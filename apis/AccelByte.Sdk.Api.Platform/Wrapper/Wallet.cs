@@ -92,6 +92,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         {
             get { return new Operation.QueryWallets.QueryWalletsBuilder(_sdk); }
         }
+        public BulkCredit.BulkCreditBuilder BulkCreditOp
+        {
+            get { return new Operation.BulkCredit.BulkCreditBuilder(_sdk); }
+        }
+        public BulkDebit.BulkDebitBuilder BulkDebitOp
+        {
+            get { return new Operation.BulkDebit.BulkDebitBuilder(_sdk); }
+        }
         [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetWallet.GetWalletBuilder GetWalletOp
         {
@@ -264,6 +272,24 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
         #pragma warning restore ab_deprecated_operation
+        public Model.BulkCreditResult? BulkCredit(BulkCredit input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code, 
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.BulkDebitResult? BulkDebit(BulkDebit input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code, 
+                    response.ContentType,
+                    response.Payload);
+        }
         #pragma warning disable ab_deprecated_operation
         [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public Model.WalletInfo? GetWallet(GetWallet input)

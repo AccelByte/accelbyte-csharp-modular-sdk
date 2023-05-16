@@ -44,6 +44,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public int? DiscountedPrice { get; set; }
 
         [JsonPropertyName("expireTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? ExpireTime { get; set; }
 
         [JsonPropertyName("ext")]
@@ -188,6 +189,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public int? DiscountedPrice { get; set; }
 
         [JsonPropertyName("expireTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? ExpireTime { get; set; }
 
         [JsonPropertyName("ext")]

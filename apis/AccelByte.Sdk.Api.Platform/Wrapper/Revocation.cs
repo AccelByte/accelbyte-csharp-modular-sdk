@@ -25,9 +25,9 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
 
         #region Operation Builders
-        public GetPaymentCallbackConfig1.GetPaymentCallbackConfig1Builder GetPaymentCallbackConfig1Op
+        public GetRevocationConfig.GetRevocationConfigBuilder GetRevocationConfigOp
         {
-            get { return new Operation.GetPaymentCallbackConfig1.GetPaymentCallbackConfig1Builder(_sdk); }
+            get { return new Operation.GetRevocationConfig.GetRevocationConfigBuilder(_sdk); }
         }
         public UpdateRevocationConfig.UpdateRevocationConfigBuilder UpdateRevocationConfigOp
         {
@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
         
-        public Model.RevocationConfigInfo? GetPaymentCallbackConfig1(GetPaymentCallbackConfig1 input)
+        public Model.RevocationConfigInfo? GetRevocationConfig(GetRevocationConfig input)
         {
             var response = _sdk.RunRequest(input);
 

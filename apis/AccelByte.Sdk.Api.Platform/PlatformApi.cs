@@ -301,6 +301,17 @@ namespace AccelByte.Sdk.Api.Platform
         }
         private Wrapper.Anonymization? _Anonymization = null;
 
+        public Wrapper.SessionPlatform SessionPlatform
+        {
+            get
+            {
+                if (_SessionPlatform == null)
+                    _SessionPlatform = new Wrapper.SessionPlatform(_Sdk);
+                return _SessionPlatform;
+            }
+        }
+        private Wrapper.SessionPlatform? _SessionPlatform = null;
+
         public Wrapper.View View
         {
             get

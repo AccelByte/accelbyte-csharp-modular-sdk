@@ -29,6 +29,18 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         {
             get { return new Operation.QueryEntitlements.QueryEntitlementsBuilder(_sdk); }
         }
+        public QueryEntitlements1.QueryEntitlements1Builder QueryEntitlements1Op
+        {
+            get { return new Operation.QueryEntitlements1.QueryEntitlements1Builder(_sdk); }
+        }
+        public GrantEntitlements.GrantEntitlementsBuilder GrantEntitlementsOp
+        {
+            get { return new Operation.GrantEntitlements.GrantEntitlementsBuilder(_sdk); }
+        }
+        public RevokeEntitlements.RevokeEntitlementsBuilder RevokeEntitlementsOp
+        {
+            get { return new Operation.RevokeEntitlements.RevokeEntitlementsBuilder(_sdk); }
+        }
         public GetEntitlement.GetEntitlementBuilder GetEntitlementOp
         {
             get { return new Operation.GetEntitlement.GetEntitlementBuilder(_sdk); }
@@ -85,6 +97,10 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         {
             get { return new Operation.GetUserEntitlementOwnershipBySku.GetUserEntitlementOwnershipBySkuBuilder(_sdk); }
         }
+        public RevokeAllEntitlements.RevokeAllEntitlementsBuilder RevokeAllEntitlementsOp
+        {
+            get { return new Operation.RevokeAllEntitlements.RevokeAllEntitlementsBuilder(_sdk); }
+        }
         public RevokeUserEntitlements.RevokeUserEntitlementsBuilder RevokeUserEntitlementsOp
         {
             get { return new Operation.RevokeUserEntitlements.RevokeUserEntitlementsBuilder(_sdk); }
@@ -116,6 +132,10 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public RevokeUserEntitlement.RevokeUserEntitlementBuilder RevokeUserEntitlementOp
         {
             get { return new Operation.RevokeUserEntitlement.RevokeUserEntitlementBuilder(_sdk); }
+        }
+        public RevokeUseCount.RevokeUseCountBuilder RevokeUseCountOp
+        {
+            get { return new Operation.RevokeUseCount.RevokeUseCountBuilder(_sdk); }
         }
         public SellUserEntitlement.SellUserEntitlementBuilder SellUserEntitlementOp
         {
@@ -196,6 +216,33 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         #endregion
         
         public Model.EntitlementPagingSlicedResult? QueryEntitlements(QueryEntitlements input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code, 
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.EntitlementPagingSlicedResult? QueryEntitlements1(QueryEntitlements1 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code, 
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.BulkEntitlementGrantResult? GrantEntitlements(GrantEntitlements input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code, 
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.BulkEntitlementRevokeResult? RevokeEntitlements(RevokeEntitlements input)
         {
             var response = _sdk.RunRequest(input);
 
@@ -330,6 +377,15 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public Model.BulkOperationResult? RevokeAllEntitlements(RevokeAllEntitlements input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code, 
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.BulkOperationResult? RevokeUserEntitlements(RevokeUserEntitlements input)
         {
             var response = _sdk.RunRequest(input);
@@ -394,6 +450,15 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
         public Model.EntitlementInfo? RevokeUserEntitlement(RevokeUserEntitlement input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code, 
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.EntitlementInfo? RevokeUseCount(RevokeUseCount input)
         {
             var response = _sdk.RunRequest(input);
 

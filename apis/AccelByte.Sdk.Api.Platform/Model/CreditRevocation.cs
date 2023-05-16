@@ -26,6 +26,10 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? CurrencyCode { get; set; }
 
+        [JsonPropertyName("customRevocation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Dictionary<string, object>? CustomRevocation { get; set; }
+
         [JsonPropertyName("reason")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Reason { get; set; }
@@ -49,6 +53,46 @@ namespace AccelByte.Sdk.Api.Platform.Model
 
     }
 
+    public class CreditRevocation<T1> : AccelByte.Sdk.Core.Model
+    {
+        [JsonPropertyName("amount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public long? Amount { get; set; }
+
+        [JsonPropertyName("balanceOrigin")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? BalanceOrigin { get; set; }
+
+        [JsonPropertyName("currencyCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? CurrencyCode { get; set; }
+
+        [JsonPropertyName("customRevocation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public T1? CustomRevocation { get; set; }
+
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Reason { get; set; }
+
+        [JsonPropertyName("revocationStrategy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? RevocationStrategy { get; set; }
+
+        [JsonPropertyName("skipped")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? Skipped { get; set; }
+
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public CreditRevocationStatus? Status { get; set; }
+
+        [JsonPropertyName("walletId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? WalletId { get; set; }
+
+    }
 
 
     public class CreditRevocationStatus : StringEnum<CreditRevocationStatus>

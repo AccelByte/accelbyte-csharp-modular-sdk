@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// getUserDLC
     ///
-    /// Get user dlc by platform.
+    /// Get user dlc records.
     /// Other detail info:
     /// 
     ///   * Required permission : resource="ADMIN:NAMESPACE:{namespace}:USER:{userId}:IAP", action=2 (READ)
@@ -37,6 +37,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             : OperationBuilder<GetUserDLCBuilder>
         {
 
+            public GetUserDLCType? Type { get; set; }
+
 
 
 
@@ -49,36 +51,38 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
 
+            public GetUserDLCBuilder SetType(GetUserDLCType _type)
+            {
+                Type = _type;
+                return this;
+            }
+
 
 
 
 
             public GetUserDLC Build(
                 string namespace_,
-                string userId,
-                GetUserDLCType type
+                string userId
             )
             {
                 GetUserDLC op = new GetUserDLC(this,
                     namespace_,                    
-                    userId,                    
-                    type                    
+                    userId                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
                 return op;
             }
 
-            public Model.UserDLC? Execute(
+            public List<Model.UserDLCRecord>? Execute(
                 string namespace_,
-                string userId,
-                string type
+                string userId
             )
             {
                 GetUserDLC op = Build(
                     namespace_,
-                    userId,
-                    type
+                    userId
                 );
 
                 if (_Sdk == null)
@@ -94,14 +98,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         private GetUserDLC(GetUserDLCBuilder builder,
             string namespace_,
-            string userId,
-            GetUserDLCType type
+            string userId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
             
-            if (type is not null) QueryParams["type"] = type.Value;
+            if (builder.Type is not null) QueryParams["type"] = builder.Type.Value;
             
 
             
@@ -115,7 +118,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public GetUserDLC(
             string namespace_,            
             string userId,            
-            GetUserDLCType type            
+            GetUserDLCType? type            
         )
         {
             PathParams["namespace"] = namespace_;
@@ -131,7 +134,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/platform/admin/namespaces/{namespace}/users/{userId}/dlc";
+        public override string Path => "/platform/admin/namespaces/{namespace}/users/{userId}/dlc/records";
 
         public override HttpMethod Method => HttpMethod.Get;
 
@@ -139,7 +142,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Produces => new() { "application/json" };        
         
-        public Model.UserDLC? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public List<Model.UserDLCRecord>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {            
             if (code == (HttpStatusCode)204)
             {
@@ -147,11 +150,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.UserDLC>(payload);
+                return JsonSerializer.Deserialize<List<Model.UserDLCRecord>>(payload);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.UserDLC>(payload);
+                return JsonSerializer.Deserialize<List<Model.UserDLCRecord>>(payload);
             }
             
             var payloadString = payload.ReadToString();

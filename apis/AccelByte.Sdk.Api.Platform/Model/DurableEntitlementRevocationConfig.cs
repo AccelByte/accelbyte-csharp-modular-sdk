@@ -29,6 +29,9 @@ namespace AccelByte.Sdk.Api.Platform.Model
 
     public class DurableEntitlementRevocationConfigStrategy : StringEnum<DurableEntitlementRevocationConfigStrategy>
     {
+        public static readonly DurableEntitlementRevocationConfigStrategy CUSTOM
+            = new DurableEntitlementRevocationConfigStrategy("CUSTOM");
+
         public static readonly DurableEntitlementRevocationConfigStrategy REVOKEORREPORT
             = new DurableEntitlementRevocationConfigStrategy("REVOKE_OR_REPORT");
 

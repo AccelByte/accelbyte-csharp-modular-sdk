@@ -32,6 +32,9 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public static readonly WalletRevocationConfigStrategy ALWAYSREVOKE
             = new WalletRevocationConfigStrategy("ALWAYS_REVOKE");
 
+        public static readonly WalletRevocationConfigStrategy CUSTOM
+            = new WalletRevocationConfigStrategy("CUSTOM");
+
         public static readonly WalletRevocationConfigStrategy REVOKEORREPORT
             = new WalletRevocationConfigStrategy("REVOKE_OR_REPORT");
 

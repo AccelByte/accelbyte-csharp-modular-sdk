@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
 
         [JsonPropertyName("regionData")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public Dictionary<string, List<RegionDataItem>>? RegionData { get; set; }
+        public Dictionary<string, List<RegionDataItemDTO>>? RegionData { get; set; }
 
         [JsonPropertyName("saleConfig")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -119,6 +119,10 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonStringEnum]
         public ItemUpdateSeasonType? SeasonType { get; set; }
+
+        [JsonPropertyName("sectionExclusive")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? SectionExclusive { get; set; }
 
         [JsonPropertyName("sellable")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -256,7 +260,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
 
         [JsonPropertyName("regionData")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public Dictionary<string, List<RegionDataItem>>? RegionData { get; set; }
+        public Dictionary<string, List<RegionDataItemDTO>>? RegionData { get; set; }
 
         [JsonPropertyName("saleConfig")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -266,6 +270,10 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonStringEnum]
         public ItemUpdateSeasonType? SeasonType { get; set; }
+
+        [JsonPropertyName("sectionExclusive")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? SectionExclusive { get; set; }
 
         [JsonPropertyName("sellable")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

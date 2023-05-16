@@ -26,6 +26,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public string? Namespace { get; set; }
 
         [JsonPropertyName("paymentMerchantConfigId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? PaymentMerchantConfigId { get; set; }
 
         [JsonPropertyName("region")]

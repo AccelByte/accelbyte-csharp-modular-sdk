@@ -99,6 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public string? PaymentOrderNo { get; set; }
 
         [JsonPropertyName("paymentProvider")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonStringEnum]
         public PaymentOrderInfoPaymentProvider? PaymentProvider { get; set; }
 
@@ -282,6 +283,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public string? PaymentOrderNo { get; set; }
 
         [JsonPropertyName("paymentProvider")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonStringEnum]
         public PaymentOrderInfoPaymentProvider? PaymentProvider { get; set; }
 

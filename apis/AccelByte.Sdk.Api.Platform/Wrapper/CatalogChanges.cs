@@ -59,7 +59,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
         
-        public List<Model.CatalogChangePagingSlicedResult>? QueryChanges(QueryChanges input)
+        public Model.CatalogChangePagingSlicedResult? QueryChanges(QueryChanges input)
         {
             var response = _sdk.RunRequest(input);
 

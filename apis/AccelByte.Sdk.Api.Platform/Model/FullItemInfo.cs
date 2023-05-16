@@ -133,6 +133,10 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonStringEnum]
         public FullItemInfoSeasonType? SeasonType { get; set; }
 
+        [JsonPropertyName("sectionExclusive")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? SectionExclusive { get; set; }
+
         [JsonPropertyName("sellable")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Sellable { get; set; }
@@ -298,6 +302,10 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonStringEnum]
         public FullItemInfoSeasonType? SeasonType { get; set; }
+
+        [JsonPropertyName("sectionExclusive")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? SectionExclusive { get; set; }
 
         [JsonPropertyName("sellable")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

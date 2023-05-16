@@ -18,6 +18,10 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<CreditRevocation>? CreditRevocations { get; set; }
 
+        [JsonPropertyName("customRevocation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Dictionary<string, object>? CustomRevocation { get; set; }
+
         [JsonPropertyName("entitlementRevocations")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<EntitlementRevocation>? EntitlementRevocations { get; set; }
@@ -43,6 +47,10 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? Quantity { get; set; }
 
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Reason { get; set; }
+
         [JsonPropertyName("skipped")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Skipped { get; set; }
@@ -52,8 +60,65 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonStringEnum]
         public ItemRevocationStatus? Status { get; set; }
 
+        [JsonPropertyName("strategy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Strategy { get; set; }
+
     }
 
+    public class ItemRevocation<T1> : AccelByte.Sdk.Core.Model
+    {
+        [JsonPropertyName("creditRevocations")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<CreditRevocation>? CreditRevocations { get; set; }
+
+        [JsonPropertyName("customRevocation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public T1? CustomRevocation { get; set; }
+
+        [JsonPropertyName("entitlementRevocations")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<EntitlementRevocation>? EntitlementRevocations { get; set; }
+
+        [JsonPropertyName("itemId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? ItemId { get; set; }
+
+        [JsonPropertyName("itemRevocations")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<ItemRevocation>? ItemRevocations { get; set; }
+
+        [JsonPropertyName("itemSku")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? ItemSku { get; set; }
+
+        [JsonPropertyName("itemType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public ItemRevocationItemType? ItemType { get; set; }
+
+        [JsonPropertyName("quantity")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public long? Quantity { get; set; }
+
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Reason { get; set; }
+
+        [JsonPropertyName("skipped")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? Skipped { get; set; }
+
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public ItemRevocationStatus? Status { get; set; }
+
+        [JsonPropertyName("strategy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Strategy { get; set; }
+
+    }
 
 
     public class ItemRevocationItemType : StringEnum<ItemRevocationItemType>

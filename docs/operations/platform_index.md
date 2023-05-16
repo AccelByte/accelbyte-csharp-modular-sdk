@@ -126,7 +126,8 @@
 | `/platform/admin/namespaces/{namespace}/dlc/config/platformMap` | GET | GetPlatformDLCConfig | [GetPlatformDLCConfig](../../AccelByte.Sdk/Api/Platform/Operation/DLC/GetPlatformDLCConfig.cs) | [GetPlatformDLCConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/DLC/GetPlatformDLCConfig.cs) |
 | `/platform/admin/namespaces/{namespace}/dlc/config/platformMap` | PUT | UpdatePlatformDLCConfig | [UpdatePlatformDLCConfig](../../AccelByte.Sdk/Api/Platform/Operation/DLC/UpdatePlatformDLCConfig.cs) | [UpdatePlatformDLCConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/DLC/UpdatePlatformDLCConfig.cs) |
 | `/platform/admin/namespaces/{namespace}/dlc/config/platformMap` | DELETE | DeletePlatformDLCConfig | [DeletePlatformDLCConfig](../../AccelByte.Sdk/Api/Platform/Operation/DLC/DeletePlatformDLCConfig.cs) | [DeletePlatformDLCConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/DLC/DeletePlatformDLCConfig.cs) |
-| `/platform/admin/namespaces/{namespace}/users/{userId}/dlc` | GET | GetUserDLC | [GetUserDLC](../../AccelByte.Sdk/Api/Platform/Operation/DLC/GetUserDLC.cs) | [GetUserDLC](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/DLC/GetUserDLC.cs) |
+| `/platform/admin/namespaces/{namespace}/users/{userId}/dlc` | GET | GetUserDLCByPlatform | [GetUserDLCByPlatform](../../AccelByte.Sdk/Api/Platform/Operation/DLC/GetUserDLCByPlatform.cs) | [GetUserDLCByPlatform](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/DLC/GetUserDLCByPlatform.cs) |
+| `/platform/admin/namespaces/{namespace}/users/{userId}/dlc/records` | GET | GetUserDLC | [GetUserDLC](../../AccelByte.Sdk/Api/Platform/Operation/DLC/GetUserDLC.cs) | [GetUserDLC](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/DLC/GetUserDLC.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/dlc/epicgames/sync` | PUT | SyncEpicGameDLC | [SyncEpicGameDLC](../../AccelByte.Sdk/Api/Platform/Operation/DLC/SyncEpicGameDLC.cs) | [SyncEpicGameDLC](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/DLC/SyncEpicGameDLC.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/dlc/psn/sync` | PUT | PublicSyncPsnDlcInventory | [PublicSyncPsnDlcInventory](../../AccelByte.Sdk/Api/Platform/Operation/DLC/PublicSyncPsnDlcInventory.cs) | [PublicSyncPsnDlcInventory](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/DLC/PublicSyncPsnDlcInventory.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/dlc/psn/sync/multiServiceLabels` | PUT | PublicSyncPsnDlcInventoryWithMultipleServiceLabels | [PublicSyncPsnDlcInventoryWithMultipleServiceLabels](../../AccelByte.Sdk/Api/Platform/Operation/DLC/PublicSyncPsnDlcInventoryWithMultipleServiceLabels.cs) | [PublicSyncPsnDlcInventoryWithMultipleServiceLabels](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/DLC/PublicSyncPsnDlcInventoryWithMultipleServiceLabels.cs) |
@@ -137,6 +138,9 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 | `/platform/admin/namespaces/{namespace}/entitlements` | GET | QueryEntitlements | [QueryEntitlements](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/QueryEntitlements.cs) | [QueryEntitlements](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/QueryEntitlements.cs) |
+| `/platform/admin/namespaces/{namespace}/entitlements/byItemIds` | GET | QueryEntitlements1 | [QueryEntitlements1](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/QueryEntitlements1.cs) | [QueryEntitlements1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/QueryEntitlements1.cs) |
+| `/platform/admin/namespaces/{namespace}/entitlements/grant` | POST | GrantEntitlements | [GrantEntitlements](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/GrantEntitlements.cs) | [GrantEntitlements](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GrantEntitlements.cs) |
+| `/platform/admin/namespaces/{namespace}/entitlements/revoke` | POST | RevokeEntitlements | [RevokeEntitlements](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/RevokeEntitlements.cs) | [RevokeEntitlements](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/RevokeEntitlements.cs) |
 | `/platform/admin/namespaces/{namespace}/entitlements/{entitlementId}` | GET | GetEntitlement | [GetEntitlement](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/GetEntitlement.cs) | [GetEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GetEntitlement.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements` | GET | QueryUserEntitlements | [QueryUserEntitlements](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/QueryUserEntitlements.cs) | [QueryUserEntitlements](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/QueryUserEntitlements.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements` | POST | GrantUserEntitlement | [GrantUserEntitlement](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/GrantUserEntitlement.cs) | [GrantUserEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GrantUserEntitlement.cs) |
@@ -151,6 +155,7 @@
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/ownership/byItemId` | GET | GetUserEntitlementOwnershipByItemId | [GetUserEntitlementOwnershipByItemId](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/GetUserEntitlementOwnershipByItemId.cs) | [GetUserEntitlementOwnershipByItemId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GetUserEntitlementOwnershipByItemId.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/ownership/byItemIds` | GET | GetUserEntitlementOwnershipByItemIds | [GetUserEntitlementOwnershipByItemIds](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/GetUserEntitlementOwnershipByItemIds.cs) | [GetUserEntitlementOwnershipByItemIds](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GetUserEntitlementOwnershipByItemIds.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/ownership/bySku` | GET | GetUserEntitlementOwnershipBySku | [GetUserEntitlementOwnershipBySku](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/GetUserEntitlementOwnershipBySku.cs) | [GetUserEntitlementOwnershipBySku](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GetUserEntitlementOwnershipBySku.cs) |
+| `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/revoke` | PUT | RevokeAllEntitlements | [RevokeAllEntitlements](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/RevokeAllEntitlements.cs) | [RevokeAllEntitlements](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/RevokeAllEntitlements.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/revoke/byIds` | PUT | RevokeUserEntitlements | [RevokeUserEntitlements](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/RevokeUserEntitlements.cs) | [RevokeUserEntitlements](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/RevokeUserEntitlements.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}` | GET | GetUserEntitlement | [GetUserEntitlement](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/GetUserEntitlement.cs) | [GetUserEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GetUserEntitlement.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}` | PUT | UpdateUserEntitlement | [UpdateUserEntitlement](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/UpdateUserEntitlement.cs) | [UpdateUserEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/UpdateUserEntitlement.cs) |
@@ -159,6 +164,7 @@
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}/enable` | PUT | EnableUserEntitlement | [EnableUserEntitlement](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/EnableUserEntitlement.cs) | [EnableUserEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/EnableUserEntitlement.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}/history` | GET | GetUserEntitlementHistories | [GetUserEntitlementHistories](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/GetUserEntitlementHistories.cs) | [GetUserEntitlementHistories](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GetUserEntitlementHistories.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}/revoke` | PUT | RevokeUserEntitlement | [RevokeUserEntitlement](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/RevokeUserEntitlement.cs) | [RevokeUserEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/RevokeUserEntitlement.cs) |
+| `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}/revokeByUseCount` | PUT | RevokeUseCount | [RevokeUseCount](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/RevokeUseCount.cs) | [RevokeUseCount](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/RevokeUseCount.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}/sell` | PUT | SellUserEntitlement | [SellUserEntitlement](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/SellUserEntitlement.cs) | [SellUserEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/SellUserEntitlement.cs) |
 | `/platform/public/namespaces/{namespace}/users/me/entitlements/ownership/any` | GET | PublicExistsAnyMyActiveEntitlement | [PublicExistsAnyMyActiveEntitlement](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/PublicExistsAnyMyActiveEntitlement.cs) | [PublicExistsAnyMyActiveEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicExistsAnyMyActiveEntitlement.cs) |
 | `/platform/public/namespaces/{namespace}/users/me/entitlements/ownership/byAppId` | GET | PublicGetMyAppEntitlementOwnershipByAppId | [PublicGetMyAppEntitlementOwnershipByAppId](../../AccelByte.Sdk/Api/Platform/Operation/Entitlement/PublicGetMyAppEntitlementOwnershipByAppId.cs) | [PublicGetMyAppEntitlementOwnershipByAppId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicGetMyAppEntitlementOwnershipByAppId.cs) |
@@ -318,6 +324,8 @@
 | [DEPRECATED] `/platform/admin/namespaces/{namespace}/users/{userId}/wallets/{walletId}/enable` | PUT | EnableUserWallet | [EnableUserWallet](../../AccelByte.Sdk/Api/Platform/Operation/Wallet/EnableUserWallet.cs) | [EnableUserWallet](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Wallet/EnableUserWallet.cs) |
 | [DEPRECATED] `/platform/admin/namespaces/{namespace}/users/{userId}/wallets/{walletId}/transactions` | GET | ListUserWalletTransactions | [ListUserWalletTransactions](../../AccelByte.Sdk/Api/Platform/Operation/Wallet/ListUserWalletTransactions.cs) | [ListUserWalletTransactions](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Wallet/ListUserWalletTransactions.cs) |
 | [DEPRECATED] `/platform/admin/namespaces/{namespace}/wallets` | GET | QueryWallets | [QueryWallets](../../AccelByte.Sdk/Api/Platform/Operation/Wallet/QueryWallets.cs) | [QueryWallets](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Wallet/QueryWallets.cs) |
+| `/platform/admin/namespaces/{namespace}/wallets/credit` | POST | BulkCredit | [BulkCredit](../../AccelByte.Sdk/Api/Platform/Operation/Wallet/BulkCredit.cs) | [BulkCredit](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Wallet/BulkCredit.cs) |
+| `/platform/admin/namespaces/{namespace}/wallets/debit` | POST | BulkDebit | [BulkDebit](../../AccelByte.Sdk/Api/Platform/Operation/Wallet/BulkDebit.cs) | [BulkDebit](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Wallet/BulkDebit.cs) |
 | [DEPRECATED] `/platform/admin/namespaces/{namespace}/wallets/{walletId}` | GET | GetWallet | [GetWallet](../../AccelByte.Sdk/Api/Platform/Operation/Wallet/GetWallet.cs) | [GetWallet](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Wallet/GetWallet.cs) |
 | `/platform/public/namespaces/{namespace}/users/me/wallets/{currencyCode}` | GET | PublicGetMyWallet | [PublicGetMyWallet](../../AccelByte.Sdk/Api/Platform/Operation/Wallet/PublicGetMyWallet.cs) | [PublicGetMyWallet](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Wallet/PublicGetMyWallet.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/wallets/{currencyCode}` | GET | PublicGetWallet | [PublicGetWallet](../../AccelByte.Sdk/Api/Platform/Operation/Wallet/PublicGetWallet.cs) | [PublicGetWallet](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Wallet/PublicGetWallet.cs) |
@@ -326,7 +334,7 @@
 ### Revocation Wrapper:  [Revocation](../../AccelByte.Sdk/Api/Platform/Wrapper/Revocation.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
-| `/platform/admin/namespaces/{namespace}/revocation/config` | GET | GetPaymentCallbackConfig1 | [GetPaymentCallbackConfig1](../../AccelByte.Sdk/Api/Platform/Operation/Revocation/GetPaymentCallbackConfig1.cs) | [GetPaymentCallbackConfig1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Revocation/GetPaymentCallbackConfig1.cs) |
+| `/platform/admin/namespaces/{namespace}/revocation/config` | GET | GetRevocationConfig | [GetRevocationConfig](../../AccelByte.Sdk/Api/Platform/Operation/Revocation/GetRevocationConfig.cs) | [GetRevocationConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Revocation/GetRevocationConfig.cs) |
 | `/platform/admin/namespaces/{namespace}/revocation/config` | PUT | UpdateRevocationConfig | [UpdateRevocationConfig](../../AccelByte.Sdk/Api/Platform/Operation/Revocation/UpdateRevocationConfig.cs) | [UpdateRevocationConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Revocation/UpdateRevocationConfig.cs) |
 | `/platform/admin/namespaces/{namespace}/revocation/config` | DELETE | DeleteRevocationConfig | [DeleteRevocationConfig](../../AccelByte.Sdk/Api/Platform/Operation/Revocation/DeleteRevocationConfig.cs) | [DeleteRevocationConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Revocation/DeleteRevocationConfig.cs) |
 | `/platform/admin/namespaces/{namespace}/revocation/history` | GET | QueryRevocationHistories | [QueryRevocationHistories](../../AccelByte.Sdk/Api/Platform/Operation/Revocation/QueryRevocationHistories.cs) | [QueryRevocationHistories](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Revocation/QueryRevocationHistories.cs) |
@@ -441,6 +449,11 @@
 | `/platform/admin/namespaces/{namespace}/users/{userId}/anonymization/revocation` | DELETE | AnonymizeRevocation | [AnonymizeRevocation](../../AccelByte.Sdk/Api/Platform/Operation/Anonymization/AnonymizeRevocation.cs) | [AnonymizeRevocation](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Anonymization/AnonymizeRevocation.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/anonymization/subscriptions` | DELETE | AnonymizeSubscription | [AnonymizeSubscription](../../AccelByte.Sdk/Api/Platform/Operation/Anonymization/AnonymizeSubscription.cs) | [AnonymizeSubscription](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Anonymization/AnonymizeSubscription.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/anonymization/wallets` | DELETE | AnonymizeWallet | [AnonymizeWallet](../../AccelByte.Sdk/Api/Platform/Operation/Anonymization/AnonymizeWallet.cs) | [AnonymizeWallet](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Anonymization/AnonymizeWallet.cs) |
+
+### Session(Platform) Wrapper:  [SessionPlatform](../../AccelByte.Sdk/Api/Platform/Wrapper/SessionPlatform.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/platform/admin/namespaces/{namespace}/users/{userId}/session/xbl` | PUT | RegisterXblSessions | [RegisterXblSessions](../../AccelByte.Sdk/Api/Platform/Operation/SessionPlatform/RegisterXblSessions.cs) | [RegisterXblSessions](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/SessionPlatform/RegisterXblSessions.cs) |
 
 ### View Wrapper:  [View](../../AccelByte.Sdk/Api/Platform/Wrapper/View.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -625,6 +638,10 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
+### Session(Platform) Wrapper:  [SessionPlatform](../../AccelByte.Sdk/Api/Platform/Wrapper/SessionPlatform.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
 ### View Wrapper:  [View](../../AccelByte.Sdk/Api/Platform/Wrapper/View.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -675,6 +692,13 @@
 | `BillingHistoryInfo` | [BillingHistoryInfo](../../AccelByte.Sdk/Api/Platform/Model/BillingHistoryInfo.cs) |
 | `BillingHistoryPagingSlicedResult` | [BillingHistoryPagingSlicedResult](../../AccelByte.Sdk/Api/Platform/Model/BillingHistoryPagingSlicedResult.cs) |
 | `BoxItem` | [BoxItem](../../AccelByte.Sdk/Api/Platform/Model/BoxItem.cs) |
+| `BulkCreditRequest` | [BulkCreditRequest](../../AccelByte.Sdk/Api/Platform/Model/BulkCreditRequest.cs) |
+| `BulkCreditResult` | [BulkCreditResult](../../AccelByte.Sdk/Api/Platform/Model/BulkCreditResult.cs) |
+| `BulkDebitRequest` | [BulkDebitRequest](../../AccelByte.Sdk/Api/Platform/Model/BulkDebitRequest.cs) |
+| `BulkDebitResult` | [BulkDebitResult](../../AccelByte.Sdk/Api/Platform/Model/BulkDebitResult.cs) |
+| `BulkEntitlementGrantRequest` | [BulkEntitlementGrantRequest](../../AccelByte.Sdk/Api/Platform/Model/BulkEntitlementGrantRequest.cs) |
+| `BulkEntitlementGrantResult` | [BulkEntitlementGrantResult](../../AccelByte.Sdk/Api/Platform/Model/BulkEntitlementGrantResult.cs) |
+| `BulkEntitlementRevokeResult` | [BulkEntitlementRevokeResult](../../AccelByte.Sdk/Api/Platform/Model/BulkEntitlementRevokeResult.cs) |
 | `BulkOperationResult` | [BulkOperationResult](../../AccelByte.Sdk/Api/Platform/Model/BulkOperationResult.cs) |
 | `BulkRegionDataChangeRequest` | [BulkRegionDataChangeRequest](../../AccelByte.Sdk/Api/Platform/Model/BulkRegionDataChangeRequest.cs) |
 | `BundledItemInfo` | [BundledItemInfo](../../AccelByte.Sdk/Api/Platform/Model/BundledItemInfo.cs) |
@@ -699,8 +723,10 @@
 | `ConditionGroup` | [ConditionGroup](../../AccelByte.Sdk/Api/Platform/Model/ConditionGroup.cs) |
 | `ConditionGroupValidateResult` | [ConditionGroupValidateResult](../../AccelByte.Sdk/Api/Platform/Model/ConditionGroupValidateResult.cs) |
 | `ConditionMatchResult` | [ConditionMatchResult](../../AccelByte.Sdk/Api/Platform/Model/ConditionMatchResult.cs) |
+| `ConsumableEntitlementRevocationConfig` | [ConsumableEntitlementRevocationConfig](../../AccelByte.Sdk/Api/Platform/Model/ConsumableEntitlementRevocationConfig.cs) |
 | `ConsumeItem` | [ConsumeItem](../../AccelByte.Sdk/Api/Platform/Model/ConsumeItem.cs) |
 | `CreditRequest` | [CreditRequest](../../AccelByte.Sdk/Api/Platform/Model/CreditRequest.cs) |
+| `CreditResult` | [CreditResult](../../AccelByte.Sdk/Api/Platform/Model/CreditResult.cs) |
 | `CreditRevocation` | [CreditRevocation](../../AccelByte.Sdk/Api/Platform/Model/CreditRevocation.cs) |
 | `CreditSummary` | [CreditSummary](../../AccelByte.Sdk/Api/Platform/Model/CreditSummary.cs) |
 | `CurrencyConfig` | [CurrencyConfig](../../AccelByte.Sdk/Api/Platform/Model/CurrencyConfig.cs) |
@@ -716,6 +742,7 @@
 | `DLCRecord` | [DLCRecord](../../AccelByte.Sdk/Api/Platform/Model/DLCRecord.cs) |
 | `DebitByCurrencyCodeRequest` | [DebitByCurrencyCodeRequest](../../AccelByte.Sdk/Api/Platform/Model/DebitByCurrencyCodeRequest.cs) |
 | `DebitRequest` | [DebitRequest](../../AccelByte.Sdk/Api/Platform/Model/DebitRequest.cs) |
+| `DebitResult` | [DebitResult](../../AccelByte.Sdk/Api/Platform/Model/DebitResult.cs) |
 | `DeleteRewardConditionRequest` | [DeleteRewardConditionRequest](../../AccelByte.Sdk/Api/Platform/Model/DeleteRewardConditionRequest.cs) |
 | `DetailedWalletTransactionInfo` | [DetailedWalletTransactionInfo](../../AccelByte.Sdk/Api/Platform/Model/DetailedWalletTransactionInfo.cs) |
 | `DetailedWalletTransactionPagingSlicedResult` | [DetailedWalletTransactionPagingSlicedResult](../../AccelByte.Sdk/Api/Platform/Model/DetailedWalletTransactionPagingSlicedResult.cs) |
@@ -723,6 +750,7 @@
 | `EntitlementDecrement` | [EntitlementDecrement](../../AccelByte.Sdk/Api/Platform/Model/EntitlementDecrement.cs) |
 | `EntitlementDecrementResult` | [EntitlementDecrementResult](../../AccelByte.Sdk/Api/Platform/Model/EntitlementDecrementResult.cs) |
 | `EntitlementGrant` | [EntitlementGrant](../../AccelByte.Sdk/Api/Platform/Model/EntitlementGrant.cs) |
+| `EntitlementGrantResult` | [EntitlementGrantResult](../../AccelByte.Sdk/Api/Platform/Model/EntitlementGrantResult.cs) |
 | `EntitlementHistoryInfo` | [EntitlementHistoryInfo](../../AccelByte.Sdk/Api/Platform/Model/EntitlementHistoryInfo.cs) |
 | `EntitlementInfo` | [EntitlementInfo](../../AccelByte.Sdk/Api/Platform/Model/EntitlementInfo.cs) |
 | `EntitlementLootBoxReward` | [EntitlementLootBoxReward](../../AccelByte.Sdk/Api/Platform/Model/EntitlementLootBoxReward.cs) |
@@ -730,6 +758,7 @@
 | `EntitlementPagingSlicedResult` | [EntitlementPagingSlicedResult](../../AccelByte.Sdk/Api/Platform/Model/EntitlementPagingSlicedResult.cs) |
 | `EntitlementRevocation` | [EntitlementRevocation](../../AccelByte.Sdk/Api/Platform/Model/EntitlementRevocation.cs) |
 | `EntitlementRevocationConfig` | [EntitlementRevocationConfig](../../AccelByte.Sdk/Api/Platform/Model/EntitlementRevocationConfig.cs) |
+| `EntitlementRevokeResult` | [EntitlementRevokeResult](../../AccelByte.Sdk/Api/Platform/Model/EntitlementRevokeResult.cs) |
 | `EntitlementSoldRequest` | [EntitlementSoldRequest](../../AccelByte.Sdk/Api/Platform/Model/EntitlementSoldRequest.cs) |
 | `EntitlementSoldResult` | [EntitlementSoldResult](../../AccelByte.Sdk/Api/Platform/Model/EntitlementSoldResult.cs) |
 | `EntitlementSummary` | [EntitlementSummary](../../AccelByte.Sdk/Api/Platform/Model/EntitlementSummary.cs) |
@@ -898,10 +927,12 @@
 | `RedeemableItem` | [RedeemableItem](../../AccelByte.Sdk/Api/Platform/Model/RedeemableItem.cs) |
 | `RegionDataChange` | [RegionDataChange](../../AccelByte.Sdk/Api/Platform/Model/RegionDataChange.cs) |
 | `RegionDataItem` | [RegionDataItem](../../AccelByte.Sdk/Api/Platform/Model/RegionDataItem.cs) |
+| `RegionDataItemDTO` | [RegionDataItemDTO](../../AccelByte.Sdk/Api/Platform/Model/RegionDataItemDTO.cs) |
 | `RequestHistory` | [RequestHistory](../../AccelByte.Sdk/Api/Platform/Model/RequestHistory.cs) |
 | `Requirement` | [Requirement](../../AccelByte.Sdk/Api/Platform/Model/Requirement.cs) |
 | `RevocationConfigInfo` | [RevocationConfigInfo](../../AccelByte.Sdk/Api/Platform/Model/RevocationConfigInfo.cs) |
 | `RevocationConfigUpdate` | [RevocationConfigUpdate](../../AccelByte.Sdk/Api/Platform/Model/RevocationConfigUpdate.cs) |
+| `RevocationError` | [RevocationError](../../AccelByte.Sdk/Api/Platform/Model/RevocationError.cs) |
 | `RevocationHistoryInfo` | [RevocationHistoryInfo](../../AccelByte.Sdk/Api/Platform/Model/RevocationHistoryInfo.cs) |
 | `RevocationHistoryPagingSlicedResult` | [RevocationHistoryPagingSlicedResult](../../AccelByte.Sdk/Api/Platform/Model/RevocationHistoryPagingSlicedResult.cs) |
 | `RevocationRequest` | [RevocationRequest](../../AccelByte.Sdk/Api/Platform/Model/RevocationRequest.cs) |
@@ -912,6 +943,7 @@
 | `RevokeItem` | [RevokeItem](../../AccelByte.Sdk/Api/Platform/Model/RevokeItem.cs) |
 | `RevokeItemSummary` | [RevokeItemSummary](../../AccelByte.Sdk/Api/Platform/Model/RevokeItemSummary.cs) |
 | `RevokeResult` | [RevokeResult](../../AccelByte.Sdk/Api/Platform/Model/RevokeResult.cs) |
+| `RevokeUseCountRequest` | [RevokeUseCountRequest](../../AccelByte.Sdk/Api/Platform/Model/RevokeUseCountRequest.cs) |
 | `RewardCondition` | [RewardCondition](../../AccelByte.Sdk/Api/Platform/Model/RewardCondition.cs) |
 | `RewardCreate` | [RewardCreate](../../AccelByte.Sdk/Api/Platform/Model/RewardCreate.cs) |
 | `RewardInfo` | [RewardInfo](../../AccelByte.Sdk/Api/Platform/Model/RewardInfo.cs) |
@@ -966,6 +998,7 @@
 | `TwitchSyncRequest` | [TwitchSyncRequest](../../AccelByte.Sdk/Api/Platform/Model/TwitchSyncRequest.cs) |
 | `TwitchSyncResult` | [TwitchSyncResult](../../AccelByte.Sdk/Api/Platform/Model/TwitchSyncResult.cs) |
 | `UserDLC` | [UserDLC](../../AccelByte.Sdk/Api/Platform/Model/UserDLC.cs) |
+| `UserDLCRecord` | [UserDLCRecord](../../AccelByte.Sdk/Api/Platform/Model/UserDLCRecord.cs) |
 | `ValidationErrorEntity` | [ValidationErrorEntity](../../AccelByte.Sdk/Api/Platform/Model/ValidationErrorEntity.cs) |
 | `ViewCreate` | [ViewCreate](../../AccelByte.Sdk/Api/Platform/Model/ViewCreate.cs) |
 | `ViewInfo` | [ViewInfo](../../AccelByte.Sdk/Api/Platform/Model/ViewInfo.cs) |
@@ -984,6 +1017,7 @@
 | `XblReconcileRequest` | [XblReconcileRequest](../../AccelByte.Sdk/Api/Platform/Model/XblReconcileRequest.cs) |
 | `XblReconcileResult` | [XblReconcileResult](../../AccelByte.Sdk/Api/Platform/Model/XblReconcileResult.cs) |
 | `XblUserAchievements` | [XblUserAchievements](../../AccelByte.Sdk/Api/Platform/Model/XblUserAchievements.cs) |
+| `XblUserSessionRequest` | [XblUserSessionRequest](../../AccelByte.Sdk/Api/Platform/Model/XblUserSessionRequest.cs) |
 | `XsollaConfig` | [XsollaConfig](../../AccelByte.Sdk/Api/Platform/Model/XsollaConfig.cs) |
 | `XsollaPaywallConfig` | [XsollaPaywallConfig](../../AccelByte.Sdk/Api/Platform/Model/XsollaPaywallConfig.cs) |
 | `XsollaPaywallConfigRequest` | [XsollaPaywallConfigRequest](../../AccelByte.Sdk/Api/Platform/Model/XsollaPaywallConfigRequest.cs) |

@@ -20,44 +20,52 @@ using AccelByte.Sdk.Api.Platform.Model;
 namespace AccelByte.Sdk.Api.Platform.Operation
 {
     /// <summary>
-    /// getPaymentCallbackConfig_1
+    /// revokeEntitlements
     ///
-    /// Get revocation configuration.
+    /// Revoke entitlements, skipped revocation will be treated as fail.
     /// Other detail info:
     /// 
-    ///   * Required permission : resource=ADMIN:NAMESPACE:{namespace}:REVOCATION, action=2 (READ)
-    ///   *  Returns : Revocation config
+    ///   * Required permission : resource="ADMIN:NAMESPACE:{namespace}:ENTITLEMENT", action=4 (UPDATE)
+    ///   *  Returns : bulk revoke entitlements result
     /// </summary>
-    public class GetPaymentCallbackConfig1 : AccelByte.Sdk.Core.Operation
+    public class RevokeEntitlements : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static GetPaymentCallbackConfig1Builder Builder { get => new GetPaymentCallbackConfig1Builder(); }
+        public static RevokeEntitlementsBuilder Builder { get => new RevokeEntitlementsBuilder(); }
 
-        public class GetPaymentCallbackConfig1Builder
-            : OperationBuilder<GetPaymentCallbackConfig1Builder>
+        public class RevokeEntitlementsBuilder
+            : OperationBuilder<RevokeEntitlementsBuilder>
         {
 
 
+            public List<string>? Body { get; set; }
 
 
 
-            internal GetPaymentCallbackConfig1Builder() { }
 
-            internal GetPaymentCallbackConfig1Builder(IAccelByteSdk sdk)
+            internal RevokeEntitlementsBuilder() { }
+
+            internal RevokeEntitlementsBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
+            public RevokeEntitlementsBuilder SetBody(List<string> _body)
+            {
+                Body = _body;
+                return this;
+            }
 
 
 
-            public GetPaymentCallbackConfig1 Build(
+
+            public RevokeEntitlements Build(
                 string namespace_
             )
             {
-                GetPaymentCallbackConfig1 op = new GetPaymentCallbackConfig1(this,
+                RevokeEntitlements op = new RevokeEntitlements(this,
                     namespace_                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
@@ -65,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
-            public Model.RevocationConfigInfo? Execute(
+            public Model.BulkEntitlementRevokeResult? Execute(
                 string namespace_
             )
             {
-                GetPaymentCallbackConfig1 op = Build(
+                RevokeEntitlements op = Build(
                     namespace_
                 );
 
@@ -84,7 +92,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetPaymentCallbackConfig1(GetPaymentCallbackConfig1Builder builder,
+        private RevokeEntitlements(RevokeEntitlementsBuilder builder,
             string namespace_
         )
         {
@@ -94,14 +102,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             
             
+            BodyParams = builder.Body;
             
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public GetPaymentCallbackConfig1(
-            string namespace_            
+        public RevokeEntitlements(
+            string namespace_,            
+            List<string> body            
         )
         {
             PathParams["namespace"] = namespace_;
@@ -110,20 +120,21 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             
             
+            BodyParams = body;
             
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/platform/admin/namespaces/{namespace}/revocation/config";
+        public override string Path => "/platform/admin/namespaces/{namespace}/entitlements/revoke";
 
-        public override HttpMethod Method => HttpMethod.Get;
+        public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };        
         
-        public Model.RevocationConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.BulkEntitlementRevokeResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {            
             if (code == (HttpStatusCode)204)
             {
@@ -131,11 +142,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.RevocationConfigInfo>(payload);
+                return JsonSerializer.Deserialize<Model.BulkEntitlementRevokeResult>(payload);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.RevocationConfigInfo>(payload);
+                return JsonSerializer.Deserialize<Model.BulkEntitlementRevokeResult>(payload);
             }
             
             var payloadString = payload.ReadToString();

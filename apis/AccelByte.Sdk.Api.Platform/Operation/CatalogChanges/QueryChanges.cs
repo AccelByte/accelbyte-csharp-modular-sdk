@@ -156,7 +156,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
-            public List<Model.CatalogChangePagingSlicedResult>? Execute(
+            public Model.CatalogChangePagingSlicedResult? Execute(
                 string namespace_,
                 string storeId
             )
@@ -255,7 +255,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Produces => new() { "application/json" };        
         
-        public List<Model.CatalogChangePagingSlicedResult>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.CatalogChangePagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {            
             if (code == (HttpStatusCode)204)
             {
@@ -263,11 +263,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<List<Model.CatalogChangePagingSlicedResult>>(payload);
+                return JsonSerializer.Deserialize<Model.CatalogChangePagingSlicedResult>(payload);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<List<Model.CatalogChangePagingSlicedResult>>(payload);
+                return JsonSerializer.Deserialize<Model.CatalogChangePagingSlicedResult>(payload);
             }
             
             var payloadString = payload.ReadToString();
