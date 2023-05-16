@@ -10,6 +10,7 @@ using NUnit.Framework;
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Core.Util;
+using AccelByte.Sdk.Core.Net.Http;
 
 using AccelByte.Sdk.Api.Iam.Model;
 

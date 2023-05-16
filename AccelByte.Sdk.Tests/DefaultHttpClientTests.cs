@@ -26,7 +26,7 @@ namespace AccelByte.Sdk.Tests
     {
         protected override IHttpClient GetHttpClientObject()
         {
-            return AccelByte.Sdk.Core.Client.HttpClient.Default;
+            return new DefaultHttpClient();
         }
     }
 }

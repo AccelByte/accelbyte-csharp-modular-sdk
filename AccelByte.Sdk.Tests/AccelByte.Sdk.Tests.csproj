@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
-
+	<ImplicitUsings>disable</ImplicitUsings>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -15,8 +15,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\samples\AccelByte.Sdk.Sample.Cli\AccelByte.Sdk.Sample.Cli.csproj" />
-    <ProjectReference Include="..\AccelByte.Sdk\AccelByte.Sdk.csproj" />
+    <ProjectReference Include="..\AccelByte.Sdk.Compat\AccelByte.Sdk.Compat.csproj" />
   </ItemGroup>
 
 </Project>

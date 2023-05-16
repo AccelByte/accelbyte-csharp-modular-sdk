@@ -12,7 +12,6 @@ using NUnit.Framework;
 
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Core.Repository;
-using AccelByte.Sdk.Core.Logging;
 using AccelByte.Sdk.Core.Client;
 using AccelByte.Sdk.Core.Util;
 

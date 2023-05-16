@@ -9,6 +9,7 @@ using NUnit.Framework;
 
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Api;
+using AccelByte.Sdk.Core.Net;
 
 using AccelByte.Sdk.Api.Platform.Model;
 

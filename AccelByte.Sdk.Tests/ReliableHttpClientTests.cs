@@ -14,11 +14,12 @@ using System.Text.Json;
 using NUnit.Framework;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Client;
 using AccelByte.Sdk.Core.Util;
-using AccelByte.Sdk.Core.Logging;
+using AccelByte.Sdk.Core.Net.Http;
+using AccelByte.Sdk.Core.Net.Logging;
 using AccelByte.Sdk.Core.Repository;
 using AccelByte.Sdk.Api;
+
 using AccelByte.Sdk.Tests.MockServer;
 
 namespace AccelByte.Sdk.Tests

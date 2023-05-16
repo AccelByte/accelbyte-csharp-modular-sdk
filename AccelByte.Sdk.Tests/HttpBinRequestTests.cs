@@ -17,7 +17,7 @@ using System.IO;
 using NUnit.Framework;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Client;
+using AccelByte.Sdk.Core.Net.Http;
 
 namespace AccelByte.Sdk.Tests
 {
@@ -229,7 +229,7 @@ namespace AccelByte.Sdk.Tests
                 .SetBodyParam(request)
                 .Create(HttpMethod.Post);
 
-            HttpResponse response = _Sdk.RunRequest(op);
+            IHttpResponse response = _Sdk.RunRequest(op);
             int monkeyPatchStatusCode = statusCode; //Monkey patching since current Httpbin server does not provide endpoint with specified status code and response object altogether.
             var result = op.ParseResponse<Dictionary<string, string>, TestRequest>(
                 (HttpStatusCode)monkeyPatchStatusCode,

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -14,6 +14,7 @@ using System.IO;
 
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Core.Util;
+using AccelByte.Sdk.Core.Net.Http;
 
 namespace AccelByte.Sdk.Tests
 {
@@ -64,14 +65,11 @@ namespace AccelByte.Sdk.Tests
 
         public override HttpMethod Method => _Method;
 
-        private string[] _Consumes = new string[] { "application/json" };
-        public override string[] Consumes => _Consumes;
+        private List<string> _Consumes = new(){ "application/json" };
+        public override List<string> Consumes => _Consumes;
 
-        private string[] _Produces = new string[] { "application/json" };
-        public override string[] Produces => _Produces;
-
-        [Obsolete]
-        public override string? Security { get; set; } = Operation.SECURITY_BASIC;
+        private List<string> _Produces = new(){ "application/json" };
+        public override List<string> Produces => _Produces;
 
         public HttpbinAnythingOperation AddPathParam(string key, string value)
         {
@@ -117,13 +115,13 @@ namespace AccelByte.Sdk.Tests
 
         public HttpbinAnythingOperation SetConsume(string contentType)
         {
-            _Consumes = new string[] { contentType };
+            _Consumes = new List<string> { contentType };
             return this;
         }
 
         public HttpbinAnythingOperation SetProduce(string contentType)
         {
-            _Produces = new string[] { contentType };
+            _Produces = new List<string> { contentType };
             return this;
         }
 
@@ -177,19 +175,19 @@ namespace AccelByte.Sdk.Tests
 
         public HttpbinAnythingResponse<TArgs>? Execute<TArgs>(AccelByteSDK sdk)
         {
-            HttpResponse response = sdk.RunRequest(this);
+            IHttpResponse response = sdk.RunRequest(this);
             return ParseResponse<TArgs>(response.Code, response.ContentType, response.Payload);
         }
 
         public HttpbinAnythingResponse<TArgs, TData>? Execute<TArgs, TData>(AccelByteSDK sdk)
         {
-            HttpResponse response = sdk.RunRequest(this);
+            IHttpResponse response = sdk.RunRequest(this);
             return ParseResponse<TArgs, TData>(response.Code, response.ContentType, response.Payload);
         }
 
         public HttpbinAnythingResponse<Dictionary<string, string>>? Execute(AccelByteSDK sdk)
         {
-            HttpResponse response = sdk.RunRequest(this);
+            IHttpResponse response = sdk.RunRequest(this);
             return ParseResponse<Dictionary<string, string>>(response.Code, response.ContentType, response.Payload);
         }
     }

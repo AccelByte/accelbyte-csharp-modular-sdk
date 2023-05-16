@@ -1,4 +1,4 @@
-# AccelByte .NET (C#) SDK
+# AccelByte .NET (C#) SDK (Modular Version)
 
 A software development kit (SDK) for interacting with AccelByte Gaming Services written in C#.
 
@@ -34,10 +34,12 @@ The following environment variables need to be set when using `DefaultConfigRepo
 //Add core namespace
 using AccelByte.Sdk.Core;
 
-AccelByteSDK sdk = AccelByteSDK.Builder
+IAccelByteSdk sdk = AccelByteSdk.Builder
     .UseDefaultHttpClient()
     .UseDefaultConfigRepository() // Using DefaultConfigRepository, make sure the required environment variables are set
     .UseDefaultTokenRepository()
+    .UseDefaultCredentialRepository() // Required if you want to load user's credential via environment variables.
+    .UseDefaultTokenValidator() // Required if you want to use ValidateToken method.
     .Build();
 ```
 
@@ -117,23 +119,19 @@ if (!login)
     Console.WriteLine("Login failed");
 }
 
-// Instantiate UserProfile wrapper class which is part of basic service
-
-UserProfile userProfile = new UserProfile(sdk);
-
 try
 {
     // Make a call to getMyProfileInfo endpoint
-    UserProfilePrivateInfo? response = sdk.Basic.UserProfile.GetMyProfileInfoOp.Execute(sdk.Namespace);
+    UserProfilePrivateInfo? response = sdk.GetBasicApi().UserProfile.GetMyProfileInfoOp.Execute(sdk.Namespace);
 
     /*
     
     // If you need to modify operation object, first you can build the operation object
-    GetMyProfileInfo operation = sdk.Basic.UserProfile.GetMyProfileInfoOp
+    GetMyProfileInfo operation = sdk.GetBasicApi().UserProfile.GetMyProfileInfoOp
         .Build(sdk.Namespace);
 
     // then
-    UserProfilePrivateInfo? response = sdk.Basic.UserProfile.GetMyProfileInfo(operation);
+    UserProfilePrivateInfo? response = sdk.GetBasicApi().UserProfile.GetMyProfileInfo(operation);
 
     */
 
@@ -159,7 +157,7 @@ To enable http logging feature, build the sdk with `EnableLog()`.
 ```csharp
 using AccelByte.Sdk.Core;
 
-AccelByteSDK sdk = AccelByteSDK.Builder
+IAccelByteSdk sdk = AccelByteSdk.Builder
     .UseDefaultHttpClient()
     .UseDefaultConfigRepository()
     .UseDefaultTokenRepository()
@@ -172,12 +170,12 @@ If retry feature is required, instantiate the sdk with `ReliableHttpClient` obje
 ```csharp
 //Add core namespace
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Client;
+using AccelByte.Sdk.Core.Net.Http;
 
 //Using default retry policy 
 HttpClientPolicy policy = HttpClientPolicy.Default;
 
-AccelByteSDK sdk = AccelByteSDK.Builder
+IAccelByteSdk sdk = AccelByteSdk.Builder
     .SetHttpClient(ReliableHttpClient.Builder
         .SetDefaultPolicy(policy)                    
         .Build())    
@@ -186,7 +184,7 @@ AccelByteSDK sdk = AccelByteSDK.Builder
     .Build();
 ```
 
-For `HttpClientPolicy` properties, refer to [this code](AccelByte.Sdk/Core/Client//HttpClientPolicy.cs).
+For `HttpClientPolicy` properties, refer to [this code](AccelByte.Sdk.Core/Net/Http/HttpClientPolicy.cs).
 
 ## Automatically Refresh Access Token
 To enable automatic access token refresh, include `AccelByte.Sdk.Feature.AutoRefreshToken` and instantiate the sdk with following code.
@@ -197,7 +195,7 @@ using AccelByte.Sdk.Core;
 //Add feature namespace
 using AccelByte.Sdk.Feature.AutoRefreshToken;
 
-AccelByteSDK sdk = AccelByteSDK.Builder
+IAccelByteSdk sdk = AccelByteSdk.Builder
     .UseDefaultHttpClient()
     // Using DefaultConfigRepository, make sure the required environment variables are set
     .UseDefaultConfigRepository()
@@ -209,6 +207,7 @@ AccelByteSDK sdk = AccelByteSDK.Builder
 ```
 Then when login, use the extension method provided.
 ```csharp
+using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Feature.AutoRefreshToken;
 
 //pass true to the third parameter
@@ -233,7 +232,7 @@ using AccelByte.Sdk.Core;
 //Add feature namespace
 using AccelByte.Sdk.Feature.AutoRefreshToken;
 
-AccelByteSDK sdk = AccelByteSDK.Builder
+IAccelByteSdk sdk = AccelByteSdk.Builder
     .UseDefaultHttpClient()
     // Using DefaultConfigRepository, make sure the required environment variables are set
     .UseDefaultConfigRepository()
@@ -255,7 +254,7 @@ using AccelByte.Sdk.Core;
 //Add feature namespace
 using AccelByte.Sdk.Feature.LocalTokenValidation;
 
-AccelByteSDK sdk = AccelByteSDK.Builder
+IAccelByteSdk sdk = AccelByteSdk.Builder
     .UseDefaultHttpClient()
     // Using DefaultConfigRepository, make sure the required environment variables are set
     .UseDefaultConfigRepository()
@@ -300,21 +299,7 @@ GameRecordExample myGameRecord = new GameRecordExample()
 ModelsGameRecordResponse<GameRecordExample>? response = sdk.Cloudsave.PublicGameRecord.PostGameRecordHandlerV1Op
     .Execute<GameRecordExample>(myGameRecord, "test_record", sdk.Namespace);
 ```
-The list of which endpoints that support it can be found in [here](docs/operations/)
-
-## Samples
-
-See common use cases [here](docs/common_use_cases.md).
-
-Sample apps are available in the [samples](samples) directory.
-
-## Migration Guides
-- [0.21.x to 0.22.0](docs/migration-guides/migration-guide-v0.21-to-v0.22.md)
-- [0.23.x to 0.24.0](docs/migration-guides/migration-guide-v0.23-to-v0.24.md)
+The list of which endpoints that support it can be found in [here](../docs/operations/)
 
 ## Documentation
-Reference about AccelByte Gaming Services endpoints and their corresponding SDK API is available in [docs/operations](docs/operations) directory.
-
-Sample app documentations are available in the [docs/samples](docs/samples/) directory.
-
 For documentation about AccelByte Gaming Services and SDK, see [docs.accelbyte.io](https://docs.accelbyte.io/)

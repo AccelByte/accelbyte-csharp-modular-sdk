@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -8,14 +8,16 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
+
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Core.Util;
+using AccelByte.Sdk.Core.Net.Http;
 
 namespace AccelByte.Sdk.Tests
 {
     public class HttpbinOperation : Operation
     {
-        private string[] _Consumes;
+        private List<string> _Consumes;
 
         public HttpbinOperation(HttpMethod method,
                 string path = "/anything",
@@ -57,21 +59,18 @@ namespace AccelByte.Sdk.Tests
             BodyParams = bodyParams;
 
             if (consumes.Trim() != string.Empty)
-                _Consumes = new string[] { consumes };
+                _Consumes = new() { consumes };
             else
-                _Consumes = new string[] { };
+                _Consumes = new();
         }
 
         public override string Path { get; }
 
         public override HttpMethod Method { get; }
 
-        public override string[] Consumes => _Consumes;
+        public override List<string> Consumes => _Consumes;
 
-        public override string[] Produces => new[] { "application/json" };
-
-        [Obsolete("Use 'Securities' property instead.")]
-        public override string? Security { get; set; }
+        public override List<string> Produces => new() { "application/json" };        
 
         public HttpbinAnythingResponse<TArgs>? ParseResponse<TArgs>(HttpStatusCode code, string contentTpe, Stream payload)
         {

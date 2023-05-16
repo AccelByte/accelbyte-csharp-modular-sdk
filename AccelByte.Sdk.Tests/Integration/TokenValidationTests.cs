@@ -34,6 +34,7 @@ namespace AccelByte.Sdk.Tests.Integration
                 .SetConfigRepository(IntegrationTestConfigRepository.Admin)
                 .UseDefaultTokenRepository()
                 .UseDefaultCredentialRepository()
+                .UseDefaultTokenValidator()
                 .EnableLog()
                 .Build();
 
@@ -63,6 +64,7 @@ namespace AccelByte.Sdk.Tests.Integration
                 .SetConfigRepository(IntegrationTestConfigRepository.Admin)
                 .UseDefaultTokenRepository()
                 .UseDefaultCredentialRepository()
+                .UseDefaultTokenValidator()
                 .EnableLog()
                 .Build();
 

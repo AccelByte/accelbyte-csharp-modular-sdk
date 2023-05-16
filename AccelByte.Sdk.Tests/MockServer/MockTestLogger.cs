@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Http;
 
-using AccelByte.Sdk.Core.Logging;
+using AccelByte.Sdk.Core.Net.Logging;
 
 namespace AccelByte.Sdk.Tests.MockServer
 {
@@ -20,17 +20,17 @@ namespace AccelByte.Sdk.Tests.MockServer
 
         public int RequestCount { get; set; } = 0;
 
-        public ILogOutputWriter? OutputWriter { get; set; } = null;
+        public IHttpLogWriter? Writer { get; set; } = null;
 
         public MockTestLogger()
         {
             string filePath = "http_log.txt";
-            OutputWriter = new DefaultOutputWriter(filePath);
+            Writer = new DefaultOutputWriter(filePath);
         }
 
         public void LogRequest(HttpRequestMessage request, long timestamp)
         {
-            if (OutputWriter == null)
+            if (Writer == null)
                 return;
 
             Dictionary<string, object> logs = new Dictionary<string, object>();
@@ -62,14 +62,14 @@ namespace AccelByte.Sdk.Tests.MockServer
             }
 
             logs.Add("timestamp", DateTimeOffset.Now.ToUnixTimeSeconds().ToString());
-            OutputWriter.Write("request", logs);
+            Writer.Write("request", logs);
 
             RequestCount++;
         }
 
         public void LogResponse(HttpResponseMessage response, long timestamp, long reqTimestamp)
         {
-            if (OutputWriter == null)
+            if (Writer == null)
                 return;
 
             Dictionary<string, object> logs = new Dictionary<string, object>();
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Tests.MockServer
                 logs.Add("headers", headers);
 
             logs.Add("timestamp", DateTimeOffset.Now.ToUnixTimeSeconds().ToString());
-            OutputWriter.Write("response", logs);
+            Writer.Write("response", logs);
         }
     }
 }

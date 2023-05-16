@@ -8,6 +8,7 @@ using NUnit.Framework;
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Core.Client;
 using AccelByte.Sdk.Core.Util;
+using AccelByte.Sdk.Core.Net.Http;
 
 using AccelByte.Sdk.Tests.Integration;
 
