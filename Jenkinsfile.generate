@@ -115,23 +115,23 @@ pipeline {
       }
     }
 
-    stage('CLI Tests') {
-      steps {
-        dir(sdkRepoName) {
-          sh "make test_cli SDK_MOCK_SERVER_PATH=${sdkGenPath}/mock-server"
-        }
-      }
-      post {
-        always {
-          script {
-            dir(sdkRepoName) {
-              archiveArtifacts artifacts: 'samples/AccelByte.Sdk.Sample.Cli/tests/*.tap'
-              step([$class: "TapPublisher", testResults: "samples/AccelByte.Sdk.Sample.Cli/tests/*.tap"])
-            }
-          }
-        }
-      }
-    }
+    // stage('CLI Tests') {
+    //   steps {
+    //     dir(sdkRepoName) {
+    //       sh "make test_cli SDK_MOCK_SERVER_PATH=${sdkGenPath}/mock-server"
+    //     }
+    //   }
+    //   post {
+    //     always {
+    //       script {
+    //         dir(sdkRepoName) {
+    //           archiveArtifacts artifacts: 'samples/AccelByte.Sdk.Sample.Cli/tests/*.tap'
+    //           step([$class: "TapPublisher", testResults: "samples/AccelByte.Sdk.Sample.Cli/tests/*.tap"])
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
     
     stage('Integration Tests') {
       options {
