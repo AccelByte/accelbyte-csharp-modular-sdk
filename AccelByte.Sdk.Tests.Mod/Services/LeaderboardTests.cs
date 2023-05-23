@@ -9,6 +9,7 @@ using NUnit.Framework;
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Api.Leaderboard.Model;
+using AccelByte.Sdk.Api.Social.Model;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -25,15 +26,40 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (_Sdk == null)
                 return;
 
+            DisableRetry();
+
+            string stat_code = "csharpserversdkteststat" + Guid.NewGuid().ToString().Substring(0, 6);
             string leaderboard_code = "csharpsdklbtest" + Guid.NewGuid().ToString().Substring(0, 6);
             string start_time = DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd'T'HH:mm:ss.ffK");
+
+            // Create a stat code first
+            StatCreate createStat = new StatCreate()
+            {
+                Name = "CSharp Server SDK Test Stat",
+                Description = "CSharp server sdk integration test.",
+                StatCode = stat_code,
+                SetBy = "SERVER",
+                Minimum = 0.0,
+                Maximum = 100.0,
+                DefaultValue = 50.0,
+                IncrementOnly = true,
+                SetAsGlobal = false,
+                Tags = new List<string>() { "csharp", "server_sdk", "test" }
+            };
+
+            StatInfo? cStat = _Sdk.GetSocialApi().StatConfiguration.CreateStatOp
+                .SetBody(createStat)
+                .Execute(_Sdk.Namespace);
+            Assert.IsNotNull(cStat);
+            if (cStat != null)
+                Assert.AreEqual("CSharp Server SDK Test Stat", cStat.Name);
 
             #region Create a leaderboard
             ModelsLeaderboardConfigReq newLeaderboard = new ModelsLeaderboardConfigReq()
             {
                 LeaderboardCode = leaderboard_code,
                 Name = "CSharp SDK Leaderboard Test",
-                StatCode = "1",
+                StatCode = stat_code,
                 SeasonPeriod = 36,
                 Descending = false,
                 StartTime = start_time,
@@ -72,7 +98,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             ModelsUpdateLeaderboardConfigReq updateLeaderboard = new ModelsUpdateLeaderboardConfigReq()
             {
                 Name = "CSharp SDK Leaderboard Test",
-                StatCode = "1",
+                StatCode = stat_code,
                 StartTime = start_time,
                 SeasonPeriod = 40
             };
@@ -95,6 +121,12 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .Execute(leaderboard_code, _Sdk.Namespace);
             Assert.IsNotNull(dcLeaderboard);
             Assert.IsTrue(dcLeaderboard!.IsDeleted!);
+
+            //Last, delete the stat code
+            _Sdk.GetSocialApi().StatConfiguration.DeleteStatOp
+                .Execute(_Sdk.Namespace, stat_code);
+
+            ResetPolicy();
         }
     }
 }
