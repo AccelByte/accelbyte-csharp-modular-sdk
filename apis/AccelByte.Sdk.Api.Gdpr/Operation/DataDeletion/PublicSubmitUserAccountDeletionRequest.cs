@@ -58,9 +58,9 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             )
             {
                 PublicSubmitUserAccountDeletionRequest op = new PublicSubmitUserAccountDeletionRequest(this,
-                    password,                    
-                    namespace_,                    
-                    userId                    
+                    password,
+                    namespace_,
+                    userId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -84,7 +84,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -98,33 +98,33 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
+
+
             if (password is not null) FormParams["password"] = password;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PublicSubmitUserAccountDeletionRequest(
-            string namespace_,            
-            string userId,            
-            string password            
+            string namespace_,
+            string userId,
+            string password
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
+
+
             if (password is not null) FormParams["password"] = password;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -135,10 +135,10 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ModelsRequestDeleteResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -151,9 +151,9 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsRequestDeleteResponse>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

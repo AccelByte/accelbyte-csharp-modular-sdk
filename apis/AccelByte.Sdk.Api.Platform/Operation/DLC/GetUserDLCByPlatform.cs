@@ -60,9 +60,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetUserDLCByPlatform op = new GetUserDLCByPlatform(this,
-                    namespace_,                    
-                    userId,                    
-                    type                    
+                    namespace_,
+                    userId,
+                    type
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -100,33 +100,33 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            if (type is not null) QueryParams["type"] = type.Value;
-            
 
-            
-            
-            
+            if (type is not null) QueryParams["type"] = type.Value;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GetUserDLCByPlatform(
-            string namespace_,            
-            string userId,            
-            GetUserDLCByPlatformType type            
+            string namespace_,
+            string userId,
+            GetUserDLCByPlatformType type
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            if (type is not null) QueryParams["type"] = type.Value;
-            
 
-            
-            
-            
+            if (type is not null) QueryParams["type"] = type.Value;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -135,12 +135,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.UserDLC? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -153,9 +153,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.UserDLC>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

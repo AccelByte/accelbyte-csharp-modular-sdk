@@ -61,6 +61,9 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonPropertyName("session_id")]
         public string? SessionId { get; set; }
 
+        [JsonPropertyName("source")]
+        public string? Source { get; set; }
+
         [JsonPropertyName("status")]
         public string? Status { get; set; }
 

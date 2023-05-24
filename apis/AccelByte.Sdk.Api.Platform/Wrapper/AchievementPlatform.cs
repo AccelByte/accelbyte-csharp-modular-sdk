@@ -38,12 +38,13 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             get { return new Operation.UpdateXblUserAchievement.UpdateXblUserAchievementBuilder(_sdk); }
         }
         #endregion
-        
-        public void UnlockSteamUserAchievement(UnlockSteamUserAchievement input) {
+
+        public void UnlockSteamUserAchievement(UnlockSteamUserAchievement input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -52,15 +53,16 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void UpdateXblUserAchievement(UpdateXblUserAchievement input) {
+        public void UpdateXblUserAchievement(UpdateXblUserAchievement input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

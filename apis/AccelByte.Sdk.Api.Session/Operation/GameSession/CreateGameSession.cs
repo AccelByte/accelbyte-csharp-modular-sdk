@@ -30,8 +30,9 @@ namespace AccelByte.Sdk.Api.Session.Operation
     /// - maxPlayers
     /// - inviteTimeout
     /// - inactiveTimeout
+    /// - dsSource
     /// 
-    /// When the session type is a DS, a DS creation request will be sent to DSMC if number of active players reaches session's minPlayers.
+    /// When the session type is a DS, a DS creation request will be sent if number of active players reaches session's minPlayers.
     /// 
     /// Active user is a user who present within the session, has status CONNECTED/JOINED.
     /// 
@@ -40,6 +41,12 @@ namespace AccelByte.Sdk.Api.Session.Operation
     /// - REQUESTED: DS is being requested to DSMC.
     /// - AVAILABLE: DS is ready to use. The DSMC status for this DS is either READY/BUSY.
     /// - FAILED_TO_REQUEST: DSMC fails to create the DS.
+    /// 
+    /// By default, DS requests are sent to DSMC, but if dsSource is set to "AMS":
+    /// - A DS will be requested from AMS instead of DSMC.
+    /// - The server will be chosen based on a set of claim keys, in order of preference, to match with fleets.
+    /// - The claim key list is built build from the preferredClaimKeys, fallbackClaimKeys, and clientVersion as follows:
+    /// [preferredClaimKeys.., clientVersion, fallbackClaimKeys...]
     /// </summary>
     public class CreateGameSession : AccelByte.Sdk.Core.Operation
     {
@@ -72,8 +79,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 CreateGameSession op = new CreateGameSession(this,
-                    body,                    
-                    namespace_                    
+                    body,
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -95,7 +102,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -115,7 +122,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -127,31 +134,31 @@ namespace AccelByte.Sdk.Api.Session.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public CreateGameSession(
-            string namespace_,            
-            Model.ApimodelsCreateGameSessionRequest body            
+            string namespace_,
+            Model.ApimodelsCreateGameSessionRequest body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -162,10 +169,10 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ApimodelsGameSessionResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -178,18 +185,18 @@ namespace AccelByte.Sdk.Api.Session.Operation
             {
                 return JsonSerializer.Deserialize<Model.ApimodelsGameSessionResponse>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
 
         public Model.ApimodelsGameSessionResponse<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
-            }            
+            }
             else if (code == (HttpStatusCode)201)
             {
                 return JsonSerializer.Deserialize<Model.ApimodelsGameSessionResponse<T1>>(payload);
@@ -198,7 +205,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
             {
                 return JsonSerializer.Deserialize<Model.ApimodelsGameSessionResponse<T1>>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
             throw new HttpResponseException(code, payloadString);
         }

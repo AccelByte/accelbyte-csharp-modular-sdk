@@ -34,20 +34,22 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
             get { return new Operation.SetDefaultPolicy3.SetDefaultPolicy3Builder(_sdk); }
         }
         #endregion
-        
-        public void UpdatePolicy1(UpdatePolicy1 input) {
+
+        public void UpdatePolicy1(UpdatePolicy1 input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void SetDefaultPolicy3(SetDefaultPolicy3 input) {
+        public void SetDefaultPolicy3(SetDefaultPolicy3 input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

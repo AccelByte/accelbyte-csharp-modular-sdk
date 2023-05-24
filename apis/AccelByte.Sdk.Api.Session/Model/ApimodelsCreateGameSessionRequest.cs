@@ -27,6 +27,14 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonPropertyName("deployment")]
         public string? Deployment { get; set; }
 
+        [JsonPropertyName("dsSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? DsSource { get; set; }
+
+        [JsonPropertyName("fallbackClaimKeys")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<string>? FallbackClaimKeys { get; set; }
+
         [JsonPropertyName("inactiveTimeout")]
         public int? InactiveTimeout { get; set; }
 
@@ -45,8 +53,9 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonPropertyName("minPlayers")]
         public int? MinPlayers { get; set; }
 
-        [JsonPropertyName("persistent")]
-        public bool? Persistent { get; set; }
+        [JsonPropertyName("preferredClaimKeys")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<string>? PreferredClaimKeys { get; set; }
 
         [JsonPropertyName("requestedRegions")]
         public List<string>? RequestedRegions { get; set; }
@@ -85,6 +94,14 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonPropertyName("deployment")]
         public string? Deployment { get; set; }
 
+        [JsonPropertyName("dsSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? DsSource { get; set; }
+
+        [JsonPropertyName("fallbackClaimKeys")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<string>? FallbackClaimKeys { get; set; }
+
         [JsonPropertyName("inactiveTimeout")]
         public int? InactiveTimeout { get; set; }
 
@@ -103,8 +120,9 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonPropertyName("minPlayers")]
         public int? MinPlayers { get; set; }
 
-        [JsonPropertyName("persistent")]
-        public bool? Persistent { get; set; }
+        [JsonPropertyName("preferredClaimKeys")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<string>? PreferredClaimKeys { get; set; }
 
         [JsonPropertyName("requestedRegions")]
         public List<string>? RequestedRegions { get; set; }

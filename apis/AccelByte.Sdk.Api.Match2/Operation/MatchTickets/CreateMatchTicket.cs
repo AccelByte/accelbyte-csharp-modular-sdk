@@ -26,7 +26,33 @@ namespace AccelByte.Sdk.Api.Match2.Operation
     /// 
     /// Required Scope: social
     /// 
-    /// Creates a new request for matchmaking
+    /// Creates a new request for matchmaking.
+    /// 
+    /// Cross Platform: Allow player to play game with "any" registered plaftforms.
+    /// 1. Cross Platform can be enabled through session service or create match ticket.
+    /// a. via ticket: specify several cross_platform on create match ticket attributes.
+    /// This value will override player attributes in session service. e.g. cross_platform:[xbox,psn,steam]
+    /// b. via session service: set player/party cross_platform attributes.
+    /// c. Enable match options ruleset with name cross_platform and type "any".
+    /// {
+    /// "name": "co-op",
+    /// "data": {
+    /// "alliance": {
+    /// "min_number": 1,
+    /// "max_number": 1,
+    /// "player_min_number": 1,
+    /// "player_max_number": 4
+    /// },
+    /// "match_options": {
+    /// "options": [
+    /// {ânameâ: âcross_platformâ, âtypeâ: âanyâ}
+    /// ]
+    /// }
+    /// }
+    /// }
+    /// 2. Cross Platform can be disabled with specify only ONE cross_platform. Current matchmaking use this behavior. e.g. cross_platform:[xbox]
+    /// 3. Matchmaking will consider Party leader cross_platform preference or Session attribute cross_platform preference.
+    /// 4. This behavior only works for Default Matchmaker. Custom matchmaker (custom gRPC matchmaker) need to consider this on its own implementation.
     /// </summary>
     public class CreateMatchTicket : AccelByte.Sdk.Core.Operation
     {
@@ -59,8 +85,8 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             )
             {
                 CreateMatchTicket op = new CreateMatchTicket(this,
-                    body,                    
-                    namespace_                    
+                    body,
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -82,7 +108,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -94,31 +120,31 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public CreateMatchTicket(
-            string namespace_,            
-            Model.ApiMatchTicketRequest body            
+            string namespace_,
+            Model.ApiMatchTicketRequest body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -129,10 +155,10 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ApiMatchTicketResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -145,9 +171,9 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             {
                 return JsonSerializer.Deserialize<Model.ApiMatchTicketResponse>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

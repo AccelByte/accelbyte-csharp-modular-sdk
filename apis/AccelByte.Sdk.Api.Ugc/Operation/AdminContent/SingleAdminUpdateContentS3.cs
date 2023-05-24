@@ -23,14 +23,24 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// SingleAdminUpdateContentS3
     ///
     /// Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE].
-    /// All request body are required except payload, preview, tags, contentType, updateContentFile and customAttributes.
-    /// contentType values is used to enforce the Content-Type header needed by the client to upload the content using the S3 presigned URL.
-    /// If not specified, it will use fileExtension value.
-    /// To update content's file, set `updateContentFile` to `true` and upload the file using URL in `payloadURL.url` in response body.
+    /// 
+    /// All request body are required except `payload`, `preview`, `tags`,`contentType`, `updateContentFile`, `customAttributes` and `shareCode`.
+    /// 
+    /// `contentType` values is used to enforce the Content-Type header needed by the client to upload the content using the S3 presigned URL.
+    /// 
+    /// If not specified, it will use `fileExtension` value.
+    /// 
+    /// To update content file, set `updateContentFile` to `true` and upload the file using URL in `payloadURL.url` in response body.
+    /// 
+    /// `shareCode` format should follows:
+    /// 
+    /// Max length: 7
+    /// Available characters: abcdefhkpqrstuxyz
     /// 
     /// 
     /// 
-    /// NOTE: Preview is Legacy Code, please use Screenshot for better solution to display preview of a content
+    /// 
+    ///  NOTE: Preview is Legacy Code, please use Screenshot for better solution to display preview of a content
     /// </summary>
     public class SingleAdminUpdateContentS3 : AccelByte.Sdk.Core.Operation
     {
@@ -58,17 +68,17 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
 
             public SingleAdminUpdateContentS3 Build(
-                ModelsContentRequest body,
+                ModelsAdminUpdateContentRequest body,
                 string channelId,
                 string contentId,
                 string namespace_
             )
             {
                 SingleAdminUpdateContentS3 op = new SingleAdminUpdateContentS3(this,
-                    body,                    
-                    channelId,                    
-                    contentId,                    
-                    namespace_                    
+                    body,
+                    channelId,
+                    contentId,
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -76,7 +86,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
 
             public Model.ModelsCreateContentResponse? Execute(
-                ModelsContentRequest body,
+                ModelsAdminUpdateContentRequest body,
                 string channelId,
                 string contentId,
                 string namespace_
@@ -94,13 +104,13 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
 
             public Model.ModelsCreateContentResponse<T1>? Execute<T1>(
-                ModelsContentRequest body,
+                ModelsAdminUpdateContentRequest body,
                 string channelId,
                 string contentId,
                 string namespace_
@@ -118,14 +128,14 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private SingleAdminUpdateContentS3(SingleAdminUpdateContentS3Builder builder,
-            ModelsContentRequest body,
+            ModelsAdminUpdateContentRequest body,
             string channelId,
             string contentId,
             string namespace_
@@ -134,35 +144,35 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["channelId"] = channelId;
             PathParams["contentId"] = contentId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public SingleAdminUpdateContentS3(
-            string channelId,            
-            string contentId,            
-            string namespace_,            
-            Model.ModelsContentRequest body            
+            string channelId,
+            string contentId,
+            string namespace_,
+            Model.ModelsAdminUpdateContentRequest body
         )
         {
             PathParams["channelId"] = channelId;
             PathParams["contentId"] = contentId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -173,10 +183,10 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ModelsCreateContentResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -189,18 +199,18 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsCreateContentResponse>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
 
         public Model.ModelsCreateContentResponse<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
-            }            
+            }
             else if (code == (HttpStatusCode)201)
             {
                 return JsonSerializer.Deserialize<Model.ModelsCreateContentResponse<T1>>(payload);
@@ -209,7 +219,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsCreateContentResponse<T1>>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
             throw new HttpResponseException(code, payloadString);
         }

@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Tests
 
         public override List<string> Consumes => _Consumes;
 
-        public override List<string> Produces => new() { "application/json" };        
+        public override List<string> Produces => new() { "application/json" };
 
         public HttpbinAnythingResponse<TArgs>? ParseResponse<TArgs>(HttpStatusCode code, string contentTpe, Stream payload)
         {

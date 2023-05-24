@@ -12,6 +12,9 @@ namespace AccelByte.Sdk.Api.Session.Model
 {
     public class ApimodelsSessionInviteRequest : AccelByte.Sdk.Core.Model
     {
+        [JsonPropertyName("platformID")]
+        public string? PlatformID { get; set; }
+
         [JsonPropertyName("userID")]
         public string? UserID { get; set; }
 

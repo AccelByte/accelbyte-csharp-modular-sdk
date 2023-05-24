@@ -122,8 +122,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AuthCodeRequestV3 op = new AuthCodeRequestV3(this,
-                    platformId,                    
-                    requestId                    
+                    platformId,
+                    requestId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -145,7 +145,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -157,15 +157,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["platformId"] = platformId;
-            
+
             if (builder.ClientId is not null) QueryParams["client_id"] = builder.ClientId;
             if (builder.RedirectUri is not null) QueryParams["redirect_uri"] = builder.RedirectUri;
             if (requestId is not null) QueryParams["request_id"] = requestId;
-            
 
-            
-            
-            
+
+
+
+
             LocationQuery = "code";
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
@@ -173,22 +173,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AuthCodeRequestV3(
-            string platformId,            
-            string? clientId,            
-            string? redirectUri,            
-            string requestId            
+            string platformId,
+            string? clientId,
+            string? redirectUri,
+            string requestId
         )
         {
             PathParams["platformId"] = platformId;
-            
+
             if (clientId is not null) QueryParams["client_id"] = clientId;
             if (redirectUri is not null) QueryParams["redirect_uri"] = redirectUri;
             if (requestId is not null) QueryParams["request_id"] = requestId;
-            
 
-            
-            
-            
+
+
+
+
             LocationQuery = "code";
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
@@ -200,17 +200,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public string ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var payloadString = payload.ReadToString();
-            
+
             if (code == (HttpStatusCode)302)
             {
-              return payloadString;
+                return payloadString;
             }
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

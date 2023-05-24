@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class UserDLCRecordStatus : StringEnum<UserDLCRecordStatus>
     {
@@ -121,5 +121,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 }

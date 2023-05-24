@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 ListCurrencies op = new ListCurrencies(this,
-                    namespace_                    
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -97,31 +97,31 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.CurrencyType is not null) QueryParams["currencyType"] = builder.CurrencyType.Value;
-            
 
-            
-            
-            
+            if (builder.CurrencyType is not null) QueryParams["currencyType"] = builder.CurrencyType.Value;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public ListCurrencies(
-            string namespace_,            
-            ListCurrenciesCurrencyType? currencyType            
+            string namespace_,
+            ListCurrenciesCurrencyType? currencyType
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (currencyType is not null) QueryParams["currencyType"] = currencyType.Value;
-            
 
-            
-            
-            
+            if (currencyType is not null) QueryParams["currencyType"] = currencyType.Value;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -132,10 +132,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public List<Model.CurrencyInfo>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -148,9 +148,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<List<Model.CurrencyInfo>>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

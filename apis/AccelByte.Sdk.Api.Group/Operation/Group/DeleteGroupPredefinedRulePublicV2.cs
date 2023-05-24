@@ -75,9 +75,9 @@ namespace AccelByte.Sdk.Api.Group.Operation
             )
             {
                 DeleteGroupPredefinedRulePublicV2 op = new DeleteGroupPredefinedRulePublicV2(this,
-                    allowedAction,                    
-                    groupId,                    
-                    namespace_                    
+                    allowedAction,
+                    groupId,
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,32 +116,32 @@ namespace AccelByte.Sdk.Api.Group.Operation
             PathParams["allowedAction"] = allowedAction;
             PathParams["groupId"] = groupId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public DeleteGroupPredefinedRulePublicV2(
-            string allowedAction,            
-            string groupId,            
-            string namespace_            
+            string allowedAction,
+            string groupId,
+            string namespace_
         )
         {
             PathParams["allowedAction"] = allowedAction;
             PathParams["groupId"] = groupId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -150,19 +150,19 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

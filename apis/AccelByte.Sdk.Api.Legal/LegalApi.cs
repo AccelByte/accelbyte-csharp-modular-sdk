@@ -207,7 +207,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<LegalApi>("legal", () =>
             {
                 return new LegalApi(sdk);
-            });            
+            });
         }
     }
 }

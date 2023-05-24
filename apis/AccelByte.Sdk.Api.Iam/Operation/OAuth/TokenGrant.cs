@@ -258,7 +258,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// 
     /// Align with General Data Protection Regulation in Europe, user login history will be kept within 28 days by default"
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class TokenGrant : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -345,14 +345,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 TokenGrant op = new TokenGrant(this,
-                    grantType                    
+                    grantType
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public Model.OauthmodelTokenResponse? Execute(
                 string grantType
             )
@@ -366,7 +366,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -376,8 +376,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             TokenGrantGrantType grantType
         )
         {
-            
-            
+
+
             if (builder.Code is not null) FormParams["code"] = builder.Code;
             if (builder.ExtendExp != null) FormParams["extend_exp"] = Convert.ToString(builder.ExtendExp)!;
             if (builder.Namespace is not null) FormParams["namespace"] = builder.Namespace;
@@ -387,27 +387,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (builder.Username is not null) FormParams["username"] = builder.Username;
             if (grantType is not null) FormParams["grant_type"] = grantType.Value;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public TokenGrant(
-            string? code,            
-            bool? extendExp,            
-            string? namespace_,            
-            string? password,            
-            string? redirectUri,            
-            string? refreshToken,            
-            string? username,            
-            TokenGrantGrantType grantType            
+            string? code,
+            bool? extendExp,
+            string? namespace_,
+            string? password,
+            string? redirectUri,
+            string? refreshToken,
+            string? username,
+            TokenGrantGrantType grantType
         )
         {
-            
-            
+
+
             if (code is not null) FormParams["code"] = code;
             if (extendExp != null) FormParams["extend_exp"] = Convert.ToString(extendExp)!;
             if (namespace_ is not null) FormParams["namespace"] = namespace_;
@@ -417,9 +417,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (username is not null) FormParams["username"] = username;
             if (grantType is not null) FormParams["grant_type"] = grantType.Value;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -430,10 +430,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.OauthmodelTokenResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -446,9 +446,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 return JsonSerializer.Deserialize<Model.OauthmodelTokenResponse>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

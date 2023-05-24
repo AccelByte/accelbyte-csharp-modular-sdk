@@ -49,14 +49,26 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         {
             get { return new Operation.UpdatePodConfig.UpdatePodConfigBuilder(_sdk); }
         }
+        public GetAllPodConfigClient.GetAllPodConfigClientBuilder GetAllPodConfigClientOp
+        {
+            get { return new Operation.GetAllPodConfigClient.GetAllPodConfigClientBuilder(_sdk); }
+        }
+        public CreatePodConfigClient.CreatePodConfigClientBuilder CreatePodConfigClientOp
+        {
+            get { return new Operation.CreatePodConfigClient.CreatePodConfigClientBuilder(_sdk); }
+        }
+        public DeletePodConfigClient.DeletePodConfigClientBuilder DeletePodConfigClientOp
+        {
+            get { return new Operation.DeletePodConfigClient.DeletePodConfigClientBuilder(_sdk); }
+        }
         #endregion
-        
+
         public Model.ModelsInstanceSpec? GetLowestInstanceSpec(GetLowestInstanceSpec input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -65,7 +77,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -74,7 +86,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -83,15 +95,16 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeletePodConfig(DeletePodConfig input) {
+        public void DeletePodConfig(DeletePodConfig input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -100,7 +113,34 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelsListPodConfigResponse? GetAllPodConfigClient(GetAllPodConfigClient input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelsPodConfigRecord? CreatePodConfigClient(CreatePodConfigClient input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void DeletePodConfigClient(DeletePodConfigClient input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

@@ -73,6 +73,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         {
             get { return new Operation.GetImagePatchDetail.GetImagePatchDetailBuilder(_sdk); }
         }
+        public GetRepository.GetRepositoryBuilder GetRepositoryOp
+        {
+            get { return new Operation.GetRepository.GetRepositoryBuilder(_sdk); }
+        }
+        public CreateRepository.CreateRepositoryBuilder CreateRepositoryOp
+        {
+            get { return new Operation.CreateRepository.CreateRepositoryBuilder(_sdk); }
+        }
         public ImageLimitClient.ImageLimitClientBuilder ImageLimitClientOp
         {
             get { return new Operation.ImageLimitClient.ImageLimitClientBuilder(_sdk); }
@@ -82,20 +90,22 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
             get { return new Operation.ImageDetailClient.ImageDetailClientBuilder(_sdk); }
         }
         #endregion
-        
-        public void UpdateImage(UpdateImage input) {
+
+        public void UpdateImage(UpdateImage input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void CreateImage(CreateImage input) {
+        public void CreateImage(CreateImage input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -104,15 +114,16 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void CreateImagePatch(CreateImagePatch input) {
+        public void CreateImagePatch(CreateImagePatch input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -121,15 +132,16 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteImage(DeleteImage input) {
+        public void DeleteImage(DeleteImage input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -138,7 +150,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -147,15 +159,16 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteImagePatch(DeleteImagePatch input) {
+        public void DeleteImagePatch(DeleteImagePatch input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -164,7 +177,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -173,7 +186,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -182,7 +195,25 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelsRepositoryRecord? GetRepository(GetRepository input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void CreateRepository(CreateRepository input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -191,7 +222,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -200,7 +231,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

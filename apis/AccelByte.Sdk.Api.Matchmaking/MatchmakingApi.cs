@@ -64,7 +64,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<MatchmakingApi>("matchmaking", () =>
             {
                 return new MatchmakingApi(sdk);
-            });            
+            });
         }
     }
 }

@@ -33,6 +33,10 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         {
             get { return new Operation.CreateStatCycle.CreateStatCycleBuilder(_sdk); }
         }
+        public BulkGetStatCycle.BulkGetStatCycleBuilder BulkGetStatCycleOp
+        {
+            get { return new Operation.BulkGetStatCycle.BulkGetStatCycleBuilder(_sdk); }
+        }
         public GetStatCycle.GetStatCycleBuilder GetStatCycleOp
         {
             get { return new Operation.GetStatCycle.GetStatCycleBuilder(_sdk); }
@@ -57,18 +61,22 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         {
             get { return new Operation.GetStatCycles1.GetStatCycles1Builder(_sdk); }
         }
+        public BulkGetStatCycle1.BulkGetStatCycle1Builder BulkGetStatCycle1Op
+        {
+            get { return new Operation.BulkGetStatCycle1.BulkGetStatCycle1Builder(_sdk); }
+        }
         public GetStatCycle1.GetStatCycle1Builder GetStatCycle1Op
         {
             get { return new Operation.GetStatCycle1.GetStatCycle1Builder(_sdk); }
         }
         #endregion
-        
+
         public Model.StatCyclePagingSlicedResult? GetStatCycles(GetStatCycles input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -77,7 +85,16 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.BulkStatCycleResult? BulkGetStatCycle(BulkGetStatCycle input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -86,7 +103,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -95,15 +112,16 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteStatCycle(DeleteStatCycle input) {
+        public void DeleteStatCycle(DeleteStatCycle input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -112,17 +130,17 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public List<Model.BulkStatOperationResult<T1>>? BulkAddStats<T1>(BulkAddStats input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -131,7 +149,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -140,7 +158,16 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.BulkStatCycleResult? BulkGetStatCycle1(BulkGetStatCycle1 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -149,7 +176,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

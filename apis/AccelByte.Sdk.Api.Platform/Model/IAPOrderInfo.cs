@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class IAPOrderInfoType : StringEnum<IAPOrderInfoType>
     {
@@ -158,5 +158,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 }

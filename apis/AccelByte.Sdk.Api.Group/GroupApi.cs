@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<GroupApi>("group", () =>
             {
                 return new GroupApi(sdk);
-            });            
+            });
         }
     }
 }

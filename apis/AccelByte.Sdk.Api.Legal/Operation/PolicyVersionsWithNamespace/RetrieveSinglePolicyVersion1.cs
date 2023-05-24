@@ -66,8 +66,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 RetrieveSinglePolicyVersion1 op = new RetrieveSinglePolicyVersion1(this,
-                    namespace_,                    
-                    policyId                    
+                    namespace_,
+                    policyId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -102,33 +102,33 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["policyId"] = policyId;
-            
-            if (builder.VersionId is not null) QueryParams["versionId"] = builder.VersionId;
-            
 
-            
-            
-            
+            if (builder.VersionId is not null) QueryParams["versionId"] = builder.VersionId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public RetrieveSinglePolicyVersion1(
-            string namespace_,            
-            string policyId,            
-            string? versionId            
+            string namespace_,
+            string policyId,
+            string? versionId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["policyId"] = policyId;
-            
-            if (versionId is not null) QueryParams["versionId"] = versionId;
-            
 
-            
-            
-            
+            if (versionId is not null) QueryParams["versionId"] = versionId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -137,12 +137,12 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public List<Model.RetrievePolicyVersionResponse>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -155,9 +155,9 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             {
                 return JsonSerializer.Deserialize<List<Model.RetrievePolicyVersionResponse>>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

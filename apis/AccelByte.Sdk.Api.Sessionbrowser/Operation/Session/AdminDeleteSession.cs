@@ -59,8 +59,8 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             )
             {
                 AdminDeleteSession op = new AdminDeleteSession(this,
-                    namespace_,                    
-                    sessionID                    
+                    namespace_,
+                    sessionID
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -95,30 +95,30 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["sessionID"] = sessionID;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public AdminDeleteSession(
-            string namespace_,            
-            string sessionID            
+            string namespace_,
+            string sessionID
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["sessionID"] = sessionID;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -129,10 +129,10 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ModelsAdminSessionResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -145,9 +145,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsAdminSessionResponse>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

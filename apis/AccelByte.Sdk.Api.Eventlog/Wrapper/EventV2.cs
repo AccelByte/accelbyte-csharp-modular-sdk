@@ -42,13 +42,13 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
             get { return new Operation.GetUserEventsV2Public.GetUserEventsV2PublicBuilder(_sdk); }
         }
         #endregion
-        
+
         public Model.ModelsEventResponseV2? QueryEventStreamHandler(QueryEventStreamHandler input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -57,7 +57,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -75,7 +75,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

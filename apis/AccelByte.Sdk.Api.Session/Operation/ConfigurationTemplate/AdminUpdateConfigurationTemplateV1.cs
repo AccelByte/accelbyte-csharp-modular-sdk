@@ -31,6 +31,17 @@ namespace AccelByte.Sdk.Api.Session.Operation
     /// - MaxPlayers (must greather than 0)
     /// - InviteTimeout (must greather or equal 0) if InviteTimeout equal 0 will be use default DefaultTimeoutSecond (60s)
     /// - InactiveTimeout (must greather or equal 0) if InactiveTimeout equal 0 will be use default DefaultTimeoutSecond (60s)
+    /// - Persistent Flag only can use with type DS (example value true or false)
+    /// - If Persistent True the session always active even DS removing or terminate and Session will be request DS again until DS Ready or Busy.
+    /// - To Stop Session Not request again to DS or want Delete Session can Delete Session using endpoint DELETE /session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}
+    /// - If Persistent False the session will be inactive if all member left and DS terminate or removing
+    /// - nativeSessionSetting:
+    /// - XboxSessionTemplateName: the XBox session template name that correspondent to the AB session template, and is needed to define XBox session's joinRestriction and maxMembersCount when doing the session sync.
+    /// - XboxServiceConfigID: the XBox service configuration ID.
+    /// - PSNServiceLabel: the PSN service label.
+    /// - SessionTitle: the session title. In PSN, this will be used to define name of the session thats displayed on PlayStation system UI.
+    /// - ShouldSync: to define whether the service needs to do session sync with native platform(s). Default: false (disabled).
+    /// - PSNSupportedPlatforms: the PSN supported platforms. In PSN, if ShouldSync true and PSNSupportedPlatforms is empty, then PS5 will be set as default value.
     /// </summary>
     public class AdminUpdateConfigurationTemplateV1 : AccelByte.Sdk.Core.Operation
     {
@@ -64,9 +75,9 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 AdminUpdateConfigurationTemplateV1 op = new AdminUpdateConfigurationTemplateV1(this,
-                    body,                    
-                    name,                    
-                    namespace_                    
+                    body,
+                    name,
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -90,7 +101,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -104,33 +115,33 @@ namespace AccelByte.Sdk.Api.Session.Operation
         {
             PathParams["name"] = name;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public AdminUpdateConfigurationTemplateV1(
-            string name,            
-            string namespace_,            
-            Model.ApimodelsUpdateConfigurationTemplateRequest body            
+            string name,
+            string namespace_,
+            Model.ApimodelsUpdateConfigurationTemplateRequest body
         )
         {
             PathParams["name"] = name;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -141,10 +152,10 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ApimodelsConfigurationTemplateResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -157,9 +168,9 @@ namespace AccelByte.Sdk.Api.Session.Operation
             {
                 return JsonSerializer.Deserialize<Model.ApimodelsConfigurationTemplateResponse>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

@@ -65,7 +65,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UpdateFulfillmentScript op = new UpdateFulfillmentScript(this,
-                    id                    
+                    id
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -96,31 +96,31 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["id"] = id;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = builder.Body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdateFulfillmentScript(
-            string id,            
-            Model.FulfillmentScriptUpdate body            
+            string id,
+            Model.FulfillmentScriptUpdate body
         )
         {
             PathParams["id"] = id;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -131,10 +131,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() {  };        
-        
+        public override List<string> Produces => new() { };
+
         public Model.FulfillmentScriptInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -147,9 +147,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.FulfillmentScriptInfo>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

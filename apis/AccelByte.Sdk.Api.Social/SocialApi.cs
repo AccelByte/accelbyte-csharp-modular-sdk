@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<SocialApi>("social", () =>
             {
                 return new SocialApi(sdk);
-            });            
+            });
         }
     }
 }

@@ -64,7 +64,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             )
             {
                 GetTotalActiveSession op = new GetTotalActiveSession(this,
-                    namespace_                    
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -84,7 +84,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -95,31 +95,31 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.SessionType is not null) QueryParams["session_type"] = builder.SessionType;
-            
 
-            
-            
-            
+            if (builder.SessionType is not null) QueryParams["session_type"] = builder.SessionType;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GetTotalActiveSession(
-            string namespace_,            
-            string? sessionType            
+            string namespace_,
+            string? sessionType
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (sessionType is not null) QueryParams["session_type"] = sessionType;
-            
 
-            
-            
-            
+            if (sessionType is not null) QueryParams["session_type"] = sessionType;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -128,12 +128,12 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ModelsCountActiveSessionResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -146,9 +146,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsCountActiveSessionResponse>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

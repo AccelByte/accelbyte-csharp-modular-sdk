@@ -59,8 +59,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetPlatformWalletConfig op = new GetPlatformWalletConfig(this,
-                    namespace_,                    
-                    platform                    
+                    namespace_,
+                    platform
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -95,30 +95,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["platform"] = platform.Value;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GetPlatformWalletConfig(
-            string namespace_,            
-            GetPlatformWalletConfigPlatform platform            
+            string namespace_,
+            GetPlatformWalletConfigPlatform platform
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platform"] = platform.Value;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -129,10 +129,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.PlatformWalletConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -145,9 +145,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.PlatformWalletConfigInfo>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

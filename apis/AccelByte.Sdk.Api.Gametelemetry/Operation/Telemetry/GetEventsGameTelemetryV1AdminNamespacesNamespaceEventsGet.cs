@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             )
             {
                 GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet op = new GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet(this,
-                    namespace_                    
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.EndTime is not null) QueryParams["endTime"] = builder.EndTime;
             if (builder.EventId is not null) QueryParams["eventId"] = builder.EventId;
             if (builder.EventName is not null) QueryParams["eventName"] = builder.EventName;
@@ -147,11 +147,11 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.StartTime is not null) QueryParams["startTime"] = builder.StartTime;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
@@ -159,18 +159,18 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         #endregion
 
         public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet(
-            string namespace_,            
-            string? endTime,            
-            string? eventId,            
-            string? eventName,            
-            string? eventPayload,            
-            long? limit,            
-            long? offset,            
-            string? startTime            
+            string namespace_,
+            string? endTime,
+            string? eventId,
+            string? eventName,
+            string? eventPayload,
+            long? limit,
+            long? offset,
+            string? startTime
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (endTime is not null) QueryParams["endTime"] = endTime;
             if (eventId is not null) QueryParams["eventId"] = eventId;
             if (eventName is not null) QueryParams["eventName"] = eventName;
@@ -178,11 +178,11 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (startTime is not null) QueryParams["startTime"] = startTime;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
@@ -192,19 +192,19 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)200)
             {
                 return;
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

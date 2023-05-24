@@ -99,5 +99,5 @@ namespace AccelByte.Sdk.Api.Group.Model
         {
 
         }
-    }    
+    }
 }

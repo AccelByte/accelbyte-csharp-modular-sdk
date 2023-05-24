@@ -50,17 +50,17 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
 
             public AdminUpdateChannel Build(
-                ModelsChannelRequest body,
+                ModelsUpdateChannelRequest body,
                 string channelId,
                 string namespace_,
                 string userId
             )
             {
                 AdminUpdateChannel op = new AdminUpdateChannel(this,
-                    body,                    
-                    channelId,                    
-                    namespace_,                    
-                    userId                    
+                    body,
+                    channelId,
+                    namespace_,
+                    userId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -68,7 +68,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
 
             public Model.ModelsChannelResponse? Execute(
-                ModelsChannelRequest body,
+                ModelsUpdateChannelRequest body,
                 string channelId,
                 string namespace_,
                 string userId
@@ -86,14 +86,14 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private AdminUpdateChannel(AdminUpdateChannelBuilder builder,
-            ModelsChannelRequest body,
+            ModelsUpdateChannelRequest body,
             string channelId,
             string namespace_,
             string userId
@@ -102,35 +102,35 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["channelId"] = channelId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public AdminUpdateChannel(
-            string channelId,            
-            string namespace_,            
-            string userId,            
-            Model.ModelsChannelRequest body            
+            string channelId,
+            string namespace_,
+            string userId,
+            Model.ModelsUpdateChannelRequest body
         )
         {
             PathParams["channelId"] = channelId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -141,10 +141,10 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ModelsChannelResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -157,9 +157,9 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsChannelResponse>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

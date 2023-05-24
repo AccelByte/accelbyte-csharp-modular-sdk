@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             )
             {
                 ListReports op = new ListReports(this,
-                    namespace_                    
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -128,43 +128,43 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Category is not null) QueryParams["category"] = builder.Category;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.ReportedUserId is not null) QueryParams["reportedUserId"] = builder.ReportedUserId;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public ListReports(
-            string namespace_,            
-            string? category,            
-            long? limit,            
-            long? offset,            
-            string? reportedUserId,            
-            string? sortBy            
+            string namespace_,
+            string? category,
+            long? limit,
+            long? offset,
+            string? reportedUserId,
+            string? sortBy
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (category is not null) QueryParams["category"] = category;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (reportedUserId is not null) QueryParams["reportedUserId"] = reportedUserId;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -175,10 +175,10 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.RestapiReportListResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -191,9 +191,9 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             {
                 return JsonSerializer.Deserialize<Model.RestapiReportListResponse>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

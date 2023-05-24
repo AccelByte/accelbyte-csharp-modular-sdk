@@ -24,6 +24,9 @@ namespace AccelByte.Sdk.Api.Lobby.Model
         [JsonPropertyName("namespace")]
         public string? Namespace { get; set; }
 
+        [JsonPropertyName("platform")]
+        public string? Platform { get; set; }
+
         [JsonPropertyName("userID")]
         public string? UserID { get; set; }
 

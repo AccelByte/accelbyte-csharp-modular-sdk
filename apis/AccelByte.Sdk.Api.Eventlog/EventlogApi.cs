@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<EventlogApi>("eventlog", () =>
             {
                 return new EventlogApi(sdk);
-            });            
+            });
         }
     }
 }

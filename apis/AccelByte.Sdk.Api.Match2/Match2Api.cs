@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<Match2Api>("match2", () =>
             {
                 return new Match2Api(sdk);
-            });            
+            });
         }
     }
 }

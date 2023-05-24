@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class AppInfoPlatforms : StringEnum<AppInfoPlatforms>
     {
@@ -164,7 +164,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class AppInfoPlayers : StringEnum<AppInfoPlayers>
     {
@@ -197,7 +197,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class AppInfoPrimaryGenre : StringEnum<AppInfoPrimaryGenre>
     {
@@ -245,5 +245,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 }

@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Model
         public string? Image { get; set; }
 
         [JsonPropertyName("imageSize")]
-        public int? ImageSize { get; set; }
+        public long? ImageSize { get; set; }
 
         [JsonPropertyName("modifiedBy")]
         public string? ModifiedBy { get; set; }
@@ -41,6 +41,9 @@ namespace AccelByte.Sdk.Api.Dsmc.Model
 
         [JsonPropertyName("updatedAt")]
         public DateTime? UpdatedAt { get; set; }
+
+        [JsonPropertyName("uploaderFlags")]
+        public List<ModelsUploaderFlag>? UploaderFlags { get; set; }
 
         [JsonPropertyName("version")]
         public string? Version { get; set; }

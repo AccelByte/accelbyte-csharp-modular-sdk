@@ -57,8 +57,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 DeleteStatCycle op = new DeleteStatCycle(this,
-                    cycleId,                    
-                    namespace_                    
+                    cycleId,
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -93,30 +93,30 @@ namespace AccelByte.Sdk.Api.Social.Operation
         {
             PathParams["cycleId"] = cycleId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public DeleteStatCycle(
-            string cycleId,            
-            string namespace_            
+            string cycleId,
+            string namespace_
         )
         {
             PathParams["cycleId"] = cycleId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -125,19 +125,19 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() {  };        
-        
+        public override List<string> Produces => new() { };
+
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

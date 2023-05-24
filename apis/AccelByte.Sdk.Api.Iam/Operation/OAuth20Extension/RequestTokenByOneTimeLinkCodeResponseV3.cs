@@ -29,6 +29,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// It require publisher ClientID
     /// 
     /// It required a code which can be generated from /iam/v3/link/code/request.
+    /// 
+    /// 
+    /// 
+    /// 
+    /// 
+    /// 
+    /// This endpoint support creating transient token by utilizing isTransient param:
+    /// 
+    /// isTransient=true will generate a transient token with a short Time Expiration and without a refresh token
+    /// 
+    /// isTransient=false will consume the one-time code and generate the access token with a refresh token.
     /// </summary>
     public class RequestTokenByOneTimeLinkCodeResponseV3 : AccelByte.Sdk.Core.Operation
     {
@@ -40,6 +51,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
 
 
+
+            public bool? IsTransient { get; set; }
 
 
 
@@ -53,6 +66,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
+            public RequestTokenByOneTimeLinkCodeResponseV3Builder SetIsTransient(bool _isTransient)
+            {
+                IsTransient = _isTransient;
+                return this;
+            }
+
 
 
             public RequestTokenByOneTimeLinkCodeResponseV3 Build(
@@ -61,8 +80,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 RequestTokenByOneTimeLinkCodeResponseV3 op = new RequestTokenByOneTimeLinkCodeResponseV3(this,
-                    clientId,                    
-                    oneTimeLinkCode                    
+                    clientId,
+                    oneTimeLinkCode
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -84,7 +103,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -95,31 +114,34 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string oneTimeLinkCode
         )
         {
-            
-            
+
+
+            if (builder.IsTransient != null) FormParams["isTransient"] = Convert.ToString(builder.IsTransient)!;
             if (clientId is not null) FormParams["client_id"] = clientId;
             if (oneTimeLinkCode is not null) FormParams["oneTimeLinkCode"] = oneTimeLinkCode;
 
-            
-            
-            
+
+
+
 
         }
         #endregion
 
         public RequestTokenByOneTimeLinkCodeResponseV3(
-            string clientId,            
-            string oneTimeLinkCode            
+            bool? isTransient,
+            string clientId,
+            string oneTimeLinkCode
         )
         {
-            
-            
+
+
+            if (isTransient != null) FormParams["isTransient"] = Convert.ToString(isTransient)!;
             if (clientId is not null) FormParams["client_id"] = clientId;
             if (oneTimeLinkCode is not null) FormParams["oneTimeLinkCode"] = oneTimeLinkCode;
 
-            
-            
-            
+
+
+
 
         }
 
@@ -129,10 +151,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.OauthmodelTokenResponseV3? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -145,9 +167,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 return JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

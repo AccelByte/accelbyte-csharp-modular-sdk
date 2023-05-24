@@ -29,18 +29,31 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         {
             get { return new Operation.GetUserStatCycleItems.GetUserStatCycleItemsBuilder(_sdk); }
         }
+        public PublicListMyStatCycleItems.PublicListMyStatCycleItemsBuilder PublicListMyStatCycleItemsOp
+        {
+            get { return new Operation.PublicListMyStatCycleItems.PublicListMyStatCycleItemsBuilder(_sdk); }
+        }
         public GetUserStatCycleItems1.GetUserStatCycleItems1Builder GetUserStatCycleItems1Op
         {
             get { return new Operation.GetUserStatCycleItems1.GetUserStatCycleItems1Builder(_sdk); }
         }
         #endregion
-        
+
         public Model.UserStatCycleItemPagingSlicedResult? GetUserStatCycleItems(GetUserStatCycleItems input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.UserStatCycleItemPagingSlicedResult? PublicListMyStatCycleItems(PublicListMyStatCycleItems input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -49,7 +62,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

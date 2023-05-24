@@ -28,8 +28,14 @@ namespace AccelByte.Sdk.Api.Social.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
 
+        [JsonPropertyName("ignoreAdditionalDataOnValueRejected")]
+        public bool? IgnoreAdditionalDataOnValueRejected { get; set; }
+
         [JsonPropertyName("incrementOnly")]
         public bool? IncrementOnly { get; set; }
+
+        [JsonPropertyName("isPublic")]
+        public bool? IsPublic { get; set; }
 
         [JsonPropertyName("maximum")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -89,7 +95,7 @@ namespace AccelByte.Sdk.Api.Social.Model
         {
 
         }
-    }    
+    }
 
     public class StatInfoStatus : StringEnum<StatInfoStatus>
     {
@@ -110,5 +116,5 @@ namespace AccelByte.Sdk.Api.Social.Model
         {
 
         }
-    }    
+    }
 }

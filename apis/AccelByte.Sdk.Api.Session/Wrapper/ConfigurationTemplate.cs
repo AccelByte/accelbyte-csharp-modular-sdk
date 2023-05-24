@@ -25,6 +25,22 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         }
 
         #region Operation Builders
+        public AdminGetConfigurationAlertV1.AdminGetConfigurationAlertV1Builder AdminGetConfigurationAlertV1Op
+        {
+            get { return new Operation.AdminGetConfigurationAlertV1.AdminGetConfigurationAlertV1Builder(_sdk); }
+        }
+        public AdminUpdateConfigurationAlertV1.AdminUpdateConfigurationAlertV1Builder AdminUpdateConfigurationAlertV1Op
+        {
+            get { return new Operation.AdminUpdateConfigurationAlertV1.AdminUpdateConfigurationAlertV1Builder(_sdk); }
+        }
+        public AdminCreateConfigurationAlertV1.AdminCreateConfigurationAlertV1Builder AdminCreateConfigurationAlertV1Op
+        {
+            get { return new Operation.AdminCreateConfigurationAlertV1.AdminCreateConfigurationAlertV1Builder(_sdk); }
+        }
+        public AdminDeleteConfigurationAlertV1.AdminDeleteConfigurationAlertV1Builder AdminDeleteConfigurationAlertV1Op
+        {
+            get { return new Operation.AdminDeleteConfigurationAlertV1.AdminDeleteConfigurationAlertV1Builder(_sdk); }
+        }
         public AdminCreateConfigurationTemplateV1.AdminCreateConfigurationTemplateV1Builder AdminCreateConfigurationTemplateV1Op
         {
             get { return new Operation.AdminCreateConfigurationTemplateV1.AdminCreateConfigurationTemplateV1Builder(_sdk); }
@@ -54,13 +70,49 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             get { return new Operation.AdminSyncDSMCConfiguration.AdminSyncDSMCConfigurationBuilder(_sdk); }
         }
         #endregion
-        
+
+        public Model.ApimodelsConfigAlertResponse? AdminGetConfigurationAlertV1(AdminGetConfigurationAlertV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ApimodelsConfigAlertResponse? AdminUpdateConfigurationAlertV1(AdminUpdateConfigurationAlertV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ApimodelsConfigAlertResponse? AdminCreateConfigurationAlertV1(AdminCreateConfigurationAlertV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void AdminDeleteConfigurationAlertV1(AdminDeleteConfigurationAlertV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.ApimodelsConfigurationTemplateResponse? AdminCreateConfigurationTemplateV1(AdminCreateConfigurationTemplateV1 input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -69,7 +121,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -78,7 +130,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -87,15 +139,16 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteConfigurationTemplateV1(AdminDeleteConfigurationTemplateV1 input) {
+        public void AdminDeleteConfigurationTemplateV1(AdminDeleteConfigurationTemplateV1 input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -104,7 +157,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -113,7 +166,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

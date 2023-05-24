@@ -50,12 +50,13 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
             get { return new Operation.GetModerationRuleDetails.GetModerationRuleDetailsBuilder(_sdk); }
         }
         #endregion
-        
-        public void CreateModerationRule(CreateModerationRule input) {
+
+        public void CreateModerationRule(CreateModerationRule input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -64,23 +65,25 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteModerationRule(DeleteModerationRule input) {
+        public void DeleteModerationRule(DeleteModerationRule input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void UpdateModerationRuleStatus(UpdateModerationRuleStatus input) {
+        public void UpdateModerationRuleStatus(UpdateModerationRuleStatus input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -89,7 +92,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -98,7 +101,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

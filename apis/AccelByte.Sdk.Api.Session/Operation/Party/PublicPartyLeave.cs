@@ -55,8 +55,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 PublicPartyLeave op = new PublicPartyLeave(this,
-                    namespace_,                    
-                    partyId                    
+                    namespace_,
+                    partyId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -78,7 +78,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -91,30 +91,30 @@ namespace AccelByte.Sdk.Api.Session.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["partyId"] = partyId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PublicPartyLeave(
-            string namespace_,            
-            string partyId            
+            string namespace_,
+            string partyId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["partyId"] = partyId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -125,17 +125,17 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

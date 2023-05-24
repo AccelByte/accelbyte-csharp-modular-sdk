@@ -65,7 +65,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 PublicGetCountries op = new PublicGetCountries(this,
-                    namespace_                    
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -96,30 +96,30 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.Lang is not null) QueryParams["lang"] = builder.Lang;
-            
 
-            
-            
-            
+            if (builder.Lang is not null) QueryParams["lang"] = builder.Lang;
+
+
+
+
+
 
         }
         #endregion
 
         public PublicGetCountries(
-            string namespace_,            
-            string? lang            
+            string namespace_,
+            string? lang
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (lang is not null) QueryParams["lang"] = lang;
-            
 
-            
-            
-            
+            if (lang is not null) QueryParams["lang"] = lang;
+
+
+
+
+
 
         }
 
@@ -127,12 +127,12 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public List<Model.CountryObject>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -145,9 +145,9 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             {
                 return JsonSerializer.Deserialize<List<Model.CountryObject>>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

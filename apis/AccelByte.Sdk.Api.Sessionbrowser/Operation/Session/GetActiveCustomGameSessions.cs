@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             )
             {
                 GetActiveCustomGameSessions op = new GetActiveCustomGameSessions(this,
-                    namespace_                    
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -119,40 +119,40 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.ServerRegion is not null) QueryParams["server_region"] = builder.ServerRegion;
             if (builder.SessionId is not null) QueryParams["session_id"] = builder.SessionId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GetActiveCustomGameSessions(
-            string namespace_,            
-            long? limit,            
-            long? offset,            
-            string? serverRegion,            
-            string? sessionId            
+            string namespace_,
+            long? limit,
+            long? offset,
+            string? serverRegion,
+            string? sessionId
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (serverRegion is not null) QueryParams["server_region"] = serverRegion;
             if (sessionId is not null) QueryParams["session_id"] = sessionId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -161,12 +161,12 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ModelsActiveCustomGameResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -179,9 +179,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsActiveCustomGameResponse>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

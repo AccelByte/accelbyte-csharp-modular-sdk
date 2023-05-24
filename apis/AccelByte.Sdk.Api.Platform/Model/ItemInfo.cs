@@ -424,7 +424,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class ItemInfoEntitlementType : StringEnum<ItemInfoEntitlementType>
     {
@@ -445,7 +445,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class ItemInfoItemType : StringEnum<ItemInfoItemType>
     {
@@ -493,7 +493,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class ItemInfoSeasonType : StringEnum<ItemInfoSeasonType>
     {
@@ -514,7 +514,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class ItemInfoStatus : StringEnum<ItemInfoStatus>
     {
@@ -535,5 +535,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 }

@@ -51,7 +51,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class RevokeItemOrigin : StringEnum<RevokeItemOrigin>
     {
@@ -96,5 +96,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 }

@@ -58,17 +58,17 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
 
             public CreateContentS3 Build(
-                ModelsCreateContentRequestS3 body,
+                ModelsPublicCreateContentRequestS3 body,
                 string channelId,
                 string namespace_,
                 string userId
             )
             {
                 CreateContentS3 op = new CreateContentS3(this,
-                    body,                    
-                    channelId,                    
-                    namespace_,                    
-                    userId                    
+                    body,
+                    channelId,
+                    namespace_,
+                    userId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -76,7 +76,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
 
             public Model.ModelsCreateContentResponse? Execute(
-                ModelsCreateContentRequestS3 body,
+                ModelsPublicCreateContentRequestS3 body,
                 string channelId,
                 string namespace_,
                 string userId
@@ -94,13 +94,13 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
 
             public Model.ModelsCreateContentResponse<T1>? Execute<T1>(
-                ModelsCreateContentRequestS3 body,
+                ModelsPublicCreateContentRequestS3 body,
                 string channelId,
                 string namespace_,
                 string userId
@@ -118,14 +118,14 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private CreateContentS3(CreateContentS3Builder builder,
-            ModelsCreateContentRequestS3 body,
+            ModelsPublicCreateContentRequestS3 body,
             string channelId,
             string namespace_,
             string userId
@@ -134,35 +134,35 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["channelId"] = channelId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public CreateContentS3(
-            string channelId,            
-            string namespace_,            
-            string userId,            
-            Model.ModelsCreateContentRequestS3 body            
+            string channelId,
+            string namespace_,
+            string userId,
+            Model.ModelsPublicCreateContentRequestS3 body
         )
         {
             PathParams["channelId"] = channelId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -171,12 +171,12 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { "application/json","application/octet-stream" };
+        public override List<string> Consumes => new() { "application/json", "application/octet-stream" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ModelsCreateContentResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -189,18 +189,18 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsCreateContentResponse>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
 
         public Model.ModelsCreateContentResponse<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
-            }            
+            }
             else if (code == (HttpStatusCode)201)
             {
                 return JsonSerializer.Deserialize<Model.ModelsCreateContentResponse<T1>>(payload);
@@ -209,7 +209,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsCreateContentResponse<T1>>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
             throw new HttpResponseException(code, payloadString);
         }

@@ -34,13 +34,13 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
             get { return new Operation.PublicListTags.PublicListTagsBuilder(_sdk); }
         }
         #endregion
-        
+
         public Model.ModelsPaginatedTagResponse? AdminListTags(AdminListTags input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -49,7 +49,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

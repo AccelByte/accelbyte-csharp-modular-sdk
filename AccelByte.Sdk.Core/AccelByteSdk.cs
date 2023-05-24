@@ -18,7 +18,7 @@ namespace AccelByte.Sdk.Core
 
         private readonly List<ISdkService> _Services = new();
 
-        public IAccelByteConfig Configuration { get; private set; }        
+        public IAccelByteConfig Configuration { get; private set; }
 
         public ISdkLocalData LocalData { get; } = new SdkLocalData();
 
@@ -119,5 +119,5 @@ namespace AccelByte.Sdk.Core
             else
                 throw new Exception("Could not validate token. No token validator assigned.");
         }
-    }    
+    }
 }

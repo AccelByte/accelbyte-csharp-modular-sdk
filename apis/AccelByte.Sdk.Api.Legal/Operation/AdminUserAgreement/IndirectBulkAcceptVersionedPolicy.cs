@@ -74,10 +74,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 IndirectBulkAcceptVersionedPolicy op = new IndirectBulkAcceptVersionedPolicy(this,
-                    namespace_,                    
-                    userId,                    
-                    clientId,                    
-                    countryCode                    
+                    namespace_,
+                    userId,
+                    clientId,
+                    countryCode
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -127,7 +127,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -142,42 +142,42 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (builder.PublisherUserId is not null) QueryParams["publisherUserId"] = builder.PublisherUserId;
             if (clientId is not null) QueryParams["clientId"] = clientId;
             if (countryCode is not null) QueryParams["countryCode"] = countryCode;
-            
 
-            
-            
+
+
+
             BodyParams = builder.Body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public IndirectBulkAcceptVersionedPolicy(
-            string namespace_,            
-            string userId,            
-            string? publisherUserId,            
-            string clientId,            
-            string countryCode,            
-            List<Model.AcceptAgreementRequest> body            
+            string namespace_,
+            string userId,
+            string? publisherUserId,
+            string clientId,
+            string countryCode,
+            List<Model.AcceptAgreementRequest> body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (publisherUserId is not null) QueryParams["publisherUserId"] = publisherUserId;
             if (clientId is not null) QueryParams["clientId"] = clientId;
             if (countryCode is not null) QueryParams["countryCode"] = countryCode;
-            
 
-            
-            
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -188,10 +188,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.AcceptAgreementResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -204,18 +204,18 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             {
                 return JsonSerializer.Deserialize<Model.AcceptAgreementResponse>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
 
         public Model.AcceptAgreementResponse<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
-            }            
+            }
             else if (code == (HttpStatusCode)201)
             {
                 return JsonSerializer.Deserialize<Model.AcceptAgreementResponse<T1>>(payload);
@@ -224,7 +224,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             {
                 return JsonSerializer.Deserialize<Model.AcceptAgreementResponse<T1>>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
             throw new HttpResponseException(code, payloadString);
         }

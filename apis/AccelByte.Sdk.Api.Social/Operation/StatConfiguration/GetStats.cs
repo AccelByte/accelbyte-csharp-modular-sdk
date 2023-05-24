@@ -40,6 +40,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
             public bool? IsGlobal { get; set; }
 
+            public bool? IsPublic { get; set; }
+
             public int? Limit { get; set; }
 
             public int? Offset { get; set; }
@@ -68,6 +70,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 return this;
             }
 
+            public GetStatsBuilder SetIsPublic(bool _isPublic)
+            {
+                IsPublic = _isPublic;
+                return this;
+            }
+
             public GetStatsBuilder SetLimit(int _limit)
             {
                 Limit = _limit;
@@ -89,7 +97,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 GetStats op = new GetStats(this,
-                    namespace_                    
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -109,7 +117,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -120,40 +128,43 @@ namespace AccelByte.Sdk.Api.Social.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.CycleIds is not null) QueryParams["cycleIds"] = builder.CycleIds;
             if (builder.IsGlobal != null) QueryParams["isGlobal"] = Convert.ToString(builder.IsGlobal)!;
+            if (builder.IsPublic != null) QueryParams["isPublic"] = Convert.ToString(builder.IsPublic)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GetStats(
-            string namespace_,            
-            string? cycleIds,            
-            bool? isGlobal,            
-            int? limit,            
-            int? offset            
+            string namespace_,
+            string? cycleIds,
+            bool? isGlobal,
+            bool? isPublic,
+            int? limit,
+            int? offset
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (cycleIds is not null) QueryParams["cycleIds"] = cycleIds;
             if (isGlobal != null) QueryParams["isGlobal"] = Convert.ToString(isGlobal)!;
+            if (isPublic != null) QueryParams["isPublic"] = Convert.ToString(isPublic)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -162,12 +173,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.StatPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -180,9 +191,9 @@ namespace AccelByte.Sdk.Api.Social.Operation
             {
                 return JsonSerializer.Deserialize<Model.StatPagingSlicedResult>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

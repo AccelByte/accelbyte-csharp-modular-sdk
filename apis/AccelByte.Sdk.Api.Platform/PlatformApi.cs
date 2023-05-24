@@ -383,7 +383,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<PlatformApi>("platform", () =>
             {
                 return new PlatformApi(sdk);
-            });            
+            });
         }
     }
 }

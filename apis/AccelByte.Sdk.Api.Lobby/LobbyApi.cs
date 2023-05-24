@@ -26,17 +26,6 @@ namespace AccelByte.Sdk.Api.Lobby
         }
         private Wrapper.Friends? _Friends = null;
 
-        public Wrapper.Chat Chat
-        {
-            get
-            {
-                if (_Chat == null)
-                    _Chat = new Wrapper.Chat(_Sdk);
-                return _Chat;
-            }
-        }
-        private Wrapper.Chat? _Chat = null;
-
         public Wrapper.Config Config
         {
             get
@@ -152,7 +141,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<LobbyApi>("lobby", () =>
             {
                 return new LobbyApi(sdk);
-            });            
+            });
         }
     }
 }

@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class PredicatePredicateType : StringEnum<PredicatePredicateType>
     {
@@ -105,5 +105,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 }

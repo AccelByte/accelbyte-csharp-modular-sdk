@@ -81,8 +81,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 GetSlugTemplate op = new GetSlugTemplate(this,
-                    namespace_,                    
-                    templateSlug                    
+                    namespace_,
+                    templateSlug
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -117,39 +117,39 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["templateSlug"] = templateSlug;
-            
+
             if (builder.After is not null) QueryParams["after"] = builder.After;
             if (builder.Before is not null) QueryParams["before"] = builder.Before;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GetSlugTemplate(
-            string namespace_,            
-            string templateSlug,            
-            string? after,            
-            string? before,            
-            long? limit            
+            string namespace_,
+            string templateSlug,
+            string? after,
+            string? before,
+            long? limit
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["templateSlug"] = templateSlug;
-            
+
             if (after is not null) QueryParams["after"] = after;
             if (before is not null) QueryParams["before"] = before;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -160,10 +160,10 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ModelTemplateLocalizationResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -176,9 +176,9 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelTemplateLocalizationResponse>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

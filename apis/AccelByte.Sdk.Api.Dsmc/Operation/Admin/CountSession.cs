@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             )
             {
                 CountSession op = new CountSession(this,
-                    namespace_                    
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -97,31 +97,31 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.Region is not null) QueryParams["region"] = builder.Region;
-            
 
-            
-            
-            
+            if (builder.Region is not null) QueryParams["region"] = builder.Region;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public CountSession(
-            string namespace_,            
-            string? region            
+            string namespace_,
+            string? region
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (region is not null) QueryParams["region"] = region;
-            
 
-            
-            
-            
+            if (region is not null) QueryParams["region"] = region;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -132,10 +132,10 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ModelsCountSessionResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -148,9 +148,9 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsCountSessionResponse>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

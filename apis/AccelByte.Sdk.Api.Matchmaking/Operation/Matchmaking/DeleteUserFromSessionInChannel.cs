@@ -61,10 +61,10 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
             )
             {
                 DeleteUserFromSessionInChannel op = new DeleteUserFromSessionInChannel(this,
-                    channelName,                    
-                    matchID,                    
-                    namespace_,                    
-                    userID                    
+                    channelName,
+                    matchID,
+                    namespace_,
+                    userID
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -90,7 +90,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -107,34 +107,34 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
             PathParams["matchID"] = matchID;
             PathParams["namespace"] = namespace_;
             PathParams["userID"] = userID;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public DeleteUserFromSessionInChannel(
-            string channelName,            
-            string matchID,            
-            string namespace_,            
-            string userID            
+            string channelName,
+            string matchID,
+            string namespace_,
+            string userID
         )
         {
             PathParams["channelName"] = channelName;
             PathParams["matchID"] = matchID;
             PathParams["namespace"] = namespace_;
             PathParams["userID"] = userID;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -145,17 +145,17 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)200)
             {
                 return;
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

@@ -65,10 +65,10 @@ namespace AccelByte.Sdk.Tests
 
         public override HttpMethod Method => _Method;
 
-        private List<string> _Consumes = new(){ "application/json" };
+        private List<string> _Consumes = new() { "application/json" };
         public override List<string> Consumes => _Consumes;
 
-        private List<string> _Produces = new(){ "application/json" };
+        private List<string> _Produces = new() { "application/json" };
         public override List<string> Produces => _Produces;
 
         public HttpbinAnythingOperation AddPathParam(string key, string value)

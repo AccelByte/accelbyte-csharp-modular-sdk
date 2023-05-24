@@ -130,23 +130,23 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             get { return new Operation.PublicUpdateUserProfileStatus.PublicUpdateUserProfileStatusBuilder(_sdk); }
         }
         #endregion
-        
+
         public Model.UserProfileInfo? GetUserProfileInfoByPublicId(GetUserProfileInfoByPublicId input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.UserProfileInfo<T1>? GetUserProfileInfoByPublicId<T1>(GetUserProfileInfoByPublicId input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -155,17 +155,17 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public List<Model.UserProfilePublicInfo<T1>>? AdminGetUserProfilePublicInfoByIds<T1>(AdminGetUserProfilePublicInfoByIds input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -174,17 +174,17 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.UserProfilePrivateInfo<T1, T2>? GetUserProfileInfo<T1, T2>(GetUserProfileInfo input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -193,17 +193,17 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.UserProfilePrivateInfo<T1, T2>? UpdateUserProfile<T1, T2>(UpdateUserProfile input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -212,17 +212,17 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.UserProfilePrivateInfo<T1, T2>? DeleteUserProfile<T1, T2>(DeleteUserProfile input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -231,7 +231,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -240,7 +240,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -249,7 +249,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -258,7 +258,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -267,17 +267,17 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.UserProfilePrivateInfo<T1, T2>? UpdateUserProfileStatus<T1, T2>(UpdateUserProfileStatus input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -286,17 +286,17 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public List<Model.UserProfilePublicInfo<T1>>? PublicGetUserProfilePublicInfoByIds<T1>(PublicGetUserProfilePublicInfoByIds input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -305,17 +305,17 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.UserProfilePublicInfo<T1>? PublicGetUserProfileInfoByPublicId<T1>(PublicGetUserProfileInfoByPublicId input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -324,17 +324,17 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.UserProfilePrivateInfo<T1, T2>? GetMyProfileInfo<T1, T2>(GetMyProfileInfo input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -343,17 +343,17 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.UserProfilePrivateInfo<T1, T2>? UpdateMyProfile<T1, T2>(UpdateMyProfile input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -362,17 +362,17 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.UserProfilePrivateInfo<T1, T2>? CreateMyProfile<T1, T2>(CreateMyProfile input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -381,7 +381,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -390,7 +390,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -399,7 +399,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -408,7 +408,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -417,17 +417,17 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.UserProfileInfo<T1>? PublicGetUserProfileInfo<T1>(PublicGetUserProfileInfo input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -436,17 +436,17 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.UserProfileInfo<T1>? PublicUpdateUserProfile<T1>(PublicUpdateUserProfile input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -455,17 +455,17 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.UserProfileInfo<T1>? PublicCreateUserProfile<T1>(PublicCreateUserProfile input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -474,7 +474,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -483,7 +483,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -492,17 +492,17 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.UserProfilePublicInfo<T1>? PublicGetUserProfilePublicInfo<T1>(PublicGetUserProfilePublicInfo input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -511,17 +511,17 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.UserProfileInfo<T1>? PublicUpdateUserProfileStatus<T1>(PublicUpdateUserProfileStatus input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

@@ -60,9 +60,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             )
             {
                 RemovePlayerFromSession op = new RemovePlayerFromSession(this,
-                    namespace_,                    
-                    sessionID,                    
-                    userID                    
+                    namespace_,
+                    sessionID,
+                    userID
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -101,32 +101,32 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             PathParams["namespace"] = namespace_;
             PathParams["sessionID"] = sessionID;
             PathParams["userID"] = userID;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public RemovePlayerFromSession(
-            string namespace_,            
-            string sessionID,            
-            string userID            
+            string namespace_,
+            string sessionID,
+            string userID
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["sessionID"] = sessionID;
             PathParams["userID"] = userID;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -137,10 +137,10 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ModelsAddPlayerResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -153,9 +153,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsAddPlayerResponse>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

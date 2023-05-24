@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Core
         {
             return builder.SetTokenRepository(new SharedTokenRepository());
         }
-        
+
         public static IAccelByteSdkBuilder<AccelByteSDK> UseDefaultConfigRepository(this IAccelByteSdkBuilder<AccelByteSDK> builder)
         {
             return builder.SetConfigRepository(new DefaultConfigRepository());

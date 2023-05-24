@@ -68,8 +68,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UploadKeys op = new UploadKeys(this,
-                    keyGroupId,                    
-                    namespace_                    
+                    keyGroupId,
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -104,33 +104,33 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["keyGroupId"] = keyGroupId;
             PathParams["namespace"] = namespace_;
-            
-            
+
+
             if (builder.File is not null) FormParams["file"] = builder.File;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UploadKeys(
-            string keyGroupId,            
-            string namespace_,            
-            Stream? file            
+            string keyGroupId,
+            string namespace_,
+            Stream? file
         )
         {
             PathParams["keyGroupId"] = keyGroupId;
             PathParams["namespace"] = namespace_;
-            
-            
+
+
             if (file is not null) FormParams["file"] = file;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -141,10 +141,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "multipart/form-data" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.BulkOperationResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -157,9 +157,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.BulkOperationResult>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

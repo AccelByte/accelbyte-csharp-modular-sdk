@@ -42,13 +42,13 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
             get { return new Operation.AdminDeleteTag.AdminDeleteTagBuilder(_sdk); }
         }
         #endregion
-        
+
         public Model.ModelsPaginatedGetTagResponse? AdminGetTag(AdminGetTag input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -57,7 +57,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -66,15 +66,16 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteTag(AdminDeleteTag input) {
+        public void AdminDeleteTag(AdminDeleteTag input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

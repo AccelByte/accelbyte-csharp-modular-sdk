@@ -70,6 +70,50 @@ namespace AccelByte.Sdk.Api.Leaderboard
         }
         private Wrapper.UserVisibility? _UserVisibility = null;
 
+        public Wrapper.LeaderboardConfigurationV3 LeaderboardConfigurationV3
+        {
+            get
+            {
+                if (_LeaderboardConfigurationV3 == null)
+                    _LeaderboardConfigurationV3 = new Wrapper.LeaderboardConfigurationV3(_Sdk);
+                return _LeaderboardConfigurationV3;
+            }
+        }
+        private Wrapper.LeaderboardConfigurationV3? _LeaderboardConfigurationV3 = null;
+
+        public Wrapper.LeaderboardDataV3 LeaderboardDataV3
+        {
+            get
+            {
+                if (_LeaderboardDataV3 == null)
+                    _LeaderboardDataV3 = new Wrapper.LeaderboardDataV3(_Sdk);
+                return _LeaderboardDataV3;
+            }
+        }
+        private Wrapper.LeaderboardDataV3? _LeaderboardDataV3 = null;
+
+        public Wrapper.UserVisibilityV3 UserVisibilityV3
+        {
+            get
+            {
+                if (_UserVisibilityV3 == null)
+                    _UserVisibilityV3 = new Wrapper.UserVisibilityV3(_Sdk);
+                return _UserVisibilityV3;
+            }
+        }
+        private Wrapper.UserVisibilityV3? _UserVisibilityV3 = null;
+
+        public Wrapper.UserDataV3 UserDataV3
+        {
+            get
+            {
+                if (_UserDataV3 == null)
+                    _UserDataV3 = new Wrapper.UserDataV3(_Sdk);
+                return _UserDataV3;
+            }
+        }
+        private Wrapper.UserDataV3? _UserDataV3 = null;
+
         internal LeaderboardApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
@@ -86,7 +130,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<LeaderboardApi>("leaderboard", () =>
             {
                 return new LeaderboardApi(sdk);
-            });            
+            });
         }
     }
 }

@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class TransactionStatus : StringEnum<TransactionStatus>
     {
@@ -155,7 +155,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class TransactionType : StringEnum<TransactionType>
     {
@@ -197,5 +197,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 }

@@ -34,13 +34,13 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
             get { return new Operation.PublicGetCreator.PublicGetCreatorBuilder(_sdk); }
         }
         #endregion
-        
+
         public Model.ModelsPaginatedCreatorOverviewResponse? PublicSearchCreator(PublicSearchCreator input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -49,7 +49,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

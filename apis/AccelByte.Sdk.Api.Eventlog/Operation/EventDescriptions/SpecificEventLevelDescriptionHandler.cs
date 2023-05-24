@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
     /// <summary>
     /// SpecificEventLevelDescriptionHandler
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class SpecificEventLevelDescriptionHandler : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public Model.ModelsMultipleEventLevel? Execute(
             )
             {
@@ -78,7 +78,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -87,29 +87,29 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
         private SpecificEventLevelDescriptionHandler(SpecificEventLevelDescriptionHandlerBuilder builder
         )
         {
-            
-            if (builder.EventLevels is not null) QueryParams["eventLevels"] = builder.EventLevels;
-            
 
-            
-            
-            
+            if (builder.EventLevels is not null) QueryParams["eventLevels"] = builder.EventLevels;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public SpecificEventLevelDescriptionHandler(
-            string? eventLevels            
+            string? eventLevels
         )
         {
-            
-            if (eventLevels is not null) QueryParams["eventLevels"] = eventLevels;
-            
 
-            
-            
-            
+            if (eventLevels is not null) QueryParams["eventLevels"] = eventLevels;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -118,12 +118,12 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ModelsMultipleEventLevel? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -136,9 +136,9 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsMultipleEventLevel>(payload);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

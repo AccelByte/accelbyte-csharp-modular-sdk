@@ -12,6 +12,9 @@ namespace AccelByte.Sdk.Api.Gdpr.Model
 {
     public class ModelsDeletionStatus : AccelByte.Sdk.Core.Model
     {
+        [JsonPropertyName("DeletionDate")]
+        public string? DeletionDate { get; set; }
+
         [JsonPropertyName("DeletionStatus")]
         public bool? DeletionStatus { get; set; }
 

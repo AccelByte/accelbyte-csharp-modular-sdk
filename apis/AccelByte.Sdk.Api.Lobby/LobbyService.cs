@@ -26,13 +26,13 @@ namespace AccelByte.Sdk.Api.Lobby
         public LobbyService(IAccelByteConfig abConfig)
             : base(abConfig)
         {
-            
+
         }
 
         public LobbyService(string baseUrl)
             : base(baseUrl)
         {
-            
+
         }
 
         [WebSocketEvent("acceptFriendsNotif")]
@@ -370,7 +370,6 @@ namespace AccelByte.Sdk.Api.Lobby
 
         [WebSocketEvent("startMatchmakingResponse")]
         public Action<StartMatchmakingResponse>? OnStartMatchmakingResponse { get; set; } = null;
-
 
         [WebSocketEvent("unblockPlayerNotif")]
         public Action<UnblockPlayerNotif>? OnUnblockPlayerNotif { get; set; } = null;

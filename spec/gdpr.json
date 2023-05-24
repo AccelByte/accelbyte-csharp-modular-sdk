@@ -8,11 +8,15 @@
     },
     "description": "Justice GDPR Service",
     "title": "justice-gdpr-service",
-    "version": "1.19.3"
+    "version": "2.0.0"
   },
   "schemes": [
     "https"
   ],
+  "externalDocs": {
+    "description": "API Docs",
+    "url": "https://stage.accelbyte.io/gdpr/apidocs"
+  },
   "securityDefinitions": {
     "HasPermission": {
       "authorizationUrl": "https://dummy.oauth.net/auth",
@@ -1619,6 +1623,9 @@
     },
     "models.DeletionStatus": {
       "properties": {
+        "DeletionDate": {
+          "type": "string"
+        },
         "DeletionStatus": {
           "type": "boolean",
           "x-omitempty": false
@@ -1639,6 +1646,7 @@
         }
       },
       "required": [
+        "DeletionDate",
         "DeletionStatus",
         "DisplayName",
         "Status",
@@ -1823,5 +1831,18 @@
         "errorMessage"
       ]
     }
+  },
+  "x-docs": {
+    "alias": "gdpr",
+    "host": "https://stage.accelbyte.io",
+    "path": "/gdpr/apidocs/api.json"
+  },
+  "x-version": {
+    "buildDate": "2023-05-23T01:42:36+00:00",
+    "gitHash": "7d3a26bdd8ac81fdc2f3bd946084ad73d4b00ec2",
+    "name": "justice-gdpr-service",
+    "realm": "staging",
+    "version": "2.0.0",
+    "version-roles-seeding": "0.0.3"
   }
 }

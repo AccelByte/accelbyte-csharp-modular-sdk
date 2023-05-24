@@ -28,8 +28,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// 
     /// Delete user's statItems given stat code.
     /// Other detail info:
-    ///               *  Required permission : resource="ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM", action=8 (DELETE)
-    ///               *  Returns : no content
+    ///             *  Required permission : resource="ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM", action=8 (DELETE)
+    ///             *  Returns : no content
     /// </summary>
     public class DeleteUserStatItems2 : AccelByte.Sdk.Core.Operation
     {
@@ -71,9 +71,9 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 DeleteUserStatItems2 op = new DeleteUserStatItems2(this,
-                    namespace_,                    
-                    statCode,                    
-                    userId                    
+                    namespace_,
+                    statCode,
+                    userId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
 
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -112,35 +112,35 @@ namespace AccelByte.Sdk.Api.Social.Operation
             PathParams["namespace"] = namespace_;
             PathParams["statCode"] = statCode;
             PathParams["userId"] = userId;
-            
-            if (builder.AdditionalKey is not null) QueryParams["additionalKey"] = builder.AdditionalKey;
-            
 
-            
-            
-            
+            if (builder.AdditionalKey is not null) QueryParams["additionalKey"] = builder.AdditionalKey;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public DeleteUserStatItems2(
-            string namespace_,            
-            string statCode,            
-            string userId,            
-            string? additionalKey            
+            string namespace_,
+            string statCode,
+            string userId,
+            string? additionalKey
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["statCode"] = statCode;
             PathParams["userId"] = userId;
-            
-            if (additionalKey is not null) QueryParams["additionalKey"] = additionalKey;
-            
 
-            
-            
-            
+            if (additionalKey is not null) QueryParams["additionalKey"] = additionalKey;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -149,19 +149,19 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<AchievementApi>("achievement", () =>
             {
                 return new AchievementApi(sdk);
-            });            
+            });
         }
     }
 }

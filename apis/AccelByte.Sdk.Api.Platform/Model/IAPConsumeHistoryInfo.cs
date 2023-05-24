@@ -142,7 +142,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class IAPConsumeHistoryInfoStatus : StringEnum<IAPConsumeHistoryInfoStatus>
     {
@@ -166,5 +166,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 }

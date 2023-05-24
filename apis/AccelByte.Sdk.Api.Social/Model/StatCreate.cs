@@ -25,9 +25,17 @@ namespace AccelByte.Sdk.Api.Social.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
 
+        [JsonPropertyName("ignoreAdditionalDataOnValueRejected")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? IgnoreAdditionalDataOnValueRejected { get; set; }
+
         [JsonPropertyName("incrementOnly")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? IncrementOnly { get; set; }
+
+        [JsonPropertyName("isPublic")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? IsPublic { get; set; }
 
         [JsonPropertyName("maximum")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -78,5 +86,5 @@ namespace AccelByte.Sdk.Api.Social.Model
         {
 
         }
-    }    
+    }
 }

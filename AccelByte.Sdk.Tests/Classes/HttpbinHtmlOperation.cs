@@ -28,7 +28,7 @@ namespace AccelByte.Sdk.Tests
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "text/html" };        
+        public override List<string> Produces => new() { "text/html" };
 
         public string? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {

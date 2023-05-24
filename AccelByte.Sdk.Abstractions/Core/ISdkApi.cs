@@ -8,6 +8,6 @@ namespace AccelByte.Sdk.Core
 {
     public interface ISdkApi
     {
-        
+
     }
 }
