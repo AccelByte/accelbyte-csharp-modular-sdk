@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Api.Achievement;
+using AccelByte.Sdk.Api.Ams;
 using AccelByte.Sdk.Api.Basic;
 using AccelByte.Sdk.Api.Cloudsave;
 using AccelByte.Sdk.Api.Dslogmanager;
@@ -40,6 +41,7 @@ namespace AccelByte.Sdk.Core
 
         #region Api Fluent Properties
         public AchievementApi Achievement { get => ((IAccelByteSdk)this).GetAchievementApi(); }
+        public AmsApi Ams { get => ((IAccelByteSdk)this).GetAmsApi(); }        
         public BasicApi Basic { get => ((IAccelByteSdk)this).GetBasicApi(); }
         public CloudsaveApi Cloudsave { get => ((IAccelByteSdk)this).GetCloudsaveApi(); }
         public DslogmanagerApi Dslogmanager { get => ((IAccelByteSdk)this).GetDslogmanagerApi(); }
