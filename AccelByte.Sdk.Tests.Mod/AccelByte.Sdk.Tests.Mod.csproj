@@ -21,6 +21,7 @@
     <ProjectReference Include="..\AccelByte.Sdk.Feature.AutoRefreshToken\AccelByte.Sdk.Feature.AutoRefreshToken.csproj" />
     <ProjectReference Include="..\AccelByte.Sdk.Feature.LocalTokenValidation\AccelByte.Sdk.Feature.LocalTokenValidation.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Achievement\AccelByte.Sdk.Api.Achievement.csproj" />
+    <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Ams\AccelByte.Sdk.Api.Ams.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Basic\AccelByte.Sdk.Api.Basic.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Cloudsave\AccelByte.Sdk.Api.Cloudsave.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Dslogmanager\AccelByte.Sdk.Api.Dslogmanager.csproj" />
