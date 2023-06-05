@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<AmsApi>("ams", () =>
             {
                 return new AmsApi(sdk);
-            });            
+            });
         }
     }
 }

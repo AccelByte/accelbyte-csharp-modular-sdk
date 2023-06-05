@@ -48,6 +48,17 @@ namespace AccelByte.Sdk.Api.Matchmaking
         }
         private Wrapper.SocialMatchmaking? _SocialMatchmaking = null;
 
+        public Wrapper.MockMatchmaking MockMatchmaking
+        {
+            get
+            {
+                if (_MockMatchmaking == null)
+                    _MockMatchmaking = new Wrapper.MockMatchmaking(_Sdk);
+                return _MockMatchmaking;
+            }
+        }
+        private Wrapper.MockMatchmaking? _MockMatchmaking = null;
+
         internal MatchmakingApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;

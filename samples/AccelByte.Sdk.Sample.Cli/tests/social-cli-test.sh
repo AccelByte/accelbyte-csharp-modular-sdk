@@ -484,7 +484,7 @@ eval_tap $? 41 'GetStats' test.out
 
 #- 42 CreateStat
 # body param: body
-echo '{"cycleIds": ["JAczj5ApcsiEQ65l", "tuzxir12r0VUWI0k", "lgGnTHAsTCZa7xE4"], "defaultValue": 0.22465795090033192, "description": "wGKlbPRxfucxoRKF", "ignoreAdditionalDataOnValueRejected": true, "incrementOnly": true, "isPublic": false, "maximum": 0.03621747003353992, "minimum": 0.6127622490785266, "name": "9SyuHbvRxR6LaKWg", "setAsGlobal": true, "setBy": "CLIENT", "statCode": "VjZKDxiezEbuMCz9", "tags": ["vyPupimCENHEenqj", "J4dPRGzoQLYIWPPZ", "RSxO9oZ0fCxLR0Gf"]}' > $TEMP_JSON_INPUT
+echo '{"cycleIds": ["JAczj5ApcsiEQ65l", "lgGnTHAsTCZa7xE4", "tuzxir12r0VUWI0k"], "defaultValue": 0.22465795090033192, "description": "wGKlbPRxfucxoRKF", "ignoreAdditionalDataOnValueRejected": true, "incrementOnly": true, "isPublic": false, "maximum": 0.03621747003353992, "minimum": 0.6127622490785266, "name": "9SyuHbvRxR6LaKWg", "setAsGlobal": true, "setBy": "CLIENT", "statCode": "VjZKDxiezEbuMCz9", "tags": ["RSxO9oZ0fCxLR0Gf", "J4dPRGzoQLYIWPPZ", "vyPupimCENHEenqj"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op CreateStat \
@@ -546,7 +546,7 @@ eval_tap $? 47 'DeleteStat' test.out
 
 #- 48 UpdateStat
 # body param: body
-echo '{"cycleIds": ["zRvUdK1uOV1ZJTYu", "GXO8Utpwxug8Mpqc", "vTMICtWyUtVDnhgT"], "defaultValue": 0.5381247324752749, "description": "pnpVX5u4gw4XBXDD", "ignoreAdditionalDataOnValueRejected": false, "isPublic": true, "name": "1o9zV6rhVfcQmLfE", "tags": ["6skHMfl4Hjw9KEnx", "8cNfDK45zWtwYhRo", "n5ZUGeYlOwODWBAz"]}' > $TEMP_JSON_INPUT
+echo '{"cycleIds": ["zRvUdK1uOV1ZJTYu", "vTMICtWyUtVDnhgT", "GXO8Utpwxug8Mpqc"], "defaultValue": 0.5381247324752749, "description": "pnpVX5u4gw4XBXDD", "ignoreAdditionalDataOnValueRejected": false, "isPublic": true, "name": "1o9zV6rhVfcQmLfE", "tags": ["8cNfDK45zWtwYhRo", "n5ZUGeYlOwODWBAz", "6skHMfl4Hjw9KEnx"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op UpdateStat \
@@ -789,7 +789,7 @@ eval_tap $? 68 'BulkResetUserStatItem2' test.out
 
 #- 69 CreateStat1
 # body param: body
-echo '{"cycleIds": ["ngca58m1uNcxsQxr", "sxbLSv7uFZXdW5Gy", "Q2mveLZEnmSCeWTC"], "defaultValue": 0.8019883630383738, "description": "fARUx3U3KrfqoZi5", "ignoreAdditionalDataOnValueRejected": true, "incrementOnly": false, "isPublic": false, "maximum": 0.10530731594886689, "minimum": 0.21588577743826287, "name": "YO9A4NtX4m0L4BGx", "setAsGlobal": true, "setBy": "CLIENT", "statCode": "cKUh2wepEjvh8sTP", "tags": ["E7JfL8ZG7IBiOpvS", "KRmJcE8fHWU8tF9T", "j5DH9jDJgqZagf9T"]}' > $TEMP_JSON_INPUT
+echo '{"cycleIds": ["Q2mveLZEnmSCeWTC", "sxbLSv7uFZXdW5Gy", "ngca58m1uNcxsQxr"], "defaultValue": 0.8019883630383738, "description": "fARUx3U3KrfqoZi5", "ignoreAdditionalDataOnValueRejected": true, "incrementOnly": false, "isPublic": false, "maximum": 0.10530731594886689, "minimum": 0.21588577743826287, "name": "YO9A4NtX4m0L4BGx", "setAsGlobal": true, "setBy": "CLIENT", "statCode": "cKUh2wepEjvh8sTP", "tags": ["KRmJcE8fHWU8tF9T", "j5DH9jDJgqZagf9T", "E7JfL8ZG7IBiOpvS"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op CreateStat1 \
