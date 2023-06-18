@@ -24,6 +24,12 @@ namespace AccelByte.Sdk.Api.Ams.Model
         [JsonPropertyName("runningVmCount")]
         public int? RunningVmCount { get; set; }
 
+        [JsonPropertyName("targetDsCount")]
+        public int? TargetDsCount { get; set; }
+
+        [JsonPropertyName("targetVmCount")]
+        public int? TargetVmCount { get; set; }
+
     }
 
 

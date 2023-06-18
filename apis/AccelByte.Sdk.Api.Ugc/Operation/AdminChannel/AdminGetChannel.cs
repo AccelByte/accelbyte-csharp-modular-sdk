@@ -35,6 +35,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
             public long? Limit { get; set; }
 
+            public string? Name { get; set; }
+
             public long? Offset { get; set; }
 
 
@@ -52,6 +54,12 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             public AdminGetChannelBuilder SetLimit(long _limit)
             {
                 Limit = _limit;
+                return this;
+            }
+
+            public AdminGetChannelBuilder SetName(string _name)
+            {
+                Name = _name;
                 return this;
             }
 
@@ -109,6 +117,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["userId"] = userId;
 
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
+            if (builder.Name is not null) QueryParams["name"] = builder.Name;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
 
 
@@ -124,6 +133,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             string namespace_,
             string userId,
             long? limit,
+            string? name,
             long? offset
         )
         {
@@ -131,6 +141,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["userId"] = userId;
 
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
+            if (name is not null) QueryParams["name"] = name;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
 
 

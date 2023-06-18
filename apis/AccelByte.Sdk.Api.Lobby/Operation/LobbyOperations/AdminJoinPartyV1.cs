@@ -133,7 +133,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { "application/json" };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
 

@@ -44,6 +44,8 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
             public long? Offset { get; set; }
 
+            public long? PreviousVersion { get; set; }
+
 
 
 
@@ -65,6 +67,12 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             public GetCurrentSeasonLeaderboardRankingAdminV1Builder SetOffset(long _offset)
             {
                 Offset = _offset;
+                return this;
+            }
+
+            public GetCurrentSeasonLeaderboardRankingAdminV1Builder SetPreviousVersion(long _previousVersion)
+            {
+                PreviousVersion = _previousVersion;
                 return this;
             }
 
@@ -117,6 +125,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
+            if (builder.PreviousVersion != null) QueryParams["previousVersion"] = Convert.ToString(builder.PreviousVersion)!;
 
 
 
@@ -131,7 +140,8 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             string leaderboardCode,
             string namespace_,
             long? limit,
-            long? offset
+            long? offset,
+            long? previousVersion
         )
         {
             PathParams["leaderboardCode"] = leaderboardCode;
@@ -139,6 +149,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
+            if (previousVersion != null) QueryParams["previousVersion"] = Convert.ToString(previousVersion)!;
 
 
 

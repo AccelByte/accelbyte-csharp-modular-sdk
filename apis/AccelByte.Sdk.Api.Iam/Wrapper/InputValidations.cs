@@ -41,6 +41,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.PublicGetInputValidations.PublicGetInputValidationsBuilder(_sdk); }
         }
+        public PublicGetInputValidationByField.PublicGetInputValidationByFieldBuilder PublicGetInputValidationByFieldOp
+        {
+            get { return new Operation.PublicGetInputValidationByField.PublicGetInputValidationByFieldBuilder(_sdk); }
+        }
         #endregion
 
         public Model.ModelInputValidationsResponse? AdminGetInputValidations(AdminGetInputValidations input)
@@ -71,6 +75,15 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
         public Model.ModelInputValidationsPublicResponse? PublicGetInputValidations(PublicGetInputValidations input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelInputValidationConfigVersion? PublicGetInputValidationByField(PublicGetInputValidationByField input)
         {
             var response = _sdk.RunRequest(input);
 

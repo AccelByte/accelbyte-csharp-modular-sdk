@@ -10,13 +10,13 @@ using System.Text.Json.Serialization;
 
 namespace AccelByte.Sdk.Api.Ams.Model
 {
-    public class TidID : AccelByte.Sdk.Core.Model
+    public class ApiFleetClaimByKeysReq : AccelByte.Sdk.Core.Model
     {
-        [JsonPropertyName("Type")]
-        public string? Type { get; set; }
+        [JsonPropertyName("claimKeys")]
+        public List<string>? ClaimKeys { get; set; }
 
-        [JsonPropertyName("UUID")]
-        public string? UUID { get; set; }
+        [JsonPropertyName("regions")]
+        public List<string>? Regions { get; set; }
 
     }
 

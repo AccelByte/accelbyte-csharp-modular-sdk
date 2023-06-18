@@ -40,6 +40,8 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             : OperationBuilder<GetUserRankingAdminV1Builder>
         {
 
+            public long? PreviousVersion { get; set; }
+
 
 
 
@@ -51,6 +53,12 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                 _Sdk = sdk;
             }
 
+
+            public GetUserRankingAdminV1Builder SetPreviousVersion(long _previousVersion)
+            {
+                PreviousVersion = _previousVersion;
+                return this;
+            }
 
 
 
@@ -105,6 +113,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
 
+            if (builder.PreviousVersion != null) QueryParams["previousVersion"] = Convert.ToString(builder.PreviousVersion)!;
 
 
 
@@ -118,13 +127,15 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         public GetUserRankingAdminV1(
             string leaderboardCode,
             string namespace_,
-            string userId
+            string userId,
+            long? previousVersion
         )
         {
             PathParams["leaderboardCode"] = leaderboardCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
 
+            if (previousVersion != null) QueryParams["previousVersion"] = Convert.ToString(previousVersion)!;
 
 
 
