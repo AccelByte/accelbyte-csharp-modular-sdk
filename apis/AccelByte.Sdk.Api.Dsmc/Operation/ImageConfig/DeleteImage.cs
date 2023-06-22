@@ -67,6 +67,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                     version
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
+                op.RequestJsonOptions = RequestJsonOptions;
+                op.ResponseJsonOptions = ResponseJsonOptions;
 
                 return op;
             }

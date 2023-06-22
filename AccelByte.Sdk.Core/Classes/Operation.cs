@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Web;
 using System.Net.Http;
 
@@ -60,6 +61,10 @@ namespace AccelByte.Sdk.Core
 
         public IHttpClientPolicy? HttpClientPolicy { get; set; } = null;
 
+        public JsonSerializerOptions? RequestJsonOptions { get; set; } = null;
+
+        public JsonSerializerOptions? ResponseJsonOptions { get; set; } = null;
+
         public string GetUrl(string baseUrl)
         {
             return BuildUrl(baseUrl, Path, PathParams, QueryParams);
@@ -74,6 +79,7 @@ namespace AccelByte.Sdk.Core
         {
             return (WrapQueryParamValueWithQuote ? "\"" + value + "\"" : value);
         }
+
         protected string BuildUrl(string baseUrl, string path, Dictionary<string, string> pathParams, Dictionary<string, dynamic> queryParams)
         {
             if (path == null)

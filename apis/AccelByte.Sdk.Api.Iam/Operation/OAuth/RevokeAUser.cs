@@ -86,6 +86,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userID
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
+                op.RequestJsonOptions = RequestJsonOptions;
+                op.ResponseJsonOptions = ResponseJsonOptions;
 
                 return op;
             }

@@ -63,6 +63,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminGenerateMyAuthenticatorKeyV4 op = new AdminGenerateMyAuthenticatorKeyV4(this
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
+                op.RequestJsonOptions = RequestJsonOptions;
+                op.ResponseJsonOptions = ResponseJsonOptions;
 
                 return op;
             }
@@ -127,11 +129,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.ModelAuthenticatorKeyResponseV4>(payload);
+                return JsonSerializer.Deserialize<Model.ModelAuthenticatorKeyResponseV4>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.ModelAuthenticatorKeyResponseV4>(payload);
+                return JsonSerializer.Deserialize<Model.ModelAuthenticatorKeyResponseV4>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

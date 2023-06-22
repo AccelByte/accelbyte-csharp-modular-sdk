@@ -56,6 +56,8 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
                 GetRegisteredEventsHandler op = new GetRegisteredEventsHandler(this
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
+                op.RequestJsonOptions = RequestJsonOptions;
+                op.ResponseJsonOptions = ResponseJsonOptions;
 
                 return op;
             }
@@ -121,11 +123,11 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.ModelsEventRegistry>(payload);
+                return JsonSerializer.Deserialize<Model.ModelsEventRegistry>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.ModelsEventRegistry>(payload);
+                return JsonSerializer.Deserialize<Model.ModelsEventRegistry>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

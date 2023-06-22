@@ -60,6 +60,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     ticketId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
+                op.RequestJsonOptions = RequestJsonOptions;
+                op.ResponseJsonOptions = ResponseJsonOptions;
 
                 return op;
             }

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 
 using AccelByte.Sdk.Core.Net.Http;
 
@@ -48,6 +49,10 @@ namespace AccelByte.Sdk.Core
         string? LocationQuery { get; }
 
         IHttpClientPolicy? HttpClientPolicy { get; }
+
+        JsonSerializerOptions? RequestJsonOptions { get; }
+
+        JsonSerializerOptions? ResponseJsonOptions { get; }
 
         string GetUrl(string baseUrl);
     }

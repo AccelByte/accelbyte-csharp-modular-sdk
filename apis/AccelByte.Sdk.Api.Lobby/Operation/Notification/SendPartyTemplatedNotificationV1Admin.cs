@@ -68,6 +68,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     partyId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
+                op.RequestJsonOptions = RequestJsonOptions;
+                op.ResponseJsonOptions = ResponseJsonOptions;
 
                 return op;
             }

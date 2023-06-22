@@ -66,6 +66,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     sessionId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
+                op.RequestJsonOptions = RequestJsonOptions;
+                op.ResponseJsonOptions = ResponseJsonOptions;
 
                 return op;
             }

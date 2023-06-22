@@ -70,6 +70,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 Logout op = new Logout(this
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
+                op.RequestJsonOptions = RequestJsonOptions;
+                op.ResponseJsonOptions = ResponseJsonOptions;
 
                 return op;
             }

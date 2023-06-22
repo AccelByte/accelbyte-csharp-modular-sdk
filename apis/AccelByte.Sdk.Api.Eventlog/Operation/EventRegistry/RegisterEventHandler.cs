@@ -58,6 +58,8 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
                     body
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
+                op.RequestJsonOptions = RequestJsonOptions;
+                op.ResponseJsonOptions = ResponseJsonOptions;
 
                 return op;
             }

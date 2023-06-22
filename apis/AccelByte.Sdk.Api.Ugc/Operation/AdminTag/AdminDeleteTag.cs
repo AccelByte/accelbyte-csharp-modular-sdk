@@ -59,6 +59,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     tagId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
+                op.RequestJsonOptions = RequestJsonOptions;
+                op.ResponseJsonOptions = ResponseJsonOptions;
 
                 return op;
             }

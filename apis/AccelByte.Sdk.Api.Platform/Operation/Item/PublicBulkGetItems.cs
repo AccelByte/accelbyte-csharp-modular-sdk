@@ -89,6 +89,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     itemIds
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
+                op.RequestJsonOptions = RequestJsonOptions;
+                op.ResponseJsonOptions = ResponseJsonOptions;
 
                 return op;
             }
@@ -194,11 +196,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<List<Model.ItemInfo>>(payload);
+                return JsonSerializer.Deserialize<List<Model.ItemInfo>>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<List<Model.ItemInfo>>(payload);
+                return JsonSerializer.Deserialize<List<Model.ItemInfo>>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();
@@ -214,11 +216,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<List<Model.ItemInfo<T1, T2>>>(payload);
+                return JsonSerializer.Deserialize<List<Model.ItemInfo<T1, T2>>>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<List<Model.ItemInfo<T1, T2>>>(payload);
+                return JsonSerializer.Deserialize<List<Model.ItemInfo<T1, T2>>>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

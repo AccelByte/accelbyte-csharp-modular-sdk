@@ -71,6 +71,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 GetListBanReason op = new GetListBanReason(this
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
+                op.RequestJsonOptions = RequestJsonOptions;
+                op.ResponseJsonOptions = ResponseJsonOptions;
 
                 return op;
             }
@@ -136,11 +138,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.AccountcommonBanReasons>(payload);
+                return JsonSerializer.Deserialize<Model.AccountcommonBanReasons>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.AccountcommonBanReasons>(payload);
+                return JsonSerializer.Deserialize<Model.AccountcommonBanReasons>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

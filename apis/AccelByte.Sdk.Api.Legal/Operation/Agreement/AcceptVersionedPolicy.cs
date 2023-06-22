@@ -60,6 +60,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     localizedPolicyVersionId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
+                op.RequestJsonOptions = RequestJsonOptions;
+                op.ResponseJsonOptions = ResponseJsonOptions;
 
                 return op;
             }

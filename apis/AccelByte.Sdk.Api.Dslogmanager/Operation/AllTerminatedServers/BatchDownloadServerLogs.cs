@@ -61,6 +61,8 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
                     body
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
+                op.RequestJsonOptions = RequestJsonOptions;
+                op.ResponseJsonOptions = ResponseJsonOptions;
 
                 return op;
             }

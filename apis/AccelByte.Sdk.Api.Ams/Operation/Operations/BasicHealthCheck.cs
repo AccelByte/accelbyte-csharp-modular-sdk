@@ -53,6 +53,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 BasicHealthCheck op = new BasicHealthCheck(this
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
+                op.RequestJsonOptions = RequestJsonOptions;
+                op.ResponseJsonOptions = ResponseJsonOptions;
 
                 return op;
             }

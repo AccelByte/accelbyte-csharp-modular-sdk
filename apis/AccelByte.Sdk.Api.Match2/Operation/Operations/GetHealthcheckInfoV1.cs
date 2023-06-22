@@ -53,6 +53,8 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                 GetHealthcheckInfoV1 op = new GetHealthcheckInfoV1(this
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
+                op.RequestJsonOptions = RequestJsonOptions;
+                op.ResponseJsonOptions = ResponseJsonOptions;
 
                 return op;
             }
