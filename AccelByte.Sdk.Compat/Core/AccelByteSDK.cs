@@ -72,8 +72,20 @@ namespace AccelByte.Sdk.Core
 
         }
 
+        public AccelByteSDK(IAccelByteConfig config, ISdkEvents events)
+            : base(config, events)
+        {
+
+        }
+
         public AccelByteSDK(IAccelByteConfig config, List<ISdkService> services)
             : base(config, services)
+        {
+
+        }
+
+        public AccelByteSDK(IAccelByteConfig config, ISdkEvents events, List<ISdkService> services)
+            : base(config, events, services)
         {
 
         }
