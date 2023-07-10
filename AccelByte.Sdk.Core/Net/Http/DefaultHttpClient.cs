@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Core.Net.Http
 
                     if (IsMediaTypeJson(contentType))
                     {
-                        var jsonString = JsonSerializer.Serialize(operation.BodyParams);
+                        var jsonString = JsonSerializer.Serialize(operation.BodyParams, operation.RequestJsonOptions);
                         request.Content = new StringContent(jsonString, Encoding.UTF8, contentType);
                     }
                     else
