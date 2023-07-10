@@ -10,7 +10,7 @@ using AccelByte.Sdk.Core.Pipeline;
 
 namespace AccelByte.Sdk.Core
 {
-    public class AccelByteSdk : IAccelByteSdk, IDisposable
+    public class AccelByteSdk : IAccelByteSdk
     {
         public static IAccelByteSdkBuilder<AccelByteSdk> Builder { get => new AccelByteSdkBuilder<AccelByteSdk>(); }
 
@@ -22,6 +22,8 @@ namespace AccelByte.Sdk.Core
 
         public ISdkLocalData LocalData { get; } = new SdkLocalData();
 
+        public ISdkEvents Events { get; } = new SdkEvents();
+
         public IOperationProcessPipeline OpProcess { get; } = new OperationProcessPipeline();
 
         public string Namespace { get => Configuration.ConfigRepository.Namespace; }
@@ -32,9 +34,27 @@ namespace AccelByte.Sdk.Core
             OpProcess.AppendToChain(new MandatoryOperationProcess());
         }
 
+        public AccelByteSdk(IAccelByteConfig config, ISdkEvents events)
+        {
+            Configuration = config;
+            Events = events;
+            OpProcess.AppendToChain(new MandatoryOperationProcess());
+        }
+
         public AccelByteSdk(IAccelByteConfig config, List<ISdkService> services)
         {
             Configuration = config;
+            OpProcess.AppendToChain(new MandatoryOperationProcess());
+
+            _Services = services;
+            foreach (var service in _Services)
+                service.Start(this);
+        }
+
+        public AccelByteSdk(IAccelByteConfig config, ISdkEvents events, List<ISdkService> services)
+        {
+            Configuration = config;
+            Events = events;
             OpProcess.AppendToChain(new MandatoryOperationProcess());
 
             _Services = services;

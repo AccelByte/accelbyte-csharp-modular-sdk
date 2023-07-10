@@ -9,11 +9,13 @@ using AccelByte.Sdk.Core.Net.Http;
 
 namespace AccelByte.Sdk.Core
 {
-    public interface IAccelByteSdk
+    public interface IAccelByteSdk : IDisposable
     {
         IAccelByteConfig Configuration { get; }
 
         ISdkLocalData LocalData { get; }
+
+        ISdkEvents Events { get; }
 
         IOperationProcessPipeline OpProcess { get; }
 

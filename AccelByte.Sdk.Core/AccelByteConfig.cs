@@ -3,7 +3,7 @@
 // and restrictions contact your company contract manager.
 
 using System;
-
+using System.Collections.Generic;
 using AccelByte.Sdk.Core.Net.Http;
 using AccelByte.Sdk.Core.Repository;
 using AccelByte.Sdk.Core.Security;
@@ -22,6 +22,8 @@ namespace AccelByte.Sdk.Core
 
         public ITokenValidator? TokenValidator { get; set; }
 
+        public Dictionary<string, bool> Flags { get; private set; }
+
         public AccelByteConfig(
                 IHttpClient httpClient,
                 ITokenRepository tokenRepository,
@@ -30,6 +32,19 @@ namespace AccelByte.Sdk.Core
             HttpClient = httpClient;
             TokenRepository = tokenRepository;
             ConfigRepository = configRepository;
+            Flags = new Dictionary<string, bool>();
+        }
+
+        public AccelByteConfig(
+                IHttpClient httpClient,
+                ITokenRepository tokenRepository,
+                IConfigRepository configRepository,
+                Dictionary<string, bool> flags)
+        {
+            HttpClient = httpClient;
+            TokenRepository = tokenRepository;
+            ConfigRepository = configRepository;
+            Flags = flags;
         }
     }
 }

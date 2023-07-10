@@ -28,9 +28,15 @@ namespace AccelByte.Sdk.Core
 
         IAccelByteSdkBuilder<T> AddOperationProcess(IOperationProcess opProcess);
 
-        void RegisterService(ISdkService service);
+        IAccelByteSdkBuilder<T> RegisterService(ISdkService service);
 
         IAccelByteSdkBuilder<T> EnableLog();
+
+        IAccelByteSdkBuilder<T> SetFlag(string key, bool value);
+
+        IAccelByteSdkBuilder<T> UnsetFlag(string key);
+
+        IAccelByteSdkBuilder<T> RegisterEvent(string key, object eventAction);
 
         T Build();
     }

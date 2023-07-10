@@ -36,6 +36,10 @@ namespace AccelByte.Sdk.Core
 
         private List<ISdkService> _Services = new List<ISdkService>();
 
+        private Dictionary<string, bool> _Flags = new();
+
+        private ISdkEvents _Events = new SdkEvents();
+
         public IAccelByteSdkBuilder<T> SetHttpClient(IHttpClient client)
         {
             _Client = client;
@@ -84,9 +88,32 @@ namespace AccelByte.Sdk.Core
             return this;
         }
 
-        public void RegisterService(ISdkService service)
+        public IAccelByteSdkBuilder<T> RegisterService(ISdkService service)
         {
             _Services.Add(service);
+            return this;
+        }
+
+        public IAccelByteSdkBuilder<T> SetFlag(string key, bool value)
+        {
+            if (_Flags.ContainsKey(key))
+                _Flags[key] = value;
+            else
+                _Flags.Add(key, value);
+            return this;
+        }
+
+        public IAccelByteSdkBuilder<T> UnsetFlag(string key)
+        {
+            if (_Flags.ContainsKey(key))
+                _Flags.Remove(key);
+            return this;
+        }
+
+        public IAccelByteSdkBuilder<T> RegisterEvent(string key, object eventAction)
+        {
+            _Events.RegisterEvent(key, eventAction);
+            return this;
         }
 
         public T Build()
@@ -109,7 +136,7 @@ namespace AccelByte.Sdk.Core
                     _Client.SetLogger(_Logger);
             }
 
-            IAccelByteConfig config = new AccelByteConfig(_Client, _TokenRepository, _ConfigRepository);
+            IAccelByteConfig config = new AccelByteConfig(_Client, _TokenRepository, _ConfigRepository, _Flags);
             if (_Credential != null)
                 config.Credential = _Credential;
             if (_TokenValidator != null)
@@ -117,9 +144,9 @@ namespace AccelByte.Sdk.Core
 
             T? sdk;
             if (_Services.Count > 0)
-                sdk = (T?)Activator.CreateInstance(typeof(T), config, _Services);
+                sdk = (T?)Activator.CreateInstance(typeof(T), config, _Events, _Services);
             else
-                sdk = (T?)Activator.CreateInstance(typeof(T), config);
+                sdk = (T?)Activator.CreateInstance(typeof(T), config, _Events);
             if (sdk == null)
                 throw new Exception("Could not create sdk object");
 

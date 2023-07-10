@@ -24,6 +24,8 @@ namespace AccelByte.Sdk.Core.Repository
 
         LoginType LoginType { get; }
 
+        ITokenResponse? TokenData { get; }
+
         void RemoveToken();
 
         void StoreToken(LoginType loginType, ITokenResponse tokenResponse);

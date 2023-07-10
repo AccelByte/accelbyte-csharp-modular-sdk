@@ -78,6 +78,8 @@ namespace AccelByte.Sdk.Core.Repository
             }
         }
 
+        public ITokenResponse? TokenData { get; private set; } = null;
+
         public virtual void RemoveToken()
         {
             lock (_TokenLock)
@@ -95,6 +97,7 @@ namespace AccelByte.Sdk.Core.Repository
 
             lock (_TokenLock)
             {
+                TokenData = tokenResponse;
                 _Token = tokenResponse.AccessToken;
                 _LoginType = loginType;
                 IssuedTimestamp = CurrentTimestamp;
@@ -110,6 +113,7 @@ namespace AccelByte.Sdk.Core.Repository
 
             lock (_TokenLock)
             {
+                TokenData = tokenResponse;
                 _Token = tokenResponse.AccessToken;
                 IssuedTimestamp = CurrentTimestamp;
                 if (tokenResponse.ExpiresIn != null)

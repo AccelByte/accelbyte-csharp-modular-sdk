@@ -7,6 +7,7 @@ using System;
 using AccelByte.Sdk.Core.Repository;
 using AccelByte.Sdk.Core.Net.Http;
 using AccelByte.Sdk.Core.Security;
+using System.Collections.Generic;
 
 namespace AccelByte.Sdk.Core
 {
@@ -21,5 +22,7 @@ namespace AccelByte.Sdk.Core
         ICredentialRepository? Credential { get; set; }
 
         ITokenValidator? TokenValidator { get; set; }
+
+        Dictionary<string, bool> Flags { get; }
     }
 }
