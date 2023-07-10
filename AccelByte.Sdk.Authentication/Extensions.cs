@@ -22,6 +22,10 @@ namespace AccelByte.Sdk.Core
 {
     public static class Auth_SdkExtensions
     {
+        public const string DISABLE_REFRESH_IF_POSSIBLE_FLAGNAME = "disable_refresh_if_possible";
+
+        public const string ON_AFTER_LOGIN_EVENT_KEY = "on_after_login";
+
         public static bool LoginUser(this IAccelByteSdk sdk)
         {
             if (sdk.Configuration.Credential == null)
@@ -47,10 +51,27 @@ namespace AccelByte.Sdk.Core
 
         public static bool LoginUser(this IAccelByteSdk sdk, string username, string password, Action<ITokenResponse>? onTokenReceived)
         {
-            sdk.Configuration.TokenRepository.RemoveToken();
+            bool disableRefreshIfPossible = false;
+            if (sdk.Configuration.Flags.ContainsKey(DISABLE_REFRESH_IF_POSSIBLE_FLAGNAME))
+                disableRefreshIfPossible = sdk.Configuration.Flags[DISABLE_REFRESH_IF_POSSIBLE_FLAGNAME];
+
+            var actObj = sdk.Events.GetEventAs<Action<LoginType, AuthActionType, ITokenResponse?, IAccelByteSdk>>(ON_AFTER_LOGIN_EVENT_KEY);
+
+            if ((!disableRefreshIfPossible) && (sdk.Configuration.TokenRepository.TokenData != null))
+            {
+                if (sdk.Configuration.TokenRepository.IsTokenExpired)
+                {
+                    bool b = sdk.RefreshAccessToken(sdk.Configuration.TokenRepository.TokenData.RefreshToken, onTokenReceived);
+                    actObj?.Invoke(LoginType.User, AuthActionType.TokenRefresh, sdk.Configuration.TokenRepository.TokenData, sdk);
+                    return b;
+                }
+                else
+                    return true;
+            }
+            else
+                sdk.Configuration.TokenRepository.RemoveToken();
+
             Random random = new Random();
-
-
             var codeVerifier = random.GenerateCodeVerifier();
             var codeChallenge = codeVerifier.GenerateCodeChallenge();
             var clientId = sdk.Configuration.ConfigRepository.ClientId;
@@ -90,6 +111,7 @@ namespace AccelByte.Sdk.Core
                 sdk.Configuration.Credential.UserId = token.UserId;
 
             onTokenReceived?.Invoke(tokenResponse);
+            actObj?.Invoke(LoginType.User, AuthActionType.Login, sdk.Configuration.TokenRepository.TokenData, sdk);
             return true;
         }
 
@@ -100,7 +122,19 @@ namespace AccelByte.Sdk.Core
 
         public static bool LoginClient(this IAccelByteSdk sdk, Action<ITokenResponse>? onTokenReceived)
         {
-            sdk.Configuration.TokenRepository.RemoveToken();
+            bool disableRefreshIfPossible = false;
+            if (sdk.Configuration.Flags.ContainsKey(DISABLE_REFRESH_IF_POSSIBLE_FLAGNAME))
+                disableRefreshIfPossible = sdk.Configuration.Flags[DISABLE_REFRESH_IF_POSSIBLE_FLAGNAME];
+
+            var actObj = sdk.Events.GetEventAs<Action<LoginType, AuthActionType, ITokenResponse?, IAccelByteSdk>>(ON_AFTER_LOGIN_EVENT_KEY);
+
+            if ((!disableRefreshIfPossible) && (sdk.Configuration.TokenRepository.TokenData != null))
+            {
+                if (!sdk.Configuration.TokenRepository.IsTokenExpired)
+                    return true;
+            }
+            else
+                sdk.Configuration.TokenRepository.RemoveToken();
 
             var token = sdk.GetIamApi().OAuth20.TokenGrantV3Op.Execute("client_credentials")
                 ?? throw new Exception($"TokenGrantV3 returned null");
@@ -108,6 +142,7 @@ namespace AccelByte.Sdk.Core
 
             sdk.Configuration.TokenRepository.StoreToken(LoginType.Client, tokenResponse);
             onTokenReceived?.Invoke(tokenResponse);
+            actObj?.Invoke(LoginType.Client, AuthActionType.Login, sdk.Configuration.TokenRepository.TokenData, sdk);
             return true;
         }
 
@@ -118,7 +153,25 @@ namespace AccelByte.Sdk.Core
 
         public static bool LoginPlatform(this IAccelByteSdk sdk, string platformId, string platformToken, Action<ITokenResponse>? onTokenReceived)
         {
-            sdk.Configuration.TokenRepository.RemoveToken();
+            bool disableRefreshIfPossible = false;
+            if (sdk.Configuration.Flags.ContainsKey(DISABLE_REFRESH_IF_POSSIBLE_FLAGNAME))
+                disableRefreshIfPossible = sdk.Configuration.Flags[DISABLE_REFRESH_IF_POSSIBLE_FLAGNAME];
+
+            var actObj = sdk.Events.GetEventAs<Action<LoginType, AuthActionType, ITokenResponse?, IAccelByteSdk>>(ON_AFTER_LOGIN_EVENT_KEY);
+
+            if ((!disableRefreshIfPossible) && (sdk.Configuration.TokenRepository.TokenData != null))
+            {
+                if (sdk.Configuration.TokenRepository.IsTokenExpired)
+                {
+                    bool b = sdk.RefreshAccessToken(sdk.Configuration.TokenRepository.TokenData.RefreshToken, onTokenReceived);
+                    actObj?.Invoke(LoginType.Platform, AuthActionType.TokenRefresh, sdk.Configuration.TokenRepository.TokenData, sdk);
+                    return b;
+                }
+                else
+                    return true;
+            }
+            else
+                sdk.Configuration.TokenRepository.RemoveToken();
 
             var token = sdk.GetIamApi().OAuth20.PlatformTokenGrantV3Op
                 .SetPlatformToken(platformToken)
@@ -128,6 +181,7 @@ namespace AccelByte.Sdk.Core
 
             sdk.Configuration.TokenRepository.StoreToken(LoginType.Platform, tokenResponse);
             onTokenReceived?.Invoke(tokenResponse);
+            actObj?.Invoke(LoginType.Platform, AuthActionType.Login, sdk.Configuration.TokenRepository.TokenData, sdk);
             return true;
         }
 
@@ -158,9 +212,25 @@ namespace AccelByte.Sdk.Core
 
     public static class Auth_SdkBuilderExtensions
     {
-        public static IAccelByteSdkBuilder<T> UseDefaultTokenValidator<T>(IAccelByteSdkBuilder<T> builder)
+        public static IAccelByteSdkBuilder<T> UseDefaultTokenValidator<T>(this IAccelByteSdkBuilder<T> builder)
         {
             return builder.SetTokenValidator(new DefaultTokenValidator());
+        }
+
+        public static IAccelByteSdkBuilder<T> DisableRefreshIfPossible<T>(this IAccelByteSdkBuilder<T> builder)
+        {
+            return builder.SetFlag(Auth_SdkExtensions.DISABLE_REFRESH_IF_POSSIBLE_FLAGNAME, true);
+        }
+
+        public static IAccelByteSdkBuilder<T> EnableRefreshIfPossible<T>(this IAccelByteSdkBuilder<T> builder)
+        {
+            return builder.SetFlag(Auth_SdkExtensions.DISABLE_REFRESH_IF_POSSIBLE_FLAGNAME, false);
+        }
+
+        public static IAccelByteSdkBuilder<T> SetOnAfterLoginEventHandler<T>(this IAccelByteSdkBuilder<T> builder, Action<LoginType, AuthActionType, ITokenResponse?, IAccelByteSdk> eventAction)
+        {
+            builder.RegisterEvent(Auth_SdkExtensions.ON_AFTER_LOGIN_EVENT_KEY, eventAction);
+            return builder;
         }
     }
 }
