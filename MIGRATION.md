@@ -40,6 +40,8 @@ Below are the list of things that changed.
 ## Sdk Initialization
 In monolithic version, using default implementations only need to include single namespace, which is `AccelByte.Sdk.Core`. In modular version, You will need to include respective namespace for each default implementations. For example, if you want to include default repositories, then you will need to include `AccelByte.Sdk.Core.Repository`. For Http clients, you will need to include `AccelByte.Sdk.Core.Net.Http`.
 
+## On-Demand Refresh Token
+Now on-demand refresh token is enabled by default. To disable it, you can call `DisableRefreshIfPossible` while building the sdk object.
 
 ## Custom Operation
 `Consumes` and `Produces` property is now using `List<string>` instead of string array. Also `Security` property is removed in favor of `Securities` field.
@@ -48,3 +50,6 @@ In monolithic version, using default implementations only need to include single
 
 `AccelByte.Sdk.Compat` library provides classes as adapter to monolithic version. `AccelByte.Sdk.Compat` provides `AccelByteSDK` object that has monolithic version of fluent interface access. Also it provides `Helper` class in `AccelByte.Sdk.Core.Util` that map to each respective extension method.
 See [Tests Project](AccelByte.Sdk.Tests) for more samples on how the compat project works.
+
+NOTE:
+- this compat library does not change the default behaviour  of on-demand refresh token.
