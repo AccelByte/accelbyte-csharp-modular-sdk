@@ -108,11 +108,12 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .Execute(_Sdk.Namespace);
             #endregion
             Assert.IsNotNull(poolList);
-            if (poolList != null)
-            {
-                ApiMatchPool? poolItem = poolList.Data!.Where(p => p.Name! == poolName).FirstOrDefault();
-                Assert.IsNotNull(poolItem);
-            }
+            
+            #region Get match pool detail
+            ApiMatchPool? matchPool = _Sdk.GetMatch2Api().MatchPools.MatchPoolDetailsOp
+                .Execute(_Sdk.Namespace, poolName);
+            #endregion
+            Assert.IsNotNull(matchPool);
 
             ITestPlayer player1 = new NewTestPlayer(_Sdk, true);
             player1.Run((sdk, player) =>
