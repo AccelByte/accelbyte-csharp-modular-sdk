@@ -25,6 +25,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (_Sdk == null)
                 return;
 
+            DisableRetry();
+
             string usernameToTest = "dummy@example.com";
             if (_Sdk.Configuration.Credential != null)
                 usernameToTest = _Sdk.Configuration.Credential.Username;
@@ -33,7 +35,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Create a session
             ModelsCreateSessionRequest createSession = new ModelsCreateSessionRequest()
             {
-                SessionType = "p2p",
+                SessionType = "dedicated",
                 GameVersion = "0.3.0",
                 Namespace = _Sdk.Namespace,
                 Username = usernameToTest,
@@ -75,12 +77,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             Assert.IsNotNull(uResp);
             if (uResp != null)
                 Assert.AreEqual(150, uResp.GameSessionSetting!.MaxPlayer!);
-
+            
             #region Delete a session
-            ModelsSessionResponse? dResp = _Sdk.GetSessionbrowserApi().Session.DeleteSessionOp
+            ModelsAdminSessionResponse? dResp = _Sdk.GetSessionbrowserApi().Session.AdminDeleteSessionOp
                 .Execute(_Sdk.Namespace, session_id);
+            Assert.IsNotNull(dResp);
             #endregion
-            Assert.IsNotNull(uResp);
+
+            ResetPolicy();
         }
     }
 }
