@@ -116,6 +116,7 @@
 | `/iam/v3/admin/namespaces/{namespace}/platforms/{platformId}/users/{platformUserId}` | GET | AdminGetUserByPlatformUserIDV3 | [AdminGetUserByPlatformUserIDV3](../../AccelByte.Sdk/Api/Iam/Operation/Users/AdminGetUserByPlatformUserIDV3.cs) | [AdminGetUserByPlatformUserIDV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/AdminGetUserByPlatformUserIDV3.cs) |
 | `/iam/v3/admin/namespaces/{namespace}/roles/{roleId}/users` | GET | GetAdminUsersByRoleIdV3 | [GetAdminUsersByRoleIdV3](../../AccelByte.Sdk/Api/Iam/Operation/Users/GetAdminUsersByRoleIdV3.cs) | [GetAdminUsersByRoleIdV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/GetAdminUsersByRoleIdV3.cs) |
 | `/iam/v3/admin/namespaces/{namespace}/users` | GET | AdminGetUserByEmailAddressV3 | [AdminGetUserByEmailAddressV3](../../AccelByte.Sdk/Api/Iam/Operation/Users/AdminGetUserByEmailAddressV3.cs) | [AdminGetUserByEmailAddressV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/AdminGetUserByEmailAddressV3.cs) |
+| `/iam/v3/admin/namespaces/{namespace}/users/bans` | POST | AdminGetBulkUserBanV3 | [AdminGetBulkUserBanV3](../../AccelByte.Sdk/Api/Iam/Operation/Users/AdminGetBulkUserBanV3.cs) | [AdminGetBulkUserBanV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/AdminGetBulkUserBanV3.cs) |
 | `/iam/v3/admin/namespaces/{namespace}/users/bulk` | POST | AdminListUserIDByUserIDsV3 | [AdminListUserIDByUserIDsV3](../../AccelByte.Sdk/Api/Iam/Operation/Users/AdminListUserIDByUserIDsV3.cs) | [AdminListUserIDByUserIDsV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/AdminListUserIDByUserIDsV3.cs) |
 | `/iam/v3/admin/namespaces/{namespace}/users/invite` | POST | AdminInviteUserV3 | [AdminInviteUserV3](../../AccelByte.Sdk/Api/Iam/Operation/Users/AdminInviteUserV3.cs) | [AdminInviteUserV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/AdminInviteUserV3.cs) |
 | `/iam/v3/admin/namespaces/{namespace}/users/linkhistories` | GET | AdminQueryThirdPlatformLinkHistoryV3 | [AdminQueryThirdPlatformLinkHistoryV3](../../AccelByte.Sdk/Api/Iam/Operation/Users/AdminQueryThirdPlatformLinkHistoryV3.cs) | [AdminQueryThirdPlatformLinkHistoryV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/AdminQueryThirdPlatformLinkHistoryV3.cs) |
@@ -148,6 +149,7 @@
 | `/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId}` | DELETE | AdminPlatformUnlinkV3 | [AdminPlatformUnlinkV3](../../AccelByte.Sdk/Api/Iam/Operation/Users/AdminPlatformUnlinkV3.cs) | [AdminPlatformUnlinkV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/AdminPlatformUnlinkV3.cs) |
 | `/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId}/link` | POST | AdminPlatformLinkV3 | [AdminPlatformLinkV3](../../AccelByte.Sdk/Api/Iam/Operation/Users/AdminPlatformLinkV3.cs) | [AdminPlatformLinkV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/AdminPlatformLinkV3.cs) |
 | `/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId}/linkStatus` | POST | AdminGetThirdPartyPlatformTokenLinkStatusV3 | [AdminGetThirdPartyPlatformTokenLinkStatusV3](../../AccelByte.Sdk/Api/Iam/Operation/Users/AdminGetThirdPartyPlatformTokenLinkStatusV3.cs) | [AdminGetThirdPartyPlatformTokenLinkStatusV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/AdminGetThirdPartyPlatformTokenLinkStatusV3.cs) |
+| `/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId}/metadata` | GET | AdminGetUserSinglePlatformAccount | [AdminGetUserSinglePlatformAccount](../../AccelByte.Sdk/Api/Iam/Operation/Users/AdminGetUserSinglePlatformAccount.cs) | [AdminGetUserSinglePlatformAccount](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/AdminGetUserSinglePlatformAccount.cs) |
 | `/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles` | DELETE | AdminDeleteUserRolesV3 | [AdminDeleteUserRolesV3](../../AccelByte.Sdk/Api/Iam/Operation/Users/AdminDeleteUserRolesV3.cs) | [AdminDeleteUserRolesV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/AdminDeleteUserRolesV3.cs) |
 | `/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles` | PATCH | AdminSaveUserRoleV3 | [AdminSaveUserRoleV3](../../AccelByte.Sdk/Api/Iam/Operation/Users/AdminSaveUserRoleV3.cs) | [AdminSaveUserRoleV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/AdminSaveUserRoleV3.cs) |
 | `/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles/{roleId}` | POST | AdminAddUserRoleV3 | [AdminAddUserRoleV3](../../AccelByte.Sdk/Api/Iam/Operation/Users/AdminAddUserRoleV3.cs) | [AdminAddUserRoleV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/AdminAddUserRoleV3.cs) |
@@ -425,6 +427,7 @@
 ### Users Wrapper:  [Users](../../AccelByte.Sdk/Api/Iam/Wrapper/Users.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
+| `/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId}/metadata` | GET | AdminGetUserSinglePlatformAccount | [AdminGetUserSinglePlatformAccount](../../AccelByte.Sdk/Api/Iam/Operation/Users/AdminGetUserSinglePlatformAccount.cs) | [AdminGetUserSinglePlatformAccount](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/AdminGetUserSinglePlatformAccount.cs) |
 | `/iam/v3/public/namespaces/{namespace}/requests/{requestId}/async/status` | GET | PublicGetAsyncStatus | [PublicGetAsyncStatus](../../AccelByte.Sdk/Api/Iam/Operation/Users/PublicGetAsyncStatus.cs) | [PublicGetAsyncStatus](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/PublicGetAsyncStatus.cs) |
 
 ### OAuth Wrapper:  [OAuth](../../AccelByte.Sdk/Api/Iam/Wrapper/OAuth.cs)
@@ -594,6 +597,7 @@
 | `model.FailedBanUnbanUserV3` | [ModelFailedBanUnbanUserV3](../../AccelByte.Sdk/Api/Iam/Model/ModelFailedBanUnbanUserV3.cs) |
 | `model.ForgotPasswordRequestV3` | [ModelForgotPasswordRequestV3](../../AccelByte.Sdk/Api/Iam/Model/ModelForgotPasswordRequestV3.cs) |
 | `model.GetAdminUsersResponse` | [ModelGetAdminUsersResponse](../../AccelByte.Sdk/Api/Iam/Model/ModelGetAdminUsersResponse.cs) |
+| `model.GetBulkUserBansRequest` | [ModelGetBulkUserBansRequest](../../AccelByte.Sdk/Api/Iam/Model/ModelGetBulkUserBansRequest.cs) |
 | `model.GetLinkHeadlessAccountConflictResponse` | [ModelGetLinkHeadlessAccountConflictResponse](../../AccelByte.Sdk/Api/Iam/Model/ModelGetLinkHeadlessAccountConflictResponse.cs) |
 | `model.GetPublisherUserResponse` | [ModelGetPublisherUserResponse](../../AccelByte.Sdk/Api/Iam/Model/ModelGetPublisherUserResponse.cs) |
 | `model.GetPublisherUserV3Response` | [ModelGetPublisherUserV3Response](../../AccelByte.Sdk/Api/Iam/Model/ModelGetPublisherUserV3Response.cs) |
@@ -706,6 +710,7 @@
 | `model.UserPasswordUpdateRequest` | [ModelUserPasswordUpdateRequest](../../AccelByte.Sdk/Api/Iam/Model/ModelUserPasswordUpdateRequest.cs) |
 | `model.UserPasswordUpdateV3Request` | [ModelUserPasswordUpdateV3Request](../../AccelByte.Sdk/Api/Iam/Model/ModelUserPasswordUpdateV3Request.cs) |
 | `model.UserPermissionsResponseV3` | [ModelUserPermissionsResponseV3](../../AccelByte.Sdk/Api/Iam/Model/ModelUserPermissionsResponseV3.cs) |
+| `model.UserPlatformMetadata` | [ModelUserPlatformMetadata](../../AccelByte.Sdk/Api/Iam/Model/ModelUserPlatformMetadata.cs) |
 | `model.UserResponse` | [ModelUserResponse](../../AccelByte.Sdk/Api/Iam/Model/ModelUserResponse.cs) |
 | `model.UserResponseV3` | [ModelUserResponseV3](../../AccelByte.Sdk/Api/Iam/Model/ModelUserResponseV3.cs) |
 | `model.UserRolesV4Response` | [ModelUserRolesV4Response](../../AccelByte.Sdk/Api/Iam/Model/ModelUserRolesV4Response.cs) |

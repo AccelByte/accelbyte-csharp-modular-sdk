@@ -25,9 +25,17 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         }
 
         #region Operation Builders
+        public AdminPutAdminGameRecordConcurrentHandlerV1.AdminPutAdminGameRecordConcurrentHandlerV1Builder AdminPutAdminGameRecordConcurrentHandlerV1Op
+        {
+            get { return new Operation.AdminPutAdminGameRecordConcurrentHandlerV1.AdminPutAdminGameRecordConcurrentHandlerV1Builder(_sdk); }
+        }
         public AdminPutGameRecordConcurrentHandlerV1.AdminPutGameRecordConcurrentHandlerV1Builder AdminPutGameRecordConcurrentHandlerV1Op
         {
             get { return new Operation.AdminPutGameRecordConcurrentHandlerV1.AdminPutGameRecordConcurrentHandlerV1Builder(_sdk); }
+        }
+        public AdminPutAdminPlayerRecordConcurrentHandlerV1.AdminPutAdminPlayerRecordConcurrentHandlerV1Builder AdminPutAdminPlayerRecordConcurrentHandlerV1Op
+        {
+            get { return new Operation.AdminPutAdminPlayerRecordConcurrentHandlerV1.AdminPutAdminPlayerRecordConcurrentHandlerV1Builder(_sdk); }
         }
         public AdminPutPlayerRecordConcurrentHandlerV1.AdminPutPlayerRecordConcurrentHandlerV1Builder AdminPutPlayerRecordConcurrentHandlerV1Op
         {
@@ -39,7 +47,25 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         }
         #endregion
 
+        public void AdminPutAdminGameRecordConcurrentHandlerV1(AdminPutAdminGameRecordConcurrentHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public void AdminPutGameRecordConcurrentHandlerV1(AdminPutGameRecordConcurrentHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void AdminPutAdminPlayerRecordConcurrentHandlerV1(AdminPutAdminPlayerRecordConcurrentHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
 

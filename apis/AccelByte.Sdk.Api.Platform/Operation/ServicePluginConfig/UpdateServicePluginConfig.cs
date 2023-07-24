@@ -26,6 +26,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     ///   * Required permission : resource=ADMIN:NAMESPACE:{namespace}:CONFIG:SERVICEPLUGIN, action=4 (UPDATE)
     ///   *  Returns : updated service plugin config
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class UpdateServicePluginConfig : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -73,6 +74,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public Model.ServicePluginConfigInfo? Execute(
                 string namespace_
             )

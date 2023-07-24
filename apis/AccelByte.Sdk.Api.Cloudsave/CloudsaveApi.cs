@@ -15,6 +15,17 @@ namespace AccelByte.Sdk.Api.Cloudsave
     {
         private IAccelByteSdk _Sdk;
 
+        public Wrapper.AdminRecord AdminRecord
+        {
+            get
+            {
+                if (_AdminRecord == null)
+                    _AdminRecord = new Wrapper.AdminRecord(_Sdk);
+                return _AdminRecord;
+            }
+        }
+        private Wrapper.AdminRecord? _AdminRecord = null;
+
         public Wrapper.AdminConcurrentRecord AdminConcurrentRecord
         {
             get
@@ -25,6 +36,17 @@ namespace AccelByte.Sdk.Api.Cloudsave
             }
         }
         private Wrapper.AdminConcurrentRecord? _AdminConcurrentRecord = null;
+
+        public Wrapper.PluginConfig PluginConfig
+        {
+            get
+            {
+                if (_PluginConfig == null)
+                    _PluginConfig = new Wrapper.PluginConfig(_Sdk);
+                return _PluginConfig;
+            }
+        }
+        private Wrapper.PluginConfig? _PluginConfig = null;
 
         public Wrapper.AdminGameRecord AdminGameRecord
         {

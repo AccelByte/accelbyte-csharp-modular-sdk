@@ -70,6 +70,17 @@ namespace AccelByte.Sdk.Api.Session
         }
         private Wrapper.Party? _Party = null;
 
+        public Wrapper.PlatformCredential PlatformCredential
+        {
+            get
+            {
+                if (_PlatformCredential == null)
+                    _PlatformCredential = new Wrapper.PlatformCredential(_Sdk);
+                return _PlatformCredential;
+            }
+        }
+        private Wrapper.PlatformCredential? _PlatformCredential = null;
+
         public Wrapper.Player Player
         {
             get

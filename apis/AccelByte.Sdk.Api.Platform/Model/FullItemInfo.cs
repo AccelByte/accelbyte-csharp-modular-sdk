@@ -36,6 +36,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public List<string>? BoundItemIds { get; set; }
 
         [JsonPropertyName("categoryPath")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? CategoryPath { get; set; }
 
         [JsonPropertyName("clazz")]
@@ -206,6 +207,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public List<string>? BoundItemIds { get; set; }
 
         [JsonPropertyName("categoryPath")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? CategoryPath { get; set; }
 
         [JsonPropertyName("clazz")]

@@ -31,6 +31,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Model
         public string? Namespace { get; set; }
 
         [JsonPropertyName("season")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public SeasonSummary? Season { get; set; }
 
         [JsonPropertyName("seasonId")]

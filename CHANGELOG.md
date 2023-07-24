@@ -1,3 +1,21 @@
+<a name="v0.32.0"></a>
+## [v0.32.0]
+### feat
+- **core:** added json serialization options and its test
+- **core:** added support for custom flags and events
+- **auth:** enable on-demand refresh token
+- **test:** added integration test for on-demand refresh token
+- **mock-server:** change jenkinfile for new mock-server path
+- **integration:** add lobby presence tests
+### docs
+- **migration:** added migration info for on-demand refresh token
+### fix
+- **core:** add missing request json options in http clients
+- **compat:** add missing constructors for sdk class
+- **integration:** fix get match pool detail integration tests
+- **integration:** use admin delete session endpoint for session browser test
+
+
 <a name="v0.31.1"><a>
 ## [v0.31.1]
 - Hotfix: fixed image size model's property for DSMC service.

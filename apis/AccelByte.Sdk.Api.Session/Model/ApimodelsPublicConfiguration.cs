@@ -12,6 +12,13 @@ namespace AccelByte.Sdk.Api.Session.Model
 {
     public class ApimodelsPublicConfiguration : AccelByte.Sdk.Core.Model
     {
+        [JsonPropertyName("PSNBaseURL")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? PSNBaseURL { get; set; }
+
+        [JsonPropertyName("autoJoin")]
+        public bool? AutoJoin { get; set; }
+
         [JsonPropertyName("clientVersion")]
         public string? ClientVersion { get; set; }
 
@@ -44,6 +51,10 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonPropertyName("name")]
         public string? Name { get; set; }
 
+        [JsonPropertyName("native_session_setting")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ModelsNativeSessionSetting? NativeSessionSetting { get; set; }
+
         [JsonPropertyName("persistent")]
         public bool? Persistent { get; set; }
 
@@ -57,6 +68,10 @@ namespace AccelByte.Sdk.Api.Session.Model
 
         [JsonPropertyName("textChat")]
         public bool? TextChat { get; set; }
+
+        [JsonPropertyName("tieTeamsSessionLifetime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? TieTeamsSessionLifetime { get; set; }
 
         [JsonPropertyName("type")]
         public string? Type { get; set; }

@@ -27,6 +27,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// 
     ///   * Required permission : resource=ADMIN:NAMESPACE:{namespace}:CONFIG:SERVICEPLUGIN, action=8 (DELETE)
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class DeleteServicePluginConfig : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -66,6 +67,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_
             )

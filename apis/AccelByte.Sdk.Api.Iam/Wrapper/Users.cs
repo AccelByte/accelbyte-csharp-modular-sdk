@@ -377,6 +377,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.AdminGetUserByEmailAddressV3.AdminGetUserByEmailAddressV3Builder(_sdk); }
         }
+        public AdminGetBulkUserBanV3.AdminGetBulkUserBanV3Builder AdminGetBulkUserBanV3Op
+        {
+            get { return new Operation.AdminGetBulkUserBanV3.AdminGetBulkUserBanV3Builder(_sdk); }
+        }
         public AdminListUserIDByUserIDsV3.AdminListUserIDByUserIDsV3Builder AdminListUserIDByUserIDsV3Op
         {
             get { return new Operation.AdminListUserIDByUserIDsV3.AdminListUserIDByUserIDsV3Builder(_sdk); }
@@ -504,6 +508,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public AdminGetThirdPartyPlatformTokenLinkStatusV3.AdminGetThirdPartyPlatformTokenLinkStatusV3Builder AdminGetThirdPartyPlatformTokenLinkStatusV3Op
         {
             get { return new Operation.AdminGetThirdPartyPlatformTokenLinkStatusV3.AdminGetThirdPartyPlatformTokenLinkStatusV3Builder(_sdk); }
+        }
+        public AdminGetUserSinglePlatformAccount.AdminGetUserSinglePlatformAccountBuilder AdminGetUserSinglePlatformAccountOp
+        {
+            get { return new Operation.AdminGetUserSinglePlatformAccount.AdminGetUserSinglePlatformAccountBuilder(_sdk); }
         }
         public AdminDeleteUserRolesV3.AdminDeleteUserRolesV3Builder AdminDeleteUserRolesV3Op
         {
@@ -1552,6 +1560,15 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public Model.ModelGetUserBanV3Response? AdminGetBulkUserBanV3(AdminGetBulkUserBanV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.ModelListUserInformationResult? AdminListUserIDByUserIDsV3(AdminListUserIDByUserIDsV3 input)
         {
             var response = _sdk.RunRequest(input);
@@ -1836,6 +1853,25 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelUserPlatformMetadata? AdminGetUserSinglePlatformAccount(AdminGetUserSinglePlatformAccount input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public Model.ModelUserPlatformMetadata<T1>? AdminGetUserSinglePlatformAccount<T1>(AdminGetUserSinglePlatformAccount input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
                     response.Payload);

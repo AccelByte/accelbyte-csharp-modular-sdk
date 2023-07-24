@@ -22,12 +22,18 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// <summary>
     /// updateNamespaceSlotConfig
     ///
+    /// 
+    /// 
+    /// ## The endpoint is going to be deprecated
+    /// 
+    /// 
     /// Update a slot namespace configuration.
     /// Other detail info:
     /// 
     ///   *  Required permission : resource="ADMIN:NAMESPACE:{namespace}:SLOTCONFIG", action=4 (UPDATE)
     ///   *  Returns : updated namespace slot config
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class UpdateNamespaceSlotConfig : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -75,6 +81,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public Model.NamespaceSlotConfigInfo? Execute(
                 string namespace_
             )

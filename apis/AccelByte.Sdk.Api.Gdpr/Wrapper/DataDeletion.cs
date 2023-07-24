@@ -53,6 +53,18 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         {
             get { return new Operation.PublicGetUserAccountDeletionStatus.PublicGetUserAccountDeletionStatusBuilder(_sdk); }
         }
+        public PublicSubmitMyAccountDeletionRequest.PublicSubmitMyAccountDeletionRequestBuilder PublicSubmitMyAccountDeletionRequestOp
+        {
+            get { return new Operation.PublicSubmitMyAccountDeletionRequest.PublicSubmitMyAccountDeletionRequestBuilder(_sdk); }
+        }
+        public PublicCancelMyAccountDeletionRequest.PublicCancelMyAccountDeletionRequestBuilder PublicCancelMyAccountDeletionRequestOp
+        {
+            get { return new Operation.PublicCancelMyAccountDeletionRequest.PublicCancelMyAccountDeletionRequestBuilder(_sdk); }
+        }
+        public PublicGetMyAccountDeletionStatus.PublicGetMyAccountDeletionStatusBuilder PublicGetMyAccountDeletionStatusOp
+        {
+            get { return new Operation.PublicGetMyAccountDeletionStatus.PublicGetMyAccountDeletionStatusBuilder(_sdk); }
+        }
         #endregion
 
         public Model.ModelsListDeletionDataResponse? AdminGetListDeletionDataRequest(AdminGetListDeletionDataRequest input)
@@ -110,6 +122,33 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.Payload);
         }
         public Model.ModelsDeletionStatus? PublicGetUserAccountDeletionStatus(PublicGetUserAccountDeletionStatus input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelsRequestDeleteResponse? PublicSubmitMyAccountDeletionRequest(PublicSubmitMyAccountDeletionRequest input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void PublicCancelMyAccountDeletionRequest(PublicCancelMyAccountDeletionRequest input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelsDeletionStatus? PublicGetMyAccountDeletionStatus(PublicGetMyAccountDeletionStatus input)
         {
             var response = _sdk.RunRequest(input);
 

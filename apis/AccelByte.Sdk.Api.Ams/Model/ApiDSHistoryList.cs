@@ -15,6 +15,9 @@ namespace AccelByte.Sdk.Api.Ams.Model
         [JsonPropertyName("events")]
         public List<ApiDSHistoryEvent>? Events { get; set; }
 
+        [JsonPropertyName("paging")]
+        public ApiPagingInfo? Paging { get; set; }
+
     }
 
 

@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .Execute(_Sdk.Namespace);
             #endregion
             Assert.IsNotNull(poolList);
-            
+
             #region Get match pool detail
             ApiMatchPool? matchPool = _Sdk.GetMatch2Api().MatchPools.MatchPoolDetailsOp
                 .Execute(_Sdk.Namespace, poolName);

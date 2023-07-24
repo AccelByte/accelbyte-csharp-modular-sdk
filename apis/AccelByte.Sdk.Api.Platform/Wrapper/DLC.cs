@@ -61,6 +61,10 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         {
             get { return new Operation.SyncEpicGameDLC.SyncEpicGameDLCBuilder(_sdk); }
         }
+        public SyncOculusDLC.SyncOculusDLCBuilder SyncOculusDLCOp
+        {
+            get { return new Operation.SyncOculusDLC.SyncOculusDLCBuilder(_sdk); }
+        }
         public PublicSyncPsnDlcInventory.PublicSyncPsnDlcInventoryBuilder PublicSyncPsnDlcInventoryOp
         {
             get { return new Operation.PublicSyncPsnDlcInventory.PublicSyncPsnDlcInventoryBuilder(_sdk); }
@@ -152,6 +156,15 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
         public void SyncEpicGameDLC(SyncEpicGameDLC input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void SyncOculusDLC(SyncOculusDLC input)
         {
             var response = _sdk.RunRequest(input);
 

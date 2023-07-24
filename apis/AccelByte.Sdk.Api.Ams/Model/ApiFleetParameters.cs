@@ -16,6 +16,7 @@ namespace AccelByte.Sdk.Api.Ams.Model
         public bool? Active { get; set; }
 
         [JsonPropertyName("claimKeys")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? ClaimKeys { get; set; }
 
         [JsonPropertyName("dsHostConfiguration")]

@@ -81,6 +81,17 @@ namespace AccelByte.Sdk.Api.Ams
         }
         private Wrapper.Watchdogs? _Watchdogs = null;
 
+        public Wrapper.FleetCommander FleetCommander
+        {
+            get
+            {
+                if (_FleetCommander == null)
+                    _FleetCommander = new Wrapper.FleetCommander(_Sdk);
+                return _FleetCommander;
+            }
+        }
+        private Wrapper.FleetCommander? _FleetCommander = null;
+
         public Wrapper.Operations Operations
         {
             get

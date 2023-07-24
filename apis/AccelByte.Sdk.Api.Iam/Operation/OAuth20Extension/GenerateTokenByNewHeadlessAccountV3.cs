@@ -39,6 +39,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
+            public string? AdditionalData { get; set; }
+
             public bool? ExtendExp { get; set; }
 
 
@@ -52,6 +54,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
+
+            public GenerateTokenByNewHeadlessAccountV3Builder SetAdditionalData(string _additionalData)
+            {
+                AdditionalData = _additionalData;
+                return this;
+            }
 
             public GenerateTokenByNewHeadlessAccountV3Builder SetExtendExp(bool _extendExp)
             {
@@ -100,6 +108,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
 
 
+            if (builder.AdditionalData is not null) FormParams["additionalData"] = builder.AdditionalData;
             if (builder.ExtendExp != null) FormParams["extend_exp"] = Convert.ToString(builder.ExtendExp)!;
             if (linkingToken is not null) FormParams["linkingToken"] = linkingToken;
 
@@ -112,12 +121,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public GenerateTokenByNewHeadlessAccountV3(
+            string? additionalData,
             bool? extendExp,
             string linkingToken
         )
         {
 
 
+            if (additionalData is not null) FormParams["additionalData"] = additionalData;
             if (extendExp != null) FormParams["extend_exp"] = Convert.ToString(extendExp)!;
             if (linkingToken is not null) FormParams["linkingToken"] = linkingToken;
 

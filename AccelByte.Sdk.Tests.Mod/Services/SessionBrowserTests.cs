@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             Assert.IsNotNull(uResp);
             if (uResp != null)
                 Assert.AreEqual(150, uResp.GameSessionSetting!.MaxPlayer!);
-            
+
             #region Delete a session
             ModelsAdminSessionResponse? dResp = _Sdk.GetSessionbrowserApi().Session.AdminDeleteSessionOp
                 .Execute(_Sdk.Namespace, session_id);

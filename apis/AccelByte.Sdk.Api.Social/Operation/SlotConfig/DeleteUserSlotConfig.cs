@@ -22,10 +22,16 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// <summary>
     /// deleteUserSlotConfig
     ///
+    /// 
+    /// 
+    /// ## The endpoint is going to be deprecated
+    /// 
+    /// 
     /// Deletes a user slot configuration in given namespace, the namespace slot configuration will be returned after delete.
     /// Other detail info:
     ///       *  Required permission : resource="ADMIN:NAMESPACE:{namespace}:USER:{userId}:SLOTCONFIG", action=8 (DELETE)
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class DeleteUserSlotConfig : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -67,6 +73,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string userId

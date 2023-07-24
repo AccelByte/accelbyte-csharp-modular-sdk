@@ -48,17 +48,6 @@ namespace AccelByte.Sdk.Api.Platform
         }
         private Wrapper.Campaign? _Campaign = null;
 
-        public Wrapper.Category Category
-        {
-            get
-            {
-                if (_Category == null)
-                    _Category = new Wrapper.Category(_Sdk);
-                return _Category;
-            }
-        }
-        private Wrapper.Category? _Category = null;
-
         public Wrapper.ServicePluginConfig ServicePluginConfig
         {
             get
@@ -69,6 +58,17 @@ namespace AccelByte.Sdk.Api.Platform
             }
         }
         private Wrapper.ServicePluginConfig? _ServicePluginConfig = null;
+
+        public Wrapper.Category Category
+        {
+            get
+            {
+                if (_Category == null)
+                    _Category = new Wrapper.Category(_Sdk);
+                return _Category;
+            }
+        }
+        private Wrapper.Category? _Category = null;
 
         public Wrapper.Currency Currency
         {

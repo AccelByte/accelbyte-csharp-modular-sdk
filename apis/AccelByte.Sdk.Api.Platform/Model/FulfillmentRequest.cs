@@ -85,6 +85,9 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public static readonly FulfillmentRequestOrigin Nintendo
             = new FulfillmentRequestOrigin("Nintendo");
 
+        public static readonly FulfillmentRequestOrigin Oculus
+            = new FulfillmentRequestOrigin("Oculus");
+
         public static readonly FulfillmentRequestOrigin Other
             = new FulfillmentRequestOrigin("Other");
 

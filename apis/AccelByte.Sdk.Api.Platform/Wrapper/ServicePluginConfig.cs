@@ -25,20 +25,158 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
 
         #region Operation Builders
+        public GetLootBoxPluginConfig.GetLootBoxPluginConfigBuilder GetLootBoxPluginConfigOp
+        {
+            get { return new Operation.GetLootBoxPluginConfig.GetLootBoxPluginConfigBuilder(_sdk); }
+        }
+        public UpdateLootBoxPluginConfig.UpdateLootBoxPluginConfigBuilder UpdateLootBoxPluginConfigOp
+        {
+            get { return new Operation.UpdateLootBoxPluginConfig.UpdateLootBoxPluginConfigBuilder(_sdk); }
+        }
+        public DeleteLootBoxPluginConfig.DeleteLootBoxPluginConfigBuilder DeleteLootBoxPluginConfigOp
+        {
+            get { return new Operation.DeleteLootBoxPluginConfig.DeleteLootBoxPluginConfigBuilder(_sdk); }
+        }
+        public UplodLootBoxPluginConfigCert.UplodLootBoxPluginConfigCertBuilder UplodLootBoxPluginConfigCertOp
+        {
+            get { return new Operation.UplodLootBoxPluginConfigCert.UplodLootBoxPluginConfigCertBuilder(_sdk); }
+        }
+        public GetLootBoxGrpcInfo.GetLootBoxGrpcInfoBuilder GetLootBoxGrpcInfoOp
+        {
+            get { return new Operation.GetLootBoxGrpcInfo.GetLootBoxGrpcInfoBuilder(_sdk); }
+        }
+        public GetSectionPluginConfig.GetSectionPluginConfigBuilder GetSectionPluginConfigOp
+        {
+            get { return new Operation.GetSectionPluginConfig.GetSectionPluginConfigBuilder(_sdk); }
+        }
+        public UpdateSectionPluginConfig.UpdateSectionPluginConfigBuilder UpdateSectionPluginConfigOp
+        {
+            get { return new Operation.UpdateSectionPluginConfig.UpdateSectionPluginConfigBuilder(_sdk); }
+        }
+        public DeleteSectionPluginConfig.DeleteSectionPluginConfigBuilder DeleteSectionPluginConfigOp
+        {
+            get { return new Operation.DeleteSectionPluginConfig.DeleteSectionPluginConfigBuilder(_sdk); }
+        }
+        public UploadSectionPluginConfigCert.UploadSectionPluginConfigCertBuilder UploadSectionPluginConfigCertOp
+        {
+            get { return new Operation.UploadSectionPluginConfigCert.UploadSectionPluginConfigCertBuilder(_sdk); }
+        }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetServicePluginConfig.GetServicePluginConfigBuilder GetServicePluginConfigOp
         {
             get { return new Operation.GetServicePluginConfig.GetServicePluginConfigBuilder(_sdk); }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateServicePluginConfig.UpdateServicePluginConfigBuilder UpdateServicePluginConfigOp
         {
             get { return new Operation.UpdateServicePluginConfig.UpdateServicePluginConfigBuilder(_sdk); }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteServicePluginConfig.DeleteServicePluginConfigBuilder DeleteServicePluginConfigOp
         {
             get { return new Operation.DeleteServicePluginConfig.DeleteServicePluginConfigBuilder(_sdk); }
         }
+        public GetLootBoxPluginConfig1.GetLootBoxPluginConfig1Builder GetLootBoxPluginConfig1Op
+        {
+            get { return new Operation.GetLootBoxPluginConfig1.GetLootBoxPluginConfig1Builder(_sdk); }
+        }
+        public UpdateRevocationPluginConfig.UpdateRevocationPluginConfigBuilder UpdateRevocationPluginConfigOp
+        {
+            get { return new Operation.UpdateRevocationPluginConfig.UpdateRevocationPluginConfigBuilder(_sdk); }
+        }
+        public DeleteLootBoxPluginConfig1.DeleteLootBoxPluginConfig1Builder DeleteLootBoxPluginConfig1Op
+        {
+            get { return new Operation.DeleteLootBoxPluginConfig1.DeleteLootBoxPluginConfig1Builder(_sdk); }
+        }
+        public UploadRevocationPluginConfigCert.UploadRevocationPluginConfigCertBuilder UploadRevocationPluginConfigCertOp
+        {
+            get { return new Operation.UploadRevocationPluginConfigCert.UploadRevocationPluginConfigCertBuilder(_sdk); }
+        }
         #endregion
 
+        public Model.LootBoxPluginConfigInfo? GetLootBoxPluginConfig(GetLootBoxPluginConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.LootBoxPluginConfigInfo? UpdateLootBoxPluginConfig(UpdateLootBoxPluginConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void DeleteLootBoxPluginConfig(DeleteLootBoxPluginConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.LootBoxPluginConfigInfo? UplodLootBoxPluginConfigCert(UplodLootBoxPluginConfigCert input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.GrpcServerInfo? GetLootBoxGrpcInfo(GetLootBoxGrpcInfo input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.SectionPluginConfigInfo? GetSectionPluginConfig(GetSectionPluginConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.SectionPluginConfigInfo? UpdateSectionPluginConfig(UpdateSectionPluginConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void DeleteSectionPluginConfig(DeleteSectionPluginConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.SectionPluginConfigInfo? UploadSectionPluginConfigCert(UploadSectionPluginConfigCert input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.ServicePluginConfigInfo? GetServicePluginConfig(GetServicePluginConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -48,6 +186,9 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.ServicePluginConfigInfo? UpdateServicePluginConfig(UpdateServicePluginConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -57,11 +198,51 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public void DeleteServicePluginConfig(DeleteServicePluginConfig input)
         {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+#pragma warning restore ab_deprecated_operation
+        public Model.RevocationPluginConfigInfo? GetLootBoxPluginConfig1(GetLootBoxPluginConfig1 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.RevocationPluginConfigInfo? UpdateRevocationPluginConfig(UpdateRevocationPluginConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void DeleteLootBoxPluginConfig1(DeleteLootBoxPluginConfig1 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.RevocationPluginConfigInfo? UploadRevocationPluginConfigCert(UploadRevocationPluginConfigCert input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
