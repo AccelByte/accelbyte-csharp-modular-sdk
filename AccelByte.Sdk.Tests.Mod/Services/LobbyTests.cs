@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
@@ -18,6 +19,9 @@ namespace AccelByte.Sdk.Tests.Mod.Services
     [Explicit]
     public class LobbyTests : BaseServiceTests
     {
+        public const string LOBBY_PRESENCE_ONLINE = "online";
+        public const string LOBBY_PRESENCE_OFFLINE = "offline";
+
         public LobbyTests() : base(true) { }
 
         [Test]
@@ -48,6 +52,9 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             DisableRetry();
 
+            int maxCheckRetry = 10;
+            int checkRetryCount = 0;
+
             if (_Sdk.Configuration.Credential == null)
                 throw new Exception("Credential object is null. Please use User Login for this test.");
 
@@ -63,15 +70,30 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             Task connectTak = lobby.Connect(false);
             connectTak.Wait();
 
-            HandlersGetUsersPresenceResponse? userPresence = _Sdk.GetLobbyApi().Presence.UsersPresenceHandlerV1Op
+            Thread.Sleep(500); //wait 0.5 second to make sure backend has updated status.
+
+            HandlersGetUsersPresenceResponse? userPresence = null;
+            while (checkRetryCount < maxCheckRetry)
+            {
+                userPresence = _Sdk.GetLobbyApi().Presence.UsersPresenceHandlerV1Op
                 .Execute(_Sdk.Namespace, currentUserId);
-            Assert.IsNotNull(userPresence);
+                Assert.IsNotNull(userPresence);
+
+                string userStatus = "";
+                if ((userPresence != null) && (userPresence.Data != null) && (userPresence.Data.Count > 0))
+                    userStatus = userPresence.Data[0].Availability!;
+                if (userStatus == LOBBY_PRESENCE_ONLINE)
+                    break;
+
+                Thread.Sleep(500);
+            }
+
             if (userPresence != null)
             {
                 if ((userPresence.Data != null) && (userPresence.Data.Count > 0))
                 {
                     HandlersUserPresence upItem = userPresence.Data[0];
-                    Assert.AreEqual("online", upItem.Availability);
+                    Assert.AreEqual(LOBBY_PRESENCE_ONLINE, upItem.Availability);
                 }
                 else
                     Assert.Fail("No user presence data");
@@ -80,15 +102,31 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             Task disconnectTask = lobby.Disconnect();
             disconnectTask.Wait();
 
-            userPresence = _Sdk.GetLobbyApi().Presence.UsersPresenceHandlerV1Op
-                .Execute(_Sdk.Namespace, currentUserId);
-            Assert.IsNotNull(userPresence);
+            Thread.Sleep(500); //wait 0.5 second to make sure backend has updated status.
+
+            userPresence = null;
+            checkRetryCount = 0;
+            while (checkRetryCount < maxCheckRetry)
+            {
+                userPresence = _Sdk.GetLobbyApi().Presence.UsersPresenceHandlerV1Op
+                    .Execute(_Sdk.Namespace, currentUserId);
+                Assert.IsNotNull(userPresence);
+
+                string userStatus = "";
+                if ((userPresence != null) && (userPresence.Data != null) && (userPresence.Data.Count > 0))
+                    userStatus = userPresence.Data[0].Availability!;
+                if (userStatus == LOBBY_PRESENCE_OFFLINE)
+                    break;
+
+                Thread.Sleep(500);
+            }
+
             if (userPresence != null)
             {
                 if ((userPresence.Data != null) && (userPresence.Data.Count > 0))
                 {
                     HandlersUserPresence upItem = userPresence.Data[0];
-                    Assert.AreEqual("offline", upItem.Availability);
+                    Assert.AreEqual(LOBBY_PRESENCE_OFFLINE, upItem.Availability);
                 }
                 else
                     Assert.Fail("No user presence data");
