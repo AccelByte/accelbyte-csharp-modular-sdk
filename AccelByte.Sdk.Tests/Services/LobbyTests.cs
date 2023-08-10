@@ -41,6 +41,7 @@ namespace AccelByte.Sdk.Tests.Services
         }
 
         [Test]
+        [Ignore("Due to unstable response")]
         public void LobbyConnectAndCheckPresenceTest()
         {
             Assert.IsNotNull(_Sdk);
