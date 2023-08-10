@@ -30,13 +30,12 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
             get { return new Operation.WatchdogConnect.WatchdogConnectBuilder(_sdk); }
         }
         #endregion
-
-        public void WatchdogConnect(WatchdogConnect input)
-        {
+        
+        public void WatchdogConnect(WatchdogConnect input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

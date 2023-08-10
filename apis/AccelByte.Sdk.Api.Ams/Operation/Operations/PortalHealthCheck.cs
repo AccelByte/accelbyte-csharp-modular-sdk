@@ -20,24 +20,24 @@ using AccelByte.Sdk.Api.Ams.Model;
 namespace AccelByte.Sdk.Api.Ams.Operation
 {
     /// <summary>
-    /// func1
+    /// PortalHealthCheck
     /// </summary>
-    public class Func1 : AccelByte.Sdk.Core.Operation
+    public class PortalHealthCheck : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static Func1Builder Builder { get => new Func1Builder(); }
+        public static PortalHealthCheckBuilder Builder { get => new PortalHealthCheckBuilder(); }
 
-        public class Func1Builder
-            : OperationBuilder<Func1Builder>
+        public class PortalHealthCheckBuilder
+            : OperationBuilder<PortalHealthCheckBuilder>
         {
 
 
 
 
 
-            internal Func1Builder() { }
+            internal PortalHealthCheckBuilder() { }
 
-            internal Func1Builder(IAccelByteSdk sdk)
+            internal PortalHealthCheckBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -47,10 +47,10 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            public Func1 Build(
+            public PortalHealthCheck Build(
             )
             {
-                Func1 op = new Func1(this
+                PortalHealthCheck op = new PortalHealthCheck(this
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -62,7 +62,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             public void Execute(
             )
             {
-                Func1 op = Build(
+                PortalHealthCheck op = Build(
                 );
 
                 if (_Sdk == null)
@@ -70,56 +70,56 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
-        private Func1(Func1Builder builder
+        private PortalHealthCheck(PortalHealthCheckBuilder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public Func1(
+        public PortalHealthCheck(
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/ams/version";
+        public override string Path => "/healthz";
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)200)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

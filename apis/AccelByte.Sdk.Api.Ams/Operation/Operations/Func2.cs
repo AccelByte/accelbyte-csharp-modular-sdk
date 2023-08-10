@@ -20,26 +20,24 @@ using AccelByte.Sdk.Api.Ams.Model;
 namespace AccelByte.Sdk.Api.Ams.Operation
 {
     /// <summary>
-    /// InfoRegions
-    ///
-    /// Required Permission: ADMIN:NAMESPACE:{namespace}:ARMADA [READ]
+    /// func2
     /// </summary>
-    public class InfoRegions : AccelByte.Sdk.Core.Operation
+    public class Func2 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static InfoRegionsBuilder Builder { get => new InfoRegionsBuilder(); }
+        public static Func2Builder Builder { get => new Func2Builder(); }
 
-        public class InfoRegionsBuilder
-            : OperationBuilder<InfoRegionsBuilder>
+        public class Func2Builder
+            : OperationBuilder<Func2Builder>
         {
 
 
 
 
 
-            internal InfoRegionsBuilder() { }
+            internal Func2Builder() { }
 
-            internal InfoRegionsBuilder(IAccelByteSdk sdk)
+            internal Func2Builder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -49,12 +47,10 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            public InfoRegions Build(
-                string namespace_
+            public Func2 Build(
             )
             {
-                InfoRegions op = new InfoRegions(this,
-                    namespace_                    
+                Func2 op = new Func2(this
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -63,30 +59,26 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 return op;
             }
 
-            public Model.ApiRegionsResponse? Execute(
-                string namespace_
+            public void Execute(
             )
             {
-                InfoRegions op = Build(
-                    namespace_
+                Func2 op = Build(
                 );
 
                 if (_Sdk == null)
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                return op.ParseResponse(
+                op.ParseResponse(
                     response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
-        private InfoRegions(InfoRegionsBuilder builder,
-            string namespace_
+        private Func2(Func2Builder builder
         )
         {
-            PathParams["namespace"] = namespace_;
             
             
 
@@ -98,11 +90,9 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         }
         #endregion
 
-        public InfoRegions(
-            string namespace_            
+        public Func2(
         )
         {
-            PathParams["namespace"] = namespace_;
             
             
 
@@ -113,27 +103,19 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/ams/v1/admin/namespaces/{namespace}/regions";
+        public override string Path => "/ams/healthz";
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { "application/json" };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };        
         
-        public Model.ApiRegionsResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
-            if (code == (HttpStatusCode)204)
+        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        {
+            if (code == (HttpStatusCode)200)
             {
-                return null;
-            }
-            else if (code == (HttpStatusCode)201)
-            {
-                return JsonSerializer.Deserialize<Model.ApiRegionsResponse>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.ApiRegionsResponse>(payload, ResponseJsonOptions);
+                return;
             }
             
             var payloadString = payload.ReadToString();

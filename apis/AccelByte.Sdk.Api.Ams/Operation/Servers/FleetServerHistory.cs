@@ -37,6 +37,16 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
             public long? Offset { get; set; }
 
+            public string? Reason { get; set; }
+
+            public string? Region { get; set; }
+
+            public string? ServerId { get; set; }
+
+            public string? SortDirection { get; set; }
+
+            public string? Status { get; set; }
+
 
 
 
@@ -61,6 +71,36 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 return this;
             }
 
+            public FleetServerHistoryBuilder SetReason(string _reason)
+            {
+                Reason = _reason;
+                return this;
+            }
+
+            public FleetServerHistoryBuilder SetRegion(string _region)
+            {
+                Region = _region;
+                return this;
+            }
+
+            public FleetServerHistoryBuilder SetServerId(string _serverId)
+            {
+                ServerId = _serverId;
+                return this;
+            }
+
+            public FleetServerHistoryBuilder SetSortDirection(string _sortDirection)
+            {
+                SortDirection = _sortDirection;
+                return this;
+            }
+
+            public FleetServerHistoryBuilder SetStatus(string _status)
+            {
+                Status = _status;
+                return this;
+            }
+
 
 
 
@@ -71,8 +111,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             )
             {
                 FleetServerHistory op = new FleetServerHistory(this,
-                    fleetID,
-                    namespace_
+                    fleetID,                    
+                    namespace_                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -96,7 +136,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -109,36 +149,51 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         {
             PathParams["fleetID"] = fleetID;
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Count != null) QueryParams["count"] = Convert.ToString(builder.Count)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
+            if (builder.Reason is not null) QueryParams["reason"] = builder.Reason;
+            if (builder.Region is not null) QueryParams["region"] = builder.Region;
+            if (builder.ServerId is not null) QueryParams["serverId"] = builder.ServerId;
+            if (builder.SortDirection is not null) QueryParams["sortDirection"] = builder.SortDirection;
+            if (builder.Status is not null) QueryParams["status"] = builder.Status;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public FleetServerHistory(
-            string fleetID,
-            string namespace_,
-            long? count,
-            long? offset
+            string fleetID,            
+            string namespace_,            
+            long? count,            
+            long? offset,            
+            string? reason,            
+            string? region,            
+            string? serverId,            
+            string? sortDirection,            
+            string? status            
         )
         {
             PathParams["fleetID"] = fleetID;
             PathParams["namespace"] = namespace_;
-
+            
             if (count != null) QueryParams["count"] = Convert.ToString(count)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
+            if (reason is not null) QueryParams["reason"] = reason;
+            if (region is not null) QueryParams["region"] = region;
+            if (serverId is not null) QueryParams["serverId"] = serverId;
+            if (sortDirection is not null) QueryParams["sortDirection"] = sortDirection;
+            if (status is not null) QueryParams["status"] = status;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -149,10 +204,10 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ApiDSHistoryList? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -165,9 +220,9 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             {
                 return JsonSerializer.Deserialize<Model.ApiDSHistoryList>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

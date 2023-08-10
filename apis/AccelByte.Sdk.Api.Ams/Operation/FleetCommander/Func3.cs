@@ -20,24 +20,24 @@ using AccelByte.Sdk.Api.Ams.Model;
 namespace AccelByte.Sdk.Api.Ams.Operation
 {
     /// <summary>
-    /// BasicHealthCheck
+    /// func3
     /// </summary>
-    public class BasicHealthCheck : AccelByte.Sdk.Core.Operation
+    public class Func3 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static BasicHealthCheckBuilder Builder { get => new BasicHealthCheckBuilder(); }
+        public static Func3Builder Builder { get => new Func3Builder(); }
 
-        public class BasicHealthCheckBuilder
-            : OperationBuilder<BasicHealthCheckBuilder>
+        public class Func3Builder
+            : OperationBuilder<Func3Builder>
         {
 
 
 
 
 
-            internal BasicHealthCheckBuilder() { }
+            internal Func3Builder() { }
 
-            internal BasicHealthCheckBuilder(IAccelByteSdk sdk)
+            internal Func3Builder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -47,10 +47,10 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            public BasicHealthCheck Build(
+            public Func3 Build(
             )
             {
-                BasicHealthCheck op = new BasicHealthCheck(this
+                Func3 op = new Func3(this
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -62,7 +62,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             public void Execute(
             )
             {
-                BasicHealthCheck op = Build(
+                Func3 op = Build(
                 );
 
                 if (_Sdk == null)
@@ -70,56 +70,56 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
-        private BasicHealthCheck(BasicHealthCheckBuilder builder
+        private Func3(Func3Builder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public BasicHealthCheck(
+        public Func3(
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/healthz";
+        public override string Path => "/ams/version";
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)200)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

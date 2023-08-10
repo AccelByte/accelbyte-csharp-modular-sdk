@@ -38,13 +38,13 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
             get { return new Operation.ServerHistory.ServerHistoryBuilder(_sdk); }
         }
         #endregion
-
+        
         public Model.ApiDSHistoryList? FleetServerHistory(FleetServerHistory input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -53,7 +53,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -62,7 +62,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

@@ -15,6 +15,17 @@ namespace AccelByte.Sdk.Api.Ams
     {
         private IAccelByteSdk _Sdk;
 
+        public Wrapper.Operations Operations
+        {
+            get
+            {
+                if (_Operations == null)
+                    _Operations = new Wrapper.Operations(_Sdk);
+                return _Operations;
+            }
+        }
+        private Wrapper.Operations? _Operations = null;
+
         public Wrapper.Account Account
         {
             get
@@ -92,17 +103,6 @@ namespace AccelByte.Sdk.Api.Ams
         }
         private Wrapper.FleetCommander? _FleetCommander = null;
 
-        public Wrapper.Operations Operations
-        {
-            get
-            {
-                if (_Operations == null)
-                    _Operations = new Wrapper.Operations(_Sdk);
-                return _Operations;
-            }
-        }
-        private Wrapper.Operations? _Operations = null;
-
         internal AmsApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<AmsApi>("ams", () =>
             {
                 return new AmsApi(sdk);
-            });
+            });            
         }
     }
 }
