@@ -96,6 +96,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
+
+            public List<Model.UserDLCRecord<T1>>? Execute<T1>(
+                string namespace_,
+                string userId
+            )
+            {
+                GetUserDLC op = Build(
+                    namespace_,
+                    userId
+                );
+
+                if (_Sdk == null)
+                    throw IncompleteComponentException.NoSdkObject;
+
+                var response = _Sdk.RunRequest(op);
+                return op.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+            }
         }
 
         private GetUserDLC(GetUserDLCBuilder builder,
@@ -161,6 +181,25 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             var payloadString = payload.ReadToString();
 
+            throw new HttpResponseException(code, payloadString);
+        }
+
+        public List<Model.UserDLCRecord<T1>>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
+        {
+            if (code == (HttpStatusCode)204)
+            {
+                return null;
+            }
+            else if (code == (HttpStatusCode)201)
+            {
+                return JsonSerializer.Deserialize<List<Model.UserDLCRecord<T1>>>(payload, ResponseJsonOptions);
+            }
+            else if (code == (HttpStatusCode)200)
+            {
+                return JsonSerializer.Deserialize<List<Model.UserDLCRecord<T1>>>(payload, ResponseJsonOptions);
+            }
+
+            var payloadString = payload.ReadToString();
             throw new HttpResponseException(code, payloadString);
         }
     }

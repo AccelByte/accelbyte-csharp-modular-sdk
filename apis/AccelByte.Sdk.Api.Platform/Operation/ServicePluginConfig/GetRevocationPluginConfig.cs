@@ -20,29 +20,29 @@ using AccelByte.Sdk.Api.Platform.Model;
 namespace AccelByte.Sdk.Api.Platform.Operation
 {
     /// <summary>
-    /// deleteLootBoxPluginConfig_1
+    /// getRevocationPluginConfig
     ///
-    /// Delete service plugin config.
+    /// Get revocation plugin config.
     /// Other detail info:
     /// 
-    ///   * Required permission : resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION, action=8 (DELETE)
+    ///   * Required permission : resource= ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION , action=2 (READ)
     /// </summary>
-    public class DeleteLootBoxPluginConfig1 : AccelByte.Sdk.Core.Operation
+    public class GetRevocationPluginConfig : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static DeleteLootBoxPluginConfig1Builder Builder { get => new DeleteLootBoxPluginConfig1Builder(); }
+        public static GetRevocationPluginConfigBuilder Builder { get => new GetRevocationPluginConfigBuilder(); }
 
-        public class DeleteLootBoxPluginConfig1Builder
-            : OperationBuilder<DeleteLootBoxPluginConfig1Builder>
+        public class GetRevocationPluginConfigBuilder
+            : OperationBuilder<GetRevocationPluginConfigBuilder>
         {
 
 
 
 
 
-            internal DeleteLootBoxPluginConfig1Builder() { }
+            internal GetRevocationPluginConfigBuilder() { }
 
-            internal DeleteLootBoxPluginConfig1Builder(IAccelByteSdk sdk)
+            internal GetRevocationPluginConfigBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -52,11 +52,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public DeleteLootBoxPluginConfig1 Build(
+            public GetRevocationPluginConfig Build(
                 string namespace_
             )
             {
-                DeleteLootBoxPluginConfig1 op = new DeleteLootBoxPluginConfig1(this,
+                GetRevocationPluginConfig op = new GetRevocationPluginConfig(this,
                     namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
@@ -66,11 +66,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
-            public void Execute(
+            public Model.RevocationPluginConfigInfo? Execute(
                 string namespace_
             )
             {
-                DeleteLootBoxPluginConfig1 op = Build(
+                GetRevocationPluginConfig op = Build(
                     namespace_
                 );
 
@@ -78,14 +78,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
+                return op.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
             }
         }
 
-        private DeleteLootBoxPluginConfig1(DeleteLootBoxPluginConfig1Builder builder,
+        private GetRevocationPluginConfig(GetRevocationPluginConfigBuilder builder,
             string namespace_
         )
         {
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         }
         #endregion
 
-        public DeleteLootBoxPluginConfig1(
+        public GetRevocationPluginConfig(
             string namespace_
         )
         {
@@ -118,17 +118,25 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override string Path => "/platform/admin/namespaces/{namespace}/revocation/plugins/revocation";
 
-        public override HttpMethod Method => HttpMethod.Delete;
+        public override HttpMethod Method => HttpMethod.Get;
 
         public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };
+        public override List<string> Produces => new() { };
 
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.RevocationPluginConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
-                return;
+                return null;
+            }
+            else if (code == (HttpStatusCode)201)
+            {
+                return JsonSerializer.Deserialize<Model.RevocationPluginConfigInfo>(payload, ResponseJsonOptions);
+            }
+            else if (code == (HttpStatusCode)200)
+            {
+                return JsonSerializer.Deserialize<Model.RevocationPluginConfigInfo>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

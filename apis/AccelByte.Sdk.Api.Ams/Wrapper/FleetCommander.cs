@@ -30,12 +30,13 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
             get { return new Operation.Func3.Func3Builder(_sdk); }
         }
         #endregion
-        
-        public void Func3(Func3 input) {
+
+        public void Func3(Func3 input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

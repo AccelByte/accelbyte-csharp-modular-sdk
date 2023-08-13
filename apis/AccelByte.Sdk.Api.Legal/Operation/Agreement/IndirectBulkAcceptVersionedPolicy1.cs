@@ -23,13 +23,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
     /// indirectBulkAcceptVersionedPolicy_1
     ///
     /// Accepts many legal policy versions all at once. Supply with localized version policy id and userId to accept an agreement. This endpoint used by Authentication Service during new user registration.
-    /// 
-    /// Available Extra Information to return:
-    /// 
-    /// 
-    ///   * userIds : List of userId mapping ( IMPORTANT: GOING TO DEPRECATE )
-    /// 
     /// Other detail info:
+    /// 
     ///   * Required permission : login user
     /// </summary>
     public class IndirectBulkAcceptVersionedPolicy1 : AccelByte.Sdk.Core.Operation
@@ -96,24 +91,6 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-
-            public Model.AcceptAgreementResponse<T1>? Execute<T1>(
-                string userId
-            )
-            {
-                IndirectBulkAcceptVersionedPolicy1 op = Build(
-                    userId
-                );
-
-                if (_Sdk == null)
-                    throw IncompleteComponentException.NoSdkObject;
-
-                var response = _Sdk.RunRequest(op);
-                return op.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-            }
         }
 
         private IndirectBulkAcceptVersionedPolicy1(IndirectBulkAcceptVersionedPolicy1Builder builder,
@@ -175,25 +152,6 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
             var payloadString = payload.ReadToString();
 
-            throw new HttpResponseException(code, payloadString);
-        }
-
-        public Model.AcceptAgreementResponse<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
-        {
-            if (code == (HttpStatusCode)204)
-            {
-                return null;
-            }
-            else if (code == (HttpStatusCode)201)
-            {
-                return JsonSerializer.Deserialize<Model.AcceptAgreementResponse<T1>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.AcceptAgreementResponse<T1>>(payload, ResponseJsonOptions);
-            }
-
-            var payloadString = payload.ReadToString();
             throw new HttpResponseException(code, payloadString);
         }
     }

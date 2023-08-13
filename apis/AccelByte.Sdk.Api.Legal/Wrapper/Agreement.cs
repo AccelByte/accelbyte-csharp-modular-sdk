@@ -53,6 +53,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         {
             get { return new Operation.BulkAcceptVersionedPolicy.BulkAcceptVersionedPolicyBuilder(_sdk); }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public IndirectBulkAcceptVersionedPolicyV2.IndirectBulkAcceptVersionedPolicyV2Builder IndirectBulkAcceptVersionedPolicyV2Op
         {
             get { return new Operation.IndirectBulkAcceptVersionedPolicyV2.IndirectBulkAcceptVersionedPolicyV2Builder(_sdk); }
@@ -126,16 +127,8 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.AcceptAgreementResponse<T1>? BulkAcceptVersionedPolicy<T1>(BulkAcceptVersionedPolicy input)
-        {
-            var response = _sdk.RunRequest(input);
-
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.AcceptAgreementResponse? IndirectBulkAcceptVersionedPolicyV2(IndirectBulkAcceptVersionedPolicyV2 input)
         {
             var response = _sdk.RunRequest(input);
@@ -145,31 +138,12 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.AcceptAgreementResponse<T1>? IndirectBulkAcceptVersionedPolicyV2<T1>(IndirectBulkAcceptVersionedPolicyV2 input)
-        {
-            var response = _sdk.RunRequest(input);
-
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
+#pragma warning restore ab_deprecated_operation
         public Model.AcceptAgreementResponse? IndirectBulkAcceptVersionedPolicy1(IndirectBulkAcceptVersionedPolicy1 input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-
-        public Model.AcceptAgreementResponse<T1>? IndirectBulkAcceptVersionedPolicy1<T1>(IndirectBulkAcceptVersionedPolicy1 input)
-        {
-            var response = _sdk.RunRequest(input);
-
-            return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
                     response.Payload);

@@ -37,6 +37,17 @@ namespace AccelByte.Sdk.Api.Session
         }
         private Wrapper.DSMCDefaultConfiguration? _DSMCDefaultConfiguration = null;
 
+        public Wrapper.EnvironmentVariable EnvironmentVariable
+        {
+            get
+            {
+                if (_EnvironmentVariable == null)
+                    _EnvironmentVariable = new Wrapper.EnvironmentVariable(_Sdk);
+                return _EnvironmentVariable;
+            }
+        }
+        private Wrapper.EnvironmentVariable? _EnvironmentVariable = null;
+
         public Wrapper.ConfigurationTemplate ConfigurationTemplate
         {
             get

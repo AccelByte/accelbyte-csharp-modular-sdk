@@ -26,6 +26,17 @@ namespace AccelByte.Sdk.Api.Match2
         }
         private Wrapper.Operations? _Operations = null;
 
+        public Wrapper.EnvironmentVariables EnvironmentVariables
+        {
+            get
+            {
+                if (_EnvironmentVariables == null)
+                    _EnvironmentVariables = new Wrapper.EnvironmentVariables(_Sdk);
+                return _EnvironmentVariables;
+            }
+        }
+        private Wrapper.EnvironmentVariables? _EnvironmentVariables = null;
+
         public Wrapper.Backfill Backfill
         {
             get

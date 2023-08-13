@@ -21,6 +21,10 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? ExpireAt { get; set; }
 
+        [JsonPropertyName("metadata")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Dictionary<string, object>? Metadata { get; set; }
+
         [JsonPropertyName("origin")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonStringEnum]
@@ -37,6 +41,34 @@ namespace AccelByte.Sdk.Api.Platform.Model
 
     }
 
+    public class CreditRequest<T1> : AccelByte.Sdk.Core.Model
+    {
+        [JsonPropertyName("amount")]
+        public long? Amount { get; set; }
+
+        [JsonPropertyName("expireAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public DateTime? ExpireAt { get; set; }
+
+        [JsonPropertyName("metadata")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public T1? Metadata { get; set; }
+
+        [JsonPropertyName("origin")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public CreditRequestOrigin? Origin { get; set; }
+
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Reason { get; set; }
+
+        [JsonPropertyName("source")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public CreditRequestSource? Source { get; set; }
+
+    }
 
 
     public class CreditRequestOrigin : StringEnum<CreditRequestOrigin>
@@ -91,6 +123,9 @@ namespace AccelByte.Sdk.Api.Platform.Model
     {
         public static readonly CreditRequestSource ACHIEVEMENT
             = new CreditRequestSource("ACHIEVEMENT");
+
+        public static readonly CreditRequestSource CONSUMEENTITLEMENT
+            = new CreditRequestSource("CONSUME_ENTITLEMENT");
 
         public static readonly CreditRequestSource DLC
             = new CreditRequestSource("DLC");

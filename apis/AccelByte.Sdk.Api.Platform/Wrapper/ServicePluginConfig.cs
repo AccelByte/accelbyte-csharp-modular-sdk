@@ -76,17 +76,17 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         {
             get { return new Operation.DeleteServicePluginConfig.DeleteServicePluginConfigBuilder(_sdk); }
         }
-        public GetLootBoxPluginConfig1.GetLootBoxPluginConfig1Builder GetLootBoxPluginConfig1Op
+        public GetRevocationPluginConfig.GetRevocationPluginConfigBuilder GetRevocationPluginConfigOp
         {
-            get { return new Operation.GetLootBoxPluginConfig1.GetLootBoxPluginConfig1Builder(_sdk); }
+            get { return new Operation.GetRevocationPluginConfig.GetRevocationPluginConfigBuilder(_sdk); }
         }
         public UpdateRevocationPluginConfig.UpdateRevocationPluginConfigBuilder UpdateRevocationPluginConfigOp
         {
             get { return new Operation.UpdateRevocationPluginConfig.UpdateRevocationPluginConfigBuilder(_sdk); }
         }
-        public DeleteLootBoxPluginConfig1.DeleteLootBoxPluginConfig1Builder DeleteLootBoxPluginConfig1Op
+        public DeleteRevocationPluginConfig.DeleteRevocationPluginConfigBuilder DeleteRevocationPluginConfigOp
         {
-            get { return new Operation.DeleteLootBoxPluginConfig1.DeleteLootBoxPluginConfig1Builder(_sdk); }
+            get { return new Operation.DeleteRevocationPluginConfig.DeleteRevocationPluginConfigBuilder(_sdk); }
         }
         public UploadRevocationPluginConfigCert.UploadRevocationPluginConfigCertBuilder UploadRevocationPluginConfigCertOp
         {
@@ -211,7 +211,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
 #pragma warning restore ab_deprecated_operation
-        public Model.RevocationPluginConfigInfo? GetLootBoxPluginConfig1(GetLootBoxPluginConfig1 input)
+        public Model.RevocationPluginConfigInfo? GetRevocationPluginConfig(GetRevocationPluginConfig input)
         {
             var response = _sdk.RunRequest(input);
 
@@ -229,7 +229,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteLootBoxPluginConfig1(DeleteLootBoxPluginConfig1 input)
+        public void DeleteRevocationPluginConfig(DeleteRevocationPluginConfig input)
         {
             var response = _sdk.RunRequest(input);
 

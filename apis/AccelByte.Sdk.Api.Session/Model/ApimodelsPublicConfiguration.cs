@@ -42,6 +42,10 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonPropertyName("joinability")]
         public string? Joinability { get; set; }
 
+        [JsonPropertyName("maxActiveSession")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? MaxActiveSession { get; set; }
+
         [JsonPropertyName("maxPlayers")]
         public int? MaxPlayers { get; set; }
 
@@ -51,7 +55,7 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonPropertyName("name")]
         public string? Name { get; set; }
 
-        [JsonPropertyName("native_session_setting")]
+        [JsonPropertyName("nativeSessionSetting")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ModelsNativeSessionSetting? NativeSessionSetting { get; set; }
 

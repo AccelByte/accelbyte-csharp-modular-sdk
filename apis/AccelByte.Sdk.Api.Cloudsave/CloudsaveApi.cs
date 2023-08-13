@@ -26,6 +26,17 @@ namespace AccelByte.Sdk.Api.Cloudsave
         }
         private Wrapper.AdminRecord? _AdminRecord = null;
 
+        public Wrapper.AdminGameBinaryRecord AdminGameBinaryRecord
+        {
+            get
+            {
+                if (_AdminGameBinaryRecord == null)
+                    _AdminGameBinaryRecord = new Wrapper.AdminGameBinaryRecord(_Sdk);
+                return _AdminGameBinaryRecord;
+            }
+        }
+        private Wrapper.AdminGameBinaryRecord? _AdminGameBinaryRecord = null;
+
         public Wrapper.AdminConcurrentRecord AdminConcurrentRecord
         {
             get
@@ -70,6 +81,28 @@ namespace AccelByte.Sdk.Api.Cloudsave
         }
         private Wrapper.AdminPlayerRecord? _AdminPlayerRecord = null;
 
+        public Wrapper.AdminPlayerBinaryRecord AdminPlayerBinaryRecord
+        {
+            get
+            {
+                if (_AdminPlayerBinaryRecord == null)
+                    _AdminPlayerBinaryRecord = new Wrapper.AdminPlayerBinaryRecord(_Sdk);
+                return _AdminPlayerBinaryRecord;
+            }
+        }
+        private Wrapper.AdminPlayerBinaryRecord? _AdminPlayerBinaryRecord = null;
+
+        public Wrapper.PublicGameBinaryRecord PublicGameBinaryRecord
+        {
+            get
+            {
+                if (_PublicGameBinaryRecord == null)
+                    _PublicGameBinaryRecord = new Wrapper.PublicGameBinaryRecord(_Sdk);
+                return _PublicGameBinaryRecord;
+            }
+        }
+        private Wrapper.PublicGameBinaryRecord? _PublicGameBinaryRecord = null;
+
         public Wrapper.ConcurrentRecord ConcurrentRecord
         {
             get
@@ -91,6 +124,17 @@ namespace AccelByte.Sdk.Api.Cloudsave
             }
         }
         private Wrapper.PublicGameRecord? _PublicGameRecord = null;
+
+        public Wrapper.PublicPlayerBinaryRecord PublicPlayerBinaryRecord
+        {
+            get
+            {
+                if (_PublicPlayerBinaryRecord == null)
+                    _PublicPlayerBinaryRecord = new Wrapper.PublicPlayerBinaryRecord(_Sdk);
+                return _PublicPlayerBinaryRecord;
+            }
+        }
+        private Wrapper.PublicPlayerBinaryRecord? _PublicPlayerBinaryRecord = null;
 
         public Wrapper.PublicPlayerRecord PublicPlayerRecord
         {

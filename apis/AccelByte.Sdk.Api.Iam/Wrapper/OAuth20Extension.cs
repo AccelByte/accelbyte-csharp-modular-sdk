@@ -69,6 +69,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.RequestGameTokenResponseV3.RequestGameTokenResponseV3Builder(_sdk); }
         }
+        public PlatformTokenRefreshV3.PlatformTokenRefreshV3Builder PlatformTokenRefreshV3Op
+        {
+            get { return new Operation.PlatformTokenRefreshV3.PlatformTokenRefreshV3Builder(_sdk); }
+        }
         #endregion
 
         public string UserAuthenticationV3(UserAuthenticationV3 input)
@@ -162,6 +166,15 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
         public Model.OauthmodelTokenResponseV3? RequestGameTokenResponseV3(RequestGameTokenResponseV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.OauthmodelPlatformTokenRefreshResponseV3? PlatformTokenRefreshV3(PlatformTokenRefreshV3 input)
         {
             var response = _sdk.RunRequest(input);
 

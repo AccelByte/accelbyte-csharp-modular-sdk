@@ -22,13 +22,12 @@ namespace AccelByte.Sdk.Api.Legal.Operation
     /// <summary>
     /// invalidateUserInfoCache
     ///
-    ///  Important: GOING TO DEPRECATE
-    /// 
     /// Invalidate user info cache in agreement service.
     /// Other detail info:
     /// 
     ///   * Required permission : resource="ADMIN:NAMESPACE:*:LEGAL", action=8 (DELETE)
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class InvalidateUserInfoCache : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -74,6 +73,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
             )
             {

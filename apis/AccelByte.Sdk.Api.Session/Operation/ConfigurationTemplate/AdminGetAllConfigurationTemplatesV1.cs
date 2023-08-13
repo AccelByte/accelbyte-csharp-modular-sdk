@@ -39,6 +39,10 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
             public long? Offset { get; set; }
 
+            public string? Order { get; set; }
+
+            public string? OrderBy { get; set; }
+
 
 
 
@@ -66,6 +70,18 @@ namespace AccelByte.Sdk.Api.Session.Operation
             public AdminGetAllConfigurationTemplatesV1Builder SetOffset(long _offset)
             {
                 Offset = _offset;
+                return this;
+            }
+
+            public AdminGetAllConfigurationTemplatesV1Builder SetOrder(string _order)
+            {
+                Order = _order;
+                return this;
+            }
+
+            public AdminGetAllConfigurationTemplatesV1Builder SetOrderBy(string _orderBy)
+            {
+                OrderBy = _orderBy;
                 return this;
             }
 
@@ -115,6 +131,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Name is not null) QueryParams["name"] = builder.Name;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
+            if (builder.Order is not null) QueryParams["order"] = builder.Order;
+            if (builder.OrderBy is not null) QueryParams["orderBy"] = builder.OrderBy;
 
 
 
@@ -129,7 +147,9 @@ namespace AccelByte.Sdk.Api.Session.Operation
             string namespace_,
             long? limit,
             string? name,
-            long? offset
+            long? offset,
+            string? order,
+            string? orderBy
         )
         {
             PathParams["namespace"] = namespace_;
@@ -137,6 +157,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (name is not null) QueryParams["name"] = name;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
+            if (order is not null) QueryParams["order"] = order;
+            if (orderBy is not null) QueryParams["orderBy"] = orderBy;
 
 
 

@@ -87,22 +87,6 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-
-            public Model.AcceptAgreementResponse<T1>? Execute<T1>(
-            )
-            {
-                BulkAcceptVersionedPolicy op = Build(
-                );
-
-                if (_Sdk == null)
-                    throw IncompleteComponentException.NoSdkObject;
-
-                var response = _Sdk.RunRequest(op);
-                return op.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-            }
         }
 
         private BulkAcceptVersionedPolicy(BulkAcceptVersionedPolicyBuilder builder
@@ -160,25 +144,6 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
             var payloadString = payload.ReadToString();
 
-            throw new HttpResponseException(code, payloadString);
-        }
-
-        public Model.AcceptAgreementResponse<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
-        {
-            if (code == (HttpStatusCode)204)
-            {
-                return null;
-            }
-            else if (code == (HttpStatusCode)201)
-            {
-                return JsonSerializer.Deserialize<Model.AcceptAgreementResponse<T1>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.AcceptAgreementResponse<T1>>(payload, ResponseJsonOptions);
-            }
-
-            var payloadString = payload.ReadToString();
             throw new HttpResponseException(code, payloadString);
         }
     }

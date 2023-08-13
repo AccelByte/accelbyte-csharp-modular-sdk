@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Cloudsave.Model
 {
@@ -24,7 +26,8 @@ namespace AccelByte.Sdk.Api.Cloudsave.Model
         public ModelsCustomFunction? CustomFunction { get; set; }
 
         [JsonPropertyName("extendType")]
-        public string? ExtendType { get; set; }
+        [JsonStringEnum]
+        public ModelsPluginResponseExtendType? ExtendType { get; set; }
 
         [JsonPropertyName("namespace")]
         public string? Namespace { get; set; }
@@ -32,4 +35,25 @@ namespace AccelByte.Sdk.Api.Cloudsave.Model
     }
 
 
+
+    public class ModelsPluginResponseExtendType : StringEnum<ModelsPluginResponseExtendType>
+    {
+        public static readonly ModelsPluginResponseExtendType APP
+            = new ModelsPluginResponseExtendType("APP");
+
+        public static readonly ModelsPluginResponseExtendType CUSTOM
+            = new ModelsPluginResponseExtendType("CUSTOM");
+
+
+        public static implicit operator ModelsPluginResponseExtendType(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ModelsPluginResponseExtendType(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

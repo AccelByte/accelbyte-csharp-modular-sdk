@@ -15,34 +15,35 @@ using System.IO;
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Core.Net.Http;
 
-using AccelByte.Sdk.Api.Platform.Model;
+using AccelByte.Sdk.Api.Cloudsave.Model;
 
-namespace AccelByte.Sdk.Api.Platform.Operation
+namespace AccelByte.Sdk.Api.Cloudsave.Operation
 {
     /// <summary>
-    /// getLootBoxPluginConfig_1
+    /// bulkGetMyBinaryRecordV1
     ///
-    /// Get revocation plugin config.
-    /// Other detail info:
+    /// Required valid user token
+    /// Required scope: `social`
     /// 
-    ///   * Required permission : resource= ADMIN:NAMESPACE:{namespace}:PLUGIN:REVOCATION , action=2 (READ)
+    /// Retrieve player record key and payload in bulk under given namespace.
+    /// Maximum bulk key limit per request 20
     /// </summary>
-    public class GetLootBoxPluginConfig1 : AccelByte.Sdk.Core.Operation
+    public class BulkGetMyBinaryRecordV1 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static GetLootBoxPluginConfig1Builder Builder { get => new GetLootBoxPluginConfig1Builder(); }
+        public static BulkGetMyBinaryRecordV1Builder Builder { get => new BulkGetMyBinaryRecordV1Builder(); }
 
-        public class GetLootBoxPluginConfig1Builder
-            : OperationBuilder<GetLootBoxPluginConfig1Builder>
+        public class BulkGetMyBinaryRecordV1Builder
+            : OperationBuilder<BulkGetMyBinaryRecordV1Builder>
         {
 
 
 
 
 
-            internal GetLootBoxPluginConfig1Builder() { }
+            internal BulkGetMyBinaryRecordV1Builder() { }
 
-            internal GetLootBoxPluginConfig1Builder(IAccelByteSdk sdk)
+            internal BulkGetMyBinaryRecordV1Builder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -52,11 +53,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public GetLootBoxPluginConfig1 Build(
+            public BulkGetMyBinaryRecordV1 Build(
+                ModelsBulkGetPlayerRecordsRequest body,
                 string namespace_
             )
             {
-                GetLootBoxPluginConfig1 op = new GetLootBoxPluginConfig1(this,
+                BulkGetMyBinaryRecordV1 op = new BulkGetMyBinaryRecordV1(this,
+                    body,
                     namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
@@ -66,11 +69,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
-            public Model.RevocationPluginConfigInfo? Execute(
+            public Model.ModelsBulkGetPlayerBinaryRecordResponse? Execute(
+                ModelsBulkGetPlayerRecordsRequest body,
                 string namespace_
             )
             {
-                GetLootBoxPluginConfig1 op = Build(
+                BulkGetMyBinaryRecordV1 op = Build(
+                    body,
                     namespace_
                 );
 
@@ -85,7 +90,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetLootBoxPluginConfig1(GetLootBoxPluginConfig1Builder builder,
+        private BulkGetMyBinaryRecordV1(BulkGetMyBinaryRecordV1Builder builder,
+            ModelsBulkGetPlayerRecordsRequest body,
             string namespace_
         )
         {
@@ -95,14 +101,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
+            BodyParams = body;
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public GetLootBoxPluginConfig1(
-            string namespace_
+        public BulkGetMyBinaryRecordV1(
+            string namespace_,
+            Model.ModelsBulkGetPlayerRecordsRequest body
         )
         {
             PathParams["namespace"] = namespace_;
@@ -111,20 +119,21 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
+            BodyParams = body;
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/platform/admin/namespaces/{namespace}/revocation/plugins/revocation";
+        public override string Path => "/cloudsave/v1/namespaces/{namespace}/users/me/binaries/bulk";
 
-        public override HttpMethod Method => HttpMethod.Get;
+        public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { };
+        public override List<string> Produces => new() { "application/json" };
 
-        public Model.RevocationPluginConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.ModelsBulkGetPlayerBinaryRecordResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -132,11 +141,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.RevocationPluginConfigInfo>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ModelsBulkGetPlayerBinaryRecordResponse>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.RevocationPluginConfigInfo>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ModelsBulkGetPlayerBinaryRecordResponse>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

@@ -68,6 +68,10 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
     /// 
     /// 
     /// Default maximum payload size is 1MB
+    /// 
+    /// 
+    /// 
+    /// - **ClientTimestamp (optional)**: Timestamp of the event captured by the client SDK.
     /// </summary>
     public class ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost : AccelByte.Sdk.Core.Operation
     {

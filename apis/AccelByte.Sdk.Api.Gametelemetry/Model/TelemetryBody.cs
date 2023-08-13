@@ -12,6 +12,10 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Model
 {
     public class TelemetryBody : AccelByte.Sdk.Core.Model
     {
+        [JsonPropertyName("ClientTimestamp")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public DateTime? ClientTimestamp { get; set; }
+
         [JsonPropertyName("EventId")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? EventId { get; set; }
@@ -33,6 +37,10 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Model
 
     public class TelemetryBody<T1> : AccelByte.Sdk.Core.Model
     {
+        [JsonPropertyName("ClientTimestamp")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public DateTime? ClientTimestamp { get; set; }
+
         [JsonPropertyName("EventId")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? EventId { get; set; }

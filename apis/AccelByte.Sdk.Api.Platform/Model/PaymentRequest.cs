@@ -17,6 +17,10 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonPropertyName("amount")]
         public long? Amount { get; set; }
 
+        [JsonPropertyName("metadata")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Dictionary<string, object>? Metadata { get; set; }
+
         [JsonPropertyName("walletPlatform")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonStringEnum]
@@ -24,6 +28,21 @@ namespace AccelByte.Sdk.Api.Platform.Model
 
     }
 
+    public class PaymentRequest<T1> : AccelByte.Sdk.Core.Model
+    {
+        [JsonPropertyName("amount")]
+        public long? Amount { get; set; }
+
+        [JsonPropertyName("metadata")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public T1? Metadata { get; set; }
+
+        [JsonPropertyName("walletPlatform")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public PaymentRequestWalletPlatform? WalletPlatform { get; set; }
+
+    }
 
 
     public class PaymentRequestWalletPlatform : StringEnum<PaymentRequestWalletPlatform>
