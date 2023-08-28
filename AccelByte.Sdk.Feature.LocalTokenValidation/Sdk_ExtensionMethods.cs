@@ -30,4 +30,13 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
             return builder;
         }
     }
+
+    public static class Sdk_ExtensionMethods
+    {
+        public static AccessTokenPayload? ParseAccessToken(this IAccelByteSdk sdk, string accessToken, bool validateFirst)
+        {
+            var validator = new LocalTokenValidator();
+            return validator.ParseAccessToken(sdk, accessToken, validateFirst);
+        }
+    }
 }

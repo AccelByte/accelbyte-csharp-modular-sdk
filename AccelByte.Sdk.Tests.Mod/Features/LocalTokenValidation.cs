@@ -4,90 +4,32 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Net;
-using System.Net.Http;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
 using NUnit.Framework;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Api;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Core.Repository;
-using AccelByte.Sdk.Core.Client;
-
+using AccelByte.Sdk.Core.Net.Http;
+using AccelByte.Sdk.Authentication;
+using AccelByte.Sdk.Api;
+using AccelByte.Sdk.Api.Legal.Model;
+using AccelByte.Sdk.Tests.Mod.Repository;
 using AccelByte.Sdk.Feature.LocalTokenValidation;
-using System.Threading;
 
-namespace AccelByte.Sdk.Tests.Integration
+namespace AccelByte.Sdk.Tests.Mod.Features
 {
-    [TestFixture(Category = "FluentIntegration")]
+    [TestFixture(Category = "ServiceIntegration")]
     [Explicit]
-    public class TokenValidationTests
+    public class LocalTokenValidation
     {
         [Test]
-        public void TokenValidationTestUsingDefaultValidator()
+        public void TokenValidationTest()
         {
-            using AccelByteSDK sdk = AccelByteSDK.Builder
-                .UseDefaultHttpClient()
-                .SetConfigRepository(IntegrationTestConfigRepository.Admin)
-                .UseDefaultTokenRepository()
-                .UseDefaultCredentialRepository()
-                .UseDefaultTokenValidator()
-                .EnableLog()
-                .Build();
-
-            string accessToken = String.Empty;
-            sdk.LoginClient((tokenResp) =>
-            {
-                accessToken = tokenResp.AccessToken!;
-            });
-
-            Thread.Sleep(2000);
-
-            bool b = sdk.ValidateToken(accessToken);
-            Assert.IsTrue(b);
-
-            sdk.Iam.OAuth20.TokenRevocationV3Op.Execute(accessToken);
-            Thread.Sleep(3000);
-
-            b = sdk.ValidateToken(accessToken);
-            Assert.IsFalse(b);
-        }
-
-        [Test]
-        public void PermissionValidationTestUsingDefaultValidator()
-        {
-            using AccelByteSDK sdk = AccelByteSDK.Builder
-                .UseDefaultHttpClient()
-                .SetConfigRepository(IntegrationTestConfigRepository.Admin)
-                .UseDefaultTokenRepository()
-                .UseDefaultCredentialRepository()
-                .UseDefaultTokenValidator()
-                .EnableLog()
-                .Build();
-
-            string accessToken = String.Empty;
-            sdk.LoginClient((tokenResp) =>
-            {
-                accessToken = tokenResp.AccessToken!;
-            });
-
-            Thread.Sleep(2000);
-
-            string tPermission = $"NAMESPACE:{sdk.Namespace}:PROFILE";
-            int tAction = 15;
-
-            bool b = sdk.ValidateToken(accessToken, tPermission, tAction);
-            Assert.IsTrue(b);
-        }
-
-
-        [Test]
-        public void TokenValidationTestUsingLocalValidator()
-        {
-            using AccelByteSDK sdk = AccelByteSDK.Builder
+            using IAccelByteSdk sdk = AccelByteSdk.Builder
                 .UseDefaultHttpClient()
                 .SetConfigRepository(IntegrationTestConfigRepository.Admin)
                 .UseDefaultTokenRepository()
@@ -108,7 +50,7 @@ namespace AccelByte.Sdk.Tests.Integration
             bool b = sdk.ValidateToken(accessToken);
             Assert.IsTrue(b);
 
-            sdk.Iam.OAuth20.TokenRevocationV3Op.Execute(accessToken);
+            sdk.GetIamApi().OAuth20.TokenRevocationV3Op.Execute(accessToken);
             Thread.Sleep(3000);
 
             b = sdk.ValidateToken(accessToken);
@@ -116,9 +58,9 @@ namespace AccelByte.Sdk.Tests.Integration
         }
 
         [Test]
-        public void PermissionValidationTestUsingLocalValidator()
+        public void PermissionValidationTest()
         {
-            using AccelByteSDK sdk = AccelByteSDK.Builder
+            using IAccelByteSdk sdk = AccelByteSdk.Builder
                 .UseDefaultHttpClient()
                 .SetConfigRepository(IntegrationTestConfigRepository.Admin)
                 .UseDefaultTokenRepository()
@@ -146,7 +88,7 @@ namespace AccelByte.Sdk.Tests.Integration
         [Test]
         public void ParseAccessTokenNoValidationTest()
         {
-            using AccelByteSDK sdk = AccelByteSDK.Builder
+            using IAccelByteSdk sdk = AccelByteSdk.Builder
                 .UseDefaultHttpClient()
                 .SetConfigRepository(IntegrationTestConfigRepository.Admin)
                 .UseDefaultTokenRepository()

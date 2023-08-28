@@ -84,6 +84,9 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
         [JsonPropertyName("namespace")]
         public string? Namespace { get; set; } = null;
 
+        [JsonPropertyName("parent_namespace")]
+        public string? ParentNamespace { get; set; } = null;
+
         [JsonPropertyName("namespace_roles")]
         public List<Types.Role>? NamespaceRoles { get; set; }
 
@@ -95,6 +98,15 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
 
         [JsonPropertyName("scope")]
         public string? Scope { get; set; } = null;
+
+        [JsonPropertyName("sub")]
+        public string? Sub { get; set; } = null;
+
+        [JsonPropertyName("union_id")]
+        public string? UnionId { get; set; } = null;
+
+        [JsonPropertyName("union_namespace")]
+        public string? UnionNamespace { get; set; } = null;
 
         public static AccessTokenPayload FromToken(JwtSecurityToken token)
         {
