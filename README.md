@@ -8,14 +8,28 @@ This SDK was generated from OpenAPI spec included in the [spec](spec) directory.
 
 This SDK requires .NET 6.0 SDK to be installed.
 
-## Adding to Your Project
-
-```
-cd /path/to/your_solution/your_project
-dotnet add package AccelByte.Sdk
-```
-
 ## Usage
+
+```bash
+# always include these package to use AccelByte .NET SDK
+$ dotnet add package AccelByte.Sdk.Abstractions
+$ dotnet add package AccelByte.Sdk.Core
+
+# include this package to do authentication to AGS
+$ dotnet add package AccelByte.Sdk.Authentication
+
+# feature packages, these are optional
+$ dotnet add package AccelByte.Sdk.Feature.AutoRefreshToken
+$ dotnet add package AccelByte.Sdk.Feature.LocalTokenValidation
+
+# Api packages. You can include only one or more packages depending on your need.
+$ dotnet add package AccelByte.Sdk.Api.<ApiName>
+
+# Compatibility layer. Use this package to enable compatibility layer with monolithic sdk version.
+$ dotnet add package AccelByte.Sdk.Api.Compat
+```
+
+See the list of api packages [here](apis/).
 
 ### Environment Variables
 
@@ -68,41 +82,6 @@ if (!login)
 ## Interacting with a Service Endpoint
 
 As an example, we will get current user profile info using [getMyProfileInfo](https://demo.accelbyte.io/basic/apidocs/#/UserProfile/getMyProfileInfo) endpoint available in [basic](https://demo.accelbyte.io/basic/apidocs) service.
-
-```csharp
-//Add basic service model namespace
-using AccelByte.Sdk.Api.Basic.Model;
-
-// Login using username and password
-
-bool login = sdk.LoginUser("myUsername", "myPassword");
-if (!login)
-{
-    Console.WriteLine("Login failed");
-}
-
-// Instantiate UserProfile wrapper class which is part of basic service
-
-UserProfile userProfile = new UserProfile(sdk);
-
-try
-{
-    // Make a call to getMyProfileInfo endpoint
-    UserProfilePrivateInfo? response = userProfile.GetMyProfileInfo(
-        GetMyProfileInfo.Builder
-        .Build(sdk.Namespace));
-
-    Console.WriteLine(response.UserId); // Success response
-}
-catch (HttpResponseException e)
-{
-    Console.WriteLine(e.Message);
-}
-```
-
-## Interacting with a Service Endpoint (alternative)
-
-As an example, we will get current user profile info using [getMyProfileInfo](https://demo.accelbyte.io/basic/apidocs/#/UserProfile/getMyProfileInfo) endpoint available in [basic](https://demo.accelbyte.io/basic/apidocs) service with fluent interface.
 
 ```csharp
 //Add api namespace
@@ -245,7 +224,7 @@ IAccelByteSdk sdk = AccelByteSdk.Builder
 NOTE: Do not use `.UseAutoTokenRefresh()` together with `.UseScheduledTokenRefresh()`. It will introduce unnecessary overhead and possibility of unexpected behaviour.
 
 ## Local Token Validation
-Local token validation is available since version 0.27. Currently only support for oauth client token.
+Enable this feature to use local token validation instead of default token validation. Token validation and parse access token can support all access token type (user, client, or platform) while permission validation only support for oauth client token only.
 To enable it, include `AccelByte.Sdk.Feature.LocalTokenValidation` and instantiate the sdk with following code.
 ```csharp
 //Add core namespace
@@ -276,8 +255,18 @@ Or, if you need to validate permission and action, use following method.
 bool isValid = sdk.ValidateToken(accessTokenStr, permissionStr, actionInt);
 ```
 
+If you only want to parse the access token.
+```csharp
+var payload = sdk.ParseAccessToken(accessTokenStr, false);
+```
+Or, you want to validate the token first before parse it.
+```csharp
+var payload = sdk.ParseAccessToken('<access token>', true);
+//payload will be null if the access token is invalid.
+```
+
 ## Operation with Generic Response
-Since 0.28, C# Extend SDK enable overloaded `ParseOperation` method with generic data type that applies to almost all operations with response model which has one or more object data type in it.
+C# Extend SDK enable overloaded `ParseOperation` method with generic data type that applies to almost all operations with response model which has one or more object data type in it.
 For example:
 ```csharp
 using AccelByte.Sdk.Api.Cloudsave.Model;
@@ -296,7 +285,7 @@ GameRecordExample myGameRecord = new GameRecordExample()
     }
 };
 
-ModelsGameRecordResponse<GameRecordExample>? response = sdk.Cloudsave.PublicGameRecord.PostGameRecordHandlerV1Op
+ModelsGameRecordResponse<GameRecordExample>? response = sdk.GetCloudsaveApi().PublicGameRecord.PostGameRecordHandlerV1Op
     .Execute<GameRecordExample>(myGameRecord, "test_record", sdk.Namespace);
 ```
 The list of which endpoints that support it can be found in [here](../docs/operations/)
