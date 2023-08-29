@@ -59,9 +59,9 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             )
             {
                 PublicGetAchievement op = new PublicGetAchievement(this,
-                    achievementCode,                    
-                    namespace_,                    
-                    language                    
+                    achievementCode,
+                    namespace_,
+                    language
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -123,33 +123,33 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         {
             PathParams["achievementCode"] = achievementCode;
             PathParams["namespace"] = namespace_;
-            
-            if (language is not null) QueryParams["language"] = language;
-            
 
-            
-            
-            
+            if (language is not null) QueryParams["language"] = language;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PublicGetAchievement(
-            string achievementCode,            
-            string namespace_,            
-            string language            
+            string achievementCode,
+            string namespace_,
+            string language
         )
         {
             PathParams["achievementCode"] = achievementCode;
             PathParams["namespace"] = namespace_;
-            
-            if (language is not null) QueryParams["language"] = language;
-            
 
-            
-            
-            
+            if (language is not null) QueryParams["language"] = language;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -160,10 +160,10 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ModelsPublicAchievementResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -176,18 +176,18 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsPublicAchievementResponse>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
 
         public Model.ModelsPublicAchievementResponse<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
-            }            
+            }
             else if (code == (HttpStatusCode)201)
             {
                 return JsonSerializer.Deserialize<Model.ModelsPublicAchievementResponse<T1>>(payload, ResponseJsonOptions);
@@ -196,7 +196,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsPublicAchievementResponse<T1>>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
             throw new HttpResponseException(code, payloadString);
         }

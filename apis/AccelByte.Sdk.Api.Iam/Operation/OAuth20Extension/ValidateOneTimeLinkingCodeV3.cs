@@ -56,7 +56,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 ValidateOneTimeLinkingCodeV3 op = new ValidateOneTimeLinkingCodeV3(this,
-                    oneTimeLinkCode                    
+                    oneTimeLinkCode
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -78,7 +78,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -88,28 +88,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string oneTimeLinkCode
         )
         {
-            
-            
+
+
             if (oneTimeLinkCode is not null) FormParams["oneTimeLinkCode"] = oneTimeLinkCode;
 
-            
-            
-            
+
+
+
 
         }
         #endregion
 
         public ValidateOneTimeLinkingCodeV3(
-            string oneTimeLinkCode            
+            string oneTimeLinkCode
         )
         {
-            
-            
+
+
             if (oneTimeLinkCode is not null) FormParams["oneTimeLinkCode"] = oneTimeLinkCode;
 
-            
-            
-            
+
+
+
 
         }
 
@@ -119,10 +119,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.OauthmodelOneTimeLinkingCodeValidationResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -135,9 +135,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 return JsonSerializer.Deserialize<Model.OauthmodelOneTimeLinkingCodeValidationResponse>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

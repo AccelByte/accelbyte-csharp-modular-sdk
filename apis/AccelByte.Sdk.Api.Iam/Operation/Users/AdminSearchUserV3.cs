@@ -179,7 +179,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminSearchUserV3 op = new AdminSearchUserV3(this,
-                    namespace_                    
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -201,7 +201,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -212,7 +212,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.By is not null) QueryParams["by"] = builder.By;
             if (builder.EndDate is not null) QueryParams["endDate"] = builder.EndDate;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
@@ -221,30 +221,30 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (builder.PlatformId is not null) QueryParams["platformId"] = builder.PlatformId;
             if (builder.Query is not null) QueryParams["query"] = builder.Query;
             if (builder.StartDate is not null) QueryParams["startDate"] = builder.StartDate;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public AdminSearchUserV3(
-            string namespace_,            
-            string? by,            
-            string? endDate,            
-            long? limit,            
-            long? offset,            
-            string? platformBy,            
-            string? platformId,            
-            string? query,            
-            string? startDate            
+            string namespace_,
+            string? by,
+            string? endDate,
+            long? limit,
+            long? offset,
+            string? platformBy,
+            string? platformId,
+            string? query,
+            string? startDate
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (by is not null) QueryParams["by"] = by;
             if (endDate is not null) QueryParams["endDate"] = endDate;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
@@ -253,11 +253,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (platformId is not null) QueryParams["platformId"] = platformId;
             if (query is not null) QueryParams["query"] = query;
             if (startDate is not null) QueryParams["startDate"] = startDate;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -268,10 +268,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ModelSearchUsersResponseWithPaginationV3? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -284,9 +284,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelSearchUsersResponseWithPaginationV3>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

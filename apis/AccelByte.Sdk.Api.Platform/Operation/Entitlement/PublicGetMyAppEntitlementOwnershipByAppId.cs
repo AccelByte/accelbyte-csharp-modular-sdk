@@ -61,8 +61,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicGetMyAppEntitlementOwnershipByAppId op = new PublicGetMyAppEntitlementOwnershipByAppId(this,
-                    namespace_,                    
-                    appId                    
+                    namespace_,
+                    appId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -98,31 +98,31 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (appId is not null) QueryParams["appId"] = appId;
-            
 
-            
-            
-            
+            if (appId is not null) QueryParams["appId"] = appId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PublicGetMyAppEntitlementOwnershipByAppId(
-            string namespace_,            
-            string appId            
+            string namespace_,
+            string appId
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (appId is not null) QueryParams["appId"] = appId;
-            
 
-            
-            
-            
+            if (appId is not null) QueryParams["appId"] = appId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -131,12 +131,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.Ownership? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -149,9 +149,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.Ownership>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

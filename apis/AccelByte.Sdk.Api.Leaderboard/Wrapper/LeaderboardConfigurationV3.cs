@@ -62,13 +62,13 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
             get { return new Operation.GetLeaderboardConfigurationPublicV3.GetLeaderboardConfigurationPublicV3Builder(_sdk); }
         }
         #endregion
-        
+
         public Model.ModelsGetAllLeaderboardConfigsRespV3? GetLeaderboardConfigurationsAdminV3(GetLeaderboardConfigurationsAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -104,23 +104,25 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteLeaderboardConfigurationAdminV3(DeleteLeaderboardConfigurationAdminV3 input) {
+        public void DeleteLeaderboardConfigurationAdminV3(DeleteLeaderboardConfigurationAdminV3 input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void HardDeleteLeaderboardAdminV3(HardDeleteLeaderboardAdminV3 input) {
+        public void HardDeleteLeaderboardAdminV3(HardDeleteLeaderboardAdminV3 input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -129,7 +131,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -138,7 +140,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

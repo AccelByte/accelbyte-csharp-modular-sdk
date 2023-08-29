@@ -36,7 +36,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// 
     ///           * Substitute endpoint: /iam/v4/admin/roles/{roleId}/permissions [DELETE]
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class DeleteRolePermission : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -69,9 +69,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 DeleteRolePermission op = new DeleteRolePermission(this,
-                    action,                    
-                    resource,                    
-                    roleId                    
+                    action,
+                    resource,
+                    roleId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 long action,
                 string resource,
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -113,32 +113,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["action"] = Convert.ToString(action);
             PathParams["resource"] = resource;
             PathParams["roleId"] = roleId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public DeleteRolePermission(
-            long action,            
-            string resource,            
-            string roleId            
+            long action,
+            string resource,
+            string roleId
         )
         {
             PathParams["action"] = Convert.ToString(action);
             PathParams["resource"] = resource;
             PathParams["roleId"] = roleId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -149,17 +149,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

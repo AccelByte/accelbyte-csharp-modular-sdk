@@ -196,7 +196,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<UgcApi>("ugc", () =>
             {
                 return new UgcApi(sdk);
-            });            
+            });
         }
     }
 }

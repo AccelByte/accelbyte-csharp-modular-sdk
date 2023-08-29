@@ -122,7 +122,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             )
             {
                 ListTickets op = new ListTickets(this,
-                    namespace_                    
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -144,7 +144,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -155,7 +155,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Category is not null) QueryParams["category"] = builder.Category;
             if (builder.ExtensionCategory is not null) QueryParams["extensionCategory"] = builder.ExtensionCategory;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
@@ -164,30 +164,30 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             if (builder.ReportedUserId is not null) QueryParams["reportedUserId"] = builder.ReportedUserId;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy;
             if (builder.Status is not null) QueryParams["status"] = builder.Status;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public ListTickets(
-            string namespace_,            
-            string? category,            
-            string? extensionCategory,            
-            long? limit,            
-            long? offset,            
-            string? order,            
-            string? reportedUserId,            
-            string? sortBy,            
-            string? status            
+            string namespace_,
+            string? category,
+            string? extensionCategory,
+            long? limit,
+            long? offset,
+            string? order,
+            string? reportedUserId,
+            string? sortBy,
+            string? status
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (category is not null) QueryParams["category"] = category;
             if (extensionCategory is not null) QueryParams["extensionCategory"] = extensionCategory;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
@@ -196,11 +196,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             if (reportedUserId is not null) QueryParams["reportedUserId"] = reportedUserId;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy;
             if (status is not null) QueryParams["status"] = status;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -211,10 +211,10 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.RestapiTicketListResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -227,9 +227,9 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             {
                 return JsonSerializer.Deserialize<Model.RestapiTicketListResponse>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

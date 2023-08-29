@@ -30,13 +30,13 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
             get { return new Operation.AddDownloadCount.AddDownloadCountBuilder(_sdk); }
         }
         #endregion
-        
+
         public Model.ModelsAddDownloadCountResponse? AddDownloadCount(AddDownloadCount input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

@@ -88,8 +88,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 RetrieveAllUsersByPolicyVersion1 op = new RetrieveAllUsersByPolicyVersion1(this,
-                    namespace_,                    
-                    policyVersionId                    
+                    namespace_,
+                    policyVersionId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -125,43 +125,43 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.ConvertGameUserId != null) QueryParams["convertGameUserId"] = Convert.ToString(builder.ConvertGameUserId)!;
             if (builder.Keyword is not null) QueryParams["keyword"] = builder.Keyword;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (policyVersionId is not null) QueryParams["policyVersionId"] = policyVersionId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public RetrieveAllUsersByPolicyVersion1(
-            string namespace_,            
-            bool? convertGameUserId,            
-            string? keyword,            
-            int? limit,            
-            int? offset,            
-            string policyVersionId            
+            string namespace_,
+            bool? convertGameUserId,
+            string? keyword,
+            int? limit,
+            int? offset,
+            string policyVersionId
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (convertGameUserId != null) QueryParams["convertGameUserId"] = Convert.ToString(convertGameUserId)!;
             if (keyword is not null) QueryParams["keyword"] = keyword;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (policyVersionId is not null) QueryParams["policyVersionId"] = policyVersionId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -170,12 +170,12 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.PagedRetrieveUserAcceptedAgreementResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -188,9 +188,9 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             {
                 return JsonSerializer.Deserialize<Model.PagedRetrieveUserAcceptedAgreementResponse>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

@@ -125,8 +125,8 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
             )
             {
                 GetPublicEditHistory op = new GetPublicEditHistory(this,
-                    namespace_,                    
-                    userId                    
+                    namespace_,
+                    userId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -150,7 +150,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -163,45 +163,45 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (builder.EndDate is not null) QueryParams["endDate"] = builder.EndDate;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.PageSize != null) QueryParams["pageSize"] = Convert.ToString(builder.PageSize)!;
             if (builder.StartDate is not null) QueryParams["startDate"] = builder.StartDate;
             if (builder.Type is not null) QueryParams["type"] = builder.Type;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GetPublicEditHistory(
-            string namespace_,            
-            string userId,            
-            string? endDate,            
-            long? offset,            
-            long? pageSize,            
-            string? startDate,            
-            string? type            
+            string namespace_,
+            string userId,
+            string? endDate,
+            long? offset,
+            long? pageSize,
+            string? startDate,
+            string? type
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (endDate is not null) QueryParams["endDate"] = endDate;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (pageSize != null) QueryParams["pageSize"] = Convert.ToString(pageSize)!;
             if (startDate is not null) QueryParams["startDate"] = startDate;
             if (type is not null) QueryParams["type"] = type;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -210,12 +210,12 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ModelsEventResponseV2? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -228,9 +228,9 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsEventResponseV2>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

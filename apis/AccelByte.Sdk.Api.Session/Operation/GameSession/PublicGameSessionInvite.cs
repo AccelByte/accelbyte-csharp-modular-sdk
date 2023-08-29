@@ -61,9 +61,9 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 PublicGameSessionInvite op = new PublicGameSessionInvite(this,
-                    body,                    
-                    namespace_,                    
-                    sessionId                    
+                    body,
+                    namespace_,
+                    sessionId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -103,33 +103,33 @@ namespace AccelByte.Sdk.Api.Session.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["sessionId"] = sessionId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PublicGameSessionInvite(
-            string namespace_,            
-            string sessionId,            
-            Model.ApimodelsSessionInviteRequest body            
+            string namespace_,
+            string sessionId,
+            Model.ApimodelsSessionInviteRequest body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["sessionId"] = sessionId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -140,17 +140,17 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)201)
             {
                 return;
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

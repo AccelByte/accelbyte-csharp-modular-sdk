@@ -78,37 +78,40 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
             get { return new Operation.PublicGeneratePersonalDataURL.PublicGeneratePersonalDataURLBuilder(_sdk); }
         }
         #endregion
-        
+
         public List<string>? GetAdminEmailConfiguration(GetAdminEmailConfiguration input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void UpdateAdminEmailConfiguration(UpdateAdminEmailConfiguration input) {
+        public void UpdateAdminEmailConfiguration(UpdateAdminEmailConfiguration input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void SaveAdminEmailConfiguration(SaveAdminEmailConfiguration input) {
+        public void SaveAdminEmailConfiguration(SaveAdminEmailConfiguration input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteAdminEmailConfiguration(DeleteAdminEmailConfiguration input) {
+        public void DeleteAdminEmailConfiguration(DeleteAdminEmailConfiguration input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -117,7 +120,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -126,7 +129,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -135,15 +138,16 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminCancelUserPersonalDataRequest(AdminCancelUserPersonalDataRequest input) {
+        public void AdminCancelUserPersonalDataRequest(AdminCancelUserPersonalDataRequest input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -152,7 +156,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -161,7 +165,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -170,15 +174,16 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicCancelUserPersonalDataRequest(PublicCancelUserPersonalDataRequest input) {
+        public void PublicCancelUserPersonalDataRequest(PublicCancelUserPersonalDataRequest input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -187,7 +192,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

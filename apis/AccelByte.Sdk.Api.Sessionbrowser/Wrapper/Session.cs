@@ -106,13 +106,13 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             get { return new Operation.GetRecentPlayer.GetRecentPlayerBuilder(_sdk); }
         }
         #endregion
-        
+
         public Model.ModelsSessionQueryResponse? AdminQuerySession(AdminQuerySession input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -157,7 +157,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -166,7 +166,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -175,7 +175,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -184,7 +184,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -193,7 +193,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -202,7 +202,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -211,7 +211,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -220,7 +220,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -229,7 +229,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -238,7 +238,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -247,7 +247,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -256,7 +256,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -265,7 +265,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -274,7 +274,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -283,7 +283,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class CreditRequestSource : StringEnum<CreditRequestSource>
     {
@@ -174,5 +174,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 }

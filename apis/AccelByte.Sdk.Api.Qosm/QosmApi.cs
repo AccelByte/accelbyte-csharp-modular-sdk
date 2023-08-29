@@ -64,7 +64,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<QosmApi>("qosm", () =>
             {
                 return new QosmApi(sdk);
-            });            
+            });
         }
     }
 }

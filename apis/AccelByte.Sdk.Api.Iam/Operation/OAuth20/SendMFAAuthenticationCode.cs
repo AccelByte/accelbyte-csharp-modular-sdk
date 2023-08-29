@@ -60,9 +60,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 SendMFAAuthenticationCode op = new SendMFAAuthenticationCode(this,
-                    clientId,                    
-                    factor,                    
-                    mfaToken                    
+                    clientId,
+                    factor,
+                    mfaToken
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -100,35 +100,35 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string mfaToken
         )
         {
-            
-            
+
+
             if (clientId is not null) FormParams["clientId"] = clientId;
             if (factor is not null) FormParams["factor"] = factor;
             if (mfaToken is not null) FormParams["mfaToken"] = mfaToken;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public SendMFAAuthenticationCode(
-            string clientId,            
-            string factor,            
-            string mfaToken            
+            string clientId,
+            string factor,
+            string mfaToken
         )
         {
-            
-            
+
+
             if (clientId is not null) FormParams["clientId"] = clientId;
             if (factor is not null) FormParams["factor"] = factor;
             if (mfaToken is not null) FormParams["mfaToken"] = mfaToken;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -139,17 +139,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

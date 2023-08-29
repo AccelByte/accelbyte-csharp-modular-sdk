@@ -64,9 +64,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicWebLinkPlatformEstablish op = new PublicWebLinkPlatformEstablish(this,
-                    namespace_,                    
-                    platformId,                    
-                    state                    
+                    namespace_,
+                    platformId,
+                    state
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -106,14 +106,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
-            
+
             if (builder.Code is not null) QueryParams["code"] = builder.Code;
             if (state is not null) QueryParams["state"] = state;
-            
 
-            
-            
-            
+
+
+
+
             LocationQuery = "PLACEHOLDER";
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
@@ -121,22 +121,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicWebLinkPlatformEstablish(
-            string namespace_,            
-            string platformId,            
-            string? code,            
-            string state            
+            string namespace_,
+            string platformId,
+            string? code,
+            string state
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
-            
+
             if (code is not null) QueryParams["code"] = code;
             if (state is not null) QueryParams["state"] = state;
-            
 
-            
-            
-            
+
+
+
+
             LocationQuery = "PLACEHOLDER";
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
@@ -146,19 +146,19 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public string ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var payloadString = payload.ReadToString();
-            
+
             if (code == (HttpStatusCode)302)
             {
-              return payloadString;
+                return payloadString;
             }
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

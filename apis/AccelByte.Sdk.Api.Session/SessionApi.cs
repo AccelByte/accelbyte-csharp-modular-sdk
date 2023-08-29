@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<SessionApi>("session", () =>
             {
                 return new SessionApi(sdk);
-            });            
+            });
         }
     }
 }

@@ -30,13 +30,13 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             get { return new Operation.UpdatePlayTimeWeight.UpdatePlayTimeWeightBuilder(_sdk); }
         }
         #endregion
-        
+
         public Model.ModelsUpdatePlayerPlaytimeWeightResponse? UpdatePlayTimeWeight(UpdatePlayTimeWeight input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

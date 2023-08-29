@@ -179,7 +179,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class ClawbackInfoStatus : StringEnum<ClawbackInfoStatus>
     {
@@ -206,5 +206,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 }

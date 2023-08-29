@@ -66,13 +66,13 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
             get { return new Operation.GetUserRankingPublicV3.GetUserRankingPublicV3Builder(_sdk); }
         }
         #endregion
-        
+
         public Model.ModelsGetLeaderboardRankingResp? GetAllTimeLeaderboardRankingAdminV3(GetAllTimeLeaderboardRankingAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -81,15 +81,16 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteUserRankingByLeaderboardCodeAdminV3(DeleteUserRankingByLeaderboardCodeAdminV3 input) {
+        public void DeleteUserRankingByLeaderboardCodeAdminV3(DeleteUserRankingByLeaderboardCodeAdminV3 input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -98,23 +99,25 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteUserRankingAdminV3(DeleteUserRankingAdminV3 input) {
+        public void DeleteUserRankingAdminV3(DeleteUserRankingAdminV3 input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteUserRankingsAdminV3(DeleteUserRankingsAdminV3 input) {
+        public void DeleteUserRankingsAdminV3(DeleteUserRankingsAdminV3 input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -123,7 +126,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -132,7 +135,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -141,7 +144,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -150,7 +153,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

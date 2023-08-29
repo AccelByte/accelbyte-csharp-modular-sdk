@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 RetrieveSingleLocalizedPolicyVersion3 op = new RetrieveSingleLocalizedPolicyVersion3(this,
-                    localizedPolicyVersionId,                    
-                    namespace_                    
+                    localizedPolicyVersionId,
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -94,29 +94,29 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         {
             PathParams["localizedPolicyVersionId"] = localizedPolicyVersionId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
         }
         #endregion
 
         public RetrieveSingleLocalizedPolicyVersion3(
-            string localizedPolicyVersionId,            
-            string namespace_            
+            string localizedPolicyVersionId,
+            string namespace_
         )
         {
             PathParams["localizedPolicyVersionId"] = localizedPolicyVersionId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
         }
 
@@ -124,12 +124,12 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.RetrieveLocalizedPolicyVersionPublicResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -142,9 +142,9 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             {
                 return JsonSerializer.Deserialize<Model.RetrieveLocalizedPolicyVersionPublicResponse>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

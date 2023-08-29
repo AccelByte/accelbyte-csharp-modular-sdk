@@ -30,13 +30,13 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
             get { return new Operation.EnvironmentVariableList.EnvironmentVariableListBuilder(_sdk); }
         }
         #endregion
-        
+
         public Model.ApiListEnvironmentVariablesResponse? EnvironmentVariableList(EnvironmentVariableList input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

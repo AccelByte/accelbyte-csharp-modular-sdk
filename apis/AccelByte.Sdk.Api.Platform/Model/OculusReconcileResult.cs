@@ -62,7 +62,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class OculusReconcileResultItemIdentityType : StringEnum<OculusReconcileResultItemIdentityType>
     {
@@ -83,5 +83,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 }

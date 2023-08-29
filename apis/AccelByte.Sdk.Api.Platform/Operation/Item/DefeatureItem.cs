@@ -61,10 +61,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 DefeatureItem op = new DefeatureItem(this,
-                    feature,                    
-                    itemId,                    
-                    namespace_,                    
-                    storeId                    
+                    feature,
+                    itemId,
+                    namespace_,
+                    storeId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -132,35 +132,35 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["feature"] = feature;
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-            
-            if (storeId is not null) QueryParams["storeId"] = storeId;
-            
 
-            
-            
-            
+            if (storeId is not null) QueryParams["storeId"] = storeId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public DefeatureItem(
-            string feature,            
-            string itemId,            
-            string namespace_,            
-            string storeId            
+            string feature,
+            string itemId,
+            string namespace_,
+            string storeId
         )
         {
             PathParams["feature"] = feature;
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-            
-            if (storeId is not null) QueryParams["storeId"] = storeId;
-            
 
-            
-            
-            
+            if (storeId is not null) QueryParams["storeId"] = storeId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -171,10 +171,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.FullItemInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -187,18 +187,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.FullItemInfo>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
 
         public Model.FullItemInfo<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
-            }            
+            }
             else if (code == (HttpStatusCode)201)
             {
                 return JsonSerializer.Deserialize<Model.FullItemInfo<T1>>(payload, ResponseJsonOptions);
@@ -207,7 +207,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.FullItemInfo<T1>>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
             throw new HttpResponseException(code, payloadString);
         }

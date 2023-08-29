@@ -82,8 +82,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 Pay op = new Pay(this,
-                    namespace_,                    
-                    paymentOrderNo                    
+                    namespace_,
+                    paymentOrderNo
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -120,38 +120,38 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["paymentOrderNo"] = paymentOrderNo;
-            
+
             if (builder.PaymentProvider is not null) QueryParams["paymentProvider"] = builder.PaymentProvider.Value;
             if (builder.ZipCode is not null) QueryParams["zipCode"] = builder.ZipCode;
-            
 
-            
-            
+
+
+
             BodyParams = builder.Body;
-            
+
 
         }
         #endregion
 
         public Pay(
-            string namespace_,            
-            string paymentOrderNo,            
-            PayPaymentProvider? paymentProvider,            
-            string? zipCode,            
-            Model.PaymentToken body            
+            string namespace_,
+            string paymentOrderNo,
+            PayPaymentProvider? paymentProvider,
+            string? zipCode,
+            Model.PaymentToken body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["paymentOrderNo"] = paymentOrderNo;
-            
+
             if (paymentProvider is not null) QueryParams["paymentProvider"] = paymentProvider.Value;
             if (zipCode is not null) QueryParams["zipCode"] = zipCode;
-            
 
-            
-            
+
+
+
             BodyParams = body;
-            
+
 
         }
 
@@ -161,10 +161,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.PaymentProcessResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -177,9 +177,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.PaymentProcessResult>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

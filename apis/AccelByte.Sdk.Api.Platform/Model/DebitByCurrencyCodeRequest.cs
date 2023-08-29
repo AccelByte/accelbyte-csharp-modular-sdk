@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class DebitByCurrencyCodeRequestBalanceSource : StringEnum<DebitByCurrencyCodeRequestBalanceSource>
     {
@@ -150,5 +150,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 }

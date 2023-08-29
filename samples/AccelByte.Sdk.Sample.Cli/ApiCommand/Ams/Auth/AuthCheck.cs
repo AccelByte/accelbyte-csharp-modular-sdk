@@ -19,35 +19,35 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 {
-    [SdkConsoleCommand("ams","func2")]
-    public class Func2Command: ISdkConsoleCommand
+    [SdkConsoleCommand("ams","authcheck")]
+    public class AuthCheckCommand: ISdkConsoleCommand
     {
         private AccelByteSDK _SDK;
 
         public string ServiceName{ get { return "Ams"; } }
 
-        public string OperationName{ get { return "Func2"; } }
+        public string OperationName{ get { return "AuthCheck"; } }
 
-        public Func2Command(AccelByteSDK sdk)
+        public AuthCheckCommand(AccelByteSDK sdk)
         {
             _SDK = sdk;
         }
 
         public string Run()
         {
-            AccelByte.Sdk.Api.Ams.Wrapper.Operations wrapper = new AccelByte.Sdk.Api.Ams.Wrapper.Operations(_SDK);
+            AccelByte.Sdk.Api.Ams.Wrapper.Auth wrapper = new AccelByte.Sdk.Api.Ams.Wrapper.Auth(_SDK);
 
-            var opBuilder = AccelByte.Sdk.Api.Ams.Operation.Func2.Builder;
-
-
+            var opBuilder = AccelByte.Sdk.Api.Ams.Operation.AuthCheck.Builder;
 
 
 
-            Func2 operation = opBuilder.Build(
+
+
+            AuthCheck operation = opBuilder.Build(
             );
 
             
-            wrapper.Func2(operation);
+            wrapper.AuthCheck(operation);
             return String.Empty;
         }
     }

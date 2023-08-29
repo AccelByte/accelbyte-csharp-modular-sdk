@@ -60,9 +60,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 CountOfPurchasedItem op = new CountOfPurchasedItem(this,
-                    namespace_,                    
-                    userId,                    
-                    itemId                    
+                    namespace_,
+                    userId,
+                    itemId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -102,33 +102,33 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            if (itemId is not null) QueryParams["itemId"] = itemId;
-            
 
-            
-            
-            
+            if (itemId is not null) QueryParams["itemId"] = itemId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public CountOfPurchasedItem(
-            string namespace_,            
-            string userId,            
-            string itemId            
+            string namespace_,
+            string userId,
+            string itemId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            if (itemId is not null) QueryParams["itemId"] = itemId;
-            
 
-            
-            
-            
+            if (itemId is not null) QueryParams["itemId"] = itemId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -137,12 +137,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.PurchasedItemCount? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -155,9 +155,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.PurchasedItemCount>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

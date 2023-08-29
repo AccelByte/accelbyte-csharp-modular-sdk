@@ -83,8 +83,8 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
             )
             {
                 GetServerLogs op = new GetServerLogs(this,
-                    namespace_,                    
-                    podName                    
+                    namespace_,
+                    podName
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -121,39 +121,39 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["podName"] = podName;
-            
+
             if (builder.LogType is not null) QueryParams["logType"] = builder.LogType;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Origin is not null) QueryParams["origin"] = builder.Origin;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GetServerLogs(
-            string namespace_,            
-            string podName,            
-            string? logType,            
-            long? offset,            
-            string? origin            
+            string namespace_,
+            string podName,
+            string? logType,
+            long? offset,
+            string? origin
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["podName"] = podName;
-            
+
             if (logType is not null) QueryParams["logType"] = logType;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (origin is not null) QueryParams["origin"] = origin;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -164,10 +164,10 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ModelsServerLogs? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -180,9 +180,9 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsServerLogs>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

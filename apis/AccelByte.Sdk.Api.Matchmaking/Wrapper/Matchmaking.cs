@@ -109,12 +109,12 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
         {
             get { return new Operation.GetStatData.GetStatDataBuilder(_sdk); }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SearchSessions.SearchSessionsBuilder SearchSessionsOp
         {
             get { return new Operation.SearchSessions.SearchSessionsBuilder(_sdk); }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetSessionHistoryDetailed.GetSessionHistoryDetailedBuilder GetSessionHistoryDetailedOp
         {
             get { return new Operation.GetSessionHistoryDetailed.GetSessionHistoryDetailedBuilder(_sdk); }
@@ -127,19 +127,19 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
         {
             get { return new Operation.PublicGetSingleMatchmakingChannel.PublicGetSingleMatchmakingChannelBuilder(_sdk); }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SearchSessionsV2.SearchSessionsV2Builder SearchSessionsV2Op
         {
             get { return new Operation.SearchSessionsV2.SearchSessionsV2Builder(_sdk); }
         }
         #endregion
-        
+
         public Model.ModelsGetChannelsResponse? GetAllChannelsHandler(GetAllChannelsHandler input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -157,15 +157,16 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteChannelHandler(DeleteChannelHandler input) {
+        public void DeleteChannelHandler(DeleteChannelHandler input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -174,7 +175,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -183,23 +184,25 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void QueueSessionHandler(QueueSessionHandler input) {
+        public void QueueSessionHandler(QueueSessionHandler input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DequeueSessionHandler(DequeueSessionHandler input) {
+        public void DequeueSessionHandler(DequeueSessionHandler input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -208,17 +211,17 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.ModelsMatchmakingResult<T1>? QuerySessionHandler<T1>(QuerySessionHandler input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -227,17 +230,17 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Dictionary<string, List<Model.ModelsMatchingParty<T1>>>? GetAllPartyInAllChannel<T1>(GetAllPartyInAllChannel input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -246,17 +249,17 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public List<Model.ModelsMatchmakingResult<T1>>? BulkGetSessions<T1>(BulkGetSessions input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -265,7 +268,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -274,7 +277,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -283,15 +286,16 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void UpdateMatchmakingChannel(UpdateMatchmakingChannel input) {
+        public void UpdateMatchmakingChannel(UpdateMatchmakingChannel input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -300,17 +304,17 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public List<Model.ModelsMatchingParty<T1>>? GetAllPartyInChannel<T1>(GetAllPartyInChannel input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -319,41 +323,44 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public List<Model.ModelsMatchmakingResult<T1>>? GetAllSessionsInChannel<T1>(GetAllSessionsInChannel input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AddUserIntoSessionInChannel(AddUserIntoSessionInChannel input) {
+        public void AddUserIntoSessionInChannel(AddUserIntoSessionInChannel input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteSessionInChannel(DeleteSessionInChannel input) {
+        public void DeleteSessionInChannel(DeleteSessionInChannel input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteUserFromSessionInChannel(DeleteUserFromSessionInChannel input) {
+        public void DeleteUserFromSessionInChannel(DeleteUserFromSessionInChannel input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -362,40 +369,40 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.ServiceGetSessionHistorySearchResponse? SearchSessions(SearchSessions input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public List<Model.ServiceGetSessionHistoryDetailedResponseItem>? GetSessionHistoryDetailed(GetSessionHistoryDetailed input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
         public List<Model.ModelsChannelV1>? PublicGetAllMatchmakingChannel(PublicGetAllMatchmakingChannel input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -404,21 +411,21 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.ServiceGetSessionHistorySearchResponseV2? SearchSessionsV2(SearchSessionsV2 input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
     }
 }

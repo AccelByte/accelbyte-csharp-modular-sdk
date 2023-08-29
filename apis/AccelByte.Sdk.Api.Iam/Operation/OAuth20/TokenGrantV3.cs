@@ -364,7 +364,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 TokenGrantV3 op = new TokenGrantV3(this,
-                    grantType                    
+                    grantType
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -386,7 +386,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -396,8 +396,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             TokenGrantV3GrantType grantType
         )
         {
-            
-            
+
+
             if (builder.AdditionalData is not null) FormParams["additionalData"] = builder.AdditionalData;
             if (builder.ClientId is not null) FormParams["client_id"] = builder.ClientId;
             if (builder.Code is not null) FormParams["code"] = builder.Code;
@@ -409,29 +409,29 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (builder.Username is not null) FormParams["username"] = builder.Username;
             if (grantType is not null) FormParams["grant_type"] = grantType.Value;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
         #endregion
 
         public TokenGrantV3(
-            string? additionalData,            
-            string? clientId,            
-            string? code,            
-            string? codeVerifier,            
-            bool? extendExp,            
-            string? password,            
-            string? redirectUri,            
-            string? refreshToken,            
-            string? username,            
-            TokenGrantV3GrantType grantType            
+            string? additionalData,
+            string? clientId,
+            string? code,
+            string? codeVerifier,
+            bool? extendExp,
+            string? password,
+            string? redirectUri,
+            string? refreshToken,
+            string? username,
+            TokenGrantV3GrantType grantType
         )
         {
-            
-            
+
+
             if (additionalData is not null) FormParams["additionalData"] = additionalData;
             if (clientId is not null) FormParams["client_id"] = clientId;
             if (code is not null) FormParams["code"] = code;
@@ -443,9 +443,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (username is not null) FormParams["username"] = username;
             if (grantType is not null) FormParams["grant_type"] = grantType.Value;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -456,10 +456,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.OauthmodelTokenWithDeviceCookieResponseV3? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -472,9 +472,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 return JsonSerializer.Deserialize<Model.OauthmodelTokenWithDeviceCookieResponseV3>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

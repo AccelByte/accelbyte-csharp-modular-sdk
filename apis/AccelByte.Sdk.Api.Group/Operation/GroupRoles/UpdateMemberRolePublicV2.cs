@@ -67,10 +67,10 @@ namespace AccelByte.Sdk.Api.Group.Operation
             )
             {
                 UpdateMemberRolePublicV2 op = new UpdateMemberRolePublicV2(this,
-                    body,                    
-                    groupId,                    
-                    memberRoleId,                    
-                    namespace_                    
+                    body,
+                    groupId,
+                    memberRoleId,
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -114,35 +114,35 @@ namespace AccelByte.Sdk.Api.Group.Operation
             PathParams["groupId"] = groupId;
             PathParams["memberRoleId"] = memberRoleId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdateMemberRolePublicV2(
-            string groupId,            
-            string memberRoleId,            
-            string namespace_,            
-            Model.ModelsAssignRoleToMemberRequestV1 body            
+            string groupId,
+            string memberRoleId,
+            string namespace_,
+            Model.ModelsAssignRoleToMemberRequestV1 body
         )
         {
             PathParams["groupId"] = groupId;
             PathParams["memberRoleId"] = memberRoleId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -153,10 +153,10 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ModelsGetUserGroupInformationResponseV1? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -169,9 +169,9 @@ namespace AccelByte.Sdk.Api.Group.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsGetUserGroupInformationResponseV1>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

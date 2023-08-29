@@ -42,13 +42,13 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
             get { return new Operation.UpdatePluginConfig.UpdatePluginConfigBuilder(_sdk); }
         }
         #endregion
-        
+
         public Model.ModelsPluginResponse? GetPluginConfig(GetPluginConfig input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -57,15 +57,16 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeletePluginConfig(DeletePluginConfig input) {
+        public void DeletePluginConfig(DeletePluginConfig input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -74,7 +75,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

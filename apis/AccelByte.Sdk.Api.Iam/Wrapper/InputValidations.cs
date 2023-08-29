@@ -46,29 +46,31 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             get { return new Operation.PublicGetInputValidationByField.PublicGetInputValidationByFieldBuilder(_sdk); }
         }
         #endregion
-        
+
         public Model.ModelInputValidationsResponse? AdminGetInputValidations(AdminGetInputValidations input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminUpdateInputValidations(AdminUpdateInputValidations input) {
+        public void AdminUpdateInputValidations(AdminUpdateInputValidations input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminResetInputValidations(AdminResetInputValidations input) {
+        public void AdminResetInputValidations(AdminResetInputValidations input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -77,7 +79,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -86,7 +88,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

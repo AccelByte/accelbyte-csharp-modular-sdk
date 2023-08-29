@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QuerySections op = new QuerySections(this,
-                    namespace_                    
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -140,46 +140,46 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.End is not null) QueryParams["end"] = builder.End;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Start is not null) QueryParams["start"] = builder.Start;
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
             if (builder.ViewId is not null) QueryParams["viewId"] = builder.ViewId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public QuerySections(
-            string namespace_,            
-            string? end,            
-            int? limit,            
-            int? offset,            
-            string? start,            
-            string? storeId,            
-            string? viewId            
+            string namespace_,
+            string? end,
+            int? limit,
+            int? offset,
+            string? start,
+            string? storeId,
+            string? viewId
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (end is not null) QueryParams["end"] = end;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (start is not null) QueryParams["start"] = start;
             if (storeId is not null) QueryParams["storeId"] = storeId;
             if (viewId is not null) QueryParams["viewId"] = viewId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -188,12 +188,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.SectionPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -206,9 +206,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.SectionPagingSlicedResult>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

@@ -57,8 +57,8 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             )
             {
                 GetLeaderboardConfigurationPublicV3 op = new GetLeaderboardConfigurationPublicV3(this,
-                    leaderboardCode,                    
-                    namespace_                    
+                    leaderboardCode,
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -95,30 +95,30 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         {
             PathParams["leaderboardCode"] = leaderboardCode;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GetLeaderboardConfigurationPublicV3(
-            string leaderboardCode,            
-            string namespace_            
+            string leaderboardCode,
+            string namespace_
         )
         {
             PathParams["leaderboardCode"] = leaderboardCode;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -127,12 +127,12 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ModelsGetLeaderboardConfigPublicRespV3? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -145,9 +145,9 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsGetLeaderboardConfigPublicRespV3>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

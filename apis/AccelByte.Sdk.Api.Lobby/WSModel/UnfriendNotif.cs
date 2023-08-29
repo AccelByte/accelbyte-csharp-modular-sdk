@@ -17,6 +17,6 @@ namespace AccelByte.Sdk.Api.Lobby.WSModel
         [AwesomeProperty("friendId")]
         [JsonPropertyName("friendId")]
         public string? FriendId { get; set; }
-        
+
     }
 }

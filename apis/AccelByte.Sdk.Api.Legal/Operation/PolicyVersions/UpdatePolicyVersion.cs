@@ -65,7 +65,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 UpdatePolicyVersion op = new UpdatePolicyVersion(this,
-                    policyVersionId                    
+                    policyVersionId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -98,31 +98,31 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         )
         {
             PathParams["policyVersionId"] = policyVersionId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = builder.Body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdatePolicyVersion(
-            string policyVersionId,            
-            Model.UpdatePolicyVersionRequest body            
+            string policyVersionId,
+            Model.UpdatePolicyVersionRequest body
         )
         {
             PathParams["policyVersionId"] = policyVersionId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -133,10 +133,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.UpdatePolicyVersionResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -149,9 +149,9 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             {
                 return JsonSerializer.Deserialize<Model.UpdatePolicyVersionResponse>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

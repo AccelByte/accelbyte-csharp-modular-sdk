@@ -61,10 +61,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicDeletePaymentAccount op = new PublicDeletePaymentAccount(this,
-                    id,                    
-                    namespace_,                    
-                    type,                    
-                    userId                    
+                    id,
+                    namespace_,
+                    type,
+                    userId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -109,34 +109,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["namespace"] = namespace_;
             PathParams["type"] = type.Value;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PublicDeletePaymentAccount(
-            string id,            
-            string namespace_,            
-            PublicDeletePaymentAccountType type,            
-            string userId            
+            string id,
+            string namespace_,
+            PublicDeletePaymentAccountType type,
+            string userId
         )
         {
             PathParams["id"] = id;
             PathParams["namespace"] = namespace_;
             PathParams["type"] = type.Value;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,17 +147,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

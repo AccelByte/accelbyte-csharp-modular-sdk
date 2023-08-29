@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             )
             {
                 ExportAchievements op = new ExportAchievements(this,
-                    namespace_                    
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -102,33 +102,33 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
-            
 
-            
+            if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
+
+
+
             CollectionFormatMap["tags"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public ExportAchievements(
-            string namespace_,            
-            List<string>? tags            
+            string namespace_,
+            List<string>? tags
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (tags is not null) QueryParams["tags"] = tags;
-            
 
-            
+            if (tags is not null) QueryParams["tags"] = tags;
+
+
+
             CollectionFormatMap["tags"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -139,10 +139,10 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Stream? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -155,9 +155,9 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             {
                 return payload;
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

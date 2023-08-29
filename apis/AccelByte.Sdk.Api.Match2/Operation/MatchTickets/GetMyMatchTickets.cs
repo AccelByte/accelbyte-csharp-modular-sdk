@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             )
             {
                 GetMyMatchTickets op = new GetMyMatchTickets(this,
-                    namespace_                    
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -115,37 +115,37 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.MatchPool is not null) QueryParams["matchPool"] = builder.MatchPool;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GetMyMatchTickets(
-            string namespace_,            
-            long? limit,            
-            string? matchPool,            
-            long? offset            
+            string namespace_,
+            long? limit,
+            string? matchPool,
+            long? offset
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (matchPool is not null) QueryParams["matchPool"] = matchPool;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,10 +156,10 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ApiMatchTicketStatuses? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -172,9 +172,9 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             {
                 return JsonSerializer.Deserialize<Model.ApiMatchTicketStatuses>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

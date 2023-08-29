@@ -118,13 +118,13 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             get { return new Operation.PublicGetUserSeason.PublicGetUserSeasonBuilder(_sdk); }
         }
         #endregion
-        
+
         public Model.ListSeasonInfoPagingSlicedResult? QuerySeasons(QuerySeasons input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -133,7 +133,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -142,7 +142,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -151,7 +151,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -160,15 +160,16 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteSeason(DeleteSeason input) {
+        public void DeleteSeason(DeleteSeason input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -177,7 +178,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -186,7 +187,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -195,7 +196,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -204,7 +205,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -213,7 +214,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -222,7 +223,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -231,7 +232,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -240,7 +241,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -249,23 +250,25 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void CheckSeasonPurchasable(CheckSeasonPurchasable input) {
+        public void CheckSeasonPurchasable(CheckSeasonPurchasable input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void ResetUserSeason(ResetUserSeason input) {
+        public void ResetUserSeason(ResetUserSeason input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -274,7 +277,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -283,7 +286,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -292,17 +295,17 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.ClaimableUserSeasonInfo<T1, T2>? GetUserSeason<T1, T2>(GetUserSeason input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -311,7 +314,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -320,17 +323,17 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.ClaimableUserSeasonInfo<T1, T2>? PublicGetCurrentUserSeason<T1, T2>(PublicGetCurrentUserSeason input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -339,17 +342,17 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.ClaimableUserSeasonInfo<T1, T2>? PublicGetUserSeason<T1, T2>(PublicGetUserSeason input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

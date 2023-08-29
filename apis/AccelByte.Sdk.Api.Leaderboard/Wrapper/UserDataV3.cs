@@ -30,13 +30,13 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
             get { return new Operation.GetUserLeaderboardRankingsAdminV3.GetUserLeaderboardRankingsAdminV3Builder(_sdk); }
         }
         #endregion
-        
+
         public Model.ModelsGetAllUserLeaderboardsRespV3? GetUserLeaderboardRankingsAdminV3(GetUserLeaderboardRankingsAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

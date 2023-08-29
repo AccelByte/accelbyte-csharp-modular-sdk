@@ -30,12 +30,13 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
             get { return new Operation.AdminAnonymizeUserAchievement.AdminAnonymizeUserAchievementBuilder(_sdk); }
         }
         #endregion
-        
-        public void AdminAnonymizeUserAchievement(AdminAnonymizeUserAchievement input) {
+
+        public void AdminAnonymizeUserAchievement(AdminAnonymizeUserAchievement input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

@@ -34,21 +34,22 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             get { return new Operation.MockPlayStationStreamEvent.MockPlayStationStreamEventBuilder(_sdk); }
         }
         #endregion
-        
+
         public Model.IAPClawbackPagingSlicedResult? QueryIAPClawbackHistory(QueryIAPClawbackHistory input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void MockPlayStationStreamEvent(MockPlayStationStreamEvent input) {
+        public void MockPlayStationStreamEvent(MockPlayStationStreamEvent input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

@@ -7,6 +7,33 @@
 - **test:** added integration test for on-demand refresh token
 - **mock-server:** change jenkinfile for new mock-server path
 - **integration:** add lobby presence tests
+- **:** added parse access token function
+### docs
+- **migration:** added migration info for on-demand refresh token
+### fix
+- **core:** add missing request json options in http clients
+- **compat:** add missing constructors for sdk class
+- **integration:** fix get match pool detail integration tests
+- **integration:** use admin delete session endpoint for session browser test
+- **integration:** try to make lobby presence integration test more reliable
+- **ams:** fix ams integration test due to op renaming
+- **lobby:** disable lobby presence integration test temporarily
+- **integration:** fix ams integration test due to spec changes
+### chore
+- **sdk:** generated from openapi spec commit: f131e5930c5a8dc3e43bb4f3306baafe7080c3cf
+- **sdk:** generated from openapi spec commit: bc8b66d4a19d67ece6b906c42e187cd5d70c747b
+- **:** regenerate all services
+
+
+<a name="v0.32.0"></a>
+## [v0.32.0]
+### feat
+- **core:** added json serialization options and its test
+- **core:** added support for custom flags and events
+- **auth:** enable on-demand refresh token
+- **test:** added integration test for on-demand refresh token
+- **mock-server:** change jenkinfile for new mock-server path
+- **integration:** add lobby presence tests
 ### docs
 - **migration:** added migration info for on-demand refresh token
 ### fix

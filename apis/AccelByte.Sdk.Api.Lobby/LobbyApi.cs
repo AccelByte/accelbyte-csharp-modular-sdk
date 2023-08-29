@@ -141,7 +141,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<LobbyApi>("lobby", () =>
             {
                 return new LobbyApi(sdk);
-            });            
+            });
         }
     }
 }

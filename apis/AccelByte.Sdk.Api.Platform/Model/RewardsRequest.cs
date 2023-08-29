@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 
     public class RewardsRequestSource : StringEnum<RewardsRequestSource>
     {
@@ -172,5 +172,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }    
+    }
 }

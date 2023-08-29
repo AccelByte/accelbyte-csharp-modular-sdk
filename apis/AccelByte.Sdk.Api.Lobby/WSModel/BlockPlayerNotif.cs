@@ -17,10 +17,10 @@ namespace AccelByte.Sdk.Api.Lobby.WSModel
         [AwesomeProperty("blockedUserId")]
         [JsonPropertyName("blockedUserId")]
         public string? BlockedUserId { get; set; }
-        
+
         [AwesomeProperty("userId")]
         [JsonPropertyName("userId")]
         public string? UserId { get; set; }
-        
+
     }
 }

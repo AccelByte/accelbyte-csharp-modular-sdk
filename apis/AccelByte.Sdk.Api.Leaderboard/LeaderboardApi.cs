@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<LeaderboardApi>("leaderboard", () =>
             {
                 return new LeaderboardApi(sdk);
-            });            
+            });
         }
     }
 }

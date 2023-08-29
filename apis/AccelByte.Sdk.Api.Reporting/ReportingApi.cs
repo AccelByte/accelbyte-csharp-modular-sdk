@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<ReportingApi>("reporting", () =>
             {
                 return new ReportingApi(sdk);
-            });            
+            });
         }
     }
 }

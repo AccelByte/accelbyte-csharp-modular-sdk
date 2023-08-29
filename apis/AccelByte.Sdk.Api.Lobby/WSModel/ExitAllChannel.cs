@@ -17,10 +17,10 @@ namespace AccelByte.Sdk.Api.Lobby.WSModel
         [AwesomeProperty("namespace")]
         [JsonPropertyName("namespace")]
         public string? Namespace { get; set; }
-        
+
         [AwesomeProperty("userId")]
         [JsonPropertyName("userId")]
         public string? UserId { get; set; }
-        
+
     }
 }

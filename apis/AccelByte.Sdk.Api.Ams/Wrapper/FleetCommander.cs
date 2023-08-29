@@ -38,28 +38,31 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
             get { return new Operation.BasicHealthCheck.BasicHealthCheckBuilder(_sdk); }
         }
         #endregion
-        
-        public void PortalHealthCheck(PortalHealthCheck input) {
+
+        public void PortalHealthCheck(PortalHealthCheck input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void Func1(Func1 input) {
+        public void Func1(Func1 input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void BasicHealthCheck(BasicHealthCheck input) {
+        public void BasicHealthCheck(BasicHealthCheck input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

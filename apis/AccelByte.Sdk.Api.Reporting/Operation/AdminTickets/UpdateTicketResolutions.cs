@@ -57,9 +57,9 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             )
             {
                 UpdateTicketResolutions op = new UpdateTicketResolutions(this,
-                    body,                    
-                    namespace_,                    
-                    ticketId                    
+                    body,
+                    namespace_,
+                    ticketId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -99,33 +99,33 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["ticketId"] = ticketId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdateTicketResolutions(
-            string namespace_,            
-            string ticketId,            
-            Model.RestapiUpdateTicketResolutionsRequest body            
+            string namespace_,
+            string ticketId,
+            Model.RestapiUpdateTicketResolutionsRequest body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["ticketId"] = ticketId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -136,10 +136,10 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.RestapiTicketResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -152,9 +152,9 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             {
                 return JsonSerializer.Deserialize<Model.RestapiTicketResponse>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

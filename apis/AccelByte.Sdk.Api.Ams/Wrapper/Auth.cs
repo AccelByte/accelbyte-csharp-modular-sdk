@@ -30,12 +30,13 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
             get { return new Operation.AuthCheck.AuthCheckBuilder(_sdk); }
         }
         #endregion
-        
-        public void AuthCheck(AuthCheck input) {
+
+        public void AuthCheck(AuthCheck input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

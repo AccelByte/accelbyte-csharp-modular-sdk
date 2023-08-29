@@ -90,8 +90,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 QueryStats op = new QueryStats(this,
-                    namespace_,                    
-                    keyword                    
+                    namespace_,
+                    keyword
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -127,43 +127,43 @@ namespace AccelByte.Sdk.Api.Social.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.IsGlobal != null) QueryParams["isGlobal"] = Convert.ToString(builder.IsGlobal)!;
             if (builder.IsPublic != null) QueryParams["isPublic"] = Convert.ToString(builder.IsPublic)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (keyword is not null) QueryParams["keyword"] = keyword;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public QueryStats(
-            string namespace_,            
-            bool? isGlobal,            
-            bool? isPublic,            
-            int? limit,            
-            int? offset,            
-            string keyword            
+            string namespace_,
+            bool? isGlobal,
+            bool? isPublic,
+            int? limit,
+            int? offset,
+            string keyword
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (isGlobal != null) QueryParams["isGlobal"] = Convert.ToString(isGlobal)!;
             if (isPublic != null) QueryParams["isPublic"] = Convert.ToString(isPublic)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (keyword is not null) QueryParams["keyword"] = keyword;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -172,12 +172,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.StatPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -190,9 +190,9 @@ namespace AccelByte.Sdk.Api.Social.Operation
             {
                 return JsonSerializer.Deserialize<Model.StatPagingSlicedResult>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

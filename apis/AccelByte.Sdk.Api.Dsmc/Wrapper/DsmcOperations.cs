@@ -30,13 +30,13 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
             get { return new Operation.PublicGetMessages.PublicGetMessagesBuilder(_sdk); }
         }
         #endregion
-        
+
         public List<Model.LogAppMessageDeclaration>? PublicGetMessages(PublicGetMessages input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
