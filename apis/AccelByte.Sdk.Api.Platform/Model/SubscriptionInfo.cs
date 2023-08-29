@@ -209,7 +209,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class SubscriptionInfoStatus : StringEnum<SubscriptionInfoStatus>
     {
@@ -236,7 +236,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class SubscriptionInfoSubscribedBy : StringEnum<SubscriptionInfoSubscribedBy>
     {
@@ -257,5 +257,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 }

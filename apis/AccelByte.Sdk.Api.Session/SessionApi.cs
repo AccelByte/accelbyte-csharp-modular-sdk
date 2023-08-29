@@ -92,6 +92,17 @@ namespace AccelByte.Sdk.Api.Session
         }
         private Wrapper.PlatformCredential? _PlatformCredential = null;
 
+        public Wrapper.SessionStorage SessionStorage
+        {
+            get
+            {
+                if (_SessionStorage == null)
+                    _SessionStorage = new Wrapper.SessionStorage(_Sdk);
+                return _SessionStorage;
+            }
+        }
+        private Wrapper.SessionStorage? _SessionStorage = null;
+
         public Wrapper.Player Player
         {
             get
@@ -119,7 +130,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<SessionApi>("session", () =>
             {
                 return new SessionApi(sdk);
-            });
+            });            
         }
     }
 }

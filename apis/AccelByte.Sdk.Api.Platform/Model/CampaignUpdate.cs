@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class CampaignUpdateStatus : StringEnum<CampaignUpdateStatus>
     {
@@ -104,5 +104,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 }

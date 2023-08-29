@@ -68,8 +68,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 CloneStore op = new CloneStore(this,
-                    namespace_,
-                    storeId
+                    namespace_,                    
+                    storeId                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -106,33 +106,33 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["storeId"] = storeId;
-
+            
             if (builder.TargetStoreId is not null) QueryParams["targetStoreId"] = builder.TargetStoreId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public CloneStore(
-            string namespace_,
-            string storeId,
-            string? targetStoreId
+            string namespace_,            
+            string storeId,            
+            string? targetStoreId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["storeId"] = storeId;
-
+            
             if (targetStoreId is not null) QueryParams["targetStoreId"] = targetStoreId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -143,10 +143,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.StoreInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -159,9 +159,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.StoreInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

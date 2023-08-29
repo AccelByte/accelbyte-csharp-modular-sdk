@@ -20,24 +20,24 @@ using AccelByte.Sdk.Api.Ams.Model;
 namespace AccelByte.Sdk.Api.Ams.Operation
 {
     /// <summary>
-    /// func2
+    /// func1
     /// </summary>
-    public class Func2 : AccelByte.Sdk.Core.Operation
+    public class Func1 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static Func2Builder Builder { get => new Func2Builder(); }
+        public static Func1Builder Builder { get => new Func1Builder(); }
 
-        public class Func2Builder
-            : OperationBuilder<Func2Builder>
+        public class Func1Builder
+            : OperationBuilder<Func1Builder>
         {
 
 
 
 
 
-            internal Func2Builder() { }
+            internal Func1Builder() { }
 
-            internal Func2Builder(IAccelByteSdk sdk)
+            internal Func1Builder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -47,10 +47,10 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            public Func2 Build(
+            public Func1 Build(
             )
             {
-                Func2 op = new Func2(this
+                Func1 op = new Func1(this
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -62,7 +62,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             public void Execute(
             )
             {
-                Func2 op = Build(
+                Func1 op = Build(
                 );
 
                 if (_Sdk == null)
@@ -70,56 +70,56 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
-        private Func2(Func2Builder builder
+        private Func1(Func1Builder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public Func2(
+        public Func1(
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/ams/healthz";
+        public override string Path => "/ams/version";
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)200)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

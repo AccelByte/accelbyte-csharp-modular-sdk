@@ -42,13 +42,13 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
             get { return new Operation.DeleteMatchTicket.DeleteMatchTicketBuilder(_sdk); }
         }
         #endregion
-
+        
         public Model.ApiMatchTicketResponse? CreateMatchTicket(CreateMatchTicket input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -57,7 +57,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -66,16 +66,15 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteMatchTicket(DeleteMatchTicket input)
-        {
+        public void DeleteMatchTicket(DeleteMatchTicket input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

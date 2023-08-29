@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.AdminMakeFactorMyDefaultV4.AdminMakeFactorMyDefaultV4Builder(_sdk); }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminInviteUserV4.AdminInviteUserV4Builder AdminInviteUserV4Op
         {
             get { return new Operation.AdminInviteUserV4.AdminInviteUserV4Builder(_sdk); }
@@ -210,18 +210,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.PublicMakeFactorMyDefaultV4.PublicMakeFactorMyDefaultV4Builder(_sdk); }
         }
+        public PublicGetUserPublicInfoByUserIdV4.PublicGetUserPublicInfoByUserIdV4Builder PublicGetUserPublicInfoByUserIdV4Op
+        {
+            get { return new Operation.PublicGetUserPublicInfoByUserIdV4.PublicGetUserPublicInfoByUserIdV4Builder(_sdk); }
+        }
         public PublicInviteUserV4.PublicInviteUserV4Builder PublicInviteUserV4Op
         {
             get { return new Operation.PublicInviteUserV4.PublicInviteUserV4Builder(_sdk); }
         }
         #endregion
-
+        
         public Model.AccountCreateTestUsersResponseV4? AdminCreateTestUsersV4(AdminCreateTestUsersV4 input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -230,7 +234,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -239,25 +243,23 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminUpdateUserEmailAddressV4(AdminUpdateUserEmailAddressV4 input)
-        {
+        public void AdminUpdateUserEmailAddressV4(AdminUpdateUserEmailAddressV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDisableUserMFAV4(AdminDisableUserMFAV4 input)
-        {
+        public void AdminDisableUserMFAV4(AdminDisableUserMFAV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -266,7 +268,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -275,7 +277,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -284,16 +286,15 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminRemoveUserRoleV4(AdminRemoveUserRoleV4 input)
-        {
+        public void AdminRemoveUserRoleV4(AdminRemoveUserRoleV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -302,7 +303,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -311,25 +312,23 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDisableMyAuthenticatorV4(AdminDisableMyAuthenticatorV4 input)
-        {
+        public void AdminDisableMyAuthenticatorV4(AdminDisableMyAuthenticatorV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminEnableMyAuthenticatorV4(AdminEnableMyAuthenticatorV4 input)
-        {
+        public void AdminEnableMyAuthenticatorV4(AdminEnableMyAuthenticatorV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -338,7 +337,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -347,7 +346,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -356,16 +355,15 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDisableMyBackupCodesV4(AdminDisableMyBackupCodesV4 input)
-        {
+        public void AdminDisableMyBackupCodesV4(AdminDisableMyBackupCodesV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -374,7 +372,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -383,34 +381,31 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminSendMyMFAEmailCodeV4(AdminSendMyMFAEmailCodeV4 input)
-        {
+        public void AdminSendMyMFAEmailCodeV4(AdminSendMyMFAEmailCodeV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDisableMyEmailV4(AdminDisableMyEmailV4 input)
-        {
+        public void AdminDisableMyEmailV4(AdminDisableMyEmailV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminEnableMyEmailV4(AdminEnableMyEmailV4 input)
-        {
+        public void AdminEnableMyEmailV4(AdminEnableMyEmailV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -419,37 +414,36 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminMakeFactorMyDefaultV4(AdminMakeFactorMyDefaultV4 input)
-        {
+        public void AdminMakeFactorMyDefaultV4(AdminMakeFactorMyDefaultV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public Model.ModelInviteUserResponseV3? AdminInviteUserV4(AdminInviteUserV4 input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        #pragma warning restore ab_deprecated_operation
         public Model.AccountCreateUserResponseV4? PublicCreateTestUserV4(PublicCreateTestUserV4 input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -458,7 +452,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -467,7 +461,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -476,16 +470,15 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicUpdateUserEmailAddressV4(PublicUpdateUserEmailAddressV4 input)
-        {
+        public void PublicUpdateUserEmailAddressV4(PublicUpdateUserEmailAddressV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -494,7 +487,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -503,25 +496,23 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicDisableMyAuthenticatorV4(PublicDisableMyAuthenticatorV4 input)
-        {
+        public void PublicDisableMyAuthenticatorV4(PublicDisableMyAuthenticatorV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicEnableMyAuthenticatorV4(PublicEnableMyAuthenticatorV4 input)
-        {
+        public void PublicEnableMyAuthenticatorV4(PublicEnableMyAuthenticatorV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -530,7 +521,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -539,7 +530,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -548,16 +539,15 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicDisableMyBackupCodesV4(PublicDisableMyBackupCodesV4 input)
-        {
+        public void PublicDisableMyBackupCodesV4(PublicDisableMyBackupCodesV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -566,7 +556,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -575,43 +565,39 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicRemoveTrustedDeviceV4(PublicRemoveTrustedDeviceV4 input)
-        {
+        public void PublicRemoveTrustedDeviceV4(PublicRemoveTrustedDeviceV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicSendMyMFAEmailCodeV4(PublicSendMyMFAEmailCodeV4 input)
-        {
+        public void PublicSendMyMFAEmailCodeV4(PublicSendMyMFAEmailCodeV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicDisableMyEmailV4(PublicDisableMyEmailV4 input)
-        {
+        public void PublicDisableMyEmailV4(PublicDisableMyEmailV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicEnableMyEmailV4(PublicEnableMyEmailV4 input)
-        {
+        public void PublicEnableMyEmailV4(PublicEnableMyEmailV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -620,16 +606,24 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicMakeFactorMyDefaultV4(PublicMakeFactorMyDefaultV4 input)
-        {
+        public void PublicMakeFactorMyDefaultV4(PublicMakeFactorMyDefaultV4 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelUserPublicInfoResponseV4? PublicGetUserPublicInfoByUserIdV4(PublicGetUserPublicInfoByUserIdV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -638,7 +632,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

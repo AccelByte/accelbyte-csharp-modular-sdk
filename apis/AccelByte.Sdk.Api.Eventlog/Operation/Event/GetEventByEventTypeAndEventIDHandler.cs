@@ -24,7 +24,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
     ///
     /// Required permission `NAMESPACE:{namespace}:EVENT [UPDATE]`and scope `analytics`
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class GetEventByEventTypeAndEventIDHandler : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -68,12 +68,12 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
             )
             {
                 GetEventByEventTypeAndEventIDHandler op = new GetEventByEventTypeAndEventIDHandler(this,
-                    eventId,
-                    eventType,
-                    namespace_,
-                    endDate,
-                    pageSize,
-                    startDate
+                    eventId,                    
+                    eventType,                    
+                    namespace_,                    
+                    endDate,                    
+                    pageSize,                    
+                    startDate                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public Model.ModelsEventResponse? Execute(
                 double eventId,
                 double eventType,
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -124,44 +124,44 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
             PathParams["eventId"] = Convert.ToString(eventId);
             PathParams["eventType"] = Convert.ToString(eventType);
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (endDate is not null) QueryParams["endDate"] = endDate;
             QueryParams["pageSize"] = Convert.ToString(pageSize)!;
             if (startDate is not null) QueryParams["startDate"] = startDate;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GetEventByEventTypeAndEventIDHandler(
-            double eventId,
-            double eventType,
-            string namespace_,
-            long? offset,
-            string endDate,
-            long pageSize,
-            string startDate
+            double eventId,            
+            double eventType,            
+            string namespace_,            
+            long? offset,            
+            string endDate,            
+            long pageSize,            
+            string startDate            
         )
         {
             PathParams["eventId"] = Convert.ToString(eventId);
             PathParams["eventType"] = Convert.ToString(eventType);
             PathParams["namespace"] = namespace_;
-
+            
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (endDate is not null) QueryParams["endDate"] = endDate;
             QueryParams["pageSize"] = Convert.ToString(pageSize)!;
             if (startDate is not null) QueryParams["startDate"] = startDate;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -170,12 +170,12 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ModelsEventResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -188,9 +188,9 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsEventResponse>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

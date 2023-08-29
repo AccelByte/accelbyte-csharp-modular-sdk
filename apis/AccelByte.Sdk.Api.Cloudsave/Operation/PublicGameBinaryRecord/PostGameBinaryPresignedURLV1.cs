@@ -66,9 +66,9 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             )
             {
                 PostGameBinaryPresignedURLV1 op = new PostGameBinaryPresignedURLV1(this,
-                    body,
-                    key,
-                    namespace_
+                    body,                    
+                    key,                    
+                    namespace_                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -108,33 +108,33 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         {
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PostGameBinaryPresignedURLV1(
-            string key,
-            string namespace_,
-            Model.ModelsUploadBinaryRecordRequest body
+            string key,            
+            string namespace_,            
+            Model.ModelsUploadBinaryRecordRequest body            
         )
         {
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -145,10 +145,10 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ModelsUploadBinaryRecordResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -161,9 +161,9 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsUploadBinaryRecordResponse>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

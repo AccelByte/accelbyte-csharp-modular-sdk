@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
     /// <summary>
     /// EventIDDescriptionHandler
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class EventIDDescriptionHandler : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -60,7 +60,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public Model.ModelsMultipleEventID? Execute(
             )
             {
@@ -72,7 +72,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -81,12 +81,12 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
         private EventIDDescriptionHandler(EventIDDescriptionHandlerBuilder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -95,12 +95,12 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
         public EventIDDescriptionHandler(
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -109,12 +109,12 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ModelsMultipleEventID? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -127,9 +127,9 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsMultipleEventID>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

@@ -54,7 +54,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// 
     /// If targetNamespace filled with game namespace then this endpoint will return its publisher user id and publisher namespace
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class GetUserMapping : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -87,9 +87,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 GetUserMapping op = new GetUserMapping(this,
-                    namespace_,
-                    targetNamespace,
-                    userId
+                    namespace_,                    
+                    targetNamespace,                    
+                    userId                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public Model.ModelGetUserMapping? Execute(
                 string namespace_,
                 string targetNamespace,
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -131,32 +131,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["namespace"] = namespace_;
             PathParams["targetNamespace"] = targetNamespace;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GetUserMapping(
-            string namespace_,
-            string targetNamespace,
-            string userId
+            string namespace_,            
+            string targetNamespace,            
+            string userId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["targetNamespace"] = targetNamespace;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -167,10 +167,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ModelGetUserMapping? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -183,9 +183,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelGetUserMapping>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

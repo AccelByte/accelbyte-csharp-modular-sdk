@@ -59,8 +59,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             )
             {
                 ImageDetailClient op = new ImageDetailClient(this,
-                    namespace_,
-                    version
+                    namespace_,                    
+                    version                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -84,7 +84,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -97,30 +97,30 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["version"] = version;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public ImageDetailClient(
-            string namespace_,
-            string version
+            string namespace_,            
+            string version            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["version"] = version;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -131,10 +131,10 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ModelsGetImageDetailResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -147,9 +147,9 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsGetImageDetailResponse>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

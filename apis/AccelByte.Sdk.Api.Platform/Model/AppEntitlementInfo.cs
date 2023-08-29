@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class AppEntitlementInfoStatus : StringEnum<AppEntitlementInfoStatus>
     {
@@ -119,5 +119,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 }

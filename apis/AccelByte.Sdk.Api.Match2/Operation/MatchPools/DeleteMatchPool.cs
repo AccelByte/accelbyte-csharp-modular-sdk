@@ -59,8 +59,8 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             )
             {
                 DeleteMatchPool op = new DeleteMatchPool(this,
-                    namespace_,
-                    pool
+                    namespace_,                    
+                    pool                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -84,7 +84,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -97,30 +97,30 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["pool"] = pool;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public DeleteMatchPool(
-            string namespace_,
-            string pool
+            string namespace_,            
+            string pool            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["pool"] = pool;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -131,17 +131,17 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class AppUpdatePlatforms : StringEnum<AppUpdatePlatforms>
     {
@@ -146,7 +146,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class AppUpdatePlayers : StringEnum<AppUpdatePlayers>
     {
@@ -179,7 +179,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class AppUpdatePrimaryGenre : StringEnum<AppUpdatePrimaryGenre>
     {
@@ -227,5 +227,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 }

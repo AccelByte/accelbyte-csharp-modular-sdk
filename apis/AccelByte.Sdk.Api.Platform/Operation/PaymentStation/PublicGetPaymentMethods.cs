@@ -58,8 +58,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicGetPaymentMethods op = new PublicGetPaymentMethods(this,
-                    namespace_,
-                    paymentOrderNo
+                    namespace_,                    
+                    paymentOrderNo                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -95,30 +95,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (paymentOrderNo is not null) QueryParams["paymentOrderNo"] = paymentOrderNo;
+            
 
-
-
-
-
+            
+            
+            
 
         }
         #endregion
 
         public PublicGetPaymentMethods(
-            string namespace_,
-            string paymentOrderNo
+            string namespace_,            
+            string paymentOrderNo            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (paymentOrderNo is not null) QueryParams["paymentOrderNo"] = paymentOrderNo;
+            
 
-
-
-
-
+            
+            
+            
 
         }
 
@@ -128,10 +128,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public List<Model.PaymentMethod>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -144,9 +144,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<List<Model.PaymentMethod>>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

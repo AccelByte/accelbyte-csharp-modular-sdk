@@ -93,8 +93,8 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             )
             {
                 CreateLeaderboardConfigurationPublicV1 op = new CreateLeaderboardConfigurationPublicV1(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -130,31 +130,31 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public CreateLeaderboardConfigurationPublicV1(
-            string namespace_,
-            Model.ModelsLeaderboardConfigReq body
+            string namespace_,            
+            Model.ModelsLeaderboardConfigReq body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -165,10 +165,10 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ModelsLeaderboardConfigReq? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -181,9 +181,9 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsLeaderboardConfigReq>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

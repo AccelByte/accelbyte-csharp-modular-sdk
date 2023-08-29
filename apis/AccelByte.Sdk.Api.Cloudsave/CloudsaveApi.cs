@@ -163,7 +163,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<CloudsaveApi>("cloudsave", () =>
             {
                 return new CloudsaveApi(sdk);
-            });
+            });            
         }
     }
 }

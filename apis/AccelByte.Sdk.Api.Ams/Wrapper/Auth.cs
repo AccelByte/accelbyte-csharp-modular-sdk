@@ -15,41 +15,27 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Api.Ams.Wrapper
 {
-    public class Operations
+    public class Auth
     {
         private readonly IAccelByteSdk _sdk;
 
-        public Operations(IAccelByteSdk sdk)
+        public Auth(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
         #region Operation Builders
-        public Func2.Func2Builder Func2Op
+        public AuthCheck.AuthCheckBuilder AuthCheckOp
         {
-            get { return new Operation.Func2.Func2Builder(_sdk); }
-        }
-        public PortalHealthCheck.PortalHealthCheckBuilder PortalHealthCheckOp
-        {
-            get { return new Operation.PortalHealthCheck.PortalHealthCheckBuilder(_sdk); }
+            get { return new Operation.AuthCheck.AuthCheckBuilder(_sdk); }
         }
         #endregion
-
-        public void Func2(Func2 input)
-        {
+        
+        public void AuthCheck(AuthCheck input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void PortalHealthCheck(PortalHealthCheck input)
-        {
-            var response = _sdk.RunRequest(input);
-
-            input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

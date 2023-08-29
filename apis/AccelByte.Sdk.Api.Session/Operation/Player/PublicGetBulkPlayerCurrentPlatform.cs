@@ -55,8 +55,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 PublicGetBulkPlayerCurrentPlatform op = new PublicGetBulkPlayerCurrentPlatform(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -92,31 +92,31 @@ namespace AccelByte.Sdk.Api.Session.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PublicGetBulkPlayerCurrentPlatform(
-            string namespace_,
-            Model.ApimodelsPlayersCurrentPlatformRequest body
+            string namespace_,            
+            Model.ApimodelsPlayersCurrentPlatformRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -127,10 +127,10 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ApimodelsPlayersCurrentPlatformResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -143,9 +143,9 @@ namespace AccelByte.Sdk.Api.Session.Operation
             {
                 return JsonSerializer.Deserialize<Model.ApimodelsPlayersCurrentPlatformResponse>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

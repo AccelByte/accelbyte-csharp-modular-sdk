@@ -17,10 +17,10 @@ namespace AccelByte.Sdk.Api.Lobby.WSModel
         [AwesomeProperty("matchId")]
         [JsonPropertyName("matchId")]
         public string? MatchId { get; set; }
-
+        
         [AwesomeProperty("userId")]
         [JsonPropertyName("userId")]
         public string? UserId { get; set; }
-
+        
     }
 }

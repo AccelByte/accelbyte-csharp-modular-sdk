@@ -57,10 +57,10 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 AdminUpdateGameSessionMember op = new AdminUpdateGameSessionMember(this,
-                    memberId,
-                    namespace_,
-                    sessionId,
-                    statusType
+                    memberId,                    
+                    namespace_,                    
+                    sessionId,                    
+                    statusType                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -105,34 +105,34 @@ namespace AccelByte.Sdk.Api.Session.Operation
             PathParams["namespace"] = namespace_;
             PathParams["sessionId"] = sessionId;
             PathParams["statusType"] = statusType;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public AdminUpdateGameSessionMember(
-            string memberId,
-            string namespace_,
-            string sessionId,
-            string statusType
+            string memberId,            
+            string namespace_,            
+            string sessionId,            
+            string statusType            
         )
         {
             PathParams["memberId"] = memberId;
             PathParams["namespace"] = namespace_;
             PathParams["sessionId"] = sessionId;
             PathParams["statusType"] = statusType;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -143,10 +143,10 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ApimodelsUpdateGameSessionMemberStatusResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -159,9 +159,9 @@ namespace AccelByte.Sdk.Api.Session.Operation
             {
                 return JsonSerializer.Deserialize<Model.ApimodelsUpdateGameSessionMemberStatusResponse>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

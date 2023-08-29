@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<BasicApi>("basic", () =>
             {
                 return new BasicApi(sdk);
-            });
+            });            
         }
     }
 }

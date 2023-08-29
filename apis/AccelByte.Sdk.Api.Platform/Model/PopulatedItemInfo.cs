@@ -432,7 +432,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class PopulatedItemInfoEntitlementType : StringEnum<PopulatedItemInfoEntitlementType>
     {
@@ -453,7 +453,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class PopulatedItemInfoItemType : StringEnum<PopulatedItemInfoItemType>
     {
@@ -501,7 +501,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class PopulatedItemInfoSeasonType : StringEnum<PopulatedItemInfoSeasonType>
     {
@@ -522,7 +522,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class PopulatedItemInfoStatus : StringEnum<PopulatedItemInfoStatus>
     {
@@ -543,5 +543,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 }

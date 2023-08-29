@@ -65,7 +65,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 PublishPolicyVersion op = new PublishPolicyVersion(this,
-                    policyVersionId
+                    policyVersionId                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -98,31 +98,31 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         )
         {
             PathParams["policyVersionId"] = policyVersionId;
-
+            
             if (builder.ShouldNotify != null) QueryParams["shouldNotify"] = Convert.ToString(builder.ShouldNotify)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PublishPolicyVersion(
-            string policyVersionId,
-            bool? shouldNotify
+            string policyVersionId,            
+            bool? shouldNotify            
         )
         {
             PathParams["policyVersionId"] = policyVersionId;
-
+            
             if (shouldNotify != null) QueryParams["shouldNotify"] = Convert.ToString(shouldNotify)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -131,19 +131,19 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Patch;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)200)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

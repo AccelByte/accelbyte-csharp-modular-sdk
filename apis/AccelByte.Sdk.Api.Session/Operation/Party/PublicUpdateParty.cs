@@ -66,9 +66,9 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 PublicUpdateParty op = new PublicUpdateParty(this,
-                    body,
-                    namespace_,
-                    partyId
+                    body,                    
+                    namespace_,                    
+                    partyId                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -94,12 +94,12 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
 
-            public Model.ApimodelsPartySessionResponse<T1>? Execute<T1>(
+            public Model.ApimodelsPartySessionResponse<T1, T2>? Execute<T1, T2>(
                 ApimodelsUpdatePartyRequest body,
                 string namespace_,
                 string partyId
@@ -115,8 +115,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                return op.ParseResponse<T1>(
-                    response.Code,
+                return op.ParseResponse<T1, T2>(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -130,33 +130,33 @@ namespace AccelByte.Sdk.Api.Session.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["partyId"] = partyId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PublicUpdateParty(
-            string namespace_,
-            string partyId,
-            Model.ApimodelsUpdatePartyRequest body
+            string namespace_,            
+            string partyId,            
+            Model.ApimodelsUpdatePartyRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["partyId"] = partyId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -167,10 +167,10 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ApimodelsPartySessionResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -183,27 +183,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
             {
                 return JsonSerializer.Deserialize<Model.ApimodelsPartySessionResponse>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
 
-        public Model.ApimodelsPartySessionResponse<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
-        {
+        public Model.ApimodelsPartySessionResponse<T1, T2>? ParseResponse<T1, T2>(HttpStatusCode code, string contentType, Stream payload)
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
-            }
+            }            
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.ApimodelsPartySessionResponse<T1>>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ApimodelsPartySessionResponse<T1, T2>>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.ApimodelsPartySessionResponse<T1>>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ApimodelsPartySessionResponse<T1, T2>>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
             throw new HttpResponseException(code, payloadString);
         }

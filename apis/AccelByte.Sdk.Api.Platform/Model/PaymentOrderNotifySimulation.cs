@@ -60,7 +60,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class PaymentOrderNotifySimulationPaymentProvider : StringEnum<PaymentOrderNotifySimulationPaymentProvider>
     {
@@ -99,5 +99,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 }

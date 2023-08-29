@@ -68,6 +68,10 @@ namespace AccelByte.Sdk.Api.Matchmaking.Model
         [JsonPropertyName("ticket_id")]
         public string? TicketId { get; set; }
 
+        [JsonPropertyName("ticket_ids")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<string>? TicketIds { get; set; }
+
         [JsonPropertyName("updated_at")]
         public DateTime? UpdatedAt { get; set; }
 
@@ -130,6 +134,10 @@ namespace AccelByte.Sdk.Api.Matchmaking.Model
 
         [JsonPropertyName("ticket_id")]
         public string? TicketId { get; set; }
+
+        [JsonPropertyName("ticket_ids")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<string>? TicketIds { get; set; }
 
         [JsonPropertyName("updated_at")]
         public DateTime? UpdatedAt { get; set; }

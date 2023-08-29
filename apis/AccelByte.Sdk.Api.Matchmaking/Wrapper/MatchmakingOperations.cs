@@ -42,22 +42,20 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             get { return new Operation.VersionCheckHandler.VersionCheckHandlerBuilder(_sdk); }
         }
         #endregion
-
-        public void GetHealthcheckInfo(GetHealthcheckInfo input)
-        {
+        
+        public void GetHealthcheckInfo(GetHealthcheckInfo input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void HandlerV3Healthz(HandlerV3Healthz input)
-        {
+        public void HandlerV3Healthz(HandlerV3Healthz input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -66,16 +64,15 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void VersionCheckHandler(VersionCheckHandler input)
-        {
+        public void VersionCheckHandler(VersionCheckHandler input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

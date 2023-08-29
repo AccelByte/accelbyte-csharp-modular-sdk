@@ -30,13 +30,13 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             get { return new Operation.RegisterXblSessions.RegisterXblSessionsBuilder(_sdk); }
         }
         #endregion
-
+        
         public Dictionary<string, object>? RegisterXblSessions(RegisterXblSessions input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

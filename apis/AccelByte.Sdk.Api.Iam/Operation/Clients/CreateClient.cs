@@ -37,7 +37,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// 
     ///   * Substitute endpoint: /iam/v3/admin/namespaces/{namespace}/clients [POST]
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class CreateClient : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -68,7 +68,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 CreateClient op = new CreateClient(this,
-                    body
+                    body                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public Model.ClientmodelClientCreationResponse? Execute(
                 ClientmodelClientCreateRequest body
             )
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -101,29 +101,29 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             ClientmodelClientCreateRequest body
         )
         {
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public CreateClient(
-            Model.ClientmodelClientCreateRequest body
+            Model.ClientmodelClientCreateRequest body            
         )
         {
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -134,10 +134,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ClientmodelClientCreationResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -150,9 +150,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 return JsonSerializer.Deserialize<Model.ClientmodelClientCreationResponse>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

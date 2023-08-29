@@ -114,6 +114,17 @@ namespace AccelByte.Sdk.Api.Platform
         }
         private Wrapper.Fulfillment? _Fulfillment = null;
 
+        public Wrapper.Clawback Clawback
+        {
+            get
+            {
+                if (_Clawback == null)
+                    _Clawback = new Wrapper.Clawback(_Sdk);
+                return _Clawback;
+            }
+        }
+        private Wrapper.Clawback? _Clawback = null;
+
         public Wrapper.IAP IAP
         {
             get
@@ -383,7 +394,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<PlatformApi>("platform", () =>
             {
                 return new PlatformApi(sdk);
-            });
+            });            
         }
     }
 }

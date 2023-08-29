@@ -64,10 +64,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public PublicRemoveTrustedDeviceV4 Build(
                 string namespace_,
-                string deviceToken)
+                string deviceToken            )
             {
                 PublicRemoveTrustedDeviceV4 op = new PublicRemoveTrustedDeviceV4(this,
-                    namespace_,
+                    namespace_,                    
                     deviceToken
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
@@ -84,7 +84,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 PublicRemoveTrustedDeviceV4 op = Build(
                     namespace_,
-                    deviceToken
+                    deviceToken                    
                 );
 
                 if (_Sdk == null)
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -100,35 +100,35 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         private PublicRemoveTrustedDeviceV4(PublicRemoveTrustedDeviceV4Builder builder,
             string namespace_,
-            string deviceToken
+            string deviceToken            
         )
         {
             PathParams["namespace"] = namespace_;
-
-
+            
+            
 
             Cookies["device_token"] = deviceToken;
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PublicRemoveTrustedDeviceV4(
-            string namespace_,
+            string namespace_,            
             string deviceToken
         )
         {
             PathParams["namespace"] = namespace_;
-
-
+            
+            
 
             Cookies["device_token"] = deviceToken;
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -137,19 +137,19 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             )
             {
                 ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost op = new ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost(this,
-                    body
+                    body                    
 
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             {
                 ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost op = Build(
                     body
-
+                    
                 );
 
                 if (_Sdk == null)
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -136,16 +136,16 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
         private ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost(ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder builder,
             List<TelemetryBody> body
-
+            
         )
         {
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
@@ -153,17 +153,17 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         #endregion
 
         public ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost(
-            List<Model.TelemetryBody> body,
+            List<Model.TelemetryBody> body,            
             string accessToken
         )
         {
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
@@ -175,17 +175,17 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

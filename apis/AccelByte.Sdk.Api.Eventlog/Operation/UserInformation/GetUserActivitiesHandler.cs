@@ -24,7 +24,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
     ///
     /// Required permission `NAMESPACE:{namespace}:EVENT [UPDATE]`and scope `analytics`
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class GetUserActivitiesHandler : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -65,9 +65,9 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
             )
             {
                 GetUserActivitiesHandler op = new GetUserActivitiesHandler(this,
-                    namespace_,
-                    userId,
-                    pageSize
+                    namespace_,                    
+                    userId,                    
+                    pageSize                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -76,7 +76,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public Model.ModelsEventResponse? Execute(
                 string namespace_,
                 string userId,
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -108,36 +108,36 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             QueryParams["pageSize"] = Convert.ToString(pageSize)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GetUserActivitiesHandler(
-            string namespace_,
-            string userId,
-            long? offset,
-            long pageSize
+            string namespace_,            
+            string userId,            
+            long? offset,            
+            long pageSize            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             QueryParams["pageSize"] = Convert.ToString(pageSize)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -146,12 +146,12 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ModelsEventResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -164,9 +164,9 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsEventResponse>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

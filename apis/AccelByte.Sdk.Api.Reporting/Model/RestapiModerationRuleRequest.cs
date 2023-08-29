@@ -60,7 +60,7 @@ namespace AccelByte.Sdk.Api.Reporting.Model
         {
 
         }
-    }
+    }    
 
     public class RestapiModerationRuleRequestCategory : StringEnum<RestapiModerationRuleRequestCategory>
     {
@@ -87,5 +87,5 @@ namespace AccelByte.Sdk.Api.Reporting.Model
         {
 
         }
-    }
+    }    
 }

@@ -31,6 +31,10 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonStringEnum]
         public RewardsRequestSource? Source { get; set; }
 
+        [JsonPropertyName("transactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? TransactionId { get; set; }
+
     }
 
     public class RewardsRequest<T1> : AccelByte.Sdk.Core.Model
@@ -51,6 +55,10 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonStringEnum]
         public RewardsRequestSource? Source { get; set; }
+
+        [JsonPropertyName("transactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? TransactionId { get; set; }
 
     }
 
@@ -101,7 +109,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class RewardsRequestSource : StringEnum<RewardsRequestSource>
     {
@@ -114,9 +122,6 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public static readonly RewardsRequestSource DLC
             = new RewardsRequestSource("DLC");
 
-        public static readonly RewardsRequestSource DLCREVOCATION
-            = new RewardsRequestSource("DLC_REVOCATION");
-
         public static readonly RewardsRequestSource EXPIRATION
             = new RewardsRequestSource("EXPIRATION");
 
@@ -125,6 +130,9 @@ namespace AccelByte.Sdk.Api.Platform.Model
 
         public static readonly RewardsRequestSource IAP
             = new RewardsRequestSource("IAP");
+
+        public static readonly RewardsRequestSource IAPCHARGEBACKREVERSED
+            = new RewardsRequestSource("IAP_CHARGEBACK_REVERSED");
 
         public static readonly RewardsRequestSource ORDERREVOCATION
             = new RewardsRequestSource("ORDER_REVOCATION");
@@ -164,5 +172,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 }

@@ -30,13 +30,13 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             get { return new Operation.AdminListEnvironmentVariables.AdminListEnvironmentVariablesBuilder(_sdk); }
         }
         #endregion
-
+        
         public Model.ApimodelsEnvironmentVariableListResponse? AdminListEnvironmentVariables(AdminListEnvironmentVariables input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

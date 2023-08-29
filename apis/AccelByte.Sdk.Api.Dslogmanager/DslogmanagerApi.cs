@@ -75,7 +75,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<DslogmanagerApi>("dslogmanager", () =>
             {
                 return new DslogmanagerApi(sdk);
-            });
+            });            
         }
     }
 }

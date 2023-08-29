@@ -55,8 +55,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
             )
             {
                 PublicGetSingleMatchmakingChannel op = new PublicGetSingleMatchmakingChannel(this,
-                    channelName,
-                    namespace_
+                    channelName,                    
+                    namespace_                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -93,30 +93,30 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         {
             PathParams["channelName"] = channelName;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PublicGetSingleMatchmakingChannel(
-            string channelName,
-            string namespace_
+            string channelName,            
+            string namespace_            
         )
         {
             PathParams["channelName"] = channelName;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -127,10 +127,10 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ModelsChannelV1? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -143,9 +143,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsChannelV1>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

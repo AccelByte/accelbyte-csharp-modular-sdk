@@ -38,13 +38,13 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             get { return new Operation.AdminDeletePlatformCredentials.AdminDeletePlatformCredentialsBuilder(_sdk); }
         }
         #endregion
-
+        
         public Model.ModelsPlatformCredentials? AdminGetPlatformCredentials(AdminGetPlatformCredentials input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -53,16 +53,15 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeletePlatformCredentials(AdminDeletePlatformCredentials input)
-        {
+        public void AdminDeletePlatformCredentials(AdminDeletePlatformCredentials input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

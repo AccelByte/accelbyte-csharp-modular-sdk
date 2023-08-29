@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<DsmcApi>("dsmc", () =>
             {
                 return new DsmcApi(sdk);
-            });
+            });            
         }
     }
 }

@@ -33,7 +33,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// 
     ///           * Substitute endpoint: /iam/v3/admin/roles/{roleId}/members [DELETE]
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class RemoveRoleMembers : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -65,8 +65,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 RemoveRoleMembers op = new RemoveRoleMembers(this,
-                    body,
-                    roleId
+                    body,                    
+                    roleId                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -75,7 +75,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelRoleMembersRequest body,
                 string roleId
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -103,31 +103,31 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["roleId"] = roleId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public RemoveRoleMembers(
-            string roleId,
-            Model.ModelRoleMembersRequest body
+            string roleId,            
+            Model.ModelRoleMembersRequest body            
         )
         {
             PathParams["roleId"] = roleId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -138,17 +138,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

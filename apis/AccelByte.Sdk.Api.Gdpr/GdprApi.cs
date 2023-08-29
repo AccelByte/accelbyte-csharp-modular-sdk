@@ -53,7 +53,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<GdprApi>("gdpr", () =>
             {
                 return new GdprApi(sdk);
-            });
+            });            
         }
     }
 }

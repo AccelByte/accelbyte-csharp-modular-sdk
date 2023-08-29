@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 GenerateTokenByNewHeadlessAccountV3 op = new GenerateTokenByNewHeadlessAccountV3(this,
-                    linkingToken
+                    linkingToken                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -106,35 +106,35 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string linkingToken
         )
         {
-
-
+            
+            
             if (builder.AdditionalData is not null) FormParams["additionalData"] = builder.AdditionalData;
             if (builder.ExtendExp != null) FormParams["extend_exp"] = Convert.ToString(builder.ExtendExp)!;
             if (linkingToken is not null) FormParams["linkingToken"] = linkingToken;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GenerateTokenByNewHeadlessAccountV3(
-            string? additionalData,
-            bool? extendExp,
-            string linkingToken
+            string? additionalData,            
+            bool? extendExp,            
+            string linkingToken            
         )
         {
-
-
+            
+            
             if (additionalData is not null) FormParams["additionalData"] = additionalData;
             if (extendExp != null) FormParams["extend_exp"] = Convert.ToString(extendExp)!;
             if (linkingToken is not null) FormParams["linkingToken"] = linkingToken;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -145,10 +145,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.OauthmodelTokenResponseV3? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -161,9 +161,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 return JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

@@ -190,7 +190,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 AdminQueryGameSessions op = new AdminQueryGameSessions(this,
-                    namespace_
+                    namespace_                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -212,7 +212,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -223,7 +223,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.ConfigurationName is not null) QueryParams["configurationName"] = builder.ConfigurationName;
             if (builder.DsPodName is not null) QueryParams["dsPodName"] = builder.DsPodName;
             if (builder.FromTime is not null) QueryParams["fromTime"] = builder.FromTime;
@@ -241,39 +241,39 @@ namespace AccelByte.Sdk.Api.Session.Operation
             if (builder.Status is not null) QueryParams["status"] = builder.Status;
             if (builder.StatusV2 is not null) QueryParams["statusV2"] = builder.StatusV2;
             if (builder.ToTime is not null) QueryParams["toTime"] = builder.ToTime;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public AdminQueryGameSessions(
-            string namespace_,
-            string? configurationName,
-            string? dsPodName,
-            string? fromTime,
-            string? gameMode,
-            string? isPersistent,
-            string? isSoftDeleted,
-            string? joinability,
-            long? limit,
-            string? matchPool,
-            string? memberID,
-            long? offset,
-            string? order,
-            string? orderBy,
-            string? sessionID,
-            string? status,
-            string? statusV2,
-            string? toTime
+            string namespace_,            
+            string? configurationName,            
+            string? dsPodName,            
+            string? fromTime,            
+            string? gameMode,            
+            string? isPersistent,            
+            string? isSoftDeleted,            
+            string? joinability,            
+            long? limit,            
+            string? matchPool,            
+            string? memberID,            
+            long? offset,            
+            string? order,            
+            string? orderBy,            
+            string? sessionID,            
+            string? status,            
+            string? statusV2,            
+            string? toTime            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (configurationName is not null) QueryParams["configurationName"] = configurationName;
             if (dsPodName is not null) QueryParams["dsPodName"] = dsPodName;
             if (fromTime is not null) QueryParams["fromTime"] = fromTime;
@@ -291,11 +291,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
             if (status is not null) QueryParams["status"] = status;
             if (statusV2 is not null) QueryParams["statusV2"] = statusV2;
             if (toTime is not null) QueryParams["toTime"] = toTime;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -306,10 +306,10 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ApimodelsGameSessionQueryResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -322,9 +322,9 @@ namespace AccelByte.Sdk.Api.Session.Operation
             {
                 return JsonSerializer.Deserialize<Model.ApimodelsGameSessionQueryResponse>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

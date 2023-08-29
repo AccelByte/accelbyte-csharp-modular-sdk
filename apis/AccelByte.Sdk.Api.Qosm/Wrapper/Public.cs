@@ -34,13 +34,13 @@ namespace AccelByte.Sdk.Api.Qosm.Wrapper
             get { return new Operation.ListServer.ListServerBuilder(_sdk); }
         }
         #endregion
-
+        
         public Model.ModelsListServerResponse? ListServerPerNamespace(ListServerPerNamespace input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -49,7 +49,7 @@ namespace AccelByte.Sdk.Api.Qosm.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

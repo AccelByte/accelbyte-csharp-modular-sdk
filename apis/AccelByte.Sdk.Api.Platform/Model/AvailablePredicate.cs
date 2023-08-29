@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class AvailablePredicateValueType : StringEnum<AvailablePredicateValueType>
     {
@@ -82,5 +82,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 }

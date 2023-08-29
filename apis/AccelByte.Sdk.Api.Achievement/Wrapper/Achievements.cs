@@ -66,13 +66,13 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
             get { return new Operation.PublicGetAchievement.PublicGetAchievementBuilder(_sdk); }
         }
         #endregion
-
+        
         public Model.ModelsPaginatedAchievementResponse? AdminListAchievements(AdminListAchievements input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -81,17 +81,17 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-
+        
         public Model.ModelsAchievementResponse<T1>? AdminCreateNewAchievement<T1>(AdminCreateNewAchievement input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -118,17 +118,17 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-
+        
         public Model.ModelsAchievementResponse<T1>? AdminGetAchievement<T1>(AdminGetAchievement input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -137,35 +137,33 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-
+        
         public Model.ModelsAchievementResponse<T1>? AdminUpdateAchievement<T1>(AdminUpdateAchievement input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteAchievement(AdminDeleteAchievement input)
-        {
+        public void AdminDeleteAchievement(AdminDeleteAchievement input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminUpdateAchievementListOrder(AdminUpdateAchievementListOrder input)
-        {
+        public void AdminUpdateAchievementListOrder(AdminUpdateAchievementListOrder input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -174,7 +172,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -183,17 +181,17 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-
+        
         public Model.ModelsPublicAchievementResponse<T1>? PublicGetAchievement<T1>(PublicGetAchievement input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

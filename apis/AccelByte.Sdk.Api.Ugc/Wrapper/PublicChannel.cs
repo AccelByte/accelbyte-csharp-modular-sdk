@@ -42,13 +42,13 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
             get { return new Operation.DeleteChannel.DeleteChannelBuilder(_sdk); }
         }
         #endregion
-
+        
         public Model.ModelsPaginatedGetChannelResponse? GetChannels(GetChannels input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -57,7 +57,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -66,16 +66,15 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteChannel(DeleteChannel input)
-        {
+        public void DeleteChannel(DeleteChannel input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

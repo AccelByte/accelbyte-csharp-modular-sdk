@@ -24,7 +24,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
     ///
     /// Required permission `ADMIN:NAMESPACE:{namespace}:EVENT [UPDATE]`and scope `analytics`
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class UpdateEventRegistryHandler : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
             )
             {
                 UpdateEventRegistryHandler op = new UpdateEventRegistryHandler(this,
-                    body,
-                    eventId
+                    body,                    
+                    eventId                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelsEventRegistry body,
                 string eventId
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -94,31 +94,31 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
         )
         {
             PathParams["eventId"] = eventId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdateEventRegistryHandler(
-            string eventId,
-            Model.ModelsEventRegistry body
+            string eventId,            
+            Model.ModelsEventRegistry body            
         )
         {
             PathParams["eventId"] = eventId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -129,17 +129,17 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

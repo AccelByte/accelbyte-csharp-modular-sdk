@@ -58,13 +58,13 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             get { return new Operation.UnselectRecord.UnselectRecordBuilder(_sdk); }
         }
         #endregion
-
+        
         public Model.CatalogChangePagingSlicedResult? QueryChanges(QueryChanges input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -73,7 +73,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -82,16 +82,15 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void SelectAllRecords(SelectAllRecords input)
-        {
+        public void SelectAllRecords(SelectAllRecords input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -100,34 +99,31 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void UnselectAllRecords(UnselectAllRecords input)
-        {
+        public void UnselectAllRecords(UnselectAllRecords input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void SelectRecord(SelectRecord input)
-        {
+        public void SelectRecord(SelectRecord input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void UnselectRecord(UnselectRecord input)
-        {
+        public void UnselectRecord(UnselectRecord input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

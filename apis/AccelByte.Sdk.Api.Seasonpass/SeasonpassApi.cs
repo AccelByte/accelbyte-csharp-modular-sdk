@@ -75,7 +75,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<SeasonpassApi>("seasonpass", () =>
             {
                 return new SeasonpassApi(sdk);
-            });
+            });            
         }
     }
 }

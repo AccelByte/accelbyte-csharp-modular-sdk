@@ -61,10 +61,10 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             )
             {
                 DeleteImagePatch op = new DeleteImagePatch(this,
-                    namespace_,
-                    imageURI,
-                    version,
-                    versionPatch
+                    namespace_,                    
+                    imageURI,                    
+                    version,                    
+                    versionPatch                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -106,37 +106,37 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (imageURI is not null) QueryParams["imageURI"] = imageURI;
             if (version is not null) QueryParams["version"] = version;
             if (versionPatch is not null) QueryParams["versionPatch"] = versionPatch;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public DeleteImagePatch(
-            string namespace_,
-            string imageURI,
-            string version,
-            string versionPatch
+            string namespace_,            
+            string imageURI,            
+            string version,            
+            string versionPatch            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (imageURI is not null) QueryParams["imageURI"] = imageURI;
             if (version is not null) QueryParams["version"] = version;
             if (versionPatch is not null) QueryParams["versionPatch"] = versionPatch;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,17 +147,17 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

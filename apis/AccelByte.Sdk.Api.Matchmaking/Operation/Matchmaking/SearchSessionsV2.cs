@@ -50,7 +50,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
     /// Search sessions. Optimize the query by differentiating query with filter namespace only and filter with namespace & other filter (partyID, userID, matchID).
     /// Query with filter namespace only will not group whole session data while query with filter namespace & other filter will include session data.
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class SearchSessionsV2 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -123,9 +123,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
             )
             {
                 SearchSessionsV2 op = new SearchSessionsV2(this,
-                    namespace_,
-                    limit,
-                    offset
+                    namespace_,                    
+                    limit,                    
+                    offset                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public Model.ServiceGetSessionHistorySearchResponseV2? Execute(
                 string namespace_,
                 long limit,
@@ -152,7 +152,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -165,7 +165,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Channel is not null) QueryParams["channel"] = builder.Channel;
             if (builder.Deleted != null) QueryParams["deleted"] = Convert.ToString(builder.Deleted)!;
             if (builder.MatchID is not null) QueryParams["matchID"] = builder.MatchID;
@@ -173,29 +173,29 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
             if (builder.UserID is not null) QueryParams["userID"] = builder.UserID;
             QueryParams["limit"] = Convert.ToString(limit)!;
             QueryParams["offset"] = Convert.ToString(offset)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public SearchSessionsV2(
-            string namespace_,
-            string? channel,
-            bool? deleted,
-            string? matchID,
-            string? partyID,
-            string? userID,
-            long limit,
-            long offset
+            string namespace_,            
+            string? channel,            
+            bool? deleted,            
+            string? matchID,            
+            string? partyID,            
+            string? userID,            
+            long limit,            
+            long offset            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (channel is not null) QueryParams["channel"] = channel;
             if (deleted != null) QueryParams["deleted"] = Convert.ToString(deleted)!;
             if (matchID is not null) QueryParams["matchID"] = matchID;
@@ -203,11 +203,11 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
             if (userID is not null) QueryParams["userID"] = userID;
             QueryParams["limit"] = Convert.ToString(limit)!;
             QueryParams["offset"] = Convert.ToString(offset)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -218,10 +218,10 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ServiceGetSessionHistorySearchResponseV2? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -234,9 +234,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
             {
                 return JsonSerializer.Deserialize<Model.ServiceGetSessionHistorySearchResponseV2>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

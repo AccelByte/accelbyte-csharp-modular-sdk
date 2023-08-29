@@ -30,13 +30,12 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
             get { return new Operation.AdminAnonymizeUserLeaderboardAdminV1.AdminAnonymizeUserLeaderboardAdminV1Builder(_sdk); }
         }
         #endregion
-
-        public void AdminAnonymizeUserLeaderboardAdminV1(AdminAnonymizeUserLeaderboardAdminV1 input)
-        {
+        
+        public void AdminAnonymizeUserLeaderboardAdminV1(AdminAnonymizeUserLeaderboardAdminV1 input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

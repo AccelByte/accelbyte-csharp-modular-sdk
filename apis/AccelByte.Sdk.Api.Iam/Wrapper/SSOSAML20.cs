@@ -30,13 +30,12 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             get { return new Operation.PlatformAuthenticateSAMLV3Handler.PlatformAuthenticateSAMLV3HandlerBuilder(_sdk); }
         }
         #endregion
-
-        public string PlatformAuthenticateSAMLV3Handler(PlatformAuthenticateSAMLV3Handler input)
-        {
+        
+        public string PlatformAuthenticateSAMLV3Handler(PlatformAuthenticateSAMLV3Handler input) {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

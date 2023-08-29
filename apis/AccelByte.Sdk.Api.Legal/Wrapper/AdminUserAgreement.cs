@@ -30,13 +30,13 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
             get { return new Operation.IndirectBulkAcceptVersionedPolicy.IndirectBulkAcceptVersionedPolicyBuilder(_sdk); }
         }
         #endregion
-
+        
         public Model.AcceptAgreementResponse? IndirectBulkAcceptVersionedPolicy(IndirectBulkAcceptVersionedPolicy input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

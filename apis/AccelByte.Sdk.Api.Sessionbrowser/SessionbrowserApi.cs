@@ -42,7 +42,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<SessionbrowserApi>("sessionbrowser", () =>
             {
                 return new SessionbrowserApi(sdk);
-            });
+            });            
         }
     }
 }

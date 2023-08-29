@@ -35,6 +35,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             : OperationBuilder<GetListOfFriendsBuilder>
         {
 
+            public string? FriendId { get; set; }
+
             public long? Limit { get; set; }
 
             public long? Offset { get; set; }
@@ -50,6 +52,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 _Sdk = sdk;
             }
 
+
+            public GetListOfFriendsBuilder SetFriendId(string _friendId)
+            {
+                FriendId = _friendId;
+                return this;
+            }
 
             public GetListOfFriendsBuilder SetLimit(long _limit)
             {
@@ -73,8 +81,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 GetListOfFriends op = new GetListOfFriends(this,
-                    namespace_,
-                    userId
+                    namespace_,                    
+                    userId                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -98,7 +106,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,36 +119,39 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
+            if (builder.FriendId is not null) QueryParams["friendId"] = builder.FriendId;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GetListOfFriends(
-            string namespace_,
-            string userId,
-            long? limit,
-            long? offset
+            string namespace_,            
+            string userId,            
+            string? friendId,            
+            long? limit,            
+            long? offset            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
+            if (friendId is not null) QueryParams["friendId"] = friendId;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -151,10 +162,10 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ModelGetFriendsResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -167,9 +178,9 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelGetFriendsResponse>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

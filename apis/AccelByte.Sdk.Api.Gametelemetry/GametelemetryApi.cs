@@ -53,7 +53,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<GametelemetryApi>("gametelemetry", () =>
             {
                 return new GametelemetryApi(sdk);
-            });
+            });            
         }
     }
 }

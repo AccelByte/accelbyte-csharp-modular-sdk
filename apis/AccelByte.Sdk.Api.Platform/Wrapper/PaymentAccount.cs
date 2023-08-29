@@ -34,22 +34,21 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             get { return new Operation.PublicDeletePaymentAccount.PublicDeletePaymentAccountBuilder(_sdk); }
         }
         #endregion
-
+        
         public List<Model.PaymentAccount>? PublicGetPaymentAccounts(PublicGetPaymentAccounts input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicDeletePaymentAccount(PublicDeletePaymentAccount input)
-        {
+        public void PublicDeletePaymentAccount(PublicDeletePaymentAccount input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

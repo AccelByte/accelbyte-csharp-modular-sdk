@@ -181,7 +181,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class FulfillmentRequestSource : StringEnum<FulfillmentRequestSource>
     {
@@ -194,9 +194,6 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public static readonly FulfillmentRequestSource DLC
             = new FulfillmentRequestSource("DLC");
 
-        public static readonly FulfillmentRequestSource DLCREVOCATION
-            = new FulfillmentRequestSource("DLC_REVOCATION");
-
         public static readonly FulfillmentRequestSource EXPIRATION
             = new FulfillmentRequestSource("EXPIRATION");
 
@@ -205,6 +202,9 @@ namespace AccelByte.Sdk.Api.Platform.Model
 
         public static readonly FulfillmentRequestSource IAP
             = new FulfillmentRequestSource("IAP");
+
+        public static readonly FulfillmentRequestSource IAPCHARGEBACKREVERSED
+            = new FulfillmentRequestSource("IAP_CHARGEBACK_REVERSED");
 
         public static readonly FulfillmentRequestSource ORDERREVOCATION
             = new FulfillmentRequestSource("ORDER_REVOCATION");
@@ -244,5 +244,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 }

@@ -57,7 +57,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// 
     ///           * Substitute endpoint: /iam/v3/oauth/platforms/{platformId}/token [POST]
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class PlatformTokenRequestHandler : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -113,8 +113,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PlatformTokenRequestHandler op = new PlatformTokenRequestHandler(this,
-                    namespace_,
-                    platformId
+                    namespace_,                    
+                    platformId                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public Model.OauthmodelTokenResponse? Execute(
                 string namespace_,
                 string platformId
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -152,39 +152,39 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
-
-
+            
+            
             if (builder.DeviceId is not null) FormParams["device_id"] = builder.DeviceId;
             if (builder.MacAddress is not null) FormParams["macAddress"] = builder.MacAddress;
             if (builder.PlatformToken is not null) FormParams["platform_token"] = builder.PlatformToken;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PlatformTokenRequestHandler(
-            string namespace_,
-            string platformId,
-            string? deviceId,
-            string? macAddress,
-            string? platformToken
+            string namespace_,            
+            string platformId,            
+            string? deviceId,            
+            string? macAddress,            
+            string? platformToken            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
-
-
+            
+            
             if (deviceId is not null) FormParams["device_id"] = deviceId;
             if (macAddress is not null) FormParams["macAddress"] = macAddress;
             if (platformToken is not null) FormParams["platform_token"] = platformToken;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -195,10 +195,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.OauthmodelTokenResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -211,9 +211,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 return JsonSerializer.Deserialize<Model.OauthmodelTokenResponse>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

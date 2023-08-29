@@ -86,9 +86,9 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             )
             {
                 ListImages op = new ListImages(this,
-                    namespace_,
-                    count,
-                    offset
+                    namespace_,                    
+                    count,                    
+                    offset                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -127,43 +127,43 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Q is not null) QueryParams["q"] = builder.Q;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy.Value;
             if (builder.SortDirection is not null) QueryParams["sortDirection"] = builder.SortDirection.Value;
             QueryParams["count"] = Convert.ToString(count)!;
             QueryParams["offset"] = Convert.ToString(offset)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public ListImages(
-            string namespace_,
-            string? q,
-            ListImagesSortBy? sortBy,
-            ListImagesSortDirection? sortDirection,
-            long count,
-            long offset
+            string namespace_,            
+            string? q,            
+            ListImagesSortBy? sortBy,            
+            ListImagesSortDirection? sortDirection,            
+            long count,            
+            long offset            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (q is not null) QueryParams["q"] = q;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy.Value;
             if (sortDirection is not null) QueryParams["sortDirection"] = sortDirection.Value;
             QueryParams["count"] = Convert.ToString(count)!;
             QueryParams["offset"] = Convert.ToString(offset)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -174,10 +174,10 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ModelsListImageResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -190,9 +190,9 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsListImageResponse>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

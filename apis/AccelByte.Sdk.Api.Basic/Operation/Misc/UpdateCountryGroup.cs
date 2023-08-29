@@ -71,8 +71,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 UpdateCountryGroup op = new UpdateCountryGroup(this,
-                    countryGroupCode,
-                    namespace_
+                    countryGroupCode,                    
+                    namespace_                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -109,33 +109,33 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         {
             PathParams["countryGroupCode"] = countryGroupCode;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = builder.Body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdateCountryGroup(
-            string countryGroupCode,
-            string namespace_,
-            Model.UpdateCountryGroupRequest body
+            string countryGroupCode,            
+            string namespace_,            
+            Model.UpdateCountryGroupRequest body            
         )
         {
             PathParams["countryGroupCode"] = countryGroupCode;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -146,10 +146,10 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.CountryGroupObject? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -162,9 +162,9 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             {
                 return JsonSerializer.Deserialize<Model.CountryGroupObject>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

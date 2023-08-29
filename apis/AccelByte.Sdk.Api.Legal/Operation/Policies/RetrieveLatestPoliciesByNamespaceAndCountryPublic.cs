@@ -99,8 +99,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 RetrieveLatestPoliciesByNamespaceAndCountryPublic op = new RetrieveLatestPoliciesByNamespaceAndCountryPublic(this,
-                    countryCode,
-                    namespace_
+                    countryCode,                    
+                    namespace_                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -137,41 +137,41 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         {
             PathParams["countryCode"] = countryCode;
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.AlwaysIncludeDefault != null) QueryParams["alwaysIncludeDefault"] = Convert.ToString(builder.AlwaysIncludeDefault)!;
             if (builder.DefaultOnEmpty != null) QueryParams["defaultOnEmpty"] = Convert.ToString(builder.DefaultOnEmpty)!;
             if (builder.PolicyType is not null) QueryParams["policyType"] = builder.PolicyType.Value;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
+            
 
-
-
-
-
+            
+            
+            
 
         }
         #endregion
 
         public RetrieveLatestPoliciesByNamespaceAndCountryPublic(
-            string countryCode,
-            string namespace_,
-            bool? alwaysIncludeDefault,
-            bool? defaultOnEmpty,
-            RetrieveLatestPoliciesByNamespaceAndCountryPublicPolicyType? policyType,
-            string? tags
+            string countryCode,            
+            string namespace_,            
+            bool? alwaysIncludeDefault,            
+            bool? defaultOnEmpty,            
+            RetrieveLatestPoliciesByNamespaceAndCountryPublicPolicyType? policyType,            
+            string? tags            
         )
         {
             PathParams["countryCode"] = countryCode;
             PathParams["namespace"] = namespace_;
-
+            
             if (alwaysIncludeDefault != null) QueryParams["alwaysIncludeDefault"] = Convert.ToString(alwaysIncludeDefault)!;
             if (defaultOnEmpty != null) QueryParams["defaultOnEmpty"] = Convert.ToString(defaultOnEmpty)!;
             if (policyType is not null) QueryParams["policyType"] = policyType.Value;
             if (tags is not null) QueryParams["tags"] = tags;
+            
 
-
-
-
-
+            
+            
+            
 
         }
 
@@ -179,12 +179,12 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public List<Model.RetrievePolicyPublicResponse>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -197,9 +197,9 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             {
                 return JsonSerializer.Deserialize<List<Model.RetrievePolicyPublicResponse>>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

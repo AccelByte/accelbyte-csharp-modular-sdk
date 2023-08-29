@@ -82,8 +82,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PlatformAuthenticateSAMLV3Handler op = new PlatformAuthenticateSAMLV3Handler(this,
-                    platformId,
-                    state
+                    platformId,                    
+                    state                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -119,15 +119,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["platformId"] = platformId;
-
+            
             if (builder.Code is not null) QueryParams["code"] = builder.Code;
             if (builder.Error is not null) QueryParams["error"] = builder.Error;
             if (state is not null) QueryParams["state"] = state;
+            
 
-
-
-
-
+            
+            
+            
             LocationQuery = "PLACEHOLDER";
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
@@ -135,22 +135,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PlatformAuthenticateSAMLV3Handler(
-            string platformId,
-            string? code,
-            string? error,
-            string state
+            string platformId,            
+            string? code,            
+            string? error,            
+            string state            
         )
         {
             PathParams["platformId"] = platformId;
-
+            
             if (code is not null) QueryParams["code"] = code;
             if (error is not null) QueryParams["error"] = error;
             if (state is not null) QueryParams["state"] = state;
+            
 
-
-
-
-
+            
+            
+            
             LocationQuery = "PLACEHOLDER";
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
@@ -162,17 +162,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
-        public override List<string> Produces => new() { };
-
+        public override List<string> Produces => new() {  };        
+        
         public string ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var payloadString = payload.ReadToString();
-
+            
             if (code == (HttpStatusCode)302)
             {
-                return payloadString;
+              return payloadString;
             }
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

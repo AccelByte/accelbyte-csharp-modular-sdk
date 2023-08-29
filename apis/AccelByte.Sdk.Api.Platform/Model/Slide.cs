@@ -63,7 +63,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class SlideVideoSource : StringEnum<SlideVideoSource>
     {
@@ -87,5 +87,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 }

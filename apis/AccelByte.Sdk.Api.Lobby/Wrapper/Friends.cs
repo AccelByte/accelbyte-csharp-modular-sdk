@@ -77,6 +77,10 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         {
             get { return new Operation.AddFriendsWithoutConfirmation.AddFriendsWithoutConfirmationBuilder(_sdk); }
         }
+        public BulkDeleteFriends.BulkDeleteFriendsBuilder BulkDeleteFriendsOp
+        {
+            get { return new Operation.BulkDeleteFriends.BulkDeleteFriendsBuilder(_sdk); }
+        }
         public GetListOfFriends.GetListOfFriendsBuilder GetListOfFriendsOp
         {
             get { return new Operation.GetListOfFriends.GetListOfFriendsBuilder(_sdk); }
@@ -90,13 +94,13 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             get { return new Operation.GetOutgoingFriendRequests.GetOutgoingFriendRequestsBuilder(_sdk); }
         }
         #endregion
-
+        
         public List<Model.ModelGetUserFriendsResponse>? GetUserFriendsUpdated(GetUserFriendsUpdated input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -105,7 +109,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -114,7 +118,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -123,7 +127,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -132,7 +136,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -141,43 +145,39 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void UserRequestFriend(UserRequestFriend input)
-        {
+        public void UserRequestFriend(UserRequestFriend input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void UserAcceptFriendRequest(UserAcceptFriendRequest input)
-        {
+        public void UserAcceptFriendRequest(UserAcceptFriendRequest input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void UserCancelFriendRequest(UserCancelFriendRequest input)
-        {
+        public void UserCancelFriendRequest(UserCancelFriendRequest input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void UserRejectFriendRequest(UserRejectFriendRequest input)
-        {
+        public void UserRejectFriendRequest(UserRejectFriendRequest input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -186,25 +186,32 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void UserUnfriendRequest(UserUnfriendRequest input)
-        {
+        public void UserUnfriendRequest(UserUnfriendRequest input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void AddFriendsWithoutConfirmation(AddFriendsWithoutConfirmation input)
-        {
+        public void AddFriendsWithoutConfirmation(AddFriendsWithoutConfirmation input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelBulkFriendsResponse? BulkDeleteFriends(BulkDeleteFriends input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -213,7 +220,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -222,7 +229,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -231,7 +238,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

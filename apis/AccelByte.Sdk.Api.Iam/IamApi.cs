@@ -185,7 +185,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<IamApi>("iam", () =>
             {
                 return new IamApi(sdk);
-            });
+            });            
         }
     }
 }

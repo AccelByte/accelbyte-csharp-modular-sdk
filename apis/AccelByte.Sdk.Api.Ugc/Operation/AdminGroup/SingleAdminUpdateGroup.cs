@@ -57,9 +57,9 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 SingleAdminUpdateGroup op = new SingleAdminUpdateGroup(this,
-                    body,
-                    groupId,
-                    namespace_
+                    body,                    
+                    groupId,                    
+                    namespace_                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -99,33 +99,33 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         {
             PathParams["groupId"] = groupId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public SingleAdminUpdateGroup(
-            string groupId,
-            string namespace_,
-            Model.ModelsCreateGroupRequest body
+            string groupId,            
+            string namespace_,            
+            Model.ModelsCreateGroupRequest body            
         )
         {
             PathParams["groupId"] = groupId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -136,10 +136,10 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ModelsCreateGroupResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -152,9 +152,9 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             {
                 return JsonSerializer.Deserialize<Model.ModelsCreateGroupResponse>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

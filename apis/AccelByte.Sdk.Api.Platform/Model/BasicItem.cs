@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class BasicItemEntitlementType : StringEnum<BasicItemEntitlementType>
     {
@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class BasicItemItemType : StringEnum<BasicItemItemType>
     {
@@ -173,7 +173,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class BasicItemSeasonType : StringEnum<BasicItemSeasonType>
     {
@@ -194,7 +194,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class BasicItemStatus : StringEnum<BasicItemStatus>
     {
@@ -215,5 +215,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 }

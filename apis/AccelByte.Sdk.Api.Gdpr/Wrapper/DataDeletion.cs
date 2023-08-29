@@ -66,13 +66,13 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
             get { return new Operation.PublicGetMyAccountDeletionStatus.PublicGetMyAccountDeletionStatusBuilder(_sdk); }
         }
         #endregion
-
+        
         public Model.ModelsListDeletionDataResponse? AdminGetListDeletionDataRequest(AdminGetListDeletionDataRequest input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -90,16 +90,15 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminCancelUserAccountDeletionRequest(AdminCancelUserAccountDeletionRequest input)
-        {
+        public void AdminCancelUserAccountDeletionRequest(AdminCancelUserAccountDeletionRequest input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -108,16 +107,15 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicCancelUserAccountDeletionRequest(PublicCancelUserAccountDeletionRequest input)
-        {
+        public void PublicCancelUserAccountDeletionRequest(PublicCancelUserAccountDeletionRequest input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -126,7 +124,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -135,16 +133,15 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicCancelMyAccountDeletionRequest(PublicCancelMyAccountDeletionRequest input)
-        {
+        public void PublicCancelMyAccountDeletionRequest(PublicCancelMyAccountDeletionRequest input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -153,7 +150,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

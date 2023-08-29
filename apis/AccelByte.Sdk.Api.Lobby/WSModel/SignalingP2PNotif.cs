@@ -17,10 +17,10 @@ namespace AccelByte.Sdk.Api.Lobby.WSModel
         [AwesomeProperty("destinationId")]
         [JsonPropertyName("destinationId")]
         public string? DestinationId { get; set; }
-
+        
         [AwesomeProperty("message")]
         [JsonPropertyName("message")]
         public string? Message { get; set; }
-
+        
     }
 }

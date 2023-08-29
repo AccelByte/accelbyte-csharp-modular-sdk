@@ -110,13 +110,13 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             get { return new Operation.PublicQueryMyGameSessions.PublicQueryMyGameSessionsBuilder(_sdk); }
         }
         #endregion
-
+        
         public Model.ApimodelsGameSessionQueryResponse? AdminQueryGameSessions(AdminQueryGameSessions input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -143,17 +143,17 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.ApimodelsGameSessionResponse<T1>? CreateGameSession<T1>(CreateGameSession input)
+        
+        public Model.ApimodelsGameSessionResponse<T1, T2>? CreateGameSession<T1, T2>(CreateGameSession input)
         {
             var response = _sdk.RunRequest(input);
 
-            return input.ParseResponse<T1>(
-                    response.Code,
+            return input.ParseResponse<T1, T2>(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -162,7 +162,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -171,17 +171,17 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.ApimodelsGameSessionResponse<T1>? PublicSessionJoinCode<T1>(PublicSessionJoinCode input)
+        
+        public Model.ApimodelsGameSessionResponse<T1, T2>? PublicSessionJoinCode<T1, T2>(PublicSessionJoinCode input)
         {
             var response = _sdk.RunRequest(input);
 
-            return input.ParseResponse<T1>(
-                    response.Code,
+            return input.ParseResponse<T1, T2>(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -190,17 +190,17 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.ApimodelsGameSessionResponse<T1>? GetGameSessionByPodName<T1>(GetGameSessionByPodName input)
+        
+        public Model.ApimodelsGameSessionResponse<T1, T2>? GetGameSessionByPodName<T1, T2>(GetGameSessionByPodName input)
         {
             var response = _sdk.RunRequest(input);
 
-            return input.ParseResponse<T1>(
-                    response.Code,
+            return input.ParseResponse<T1, T2>(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -209,17 +209,17 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.ApimodelsGameSessionResponse<T1>? GetGameSession<T1>(GetGameSession input)
+        
+        public Model.ApimodelsGameSessionResponse<T1, T2>? GetGameSession<T1, T2>(GetGameSession input)
         {
             var response = _sdk.RunRequest(input);
 
-            return input.ParseResponse<T1>(
-                    response.Code,
+            return input.ParseResponse<T1, T2>(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -228,26 +228,25 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.ApimodelsGameSessionResponse<T1>? UpdateGameSession<T1>(UpdateGameSession input)
+        
+        public Model.ApimodelsGameSessionResponse<T1, T2>? UpdateGameSession<T1, T2>(UpdateGameSession input)
         {
             var response = _sdk.RunRequest(input);
 
-            return input.ParseResponse<T1>(
-                    response.Code,
+            return input.ParseResponse<T1, T2>(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteGameSession(DeleteGameSession input)
-        {
+        public void DeleteGameSession(DeleteGameSession input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -256,17 +255,17 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.ApimodelsGameSessionResponse<T1>? PatchUpdateGameSession<T1>(PatchUpdateGameSession input)
+        
+        public Model.ApimodelsGameSessionResponse<T1, T2>? PatchUpdateGameSession<T1, T2>(PatchUpdateGameSession input)
         {
             var response = _sdk.RunRequest(input);
 
-            return input.ParseResponse<T1>(
-                    response.Code,
+            return input.ParseResponse<T1, T2>(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -275,17 +274,17 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.ApimodelsGameSessionResponse<T1>? UpdateGameSessionBackfillTicketID<T1>(UpdateGameSessionBackfillTicketID input)
+        
+        public Model.ApimodelsGameSessionResponse<T1, T2>? UpdateGameSessionBackfillTicketID<T1, T2>(UpdateGameSessionBackfillTicketID input)
         {
             var response = _sdk.RunRequest(input);
 
-            return input.ParseResponse<T1>(
-                    response.Code,
+            return input.ParseResponse<T1, T2>(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -294,17 +293,17 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.ApimodelsGameSessionResponse<T1>? GameSessionGenerateCode<T1>(GameSessionGenerateCode input)
+        
+        public Model.ApimodelsGameSessionResponse<T1, T2>? GameSessionGenerateCode<T1, T2>(GameSessionGenerateCode input)
         {
             var response = _sdk.RunRequest(input);
 
-            return input.ParseResponse<T1>(
-                    response.Code,
+            return input.ParseResponse<T1, T2>(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -313,26 +312,25 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.ApimodelsGameSessionResponse<T1>? PublicRevokeGameSessionCode<T1>(PublicRevokeGameSessionCode input)
+        
+        public Model.ApimodelsGameSessionResponse<T1, T2>? PublicRevokeGameSessionCode<T1, T2>(PublicRevokeGameSessionCode input)
         {
             var response = _sdk.RunRequest(input);
 
-            return input.ParseResponse<T1>(
-                    response.Code,
+            return input.ParseResponse<T1, T2>(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicGameSessionInvite(PublicGameSessionInvite input)
-        {
+        public void PublicGameSessionInvite(PublicGameSessionInvite input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -341,17 +339,17 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.ApimodelsGameSessionResponse<T1>? JoinGameSession<T1>(JoinGameSession input)
+        
+        public Model.ApimodelsGameSessionResponse<T1, T2>? JoinGameSession<T1, T2>(JoinGameSession input)
         {
             var response = _sdk.RunRequest(input);
 
-            return input.ParseResponse<T1>(
-                    response.Code,
+            return input.ParseResponse<T1, T2>(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -360,35 +358,33 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.ApimodelsGameSessionResponse<T1>? PublicPromoteGameSessionLeader<T1>(PublicPromoteGameSessionLeader input)
+        
+        public Model.ApimodelsGameSessionResponse<T1, T2>? PublicPromoteGameSessionLeader<T1, T2>(PublicPromoteGameSessionLeader input)
         {
             var response = _sdk.RunRequest(input);
 
-            return input.ParseResponse<T1>(
-                    response.Code,
+            return input.ParseResponse<T1, T2>(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void LeaveGameSession(LeaveGameSession input)
-        {
-            var response = _sdk.RunRequest(input);
-
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void PublicGameSessionReject(PublicGameSessionReject input)
-        {
+        public void LeaveGameSession(LeaveGameSession input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void PublicGameSessionReject(PublicGameSessionReject input) {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -397,17 +393,17 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.ApimodelsGameSessionResponse<T1>? AppendTeamGameSession<T1>(AppendTeamGameSession input)
+        
+        public Model.ApimodelsGameSessionResponse<T1, T2>? AppendTeamGameSession<T1, T2>(AppendTeamGameSession input)
         {
             var response = _sdk.RunRequest(input);
 
-            return input.ParseResponse<T1>(
-                    response.Code,
+            return input.ParseResponse<T1, T2>(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -416,7 +412,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

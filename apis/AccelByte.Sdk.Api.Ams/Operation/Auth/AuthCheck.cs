@@ -20,24 +20,24 @@ using AccelByte.Sdk.Api.Ams.Model;
 namespace AccelByte.Sdk.Api.Ams.Operation
 {
     /// <summary>
-    /// func3
+    /// AuthCheck
     /// </summary>
-    public class Func3 : AccelByte.Sdk.Core.Operation
+    public class AuthCheck : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static Func3Builder Builder { get => new Func3Builder(); }
+        public static AuthCheckBuilder Builder { get => new AuthCheckBuilder(); }
 
-        public class Func3Builder
-            : OperationBuilder<Func3Builder>
+        public class AuthCheckBuilder
+            : OperationBuilder<AuthCheckBuilder>
         {
 
 
 
 
 
-            internal Func3Builder() { }
+            internal AuthCheckBuilder() { }
 
-            internal Func3Builder(IAccelByteSdk sdk)
+            internal AuthCheckBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -47,10 +47,10 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            public Func3 Build(
+            public AuthCheck Build(
             )
             {
-                Func3 op = new Func3(this
+                AuthCheck op = new AuthCheck(this
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -62,7 +62,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             public void Execute(
             )
             {
-                Func3 op = Build(
+                AuthCheck op = Build(
                 );
 
                 if (_Sdk == null)
@@ -70,56 +70,56 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
-        private Func3(Func3Builder builder
+        private AuthCheck(AuthCheckBuilder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public Func3(
+        public AuthCheck(
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/ams/version";
+        public override string Path => "/ams/auth";
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)200)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

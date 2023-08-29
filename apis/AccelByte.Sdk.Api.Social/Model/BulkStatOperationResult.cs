@@ -24,6 +24,10 @@ namespace AccelByte.Sdk.Api.Social.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Success { get; set; }
 
+        [JsonPropertyName("userId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? UserId { get; set; }
+
     }
 
     public class BulkStatOperationResult<T1> : AccelByte.Sdk.Core.Model
@@ -39,6 +43,10 @@ namespace AccelByte.Sdk.Api.Social.Model
         [JsonPropertyName("success")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Success { get; set; }
+
+        [JsonPropertyName("userId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? UserId { get; set; }
 
     }
 

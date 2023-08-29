@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 
     public class PaymentProviderConfigInfoSpecials : StringEnum<PaymentProviderConfigInfoSpecials>
     {
@@ -121,5 +121,5 @@ namespace AccelByte.Sdk.Api.Platform.Model
         {
 
         }
-    }
+    }    
 }

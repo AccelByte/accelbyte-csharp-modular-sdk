@@ -64,9 +64,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminUpdateDeviceBanV4 op = new AdminUpdateDeviceBanV4(this,
-                    body,
-                    banId,
-                    namespace_
+                    body,                    
+                    banId,                    
+                    namespace_                    
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -106,33 +106,33 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["banId"] = banId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public AdminUpdateDeviceBanV4(
-            string banId,
-            string namespace_,
-            Model.ModelDeviceBanUpdateRequestV4 body
+            string banId,            
+            string namespace_,            
+            Model.ModelDeviceBanUpdateRequestV4 body            
         )
         {
             PathParams["banId"] = banId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -143,17 +143,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

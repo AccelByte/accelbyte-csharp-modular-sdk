@@ -30,13 +30,13 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Wrapper
             get { return new Operation.GetServerLogs.GetServerLogsBuilder(_sdk); }
         }
         #endregion
-
+        
         public Model.ModelsServerLogs? GetServerLogs(GetServerLogs input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }

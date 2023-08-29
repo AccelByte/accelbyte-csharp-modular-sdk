@@ -54,13 +54,12 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             get { return new Operation.GetMockTicketsByTimestamp.GetMockTicketsByTimestampBuilder(_sdk); }
         }
         #endregion
-
-        public void CleanAllMocks(CleanAllMocks input)
-        {
+        
+        public void CleanAllMocks(CleanAllMocks input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -69,7 +68,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -78,7 +77,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -87,7 +86,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -96,26 +95,25 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-
+        
         public List<Model.ModelsMockTicket<T1, T2>>? CreateMockTickets<T1, T2>(CreateMockTickets input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1, T2>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
-        public void BulkCreateMockTickets(BulkCreateMockTickets input)
-        {
+        public void BulkCreateMockTickets(BulkCreateMockTickets input) {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
@@ -124,7 +122,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
         }
