@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Core
                 object? apiObj = Activator.CreateInstance(typeof(T), this);
                 if (apiObj == null)
                     throw new Exception($"Could not create api object {key}.");
-                _ApiObjects.Add(key, (T)apiObj);
+                _ApiObjects.TryAdd(key, (T)apiObj);
             }
             return (T)_ApiObjects[key];
         }
@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Core
             if (!_ApiObjects.ContainsKey(key))
             {
                 T apiObj = activatorFunc.Invoke();
-                _ApiObjects.Add(key, apiObj);
+                _ApiObjects.TryAdd(key, apiObj);
             }
             return (T)_ApiObjects[key];
         }
