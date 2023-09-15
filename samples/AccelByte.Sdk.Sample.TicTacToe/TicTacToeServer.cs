@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -14,7 +14,6 @@ using System.IO;
 
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Api;
-using AccelByte.Sdk.Core.Util;
 
 using AccelByte.Sdk.Api.Iam.Model;
 using AccelByte.Sdk.Api.Lobby.Model;
@@ -36,7 +35,7 @@ namespace AccelByte.Sdk.Sample.TicTacToe
 
         public const string WSTOPIC_LOSE = "LOSE";
 
-        private readonly AccelByteSDK _Sdk;
+        private readonly IAccelByteSdk _Sdk;
 
         private readonly ICacheProvider _Cache;
 
@@ -44,7 +43,7 @@ namespace AccelByte.Sdk.Sample.TicTacToe
 
         public char P2Symbol { get; set; } = 'x';
 
-        public TicTacToeServer(AccelByteSDK sdk, ICacheProvider cacheProvider)
+        public TicTacToeServer(IAccelByteSdk sdk, ICacheProvider cacheProvider)
         {
             _Sdk = sdk;
             _Cache = cacheProvider;
@@ -52,7 +51,7 @@ namespace AccelByte.Sdk.Sample.TicTacToe
 
         public string ValidateAuthToken(string authToken)
         {
-            OauthmodelTokenResponseV3? oauthToken = _Sdk.Iam.OAuth20.VerifyTokenV3Op
+            OauthmodelTokenResponseV3? oauthToken = _Sdk.GetIamApi().OAuth20.VerifyTokenV3Op
                 .SetPreferredSecurityMethod(Operation.SECURITY_BASIC)
                 .Execute(authToken);
             if (oauthToken == null)
@@ -62,8 +61,7 @@ namespace AccelByte.Sdk.Sample.TicTacToe
 
         public string GetUsername(string userId)
         {
-            ModelPublicUserResponseV3? userInfo =
-                _Sdk.Iam.Users.PublicGetUserByUserIdV3Op
+            ModelPublicUserResponseV3? userInfo = _Sdk.GetIamApi().Users.PublicGetUserByUserIdV3Op
                 .Execute(_Sdk.Namespace, userId);
             if (userInfo == null)
                 throw new Exception("NULL userInfo");
@@ -78,7 +76,7 @@ namespace AccelByte.Sdk.Sample.TicTacToe
                 Message = (payload is String ? payload.ToString() : JsonSerializer.Serialize(payload))
             };
 
-            _Sdk.Lobby.Notification.FreeFormNotificationByUserIDOp
+            _Sdk.GetLobbyApi().Notification.FreeFormNotificationByUserIDOp
                 .Execute(notifBody, _Sdk.Namespace, userId);
         }
 

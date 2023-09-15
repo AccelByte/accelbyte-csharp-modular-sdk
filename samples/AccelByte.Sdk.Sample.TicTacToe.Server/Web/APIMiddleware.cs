@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -14,8 +14,6 @@ using System.IO;
 
 using Microsoft.AspNetCore.Http;
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Api;
-using AccelByte.Sdk.Core.Util;
 
 using AccelByte.Sdk.Sample.TicTacToe;
 using AccelByte.Sdk.Sample.TicTacToe.Web;
@@ -28,7 +26,7 @@ namespace AccelByte.Sdk.Sample.TicTacToe.Server.Web
     {
         private readonly RequestDelegate _Next;
 
-        private readonly AccelByteSDK _Sdk;
+        private readonly IAccelByteSdk _Sdk;
 
         private readonly ICacheProvider _Cache;
 

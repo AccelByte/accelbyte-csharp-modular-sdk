@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.IO;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 
 namespace AccelByte.Sdk.Sample.TicTacToe.Game
 {

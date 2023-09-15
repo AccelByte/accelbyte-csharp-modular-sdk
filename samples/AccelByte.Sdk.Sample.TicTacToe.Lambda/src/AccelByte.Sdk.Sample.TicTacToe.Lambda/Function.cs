@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -14,8 +14,7 @@ using Amazon.Lambda.Core;
 using Amazon.Lambda.APIGatewayEvents;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Client;
-using AccelByte.Sdk.Core.Util;
+using AccelByte.Sdk.Core.Net.Http;
 using AccelByte.Sdk.Core.Repository;
 
 using AccelByte.Sdk.Sample.TicTacToe;
@@ -40,7 +39,7 @@ public class Functions
 
     }
 
-    protected AccelByteSDK CreateSdk()
+    protected IAccelByteSdk CreateSdk()
     {
         HttpClientPolicy policy = HttpClientPolicy.Default;
         policy.MaxRetryCount = 1000;
@@ -49,7 +48,7 @@ public class Functions
         //retry logic for claim server if server is not ready
         policy.RetryLogicHandler = new ResponseCodeCheckLogicHandler("425");
 
-        AccelByteSDK sdk = AccelByteSDK.Builder
+        IAccelByteSdk sdk = AccelByteSdk.Builder
             .SetHttpClient(ReliableHttpClient.Builder
                 .SetDefaultPolicy(policy)
                 .Build())

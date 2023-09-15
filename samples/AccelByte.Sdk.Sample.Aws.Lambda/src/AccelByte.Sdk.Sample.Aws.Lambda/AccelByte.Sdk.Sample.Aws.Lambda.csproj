@@ -16,8 +16,9 @@
     <PackageReference Include="Amazon.Lambda.Serialization.SystemTextJson" Version="2.2.0" />
     <PackageReference Include="Amazon.Lambda.APIGatewayEvents" Version="2.4.0" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\AccelByte.Sdk\AccelByte.Sdk.csproj" />
+    <ProjectReference Include="..\..\..\..\AccelByte.Sdk.Authentication\AccelByte.Sdk.Authentication.csproj" />
+    <ProjectReference Include="..\..\..\..\AccelByte.Sdk.Core\AccelByte.Sdk.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\apis\AccelByte.Sdk.Api.Social\AccelByte.Sdk.Api.Social.csproj" />
   </ItemGroup>
 </Project>

@@ -13,10 +13,9 @@ using System.Text.Json;
 using System.Net;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Client;
-using AccelByte.Sdk.Core.Util;
+using AccelByte.Sdk.Core.Net.Http;
+using AccelByte.Sdk.Core.Repository;
 using AccelByte.Sdk.Api.Lobby;
-using AccelByte.Sdk.Api.Lobby.WSModel;
 
 using AccelByte.Sdk.Sample.TicTacToe;
 using AccelByte.Sdk.Sample.TicTacToe.Model;
@@ -35,7 +34,7 @@ namespace AccelByte.Sdk.Sample.TicTacToe.Game
 
         private LobbyService _LobbyWs;
 
-        private AccelByteSDK _Sdk;
+        private IAccelByteSdk _Sdk;
 
         public string ActiveMatchId { get; set; } = String.Empty;
 
@@ -111,7 +110,7 @@ namespace AccelByte.Sdk.Sample.TicTacToe.Game
         public Player(CommandArguments cArgs)
         {
             _ServerUrl = cArgs.ServerURL;
-            AccelByteSdkBuilder builder = AccelByteSDK.Builder
+            var builder = AccelByteSdk.Builder
                     .UseDefaultHttpClient()
                     .UseDefaultTokenRepository();
             if (cArgs.SdkConfigFile != String.Empty)

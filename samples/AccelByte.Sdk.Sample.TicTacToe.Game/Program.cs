@@ -10,12 +10,6 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.IO;
 
-using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Client;
-using AccelByte.Sdk.Core.Util;
-using AccelByte.Sdk.Api.Lobby;
-using AccelByte.Sdk.Api.Lobby.WSModel;
-
 namespace AccelByte.Sdk.Sample.TicTacToe.Game
 {
     internal class Program

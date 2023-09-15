@@ -1,9 +1,15 @@
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// This is licensed software from AccelByte Inc, for limitations
+// and restrictions contact your company contract manager.
+
 using System.Net;
 using System.Text.Json;
 using Amazon.Lambda.Core;
 using Amazon.Lambda.APIGatewayEvents;
 
 using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Net.Http;
+using AccelByte.Sdk.Core.Repository;
 using AccelByte.Sdk.Api.Social.Model;
 using AccelByte.Sdk.Api.Social.Operation;
 using AccelByte.Sdk.Api.Social.Wrapper;
@@ -15,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Aws.Lambda;
 
 public class Functions
 {
-    private AccelByteSDK _Sdk;
+    private IAccelByteSdk _Sdk;
 
     private string _ActiveStatCode;
 
@@ -24,7 +30,7 @@ public class Functions
     /// </summary>
     public Functions()
     {
-        _Sdk = AccelByteSDK.Builder
+        _Sdk = AccelByteSdk.Builder
             .UseDefaultConfigRepository()
             .UseDefaultTokenRepository()
             .UseDefaultHttpClient()

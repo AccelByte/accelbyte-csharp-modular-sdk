@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Net;
 using System.Net.Http;
+using AccelByte.Sdk.Core;
 
 namespace AccelByte.Sdk.Sample.OIDC.Web
 {
@@ -48,7 +49,7 @@ namespace AccelByte.Sdk.Sample.OIDC.Web
             HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Get, discoveryUrl);
 
             HttpResponseMessage response = httpClient.Send(req);
-            string jsonString = AccelByte.Sdk.Core.Util.Helper.ConvertInputStreamToString(response.Content.ReadAsStream());
+            string jsonString = response.Content.ReadAsStream().ReadToString();
             return JsonSerializer.Deserialize<DiscoveryData>(jsonString)!;
         }
     }

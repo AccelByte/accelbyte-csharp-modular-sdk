@@ -7,7 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\AccelByte.Sdk\AccelByte.Sdk.csproj" />
+    <ProjectReference Include="..\..\AccelByte.Sdk.Abstractions\AccelByte.Sdk.Abstractions.csproj" />
+    <ProjectReference Include="..\..\AccelByte.Sdk.Authentication\AccelByte.Sdk.Authentication.csproj" />
+    <ProjectReference Include="..\..\AccelByte.Sdk.Core\AccelByte.Sdk.Core.csproj" />
+    <ProjectReference Include="..\..\apis\AccelByte.Sdk.Api.Iam\AccelByte.Sdk.Api.Iam.csproj" />
+    <ProjectReference Include="..\..\apis\AccelByte.Sdk.Api.Lobby\AccelByte.Sdk.Api.Lobby.csproj" />
   </ItemGroup>
 
 </Project>

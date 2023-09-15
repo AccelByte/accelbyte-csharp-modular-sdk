@@ -1,7 +1,13 @@
-﻿using System;
+﻿// Copyright (c) 2023 AccelByte Inc. All Rights Reserved.
+// This is licensed software from AccelByte Inc, for limitations
+// and restrictions contact your company contract manager.
+
+using System;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Net.Http;
+using AccelByte.Sdk.Core.Repository;
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Api.Legal.Model;
 
@@ -11,7 +17,7 @@ namespace AccelByte.Sdk.Sample.GettingStarted
     {
         static int Main(string[] args)
         {
-            using AccelByteSDK sdk = AccelByteSDK.Builder
+            using IAccelByteSdk sdk = AccelByteSdk.Builder
                 .UseDefaultHttpClient()
                 .UseDefaultConfigRepository()
                 .UseDefaultTokenRepository()
@@ -27,7 +33,7 @@ namespace AccelByte.Sdk.Sample.GettingStarted
 
             try
             {
-                List<RetrieveAcceptedAgreementResponse>? response = sdk.Legal.Agreement.RetrieveAgreementsPublicOp.Execute();
+                List<RetrieveAcceptedAgreementResponse>? response = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublicOp.Execute();
                 if (response == null)
                     throw new Exception("Response is null");
 

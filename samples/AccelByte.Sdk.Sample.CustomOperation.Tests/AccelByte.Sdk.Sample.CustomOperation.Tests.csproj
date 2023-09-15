@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
+    <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.3.1" />
+    <PackageReference Include="coverlet.collector" Version="3.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\AccelByte.Sdk.Authentication\AccelByte.Sdk.Authentication.csproj" />
+    <ProjectReference Include="..\..\AccelByte.Sdk.Core\AccelByte.Sdk.Core.csproj" />
+    <ProjectReference Include="..\AccelByte.Sdk.Sample.CustomOperation\AccelByte.Sdk.Sample.CustomOperation.csproj" />
+  </ItemGroup>
+
+</Project>

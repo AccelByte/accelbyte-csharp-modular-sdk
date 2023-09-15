@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -12,10 +12,11 @@ using System.Reflection;
 using System.IO;
 
 using Microsoft.AspNetCore.Http;
+
 using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Net.Http;
+using AccelByte.Sdk.Core.Repository;
 using AccelByte.Sdk.Api;
-using AccelByte.Sdk.Core.Util;
-using AccelByte.Sdk.Core.Client;
 
 namespace AccelByte.Sdk.Sample.OIDC.Web
 {
@@ -40,7 +41,7 @@ namespace AccelByte.Sdk.Sample.OIDC.Web
             });
 
             HttpResponseMessage response = DefaultHttpClient.Http.Send(req);
-            string jsonString = Helper.ConvertInputStreamToString(response.Content.ReadAsStream());
+            string jsonString = response.Content.ReadAsStream().ReadToString();
 
             return JsonSerializer.Deserialize<OAuthTokens>(jsonString)!;
         }
@@ -78,7 +79,7 @@ namespace AccelByte.Sdk.Sample.OIDC.Web
 
                 try
                 {
-                    using AccelByteSDK sdk = AccelByteSDK.Builder
+                    using IAccelByteSdk sdk = AccelByteSdk.Builder
                         .UseDefaultHttpClient()
                         .UseDefaultConfigRepository()
                         .UseDefaultTokenRepository()

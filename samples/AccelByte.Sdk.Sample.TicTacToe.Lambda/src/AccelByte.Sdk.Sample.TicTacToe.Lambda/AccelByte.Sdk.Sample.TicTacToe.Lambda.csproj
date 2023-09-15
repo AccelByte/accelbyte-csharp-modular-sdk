@@ -19,7 +19,8 @@
     <PackageReference Include="StackExchange.Redis" Version="2.6.48" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\AccelByte.Sdk\AccelByte.Sdk.csproj" />
+    <ProjectReference Include="..\..\..\..\AccelByte.Sdk.Authentication\AccelByte.Sdk.Authentication.csproj" />
+    <ProjectReference Include="..\..\..\..\AccelByte.Sdk.Core\AccelByte.Sdk.Core.csproj" />
     <ProjectReference Include="..\..\..\AccelByte.Sdk.Sample.TicTacToe\AccelByte.Sdk.Sample.TicTacToe.csproj" />
   </ItemGroup>
 </Project>
