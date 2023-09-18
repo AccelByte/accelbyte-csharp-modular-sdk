@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Legal.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
     [SdkConsoleCommand("legal","createpolicy")]
     public class CreatePolicyCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Legal"; } }
 
@@ -30,8 +29,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 
         [SdkCommandData("body")]
         public CreateBasePolicyRequest Body { get; set; } = new CreateBasePolicyRequest();
-                
-        public CreatePolicyCommand(AccelByteSDK sdk)
+
+        public CreatePolicyCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -51,7 +50,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
             CreatePolicy operation = opBuilder.Build(
             );
 
-            
+
             AccelByte.Sdk.Api.Legal.Model.CreateBasePolicyResponse? response = wrapper.CreatePolicy(operation);
             if (response == null)
                 return "No response from server.";

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Group.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
     [SdkConsoleCommand("group","updatememberrolepublicv2")]
     public class UpdateMemberRolePublicV2Command: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Group"; } }
 
@@ -39,8 +38,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
 
         [SdkCommandData("body")]
         public ModelsAssignRoleToMemberRequestV1 Body { get; set; } = new ModelsAssignRoleToMemberRequestV1();
-                
-        public UpdateMemberRolePublicV2Command(AccelByteSDK sdk)
+
+        public UpdateMemberRolePublicV2Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -62,7 +61,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
                 Namespace
             );
 
-            
+
             AccelByte.Sdk.Api.Group.Model.ModelsGetUserGroupInformationResponseV1? response = wrapper.UpdateMemberRolePublicV2(operation);
             if (response == null)
                 return "No response from server.";

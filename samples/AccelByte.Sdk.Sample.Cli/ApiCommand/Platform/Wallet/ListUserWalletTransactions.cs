@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Platform.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
     [SdkConsoleCommand("platform","listuserwallettransactions")]
     public class ListUserWalletTransactionsCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Platform"; } }
 
@@ -43,7 +42,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
         [SdkCommandArgument("offset")]
         public int? Offset { get; set; }
 
-        public ListUserWalletTransactionsCommand(AccelByteSDK sdk)
+        public ListUserWalletTransactionsCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -70,7 +69,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
             );
 
             #pragma warning restore ab_deprecated_operation
-            
+
             #pragma warning disable ab_deprecated_operation_wrapper
             AccelByte.Sdk.Api.Platform.Model.DetailedWalletTransactionPagingSlicedResult? response = wrapper.ListUserWalletTransactions(operation);
             if (response == null)

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Achievement.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
     [SdkConsoleCommand("achievement","importachievements")]
     public class ImportAchievementsCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Achievement"; } }
 
@@ -33,11 +32,11 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
 
         [SdkCommandFile("file")]
         public Stream? File { get; set; }
-                    
+
         [SdkCommandArgument("strategy")]
         public string Strategy { get; set; } = String.Empty;
-                    
-        public ImportAchievementsCommand(AccelByteSDK sdk)
+
+        public ImportAchievementsCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -60,7 +59,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
                 Namespace
             );
 
-            
+
             AccelByte.Sdk.Api.Achievement.Model.ServiceImportConfigResponse? response = wrapper.ImportAchievements(operation);
             if (response == null)
                 return "No response from server.";

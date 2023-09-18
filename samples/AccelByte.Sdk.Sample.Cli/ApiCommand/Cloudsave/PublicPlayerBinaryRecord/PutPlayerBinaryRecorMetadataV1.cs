@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Cloudsave.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
     [SdkConsoleCommand("cloudsave","putplayerbinaryrecormetadatav1")]
     public class PutPlayerBinaryRecorMetadataV1Command: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Cloudsave"; } }
 
@@ -39,8 +38,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
 
         [SdkCommandData("body")]
         public ModelsPlayerBinaryRecordMetadataPublicRequest Body { get; set; } = new ModelsPlayerBinaryRecordMetadataPublicRequest();
-                
-        public PutPlayerBinaryRecorMetadataV1Command(AccelByteSDK sdk)
+
+        public PutPlayerBinaryRecorMetadataV1Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -62,7 +61,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
                 UserId
             );
 
-            
+
             AccelByte.Sdk.Api.Cloudsave.Model.ModelsPlayerBinaryRecordResponse? response = wrapper.PutPlayerBinaryRecorMetadataV1(operation);
             if (response == null)
                 return "No response from server.";

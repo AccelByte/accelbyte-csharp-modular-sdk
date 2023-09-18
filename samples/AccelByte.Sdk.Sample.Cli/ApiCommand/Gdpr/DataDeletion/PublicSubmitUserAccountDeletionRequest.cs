@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Gdpr.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
     [SdkConsoleCommand("gdpr","publicsubmituseraccountdeletionrequest")]
     public class PublicSubmitUserAccountDeletionRequestCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Gdpr"; } }
 
@@ -36,8 +35,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
 
         [SdkCommandArgument("password")]
         public string Password { get; set; } = String.Empty;
-                    
-        public PublicSubmitUserAccountDeletionRequestCommand(AccelByteSDK sdk)
+
+        public PublicSubmitUserAccountDeletionRequestCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -58,7 +57,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
                 UserId
             );
 
-            
+
             AccelByte.Sdk.Api.Gdpr.Model.ModelsRequestDeleteResponse? response = wrapper.PublicSubmitUserAccountDeletionRequest(operation);
             if (response == null)
                 return "No response from server.";

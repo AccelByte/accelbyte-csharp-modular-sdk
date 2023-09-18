@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Ams.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
     [SdkConsoleCommand("ams","imagepatch")]
     public class ImagePatchCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Ams"; } }
 
@@ -36,8 +35,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 
         [SdkCommandData("body")]
         public ApiImageUpdate Body { get; set; } = new ApiImageUpdate();
-                
-        public ImagePatchCommand(AccelByteSDK sdk)
+
+        public ImagePatchCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -58,7 +57,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
                 Namespace
             );
 
-            
+
             AccelByte.Sdk.Api.Ams.Model.ApiImageDetails? response = wrapper.ImagePatch(operation);
             if (response == null)
                 return "No response from server.";

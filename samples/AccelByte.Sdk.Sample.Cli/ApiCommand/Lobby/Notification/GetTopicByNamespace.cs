@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Lobby.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
     [SdkConsoleCommand("lobby","gettopicbynamespace")]
     public class GetTopicByNamespaceCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Lobby"; } }
 
@@ -40,7 +39,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
         [SdkCommandArgument("limit")]
         public long? Limit { get; set; }
 
-        public GetTopicByNamespaceCommand(AccelByteSDK sdk)
+        public GetTopicByNamespaceCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -65,7 +64,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
                 Namespace
             );
 
-            
+
             AccelByte.Sdk.Api.Lobby.Model.ModelTopicByNamespacesResponse? response = wrapper.GetTopicByNamespace(operation);
             if (response == null)
                 return "No response from server.";

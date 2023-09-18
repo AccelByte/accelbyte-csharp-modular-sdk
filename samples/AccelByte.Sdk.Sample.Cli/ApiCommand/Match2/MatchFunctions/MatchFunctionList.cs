@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Match2.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Match2
     [SdkConsoleCommand("match2","matchfunctionlist")]
     public class MatchFunctionListCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Match2"; } }
 
@@ -37,7 +36,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Match2
         [SdkCommandArgument("offset")]
         public long? Offset { get; set; }
 
-        public MatchFunctionListCommand(AccelByteSDK sdk)
+        public MatchFunctionListCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -60,7 +59,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Match2
                 Namespace
             );
 
-            
+
             AccelByte.Sdk.Api.Match2.Model.ApiListMatchFunctionsResponse? response = wrapper.MatchFunctionList(operation);
             if (response == null)
                 return "No response from server.";

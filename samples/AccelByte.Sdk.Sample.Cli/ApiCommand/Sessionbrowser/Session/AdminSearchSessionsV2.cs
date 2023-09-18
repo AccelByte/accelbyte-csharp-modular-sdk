@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Sessionbrowser.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionbrowser
     [SdkConsoleCommand("sessionbrowser","adminsearchsessionsv2")]
     public class AdminSearchSessionsV2Command: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Sessionbrowser"; } }
 
@@ -58,7 +57,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionbrowser
         [SdkCommandArgument("offset")]
         public long Offset { get; set; } = 0;
 
-        public AdminSearchSessionsV2Command(AccelByteSDK sdk)
+        public AdminSearchSessionsV2Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -93,7 +92,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionbrowser
                 Offset
             );
 
-            
+
             AccelByte.Sdk.Api.Sessionbrowser.Model.ModelsGetSessionHistorySearchResponseV2? response = wrapper.AdminSearchSessionsV2(operation);
             if (response == null)
                 return "No response from server.";

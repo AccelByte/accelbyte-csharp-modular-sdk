@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Iam.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
     [SdkConsoleCommand("iam","requestgametokenresponsev3")]
     public class RequestGameTokenResponseV3Command: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Iam"; } }
 
@@ -30,11 +29,11 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 
         [SdkCommandArgument("additionalData")]
         public string AdditionalData { get; set; } = String.Empty;
-                    
+
         [SdkCommandArgument("code")]
         public string Code { get; set; } = String.Empty;
-                    
-        public RequestGameTokenResponseV3Command(AccelByteSDK sdk)
+
+        public RequestGameTokenResponseV3Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -55,7 +54,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
                 Code
             );
 
-            
+
             AccelByte.Sdk.Api.Iam.Model.OauthmodelTokenResponseV3? response = wrapper.RequestGameTokenResponseV3(operation);
             if (response == null)
                 return "No response from server.";

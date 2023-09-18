@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Qosm.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Qosm
     [SdkConsoleCommand("qosm","setserveralias")]
     public class SetServerAliasCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Qosm"; } }
 
@@ -33,8 +32,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Qosm
 
         [SdkCommandData("body")]
         public ModelsSetAliasRequest Body { get; set; } = new ModelsSetAliasRequest();
-                
-        public SetServerAliasCommand(AccelByteSDK sdk)
+
+        public SetServerAliasCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -54,7 +53,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Qosm
                 Region
             );
 
-            
+
             wrapper.SetServerAlias(operation);
             return String.Empty;
         }

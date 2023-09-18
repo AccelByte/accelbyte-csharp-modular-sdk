@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Achievement.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
     [SdkConsoleCommand("achievement","adminlistachievements")]
     public class AdminListAchievementsCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Achievement"; } }
 
@@ -46,7 +45,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
         [SdkCommandArgument("tags")]
         public List<string>? Tags { get; set; }
 
-        public AdminListAchievementsCommand(AccelByteSDK sdk)
+        public AdminListAchievementsCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -75,7 +74,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
                 Namespace
             );
 
-            
+
             AccelByte.Sdk.Api.Achievement.Model.ModelsPaginatedAchievementResponse? response = wrapper.AdminListAchievements(operation);
             if (response == null)
                 return "No response from server.";

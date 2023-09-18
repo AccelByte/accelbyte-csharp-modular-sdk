@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Iam.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
     [SdkConsoleCommand("iam","publiccreatejusticeuser")]
     public class PublicCreateJusticeUserCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Iam"; } }
 
@@ -34,7 +33,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
         [SdkCommandArgument("targetNamespace")]
         public string TargetNamespace { get; set; } = String.Empty;
 
-        public PublicCreateJusticeUserCommand(AccelByteSDK sdk)
+        public PublicCreateJusticeUserCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -54,7 +53,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
                 TargetNamespace
             );
 
-            
+
             AccelByte.Sdk.Api.Iam.Model.ModelCreateJusticeUserResponse? response = wrapper.PublicCreateJusticeUser(operation);
             if (response == null)
                 return "No response from server.";

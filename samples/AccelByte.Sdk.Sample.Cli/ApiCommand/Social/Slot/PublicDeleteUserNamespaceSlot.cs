@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Social.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
     [SdkConsoleCommand("social","publicdeleteusernamespaceslot")]
     public class PublicDeleteUserNamespaceSlotCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Social"; } }
 
@@ -37,7 +36,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
         [SdkCommandArgument("userId")]
         public string UserId { get; set; } = String.Empty;
 
-        public PublicDeleteUserNamespaceSlotCommand(AccelByteSDK sdk)
+        public PublicDeleteUserNamespaceSlotCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -60,7 +59,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
             );
 
             #pragma warning restore ab_deprecated_operation
-            
+
             #pragma warning disable ab_deprecated_operation_wrapper
             wrapper.PublicDeleteUserNamespaceSlot(operation);
             return String.Empty;

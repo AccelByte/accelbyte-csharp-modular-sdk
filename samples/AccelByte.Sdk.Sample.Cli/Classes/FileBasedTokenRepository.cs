@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -12,8 +12,10 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.IO;
 
-using AccelByte.Sdk.Core.Util;
+using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Core.Repository;
+using AccelByte.Sdk.Core.Security;
+
 using AccelByte.Sdk.Api.Iam.Model;
 
 namespace AccelByte.Sdk.Sample.Cli
@@ -140,6 +142,8 @@ namespace AccelByte.Sdk.Sample.Cli
             get => (_Store != null ? _Store.Type : LoginType.User);
         }
 
+        public ITokenResponse? TokenData { get; private set; } = null;
+
         public FileBasedTokenRepository(string fileName)
         {
             _FileName = fileName;
@@ -168,13 +172,14 @@ namespace AccelByte.Sdk.Sample.Cli
             }
         }
 
-        public void StoreToken(LoginType loginType, OauthmodelTokenResponseV3 tokenResponse)
+        public void StoreToken(LoginType loginType, ITokenResponse tokenResponse)
         {
             if (tokenResponse.AccessToken == null)
                 throw new Exception("Access token is null");
 
             lock (_TokenLock)
             {
+                TokenData = tokenResponse;
                 _Store = new _TokenStore()
                 {
                     Token = tokenResponse.AccessToken,
@@ -189,55 +194,14 @@ namespace AccelByte.Sdk.Sample.Cli
             }
         }
 
-        public void StoreToken(LoginType loginType, OauthmodelTokenResponse tokenResponse)
+        public void UpdateToken(ITokenResponse tokenResponse)
         {
             if (tokenResponse.AccessToken == null)
                 throw new Exception("Access token is null");
 
             lock (_TokenLock)
             {
-                _Store = new _TokenStore()
-                {
-                    Token = tokenResponse.AccessToken,
-                    Type = LoginType,
-                    IssuedTimestamp = CurrentTimestamp
-                };
-
-                if (tokenResponse.ExpiresIn != null)
-                    _Store.TokenExpiryIn = tokenResponse.ExpiresIn.Value;
-
-                _Store.SaveToFile(_FileName);
-            }
-        }
-
-        public void StoreToken(LoginType loginType, OauthmodelTokenWithDeviceCookieResponseV3 tokenResponse)
-        {
-            if (tokenResponse.AccessToken == null)
-                throw new Exception("Access token is null");
-
-            lock (_TokenLock)
-            {
-                _Store = new _TokenStore()
-                {
-                    Token = tokenResponse.AccessToken,
-                    Type = LoginType,
-                    IssuedTimestamp = CurrentTimestamp
-                };
-
-                if (tokenResponse.ExpiresIn != null)
-                    _Store.TokenExpiryIn = tokenResponse.ExpiresIn.Value;
-
-                _Store.SaveToFile(_FileName);
-            }
-        }
-
-        public void UpdateToken(OauthmodelTokenResponseV3 tokenResponse)
-        {
-            if (tokenResponse.AccessToken == null)
-                throw new Exception("Access token is null");
-
-            lock (_TokenLock)
-            {
+                TokenData = tokenResponse;
                 if (_Store == null)
                     _Store = new _TokenStore();
 
@@ -248,30 +212,6 @@ namespace AccelByte.Sdk.Sample.Cli
 
                 _Store.SaveToFile(_FileName);
             }
-        }
-
-        public void UpdateToken(OauthmodelTokenWithDeviceCookieResponseV3 tokenResponse)
-        {
-            if (tokenResponse.AccessToken == null)
-                throw new Exception("Access token is null");
-
-            lock (_TokenLock)
-            {
-                if (_Store == null)
-                    _Store = new _TokenStore();
-
-                _Store.Token = tokenResponse.AccessToken;
-                _Store.IssuedTimestamp = CurrentTimestamp;
-                if (tokenResponse.ExpiresIn != null)
-                    _Store.TokenExpiryIn = tokenResponse.ExpiresIn.Value;
-
-                _Store.SaveToFile(_FileName);
-            }
-        }
-
-        public void StoreToken(string token)
-        {
-
         }
     }
 }

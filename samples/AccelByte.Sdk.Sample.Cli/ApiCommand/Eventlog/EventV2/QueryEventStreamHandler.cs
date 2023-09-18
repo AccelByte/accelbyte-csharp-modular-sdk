@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Eventlog.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
     [SdkConsoleCommand("eventlog","queryeventstreamhandler")]
     public class QueryEventStreamHandlerCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Eventlog"; } }
 
@@ -45,8 +44,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
 
         [SdkCommandData("body")]
         public ModelsGenericQueryPayload Body { get; set; } = new ModelsGenericQueryPayload();
-                
-        public QueryEventStreamHandlerCommand(AccelByteSDK sdk)
+
+        public QueryEventStreamHandlerCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -74,7 +73,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
                 Namespace
             );
 
-            
+
             AccelByte.Sdk.Api.Eventlog.Model.ModelsEventResponseV2? response = wrapper.QueryEventStreamHandler(operation);
             if (response == null)
                 return "No response from server.";

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Leaderboard.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
     [SdkConsoleCommand("leaderboard","setuservisibilityv3")]
     public class SetUserVisibilityV3Command: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Leaderboard"; } }
 
@@ -36,8 +35,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
 
         [SdkCommandData("body")]
         public ModelsSetUserVisibilityRequest Body { get; set; } = new ModelsSetUserVisibilityRequest();
-                
-        public SetUserVisibilityV3Command(AccelByteSDK sdk)
+
+        public SetUserVisibilityV3Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -58,7 +57,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
                 UserId
             );
 
-            
+
             AccelByte.Sdk.Api.Leaderboard.Model.ModelsGetUserVisibilityResponse? response = wrapper.SetUserVisibilityV3(operation);
             if (response == null)
                 return "No response from server.";

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Achievement.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
     [SdkConsoleCommand("achievement","adminunlockachievement")]
     public class AdminUnlockAchievementCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Achievement"; } }
 
@@ -37,7 +36,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
         [SdkCommandArgument("userId")]
         public string UserId { get; set; } = String.Empty;
 
-        public AdminUnlockAchievementCommand(AccelByteSDK sdk)
+        public AdminUnlockAchievementCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -58,7 +57,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
                 UserId
             );
 
-            
+
             wrapper.AdminUnlockAchievement(operation);
             return String.Empty;
         }

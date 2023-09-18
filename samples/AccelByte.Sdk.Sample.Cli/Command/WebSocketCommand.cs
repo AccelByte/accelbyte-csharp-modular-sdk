@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,8 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
-using AccelByte.Sdk.Core.Client;
+using AccelByte.Sdk.Core.Net;
 using AccelByte.Sdk.Core.Awesome;
 
 using AccelByte.Sdk.Api.Lobby;
@@ -25,7 +24,7 @@ namespace AccelByte.Sdk.Sample.Cli.Command
             { "lobby", typeof(LobbyService) }
         };
 
-        private AccelByteConfig _Config;
+        private IAccelByteConfig _Config;
 
         private object _RMELock = new object();
 
@@ -37,13 +36,13 @@ namespace AccelByte.Sdk.Sample.Cli.Command
 
         private bool _RetryOnWSMessageException = false;
 
-        public WebSocketCommand(AccelByteConfig abConfig, bool retryOnWSMessageException)
+        public WebSocketCommand(IAccelByteConfig abConfig, bool retryOnWSMessageException)
         {
             _Config = abConfig;
             _RetryOnWSMessageException = retryOnWSMessageException;
         }
 
-        public WebSocketService InitializeService(AccelByteConfig abConfig, string serviceName)
+        public WebSocketService InitializeService(IAccelByteConfig abConfig, string serviceName)
         {
             if (!_ServiceTypes.ContainsKey(serviceName))
                 throw new Exception("WebSocket '" + serviceName + "' does not exists.");

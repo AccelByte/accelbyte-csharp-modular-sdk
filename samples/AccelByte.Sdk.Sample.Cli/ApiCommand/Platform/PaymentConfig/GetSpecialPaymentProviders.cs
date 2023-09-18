@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Platform.Wrapper;
@@ -22,13 +21,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
     [SdkConsoleCommand("platform","getspecialpaymentproviders")]
     public class GetSpecialPaymentProvidersCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Platform"; } }
 
         public string OperationName{ get { return "GetSpecialPaymentProviders"; } }
 
-        public GetSpecialPaymentProvidersCommand(AccelByteSDK sdk)
+        public GetSpecialPaymentProvidersCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -46,7 +45,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
             GetSpecialPaymentProviders operation = opBuilder.Build(
             );
 
-            
+
             List<string>? response = wrapper.GetSpecialPaymentProviders(operation);
             if (response == null)
                 return "No response from server.";

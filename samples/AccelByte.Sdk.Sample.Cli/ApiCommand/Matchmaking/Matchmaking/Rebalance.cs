@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Matchmaking.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
     [SdkConsoleCommand("matchmaking","rebalance")]
     public class RebalanceCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Matchmaking"; } }
 
@@ -33,8 +32,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
 
         [SdkCommandData("body")]
         public ModelsRebalanceRequest Body { get; set; } = new ModelsRebalanceRequest();
-                
-        public RebalanceCommand(AccelByteSDK sdk)
+
+        public RebalanceCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -54,7 +53,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
                 Namespace
             );
 
-            
+
             AccelByte.Sdk.Api.Matchmaking.Model.ModelsRebalanceResponse? response = wrapper.Rebalance(operation);
             if (response == null)
                 return "No response from server.";

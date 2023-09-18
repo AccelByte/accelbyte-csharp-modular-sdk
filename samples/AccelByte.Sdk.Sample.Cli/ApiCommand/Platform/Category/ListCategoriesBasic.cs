@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Platform.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
     [SdkConsoleCommand("platform","listcategoriesbasic")]
     public class ListCategoriesBasicCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Platform"; } }
 
@@ -34,7 +33,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
         [SdkCommandArgument("storeId")]
         public string? StoreId { get; set; }
 
-        public ListCategoriesBasicCommand(AccelByteSDK sdk)
+        public ListCategoriesBasicCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -55,7 +54,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
                 Namespace
             );
 
-            
+
             List<AccelByte.Sdk.Api.Platform.Model.BasicCategoryInfo>? response = wrapper.ListCategoriesBasic(operation);
             if (response == null)
                 return "No response from server.";

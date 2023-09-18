@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Sample.Cli.Command
             }
         }
 
-        public ISdkConsoleCommand CreateCommandObject(CommandArguments cArgs, AccelByteSDK sdk)
+        public ISdkConsoleCommand CreateCommandObject(CommandArguments cArgs, IAccelByteSdk sdk)
         {
             if ((cArgs.ServiceName == String.Empty) || (cArgs.OperationName == String.Empty))
                 throw new Exception("Service name and/or operation name is not specified.");
@@ -141,7 +141,7 @@ namespace AccelByte.Sdk.Sample.Cli.Command
                 Console.WriteLine("\nFile upload is required.");
         }
 
-        public void EchoAllServiceNames(AccelByteSDK sdk)
+        public void EchoAllServiceNames(IAccelByteSdk sdk)
         {
             Console.WriteLine("Available API Service(s):");
             foreach (KeyValuePair<string, Dictionary<string, Type>> pair in _CommandTypes)
@@ -157,7 +157,7 @@ namespace AccelByte.Sdk.Sample.Cli.Command
             }
         }
 
-        public void EchoAllOperationInService(AccelByteSDK sdk, string serviceName)
+        public void EchoAllOperationInService(IAccelByteSdk sdk, string serviceName)
         {
             if (!_CommandTypes.ContainsKey(serviceName))
             {
@@ -175,7 +175,7 @@ namespace AccelByte.Sdk.Sample.Cli.Command
             }
         }
 
-        public void EchoAllOperations(AccelByteSDK sdk)
+        public void EchoAllOperations(IAccelByteSdk sdk)
         {
             Console.WriteLine("Available service/operations:");
             foreach (KeyValuePair<string, Dictionary<string, Type>> pair in _CommandTypes)

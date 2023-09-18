@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Lobby.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
     [SdkConsoleCommand("lobby","updatenotificationtopicv1admin")]
     public class UpdateNotificationTopicV1AdminCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Lobby"; } }
 
@@ -36,8 +35,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 
         [SdkCommandData("body")]
         public ModelUpdateTopicRequest Body { get; set; } = new ModelUpdateTopicRequest();
-                
-        public UpdateNotificationTopicV1AdminCommand(AccelByteSDK sdk)
+
+        public UpdateNotificationTopicV1AdminCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -58,7 +57,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
                 TopicName
             );
 
-            
+
             wrapper.UpdateNotificationTopicV1Admin(operation);
             return String.Empty;
         }

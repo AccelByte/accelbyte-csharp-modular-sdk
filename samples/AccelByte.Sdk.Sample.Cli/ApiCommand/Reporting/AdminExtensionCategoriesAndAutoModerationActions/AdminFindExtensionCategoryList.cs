@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Reporting.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
     [SdkConsoleCommand("reporting","adminfindextensioncategorylist")]
     public class AdminFindExtensionCategoryListCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Reporting"; } }
 
@@ -34,7 +33,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
         [SdkCommandArgument("sortBy")]
         public string? SortBy { get; set; }
 
-        public AdminFindExtensionCategoryListCommand(AccelByteSDK sdk)
+        public AdminFindExtensionCategoryListCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -56,7 +55,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
             AdminFindExtensionCategoryList operation = opBuilder.Build(
             );
 
-            
+
             AccelByte.Sdk.Api.Reporting.Model.RestapiExtensionCategoryListApiResponse? response = wrapper.AdminFindExtensionCategoryList(operation);
             if (response == null)
                 return "No response from server.";

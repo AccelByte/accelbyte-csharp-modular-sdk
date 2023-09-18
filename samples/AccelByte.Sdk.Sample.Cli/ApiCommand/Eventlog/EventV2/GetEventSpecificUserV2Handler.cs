@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Eventlog.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
     [SdkConsoleCommand("eventlog","geteventspecificuserv2handler")]
     public class GetEventSpecificUserV2HandlerCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Eventlog"; } }
 
@@ -49,7 +48,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
         [SdkCommandArgument("startDate")]
         public string? StartDate { get; set; }
 
-        public GetEventSpecificUserV2HandlerCommand(AccelByteSDK sdk)
+        public GetEventSpecificUserV2HandlerCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -79,7 +78,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
                 UserId
             );
 
-            
+
             AccelByte.Sdk.Api.Eventlog.Model.ModelsEventResponseV2? response = wrapper.GetEventSpecificUserV2Handler(operation);
             if (response == null)
                 return "No response from server.";

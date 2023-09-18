@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Platform.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
     [SdkConsoleCommand("platform","importstore")]
     public class ImportStoreCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Platform"; } }
 
@@ -36,8 +35,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 
         [SdkCommandFile("file")]
         public Stream? File { get; set; }
-                    
-        public ImportStoreCommand(AccelByteSDK sdk)
+
+        public ImportStoreCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -62,7 +61,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
             );
 
             #pragma warning restore ab_deprecated_operation
-            
+
             #pragma warning disable ab_deprecated_operation_wrapper
             AccelByte.Sdk.Api.Platform.Model.StoreInfo? response = wrapper.ImportStore(operation);
             if (response == null)

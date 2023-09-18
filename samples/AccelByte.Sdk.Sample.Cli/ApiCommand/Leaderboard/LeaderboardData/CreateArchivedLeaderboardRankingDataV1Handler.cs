@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Leaderboard.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
     [SdkConsoleCommand("leaderboard","createarchivedleaderboardrankingdatav1handler")]
     public class CreateArchivedLeaderboardRankingDataV1HandlerCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Leaderboard"; } }
 
@@ -33,8 +32,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
 
         [SdkCommandData("body")]
         public ModelsArchiveLeaderboardReq Body { get; set; } = new ModelsArchiveLeaderboardReq();
-                
-        public CreateArchivedLeaderboardRankingDataV1HandlerCommand(AccelByteSDK sdk)
+
+        public CreateArchivedLeaderboardRankingDataV1HandlerCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -54,7 +53,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
                 Namespace
             );
 
-            
+
             wrapper.CreateArchivedLeaderboardRankingDataV1Handler(operation);
             return String.Empty;
         }

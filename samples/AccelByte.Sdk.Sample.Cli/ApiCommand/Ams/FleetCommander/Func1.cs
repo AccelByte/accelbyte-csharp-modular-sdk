@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Ams.Wrapper;
@@ -22,13 +21,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
     [SdkConsoleCommand("ams","func1")]
     public class Func1Command: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Ams"; } }
 
         public string OperationName{ get { return "Func1"; } }
 
-        public Func1Command(AccelByteSDK sdk)
+        public Func1Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -46,7 +45,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
             Func1 operation = opBuilder.Build(
             );
 
-            
+
             wrapper.Func1(operation);
             return String.Empty;
         }

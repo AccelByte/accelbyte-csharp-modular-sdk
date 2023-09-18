@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Sessionbrowser.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionbrowser
     [SdkConsoleCommand("sessionbrowser","getactivecustomgamesessions")]
     public class GetActiveCustomGameSessionsCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Sessionbrowser"; } }
 
@@ -43,7 +42,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionbrowser
         [SdkCommandArgument("sessionId")]
         public string? SessionId { get; set; }
 
-        public GetActiveCustomGameSessionsCommand(AccelByteSDK sdk)
+        public GetActiveCustomGameSessionsCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -70,7 +69,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionbrowser
                 Namespace
             );
 
-            
+
             AccelByte.Sdk.Api.Sessionbrowser.Model.ModelsActiveCustomGameResponse? response = wrapper.GetActiveCustomGameSessions(operation);
             if (response == null)
                 return "No response from server.";

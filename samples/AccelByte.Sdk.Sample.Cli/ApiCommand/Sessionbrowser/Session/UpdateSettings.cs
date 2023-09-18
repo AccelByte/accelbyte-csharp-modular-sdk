@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Sessionbrowser.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionbrowser
     [SdkConsoleCommand("sessionbrowser","updatesettings")]
     public class UpdateSettingsCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Sessionbrowser"; } }
 
@@ -36,8 +35,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionbrowser
 
         [SdkCommandData("body")]
         public ModelsUpdateSettingsRequest Body { get; set; } = new ModelsUpdateSettingsRequest();
-                
-        public UpdateSettingsCommand(AccelByteSDK sdk)
+
+        public UpdateSettingsCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -58,7 +57,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionbrowser
                 SessionID
             );
 
-            
+
             AccelByte.Sdk.Api.Sessionbrowser.Model.ModelsSessionResponse? response = wrapper.UpdateSettings(operation);
             if (response == null)
                 return "No response from server.";

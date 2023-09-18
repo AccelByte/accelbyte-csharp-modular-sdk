@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Ams.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
     [SdkConsoleCommand("ams","fleetserverhistory")]
     public class FleetServerHistoryCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Ams"; } }
 
@@ -55,7 +54,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
         [SdkCommandArgument("status")]
         public string? Status { get; set; }
 
-        public FleetServerHistoryCommand(AccelByteSDK sdk)
+        public FleetServerHistoryCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -89,7 +88,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
                 Namespace
             );
 
-            
+
             AccelByte.Sdk.Api.Ams.Model.ApiDSHistoryList? response = wrapper.FleetServerHistory(operation);
             if (response == null)
                 return "No response from server.";

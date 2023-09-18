@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -11,31 +11,31 @@ using System.Text.Json;
 using System.Reflection;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Client;
+using AccelByte.Sdk.Core.Net.Http;
+using AccelByte.Sdk.Core.Net.Logging;
 using AccelByte.Sdk.Core.Repository;
-using AccelByte.Sdk.Core.Logging;
 using AccelByte.Sdk.Core.Awesome;
 
 namespace AccelByte.Sdk.Sample.Cli
 {
     public class SdkHelper
     {
-        public static AccelByteSDK CreateSdkAndLogin(CommandArguments cArgs)
+        public static IAccelByteSdk CreateSdkAndLogin(CommandArguments cArgs)
         {
-            IConfigRepository cRepo = ConfigRepository.Default;
-            IHttpClient httpClient = HttpClient.Default;
-            ITokenRepository tokenRepo = new FileBasedTokenRepository();
-
+            IHttpClient httpClient = new DefaultHttpClient();
             if (cArgs.IsLogEnabled)
             {
                 IHttpLogger dLogger = new DefaultHttpLogger();
                 httpClient.SetLogger(dLogger);
             }
 
-            AccelByteConfig config = new AccelByteConfig(httpClient, tokenRepo, cRepo);
-            AccelByteSDK sdk = new AccelByteSDK(config);
+            IAccelByteSdk sdk = AccelByteSdk.Builder                
+                .UseDefaultConfigRepository()
+                .SetHttpClient(httpClient)
+                .SetTokenRepository(new FileBasedTokenRepository())
+                .Build();
 
-            if (!tokenRepo.HasToken)
+            if (!sdk.Configuration.TokenRepository.HasToken)
             {
                 Console.WriteLine("No stored token found. Trying to login using supplied credential if any.");
                 if (cArgs.LoginType == CommandArguments.LoginTypeUser)
@@ -57,16 +57,13 @@ namespace AccelByte.Sdk.Sample.Cli
             return sdk;
         }
 
-        public static AccelByteSDK CreatyEmptySdk()
+        public static IAccelByteSdk CreatyEmptySdk()
         {
-            IConfigRepository cRepo = ConfigRepository.Default;
-            IHttpClient httpClient = HttpClient.Default;
-            ITokenRepository tokenRepo = new FileBasedTokenRepository();
-
-            AccelByteConfig config = new AccelByteConfig(httpClient, tokenRepo, cRepo);
-            AccelByteSDK sdk = new AccelByteSDK(config);
-
-            return sdk;
+            return AccelByteSdk.Builder
+                .UseDefaultConfigRepository()
+                .UseDefaultHttpClient()
+                .SetTokenRepository(new FileBasedTokenRepository())
+                .Build();
         }
 
         public static string SerializeToJson(object modelObj)

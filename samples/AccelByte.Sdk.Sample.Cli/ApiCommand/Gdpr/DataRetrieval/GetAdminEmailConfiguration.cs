@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Gdpr.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
     [SdkConsoleCommand("gdpr","getadminemailconfiguration")]
     public class GetAdminEmailConfigurationCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Gdpr"; } }
 
@@ -31,7 +30,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
-        public GetAdminEmailConfigurationCommand(AccelByteSDK sdk)
+        public GetAdminEmailConfigurationCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -50,7 +49,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
                 Namespace
             );
 
-            
+
             List<string>? response = wrapper.GetAdminEmailConfiguration(operation);
             if (response == null)
                 return "No response from server.";

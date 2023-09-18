@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Iam.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
     [SdkConsoleCommand("iam","tokengrant")]
     public class TokenGrantCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Iam"; } }
 
@@ -30,29 +29,29 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 
         [SdkCommandArgument("code")]
         public string Code { get; set; } = String.Empty;
-                    
+
         [SdkCommandArgument("extend_exp")]
         public bool ExtendExp { get; set; } = false;
-                    
+
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
-                    
+
         [SdkCommandArgument("password")]
         public string Password { get; set; } = String.Empty;
-                    
+
         [SdkCommandArgument("redirect_uri")]
         public string RedirectUri { get; set; } = String.Empty;
-                    
+
         [SdkCommandArgument("refresh_token")]
         public string RefreshToken { get; set; } = String.Empty;
-                    
+
         [SdkCommandArgument("username")]
         public string Username { get; set; } = String.Empty;
-                    
+
         [SdkCommandArgument("grant_type")]
         public string GrantType { get; set; } = String.Empty;
-                    
-        public TokenGrantCommand(AccelByteSDK sdk)
+
+        public TokenGrantCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -87,7 +86,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             );
 
             #pragma warning restore ab_deprecated_operation
-            
+
             #pragma warning disable ab_deprecated_operation_wrapper
             AccelByte.Sdk.Api.Iam.Model.OauthmodelTokenResponse? response = wrapper.TokenGrant(operation);
             if (response == null)

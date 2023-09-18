@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Social.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
     [SdkConsoleCommand("social","publicupdateusernamespaceslotmetadata")]
     public class PublicUpdateUserNamespaceSlotMetadataCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Social"; } }
 
@@ -39,8 +38,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
 
         [SdkCommandData("body")]
         public SlotMetadataUpdate Body { get; set; } = new SlotMetadataUpdate();
-                
-        public PublicUpdateUserNamespaceSlotMetadataCommand(AccelByteSDK sdk)
+
+        public PublicUpdateUserNamespaceSlotMetadataCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -65,7 +64,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
             );
 
             #pragma warning restore ab_deprecated_operation
-            
+
             #pragma warning disable ab_deprecated_operation_wrapper
             AccelByte.Sdk.Api.Social.Model.SlotInfo? response = wrapper.PublicUpdateUserNamespaceSlotMetadata(operation);
             if (response == null)

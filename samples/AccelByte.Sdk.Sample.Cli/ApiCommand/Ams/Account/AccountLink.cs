@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Ams.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
     [SdkConsoleCommand("ams","accountlink")]
     public class AccountLinkCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Ams"; } }
 
@@ -33,8 +32,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 
         [SdkCommandData("body")]
         public ApiAccountLinkRequest Body { get; set; } = new ApiAccountLinkRequest();
-                
-        public AccountLinkCommand(AccelByteSDK sdk)
+
+        public AccountLinkCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -54,7 +53,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
                 Namespace
             );
 
-            
+
             AccelByte.Sdk.Api.Ams.Model.ApiAccountLinkResponse? response = wrapper.AccountLink(operation);
             if (response == null)
                 return "No response from server.";

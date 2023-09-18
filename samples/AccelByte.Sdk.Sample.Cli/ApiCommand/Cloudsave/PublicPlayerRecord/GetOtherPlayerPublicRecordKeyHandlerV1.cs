@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Cloudsave.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
     [SdkConsoleCommand("cloudsave","getotherplayerpublicrecordkeyhandlerv1")]
     public class GetOtherPlayerPublicRecordKeyHandlerV1Command: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Cloudsave"; } }
 
@@ -40,7 +39,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
         [SdkCommandArgument("offset")]
         public long? Offset { get; set; }
 
-        public GetOtherPlayerPublicRecordKeyHandlerV1Command(AccelByteSDK sdk)
+        public GetOtherPlayerPublicRecordKeyHandlerV1Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -64,7 +63,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
                 UserId
             );
 
-            
+
             AccelByte.Sdk.Api.Cloudsave.Model.ModelsListPlayerRecordKeysResponse? response = wrapper.GetOtherPlayerPublicRecordKeyHandlerV1(operation);
             if (response == null)
                 return "No response from server.";

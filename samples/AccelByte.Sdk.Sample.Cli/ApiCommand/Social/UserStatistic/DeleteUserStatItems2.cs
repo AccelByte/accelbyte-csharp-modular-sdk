@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Social.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
     [SdkConsoleCommand("social","deleteuserstatitems2")]
     public class DeleteUserStatItems2Command: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Social"; } }
 
@@ -40,7 +39,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
         [SdkCommandArgument("additionalKey")]
         public string? AdditionalKey { get; set; }
 
-        public DeleteUserStatItems2Command(AccelByteSDK sdk)
+        public DeleteUserStatItems2Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -63,7 +62,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
                 UserId
             );
 
-            
+
             wrapper.DeleteUserStatItems2(operation);
             return String.Empty;
         }

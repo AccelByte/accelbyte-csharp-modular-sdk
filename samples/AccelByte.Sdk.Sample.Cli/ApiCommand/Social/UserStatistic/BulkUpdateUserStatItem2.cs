@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Social.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
     [SdkConsoleCommand("social","bulkupdateuserstatitem2")]
     public class BulkUpdateUserStatItem2Command: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Social"; } }
 
@@ -39,8 +38,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
 
         [SdkCommandData("body")]
         public List<BulkStatItemUpdate> Body { get; set; } = new List<BulkStatItemUpdate>();
-                
-        public BulkUpdateUserStatItem2Command(AccelByteSDK sdk)
+
+        public BulkUpdateUserStatItem2Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -64,7 +63,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
                 UserId
             );
 
-            
+
             List<AccelByte.Sdk.Api.Social.Model.BulkStatOperationResult>? response = wrapper.BulkUpdateUserStatItem2(operation);
             if (response == null)
                 return "No response from server.";

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Seasonpass.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Seasonpass
     [SdkConsoleCommand("seasonpass","updatetier")]
     public class UpdateTierCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Seasonpass"; } }
 
@@ -39,8 +38,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Seasonpass
 
         [SdkCommandData("body")]
         public TierInput Body { get; set; } = new TierInput();
-                
-        public UpdateTierCommand(AccelByteSDK sdk)
+
+        public UpdateTierCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -63,7 +62,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Seasonpass
                 SeasonId
             );
 
-            
+
             AccelByte.Sdk.Api.Seasonpass.Model.Tier? response = wrapper.UpdateTier(operation);
             if (response == null)
                 return "No response from server.";

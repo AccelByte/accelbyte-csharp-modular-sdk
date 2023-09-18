@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Session.Wrapper;
@@ -22,13 +21,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
     [SdkConsoleCommand("session","adminlistenvironmentvariables")]
     public class AdminListEnvironmentVariablesCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Session"; } }
 
         public string OperationName{ get { return "AdminListEnvironmentVariables"; } }
 
-        public AdminListEnvironmentVariablesCommand(AccelByteSDK sdk)
+        public AdminListEnvironmentVariablesCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -46,7 +45,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
             AdminListEnvironmentVariables operation = opBuilder.Build(
             );
 
-            
+
             AccelByte.Sdk.Api.Session.Model.ApimodelsEnvironmentVariableListResponse? response = wrapper.AdminListEnvironmentVariables(operation);
             if (response == null)
                 return "No response from server.";

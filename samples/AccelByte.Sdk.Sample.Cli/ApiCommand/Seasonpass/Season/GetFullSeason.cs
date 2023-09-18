@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Seasonpass.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Seasonpass
     [SdkConsoleCommand("seasonpass","getfullseason")]
     public class GetFullSeasonCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Seasonpass"; } }
 
@@ -34,7 +33,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Seasonpass
         [SdkCommandArgument("seasonId")]
         public string SeasonId { get; set; } = String.Empty;
 
-        public GetFullSeasonCommand(AccelByteSDK sdk)
+        public GetFullSeasonCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -54,7 +53,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Seasonpass
                 SeasonId
             );
 
-            
+
             AccelByte.Sdk.Api.Seasonpass.Model.FullSeasonInfo? response = wrapper.GetFullSeason(operation);
             if (response == null)
                 return "No response from server.";

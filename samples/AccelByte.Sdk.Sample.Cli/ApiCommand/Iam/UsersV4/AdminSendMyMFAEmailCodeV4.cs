@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Iam.Wrapper;
@@ -22,13 +21,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
     [SdkConsoleCommand("iam","adminsendmymfaemailcodev4")]
     public class AdminSendMyMFAEmailCodeV4Command: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Iam"; } }
 
         public string OperationName{ get { return "AdminSendMyMFAEmailCodeV4"; } }
 
-        public AdminSendMyMFAEmailCodeV4Command(AccelByteSDK sdk)
+        public AdminSendMyMFAEmailCodeV4Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -46,7 +45,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             AdminSendMyMFAEmailCodeV4 operation = opBuilder.Build(
             );
 
-            
+
             wrapper.AdminSendMyMFAEmailCodeV4(operation);
             return String.Empty;
         }

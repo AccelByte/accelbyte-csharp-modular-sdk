@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Iam.Wrapper;
@@ -22,13 +21,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
     [SdkConsoleCommand("iam","admingeneratemybackupcodesv4")]
     public class AdminGenerateMyBackupCodesV4Command: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Iam"; } }
 
         public string OperationName{ get { return "AdminGenerateMyBackupCodesV4"; } }
 
-        public AdminGenerateMyBackupCodesV4Command(AccelByteSDK sdk)
+        public AdminGenerateMyBackupCodesV4Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -46,7 +45,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             AdminGenerateMyBackupCodesV4 operation = opBuilder.Build(
             );
 
-            
+
             AccelByte.Sdk.Api.Iam.Model.ModelBackupCodesResponseV4? response = wrapper.AdminGenerateMyBackupCodesV4(operation);
             if (response == null)
                 return "No response from server.";

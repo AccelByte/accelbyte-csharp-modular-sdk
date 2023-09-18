@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Gdpr.Wrapper;
@@ -22,13 +21,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
     [SdkConsoleCommand("gdpr","publicgetmyaccountdeletionstatus")]
     public class PublicGetMyAccountDeletionStatusCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Gdpr"; } }
 
         public string OperationName{ get { return "PublicGetMyAccountDeletionStatus"; } }
 
-        public PublicGetMyAccountDeletionStatusCommand(AccelByteSDK sdk)
+        public PublicGetMyAccountDeletionStatusCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -46,7 +45,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
             PublicGetMyAccountDeletionStatus operation = opBuilder.Build(
             );
 
-            
+
             AccelByte.Sdk.Api.Gdpr.Model.ModelsDeletionStatus? response = wrapper.PublicGetMyAccountDeletionStatus(operation);
             if (response == null)
                 return "No response from server.";

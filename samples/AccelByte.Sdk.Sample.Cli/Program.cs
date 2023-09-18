@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,7 +28,7 @@ namespace AccelByte.Sdk.Sample.Cli
                     if (cArgs.ServiceName == String.Empty)
                         throw new Exception("Unspecified service name for websocket service.");
 
-                    using AccelByteSDK sdk = SdkHelper.CreateSdkAndLogin(cArgs);
+                    using IAccelByteSdk sdk = SdkHelper.CreateSdkAndLogin(cArgs);
                     WebSocketCommand wsCmd = new WebSocketCommand(sdk.Configuration, cArgs.IsRetryOnWSMessageError);
                     if (cArgs.IsWebSocketListenMode)
                         wsCmd.Listen(cArgs.ServiceName);
@@ -87,17 +87,17 @@ namespace AccelByte.Sdk.Sample.Cli
                 {
                     if (cArgs.IsListAllAsked)
                     {
-                        AccelByteSDK sdk = SdkHelper.CreatyEmptySdk();
+                        IAccelByteSdk sdk = SdkHelper.CreatyEmptySdk();
                         cFactory.EchoAllOperations(sdk);
                     }
                     else if (cArgs.IsListAsked && (cArgs.ServiceName == String.Empty))
                     {
-                        AccelByteSDK sdk = SdkHelper.CreatyEmptySdk();
+                        IAccelByteSdk sdk = SdkHelper.CreatyEmptySdk();
                         cFactory.EchoAllServiceNames(sdk);
                     }
                     else if (cArgs.IsListAsked && (cArgs.ServiceName != String.Empty))
                     {
-                        AccelByteSDK sdk = SdkHelper.CreatyEmptySdk();
+                        IAccelByteSdk sdk = SdkHelper.CreatyEmptySdk();
                         cFactory.EchoAllOperationInService(sdk, cArgs.ServiceName);
                     }
                     else
@@ -105,11 +105,11 @@ namespace AccelByte.Sdk.Sample.Cli
                 }
                 else if (cArgs.OperationName == "login")
                 {
-                    AccelByteSDK sdk = SdkHelper.CreateSdkAndLogin(cArgs);
+                    IAccelByteSdk sdk = SdkHelper.CreateSdkAndLogin(cArgs);
                 }
                 else
                 {
-                    AccelByteSDK sdk = SdkHelper.CreateSdkAndLogin(cArgs);
+                    IAccelByteSdk sdk = SdkHelper.CreateSdkAndLogin(cArgs);
                     ISdkConsoleCommand cmd = cFactory.CreateCommandObject(cArgs, sdk);
                     if (cArgs.IsHelpAsked)
                     {

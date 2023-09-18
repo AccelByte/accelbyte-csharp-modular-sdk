@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Lobby.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
     [SdkConsoleCommand("lobby","getsingletemplatelocalizationv1admin")]
     public class GetSingleTemplateLocalizationV1AdminCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Lobby"; } }
 
@@ -37,7 +36,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
         [SdkCommandArgument("templateSlug")]
         public string TemplateSlug { get; set; } = String.Empty;
 
-        public GetSingleTemplateLocalizationV1AdminCommand(AccelByteSDK sdk)
+        public GetSingleTemplateLocalizationV1AdminCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -58,7 +57,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
                 TemplateSlug
             );
 
-            
+
             AccelByte.Sdk.Api.Lobby.Model.ModelLocalization? response = wrapper.GetSingleTemplateLocalizationV1Admin(operation);
             if (response == null)
                 return "No response from server.";

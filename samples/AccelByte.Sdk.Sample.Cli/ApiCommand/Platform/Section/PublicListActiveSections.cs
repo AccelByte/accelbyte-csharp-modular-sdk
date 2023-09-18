@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Platform.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
     [SdkConsoleCommand("platform","publiclistactivesections")]
     public class PublicListActiveSectionsCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Platform"; } }
 
@@ -46,7 +45,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
         [SdkCommandArgument("viewId")]
         public string? ViewId { get; set; }
 
-        public PublicListActiveSectionsCommand(AccelByteSDK sdk)
+        public PublicListActiveSectionsCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -74,7 +73,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
                 UserId
             );
 
-            
+
             List<AccelByte.Sdk.Api.Platform.Model.SectionInfo>? response = wrapper.PublicListActiveSections(operation);
             if (response == null)
                 return "No response from server.";

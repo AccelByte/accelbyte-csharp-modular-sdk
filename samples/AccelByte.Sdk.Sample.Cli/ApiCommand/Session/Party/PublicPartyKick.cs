@@ -1,4 +1,4 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
 using AccelByte.Sdk.Sample.Cli.Command;
 
 using AccelByte.Sdk.Api.Session.Wrapper;
@@ -22,7 +21,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
     [SdkConsoleCommand("session","publicpartykick")]
     public class PublicPartyKickCommand: ISdkConsoleCommand
     {
-        private AccelByteSDK _SDK;
+        private IAccelByteSdk _SDK;
 
         public string ServiceName{ get { return "Session"; } }
 
@@ -37,7 +36,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
         [SdkCommandArgument("userId")]
         public string UserId { get; set; } = String.Empty;
 
-        public PublicPartyKickCommand(AccelByteSDK sdk)
+        public PublicPartyKickCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -58,7 +57,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
                 UserId
             );
 
-            
+
             AccelByte.Sdk.Api.Session.Model.ApimodelsKickResponse? response = wrapper.PublicPartyKick(operation);
             if (response == null)
                 return "No response from server.";
