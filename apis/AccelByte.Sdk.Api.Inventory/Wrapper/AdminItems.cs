@@ -54,13 +54,13 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             get { return new Operation.AdminSaveItem.AdminSaveItemBuilder(_sdk); }
         }
         #endregion
-        
+
         public Model.ApimodelsListItemResp? AdminListItems(AdminListItems input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -69,17 +69,17 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.ApimodelsItemResp<T1, T2>? AdminGetInventoryItem<T1, T2>(AdminGetInventoryItem input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -97,17 +97,17 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.ApimodelsItemResp<T1, T2>? AdminSaveItemToInventory<T1, T2>(AdminSaveItemToInventory input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -125,17 +125,17 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.ApimodelsItemResp<T1, T2>? AdminConsumeUserItem<T1, T2>(AdminConsumeUserItem input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -144,17 +144,17 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.ApimodelsItemResp<T1, T2>? AdminSaveItem<T1, T2>(AdminSaveItem input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

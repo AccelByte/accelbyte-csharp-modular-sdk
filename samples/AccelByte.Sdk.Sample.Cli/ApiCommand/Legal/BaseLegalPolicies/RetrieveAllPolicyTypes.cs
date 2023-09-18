@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal","retrieveallpolicytypes")]
-    public class RetrieveAllPolicyTypesCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("legal", "retrieveallpolicytypes")]
+    public class RetrieveAllPolicyTypesCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Legal"; } }
+        public string ServiceName { get { return "Legal"; } }
 
-        public string OperationName{ get { return "RetrieveAllPolicyTypes"; } }
+        public string OperationName { get { return "RetrieveAllPolicyTypes"; } }
 
         [SdkCommandArgument("offset")]
         public int? Offset { get; set; }

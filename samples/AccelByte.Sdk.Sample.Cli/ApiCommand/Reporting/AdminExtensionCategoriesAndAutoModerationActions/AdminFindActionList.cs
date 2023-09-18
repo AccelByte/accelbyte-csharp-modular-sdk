@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Reporting.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
 {
-    [SdkConsoleCommand("reporting","adminfindactionlist")]
-    public class AdminFindActionListCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("reporting", "adminfindactionlist")]
+    public class AdminFindActionListCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Reporting"; } }
+        public string ServiceName { get { return "Reporting"; } }
 
-        public string OperationName{ get { return "AdminFindActionList"; } }
+        public string OperationName { get { return "AdminFindActionList"; } }
 
         public AdminFindActionListCommand(IAccelByteSdk sdk)
         {

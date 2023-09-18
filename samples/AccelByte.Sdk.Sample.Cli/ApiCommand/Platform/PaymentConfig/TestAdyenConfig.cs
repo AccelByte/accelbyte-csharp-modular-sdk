@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","testadyenconfig")]
-    public class TestAdyenConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "testadyenconfig")]
+    public class TestAdyenConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "TestAdyenConfig"; } }
+        public string OperationName { get { return "TestAdyenConfig"; } }
 
         [SdkCommandArgument("sandbox")]
         public bool? Sandbox { get; set; }

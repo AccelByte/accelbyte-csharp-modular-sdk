@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","admingetlistbanreasonv3")]
-    public class AdminGetListBanReasonV3Command: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "admingetlistbanreasonv3")]
+    public class AdminGetListBanReasonV3Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "AdminGetListBanReasonV3"; } }
+        public string OperationName { get { return "AdminGetListBanReasonV3"; } }
 
         public AdminGetListBanReasonV3Command(IAccelByteSdk sdk)
         {

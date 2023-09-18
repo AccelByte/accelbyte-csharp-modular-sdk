@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsmc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
 {
-    [SdkConsoleCommand("dsmc","listprovidersbyregion")]
-    public class ListProvidersByRegionCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("dsmc", "listprovidersbyregion")]
+    public class ListProvidersByRegionCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Dsmc"; } }
+        public string ServiceName { get { return "Dsmc"; } }
 
-        public string OperationName{ get { return "ListProvidersByRegion"; } }
+        public string OperationName { get { return "ListProvidersByRegion"; } }
 
         [SdkCommandArgument("region")]
         public string Region { get; set; } = String.Empty;

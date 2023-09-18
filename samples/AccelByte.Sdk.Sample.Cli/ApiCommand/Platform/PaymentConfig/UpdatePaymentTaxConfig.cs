@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","updatepaymenttaxconfig")]
-    public class UpdatePaymentTaxConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "updatepaymenttaxconfig")]
+    public class UpdatePaymentTaxConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "UpdatePaymentTaxConfig"; } }
+        public string OperationName { get { return "UpdatePaymentTaxConfig"; } }
 
         [SdkCommandData("body")]
         public PaymentTaxConfigEdit Body { get; set; } = new PaymentTaxConfigEdit();

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","queryentitlements")]
-    public class QueryEntitlementsCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "queryentitlements")]
+    public class QueryEntitlementsCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "QueryEntitlements"; } }
+        public string OperationName { get { return "QueryEntitlements"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

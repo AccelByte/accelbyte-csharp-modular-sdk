@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Session.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 {
-    [SdkConsoleCommand("session","adminupdateconfigurationtemplatev1")]
-    public class AdminUpdateConfigurationTemplateV1Command: ISdkConsoleCommand
+    [SdkConsoleCommand("session", "adminupdateconfigurationtemplatev1")]
+    public class AdminUpdateConfigurationTemplateV1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Session"; } }
+        public string ServiceName { get { return "Session"; } }
 
-        public string OperationName{ get { return "AdminUpdateConfigurationTemplateV1"; } }
+        public string OperationName { get { return "AdminUpdateConfigurationTemplateV1"; } }
 
         [SdkCommandArgument("name")]
         public string Name { get; set; } = String.Empty;

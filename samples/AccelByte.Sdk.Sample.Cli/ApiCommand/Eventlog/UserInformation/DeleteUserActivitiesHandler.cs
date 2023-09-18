@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Eventlog.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
 {
-    [SdkConsoleCommand("eventlog","deleteuseractivitieshandler")]
-    public class DeleteUserActivitiesHandlerCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("eventlog", "deleteuseractivitieshandler")]
+    public class DeleteUserActivitiesHandlerCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Eventlog"; } }
+        public string ServiceName { get { return "Eventlog"; } }
 
-        public string OperationName{ get { return "DeleteUserActivitiesHandler"; } }
+        public string OperationName { get { return "DeleteUserActivitiesHandler"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -42,7 +42,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
         {
             AccelByte.Sdk.Api.Eventlog.Wrapper.UserInformation wrapper = new AccelByte.Sdk.Api.Eventlog.Wrapper.UserInformation(_SDK);
 
-            #pragma warning disable ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Eventlog.Operation.DeleteUserActivitiesHandler.Builder;
 
 
@@ -54,12 +54,12 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
                 UserId
             );
 
-            #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
 
-            #pragma warning disable ab_deprecated_operation_wrapper
+#pragma warning disable ab_deprecated_operation_wrapper
             wrapper.DeleteUserActivitiesHandler(operation);
             return String.Empty;
-            #pragma warning restore ab_deprecated_operation_wrapper
+#pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

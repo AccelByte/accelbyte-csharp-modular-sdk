@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsmc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
 {
-    [SdkConsoleCommand("dsmc","deregisterlocalserver")]
-    public class DeregisterLocalServerCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("dsmc", "deregisterlocalserver")]
+    public class DeregisterLocalServerCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Dsmc"; } }
+        public string ServiceName { get { return "Dsmc"; } }
 
-        public string OperationName{ get { return "DeregisterLocalServer"; } }
+        public string OperationName { get { return "DeregisterLocalServer"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal","checkreadiness")]
-    public class CheckReadinessCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("legal", "checkreadiness")]
+    public class CheckReadinessCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Legal"; } }
+        public string ServiceName { get { return "Legal"; } }
 
-        public string OperationName{ get { return "CheckReadiness"; } }
+        public string OperationName { get { return "CheckReadiness"; } }
 
         public CheckReadinessCommand(IAccelByteSdk sdk)
         {

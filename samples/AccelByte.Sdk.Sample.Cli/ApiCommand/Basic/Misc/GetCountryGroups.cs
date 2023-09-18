@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Basic.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
 {
-    [SdkConsoleCommand("basic","getcountrygroups")]
-    public class GetCountryGroupsCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("basic", "getcountrygroups")]
+    public class GetCountryGroupsCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Basic"; } }
+        public string ServiceName { get { return "Basic"; } }
 
-        public string OperationName{ get { return "GetCountryGroups"; } }
+        public string OperationName { get { return "GetCountryGroups"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

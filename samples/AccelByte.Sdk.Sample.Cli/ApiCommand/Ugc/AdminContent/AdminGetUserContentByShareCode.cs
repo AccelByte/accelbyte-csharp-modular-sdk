@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ugc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
 {
-    [SdkConsoleCommand("ugc","admingetusercontentbysharecode")]
-    public class AdminGetUserContentByShareCodeCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("ugc", "admingetusercontentbysharecode")]
+    public class AdminGetUserContentByShareCodeCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Ugc"; } }
+        public string ServiceName { get { return "Ugc"; } }
 
-        public string OperationName{ get { return "AdminGetUserContentByShareCode"; } }
+        public string OperationName { get { return "AdminGetUserContentByShareCode"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

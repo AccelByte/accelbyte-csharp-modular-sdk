@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsmc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
 {
-    [SdkConsoleCommand("dsmc","getalldeployment")]
-    public class GetAllDeploymentCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("dsmc", "getalldeployment")]
+    public class GetAllDeploymentCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Dsmc"; } }
+        public string ServiceName { get { return "Dsmc"; } }
 
-        public string OperationName{ get { return "GetAllDeployment"; } }
+        public string OperationName { get { return "GetAllDeployment"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

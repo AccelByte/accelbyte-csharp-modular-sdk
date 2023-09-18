@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dslogmanager.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dslogmanager
 {
-    [SdkConsoleCommand("dslogmanager","listallterminatedservers")]
-    public class ListAllTerminatedServersCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("dslogmanager", "listallterminatedservers")]
+    public class ListAllTerminatedServersCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Dslogmanager"; } }
+        public string ServiceName { get { return "Dslogmanager"; } }
 
-        public string OperationName{ get { return "ListAllTerminatedServers"; } }
+        public string OperationName { get { return "ListAllTerminatedServers"; } }
 
         [SdkCommandArgument("deployment")]
         public string? Deployment { get; set; }

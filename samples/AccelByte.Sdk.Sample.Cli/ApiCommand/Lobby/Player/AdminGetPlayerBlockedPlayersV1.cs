@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby","admingetplayerblockedplayersv1")]
-    public class AdminGetPlayerBlockedPlayersV1Command: ISdkConsoleCommand
+    [SdkConsoleCommand("lobby", "admingetplayerblockedplayersv1")]
+    public class AdminGetPlayerBlockedPlayersV1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Lobby"; } }
+        public string ServiceName { get { return "Lobby"; } }
 
-        public string OperationName{ get { return "AdminGetPlayerBlockedPlayersV1"; } }
+        public string OperationName { get { return "AdminGetPlayerBlockedPlayersV1"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

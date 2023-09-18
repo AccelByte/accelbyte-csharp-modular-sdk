@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 {
-    [SdkConsoleCommand("ams","imagepatch")]
-    public class ImagePatchCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("ams", "imagepatch")]
+    public class ImagePatchCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Ams"; } }
+        public string ServiceName { get { return "Ams"; } }
 
-        public string OperationName{ get { return "ImagePatch"; } }
+        public string OperationName { get { return "ImagePatch"; } }
 
         [SdkCommandArgument("imageID")]
         public string ImageID { get; set; } = String.Empty;

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Sessionbrowser.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionbrowser
 {
-    [SdkConsoleCommand("sessionbrowser","deletesessionlocalds")]
-    public class DeleteSessionLocalDSCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("sessionbrowser", "deletesessionlocalds")]
+    public class DeleteSessionLocalDSCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Sessionbrowser"; } }
+        public string ServiceName { get { return "Sessionbrowser"; } }
 
-        public string OperationName{ get { return "DeleteSessionLocalDS"; } }
+        public string OperationName { get { return "DeleteSessionLocalDS"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

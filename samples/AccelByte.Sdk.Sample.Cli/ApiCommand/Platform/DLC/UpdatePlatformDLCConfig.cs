@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","updateplatformdlcconfig")]
-    public class UpdatePlatformDLCConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "updateplatformdlcconfig")]
+    public class UpdatePlatformDLCConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "UpdatePlatformDLCConfig"; } }
+        public string OperationName { get { return "UpdatePlatformDLCConfig"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","admininviteusernewv4")]
-    public class AdminInviteUserNewV4Command: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "admininviteusernewv4")]
+    public class AdminInviteUserNewV4Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "AdminInviteUserNewV4"; } }
+        public string OperationName { get { return "AdminInviteUserNewV4"; } }
 
         [SdkCommandData("body")]
         public ModelInviteUserRequestV4 Body { get; set; } = new ModelInviteUserRequestV4();

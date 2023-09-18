@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","publicplatformunlinkv3")]
-    public class PublicPlatformUnlinkV3Command: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "publicplatformunlinkv3")]
+    public class PublicPlatformUnlinkV3Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "PublicPlatformUnlinkV3"; } }
+        public string OperationName { get { return "PublicPlatformUnlinkV3"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

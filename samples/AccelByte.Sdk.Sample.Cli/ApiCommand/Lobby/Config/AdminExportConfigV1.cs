@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby","adminexportconfigv1")]
-    public class AdminExportConfigV1Command: ISdkConsoleCommand
+    [SdkConsoleCommand("lobby", "adminexportconfigv1")]
+    public class AdminExportConfigV1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Lobby"; } }
+        public string ServiceName { get { return "Lobby"; } }
 
-        public string OperationName{ get { return "AdminExportConfigV1"; } }
+        public string OperationName { get { return "AdminExportConfigV1"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

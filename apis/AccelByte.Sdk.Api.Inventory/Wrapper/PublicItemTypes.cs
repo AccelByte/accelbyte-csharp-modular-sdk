@@ -30,13 +30,13 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             get { return new Operation.PublicListItemTypes.PublicListItemTypesBuilder(_sdk); }
         }
         #endregion
-        
+
         public Model.ApimodelsListItemTypesResp? PublicListItemTypes(PublicListItemTypes input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

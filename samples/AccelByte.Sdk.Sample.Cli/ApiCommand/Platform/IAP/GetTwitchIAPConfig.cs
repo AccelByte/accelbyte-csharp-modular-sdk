@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","gettwitchiapconfig")]
-    public class GetTwitchIAPConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "gettwitchiapconfig")]
+    public class GetTwitchIAPConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "GetTwitchIAPConfig"; } }
+        public string OperationName { get { return "GetTwitchIAPConfig"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

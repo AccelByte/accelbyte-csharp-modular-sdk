@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Session.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 {
-    [SdkConsoleCommand("session","publicupdateinsertsessionstorage")]
-    public class PublicUpdateInsertSessionStorageCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("session", "publicupdateinsertsessionstorage")]
+    public class PublicUpdateInsertSessionStorageCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Session"; } }
+        public string ServiceName { get { return "Session"; } }
 
-        public string OperationName{ get { return "PublicUpdateInsertSessionStorage"; } }
+        public string OperationName { get { return "PublicUpdateInsertSessionStorage"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","checkusersubscriptionsubscribablebyitemid")]
-    public class CheckUserSubscriptionSubscribableByItemIdCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "checkusersubscriptionsubscribablebyitemid")]
+    public class CheckUserSubscriptionSubscribableByItemIdCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "CheckUserSubscriptionSubscribableByItemId"; } }
+        public string OperationName { get { return "CheckUserSubscriptionSubscribableByItemId"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

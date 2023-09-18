@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Eventlog.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
 {
-    [SdkConsoleCommand("eventlog","posteventhandler")]
-    public class PostEventHandlerCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("eventlog", "posteventhandler")]
+    public class PostEventHandlerCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Eventlog"; } }
+        public string ServiceName { get { return "Eventlog"; } }
 
-        public string OperationName{ get { return "PostEventHandler"; } }
+        public string OperationName { get { return "PostEventHandler"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -42,7 +42,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
         {
             AccelByte.Sdk.Api.Eventlog.Wrapper.Event wrapper = new AccelByte.Sdk.Api.Eventlog.Wrapper.Event(_SDK);
 
-            #pragma warning disable ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Eventlog.Operation.PostEventHandler.Builder;
 
 
@@ -54,12 +54,12 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
                 Namespace
             );
 
-            #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
 
-            #pragma warning disable ab_deprecated_operation_wrapper
+#pragma warning disable ab_deprecated_operation_wrapper
             wrapper.PostEventHandler(operation);
             return String.Empty;
-            #pragma warning restore ab_deprecated_operation_wrapper
+#pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

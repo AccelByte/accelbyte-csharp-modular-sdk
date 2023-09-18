@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","removerolemembers")]
-    public class RemoveRoleMembersCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "removerolemembers")]
+    public class RemoveRoleMembersCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "RemoveRoleMembers"; } }
+        public string OperationName { get { return "RemoveRoleMembers"; } }
 
         [SdkCommandArgument("roleId")]
         public string RoleId { get; set; } = String.Empty;
@@ -42,7 +42,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
         {
             AccelByte.Sdk.Api.Iam.Wrapper.Roles wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.Roles(_SDK);
 
-            #pragma warning disable ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Iam.Operation.RemoveRoleMembers.Builder;
 
 
@@ -54,12 +54,12 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
                 RoleId
             );
 
-            #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
 
-            #pragma warning disable ab_deprecated_operation_wrapper
+#pragma warning disable ab_deprecated_operation_wrapper
             wrapper.RemoveRoleMembers(operation);
             return String.Empty;
-            #pragma warning restore ab_deprecated_operation_wrapper
+#pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

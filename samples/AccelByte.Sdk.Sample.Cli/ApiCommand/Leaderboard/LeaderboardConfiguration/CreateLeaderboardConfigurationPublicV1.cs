@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Leaderboard.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
 {
-    [SdkConsoleCommand("leaderboard","createleaderboardconfigurationpublicv1")]
-    public class CreateLeaderboardConfigurationPublicV1Command: ISdkConsoleCommand
+    [SdkConsoleCommand("leaderboard", "createleaderboardconfigurationpublicv1")]
+    public class CreateLeaderboardConfigurationPublicV1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Leaderboard"; } }
+        public string ServiceName { get { return "Leaderboard"; } }
 
-        public string OperationName{ get { return "CreateLeaderboardConfigurationPublicV1"; } }
+        public string OperationName { get { return "CreateLeaderboardConfigurationPublicV1"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

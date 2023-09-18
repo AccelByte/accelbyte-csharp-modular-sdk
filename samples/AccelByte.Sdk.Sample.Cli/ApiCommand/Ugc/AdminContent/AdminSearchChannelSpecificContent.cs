@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ugc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
 {
-    [SdkConsoleCommand("ugc","adminsearchchannelspecificcontent")]
-    public class AdminSearchChannelSpecificContentCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("ugc", "adminsearchchannelspecificcontent")]
+    public class AdminSearchChannelSpecificContentCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Ugc"; } }
+        public string ServiceName { get { return "Ugc"; } }
 
-        public string OperationName{ get { return "AdminSearchChannelSpecificContent"; } }
+        public string OperationName { get { return "AdminSearchChannelSpecificContent"; } }
 
         [SdkCommandArgument("channelId")]
         public string ChannelId { get; set; } = String.Empty;

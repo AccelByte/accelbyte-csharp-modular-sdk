@@ -61,10 +61,10 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             )
             {
                 AdminBulkUpdateMyItems op = new AdminBulkUpdateMyItems(this,
-                    body,                    
-                    inventoryId,                    
-                    namespace_,                    
-                    userId                    
+                    body,
+                    inventoryId,
+                    namespace_,
+                    userId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -108,35 +108,35 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             PathParams["inventoryId"] = inventoryId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public AdminBulkUpdateMyItems(
-            string inventoryId,            
-            string namespace_,            
-            string userId,            
-            List<Model.ApimodelsAdminUpdateItemReq> body            
+            string inventoryId,
+            string namespace_,
+            string userId,
+            List<Model.ApimodelsAdminUpdateItemReq> body
         )
         {
             PathParams["inventoryId"] = inventoryId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,10 +147,10 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public List<Model.ApimodelsUpdateItemResp>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -163,9 +163,9 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             {
                 return JsonSerializer.Deserialize<List<Model.ApimodelsUpdateItemResp>>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

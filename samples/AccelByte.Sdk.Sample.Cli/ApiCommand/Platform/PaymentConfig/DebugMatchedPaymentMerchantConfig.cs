@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","debugmatchedpaymentmerchantconfig")]
-    public class DebugMatchedPaymentMerchantConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "debugmatchedpaymentmerchantconfig")]
+    public class DebugMatchedPaymentMerchantConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "DebugMatchedPaymentMerchantConfig"; } }
+        public string OperationName { get { return "DebugMatchedPaymentMerchantConfig"; } }
 
         [SdkCommandArgument("namespace_")]
         public string? Namespace { get; set; }

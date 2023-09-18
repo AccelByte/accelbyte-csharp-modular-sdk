@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Matchmaking.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
 {
-    [SdkConsoleCommand("matchmaking","publicgetsinglematchmakingchannel")]
-    public class PublicGetSingleMatchmakingChannelCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("matchmaking", "publicgetsinglematchmakingchannel")]
+    public class PublicGetSingleMatchmakingChannelCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Matchmaking"; } }
+        public string ServiceName { get { return "Matchmaking"; } }
 
-        public string OperationName{ get { return "PublicGetSingleMatchmakingChannel"; } }
+        public string OperationName { get { return "PublicGetSingleMatchmakingChannel"; } }
 
         [SdkCommandArgument("channelName")]
         public string ChannelName { get; set; } = String.Empty;

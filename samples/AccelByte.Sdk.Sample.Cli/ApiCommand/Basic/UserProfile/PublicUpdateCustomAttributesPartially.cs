@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Basic.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
 {
-    [SdkConsoleCommand("basic","publicupdatecustomattributespartially")]
-    public class PublicUpdateCustomAttributesPartiallyCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("basic", "publicupdatecustomattributespartially")]
+    public class PublicUpdateCustomAttributesPartiallyCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Basic"; } }
+        public string ServiceName { get { return "Basic"; } }
 
-        public string OperationName{ get { return "PublicUpdateCustomAttributesPartially"; } }
+        public string OperationName { get { return "PublicUpdateCustomAttributesPartially"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

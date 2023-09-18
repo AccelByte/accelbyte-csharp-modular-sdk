@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Match2.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Match2
 {
-    [SdkConsoleCommand("match2","creatematchticket")]
-    public class CreateMatchTicketCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("match2", "creatematchticket")]
+    public class CreateMatchTicketCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Match2"; } }
+        public string ServiceName { get { return "Match2"; } }
 
-        public string OperationName{ get { return "CreateMatchTicket"; } }
+        public string OperationName { get { return "CreateMatchTicket"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

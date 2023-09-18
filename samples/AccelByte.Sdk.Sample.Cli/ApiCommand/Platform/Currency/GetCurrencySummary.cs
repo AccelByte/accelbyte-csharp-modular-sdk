@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","getcurrencysummary")]
-    public class GetCurrencySummaryCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "getcurrencysummary")]
+    public class GetCurrencySummaryCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "GetCurrencySummary"; } }
+        public string OperationName { get { return "GetCurrencySummary"; } }
 
         [SdkCommandArgument("currencyCode")]
         public string CurrencyCode { get; set; } = String.Empty;

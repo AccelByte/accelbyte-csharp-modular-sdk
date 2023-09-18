@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Social.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
 {
-    [SdkConsoleCommand("social","deleteuserslotconfig")]
-    public class DeleteUserSlotConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("social", "deleteuserslotconfig")]
+    public class DeleteUserSlotConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Social"; } }
+        public string ServiceName { get { return "Social"; } }
 
-        public string OperationName{ get { return "DeleteUserSlotConfig"; } }
+        public string OperationName { get { return "DeleteUserSlotConfig"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -42,7 +42,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
         {
             AccelByte.Sdk.Api.Social.Wrapper.SlotConfig wrapper = new AccelByte.Sdk.Api.Social.Wrapper.SlotConfig(_SDK);
 
-            #pragma warning disable ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Social.Operation.DeleteUserSlotConfig.Builder;
 
 
@@ -54,12 +54,12 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
                 UserId
             );
 
-            #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
 
-            #pragma warning disable ab_deprecated_operation_wrapper
+#pragma warning disable ab_deprecated_operation_wrapper
             wrapper.DeleteUserSlotConfig(operation);
             return String.Empty;
-            #pragma warning restore ab_deprecated_operation_wrapper
+#pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

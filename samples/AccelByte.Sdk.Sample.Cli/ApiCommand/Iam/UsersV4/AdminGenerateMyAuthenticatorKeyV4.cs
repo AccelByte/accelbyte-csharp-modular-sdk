@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","admingeneratemyauthenticatorkeyv4")]
-    public class AdminGenerateMyAuthenticatorKeyV4Command: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "admingeneratemyauthenticatorkeyv4")]
+    public class AdminGenerateMyAuthenticatorKeyV4Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "AdminGenerateMyAuthenticatorKeyV4"; } }
+        public string OperationName { get { return "AdminGenerateMyAuthenticatorKeyV4"; } }
 
         public AdminGenerateMyAuthenticatorKeyV4Command(IAccelByteSdk sdk)
         {

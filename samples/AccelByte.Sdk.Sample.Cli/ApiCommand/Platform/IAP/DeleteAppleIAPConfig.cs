@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","deleteappleiapconfig")]
-    public class DeleteAppleIAPConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "deleteappleiapconfig")]
+    public class DeleteAppleIAPConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "DeleteAppleIAPConfig"; } }
+        public string OperationName { get { return "DeleteAppleIAPConfig"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

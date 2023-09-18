@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","existsanyuseractiveentitlement")]
-    public class ExistsAnyUserActiveEntitlementCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "existsanyuseractiveentitlement")]
+    public class ExistsAnyUserActiveEntitlementCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "ExistsAnyUserActiveEntitlement"; } }
+        public string OperationName { get { return "ExistsAnyUserActiveEntitlement"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","getepicgamesiapconfig")]
-    public class GetEpicGamesIAPConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "getepicgamesiapconfig")]
+    public class GetEpicGamesIAPConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "GetEpicGamesIAPConfig"; } }
+        public string OperationName { get { return "GetEpicGamesIAPConfig"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

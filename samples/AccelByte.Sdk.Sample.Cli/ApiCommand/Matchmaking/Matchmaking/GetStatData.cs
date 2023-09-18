@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Matchmaking.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
 {
-    [SdkConsoleCommand("matchmaking","getstatdata")]
-    public class GetStatDataCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("matchmaking", "getstatdata")]
+    public class GetStatDataCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Matchmaking"; } }
+        public string ServiceName { get { return "Matchmaking"; } }
 
-        public string OperationName{ get { return "GetStatData"; } }
+        public string OperationName { get { return "GetStatData"; } }
 
         [SdkCommandArgument("channelName")]
         public string ChannelName { get; set; } = String.Empty;

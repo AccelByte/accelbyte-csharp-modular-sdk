@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby","admindeletethirdpartyconfig")]
-    public class AdminDeleteThirdPartyConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("lobby", "admindeletethirdpartyconfig")]
+    public class AdminDeleteThirdPartyConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Lobby"; } }
+        public string ServiceName { get { return "Lobby"; } }
 
-        public string OperationName{ get { return "AdminDeleteThirdPartyConfig"; } }
+        public string OperationName { get { return "AdminDeleteThirdPartyConfig"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

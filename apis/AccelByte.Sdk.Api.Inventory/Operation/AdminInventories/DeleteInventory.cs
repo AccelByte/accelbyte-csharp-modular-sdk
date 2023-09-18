@@ -60,9 +60,9 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             )
             {
                 DeleteInventory op = new DeleteInventory(this,
-                    body,                    
-                    inventoryId,                    
-                    namespace_                    
+                    body,
+                    inventoryId,
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -102,33 +102,33 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         {
             PathParams["inventoryId"] = inventoryId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public DeleteInventory(
-            string inventoryId,            
-            string namespace_,            
-            Model.ApimodelsDeleteInventoryReq body            
+            string inventoryId,
+            string namespace_,
+            Model.ApimodelsDeleteInventoryReq body
         )
         {
             PathParams["inventoryId"] = inventoryId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -139,17 +139,17 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby","adminupdatethirdpartyconfig")]
-    public class AdminUpdateThirdPartyConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("lobby", "adminupdatethirdpartyconfig")]
+    public class AdminUpdateThirdPartyConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Lobby"; } }
+        public string ServiceName { get { return "Lobby"; } }
 
-        public string OperationName{ get { return "AdminUpdateThirdPartyConfig"; } }
+        public string OperationName { get { return "AdminUpdateThirdPartyConfig"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

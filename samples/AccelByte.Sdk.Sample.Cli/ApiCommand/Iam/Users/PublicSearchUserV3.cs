@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","publicsearchuserv3")]
-    public class PublicSearchUserV3Command: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "publicsearchuserv3")]
+    public class PublicSearchUserV3Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "PublicSearchUserV3"; } }
+        public string OperationName { get { return "PublicSearchUserV3"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

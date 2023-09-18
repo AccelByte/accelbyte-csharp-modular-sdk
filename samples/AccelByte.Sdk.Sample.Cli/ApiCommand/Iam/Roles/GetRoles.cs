@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","getroles")]
-    public class GetRolesCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "getroles")]
+    public class GetRolesCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "GetRoles"; } }
+        public string OperationName { get { return "GetRoles"; } }
 
         [SdkCommandArgument("isWildcard")]
         public string? IsWildcard { get; set; }
@@ -39,7 +39,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
         {
             AccelByte.Sdk.Api.Iam.Wrapper.Roles wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.Roles(_SDK);
 
-            #pragma warning disable ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Iam.Operation.GetRoles.Builder;
 
             if (IsWildcard != null)
@@ -51,15 +51,15 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             GetRoles operation = opBuilder.Build(
             );
 
-            #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
 
-            #pragma warning disable ab_deprecated_operation_wrapper
+#pragma warning disable ab_deprecated_operation_wrapper
             List<AccelByte.Sdk.Api.Iam.Model.ModelRoleResponseWithManagers>? response = wrapper.GetRoles(operation);
             if (response == null)
                 return "No response from server.";
 
             return SdkHelper.SerializeToJson(response);
-            #pragma warning restore ab_deprecated_operation_wrapper
+#pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

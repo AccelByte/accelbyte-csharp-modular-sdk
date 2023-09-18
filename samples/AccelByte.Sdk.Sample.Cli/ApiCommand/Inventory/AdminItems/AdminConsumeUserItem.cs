@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Inventory.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
 {
-    [SdkConsoleCommand("inventory","adminconsumeuseritem")]
-    public class AdminConsumeUserItemCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("inventory", "adminconsumeuseritem")]
+    public class AdminConsumeUserItemCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Inventory"; } }
+        public string ServiceName { get { return "Inventory"; } }
 
-        public string OperationName{ get { return "AdminConsumeUserItem"; } }
+        public string OperationName { get { return "AdminConsumeUserItem"; } }
 
         [SdkCommandArgument("inventoryId")]
         public string InventoryId { get; set; } = String.Empty;

@@ -59,9 +59,9 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             )
             {
                 AdminGetInventoryItem op = new AdminGetInventoryItem(this,
-                    inventoryId,                    
-                    itemId,                    
-                    namespace_                    
+                    inventoryId,
+                    itemId,
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -124,32 +124,32 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             PathParams["inventoryId"] = inventoryId;
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public AdminGetInventoryItem(
-            string inventoryId,            
-            string itemId,            
-            string namespace_            
+            string inventoryId,
+            string itemId,
+            string namespace_
         )
         {
             PathParams["inventoryId"] = inventoryId;
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -160,10 +160,10 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ApimodelsItemResp? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -176,18 +176,18 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             {
                 return JsonSerializer.Deserialize<Model.ApimodelsItemResp>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
 
         public Model.ApimodelsItemResp<T1, T2>? ParseResponse<T1, T2>(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
-            }            
+            }
             else if (code == (HttpStatusCode)201)
             {
                 return JsonSerializer.Deserialize<Model.ApimodelsItemResp<T1, T2>>(payload, ResponseJsonOptions);
@@ -196,7 +196,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             {
                 return JsonSerializer.Deserialize<Model.ApimodelsItemResp<T1, T2>>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
             throw new HttpResponseException(code, payloadString);
         }

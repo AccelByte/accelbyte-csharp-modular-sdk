@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal","requestpresignedurl1")]
-    public class RequestPresignedURL1Command: ISdkConsoleCommand
+    [SdkConsoleCommand("legal", "requestpresignedurl1")]
+    public class RequestPresignedURL1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Legal"; } }
+        public string ServiceName { get { return "Legal"; } }
 
-        public string OperationName{ get { return "RequestPresignedURL1"; } }
+        public string OperationName { get { return "RequestPresignedURL1"; } }
 
         [SdkCommandArgument("localizedPolicyVersionId")]
         public string LocalizedPolicyVersionId { get; set; } = String.Empty;

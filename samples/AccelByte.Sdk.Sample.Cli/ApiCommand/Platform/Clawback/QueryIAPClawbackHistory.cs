@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","queryiapclawbackhistory")]
-    public class QueryIAPClawbackHistoryCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "queryiapclawbackhistory")]
+    public class QueryIAPClawbackHistoryCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "QueryIAPClawbackHistory"; } }
+        public string OperationName { get { return "QueryIAPClawbackHistory"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

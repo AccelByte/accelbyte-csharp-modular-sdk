@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsmc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
 {
-    [SdkConsoleCommand("dsmc","addport")]
-    public class AddPortCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("dsmc", "addport")]
+    public class AddPortCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Dsmc"; } }
+        public string ServiceName { get { return "Dsmc"; } }
 
-        public string OperationName{ get { return "AddPort"; } }
+        public string OperationName { get { return "AddPort"; } }
 
         [SdkCommandArgument("name")]
         public string Name { get; set; } = String.Empty;

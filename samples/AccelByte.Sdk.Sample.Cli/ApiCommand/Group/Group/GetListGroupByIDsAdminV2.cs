@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Group.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
 {
-    [SdkConsoleCommand("group","getlistgroupbyidsadminv2")]
-    public class GetListGroupByIDsAdminV2Command: ISdkConsoleCommand
+    [SdkConsoleCommand("group", "getlistgroupbyidsadminv2")]
+    public class GetListGroupByIDsAdminV2Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Group"; } }
+        public string ServiceName { get { return "Group"; } }
 
-        public string OperationName{ get { return "GetListGroupByIDsAdminV2"; } }
+        public string OperationName { get { return "GetListGroupByIDsAdminV2"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

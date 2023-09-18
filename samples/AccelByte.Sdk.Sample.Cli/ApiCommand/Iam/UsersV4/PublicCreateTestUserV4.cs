@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","publiccreatetestuserv4")]
-    public class PublicCreateTestUserV4Command: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "publiccreatetestuserv4")]
+    public class PublicCreateTestUserV4Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "PublicCreateTestUserV4"; } }
+        public string OperationName { get { return "PublicCreateTestUserV4"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

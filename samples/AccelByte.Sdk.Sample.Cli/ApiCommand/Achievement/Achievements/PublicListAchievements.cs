@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Achievement.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
 {
-    [SdkConsoleCommand("achievement","publiclistachievements")]
-    public class PublicListAchievementsCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("achievement", "publiclistachievements")]
+    public class PublicListAchievementsCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Achievement"; } }
+        public string ServiceName { get { return "Achievement"; } }
 
-        public string OperationName{ get { return "PublicListAchievements"; } }
+        public string OperationName { get { return "PublicListAchievements"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

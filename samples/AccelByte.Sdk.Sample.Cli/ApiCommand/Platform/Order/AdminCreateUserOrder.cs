@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","admincreateuserorder")]
-    public class AdminCreateUserOrderCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "admincreateuserorder")]
+    public class AdminCreateUserOrderCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "AdminCreateUserOrder"; } }
+        public string OperationName { get { return "AdminCreateUserOrder"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby","gettopicbynamespace")]
-    public class GetTopicByNamespaceCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("lobby", "gettopicbynamespace")]
+    public class GetTopicByNamespaceCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Lobby"; } }
+        public string ServiceName { get { return "Lobby"; } }
 
-        public string OperationName{ get { return "GetTopicByNamespace"; } }
+        public string OperationName { get { return "GetTopicByNamespace"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Sessionbrowser.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionbrowser
 {
-    [SdkConsoleCommand("sessionbrowser","addplayertosession")]
-    public class AddPlayerToSessionCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("sessionbrowser", "addplayertosession")]
+    public class AddPlayerToSessionCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Sessionbrowser"; } }
+        public string ServiceName { get { return "Sessionbrowser"; } }
 
-        public string OperationName{ get { return "AddPlayerToSession"; } }
+        public string OperationName { get { return "AddPlayerToSession"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

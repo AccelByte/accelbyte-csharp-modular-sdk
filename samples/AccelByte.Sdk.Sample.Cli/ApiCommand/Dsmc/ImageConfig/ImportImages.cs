@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsmc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
 {
-    [SdkConsoleCommand("dsmc","importimages")]
-    public class ImportImagesCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("dsmc", "importimages")]
+    public class ImportImagesCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Dsmc"; } }
+        public string ServiceName { get { return "Dsmc"; } }
 
-        public string OperationName{ get { return "ImportImages"; } }
+        public string OperationName { get { return "ImportImages"; } }
 
         [SdkCommandFile("file")]
         public Stream File { get; set; } = new MemoryStream();

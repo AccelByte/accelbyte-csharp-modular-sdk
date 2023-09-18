@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dslogmanager.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dslogmanager
 {
-    [SdkConsoleCommand("dslogmanager","downloadserverlogs")]
-    public class DownloadServerLogsCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("dslogmanager", "downloadserverlogs")]
+    public class DownloadServerLogsCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Dslogmanager"; } }
+        public string ServiceName { get { return "Dslogmanager"; } }
 
-        public string OperationName{ get { return "DownloadServerLogs"; } }
+        public string OperationName { get { return "DownloadServerLogs"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

@@ -38,13 +38,13 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             get { return new Operation.AdminDeleteItemType.AdminDeleteItemTypeBuilder(_sdk); }
         }
         #endregion
-        
+
         public Model.ApimodelsListItemTypesResp? AdminListItemTypes(AdminListItemTypes input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -53,15 +53,16 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteItemType(AdminDeleteItemType input) {
+        public void AdminDeleteItemType(AdminDeleteItemType input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

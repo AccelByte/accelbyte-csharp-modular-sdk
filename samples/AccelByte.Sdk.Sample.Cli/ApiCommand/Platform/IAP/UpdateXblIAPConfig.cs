@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","updatexbliapconfig")]
-    public class UpdateXblIAPConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "updatexbliapconfig")]
+    public class UpdateXblIAPConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "UpdateXblIAPConfig"; } }
+        public string OperationName { get { return "UpdateXblIAPConfig"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

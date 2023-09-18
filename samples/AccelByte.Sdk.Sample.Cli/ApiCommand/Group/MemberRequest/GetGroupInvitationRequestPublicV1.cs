@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Group.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
 {
-    [SdkConsoleCommand("group","getgroupinvitationrequestpublicv1")]
-    public class GetGroupInvitationRequestPublicV1Command: ISdkConsoleCommand
+    [SdkConsoleCommand("group", "getgroupinvitationrequestpublicv1")]
+    public class GetGroupInvitationRequestPublicV1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Group"; } }
+        public string ServiceName { get { return "Group"; } }
 
-        public string OperationName{ get { return "GetGroupInvitationRequestPublicV1"; } }
+        public string OperationName { get { return "GetGroupInvitationRequestPublicV1"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

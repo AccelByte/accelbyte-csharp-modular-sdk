@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Leaderboard.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
 {
-    [SdkConsoleCommand("leaderboard","setuserleaderboardvisibilityv3")]
-    public class SetUserLeaderboardVisibilityV3Command: ISdkConsoleCommand
+    [SdkConsoleCommand("leaderboard", "setuserleaderboardvisibilityv3")]
+    public class SetUserLeaderboardVisibilityV3Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Leaderboard"; } }
+        public string ServiceName { get { return "Leaderboard"; } }
 
-        public string OperationName{ get { return "SetUserLeaderboardVisibilityV3"; } }
+        public string OperationName { get { return "SetUserLeaderboardVisibilityV3"; } }
 
         [SdkCommandArgument("leaderboardCode")]
         public string LeaderboardCode { get; set; } = String.Empty;

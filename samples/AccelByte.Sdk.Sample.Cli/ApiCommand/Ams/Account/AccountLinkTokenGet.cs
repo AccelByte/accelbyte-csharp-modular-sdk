@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 {
-    [SdkConsoleCommand("ams","accountlinktokenget")]
-    public class AccountLinkTokenGetCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("ams", "accountlinktokenget")]
+    public class AccountLinkTokenGetCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Ams"; } }
+        public string ServiceName { get { return "Ams"; } }
 
-        public string OperationName{ get { return "AccountLinkTokenGet"; } }
+        public string OperationName { get { return "AccountLinkTokenGet"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","deleteitemtypeconfig")]
-    public class DeleteItemTypeConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "deleteitemtypeconfig")]
+    public class DeleteItemTypeConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "DeleteItemTypeConfig"; } }
+        public string OperationName { get { return "DeleteItemTypeConfig"; } }
 
         [SdkCommandArgument("id")]
         public string Id { get; set; } = String.Empty;

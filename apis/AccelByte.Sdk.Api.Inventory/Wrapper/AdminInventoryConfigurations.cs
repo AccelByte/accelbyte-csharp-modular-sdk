@@ -46,13 +46,13 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             get { return new Operation.AdminDeleteInventoryConfiguration.AdminDeleteInventoryConfigurationBuilder(_sdk); }
         }
         #endregion
-        
+
         public Model.ApimodelsListInventoryConfigurationsResp? AdminListInventoryConfigurations(AdminListInventoryConfigurations input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -61,7 +61,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -79,15 +79,16 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteInventoryConfiguration(AdminDeleteInventoryConfiguration input) {
+        public void AdminDeleteInventoryConfiguration(AdminDeleteInventoryConfiguration input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

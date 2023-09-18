@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","authenticationwithplatformlinkv3")]
-    public class AuthenticationWithPlatformLinkV3Command: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "authenticationwithplatformlinkv3")]
+    public class AuthenticationWithPlatformLinkV3Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "AuthenticationWithPlatformLinkV3"; } }
+        public string OperationName { get { return "AuthenticationWithPlatformLinkV3"; } }
 
         [SdkCommandArgument("extend_exp")]
         public bool ExtendExp { get; set; } = false;

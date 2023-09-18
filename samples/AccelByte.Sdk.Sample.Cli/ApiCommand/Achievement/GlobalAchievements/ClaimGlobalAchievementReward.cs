@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Achievement.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
 {
-    [SdkConsoleCommand("achievement","claimglobalachievementreward")]
-    public class ClaimGlobalAchievementRewardCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("achievement", "claimglobalachievementreward")]
+    public class ClaimGlobalAchievementRewardCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Achievement"; } }
+        public string ServiceName { get { return "Achievement"; } }
 
-        public string OperationName{ get { return "ClaimGlobalAchievementReward"; } }
+        public string OperationName { get { return "ClaimGlobalAchievementReward"; } }
 
         [SdkCommandArgument("achievementCode")]
         public string AchievementCode { get; set; } = String.Empty;

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","publiccanceluserorder")]
-    public class PublicCancelUserOrderCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "publiccanceluserorder")]
+    public class PublicCancelUserOrderCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "PublicCancelUserOrder"; } }
+        public string OperationName { get { return "PublicCancelUserOrder"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

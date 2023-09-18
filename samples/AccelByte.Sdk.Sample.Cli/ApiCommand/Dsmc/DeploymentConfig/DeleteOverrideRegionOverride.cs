@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsmc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
 {
-    [SdkConsoleCommand("dsmc","deleteoverrideregionoverride")]
-    public class DeleteOverrideRegionOverrideCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("dsmc", "deleteoverrideregionoverride")]
+    public class DeleteOverrideRegionOverrideCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Dsmc"; } }
+        public string ServiceName { get { return "Dsmc"; } }
 
-        public string OperationName{ get { return "DeleteOverrideRegionOverride"; } }
+        public string OperationName { get { return "DeleteOverrideRegionOverride"; } }
 
         [SdkCommandArgument("deployment")]
         public string Deployment { get; set; } = String.Empty;

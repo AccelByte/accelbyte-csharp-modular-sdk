@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","getlootboxgrpcinfo")]
-    public class GetLootBoxGrpcInfoCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "getlootboxgrpcinfo")]
+    public class GetLootBoxGrpcInfoCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "GetLootBoxGrpcInfo"; } }
+        public string OperationName { get { return "GetLootBoxGrpcInfo"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

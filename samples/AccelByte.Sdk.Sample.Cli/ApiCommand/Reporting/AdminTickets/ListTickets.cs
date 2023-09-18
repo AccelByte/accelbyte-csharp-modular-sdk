@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Reporting.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
 {
-    [SdkConsoleCommand("reporting","listtickets")]
-    public class ListTicketsCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("reporting", "listtickets")]
+    public class ListTicketsCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Reporting"; } }
+        public string ServiceName { get { return "Reporting"; } }
 
-        public string OperationName{ get { return "ListTickets"; } }
+        public string OperationName { get { return "ListTickets"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

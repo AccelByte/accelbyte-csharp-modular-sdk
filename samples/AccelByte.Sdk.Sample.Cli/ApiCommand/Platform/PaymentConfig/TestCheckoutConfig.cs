@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","testcheckoutconfig")]
-    public class TestCheckoutConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "testcheckoutconfig")]
+    public class TestCheckoutConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "TestCheckoutConfig"; } }
+        public string OperationName { get { return "TestCheckoutConfig"; } }
 
         [SdkCommandArgument("sandbox")]
         public bool? Sandbox { get; set; }

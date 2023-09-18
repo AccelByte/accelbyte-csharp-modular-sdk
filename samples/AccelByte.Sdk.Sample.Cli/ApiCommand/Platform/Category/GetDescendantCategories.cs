@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","getdescendantcategories")]
-    public class GetDescendantCategoriesCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "getdescendantcategories")]
+    public class GetDescendantCategoriesCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "GetDescendantCategories"; } }
+        public string OperationName { get { return "GetDescendantCategories"; } }
 
         [SdkCommandArgument("categoryPath")]
         public string CategoryPath { get; set; } = String.Empty;

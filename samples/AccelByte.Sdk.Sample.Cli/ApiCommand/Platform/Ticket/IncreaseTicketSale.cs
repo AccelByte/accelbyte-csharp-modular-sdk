@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","increaseticketsale")]
-    public class IncreaseTicketSaleCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "increaseticketsale")]
+    public class IncreaseTicketSaleCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "IncreaseTicketSale"; } }
+        public string OperationName { get { return "IncreaseTicketSale"; } }
 
         [SdkCommandArgument("boothName")]
         public string BoothName { get; set; } = String.Empty;

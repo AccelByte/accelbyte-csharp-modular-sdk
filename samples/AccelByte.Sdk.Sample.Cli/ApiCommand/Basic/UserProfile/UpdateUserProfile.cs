@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Basic.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
 {
-    [SdkConsoleCommand("basic","updateuserprofile")]
-    public class UpdateUserProfileCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("basic", "updateuserprofile")]
+    public class UpdateUserProfileCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Basic"; } }
+        public string ServiceName { get { return "Basic"; } }
 
-        public string OperationName{ get { return "UpdateUserProfile"; } }
+        public string OperationName { get { return "UpdateUserProfile"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

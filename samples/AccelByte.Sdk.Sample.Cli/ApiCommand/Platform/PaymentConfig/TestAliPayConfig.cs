@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","testalipayconfig")]
-    public class TestAliPayConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "testalipayconfig")]
+    public class TestAliPayConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "TestAliPayConfig"; } }
+        public string OperationName { get { return "TestAliPayConfig"; } }
 
         [SdkCommandArgument("sandbox")]
         public bool? Sandbox { get; set; }

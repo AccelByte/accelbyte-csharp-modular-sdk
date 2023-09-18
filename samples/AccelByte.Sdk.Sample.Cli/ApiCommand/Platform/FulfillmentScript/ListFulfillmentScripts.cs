@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","listfulfillmentscripts")]
-    public class ListFulfillmentScriptsCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "listfulfillmentscripts")]
+    public class ListFulfillmentScriptsCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "ListFulfillmentScripts"; } }
+        public string OperationName { get { return "ListFulfillmentScripts"; } }
 
         public ListFulfillmentScriptsCommand(IAccelByteSdk sdk)
         {

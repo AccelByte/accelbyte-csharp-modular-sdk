@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","validateplaystationiapconfig")]
-    public class ValidatePlaystationIAPConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "validateplaystationiapconfig")]
+    public class ValidatePlaystationIAPConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "ValidatePlaystationIAPConfig"; } }
+        public string OperationName { get { return "ValidatePlaystationIAPConfig"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

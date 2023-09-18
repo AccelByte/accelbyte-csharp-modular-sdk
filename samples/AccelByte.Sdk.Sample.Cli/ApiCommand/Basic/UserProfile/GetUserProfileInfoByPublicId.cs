@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Basic.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
 {
-    [SdkConsoleCommand("basic","getuserprofileinfobypublicid")]
-    public class GetUserProfileInfoByPublicIdCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("basic", "getuserprofileinfobypublicid")]
+    public class GetUserProfileInfoByPublicIdCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Basic"; } }
+        public string ServiceName { get { return "Basic"; } }
 
-        public string OperationName{ get { return "GetUserProfileInfoByPublicId"; } }
+        public string OperationName { get { return "GetUserProfileInfoByPublicId"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

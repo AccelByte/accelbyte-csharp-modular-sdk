@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ugc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
 {
-    [SdkConsoleCommand("ugc","publiccreatechannel")]
-    public class PublicCreateChannelCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("ugc", "publiccreatechannel")]
+    public class PublicCreateChannelCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Ugc"; } }
+        public string ServiceName { get { return "Ugc"; } }
 
-        public string OperationName{ get { return "PublicCreateChannel"; } }
+        public string OperationName { get { return "PublicCreateChannel"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

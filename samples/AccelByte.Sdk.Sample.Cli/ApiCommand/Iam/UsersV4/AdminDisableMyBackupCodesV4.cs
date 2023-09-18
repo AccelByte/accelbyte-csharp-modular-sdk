@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","admindisablemybackupcodesv4")]
-    public class AdminDisableMyBackupCodesV4Command: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "admindisablemybackupcodesv4")]
+    public class AdminDisableMyBackupCodesV4Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "AdminDisableMyBackupCodesV4"; } }
+        public string OperationName { get { return "AdminDisableMyBackupCodesV4"; } }
 
         public AdminDisableMyBackupCodesV4Command(IAccelByteSdk sdk)
         {

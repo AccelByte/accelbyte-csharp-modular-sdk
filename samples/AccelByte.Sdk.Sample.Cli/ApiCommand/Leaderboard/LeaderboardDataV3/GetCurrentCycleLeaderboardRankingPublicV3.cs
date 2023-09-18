@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Leaderboard.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
 {
-    [SdkConsoleCommand("leaderboard","getcurrentcycleleaderboardrankingpublicv3")]
-    public class GetCurrentCycleLeaderboardRankingPublicV3Command: ISdkConsoleCommand
+    [SdkConsoleCommand("leaderboard", "getcurrentcycleleaderboardrankingpublicv3")]
+    public class GetCurrentCycleLeaderboardRankingPublicV3Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Leaderboard"; } }
+        public string ServiceName { get { return "Leaderboard"; } }
 
-        public string OperationName{ get { return "GetCurrentCycleLeaderboardRankingPublicV3"; } }
+        public string OperationName { get { return "GetCurrentCycleLeaderboardRankingPublicV3"; } }
 
         [SdkCommandArgument("cycleId")]
         public string CycleId { get; set; } = String.Empty;

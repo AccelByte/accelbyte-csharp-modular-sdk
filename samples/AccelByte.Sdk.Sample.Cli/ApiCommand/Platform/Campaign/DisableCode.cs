@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","disablecode")]
-    public class DisableCodeCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "disablecode")]
+    public class DisableCodeCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "DisableCode"; } }
+        public string OperationName { get { return "DisableCode"; } }
 
         [SdkCommandArgument("code")]
         public string Code { get; set; } = String.Empty;

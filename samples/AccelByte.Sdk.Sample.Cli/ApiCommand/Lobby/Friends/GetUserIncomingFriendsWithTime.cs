@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby","getuserincomingfriendswithtime")]
-    public class GetUserIncomingFriendsWithTimeCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("lobby", "getuserincomingfriendswithtime")]
+    public class GetUserIncomingFriendsWithTimeCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Lobby"; } }
+        public string ServiceName { get { return "Lobby"; } }
 
-        public string OperationName{ get { return "GetUserIncomingFriendsWithTime"; } }
+        public string OperationName { get { return "GetUserIncomingFriendsWithTime"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsmc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
 {
-    [SdkConsoleCommand("dsmc","saveconfig")]
-    public class SaveConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("dsmc", "saveconfig")]
+    public class SaveConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Dsmc"; } }
+        public string ServiceName { get { return "Dsmc"; } }
 
-        public string OperationName{ get { return "SaveConfig"; } }
+        public string OperationName { get { return "SaveConfig"; } }
 
         [SdkCommandData("body")]
         public ModelsDSMConfigRecord Body { get; set; } = new ModelsDSMConfigRecord();
@@ -39,7 +39,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
         {
             AccelByte.Sdk.Api.Dsmc.Wrapper.Config wrapper = new AccelByte.Sdk.Api.Dsmc.Wrapper.Config(_SDK);
 
-            #pragma warning disable ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Dsmc.Operation.SaveConfig.Builder;
 
 
@@ -50,12 +50,12 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
                 Body
             );
 
-            #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
 
-            #pragma warning disable ab_deprecated_operation_wrapper
+#pragma warning disable ab_deprecated_operation_wrapper
             wrapper.SaveConfig(operation);
             return String.Empty;
-            #pragma warning restore ab_deprecated_operation_wrapper
+#pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

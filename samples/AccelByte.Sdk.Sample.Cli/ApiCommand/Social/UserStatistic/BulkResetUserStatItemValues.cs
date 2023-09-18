@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Social.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
 {
-    [SdkConsoleCommand("social","bulkresetuserstatitemvalues")]
-    public class BulkResetUserStatItemValuesCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("social", "bulkresetuserstatitemvalues")]
+    public class BulkResetUserStatItemValuesCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Social"; } }
+        public string ServiceName { get { return "Social"; } }
 
-        public string OperationName{ get { return "BulkResetUserStatItemValues"; } }
+        public string OperationName { get { return "BulkResetUserStatItemValues"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

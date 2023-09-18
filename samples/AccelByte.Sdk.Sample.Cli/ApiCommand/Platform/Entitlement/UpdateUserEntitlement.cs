@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","updateuserentitlement")]
-    public class UpdateUserEntitlementCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "updateuserentitlement")]
+    public class UpdateUserEntitlementCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "UpdateUserEntitlement"; } }
+        public string OperationName { get { return "UpdateUserEntitlement"; } }
 
         [SdkCommandArgument("entitlementId")]
         public string EntitlementId { get; set; } = String.Empty;

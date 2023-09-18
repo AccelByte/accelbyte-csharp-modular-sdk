@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Matchmaking.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
 {
-    [SdkConsoleCommand("matchmaking","adduserintosessioninchannel")]
-    public class AddUserIntoSessionInChannelCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("matchmaking", "adduserintosessioninchannel")]
+    public class AddUserIntoSessionInChannelCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Matchmaking"; } }
+        public string ServiceName { get { return "Matchmaking"; } }
 
-        public string OperationName{ get { return "AddUserIntoSessionInChannel"; } }
+        public string OperationName { get { return "AddUserIntoSessionInChannel"; } }
 
         [SdkCommandArgument("channelName")]
         public string ChannelName { get; set; } = String.Empty;

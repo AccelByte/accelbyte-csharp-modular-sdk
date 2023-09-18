@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","revokeallentitlements")]
-    public class RevokeAllEntitlementsCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "revokeallentitlements")]
+    public class RevokeAllEntitlementsCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "RevokeAllEntitlements"; } }
+        public string OperationName { get { return "RevokeAllEntitlements"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

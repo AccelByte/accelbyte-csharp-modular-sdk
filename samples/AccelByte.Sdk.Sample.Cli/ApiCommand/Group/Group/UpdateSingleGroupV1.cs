@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Group.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
 {
-    [SdkConsoleCommand("group","updatesinglegroupv1")]
-    public class UpdateSingleGroupV1Command: ISdkConsoleCommand
+    [SdkConsoleCommand("group", "updatesinglegroupv1")]
+    public class UpdateSingleGroupV1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Group"; } }
+        public string ServiceName { get { return "Group"; } }
 
-        public string OperationName{ get { return "UpdateSingleGroupV1"; } }
+        public string OperationName { get { return "UpdateSingleGroupV1"; } }
 
         [SdkCommandArgument("groupId")]
         public string GroupId { get; set; } = String.Empty;

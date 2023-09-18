@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","deletefulfillmentscript")]
-    public class DeleteFulfillmentScriptCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "deletefulfillmentscript")]
+    public class DeleteFulfillmentScriptCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "DeleteFulfillmentScript"; } }
+        public string OperationName { get { return "DeleteFulfillmentScript"; } }
 
         [SdkCommandArgument("id")]
         public string Id { get; set; } = String.Empty;

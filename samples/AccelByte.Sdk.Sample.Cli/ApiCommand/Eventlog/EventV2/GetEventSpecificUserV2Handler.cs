@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Eventlog.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
 {
-    [SdkConsoleCommand("eventlog","geteventspecificuserv2handler")]
-    public class GetEventSpecificUserV2HandlerCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("eventlog", "geteventspecificuserv2handler")]
+    public class GetEventSpecificUserV2HandlerCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Eventlog"; } }
+        public string ServiceName { get { return "Eventlog"; } }
 
-        public string OperationName{ get { return "GetEventSpecificUserV2Handler"; } }
+        public string OperationName { get { return "GetEventSpecificUserV2Handler"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

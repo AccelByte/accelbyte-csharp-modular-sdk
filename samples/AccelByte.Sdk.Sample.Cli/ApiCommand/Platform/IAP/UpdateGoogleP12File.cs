@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","updategooglep12file")]
-    public class UpdateGoogleP12FileCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "updategooglep12file")]
+    public class UpdateGoogleP12FileCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "UpdateGoogleP12File"; } }
+        public string OperationName { get { return "UpdateGoogleP12File"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

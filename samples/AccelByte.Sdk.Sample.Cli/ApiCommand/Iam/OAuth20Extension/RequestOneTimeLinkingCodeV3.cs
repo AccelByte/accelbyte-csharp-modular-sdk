@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","requestonetimelinkingcodev3")]
-    public class RequestOneTimeLinkingCodeV3Command: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "requestonetimelinkingcodev3")]
+    public class RequestOneTimeLinkingCodeV3Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "RequestOneTimeLinkingCodeV3"; } }
+        public string OperationName { get { return "RequestOneTimeLinkingCodeV3"; } }
 
         [SdkCommandArgument("platformId")]
         public string PlatformId { get; set; } = String.Empty;

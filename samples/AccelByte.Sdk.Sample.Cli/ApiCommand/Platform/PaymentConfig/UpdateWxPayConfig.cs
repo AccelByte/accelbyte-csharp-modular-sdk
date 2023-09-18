@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","updatewxpayconfig")]
-    public class UpdateWxPayConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "updatewxpayconfig")]
+    public class UpdateWxPayConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "UpdateWxPayConfig"; } }
+        public string OperationName { get { return "UpdateWxPayConfig"; } }
 
         [SdkCommandArgument("id")]
         public string Id { get; set; } = String.Empty;

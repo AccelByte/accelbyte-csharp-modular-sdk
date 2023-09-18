@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","searchitemtypeconfig")]
-    public class SearchItemTypeConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "searchitemtypeconfig")]
+    public class SearchItemTypeConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "SearchItemTypeConfig"; } }
+        public string OperationName { get { return "SearchItemTypeConfig"; } }
 
         [SdkCommandArgument("clazz")]
         public string? Clazz { get; set; }

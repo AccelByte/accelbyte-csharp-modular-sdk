@@ -50,13 +50,13 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             get { return new Operation.PublicConsumeMyItem.PublicConsumeMyItemBuilder(_sdk); }
         }
         #endregion
-        
+
         public Model.ApimodelsListItemResp? PublicListItems(PublicListItems input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -65,7 +65,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -92,17 +92,17 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.ApimodelsItemResp<T1, T2>? PublicGetItem<T1, T2>(PublicGetItem input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
@@ -111,17 +111,17 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        
+
         public Model.ApimodelsItemResp<T1, T2>? PublicConsumeMyItem<T1, T2>(PublicConsumeMyItem input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
         }

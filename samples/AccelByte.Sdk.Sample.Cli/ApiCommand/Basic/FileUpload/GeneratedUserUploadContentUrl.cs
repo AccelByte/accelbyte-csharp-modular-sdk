@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Basic.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
 {
-    [SdkConsoleCommand("basic","generateduseruploadcontenturl")]
-    public class GeneratedUserUploadContentUrlCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("basic", "generateduseruploadcontenturl")]
+    public class GeneratedUserUploadContentUrlCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Basic"; } }
+        public string ServiceName { get { return "Basic"; } }
 
-        public string OperationName{ get { return "GeneratedUserUploadContentUrl"; } }
+        public string OperationName { get { return "GeneratedUserUploadContentUrl"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

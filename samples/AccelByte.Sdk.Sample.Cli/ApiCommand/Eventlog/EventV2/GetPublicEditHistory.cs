@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Eventlog.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
 {
-    [SdkConsoleCommand("eventlog","getpublicedithistory")]
-    public class GetPublicEditHistoryCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("eventlog", "getpublicedithistory")]
+    public class GetPublicEditHistoryCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Eventlog"; } }
+        public string ServiceName { get { return "Eventlog"; } }
 
-        public string OperationName{ get { return "GetPublicEditHistory"; } }
+        public string OperationName { get { return "GetPublicEditHistory"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

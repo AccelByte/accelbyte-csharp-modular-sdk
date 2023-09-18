@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ugc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
 {
-    [SdkConsoleCommand("ugc","singleadmingetgroupcontents")]
-    public class SingleAdminGetGroupContentsCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("ugc", "singleadmingetgroupcontents")]
+    public class SingleAdminGetGroupContentsCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Ugc"; } }
+        public string ServiceName { get { return "Ugc"; } }
 
-        public string OperationName{ get { return "SingleAdminGetGroupContents"; } }
+        public string OperationName { get { return "SingleAdminGetGroupContents"; } }
 
         [SdkCommandArgument("groupId")]
         public string GroupId { get; set; } = String.Empty;

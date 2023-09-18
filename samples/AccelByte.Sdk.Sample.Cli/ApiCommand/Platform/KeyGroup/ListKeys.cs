@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","listkeys")]
-    public class ListKeysCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "listkeys")]
+    public class ListKeysCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "ListKeys"; } }
+        public string OperationName { get { return "ListKeys"; } }
 
         [SdkCommandArgument("keyGroupId")]
         public string KeyGroupId { get; set; } = String.Empty;

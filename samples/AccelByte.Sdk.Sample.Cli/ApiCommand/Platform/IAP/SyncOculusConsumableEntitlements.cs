@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","syncoculusconsumableentitlements")]
-    public class SyncOculusConsumableEntitlementsCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "syncoculusconsumableentitlements")]
+    public class SyncOculusConsumableEntitlementsCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "SyncOculusConsumableEntitlements"; } }
+        public string OperationName { get { return "SyncOculusConsumableEntitlements"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

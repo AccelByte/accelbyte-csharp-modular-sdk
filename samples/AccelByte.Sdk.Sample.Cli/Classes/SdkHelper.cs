@@ -29,7 +29,7 @@ namespace AccelByte.Sdk.Sample.Cli
                 httpClient.SetLogger(dLogger);
             }
 
-            IAccelByteSdk sdk = AccelByteSdk.Builder                
+            IAccelByteSdk sdk = AccelByteSdk.Builder
                 .UseDefaultConfigRepository()
                 .SetHttpClient(httpClient)
                 .SetTokenRepository(new FileBasedTokenRepository())

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby","adminaddprofanityfilters")]
-    public class AdminAddProfanityFiltersCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("lobby", "adminaddprofanityfilters")]
+    public class AdminAddProfanityFiltersCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Lobby"; } }
+        public string ServiceName { get { return "Lobby"; } }
 
-        public string OperationName{ get { return "AdminAddProfanityFilters"; } }
+        public string OperationName { get { return "AdminAddProfanityFilters"; } }
 
         [SdkCommandArgument("list")]
         public string List { get; set; } = String.Empty;

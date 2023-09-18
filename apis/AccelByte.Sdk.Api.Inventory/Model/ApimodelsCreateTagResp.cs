@@ -50,5 +50,5 @@ namespace AccelByte.Sdk.Api.Inventory.Model
         {
 
         }
-    }    
+    }
 }

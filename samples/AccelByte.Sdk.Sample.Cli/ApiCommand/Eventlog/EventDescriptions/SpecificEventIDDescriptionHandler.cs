@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Eventlog.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
 {
-    [SdkConsoleCommand("eventlog","specificeventiddescriptionhandler")]
-    public class SpecificEventIDDescriptionHandlerCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("eventlog", "specificeventiddescriptionhandler")]
+    public class SpecificEventIDDescriptionHandlerCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Eventlog"; } }
+        public string ServiceName { get { return "Eventlog"; } }
 
-        public string OperationName{ get { return "SpecificEventIDDescriptionHandler"; } }
+        public string OperationName { get { return "SpecificEventIDDescriptionHandler"; } }
 
         [SdkCommandArgument("eventIds")]
         public string? EventIds { get; set; }
@@ -39,7 +39,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
         {
             AccelByte.Sdk.Api.Eventlog.Wrapper.EventDescriptions wrapper = new AccelByte.Sdk.Api.Eventlog.Wrapper.EventDescriptions(_SDK);
 
-            #pragma warning disable ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Eventlog.Operation.SpecificEventIDDescriptionHandler.Builder;
 
             if (EventIds != null)
@@ -51,15 +51,15 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
             SpecificEventIDDescriptionHandler operation = opBuilder.Build(
             );
 
-            #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
 
-            #pragma warning disable ab_deprecated_operation_wrapper
+#pragma warning disable ab_deprecated_operation_wrapper
             AccelByte.Sdk.Api.Eventlog.Model.ModelsMultipleEventID? response = wrapper.SpecificEventIDDescriptionHandler(operation);
             if (response == null)
                 return "No response from server.";
 
             return SdkHelper.SerializeToJson(response);
-            #pragma warning restore ab_deprecated_operation_wrapper
+#pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

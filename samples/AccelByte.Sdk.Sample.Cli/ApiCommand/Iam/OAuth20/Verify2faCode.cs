@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","verify2facode")]
-    public class Verify2faCodeCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "verify2facode")]
+    public class Verify2faCodeCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "Verify2faCode"; } }
+        public string OperationName { get { return "Verify2faCode"; } }
 
         [SdkCommandArgument("code")]
         public string Code { get; set; } = String.Empty;

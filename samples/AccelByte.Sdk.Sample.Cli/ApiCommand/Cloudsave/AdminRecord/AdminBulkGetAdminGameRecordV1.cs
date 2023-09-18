@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Cloudsave.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
 {
-    [SdkConsoleCommand("cloudsave","adminbulkgetadmingamerecordv1")]
-    public class AdminBulkGetAdminGameRecordV1Command: ISdkConsoleCommand
+    [SdkConsoleCommand("cloudsave", "adminbulkgetadmingamerecordv1")]
+    public class AdminBulkGetAdminGameRecordV1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Cloudsave"; } }
+        public string ServiceName { get { return "Cloudsave"; } }
 
-        public string OperationName{ get { return "AdminBulkGetAdminGameRecordV1"; } }
+        public string OperationName { get { return "AdminBulkGetAdminGameRecordV1"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

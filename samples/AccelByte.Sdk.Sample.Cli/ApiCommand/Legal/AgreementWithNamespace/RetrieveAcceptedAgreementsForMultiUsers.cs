@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal","retrieveacceptedagreementsformultiusers")]
-    public class RetrieveAcceptedAgreementsForMultiUsersCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("legal", "retrieveacceptedagreementsformultiusers")]
+    public class RetrieveAcceptedAgreementsForMultiUsersCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Legal"; } }
+        public string ServiceName { get { return "Legal"; } }
 
-        public string OperationName{ get { return "RetrieveAcceptedAgreementsForMultiUsers"; } }
+        public string OperationName { get { return "RetrieveAcceptedAgreementsForMultiUsers"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

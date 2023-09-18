@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","authcoderequestv3")]
-    public class AuthCodeRequestV3Command: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "authcoderequestv3")]
+    public class AuthCodeRequestV3Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "AuthCodeRequestV3"; } }
+        public string OperationName { get { return "AuthCodeRequestV3"; } }
 
         [SdkCommandArgument("platformId")]
         public string PlatformId { get; set; } = String.Empty;

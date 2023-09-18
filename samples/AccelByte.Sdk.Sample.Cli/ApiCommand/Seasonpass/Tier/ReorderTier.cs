@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Seasonpass.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Seasonpass
 {
-    [SdkConsoleCommand("seasonpass","reordertier")]
-    public class ReorderTierCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("seasonpass", "reordertier")]
+    public class ReorderTierCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Seasonpass"; } }
+        public string ServiceName { get { return "Seasonpass"; } }
 
-        public string OperationName{ get { return "ReorderTier"; } }
+        public string OperationName { get { return "ReorderTier"; } }
 
         [SdkCommandArgument("id")]
         public string Id { get; set; } = String.Empty;

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby","getslugtemplate")]
-    public class GetSlugTemplateCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("lobby", "getslugtemplate")]
+    public class GetSlugTemplateCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Lobby"; } }
+        public string ServiceName { get { return "Lobby"; } }
 
-        public string OperationName{ get { return "GetSlugTemplate"; } }
+        public string OperationName { get { return "GetSlugTemplate"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","updateoculusiapconfig")]
-    public class UpdateOculusIAPConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "updateoculusiapconfig")]
+    public class UpdateOculusIAPConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "UpdateOculusIAPConfig"; } }
+        public string OperationName { get { return "UpdateOculusIAPConfig"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

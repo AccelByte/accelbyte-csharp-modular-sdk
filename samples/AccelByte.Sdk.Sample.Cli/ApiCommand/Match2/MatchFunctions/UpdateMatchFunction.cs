@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Match2.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Match2
 {
-    [SdkConsoleCommand("match2","updatematchfunction")]
-    public class UpdateMatchFunctionCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("match2", "updatematchfunction")]
+    public class UpdateMatchFunctionCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Match2"; } }
+        public string ServiceName { get { return "Match2"; } }
 
-        public string OperationName{ get { return "UpdateMatchFunction"; } }
+        public string OperationName { get { return "UpdateMatchFunction"; } }
 
         [SdkCommandArgument("name")]
         public string Name { get; set; } = String.Empty;

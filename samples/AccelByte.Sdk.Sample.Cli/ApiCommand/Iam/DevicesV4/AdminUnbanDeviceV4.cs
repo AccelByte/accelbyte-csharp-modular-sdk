@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","adminunbandevicev4")]
-    public class AdminUnbanDeviceV4Command: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "adminunbandevicev4")]
+    public class AdminUnbanDeviceV4Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "AdminUnbanDeviceV4"; } }
+        public string OperationName { get { return "AdminUnbanDeviceV4"; } }
 
         [SdkCommandArgument("deviceId")]
         public string DeviceId { get; set; } = String.Empty;

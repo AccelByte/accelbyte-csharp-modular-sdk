@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Gametelemetry.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gametelemetry
 {
-    [SdkConsoleCommand("gametelemetry","protectedupdateplaytimegametelemetryv1protectedsteamidssteamidplaytimeplaytimeput")]
-    public class ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePutCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("gametelemetry", "protectedupdateplaytimegametelemetryv1protectedsteamidssteamidplaytimeplaytimeput")]
+    public class ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePutCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Gametelemetry"; } }
+        public string ServiceName { get { return "Gametelemetry"; } }
 
-        public string OperationName{ get { return "ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePut"; } }
+        public string OperationName { get { return "ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePut"; } }
 
         [SdkCommandArgument("playtime")]
         public string Playtime { get; set; } = String.Empty;

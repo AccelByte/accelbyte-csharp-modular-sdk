@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Basic.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
 {
-    [SdkConsoleCommand("basic","createnamespace")]
-    public class CreateNamespaceCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("basic", "createnamespace")]
+    public class CreateNamespaceCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Basic"; } }
+        public string ServiceName { get { return "Basic"; } }
 
-        public string OperationName{ get { return "CreateNamespace"; } }
+        public string OperationName { get { return "CreateNamespace"; } }
 
         [SdkCommandData("body")]
         public NamespaceCreate Body { get; set; } = new NamespaceCreate();

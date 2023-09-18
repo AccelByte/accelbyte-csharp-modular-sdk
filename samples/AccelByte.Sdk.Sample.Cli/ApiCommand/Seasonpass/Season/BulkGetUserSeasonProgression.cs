@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Seasonpass.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Seasonpass
 {
-    [SdkConsoleCommand("seasonpass","bulkgetuserseasonprogression")]
-    public class BulkGetUserSeasonProgressionCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("seasonpass", "bulkgetuserseasonprogression")]
+    public class BulkGetUserSeasonProgressionCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Seasonpass"; } }
+        public string ServiceName { get { return "Seasonpass"; } }
 
-        public string OperationName{ get { return "BulkGetUserSeasonProgression"; } }
+        public string OperationName { get { return "BulkGetUserSeasonProgression"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

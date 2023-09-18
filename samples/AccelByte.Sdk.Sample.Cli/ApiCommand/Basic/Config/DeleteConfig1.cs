@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Basic.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
 {
-    [SdkConsoleCommand("basic","deleteconfig1")]
-    public class DeleteConfig1Command: ISdkConsoleCommand
+    [SdkConsoleCommand("basic", "deleteconfig1")]
+    public class DeleteConfig1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Basic"; } }
+        public string ServiceName { get { return "Basic"; } }
 
-        public string OperationName{ get { return "DeleteConfig1"; } }
+        public string OperationName { get { return "DeleteConfig1"; } }
 
         [SdkCommandArgument("configKey")]
         public string ConfigKey { get; set; } = String.Empty;

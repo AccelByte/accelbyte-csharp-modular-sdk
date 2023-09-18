@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","testxsollaconfigbyid")]
-    public class TestXsollaConfigByIdCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "testxsollaconfigbyid")]
+    public class TestXsollaConfigByIdCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "TestXsollaConfigById"; } }
+        public string OperationName { get { return "TestXsollaConfigById"; } }
 
         [SdkCommandArgument("id")]
         public string Id { get; set; } = String.Empty;

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","retrieveallssologinplatformcredentialv3")]
-    public class RetrieveAllSSOLoginPlatformCredentialV3Command: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "retrieveallssologinplatformcredentialv3")]
+    public class RetrieveAllSSOLoginPlatformCredentialV3Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "RetrieveAllSSOLoginPlatformCredentialV3"; } }
+        public string OperationName { get { return "RetrieveAllSSOLoginPlatformCredentialV3"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

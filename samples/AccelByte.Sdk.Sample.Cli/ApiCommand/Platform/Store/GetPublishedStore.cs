@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","getpublishedstore")]
-    public class GetPublishedStoreCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "getpublishedstore")]
+    public class GetPublishedStoreCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "GetPublishedStore"; } }
+        public string OperationName { get { return "GetPublishedStore"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","admingetrolesv4")]
-    public class AdminGetRolesV4Command: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "admingetrolesv4")]
+    public class AdminGetRolesV4Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "AdminGetRolesV4"; } }
+        public string OperationName { get { return "AdminGetRolesV4"; } }
 
         [SdkCommandArgument("adminRole")]
         public bool? AdminRole { get; set; }

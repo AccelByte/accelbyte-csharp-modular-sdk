@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ugc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
 {
-    [SdkConsoleCommand("ugc","publicsearchcreator")]
-    public class PublicSearchCreatorCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("ugc", "publicsearchcreator")]
+    public class PublicSearchCreatorCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Ugc"; } }
+        public string ServiceName { get { return "Ugc"; } }
 
-        public string OperationName{ get { return "PublicSearchCreator"; } }
+        public string OperationName { get { return "PublicSearchCreator"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

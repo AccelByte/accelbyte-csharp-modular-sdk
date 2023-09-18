@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Achievement.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
 {
-    [SdkConsoleCommand("achievement","adminupdateachievement")]
-    public class AdminUpdateAchievementCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("achievement", "adminupdateachievement")]
+    public class AdminUpdateAchievementCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Achievement"; } }
+        public string ServiceName { get { return "Achievement"; } }
 
-        public string OperationName{ get { return "AdminUpdateAchievement"; } }
+        public string OperationName { get { return "AdminUpdateAchievement"; } }
 
         [SdkCommandArgument("achievementCode")]
         public string AchievementCode { get; set; } = String.Empty;

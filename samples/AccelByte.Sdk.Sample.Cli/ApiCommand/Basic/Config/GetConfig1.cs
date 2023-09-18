@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Basic.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
 {
-    [SdkConsoleCommand("basic","getconfig1")]
-    public class GetConfig1Command: ISdkConsoleCommand
+    [SdkConsoleCommand("basic", "getconfig1")]
+    public class GetConfig1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Basic"; } }
+        public string ServiceName { get { return "Basic"; } }
 
-        public string OperationName{ get { return "GetConfig1"; } }
+        public string OperationName { get { return "GetConfig1"; } }
 
         [SdkCommandArgument("configKey")]
         public string ConfigKey { get; set; } = String.Empty;

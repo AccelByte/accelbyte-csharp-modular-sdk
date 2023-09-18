@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","getavailablepredicatetypes")]
-    public class GetAvailablePredicateTypesCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "getavailablepredicatetypes")]
+    public class GetAvailablePredicateTypesCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "GetAvailablePredicateTypes"; } }
+        public string OperationName { get { return "GetAvailablePredicateTypes"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

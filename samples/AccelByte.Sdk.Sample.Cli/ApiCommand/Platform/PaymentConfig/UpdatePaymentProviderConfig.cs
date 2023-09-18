@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","updatepaymentproviderconfig")]
-    public class UpdatePaymentProviderConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "updatepaymentproviderconfig")]
+    public class UpdatePaymentProviderConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "UpdatePaymentProviderConfig"; } }
+        public string OperationName { get { return "UpdatePaymentProviderConfig"; } }
 
         [SdkCommandArgument("id")]
         public string Id { get; set; } = String.Empty;

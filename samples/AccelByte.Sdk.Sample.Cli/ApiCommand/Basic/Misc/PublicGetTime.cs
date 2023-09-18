@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Basic.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
 {
-    [SdkConsoleCommand("basic","publicgettime")]
-    public class PublicGetTimeCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("basic", "publicgettime")]
+    public class PublicGetTimeCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Basic"; } }
+        public string ServiceName { get { return "Basic"; } }
 
-        public string OperationName{ get { return "PublicGetTime"; } }
+        public string OperationName { get { return "PublicGetTime"; } }
 
         public PublicGetTimeCommand(IAccelByteSdk sdk)
         {

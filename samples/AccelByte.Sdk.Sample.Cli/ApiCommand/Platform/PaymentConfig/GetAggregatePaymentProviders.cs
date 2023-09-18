@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","getaggregatepaymentproviders")]
-    public class GetAggregatePaymentProvidersCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "getaggregatepaymentproviders")]
+    public class GetAggregatePaymentProvidersCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "GetAggregatePaymentProviders"; } }
+        public string OperationName { get { return "GetAggregatePaymentProviders"; } }
 
         public GetAggregatePaymentProvidersCommand(IAccelByteSdk sdk)
         {

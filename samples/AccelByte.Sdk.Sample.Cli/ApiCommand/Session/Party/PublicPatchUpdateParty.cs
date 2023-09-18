@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Session.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 {
-    [SdkConsoleCommand("session","publicpatchupdateparty")]
-    public class PublicPatchUpdatePartyCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("session", "publicpatchupdateparty")]
+    public class PublicPatchUpdatePartyCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Session"; } }
+        public string ServiceName { get { return "Session"; } }
 
-        public string OperationName{ get { return "PublicPatchUpdateParty"; } }
+        public string OperationName { get { return "PublicPatchUpdateParty"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

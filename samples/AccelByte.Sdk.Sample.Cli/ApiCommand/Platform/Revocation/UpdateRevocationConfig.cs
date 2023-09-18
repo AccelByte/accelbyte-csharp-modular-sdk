@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","updaterevocationconfig")]
-    public class UpdateRevocationConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "updaterevocationconfig")]
+    public class UpdateRevocationConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "UpdateRevocationConfig"; } }
+        public string OperationName { get { return "UpdateRevocationConfig"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

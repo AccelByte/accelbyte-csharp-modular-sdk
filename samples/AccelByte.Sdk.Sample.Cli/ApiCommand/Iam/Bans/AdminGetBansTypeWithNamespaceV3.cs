@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","admingetbanstypewithnamespacev3")]
-    public class AdminGetBansTypeWithNamespaceV3Command: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "admingetbanstypewithnamespacev3")]
+    public class AdminGetBansTypeWithNamespaceV3Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "AdminGetBansTypeWithNamespaceV3"; } }
+        public string OperationName { get { return "AdminGetBansTypeWithNamespaceV3"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

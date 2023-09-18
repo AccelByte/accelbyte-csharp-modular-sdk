@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","publicreconcileplaystationstore")]
-    public class PublicReconcilePlayStationStoreCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "publicreconcileplaystationstore")]
+    public class PublicReconcilePlayStationStoreCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "PublicReconcilePlayStationStore"; } }
+        public string OperationName { get { return "PublicReconcilePlayStationStore"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

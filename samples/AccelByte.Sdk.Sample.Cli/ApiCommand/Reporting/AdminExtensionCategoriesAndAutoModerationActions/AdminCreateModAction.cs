@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Reporting.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
 {
-    [SdkConsoleCommand("reporting","admincreatemodaction")]
-    public class AdminCreateModActionCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("reporting", "admincreatemodaction")]
+    public class AdminCreateModActionCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Reporting"; } }
+        public string ServiceName { get { return "Reporting"; } }
 
-        public string OperationName{ get { return "AdminCreateModAction"; } }
+        public string OperationName { get { return "AdminCreateModAction"; } }
 
         [SdkCommandData("body")]
         public RestapiActionApiRequest Body { get; set; } = new RestapiActionApiRequest();

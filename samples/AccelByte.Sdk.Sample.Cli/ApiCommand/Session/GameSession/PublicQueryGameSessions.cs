@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Session.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 {
-    [SdkConsoleCommand("session","publicquerygamesessions")]
-    public class PublicQueryGameSessionsCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("session", "publicquerygamesessions")]
+    public class PublicQueryGameSessionsCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Session"; } }
+        public string ServiceName { get { return "Session"; } }
 
-        public string OperationName{ get { return "PublicQueryGameSessions"; } }
+        public string OperationName { get { return "PublicQueryGameSessions"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

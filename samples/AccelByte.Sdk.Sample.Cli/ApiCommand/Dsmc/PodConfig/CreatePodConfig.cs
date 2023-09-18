@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsmc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
 {
-    [SdkConsoleCommand("dsmc","createpodconfig")]
-    public class CreatePodConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("dsmc", "createpodconfig")]
+    public class CreatePodConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Dsmc"; } }
+        public string ServiceName { get { return "Dsmc"; } }
 
-        public string OperationName{ get { return "CreatePodConfig"; } }
+        public string OperationName { get { return "CreatePodConfig"; } }
 
         [SdkCommandArgument("name")]
         public string Name { get; set; } = String.Empty;

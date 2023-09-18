@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Session.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 {
-    [SdkConsoleCommand("session","publicsessionjoincode")]
-    public class PublicSessionJoinCodeCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("session", "publicsessionjoincode")]
+    public class PublicSessionJoinCodeCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Session"; } }
+        public string ServiceName { get { return "Session"; } }
 
-        public string OperationName{ get { return "PublicSessionJoinCode"; } }
+        public string OperationName { get { return "PublicSessionJoinCode"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

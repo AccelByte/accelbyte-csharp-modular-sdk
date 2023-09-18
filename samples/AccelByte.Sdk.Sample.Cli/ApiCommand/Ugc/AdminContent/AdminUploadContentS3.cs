@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ugc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
 {
-    [SdkConsoleCommand("ugc","adminuploadcontents3")]
-    public class AdminUploadContentS3Command: ISdkConsoleCommand
+    [SdkConsoleCommand("ugc", "adminuploadcontents3")]
+    public class AdminUploadContentS3Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Ugc"; } }
+        public string ServiceName { get { return "Ugc"; } }
 
-        public string OperationName{ get { return "AdminUploadContentS3"; } }
+        public string OperationName { get { return "AdminUploadContentS3"; } }
 
         [SdkCommandArgument("channelId")]
         public string ChannelId { get; set; } = String.Empty;

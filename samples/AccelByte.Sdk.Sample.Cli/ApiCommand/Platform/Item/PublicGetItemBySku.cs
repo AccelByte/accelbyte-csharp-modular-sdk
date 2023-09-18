@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","publicgetitembysku")]
-    public class PublicGetItemBySkuCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "publicgetitembysku")]
+    public class PublicGetItemBySkuCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "PublicGetItemBySku"; } }
+        public string OperationName { get { return "PublicGetItemBySku"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

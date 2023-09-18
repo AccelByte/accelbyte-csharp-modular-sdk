@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","updateitemtypeconfig")]
-    public class UpdateItemTypeConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "updateitemtypeconfig")]
+    public class UpdateItemTypeConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "UpdateItemTypeConfig"; } }
+        public string OperationName { get { return "UpdateItemTypeConfig"; } }
 
         [SdkCommandArgument("id")]
         public string Id { get; set; } = String.Empty;

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsmc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
 {
-    [SdkConsoleCommand("dsmc","getimagepatchdetail")]
-    public class GetImagePatchDetailCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("dsmc", "getimagepatchdetail")]
+    public class GetImagePatchDetailCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Dsmc"; } }
+        public string ServiceName { get { return "Dsmc"; } }
 
-        public string OperationName{ get { return "GetImagePatchDetail"; } }
+        public string OperationName { get { return "GetImagePatchDetail"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

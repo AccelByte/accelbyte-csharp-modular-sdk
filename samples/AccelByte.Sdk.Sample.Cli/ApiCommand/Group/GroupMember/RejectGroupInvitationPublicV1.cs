@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Group.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
 {
-    [SdkConsoleCommand("group","rejectgroupinvitationpublicv1")]
-    public class RejectGroupInvitationPublicV1Command: ISdkConsoleCommand
+    [SdkConsoleCommand("group", "rejectgroupinvitationpublicv1")]
+    public class RejectGroupInvitationPublicV1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Group"; } }
+        public string ServiceName { get { return "Group"; } }
 
-        public string OperationName{ get { return "RejectGroupInvitationPublicV1"; } }
+        public string OperationName { get { return "RejectGroupInvitationPublicV1"; } }
 
         [SdkCommandArgument("groupId")]
         public string GroupId { get; set; } = String.Empty;

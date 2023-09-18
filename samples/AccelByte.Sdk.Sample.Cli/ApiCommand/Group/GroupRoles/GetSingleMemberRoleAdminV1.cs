@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Group.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
 {
-    [SdkConsoleCommand("group","getsinglememberroleadminv1")]
-    public class GetSingleMemberRoleAdminV1Command: ISdkConsoleCommand
+    [SdkConsoleCommand("group", "getsinglememberroleadminv1")]
+    public class GetSingleMemberRoleAdminV1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Group"; } }
+        public string ServiceName { get { return "Group"; } }
 
-        public string OperationName{ get { return "GetSingleMemberRoleAdminV1"; } }
+        public string OperationName { get { return "GetSingleMemberRoleAdminV1"; } }
 
         [SdkCommandArgument("memberRoleId")]
         public string MemberRoleId { get; set; } = String.Empty;

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","uplodlootboxpluginconfigcert")]
-    public class UplodLootBoxPluginConfigCertCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "uplodlootboxpluginconfigcert")]
+    public class UplodLootBoxPluginConfigCertCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "UplodLootBoxPluginConfigCert"; } }
+        public string OperationName { get { return "UplodLootBoxPluginConfigCert"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

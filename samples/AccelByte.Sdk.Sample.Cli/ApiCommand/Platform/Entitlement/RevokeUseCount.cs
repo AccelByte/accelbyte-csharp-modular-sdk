@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","revokeusecount")]
-    public class RevokeUseCountCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "revokeusecount")]
+    public class RevokeUseCountCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "RevokeUseCount"; } }
+        public string OperationName { get { return "RevokeUseCount"; } }
 
         [SdkCommandArgument("entitlementId")]
         public string EntitlementId { get; set; } = String.Empty;

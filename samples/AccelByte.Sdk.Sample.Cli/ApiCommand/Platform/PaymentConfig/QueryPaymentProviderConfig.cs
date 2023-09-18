@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","querypaymentproviderconfig")]
-    public class QueryPaymentProviderConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "querypaymentproviderconfig")]
+    public class QueryPaymentProviderConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "QueryPaymentProviderConfig"; } }
+        public string OperationName { get { return "QueryPaymentProviderConfig"; } }
 
         [SdkCommandArgument("limit")]
         public int? Limit { get; set; }

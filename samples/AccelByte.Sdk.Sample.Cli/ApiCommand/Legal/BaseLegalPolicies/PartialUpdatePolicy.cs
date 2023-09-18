@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal","partialupdatepolicy")]
-    public class PartialUpdatePolicyCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("legal", "partialupdatepolicy")]
+    public class PartialUpdatePolicyCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Legal"; } }
+        public string ServiceName { get { return "Legal"; } }
 
-        public string OperationName{ get { return "PartialUpdatePolicy"; } }
+        public string OperationName { get { return "PartialUpdatePolicy"; } }
 
         [SdkCommandArgument("basePolicyId")]
         public string BasePolicyId { get; set; } = String.Empty;

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Gdpr.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
 {
-    [SdkConsoleCommand("gdpr","publicrequestdataretrieval")]
-    public class PublicRequestDataRetrievalCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("gdpr", "publicrequestdataretrieval")]
+    public class PublicRequestDataRetrievalCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Gdpr"; } }
+        public string ServiceName { get { return "Gdpr"; } }
 
-        public string OperationName{ get { return "PublicRequestDataRetrieval"; } }
+        public string OperationName { get { return "PublicRequestDataRetrieval"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

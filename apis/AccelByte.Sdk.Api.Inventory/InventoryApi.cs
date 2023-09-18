@@ -141,7 +141,7 @@ namespace AccelByte.Sdk.Api
             return sdk.GetApi<InventoryApi>("inventory", () =>
             {
                 return new InventoryApi(sdk);
-            });            
+            });
         }
     }
 }

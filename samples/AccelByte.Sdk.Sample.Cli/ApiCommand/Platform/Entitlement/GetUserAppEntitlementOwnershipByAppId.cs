@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","getuserappentitlementownershipbyappid")]
-    public class GetUserAppEntitlementOwnershipByAppIdCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "getuserappentitlementownershipbyappid")]
+    public class GetUserAppEntitlementOwnershipByAppIdCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "GetUserAppEntitlementOwnershipByAppId"; } }
+        public string OperationName { get { return "GetUserAppEntitlementOwnershipByAppId"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

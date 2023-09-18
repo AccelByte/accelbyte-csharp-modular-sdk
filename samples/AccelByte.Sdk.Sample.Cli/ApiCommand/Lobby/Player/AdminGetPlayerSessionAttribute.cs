@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby","admingetplayersessionattribute")]
-    public class AdminGetPlayerSessionAttributeCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("lobby", "admingetplayersessionattribute")]
+    public class AdminGetPlayerSessionAttributeCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Lobby"; } }
+        public string ServiceName { get { return "Lobby"; } }
 
-        public string OperationName{ get { return "AdminGetPlayerSessionAttribute"; } }
+        public string OperationName { get { return "AdminGetPlayerSessionAttribute"; } }
 
         [SdkCommandArgument("attribute")]
         public string Attribute { get; set; } = String.Empty;

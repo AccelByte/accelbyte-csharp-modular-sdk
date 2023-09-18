@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Inventory.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
 {
-    [SdkConsoleCommand("inventory","admincreateinventory")]
-    public class AdminCreateInventoryCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("inventory", "admincreateinventory")]
+    public class AdminCreateInventoryCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Inventory"; } }
+        public string ServiceName { get { return "Inventory"; } }
 
-        public string OperationName{ get { return "AdminCreateInventory"; } }
+        public string OperationName { get { return "AdminCreateInventory"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

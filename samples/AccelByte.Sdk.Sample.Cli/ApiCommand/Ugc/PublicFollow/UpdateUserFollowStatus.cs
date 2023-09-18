@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ugc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
 {
-    [SdkConsoleCommand("ugc","updateuserfollowstatus")]
-    public class UpdateUserFollowStatusCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("ugc", "updateuserfollowstatus")]
+    public class UpdateUserFollowStatusCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Ugc"; } }
+        public string ServiceName { get { return "Ugc"; } }
 
-        public string OperationName{ get { return "UpdateUserFollowStatus"; } }
+        public string OperationName { get { return "UpdateUserFollowStatus"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

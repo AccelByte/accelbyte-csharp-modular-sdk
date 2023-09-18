@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsmc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
 {
-    [SdkConsoleCommand("dsmc","createrootregionoverride")]
-    public class CreateRootRegionOverrideCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("dsmc", "createrootregionoverride")]
+    public class CreateRootRegionOverrideCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Dsmc"; } }
+        public string ServiceName { get { return "Dsmc"; } }
 
-        public string OperationName{ get { return "CreateRootRegionOverride"; } }
+        public string OperationName { get { return "CreateRootRegionOverride"; } }
 
         [SdkCommandArgument("deployment")]
         public string Deployment { get; set; } = String.Empty;

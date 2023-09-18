@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ugc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
 {
-    [SdkConsoleCommand("ugc","publicdownloadcontentbycontentid")]
-    public class PublicDownloadContentByContentIDCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("ugc", "publicdownloadcontentbycontentid")]
+    public class PublicDownloadContentByContentIDCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Ugc"; } }
+        public string ServiceName { get { return "Ugc"; } }
 
-        public string OperationName{ get { return "PublicDownloadContentByContentID"; } }
+        public string OperationName { get { return "PublicDownloadContentByContentID"; } }
 
         [SdkCommandArgument("contentId")]
         public string ContentId { get; set; } = String.Empty;

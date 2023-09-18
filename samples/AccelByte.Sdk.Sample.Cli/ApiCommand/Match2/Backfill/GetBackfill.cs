@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Match2.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Match2
 {
-    [SdkConsoleCommand("match2","getbackfill")]
-    public class GetBackfillCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("match2", "getbackfill")]
+    public class GetBackfillCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Match2"; } }
+        public string ServiceName { get { return "Match2"; } }
 
-        public string OperationName{ get { return "GetBackfill"; } }
+        public string OperationName { get { return "GetBackfill"; } }
 
         [SdkCommandArgument("backfillID")]
         public string BackfillID { get; set; } = String.Empty;

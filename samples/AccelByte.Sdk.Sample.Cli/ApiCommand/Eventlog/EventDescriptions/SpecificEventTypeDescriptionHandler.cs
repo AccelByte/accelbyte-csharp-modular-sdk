@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Eventlog.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
 {
-    [SdkConsoleCommand("eventlog","specificeventtypedescriptionhandler")]
-    public class SpecificEventTypeDescriptionHandlerCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("eventlog", "specificeventtypedescriptionhandler")]
+    public class SpecificEventTypeDescriptionHandlerCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Eventlog"; } }
+        public string ServiceName { get { return "Eventlog"; } }
 
-        public string OperationName{ get { return "SpecificEventTypeDescriptionHandler"; } }
+        public string OperationName { get { return "SpecificEventTypeDescriptionHandler"; } }
 
         [SdkCommandArgument("eventTypes")]
         public string? EventTypes { get; set; }
@@ -39,7 +39,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
         {
             AccelByte.Sdk.Api.Eventlog.Wrapper.EventDescriptions wrapper = new AccelByte.Sdk.Api.Eventlog.Wrapper.EventDescriptions(_SDK);
 
-            #pragma warning disable ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Eventlog.Operation.SpecificEventTypeDescriptionHandler.Builder;
 
             if (EventTypes != null)
@@ -51,15 +51,15 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Eventlog
             SpecificEventTypeDescriptionHandler operation = opBuilder.Build(
             );
 
-            #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
 
-            #pragma warning disable ab_deprecated_operation_wrapper
+#pragma warning disable ab_deprecated_operation_wrapper
             AccelByte.Sdk.Api.Eventlog.Model.ModelsMultipleEventType? response = wrapper.SpecificEventTypeDescriptionHandler(operation);
             if (response == null)
                 return "No response from server.";
 
             return SdkHelper.SerializeToJson(response);
-            #pragma warning restore ab_deprecated_operation_wrapper
+#pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

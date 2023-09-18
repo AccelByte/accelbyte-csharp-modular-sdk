@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby","bulkdeletefriends")]
-    public class BulkDeleteFriendsCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("lobby", "bulkdeletefriends")]
+    public class BulkDeleteFriendsCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Lobby"; } }
+        public string ServiceName { get { return "Lobby"; } }
 
-        public string OperationName{ get { return "BulkDeleteFriends"; } }
+        public string OperationName { get { return "BulkDeleteFriends"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

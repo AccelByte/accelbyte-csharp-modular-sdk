@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","admingetinputvalidations")]
-    public class AdminGetInputValidationsCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "admingetinputvalidations")]
+    public class AdminGetInputValidationsCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "AdminGetInputValidations"; } }
+        public string OperationName { get { return "AdminGetInputValidations"; } }
 
         public AdminGetInputValidationsCommand(IAccelByteSdk sdk)
         {

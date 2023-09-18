@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","syncorders")]
-    public class SyncOrdersCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "syncorders")]
+    public class SyncOrdersCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "SyncOrders"; } }
+        public string OperationName { get { return "SyncOrders"; } }
 
         [SdkCommandArgument("nextEvaluatedKey")]
         public string? NextEvaluatedKey { get; set; }

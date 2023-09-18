@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Session.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 {
-    [SdkConsoleCommand("session","admincreateconfigurationalertv1")]
-    public class AdminCreateConfigurationAlertV1Command: ISdkConsoleCommand
+    [SdkConsoleCommand("session", "admincreateconfigurationalertv1")]
+    public class AdminCreateConfigurationAlertV1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Session"; } }
+        public string ServiceName { get { return "Session"; } }
 
-        public string OperationName{ get { return "AdminCreateConfigurationAlertV1"; } }
+        public string OperationName { get { return "AdminCreateConfigurationAlertV1"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
