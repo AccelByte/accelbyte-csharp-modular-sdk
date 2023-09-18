@@ -47,6 +47,8 @@ The following environment variables need to be set when using `DefaultConfigRepo
 ```csharp
 //Add core namespace
 using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Net.Http;
+using AccelByte.Sdk.Core.Repository;
 
 IAccelByteSdk sdk = AccelByteSdk.Builder
     .UseDefaultHttpClient()
@@ -289,6 +291,9 @@ ModelsGameRecordResponse<GameRecordExample>? response = sdk.GetCloudsaveApi().Pu
     .Execute<GameRecordExample>(myGameRecord, "test_record", sdk.Namespace);
 ```
 The list of which endpoints that support it can be found in [here](../docs/operations/)
+
+## Migrate from Monolithic Version
+See this [migration info](MIGRATION.md).
 
 ## Documentation
 For documentation about AccelByte Gaming Services and SDK, see [docs.accelbyte.io](https://docs.accelbyte.io/)

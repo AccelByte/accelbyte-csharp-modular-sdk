@@ -25,3 +25,7 @@ If you know which AccelByte Gaming Services endpoints that you need to call and 
 
 The documents in this folder explain in-depth on how some of the samples included with AccelByte C# (.NET) Extend SDK are implemented.
 
+## [Migration Guides](migration-guides)
+
+The documents in this folder explain any change that may impact or break your current implementation if you upgrade AccelByte C# (.NET) Extend SDK.
+

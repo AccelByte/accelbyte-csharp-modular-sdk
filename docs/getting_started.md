@@ -1,7 +1,6 @@
-# Getting Started Guide for AccelByte C# (.NET) Extend SDK
+# Getting Started Guide for AccelByte C# (.NET) SDK (Modular Version)
 
-This guide will show you how to create a project which uses C# (.NET) Extend SDK from scratch.
-
+This guide will show you how to create a project which uses C# (.NET) Modular SDK from scratch.
 
 ## Prerequisites
 * AccelByte Gaming Services (demo environment):
@@ -30,15 +29,20 @@ $ dotnet sln add myproject/myproject.csproj     # Add myproject to mysolution
 
 ### 2. Add to Project Dependency
 
-Get a release version of [AccelByte C# Extend SDK](https://github.com/AccelByte/accelbyte-csharp-sdk) and add it as C# project dependency. 
-
-Replace `{VERSION}` with a specific release version tag from [releases](https://github.com/AccelByte/accelbyte-csharp-sdk/releases).
-
-It is recommended to use the matching C# (.NET) Extend SDK version for the given AccelByte Gaming Services version.
-
 ```bash
-$ cd /path/to/mysolution/myproject
-$ dotnet add package AccelByte.Sdk -v {VERSION}      # Add AccelByte C# Extend SDK Package from Nuget
+# always include these package to use AccelByte .NET SDK
+$ dotnet add package AccelByte.Sdk.Abstractions
+$ dotnet add package AccelByte.Sdk.Core
+
+# include this package to do authentication to AGS
+$ dotnet add package AccelByte.Sdk.Authentication
+
+# feature packages, these are optional
+$ dotnet add package AccelByte.Sdk.Feature.AutoRefreshToken
+$ dotnet add package AccelByte.Sdk.Feature.LocalTokenValidation
+
+# Api packages. You can include one or more packages depending on your need.
+$ dotnet add package AccelByte.Sdk.Api.<ApiName>
 ```
 
 ### 3. Use in Code
@@ -52,6 +56,8 @@ using System;
 using System.Collections.Generic;
 
 using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Net.Http;
+using AccelByte.Sdk.Core.Repository;
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Api.Legal.Model;
 
@@ -61,7 +67,7 @@ namespace AccelByteExample
     {
         static int Main(string[] args)
         {
-            AccelByteSDK sdk = AccelByteSDK.Builder
+            IAccelByteSdk sdk = AccelByteSdk.Builder
                 .UseDefaultHttpClient()
                 .UseDefaultConfigRepository()
                 .UseDefaultTokenRepository()
@@ -76,7 +82,7 @@ namespace AccelByteExample
 
             try
             {
-                List<RetrieveAcceptedAgreementResponse>? response = sdk.Legal.Agreement.RetrieveAgreementsPublicOp.Execute();
+                List<RetrieveAcceptedAgreementResponse>? response = sdk.GetLegal().Agreement.RetrieveAgreementsPublicOp.Execute();
                 if (response == null)
                     throw new Exception("Response is null");
 
@@ -116,9 +122,9 @@ $ dotnet run
 
 ## Follow Up Resources
 
-* C# (.NET) Extend SDK [README.md](https://github.com/AccelByte/accelbyte-csharp-sdk/blob/main/README.md)
-* Reference documentation on AccelByte Gaming Services endpoints, their corresponding C# (.NET) Extend SDK API, and short examples on how to use them is available in [docs](https://github.com/AccelByte/accelbyte-csharp-sdk/blob/main/docs)
-* Sample apps which show some practical usage of C# (.NET) Extend SDK are available in [samples](https://github.com/AccelByte/accelbyte-csharp-sdk/blob/main/samples)
+* C# (.NET) Extend SDK [README.md](../README.md)
+* Reference documentation on AccelByte Gaming Services endpoints, their corresponding C# (.NET) Extend SDK API, and short examples on how to use them is available in [docs](../docs)
+* Sample apps which show some practical usage of C# (.NET) Extend SDK are available in [samples](../samples/)
 
 ## FAQ
 
@@ -128,4 +134,4 @@ Yes. You just need to implement the interface accordingly.
 
 ### 2. How can I use more advanced features of C# (.NET) Extend SDK e.g. HTTP retry and automatic token refresh? 
 
-See [README.md](https://github.com/AccelByte/accelbyte-csharp-sdk/blob/main/README.md)
+See [README.md](../README.md), [sample projects](../samples), or even our [integration tests](../AccelByte.Sdk.Tests.Mod).

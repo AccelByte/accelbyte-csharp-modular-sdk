@@ -36,4 +36,4 @@ var response = sdk.GetCloudsaveApi().PublicGameRecord.PutGameRecordHandlerV1Op
 ```
 
 ## References
-Full code example [here](../AccelByte.Sdk.Tests.Mode/Services/CloudSaveTests.cs).
+Full code example [here](../AccelByte.Sdk.Tests.Mod/Services/CloudSaveTests.cs).

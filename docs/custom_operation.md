@@ -5,7 +5,7 @@ Majority of C# Extend SDK codes are generated from [spec json files](../spec) us
 Also it is best practice to extend the functionality of C# Extend SDK by inherit the base classes or add new implementation for partial classes to ensure less complications when upgrading C# Extend SDK.
 
 ## How to Create a Custom Operation
-In this guide, we will explain on how to create a custom operation for custom endpoint and integrate it into SDK core.
+In this guide, we will explain on how to use our AccelByte Sdk C# (.NET) to create a sdk module for your custom operation for custom endpoint.
 
 ### Preparation
 Create a new .NET 6.0 class library project and include dependency to [AccelByte.Sdk](https://www.nuget.org/packages/AccelByte.Sdk/). Refer to these articles for more information on how to create new project.
@@ -15,8 +15,8 @@ Create a new .NET 6.0 class library project and include dependency to [AccelByte
 ### Goal
 Create an operation class and its wrapper for custom endpoint (for this guide, let's use `GET /achievement/v1/public/namespaces/{namespace}/tags` as an example of custom endpoint).
 This endpoints requires `namespace` as path parameter and a few optional query parameters. Will returns HTTP 200 if success along with the data.
-Let's use `SdkCustomization.CustomOp` as namespace. (Usually the namespace is the name of the project).
-And let us name this custom operation `MyCustomOp`.
+Let's use `SdkCustomization.CustomOperation` as namespace. (Usually the namespace is the name of the project).
+And let us name this custom operation `MyCustomOperation`.
 
 ## Create Model classes
 Our example endpoint has this output
@@ -41,7 +41,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace SdkCustomization.CustomOp
+namespace SdkCustomization.CustomOperation
 {
     public class MyCustomResponseModel
     {
@@ -78,22 +78,129 @@ namespace SdkCustomization.CustomOp
 ```
 
 ## Create an Operation Class
-You can create an operation class following this example
+You can create an operation class following this example. This operation class already include operation builder class.
 ```csharp
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Net;
 using System.Net.Http;
 
 using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
+using AccelByte.Sdk.Core.Net.Http;
 
 namespace SdkCustomization.CustomOp
 {
-    public class MyCustomOp : Operation
+    public class MyCustomOperation : Operation
     {
-        public MyCustomOp(string namespace_, long? limit, string? name, long? offset, string? sortBy)
+        #region Builder Part
+        public static MyCustomOperationBuilder Builder { get => new MyCustomOperationBuilder(); }
+
+        public class MyCustomOperationBuilder : OperationBuilder<MyCustomOperationBuilder>
+        {
+            public long? Limit { get; set; }
+
+            public string? Name { get; set; }
+
+            public long? Offset { get; set; }
+
+            public string? SortBy { get; set; }
+
+            internal MyCustomOperationBuilder() { }
+
+            internal MyCustomOperationBuilder(IAccelByteSdk sdk)
+            {
+                _Sdk = sdk;
+            }
+
+            public MyCustomOperationBuilder SetLimit(long _limit)
+            {
+                Limit = _limit;
+                return this;
+            }
+
+            public MyCustomOperationBuilder SetName(string _name)
+            {
+                Name = _name;
+                return this;
+            }
+
+            public MyCustomOperationBuilder SetOffset(long _offset)
+            {
+                Offset = _offset;
+                return this;
+            }
+
+            public MyCustomOperationBuilder SetSortBy(string _sortBy)
+            {
+                SortBy = _sortBy;
+                return this;
+            }
+
+            public MyCustomOperation Build(
+                string namespace_
+            )
+            {
+                MyCustomOperation op = new MyCustomOperation(this,
+                    namespace_
+                );
+                op.PreferredSecurityMethod = PreferredSecurityMethod;
+                op.RequestJsonOptions = RequestJsonOptions;
+                op.ResponseJsonOptions = ResponseJsonOptions;
+
+                return op;
+            }
+
+            public MyCustomResponseModel? Execute(string namespace_)
+            {
+                MyCustomOperation op = Build(
+                    namespace_
+                );
+
+                if (_Sdk == null)
+                    throw IncompleteComponentException.NoSdkObject;
+
+                var response = _Sdk.RunRequest(op);
+                return op.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+            }
+        }
+
+        private MyCustomOperation(MyCustomOperationBuilder builder, string namespace_)
+        {
+            PathParams["namespace"] = namespace_;
+
+            if (builder.Limit != null)
+                QueryParams["limit"] = Convert.ToString(builder.Limit)!;
+
+            if (builder.Name is not null)
+                QueryParams["name"] = builder.Name;
+
+            if (builder.Offset != null)
+                QueryParams["offset"] = Convert.ToString(builder.Offset)!;
+
+            if (builder.SortBy is not null)
+                QueryParams["sortBy"] = builder.SortBy;
+
+            //Use SECURITY_BEARER for endpoint that need authorization token,
+            //or use SECURITY_BASIC for endpoint that only need basic auth using client id and secret._
+            Securities.Add(SECURITY_BEARER);
+        }
+        #endregion
+
+        //Use existing endpoint only for this sample.
+        public override string Path => "/achievement/v1/public/namespaces/{namespace}/tags";
+
+        public override HttpMethod Method => HttpMethod.Get;
+
+        public override List<string> Consumes => new() { "application/json" };
+
+        public override List<string> Produces => new() { "application/json" };
+
+        public MyCustomOperation(string namespace_, long? limit, string? name, long? offset, string? sortBy)
         {
             PathParams["namespace"] = namespace_;
 
@@ -111,21 +218,8 @@ namespace SdkCustomization.CustomOp
 
             //Use SECURITY_BEARER for endpoint that need authorization token,
             //or use SECURITY_BASIC for endpoint that only need basic auth using client id and secret._
-            Securities.Add(Operation.SECURITY_BEARER);
+            Securities.Add(SECURITY_BEARER);
         }
-
-        public override string Path => "/achievement/v1/public/namespaces/{namespace}/tags";
-
-        public override HttpMethod Method => HttpMethod.Get;
-
-        public override string[] Consumes => new string[] { "application/json" };
-
-        public override string[] Produces => new string[] { "application/json" };
-
-        //Still need to implement this. set "Bearer" for SECURITY_BEARER, and "Basic" for SECURITY_BASIC.
-        //This property requirement will be removed in future release.
-        [Obsolete("Use 'Securities' property instead.")]
-        public override string? Security { get; set; } = "Bearer";
 
         public MyCustomResponseModel? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
@@ -142,7 +236,7 @@ namespace SdkCustomization.CustomOp
                 return JsonSerializer.Deserialize<MyCustomResponseModel>(payload);
             }
 
-            var payloadString = Helper.ConvertInputStreamToString(payload);
+            var payloadString = payload.ReadToString();
             throw new HttpResponseException(code, payloadString);
         }
     }
@@ -155,18 +249,18 @@ You can create a wrapper class following this example
 using System;
 using AccelByte.Sdk.Core;
 
-namespace SdkCustomization.CustomOp
+namespace SdkCustomization.CustomOperation
 {
     public class MyCustomWrapper
     {
-        private readonly AccelByteSDK _sdk;
+        private readonly IAccelByteSdk _sdk;
 
-        public MyCustomWrapper(AccelByteSDK sdk)
+        public MyCustomWrapper(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
-        
-        public MyCustomResponseModel? CallMyCustomOp(MyCustomOp input)
+
+        public MyCustomResponseModel? CallMyCustomOperation(MyCustomOperation input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -174,12 +268,65 @@ namespace SdkCustomization.CustomOp
                     response.ContentType,
                     response.Payload);
         }
+
+        public MyCustomOperation.MyCustomOperationBuilder MyCustomOperationOp
+        {
+            get { return new MyCustomOperation.MyCustomOperationBuilder(_sdk); }
+        }
+    }
+}
+```
+
+## Create a Custom Api Class
+You'll need to create a custom api class that wraps all of your wrappers (if you have more than one). You'll need a static class to add extension method for `IAccelByteSdk`.
+```csharp
+using System;
+using AccelByte.Sdk.Core;
+
+namespace SdkCustomization.CustomOperation
+{
+    public class MyCustomApi : ISdkApi
+    {
+        private IAccelByteSdk _Sdk;
+
+        private MyCustomWrapper? _MyCustomWrapper = null;
+
+        public MyCustomWrapper MyCustomWrapper
+        {
+            get
+            {
+                if (_MyCustomWrapper == null)
+                    _MyCustomWrapper = new MyCustomWrapper(_Sdk);
+                return _MyCustomWrapper;
+            }
+        }
+
+        internal MyCustomApi(IAccelByteSdk sdk)
+        {
+            _Sdk = sdk;
+        }
+    }
+}
+
+//You can use "AccelByte.Sdk.Api" to put your sdk object extension, or use your own namespace.
+namespace AccelByte.Sdk.Api
+{
+    public static class MyCustomApi_SdkExts
+    {
+        public static MyCustomApi GetMyCustomApi(this IAccelByteSdk sdk)
+        {
+            //use unique key for your custom api. If you have more than one custom api(s), you will need unique key for each of your custom api.
+            return sdk.GetApi<MyCustomApi>("my_custom_api", () =>
+            {
+                return new MyCustomApi(sdk);
+            });
+        }
     }
 }
 ```
 
 ## Use Custom Operation
-After you create necessary classes, you can use itu with AccelByte Sdk.
+After you create necessary classes, you can use it with AccelByte Sdk.
 ```csharp
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Api;
@@ -192,132 +339,13 @@ AccelByteSDK sdk = AccelByteSDK.Builder
     .UseDefaultTokenRepository()
     .Build();
 
-MyCustomWrapper customWrapper = new MyCustomWrapper(sdk);
-
-MyCustomOp newOp = new MyCustomOp(sdk.Namespace,null,null,null,null);
-var response = customWrapper.CallMyCustomOp(newOp);
-```
-
-## Implement Builder Pattern for Custom Operation
-As you can notice from the code above, to create `MyCustomOp` object, you will need to pass several null values.
-This null values is optional parameter that will be pass as query parameter.
-To make the operation class intuitive to use, you can implement builder pattern for `MyCustomOp` class.
-See the modified code below as an example of builder pattern implementation.
-```csharp
-using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Util;
-
-namespace SdkCustomization.CustomOp
-{
-    public class MyCustomOp : Operation
-    {
-        #region Builder Part
-        public static MyCustomOpBuilder Builder { get => new MyCustomOpBuilder(); }
-
-        public class MyCustomOpBuilder : OperationBuilder<MyCustomOpBuilder>
-        {
-            public long? Limit { get; set; }
-
-            public string? Name { get; set; }
-
-            public long? Offset { get; set; }
-
-            public string? SortBy { get; set; }
-
-            public MyCustomOpBuilder() { }
-
-            public MyCustomOpBuilder SetLimit(long _limit)
-            {
-                Limit = _limit;
-                return this;
-            }
-
-            public MyCustomOpBuilder SetName(string _name)
-            {
-                Name = _name;
-                return this;
-            }
-
-            public MyCustomOpBuilder SetOffset(long _offset)
-            {
-                Offset = _offset;
-                return this;
-            }
-
-            public MyCustomOpBuilder SetSortBy(string _sortBy)
-            {
-                SortBy = _sortBy;
-                return this;
-            }
-
-            public MyCustomOp Build(
-                string namespace_
-            )
-            {
-                MyCustomOp op = new MyCustomOp(this,
-                    namespace_
-                );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-
-                return op;
-            }
-        }
-
-        private MyCustomOp(MyCustomOpBuilder builder, string namespace_)
-        {
-            PathParams["namespace"] = namespace_;
-
-            if (builder.Limit != null)
-                QueryParams["limit"] = Convert.ToString(builder.Limit)!;
-
-            if (builder.Name is not null)
-                QueryParams["name"] = builder.Name;
-
-            if (builder.Offset != null)
-                QueryParams["offset"] = Convert.ToString(builder.Offset)!;
-
-            if (builder.SortBy is not null)
-                QueryParams["sortBy"] = builder.SortBy;
-
-            Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
-        }
-        #endregion
-
-
-        public MyCustomOp(string namespace_, long? limit, string? name, long? offset, string? sortBy)
-
-...
-```
-
-## Use Custom Operation with Builder Pattern
-After you do modification to the operation class, you can leverage the builder pattern to instantiate your operation class.
-```csharp
-using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Api;
-
-using SdkCustomization.CustomOp;
-
-AccelByteSDK sdk = AccelByteSDK.Builder
-    .UseDefaultHttpClient()
-    .UseDefaultConfigRepository()
-    .UseDefaultTokenRepository()
-    .Build();
-
-MyCustomWrapper customWrapper = new MyCustomWrapper(sdk);
-
-//No optional param specified...
-MyCustomOp newOp = MyCustomOp.Builder.Build(sdk.Namespace);
-
-//or, if you need to set the limit parameter..
-MyCustomOp newOp = MyCustomOp.Builder
-    .SetLimit(5)
-    .Build(sdk.Namespace);
-
-var response = customWrapper.CallMyCustomOp(newOp);
+var response = sdk.GetMyCustomApi().MyCustomWrapper.MyCustomOperationOp
+    .Execute(sdk.Namespace);
 ```
 
 ## Testing
-Create a .NET 6 `NUnit Test Project` and include [AccelByte.Sdk](https://www.nuget.org/packages/AccelByte.Sdk/) dependency.
+Create a .NET 6 `NUnit Test Project` and include AccelByte C# (.NET) Extend SDK dependency as mentioned [here](../README.md)
+
 Add reference to your custom operation project inside this test project.
 
 You can use the code template below to start your sdk test class.
@@ -326,17 +354,19 @@ using System;
 using NUnit.Framework;
 
 using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Api;
+using SdkCustomization.CustomOperation;
 
 namespace SdkCustomization.Test1
 {
-    public class Tests
+    public class CustomSdkTests
     {
-        private AccelByteSDK? _Sdk = null;
+        protected IAccelByteSdk? _Sdk = null;
 
         [OneTimeSetUp]
         public void Setup()
         {
-            _Sdk = AccelByteSDK.Builder
+            _Sdk = AccelByteSdk.Builder
                 .UseDefaultHttpClient()
                 .UseDefaultConfigRepository()
                 .UseDefaultTokenRepository()
@@ -344,37 +374,27 @@ namespace SdkCustomization.Test1
                 .EnableLog()
                 .Build();
 
-            //Use LoginUser if there are one or more endpoint/operations that requires user's authorization token.
             _Sdk.LoginUser();
-
-            //or use LoginClient if all the endpoints only use oauth client token.
-            //_Sdk.LoginClient();
-        }
-
-        [OneTimeTearDown]
-        public void Finish()
-        {
-            if (_Sdk != null)
-                _Sdk.Logout();
         }
 
         [Test]
-        public void DoSomeTest()
+        public void CustomOpTest1()
         {
             Assert.IsNotNull(_Sdk);
             if (_Sdk == null)
                 return;
 
+            MyCustomResponseModel? response = _Sdk.GetMyCustomApi().MyCustomWrapper.MyCustomOperationOp
+                .Execute(_Sdk.Namespace);
+            Assert.IsNotNull(response);
 
-
-            //Fill with your test logic here
-
+            //You can fill with your test logic after the response is received.
         }
     }
 }
 ```
 
-You will need environment variables mentioned in [README](https://github.com/AccelByte/accelbyte-csharp-sdk#readme) to run the tests.
+You will need environment variables mentioned in [README](../README.md) to run the tests.
 If you are using Visual Studio, you can create `.runsettings` file. Here is the example
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -403,4 +423,4 @@ Then go to `Test` -> `Configure Run Settings` -> `Select Solutions Wide runsetti
 > ```
 
 ## References
-Please see [api](../AccelByte.Sdk/Api) for more examples on how to create custom operation from generated code.
+Please see [api modules](../apis) for more examples on how to create custom operation from generated code.
