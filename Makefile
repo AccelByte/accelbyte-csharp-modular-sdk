@@ -11,19 +11,21 @@ DOTNETVER := 6.0.302
 build:
 	docker run --rm -u $$(id -u):$$(id -g) -v $$(pwd):/data/ -w /data/ -e HOME="/data" -e DOTNET_CLI_HOME="/data" mcr.microsoft.com/dotnet/sdk:6.0 dotnet build
 
-pack:
-	docker run --rm -u $$(id -u):$$(id -g) -v $$(pwd):/data/ -w /data/ -e HOME="/data" -e DOTNET_CLI_HOME="/data" mcr.microsoft.com/dotnet/sdk:6.0 dotnet pack AccelByte.Sdk/AccelByte.Sdk.csproj -c Release
-
-pack_push:
-	@test -n "$(NUGET_API_KEY)" || (echo "NUGET_API_KEY is not set" ; exit 1)
-	docker run --rm -u $$(id -u):$$(id -g) -v $$(pwd):/data/ -w /data/ \
-		-e DOTNET_CLI_HOME="/data" \
-		mcr.microsoft.com/dotnet/sdk:6.0 \
-		dotnet pack AccelByte.Sdk/AccelByte.Sdk.csproj -c Release
-	docker run --rm -u $$(id -u):$$(id -g) -v $$(pwd):/data/ -w /data/ \
-		-e DOTNET_CLI_HOME="/data" \
-		mcr.microsoft.com/dotnet/sdk:$(DOTNETVER) \
-		dotnet nuget push "AccelByte.Sdk/bin/Release/*.nupkg" --skip-duplicate --api-key "$(NUGET_API_KEY)" --source "https://api.nuget.org/v3/index.json"
+# disable temporarily
+#
+# pack:
+#	docker run --rm -u $$(id -u):$$(id -g) -v $$(pwd):/data/ -w /data/ -e HOME="/data" -e DOTNET_CLI_HOME="/data" mcr.microsoft.com/dotnet/sdk:6.0 dotnet pack AccelByte.Sdk/AccelByte.Sdk.csproj -c Release
+#
+# pack_push:
+#	@test -n "$(NUGET_API_KEY)" || (echo "NUGET_API_KEY is not set" ; exit 1)
+#	docker run --rm -u $$(id -u):$$(id -g) -v $$(pwd):/data/ -w /data/ \
+#		-e DOTNET_CLI_HOME="/data" \
+#		mcr.microsoft.com/dotnet/sdk:6.0 \
+#		dotnet pack AccelByte.Sdk/AccelByte.Sdk.csproj -c Release
+#	docker run --rm -u $$(id -u):$$(id -g) -v $$(pwd):/data/ -w /data/ \
+#		-e DOTNET_CLI_HOME="/data" \
+#		mcr.microsoft.com/dotnet/sdk:$(DOTNETVER) \
+#		dotnet nuget push "AccelByte.Sdk/bin/Release/*.nupkg" --skip-duplicate --api-key "$(NUGET_API_KEY)" --source "https://api.nuget.org/v3/index.json"
 
 test:
 	@test -n "$(SDK_MOCK_SERVER_PATH)" || (echo "SDK_MOCK_SERVER_PATH is not set" ; exit 1)
@@ -53,7 +55,7 @@ test_cli:
 test_integration:
 	@test -n "$(ENV_FILE_PATH)" || (echo "ENV_FILE_PATH is not set" ; exit 1)
 	bash -c 'docker run --rm -u $$(id -u):$$(id -g) -v $$(pwd):/data/ -w /data/ --network host -e HOME="/data" -e DOTNET_CLI_HOME="/data" --env-file "$(ENV_FILE_PATH)" mcr.microsoft.com/dotnet/sdk:$(DOTNETVER) \
-		dotnet test --nologo --filter "TestCategory=FluentIntegration" --verbosity n'
+		dotnet test --nologo --filter "TestCategory=ServiceIntegration" --verbosity n'
 
 test_broken_link:
 	@test -n "$(SDK_MD_CRAWLER_PATH)" || (echo "SDK_MD_CRAWLER_PATH is not set" ; exit 1)
