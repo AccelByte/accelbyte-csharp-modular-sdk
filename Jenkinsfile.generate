@@ -41,16 +41,16 @@ pipeline {
     stage("Prepare") {
       steps {
         script {
-          sdkCodegenPath = "${env.WORKSPACE}/justice-codegen-sdk"
+          sdkCodegenPath = "${env.WORKSPACE}/justice-codegen-modular-sdk"
           mockServerPath = "${env.WORKSPACE}/justice-codegen-sdk-mock-server"
           sdkSpecPath = "${env.WORKSPACE}/justice-codegen-sdk-spec"
           sdkPath = "${env.WORKSPACE}/${sdkRepoName}"
 
-          sh "rm -rf justice-codegen-sdk"
+          sh "rm -rf justice-codegen-modular-sdk"
           sh "rm -rf justice-codegen-sdk-mock-server"
           sh "rm -rf justice-codegen-sdk-spec"
           sshagent(credentials: [bitbucketCredentialsSsh]) {
-            sh "git clone --depth 1 git@bitbucket.org:accelbyte/justice-codegen-sdk.git ${sdkCodegenPath}"
+            sh "git clone --depth 1 git@bitbucket.org:accelbyte/justice-codegen-modular-sdk.git ${sdkCodegenPath}"
             sh "git clone --depth 1 git@bitbucket.org:accelbyte/justice-codegen-sdk-mock-server.git ${mockServerPath}"
             sh "git clone --depth 50 git@bitbucket.org:accelbyte/justice-codegen-sdk-spec.git ${sdkSpecPath}"
           }
@@ -78,7 +78,7 @@ pipeline {
 
         // Generate SDK only
         dir(sdkCodegenPath) {
-          sh script: "make -f Makefile.sdk-csharp-mod sdk_all SDK_PATH=${sdkPath}", label: "Generate SDK only"
+          sh script: "cd templates/csharp-modular-extend-sdk && make dbuild && make sdk_all SDK_PATH=${sdkPath}", label: "Generate SDK only"
         }
 
         // Check code-level breaking changes
@@ -90,7 +90,7 @@ pipeline {
 
         // Generate the rest of the SDK
         dir(sdkCodegenPath) {
-          sh script: "make -f Makefile.sdk-csharp-mod cli_all cli_test_all doc_operation_all beautify changelog SDK_PATH=${sdkPath}", label: "Generate the rest of SDK release"
+          sh script: "cd templates/csharp-modular-extend-sdk && make cli_cmd_all cli_project cli_test_all doc_index_all revision beautify SDK_PATH=${sdkPath}", label: "Generate the rest of SDK release"
         }
 
         // Bump SDK version and commit the generated code to generate branch (overwrite existing)
@@ -130,23 +130,23 @@ pipeline {
       }
     }
 
-    // stage('CLI Tests') {
-    //   steps {
-    //     dir(sdkRepoName) {
-    //       sh "make test_cli SDK_MOCK_SERVER_PATH=${mockServerPath}"
-    //     }
-    //   }
-    //   post {
-    //     always {
-    //       script {
-    //         dir(sdkRepoName) {
-    //           archiveArtifacts artifacts: 'samples/AccelByte.Sdk.Sample.Cli/tests/*.tap'
-    //           step([$class: "TapPublisher", testResults: "samples/AccelByte.Sdk.Sample.Cli/tests/*.tap"])
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
+    stage('CLI Tests') {
+      steps {
+        dir(sdkRepoName) {
+          sh "make test_cli SDK_MOCK_SERVER_PATH=${mockServerPath}"
+        }
+      }
+      post {
+        always {
+          script {
+            dir(sdkRepoName) {
+              archiveArtifacts artifacts: 'samples/AccelByte.Sdk.Sample.Cli/tests/*.tap'
+              step([$class: "TapPublisher", testResults: "samples/AccelByte.Sdk.Sample.Cli/tests/*.tap"])
+            }
+          }
+        }
+      }
+    }
     
     stage('Integration Tests') {
       options {
