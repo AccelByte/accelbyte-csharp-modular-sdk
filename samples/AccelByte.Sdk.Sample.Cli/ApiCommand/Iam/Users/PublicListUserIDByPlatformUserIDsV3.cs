@@ -33,8 +33,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
         [SdkCommandArgument("platformId")]
         public string PlatformId { get; set; } = String.Empty;
 
-        [SdkCommandArgument("rawPUID")]
-        public bool? RawPUID { get; set; }
+        [SdkCommandArgument("rawPID")]
+        public bool? RawPID { get; set; }
 
         [SdkCommandData("body")]
         public ModelPlatformUserIDRequest Body { get; set; } = new ModelPlatformUserIDRequest();
@@ -50,8 +50,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 
             var opBuilder = AccelByte.Sdk.Api.Iam.Operation.PublicListUserIDByPlatformUserIDsV3.Builder;
 
-            if (RawPUID != null)
-                opBuilder.SetRawPUID((bool)RawPUID);
+            if (RawPID != null)
+                opBuilder.SetRawPID((bool)RawPID);
 
 
 

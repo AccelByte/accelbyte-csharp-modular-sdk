@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
         public string Namespace { get; set; } = String.Empty;
 
         [SdkCommandData("body")]
-        public ApimodelsBulkRemoveItemsReq Body { get; set; } = new ApimodelsBulkRemoveItemsReq();
+        public List<ApimodelsRemoveInventoryItemReq> Body { get; set; } = new List<ApimodelsRemoveInventoryItemReq>();
 
         public PublicBulkRemoveMyItemsCommand(IAccelByteSdk sdk)
         {

@@ -15,6 +15,9 @@ namespace AccelByte.Sdk.Api.Dsmc.Model
         [JsonPropertyName("artifactPath")]
         public string? ArtifactPath { get; set; }
 
+        [JsonPropertyName("coreDumpEnabled")]
+        public bool? CoreDumpEnabled { get; set; }
+
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; }
 
@@ -23,6 +26,12 @@ namespace AccelByte.Sdk.Api.Dsmc.Model
 
         [JsonPropertyName("image")]
         public string? Image { get; set; }
+
+        [JsonPropertyName("imageReplications")]
+        public List<ModelsImageReplication>? ImageReplications { get; set; }
+
+        [JsonPropertyName("imageReplicationsMap")]
+        public Dictionary<string, ModelsImageReplication>? ImageReplicationsMap { get; set; }
 
         [JsonPropertyName("imageSize")]
         public long? ImageSize { get; set; }
@@ -39,11 +48,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Model
         [JsonPropertyName("persistent")]
         public bool? Persistent { get; set; }
 
+        [JsonPropertyName("ulimitFileSize")]
+        public int? UlimitFileSize { get; set; }
+
         [JsonPropertyName("updatedAt")]
         public DateTime? UpdatedAt { get; set; }
 
-        [JsonPropertyName("uploaderFlags")]
-        public List<ModelsUploaderFlag>? UploaderFlags { get; set; }
+        [JsonPropertyName("uploaderFlag")]
+        public string? UploaderFlag { get; set; }
 
         [JsonPropertyName("version")]
         public string? Version { get; set; }

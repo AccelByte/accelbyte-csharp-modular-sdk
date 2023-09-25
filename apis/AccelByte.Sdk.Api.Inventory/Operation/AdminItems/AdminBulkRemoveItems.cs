@@ -53,7 +53,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
 
             public AdminBulkRemoveItems Build(
-                ApimodelsBulkRemoveItemsReq body,
+                List<ApimodelsRemoveInventoryItemReq> body,
                 string inventoryId,
                 string namespace_,
                 string userId
@@ -73,7 +73,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
 
             public List<Model.ApimodelsUpdateItemResp>? Execute(
-                ApimodelsBulkRemoveItemsReq body,
+                List<ApimodelsRemoveInventoryItemReq> body,
                 string inventoryId,
                 string namespace_,
                 string userId
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         }
 
         private AdminBulkRemoveItems(AdminBulkRemoveItemsBuilder builder,
-            ApimodelsBulkRemoveItemsReq body,
+            List<ApimodelsRemoveInventoryItemReq> body,
             string inventoryId,
             string namespace_,
             string userId
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             string inventoryId,
             string namespace_,
             string userId,
-            Model.ApimodelsBulkRemoveItemsReq body
+            List<Model.ApimodelsRemoveInventoryItemReq> body
         )
         {
             PathParams["inventoryId"] = inventoryId;

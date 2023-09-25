@@ -16,13 +16,19 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? AlternateIps { get; set; }
 
+        [JsonPropertyName("ams_protocol")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<ModelsPortConfigurationAMS>? AmsProtocol { get; set; }
+
         [JsonPropertyName("custom_attribute")]
         public string? CustomAttribute { get; set; }
 
         [JsonPropertyName("deployment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Deployment { get; set; }
 
         [JsonPropertyName("game_version")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? GameVersion { get; set; }
 
         [JsonPropertyName("image_version")]
@@ -44,15 +50,19 @@ namespace AccelByte.Sdk.Api.Session.Model
         public string? PodName { get; set; }
 
         [JsonPropertyName("port")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public int? Port { get; set; }
 
         [JsonPropertyName("ports")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Dictionary<string, long>? Ports { get; set; }
 
         [JsonPropertyName("protocol")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Protocol { get; set; }
 
         [JsonPropertyName("provider")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Provider { get; set; }
 
         [JsonPropertyName("region")]

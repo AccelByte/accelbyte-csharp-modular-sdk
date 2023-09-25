@@ -138,14 +138,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
-            {
-                return;
-            }
-
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            //do nothing since response code is "default".
         }
     }
 

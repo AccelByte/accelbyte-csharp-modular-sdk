@@ -53,14 +53,12 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             public PublicConsumeMyItem Build(
                 ApimodelsConsumeItemReq body,
                 string inventoryId,
-                string itemId,
                 string namespace_
             )
             {
                 PublicConsumeMyItem op = new PublicConsumeMyItem(this,
                     body,
                     inventoryId,
-                    itemId,
                     namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
@@ -73,14 +71,12 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             public Model.ApimodelsItemResp? Execute(
                 ApimodelsConsumeItemReq body,
                 string inventoryId,
-                string itemId,
                 string namespace_
             )
             {
                 PublicConsumeMyItem op = Build(
                     body,
                     inventoryId,
-                    itemId,
                     namespace_
                 );
 
@@ -97,14 +93,12 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             public Model.ApimodelsItemResp<T1, T2>? Execute<T1, T2>(
                 ApimodelsConsumeItemReq body,
                 string inventoryId,
-                string itemId,
                 string namespace_
             )
             {
                 PublicConsumeMyItem op = Build(
                     body,
                     inventoryId,
-                    itemId,
                     namespace_
                 );
 
@@ -122,12 +116,10 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         private PublicConsumeMyItem(PublicConsumeMyItemBuilder builder,
             ApimodelsConsumeItemReq body,
             string inventoryId,
-            string itemId,
             string namespace_
         )
         {
             PathParams["inventoryId"] = inventoryId;
-            PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
 
 
@@ -143,13 +135,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
         public PublicConsumeMyItem(
             string inventoryId,
-            string itemId,
             string namespace_,
             Model.ApimodelsConsumeItemReq body
         )
         {
             PathParams["inventoryId"] = inventoryId;
-            PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
 
 
@@ -162,7 +152,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/items/{itemId}/consume";
+        public override string Path => "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/consume";
 
         public override HttpMethod Method => HttpMethod.Post;
 

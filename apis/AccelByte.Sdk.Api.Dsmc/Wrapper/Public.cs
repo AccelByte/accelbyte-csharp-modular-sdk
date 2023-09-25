@@ -57,7 +57,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsDefaultProvider? ListProvidersByRegion(ListProvidersByRegion input)
+        public List<string>? ListProvidersByRegion(ListProvidersByRegion input)
         {
             var response = _sdk.RunRequest(input);
 

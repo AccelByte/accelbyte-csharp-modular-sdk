@@ -365,6 +365,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.AdminUpdateCountryAgeRestrictionV3.AdminUpdateCountryAgeRestrictionV3Builder(_sdk); }
         }
+        public AdminListUserIDByPlatformUserIDsV3.AdminListUserIDByPlatformUserIDsV3Builder AdminListUserIDByPlatformUserIDsV3Op
+        {
+            get { return new Operation.AdminListUserIDByPlatformUserIDsV3.AdminListUserIDByPlatformUserIDsV3Builder(_sdk); }
+        }
         public AdminGetUserByPlatformUserIDV3.AdminGetUserByPlatformUserIDV3Builder AdminGetUserByPlatformUserIDV3Op
         {
             get { return new Operation.AdminGetUserByPlatformUserIDV3.AdminGetUserByPlatformUserIDV3Builder(_sdk); }
@@ -384,6 +388,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public AdminListUserIDByUserIDsV3.AdminListUserIDByUserIDsV3Builder AdminListUserIDByUserIDsV3Op
         {
             get { return new Operation.AdminListUserIDByUserIDsV3.AdminListUserIDByUserIDsV3Builder(_sdk); }
+        }
+        public AdminBulkGetUsersPlatform.AdminBulkGetUsersPlatformBuilder AdminBulkGetUsersPlatformOp
+        {
+            get { return new Operation.AdminBulkGetUsersPlatform.AdminBulkGetUsersPlatformBuilder(_sdk); }
         }
         public AdminInviteUserV3.AdminInviteUserV3Builder AdminInviteUserV3Op
         {
@@ -532,6 +540,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public AdminUpdateUserStatusV3.AdminUpdateUserStatusV3Builder AdminUpdateUserStatusV3Op
         {
             get { return new Operation.AdminUpdateUserStatusV3.AdminUpdateUserStatusV3Builder(_sdk); }
+        }
+        public AdminTrustlyUpdateUserIdentity.AdminTrustlyUpdateUserIdentityBuilder AdminTrustlyUpdateUserIdentityOp
+        {
+            get { return new Operation.AdminTrustlyUpdateUserIdentity.AdminTrustlyUpdateUserIdentityBuilder(_sdk); }
         }
         public AdminVerifyUserWithoutVerificationCodeV3.AdminVerifyUserWithoutVerificationCodeV3Builder AdminVerifyUserWithoutVerificationCodeV3Op
         {
@@ -1537,6 +1549,15 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public Model.AccountcommonUserPlatforms? AdminListUserIDByPlatformUserIDsV3(AdminListUserIDByPlatformUserIDsV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.ModelUserResponseV3? AdminGetUserByPlatformUserIDV3(AdminGetUserByPlatformUserIDV3 input)
         {
             var response = _sdk.RunRequest(input);
@@ -1574,6 +1595,15 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
         public Model.ModelListUserInformationResult? AdminListUserIDByUserIDsV3(AdminListUserIDByUserIDsV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelListBulkUserPlatformsResponse? AdminBulkGetUsersPlatform(AdminBulkGetUsersPlatform input)
         {
             var response = _sdk.RunRequest(input);
 
@@ -1917,6 +1947,15 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
         public void AdminUpdateUserStatusV3(AdminUpdateUserStatusV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void AdminTrustlyUpdateUserIdentity(AdminTrustlyUpdateUserIdentity input)
         {
             var response = _sdk.RunRequest(input);
 

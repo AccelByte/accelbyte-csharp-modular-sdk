@@ -29,10 +29,6 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         {
             get { return new Operation.ListFulfillmentScripts.ListFulfillmentScriptsBuilder(_sdk); }
         }
-        public TestFulfillmentScriptEval.TestFulfillmentScriptEvalBuilder TestFulfillmentScriptEvalOp
-        {
-            get { return new Operation.TestFulfillmentScriptEval.TestFulfillmentScriptEvalBuilder(_sdk); }
-        }
         public GetFulfillmentScript.GetFulfillmentScriptBuilder GetFulfillmentScriptOp
         {
             get { return new Operation.GetFulfillmentScript.GetFulfillmentScriptBuilder(_sdk); }
@@ -56,25 +52,6 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.FulfillmentScriptEvalTestResult? TestFulfillmentScriptEval(TestFulfillmentScriptEval input)
-        {
-            var response = _sdk.RunRequest(input);
-
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-
-        public Model.FulfillmentScriptEvalTestResult<T1>? TestFulfillmentScriptEval<T1>(TestFulfillmentScriptEval input)
-        {
-            var response = _sdk.RunRequest(input);
-
-            return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
                     response.Payload);

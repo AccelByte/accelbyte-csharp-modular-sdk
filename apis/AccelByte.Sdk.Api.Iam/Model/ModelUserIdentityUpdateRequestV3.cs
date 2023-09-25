@@ -8,18 +8,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace AccelByte.Sdk.Api.Dsmc.Model
+namespace AccelByte.Sdk.Api.Iam.Model
 {
-    public class ModelsUploaderFlag : AccelByte.Sdk.Core.Model
+    public class ModelUserIdentityUpdateRequestV3 : AccelByte.Sdk.Core.Model
     {
-        [JsonPropertyName("name")]
-        public string? Name { get; set; }
+        [JsonPropertyName("emailAddress")]
+        public string? EmailAddress { get; set; }
 
-        [JsonPropertyName("shorthand")]
-        public string? Shorthand { get; set; }
-
-        [JsonPropertyName("value")]
-        public string? Value { get; set; }
+        [JsonPropertyName("password")]
+        public string? Password { get; set; }
 
     }
 

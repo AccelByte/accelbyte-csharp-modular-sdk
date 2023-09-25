@@ -8,7 +8,6 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 | `/platform/admin/fulfillment/scripts` | GET | ListFulfillmentScripts | [ListFulfillmentScripts](../../apis/AccelByte.Sdk.Api.Platform/Operation/FulfillmentScript/ListFulfillmentScripts.cs) | [ListFulfillmentScripts](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/FulfillmentScript/ListFulfillmentScripts.cs) |
-| `/platform/admin/fulfillment/scripts/tests/eval` | POST | TestFulfillmentScriptEval | [TestFulfillmentScriptEval](../../apis/AccelByte.Sdk.Api.Platform/Operation/FulfillmentScript/TestFulfillmentScriptEval.cs) | [TestFulfillmentScriptEval](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/FulfillmentScript/TestFulfillmentScriptEval.cs) |
 | `/platform/admin/fulfillment/scripts/{id}` | GET | GetFulfillmentScript | [GetFulfillmentScript](../../apis/AccelByte.Sdk.Api.Platform/Operation/FulfillmentScript/GetFulfillmentScript.cs) | [GetFulfillmentScript](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/FulfillmentScript/GetFulfillmentScript.cs) |
 | `/platform/admin/fulfillment/scripts/{id}` | POST | CreateFulfillmentScript | [CreateFulfillmentScript](../../apis/AccelByte.Sdk.Api.Platform/Operation/FulfillmentScript/CreateFulfillmentScript.cs) | [CreateFulfillmentScript](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/FulfillmentScript/CreateFulfillmentScript.cs) |
 | `/platform/admin/fulfillment/scripts/{id}` | DELETE | DeleteFulfillmentScript | [DeleteFulfillmentScript](../../apis/AccelByte.Sdk.Api.Platform/Operation/FulfillmentScript/DeleteFulfillmentScript.cs) | [DeleteFulfillmentScript](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/FulfillmentScript/DeleteFulfillmentScript.cs) |
@@ -563,7 +562,6 @@
 ### FulfillmentScript Wrapper:  [FulfillmentScript](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/FulfillmentScript.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
-| `/platform/admin/fulfillment/scripts/tests/eval` | POST | TestFulfillmentScriptEval | [TestFulfillmentScriptEval](../../apis/AccelByte.Sdk.Api.Platform/Operation/FulfillmentScript/TestFulfillmentScriptEval.cs) | [TestFulfillmentScriptEval](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/FulfillmentScript/TestFulfillmentScriptEval.cs) |
 
 ### Item Wrapper:  [Item](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/Item.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -820,10 +818,7 @@
 | `FulfillmentItem` | [FulfillmentItem](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentItem.cs) |
 | `FulfillmentRequest` | [FulfillmentRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentRequest.cs) |
 | `FulfillmentResult` | [FulfillmentResult](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentResult.cs) |
-| `FulfillmentScriptContext` | [FulfillmentScriptContext](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentScriptContext.cs) |
 | `FulfillmentScriptCreate` | [FulfillmentScriptCreate](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentScriptCreate.cs) |
-| `FulfillmentScriptEvalTestRequest` | [FulfillmentScriptEvalTestRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentScriptEvalTestRequest.cs) |
-| `FulfillmentScriptEvalTestResult` | [FulfillmentScriptEvalTestResult](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentScriptEvalTestResult.cs) |
 | `FulfillmentScriptInfo` | [FulfillmentScriptInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentScriptInfo.cs) |
 | `FulfillmentScriptUpdate` | [FulfillmentScriptUpdate](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentScriptUpdate.cs) |
 | `FullAppInfo` | [FullAppInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/FullAppInfo.cs) |

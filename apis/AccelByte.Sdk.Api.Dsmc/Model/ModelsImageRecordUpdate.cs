@@ -15,11 +15,20 @@ namespace AccelByte.Sdk.Api.Dsmc.Model
         [JsonPropertyName("artifactPath")]
         public string? ArtifactPath { get; set; }
 
+        [JsonPropertyName("coreDumpEnabled")]
+        public bool? CoreDumpEnabled { get; set; }
+
         [JsonPropertyName("image")]
         public string? Image { get; set; }
 
+        [JsonPropertyName("imageReplicationsMap")]
+        public Dictionary<string, ModelsImageReplication>? ImageReplicationsMap { get; set; }
+
         [JsonPropertyName("namespace")]
         public string? Namespace { get; set; }
+
+        [JsonPropertyName("patchVersion")]
+        public string? PatchVersion { get; set; }
 
         [JsonPropertyName("persistent")]
         public bool? Persistent { get; set; }

@@ -81,6 +81,10 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         {
             get { return new Operation.BulkDeleteFriends.BulkDeleteFriendsBuilder(_sdk); }
         }
+        public SyncNativeFriends.SyncNativeFriendsBuilder SyncNativeFriendsOp
+        {
+            get { return new Operation.SyncNativeFriends.SyncNativeFriendsBuilder(_sdk); }
+        }
         public GetListOfFriends.GetListOfFriendsBuilder GetListOfFriendsOp
         {
             get { return new Operation.GetListOfFriends.GetListOfFriendsBuilder(_sdk); }
@@ -213,6 +217,15 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.Payload);
         }
         public Model.ModelBulkFriendsResponse? BulkDeleteFriends(BulkDeleteFriends input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public List<Model.ModelNativeFriendSyncResponse>? SyncNativeFriends(SyncNativeFriends input)
         {
             var response = _sdk.RunRequest(input);
 

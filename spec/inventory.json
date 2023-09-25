@@ -346,7 +346,7 @@
         "consumes": [
           "application/json"
         ],
-        "description": "\n\t\t\tUpdating an inventory.\n\t\t\tMaxSlots will be increased from existing value\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]\n\t\t",
+        "description": "\n\t\t\tUpdating an inventory.\n\t\t\tPositive value will increase MaxSlots from existing value\n\t\t\tNegative value will decrease MaxSlots from existing value\n\t\t\tLimited slots can not be changed to unlimited, vice versa\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]\n\t\t",
         "operationId": "AdminUpdateInventory",
         "parameters": [
           {
@@ -524,12 +524,12 @@
         ]
       }
     },
-    "/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}/items/{itemId}": {
+    "/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}/slots/{slotId}/sourceItems/{sourceItemId}": {
       "get": {
         "consumes": [
           "application/json"
         ],
-        "description": "\n\t\t\tGetting an item info.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [READ]\n\t\t",
+        "description": "\n\t\t\t\t\tGetting an item info.\n\n\t\t\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [READ]\n\t\t\t\t",
         "operationId": "AdminGetInventoryItem",
         "parameters": [
           {
@@ -540,16 +540,23 @@
             "type": "string"
           },
           {
-            "description": "ItemID",
+            "description": "Namespace",
             "in": "path",
-            "name": "itemId",
+            "name": "namespace",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Namespace",
+            "description": "slotID",
             "in": "path",
-            "name": "namespace",
+            "name": "slotId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "sourceItemID",
+            "in": "path",
+            "name": "sourceItemId",
             "required": true,
             "type": "string"
           }
@@ -1366,6 +1373,87 @@
         ]
       }
     },
+    "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/inventories/{inventoryId}/consume": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "\n\t\t\tConsume user\u0026#39;s own item\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]\n\t\t",
+        "operationId": "AdminConsumeUserItem",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConsumeItemReq"
+            }
+          },
+          {
+            "description": "InventoryID",
+            "in": "path",
+            "name": "inventoryId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "userID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ItemResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": [
+              "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]"
+            ],
+            "authorization": []
+          }
+        ],
+        "summary": "To consume item",
+        "tags": [
+          "Admin Items"
+        ]
+      }
+    },
     "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/inventories/{inventoryId}/items": {
       "delete": {
         "consumes": [
@@ -1379,7 +1467,10 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/apimodels.BulkRemoveItemsReq"
+              "items": {
+                "$ref": "#/definitions/apimodels.RemoveInventoryItemReq"
+              },
+              "type": "array"
             }
           },
           {
@@ -1603,94 +1694,6 @@
           }
         ],
         "summary": "To bulk update items",
-        "tags": [
-          "Admin Items"
-        ]
-      }
-    },
-    "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/inventories/{inventoryId}/items/{itemId}/consume": {
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "description": "\n\t\t\tConsume user\u0026#39;s own item\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]\n\t\t",
-        "operationId": "AdminConsumeUserItem",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/apimodels.ConsumeItemReq"
-            }
-          },
-          {
-            "description": "InventoryID",
-            "in": "path",
-            "name": "inventoryId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "ItemID",
-            "in": "path",
-            "name": "itemId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Namespace",
-            "in": "path",
-            "name": "namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "userID",
-            "in": "path",
-            "name": "userId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/apimodels.ItemResp"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/apimodels.ErrorResponse"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/apimodels.ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/apimodels.ErrorResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "HasPermission": [
-              "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]"
-            ],
-            "authorization": []
-          }
-        ],
-        "summary": "To consume item",
         "tags": [
           "Admin Items"
         ]
@@ -2087,6 +2090,77 @@
         ]
       }
     },
+    "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/consume": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "\n\t\t\tConsume user\u0026#39;s own item.\n\t\t",
+        "operationId": "PublicConsumeMyItem",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConsumeItemReq"
+            }
+          },
+          {
+            "description": "InventoryID",
+            "in": "path",
+            "name": "inventoryId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ItemResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "To consume item",
+        "tags": [
+          "Public Items"
+        ]
+      }
+    },
     "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/items": {
       "delete": {
         "consumes": [
@@ -2100,7 +2174,10 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/apimodels.BulkRemoveItemsReq"
+              "items": {
+                "$ref": "#/definitions/apimodels.RemoveInventoryItemReq"
+              },
+              "type": "array"
             }
           },
           {
@@ -2405,12 +2482,12 @@
         ]
       }
     },
-    "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/items/{itemId}": {
+    "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/slots/{slotId}/sourceItems/{sourceItemId}": {
       "get": {
         "consumes": [
           "application/json"
         ],
-        "description": "\n\t\t\tGetting an user\u0026#39;s owned item info.\n\t\t",
+        "description": "\n\t\t\t\t\tGetting an user\u0026#39;s owned item info.\n\t\t\t\t",
         "operationId": "PublicGetItem",
         "parameters": [
           {
@@ -2421,16 +2498,23 @@
             "type": "string"
           },
           {
-            "description": "ItemID",
+            "description": "Namespace",
             "in": "path",
-            "name": "itemId",
+            "name": "namespace",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Namespace",
+            "description": "slotID",
             "in": "path",
-            "name": "namespace",
+            "name": "slotId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "sourceItemID",
+            "in": "path",
+            "name": "sourceItemId",
             "required": true,
             "type": "string"
           }
@@ -2474,84 +2558,6 @@
           "Public Items"
         ]
       }
-    },
-    "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/items/{itemId}/consume": {
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "description": "\n\t\t\tConsume user\u0026#39;s own item.\n\t\t",
-        "operationId": "PublicConsumeMyItem",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/apimodels.ConsumeItemReq"
-            }
-          },
-          {
-            "description": "InventoryID",
-            "in": "path",
-            "name": "inventoryId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "ItemID",
-            "in": "path",
-            "name": "itemId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Namespace",
-            "in": "path",
-            "name": "namespace",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/apimodels.ItemResp"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/apimodels.ErrorResponse"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/apimodels.ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/apimodels.ErrorResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "authorization": []
-          }
-        ],
-        "summary": "To consume item",
-        "tags": [
-          "Public Items"
-        ]
-      }
     }
   },
   "definitions": {
@@ -2560,11 +2566,14 @@
         "customAttributes": {
           "type": "object"
         },
-        "id": {
-          "type": "string"
-        },
         "serverCustomAttributes": {
           "type": "object"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "sourceItemId": {
+          "type": "string"
         },
         "tags": {
           "items": {
@@ -2578,23 +2587,11 @@
       },
       "required": [
         "customAttributes",
-        "id",
         "serverCustomAttributes",
+        "slotId",
+        "sourceItemId",
         "tags",
         "type"
-      ]
-    },
-    "apimodels.BulkRemoveItemsReq": {
-      "properties": {
-        "ids": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "ids"
       ]
     },
     "apimodels.ConsumeItemReq": {
@@ -2602,10 +2599,18 @@
         "qty": {
           "format": "int32",
           "type": "integer"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "sourceItemId": {
+          "type": "string"
         }
       },
       "required": [
-        "qty"
+        "qty",
+        "slotId",
+        "sourceItemId"
       ]
     },
     "apimodels.CreateInventoryConfigurationReq": {
@@ -2925,6 +2930,13 @@
         "serverCustomAttributes": {
           "type": "object"
         },
+        "slotId": {
+          "type": "string"
+        },
+        "slotUsed": {
+          "format": "int32",
+          "type": "integer"
+        },
         "source": {
           "type": "string"
         },
@@ -2957,6 +2969,8 @@
         "namespace",
         "qty",
         "serverCustomAttributes",
+        "slotId",
+        "slotUsed",
         "source",
         "sourceItemId",
         "tags",
@@ -3120,6 +3134,20 @@
         "previous"
       ]
     },
+    "apimodels.RemoveInventoryItemReq": {
+      "properties": {
+        "slotId": {
+          "type": "string"
+        },
+        "sourceItemId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "slotId",
+        "sourceItemId"
+      ]
+    },
     "apimodels.SaveItemReq": {
       "properties": {
         "customAttributes": {
@@ -3134,6 +3162,13 @@
         },
         "serverCustomAttributes": {
           "type": "object"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "slotUsed": {
+          "format": "int32",
+          "type": "integer"
         },
         "sourceItemId": {
           "type": "string"
@@ -3153,6 +3188,8 @@
         "inventoryConfigurationCode",
         "qty",
         "serverCustomAttributes",
+        "slotId",
+        "slotUsed",
         "sourceItemId",
         "tags",
         "type"
@@ -3169,6 +3206,13 @@
         },
         "serverCustomAttributes": {
           "type": "object"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "slotUsed": {
+          "format": "int32",
+          "type": "integer"
         },
         "sourceItemId": {
           "type": "string"
@@ -3187,6 +3231,8 @@
         "customAttributes",
         "qty",
         "serverCustomAttributes",
+        "slotId",
+        "slotUsed",
         "sourceItemId",
         "tags",
         "type"
@@ -3194,35 +3240,39 @@
     },
     "apimodels.TradeItem": {
       "properties": {
-        "id": {
-          "type": "string"
-        },
         "qty": {
           "format": "int32",
           "type": "integer"
-        }
-      },
-      "required": [
-        "id",
-        "qty"
-      ]
-    },
-    "apimodels.TradeItemResp": {
-      "properties": {
-        "itemId": {
-          "type": "string"
         },
-        "qty": {
-          "format": "int32",
-          "type": "integer"
+        "slotId": {
+          "type": "string"
         },
         "sourceItemId": {
           "type": "string"
         }
       },
       "required": [
-        "itemId",
         "qty",
+        "slotId",
+        "sourceItemId"
+      ]
+    },
+    "apimodels.TradeItemResp": {
+      "properties": {
+        "qty": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "sourceItemId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "qty",
+        "slotId",
         "sourceItemId"
       ]
     },
@@ -3242,7 +3292,10 @@
         "customAttributes": {
           "type": "object"
         },
-        "id": {
+        "slotId": {
+          "type": "string"
+        },
+        "sourceItemId": {
           "type": "string"
         },
         "tags": {
@@ -3254,7 +3307,8 @@
       },
       "required": [
         "customAttributes",
-        "id",
+        "slotId",
+        "sourceItemId",
         "tags"
       ]
     },
@@ -3263,7 +3317,10 @@
         "errorDetails": {
           "$ref": "#/definitions/apimodels.ErrorResponse"
         },
-        "id": {
+        "slotId": {
+          "type": "string"
+        },
+        "sourceItemId": {
           "type": "string"
         },
         "success": {
@@ -3272,7 +3329,8 @@
         }
       },
       "required": [
-        "id",
+        "slotId",
+        "sourceItemId",
         "success"
       ]
     }
@@ -3283,10 +3341,11 @@
     "path": "/inventory/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2023-08-28T07:21:48+00:00",
-    "gitHash": "7615d05cee13469c402b39bf9431d054fdd60c9c",
+    "buildDate": "2023-09-18T05:03:56+00:00",
+    "gitHash": "93ffcd9b8e7029bcb6390d004cb28375c9f7cc50",
     "name": "justice-inventory-service",
     "realm": "DEV",
-    "version": "0.1.0"
+    "version": "0.1.0",
+    "version-roles-seeding": "0.0.47"
   }
 }

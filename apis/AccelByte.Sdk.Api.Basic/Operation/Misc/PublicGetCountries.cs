@@ -27,6 +27,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
     /// 
     ///   * Returns : country code list
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class PublicGetCountries : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -74,6 +75,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<Model.CountryObject>? Execute(
                 string namespace_
             )

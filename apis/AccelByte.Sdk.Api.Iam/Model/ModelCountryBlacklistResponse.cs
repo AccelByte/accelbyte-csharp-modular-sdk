@@ -8,12 +8,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace AccelByte.Sdk.Api.Inventory.Model
+namespace AccelByte.Sdk.Api.Iam.Model
 {
-    public class ApimodelsBulkRemoveItemsReq : AccelByte.Sdk.Core.Model
+    public class ModelCountryBlacklistResponse : AccelByte.Sdk.Core.Model
     {
-        [JsonPropertyName("ids")]
-        public List<string>? Ids { get; set; }
+        [JsonPropertyName("blacklist")]
+        public List<string>? Blacklist { get; set; }
 
     }
 

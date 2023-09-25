@@ -63,6 +63,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dslogmanager
         [SdkCommandArgument("sessionId")]
         public string? SessionId { get; set; }
 
+        [SdkCommandArgument("source")]
+        public string? Source { get; set; }
+
         [SdkCommandArgument("startDate")]
         public string? StartDate { get; set; }
 
@@ -105,6 +108,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dslogmanager
                 opBuilder.SetRegion((string)Region);
             if (SessionId != null)
                 opBuilder.SetSessionId((string)SessionId);
+            if (Source != null)
+                opBuilder.SetSource((string)Source);
             if (StartDate != null)
                 opBuilder.SetStartDate((string)StartDate);
             if (Status != null)

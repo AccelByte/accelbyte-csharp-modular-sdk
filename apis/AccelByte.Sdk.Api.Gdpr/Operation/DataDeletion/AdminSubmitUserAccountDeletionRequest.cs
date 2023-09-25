@@ -127,7 +127,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
+        public override List<string> Consumes => new() { "*/*" };
 
         public override List<string> Produces => new() { "application/json" };
 

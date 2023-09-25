@@ -42,6 +42,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
         [SdkCommandArgument("limit")]
         public long? Limit { get; set; }
 
+        [SdkCommandArgument("platformId")]
+        public string? PlatformId { get; set; }
+
         public AdminGetUserPlatformAccountsV3Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -59,6 +62,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
                 opBuilder.SetBefore((string)Before);
             if (Limit != null)
                 opBuilder.SetLimit((long)Limit);
+            if (PlatformId != null)
+                opBuilder.SetPlatformId((string)PlatformId);
 
 
 

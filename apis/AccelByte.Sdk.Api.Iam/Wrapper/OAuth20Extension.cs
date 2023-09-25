@@ -65,13 +65,18 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.PlatformAuthenticationV3.PlatformAuthenticationV3Builder(_sdk); }
         }
+        public PlatformTokenRefreshV3.PlatformTokenRefreshV3Builder PlatformTokenRefreshV3Op
+        {
+            get { return new Operation.PlatformTokenRefreshV3.PlatformTokenRefreshV3Builder(_sdk); }
+        }
         public RequestGameTokenResponseV3.RequestGameTokenResponseV3Builder RequestGameTokenResponseV3Op
         {
             get { return new Operation.RequestGameTokenResponseV3.RequestGameTokenResponseV3Builder(_sdk); }
         }
-        public PlatformTokenRefreshV3.PlatformTokenRefreshV3Builder PlatformTokenRefreshV3Op
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        public PlatformTokenRefreshV3Deprecate.PlatformTokenRefreshV3DeprecateBuilder PlatformTokenRefreshV3DeprecateOp
         {
-            get { return new Operation.PlatformTokenRefreshV3.PlatformTokenRefreshV3Builder(_sdk); }
+            get { return new Operation.PlatformTokenRefreshV3Deprecate.PlatformTokenRefreshV3DeprecateBuilder(_sdk); }
         }
         #endregion
 
@@ -165,15 +170,6 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OauthmodelTokenResponseV3? RequestGameTokenResponseV3(RequestGameTokenResponseV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
         public Model.OauthmodelPlatformTokenRefreshResponseV3? PlatformTokenRefreshV3(PlatformTokenRefreshV3 input)
         {
             var response = _sdk.RunRequest(input);
@@ -183,5 +179,26 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public Model.OauthmodelTokenResponseV3? RequestGameTokenResponseV3(RequestGameTokenResponseV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        public Model.OauthmodelPlatformTokenRefreshResponseV3? PlatformTokenRefreshV3Deprecate(PlatformTokenRefreshV3Deprecate input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+#pragma warning restore ab_deprecated_operation
     }
 }

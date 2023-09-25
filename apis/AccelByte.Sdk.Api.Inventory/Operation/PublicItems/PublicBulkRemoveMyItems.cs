@@ -51,7 +51,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
 
             public PublicBulkRemoveMyItems Build(
-                ApimodelsBulkRemoveItemsReq body,
+                List<ApimodelsRemoveInventoryItemReq> body,
                 string inventoryId,
                 string namespace_
             )
@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
 
             public List<Model.ApimodelsUpdateItemResp>? Execute(
-                ApimodelsBulkRemoveItemsReq body,
+                List<ApimodelsRemoveInventoryItemReq> body,
                 string inventoryId,
                 string namespace_
             )
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         }
 
         private PublicBulkRemoveMyItems(PublicBulkRemoveMyItemsBuilder builder,
-            ApimodelsBulkRemoveItemsReq body,
+            List<ApimodelsRemoveInventoryItemReq> body,
             string inventoryId,
             string namespace_
         )
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         public PublicBulkRemoveMyItems(
             string inventoryId,
             string namespace_,
-            Model.ApimodelsBulkRemoveItemsReq body
+            List<Model.ApimodelsRemoveInventoryItemReq> body
         )
         {
             PathParams["inventoryId"] = inventoryId;

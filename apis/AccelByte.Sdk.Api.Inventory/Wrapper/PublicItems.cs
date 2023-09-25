@@ -25,6 +25,10 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
         }
 
         #region Operation Builders
+        public PublicConsumeMyItem.PublicConsumeMyItemBuilder PublicConsumeMyItemOp
+        {
+            get { return new Operation.PublicConsumeMyItem.PublicConsumeMyItemBuilder(_sdk); }
+        }
         public PublicListItems.PublicListItemsBuilder PublicListItemsOp
         {
             get { return new Operation.PublicListItems.PublicListItemsBuilder(_sdk); }
@@ -45,12 +49,27 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
         {
             get { return new Operation.PublicGetItem.PublicGetItemBuilder(_sdk); }
         }
-        public PublicConsumeMyItem.PublicConsumeMyItemBuilder PublicConsumeMyItemOp
-        {
-            get { return new Operation.PublicConsumeMyItem.PublicConsumeMyItemBuilder(_sdk); }
-        }
         #endregion
 
+        public Model.ApimodelsItemResp? PublicConsumeMyItem(PublicConsumeMyItem input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public Model.ApimodelsItemResp<T1, T2>? PublicConsumeMyItem<T1, T2>(PublicConsumeMyItem input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.ApimodelsListItemResp? PublicListItems(PublicListItems input)
         {
             var response = _sdk.RunRequest(input);
@@ -98,25 +117,6 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
         }
 
         public Model.ApimodelsItemResp<T1, T2>? PublicGetItem<T1, T2>(PublicGetItem input)
-        {
-            var response = _sdk.RunRequest(input);
-
-            return input.ParseResponse<T1, T2>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApimodelsItemResp? PublicConsumeMyItem(PublicConsumeMyItem input)
-        {
-            var response = _sdk.RunRequest(input);
-
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-
-        public Model.ApimodelsItemResp<T1, T2>? PublicConsumeMyItem<T1, T2>(PublicConsumeMyItem input)
         {
             var response = _sdk.RunRequest(input);
 

@@ -30,11 +30,14 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
         [SdkCommandArgument("inventoryId")]
         public string InventoryId { get; set; } = String.Empty;
 
-        [SdkCommandArgument("itemId")]
-        public string ItemId { get; set; } = String.Empty;
-
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
+
+        [SdkCommandArgument("slotId")]
+        public string SlotId { get; set; } = String.Empty;
+
+        [SdkCommandArgument("sourceItemId")]
+        public string SourceItemId { get; set; } = String.Empty;
 
         public AdminGetInventoryItemCommand(IAccelByteSdk sdk)
         {
@@ -53,8 +56,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
 
             AdminGetInventoryItem operation = opBuilder.Build(
                 InventoryId,
-                ItemId,
-                Namespace
+                Namespace,
+                SlotId,
+                SourceItemId
             );
 
 
