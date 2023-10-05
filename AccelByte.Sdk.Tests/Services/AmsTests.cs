@@ -29,8 +29,6 @@ namespace AccelByte.Sdk.Tests.Services
 
             DisableRetry();
 
-            _Sdk.Ams.FleetCommander.PortalHealthCheckOp.Execute();
-
             ApiRegionsResponse? regions = _Sdk.Ams.AMSInfo.InfoRegionsOp
                 .Execute(_Sdk.Namespace);
             Assert.IsNotNull(regions);
