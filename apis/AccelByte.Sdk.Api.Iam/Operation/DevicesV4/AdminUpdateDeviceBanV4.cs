@@ -30,7 +30,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// 
     /// Required permission
     /// 
-    ///                                                                                                 'ADMIN:NAMESPACE:{namespace}:DEVICE [UPDATE]'
+    ///                                                                         'ADMIN:NAMESPACE:{namespace}:DEVICE [UPDATE]'
     /// </summary>
     public class AdminUpdateDeviceBanV4 : AccelByte.Sdk.Core.Operation
     {

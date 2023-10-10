@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// 
     /// 
     /// 
-    ///                       1.
+    ///                 1.
     /// UserAccountRegistration
     /// 
     /// 
@@ -46,7 +46,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// 
     /// 
     /// 
-    ///                       2.
+    ///                 2.
     /// UpdateEmailAddress
     /// 
     /// 
@@ -56,7 +56,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// 
     /// 
     /// 
-    ///                       3. upgradeHeadlessAccount
+    ///                 3. upgradeHeadlessAccount
     /// 
     /// 
     /// The context is intended to be used whenever the email address wanted to be automatically verified on upgrading a headless account.

@@ -26,7 +26,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// 
     /// Required permission
     /// 
-    ///                                                                                                 'ADMIN:NAMESPACE:{namespace}:USER:{userId} [UPDATE]'
+    ///                                                                         'ADMIN:NAMESPACE:{namespace}:USER:{userId} [UPDATE]'
     /// 
     /// 
     /// 

@@ -14,6 +14,14 @@ namespace AccelByte.Sdk.Api.Platform.Model
 {
     public class ImportStoreError : AccelByte.Sdk.Core.Model
     {
+        [JsonPropertyName("app")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ImportStoreAppInfo? App { get; set; }
+
+        [JsonPropertyName("category")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ImportStoreCategoryInfo? Category { get; set; }
+
         [JsonPropertyName("errors")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<ImportErrorDetails>? Errors { get; set; }
@@ -22,10 +30,18 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ImportStoreItemInfo? Item { get; set; }
 
+        [JsonPropertyName("section")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ImportStoreSectionInfo? Section { get; set; }
+
         [JsonPropertyName("type")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonStringEnum]
         public ImportStoreErrorType? Type { get; set; }
+
+        [JsonPropertyName("view")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ImportStoreViewInfo? View { get; set; }
 
     }
 
@@ -33,8 +49,23 @@ namespace AccelByte.Sdk.Api.Platform.Model
 
     public class ImportStoreErrorType : StringEnum<ImportStoreErrorType>
     {
+        public static readonly ImportStoreErrorType APP
+            = new ImportStoreErrorType("APP");
+
+        public static readonly ImportStoreErrorType CATEGORY
+            = new ImportStoreErrorType("CATEGORY");
+
         public static readonly ImportStoreErrorType ITEM
             = new ImportStoreErrorType("ITEM");
+
+        public static readonly ImportStoreErrorType SECTION
+            = new ImportStoreErrorType("SECTION");
+
+        public static readonly ImportStoreErrorType STORE
+            = new ImportStoreErrorType("STORE");
+
+        public static readonly ImportStoreErrorType VIEW
+            = new ImportStoreErrorType("VIEW");
 
 
         public static implicit operator ImportStoreErrorType(string value)

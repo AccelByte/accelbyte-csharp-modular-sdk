@@ -18,13 +18,20 @@
 | `/gdpr/public/users/me/deletions` | DELETE | PublicCancelMyAccountDeletionRequest | [PublicCancelMyAccountDeletionRequest](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/DataDeletion/PublicCancelMyAccountDeletionRequest.cs) | [PublicCancelMyAccountDeletionRequest](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/DataDeletion/PublicCancelMyAccountDeletionRequest.cs) |
 | `/gdpr/public/users/me/deletions/status` | GET | PublicGetMyAccountDeletionStatus | [PublicGetMyAccountDeletionStatus](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/DataDeletion/PublicGetMyAccountDeletionStatus.cs) | [PublicGetMyAccountDeletionStatus](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/DataDeletion/PublicGetMyAccountDeletionStatus.cs) |
 
+### Configuration Wrapper:  [Configuration](../../apis/AccelByte.Sdk.Api.Gdpr/Wrapper/Configuration.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/gdpr/admin/namespaces/{namespace}/emails/configurations` | GET | GetAdminEmailConfiguration | [GetAdminEmailConfiguration](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/Configuration/GetAdminEmailConfiguration.cs) | [GetAdminEmailConfiguration](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/Configuration/GetAdminEmailConfiguration.cs) |
+| `/gdpr/admin/namespaces/{namespace}/emails/configurations` | PUT | UpdateAdminEmailConfiguration | [UpdateAdminEmailConfiguration](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/Configuration/UpdateAdminEmailConfiguration.cs) | [UpdateAdminEmailConfiguration](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/Configuration/UpdateAdminEmailConfiguration.cs) |
+| `/gdpr/admin/namespaces/{namespace}/emails/configurations` | POST | SaveAdminEmailConfiguration | [SaveAdminEmailConfiguration](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/Configuration/SaveAdminEmailConfiguration.cs) | [SaveAdminEmailConfiguration](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/Configuration/SaveAdminEmailConfiguration.cs) |
+| `/gdpr/admin/namespaces/{namespace}/emails/configurations` | DELETE | DeleteAdminEmailConfiguration | [DeleteAdminEmailConfiguration](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/Configuration/DeleteAdminEmailConfiguration.cs) | [DeleteAdminEmailConfiguration](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/Configuration/DeleteAdminEmailConfiguration.cs) |
+| `/gdpr/admin/namespaces/{namespace}/services/configurations` | GET | AdminGetServicesConfiguration | [AdminGetServicesConfiguration](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/Configuration/AdminGetServicesConfiguration.cs) | [AdminGetServicesConfiguration](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/Configuration/AdminGetServicesConfiguration.cs) |
+| `/gdpr/admin/namespaces/{namespace}/services/configurations` | PUT | AdminUpdateServicesConfiguration | [AdminUpdateServicesConfiguration](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/Configuration/AdminUpdateServicesConfiguration.cs) | [AdminUpdateServicesConfiguration](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/Configuration/AdminUpdateServicesConfiguration.cs) |
+| `/gdpr/admin/namespaces/{namespace}/services/configurations/reset` | DELETE | AdminResetServicesConfiguration | [AdminResetServicesConfiguration](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/Configuration/AdminResetServicesConfiguration.cs) | [AdminResetServicesConfiguration](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/Configuration/AdminResetServicesConfiguration.cs) |
+
 ### Data Retrieval Wrapper:  [DataRetrieval](../../apis/AccelByte.Sdk.Api.Gdpr/Wrapper/DataRetrieval.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
-| `/gdpr/admin/namespaces/{namespace}/emails/configurations` | GET | GetAdminEmailConfiguration | [GetAdminEmailConfiguration](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/DataRetrieval/GetAdminEmailConfiguration.cs) | [GetAdminEmailConfiguration](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/DataRetrieval/GetAdminEmailConfiguration.cs) |
-| `/gdpr/admin/namespaces/{namespace}/emails/configurations` | PUT | UpdateAdminEmailConfiguration | [UpdateAdminEmailConfiguration](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/DataRetrieval/UpdateAdminEmailConfiguration.cs) | [UpdateAdminEmailConfiguration](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/DataRetrieval/UpdateAdminEmailConfiguration.cs) |
-| `/gdpr/admin/namespaces/{namespace}/emails/configurations` | POST | SaveAdminEmailConfiguration | [SaveAdminEmailConfiguration](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/DataRetrieval/SaveAdminEmailConfiguration.cs) | [SaveAdminEmailConfiguration](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/DataRetrieval/SaveAdminEmailConfiguration.cs) |
-| `/gdpr/admin/namespaces/{namespace}/emails/configurations` | DELETE | DeleteAdminEmailConfiguration | [DeleteAdminEmailConfiguration](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/DataRetrieval/DeleteAdminEmailConfiguration.cs) | [DeleteAdminEmailConfiguration](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/DataRetrieval/DeleteAdminEmailConfiguration.cs) |
 | `/gdpr/admin/namespaces/{namespace}/requests` | GET | AdminGetListPersonalDataRequest | [AdminGetListPersonalDataRequest](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/DataRetrieval/AdminGetListPersonalDataRequest.cs) | [AdminGetListPersonalDataRequest](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/DataRetrieval/AdminGetListPersonalDataRequest.cs) |
 | `/gdpr/admin/namespaces/{namespace}/users/{userId}/requests` | GET | AdminGetUserPersonalDataRequests | [AdminGetUserPersonalDataRequests](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/DataRetrieval/AdminGetUserPersonalDataRequests.cs) | [AdminGetUserPersonalDataRequests](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/DataRetrieval/AdminGetUserPersonalDataRequests.cs) |
 | `/gdpr/admin/namespaces/{namespace}/users/{userId}/requests` | POST | AdminRequestDataRetrieval | [AdminRequestDataRetrieval](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/DataRetrieval/AdminRequestDataRetrieval.cs) | [AdminRequestDataRetrieval](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/DataRetrieval/AdminRequestDataRetrieval.cs) |
@@ -44,6 +51,10 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
+### Configuration Wrapper:  [Configuration](../../apis/AccelByte.Sdk.Api.Gdpr/Wrapper/Configuration.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
 ### Data Retrieval Wrapper:  [DataRetrieval](../../apis/AccelByte.Sdk.Api.Gdpr/Wrapper/DataRetrieval.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -55,6 +66,11 @@
 
 | Model | Class |
 |---|---|
+| `dto.ExtendConfigDTO` | [DtoExtendConfigDTO](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoExtendConfigDTO.cs) |
+| `dto.ServiceConfigDTO` | [DtoServiceConfigDTO](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoServiceConfigDTO.cs) |
+| `dto.ServiceConfigurationDTO` | [DtoServiceConfigurationDTO](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoServiceConfigurationDTO.cs) |
+| `dto.ServiceConfigurationUpdateRequest` | [DtoServiceConfigurationUpdateRequest](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoServiceConfigurationUpdateRequest.cs) |
+| `dto.ServicesConfigurationResponse` | [DtoServicesConfigurationResponse](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoServicesConfigurationResponse.cs) |
 | `models.DataRetrievalResponse` | [ModelsDataRetrievalResponse](../../apis/AccelByte.Sdk.Api.Gdpr/Model/ModelsDataRetrievalResponse.cs) |
 | `models.DeletionData` | [ModelsDeletionData](../../apis/AccelByte.Sdk.Api.Gdpr/Model/ModelsDeletionData.cs) |
 | `models.DeletionStatus` | [ModelsDeletionStatus](../../apis/AccelByte.Sdk.Api.Gdpr/Model/ModelsDeletionStatus.cs) |

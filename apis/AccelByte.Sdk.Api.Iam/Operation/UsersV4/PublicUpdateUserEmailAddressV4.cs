@@ -29,11 +29,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// 
     /// 
     /// 
-    /// It requires a verification code from
-    /// 
-    ///                                                                                                 /users/me/code/request
-    /// 
-    /// with UpdateEmailAddress context.
+    /// It requires a verification code from /users/me/code/request with UpdateEmailAddress context.
     /// </summary>
     public class PublicUpdateUserEmailAddressV4 : AccelByte.Sdk.Core.Operation
     {

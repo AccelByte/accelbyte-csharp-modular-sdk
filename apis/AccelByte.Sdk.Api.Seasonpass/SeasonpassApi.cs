@@ -15,6 +15,17 @@ namespace AccelByte.Sdk.Api.Seasonpass
     {
         private IAccelByteSdk _Sdk;
 
+        public Wrapper.Export Export
+        {
+            get
+            {
+                if (_Export == null)
+                    _Export = new Wrapper.Export(_Sdk);
+                return _Export;
+            }
+        }
+        private Wrapper.Export? _Export = null;
+
         public Wrapper.Season Season
         {
             get

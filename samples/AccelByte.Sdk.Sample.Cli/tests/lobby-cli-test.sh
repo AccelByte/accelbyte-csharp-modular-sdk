@@ -56,8 +56,8 @@ $CLI_EXE \
     --sn lobby \
     --op GetUserFriendsUpdated \
     --namespace $AB_NAMESPACE \
-    --limit '66' \
-    --offset '73' \
+    --limit '47' \
+    --offset '89' \
     > test.out 2>&1
 eval_tap $? 2 'GetUserFriendsUpdated' test.out
 
@@ -66,8 +66,8 @@ $CLI_EXE \
     --sn lobby \
     --op GetUserIncomingFriends \
     --namespace $AB_NAMESPACE \
-    --limit '42' \
-    --offset '3' \
+    --limit '45' \
+    --offset '14' \
     > test.out 2>&1
 eval_tap $? 3 'GetUserIncomingFriends' test.out
 
@@ -76,8 +76,8 @@ $CLI_EXE \
     --sn lobby \
     --op GetUserIncomingFriendsWithTime \
     --namespace $AB_NAMESPACE \
-    --limit '91' \
-    --offset '24' \
+    --limit '1' \
+    --offset '48' \
     > test.out 2>&1
 eval_tap $? 4 'GetUserIncomingFriendsWithTime' test.out
 
@@ -86,8 +86,8 @@ $CLI_EXE \
     --sn lobby \
     --op GetUserOutgoingFriends \
     --namespace $AB_NAMESPACE \
-    --limit '67' \
-    --offset '31' \
+    --limit '21' \
+    --offset '66' \
     > test.out 2>&1
 eval_tap $? 5 'GetUserOutgoingFriends' test.out
 
@@ -96,8 +96,8 @@ $CLI_EXE \
     --sn lobby \
     --op GetUserOutgoingFriendsWithTime \
     --namespace $AB_NAMESPACE \
-    --limit '51' \
-    --offset '20' \
+    --limit '47' \
+    --offset '38' \
     > test.out 2>&1
 eval_tap $? 6 'GetUserOutgoingFriendsWithTime' test.out
 
@@ -106,14 +106,14 @@ $CLI_EXE \
     --sn lobby \
     --op GetUserFriendsWithPlatform \
     --namespace $AB_NAMESPACE \
-    --limit '44' \
-    --offset '70' \
+    --limit '21' \
+    --offset '51' \
     > test.out 2>&1
 eval_tap $? 7 'GetUserFriendsWithPlatform' test.out
 
 #- 8 UserRequestFriend
 # body param: body
-echo '{"friendId": "0oi19S1j", "friendPublicId": "4wuf6bqh"}' > $TEMP_JSON_INPUT
+echo '{"friendId": "GhX028mb", "friendPublicId": "6EPBf4EE"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op UserRequestFriend \
@@ -124,7 +124,7 @@ eval_tap $? 8 'UserRequestFriend' test.out
 
 #- 9 UserAcceptFriendRequest
 # body param: body
-echo '{"friendId": "FaNFPLaG"}' > $TEMP_JSON_INPUT
+echo '{"friendId": "lTAaZmpU"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op UserAcceptFriendRequest \
@@ -135,7 +135,7 @@ eval_tap $? 9 'UserAcceptFriendRequest' test.out
 
 #- 10 UserCancelFriendRequest
 # body param: body
-echo '{"friendId": "PwZbIyvF"}' > $TEMP_JSON_INPUT
+echo '{"friendId": "ZPI27qJZ"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op UserCancelFriendRequest \
@@ -146,7 +146,7 @@ eval_tap $? 10 'UserCancelFriendRequest' test.out
 
 #- 11 UserRejectFriendRequest
 # body param: body
-echo '{"friendId": "zQrVlFcR"}' > $TEMP_JSON_INPUT
+echo '{"friendId": "viMeogbX"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op UserRejectFriendRequest \
@@ -159,14 +159,14 @@ eval_tap $? 11 'UserRejectFriendRequest' test.out
 $CLI_EXE \
     --sn lobby \
     --op UserGetFriendshipStatus \
-    --friendId 'PqWG16fx' \
+    --friendId 'O3Qe8B6t' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 12 'UserGetFriendshipStatus' test.out
 
 #- 13 UserUnfriendRequest
 # body param: body
-echo '{"friendId": "OfKTx4AL"}' > $TEMP_JSON_INPUT
+echo '{"friendId": "3zhSZilV"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op UserUnfriendRequest \
@@ -177,31 +177,31 @@ eval_tap $? 13 'UserUnfriendRequest' test.out
 
 #- 14 AddFriendsWithoutConfirmation
 # body param: body
-echo '{"friendIds": ["jdUz7o2F", "wwWO0cxV", "nEgkDbaS"]}' > $TEMP_JSON_INPUT
+echo '{"friendIds": ["xQo8O2H2", "BjAXSfbP", "KmjlQD70"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op AddFriendsWithoutConfirmation \
     --namespace $AB_NAMESPACE \
-    --userId 'NoCpx7Dp' \
+    --userId 'L8hQZ7Nu' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 14 'AddFriendsWithoutConfirmation' test.out
 
 #- 15 BulkDeleteFriends
 # body param: body
-echo '{"friendIds": ["WnuH8nFH", "4TlYHS4W", "FlBNammV"]}' > $TEMP_JSON_INPUT
+echo '{"friendIds": ["nGfCppGN", "PYsFGjVn", "MqLMNt09"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op BulkDeleteFriends \
     --namespace $AB_NAMESPACE \
-    --userId 'fCrSwK95' \
+    --userId 'QDM5ai9b' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 15 'BulkDeleteFriends' test.out
 
 #- 16 SyncNativeFriends
 # body param: body
-echo '[{"isLogin": false, "platformId": "YdkPzQCy", "platformToken": "Ja0ny9ZH", "psnEnv": "j5XR6hjB"}, {"isLogin": false, "platformId": "Tl1fpTJj", "platformToken": "iFsUsWEr", "psnEnv": "C3fEK3W8"}, {"isLogin": true, "platformId": "2F6cyoDB", "platformToken": "2sqRIo4f", "psnEnv": "vNrJXEMZ"}]' > $TEMP_JSON_INPUT
+echo '[{"isLogin": true, "platformId": "uh0C2a25", "platformToken": "1a3gtpru", "psnEnv": "0pT0DRNd"}, {"isLogin": false, "platformId": "kHwtuVPt", "platformToken": "x1ksKttF", "psnEnv": "UmlvW42O"}, {"isLogin": true, "platformId": "bjFIKFCx", "platformToken": "0F11ECeh", "psnEnv": "Tg4H0Ma3"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op SyncNativeFriends \
@@ -227,7 +227,7 @@ eval_tap $? 18 'AdminGetConfigV1' test.out
 
 #- 19 AdminUpdateConfigV1
 # body param: body
-echo '{"allowInviteNonConnectedUser": true, "allowJoinPartyDuringMatchmaking": true, "autoKickOnDisconnect": true, "autoKickOnDisconnectDelay": 34, "cancelTicketOnDisconnect": false, "chatRateLimitBurst": 71, "chatRateLimitDuration": 98, "concurrentUsersLimit": 84, "disableInvitationOnJoinParty": false, "enableChat": true, "entitlementCheck": false, "entitlementItemID": "ulCbzchb", "generalRateLimitBurst": 5, "generalRateLimitDuration": 27, "keepPresenceActivityOnDisconnect": false, "maxDSWaitTime": 33, "maxFriendsLimit": 8, "maxPartyMember": 8, "profanityFilter": false, "readyConsentTimeout": 81, "unregisterDelay": 54}' > $TEMP_JSON_INPUT
+echo '{"allowInviteNonConnectedUser": true, "allowJoinPartyDuringMatchmaking": false, "autoKickOnDisconnect": false, "autoKickOnDisconnectDelay": 24, "cancelTicketOnDisconnect": true, "chatRateLimitBurst": 27, "chatRateLimitDuration": 32, "concurrentUsersLimit": 59, "disableInvitationOnJoinParty": false, "enableChat": true, "entitlementCheck": true, "entitlementItemID": "fCEwlCw5", "generalRateLimitBurst": 21, "generalRateLimitDuration": 100, "keepPresenceActivityOnDisconnect": true, "maxDSWaitTime": 52, "maxFriendsLimit": 37, "maxPartyMember": 55, "profanityFilter": true, "readyConsentTimeout": 26, "unregisterDelay": 33}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op AdminUpdateConfigV1 \
@@ -260,10 +260,10 @@ $CLI_EXE \
     --sn lobby \
     --op GetListOfFriends \
     --namespace $AB_NAMESPACE \
-    --userId '4z07Pf2z' \
-    --friendId '03n009mP' \
-    --limit '3' \
-    --offset '76' \
+    --userId 'Tckmfn1e' \
+    --friendId 'FkvpfvzT' \
+    --limit '34' \
+    --offset '13' \
     > test.out 2>&1
 eval_tap $? 22 'GetListOfFriends' test.out
 
@@ -272,10 +272,10 @@ $CLI_EXE \
     --sn lobby \
     --op GetIncomingFriendRequests \
     --namespace $AB_NAMESPACE \
-    --userId '6UDWyhNd' \
-    --friendId 'EfpKemWt' \
-    --limit '16' \
-    --offset '1' \
+    --userId 'fr2pJZ9b' \
+    --friendId 'a6M2G4BF' \
+    --limit '1' \
+    --offset '20' \
     > test.out 2>&1
 eval_tap $? 23 'GetIncomingFriendRequests' test.out
 
@@ -284,15 +284,15 @@ $CLI_EXE \
     --sn lobby \
     --op GetOutgoingFriendRequests \
     --namespace $AB_NAMESPACE \
-    --userId 'sbJZHdgJ' \
-    --limit '90' \
-    --offset '83' \
+    --userId 'tgjHs6sr' \
+    --limit '79' \
+    --offset '56' \
     > test.out 2>&1
 eval_tap $? 24 'GetOutgoingFriendRequests' test.out
 
 #- 25 SendMultipleUsersFreeformNotificationV1Admin
 # body param: body
-echo '{"message": "k8SRvBXk", "topicName": "LJutmCe8", "userIds": ["N3WEVFJT", "23INBupA", "sAj7Kmzf"]}' > $TEMP_JSON_INPUT
+echo '{"message": "1fNcHRY0", "topicName": "MU4d3Oju", "userIds": ["WsEPM5ET", "yTNtEVa5", "4KZkapA6"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op SendMultipleUsersFreeformNotificationV1Admin \
@@ -303,7 +303,7 @@ eval_tap $? 25 'SendMultipleUsersFreeformNotificationV1Admin' test.out
 
 #- 26 SendUsersFreeformNotificationV1Admin
 # body param: body
-echo '{"message": "FRAS2tGD", "topicName": "Av3tOz2m"}' > $TEMP_JSON_INPUT
+echo '{"message": "pLLN8epm", "topicName": "cOe76t5o"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op SendUsersFreeformNotificationV1Admin \
@@ -314,24 +314,24 @@ eval_tap $? 26 'SendUsersFreeformNotificationV1Admin' test.out
 
 #- 27 SendPartyFreeformNotificationV1Admin
 # body param: body
-echo '{"message": "HFngBpkp", "topicName": "J8KjzcBG"}' > $TEMP_JSON_INPUT
+echo '{"message": "t9J97MoE", "topicName": "sjZIcIUd"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op SendPartyFreeformNotificationV1Admin \
     --namespace $AB_NAMESPACE \
-    --partyId 'sqBFPV73' \
+    --partyId 'KRnJ2uFS' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 27 'SendPartyFreeformNotificationV1Admin' test.out
 
 #- 28 SendPartyTemplatedNotificationV1Admin
 # body param: body
-echo '{"templateContext": {"OyrQGeyi": "GA3Lk04o", "27H4Fjwq": "MNTLYMYA", "KLZjEWVv": "CTP6WiVj"}, "templateLanguage": "1fsn72Xd", "templateSlug": "oWYKMfL3", "topicName": "k5NyYBTQ"}' > $TEMP_JSON_INPUT
+echo '{"templateContext": {"9vk4o83k": "RDoPD7ge", "MZbjySjE": "S8jYXTop", "FiO8Yk9a": "S4yNhjNo"}, "templateLanguage": "sLIyQg2v", "templateSlug": "yS4PyIr6", "topicName": "2U6Sbvy4"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op SendPartyTemplatedNotificationV1Admin \
     --namespace $AB_NAMESPACE \
-    --partyId '2adhNJkG' \
+    --partyId 'iPMwgbPk' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 28 'SendPartyTemplatedNotificationV1Admin' test.out
@@ -346,7 +346,7 @@ eval_tap $? 29 'GetAllNotificationTemplatesV1Admin' test.out
 
 #- 30 CreateNotificationTemplateV1Admin
 # body param: body
-echo '{"templateContent": "K16U5tDu", "templateLanguage": "fJX8a2Jo", "templateSlug": "zntHiTVJ"}' > $TEMP_JSON_INPUT
+echo '{"templateContent": "tVyAVhfr", "templateLanguage": "cRrOeKKK", "templateSlug": "NpYhT3au"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op CreateNotificationTemplateV1Admin \
@@ -357,7 +357,7 @@ eval_tap $? 30 'CreateNotificationTemplateV1Admin' test.out
 
 #- 31 SendUsersTemplatedNotificationV1Admin
 # body param: body
-echo '{"templateContext": {"Qs3NUIJu": "8yZqphcW", "IVNuzJhM": "TZC9GiRR", "kB8XsPNX": "RyzmqI1M"}, "templateLanguage": "FbOfGh3b", "templateSlug": "VNpBrUbs", "topicName": "CZZ19xnm"}' > $TEMP_JSON_INPUT
+echo '{"templateContext": {"47OehagL": "iic7FaKf", "Wzvw2cIf": "0pHyonIw", "8J41Vpan": "DkkkGcAn"}, "templateLanguage": "fnCkFp99", "templateSlug": "ZwVbjcHM", "topicName": "hV2nkzff"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op SendUsersTemplatedNotificationV1Admin \
@@ -371,10 +371,10 @@ $CLI_EXE \
     --sn lobby \
     --op GetTemplateSlugLocalizationsTemplateV1Admin \
     --namespace $AB_NAMESPACE \
-    --templateSlug 'xntxZU74' \
-    --after 'eGuZt08b' \
-    --before 'O54goxTO' \
-    --limit '46' \
+    --templateSlug 'PFxOLIrh' \
+    --after 'tM6Se1uw' \
+    --before 'AIApsr6G' \
+    --limit '24' \
     > test.out 2>&1
 eval_tap $? 32 'GetTemplateSlugLocalizationsTemplateV1Admin' test.out
 
@@ -383,7 +383,7 @@ $CLI_EXE \
     --sn lobby \
     --op DeleteNotificationTemplateSlugV1Admin \
     --namespace $AB_NAMESPACE \
-    --templateSlug 'vEUUSNYn' \
+    --templateSlug 'TZpkQrBw' \
     > test.out 2>&1
 eval_tap $? 33 'DeleteNotificationTemplateSlugV1Admin' test.out
 
@@ -392,20 +392,20 @@ $CLI_EXE \
     --sn lobby \
     --op GetSingleTemplateLocalizationV1Admin \
     --namespace $AB_NAMESPACE \
-    --templateLanguage 'g8kwBK1k' \
-    --templateSlug '9QQ7BXFH' \
+    --templateLanguage 'u7fBDF61' \
+    --templateSlug 'l3byWChG' \
     > test.out 2>&1
 eval_tap $? 34 'GetSingleTemplateLocalizationV1Admin' test.out
 
 #- 35 UpdateTemplateLocalizationV1Admin
 # body param: body
-echo '{"templateContent": "RkTZUf9Q"}' > $TEMP_JSON_INPUT
+echo '{"templateContent": "3aGZFYLs"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op UpdateTemplateLocalizationV1Admin \
     --namespace $AB_NAMESPACE \
-    --templateLanguage 'q2qVzXGl' \
-    --templateSlug 'OwFUzKFc' \
+    --templateLanguage 'z1BU3VYB' \
+    --templateSlug '8NcM8cfy' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 35 'UpdateTemplateLocalizationV1Admin' test.out
@@ -415,8 +415,8 @@ $CLI_EXE \
     --sn lobby \
     --op DeleteTemplateLocalizationV1Admin \
     --namespace $AB_NAMESPACE \
-    --templateLanguage 'XMIqiYh7' \
-    --templateSlug 'yA3ecv40' \
+    --templateLanguage 'CAqtkpvS' \
+    --templateSlug 'Ivr3oMJH' \
     > test.out 2>&1
 eval_tap $? 36 'DeleteTemplateLocalizationV1Admin' test.out
 
@@ -425,8 +425,8 @@ $CLI_EXE \
     --sn lobby \
     --op PublishTemplateLocalizationV1Admin \
     --namespace $AB_NAMESPACE \
-    --templateLanguage 'JbbRjTfq' \
-    --templateSlug 'z3vSxyFM' \
+    --templateLanguage 'FeCyRNmJ' \
+    --templateSlug 'VXMDpwLM' \
     > test.out 2>&1
 eval_tap $? 37 'PublishTemplateLocalizationV1Admin' test.out
 
@@ -435,15 +435,15 @@ $CLI_EXE \
     --sn lobby \
     --op GetAllNotificationTopicsV1Admin \
     --namespace $AB_NAMESPACE \
-    --after 'dSKD4iML' \
-    --before 'VrPo48Aw' \
-    --limit '71' \
+    --after '5KtOOUsf' \
+    --before 'AslXMqax' \
+    --limit '46' \
     > test.out 2>&1
 eval_tap $? 38 'GetAllNotificationTopicsV1Admin' test.out
 
 #- 39 CreateNotificationTopicV1Admin
 # body param: body
-echo '{"description": "LYtcmNVx", "topicName": "ee1EVk8K"}' > $TEMP_JSON_INPUT
+echo '{"description": "7be9GRLx", "topicName": "vMBpZ1XS"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op CreateNotificationTopicV1Admin \
@@ -457,18 +457,18 @@ $CLI_EXE \
     --sn lobby \
     --op GetNotificationTopicV1Admin \
     --namespace $AB_NAMESPACE \
-    --topicName 'TCw1rVRH' \
+    --topicName 'hsX4NVkZ' \
     > test.out 2>&1
 eval_tap $? 40 'GetNotificationTopicV1Admin' test.out
 
 #- 41 UpdateNotificationTopicV1Admin
 # body param: body
-echo '{"description": "pjvJ48a5"}' > $TEMP_JSON_INPUT
+echo '{"description": "e8r1yUJj"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op UpdateNotificationTopicV1Admin \
     --namespace $AB_NAMESPACE \
-    --topicName 'Xy7MvkG4' \
+    --topicName 'gnCNXiNa' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 41 'UpdateNotificationTopicV1Admin' test.out
@@ -478,30 +478,30 @@ $CLI_EXE \
     --sn lobby \
     --op DeleteNotificationTopicV1Admin \
     --namespace $AB_NAMESPACE \
-    --topicName 'HUNm762R' \
+    --topicName 'LYelCbIf' \
     > test.out 2>&1
 eval_tap $? 42 'DeleteNotificationTopicV1Admin' test.out
 
 #- 43 SendSpecificUserFreeformNotificationV1Admin
 # body param: body
-echo '{"message": "Ky993NhO", "topicName": "jgTCtWXT"}' > $TEMP_JSON_INPUT
+echo '{"message": "87J7Tmsq", "topicName": "2wF4ps54"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op SendSpecificUserFreeformNotificationV1Admin \
     --namespace $AB_NAMESPACE \
-    --userId '5ZpKo9nb' \
+    --userId 'r0hQWtjn' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 43 'SendSpecificUserFreeformNotificationV1Admin' test.out
 
 #- 44 SendSpecificUserTemplatedNotificationV1Admin
 # body param: body
-echo '{"templateContext": {"tIpQRsew": "9XZiw529", "uL2P1qNl": "CicAZ2vQ", "ZZcwLeJu": "YmMxhLqJ"}, "templateLanguage": "Jh9pfR5Q", "templateSlug": "AkObpG0s", "topicName": "vZPMMxST"}' > $TEMP_JSON_INPUT
+echo '{"templateContext": {"G0svhsLj": "CQIAdbBC", "zMZiUUEV": "J1g5SN7m", "neI4mvxB": "Q3TUvYq9"}, "templateLanguage": "ky9KnrSq", "templateSlug": "kWCgZlrn", "topicName": "H5PRw7yp"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op SendSpecificUserTemplatedNotificationV1Admin \
     --namespace $AB_NAMESPACE \
-    --userId '47Fx2QaL' \
+    --userId '89vHIUzU' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 44 'SendSpecificUserTemplatedNotificationV1Admin' test.out
@@ -511,18 +511,18 @@ $CLI_EXE \
     --sn lobby \
     --op AdminGetPartyDataV1 \
     --namespace $AB_NAMESPACE \
-    --partyId 'ON86qB6h' \
+    --partyId 'b46npKTC' \
     > test.out 2>&1
 eval_tap $? 45 'AdminGetPartyDataV1' test.out
 
 #- 46 AdminUpdatePartyAttributesV1
 # body param: body
-echo '{"custom_attribute": {"D8TkcavO": {}, "EpFf2zoW": {}, "NYBOhFMv": {}}, "updatedAt": 59}' > $TEMP_JSON_INPUT
+echo '{"custom_attribute": {"nPPmly6K": {}, "NJtKnjml": {}, "4A5F7Xdx": {}}, "updatedAt": 55}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op AdminUpdatePartyAttributesV1 \
     --namespace $AB_NAMESPACE \
-    --partyId '6Px9Mqem' \
+    --partyId 'ePTMOvoO' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 46 'AdminUpdatePartyAttributesV1' test.out
@@ -532,8 +532,8 @@ $CLI_EXE \
     --sn lobby \
     --op AdminJoinPartyV1 \
     --namespace $AB_NAMESPACE \
-    --partyId 'EKtF801h' \
-    --userId 'jLakTgZG' \
+    --partyId 'nSyzizmm' \
+    --userId 'OAnsf7g3' \
     > test.out 2>&1
 eval_tap $? 47 'AdminJoinPartyV1' test.out
 
@@ -542,7 +542,7 @@ $CLI_EXE \
     --sn lobby \
     --op AdminGetUserPartyV1 \
     --namespace $AB_NAMESPACE \
-    --userId 'KDgW0QQx' \
+    --userId 'feoR7kjl' \
     > test.out 2>&1
 eval_tap $? 48 'AdminGetUserPartyV1' test.out
 
@@ -556,7 +556,7 @@ eval_tap $? 49 'AdminGetLobbyCCU' test.out
 
 #- 50 AdminGetBulkPlayerBlockedPlayersV1
 # body param: body
-echo '{"listBlockedUserId": ["eFlSkm18", "LehYWehH", "V5gMXfgG"]}' > $TEMP_JSON_INPUT
+echo '{"listBlockedUserId": ["pOezMS5v", "KAETHW3l", "XrfeK8FQ"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op AdminGetBulkPlayerBlockedPlayersV1 \
@@ -570,18 +570,18 @@ $CLI_EXE \
     --sn lobby \
     --op AdminGetAllPlayerSessionAttribute \
     --namespace $AB_NAMESPACE \
-    --userId 'frdpmNPC' \
+    --userId 'vcAGDHB1' \
     > test.out 2>&1
 eval_tap $? 51 'AdminGetAllPlayerSessionAttribute' test.out
 
 #- 52 AdminSetPlayerSessionAttribute
 # body param: body
-echo '{"attributes": {"azew0GzS": "aRrDNtHn", "AL0zFuuu": "bKUITCrU", "smJfnYzP": "XJw3loys"}}' > $TEMP_JSON_INPUT
+echo '{"attributes": {"KibN9QIX": "xlPBI3J8", "4uAq1POC": "SM4p222W", "3Z4MBBnY": "CQLNHDLm"}}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op AdminSetPlayerSessionAttribute \
     --namespace $AB_NAMESPACE \
-    --userId 'VlBDjz8U' \
+    --userId 'cX3C2lD6' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 52 'AdminSetPlayerSessionAttribute' test.out
@@ -590,9 +590,9 @@ eval_tap $? 52 'AdminSetPlayerSessionAttribute' test.out
 $CLI_EXE \
     --sn lobby \
     --op AdminGetPlayerSessionAttribute \
-    --attribute 'PEhuReGW' \
+    --attribute 'DrEgFrPE' \
     --namespace $AB_NAMESPACE \
-    --userId 'Wz17Edqp' \
+    --userId 'T4YZ6LJJ' \
     > test.out 2>&1
 eval_tap $? 53 'AdminGetPlayerSessionAttribute' test.out
 
@@ -601,7 +601,7 @@ $CLI_EXE \
     --sn lobby \
     --op AdminGetPlayerBlockedPlayersV1 \
     --namespace $AB_NAMESPACE \
-    --userId 'kfjYUDSI' \
+    --userId 'W7cXe322' \
     > test.out 2>&1
 eval_tap $? 54 'AdminGetPlayerBlockedPlayersV1' test.out
 
@@ -610,25 +610,25 @@ $CLI_EXE \
     --sn lobby \
     --op AdminGetPlayerBlockedByPlayersV1 \
     --namespace $AB_NAMESPACE \
-    --userId 'ehTisskm' \
+    --userId 'ixXZ6zeB' \
     > test.out 2>&1
 eval_tap $? 55 'AdminGetPlayerBlockedByPlayersV1' test.out
 
 #- 56 AdminBulkBlockPlayersV1
 # body param: body
-echo '{"listBlockedUserId": ["0XwNoIkg", "XZW9PBRL", "p57MZm98"]}' > $TEMP_JSON_INPUT
+echo '{"listBlockedUserId": ["CY7dI9iK", "n7pfUMfE", "TZv3nwPX"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op AdminBulkBlockPlayersV1 \
     --namespace $AB_NAMESPACE \
-    --userId '2ltQYsaK' \
+    --userId 'TChhvoz7' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 56 'AdminBulkBlockPlayersV1' test.out
 
 #- 57 AdminDebugProfanityFilters
 # body param: body
-echo '{"text": "qIQZtPSd"}' > $TEMP_JSON_INPUT
+echo '{"text": "UEf5qCsw"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op AdminDebugProfanityFilters \
@@ -641,18 +641,18 @@ eval_tap $? 57 'AdminDebugProfanityFilters' test.out
 $CLI_EXE \
     --sn lobby \
     --op AdminGetProfanityListFiltersV1 \
-    --list 'Arv16zFD' \
+    --list '1K16Rx5L' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 58 'AdminGetProfanityListFiltersV1' test.out
 
 #- 59 AdminAddProfanityFilterIntoList
 # body param: body
-echo '{"filter": "dvOZ6Bhw", "note": "tzzO4Kpq"}' > $TEMP_JSON_INPUT
+echo '{"filter": "1XTwT0lT", "note": "DrdeFm0p"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op AdminAddProfanityFilterIntoList \
-    --list 'BRzr66mP' \
+    --list 'J1k9jYNJ' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -660,11 +660,11 @@ eval_tap $? 59 'AdminAddProfanityFilterIntoList' test.out
 
 #- 60 AdminAddProfanityFilters
 # body param: body
-echo '{"filters": [{"filter": "fmGNLBOX", "note": "elITV4F6"}, {"filter": "PXrIDWNN", "note": "YucooxPN"}, {"filter": "X5jRO5Cn", "note": "q3iHjnI4"}]}' > $TEMP_JSON_INPUT
+echo '{"filters": [{"filter": "9Ifo3z2G", "note": "lLmnFZ9t"}, {"filter": "wfuoJBpr", "note": "7xosw1RT"}, {"filter": "HVv3tDey", "note": "ocFpvXf7"}]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op AdminAddProfanityFilters \
-    --list '8iwYnvEc' \
+    --list 'dS3n53dC' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -672,11 +672,11 @@ eval_tap $? 60 'AdminAddProfanityFilters' test.out
 
 #- 61 AdminImportProfanityFiltersFromFile
 # body param: body
-echo '[96, 90, 76]' > $TEMP_JSON_INPUT
+echo '[94, 47, 58]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op AdminImportProfanityFiltersFromFile \
-    --list 'iq5z65SM' \
+    --list 'a1t2owCG' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -684,11 +684,11 @@ eval_tap $? 61 'AdminImportProfanityFiltersFromFile' test.out
 
 #- 62 AdminDeleteProfanityFilter
 # body param: body
-echo '{"filter": "JI47C4me"}' > $TEMP_JSON_INPUT
+echo '{"filter": "dbUh2syx"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op AdminDeleteProfanityFilter \
-    --list 'CRQ2tLku' \
+    --list 'dz5ZRPNZ' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -704,7 +704,7 @@ eval_tap $? 63 'AdminGetProfanityLists' test.out
 
 #- 64 AdminCreateProfanityList
 # body param: body
-echo '{"isEnabled": false, "isMandatory": false, "name": "qlP8Xq7X"}' > $TEMP_JSON_INPUT
+echo '{"isEnabled": true, "isMandatory": true, "name": "CDrdbSAF"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op AdminCreateProfanityList \
@@ -715,11 +715,11 @@ eval_tap $? 64 'AdminCreateProfanityList' test.out
 
 #- 65 AdminUpdateProfanityList
 # body param: body
-echo '{"isEnabled": false, "isMandatory": false, "newName": "Pn4R7lSW"}' > $TEMP_JSON_INPUT
+echo '{"isEnabled": true, "isMandatory": false, "newName": "T2jXBPfh"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op AdminUpdateProfanityList \
-    --list 'BRyQs1NW' \
+    --list 'KNyPwE1c' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -729,7 +729,7 @@ eval_tap $? 65 'AdminUpdateProfanityList' test.out
 $CLI_EXE \
     --sn lobby \
     --op AdminDeleteProfanityList \
-    --list 'lfPqzAwq' \
+    --list 'HI5W4n8X' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 66 'AdminDeleteProfanityList' test.out
@@ -744,7 +744,7 @@ eval_tap $? 67 'AdminGetProfanityRule' test.out
 
 #- 68 AdminSetProfanityRuleForNamespace
 # body param: body
-echo '{"rule": "fdcPVcSf"}' > $TEMP_JSON_INPUT
+echo '{"rule": "t8ryiJUB"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op AdminSetProfanityRuleForNamespace \
@@ -755,7 +755,7 @@ eval_tap $? 68 'AdminSetProfanityRuleForNamespace' test.out
 
 #- 69 AdminVerifyMessageProfanityResponse
 # body param: body
-echo '{"message": "YMfh5CAF", "profanityLevel": "cbd35toM"}' > $TEMP_JSON_INPUT
+echo '{"message": "O4d12jeK", "profanityLevel": "8Uk3mN12"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op AdminVerifyMessageProfanityResponse \
@@ -774,7 +774,7 @@ eval_tap $? 70 'AdminGetThirdPartyConfig' test.out
 
 #- 71 AdminUpdateThirdPartyConfig
 # body param: body
-echo '{"apiKey": "bke1rs94"}' > $TEMP_JSON_INPUT
+echo '{"apiKey": "Nmhyn6Zt"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op AdminUpdateThirdPartyConfig \
@@ -785,7 +785,7 @@ eval_tap $? 71 'AdminUpdateThirdPartyConfig' test.out
 
 #- 72 AdminCreateThirdPartyConfig
 # body param: body
-echo '{"apiKey": "1fDxkKD2"}' > $TEMP_JSON_INPUT
+echo '{"apiKey": "rH6HVsAF"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op AdminCreateThirdPartyConfig \
@@ -814,30 +814,30 @@ $CLI_EXE \
     --sn lobby \
     --op PublicGetPartyDataV1 \
     --namespace $AB_NAMESPACE \
-    --partyId 'B6wXWvKN' \
+    --partyId 'T5zGXvik' \
     > test.out 2>&1
 eval_tap $? 75 'PublicGetPartyDataV1' test.out
 
 #- 76 PublicUpdatePartyAttributesV1
 # body param: body
-echo '{"custom_attribute": {"LECjjUsP": {}, "HR9P0lYW": {}, "cMLaE94Y": {}}, "updatedAt": 76}' > $TEMP_JSON_INPUT
+echo '{"custom_attribute": {"yNWB9JBZ": {}, "0opa8Ker": {}, "PwqOkEuP": {}}, "updatedAt": 62}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op PublicUpdatePartyAttributesV1 \
     --namespace $AB_NAMESPACE \
-    --partyId 'QazkpvlG' \
+    --partyId 'QNd703e3' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 76 'PublicUpdatePartyAttributesV1' test.out
 
 #- 77 PublicSetPartyLimitV1
 # body param: body
-echo '{"limit": 39}' > $TEMP_JSON_INPUT
+echo '{"limit": 10}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op PublicSetPartyLimitV1 \
     --namespace $AB_NAMESPACE \
-    --partyId 'kJUFeiLm' \
+    --partyId 'JTC1Z2T9' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 77 'PublicSetPartyLimitV1' test.out
@@ -864,13 +864,13 @@ $CLI_EXE \
     --op UsersPresenceHandlerV1 \
     --namespace $AB_NAMESPACE \
     --countOnly 'false' \
-    --userIds 'aiJVAYpS' \
+    --userIds 'tBpQbfcZ' \
     > test.out 2>&1
 eval_tap $? 80 'UsersPresenceHandlerV1' test.out
 
 #- 81 FreeFormNotification
 # body param: body
-echo '{"message": "Umvi6fVA", "topic": "aqwnMNAy"}' > $TEMP_JSON_INPUT
+echo '{"message": "QqhyvPbk", "topic": "UarAM2ny"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op FreeFormNotification \
@@ -881,7 +881,7 @@ eval_tap $? 81 'FreeFormNotification' test.out
 
 #- 82 NotificationWithTemplate
 # body param: body
-echo '{"templateContext": {"waFZeIU8": "RgZ5Ryu0", "JZg8mh6Q": "RPzs3xqD", "9EbwHmTB": "5g6oNlCn"}, "templateLanguage": "m5TOf4a2", "templateSlug": "HDrilv2T", "topic": "rqJw6Z0Y"}' > $TEMP_JSON_INPUT
+echo '{"templateContext": {"a9wBzzsY": "3rCLLTed", "SnEtvZ5j": "7e6f9YD8", "RtSy5pgG": "49APsDqW"}, "templateLanguage": "7cCtJowp", "templateSlug": "tmilu6Uc", "topic": "SGq7Hzgj"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op NotificationWithTemplate \
@@ -900,7 +900,7 @@ eval_tap $? 83 'GetGameTemplate' test.out
 
 #- 84 CreateTemplate
 # body param: body
-echo '{"templateContent": "zTQODa2H", "templateLanguage": "Sx0EWLbX", "templateSlug": "iOX4s3Dm"}' > $TEMP_JSON_INPUT
+echo '{"templateContent": "Is7Fl5Dk", "templateLanguage": "oD7vUWSa", "templateSlug": "mlmfwewu"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op CreateTemplate \
@@ -914,10 +914,10 @@ $CLI_EXE \
     --sn lobby \
     --op GetSlugTemplate \
     --namespace $AB_NAMESPACE \
-    --templateSlug 'G2Ny07Qc' \
-    --after 'B5RnKnSu' \
-    --before 'yjC2YVOg' \
-    --limit '19' \
+    --templateSlug '1kgqVR0U' \
+    --after 'lPo0rfSa' \
+    --before 'fVdcVmNN' \
+    --limit '22' \
     > test.out 2>&1
 eval_tap $? 85 'GetSlugTemplate' test.out
 
@@ -926,7 +926,7 @@ $CLI_EXE \
     --sn lobby \
     --op DeleteTemplateSlug \
     --namespace $AB_NAMESPACE \
-    --templateSlug 'IDdv5SPP' \
+    --templateSlug 'iWHfEzyA' \
     > test.out 2>&1
 eval_tap $? 86 'DeleteTemplateSlug' test.out
 
@@ -935,20 +935,20 @@ $CLI_EXE \
     --sn lobby \
     --op GetLocalizationTemplate \
     --namespace $AB_NAMESPACE \
-    --templateLanguage 'mywexop1' \
-    --templateSlug 'sN7nWdMV' \
+    --templateLanguage 'HFIcAviE' \
+    --templateSlug 'akzK63vv' \
     > test.out 2>&1
 eval_tap $? 87 'GetLocalizationTemplate' test.out
 
 #- 88 UpdateLocalizationTemplate
 # body param: body
-echo '{"templateContent": "k3xzdLWP"}' > $TEMP_JSON_INPUT
+echo '{"templateContent": "xamZ05x9"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op UpdateLocalizationTemplate \
     --namespace $AB_NAMESPACE \
-    --templateLanguage 'zxz35YPh' \
-    --templateSlug 'V2qn2ZK6' \
+    --templateLanguage 'LJ5roxsC' \
+    --templateSlug 'SgO0ZRhH' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 88 'UpdateLocalizationTemplate' test.out
@@ -958,8 +958,8 @@ $CLI_EXE \
     --sn lobby \
     --op DeleteTemplateLocalization \
     --namespace $AB_NAMESPACE \
-    --templateLanguage 'l7ggriIb' \
-    --templateSlug 'eN43CwmD' \
+    --templateLanguage 'ZeQv7gv9' \
+    --templateSlug '5oHRJHLD' \
     > test.out 2>&1
 eval_tap $? 89 'DeleteTemplateLocalization' test.out
 
@@ -968,8 +968,8 @@ $CLI_EXE \
     --sn lobby \
     --op PublishTemplate \
     --namespace $AB_NAMESPACE \
-    --templateLanguage 'fyhDvyvm' \
-    --templateSlug 'PPETVhCK' \
+    --templateLanguage 'Sy0IXx9d' \
+    --templateSlug 'eT8KBt1H' \
     > test.out 2>&1
 eval_tap $? 90 'PublishTemplate' test.out
 
@@ -978,15 +978,15 @@ $CLI_EXE \
     --sn lobby \
     --op GetTopicByNamespace \
     --namespace $AB_NAMESPACE \
-    --after 'de9mIELt' \
-    --before 'xcgEEvad' \
-    --limit '52' \
+    --after 'dcUW2yH7' \
+    --before 'AsVeWxm8' \
+    --limit '37' \
     > test.out 2>&1
 eval_tap $? 91 'GetTopicByNamespace' test.out
 
 #- 92 CreateTopic
 # body param: body
-echo '{"description": "GwDDdd3d", "topic": "RQCiCOKq"}' > $TEMP_JSON_INPUT
+echo '{"description": "FgRorZS4", "topic": "lNlJCTvN"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op CreateTopic \
@@ -1000,18 +1000,18 @@ $CLI_EXE \
     --sn lobby \
     --op GetTopicByTopicName \
     --namespace $AB_NAMESPACE \
-    --topic 'IOeX2DYB' \
+    --topic 'zqvVIQzY' \
     > test.out 2>&1
 eval_tap $? 93 'GetTopicByTopicName' test.out
 
 #- 94 UpdateTopicByTopicName
 # body param: body
-echo '{"description": "0iayeVxH"}' > $TEMP_JSON_INPUT
+echo '{"description": "spKemZUd"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op UpdateTopicByTopicName \
     --namespace $AB_NAMESPACE \
-    --topic 'hwPI7zNT' \
+    --topic 'A6LZUREb' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 94 'UpdateTopicByTopicName' test.out
@@ -1021,30 +1021,30 @@ $CLI_EXE \
     --sn lobby \
     --op DeleteTopicByTopicName \
     --namespace $AB_NAMESPACE \
-    --topic 'S35npm4k' \
+    --topic 'ejRVrP08' \
     > test.out 2>&1
 eval_tap $? 95 'DeleteTopicByTopicName' test.out
 
 #- 96 FreeFormNotificationByUserID
 # body param: body
-echo '{"message": "PoEdimpN", "topic": "JY44JZjH"}' > $TEMP_JSON_INPUT
+echo '{"message": "qiyWecJC", "topic": "Qpd5ZjaY"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op FreeFormNotificationByUserID \
     --namespace $AB_NAMESPACE \
-    --userId 'gKUWPRZq' \
+    --userId '7aXLxsvv' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 96 'FreeFormNotificationByUserID' test.out
 
 #- 97 NotificationWithTemplateByUserID
 # body param: body
-echo '{"templateContext": {"hEPKpjRi": "eg9XDvZj", "0O3NP9ST": "XUTxmEZA", "6Hl1ttng": "kTSFs10K"}, "templateLanguage": "uAralWwM", "templateSlug": "LfLBc4ny", "topic": "81BY1GL0"}' > $TEMP_JSON_INPUT
+echo '{"templateContext": {"oqFslum2": "RwuzazQE", "3BG7Nb72": "surOmcgM", "FcpBDw6g": "7kLetkgp"}, "templateLanguage": "ZjRh9ry1", "templateSlug": "3CkerqG6", "topic": "SJ2pzl75"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn lobby \
     --op NotificationWithTemplateByUserID \
     --namespace $AB_NAMESPACE \
-    --userId 'IbxSEohy' \
+    --userId 'kCxeH5yK' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 97 'NotificationWithTemplateByUserID' test.out

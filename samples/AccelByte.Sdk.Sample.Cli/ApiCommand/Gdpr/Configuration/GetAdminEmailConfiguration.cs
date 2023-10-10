@@ -18,44 +18,43 @@ using AccelByte.Sdk.Api.Gdpr.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
 {
-    [SdkConsoleCommand("gdpr", "saveadminemailconfiguration")]
-    public class SaveAdminEmailConfigurationCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("gdpr", "getadminemailconfiguration")]
+    public class GetAdminEmailConfigurationCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
         public string ServiceName { get { return "Gdpr"; } }
 
-        public string OperationName { get { return "SaveAdminEmailConfiguration"; } }
+        public string OperationName { get { return "GetAdminEmailConfiguration"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
-        [SdkCommandData("body")]
-        public List<string> Body { get; set; } = new List<string>();
-
-        public SaveAdminEmailConfigurationCommand(IAccelByteSdk sdk)
+        public GetAdminEmailConfigurationCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
         public string Run()
         {
-            AccelByte.Sdk.Api.Gdpr.Wrapper.DataRetrieval wrapper = new AccelByte.Sdk.Api.Gdpr.Wrapper.DataRetrieval(_SDK);
+            AccelByte.Sdk.Api.Gdpr.Wrapper.Configuration wrapper = new AccelByte.Sdk.Api.Gdpr.Wrapper.Configuration(_SDK);
 
-            var opBuilder = AccelByte.Sdk.Api.Gdpr.Operation.SaveAdminEmailConfiguration.Builder;
-
-
+            var opBuilder = AccelByte.Sdk.Api.Gdpr.Operation.GetAdminEmailConfiguration.Builder;
 
 
 
-            SaveAdminEmailConfiguration operation = opBuilder.Build(
-                Body,
+
+
+            GetAdminEmailConfiguration operation = opBuilder.Build(
                 Namespace
             );
 
 
-            wrapper.SaveAdminEmailConfiguration(operation);
-            return String.Empty;
+            List<string>? response = wrapper.GetAdminEmailConfiguration(operation);
+            if (response == null)
+                return "No response from server.";
+
+            return SdkHelper.SerializeToJson(response);
         }
     }
 }

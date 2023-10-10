@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// 
     /// 
     /// 
-    ///                 * AdminDeactivateAccount : if your disable account request comes from admin
+    ///               * AdminDeactivateAccount : if your disable account request comes from admin
     /// 
     /// 
     /// 

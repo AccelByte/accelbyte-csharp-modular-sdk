@@ -27,8 +27,10 @@
 | `/platform/admin/namespaces/{namespace}/items/byAppId` | GET | GetItemByAppId | [GetItemByAppId](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/GetItemByAppId.cs) | [GetItemByAppId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/GetItemByAppId.cs) |
 | `/platform/admin/namespaces/{namespace}/items/byCriteria` | GET | QueryItems | [QueryItems](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/QueryItems.cs) | [QueryItems](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/QueryItems.cs) |
 | `/platform/admin/namespaces/{namespace}/items/byFeatures/basic` | GET | ListBasicItemsByFeatures | [ListBasicItemsByFeatures](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/ListBasicItemsByFeatures.cs) | [ListBasicItemsByFeatures](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/ListBasicItemsByFeatures.cs) |
+| `/platform/admin/namespaces/{namespace}/items/byIds` | GET | GetItems | [GetItems](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/GetItems.cs) | [GetItems](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/GetItems.cs) |
 | `/platform/admin/namespaces/{namespace}/items/bySku` | GET | GetItemBySku | [GetItemBySku](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/GetItemBySku.cs) | [GetItemBySku](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/GetItemBySku.cs) |
 | `/platform/admin/namespaces/{namespace}/items/bySku/locale` | GET | GetLocaleItemBySku | [GetLocaleItemBySku](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/GetLocaleItemBySku.cs) | [GetLocaleItemBySku](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/GetLocaleItemBySku.cs) |
+| `/platform/admin/namespaces/{namespace}/items/estimatedPrice` | GET | GetEstimatedPrice | [GetEstimatedPrice](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/GetEstimatedPrice.cs) | [GetEstimatedPrice](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/GetEstimatedPrice.cs) |
 | `/platform/admin/namespaces/{namespace}/items/itemId/bySku` | GET | GetItemIdBySku | [GetItemIdBySku](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/GetItemIdBySku.cs) | [GetItemIdBySku](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/GetItemIdBySku.cs) |
 | `/platform/admin/namespaces/{namespace}/items/itemId/bySkus` | GET | GetBulkItemIdBySkus | [GetBulkItemIdBySkus](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/GetBulkItemIdBySkus.cs) | [GetBulkItemIdBySkus](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/GetBulkItemIdBySkus.cs) |
 | `/platform/admin/namespaces/{namespace}/items/locale/byIds` | GET | BulkGetLocaleItems | [BulkGetLocaleItems](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/BulkGetLocaleItems.cs) | [BulkGetLocaleItems](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/BulkGetLocaleItems.cs) |
@@ -54,6 +56,7 @@
 | `/platform/public/namespaces/{namespace}/items/byAppId` | GET | PublicGetItemByAppId | [PublicGetItemByAppId](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/PublicGetItemByAppId.cs) | [PublicGetItemByAppId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/PublicGetItemByAppId.cs) |
 | `/platform/public/namespaces/{namespace}/items/byCriteria` | GET | PublicQueryItems | [PublicQueryItems](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/PublicQueryItems.cs) | [PublicQueryItems](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/PublicQueryItems.cs) |
 | `/platform/public/namespaces/{namespace}/items/bySku` | GET | PublicGetItemBySku | [PublicGetItemBySku](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/PublicGetItemBySku.cs) | [PublicGetItemBySku](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/PublicGetItemBySku.cs) |
+| `/platform/public/namespaces/{namespace}/items/estimatedPrice` | GET | PublicGetEstimatedPrice | [PublicGetEstimatedPrice](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/PublicGetEstimatedPrice.cs) | [PublicGetEstimatedPrice](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/PublicGetEstimatedPrice.cs) |
 | `/platform/public/namespaces/{namespace}/items/locale/byIds` | GET | PublicBulkGetItems | [PublicBulkGetItems](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/PublicBulkGetItems.cs) | [PublicBulkGetItems](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/PublicBulkGetItems.cs) |
 | `/platform/public/namespaces/{namespace}/items/purchase/conditions/validate` | POST | PublicValidateItemPurchaseCondition | [PublicValidateItemPurchaseCondition](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/PublicValidateItemPurchaseCondition.cs) | [PublicValidateItemPurchaseCondition](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/PublicValidateItemPurchaseCondition.cs) |
 | `/platform/public/namespaces/{namespace}/items/search` | GET | PublicSearchItems | [PublicSearchItems](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/PublicSearchItems.cs) | [PublicSearchItems](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/PublicSearchItems.cs) |
@@ -717,6 +720,7 @@
 | `AppleIAPReceipt` | [AppleIAPReceipt](../../apis/AccelByte.Sdk.Api.Platform/Model/AppleIAPReceipt.cs) |
 | `AvailableComparison` | [AvailableComparison](../../apis/AccelByte.Sdk.Api.Platform/Model/AvailableComparison.cs) |
 | `AvailablePredicate` | [AvailablePredicate](../../apis/AccelByte.Sdk.Api.Platform/Model/AvailablePredicate.cs) |
+| `AvailablePrice` | [AvailablePrice](../../apis/AccelByte.Sdk.Api.Platform/Model/AvailablePrice.cs) |
 | `BaseCustomConfig` | [BaseCustomConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/BaseCustomConfig.cs) |
 | `BaseTLSConfig` | [BaseTLSConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/BaseTLSConfig.cs) |
 | `BasicCategoryInfo` | [BasicCategoryInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/BasicCategoryInfo.cs) |
@@ -804,6 +808,7 @@
 | `EpicGamesReconcileRequest` | [EpicGamesReconcileRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/EpicGamesReconcileRequest.cs) |
 | `EpicGamesReconcileResult` | [EpicGamesReconcileResult](../../apis/AccelByte.Sdk.Api.Platform/Model/EpicGamesReconcileResult.cs) |
 | `ErrorEntity` | [ErrorEntity](../../apis/AccelByte.Sdk.Api.Platform/Model/ErrorEntity.cs) |
+| `EstimatedPriceInfo` | [EstimatedPriceInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/EstimatedPriceInfo.cs) |
 | `EventAdditionalData` | [EventAdditionalData](../../apis/AccelByte.Sdk.Api.Platform/Model/EventAdditionalData.cs) |
 | `EventPayload` | [EventPayload](../../apis/AccelByte.Sdk.Api.Platform/Model/EventPayload.cs) |
 | `ExportStoreRequest` | [ExportStoreRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/ExportStoreRequest.cs) |
@@ -846,9 +851,13 @@
 | `IAPOrderPagingSlicedResult` | [IAPOrderPagingSlicedResult](../../apis/AccelByte.Sdk.Api.Platform/Model/IAPOrderPagingSlicedResult.cs) |
 | `Image` | [Image](../../apis/AccelByte.Sdk.Api.Platform/Model/Image.cs) |
 | `ImportErrorDetails` | [ImportErrorDetails](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportErrorDetails.cs) |
+| `ImportStoreAppInfo` | [ImportStoreAppInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportStoreAppInfo.cs) |
+| `ImportStoreCategoryInfo` | [ImportStoreCategoryInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportStoreCategoryInfo.cs) |
 | `ImportStoreError` | [ImportStoreError](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportStoreError.cs) |
 | `ImportStoreItemInfo` | [ImportStoreItemInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportStoreItemInfo.cs) |
 | `ImportStoreResult` | [ImportStoreResult](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportStoreResult.cs) |
+| `ImportStoreSectionInfo` | [ImportStoreSectionInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportStoreSectionInfo.cs) |
+| `ImportStoreViewInfo` | [ImportStoreViewInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportStoreViewInfo.cs) |
 | `InGameItemSync` | [InGameItemSync](../../apis/AccelByte.Sdk.Api.Platform/Model/InGameItemSync.cs) |
 | `InvoiceCurrencySummary` | [InvoiceCurrencySummary](../../apis/AccelByte.Sdk.Api.Platform/Model/InvoiceCurrencySummary.cs) |
 | `InvoiceSummary` | [InvoiceSummary](../../apis/AccelByte.Sdk.Api.Platform/Model/InvoiceSummary.cs) |
@@ -889,6 +898,7 @@
 | `OculusReconcileResult` | [OculusReconcileResult](../../apis/AccelByte.Sdk.Api.Platform/Model/OculusReconcileResult.cs) |
 | `OptionBoxConfig` | [OptionBoxConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/OptionBoxConfig.cs) |
 | `Order` | [Order](../../apis/AccelByte.Sdk.Api.Platform/Model/Order.cs) |
+| `OrderBundleItemInfo` | [OrderBundleItemInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/OrderBundleItemInfo.cs) |
 | `OrderCreate` | [OrderCreate](../../apis/AccelByte.Sdk.Api.Platform/Model/OrderCreate.cs) |
 | `OrderCreationOptions` | [OrderCreationOptions](../../apis/AccelByte.Sdk.Api.Platform/Model/OrderCreationOptions.cs) |
 | `OrderGrantInfo` | [OrderGrantInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/OrderGrantInfo.cs) |
@@ -1019,6 +1029,7 @@
 | `StreamEvent` | [StreamEvent](../../apis/AccelByte.Sdk.Api.Platform/Model/StreamEvent.cs) |
 | `StreamEventBody` | [StreamEventBody](../../apis/AccelByte.Sdk.Api.Platform/Model/StreamEventBody.cs) |
 | `StripeConfig` | [StripeConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/StripeConfig.cs) |
+| `SubItemAvailablePrice` | [SubItemAvailablePrice](../../apis/AccelByte.Sdk.Api.Platform/Model/SubItemAvailablePrice.cs) |
 | `Subscribable` | [Subscribable](../../apis/AccelByte.Sdk.Api.Platform/Model/Subscribable.cs) |
 | `SubscribeRequest` | [SubscribeRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/SubscribeRequest.cs) |
 | `SubscriptionActivityInfo` | [SubscriptionActivityInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/SubscriptionActivityInfo.cs) |

@@ -56,17 +56,17 @@ $CLI_EXE \
     --sn inventory \
     --op AdminListInventories \
     --namespace $AB_NAMESPACE \
-    --inventoryConfigurationCode 'Wx7wqSEq' \
-    --limit '84' \
-    --offset '65' \
+    --inventoryConfigurationCode 'fLrq4WGW' \
+    --limit '32' \
+    --offset '100' \
     --sortBy 'createdAt:asc' \
-    --userId 'zU45ueSI' \
+    --userId 'l98qXfXo' \
     > test.out 2>&1
 eval_tap $? 2 'AdminListInventories' test.out
 
 #- 3 AdminCreateInventory
 # body param: body
-echo '{"inventoryConfigurationCode": "ZUpVIMtG", "userId": "XKpc7Sc5"}' > $TEMP_JSON_INPUT
+echo '{"inventoryConfigurationCode": "3qPRvAtc", "userId": "0nSzFdPs"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminCreateInventory \
@@ -79,18 +79,18 @@ eval_tap $? 3 'AdminCreateInventory' test.out
 $CLI_EXE \
     --sn inventory \
     --op AdminGetInventory \
-    --inventoryId '8priVqBF' \
+    --inventoryId 'kmasRpYG' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 4 'AdminGetInventory' test.out
 
 #- 5 AdminUpdateInventory
 # body param: body
-echo '{"incMaxSlots": 62}' > $TEMP_JSON_INPUT
+echo '{"incMaxSlots": 61}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminUpdateInventory \
-    --inventoryId '1VNOZIGp' \
+    --inventoryId 'Q79RZRy2' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -98,11 +98,11 @@ eval_tap $? 5 'AdminUpdateInventory' test.out
 
 #- 6 DeleteInventory
 # body param: body
-echo '{"message": "Vgjcp4HT"}' > $TEMP_JSON_INPUT
+echo '{"message": "9IspJ5aZ"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op DeleteInventory \
-    --inventoryId 'fcmBVZqB' \
+    --inventoryId '6S8FmP0D' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -112,14 +112,14 @@ eval_tap $? 6 'DeleteInventory' test.out
 $CLI_EXE \
     --sn inventory \
     --op AdminListItems \
-    --inventoryId 'PAdB4Wxc' \
+    --inventoryId 'CMXZR4tJ' \
     --namespace $AB_NAMESPACE \
-    --limit '42' \
-    --offset '32' \
-    --qtyGte '3' \
-    --sortBy 'updatedAt' \
-    --sourceItemId 'JfRNeNMn' \
-    --tags 'd8bQoXF2' \
+    --limit '77' \
+    --offset '57' \
+    --qtyGte '41' \
+    --sortBy 'updatedAt:asc' \
+    --sourceItemId 'yAmtpydV' \
+    --tags 'WhFyR5qo' \
     > test.out 2>&1
 eval_tap $? 7 'AdminListItems' test.out
 
@@ -127,10 +127,10 @@ eval_tap $? 7 'AdminListItems' test.out
 $CLI_EXE \
     --sn inventory \
     --op AdminGetInventoryItem \
-    --inventoryId '0FqOQIHU' \
+    --inventoryId '7YoyUw2C' \
     --namespace $AB_NAMESPACE \
-    --slotId 'UsMVKd3I' \
-    --sourceItemId 'jHzj7wuy' \
+    --slotId 'Q7JajBxY' \
+    --sourceItemId 'utujQ1Vj' \
     > test.out 2>&1
 eval_tap $? 8 'AdminGetInventoryItem' test.out
 
@@ -139,16 +139,16 @@ $CLI_EXE \
     --sn inventory \
     --op AdminListInventoryConfigurations \
     --namespace $AB_NAMESPACE \
-    --code 'bjKIdGxp' \
-    --limit '7' \
-    --offset '58' \
-    --sortBy 'createdAt' \
+    --code '30CW6QLX' \
+    --limit '96' \
+    --offset '63' \
+    --sortBy 'createdAt:desc' \
     > test.out 2>&1
 eval_tap $? 9 'AdminListInventoryConfigurations' test.out
 
 #- 10 AdminCreateInventoryConfiguration
 # body param: body
-echo '{"code": "AeN3DOeh", "description": "ftTMxVdA", "initialMaxSlots": 96, "maxInstancesPerUser": 49, "maxUpgradeSlots": 61, "name": "onZghRzx"}' > $TEMP_JSON_INPUT
+echo '{"code": "TtPefOi6", "description": "Jz6ECzi6", "initialMaxSlots": 25, "maxInstancesPerUser": 54, "maxUpgradeSlots": 87, "name": "gWvssjJH"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminCreateInventoryConfiguration \
@@ -161,18 +161,18 @@ eval_tap $? 10 'AdminCreateInventoryConfiguration' test.out
 $CLI_EXE \
     --sn inventory \
     --op AdminGetInventoryConfiguration \
-    --inventoryConfigurationId 'ZysjQbPi' \
+    --inventoryConfigurationId 'E0TZsqoM' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 11 'AdminGetInventoryConfiguration' test.out
 
 #- 12 AdminUpdateInventoryConfiguration
 # body param: body
-echo '{"code": "E2pflmlp", "description": "u0UO7DXZ", "initialMaxSlots": 87, "maxInstancesPerUser": 45, "maxUpgradeSlots": 14, "name": "6ZF3RsLu"}' > $TEMP_JSON_INPUT
+echo '{"code": "qDUFNfIX", "description": "9jQMuygc", "initialMaxSlots": 99, "maxInstancesPerUser": 87, "maxUpgradeSlots": 38, "name": "9A8OsgeL"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminUpdateInventoryConfiguration \
-    --inventoryConfigurationId 'YrktBjfF' \
+    --inventoryConfigurationId 'RXQ8vR8h' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -182,7 +182,7 @@ eval_tap $? 12 'AdminUpdateInventoryConfiguration' test.out
 $CLI_EXE \
     --sn inventory \
     --op AdminDeleteInventoryConfiguration \
-    --inventoryConfigurationId 'UEw6m4eY' \
+    --inventoryConfigurationId 'O5Hketbd' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 13 'AdminDeleteInventoryConfiguration' test.out
@@ -192,15 +192,15 @@ $CLI_EXE \
     --sn inventory \
     --op AdminListItemTypes \
     --namespace $AB_NAMESPACE \
-    --limit '59' \
-    --offset '44' \
-    --sortBy 'name' \
+    --limit '26' \
+    --offset '84' \
+    --sortBy 'createdAt:asc' \
     > test.out 2>&1
 eval_tap $? 14 'AdminListItemTypes' test.out
 
 #- 15 AdminCreateItemType
 # body param: body
-echo '{"name": "pp6Y027n"}' > $TEMP_JSON_INPUT
+echo '{"name": "7MnBDQNq"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminCreateItemType \
@@ -213,7 +213,7 @@ eval_tap $? 15 'AdminCreateItemType' test.out
 $CLI_EXE \
     --sn inventory \
     --op AdminDeleteItemType \
-    --itemTypeName 'oEbS7YOR' \
+    --itemTypeName 'x9RDk7xs' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 16 'AdminDeleteItemType' test.out
@@ -223,16 +223,16 @@ $CLI_EXE \
     --sn inventory \
     --op AdminListTags \
     --namespace $AB_NAMESPACE \
-    --limit '29' \
-    --offset '0' \
-    --owner 'dA3C80Ye' \
+    --limit '8' \
+    --offset '37' \
+    --owner 'OBaLOYcn' \
     --sortBy 'name:asc' \
     > test.out 2>&1
 eval_tap $? 17 'AdminListTags' test.out
 
 #- 18 AdminCreateTag
 # body param: body
-echo '{"name": "vk08Xi9c", "owner": "SERVER"}' > $TEMP_JSON_INPUT
+echo '{"name": "LFNAXfwB", "owner": "SERVER"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminCreateTag \
@@ -246,70 +246,70 @@ $CLI_EXE \
     --sn inventory \
     --op AdminDeleteTag \
     --namespace $AB_NAMESPACE \
-    --tagName '48x2Mpa1' \
+    --tagName 'WZAbGksO' \
     > test.out 2>&1
 eval_tap $? 19 'AdminDeleteTag' test.out
 
 #- 20 AdminConsumeUserItem
 # body param: body
-echo '{"qty": 51, "slotId": "MDhmetcr", "sourceItemId": "l0WV45A2"}' > $TEMP_JSON_INPUT
+echo '{"qty": 30, "slotId": "jn4KwnQY", "sourceItemId": "0zXWXNNz"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminConsumeUserItem \
-    --inventoryId 'GHkytCr2' \
+    --inventoryId '4O6o532f' \
     --namespace $AB_NAMESPACE \
-    --userId 'ITiMQPZe' \
+    --userId '3tXEzCfF' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 20 'AdminConsumeUserItem' test.out
 
 #- 21 AdminBulkUpdateMyItems
 # body param: body
-echo '[{"customAttributes": {"HWv4RNlH": {}, "JpElgrKZ": {}, "h60UYXyE": {}}, "serverCustomAttributes": {"LpzWirBj": {}, "f8eIBeh3": {}, "A4UqwzaD": {}}, "slotId": "kPFWVX6U", "sourceItemId": "4fMJFvj1", "tags": ["lbQDhq4C", "5aJmGfU4", "X1AU5Ec2"], "type": "brcyeGh4"}, {"customAttributes": {"z22xIFWe": {}, "BaOqWA5X": {}, "uRFLOVj5": {}}, "serverCustomAttributes": {"XuQg0JGu": {}, "02EGbS5Z": {}, "8HU5Nji5": {}}, "slotId": "ZeYLqIzE", "sourceItemId": "B4CLWg16", "tags": ["HoNLXkWx", "5PrbkvY9", "OW8A69zO"], "type": "pNSwqbqh"}, {"customAttributes": {"rqZOzyh2": {}, "ZTNVzS6k": {}, "e5WR472o": {}}, "serverCustomAttributes": {"OTCkWKHn": {}, "8ovI83qj": {}, "XkZo1GAP": {}}, "slotId": "a6SRDRTf", "sourceItemId": "jJpcLMHB", "tags": ["pk0IFeB5", "nMmYU4Fs", "fYHQMobd"], "type": "OaJbW5KG"}]' > $TEMP_JSON_INPUT
+echo '[{"customAttributes": {"VrBluyCa": {}, "HDWr0dQr": {}, "Ynvxq5mj": {}}, "serverCustomAttributes": {"SQSrNt6A": {}, "QgmviZxE": {}, "ueRqwWjJ": {}}, "slotId": "EcVLZM57", "sourceItemId": "U81gbuOt", "tags": ["zOjCU64G", "i2ImKngm", "WxGplhMX"], "type": "LHpD9H6v"}, {"customAttributes": {"JieHcxxo": {}, "rMN62cEX": {}, "hdiVYuzm": {}}, "serverCustomAttributes": {"E5cgWiJX": {}, "Vr0OoXkC": {}, "au5Ndp7k": {}}, "slotId": "2bVxqrZx", "sourceItemId": "vNb4SnzM", "tags": ["M36MA1Za", "5KAixAtD", "qRQ1GtCZ"], "type": "uwsLf1pQ"}, {"customAttributes": {"eh1GOwcv": {}, "kzKZLdGU": {}, "PuUfnFn2": {}}, "serverCustomAttributes": {"Ec4tK3F1": {}, "MvRKIUu2": {}, "sEGFqYPi": {}}, "slotId": "UX6ikMdk", "sourceItemId": "fiTFvyxb", "tags": ["p82UshUf", "M3vG6o28", "HD4cZ11o"], "type": "paNFVtDe"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminBulkUpdateMyItems \
-    --inventoryId 'ySz2GGfr' \
+    --inventoryId '3Aqlwzmz' \
     --namespace $AB_NAMESPACE \
-    --userId 'Vhpr2ToL' \
+    --userId 'BptJgMWP' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 21 'AdminBulkUpdateMyItems' test.out
 
 #- 22 AdminSaveItemToInventory
 # body param: body
-echo '{"customAttributes": {"iVOKGQQK": {}, "9tj5cUoB": {}, "wp6ndsMk": {}}, "qty": 43, "serverCustomAttributes": {"DkcQgSg9": {}, "PdO3GeZE": {}, "agImuXj9": {}}, "slotId": "9lRbMdTT", "slotUsed": 85, "sourceItemId": "V2CLv2s6", "tags": ["OFawlCe2", "UAXL8WI6", "pCzmQNJD"], "type": "hR4axyh1"}' > $TEMP_JSON_INPUT
+echo '{"customAttributes": {"HDG3QwKP": {}, "tN5mmEbT": {}, "wp78fP8E": {}}, "qty": 34, "serverCustomAttributes": {"I91QRbF9": {}, "bMqQJdsF": {}, "YnfqhsJa": {}}, "slotId": "CdUwqVTv", "slotUsed": 55, "sourceItemId": "GS6MpzrJ", "tags": ["azpRIe8R", "vA027fUo", "1mit67sX"], "type": "u2ODLxYs"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminSaveItemToInventory \
-    --inventoryId 'Vd9P3REa' \
+    --inventoryId 'J533M2Zq' \
     --namespace $AB_NAMESPACE \
-    --userId 'v01JpobA' \
+    --userId '8eK34DuR' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 22 'AdminSaveItemToInventory' test.out
 
 #- 23 AdminBulkRemoveItems
 # body param: body
-echo '[{"slotId": "Ict0gMyp", "sourceItemId": "a2XOH00m"}, {"slotId": "ggMmtJI5", "sourceItemId": "pwsoa0nc"}, {"slotId": "jDG3HPwU", "sourceItemId": "MTnO24fd"}]' > $TEMP_JSON_INPUT
+echo '[{"slotId": "puByctFG", "sourceItemId": "syJXB8To"}, {"slotId": "QQ4wJ1o1", "sourceItemId": "OnF6yHBd"}, {"slotId": "SSHf9pTt", "sourceItemId": "cpi5mfQK"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminBulkRemoveItems \
-    --inventoryId 'bgjIsZKj' \
+    --inventoryId 'CXeLpGto' \
     --namespace $AB_NAMESPACE \
-    --userId '4pAZ6CW7' \
+    --userId 'dsMz4ctg' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 23 'AdminBulkRemoveItems' test.out
 
 #- 24 AdminSaveItem
 # body param: body
-echo '{"customAttributes": {"0LJRakWg": {}, "TN1hTJ3K": {}, "f8JgFxFb": {}}, "inventoryConfigurationCode": "wkDo2qGA", "qty": 70, "serverCustomAttributes": {"BVbX70s6": {}, "TURjifve": {}, "aYEeQsC0": {}}, "slotId": "ZbuTiMdD", "slotUsed": 95, "sourceItemId": "0xnwIGvd", "tags": ["QwyUOlUR", "VQrjqykU", "Xz5QfszT"], "type": "REnfcymL"}' > $TEMP_JSON_INPUT
+echo '{"customAttributes": {"UUP6iRyL": {}, "YVFdhQHC": {}, "UVJdqJjb": {}}, "inventoryConfigurationCode": "7GgxWjyM", "qty": 13, "serverCustomAttributes": {"kD6ZTXch": {}, "9veyQVAe": {}, "re2uWQWp": {}}, "slotId": "kBJTwGpW", "slotUsed": 48, "sourceItemId": "gfif5iV6", "tags": ["7lyM2MwQ", "m014Apxg", "71kpFvU3"], "type": "SxSHKz3r"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminSaveItem \
     --namespace $AB_NAMESPACE \
-    --userId 'ZOs1uBVU' \
+    --userId 'y1BMfEtK' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 24 'AdminSaveItem' test.out
@@ -319,10 +319,10 @@ $CLI_EXE \
     --sn inventory \
     --op PublicListInventoryConfigurations \
     --namespace $AB_NAMESPACE \
-    --code '5SdQWdGl' \
-    --limit '53' \
-    --offset '79' \
-    --sortBy 'createdAt:asc' \
+    --code '55mKkunp' \
+    --limit '46' \
+    --offset '68' \
+    --sortBy 'updatedAt' \
     > test.out 2>&1
 eval_tap $? 25 'PublicListInventoryConfigurations' test.out
 
@@ -331,9 +331,9 @@ $CLI_EXE \
     --sn inventory \
     --op PublicListItemTypes \
     --namespace $AB_NAMESPACE \
-    --limit '28' \
-    --offset '72' \
-    --sortBy 'name:desc' \
+    --limit '24' \
+    --offset '54' \
+    --sortBy 'name' \
     > test.out 2>&1
 eval_tap $? 26 'PublicListItemTypes' test.out
 
@@ -342,9 +342,9 @@ $CLI_EXE \
     --sn inventory \
     --op PublicListTags \
     --namespace $AB_NAMESPACE \
-    --limit '7' \
-    --offset '41' \
-    --sortBy 'createdAt:desc' \
+    --limit '75' \
+    --offset '7' \
+    --sortBy 'createdAt' \
     > test.out 2>&1
 eval_tap $? 27 'PublicListTags' test.out
 
@@ -353,20 +353,20 @@ $CLI_EXE \
     --sn inventory \
     --op PublicListInventories \
     --namespace $AB_NAMESPACE \
-    --inventoryConfigurationCode '1ILqqFks' \
-    --limit '6' \
-    --offset '76' \
+    --inventoryConfigurationCode 'kAUsSZC1' \
+    --limit '34' \
+    --offset '45' \
     --sortBy 'createdAt:desc' \
     > test.out 2>&1
 eval_tap $? 28 'PublicListInventories' test.out
 
 #- 29 PublicConsumeMyItem
 # body param: body
-echo '{"qty": 36, "slotId": "61sIxlUM", "sourceItemId": "BmAlyamz"}' > $TEMP_JSON_INPUT
+echo '{"qty": 19, "slotId": "xeAEAN2m", "sourceItemId": "hd3ldYjt"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op PublicConsumeMyItem \
-    --inventoryId '22jYx3nJ' \
+    --inventoryId 'eV8co56Y' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -376,24 +376,24 @@ eval_tap $? 29 'PublicConsumeMyItem' test.out
 $CLI_EXE \
     --sn inventory \
     --op PublicListItems \
-    --inventoryId 'l0jfSzoZ' \
+    --inventoryId 't6cQ8TRe' \
     --namespace $AB_NAMESPACE \
-    --limit '65' \
-    --offset '38' \
-    --qtyGte '15' \
-    --sortBy 'updatedAt:desc' \
-    --sourceItemId 'S4rCcL3z' \
-    --tags 'jO5AY39f' \
+    --limit '0' \
+    --offset '25' \
+    --qtyGte '78' \
+    --sortBy 'createdAt' \
+    --sourceItemId 'gg2D3dIT' \
+    --tags 'G91hyuls' \
     > test.out 2>&1
 eval_tap $? 30 'PublicListItems' test.out
 
 #- 31 PublicBulkUpdateMyItems
 # body param: body
-echo '[{"customAttributes": {"LSCpuDf0": {}, "4YgtlbhH": {}, "8bB8ENPj": {}}, "slotId": "Tt3qbz99", "sourceItemId": "F1aU7Byq", "tags": ["k9Y3KHKe", "6PU3v1EQ", "BASU3tcK"]}, {"customAttributes": {"U93AKp9v": {}, "2JpJjG2T": {}, "BDqnt0ci": {}}, "slotId": "xJrjyJxL", "sourceItemId": "LZltIueK", "tags": ["5nNWUDpS", "X0AzVlY6", "M4GoEK0e"]}, {"customAttributes": {"BhbV0Zin": {}, "U9kld8Iu": {}, "DQfPURFa": {}}, "slotId": "9FIj2blP", "sourceItemId": "FXN7osoU", "tags": ["0KajYneW", "IgKrQNAQ", "B3gpNxLl"]}]' > $TEMP_JSON_INPUT
+echo '[{"customAttributes": {"EX6T52ee": {}, "8uVVcdc7": {}, "Cs8x82i9": {}}, "slotId": "GwDqyqQJ", "sourceItemId": "hTN6rpnG", "tags": ["W16t2LD7", "GF2LsZTW", "2nouAN1H"]}, {"customAttributes": {"tBSnwOsW": {}, "3OYGyumV": {}, "NcGZgq9q": {}}, "slotId": "YRTSYcxq", "sourceItemId": "4N8038MI", "tags": ["KTeHQRk4", "CnjWwn9A", "6siiive6"]}, {"customAttributes": {"EUGl98RP": {}, "WnqCi7lx": {}, "s8uNHlJV": {}}, "slotId": "xQNZLJaw", "sourceItemId": "UTIcImft", "tags": ["YYcndySQ", "4MsuSNiP", "7OPEvkZD"]}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op PublicBulkUpdateMyItems \
-    --inventoryId '05EZI1ox' \
+    --inventoryId 'SH2d3FrC' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -401,11 +401,11 @@ eval_tap $? 31 'PublicBulkUpdateMyItems' test.out
 
 #- 32 PublicBulkRemoveMyItems
 # body param: body
-echo '[{"slotId": "HDJt1Yce", "sourceItemId": "a2FA44vk"}, {"slotId": "EaW56yju", "sourceItemId": "3M9Zy5TC"}, {"slotId": "C4BIfqT6", "sourceItemId": "HthpTUV2"}]' > $TEMP_JSON_INPUT
+echo '[{"slotId": "e4v04RPq", "sourceItemId": "DTCIcwAc"}, {"slotId": "azAfbofq", "sourceItemId": "7AmOdtZ8"}, {"slotId": "nthqINnM", "sourceItemId": "gbOA3iH5"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op PublicBulkRemoveMyItems \
-    --inventoryId 'PRT9tPRY' \
+    --inventoryId 'LpL62tyY' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -413,11 +413,11 @@ eval_tap $? 32 'PublicBulkRemoveMyItems' test.out
 
 #- 33 PublicMoveMyItems
 # body param: body
-echo '{"items": [{"qty": 55, "slotId": "kEpD4s40", "sourceItemId": "RRO7eJe2"}, {"qty": 57, "slotId": "GUDHVguZ", "sourceItemId": "YMSd8c11"}, {"qty": 23, "slotId": "vFwOrW7f", "sourceItemId": "u7RDUKQe"}], "srcInventoryId": "E29x1hOx"}' > $TEMP_JSON_INPUT
+echo '{"items": [{"qty": 33, "slotId": "sNO9ycjx", "sourceItemId": "JYPAX6Yk"}, {"qty": 52, "slotId": "5kDon8eB", "sourceItemId": "fPQgaFuQ"}, {"qty": 29, "slotId": "5FLTP4dj", "sourceItemId": "l7WLu5Yr"}], "srcInventoryId": "YSfRyZpX"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op PublicMoveMyItems \
-    --inventoryId '1lgOV3ox' \
+    --inventoryId 'uQaF27rq' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -427,10 +427,10 @@ eval_tap $? 33 'PublicMoveMyItems' test.out
 $CLI_EXE \
     --sn inventory \
     --op PublicGetItem \
-    --inventoryId '9MSdcuYS' \
+    --inventoryId 'Olk5nvDO' \
     --namespace $AB_NAMESPACE \
-    --slotId 'n2DV1KrJ' \
-    --sourceItemId 'h9DH4igz' \
+    --slotId 'RUXbotWl' \
+    --sourceItemId 'sgtqT8t6' \
     > test.out 2>&1
 eval_tap $? 34 'PublicGetItem' test.out
 

@@ -26,6 +26,17 @@ namespace AccelByte.Sdk.Api.Gdpr
         }
         private Wrapper.DataDeletion? _DataDeletion = null;
 
+        public Wrapper.Configuration Configuration
+        {
+            get
+            {
+                if (_Configuration == null)
+                    _Configuration = new Wrapper.Configuration(_Sdk);
+                return _Configuration;
+            }
+        }
+        private Wrapper.Configuration? _Configuration = null;
+
         public Wrapper.DataRetrieval DataRetrieval
         {
             get

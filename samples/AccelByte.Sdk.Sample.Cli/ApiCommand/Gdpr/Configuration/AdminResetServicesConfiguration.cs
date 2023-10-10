@@ -18,43 +18,39 @@ using AccelByte.Sdk.Api.Gdpr.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
 {
-    [SdkConsoleCommand("gdpr", "deleteadminemailconfiguration")]
-    public class DeleteAdminEmailConfigurationCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("gdpr", "adminresetservicesconfiguration")]
+    public class AdminResetServicesConfigurationCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
         public string ServiceName { get { return "Gdpr"; } }
 
-        public string OperationName { get { return "DeleteAdminEmailConfiguration"; } }
+        public string OperationName { get { return "AdminResetServicesConfiguration"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
-        [SdkCommandArgument("emails")]
-        public List<string> Emails { get; set; } = new List<string>();
-
-        public DeleteAdminEmailConfigurationCommand(IAccelByteSdk sdk)
+        public AdminResetServicesConfigurationCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
         public string Run()
         {
-            AccelByte.Sdk.Api.Gdpr.Wrapper.DataRetrieval wrapper = new AccelByte.Sdk.Api.Gdpr.Wrapper.DataRetrieval(_SDK);
+            AccelByte.Sdk.Api.Gdpr.Wrapper.Configuration wrapper = new AccelByte.Sdk.Api.Gdpr.Wrapper.Configuration(_SDK);
 
-            var opBuilder = AccelByte.Sdk.Api.Gdpr.Operation.DeleteAdminEmailConfiguration.Builder;
-
-
+            var opBuilder = AccelByte.Sdk.Api.Gdpr.Operation.AdminResetServicesConfiguration.Builder;
 
 
 
-            DeleteAdminEmailConfiguration operation = opBuilder.Build(
-                Namespace,
-                Emails
+
+
+            AdminResetServicesConfiguration operation = opBuilder.Build(
+                Namespace
             );
 
 
-            wrapper.DeleteAdminEmailConfiguration(operation);
+            wrapper.AdminResetServicesConfiguration(operation);
             return String.Empty;
         }
     }
