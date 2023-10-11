@@ -71,7 +71,28 @@ if (!login)
 }
 ```
 
-### Login Using OAuth Client (Public or Private)
+### Login Using Username and Password with Defined Scopes
+
+```csharp
+bool login = sdk.LoginUser("myUsername", "myPassword", "<selected scopes>", null);
+if (!login)
+{
+    // Login failed  
+}
+```
+
+### Login Using Username and Password without Scopes
+
+```csharp
+bool login = sdk.LoginUser("myUsername", "myPassword", null, null);
+if (!login)
+{
+    // Login failed  
+}
+```
+
+
+### Login Using OAuth Client
 
 ```csharp
 bool login = sdk.LoginClient();
@@ -80,6 +101,7 @@ if (!login)
     // Login failed  
 }
 ```
+> :warning: **Please use LoginClient() function with confidential OAuth client:** Using LoginClient() function with public OAuth client is not supported.
 
 ## Interacting with a Service Endpoint
 

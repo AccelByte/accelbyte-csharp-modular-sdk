@@ -32,7 +32,7 @@ namespace AccelByte.Sdk.Core
                 throw new Exception("Null credential repository");
 
             ICredentialRepository cred = sdk.Configuration.Credential;
-            return sdk.LoginUser(cred.Username, cred.Password, null);
+            return sdk.LoginUser(cred.Username, cred.Password, "", null);
         }
 
         public static bool LoginUser(this IAccelByteSdk sdk, Action<ITokenResponse>? onTokenReceived)
@@ -41,15 +41,38 @@ namespace AccelByte.Sdk.Core
                 throw new Exception("Null credential repository");
 
             ICredentialRepository cred = sdk.Configuration.Credential;
-            return sdk.LoginUser(cred.Username, cred.Password, onTokenReceived);
+            return sdk.LoginUser(cred.Username, cred.Password, "", onTokenReceived);
+        }
+
+        public static bool LoginUser(this IAccelByteSdk sdk, string scopes)
+        {
+            if (sdk.Configuration.Credential == null)
+                throw new Exception("Null credential repository");
+
+            ICredentialRepository cred = sdk.Configuration.Credential;
+            return sdk.LoginUser(cred.Username, cred.Password, scopes, null);
+        }
+
+        public static bool LoginUser(this IAccelByteSdk sdk, string scopes, Action<ITokenResponse>? onTokenReceived)
+        {
+            if (sdk.Configuration.Credential == null)
+                throw new Exception("Null credential repository");
+
+            ICredentialRepository cred = sdk.Configuration.Credential;
+            return sdk.LoginUser(cred.Username, cred.Password, scopes, onTokenReceived);
         }
 
         public static bool LoginUser(this IAccelByteSdk sdk, string username, string password)
         {
-            return sdk.LoginUser(username, password, null);
+            return sdk.LoginUser(username, password, "", null);
         }
 
         public static bool LoginUser(this IAccelByteSdk sdk, string username, string password, Action<ITokenResponse>? onTokenReceived)
+        {
+            return sdk.LoginUser(username, password, "", onTokenReceived);
+        }
+
+        public static bool LoginUser(this IAccelByteSdk sdk, string username, string password, string? scopes, Action<ITokenResponse>? onTokenReceived)
         {
             bool disableRefreshIfPossible = false;
             if (sdk.Configuration.Flags.ContainsKey(DISABLE_REFRESH_IF_POSSIBLE_FLAGNAME))
@@ -76,11 +99,30 @@ namespace AccelByte.Sdk.Core
             var codeChallenge = codeVerifier.GenerateCodeChallenge();
             var clientId = sdk.Configuration.ConfigRepository.ClientId;
 
-            var authorizeV3 = sdk.GetIamApi().OAuth20.AuthorizeV3Op
-                .SetCodeChallenge(codeChallenge)
-                .SetCodeChallengeMethod(AuthorizeV3CodeChallengeMethod.S256)
-                .SetScope("commerce account social publishing analytics")
-                .Build(clientId, AuthorizeV3ResponseType.Code);
+            AuthorizeV3 authorizeV3;
+            if (scopes == null)
+            {
+                authorizeV3 = sdk.GetIamApi().OAuth20.AuthorizeV3Op
+                    .SetCodeChallenge(codeChallenge)
+                    .SetCodeChallengeMethod(AuthorizeV3CodeChallengeMethod.S256)
+                    .Build(clientId, AuthorizeV3ResponseType.Code);
+            }
+            else if (scopes == "")
+            {
+                authorizeV3 = sdk.GetIamApi().OAuth20.AuthorizeV3Op
+                    .SetCodeChallenge(codeChallenge)
+                    .SetCodeChallengeMethod(AuthorizeV3CodeChallengeMethod.S256)
+                    .SetScope("commerce account social publishing analytics")
+                    .Build(clientId, AuthorizeV3ResponseType.Code);
+            }
+            else
+            {
+                authorizeV3 = sdk.GetIamApi().OAuth20.AuthorizeV3Op
+                    .SetCodeChallenge(codeChallenge)
+                    .SetCodeChallengeMethod(AuthorizeV3CodeChallengeMethod.S256)
+                    .SetScope(scopes)
+                    .Build(clientId, AuthorizeV3ResponseType.Code);
+            }
 
             var authorizeV3Response = sdk.GetIamApi().OAuth20.AuthorizeV3(authorizeV3);
 
