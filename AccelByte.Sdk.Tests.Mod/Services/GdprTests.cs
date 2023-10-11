@@ -29,7 +29,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             string anotherEmailToTest = "anotheremail@dummy.com";
 
             #region Save e-mail configuration
-            _Sdk.GetGdprApi().DataRetrieval.SaveAdminEmailConfigurationOp
+            _Sdk.GetGdprApi().Configuration.SaveAdminEmailConfigurationOp
                 .Execute(new List<string>
                 {
                     firstEmailToTest
@@ -37,18 +37,18 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #endregion
 
             #region Get e-mail configuration
-            List<string>? emails = _Sdk.GetGdprApi().DataRetrieval.GetAdminEmailConfigurationOp
+            List<string>? emails = _Sdk.GetGdprApi().Configuration.GetAdminEmailConfigurationOp
                 .Execute(_Sdk.Namespace);
             #endregion
             Assert.IsNotNull(emails);
 
             #region Update e-mail configuration
-            _Sdk.GetGdprApi().DataRetrieval.UpdateAdminEmailConfigurationOp
+            _Sdk.GetGdprApi().Configuration.UpdateAdminEmailConfigurationOp
                 .Execute(new List<string>() { anotherEmailToTest }, _Sdk.Namespace);
             #endregion
 
             #region Delete e-mail configuration
-            _Sdk.GetGdprApi().DataRetrieval.DeleteAdminEmailConfigurationOp
+            _Sdk.GetGdprApi().Configuration.DeleteAdminEmailConfigurationOp
                 .Execute(_Sdk.Namespace, new List<string>() { anotherEmailToTest });
             #endregion
         }
