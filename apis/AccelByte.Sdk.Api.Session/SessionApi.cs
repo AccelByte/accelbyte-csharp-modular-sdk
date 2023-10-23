@@ -48,6 +48,17 @@ namespace AccelByte.Sdk.Api.Session
         }
         private Wrapper.EnvironmentVariable? _EnvironmentVariable = null;
 
+        public Wrapper.GlobalConfiguration GlobalConfiguration
+        {
+            get
+            {
+                if (_GlobalConfiguration == null)
+                    _GlobalConfiguration = new Wrapper.GlobalConfiguration(_Sdk);
+                return _GlobalConfiguration;
+            }
+        }
+        private Wrapper.GlobalConfiguration? _GlobalConfiguration = null;
+
         public Wrapper.ConfigurationTemplate ConfigurationTemplate
         {
             get

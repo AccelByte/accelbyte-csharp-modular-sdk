@@ -16,6 +16,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Model
         public string? ArtifactPath { get; set; }
 
         [JsonPropertyName("coreDumpEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? CoreDumpEnabled { get; set; }
 
         [JsonPropertyName("dockerPath")]
@@ -37,6 +38,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Model
         public bool? Persistent { get; set; }
 
         [JsonPropertyName("ulimitFileSize")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public int? UlimitFileSize { get; set; }
 
         [JsonPropertyName("uploaderFlag")]

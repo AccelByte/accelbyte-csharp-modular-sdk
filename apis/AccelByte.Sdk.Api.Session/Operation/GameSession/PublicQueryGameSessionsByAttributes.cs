@@ -20,7 +20,7 @@ using AccelByte.Sdk.Api.Session.Model;
 namespace AccelByte.Sdk.Api.Session.Operation
 {
     /// <summary>
-    /// publicQueryGameSessions
+    /// publicQueryGameSessionsByAttributes
     ///
     /// Query game sessions.
     /// 
@@ -36,22 +36,22 @@ namespace AccelByte.Sdk.Api.Session.Operation
     /// full: only return active sessions
     /// default behavior (unset or else): return only available sessions (not full)
     /// </summary>
-    public class PublicQueryGameSessions : AccelByte.Sdk.Core.Operation
+    public class PublicQueryGameSessionsByAttributes : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static PublicQueryGameSessionsBuilder Builder { get => new PublicQueryGameSessionsBuilder(); }
+        public static PublicQueryGameSessionsByAttributesBuilder Builder { get => new PublicQueryGameSessionsByAttributesBuilder(); }
 
-        public class PublicQueryGameSessionsBuilder
-            : OperationBuilder<PublicQueryGameSessionsBuilder>
+        public class PublicQueryGameSessionsByAttributesBuilder
+            : OperationBuilder<PublicQueryGameSessionsByAttributesBuilder>
         {
 
 
 
 
 
-            internal PublicQueryGameSessionsBuilder() { }
+            internal PublicQueryGameSessionsByAttributesBuilder() { }
 
-            internal PublicQueryGameSessionsBuilder(IAccelByteSdk sdk)
+            internal PublicQueryGameSessionsByAttributesBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,12 +61,12 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
 
 
-            public PublicQueryGameSessions Build(
+            public PublicQueryGameSessionsByAttributes Build(
                 Dictionary<string, object> body,
                 string namespace_
             )
             {
-                PublicQueryGameSessions op = new PublicQueryGameSessions(this,
+                PublicQueryGameSessionsByAttributes op = new PublicQueryGameSessionsByAttributes(this,
                     body,
                     namespace_
                 );
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 string namespace_
             )
             {
-                PublicQueryGameSessions op = Build(
+                PublicQueryGameSessionsByAttributes op = Build(
                     body,
                     namespace_
                 );
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private PublicQueryGameSessions(PublicQueryGameSessionsBuilder builder,
+        private PublicQueryGameSessionsByAttributes(PublicQueryGameSessionsByAttributesBuilder builder,
             Dictionary<string, object> body,
             string namespace_
         )
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         }
         #endregion
 
-        public PublicQueryGameSessions(
+        public PublicQueryGameSessionsByAttributes(
             string namespace_,
             Dictionary<string, object> body
         )

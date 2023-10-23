@@ -15,6 +15,17 @@ namespace AccelByte.Sdk.Api.Inventory
     {
         private IAccelByteSdk _Sdk;
 
+        public Wrapper.AdminChainingOperations AdminChainingOperations
+        {
+            get
+            {
+                if (_AdminChainingOperations == null)
+                    _AdminChainingOperations = new Wrapper.AdminChainingOperations(_Sdk);
+                return _AdminChainingOperations;
+            }
+        }
+        private Wrapper.AdminChainingOperations? _AdminChainingOperations = null;
+
         public Wrapper.AdminInventories AdminInventories
         {
             get

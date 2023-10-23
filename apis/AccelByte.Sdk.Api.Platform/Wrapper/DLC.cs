@@ -57,6 +57,10 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         {
             get { return new Operation.GetUserDLC.GetUserDLCBuilder(_sdk); }
         }
+        public GeDLCDurableRewardShortMap.GeDLCDurableRewardShortMapBuilder GeDLCDurableRewardShortMapOp
+        {
+            get { return new Operation.GeDLCDurableRewardShortMap.GeDLCDurableRewardShortMapBuilder(_sdk); }
+        }
         public SyncEpicGameDLC.SyncEpicGameDLCBuilder SyncEpicGameDLCOp
         {
             get { return new Operation.SyncEpicGameDLC.SyncEpicGameDLCBuilder(_sdk); }
@@ -161,6 +165,15 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.DLCConfigRewardShortInfo? GeDLCDurableRewardShortMap(GeDLCDurableRewardShortMap input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

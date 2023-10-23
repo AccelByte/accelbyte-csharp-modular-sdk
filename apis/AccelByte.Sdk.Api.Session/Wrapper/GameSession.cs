@@ -45,9 +45,9 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         {
             get { return new Operation.CreateGameSession.CreateGameSessionBuilder(_sdk); }
         }
-        public PublicQueryGameSessions.PublicQueryGameSessionsBuilder PublicQueryGameSessionsOp
+        public PublicQueryGameSessionsByAttributes.PublicQueryGameSessionsByAttributesBuilder PublicQueryGameSessionsByAttributesOp
         {
-            get { return new Operation.PublicQueryGameSessions.PublicQueryGameSessionsBuilder(_sdk); }
+            get { return new Operation.PublicQueryGameSessionsByAttributes.PublicQueryGameSessionsByAttributesBuilder(_sdk); }
         }
         public PublicSessionJoinCode.PublicSessionJoinCodeBuilder PublicSessionJoinCodeOp
         {
@@ -170,7 +170,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsGameSessionQueryResponse? PublicQueryGameSessions(PublicQueryGameSessions input)
+        public Model.ApimodelsGameSessionQueryResponse? PublicQueryGameSessionsByAttributes(PublicQueryGameSessionsByAttributes input)
         {
             var response = _sdk.RunRequest(input);
 

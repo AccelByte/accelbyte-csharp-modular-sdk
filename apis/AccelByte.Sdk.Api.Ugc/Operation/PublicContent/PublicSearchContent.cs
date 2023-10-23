@@ -55,6 +55,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
             public string? Creator { get; set; }
 
+            public string? Ishidden { get; set; }
+
             public string? Isofficial { get; set; }
 
             public long? Limit { get; set; }
@@ -90,6 +92,12 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             public PublicSearchContentBuilder SetCreator(string _creator)
             {
                 Creator = _creator;
+                return this;
+            }
+
+            public PublicSearchContentBuilder SetIshidden(string _ishidden)
+            {
+                Ishidden = _ishidden;
                 return this;
             }
 
@@ -197,6 +205,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["namespace"] = namespace_;
 
             if (builder.Creator is not null) QueryParams["creator"] = builder.Creator;
+            if (builder.Ishidden is not null) QueryParams["ishidden"] = builder.Ishidden;
             if (builder.Isofficial is not null) QueryParams["isofficial"] = builder.Isofficial;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Name is not null) QueryParams["name"] = builder.Name;
@@ -221,6 +230,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         public PublicSearchContent(
             string namespace_,
             string? creator,
+            string? ishidden,
             string? isofficial,
             long? limit,
             string? name,
@@ -236,6 +246,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["namespace"] = namespace_;
 
             if (creator is not null) QueryParams["creator"] = creator;
+            if (ishidden is not null) QueryParams["ishidden"] = ishidden;
             if (isofficial is not null) QueryParams["isofficial"] = isofficial;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (name is not null) QueryParams["name"] = name;

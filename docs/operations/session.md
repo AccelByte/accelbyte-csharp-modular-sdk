@@ -20,6 +20,13 @@
 |---|---|---|---|---|
 | `/session/v1/admin/environment-variables` | GET | AdminListEnvironmentVariables | [AdminListEnvironmentVariables](../../apis/AccelByte.Sdk.Api.Session/Operation/EnvironmentVariable/AdminListEnvironmentVariables.cs) | [AdminListEnvironmentVariables](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/EnvironmentVariable/AdminListEnvironmentVariables.cs) |
 
+### Global Configuration Wrapper:  [GlobalConfiguration](../../apis/AccelByte.Sdk.Api.Session/Wrapper/GlobalConfiguration.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/session/v1/admin/global-configurations` | GET | AdminListGlobalConfiguration | [AdminListGlobalConfiguration](../../apis/AccelByte.Sdk.Api.Session/Operation/GlobalConfiguration/AdminListGlobalConfiguration.cs) | [AdminListGlobalConfiguration](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GlobalConfiguration/AdminListGlobalConfiguration.cs) |
+| `/session/v1/admin/global-configurations` | PUT | AdminUpdateGlobalConfiguration | [AdminUpdateGlobalConfiguration](../../apis/AccelByte.Sdk.Api.Session/Operation/GlobalConfiguration/AdminUpdateGlobalConfiguration.cs) | [AdminUpdateGlobalConfiguration](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GlobalConfiguration/AdminUpdateGlobalConfiguration.cs) |
+| `/session/v1/admin/global-configurations` | DELETE | AdminDeleteGlobalConfiguration | [AdminDeleteGlobalConfiguration](../../apis/AccelByte.Sdk.Api.Session/Operation/GlobalConfiguration/AdminDeleteGlobalConfiguration.cs) | [AdminDeleteGlobalConfiguration](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GlobalConfiguration/AdminDeleteGlobalConfiguration.cs) |
+
 ### Configuration Template Wrapper:  [ConfigurationTemplate](../../apis/AccelByte.Sdk.Api.Session/Wrapper/ConfigurationTemplate.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -43,7 +50,7 @@
 | `/session/v1/admin/namespaces/{namespace}/gamesessions/bulk` | DELETE | AdminDeleteBulkGameSessions | [AdminDeleteBulkGameSessions](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/AdminDeleteBulkGameSessions.cs) | [AdminDeleteBulkGameSessions](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/AdminDeleteBulkGameSessions.cs) |
 | `/session/v1/admin/namespaces/{namespace}/gamesessions/{sessionId}/members/{memberId}/status/{statusType}` | PUT | AdminUpdateGameSessionMember | [AdminUpdateGameSessionMember](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/AdminUpdateGameSessionMember.cs) | [AdminUpdateGameSessionMember](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/AdminUpdateGameSessionMember.cs) |
 | `/session/v1/public/namespaces/{namespace}/gamesession` | POST | CreateGameSession | [CreateGameSession](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/CreateGameSession.cs) | [CreateGameSession](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/CreateGameSession.cs) |
-| `/session/v1/public/namespaces/{namespace}/gamesessions` | POST | PublicQueryGameSessions | [PublicQueryGameSessions](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/PublicQueryGameSessions.cs) | [PublicQueryGameSessions](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/PublicQueryGameSessions.cs) |
+| `/session/v1/public/namespaces/{namespace}/gamesessions` | POST | PublicQueryGameSessionsByAttributes | [PublicQueryGameSessionsByAttributes](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/PublicQueryGameSessionsByAttributes.cs) | [PublicQueryGameSessionsByAttributes](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/PublicQueryGameSessionsByAttributes.cs) |
 | `/session/v1/public/namespaces/{namespace}/gamesessions/join/code` | POST | PublicSessionJoinCode | [PublicSessionJoinCode](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/PublicSessionJoinCode.cs) | [PublicSessionJoinCode](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/PublicSessionJoinCode.cs) |
 | `/session/v1/public/namespaces/{namespace}/gamesessions/servers/{podName}` | GET | GetGameSessionByPodName | [GetGameSessionByPodName](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/GetGameSessionByPodName.cs) | [GetGameSessionByPodName](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/GetGameSessionByPodName.cs) |
 | `/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}` | GET | GetGameSession | [GetGameSession](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/GetGameSession.cs) | [GetGameSession](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/GetGameSession.cs) |
@@ -123,6 +130,10 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
+### Global Configuration Wrapper:  [GlobalConfiguration](../../apis/AccelByte.Sdk.Api.Session/Wrapper/GlobalConfiguration.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
 ### Configuration Template Wrapper:  [ConfigurationTemplate](../../apis/AccelByte.Sdk.Api.Session/Wrapper/ConfigurationTemplate.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -192,6 +203,7 @@
 | `apimodels.EnvironmentVariableResponse` | [ApimodelsEnvironmentVariableResponse](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsEnvironmentVariableResponse.cs) |
 | `apimodels.GameSessionQueryResponse` | [ApimodelsGameSessionQueryResponse](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsGameSessionQueryResponse.cs) |
 | `apimodels.GameSessionResponse` | [ApimodelsGameSessionResponse](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsGameSessionResponse.cs) |
+| `apimodels.GlobalConfigurationResponse` | [ApimodelsGlobalConfigurationResponse](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsGlobalConfigurationResponse.cs) |
 | `apimodels.JoinByCodeRequest` | [ApimodelsJoinByCodeRequest](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsJoinByCodeRequest.cs) |
 | `apimodels.KickResponse` | [ApimodelsKickResponse](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsKickResponse.cs) |
 | `apimodels.Pagination` | [ApimodelsPagination](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsPagination.cs) |
@@ -204,6 +216,7 @@
 | `apimodels.PlayersCurrentPlatformResponse` | [ApimodelsPlayersCurrentPlatformResponse](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsPlayersCurrentPlatformResponse.cs) |
 | `apimodels.PromoteLeaderRequest` | [ApimodelsPromoteLeaderRequest](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsPromoteLeaderRequest.cs) |
 | `apimodels.PublicConfiguration` | [ApimodelsPublicConfiguration](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsPublicConfiguration.cs) |
+| `apimodels.PutGlobalConfigurationRequest` | [ApimodelsPutGlobalConfigurationRequest](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsPutGlobalConfigurationRequest.cs) |
 | `apimodels.PutPlatformCredentialsRequest` | [ApimodelsPutPlatformCredentialsRequest](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsPutPlatformCredentialsRequest.cs) |
 | `apimodels.RequestMember` | [ApimodelsRequestMember](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsRequestMember.cs) |
 | `apimodels.ResponseDeleteBulkGameSessions` | [ApimodelsResponseDeleteBulkGameSessions](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsResponseDeleteBulkGameSessions.cs) |

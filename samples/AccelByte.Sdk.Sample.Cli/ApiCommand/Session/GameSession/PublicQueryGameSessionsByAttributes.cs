@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Session.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 {
-    [SdkConsoleCommand("session", "publicquerygamesessions")]
-    public class PublicQueryGameSessionsCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("session", "publicquerygamesessionsbyattributes")]
+    public class PublicQueryGameSessionsByAttributesCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
         public string ServiceName { get { return "Session"; } }
 
-        public string OperationName { get { return "PublicQueryGameSessions"; } }
+        public string OperationName { get { return "PublicQueryGameSessionsByAttributes"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -33,7 +33,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
         [SdkCommandData("body")]
         public Dictionary<string, object> Body { get; set; } = new Dictionary<string, object>();
 
-        public PublicQueryGameSessionsCommand(IAccelByteSdk sdk)
+        public PublicQueryGameSessionsByAttributesCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -42,19 +42,19 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
         {
             AccelByte.Sdk.Api.Session.Wrapper.GameSession wrapper = new AccelByte.Sdk.Api.Session.Wrapper.GameSession(_SDK);
 
-            var opBuilder = AccelByte.Sdk.Api.Session.Operation.PublicQueryGameSessions.Builder;
+            var opBuilder = AccelByte.Sdk.Api.Session.Operation.PublicQueryGameSessionsByAttributes.Builder;
 
 
 
 
 
-            PublicQueryGameSessions operation = opBuilder.Build(
+            PublicQueryGameSessionsByAttributes operation = opBuilder.Build(
                 Body,
                 Namespace
             );
 
 
-            AccelByte.Sdk.Api.Session.Model.ApimodelsGameSessionQueryResponse? response = wrapper.PublicQueryGameSessions(operation);
+            AccelByte.Sdk.Api.Session.Model.ApimodelsGameSessionQueryResponse? response = wrapper.PublicQueryGameSessionsByAttributes(operation);
             if (response == null)
                 return "No response from server.";
 

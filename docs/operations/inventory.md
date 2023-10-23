@@ -4,6 +4,11 @@
 
 ## Operations
 
+### Admin Chaining Operations Wrapper:  [AdminChainingOperations](../../apis/AccelByte.Sdk.Api.Inventory/Wrapper/AdminChainingOperations.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/inventory/v1/admin/namespaces/{namespace}/chainingOperations` | POST | AdminCreateChainingOperations | [AdminCreateChainingOperations](../../apis/AccelByte.Sdk.Api.Inventory/Operation/AdminChainingOperations/AdminCreateChainingOperations.cs) | [AdminCreateChainingOperations](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Inventory/AdminChainingOperations/AdminCreateChainingOperations.cs) |
+
 ### Admin Inventories Wrapper:  [AdminInventories](../../apis/AccelByte.Sdk.Api.Inventory/Wrapper/AdminInventories.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -82,6 +87,10 @@
 
 ## Operations with Generic Response
 
+### Admin Chaining Operations Wrapper:  [AdminChainingOperations](../../apis/AccelByte.Sdk.Api.Inventory/Wrapper/AdminChainingOperations.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
 ### Admin Inventories Wrapper:  [AdminInventories](../../apis/AccelByte.Sdk.Api.Inventory/Wrapper/AdminInventories.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -130,9 +139,13 @@
 | Model | Class |
 |---|---|
 | `apimodels.AdminUpdateItemReq` | [ApimodelsAdminUpdateItemReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsAdminUpdateItemReq.cs) |
+| `apimodels.ChainingOperationReq` | [ApimodelsChainingOperationReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsChainingOperationReq.cs) |
+| `apimodels.ChainingOperationResp` | [ApimodelsChainingOperationResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsChainingOperationResp.cs) |
+| `apimodels.ConsumeItem` | [ApimodelsConsumeItem](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsConsumeItem.cs) |
 | `apimodels.ConsumeItemReq` | [ApimodelsConsumeItemReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsConsumeItemReq.cs) |
 | `apimodels.CreateInventoryConfigurationReq` | [ApimodelsCreateInventoryConfigurationReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsCreateInventoryConfigurationReq.cs) |
 | `apimodels.CreateInventoryReq` | [ApimodelsCreateInventoryReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsCreateInventoryReq.cs) |
+| `apimodels.CreateItem` | [ApimodelsCreateItem](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsCreateItem.cs) |
 | `apimodels.CreateItemTypeReq` | [ApimodelsCreateItemTypeReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsCreateItemTypeReq.cs) |
 | `apimodels.CreateItemTypeResp` | [ApimodelsCreateItemTypeResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsCreateItemTypeResp.cs) |
 | `apimodels.CreateTagReq` | [ApimodelsCreateTagReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsCreateTagReq.cs) |
@@ -150,12 +163,15 @@
 | `apimodels.ListTagsResp` | [ApimodelsListTagsResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsListTagsResp.cs) |
 | `apimodels.MoveItemsReq` | [ApimodelsMoveItemsReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsMoveItemsReq.cs) |
 | `apimodels.MoveItemsResp` | [ApimodelsMoveItemsResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsMoveItemsResp.cs) |
+| `apimodels.Operation` | [ApimodelsOperation](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsOperation.cs) |
 | `apimodels.Paging` | [ApimodelsPaging](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsPaging.cs) |
 | `apimodels.RemoveInventoryItemReq` | [ApimodelsRemoveInventoryItemReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsRemoveInventoryItemReq.cs) |
+| `apimodels.RemoveItem` | [ApimodelsRemoveItem](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsRemoveItem.cs) |
 | `apimodels.SaveItemReq` | [ApimodelsSaveItemReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsSaveItemReq.cs) |
 | `apimodels.SaveItemToInventoryReq` | [ApimodelsSaveItemToInventoryReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsSaveItemToInventoryReq.cs) |
 | `apimodels.TradeItem` | [ApimodelsTradeItem](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsTradeItem.cs) |
 | `apimodels.TradeItemResp` | [ApimodelsTradeItemResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsTradeItemResp.cs) |
 | `apimodels.UpdateInventoryReq` | [ApimodelsUpdateInventoryReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsUpdateInventoryReq.cs) |
+| `apimodels.UpdateItem` | [ApimodelsUpdateItem](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsUpdateItem.cs) |
 | `apimodels.UpdateItemReq` | [ApimodelsUpdateItemReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsUpdateItemReq.cs) |
 | `apimodels.UpdateItemResp` | [ApimodelsUpdateItemResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsUpdateItemResp.cs) |

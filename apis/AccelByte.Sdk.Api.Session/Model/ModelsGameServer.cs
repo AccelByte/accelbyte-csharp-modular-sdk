@@ -32,9 +32,11 @@ namespace AccelByte.Sdk.Api.Session.Model
         public string? GameVersion { get; set; }
 
         [JsonPropertyName("image_version")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ImageVersion { get; set; }
 
         [JsonPropertyName("ip")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Ip { get; set; }
 
         [JsonPropertyName("is_override_game_version")]
@@ -47,6 +49,7 @@ namespace AccelByte.Sdk.Api.Session.Model
         public string? Namespace { get; set; }
 
         [JsonPropertyName("pod_name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? PodName { get; set; }
 
         [JsonPropertyName("port")]
