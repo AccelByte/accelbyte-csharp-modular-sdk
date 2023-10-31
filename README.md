@@ -15,7 +15,7 @@ This SDK requires .NET 6.0 SDK to be installed.
 $ dotnet add package AccelByte.Sdk.Abstractions
 $ dotnet add package AccelByte.Sdk.Core
 
-# include this package to do authentication to AGS
+# include this package to do authentication to AGS or token validation
 $ dotnet add package AccelByte.Sdk.Authentication
 
 # feature packages, these are optional
@@ -247,9 +247,43 @@ IAccelByteSdk sdk = AccelByteSdk.Builder
 ```
 NOTE: Do not use `.UseAutoTokenRefresh()` together with `.UseScheduledTokenRefresh()`. It will introduce unnecessary overhead and possibility of unexpected behaviour.
 
+## Token Validation
+To use token validation, add `AccelByte.Sdk.Authentication` package and instantiate the sdk with following code.
+```csharp
+//Add core namespace
+using AccelByte.Sdk.Core;
+
+IAccelByteSdk sdk = AccelByteSdk.Builder
+    .UseDefaultHttpClient()
+    // Using DefaultConfigRepository, make sure the required environment variables are set
+    .UseDefaultConfigRepository()
+    // Credential repository is required for auto refresh token to works
+    .UseDefaultCredentialRepository()
+    // call this to enable the feature
+    .UseDefaultTokenValidator()    
+    .Build();
+```
+
+Use following method to validate access token.
+```csharp
+bool isValid = sdk.ValidateToken(accessTokenStr);
+```
+
+To validate permission and action, use following method.
+```csharp
+bool isValid = sdk.ValidateToken(accessTokenStr, permissionStr, actionInt);
+```
+
+To validate permission and action with specified namespace and/or userid, use following method.
+```csharp
+bool isValid = sdk.ValidateToken(accessTokenStr, permissionStr, actionInt, namespaceId, userId);
+```
+
+Note: To validate permission from user token, you need to instantiate the SDK with OAuth Client that has `ADMIN:ROLE [READ]` permission assigned to it.
+
 ## Local Token Validation
-Enable this feature to use local token validation instead of default token validation. Token validation and parse access token can support all access token type (user, client, or platform) while permission validation only support for oauth client token only.
-To enable it, include `AccelByte.Sdk.Feature.LocalTokenValidation` and instantiate the sdk with following code.
+Enable this feature to use local token validation instead of default token validation.
+To enable it, add `AccelByte.Sdk.Feature.LocalTokenValidation` package, include `AccelByte.Sdk.Feature.LocalTokenValidation` namespace and then instantiate the sdk with following code.
 ```csharp
 //Add core namespace
 using AccelByte.Sdk.Core;
@@ -270,14 +304,7 @@ IAccelByteSdk sdk = AccelByteSdk.Builder
     .Build();
 ```
 
-And then use following method to validate access token.
-```csharp
-bool isValid = sdk.ValidateToken(accessTokenStr);
-```
-Or, if you need to validate permission and action, use following method.
-```csharp
-bool isValid = sdk.ValidateToken(accessTokenStr, permissionStr, actionInt);
-```
+Then use the usual `ValidateToken` methods.
 
 If you only want to parse the access token.
 ```csharp

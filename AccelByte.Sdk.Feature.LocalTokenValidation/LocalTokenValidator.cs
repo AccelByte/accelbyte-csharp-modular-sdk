@@ -21,6 +21,25 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
 {
     public class LocalTokenValidator : TokenValidator, ITokenValidator
     {
+        private Func<IAccelByteSdk, string, List<LocalPermissionItem>> _FetchFunction = ((sdk, roleId) =>
+        {
+            var response = sdk.GetIamApi().Roles.AdminGetRoleV4Op.Execute(roleId);
+            if (response == null)
+                throw new Exception("Null response");
+
+            List<LocalPermissionItem> permissions = new List<LocalPermissionItem>();
+            foreach (var item in response.Permissions!)
+            {
+                permissions.Add(new LocalPermissionItem()
+                {
+                    Resource = item.Resource!,
+                    Action = item.Action!.Value
+                });
+            }
+
+            return permissions;
+        });
+
         protected static void FetchJWKS(IAccelByteSdk sdk)
         {
             OauthcommonJWKSet? tempResp = sdk.GetIamApi().OAuth20.GetJWKSV3Op
@@ -122,26 +141,116 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
                 InternalValidateToken(sdk, accessToken, out JwtSecurityToken rawJwt);
                 AccessTokenPayload payload = AccessTokenPayload.FromToken(rawJwt);
 
-                if (payload.Permissions == null)
-                    return false;
-
                 bool foundMatchingPermission = false;
-                foreach (var p in payload.Permissions)
+                if ((payload.Permissions != null) && (payload.Permissions.Count > 0))
                 {
-                    if (IsResourceAllowed(p.Resource, permission))
+                    foreach (var p in payload.Permissions)
                     {
-                        if (PermissionAction.Has(p.Action, action))
+                        if (IsResourceAllowed(p.Resource, permission))
                         {
-                            foundMatchingPermission = true;
-                            break;
+                            if (PermissionAction.Has(p.Action, action))
+                            {
+                                foundMatchingPermission = true;
+                                break;
+                            }
                         }
                     }
                 }
+                else if ((payload.NamespaceRoles != null) && (payload.NamespaceRoles.Count > 0))
+                {
+                    foreach (var r in payload.NamespaceRoles)
+                    {
+                        if (r.RoleId == null)
+                            continue;
 
-                if (!foundMatchingPermission)
-                    return false;
+                        var permissions = GetRolePermission(sdk, r.RoleId, _FetchFunction);
+                        foreach (var p in permissions)
+                        {
+                            if (IsResourceAllowed(p.Resource, permission))
+                            {
+                                if (PermissionAction.Has(p.Action, action))
+                                {
+                                    foundMatchingPermission = true;
+                                    break;
+                                }
+                            }
+                        }
 
-                return true;
+                        if (foundMatchingPermission)
+                            break;
+                    }
+                }
+
+                return foundMatchingPermission;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool Validate(IAccelByteSdk sdk, string accessToken, string permission, int action, string? aNamespace, string? userId)
+        {
+            try
+            {
+                InternalValidateToken(sdk, accessToken, out JwtSecurityToken rawJwt);
+                AccessTokenPayload payload = AccessTokenPayload.FromToken(rawJwt);
+
+                Dictionary<string, string> pParams = new Dictionary<string, string>();
+                if (aNamespace != null)
+                    pParams.Add("namespace", aNamespace);
+                if (userId != null)
+                    pParams.Add("userId", userId);
+
+                bool foundMatchingPermission = false;
+                if ((payload.Permissions != null) && (payload.Permissions.Count > 0))
+                {
+                    foreach (var p in payload.Permissions)
+                    {
+                        string aPermission = p.Resource;
+                        if (pParams.Count > 0)
+                            aPermission = ReplacePlaceholder(p.Resource, pParams);
+
+                        if (IsResourceAllowed(aPermission, permission))
+                        {
+                            if (PermissionAction.Has(p.Action, action))
+                            {
+                                foundMatchingPermission = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else if ((payload.NamespaceRoles != null) && (payload.NamespaceRoles.Count > 0))
+                {
+                    foreach (var r in payload.NamespaceRoles)
+                    {
+                        if (r.RoleId == null)
+                            continue;
+
+                        var permissions = GetRolePermission(sdk, r.RoleId, _FetchFunction);
+                        foreach (var p in permissions)
+                        {
+                            string aPermission = p.Resource;
+                            if (pParams.Count > 0)
+                                aPermission = ReplacePlaceholder(p.Resource, pParams);
+
+                            if (IsResourceAllowed(aPermission, permission))
+                            {
+                                if (PermissionAction.Has(p.Action, action))
+                                {
+                                    foundMatchingPermission = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (foundMatchingPermission)
+                            break;
+                    }
+                }
+
+                return foundMatchingPermission;
             }
             catch
             {

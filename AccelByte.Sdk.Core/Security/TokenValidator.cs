@@ -11,6 +11,44 @@ namespace AccelByte.Sdk.Core.Security
 {
     public abstract class TokenValidator
     {
+        private Dictionary<string, List<LocalPermissionItem>> _PermissionCache = new();
+
+        protected void AddPermissionToCache(string key, List<LocalPermissionItem> permissions)
+        {
+            _PermissionCache.Add(key, permissions);
+        }
+
+        protected void ClearPermissionCache()
+        {
+            _PermissionCache.Clear();
+        }
+
+        protected virtual List<LocalPermissionItem> GetRolePermission(IAccelByteSdk sdk, string roleId,
+            Func<IAccelByteSdk, string, List<LocalPermissionItem>> fetchFunction)
+        {
+            if (_PermissionCache.ContainsKey(roleId))
+                return _PermissionCache[roleId];
+
+            try
+            {
+                var permissions = fetchFunction.Invoke(sdk, roleId);
+                _PermissionCache[roleId] = permissions;
+                return permissions;
+            }
+            catch
+            {
+                return new List<LocalPermissionItem>();
+            }
+        }
+
+        protected string ReplacePlaceholder(string sResource, Dictionary<string, string> parameters)
+        {
+            string result = sResource;
+            foreach (var param in parameters)
+                result = result.Replace("{" + param.Key + "}", param.Value);
+            return result;
+        }
+
         protected bool IsResourceAllowed(string accessPermissionResource, string requiredPermissionResource)
         {
             string[] requiredPermResSections = requiredPermissionResource.Split(':');
@@ -27,7 +65,6 @@ namespace AccelByte.Sdk.Core.Security
             {
                 string userSection = accessPermResSections[i];
                 string requiredSection = requiredPermResSections[i];
-
 
                 if ((userSection != requiredSection) && (userSection != "*"))
                     return false;

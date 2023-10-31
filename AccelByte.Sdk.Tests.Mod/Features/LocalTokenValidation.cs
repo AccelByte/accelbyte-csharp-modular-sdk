@@ -86,6 +86,34 @@ namespace AccelByte.Sdk.Tests.Mod.Features
         }
 
         [Test]
+        public void UserPermissionValidationTest()
+        {
+            using IAccelByteSdk sdk = AccelByteSdk.Builder
+                .UseDefaultHttpClient()
+                .SetConfigRepository(IntegrationTestConfigRepository.Admin)
+                .UseDefaultTokenRepository()
+                .UseDefaultCredentialRepository()
+                .UseLocalTokenValidator()
+                .UseAutoRefreshForTokenRevocationList()
+                .EnableLog()
+                .Build();
+
+            string accessToken = String.Empty;
+            sdk.LoginUser((tokenResp) =>
+            {
+                accessToken = tokenResp.AccessToken!;
+            });
+
+            Thread.Sleep(2000);
+
+            string tPermission = $"ADMIN:NAMESPACE:{sdk.Namespace}:USER";
+            int tAction = 2;
+
+            bool b = sdk.ValidateToken(accessToken, tPermission, tAction);
+            Assert.IsTrue(b);
+        }
+
+        [Test]
         public void ParseAccessTokenNoValidationTest()
         {
             using IAccelByteSdk sdk = AccelByteSdk.Builder

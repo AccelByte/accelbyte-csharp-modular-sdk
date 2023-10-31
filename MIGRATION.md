@@ -43,6 +43,9 @@ In monolithic version, using default implementations only need to include single
 ## On-Demand Refresh Token
 Now on-demand refresh token is enabled by default. To disable it, you can call `DisableRefreshIfPossible` while building the sdk object.
 
+## Token Validation
+In monolithic version, default token validator is assigned by default. Now you will need to explicitly set in in sdk builder with `UseDefaultTokenValidator` method. Refer to [README](./README.md) on how to use it.
+
 ## Custom Operation
 `Consumes` and `Produces` property is now using `List<string>` instead of string array. Also `Security` property is removed in favor of `Securities` field.
 

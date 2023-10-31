@@ -37,10 +37,10 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
 
             public class Role
             {
-                [JsonPropertyName("Namespace")]
+                [JsonPropertyName("namespace")]
                 public string Namespace { get; set; } = String.Empty;
 
-                [JsonPropertyName("RoleId")]
+                [JsonPropertyName("roleId")]
                 public string RoleId { get; set; } = String.Empty;
             }
 
