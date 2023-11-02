@@ -1,10 +1,54 @@
+<!--
+Copyright (c) 2023 AccelByte Inc. All Rights Reserved.
+This is licensed software from AccelByte Inc, for limitations
+and restrictions contact your company contract manager.
+-->
+
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\build\version.props" />
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <DebugType>Embedded</DebugType>
+    <EmbedAllSources>true</EmbedAllSources>
+
+    <Version>$(CoreAbstractionVersion)</Version>
+    <AssemblyVersion>$(CoreAbstractionVersion)</AssemblyVersion>
+
+    <Product>AccelByte.Sdk.Authentication</Product>
+    <PackageId>AccelByte.Sdk.Authentication</PackageId>
+    <Authors>AccelByte Developers</Authors>
+    <Company>AccelByte</Company>
+    <Copyright>Copyright(c) AccelByte 2022-2023</Copyright>
+    <Description>AccelByte .NET (C#) Modular SDK authentication component.</Description>
+    
+    <PackageProjectUrl>https://github.com/AccelByte/accelbyte-csharp-modular-sdk</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/AccelByte/accelbyte-csharp-modular-sdk.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>accelbyte;sdk</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>Please refer to the CHANGELOG.md</PackageReleaseNotes>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\build\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AccelByte.Sdk.Abstractions\AccelByte.Sdk.Abstractions.csproj" />

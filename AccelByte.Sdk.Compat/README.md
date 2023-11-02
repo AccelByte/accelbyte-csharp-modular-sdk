@@ -1,0 +1,1 @@
+# AccelByte .NET (C#) Modular SDK to Monolithic SDK Compatibility Library
