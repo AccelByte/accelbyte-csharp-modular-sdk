@@ -38,7 +38,7 @@ TEMP_JSON_INPUT="input_json.json"
 TEMP_FILE_UPLOAD="file_upload.bin"
 
 echo "TAP version 13"
-echo "1..95"
+echo "1..96"
 
 #- 1 Login
 $CLI_EXE --op login --lt user --user user --pass user > test.out 2>&1
@@ -74,7 +74,7 @@ $CLI_EXE \
     --sn social \
     --op GetUserProfiles \
     --namespace $AB_NAMESPACE \
-    --userId '6tYzS5vi' \
+    --userId 'ZBWwrvFJ' \
     > test.out 2>&1
 eval_tap $? 8 'GetUserProfiles' test.out
 
@@ -83,8 +83,8 @@ $CLI_EXE \
     --sn social \
     --op GetProfile \
     --namespace $AB_NAMESPACE \
-    --profileId 'Ca1bBhyI' \
-    --userId 'rDlOk0XW' \
+    --profileId 'rP68vB1y' \
+    --userId 'GHQcsa8V' \
     > test.out 2>&1
 eval_tap $? 9 'GetProfile' test.out
 
@@ -99,7 +99,7 @@ $CLI_EXE \
     --sn social \
     --op PublicGetUserGameProfiles \
     --namespace $AB_NAMESPACE \
-    --userIds '["9H67bVqG", "ICGBLMql", "B7rzPxbH"]' \
+    --userIds '["qCPGT0Yx", "0SpJV6ck", "FU90PqZy"]' \
     > test.out 2>&1
 eval_tap $? 12 'PublicGetUserGameProfiles' test.out
 
@@ -108,18 +108,18 @@ $CLI_EXE \
     --sn social \
     --op PublicGetUserProfiles \
     --namespace $AB_NAMESPACE \
-    --userId 'han3WOo8' \
+    --userId '8jn8vtfn' \
     > test.out 2>&1
 eval_tap $? 13 'PublicGetUserProfiles' test.out
 
 #- 14 PublicCreateProfile
 # body param: body
-echo '{"achievements": ["WorZAmCg", "YBWtoSLY", "DgBRWAJ7"], "attributes": {"wS8AOADc": "2yhUxoST", "0YtvodUl": "g6A4tQNb", "NosJZIav": "7Jg56kX4"}, "avatarUrl": "iaKBTV0k", "inventories": ["GeFe6CI5", "suxfo9Zp", "9E0V8b9P"], "label": "KVpYQGbF", "profileName": "L0cC3jeI", "statistics": ["rYQH9BKU", "0XKLVEAk", "uHvcEfpX"], "tags": ["GFjWt1nC", "widdVPKQ", "aigC2kHB"]}' > $TEMP_JSON_INPUT
+echo '{"achievements": ["v7MgYJFu", "Gri5p99J", "73sOzImj"], "attributes": {"4o91SsHH": "YQHOvUOt", "ujjeStaN": "kvZvJq9y", "K0Xezcwy": "QjM3a9sq"}, "avatarUrl": "E9Tp1aus", "inventories": ["BG80SHPJ", "lBjMmFXG", "rfrriHxs"], "label": "7iMCIfer", "profileName": "KhJAn0yK", "statistics": ["OqWgfYPQ", "CF2Qy7PG", "O5An44sb"], "tags": ["80vJNCT7", "Gkecesj1", "dEW3rmJH"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op PublicCreateProfile \
     --namespace $AB_NAMESPACE \
-    --userId 'EkmVLipk' \
+    --userId 'ugX0JTr1' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 14 'PublicCreateProfile' test.out
@@ -129,20 +129,20 @@ $CLI_EXE \
     --sn social \
     --op PublicGetProfile \
     --namespace $AB_NAMESPACE \
-    --profileId 'XKUNeNHE' \
-    --userId 'WegtmWa8' \
+    --profileId 'TK50wbg3' \
+    --userId 'paWZ0re6' \
     > test.out 2>&1
 eval_tap $? 15 'PublicGetProfile' test.out
 
 #- 16 PublicUpdateProfile
 # body param: body
-echo '{"achievements": ["kbVq1jD8", "ChJ8zNQV", "FSaU8K5w"], "attributes": {"eF53PQK3": "aX1GhDfq", "IQmKvOeE": "JfZjcOQE", "UDpMb0DG": "LKV8DkaK"}, "avatarUrl": "cp89ARPR", "inventories": ["a8KGWxuc", "JIwbv8SD", "BUAjvr3K"], "label": "GyVxSp9B", "profileName": "wBgBEvn1", "statistics": ["0DvrhskX", "MwT6fe9b", "gMUF6NIS"], "tags": ["9Vo2AX3U", "JxRDA9E8", "uIvVhjLg"]}' > $TEMP_JSON_INPUT
+echo '{"achievements": ["j7Dcnl1W", "vbRFPItr", "wFXHXIot"], "attributes": {"41BIax4A": "bVF5swKF", "xkju5IlH": "KYwVrql2", "cRGFL9Iu": "Qc6QvOZT"}, "avatarUrl": "zm1ikDj5", "inventories": ["8aP7rOVF", "KFb15sJO", "qvAwqsPT"], "label": "r1ZpED1k", "profileName": "8twmbIWQ", "statistics": ["Z4QDVVEi", "5RvcFJBN", "NPlfsX4i"], "tags": ["UlZRSyBb", "qffNIvdo", "qtcsyReV"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op PublicUpdateProfile \
     --namespace $AB_NAMESPACE \
-    --profileId 'AFoXXHoO' \
-    --userId 'HGFPeN2v' \
+    --profileId 'UcyaTL7O' \
+    --userId 'Fm2CmGk2' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 16 'PublicUpdateProfile' test.out
@@ -152,8 +152,8 @@ $CLI_EXE \
     --sn social \
     --op PublicDeleteProfile \
     --namespace $AB_NAMESPACE \
-    --profileId 'dRAlhEnr' \
-    --userId 'EolCYcaw' \
+    --profileId 'RTuoJoCV' \
+    --userId 'Q2VF0dI1' \
     > test.out 2>&1
 eval_tap $? 17 'PublicDeleteProfile' test.out
 
@@ -161,23 +161,23 @@ eval_tap $? 17 'PublicDeleteProfile' test.out
 $CLI_EXE \
     --sn social \
     --op PublicGetProfileAttribute \
-    --attributeName 'UMG2BIQo' \
+    --attributeName 'uybDLIO4' \
     --namespace $AB_NAMESPACE \
-    --profileId '11pLxvZ3' \
-    --userId 'njykI2RE' \
+    --profileId 'CACsfclt' \
+    --userId 'nNGxVSc7' \
     > test.out 2>&1
 eval_tap $? 18 'PublicGetProfileAttribute' test.out
 
 #- 19 PublicUpdateAttribute
 # body param: body
-echo '{"name": "04JXpHe6", "value": "079gv5FF"}' > $TEMP_JSON_INPUT
+echo '{"name": "zTkxQOPm", "value": "tZS4MnM0"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op PublicUpdateAttribute \
-    --attributeName 'rMCoAwnU' \
+    --attributeName 'NS7PVNBU' \
     --namespace $AB_NAMESPACE \
-    --profileId 'RealRltw' \
-    --userId 'U3fmtbVo' \
+    --profileId '78no2V1H' \
+    --userId '6ONosTcJ' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 19 'PublicUpdateAttribute' test.out
@@ -205,9 +205,9 @@ $CLI_EXE \
     --sn social \
     --op GetGlobalStatItems \
     --namespace $AB_NAMESPACE \
-    --limit '77' \
-    --offset '45' \
-    --statCodes 'HftsaKZD' \
+    --limit '69' \
+    --offset '70' \
+    --statCodes '9AIAxkKH' \
     > test.out 2>&1
 eval_tap $? 26 'GetGlobalStatItems' test.out
 
@@ -216,7 +216,7 @@ $CLI_EXE \
     --sn social \
     --op GetGlobalStatItemByStatCode \
     --namespace $AB_NAMESPACE \
-    --statCode '9bAJrt9N' \
+    --statCode '2OlyBM2O' \
     > test.out 2>&1
 eval_tap $? 27 'GetGlobalStatItemByStatCode' test.out
 
@@ -225,18 +225,18 @@ $CLI_EXE \
     --sn social \
     --op GetStatCycles \
     --namespace $AB_NAMESPACE \
-    --cycleType 'DAILY' \
-    --limit '51' \
-    --name 'pgpisMcQ' \
-    --offset '54' \
-    --sortBy 'ZrYuLCab' \
-    --status 'INIT' \
+    --cycleType 'MONTHLY' \
+    --limit '7' \
+    --name 'N2PNOG7j' \
+    --offset '93' \
+    --sortBy 'O7vbOjaH' \
+    --status 'STOPPED' \
     > test.out 2>&1
 eval_tap $? 28 'GetStatCycles' test.out
 
 #- 29 CreateStatCycle
 # body param: body
-echo '{"cycleType": "SEASONAL", "description": "4nXGpagq", "end": "1998-04-10T00:00:00Z", "name": "MJDquXkL", "resetDate": 26, "resetDay": 56, "resetMonth": 39, "resetTime": "WUuvOtjg", "seasonPeriod": 99, "start": "1993-08-21T00:00:00Z"}' > $TEMP_JSON_INPUT
+echo '{"cycleType": "DAILY", "description": "dlfbT6ht", "end": "1975-08-20T00:00:00Z", "name": "uLncnHQx", "resetDate": 57, "resetDay": 37, "resetMonth": 2, "resetTime": "YmZlOuoa", "seasonPeriod": 43, "start": "1995-08-25T00:00:00Z"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op CreateStatCycle \
@@ -247,7 +247,7 @@ eval_tap $? 29 'CreateStatCycle' test.out
 
 #- 30 BulkGetStatCycle
 # body param: body
-echo '{"cycleIds": ["pU48m7B4", "vWvbuMMz", "9xWbO2jl"]}' > $TEMP_JSON_INPUT
+echo '{"cycleIds": ["YAGHJ1lV", "vc9Xhux3", "23BVdON4"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op BulkGetStatCycle \
@@ -260,18 +260,18 @@ eval_tap $? 30 'BulkGetStatCycle' test.out
 $CLI_EXE \
     --sn social \
     --op GetStatCycle \
-    --cycleId 'sugi4HGS' \
+    --cycleId 'pVGo5gdo' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 31 'GetStatCycle' test.out
 
 #- 32 UpdateStatCycle
 # body param: body
-echo '{"cycleType": "ANNUALLY", "description": "mSxDMtpZ", "end": "1973-02-22T00:00:00Z", "name": "qtq1kV7U", "resetDate": 63, "resetDay": 90, "resetMonth": 47, "resetTime": "6E7nef6S", "seasonPeriod": 12, "start": "1976-02-06T00:00:00Z"}' > $TEMP_JSON_INPUT
+echo '{"cycleType": "ANNUALLY", "description": "BbAFH1fw", "end": "1975-05-22T00:00:00Z", "name": "Te2UCDTE", "resetDate": 100, "resetDay": 63, "resetMonth": 88, "resetTime": "kDXJf6ga", "seasonPeriod": 46, "start": "1977-06-28T00:00:00Z"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op UpdateStatCycle \
-    --cycleId 'KHKW0jAU' \
+    --cycleId '9kkWfD9i' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -281,18 +281,18 @@ eval_tap $? 32 'UpdateStatCycle' test.out
 $CLI_EXE \
     --sn social \
     --op DeleteStatCycle \
-    --cycleId '7IxJsnfY' \
+    --cycleId 'Rf4p6HMC' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 33 'DeleteStatCycle' test.out
 
 #- 34 BulkAddStats
 # body param: body
-echo '{"statCodes": ["mEUUV81b", "2ycZv5Bj", "l4ngVtkB"]}' > $TEMP_JSON_INPUT
+echo '{"statCodes": ["kFJgmug1", "ORxMe1yD", "k9vjqHYn"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op BulkAddStats \
-    --cycleId 'glf2F250' \
+    --cycleId 'qLV7OoRA' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -302,7 +302,7 @@ eval_tap $? 34 'BulkAddStats' test.out
 $CLI_EXE \
     --sn social \
     --op StopStatCycle \
-    --cycleId 'vMpkP32H' \
+    --cycleId 'eEGy69gI' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 35 'StopStatCycle' test.out
@@ -312,14 +312,14 @@ $CLI_EXE \
     --sn social \
     --op BulkFetchStatItems \
     --namespace $AB_NAMESPACE \
-    --statCode '1LNAaoLx' \
-    --userIds 'IKK5f1Kp' \
+    --statCode 'WnueaCjT' \
+    --userIds 'mnIYGwZC' \
     > test.out 2>&1
 eval_tap $? 36 'BulkFetchStatItems' test.out
 
 #- 37 BulkIncUserStatItem
 # body param: body
-echo '[{"inc": 0.10078895355314654, "statCode": "jkbDFQZk", "userId": "imFapd9D"}, {"inc": 0.4341129064361562, "statCode": "IXYm9BdC", "userId": "WSTms4A5"}, {"inc": 0.9593391697121181, "statCode": "YGA1a0ZJ", "userId": "jMv1bUNy"}]' > $TEMP_JSON_INPUT
+echo '[{"inc": 0.9478534578596325, "statCode": "3FJW2Rz8", "userId": "CXo79xzY"}, {"inc": 0.8462431063205524, "statCode": "eXdp08Pa", "userId": "qqmXTNtr"}, {"inc": 0.2910403428646017, "statCode": "kqu8xc3W", "userId": "MPoqzymw"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op BulkIncUserStatItem \
@@ -330,7 +330,7 @@ eval_tap $? 37 'BulkIncUserStatItem' test.out
 
 #- 38 BulkIncUserStatItemValue
 # body param: body
-echo '[{"inc": 0.014875458721601564, "statCode": "KPV4zCtT", "userId": "fxxnureN"}, {"inc": 0.6385547059063196, "statCode": "Oo6EEQRn", "userId": "3g0SSUa8"}, {"inc": 0.6659103640745835, "statCode": "EJVwoFbM", "userId": "xuuWKKng"}]' > $TEMP_JSON_INPUT
+echo '[{"inc": 0.40624019401258793, "statCode": "EZX6q0te", "userId": "UiV7UTFN"}, {"inc": 0.9286147479022347, "statCode": "Z9pFEwrB", "userId": "huEeiFg1"}, {"inc": 0.9029731692835841, "statCode": "FGkcnjQS", "userId": "mbDZKqhJ"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op BulkIncUserStatItemValue \
@@ -344,14 +344,14 @@ $CLI_EXE \
     --sn social \
     --op BulkFetchOrDefaultStatItems \
     --namespace $AB_NAMESPACE \
-    --statCode '67LBwnvo' \
-    --userIds '["TQ0EoExi", "qctI6JPY", "IL06SR6W"]' \
+    --statCode '5Aiqe1qX' \
+    --userIds '["xTLG9zSL", "zChy46f3", "tQG5NlEM"]' \
     > test.out 2>&1
 eval_tap $? 39 'BulkFetchOrDefaultStatItems' test.out
 
 #- 40 BulkResetUserStatItem
 # body param: body
-echo '[{"statCode": "QK9YEGYR", "userId": "I4ZUalAc"}, {"statCode": "JIjmtRQB", "userId": "5JfF0UJH"}, {"statCode": "AklZrczb", "userId": "UerlJSg4"}]' > $TEMP_JSON_INPUT
+echo '[{"statCode": "4rvZQ5VP", "userId": "aKPA09bE"}, {"statCode": "6UDrPvuK", "userId": "jDIjXwUG"}, {"statCode": "OGSvR6Ul", "userId": "RKB1Pvlf"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op BulkResetUserStatItem \
@@ -365,17 +365,17 @@ $CLI_EXE \
     --sn social \
     --op GetStats \
     --namespace $AB_NAMESPACE \
-    --cycleIds '9GZwJv8a' \
-    --isGlobal 'true' \
-    --isPublic 'false' \
-    --limit '76' \
-    --offset '25' \
+    --cycleIds 'Lnv8whPg' \
+    --isGlobal 'false' \
+    --isPublic 'true' \
+    --limit '86' \
+    --offset '21' \
     > test.out 2>&1
 eval_tap $? 41 'GetStats' test.out
 
 #- 42 CreateStat
 # body param: body
-echo '{"cycleIds": ["xJ2w6Ktc", "97Z9y3F3", "wEq7pf0M"], "defaultValue": 0.20397653232062252, "description": "1OZfnqb6", "ignoreAdditionalDataOnValueRejected": false, "incrementOnly": true, "isPublic": false, "maximum": 0.844636368600766, "minimum": 0.05244819193408945, "name": "TiNrMZVP", "setAsGlobal": true, "setBy": "CLIENT", "statCode": "z6rUcQR1", "tags": ["XwPcKSJm", "QrohMJbn", "L1FcEQAu"]}' > $TEMP_JSON_INPUT
+echo '{"cycleIds": ["kDmelnJL", "B4Qvw2qC", "HcbE5bBa"], "defaultValue": 0.5298453930329712, "description": "XwEv5ED5", "ignoreAdditionalDataOnValueRejected": true, "incrementOnly": false, "isPublic": true, "maximum": 0.1294215978102976, "minimum": 0.5876415217459332, "name": "AnLZejg8", "setAsGlobal": true, "setBy": "SERVER", "statCode": "Ayy9hU64", "tags": ["tcyKSq3G", "mGplIA6X", "ftRoSNLH"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op CreateStat \
@@ -399,7 +399,7 @@ $CLI_EXE \
     --sn social \
     --op ImportStats \
     --namespace $AB_NAMESPACE \
-    --replaceExisting 'true' \
+    --replaceExisting 'false' \
     --upload $TEMP_FILE_UPLOAD \
     > test.out 2>&1
 eval_tap $? 44 'ImportStats' test.out
@@ -409,11 +409,11 @@ $CLI_EXE \
     --sn social \
     --op QueryStats \
     --namespace $AB_NAMESPACE \
-    --isGlobal 'true' \
+    --isGlobal 'false' \
     --isPublic 'false' \
-    --limit '80' \
-    --offset '38' \
-    --keyword 'CTSgjuj4' \
+    --limit '4' \
+    --offset '35' \
+    --keyword 'ZWL78Oc9' \
     > test.out 2>&1
 eval_tap $? 45 'QueryStats' test.out
 
@@ -422,7 +422,7 @@ $CLI_EXE \
     --sn social \
     --op GetStat \
     --namespace $AB_NAMESPACE \
-    --statCode 'ij7KjPmn' \
+    --statCode '8UZfDB1y' \
     > test.out 2>&1
 eval_tap $? 46 'GetStat' test.out
 
@@ -431,579 +431,591 @@ $CLI_EXE \
     --sn social \
     --op DeleteStat \
     --namespace $AB_NAMESPACE \
-    --statCode 'o0IcWSRW' \
+    --statCode 'ppDiVi1F' \
     > test.out 2>&1
 eval_tap $? 47 'DeleteStat' test.out
 
 #- 48 UpdateStat
 # body param: body
-echo '{"cycleIds": ["QSTCTWZN", "lcOQd1l7", "SdEO5oII"], "defaultValue": 0.10835395966000838, "description": "H8viOBy5", "ignoreAdditionalDataOnValueRejected": true, "isPublic": true, "name": "D95c5y4K", "tags": ["k4p7grLr", "HEuEjvGg", "JuGDEsnx"]}' > $TEMP_JSON_INPUT
+echo '{"cycleIds": ["re8bTabN", "swTGbfFn", "QMsEF2ir"], "defaultValue": 0.22802225586383817, "description": "UiG4M5BM", "ignoreAdditionalDataOnValueRejected": false, "isPublic": false, "name": "1YtFjBBe", "tags": ["WLOBTqsC", "cwfbiUGK", "b3jiAk6u"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op UpdateStat \
     --namespace $AB_NAMESPACE \
-    --statCode 'TLADraMz' \
+    --statCode 's0qDUV5L' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 48 'UpdateStat' test.out
 
-#- 49 DeleteTiedStat
+#- 49 GetStatItems
+$CLI_EXE \
+    --sn social \
+    --op GetStatItems \
+    --namespace $AB_NAMESPACE \
+    --statCode 'C5GWoZSV' \
+    --limit '45' \
+    --offset '76' \
+    --sortBy 'LP7vy9EO' \
+    > test.out 2>&1
+eval_tap $? 49 'GetStatItems' test.out
+
+#- 50 DeleteTiedStat
 $CLI_EXE \
     --sn social \
     --op DeleteTiedStat \
     --namespace $AB_NAMESPACE \
-    --statCode 'p7WfCUKb' \
+    --statCode 'HjErWojf' \
     > test.out 2>&1
-eval_tap $? 49 'DeleteTiedStat' test.out
+eval_tap $? 50 'DeleteTiedStat' test.out
 
-#- 50 GetUserStatCycleItems
+#- 51 GetUserStatCycleItems
 $CLI_EXE \
     --sn social \
     --op GetUserStatCycleItems \
-    --cycleId 'Fch0lKLB' \
+    --cycleId '1CkZpdLG' \
     --namespace $AB_NAMESPACE \
-    --userId 'HWoMHiEb' \
+    --userId 'fk3w70Mq' \
     --isPublic 'true' \
-    --limit '15' \
-    --offset '1' \
-    --sortBy 'rJZf0NEl' \
-    --statCodes 'VCmdsIO4' \
+    --limit '96' \
+    --offset '65' \
+    --sortBy 'F72xx8Dd' \
+    --statCodes 'rlcuxjSq' \
     > test.out 2>&1
-eval_tap $? 50 'GetUserStatCycleItems' test.out
+eval_tap $? 51 'GetUserStatCycleItems' test.out
 
-#- 51 GetUserStatItems
+#- 52 GetUserStatItems
 $CLI_EXE \
     --sn social \
     --op GetUserStatItems \
     --namespace $AB_NAMESPACE \
-    --userId '8zwfog56' \
+    --userId 'RN2c3sy1' \
     --isPublic 'true' \
-    --limit '29' \
-    --offset '55' \
-    --sortBy 'FrGxEaIe' \
-    --statCodes 'oJfuWLgf' \
-    --tags 'tNVTmcgF' \
+    --limit '15' \
+    --offset '34' \
+    --sortBy 'nqBth3WT' \
+    --statCodes 'kfTvLAXA' \
+    --tags 'bb6CoVO9' \
     > test.out 2>&1
-eval_tap $? 51 'GetUserStatItems' test.out
+eval_tap $? 52 'GetUserStatItems' test.out
 
-#- 52 BulkCreateUserStatItems
+#- 53 BulkCreateUserStatItems
 # body param: body
-echo '[{"statCode": "rgfvOqcR"}, {"statCode": "dtz8kRNc"}, {"statCode": "2shcdkaG"}]' > $TEMP_JSON_INPUT
+echo '[{"statCode": "yyk1lyjM"}, {"statCode": "XatG0yAI"}, {"statCode": "kxuOYbtN"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op BulkCreateUserStatItems \
     --namespace $AB_NAMESPACE \
-    --userId 'pOnptbUn' \
+    --userId 'tk3a2Msl' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 52 'BulkCreateUserStatItems' test.out
+eval_tap $? 53 'BulkCreateUserStatItems' test.out
 
-#- 53 BulkIncUserStatItem1
+#- 54 BulkIncUserStatItem1
 # body param: body
-echo '[{"inc": 0.3107805950271503, "statCode": "nI9bySc7"}, {"inc": 0.5062411274888439, "statCode": "fQAXeCzN"}, {"inc": 0.3020399204484684, "statCode": "AyDyYxTI"}]' > $TEMP_JSON_INPUT
+echo '[{"inc": 0.10658410491620673, "statCode": "SjwT2UgU"}, {"inc": 0.42441899068706423, "statCode": "tgaHbJD5"}, {"inc": 0.833058568921309, "statCode": "cQ5T2jwn"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op BulkIncUserStatItem1 \
     --namespace $AB_NAMESPACE \
-    --userId 'nYf9xrIw' \
+    --userId 'UzuUCLP3' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 53 'BulkIncUserStatItem1' test.out
+eval_tap $? 54 'BulkIncUserStatItem1' test.out
 
-#- 54 BulkIncUserStatItemValue1
+#- 55 BulkIncUserStatItemValue1
 # body param: body
-echo '[{"inc": 0.6331447721201957, "statCode": "DMx2qZeA"}, {"inc": 0.3447769174439852, "statCode": "62xlkSHe"}, {"inc": 0.4788031371662773, "statCode": "i1AevuaP"}]' > $TEMP_JSON_INPUT
+echo '[{"inc": 0.34999239116439007, "statCode": "LiGzOW1h"}, {"inc": 0.5510965770262067, "statCode": "DzqeLcDn"}, {"inc": 0.39532621568971726, "statCode": "bJbphueV"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op BulkIncUserStatItemValue1 \
     --namespace $AB_NAMESPACE \
-    --userId '8NEDNuRM' \
+    --userId 'G8a2XrpB' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 54 'BulkIncUserStatItemValue1' test.out
+eval_tap $? 55 'BulkIncUserStatItemValue1' test.out
 
-#- 55 BulkResetUserStatItem1
+#- 56 BulkResetUserStatItem1
 # body param: body
-echo '[{"statCode": "ZYwFpp6u"}, {"statCode": "E4VlhMfr"}, {"statCode": "Zb7GMzsG"}]' > $TEMP_JSON_INPUT
+echo '[{"statCode": "LV4rE3vY"}, {"statCode": "9gv4jMT6"}, {"statCode": "NjbeaN8C"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op BulkResetUserStatItem1 \
     --namespace $AB_NAMESPACE \
-    --userId 'wyw3Y72P' \
+    --userId 'HQA4zOfZ' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 55 'BulkResetUserStatItem1' test.out
+eval_tap $? 56 'BulkResetUserStatItem1' test.out
 
-#- 56 CreateUserStatItem
+#- 57 CreateUserStatItem
 $CLI_EXE \
     --sn social \
     --op CreateUserStatItem \
     --namespace $AB_NAMESPACE \
-    --statCode 'Uw8GxjsD' \
-    --userId 'U6N49wIt' \
+    --statCode 'K8lve75N' \
+    --userId 'Y11GmzpM' \
     > test.out 2>&1
-eval_tap $? 56 'CreateUserStatItem' test.out
+eval_tap $? 57 'CreateUserStatItem' test.out
 
-#- 57 DeleteUserStatItems
+#- 58 DeleteUserStatItems
 $CLI_EXE \
     --sn social \
     --op DeleteUserStatItems \
     --namespace $AB_NAMESPACE \
-    --statCode 'dA0ygqZX' \
-    --userId '1FiCZu6V' \
+    --statCode 'DWxi712q' \
+    --userId 'LiZU3cwS' \
     > test.out 2>&1
-eval_tap $? 57 'DeleteUserStatItems' test.out
+eval_tap $? 58 'DeleteUserStatItems' test.out
 
-#- 58 IncUserStatItemValue
+#- 59 IncUserStatItemValue
 # body param: body
-echo '{"inc": 0.4121952505267015}' > $TEMP_JSON_INPUT
+echo '{"inc": 0.3390480469833469}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op IncUserStatItemValue \
     --namespace $AB_NAMESPACE \
-    --statCode 'rVi5dARE' \
-    --userId 'nJRWTMqL' \
+    --statCode 'oJrPkSHH' \
+    --userId 'vG74javY' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 58 'IncUserStatItemValue' test.out
+eval_tap $? 59 'IncUserStatItemValue' test.out
 
-#- 59 ResetUserStatItemValue
+#- 60 ResetUserStatItemValue
 # body param: body
-echo '{"additionalData": {"V14ELAsj": {}, "R3N8rZUq": {}, "SJO5hqnk": {}}}' > $TEMP_JSON_INPUT
+echo '{"additionalData": {"OXxcpGhB": {}, "wr8SxR9l": {}, "u2Hc8dhI": {}}}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op ResetUserStatItemValue \
     --namespace $AB_NAMESPACE \
-    --statCode 'aeY1nqxo' \
-    --userId 'ciYDYuzQ' \
-    --additionalKey 'KGTfnUBG' \
+    --statCode 'MnqpcAbp' \
+    --userId 'xZKYJrFx' \
+    --additionalKey '8X3N4vzn' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 59 'ResetUserStatItemValue' test.out
+eval_tap $? 60 'ResetUserStatItemValue' test.out
 
-#- 60 GetGlobalStatItems1
+#- 61 GetGlobalStatItems1
 $CLI_EXE \
     --sn social \
     --op GetGlobalStatItems1 \
     --namespace $AB_NAMESPACE \
-    --limit '65' \
-    --offset '61' \
-    --statCodes 'J16ZzbZO' \
+    --limit '36' \
+    --offset '57' \
+    --statCodes 'Afuq4oGO' \
     > test.out 2>&1
-eval_tap $? 60 'GetGlobalStatItems1' test.out
+eval_tap $? 61 'GetGlobalStatItems1' test.out
 
-#- 61 GetGlobalStatItemByStatCode1
+#- 62 GetGlobalStatItemByStatCode1
 $CLI_EXE \
     --sn social \
     --op GetGlobalStatItemByStatCode1 \
     --namespace $AB_NAMESPACE \
-    --statCode 'A4tWZ8jt' \
+    --statCode 'KQDOZ6Yb' \
     > test.out 2>&1
-eval_tap $? 61 'GetGlobalStatItemByStatCode1' test.out
+eval_tap $? 62 'GetGlobalStatItemByStatCode1' test.out
 
-#- 62 GetStatCycles1
+#- 63 GetStatCycles1
 $CLI_EXE \
     --sn social \
     --op GetStatCycles1 \
     --namespace $AB_NAMESPACE \
-    --cycleType 'DAILY' \
-    --limit '86' \
-    --name 'jjsL1Mso' \
-    --offset '69' \
-    --sortBy 'fYYmoNOI' \
-    --status 'STOPPED' \
+    --cycleType 'ANNUALLY' \
+    --limit '4' \
+    --name 'JElrSQLb' \
+    --offset '53' \
+    --sortBy 'kjaalRow' \
+    --status 'INIT' \
     > test.out 2>&1
-eval_tap $? 62 'GetStatCycles1' test.out
+eval_tap $? 63 'GetStatCycles1' test.out
 
-#- 63 BulkGetStatCycle1
+#- 64 BulkGetStatCycle1
 # body param: body
-echo '{"cycleIds": ["fBRy6Hht", "QTDpmaFA", "Y4JWbac2"]}' > $TEMP_JSON_INPUT
+echo '{"cycleIds": ["g5QJVhqA", "c9bXVppH", "Z7xPrKii"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op BulkGetStatCycle1 \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 63 'BulkGetStatCycle1' test.out
+eval_tap $? 64 'BulkGetStatCycle1' test.out
 
-#- 64 GetStatCycle1
+#- 65 GetStatCycle1
 $CLI_EXE \
     --sn social \
     --op GetStatCycle1 \
-    --cycleId 'd8ff3X5f' \
+    --cycleId 'KbTJnsn2' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
-eval_tap $? 64 'GetStatCycle1' test.out
+eval_tap $? 65 'GetStatCycle1' test.out
 
-#- 65 BulkFetchStatItems1
+#- 66 BulkFetchStatItems1
 $CLI_EXE \
     --sn social \
     --op BulkFetchStatItems1 \
     --namespace $AB_NAMESPACE \
-    --statCode 'NbDFPUGT' \
-    --userIds 's3rBbQxQ' \
+    --statCode 'e2xspHUw' \
+    --userIds 'bTsj1CBX' \
     > test.out 2>&1
-eval_tap $? 65 'BulkFetchStatItems1' test.out
+eval_tap $? 66 'BulkFetchStatItems1' test.out
 
-#- 66 PublicBulkIncUserStatItem
+#- 67 PublicBulkIncUserStatItem
 # body param: body
-echo '[{"inc": 0.6750570821676727, "statCode": "NppZCZoa", "userId": "Epu1eyfC"}, {"inc": 0.04092618312529184, "statCode": "rm7ruEC9", "userId": "Ik4vfneD"}, {"inc": 0.01807021812421883, "statCode": "4w7uxsAX", "userId": "ws4JeQNF"}]' > $TEMP_JSON_INPUT
+echo '[{"inc": 0.7320995386355713, "statCode": "63aI5WvJ", "userId": "FZFd2fkH"}, {"inc": 0.4246157134912266, "statCode": "4BzUGKEM", "userId": "1iz4cpJD"}, {"inc": 0.49360402682341675, "statCode": "pI85bF4E", "userId": "z346I2pV"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op PublicBulkIncUserStatItem \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 66 'PublicBulkIncUserStatItem' test.out
+eval_tap $? 67 'PublicBulkIncUserStatItem' test.out
 
-#- 67 PublicBulkIncUserStatItemValue
+#- 68 PublicBulkIncUserStatItemValue
 # body param: body
-echo '[{"inc": 0.22994637478294688, "statCode": "rSrTVSDf", "userId": "aQT98etF"}, {"inc": 0.3874579310423878, "statCode": "lDZ8CyiS", "userId": "HO9nxY6H"}, {"inc": 0.07676472582093563, "statCode": "KXUVW9Xw", "userId": "7xD8f13n"}]' > $TEMP_JSON_INPUT
+echo '[{"inc": 0.38415941427061584, "statCode": "tEDlN6ep", "userId": "4mHgQLUw"}, {"inc": 0.3163531514737188, "statCode": "mQnzdoQ4", "userId": "GlH7jFZY"}, {"inc": 0.1385883370074683, "statCode": "PhgaQw1i", "userId": "6YImqw1e"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op PublicBulkIncUserStatItemValue \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 67 'PublicBulkIncUserStatItemValue' test.out
+eval_tap $? 68 'PublicBulkIncUserStatItemValue' test.out
 
-#- 68 BulkResetUserStatItem2
+#- 69 BulkResetUserStatItem2
 # body param: body
-echo '[{"statCode": "OqOGNNXG", "userId": "8sptd31A"}, {"statCode": "gKyXiQWl", "userId": "lrftJaGZ"}, {"statCode": "mbWjtUyH", "userId": "neehxggz"}]' > $TEMP_JSON_INPUT
+echo '[{"statCode": "Eea1iTGr", "userId": "XBTUJYZE"}, {"statCode": "Md2Z82dd", "userId": "Rkerx9QX"}, {"statCode": "vbKdtkvY", "userId": "FnQCuOC5"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op BulkResetUserStatItem2 \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 68 'BulkResetUserStatItem2' test.out
+eval_tap $? 69 'BulkResetUserStatItem2' test.out
 
-#- 69 CreateStat1
+#- 70 CreateStat1
 # body param: body
-echo '{"cycleIds": ["99eI7Q1j", "IESBg9rj", "SgDcLj4w"], "defaultValue": 0.9814496245462582, "description": "EuZCiWYN", "ignoreAdditionalDataOnValueRejected": true, "incrementOnly": true, "isPublic": true, "maximum": 0.2236751706020378, "minimum": 0.8885833055592632, "name": "ObJdiSpr", "setAsGlobal": false, "setBy": "SERVER", "statCode": "eEW8B1TO", "tags": ["RxlvmLbl", "tZUHoOfa", "3iz6gPnG"]}' > $TEMP_JSON_INPUT
+echo '{"cycleIds": ["vF9jKDrf", "gwCG7d5n", "Djd2dMdY"], "defaultValue": 0.8658867552806075, "description": "t081bTaT", "ignoreAdditionalDataOnValueRejected": true, "incrementOnly": false, "isPublic": false, "maximum": 0.9953726422468027, "minimum": 0.5114406385445733, "name": "2trnllMA", "setAsGlobal": false, "setBy": "CLIENT", "statCode": "WPPYBc29", "tags": ["8easfO6m", "dsYF2O9y", "iqArdr8n"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op CreateStat1 \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 69 'CreateStat1' test.out
+eval_tap $? 70 'CreateStat1' test.out
 
-#- 70 PublicListMyStatCycleItems
+#- 71 PublicListMyStatCycleItems
 $CLI_EXE \
     --sn social \
     --op PublicListMyStatCycleItems \
-    --cycleId '950cq7qq' \
+    --cycleId 'znMDDy4v' \
     --namespace $AB_NAMESPACE \
-    --limit '99' \
-    --offset '49' \
-    --sortBy 'w5gTWTTw' \
-    --statCodes '["tytIGEAd", "8IwJDQbM", "dYjkWU1E"]' \
+    --limit '57' \
+    --offset '15' \
+    --sortBy '1PWKUxeW' \
+    --statCodes '["pVmT4JLR", "as7Q4hWB", "cYzmmZkU"]' \
     > test.out 2>&1
-eval_tap $? 70 'PublicListMyStatCycleItems' test.out
+eval_tap $? 71 'PublicListMyStatCycleItems' test.out
 
-#- 71 PublicListMyStatItems
+#- 72 PublicListMyStatItems
 $CLI_EXE \
     --sn social \
     --op PublicListMyStatItems \
     --namespace $AB_NAMESPACE \
-    --limit '35' \
-    --offset '100' \
-    --sortBy 'ClXhhJSk' \
-    --statCodes '["On4xb3LP", "0aCOEtq6", "gBR06WPv"]' \
-    --tags '["19hCZgZn", "C9HSJv62", "qh5dvo4P"]' \
+    --limit '83' \
+    --offset '17' \
+    --sortBy 'JTmakR08' \
+    --statCodes '["bzrfifml", "O1xfC6Av", "K7x8cny8"]' \
+    --tags '["gEXLeE0D", "ZficJQfV", "2JLVmMJP"]' \
     > test.out 2>&1
-eval_tap $? 71 'PublicListMyStatItems' test.out
+eval_tap $? 72 'PublicListMyStatItems' test.out
 
-#- 72 PublicListAllMyStatItems
+#- 73 PublicListAllMyStatItems
 $CLI_EXE \
     --sn social \
     --op PublicListAllMyStatItems \
     --namespace $AB_NAMESPACE \
-    --additionalKey 'xAJIGrO4' \
-    --statCodes '["IDMQu8ZE", "VXzQpFk4", "8QcNWHjQ"]' \
-    --tags '["edbUIoqG", "t8ady9jf", "mrCb2tqY"]' \
+    --additionalKey 'G4i16jCI' \
+    --statCodes '["78HsI1Nu", "WGzRBMf0", "lPZxj7XF"]' \
+    --tags '["qhM0jgdY", "TQJn2zFd", "VD6cwOwP"]' \
     > test.out 2>&1
-eval_tap $? 72 'PublicListAllMyStatItems' test.out
+eval_tap $? 73 'PublicListAllMyStatItems' test.out
 
-#- 73 GetUserStatCycleItems1
+#- 74 GetUserStatCycleItems1
 $CLI_EXE \
     --sn social \
     --op GetUserStatCycleItems1 \
-    --cycleId 'q36WFf6B' \
+    --cycleId 'wcLmqo7r' \
     --namespace $AB_NAMESPACE \
-    --userId '2KQfMn86' \
-    --limit '28' \
-    --offset '37' \
-    --sortBy 'D9FBJEsq' \
-    --statCodes 'T70ViZ3o' \
+    --userId 'iKMPK7Bb' \
+    --limit '96' \
+    --offset '70' \
+    --sortBy 'vyeL9iE9' \
+    --statCodes 'bOBjwL1L' \
     > test.out 2>&1
-eval_tap $? 73 'GetUserStatCycleItems1' test.out
+eval_tap $? 74 'GetUserStatCycleItems1' test.out
 
-#- 74 PublicQueryUserStatItems
+#- 75 PublicQueryUserStatItems
 $CLI_EXE \
     --sn social \
     --op PublicQueryUserStatItems \
     --namespace $AB_NAMESPACE \
-    --userId 'YBwZXAet' \
-    --limit '80' \
-    --offset '54' \
-    --sortBy 'svAupvNg' \
-    --statCodes 'tgxlpKrI' \
-    --tags 'p9lmMOi9' \
+    --userId 'XmCPqNLs' \
+    --limit '7' \
+    --offset '78' \
+    --sortBy 'ahq5YAGY' \
+    --statCodes 'AguVkzgp' \
+    --tags 'JtotEXep' \
     > test.out 2>&1
-eval_tap $? 74 'PublicQueryUserStatItems' test.out
+eval_tap $? 75 'PublicQueryUserStatItems' test.out
 
-#- 75 PublicBulkCreateUserStatItems
+#- 76 PublicBulkCreateUserStatItems
 # body param: body
-echo '[{"statCode": "2Y5CHM35"}, {"statCode": "5DxksyLu"}, {"statCode": "vwitoziY"}]' > $TEMP_JSON_INPUT
+echo '[{"statCode": "wj2422u3"}, {"statCode": "TbLqB39X"}, {"statCode": "VolUuj4P"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op PublicBulkCreateUserStatItems \
     --namespace $AB_NAMESPACE \
-    --userId 'rjisRwpI' \
+    --userId 'IOm62fsN' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 75 'PublicBulkCreateUserStatItems' test.out
+eval_tap $? 76 'PublicBulkCreateUserStatItems' test.out
 
-#- 76 PublicQueryUserStatItems1
+#- 77 PublicQueryUserStatItems1
 $CLI_EXE \
     --sn social \
     --op PublicQueryUserStatItems1 \
     --namespace $AB_NAMESPACE \
-    --userId 'MTgYIdto' \
-    --additionalKey '0gleDiFR' \
-    --statCodes '["wa6F65e3", "hsXlV2Dq", "TtLyYBv0"]' \
-    --tags '["ehuDoCc4", "HLRohuxb", "wr1c3hVw"]' \
+    --userId 'wqsNwMQD' \
+    --additionalKey 't1qW2LQQ' \
+    --statCodes '["mTuEd1Oc", "VhVrThJe", "DFlqeCSP"]' \
+    --tags '["g6CbdSZb", "avaAlQr0", "6Sx0VgRd"]' \
     > test.out 2>&1
-eval_tap $? 76 'PublicQueryUserStatItems1' test.out
+eval_tap $? 77 'PublicQueryUserStatItems1' test.out
 
-#- 77 PublicBulkIncUserStatItem1
+#- 78 PublicBulkIncUserStatItem1
 # body param: body
-echo '[{"inc": 0.858170013292874, "statCode": "YB815kgT"}, {"inc": 0.609175538663122, "statCode": "hDjL19p3"}, {"inc": 0.34246262784845305, "statCode": "3Es32ETQ"}]' > $TEMP_JSON_INPUT
+echo '[{"inc": 0.06983601113333227, "statCode": "698fOkq7"}, {"inc": 0.6642713378267656, "statCode": "GbGJ7wkh"}, {"inc": 0.3313112807887171, "statCode": "8LI5UFXb"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op PublicBulkIncUserStatItem1 \
     --namespace $AB_NAMESPACE \
-    --userId 'dnsvri4R' \
+    --userId 'ySHUzKMT' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 77 'PublicBulkIncUserStatItem1' test.out
+eval_tap $? 78 'PublicBulkIncUserStatItem1' test.out
 
-#- 78 BulkIncUserStatItemValue2
+#- 79 BulkIncUserStatItemValue2
 # body param: body
-echo '[{"inc": 0.4726497050728844, "statCode": "mQfS2EaQ"}, {"inc": 0.18220783923217942, "statCode": "ymZua0HF"}, {"inc": 0.37722287681162736, "statCode": "dWNDYOBf"}]' > $TEMP_JSON_INPUT
+echo '[{"inc": 0.4831428528639392, "statCode": "ofrkOoBd"}, {"inc": 0.5346745274456682, "statCode": "t23gxUwL"}, {"inc": 0.9719755571721469, "statCode": "cwYuKrnm"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op BulkIncUserStatItemValue2 \
     --namespace $AB_NAMESPACE \
-    --userId '6vBcXseJ' \
+    --userId '0qWN43gd' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 78 'BulkIncUserStatItemValue2' test.out
+eval_tap $? 79 'BulkIncUserStatItemValue2' test.out
 
-#- 79 BulkResetUserStatItem3
+#- 80 BulkResetUserStatItem3
 # body param: body
-echo '[{"statCode": "nXC3Lvhw"}, {"statCode": "F0WBovlD"}, {"statCode": "ZjG5ihg1"}]' > $TEMP_JSON_INPUT
+echo '[{"statCode": "Cz6Yg0YQ"}, {"statCode": "8GEsA60x"}, {"statCode": "I5FZHZBd"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op BulkResetUserStatItem3 \
     --namespace $AB_NAMESPACE \
-    --userId 'ZHAuwDDN' \
+    --userId 'fOoQATju' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 79 'BulkResetUserStatItem3' test.out
+eval_tap $? 80 'BulkResetUserStatItem3' test.out
 
-#- 80 PublicCreateUserStatItem
+#- 81 PublicCreateUserStatItem
 $CLI_EXE \
     --sn social \
     --op PublicCreateUserStatItem \
     --namespace $AB_NAMESPACE \
-    --statCode 'qWKu6hMh' \
-    --userId 'DWzIOlzp' \
+    --statCode '6aH2Ynp5' \
+    --userId 'QGEXHxfJ' \
     > test.out 2>&1
-eval_tap $? 80 'PublicCreateUserStatItem' test.out
+eval_tap $? 81 'PublicCreateUserStatItem' test.out
 
-#- 81 DeleteUserStatItems1
+#- 82 DeleteUserStatItems1
 $CLI_EXE \
     --sn social \
     --op DeleteUserStatItems1 \
     --namespace $AB_NAMESPACE \
-    --statCode 'ghqxe3H8' \
-    --userId '3M6fulzX' \
+    --statCode 'SJbONHOJ' \
+    --userId 'uOwBG0sH' \
     > test.out 2>&1
-eval_tap $? 81 'DeleteUserStatItems1' test.out
+eval_tap $? 82 'DeleteUserStatItems1' test.out
 
-#- 82 PublicIncUserStatItem
+#- 83 PublicIncUserStatItem
 # body param: body
-echo '{"inc": 0.2607268047161868}' > $TEMP_JSON_INPUT
+echo '{"inc": 0.5959981754540905}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op PublicIncUserStatItem \
     --namespace $AB_NAMESPACE \
-    --statCode 'ezATM5s3' \
-    --userId 'jS3n7OXV' \
+    --statCode '5CvYYQVq' \
+    --userId 'okN4E0f6' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 82 'PublicIncUserStatItem' test.out
+eval_tap $? 83 'PublicIncUserStatItem' test.out
 
-#- 83 PublicIncUserStatItemValue
+#- 84 PublicIncUserStatItemValue
 # body param: body
-echo '{"inc": 0.23942079340547684}' > $TEMP_JSON_INPUT
+echo '{"inc": 0.3834002973437721}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op PublicIncUserStatItemValue \
     --namespace $AB_NAMESPACE \
-    --statCode '30ZtWJzA' \
-    --userId 'EgN8T0cy' \
+    --statCode 'CIZKPFTv' \
+    --userId '0yBPn5Ie' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 83 'PublicIncUserStatItemValue' test.out
+eval_tap $? 84 'PublicIncUserStatItemValue' test.out
 
-#- 84 ResetUserStatItemValue1
+#- 85 ResetUserStatItemValue1
 $CLI_EXE \
     --sn social \
     --op ResetUserStatItemValue1 \
     --namespace $AB_NAMESPACE \
-    --statCode 'zjP23hFc' \
-    --userId 'uM8qEIRY' \
+    --statCode 'gACeOgGE' \
+    --userId 'kz5FtbZb' \
     > test.out 2>&1
-eval_tap $? 84 'ResetUserStatItemValue1' test.out
+eval_tap $? 85 'ResetUserStatItemValue1' test.out
 
-#- 85 BulkUpdateUserStatItemV2
+#- 86 BulkUpdateUserStatItemV2
 # body param: body
-echo '[{"additionalData": {"p54Kycog": {}, "3sq9lN6P": {}, "EipM0hJ0": {}}, "additionalKey": "8ecJSDDw", "statCode": "zItXw52O", "updateStrategy": "MAX", "userId": "EU6cAHmA", "value": 0.22477293726059855}, {"additionalData": {"4ktXfcD2": {}, "7azj6Yuz": {}, "Nv4RWWYy": {}}, "additionalKey": "bBYlbhy0", "statCode": "6SxM48RY", "updateStrategy": "MAX", "userId": "4qI4WAGF", "value": 0.43301901888101735}, {"additionalData": {"lEXi4ZV8": {}, "ebEzotq9": {}, "NtuQgWXO": {}}, "additionalKey": "hNsbA7TK", "statCode": "Ngd7F4qe", "updateStrategy": "MAX", "userId": "SIwxdkcI", "value": 0.16030463252463956}]' > $TEMP_JSON_INPUT
+echo '[{"additionalData": {"ycZ43hV9": {}, "vbhaNKQS": {}, "Y2Q6ffw1": {}}, "additionalKey": "ot1beA3o", "statCode": "dGsJIbi8", "updateStrategy": "OVERRIDE", "userId": "zs6yjhvX", "value": 0.3500563746036143}, {"additionalData": {"72fNdt9n": {}, "YlfohGjb": {}, "gqsI2Vtx": {}}, "additionalKey": "YU71tyBF", "statCode": "kDCIBXpe", "updateStrategy": "OVERRIDE", "userId": "3ubfX7tW", "value": 0.1894971648411391}, {"additionalData": {"HTo5Sqsd": {}, "aT5PKXRW": {}, "nISXg2AH": {}}, "additionalKey": "G4Ik4Dlm", "statCode": "XYK3jPVL", "updateStrategy": "MAX", "userId": "n8BYVztL", "value": 0.8916442412675041}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op BulkUpdateUserStatItemV2 \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 85 'BulkUpdateUserStatItemV2' test.out
+eval_tap $? 86 'BulkUpdateUserStatItemV2' test.out
 
-#- 86 BulkFetchOrDefaultStatItems1
+#- 87 BulkFetchOrDefaultStatItems1
 $CLI_EXE \
     --sn social \
     --op BulkFetchOrDefaultStatItems1 \
     --namespace $AB_NAMESPACE \
-    --additionalKey '7NU12hbj' \
-    --statCode 'KDYakSek' \
-    --userIds '["aIQrb1RG", "nOLmLOW9", "keHWGV77"]' \
+    --additionalKey 'uK1QlTHX' \
+    --statCode 'ZEutE114' \
+    --userIds '["IVpGoF0K", "nGFGOblJ", "u4TusmoL"]' \
     > test.out 2>&1
-eval_tap $? 86 'BulkFetchOrDefaultStatItems1' test.out
+eval_tap $? 87 'BulkFetchOrDefaultStatItems1' test.out
 
-#- 87 AdminListUsersStatItems
+#- 88 AdminListUsersStatItems
 $CLI_EXE \
     --sn social \
     --op AdminListUsersStatItems \
     --namespace $AB_NAMESPACE \
-    --userId '4Pwkrr4T' \
-    --additionalKey 'G65eVNbT' \
-    --statCodes '["lIlrMEvg", "O2mAEloX", "6TNkgo19"]' \
-    --tags '["M2XmxMTT", "hvdAnvEJ", "lLy7eCEz"]' \
+    --userId 'GVzpuX3A' \
+    --additionalKey 'ptSm5E6N' \
+    --statCodes '["nj1H1mHZ", "IXYiClk3", "zb0JE2wi"]' \
+    --tags '["LxSFnGsd", "MjMfSmgW", "F3FRa7b6"]' \
     > test.out 2>&1
-eval_tap $? 87 'AdminListUsersStatItems' test.out
+eval_tap $? 88 'AdminListUsersStatItems' test.out
 
-#- 88 BulkUpdateUserStatItem
+#- 89 BulkUpdateUserStatItem
 # body param: body
-echo '[{"additionalData": {"oEy2zvos": {}, "sARUv448": {}, "0tMi5mkU": {}}, "statCode": "UoQPmLK2", "updateStrategy": "INCREMENT", "value": 0.2598321648627546}, {"additionalData": {"T762ggVq": {}, "jnHvEYVM": {}, "CqP8wwBb": {}}, "statCode": "K6ZB3EjI", "updateStrategy": "MAX", "value": 0.35869804222792256}, {"additionalData": {"daKvdIVz": {}, "FC6J7iJj": {}, "nkW4QUwg": {}}, "statCode": "pqstaTxy", "updateStrategy": "OVERRIDE", "value": 0.9851821198516227}]' > $TEMP_JSON_INPUT
+echo '[{"additionalData": {"dhqIUzRM": {}, "wODsnUMm": {}, "3D5Utz5G": {}}, "statCode": "GC6NVJBb", "updateStrategy": "INCREMENT", "value": 0.5513468760614234}, {"additionalData": {"3rDBe5qU": {}, "sTOKG2V0": {}, "ukSSDiWy": {}}, "statCode": "7oKtVjOx", "updateStrategy": "OVERRIDE", "value": 0.8737005593218113}, {"additionalData": {"uQRyn1wI": {}, "xDcQsylr": {}, "j9L8VBWu": {}}, "statCode": "eE2wIqS7", "updateStrategy": "OVERRIDE", "value": 0.06031694711442703}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op BulkUpdateUserStatItem \
     --namespace $AB_NAMESPACE \
-    --userId 'xl7X2iTA' \
-    --additionalKey 'pih6rpKw' \
+    --userId 'p5Ptx3XP' \
+    --additionalKey 'GliRyUEh' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 88 'BulkUpdateUserStatItem' test.out
+eval_tap $? 89 'BulkUpdateUserStatItem' test.out
 
-#- 89 BulkResetUserStatItemValues
+#- 90 BulkResetUserStatItemValues
 # body param: body
-echo '[{"additionalData": {"sWbpRDvT": {}, "Zs3E9Nzm": {}, "QPyOGcxs": {}}, "statCode": "BcxhXV4X"}, {"additionalData": {"cGt23Fde": {}, "IvnYvLiR": {}, "aVINnaOs": {}}, "statCode": "6Oumxxxa"}, {"additionalData": {"KNlAOr2Z": {}, "nYrXgLW6": {}, "kXdyzLgN": {}}, "statCode": "ymHUwSax"}]' > $TEMP_JSON_INPUT
+echo '[{"additionalData": {"ffAQqb9w": {}, "7xAPz75l": {}, "SrPV76p8": {}}, "statCode": "U4QrFoaX"}, {"additionalData": {"sJ37Rccc": {}, "Vl5Eem6N": {}, "YAlP8Ad1": {}}, "statCode": "a1BSVUam"}, {"additionalData": {"Gp6CP9iP": {}, "qiBx4e7P": {}, "l3a1EUQl": {}}, "statCode": "qwGQUFpH"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op BulkResetUserStatItemValues \
     --namespace $AB_NAMESPACE \
-    --userId 'EV1VbSDM' \
-    --additionalKey 'wZoyYqU7' \
+    --userId 'i7CpjZqn' \
+    --additionalKey 'nx6wRkn3' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 89 'BulkResetUserStatItemValues' test.out
+eval_tap $? 90 'BulkResetUserStatItemValues' test.out
 
-#- 90 DeleteUserStatItems2
+#- 91 DeleteUserStatItems2
 $CLI_EXE \
     --sn social \
     --op DeleteUserStatItems2 \
     --namespace $AB_NAMESPACE \
-    --statCode 'JgKHSi0O' \
-    --userId '35Fb9sbD' \
-    --additionalKey 'MZoJ3ukI' \
+    --statCode 'oBTGFcyj' \
+    --userId 'fmdJFK1y' \
+    --additionalKey 'AfOE1jsD' \
     > test.out 2>&1
-eval_tap $? 90 'DeleteUserStatItems2' test.out
+eval_tap $? 91 'DeleteUserStatItems2' test.out
 
-#- 91 UpdateUserStatItemValue
+#- 92 UpdateUserStatItemValue
 # body param: body
-echo '{"additionalData": {"WhBDGV6R": {}, "0ES5craR": {}, "IXTJv1Cs": {}}, "updateStrategy": "INCREMENT", "value": 0.15862871010645174}' > $TEMP_JSON_INPUT
+echo '{"additionalData": {"tqV4Iy9M": {}, "FHfXcywQ": {}, "zTw0FhFl": {}}, "updateStrategy": "MAX", "value": 0.28052164567389337}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op UpdateUserStatItemValue \
     --namespace $AB_NAMESPACE \
-    --statCode 'y29fIDwa' \
-    --userId 'vsFt2ulZ' \
-    --additionalKey 'vOC4PvIy' \
+    --statCode '8PCxkopa' \
+    --userId 'StgobhoY' \
+    --additionalKey 'Y62XJCMn' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 91 'UpdateUserStatItemValue' test.out
+eval_tap $? 92 'UpdateUserStatItemValue' test.out
 
-#- 92 BulkUpdateUserStatItem1
+#- 93 BulkUpdateUserStatItem1
 # body param: body
-echo '[{"additionalData": {"UgqWuZfR": {}, "eARahXYv": {}, "RyRXX2kq": {}}, "additionalKey": "1xWTfH09", "statCode": "Xda2DM0t", "updateStrategy": "MAX", "userId": "4oZaGaPw", "value": 0.025155553757311933}, {"additionalData": {"qw48HMGA": {}, "ppUgqC11": {}, "ZD7tDsGH": {}}, "additionalKey": "dT5jW4pX", "statCode": "FMQMYlsc", "updateStrategy": "OVERRIDE", "userId": "mNOQnFLE", "value": 0.21842862880305025}, {"additionalData": {"dvBTHA0g": {}, "THvJfZVs": {}, "LDdqfeaR": {}}, "additionalKey": "ltzEEsD3", "statCode": "J19ldAWX", "updateStrategy": "MAX", "userId": "qZxfQnMI", "value": 0.210288220570772}]' > $TEMP_JSON_INPUT
+echo '[{"additionalData": {"DmMcK85o": {}, "Drv3swIm": {}, "UNhcvxYQ": {}}, "additionalKey": "Lym3CZxL", "statCode": "JQYud3Xn", "updateStrategy": "OVERRIDE", "userId": "GFz932hf", "value": 0.9815288550394905}, {"additionalData": {"6OTlMirV": {}, "cWDnUVKt": {}, "HOVaMspb": {}}, "additionalKey": "6XvEcfFD", "statCode": "6bKsms5W", "updateStrategy": "OVERRIDE", "userId": "cJdvzvVk", "value": 0.7625924078860987}, {"additionalData": {"o4Z9Mu5z": {}, "ka4NoJ00": {}, "qyOUcPSj": {}}, "additionalKey": "J2FtwVWw", "statCode": "TYPdwerX", "updateStrategy": "OVERRIDE", "userId": "OJlPggf8", "value": 0.4257055836503685}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op BulkUpdateUserStatItem1 \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 92 'BulkUpdateUserStatItem1' test.out
+eval_tap $? 93 'BulkUpdateUserStatItem1' test.out
 
-#- 93 PublicQueryUserStatItems2
+#- 94 PublicQueryUserStatItems2
 $CLI_EXE \
     --sn social \
     --op PublicQueryUserStatItems2 \
     --namespace $AB_NAMESPACE \
-    --userId 'gzzMLPBl' \
-    --additionalKey '4DPtqlrM' \
-    --statCodes '["DPB1IvG6", "ysKq34UP", "KaUxBdzh"]' \
-    --tags '["r67sM6Lb", "GedSDYKU", "j0Iw3lxV"]' \
+    --userId 'Gl8pQWob' \
+    --additionalKey '4nutybvw' \
+    --statCodes '["0fczr1L3", "7vZtP0W1", "CV6DyLmv"]' \
+    --tags '["mJU3t2i9", "XJ3XLgtr", "y3gqxPSb"]' \
     > test.out 2>&1
-eval_tap $? 93 'PublicQueryUserStatItems2' test.out
+eval_tap $? 94 'PublicQueryUserStatItems2' test.out
 
-#- 94 BulkUpdateUserStatItem2
+#- 95 BulkUpdateUserStatItem2
 # body param: body
-echo '[{"additionalData": {"nlSAeBIc": {}, "vo3nA8Jh": {}, "1lceicps": {}}, "statCode": "rAev6R5A", "updateStrategy": "MAX", "value": 0.5003369794231762}, {"additionalData": {"rcw4jMAn": {}, "cJfWoNCo": {}, "hMjvHILR": {}}, "statCode": "Ruk9EPeg", "updateStrategy": "OVERRIDE", "value": 0.04394033620405591}, {"additionalData": {"zd8d494Y": {}, "Xcp3KeTU": {}, "GKzoPPtq": {}}, "statCode": "ZeIGLK4X", "updateStrategy": "MAX", "value": 0.48930971966916625}]' > $TEMP_JSON_INPUT
+echo '[{"additionalData": {"5H5FKAbA": {}, "ziEYmxI7": {}, "bvZe608C": {}}, "statCode": "g1tc9O1n", "updateStrategy": "MIN", "value": 0.3155499588780193}, {"additionalData": {"U5zoDMlS": {}, "NVDDMyeV": {}, "gq3GMt3N": {}}, "statCode": "cSo9rsZf", "updateStrategy": "MIN", "value": 0.14467199706652367}, {"additionalData": {"gxlDoiZO": {}, "rboFWtbv": {}, "WdSb6fEc": {}}, "statCode": "ZqknNfzR", "updateStrategy": "MIN", "value": 0.8863561946917565}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op BulkUpdateUserStatItem2 \
     --namespace $AB_NAMESPACE \
-    --userId 'xpAnjdrX' \
-    --additionalKey 'YRhgWlVS' \
+    --userId '7ujVc7S4' \
+    --additionalKey '8cQrmKlL' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 94 'BulkUpdateUserStatItem2' test.out
+eval_tap $? 95 'BulkUpdateUserStatItem2' test.out
 
-#- 95 UpdateUserStatItemValue1
+#- 96 UpdateUserStatItemValue1
 # body param: body
-echo '{"additionalData": {"JavHLj6v": {}, "4W0VR8d1": {}, "oA1roslK": {}}, "updateStrategy": "MIN", "value": 0.2927903192577832}' > $TEMP_JSON_INPUT
+echo '{"additionalData": {"pdESFnPo": {}, "A60mnuD9": {}, "SdfWc7ek": {}}, "updateStrategy": "OVERRIDE", "value": 0.4317700140981967}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn social \
     --op UpdateUserStatItemValue1 \
     --namespace $AB_NAMESPACE \
-    --statCode 'oyTkJ9SW' \
-    --userId 'vEi7d23K' \
-    --additionalKey 'PXZ8L8EX' \
+    --statCode 'jMSMUeOJ' \
+    --userId 'dISdmYXA' \
+    --additionalKey '9iRneIuA' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 95 'UpdateUserStatItemValue1' test.out
+eval_tap $? 96 'UpdateUserStatItemValue1' test.out
 
 
 # remove artifacts

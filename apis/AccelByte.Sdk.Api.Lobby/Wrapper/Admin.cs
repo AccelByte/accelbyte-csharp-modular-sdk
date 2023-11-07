@@ -25,6 +25,18 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         }
 
         #region Operation Builders
+        public AdminGetGlobalConfig.AdminGetGlobalConfigBuilder AdminGetGlobalConfigOp
+        {
+            get { return new Operation.AdminGetGlobalConfig.AdminGetGlobalConfigBuilder(_sdk); }
+        }
+        public AdminUpdateGlobalConfig.AdminUpdateGlobalConfigBuilder AdminUpdateGlobalConfigOp
+        {
+            get { return new Operation.AdminUpdateGlobalConfig.AdminUpdateGlobalConfigBuilder(_sdk); }
+        }
+        public AdminDeleteGlobalConfig.AdminDeleteGlobalConfigBuilder AdminDeleteGlobalConfigOp
+        {
+            get { return new Operation.AdminDeleteGlobalConfig.AdminDeleteGlobalConfigBuilder(_sdk); }
+        }
         public FreeFormNotification.FreeFormNotificationBuilder FreeFormNotificationOp
         {
             get { return new Operation.FreeFormNotification.FreeFormNotificationBuilder(_sdk); }
@@ -67,6 +79,33 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         }
         #endregion
 
+        public Model.ModelGlobalConfiguration? AdminGetGlobalConfig(AdminGetGlobalConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelGlobalConfiguration? AdminUpdateGlobalConfig(AdminUpdateGlobalConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public string? AdminDeleteGlobalConfig(AdminDeleteGlobalConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public void FreeFormNotification(FreeFormNotification input)
         {
             var response = _sdk.RunRequest(input);

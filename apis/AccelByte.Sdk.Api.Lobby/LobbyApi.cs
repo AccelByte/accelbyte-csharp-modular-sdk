@@ -37,6 +37,17 @@ namespace AccelByte.Sdk.Api.Lobby
         }
         private Wrapper.Config? _Config = null;
 
+        public Wrapper.Admin Admin
+        {
+            get
+            {
+                if (_Admin == null)
+                    _Admin = new Wrapper.Admin(_Sdk);
+                return _Admin;
+            }
+        }
+        private Wrapper.Admin? _Admin = null;
+
         public Wrapper.Notification Notification
         {
             get
@@ -113,17 +124,6 @@ namespace AccelByte.Sdk.Api.Lobby
             }
         }
         private Wrapper.Presence? _Presence = null;
-
-        public Wrapper.Admin Admin
-        {
-            get
-            {
-                if (_Admin == null)
-                    _Admin = new Wrapper.Admin(_Sdk);
-                return _Admin;
-            }
-        }
-        private Wrapper.Admin? _Admin = null;
 
         internal LobbyApi(IAccelByteSdk sdk)
         {

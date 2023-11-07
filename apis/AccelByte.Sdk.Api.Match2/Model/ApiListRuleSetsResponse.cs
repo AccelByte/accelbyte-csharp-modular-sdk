@@ -13,6 +13,7 @@ namespace AccelByte.Sdk.Api.Match2.Model
     public class ApiListRuleSetsResponse : AccelByte.Sdk.Core.Model
     {
         [JsonPropertyName("data")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<ApiMatchRuleSetNameData>? Data { get; set; }
 
         [JsonPropertyName("pagination")]

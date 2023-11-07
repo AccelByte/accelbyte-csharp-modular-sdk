@@ -13,6 +13,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Model
     public class ModelsCreateImageRequest : AccelByte.Sdk.Core.Model
     {
         [JsonPropertyName("artifactPath")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ArtifactPath { get; set; }
 
         [JsonPropertyName("coreDumpEnabled")]

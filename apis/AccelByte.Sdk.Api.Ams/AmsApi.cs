@@ -59,6 +59,17 @@ namespace AccelByte.Sdk.Api.Ams
         }
         private Wrapper.Fleets? _Fleets = null;
 
+        public Wrapper.Images Images
+        {
+            get
+            {
+                if (_Images == null)
+                    _Images = new Wrapper.Images(_Sdk);
+                return _Images;
+            }
+        }
+        private Wrapper.Images? _Images = null;
+
         public Wrapper.Servers Servers
         {
             get
@@ -70,16 +81,16 @@ namespace AccelByte.Sdk.Api.Ams
         }
         private Wrapper.Servers? _Servers = null;
 
-        public Wrapper.Images Images
+        public Wrapper.AMSQoS AMSQoS
         {
             get
             {
-                if (_Images == null)
-                    _Images = new Wrapper.Images(_Sdk);
-                return _Images;
+                if (_AMSQoS == null)
+                    _AMSQoS = new Wrapper.AMSQoS(_Sdk);
+                return _AMSQoS;
             }
         }
-        private Wrapper.Images? _Images = null;
+        private Wrapper.AMSQoS? _AMSQoS = null;
 
         public Wrapper.AMSInfo AMSInfo
         {

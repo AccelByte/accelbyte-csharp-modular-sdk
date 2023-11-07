@@ -290,6 +290,17 @@ namespace AccelByte.Sdk.Api.Platform
         }
         private Wrapper.Ticket? _Ticket = null;
 
+        public Wrapper.TradeAction TradeAction
+        {
+            get
+            {
+                if (_TradeAction == null)
+                    _TradeAction = new Wrapper.TradeAction(_Sdk);
+                return _TradeAction;
+            }
+        }
+        private Wrapper.TradeAction? _TradeAction = null;
+
         public Wrapper.AchievementPlatform AchievementPlatform
         {
             get

@@ -37,6 +37,10 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         {
             get { return new Operation.AdminDeleteBulkGameSessions.AdminDeleteBulkGameSessionsBuilder(_sdk); }
         }
+        public AdminSetDSReady.AdminSetDSReadyBuilder AdminSetDSReadyOp
+        {
+            get { return new Operation.AdminSetDSReady.AdminSetDSReadyBuilder(_sdk); }
+        }
         public AdminUpdateGameSessionMember.AdminUpdateGameSessionMemberBuilder AdminUpdateGameSessionMemberOp
         {
             get { return new Operation.AdminUpdateGameSessionMember.AdminUpdateGameSessionMemberBuilder(_sdk); }
@@ -138,6 +142,15 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void AdminSetDSReady(AdminSetDSReady input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

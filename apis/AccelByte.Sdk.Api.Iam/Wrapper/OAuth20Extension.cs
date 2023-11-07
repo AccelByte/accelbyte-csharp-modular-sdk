@@ -57,9 +57,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.Logout.LogoutBuilder(_sdk); }
         }
-        public RequestGameTokenCodeResponseV3.RequestGameTokenCodeResponseV3Builder RequestGameTokenCodeResponseV3Op
+        public RequestTokenExchangeCodeV3.RequestTokenExchangeCodeV3Builder RequestTokenExchangeCodeV3Op
         {
-            get { return new Operation.RequestGameTokenCodeResponseV3.RequestGameTokenCodeResponseV3Builder(_sdk); }
+            get { return new Operation.RequestTokenExchangeCodeV3.RequestTokenExchangeCodeV3Builder(_sdk); }
         }
         public PlatformAuthenticationV3.PlatformAuthenticationV3Builder PlatformAuthenticationV3Op
         {
@@ -69,9 +69,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.PlatformTokenRefreshV3.PlatformTokenRefreshV3Builder(_sdk); }
         }
-        public RequestGameTokenResponseV3.RequestGameTokenResponseV3Builder RequestGameTokenResponseV3Op
+        public RequestTargetTokenResponseV3.RequestTargetTokenResponseV3Builder RequestTargetTokenResponseV3Op
         {
-            get { return new Operation.RequestGameTokenResponseV3.RequestGameTokenResponseV3Builder(_sdk); }
+            get { return new Operation.RequestTargetTokenResponseV3.RequestTargetTokenResponseV3Builder(_sdk); }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PlatformTokenRefreshV3Deprecate.PlatformTokenRefreshV3DeprecateBuilder PlatformTokenRefreshV3DeprecateOp
@@ -152,7 +152,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OauthmodelGameTokenCodeResponse? RequestGameTokenCodeResponseV3(RequestGameTokenCodeResponseV3 input)
+        public Model.OauthmodelTargetTokenCodeResponse? RequestTokenExchangeCodeV3(RequestTokenExchangeCodeV3 input)
         {
             var response = _sdk.RunRequest(input);
 
@@ -179,7 +179,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OauthmodelTokenResponseV3? RequestGameTokenResponseV3(RequestGameTokenResponseV3 input)
+        public Model.OauthmodelTokenResponseV3? RequestTargetTokenResponseV3(RequestTargetTokenResponseV3 input)
         {
             var response = _sdk.RunRequest(input);
 

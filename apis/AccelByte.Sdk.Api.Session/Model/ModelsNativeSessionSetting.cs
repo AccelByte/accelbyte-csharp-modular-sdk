@@ -26,11 +26,20 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? ShouldSync { get; set; }
 
+        [JsonPropertyName("XboxAllowCrossPlatform")]
+        public bool? XboxAllowCrossPlatform { get; set; }
+
+        [JsonPropertyName("XboxSandboxID")]
+        public string? XboxSandboxID { get; set; }
+
         [JsonPropertyName("XboxServiceConfigID")]
         public string? XboxServiceConfigID { get; set; }
 
         [JsonPropertyName("XboxSessionTemplateName")]
         public string? XboxSessionTemplateName { get; set; }
+
+        [JsonPropertyName("XboxTitleID")]
+        public string? XboxTitleID { get; set; }
 
         [JsonPropertyName("localizedSessionName")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -54,11 +63,20 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? ShouldSync { get; set; }
 
+        [JsonPropertyName("XboxAllowCrossPlatform")]
+        public bool? XboxAllowCrossPlatform { get; set; }
+
+        [JsonPropertyName("XboxSandboxID")]
+        public string? XboxSandboxID { get; set; }
+
         [JsonPropertyName("XboxServiceConfigID")]
         public string? XboxServiceConfigID { get; set; }
 
         [JsonPropertyName("XboxSessionTemplateName")]
         public string? XboxSessionTemplateName { get; set; }
+
+        [JsonPropertyName("XboxTitleID")]
+        public string? XboxTitleID { get; set; }
 
         [JsonPropertyName("localizedSessionName")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

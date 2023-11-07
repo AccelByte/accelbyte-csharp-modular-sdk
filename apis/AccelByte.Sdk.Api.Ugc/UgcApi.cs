@@ -81,16 +81,16 @@ namespace AccelByte.Sdk.Api.Ugc
         }
         private Wrapper.Anonymization? _Anonymization = null;
 
-        public Wrapper.PublicContent PublicContent
+        public Wrapper.PublicContentLegacy PublicContentLegacy
         {
             get
             {
-                if (_PublicContent == null)
-                    _PublicContent = new Wrapper.PublicContent(_Sdk);
-                return _PublicContent;
+                if (_PublicContentLegacy == null)
+                    _PublicContentLegacy = new Wrapper.PublicContentLegacy(_Sdk);
+                return _PublicContentLegacy;
             }
         }
-        private Wrapper.PublicContent? _PublicContent = null;
+        private Wrapper.PublicContentLegacy? _PublicContentLegacy = null;
 
         public Wrapper.PublicFollow PublicFollow
         {
@@ -103,27 +103,27 @@ namespace AccelByte.Sdk.Api.Ugc
         }
         private Wrapper.PublicFollow? _PublicFollow = null;
 
-        public Wrapper.PublicLike PublicLike
+        public Wrapper.PublicLikeLegacy PublicLikeLegacy
         {
             get
             {
-                if (_PublicLike == null)
-                    _PublicLike = new Wrapper.PublicLike(_Sdk);
-                return _PublicLike;
+                if (_PublicLikeLegacy == null)
+                    _PublicLikeLegacy = new Wrapper.PublicLikeLegacy(_Sdk);
+                return _PublicLikeLegacy;
             }
         }
-        private Wrapper.PublicLike? _PublicLike = null;
+        private Wrapper.PublicLikeLegacy? _PublicLikeLegacy = null;
 
-        public Wrapper.PublicDownloadCount PublicDownloadCount
+        public Wrapper.PublicDownloadCountLegacy PublicDownloadCountLegacy
         {
             get
             {
-                if (_PublicDownloadCount == null)
-                    _PublicDownloadCount = new Wrapper.PublicDownloadCount(_Sdk);
-                return _PublicDownloadCount;
+                if (_PublicDownloadCountLegacy == null)
+                    _PublicDownloadCountLegacy = new Wrapper.PublicDownloadCountLegacy(_Sdk);
+                return _PublicDownloadCountLegacy;
             }
         }
-        private Wrapper.PublicDownloadCount? _PublicDownloadCount = null;
+        private Wrapper.PublicDownloadCountLegacy? _PublicDownloadCountLegacy = null;
 
         public Wrapper.PublicTag PublicTag
         {
@@ -179,6 +179,50 @@ namespace AccelByte.Sdk.Api.Ugc
             }
         }
         private Wrapper.PublicGroup? _PublicGroup = null;
+
+        public Wrapper.AdminContentV2 AdminContentV2
+        {
+            get
+            {
+                if (_AdminContentV2 == null)
+                    _AdminContentV2 = new Wrapper.AdminContentV2(_Sdk);
+                return _AdminContentV2;
+            }
+        }
+        private Wrapper.AdminContentV2? _AdminContentV2 = null;
+
+        public Wrapper.PublicContentV2 PublicContentV2
+        {
+            get
+            {
+                if (_PublicContentV2 == null)
+                    _PublicContentV2 = new Wrapper.PublicContentV2(_Sdk);
+                return _PublicContentV2;
+            }
+        }
+        private Wrapper.PublicContentV2? _PublicContentV2 = null;
+
+        public Wrapper.PublicDownloadCountV2 PublicDownloadCountV2
+        {
+            get
+            {
+                if (_PublicDownloadCountV2 == null)
+                    _PublicDownloadCountV2 = new Wrapper.PublicDownloadCountV2(_Sdk);
+                return _PublicDownloadCountV2;
+            }
+        }
+        private Wrapper.PublicDownloadCountV2? _PublicDownloadCountV2 = null;
+
+        public Wrapper.PublicLikeV2 PublicLikeV2
+        {
+            get
+            {
+                if (_PublicLikeV2 == null)
+                    _PublicLikeV2 = new Wrapper.PublicLikeV2(_Sdk);
+                return _PublicLikeV2;
+            }
+        }
+        private Wrapper.PublicLikeV2? _PublicLikeV2 = null;
 
         internal UgcApi(IAccelByteSdk sdk)
         {

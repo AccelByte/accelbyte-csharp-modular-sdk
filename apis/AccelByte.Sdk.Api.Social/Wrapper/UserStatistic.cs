@@ -45,6 +45,10 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         {
             get { return new Operation.BulkResetUserStatItem.BulkResetUserStatItemBuilder(_sdk); }
         }
+        public GetStatItems.GetStatItemsBuilder GetStatItemsOp
+        {
+            get { return new Operation.GetStatItems.GetStatItemsBuilder(_sdk); }
+        }
         public GetUserStatItems.GetUserStatItemsBuilder GetUserStatItemsOp
         {
             get { return new Operation.GetUserStatItems.GetUserStatItemsBuilder(_sdk); }
@@ -276,6 +280,15 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.StatItemValuePagingSlicedResult? GetStatItems(GetStatItems input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

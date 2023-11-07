@@ -58,6 +58,10 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         {
             get { return new Operation.CreditUserWallet.CreditUserWalletBuilder(_sdk); }
         }
+        public DebitByWalletPlatform.DebitByWalletPlatformBuilder DebitByWalletPlatformOp
+        {
+            get { return new Operation.DebitByWalletPlatform.DebitByWalletPlatformBuilder(_sdk); }
+        }
         public PayWithUserWallet.PayWithUserWalletBuilder PayWithUserWalletOp
         {
             get { return new Operation.PayWithUserWallet.PayWithUserWalletBuilder(_sdk); }
@@ -186,6 +190,15 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
 #pragma warning restore ab_deprecated_operation
         public Model.WalletInfo? CreditUserWallet(CreditUserWallet input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.PlatformWallet? DebitByWalletPlatform(DebitByWalletPlatform input)
         {
             var response = _sdk.RunRequest(input);
 

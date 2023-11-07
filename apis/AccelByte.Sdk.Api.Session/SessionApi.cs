@@ -70,6 +70,28 @@ namespace AccelByte.Sdk.Api.Session
         }
         private Wrapper.ConfigurationTemplate? _ConfigurationTemplate = null;
 
+        public Wrapper.Certificate Certificate
+        {
+            get
+            {
+                if (_Certificate == null)
+                    _Certificate = new Wrapper.Certificate(_Sdk);
+                return _Certificate;
+            }
+        }
+        private Wrapper.Certificate? _Certificate = null;
+
+        public Wrapper.MaxActive MaxActive
+        {
+            get
+            {
+                if (_MaxActive == null)
+                    _MaxActive = new Wrapper.MaxActive(_Sdk);
+                return _MaxActive;
+            }
+        }
+        private Wrapper.MaxActive? _MaxActive = null;
+
         public Wrapper.GameSession GameSession
         {
             get

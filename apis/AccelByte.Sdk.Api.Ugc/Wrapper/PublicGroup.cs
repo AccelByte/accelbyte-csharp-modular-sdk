@@ -49,6 +49,10 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         {
             get { return new Operation.GetGroupContent.GetGroupContentBuilder(_sdk); }
         }
+        public PublicGetGroupContentsV2.PublicGetGroupContentsV2Builder PublicGetGroupContentsV2Op
+        {
+            get { return new Operation.PublicGetGroupContentsV2.PublicGetGroupContentsV2Builder(_sdk); }
+        }
         #endregion
 
         public Model.ModelsPaginatedGroupResponse? GetGroups(GetGroups input)
@@ -97,6 +101,15 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.Payload);
         }
         public Model.ModelsPaginatedContentDownloadResponse? GetGroupContent(GetGroupContent input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelsPaginatedContentDownloadResponseV2? PublicGetGroupContentsV2(PublicGetGroupContentsV2 input)
         {
             var response = _sdk.RunRequest(input);
 

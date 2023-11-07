@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
     /// <summary>
     /// GetEventSpecificUserV2Handler
     ///
-    /// Required permission `ADMIN:NAMESPACE:{namespace}:EVENT [READ]`and scope `analytics`
+    /// Get events from a specific user
     /// </summary>
     public class GetEventSpecificUserV2Handler : AccelByte.Sdk.Core.Operation
     {
