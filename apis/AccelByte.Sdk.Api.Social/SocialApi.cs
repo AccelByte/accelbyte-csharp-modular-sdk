@@ -70,17 +70,6 @@ namespace AccelByte.Sdk.Api.Social
         }
         private Wrapper.StatCycleConfiguration? _StatCycleConfiguration = null;
 
-        public Wrapper.UserStatistic UserStatistic
-        {
-            get
-            {
-                if (_UserStatistic == null)
-                    _UserStatistic = new Wrapper.UserStatistic(_Sdk);
-                return _UserStatistic;
-            }
-        }
-        private Wrapper.UserStatistic? _UserStatistic = null;
-
         public Wrapper.StatConfiguration StatConfiguration
         {
             get
@@ -91,6 +80,17 @@ namespace AccelByte.Sdk.Api.Social
             }
         }
         private Wrapper.StatConfiguration? _StatConfiguration = null;
+
+        public Wrapper.UserStatistic UserStatistic
+        {
+            get
+            {
+                if (_UserStatistic == null)
+                    _UserStatistic = new Wrapper.UserStatistic(_Sdk);
+                return _UserStatistic;
+            }
+        }
+        private Wrapper.UserStatistic? _UserStatistic = null;
 
         public Wrapper.UserStatisticCycle UserStatisticCycle
         {

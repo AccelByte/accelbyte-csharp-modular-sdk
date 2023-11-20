@@ -57,6 +57,10 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         {
             get { return new Operation.AdminBulkGetContentByIDsV2.AdminBulkGetContentByIDsV2Builder(_sdk); }
         }
+        public AdminGetContentBulkByShareCodesV2.AdminGetContentBulkByShareCodesV2Builder AdminGetContentBulkByShareCodesV2Op
+        {
+            get { return new Operation.AdminGetContentBulkByShareCodesV2.AdminGetContentBulkByShareCodesV2Builder(_sdk); }
+        }
         public AdminGetContentByShareCodeV2.AdminGetContentByShareCodeV2Builder AdminGetContentByShareCodeV2Op
         {
             get { return new Operation.AdminGetContentByShareCodeV2.AdminGetContentByShareCodeV2Builder(_sdk); }
@@ -64,6 +68,10 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         public AdminGetContentByContentIDV2.AdminGetContentByContentIDV2Builder AdminGetContentByContentIDV2Op
         {
             get { return new Operation.AdminGetContentByContentIDV2.AdminGetContentByContentIDV2Builder(_sdk); }
+        }
+        public RollbackContentVersionV2.RollbackContentVersionV2Builder RollbackContentVersionV2Op
+        {
+            get { return new Operation.RollbackContentVersionV2.RollbackContentVersionV2Builder(_sdk); }
         }
         public AdminUpdateScreenshotsV2.AdminUpdateScreenshotsV2Builder AdminUpdateScreenshotsV2Op
         {
@@ -76,6 +84,18 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         public AdminDeleteContentScreenshotV2.AdminDeleteContentScreenshotV2Builder AdminDeleteContentScreenshotV2Op
         {
             get { return new Operation.AdminDeleteContentScreenshotV2.AdminDeleteContentScreenshotV2Builder(_sdk); }
+        }
+        public ListContentVersionsV2.ListContentVersionsV2Builder ListContentVersionsV2Op
+        {
+            get { return new Operation.ListContentVersionsV2.ListContentVersionsV2Builder(_sdk); }
+        }
+        public AdminUpdateContentByShareCodeV2.AdminUpdateContentByShareCodeV2Builder AdminUpdateContentByShareCodeV2Op
+        {
+            get { return new Operation.AdminUpdateContentByShareCodeV2.AdminUpdateContentByShareCodeV2Builder(_sdk); }
+        }
+        public AdminDeleteContentByShareCodeV2.AdminDeleteContentByShareCodeV2Builder AdminDeleteContentByShareCodeV2Op
+        {
+            get { return new Operation.AdminDeleteContentByShareCodeV2.AdminDeleteContentByShareCodeV2Builder(_sdk); }
         }
         public AdminDeleteUserContentV2.AdminDeleteUserContentV2Builder AdminDeleteUserContentV2Op
         {
@@ -215,6 +235,25 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public List<Model.ModelsContentDownloadResponseV2>? AdminGetContentBulkByShareCodesV2(AdminGetContentBulkByShareCodesV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public List<Model.ModelsContentDownloadResponseV2<T1>>? AdminGetContentBulkByShareCodesV2<T1>(AdminGetContentBulkByShareCodesV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.ModelsContentDownloadResponseV2? AdminGetContentByShareCodeV2(AdminGetContentByShareCodeV2 input)
         {
             var response = _sdk.RunRequest(input);
@@ -253,6 +292,25 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public Model.ModelsContentDownloadResponse? RollbackContentVersionV2(RollbackContentVersionV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public Model.ModelsContentDownloadResponse<T1>? RollbackContentVersionV2<T1>(RollbackContentVersionV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.ModelsUpdateScreenshotResponse? AdminUpdateScreenshotsV2(AdminUpdateScreenshotsV2 input)
         {
             var response = _sdk.RunRequest(input);
@@ -272,6 +330,43 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.Payload);
         }
         public void AdminDeleteContentScreenshotV2(AdminDeleteContentScreenshotV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelsListContentVersionsResponse? ListContentVersionsV2(ListContentVersionsV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelsCreateContentResponseV2? AdminUpdateContentByShareCodeV2(AdminUpdateContentByShareCodeV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public Model.ModelsCreateContentResponseV2<T1>? AdminUpdateContentByShareCodeV2<T1>(AdminUpdateContentByShareCodeV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void AdminDeleteContentByShareCodeV2(AdminDeleteContentByShareCodeV2 input)
         {
             var response = _sdk.RunRequest(input);
 

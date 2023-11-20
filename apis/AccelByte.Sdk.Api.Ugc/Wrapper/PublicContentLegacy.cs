@@ -58,9 +58,17 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         {
             get { return new Operation.CreateContentS3.CreateContentS3Builder(_sdk); }
         }
+        public PublicUpdateContentByShareCode.PublicUpdateContentByShareCodeBuilder PublicUpdateContentByShareCodeOp
+        {
+            get { return new Operation.PublicUpdateContentByShareCode.PublicUpdateContentByShareCodeBuilder(_sdk); }
+        }
         public UpdateContentS3.UpdateContentS3Builder UpdateContentS3Op
         {
             get { return new Operation.UpdateContentS3.UpdateContentS3Builder(_sdk); }
+        }
+        public PublicDeleteContentByShareCode.PublicDeleteContentByShareCodeBuilder PublicDeleteContentByShareCodeOp
+        {
+            get { return new Operation.PublicDeleteContentByShareCode.PublicDeleteContentByShareCodeBuilder(_sdk); }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateContentDirect.UpdateContentDirectBuilder UpdateContentDirectOp
@@ -214,6 +222,25 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public Model.ModelsCreateContentResponse? PublicUpdateContentByShareCode(PublicUpdateContentByShareCode input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public Model.ModelsCreateContentResponse<T1>? PublicUpdateContentByShareCode<T1>(PublicUpdateContentByShareCode input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.ModelsCreateContentResponse? UpdateContentS3(UpdateContentS3 input)
         {
             var response = _sdk.RunRequest(input);
@@ -229,6 +256,15 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void PublicDeleteContentByShareCode(PublicDeleteContentByShareCode input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

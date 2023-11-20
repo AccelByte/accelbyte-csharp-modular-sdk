@@ -53,6 +53,10 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
         {
             get { return new Operation.GetPlayerMetric.GetPlayerMetricBuilder(_sdk); }
         }
+        public AdminGetMatchPoolTickets.AdminGetMatchPoolTicketsBuilder AdminGetMatchPoolTicketsOp
+        {
+            get { return new Operation.AdminGetMatchPoolTickets.AdminGetMatchPoolTicketsBuilder(_sdk); }
+        }
         #endregion
 
         public Model.ApiListMatchPoolsResponse? MatchPoolList(MatchPoolList input)
@@ -110,6 +114,15 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.Payload);
         }
         public Model.ApiPlayerMetricRecord? GetPlayerMetric(GetPlayerMetric input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ApiListMatchPoolTicketsResponse? AdminGetMatchPoolTickets(AdminGetMatchPoolTickets input)
         {
             var response = _sdk.RunRequest(input);
 

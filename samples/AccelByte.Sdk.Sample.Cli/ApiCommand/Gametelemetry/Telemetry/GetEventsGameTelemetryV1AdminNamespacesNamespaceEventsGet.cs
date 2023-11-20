@@ -42,6 +42,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gametelemetry
         [SdkCommandArgument("eventPayload")]
         public string? EventPayload { get; set; }
 
+        [SdkCommandArgument("flightId")]
+        public string? FlightId { get; set; }
+
         [SdkCommandArgument("limit")]
         public long? Limit { get; set; }
 
@@ -50,6 +53,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gametelemetry
 
         [SdkCommandArgument("startTime")]
         public string? StartTime { get; set; }
+
+        [SdkCommandArgument("userId")]
+        public string? UserId { get; set; }
 
         public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetCommand(IAccelByteSdk sdk)
         {
@@ -70,12 +76,16 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gametelemetry
                 opBuilder.SetEventName((string)EventName);
             if (EventPayload != null)
                 opBuilder.SetEventPayload((string)EventPayload);
+            if (FlightId != null)
+                opBuilder.SetFlightId((string)FlightId);
             if (Limit != null)
                 opBuilder.SetLimit((long)Limit);
             if (Offset != null)
                 opBuilder.SetOffset((long)Offset);
             if (StartTime != null)
                 opBuilder.SetStartTime((string)StartTime);
+            if (UserId != null)
+                opBuilder.SetUserId((string)UserId);
 
 
 

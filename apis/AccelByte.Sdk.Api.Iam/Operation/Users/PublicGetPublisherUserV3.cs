@@ -73,7 +73,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
-            public Model.ModelGetPublisherUserV3Response? Execute(
+            public Model.ModelGetPublisherUserResponse? Execute(
                 string namespace_,
                 string userId
             )
@@ -137,7 +137,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public Model.ModelGetPublisherUserV3Response? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.ModelGetPublisherUserResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -145,11 +145,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.ModelGetPublisherUserV3Response>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ModelGetPublisherUserResponse>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.ModelGetPublisherUserV3Response>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ModelGetPublisherUserResponse>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

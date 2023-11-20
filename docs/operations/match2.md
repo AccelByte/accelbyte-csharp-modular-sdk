@@ -44,6 +44,7 @@
 | `/match2/v1/namespaces/{namespace}/match-pools/{pool}` | DELETE | DeleteMatchPool | [DeleteMatchPool](../../apis/AccelByte.Sdk.Api.Match2/Operation/MatchPools/DeleteMatchPool.cs) | [DeleteMatchPool](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Match2/MatchPools/DeleteMatchPool.cs) |
 | `/match2/v1/namespaces/{namespace}/match-pools/{pool}/metrics` | GET | MatchPoolMetric | [MatchPoolMetric](../../apis/AccelByte.Sdk.Api.Match2/Operation/MatchPools/MatchPoolMetric.cs) | [MatchPoolMetric](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Match2/MatchPools/MatchPoolMetric.cs) |
 | `/match2/v1/namespaces/{namespace}/match-pools/{pool}/metrics/player` | GET | GetPlayerMetric | [GetPlayerMetric](../../apis/AccelByte.Sdk.Api.Match2/Operation/MatchPools/GetPlayerMetric.cs) | [GetPlayerMetric](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Match2/MatchPools/GetPlayerMetric.cs) |
+| `/match2/v1/namespaces/{namespace}/match-pools/{pool}/tickets` | GET | AdminGetMatchPoolTickets | [AdminGetMatchPoolTickets](../../apis/AccelByte.Sdk.Api.Match2/Operation/MatchPools/AdminGetMatchPoolTickets.cs) | [AdminGetMatchPoolTickets](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Match2/MatchPools/AdminGetMatchPoolTickets.cs) |
 
 ### Match-Tickets Wrapper:  [MatchTickets](../../apis/AccelByte.Sdk.Api.Match2/Wrapper/MatchTickets.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -112,6 +113,7 @@
 | `api.BackfillProposalResponse` | [ApiBackfillProposalResponse](../../apis/AccelByte.Sdk.Api.Match2/Model/ApiBackfillProposalResponse.cs) |
 | `api.ListEnvironmentVariablesResponse` | [ApiListEnvironmentVariablesResponse](../../apis/AccelByte.Sdk.Api.Match2/Model/ApiListEnvironmentVariablesResponse.cs) |
 | `api.ListMatchFunctionsResponse` | [ApiListMatchFunctionsResponse](../../apis/AccelByte.Sdk.Api.Match2/Model/ApiListMatchFunctionsResponse.cs) |
+| `api.ListMatchPoolTicketsResponse` | [ApiListMatchPoolTicketsResponse](../../apis/AccelByte.Sdk.Api.Match2/Model/ApiListMatchPoolTicketsResponse.cs) |
 | `api.ListMatchPoolsResponse` | [ApiListMatchPoolsResponse](../../apis/AccelByte.Sdk.Api.Match2/Model/ApiListMatchPoolsResponse.cs) |
 | `api.ListRuleSetsResponse` | [ApiListRuleSetsResponse](../../apis/AccelByte.Sdk.Api.Match2/Model/ApiListRuleSetsResponse.cs) |
 | `api.Match` | [ApiMatch](../../apis/AccelByte.Sdk.Api.Match2/Model/ApiMatch.cs) |
@@ -135,12 +137,16 @@
 | `api.TicketMetricResultRecord` | [ApiTicketMetricResultRecord](../../apis/AccelByte.Sdk.Api.Match2/Model/ApiTicketMetricResultRecord.cs) |
 | `api.backFillRejectRequest` | [ApiBackFillRejectRequest](../../apis/AccelByte.Sdk.Api.Match2/Model/ApiBackFillRejectRequest.cs) |
 | `config.EnvironmentVariable` | [ConfigEnvironmentVariable](../../apis/AccelByte.Sdk.Api.Match2/Model/ConfigEnvironmentVariable.cs) |
+| `matchmaker.MatchTicketRecord` | [MatchmakerMatchTicketRecord](../../apis/AccelByte.Sdk.Api.Match2/Model/MatchmakerMatchTicketRecord.cs) |
 | `matchmaker.Party` | [MatchmakerParty](../../apis/AccelByte.Sdk.Api.Match2/Model/MatchmakerParty.cs) |
+| `matchmaker.ProposedProposal` | [MatchmakerProposedProposal](../../apis/AccelByte.Sdk.Api.Match2/Model/MatchmakerProposedProposal.cs) |
 | `matchmaker.Team` | [MatchmakerTeam](../../apis/AccelByte.Sdk.Api.Match2/Model/MatchmakerTeam.cs) |
+| `matchmaker.Ticket` | [MatchmakerTicket](../../apis/AccelByte.Sdk.Api.Match2/Model/MatchmakerTicket.cs) |
 | `models.Configuration` | [ModelsConfiguration](../../apis/AccelByte.Sdk.Api.Match2/Model/ModelsConfiguration.cs) |
 | `models.DSInformation` | [ModelsDSInformation](../../apis/AccelByte.Sdk.Api.Match2/Model/ModelsDSInformation.cs) |
 | `models.GameSession` | [ModelsGameSession](../../apis/AccelByte.Sdk.Api.Match2/Model/ModelsGameSession.cs) |
 | `models.Pagination` | [ModelsPagination](../../apis/AccelByte.Sdk.Api.Match2/Model/ModelsPagination.cs) |
 | `models.Server` | [ModelsServer](../../apis/AccelByte.Sdk.Api.Match2/Model/ModelsServer.cs) |
 | `models.User` | [ModelsUser](../../apis/AccelByte.Sdk.Api.Match2/Model/ModelsUser.cs) |
+| `player.PlayerData` | [PlayerPlayerData](../../apis/AccelByte.Sdk.Api.Match2/Model/PlayerPlayerData.cs) |
 | `response.Error` | [ResponseError](../../apis/AccelByte.Sdk.Api.Match2/Model/ResponseError.cs) |

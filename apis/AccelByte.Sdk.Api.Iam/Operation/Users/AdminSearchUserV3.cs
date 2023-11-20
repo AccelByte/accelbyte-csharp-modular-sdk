@@ -98,6 +98,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public string? EndDate { get; set; }
 
+            public bool? IncludeTotal { get; set; }
+
             public long? Limit { get; set; }
 
             public long? Offset { get; set; }
@@ -131,6 +133,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             public AdminSearchUserV3Builder SetEndDate(string _endDate)
             {
                 EndDate = _endDate;
+                return this;
+            }
+
+            public AdminSearchUserV3Builder SetIncludeTotal(bool _includeTotal)
+            {
+                IncludeTotal = _includeTotal;
                 return this;
             }
 
@@ -215,6 +223,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             if (builder.By is not null) QueryParams["by"] = builder.By;
             if (builder.EndDate is not null) QueryParams["endDate"] = builder.EndDate;
+            if (builder.IncludeTotal != null) QueryParams["includeTotal"] = Convert.ToString(builder.IncludeTotal)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.PlatformBy is not null) QueryParams["platformBy"] = builder.PlatformBy;
@@ -235,6 +244,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string namespace_,
             string? by,
             string? endDate,
+            bool? includeTotal,
             long? limit,
             long? offset,
             string? platformBy,
@@ -247,6 +257,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             if (by is not null) QueryParams["by"] = by;
             if (endDate is not null) QueryParams["endDate"] = endDate;
+            if (includeTotal != null) QueryParams["includeTotal"] = Convert.ToString(includeTotal)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (platformBy is not null) QueryParams["platformBy"] = platformBy;

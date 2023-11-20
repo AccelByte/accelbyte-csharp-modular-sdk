@@ -623,7 +623,6 @@
 | `model.GetBulkUserBansRequest` | [ModelGetBulkUserBansRequest](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelGetBulkUserBansRequest.cs) |
 | `model.GetLinkHeadlessAccountConflictResponse` | [ModelGetLinkHeadlessAccountConflictResponse](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelGetLinkHeadlessAccountConflictResponse.cs) |
 | `model.GetPublisherUserResponse` | [ModelGetPublisherUserResponse](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelGetPublisherUserResponse.cs) |
-| `model.GetPublisherUserV3Response` | [ModelGetPublisherUserV3Response](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelGetPublisherUserV3Response.cs) |
 | `model.GetUserBanV3Response` | [ModelGetUserBanV3Response](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelGetUserBanV3Response.cs) |
 | `model.GetUserJusticePlatformAccountResponse` | [ModelGetUserJusticePlatformAccountResponse](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelGetUserJusticePlatformAccountResponse.cs) |
 | `model.GetUserMapping` | [ModelGetUserMapping](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelGetUserMapping.cs) |

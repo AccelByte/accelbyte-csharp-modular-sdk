@@ -49,6 +49,14 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         {
             get { return new Operation.PublicCreateContentV2.PublicCreateContentV2Builder(_sdk); }
         }
+        public PublicUpdateContentByShareCodeV2.PublicUpdateContentByShareCodeV2Builder PublicUpdateContentByShareCodeV2Op
+        {
+            get { return new Operation.PublicUpdateContentByShareCodeV2.PublicUpdateContentByShareCodeV2Builder(_sdk); }
+        }
+        public PublicDeleteContentByShareCodeV2.PublicDeleteContentByShareCodeV2Builder PublicDeleteContentByShareCodeV2Op
+        {
+            get { return new Operation.PublicDeleteContentByShareCodeV2.PublicDeleteContentByShareCodeV2Builder(_sdk); }
+        }
         public PublicDeleteContentV2.PublicDeleteContentV2Builder PublicDeleteContentV2Op
         {
             get { return new Operation.PublicDeleteContentV2.PublicDeleteContentV2Builder(_sdk); }
@@ -173,6 +181,34 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelsCreateContentResponseV2? PublicUpdateContentByShareCodeV2(PublicUpdateContentByShareCodeV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public Model.ModelsCreateContentResponseV2<T1>? PublicUpdateContentByShareCodeV2<T1>(PublicUpdateContentByShareCodeV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void PublicDeleteContentByShareCodeV2(PublicDeleteContentByShareCodeV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
