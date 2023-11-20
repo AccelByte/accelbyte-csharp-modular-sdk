@@ -13,6 +13,7 @@
 
         <ApiAchievementVersion>0.1.0</ApiAchievementVersion>
         <ApiAmsVersion>0.1.0</ApiAmsVersion>
+        <ApiBasicVersion>0.1.0</ApiBasicVersion>
         <ApiCloudsaveVersion>0.1.0</ApiCloudsaveVersion>
         <ApiDslogmanagerVersion>0.1.0</ApiDslogmanagerVersion>
         <ApiDsmcVersion>0.1.0</ApiDsmcVersion>

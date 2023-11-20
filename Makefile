@@ -11,22 +11,6 @@ DOTNETVER := 6.0.302
 build:
 	docker run --rm -u $$(id -u):$$(id -g) -v $$(pwd):/data/ -w /data/ -e HOME="/data" -e DOTNET_CLI_HOME="/data" mcr.microsoft.com/dotnet/sdk:6.0 dotnet build
 
-# disable temporarily
-#
-# pack:
-#	docker run --rm -u $$(id -u):$$(id -g) -v $$(pwd):/data/ -w /data/ -e HOME="/data" -e DOTNET_CLI_HOME="/data" mcr.microsoft.com/dotnet/sdk:6.0 dotnet pack AccelByte.Sdk/AccelByte.Sdk.csproj -c Release
-#
-# pack_push:
-#	@test -n "$(NUGET_API_KEY)" || (echo "NUGET_API_KEY is not set" ; exit 1)
-#	docker run --rm -u $$(id -u):$$(id -g) -v $$(pwd):/data/ -w /data/ \
-#		-e DOTNET_CLI_HOME="/data" \
-#		mcr.microsoft.com/dotnet/sdk:6.0 \
-#		dotnet pack AccelByte.Sdk/AccelByte.Sdk.csproj -c Release
-#	docker run --rm -u $$(id -u):$$(id -g) -v $$(pwd):/data/ -w /data/ \
-#		-e DOTNET_CLI_HOME="/data" \
-#		mcr.microsoft.com/dotnet/sdk:$(DOTNETVER) \
-#		dotnet nuget push "AccelByte.Sdk/bin/Release/*.nupkg" --skip-duplicate --api-key "$(NUGET_API_KEY)" --source "https://api.nuget.org/v3/index.json"
-
 test:
 	@test -n "$(SDK_MOCK_SERVER_PATH)" || (echo "SDK_MOCK_SERVER_PATH is not set" ; exit 1)
 	sed -i "s/\r//" "$(SDK_MOCK_SERVER_PATH)/mock-server.sh" && \
@@ -82,6 +66,56 @@ version_api:
 
 tag_api:
 	find spec -type f -iname '*.json' | grep -oP '(?<=/)\w+(?=.json)' | xargs -I{} sh -c './build/tag-api.sh {} || exit 255'
+
+tag_ags:
+	@test -n "$(AGS_VER)" || (echo "AGS_VER is not set" ; exit 1)
+	@echo "AGS version: "$(AGS_VER)
+	git fetch origin
+	@if git rev-parse "ags/v$(AGS_VER)" >/dev/null 2>&1; then \
+		echo "AGS tag already exists!"; exit 1; \
+		else \
+			LAST_COMMIT=$(git log --format="%H" -n 1); \
+			git tag "ags/v$(AGS_VER)" $$LAST_COMMIT; \
+	fi
+
+push_tags:
+	@test -n "$(AGS_VER)" || (echo "AGS_VER is not set" ; exit 1)
+	@echo "AGS version: "$(AGS_VER)
+	@if git rev-parse "ags/v$(AGS_VER)" >/dev/null 2>&1; then \
+		git tag --contains $$(git rev-list -n 1 'ags/v$(AGS_VER)') | \
+			grep -v 'ags/v$(AGS_VER)' | \
+			xargs -I{} sh -c 'git push origin {} || exit 255'; \
+	else \
+		echo "AGS tag does not exists!"; exit 1; \
+	fi
+
+pack:
+	docker run --rm -u $$(id -u):$$(id -g) \
+		-v $$(pwd):/data/ \
+		-w /data/ \
+		-e HOME="/data" \
+		-e DOTNET_CLI_HOME="/data" \
+		mcr.microsoft.com/dotnet/sdk:$(DOTNETVER) \
+		dotnet pack --configuration Release --output ./.publish
+
+pack_pick:
+	@test -n "$(AGS_VER)" || (echo "AGS_VER is not set" ; exit 1)
+	@echo "AGS version: "$(AGS_VER)
+	@if git rev-parse "ags/v$(AGS_VER)" >/dev/null 2>&1; then \
+		./build/pack-pick.sh $(AGS_VER); \
+	else \
+		echo "AGS tag does not exists!"; exit 1; \
+	fi
+
+pack_push_only:
+	@test -n "$(NUGET_API_KEY)" || (echo "NUGET_API_KEY is not set" ; exit 1)
+	docker run --rm -u $$(id -u):$$(id -g) \
+		-v $$(pwd):/data/ \
+		-w /data/ \
+		-e HOME="/data" \
+		-e DOTNET_CLI_HOME="/data" \
+		mcr.microsoft.com/dotnet/sdk:$(DOTNETVER) \
+		dotnet nuget push "./.publish_pick/*.nupkg" --skip-duplicate --api-key "$(NUGET_API_KEY)" --source "https://api.nuget.org/v3/index.json"
 
 outstanding_deprecation:
 	find * -type f -iname '*.cs' \
