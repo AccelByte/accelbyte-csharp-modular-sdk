@@ -2,7 +2,7 @@ import groovy.json.JsonOutput
 
 bitbucketSsh = 'bitbucket-build-extend-ssh'
 githubOwner = 'AccelByte'
-githubRepo = 'accelbyte-csharp-modular-sdk-test2'
+githubRepo = 'accelbyte-csharp-modular-sdk'
 githubSsh = 'accelbyte-sdk-sdkbuild-ssh'
 githubPat = 'accelbyte-sdk-sdkbuild-pat-github'
 githubUrl = "git@github.com:${githubOwner}/${githubRepo}.git"
@@ -83,8 +83,7 @@ pipeline {
             sh 'false' // Fail this job
           }
 
-          //sh "git checkout ${params.RELEASE_BRANCH}"
-          sh "git checkout CG-1393-pre-release-test-2"
+          sh "git checkout ${params.RELEASE_BRANCH}"
           sshagent(credentials: [githubSsh]) {
             if (params.RELEASE_BRANCH == 'master') {
               
