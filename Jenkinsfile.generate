@@ -96,7 +96,7 @@ pipeline {
         // Bump SDK version and commit the generated code to generate branch (overwrite existing)
         dir(sdkRepoName) {                    
           sh "git restore apis/*/version.txt"
-          sh "make version-api"
+          sh "make version_api"
           sh "git add --all"
           sh "git commit -m 'chore(sdk): generate csharp extend sdk (${getTimestampUtc()})' -m 'generated from openapi spec commit: ${sdkSpecCommitHash}'"
           sshagent(credentials: [bitbucketCredentialsSsh]) {
