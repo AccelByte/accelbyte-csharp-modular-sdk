@@ -26,6 +26,12 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (_Sdk == null)
                 return;
 
+            if (IsUsingAGSStarter())
+            {
+                Assert.Inconclusive("Test does not apply to AGS Starter environment.");
+                return;
+            }
+
             string stat_code = "csharpserversdkteststat";
 
             #region Create a stat

@@ -27,6 +27,12 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (_Sdk == null)
                 return;
 
+            if (IsUsingAGSStarter())
+            {
+                Assert.Inconclusive("Test does not apply to AGS Starter environment.");
+                return;
+            }
+
             Random random = new Random();
             string title = random.GenerateRandomId(32);
             string reasonId = "";

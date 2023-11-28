@@ -155,6 +155,12 @@ namespace AccelByte.Sdk.Tests.Integration
                 .EnableLog()
                 .Build();
 
+            if (sdk.Configuration.ConfigRepository.BaseUrl.Contains("gamingservices.accelbyte.io"))
+            {
+                Assert.Inconclusive("Test does not apply to AGS Starter environment.");
+                return;
+            }
+
             string accessToken = String.Empty;
             sdk.LoginUser((tokenResp) =>
             {
@@ -182,6 +188,12 @@ namespace AccelByte.Sdk.Tests.Integration
                 .UseAutoRefreshForTokenRevocationList()
                 .EnableLog()
                 .Build();
+
+            if (sdk.Configuration.ConfigRepository.BaseUrl.Contains("gamingservices.accelbyte.io"))
+            {
+                Assert.Inconclusive("Test does not apply to AGS Starter environment.");
+                return;
+            }
 
             string accessToken = String.Empty;
             sdk.LoginUser((tokenResp) =>

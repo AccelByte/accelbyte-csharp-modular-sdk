@@ -26,6 +26,12 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (_Sdk == null)
                 return;
 
+            if (IsUsingAGSStarter())
+            {
+                Assert.Inconclusive("Test does not apply to AGS Starter environment.");
+                return;
+            }
+
             #region Get local server list
             ModelsListServerResponse? serverResp = _Sdk.GetDsmcApi().Admin.ListLocalServerOp
                 .Execute(_Sdk.Namespace);
@@ -40,6 +46,12 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             Assert.IsNotNull(_Sdk);
             if (_Sdk == null)
                 return;
+
+            if (IsUsingAGSStarter())
+            {
+                Assert.Inconclusive("Test does not apply to AGS Starter environment.");
+                return;
+            }
 
             string usernameToTest = "dummy@example.com";
             if (_Sdk.Configuration.Credential != null)
