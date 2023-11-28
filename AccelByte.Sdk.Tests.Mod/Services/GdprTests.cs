@@ -25,6 +25,24 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (_Sdk == null)
                 return;
 
+            if (IsUsingAGSStarter())
+            {
+                bool isLogoutOk = _Sdk.Logout();
+                if (!isLogoutOk)
+                {
+                    Assert.Inconclusive("Failed to run in AGS Starter environment.");
+                    return;
+                }
+                bool isLoginOk = _Sdk.LoginClient();
+                if (!isLoginOk)
+                {
+                    Assert.Inconclusive("Failed to run in AGS Starter environment.");
+                    return;
+                }
+                Assert.AreEqual(true, isLoginOk);
+                Assert.AreEqual(LoginType.Client, _Sdk.Configuration.TokenRepository.LoginType);
+            }
+
             string firstEmailToTest = "dummy@example.com";
             string anotherEmailToTest = "anotheremail@dummy.com";
 
