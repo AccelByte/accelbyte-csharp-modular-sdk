@@ -411,3 +411,6 @@ FodyWeavers.xsd
 
 # Publish results
 .publish
+
+# macOS Files
+.DS_Store
