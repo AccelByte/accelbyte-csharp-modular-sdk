@@ -57,7 +57,17 @@ pipeline {
           }
           steps {
             withCredentials([file(credentialsId: 'justice-codegen-sdk-integration-test-env', variable: 'ENV_FILE_PATH')]) {
-              sh 'make test_integration ENV_FILE_PATH="$ENV_FILE_PATH"'
+              sh 'make build test_integration ENV_FILE_PATH="$ENV_FILE_PATH"'
+            }
+          }
+        }
+        stage('Integration Tests (Starter)') {
+          options {
+            lock("justice-demo-serversdktest")
+          }
+          steps {
+            withCredentials([file(credentialsId: 'justice-codegen-sdk-integration-starter-test-env', variable: 'ENV_FILE_PATH')]) {
+              sh 'make build test_integration ENV_FILE_PATH="$ENV_FILE_PATH"'
             }
           }
         }
