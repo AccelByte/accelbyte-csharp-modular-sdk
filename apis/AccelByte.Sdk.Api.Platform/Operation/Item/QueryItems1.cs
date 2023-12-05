@@ -76,6 +76,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             public string? TargetNamespace { get; set; }
 
+            public bool? WithTotal { get; set; }
+
 
 
 
@@ -190,6 +192,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return this;
             }
 
+            public QueryItems1Builder SetWithTotal(bool _withTotal)
+            {
+                WithTotal = _withTotal;
+                return this;
+            }
+
 
 
 
@@ -208,7 +216,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
-            public Model.FullItemPagingSlicedResult? Execute(
+            public Model.FullItemPagingResult? Execute(
                 string namespace_
             )
             {
@@ -250,6 +258,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
             if (builder.TargetNamespace is not null) QueryParams["targetNamespace"] = builder.TargetNamespace;
+            if (builder.WithTotal != null) QueryParams["withTotal"] = Convert.ToString(builder.WithTotal)!;
 
 
 
@@ -279,7 +288,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             List<QueryItems1SortBy>? sortBy,
             string? storeId,
             string? tags,
-            string? targetNamespace
+            string? targetNamespace,
+            bool? withTotal
         )
         {
             PathParams["namespace"] = namespace_;
@@ -301,6 +311,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (storeId is not null) QueryParams["storeId"] = storeId;
             if (tags is not null) QueryParams["tags"] = tags;
             if (targetNamespace is not null) QueryParams["targetNamespace"] = targetNamespace;
+            if (withTotal != null) QueryParams["withTotal"] = Convert.ToString(withTotal)!;
 
 
 
@@ -319,7 +330,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public Model.FullItemPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.FullItemPagingResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -327,11 +338,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.FullItemPagingSlicedResult>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.FullItemPagingResult>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.FullItemPagingSlicedResult>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.FullItemPagingResult>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

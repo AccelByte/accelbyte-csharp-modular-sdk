@@ -72,7 +72,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 return op;
             }
 
-            public void Execute(
+            public Model.ApimodelsSessionInviteResponse? Execute(
                 ApimodelsSessionInviteRequest body,
                 string namespace_,
                 string partyId
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
+                return op.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
@@ -142,11 +142,19 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.ApimodelsSessionInviteResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)201)
+            if (code == (HttpStatusCode)204)
             {
-                return;
+                return null;
+            }
+            else if (code == (HttpStatusCode)201)
+            {
+                return JsonSerializer.Deserialize<Model.ApimodelsSessionInviteResponse>(payload, ResponseJsonOptions);
+            }
+            else if (code == (HttpStatusCode)200)
+            {
+                return JsonSerializer.Deserialize<Model.ApimodelsSessionInviteResponse>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

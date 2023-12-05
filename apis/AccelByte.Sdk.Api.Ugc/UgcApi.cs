@@ -191,6 +191,17 @@ namespace AccelByte.Sdk.Api.Ugc
         }
         private Wrapper.AdminContentV2? _AdminContentV2 = null;
 
+        public Wrapper.AdminConfig AdminConfig
+        {
+            get
+            {
+                if (_AdminConfig == null)
+                    _AdminConfig = new Wrapper.AdminConfig(_Sdk);
+                return _AdminConfig;
+            }
+        }
+        private Wrapper.AdminConfig? _AdminConfig = null;
+
         public Wrapper.PublicContentV2 PublicContentV2
         {
             get

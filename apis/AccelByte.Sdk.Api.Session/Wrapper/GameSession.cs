@@ -109,6 +109,10 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         {
             get { return new Operation.PublicGameSessionReject.PublicGameSessionRejectBuilder(_sdk); }
         }
+        public GetSessionServerSecret.GetSessionServerSecretBuilder GetSessionServerSecretOp
+        {
+            get { return new Operation.GetSessionServerSecret.GetSessionServerSecretBuilder(_sdk); }
+        }
         public AppendTeamGameSession.AppendTeamGameSessionBuilder AppendTeamGameSessionOp
         {
             get { return new Operation.AppendTeamGameSession.AppendTeamGameSessionBuilder(_sdk); }
@@ -404,6 +408,15 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ApimodelsServerSecret? GetSessionServerSecret(GetSessionServerSecret input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

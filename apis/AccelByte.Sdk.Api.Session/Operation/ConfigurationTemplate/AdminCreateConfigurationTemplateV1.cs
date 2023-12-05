@@ -121,6 +121,26 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
+
+            public Model.ApimodelsConfigurationTemplateResponse<T1>? Execute<T1>(
+                ApimodelsCreateConfigurationTemplateRequest body,
+                string namespace_
+            )
+            {
+                AdminCreateConfigurationTemplateV1 op = Build(
+                    body,
+                    namespace_
+                );
+
+                if (_Sdk == null)
+                    throw IncompleteComponentException.NoSdkObject;
+
+                var response = _Sdk.RunRequest(op);
+                return op.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+            }
         }
 
         private AdminCreateConfigurationTemplateV1(AdminCreateConfigurationTemplateV1Builder builder,
@@ -183,6 +203,25 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
             var payloadString = payload.ReadToString();
 
+            throw new HttpResponseException(code, payloadString);
+        }
+
+        public Model.ApimodelsConfigurationTemplateResponse<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
+        {
+            if (code == (HttpStatusCode)204)
+            {
+                return null;
+            }
+            else if (code == (HttpStatusCode)201)
+            {
+                return JsonSerializer.Deserialize<Model.ApimodelsConfigurationTemplateResponse<T1>>(payload, ResponseJsonOptions);
+            }
+            else if (code == (HttpStatusCode)200)
+            {
+                return JsonSerializer.Deserialize<Model.ApimodelsConfigurationTemplateResponse<T1>>(payload, ResponseJsonOptions);
+            }
+
+            var payloadString = payload.ReadToString();
             throw new HttpResponseException(code, payloadString);
         }
     }

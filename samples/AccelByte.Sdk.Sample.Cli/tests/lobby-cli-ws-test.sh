@@ -54,7 +54,7 @@ echo "foo" > "$CLI_TOKEN_FILE"
 
 #- 2 HandlersGetUsersPresenceResponse
 # echo "Testing 'HandlersGetUsersPresenceResponse'"
-printf 'type: handlers.GetUsersPresenceResponse\naway: 37\nbusy: 95\ndata: [{'activity': 'WOSnmUc6', 'availability': 'BtaAGZZB', 'lastSeenAt': 'h506EJKx', 'namespace': 'zRRJecGj', 'platform': 'iA5auFJp', 'userID': 'PSdOgb5o'},{'activity': 'aVj02IOh', 'availability': '9xhg92Y5', 'lastSeenAt': 'ESluJhR2', 'namespace': 'lmR7c1nR', 'platform': 'b88ryUih', 'userID': 'c1f1DbXc'},{'activity': 'JFE1NeM9', 'availability': 'SMQqjXwm', 'lastSeenAt': 'pd6YU8e5', 'namespace': 'yPBGQnIp', 'platform': 'lKbhBoli', 'userID': 'PD6aEURr'}]\ninvisible: 35\noffline: 64\nonline: 8' > $TEMP_FILE_UPLOAD
+printf 'type: handlers.GetUsersPresenceResponse\naway: 49\nbusy: 91\ndata: [{'activity': 'RNcdrajy', 'availability': '8i2JGdhW', 'lastSeenAt': 'ZrUkPqoN', 'namespace': '6QEkfieU', 'platform': 'GVZZbVeL', 'userID': 'ZM4LjES0'},{'activity': 'rDaDORmZ', 'availability': 'NFDActXy', 'lastSeenAt': 'scdHBODS', 'namespace': 'BjgPda52', 'platform': 'SDEa1Phl', 'userID': 'RePedDKC'},{'activity': 'YCb9mAMw', 'availability': 'swf5q4if', 'lastSeenAt': 'i1Su90cu', 'namespace': 'kSDBSrJq', 'platform': 'ZSEqtkPP', 'userID': 'wHE9TtAA'}]\ninvisible: 87\noffline: 2\nonline: 2' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -65,7 +65,7 @@ eval_tap $? 2 'HandlersGetUsersPresenceResponse' test.out
 
 #- 3 HandlersUserPresence
 # echo "Testing 'HandlersUserPresence'"
-printf 'type: handlers.UserPresence\nactivity: CIlKti1a\navailability: kjrrlKjM\nlastSeenAt: 2zDU9vvk\nnamespace: mN1u6dou\nplatform: 4GKM1vDG\nuserID: NA3KTssy' > $TEMP_FILE_UPLOAD
+printf 'type: handlers.UserPresence\nactivity: ptDCHvTk\navailability: PVXVQA03\nlastSeenAt: soctEdbD\nnamespace: qQUiSYEy\nplatform: j6YG9Gnf\nuserID: DMrw3g4Z' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -76,7 +76,7 @@ eval_tap $? 3 'HandlersUserPresence' test.out
 
 #- 4 LogAppMessageDeclaration
 # echo "Testing 'LogAppMessageDeclaration'"
-printf 'type: log.AppMessageDeclaration\nAttributes: [6mFK2IoZ,smyRE7wO,CsMmbVHU]\nCode: ig3dtbTs\nCodeName: VncuZTmV\nSection: hFlkMfXz\nService: hf2Ustip\nText: 732G3MBn' > $TEMP_FILE_UPLOAD
+printf 'type: log.AppMessageDeclaration\nAttributes: [prtEp5XZ,sOSA6Owx,hKfpViN6]\nCode: NjFsGeLt\nCodeName: QBekjriP\nSection: 81adedHl\nService: 2qaiqMxG\nText: elRv38s9' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -87,7 +87,7 @@ eval_tap $? 4 'LogAppMessageDeclaration' test.out
 
 #- 5 ModelBulkFriendsRequest
 # echo "Testing 'ModelBulkFriendsRequest'"
-printf 'type: model.BulkFriendsRequest\nfriendIds: [27bIs0o1,xI60Sd0c,GwbMa3GO]' > $TEMP_FILE_UPLOAD
+printf 'type: model.BulkFriendsRequest\nfriendIds: [QafT1TZQ,dPEUP5KS,YTUjDGi8]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -98,7 +98,7 @@ eval_tap $? 5 'ModelBulkFriendsRequest' test.out
 
 #- 6 ModelBulkFriendsResponse
 # echo "Testing 'ModelBulkFriendsResponse'"
-printf 'type: model.BulkFriendsResponse\nrowsAffected: 15' > $TEMP_FILE_UPLOAD
+printf 'type: model.BulkFriendsResponse\nrowsAffected: 88' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -109,7 +109,7 @@ eval_tap $? 6 'ModelBulkFriendsResponse' test.out
 
 #- 7 ModelBulkUsersFreeFormNotificationRequestV1
 # echo "Testing 'ModelBulkUsersFreeFormNotificationRequestV1'"
-printf 'type: model.BulkUsersFreeFormNotificationRequestV1\nmessage: gyLFTQVq\ntopicName: DZyeV7Wj\nuserIds: [AriL58Jg,6SuqL7Rc,G0z19iEH]' > $TEMP_FILE_UPLOAD
+printf 'type: model.BulkUsersFreeFormNotificationRequestV1\nmessage: zIWLwyv3\ntopicName: K72OBgC4\nuserIds: [H9huo3iz,LYDuiUDb,lEr8MUkA]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -120,7 +120,7 @@ eval_tap $? 7 'ModelBulkUsersFreeFormNotificationRequestV1' test.out
 
 #- 8 ModelCreateTemplateRequest
 # echo "Testing 'ModelCreateTemplateRequest'"
-printf 'type: model.CreateTemplateRequest\ntemplateContent: 4CXcX6SD\ntemplateLanguage: MqW5X0UP\ntemplateSlug: YzARnIAB' > $TEMP_FILE_UPLOAD
+printf 'type: model.CreateTemplateRequest\ntemplateContent: O6zsvzeP\ntemplateLanguage: MJ8LQU7f\ntemplateSlug: jUnEI1yO' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -131,7 +131,7 @@ eval_tap $? 8 'ModelCreateTemplateRequest' test.out
 
 #- 9 ModelCreateTopicRequest
 # echo "Testing 'ModelCreateTopicRequest'"
-printf 'type: model.CreateTopicRequest\ndescription: q9tQyUoS\ntopic: ffIM5dy6' > $TEMP_FILE_UPLOAD
+printf 'type: model.CreateTopicRequest\ndescription: pdFK58V5\ntopic: G7YXtwjO' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -142,7 +142,7 @@ eval_tap $? 9 'ModelCreateTopicRequest' test.out
 
 #- 10 ModelCreateTopicRequestV1
 # echo "Testing 'ModelCreateTopicRequestV1'"
-printf 'type: model.CreateTopicRequestV1\ndescription: Fa65leW2\ntopicName: ZVhJFYmJ' > $TEMP_FILE_UPLOAD
+printf 'type: model.CreateTopicRequestV1\ndescription: j2Zz95vg\ntopicName: uEcA8qWf' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -153,7 +153,7 @@ eval_tap $? 10 'ModelCreateTopicRequestV1' test.out
 
 #- 11 ModelFreeFormNotificationRequest
 # echo "Testing 'ModelFreeFormNotificationRequest'"
-printf 'type: model.FreeFormNotificationRequest\nmessage: fDFB89Hn\ntopic: NZjEqFjw' > $TEMP_FILE_UPLOAD
+printf 'type: model.FreeFormNotificationRequest\nmessage: En4SzjmB\ntopic: ffOAPWhz' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -164,7 +164,7 @@ eval_tap $? 11 'ModelFreeFormNotificationRequest' test.out
 
 #- 12 ModelFreeFormNotificationRequestV1
 # echo "Testing 'ModelFreeFormNotificationRequestV1'"
-printf 'type: model.FreeFormNotificationRequestV1\nmessage: dQCrloff\ntopicName: KAbxSdG5' > $TEMP_FILE_UPLOAD
+printf 'type: model.FreeFormNotificationRequestV1\nmessage: 87PfLaxi\ntopicName: Dh0qPz3M' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -175,7 +175,7 @@ eval_tap $? 12 'ModelFreeFormNotificationRequestV1' test.out
 
 #- 13 ModelFriendWithPlatform
 # echo "Testing 'ModelFriendWithPlatform'"
-printf 'type: model.FriendWithPlatform\nplatformId: 8MYrtcSw\nuserId: sUr5Rbdg' > $TEMP_FILE_UPLOAD
+printf 'type: model.FriendWithPlatform\nplatformId: WgpBUFjF\nuserId: 1pKlazp6' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -186,7 +186,7 @@ eval_tap $? 13 'ModelFriendWithPlatform' test.out
 
 #- 14 ModelGetAllNotificationTemplateSlugResp
 # echo "Testing 'ModelGetAllNotificationTemplateSlugResp'"
-printf 'type: model.GetAllNotificationTemplateSlugResp\ndata: [{'lastDraftAt': 'YL9P46Af', 'lastPublishedAt': 'gPrRJhAv', 'templateContent': {'draft': '7e4tY60i', 'published': 'LP3eUUyS'}, 'templateLanguage': 'UCpAKN90'},{'lastDraftAt': 'mji4aehB', 'lastPublishedAt': 'mx3NKOvm', 'templateContent': {'draft': 'B33FP2v9', 'published': 'SoGFCVgG'}, 'templateLanguage': 'BQmvszgb'},{'lastDraftAt': 'USeN05MU', 'lastPublishedAt': '7QnpHLBW', 'templateContent': {'draft': 'dSej5mdp', 'published': 'mAUpCVw3'}, 'templateLanguage': 'oGMBxNRO'}]\npaging: {"first":"1oYaRwoH","last":"kJXHrrJL","next":"h9Kt7A74","previous":"CySVUryl"}' > $TEMP_FILE_UPLOAD
+printf 'type: model.GetAllNotificationTemplateSlugResp\ndata: [{'lastDraftAt': 'AqVgKTaW', 'lastPublishedAt': '3W2Bi7mX', 'templateContent': {'draft': 'c47swuVb', 'published': 'Q8SEuBKO'}, 'templateLanguage': '2RulXkYi'},{'lastDraftAt': 'cEGRJPcD', 'lastPublishedAt': 'K3VjcHlH', 'templateContent': {'draft': 'e3N6COpp', 'published': 'f5QuABQJ'}, 'templateLanguage': 'K0TOCHj2'},{'lastDraftAt': 'YPFwZNM1', 'lastPublishedAt': 'cjCCIQrf', 'templateContent': {'draft': 'n4V6OwDU', 'published': 'h7kytZ52'}, 'templateLanguage': 'RlhbKpyn'}]\npaging: {"first":"nAEFecmr","last":"auNeKfPM","next":"vqE0WSL1","previous":"8CUXWNV8"}' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -197,7 +197,7 @@ eval_tap $? 14 'ModelGetAllNotificationTemplateSlugResp' test.out
 
 #- 15 ModelGetAllNotificationTopicsResponse
 # echo "Testing 'ModelGetAllNotificationTopicsResponse'"
-printf 'type: model.GetAllNotificationTopicsResponse\ndata: [{'createdAt': 44, 'description': 'KRWXJ7OK', 'namespace': 'tOD45hnB', 'topicName': 'BzQNxfFD'},{'createdAt': 28, 'description': 'OWQYpcH4', 'namespace': 'ZTuZwtCn', 'topicName': 'i7eVplJT'},{'createdAt': 21, 'description': 'B8zSCR9p', 'namespace': '7zw0mkX9', 'topicName': 'vuxACYpp'}]\npaging: {"first":"IzAD3OTA","last":"lWzNbXPt","next":"0UYxh7zO","previous":"wuhVxags"}' > $TEMP_FILE_UPLOAD
+printf 'type: model.GetAllNotificationTopicsResponse\ndata: [{'createdAt': 63, 'description': 'cScQslU1', 'namespace': 'M9rNv2TQ', 'topicName': 'ZorSpO7P'},{'createdAt': 83, 'description': 'gDESeJxM', 'namespace': 'eLyHGi1a', 'topicName': '67hc5SWw'},{'createdAt': 55, 'description': 'srIdBYAY', 'namespace': 'KlDYI0aZ', 'topicName': 'lNo2kcEY'}]\npaging: {"first":"D6sNc9l4","last":"vHSTtiEd","next":"b50BMmiD","previous":"M7RKTxZw"}' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -208,7 +208,7 @@ eval_tap $? 15 'ModelGetAllNotificationTopicsResponse' test.out
 
 #- 16 ModelGetFriendsResponse
 # echo "Testing 'ModelGetFriendsResponse'"
-printf 'type: model.GetFriendsResponse\nfriendIDs: [7sRegJoz,Y7t8bBV8,qOxrZjLw]\nfriends: [{'platformId': 'RcxfuvE3', 'userId': 'fhnsGiYo'},{'platformId': 'zc8SsLdW', 'userId': 'EuEe0Sh2'},{'platformId': 'SgI7O7W3', 'userId': 'WZVMjl31'}]\nfriendsSinceTimes: [ZOm0ZBpn,4PcOXUUY,4M5DZJkg]\npaging: {"first":"N2R2lHWh","last":"QvJ547nF","next":"IZ1AOK2A","previous":"RmbY2yGR"}' > $TEMP_FILE_UPLOAD
+printf 'type: model.GetFriendsResponse\nfriendIDs: [g1D9pHtw,IEtRSsDy,WzkGhGuL]\nfriends: [{'platformId': 'SV6u50n1', 'userId': 'nybotqCf'},{'platformId': 'BPeP7kQt', 'userId': '7wwNbvJW'},{'platformId': 'rxf2CBw0', 'userId': 'umY47mKh'}]\nfriendsSinceTimes: [hTFCVRCe,Fw0yNp6w,H33XIBQG]\npaging: {"first":"IJyuG3AR","last":"3d8wQ4ei","next":"Gipq5qfa","previous":"5tskSPWj"}' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -219,7 +219,7 @@ eval_tap $? 16 'ModelGetFriendsResponse' test.out
 
 #- 17 ModelGetUserFriendsResponse
 # echo "Testing 'ModelGetUserFriendsResponse'"
-printf 'type: model.GetUserFriendsResponse\nfriendIDs: [oP0Loiik,D1EEG9PM,MhgfAlOC]\nfriends: [{'platformId': '8cQT3Eet', 'userId': 'PbbzlLnM'},{'platformId': 'QMGxMXQy', 'userId': 'M433R6aD'},{'platformId': '5Zxvunds', 'userId': 'SYgseMPB'}]\npaging: {"first":"aAWlvzAk","last":"Ozg2a9CB","next":"uVyWMZoE","previous":"78dmlZFY"}' > $TEMP_FILE_UPLOAD
+printf 'type: model.GetUserFriendsResponse\nfriendIDs: [OKSpUT34,04tCmgBY,1VLk5tTv]\nfriends: [{'platformId': 'yIrACqrO', 'userId': 'Nj2QZehW'},{'platformId': '7vG4amVG', 'userId': 'tVIwWgTM'},{'platformId': 'vSdtetrd', 'userId': 'aTaGWgY7'}]\npaging: {"first":"s1posMGo","last":"j5eXkR3O","next":"TWB3HG5q","previous":"FOvG4yH8"}' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -230,7 +230,7 @@ eval_tap $? 17 'ModelGetUserFriendsResponse' test.out
 
 #- 18 ModelGetUserIncomingFriendsResponse
 # echo "Testing 'ModelGetUserIncomingFriendsResponse'"
-printf 'type: model.GetUserIncomingFriendsResponse\nfriendIDs: [fDqlga9o,Ze1972Kw,ibiZmvJN]\npaging: {"first":"0FcAawj9","last":"YFCjijqi","next":"RrI4PUDV","previous":"BBGy3T3x"}' > $TEMP_FILE_UPLOAD
+printf 'type: model.GetUserIncomingFriendsResponse\nfriendIDs: [SJ2T32VE,1HGOniPN,INY0fekF]\npaging: {"first":"kmoG3Ytq","last":"PBrJ1j70","next":"AVzAnL3D","previous":"Umbf5TOp"}' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -241,7 +241,7 @@ eval_tap $? 18 'ModelGetUserIncomingFriendsResponse' test.out
 
 #- 19 ModelGetUserOutgoingFriendsResponse
 # echo "Testing 'ModelGetUserOutgoingFriendsResponse'"
-printf 'type: model.GetUserOutgoingFriendsResponse\nfriendIDs: [sRN2DqMw,uUjqEnEa,8FNoFfJT]\npaging: {"first":"hTOpAIxY","last":"TgVT2jFI","next":"Z2trcAS2","previous":"RPSyYZym"}' > $TEMP_FILE_UPLOAD
+printf 'type: model.GetUserOutgoingFriendsResponse\nfriendIDs: [N8R1ojEE,GXEAw621,5wLRSlZx]\npaging: {"first":"UoZFh9Gc","last":"r8Dkm2T0","next":"okMCL7GN","previous":"iiCSjofX"}' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -252,7 +252,7 @@ eval_tap $? 19 'ModelGetUserOutgoingFriendsResponse' test.out
 
 #- 20 ModelGlobalConfiguration
 # echo "Testing 'ModelGlobalConfiguration'"
-printf 'type: model.GlobalConfiguration\nregionRetryMapping: {"zkSUSTJ9":["TFmnG3go","lc5hu0EH","940tAIUn"],"R6ykHbgw":["HfpoKack","rcyjfJYf","MX9mDGav"],"XlPhz57i":["LIUZ5wL1","po1bEdH0","taEDILhT"]}\nregionURLMapping: [qN4giA5p,gux0lgf6,h1kMGjm9]\ntestGameMode: PoO2RUmJ\ntestRegionURLMapping: [GkoAhxxc,WtgJTRQK,PjHrhVx3]\ntestTargetUserIDs: [X0QfYg1b,I212uGXG,0eXs7A9D]\nupdatedAt: epGClViS' > $TEMP_FILE_UPLOAD
+printf 'type: model.GlobalConfiguration\nregionRetryMapping: {"z55i9vsk":["N3zL6TDd","OxtVFbyf","MXcXTQoG"],"HzcXXsK1":["LbMlf5iT","eHh78O3w","zmtnlj9n"],"0VP5dLAg":["qT4uhoLW","jRlpPrpQ","5SA1R4cY"]}\nregionURLMapping: [3S50PZGC,8D6B1z8p,ZSH9Q9s8]\ntestGameMode: qjTSc0rq\ntestRegionURLMapping: [wrJferw0,pgU3mdlB,7HC1vKhD]\ntestTargetUserIDs: [sQOeco1C,VVt59Fcz,DKnnx5s3]\nupdatedAt: IcZ1Oo2k' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -263,7 +263,7 @@ eval_tap $? 20 'ModelGlobalConfiguration' test.out
 
 #- 21 ModelIncomingFriendsWithTimeData
 # echo "Testing 'ModelIncomingFriendsWithTimeData'"
-printf 'type: model.IncomingFriendsWithTimeData\nfriendId: uIoilDVW\nrequestedAt: 1974-05-21T00:00:00Z' > $TEMP_FILE_UPLOAD
+printf 'type: model.IncomingFriendsWithTimeData\nfriendId: CeP6s1Dt\nrequestedAt: 1991-07-06T00:00:00Z' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -274,7 +274,7 @@ eval_tap $? 21 'ModelIncomingFriendsWithTimeData' test.out
 
 #- 22 ModelListBulkUserPlatformsResponse
 # echo "Testing 'ModelListBulkUserPlatformsResponse'"
-printf 'type: model.ListBulkUserPlatformsResponse\ndata: [{'avatarUrl': 'uB6L3ZDo', 'displayName': 'IcaueCNU', 'platformInfos': [{'platformDisplayName': '9d0TA6LK', 'platformName': '5fN2RfcM', 'platformUserId': 'WQTIjz6g'}, {'platformDisplayName': '0Rnr1bMQ', 'platformName': '66IqUut2', 'platformUserId': 'znbOv9mW'}, {'platformDisplayName': '0f7EuVvW', 'platformName': 'AILUjCNZ', 'platformUserId': 'YznrkdD8'}], 'userId': 'xMoMQMxa', 'username': 'fVIvwJq9'},{'avatarUrl': 'fBEM1DoM', 'displayName': 'wboojz0Y', 'platformInfos': [{'platformDisplayName': 'PEb9k8UG', 'platformName': '31f9tst1', 'platformUserId': '6lI3FNTX'}, {'platformDisplayName': '41wY4m5I', 'platformName': 'eNfhjckg', 'platformUserId': 'z0xUKasR'}, {'platformDisplayName': 'ScOomp5U', 'platformName': 'cBOQ7wSG', 'platformUserId': 'UH6BfRaP'}], 'userId': 'q1Iu5vaG', 'username': '9DAs3wv9'},{'avatarUrl': 'ksFbGsg9', 'displayName': 'er3YjIH4', 'platformInfos': [{'platformDisplayName': '0lPl048p', 'platformName': 'ItO0YCpW', 'platformUserId': '8fUlrm61'}, {'platformDisplayName': 'QMMBifYH', 'platformName': '4RCw3zwo', 'platformUserId': 'eTaPrDdd'}, {'platformDisplayName': '4I7Dgi3C', 'platformName': 'COk813cO', 'platformUserId': 'e0luuwNJ'}], 'userId': '8tRDPWQN', 'username': 'e21bOyL1'}]' > $TEMP_FILE_UPLOAD
+printf 'type: model.ListBulkUserPlatformsResponse\ndata: [{'avatarUrl': 'UF4TLRWd', 'displayName': '0VGuykdN', 'platformInfos': [{'platformDisplayName': 'zzSiX4xA', 'platformName': 'hDa8S07X', 'platformUserId': 'EbMDOzlq'}, {'platformDisplayName': 'cVe7g0Qk', 'platformName': 'llQxKzgq', 'platformUserId': 'r1rwD4Af'}, {'platformDisplayName': 'jj8Gdue9', 'platformName': 'hyjeX06b', 'platformUserId': 'rA0wheYh'}], 'userId': 'lFho4yTZ', 'username': 'bBh31iYF'},{'avatarUrl': '6B8KK7Oe', 'displayName': 'IMXMDexn', 'platformInfos': [{'platformDisplayName': 'tbmZg8PH', 'platformName': '2DPcydbr', 'platformUserId': 'Yqv0i66M'}, {'platformDisplayName': 'rJzAKi6F', 'platformName': 'NcKKMzau', 'platformUserId': 'jt6dXtAn'}, {'platformDisplayName': 'Q7eauPQW', 'platformName': '5TkiSWix', 'platformUserId': 'yViSzoEr'}], 'userId': 'zx6CPDI9', 'username': 'CPiabdE5'},{'avatarUrl': 'p3fPJpIG', 'displayName': 'cIOBlfwA', 'platformInfos': [{'platformDisplayName': 'qx8suL3Z', 'platformName': 'L2sxHC5t', 'platformUserId': 'Tlm70x3p'}, {'platformDisplayName': 'OmrB29gQ', 'platformName': 'eIfTe2HK', 'platformUserId': 'TeRlNHs3'}, {'platformDisplayName': 'H9i9rNMR', 'platformName': 'FUJTEsE4', 'platformUserId': '6ojdgfm7'}], 'userId': 'BwynuhF3', 'username': 'PUtTOpEj'}]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -285,7 +285,7 @@ eval_tap $? 22 'ModelListBulkUserPlatformsResponse' test.out
 
 #- 23 ModelLoadIncomingFriendsWithTimeResponse
 # echo "Testing 'ModelLoadIncomingFriendsWithTimeResponse'"
-printf 'type: model.LoadIncomingFriendsWithTimeResponse\ndata: [{'friendId': 'WI1thFm0', 'requestedAt': '1994-11-17T00:00:00Z'},{'friendId': 'X8Alqp2Q', 'requestedAt': '1986-08-29T00:00:00Z'},{'friendId': 'SMJxsu4w', 'requestedAt': '1983-11-20T00:00:00Z'}]\npaging: {"first":"qebndFLp","last":"Y7CjfEOz","next":"9aRHLJWr","previous":"KWSWZoyv"}' > $TEMP_FILE_UPLOAD
+printf 'type: model.LoadIncomingFriendsWithTimeResponse\ndata: [{'friendId': 'ZksZR1SR', 'requestedAt': '1996-04-06T00:00:00Z'},{'friendId': 'BWnqR0JN', 'requestedAt': '1980-06-20T00:00:00Z'},{'friendId': '3eNk2axv', 'requestedAt': '1993-12-20T00:00:00Z'}]\npaging: {"first":"bv8lit0o","last":"apAE9GAR","next":"bITtGnJS","previous":"uv41YiOL"}' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -296,7 +296,7 @@ eval_tap $? 23 'ModelLoadIncomingFriendsWithTimeResponse' test.out
 
 #- 24 ModelLoadOutgoingFriendsWithTimeResponse
 # echo "Testing 'ModelLoadOutgoingFriendsWithTimeResponse'"
-printf 'type: model.LoadOutgoingFriendsWithTimeResponse\ndata: [{'friendId': 'SGMpT0EW', 'requestedAt': '1973-11-30T00:00:00Z'},{'friendId': 'Jk9diXTe', 'requestedAt': '1982-04-02T00:00:00Z'},{'friendId': 'lnE906Ho', 'requestedAt': '1999-07-09T00:00:00Z'}]\npaging: {"first":"scgsKobQ","last":"byvPE4t1","next":"hFLlbeIa","previous":"P4nqL8t2"}' > $TEMP_FILE_UPLOAD
+printf 'type: model.LoadOutgoingFriendsWithTimeResponse\ndata: [{'friendId': 'bBJPMEOQ', 'requestedAt': '1983-03-20T00:00:00Z'},{'friendId': 'UUr78m1V', 'requestedAt': '1973-04-12T00:00:00Z'},{'friendId': 'nEUgtAZ9', 'requestedAt': '1979-10-29T00:00:00Z'}]\npaging: {"first":"kobZymEo","last":"9hcATjNj","next":"s08xn8sI","previous":"J9lKAaJE"}' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -307,7 +307,7 @@ eval_tap $? 24 'ModelLoadOutgoingFriendsWithTimeResponse' test.out
 
 #- 25 ModelLocalization
 # echo "Testing 'ModelLocalization'"
-printf 'type: model.Localization\nlastDraftAt: hrOBpnvP\nlastPublishedAt: wyZeBX6X\ntemplateContent: {"draft":"Lp6pWOuK","published":"Y8KlwOCl"}\ntemplateLanguage: QEQDTEMd' > $TEMP_FILE_UPLOAD
+printf 'type: model.Localization\nlastDraftAt: ypysz0b7\nlastPublishedAt: AVGJg5OM\ntemplateContent: {"draft":"S9EfXZVs","published":"BN9bNjiD"}\ntemplateLanguage: 8BMLTSEO' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -318,7 +318,7 @@ eval_tap $? 25 'ModelLocalization' test.out
 
 #- 26 ModelNativeFriendRequest
 # echo "Testing 'ModelNativeFriendRequest'"
-printf 'type: model.NativeFriendRequest\nisLogin: False\nplatformId: W6PlJvuM\nplatformToken: SJzTEwe5\npsnEnv: IgBExdEy' > $TEMP_FILE_UPLOAD
+printf 'type: model.NativeFriendRequest\nisLogin: True\nplatformId: HqEzxK4X\nplatformToken: V2Rtcd5m\npsnEnv: KoWh8aOd' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -329,7 +329,7 @@ eval_tap $? 26 'ModelNativeFriendRequest' test.out
 
 #- 27 ModelNativeFriendSyncResponse
 # echo "Testing 'ModelNativeFriendSyncResponse'"
-printf 'type: model.NativeFriendSyncResponse\ndetail: glSFdrRH\nplatformId: 0qPErw0T\nstatus: wgxevrxA' > $TEMP_FILE_UPLOAD
+printf 'type: model.NativeFriendSyncResponse\ndetail: bJy46ob4\nplatformId: 5zO8Hny9\nstatus: mfTkaFVe' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -340,7 +340,7 @@ eval_tap $? 27 'ModelNativeFriendSyncResponse' test.out
 
 #- 28 ModelNotificationTemplateResponse
 # echo "Testing 'ModelNotificationTemplateResponse'"
-printf 'type: model.NotificationTemplateResponse\ntemplateLocalizations: [{'lastDraftAt': 'JpvLeRLz', 'lastPublishedAt': 'quEXsXys', 'templateContent': {'draft': 'C9SNcRK5', 'published': 'CxtLdD2M'}, 'templateLanguage': '8QlZoBnt'},{'lastDraftAt': 'cWPJTgXx', 'lastPublishedAt': 'pAtayXz4', 'templateContent': {'draft': 'Xnscqe1x', 'published': 'Wv2b358Z'}, 'templateLanguage': 'J3TTAKyL'},{'lastDraftAt': '4KVZPo7N', 'lastPublishedAt': 'tCCtuYSM', 'templateContent': {'draft': 'uRG07gnI', 'published': 'sDQnT2kK'}, 'templateLanguage': 'yoWMoOpl'}]\ntemplateSlug: sKfTsgfo' > $TEMP_FILE_UPLOAD
+printf 'type: model.NotificationTemplateResponse\ntemplateLocalizations: [{'lastDraftAt': '14ugIblE', 'lastPublishedAt': 'EVJwODIU', 'templateContent': {'draft': '6tVJhvF3', 'published': 'YhFcTTE7'}, 'templateLanguage': 'g5Dx4R0l'},{'lastDraftAt': 'pe4Xe44Z', 'lastPublishedAt': 'wFtAMNLQ', 'templateContent': {'draft': 'Ek45eAb9', 'published': 'kBBs8NNK'}, 'templateLanguage': 'BhDvaTeB'},{'lastDraftAt': 'qHseJMPL', 'lastPublishedAt': 'KmGoZ8eW', 'templateContent': {'draft': 'A5bLI5Ui', 'published': 'pWULcBmY'}, 'templateLanguage': 'tWBon52j'}]\ntemplateSlug: L3ReihrH' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -351,7 +351,7 @@ eval_tap $? 28 'ModelNotificationTemplateResponse' test.out
 
 #- 29 ModelNotificationTopicResponse
 # echo "Testing 'ModelNotificationTopicResponse'"
-printf 'type: model.NotificationTopicResponse\ncreatedAt: 6\ndescription: ZHLfRrB0\nnamespace: PFfbD3L6\ntopic: 96Z6Up0r' > $TEMP_FILE_UPLOAD
+printf 'type: model.NotificationTopicResponse\ncreatedAt: 57\ndescription: 41gCTW0A\nnamespace: bGSLMhYr\ntopic: UXhHd9hA' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -362,7 +362,7 @@ eval_tap $? 29 'ModelNotificationTopicResponse' test.out
 
 #- 30 ModelNotificationTopicResponseV1
 # echo "Testing 'ModelNotificationTopicResponseV1'"
-printf 'type: model.NotificationTopicResponseV1\ncreatedAt: 40\ndescription: LmvX4jjo\nnamespace: 1NAv1phz\ntopicName: csGs7Ycq' > $TEMP_FILE_UPLOAD
+printf 'type: model.NotificationTopicResponseV1\ncreatedAt: 89\ndescription: D74k3hKQ\nnamespace: VoJlmUcz\ntopicName: Csa4N6yV' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -373,7 +373,7 @@ eval_tap $? 30 'ModelNotificationTopicResponseV1' test.out
 
 #- 31 ModelNotificationWithTemplateRequest
 # echo "Testing 'ModelNotificationWithTemplateRequest'"
-printf 'type: model.NotificationWithTemplateRequest\ntemplateContext: {"XeCYfcdn":"q9FBEZWY","vhBc8y19":"5TLxdLRx","jTJQXH0a":"ADmmPtCk"}\ntemplateLanguage: SSTmqXE1\ntemplateSlug: MYFO5guD\ntopic: TiPOKCdJ' > $TEMP_FILE_UPLOAD
+printf 'type: model.NotificationWithTemplateRequest\ntemplateContext: {"RWh3JUG6":"7qKXQsM9","CaXEurqz":"8wMWSWvv","AIisFUKd":"uNmJXwq6"}\ntemplateLanguage: BHaNyEDM\ntemplateSlug: uPW3X4I7\ntopic: 9EC91Qc8' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -384,7 +384,7 @@ eval_tap $? 31 'ModelNotificationWithTemplateRequest' test.out
 
 #- 32 ModelNotificationWithTemplateRequestV1
 # echo "Testing 'ModelNotificationWithTemplateRequestV1'"
-printf 'type: model.NotificationWithTemplateRequestV1\ntemplateContext: {"cwP7uWGV":"Zvyw7STH","0IIfiIsM":"meoJ3r3M","32sui2ut":"49yjryYJ"}\ntemplateLanguage: RuhmmLY5\ntemplateSlug: zMRU0dX3\ntopicName: J6zjlOEq' > $TEMP_FILE_UPLOAD
+printf 'type: model.NotificationWithTemplateRequestV1\ntemplateContext: {"rWBTzJrv":"3lDnFj9q","NoUQ0vF5":"q6ksnPBy","9aUQCbrd":"l54PwaOr"}\ntemplateLanguage: LXTvHeMC\ntemplateSlug: iRHKQfhl\ntopicName: oK09Mhzi' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -395,7 +395,7 @@ eval_tap $? 32 'ModelNotificationWithTemplateRequestV1' test.out
 
 #- 33 ModelOutgoingFriendsWithTimeData
 # echo "Testing 'ModelOutgoingFriendsWithTimeData'"
-printf 'type: model.OutgoingFriendsWithTimeData\nfriendId: KngMjomH\nrequestedAt: 1992-05-31T00:00:00Z' > $TEMP_FILE_UPLOAD
+printf 'type: model.OutgoingFriendsWithTimeData\nfriendId: 37pjcy5X\nrequestedAt: 1989-05-15T00:00:00Z' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -406,7 +406,7 @@ eval_tap $? 33 'ModelOutgoingFriendsWithTimeData' test.out
 
 #- 34 ModelPagination
 # echo "Testing 'ModelPagination'"
-printf 'type: model.Pagination\nfirst: la6VcUFX\nlast: mF2xa3Mo\nnext: zuiVqPgC\nprevious: qPfFACpe' > $TEMP_FILE_UPLOAD
+printf 'type: model.Pagination\nfirst: Tdf7t5Ej\nlast: TPpBQZDL\nnext: ZYBxX07c\nprevious: VcJccFSm' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -417,7 +417,7 @@ eval_tap $? 34 'ModelPagination' test.out
 
 #- 35 ModelPutGlobalConfigurationRequest
 # echo "Testing 'ModelPutGlobalConfigurationRequest'"
-printf 'type: model.PutGlobalConfigurationRequest\nregionRetryMapping: {"JG3QQfWt":["ldQKhOE9","HxboDTjI","fzTY6i3d"],"TbRjt4Sx":["tPPrUQ0v","etphODUn","nmhxG0tw"],"XwYg5lnV":["LZpAhb9e","pY92cE1A","DgLp8kkg"]}\nregionURLMapping: [WD5WBnMT,xwoLi4U2,CLzglDoJ]\ntestGameMode: kHzWMHhq\ntestRegionURLMapping: [BLq21mwo,mWhHb4qA,eUVnaK9h]\ntestTargetUserIDs: [ZxXaj5wo,I2npbFQX,c01leJzt]' > $TEMP_FILE_UPLOAD
+printf 'type: model.PutGlobalConfigurationRequest\nregionRetryMapping: {"9VfY08mV":["8IoDBpYY","PYK7vFQG","WFlRExKB"],"IsYca7LM":["848GOx4O","SgAHwxcy","va49JqFV"],"dBkDWQfN":["9NeGLOhu","Td5DwQ5s","NgB57jxa"]}\nregionURLMapping: [uz0yoOiI,lGWkdFZj,pWIeGPJf]\ntestGameMode: sKDH20NU\ntestRegionURLMapping: [7gvU3mID,EVHekZDQ,JEhU8gvW]\ntestTargetUserIDs: [7U0kSaXm,ynRQLupw,WssdkCJR]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -428,7 +428,7 @@ eval_tap $? 35 'ModelPutGlobalConfigurationRequest' test.out
 
 #- 36 ModelTemplateContent
 # echo "Testing 'ModelTemplateContent'"
-printf 'type: model.TemplateContent\ndraft: Kbj7aa9n\npublished: CQQqoPP1' > $TEMP_FILE_UPLOAD
+printf 'type: model.TemplateContent\ndraft: u4DFOsBa\npublished: jwskRUyY' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -439,7 +439,7 @@ eval_tap $? 36 'ModelTemplateContent' test.out
 
 #- 37 ModelTemplateLocalization
 # echo "Testing 'ModelTemplateLocalization'"
-printf 'type: model.TemplateLocalization\nlastDraftAt: 1eITKiSD\nlastPublishedAt: 5M15Yv2H\ntemplateContent: {"draft":"GD5P8RCw","published":"eKza4FyP"}\ntemplateLanguage: 2gtL9ODf\ntemplateSlug: 6NhqU2O6' > $TEMP_FILE_UPLOAD
+printf 'type: model.TemplateLocalization\nlastDraftAt: fWmNfaQv\nlastPublishedAt: 6FWrSBkW\ntemplateContent: {"draft":"42rXBFNl","published":"js5bUGf0"}\ntemplateLanguage: VIP15SQX\ntemplateSlug: fCS4a6Vj' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -450,7 +450,7 @@ eval_tap $? 37 'ModelTemplateLocalization' test.out
 
 #- 38 ModelTemplateLocalizationResponse
 # echo "Testing 'ModelTemplateLocalizationResponse'"
-printf 'type: model.TemplateLocalizationResponse\nfirst: fjO37WEI\nlast: QeidaTUy\nnext: yeXm8XtD\nprevious: hhVlSYPx\ntemplateLocalization: [{'lastDraftAt': '3nOMXuiQ', 'lastPublishedAt': '2qjfRUi5', 'templateContent': {'draft': 'YemqWcm6', 'published': 'ThRK1YjX'}, 'templateLanguage': 'Xxsb8tlE', 'templateSlug': 'PEwTz4gG'},{'lastDraftAt': 'RFLmwKEj', 'lastPublishedAt': 'gLxVhLYG', 'templateContent': {'draft': 'vPCubk6Z', 'published': 'IIXYmNa3'}, 'templateLanguage': 'BSsi6sds', 'templateSlug': 'FVyeQ7Tw'},{'lastDraftAt': 'LMd6aVyU', 'lastPublishedAt': 'CYulzIPf', 'templateContent': {'draft': 'S20Is2am', 'published': 'FUz2Tq5g'}, 'templateLanguage': 'ffxS10SC', 'templateSlug': 'p0RmOeCe'}]' > $TEMP_FILE_UPLOAD
+printf 'type: model.TemplateLocalizationResponse\nfirst: Vu7tZdNv\nlast: uQQvnkCd\nnext: t66iMLr2\nprevious: 6gPA1ppz\ntemplateLocalization: [{'lastDraftAt': 'eApRLjf7', 'lastPublishedAt': 'drdXagPg', 'templateContent': {'draft': 'THMbASQC', 'published': 'moPps02D'}, 'templateLanguage': '9mAhZ9ht', 'templateSlug': 'oqyQtJNa'},{'lastDraftAt': 'jVaUO4My', 'lastPublishedAt': 'y0LS2PLw', 'templateContent': {'draft': 'l2fl5t0j', 'published': 'GqP36BAy'}, 'templateLanguage': 'Ca2dpXjr', 'templateSlug': 'sOUZBpoU'},{'lastDraftAt': 'd87mHgpX', 'lastPublishedAt': 'qG3CRFjo', 'templateContent': {'draft': 'lJnsJUk8', 'published': 'r2wcCuqu'}, 'templateLanguage': 'aoKYTarw', 'templateSlug': '9czi1GZy'}]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -461,7 +461,7 @@ eval_tap $? 38 'ModelTemplateLocalizationResponse' test.out
 
 #- 39 ModelTemplateResponse
 # echo "Testing 'ModelTemplateResponse'"
-printf 'type: model.TemplateResponse\nlocalizations: [{'lastDraftAt': 'W9x9RavT', 'lastPublishedAt': 'X6ma7sJA', 'templateContent': {'draft': '5JyhNa35', 'published': 'c0oyDalR'}, 'templateLanguage': '8SRoErPm'},{'lastDraftAt': '3qXcKtce', 'lastPublishedAt': 'gJXGIuX8', 'templateContent': {'draft': 'dKZT1Fln', 'published': 'M9Z3G2Sb'}, 'templateLanguage': 'rB3wZVTh'},{'lastDraftAt': 'cX3308O3', 'lastPublishedAt': 'QMN1GotU', 'templateContent': {'draft': '0qcPdqIj', 'published': 'Bz5lzWVp'}, 'templateLanguage': 'QTUD011w'}]\ntemplateSlug: deMqA4JS' > $TEMP_FILE_UPLOAD
+printf 'type: model.TemplateResponse\nlocalizations: [{'lastDraftAt': 'kOVH9l89', 'lastPublishedAt': 'FscBMwj7', 'templateContent': {'draft': '9TstP4ZJ', 'published': 'C4fVtMRp'}, 'templateLanguage': 'uHEDv3MQ'},{'lastDraftAt': 'pNi8zCs0', 'lastPublishedAt': 'IcWyEXdH', 'templateContent': {'draft': 'QmAhF9Uw', 'published': 'mIPkhxVY'}, 'templateLanguage': '1MyVCdNI'},{'lastDraftAt': 'iF5qSASj', 'lastPublishedAt': 'pP3cynQc', 'templateContent': {'draft': 'nrC54MME', 'published': '5iz98PWa'}, 'templateLanguage': 'hkIYVh9C'}]\ntemplateSlug: Tixrc27G' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -472,7 +472,7 @@ eval_tap $? 39 'ModelTemplateResponse' test.out
 
 #- 40 ModelTopicByNamespacesResponse
 # echo "Testing 'ModelTopicByNamespacesResponse'"
-printf 'type: model.TopicByNamespacesResponse\nfirst: GvTzYeiX\nlast: 0z7ykhQy\nnext: yb3Bnp0h\nprevious: bl3PQTMs\ntopics: [{'createdAt': 2, 'description': 'Pt1cUkJm', 'namespace': 'eqejNDzL', 'topic': '0lEFY41K'},{'createdAt': 9, 'description': 'CWh3bl4H', 'namespace': '26XMlcQa', 'topic': 'zVNU8gXN'},{'createdAt': 86, 'description': '0SDx2guy', 'namespace': '3IFgocyu', 'topic': 'Ra2g2Mpm'}]' > $TEMP_FILE_UPLOAD
+printf 'type: model.TopicByNamespacesResponse\nfirst: Cyxsm8j7\nlast: 62HjiDyY\nnext: OdDE9FHk\nprevious: zbgjszXJ\ntopics: [{'createdAt': 90, 'description': 'RV3XOwZJ', 'namespace': 'EM7Yjf7F', 'topic': 'eLlltf2J'},{'createdAt': 94, 'description': '5PBdAu3s', 'namespace': 'uATdp2uU', 'topic': '7nU1YbbB'},{'createdAt': 84, 'description': 'JvvKIIug', 'namespace': 'JIRoHoWZ', 'topic': 'TD2gPvMF'}]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -483,7 +483,7 @@ eval_tap $? 40 'ModelTopicByNamespacesResponse' test.out
 
 #- 41 ModelUpdateTemplateRequest
 # echo "Testing 'ModelUpdateTemplateRequest'"
-printf 'type: model.UpdateTemplateRequest\ntemplateContent: hRyzAZCx' > $TEMP_FILE_UPLOAD
+printf 'type: model.UpdateTemplateRequest\ntemplateContent: ToRulgK3' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -494,7 +494,7 @@ eval_tap $? 41 'ModelUpdateTemplateRequest' test.out
 
 #- 42 ModelUpdateTopicRequest
 # echo "Testing 'ModelUpdateTopicRequest'"
-printf 'type: model.UpdateTopicRequest\ndescription: eLwrpb6t' > $TEMP_FILE_UPLOAD
+printf 'type: model.UpdateTopicRequest\ndescription: wltxWaOn' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -505,7 +505,7 @@ eval_tap $? 42 'ModelUpdateTopicRequest' test.out
 
 #- 43 ModelUserAcceptFriendRequest
 # echo "Testing 'ModelUserAcceptFriendRequest'"
-printf 'type: model.UserAcceptFriendRequest\nfriendId: PiF5yEYU' > $TEMP_FILE_UPLOAD
+printf 'type: model.UserAcceptFriendRequest\nfriendId: i92Ve1nO' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -516,7 +516,7 @@ eval_tap $? 43 'ModelUserAcceptFriendRequest' test.out
 
 #- 44 ModelUserCancelFriendRequest
 # echo "Testing 'ModelUserCancelFriendRequest'"
-printf 'type: model.UserCancelFriendRequest\nfriendId: mZ49XOb8' > $TEMP_FILE_UPLOAD
+printf 'type: model.UserCancelFriendRequest\nfriendId: xuXivLt1' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -527,7 +527,7 @@ eval_tap $? 44 'ModelUserCancelFriendRequest' test.out
 
 #- 45 ModelUserGetFriendshipStatusResponse
 # echo "Testing 'ModelUserGetFriendshipStatusResponse'"
-printf 'type: model.UserGetFriendshipStatusResponse\ncode: 31\nname: 6SYm5p5l' > $TEMP_FILE_UPLOAD
+printf 'type: model.UserGetFriendshipStatusResponse\ncode: 26\nname: gouFKGJa' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -538,7 +538,7 @@ eval_tap $? 45 'ModelUserGetFriendshipStatusResponse' test.out
 
 #- 46 ModelUserPlatformInfo
 # echo "Testing 'ModelUserPlatformInfo'"
-printf 'type: model.UserPlatformInfo\nplatformDisplayName: UvYnPS3b\nplatformName: YRFC3ES8\nplatformUserId: YqCU7wFw' > $TEMP_FILE_UPLOAD
+printf 'type: model.UserPlatformInfo\nplatformDisplayName: Zh5oStQ4\nplatformName: LxzjzbI8\nplatformUserId: ky88GguF' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -549,7 +549,7 @@ eval_tap $? 46 'ModelUserPlatformInfo' test.out
 
 #- 47 ModelUserRejectFriendRequest
 # echo "Testing 'ModelUserRejectFriendRequest'"
-printf 'type: model.UserRejectFriendRequest\nfriendId: hBo75Bdn' > $TEMP_FILE_UPLOAD
+printf 'type: model.UserRejectFriendRequest\nfriendId: Z6j20EIB' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -560,7 +560,7 @@ eval_tap $? 47 'ModelUserRejectFriendRequest' test.out
 
 #- 48 ModelUserRequestFriendRequest
 # echo "Testing 'ModelUserRequestFriendRequest'"
-printf 'type: model.UserRequestFriendRequest\nfriendId: xk3iFTtz\nfriendPublicId: NuPpEH2d' > $TEMP_FILE_UPLOAD
+printf 'type: model.UserRequestFriendRequest\nfriendId: tpR0phv2\nfriendPublicId: NgZs2UEI' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -571,7 +571,7 @@ eval_tap $? 48 'ModelUserRequestFriendRequest' test.out
 
 #- 49 ModelUserUnfriendRequest
 # echo "Testing 'ModelUserUnfriendRequest'"
-printf 'type: model.UserUnfriendRequest\nfriendId: nQddxRps' > $TEMP_FILE_UPLOAD
+printf 'type: model.UserUnfriendRequest\nfriendId: wVQVf9yo' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -582,7 +582,7 @@ eval_tap $? 49 'ModelUserUnfriendRequest' test.out
 
 #- 50 ModelUserWithPlatformInfo
 # echo "Testing 'ModelUserWithPlatformInfo'"
-printf 'type: model.UserWithPlatformInfo\navatarUrl: lLMfextt\ndisplayName: 4xPciT6s\nplatformInfos: [{'platformDisplayName': 'PvXHxFS6', 'platformName': 'lB2los7Q', 'platformUserId': 'XWctRZhD'},{'platformDisplayName': '3WaAD0gv', 'platformName': 'rgBoTmuP', 'platformUserId': 'SmcOKcb6'},{'platformDisplayName': 'kp6PRwZb', 'platformName': 'J1AhjGv2', 'platformUserId': 'kWdFXbWC'}]\nuserId: NSEtU9UQ\nusername: MAU27lkh' > $TEMP_FILE_UPLOAD
+printf 'type: model.UserWithPlatformInfo\navatarUrl: hEnE4Cwh\ndisplayName: U0QVb8b1\nplatformInfos: [{'platformDisplayName': 'liRA2FUe', 'platformName': '3NV8nTA5', 'platformUserId': 'AKJhPAhh'},{'platformDisplayName': 'DTeIuBYw', 'platformName': 'a7qPJQDm', 'platformUserId': 'Nx7erX1k'},{'platformDisplayName': 'FjyK5Nr6', 'platformName': 'GMc61XKK', 'platformUserId': 'JCuMfGu8'}]\nuserId: uG1iJo2k\nusername: KNh0IBq7' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -593,7 +593,7 @@ eval_tap $? 50 'ModelUserWithPlatformInfo' test.out
 
 #- 51 ModelsAdminAddProfanityFilterIntoListRequest
 # echo "Testing 'ModelsAdminAddProfanityFilterIntoListRequest'"
-printf 'type: models.AdminAddProfanityFilterIntoListRequest\nfilter: MvVp07jc\nnote: gs9JNNPP' > $TEMP_FILE_UPLOAD
+printf 'type: models.AdminAddProfanityFilterIntoListRequest\nfilter: xxQ0sH24\nnote: GvEyfFtC' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -604,7 +604,7 @@ eval_tap $? 51 'ModelsAdminAddProfanityFilterIntoListRequest' test.out
 
 #- 52 ModelsAdminAddProfanityFiltersFilterRequest
 # echo "Testing 'ModelsAdminAddProfanityFiltersFilterRequest'"
-printf 'type: models.AdminAddProfanityFiltersFilterRequest\nfilter: i9Orozl0\nnote: ejuR7451' > $TEMP_FILE_UPLOAD
+printf 'type: models.AdminAddProfanityFiltersFilterRequest\nfilter: Q1YKbMnX\nnote: voE7SWCr' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -615,7 +615,7 @@ eval_tap $? 52 'ModelsAdminAddProfanityFiltersFilterRequest' test.out
 
 #- 53 ModelsAdminAddProfanityFiltersRequest
 # echo "Testing 'ModelsAdminAddProfanityFiltersRequest'"
-printf 'type: models.AdminAddProfanityFiltersRequest\nfilters: [{'filter': 'sUrjjIle', 'note': 'pZODaqSc'},{'filter': 'FQeGUNf3', 'note': 'OezRCoN4'},{'filter': 'gLLJ9XR8', 'note': 'hM2zfleI'}]' > $TEMP_FILE_UPLOAD
+printf 'type: models.AdminAddProfanityFiltersRequest\nfilters: [{'filter': 'M5GAavqR', 'note': '2XLJQDku'},{'filter': 'caFfa9My', 'note': 'pXRicgg3'},{'filter': 'r8lM0fm4', 'note': 'rjsvpFMB'}]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -626,7 +626,7 @@ eval_tap $? 53 'ModelsAdminAddProfanityFiltersRequest' test.out
 
 #- 54 ModelsAdminCreateProfanityListRequest
 # echo "Testing 'ModelsAdminCreateProfanityListRequest'"
-printf 'type: models.AdminCreateProfanityListRequest\nisEnabled: False\nisMandatory: True\nname: iZ2DW3na' > $TEMP_FILE_UPLOAD
+printf 'type: models.AdminCreateProfanityListRequest\nisEnabled: False\nisMandatory: True\nname: hxOsM6LH' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -637,7 +637,7 @@ eval_tap $? 54 'ModelsAdminCreateProfanityListRequest' test.out
 
 #- 55 ModelsAdminDeleteProfanityFilterRequest
 # echo "Testing 'ModelsAdminDeleteProfanityFilterRequest'"
-printf 'type: models.AdminDeleteProfanityFilterRequest\nfilter: Jyzzk4oZ' > $TEMP_FILE_UPLOAD
+printf 'type: models.AdminDeleteProfanityFilterRequest\nfilter: q0iI7tNI' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -648,7 +648,7 @@ eval_tap $? 55 'ModelsAdminDeleteProfanityFilterRequest' test.out
 
 #- 56 ModelsAdminGetProfanityListFiltersV1Response
 # echo "Testing 'ModelsAdminGetProfanityListFiltersV1Response'"
-printf 'type: models.AdminGetProfanityListFiltersV1Response\nfilters: [{'filter': 'pjnPgBjN', 'listName': 'P1mjdS2G', 'namespace': 'IA8rSlkk', 'note': 'QCedG99u'},{'filter': '8uoMKKID', 'listName': 'LYbmd4K1', 'namespace': 'U5mOLkp1', 'note': 'vwFgWnxT'},{'filter': 'HLWe6PVP', 'listName': 'gLuMa6Dx', 'namespace': 'iMbOGNVz', 'note': 'p562n6fJ'}]' > $TEMP_FILE_UPLOAD
+printf 'type: models.AdminGetProfanityListFiltersV1Response\nfilters: [{'filter': 'hau7c4Ay', 'listName': '3BnqeBMO', 'namespace': '9ABV8HGS', 'note': '2B0vd51m'},{'filter': 'MxoS2y1t', 'listName': 'FO0D08bV', 'namespace': '6alP2X4N', 'note': 'QVuBPHQ3'},{'filter': 'h1HGFmbU', 'listName': 'knSpOpcI', 'namespace': 'cthxHCvE', 'note': '6YMRGHVw'}]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -659,7 +659,7 @@ eval_tap $? 56 'ModelsAdminGetProfanityListFiltersV1Response' test.out
 
 #- 57 ModelsAdminGetProfanityListsListResponse
 # echo "Testing 'ModelsAdminGetProfanityListsListResponse'"
-printf 'type: models.AdminGetProfanityListsListResponse\nisEnabled: False\nisMandatory: True\nname: 9wRDI1id' > $TEMP_FILE_UPLOAD
+printf 'type: models.AdminGetProfanityListsListResponse\nisEnabled: True\nisMandatory: True\nname: l1IyKFem' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -670,7 +670,7 @@ eval_tap $? 57 'ModelsAdminGetProfanityListsListResponse' test.out
 
 #- 58 ModelsAdminSetProfanityRuleForNamespaceRequest
 # echo "Testing 'ModelsAdminSetProfanityRuleForNamespaceRequest'"
-printf 'type: models.AdminSetProfanityRuleForNamespaceRequest\nrule: mrWiw4RP' > $TEMP_FILE_UPLOAD
+printf 'type: models.AdminSetProfanityRuleForNamespaceRequest\nrule: qXoZSyRx' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -681,7 +681,7 @@ eval_tap $? 58 'ModelsAdminSetProfanityRuleForNamespaceRequest' test.out
 
 #- 59 ModelsAdminUpdateProfanityList
 # echo "Testing 'ModelsAdminUpdateProfanityList'"
-printf 'type: models.AdminUpdateProfanityList\nisEnabled: False\nisMandatory: True\nnewName: jmhod6Uk' > $TEMP_FILE_UPLOAD
+printf 'type: models.AdminUpdateProfanityList\nisEnabled: True\nisMandatory: False\nnewName: 4zJCI3ub' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -692,7 +692,7 @@ eval_tap $? 59 'ModelsAdminUpdateProfanityList' test.out
 
 #- 60 ModelsAdminVerifyMessageProfanityRequest
 # echo "Testing 'ModelsAdminVerifyMessageProfanityRequest'"
-printf 'type: models.AdminVerifyMessageProfanityRequest\nmessage: sLZSc4fh\nprofanityLevel: 72hqD0XJ' > $TEMP_FILE_UPLOAD
+printf 'type: models.AdminVerifyMessageProfanityRequest\nmessage: Im2Pg5K5\nprofanityLevel: ApWYSJ8N' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -703,7 +703,7 @@ eval_tap $? 60 'ModelsAdminVerifyMessageProfanityRequest' test.out
 
 #- 61 ModelsAdminVerifyMessageProfanityResponse
 # echo "Testing 'ModelsAdminVerifyMessageProfanityResponse'"
-printf 'type: models.AdminVerifyMessageProfanityResponse\nfilteredMessage: VnB7TLNX\nhasProfanity: True' > $TEMP_FILE_UPLOAD
+printf 'type: models.AdminVerifyMessageProfanityResponse\nfilteredMessage: sTGY6mXq\nhasProfanity: True' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -714,7 +714,7 @@ eval_tap $? 61 'ModelsAdminVerifyMessageProfanityResponse' test.out
 
 #- 62 ModelsBlockedByPlayerData
 # echo "Testing 'ModelsBlockedByPlayerData'"
-printf 'type: models.BlockedByPlayerData\nblockedAt: 1998-11-01T00:00:00Z\nuserId: KTF7jgNu' > $TEMP_FILE_UPLOAD
+printf 'type: models.BlockedByPlayerData\nblockedAt: 1992-01-23T00:00:00Z\nuserId: vRPGcHG5' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -725,7 +725,7 @@ eval_tap $? 62 'ModelsBlockedByPlayerData' test.out
 
 #- 63 ModelsBlockedPlayerData
 # echo "Testing 'ModelsBlockedPlayerData'"
-printf 'type: models.BlockedPlayerData\nblockedAt: 1994-12-29T00:00:00Z\nblockedUserId: CGvxHUUm' > $TEMP_FILE_UPLOAD
+printf 'type: models.BlockedPlayerData\nblockedAt: 1984-06-19T00:00:00Z\nblockedUserId: lbIERmzd' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -736,7 +736,7 @@ eval_tap $? 63 'ModelsBlockedPlayerData' test.out
 
 #- 64 ModelsConfig
 # echo "Testing 'ModelsConfig'"
-printf 'type: models.Config\nallowInviteNonConnectedUser: False\nallowJoinPartyDuringMatchmaking: True\nautoKickOnDisconnect: False\nautoKickOnDisconnectDelay: 26\ncancelTicketOnDisconnect: False\nchatRateLimitBurst: 90\nchatRateLimitDuration: 76\nconcurrentUsersLimit: 58\ndisableInvitationOnJoinParty: True\nenableChat: True\nentitlementCheck: True\nentitlementItemID: ujsHVZg0\ngeneralRateLimitBurst: 73\ngeneralRateLimitDuration: 10\nkeepPresenceActivityOnDisconnect: False\nmaxDSWaitTime: 56\nmaxFriendsLimit: 86\nmaxPartyMember: 65\nnamespace: p0yTT2ow\nprofanityFilter: True\nreadyConsentTimeout: 1\nunregisterDelay: 37' > $TEMP_FILE_UPLOAD
+printf 'type: models.Config\nallowInviteNonConnectedUser: False\nallowJoinPartyDuringMatchmaking: False\nautoKickOnDisconnect: False\nautoKickOnDisconnectDelay: 78\ncancelTicketOnDisconnect: True\nchatRateLimitBurst: 17\nchatRateLimitDuration: 88\nconcurrentUsersLimit: 85\ndisableInvitationOnJoinParty: False\nenableChat: False\nentitlementCheck: True\nentitlementItemID: mkmnsAOA\ngeneralRateLimitBurst: 48\ngeneralRateLimitDuration: 29\nkeepPresenceActivityOnDisconnect: False\nmaxDSWaitTime: 39\nmaxFriendsLimit: 45\nmaxPartyMember: 95\nnamespace: hVB9PeoG\nprofanityFilter: False\nreadyConsentTimeout: 97\nunregisterDelay: 10' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -747,7 +747,7 @@ eval_tap $? 64 'ModelsConfig' test.out
 
 #- 65 ModelsConfigList
 # echo "Testing 'ModelsConfigList'"
-printf 'type: models.ConfigList\nconfigs: [{'allowInviteNonConnectedUser': True, 'allowJoinPartyDuringMatchmaking': True, 'autoKickOnDisconnect': False, 'autoKickOnDisconnectDelay': 88, 'cancelTicketOnDisconnect': False, 'chatRateLimitBurst': 4, 'chatRateLimitDuration': 71, 'concurrentUsersLimit': 21, 'disableInvitationOnJoinParty': True, 'enableChat': False, 'entitlementCheck': False, 'entitlementItemID': 'ART65QWy', 'generalRateLimitBurst': 93, 'generalRateLimitDuration': 98, 'keepPresenceActivityOnDisconnect': True, 'maxDSWaitTime': 84, 'maxFriendsLimit': 93, 'maxPartyMember': 26, 'namespace': 'QGyLs0h3', 'profanityFilter': False, 'readyConsentTimeout': 56, 'unregisterDelay': 71},{'allowInviteNonConnectedUser': False, 'allowJoinPartyDuringMatchmaking': False, 'autoKickOnDisconnect': True, 'autoKickOnDisconnectDelay': 65, 'cancelTicketOnDisconnect': False, 'chatRateLimitBurst': 70, 'chatRateLimitDuration': 65, 'concurrentUsersLimit': 83, 'disableInvitationOnJoinParty': False, 'enableChat': True, 'entitlementCheck': True, 'entitlementItemID': 'v9sfvCuP', 'generalRateLimitBurst': 0, 'generalRateLimitDuration': 19, 'keepPresenceActivityOnDisconnect': True, 'maxDSWaitTime': 56, 'maxFriendsLimit': 36, 'maxPartyMember': 55, 'namespace': 'uVRU8Zfj', 'profanityFilter': True, 'readyConsentTimeout': 17, 'unregisterDelay': 77},{'allowInviteNonConnectedUser': False, 'allowJoinPartyDuringMatchmaking': False, 'autoKickOnDisconnect': True, 'autoKickOnDisconnectDelay': 92, 'cancelTicketOnDisconnect': True, 'chatRateLimitBurst': 12, 'chatRateLimitDuration': 22, 'concurrentUsersLimit': 65, 'disableInvitationOnJoinParty': False, 'enableChat': False, 'entitlementCheck': False, 'entitlementItemID': 'J4ncV8V3', 'generalRateLimitBurst': 11, 'generalRateLimitDuration': 36, 'keepPresenceActivityOnDisconnect': False, 'maxDSWaitTime': 97, 'maxFriendsLimit': 11, 'maxPartyMember': 74, 'namespace': 'ZOj4HN13', 'profanityFilter': False, 'readyConsentTimeout': 28, 'unregisterDelay': 77}]' > $TEMP_FILE_UPLOAD
+printf 'type: models.ConfigList\nconfigs: [{'allowInviteNonConnectedUser': True, 'allowJoinPartyDuringMatchmaking': True, 'autoKickOnDisconnect': False, 'autoKickOnDisconnectDelay': 29, 'cancelTicketOnDisconnect': False, 'chatRateLimitBurst': 98, 'chatRateLimitDuration': 5, 'concurrentUsersLimit': 38, 'disableInvitationOnJoinParty': False, 'enableChat': True, 'entitlementCheck': False, 'entitlementItemID': 'VFwXiCRD', 'generalRateLimitBurst': 1, 'generalRateLimitDuration': 27, 'keepPresenceActivityOnDisconnect': False, 'maxDSWaitTime': 95, 'maxFriendsLimit': 81, 'maxPartyMember': 96, 'namespace': 'ItlZm8f0', 'profanityFilter': True, 'readyConsentTimeout': 50, 'unregisterDelay': 58},{'allowInviteNonConnectedUser': False, 'allowJoinPartyDuringMatchmaking': True, 'autoKickOnDisconnect': False, 'autoKickOnDisconnectDelay': 9, 'cancelTicketOnDisconnect': False, 'chatRateLimitBurst': 72, 'chatRateLimitDuration': 44, 'concurrentUsersLimit': 35, 'disableInvitationOnJoinParty': True, 'enableChat': False, 'entitlementCheck': True, 'entitlementItemID': 'PwZs3RpK', 'generalRateLimitBurst': 59, 'generalRateLimitDuration': 24, 'keepPresenceActivityOnDisconnect': True, 'maxDSWaitTime': 23, 'maxFriendsLimit': 34, 'maxPartyMember': 13, 'namespace': 'BLD7B3CJ', 'profanityFilter': False, 'readyConsentTimeout': 37, 'unregisterDelay': 73},{'allowInviteNonConnectedUser': False, 'allowJoinPartyDuringMatchmaking': True, 'autoKickOnDisconnect': False, 'autoKickOnDisconnectDelay': 60, 'cancelTicketOnDisconnect': False, 'chatRateLimitBurst': 3, 'chatRateLimitDuration': 66, 'concurrentUsersLimit': 3, 'disableInvitationOnJoinParty': True, 'enableChat': True, 'entitlementCheck': False, 'entitlementItemID': 'hLTMtocD', 'generalRateLimitBurst': 70, 'generalRateLimitDuration': 63, 'keepPresenceActivityOnDisconnect': True, 'maxDSWaitTime': 29, 'maxFriendsLimit': 83, 'maxPartyMember': 3, 'namespace': 'a1k8LDUc', 'profanityFilter': True, 'readyConsentTimeout': 20, 'unregisterDelay': 6}]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -758,7 +758,7 @@ eval_tap $? 65 'ModelsConfigList' test.out
 
 #- 66 ModelsConfigReq
 # echo "Testing 'ModelsConfigReq'"
-printf 'type: models.ConfigReq\nallowInviteNonConnectedUser: True\nallowJoinPartyDuringMatchmaking: True\nautoKickOnDisconnect: False\nautoKickOnDisconnectDelay: 57\ncancelTicketOnDisconnect: True\nchatRateLimitBurst: 46\nchatRateLimitDuration: 93\nconcurrentUsersLimit: 18\ndisableInvitationOnJoinParty: True\nenableChat: False\nentitlementCheck: True\nentitlementItemID: hVGrJnPe\ngeneralRateLimitBurst: 72\ngeneralRateLimitDuration: 62\nkeepPresenceActivityOnDisconnect: True\nmaxDSWaitTime: 74\nmaxFriendsLimit: 12\nmaxPartyMember: 29\nprofanityFilter: False\nreadyConsentTimeout: 11\nunregisterDelay: 0' > $TEMP_FILE_UPLOAD
+printf 'type: models.ConfigReq\nallowInviteNonConnectedUser: True\nallowJoinPartyDuringMatchmaking: False\nautoKickOnDisconnect: False\nautoKickOnDisconnectDelay: 57\ncancelTicketOnDisconnect: True\nchatRateLimitBurst: 99\nchatRateLimitDuration: 55\nconcurrentUsersLimit: 21\ndisableInvitationOnJoinParty: False\nenableChat: False\nentitlementCheck: False\nentitlementItemID: SupRuU06\ngeneralRateLimitBurst: 16\ngeneralRateLimitDuration: 39\nkeepPresenceActivityOnDisconnect: True\nmaxDSWaitTime: 22\nmaxFriendsLimit: 25\nmaxPartyMember: 33\nprofanityFilter: False\nreadyConsentTimeout: 39\nunregisterDelay: 2' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -769,7 +769,7 @@ eval_tap $? 66 'ModelsConfigReq' test.out
 
 #- 67 ModelsCreateConfigRequest
 # echo "Testing 'ModelsCreateConfigRequest'"
-printf 'type: models.CreateConfigRequest\napiKey: YnXaYSOG' > $TEMP_FILE_UPLOAD
+printf 'type: models.CreateConfigRequest\napiKey: ovmJqaWA' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -780,7 +780,7 @@ eval_tap $? 67 'ModelsCreateConfigRequest' test.out
 
 #- 68 ModelsCreateConfigResponse
 # echo "Testing 'ModelsCreateConfigResponse'"
-printf 'type: models.CreateConfigResponse\napiKey: 1TlvUtgi\nnamespace: RYgJ9PmD' > $TEMP_FILE_UPLOAD
+printf 'type: models.CreateConfigResponse\napiKey: TSiMAyKg\nnamespace: UemGThfp' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -791,7 +791,7 @@ eval_tap $? 68 'ModelsCreateConfigResponse' test.out
 
 #- 69 ModelsDebugProfanityFilterRequest
 # echo "Testing 'ModelsDebugProfanityFilterRequest'"
-printf 'type: models.DebugProfanityFilterRequest\ntext: xucoLOoN' > $TEMP_FILE_UPLOAD
+printf 'type: models.DebugProfanityFilterRequest\ntext: 3RxApAMz' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -802,7 +802,7 @@ eval_tap $? 69 'ModelsDebugProfanityFilterRequest' test.out
 
 #- 70 ModelsGetAllPlayerBlockedByUsersResponse
 # echo "Testing 'ModelsGetAllPlayerBlockedByUsersResponse'"
-printf 'type: models.GetAllPlayerBlockedByUsersResponse\ndata: [{'blockedAt': '1986-12-23T00:00:00Z', 'userId': 'R5MiUVKS'},{'blockedAt': '1992-01-17T00:00:00Z', 'userId': 'vd7imNAM'},{'blockedAt': '1997-04-29T00:00:00Z', 'userId': 'cYxNlp4d'}]' > $TEMP_FILE_UPLOAD
+printf 'type: models.GetAllPlayerBlockedByUsersResponse\ndata: [{'blockedAt': '1981-02-11T00:00:00Z', 'userId': 'jCLR4Anj'},{'blockedAt': '1999-10-15T00:00:00Z', 'userId': 'jUZzKgvs'},{'blockedAt': '1982-04-05T00:00:00Z', 'userId': 'oRO7wNl5'}]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -813,7 +813,7 @@ eval_tap $? 70 'ModelsGetAllPlayerBlockedByUsersResponse' test.out
 
 #- 71 ModelsGetAllPlayerBlockedUsersResponse
 # echo "Testing 'ModelsGetAllPlayerBlockedUsersResponse'"
-printf 'type: models.GetAllPlayerBlockedUsersResponse\ndata: [{'blockedAt': '1972-11-01T00:00:00Z', 'blockedUserId': 'YSZB10UX'},{'blockedAt': '1991-05-08T00:00:00Z', 'blockedUserId': 'Wh7UpReP'},{'blockedAt': '1993-09-24T00:00:00Z', 'blockedUserId': 'P2l0HDgd'}]' > $TEMP_FILE_UPLOAD
+printf 'type: models.GetAllPlayerBlockedUsersResponse\ndata: [{'blockedAt': '1983-09-17T00:00:00Z', 'blockedUserId': 'iCLIK4Gi'},{'blockedAt': '1984-10-04T00:00:00Z', 'blockedUserId': 'APjL94rz'},{'blockedAt': '1980-11-17T00:00:00Z', 'blockedUserId': 'NmPOky8w'}]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -824,7 +824,7 @@ eval_tap $? 71 'ModelsGetAllPlayerBlockedUsersResponse' test.out
 
 #- 72 ModelsGetAllPlayerSessionAttributeResponse
 # echo "Testing 'ModelsGetAllPlayerSessionAttributeResponse'"
-printf 'type: models.GetAllPlayerSessionAttributeResponse\nattributes: {"yc78Ws0K":"O3P1TkuS","MNH3nhEx":"wiTOAoQq","kYmSuP7F":"nDwnB4jB"}' > $TEMP_FILE_UPLOAD
+printf 'type: models.GetAllPlayerSessionAttributeResponse\nattributes: {"Ch3HiptB":"sKC3Ijyd","3X18TvT8":"ST0oF3Z8","ebNeOBP6":"lpfIMuym"}' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -835,7 +835,7 @@ eval_tap $? 72 'ModelsGetAllPlayerSessionAttributeResponse' test.out
 
 #- 73 ModelsGetBulkAllPlayerBlockedUsersRequest
 # echo "Testing 'ModelsGetBulkAllPlayerBlockedUsersRequest'"
-printf 'type: models.GetBulkAllPlayerBlockedUsersRequest\nlistBlockedUserId: [1ikiognd,GyTkcCK3,mZSKlVfK]' > $TEMP_FILE_UPLOAD
+printf 'type: models.GetBulkAllPlayerBlockedUsersRequest\nlistBlockedUserId: [O0odG8XM,9zxE6EEr,XGvu0swN]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -846,7 +846,7 @@ eval_tap $? 73 'ModelsGetBulkAllPlayerBlockedUsersRequest' test.out
 
 #- 74 ModelsGetBulkAllPlayerBlockedUsersResponse
 # echo "Testing 'ModelsGetBulkAllPlayerBlockedUsersResponse'"
-printf 'type: models.GetBulkAllPlayerBlockedUsersResponse\ndata: {"0hDoz2hP":[{"blockedAt":"1981-11-17T00:00:00Z","blockedUserId":"db95Qc1j"},{"blockedAt":"1981-06-06T00:00:00Z","blockedUserId":"ehJ3jMHQ"},{"blockedAt":"1994-04-12T00:00:00Z","blockedUserId":"OZQ9aPzN"}],"42yRtx8C":[{"blockedAt":"1989-12-01T00:00:00Z","blockedUserId":"txRGqWIS"},{"blockedAt":"1998-03-03T00:00:00Z","blockedUserId":"qdugUCYd"},{"blockedAt":"1981-05-30T00:00:00Z","blockedUserId":"a80kKv8y"}],"311vqSgD":[{"blockedAt":"1972-05-23T00:00:00Z","blockedUserId":"moYncozr"},{"blockedAt":"1995-09-19T00:00:00Z","blockedUserId":"s3rsBGor"},{"blockedAt":"1971-03-21T00:00:00Z","blockedUserId":"bIGE5dEL"}]}' > $TEMP_FILE_UPLOAD
+printf 'type: models.GetBulkAllPlayerBlockedUsersResponse\ndata: {"M3b4LmOw":[{"blockedAt":"1983-04-18T00:00:00Z","blockedUserId":"58NrAzMh"},{"blockedAt":"1981-07-27T00:00:00Z","blockedUserId":"x67Xny0I"},{"blockedAt":"1990-04-28T00:00:00Z","blockedUserId":"KCf6zbne"}],"3DQAvowj":[{"blockedAt":"1991-01-14T00:00:00Z","blockedUserId":"kh9C0LEa"},{"blockedAt":"1995-03-12T00:00:00Z","blockedUserId":"Oi7WpP0l"},{"blockedAt":"1972-01-15T00:00:00Z","blockedUserId":"pNNsLNyn"}],"T2kQVm4X":[{"blockedAt":"1987-01-16T00:00:00Z","blockedUserId":"2i8PKUNi"},{"blockedAt":"1974-10-30T00:00:00Z","blockedUserId":"RLRckZql"},{"blockedAt":"1999-05-08T00:00:00Z","blockedUserId":"ZXnZxhIC"}]}' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -857,7 +857,7 @@ eval_tap $? 74 'ModelsGetBulkAllPlayerBlockedUsersResponse' test.out
 
 #- 75 ModelsGetConfigResponse
 # echo "Testing 'ModelsGetConfigResponse'"
-printf 'type: models.GetConfigResponse\napiKey: lHe7ubTC\nnamespace: 9FEefHY4' > $TEMP_FILE_UPLOAD
+printf 'type: models.GetConfigResponse\napiKey: kcvbSXUH\nnamespace: U3MZMgXv' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -868,7 +868,7 @@ eval_tap $? 75 'ModelsGetConfigResponse' test.out
 
 #- 76 ModelsGetLobbyCcuResponse
 # echo "Testing 'ModelsGetLobbyCcuResponse'"
-printf 'type: models.GetLobbyCcuResponse\ncountCurrentUsers: 56' > $TEMP_FILE_UPLOAD
+printf 'type: models.GetLobbyCcuResponse\ncountCurrentUsers: 12' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -879,7 +879,7 @@ eval_tap $? 76 'ModelsGetLobbyCcuResponse' test.out
 
 #- 77 ModelsGetPlayerSessionAttributeResponse
 # echo "Testing 'ModelsGetPlayerSessionAttributeResponse'"
-printf 'type: models.GetPlayerSessionAttributeResponse\nkey: oJfaoUJn\nvalue: oRI9lubX' > $TEMP_FILE_UPLOAD
+printf 'type: models.GetPlayerSessionAttributeResponse\nkey: m5M4J2hk\nvalue: oAPp8wY2' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -890,7 +890,7 @@ eval_tap $? 77 'ModelsGetPlayerSessionAttributeResponse' test.out
 
 #- 78 ModelsImportConfigResponse
 # echo "Testing 'ModelsImportConfigResponse'"
-printf 'type: models.ImportConfigResponse\nfailedConfigs: [MyZp1qSi,CPTpA1fi,y4wFfVel]\nignoredConfigs: [bFlnNSn3,LNU8c0mB,pgQHdkaE]\nnewConfigs: [DIMj4Pvw,ZVE4lLlU,q9dpgwkB]\nreplacedConfigs: [k6uy0Ul0,pK3PMbJA,w5xFcIJL]' > $TEMP_FILE_UPLOAD
+printf 'type: models.ImportConfigResponse\nfailedConfigs: [bePDKXMz,p8YYHqrm,1YUVUZdH]\nignoredConfigs: [FyFBsyxA,CjOSHfTq,zGDo9vbO]\nnewConfigs: [SR6Oar78,1nQqYbRn,mFNb2IvH]\nreplacedConfigs: [6dxemsqk,mvOmkoQE,Pznf3hrZ]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -901,7 +901,7 @@ eval_tap $? 78 'ModelsImportConfigResponse' test.out
 
 #- 79 ModelsListBlockedPlayerRequest
 # echo "Testing 'ModelsListBlockedPlayerRequest'"
-printf 'type: models.ListBlockedPlayerRequest\nlistBlockedUserId: [6UFuUb3P,syqEbpeR,ls4k6ayH]' > $TEMP_FILE_UPLOAD
+printf 'type: models.ListBlockedPlayerRequest\nlistBlockedUserId: [gvxqlaya,RnIrnpLJ,3ohuIz2b]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -912,7 +912,7 @@ eval_tap $? 79 'ModelsListBlockedPlayerRequest' test.out
 
 #- 80 ModelsPartyData
 # echo "Testing 'ModelsPartyData'"
-printf 'type: models.PartyData\ncustom_attribute: {"MDMucZvT":{},"QI9w0Ytu":{},"NfKUFpSN":{}}\ninvitees: [bfYAlfQI,8ks0g0Kv,WS3aVsJd]\nleader: pEr9Sqag\nmembers: [PERWtae2,ID03k27T,qrNbht8l]\nnamespace: VaZw0msD\npartyId: 1RKn8Zbf\nupdatedAt: 72' > $TEMP_FILE_UPLOAD
+printf 'type: models.PartyData\ncustom_attribute: {"wu22rcXH":{},"xPx3CXgG":{},"LL12AOaM":{}}\ninvitees: [1gBqZMRT,jLJAvrDX,e60fKgmm]\nleader: UtApEqZs\nmembers: [smB1H6vz,yED5OoQU,zBATH6rt]\nnamespace: nziPfH2g\npartyId: oAAPp9JZ\nupdatedAt: 95' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -923,7 +923,7 @@ eval_tap $? 80 'ModelsPartyData' test.out
 
 #- 81 ModelsPartyPUTCustomAttributesRequest
 # echo "Testing 'ModelsPartyPUTCustomAttributesRequest'"
-printf 'type: models.PartyPUTCustomAttributesRequest\ncustom_attribute: {"kZXSHw2E":{},"lFjJg8FR":{},"czCol5Up":{}}\nupdatedAt: 56' > $TEMP_FILE_UPLOAD
+printf 'type: models.PartyPUTCustomAttributesRequest\ncustom_attribute: {"EdagFCUU":{},"Bfd86qAw":{},"AETesdQA":{}}\nupdatedAt: 56' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -934,7 +934,7 @@ eval_tap $? 81 'ModelsPartyPUTCustomAttributesRequest' test.out
 
 #- 82 ModelsPartyPUTLimitSizeRequest
 # echo "Testing 'ModelsPartyPUTLimitSizeRequest'"
-printf 'type: models.PartyPUTLimitSizeRequest\nlimit: 51' > $TEMP_FILE_UPLOAD
+printf 'type: models.PartyPUTLimitSizeRequest\nlimit: 37' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -945,7 +945,7 @@ eval_tap $? 82 'ModelsPartyPUTLimitSizeRequest' test.out
 
 #- 83 ModelsProfanityFilter
 # echo "Testing 'ModelsProfanityFilter'"
-printf 'type: models.ProfanityFilter\nfilter: JHU1FFnG\nlistName: NodOTU8G\nnamespace: vUk5MSJ3\nnote: UZ9YDTSj' > $TEMP_FILE_UPLOAD
+printf 'type: models.ProfanityFilter\nfilter: KzKoyv9N\nlistName: tqCa4Nzc\nnamespace: UalmUZOD\nnote: RbZlRCjd' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -956,7 +956,7 @@ eval_tap $? 83 'ModelsProfanityFilter' test.out
 
 #- 84 ModelsProfanityRule
 # echo "Testing 'ModelsProfanityRule'"
-printf 'type: models.ProfanityRule\nNamespace: 04eONf8Z\nRule: gJOh4ypZ' > $TEMP_FILE_UPLOAD
+printf 'type: models.ProfanityRule\nNamespace: uk1uA0ep\nRule: BF8KJjli' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -967,7 +967,7 @@ eval_tap $? 84 'ModelsProfanityRule' test.out
 
 #- 85 ModelsSetPlayerSessionAttributeRequest
 # echo "Testing 'ModelsSetPlayerSessionAttributeRequest'"
-printf 'type: models.SetPlayerSessionAttributeRequest\nattributes: {"rEYUBTET":"uZr7zeGA","v7BsZOXe":"uaI96zHW","ItMwKE5i":"5yKIlEur"}' > $TEMP_FILE_UPLOAD
+printf 'type: models.SetPlayerSessionAttributeRequest\nattributes: {"OGAvoMzG":"pdhPc8PY","ymTbaiY6":"uI4up4Ss","jXIu2oGe":"LOEPz8VC"}' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -978,7 +978,7 @@ eval_tap $? 85 'ModelsSetPlayerSessionAttributeRequest' test.out
 
 #- 86 ModelsUpdateConfigRequest
 # echo "Testing 'ModelsUpdateConfigRequest'"
-printf 'type: models.UpdateConfigRequest\napiKey: wmRLuqT8' > $TEMP_FILE_UPLOAD
+printf 'type: models.UpdateConfigRequest\napiKey: lxnqD99o' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -989,7 +989,7 @@ eval_tap $? 86 'ModelsUpdateConfigRequest' test.out
 
 #- 87 ModelsUpdateConfigResponse
 # echo "Testing 'ModelsUpdateConfigResponse'"
-printf 'type: models.UpdateConfigResponse\napiKey: YAwN8YgS\nnamespace: tKePhmca' > $TEMP_FILE_UPLOAD
+printf 'type: models.UpdateConfigResponse\napiKey: egUiYDp9\nnamespace: TUWUOAwf' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1000,7 +1000,7 @@ eval_tap $? 87 'ModelsUpdateConfigResponse' test.out
 
 #- 88 ResponseError
 # echo "Testing 'ResponseError'"
-printf 'type: response.Error\nerrorCode: 26\nerrorMessage: nJIQvnRo' > $TEMP_FILE_UPLOAD
+printf 'type: response.Error\nerrorCode: 48\nerrorMessage: Z2SaFEWc' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1011,7 +1011,7 @@ eval_tap $? 88 'ResponseError' test.out
 
 #- 89 RestapiErrorResponseBody
 # echo "Testing 'RestapiErrorResponseBody'"
-printf 'type: restapi.ErrorResponseBody\nErrorCode: 36\nErrorMessage: 6NZbS88h' > $TEMP_FILE_UPLOAD
+printf 'type: restapi.ErrorResponseBody\nErrorCode: 34\nErrorMessage: luxRnhTB' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1022,7 +1022,7 @@ eval_tap $? 89 'RestapiErrorResponseBody' test.out
 
 #- 90 RestapiErrorResponseV1
 # echo "Testing 'RestapiErrorResponseV1'"
-printf 'type: restapi.ErrorResponseV1\nerrorCode: 88\nerrorMessage: qsVBHRvn' > $TEMP_FILE_UPLOAD
+printf 'type: restapi.ErrorResponseV1\nerrorCode: 16\nerrorMessage: 7b0wivJf' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \

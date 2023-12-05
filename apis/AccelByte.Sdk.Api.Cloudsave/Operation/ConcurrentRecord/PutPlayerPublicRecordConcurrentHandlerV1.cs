@@ -127,6 +127,8 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             : OperationBuilder<PutPlayerPublicRecordConcurrentHandlerV1Builder>
         {
 
+            public bool? ResponseBody { get; set; }
+
 
 
 
@@ -138,6 +140,12 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                 _Sdk = sdk;
             }
 
+
+            public PutPlayerPublicRecordConcurrentHandlerV1Builder SetResponseBody(bool _responseBody)
+            {
+                ResponseBody = _responseBody;
+                return this;
+            }
 
 
 
@@ -163,7 +171,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                 return op;
             }
 
-            public void Execute(
+            public Model.ModelsPlayerRecordConcurrentUpdateResponse? Execute(
                 ModelsConcurrentRecordRequest body,
                 string key,
                 string namespace_,
@@ -181,7 +189,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
+                return op.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
@@ -199,6 +207,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
 
+            if (builder.ResponseBody != null) QueryParams["responseBody"] = Convert.ToString(builder.ResponseBody)!;
 
 
 
@@ -214,6 +223,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             string key,
             string namespace_,
             string userId,
+            bool? responseBody,
             Model.ModelsConcurrentRecordRequest body
         )
         {
@@ -221,6 +231,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
 
+            if (responseBody != null) QueryParams["responseBody"] = Convert.ToString(responseBody)!;
 
 
 
@@ -239,11 +250,19 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.ModelsPlayerRecordConcurrentUpdateResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
-                return;
+                return null;
+            }
+            else if (code == (HttpStatusCode)201)
+            {
+                return JsonSerializer.Deserialize<Model.ModelsPlayerRecordConcurrentUpdateResponse>(payload, ResponseJsonOptions);
+            }
+            else if (code == (HttpStatusCode)200)
+            {
+                return JsonSerializer.Deserialize<Model.ModelsPlayerRecordConcurrentUpdateResponse>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

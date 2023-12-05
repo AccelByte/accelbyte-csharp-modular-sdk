@@ -81,6 +81,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
         [SdkCommandArgument("targetNamespace")]
         public string? TargetNamespace { get; set; }
 
+        [SdkCommandArgument("withTotal")]
+        public bool? WithTotal { get; set; }
+
         public QueryItems1Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -126,6 +129,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
                 opBuilder.SetTags((string)Tags);
             if (TargetNamespace != null)
                 opBuilder.SetTargetNamespace((string)TargetNamespace);
+            if (WithTotal != null)
+                opBuilder.SetWithTotal((bool)WithTotal);
 
 
 
@@ -135,7 +140,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
             );
 
 
-            AccelByte.Sdk.Api.Platform.Model.FullItemPagingSlicedResult? response = wrapper.QueryItems1(operation);
+            AccelByte.Sdk.Api.Platform.Model.FullItemPagingResult? response = wrapper.QueryItems1(operation);
             if (response == null)
                 return "No response from server.";
 

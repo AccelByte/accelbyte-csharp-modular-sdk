@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Matchmaking.Model
 {
@@ -18,6 +20,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Model
         [JsonPropertyName("alliance_flexing_rule")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<ModelsAllianceFlexingRule>? AllianceFlexingRule { get; set; }
+
+        [JsonPropertyName("batch_size")]
+        public int? BatchSize { get; set; }
 
         [JsonPropertyName("bucket_mmr_rule")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -35,9 +40,22 @@ namespace AccelByte.Sdk.Api.Matchmaking.Model
         [JsonPropertyName("rebalance_enable")]
         public bool? RebalanceEnable { get; set; }
 
+        [JsonPropertyName("sort_ticket")]
+        public ModelsSortTicket? SortTicket { get; set; }
+
+        [JsonPropertyName("sort_tickets")]
+        public List<ModelsSortTicketRule>? SortTickets { get; set; }
+
         [JsonPropertyName("sub_game_modes")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Dictionary<string, ModelsSubGameMode>? SubGameModes { get; set; }
+
+        [JsonPropertyName("ticket_flexing_selection")]
+        [JsonStringEnum]
+        public ModelsRuleSetTicketFlexingSelection? TicketFlexingSelection { get; set; }
+
+        [JsonPropertyName("ticket_flexing_selections")]
+        public List<ModelsSelectionRule>? TicketFlexingSelections { get; set; }
 
         [JsonPropertyName("use_newest_ticket_for_flexing")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -46,4 +64,31 @@ namespace AccelByte.Sdk.Api.Matchmaking.Model
     }
 
 
+
+    public class ModelsRuleSetTicketFlexingSelection : StringEnum<ModelsRuleSetTicketFlexingSelection>
+    {
+        public static readonly ModelsRuleSetTicketFlexingSelection Newest
+            = new ModelsRuleSetTicketFlexingSelection("newest");
+
+        public static readonly ModelsRuleSetTicketFlexingSelection Oldest
+            = new ModelsRuleSetTicketFlexingSelection("oldest");
+
+        public static readonly ModelsRuleSetTicketFlexingSelection Pivot
+            = new ModelsRuleSetTicketFlexingSelection("pivot");
+
+        public static readonly ModelsRuleSetTicketFlexingSelection Random
+            = new ModelsRuleSetTicketFlexingSelection("random");
+
+
+        public static implicit operator ModelsRuleSetTicketFlexingSelection(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ModelsRuleSetTicketFlexingSelection(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

@@ -56,6 +56,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// 
     /// 
     ///               * awscognito
+    /// 
+    /// 
+    ///               *
+    /// 
+    ///               * eaorigin
+    /// 
+    /// 
+    ///               * snapchat
+    /// 
+    /// 
+    ///               * twitch
+    /// 
+    /// 
+    ///               * live
     /// </summary>
     public class RetrieveUserThirdPartyPlatformTokenV3 : AccelByte.Sdk.Core.Operation
     {

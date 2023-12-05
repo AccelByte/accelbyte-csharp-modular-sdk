@@ -36,6 +36,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
         [SdkCommandArgument("userId")]
         public string UserId { get; set; } = String.Empty;
 
+        [SdkCommandArgument("responseBody")]
+        public bool? ResponseBody { get; set; }
+
         [SdkCommandData("body")]
         public ModelsAdminPlayerConcurrentRecordRequest Body { get; set; } = new ModelsAdminPlayerConcurrentRecordRequest();
 
@@ -50,6 +53,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
 
             var opBuilder = AccelByte.Sdk.Api.Cloudsave.Operation.AdminPutAdminPlayerRecordConcurrentHandlerV1.Builder;
 
+            if (ResponseBody != null)
+                opBuilder.SetResponseBody((bool)ResponseBody);
 
 
 
@@ -62,8 +67,11 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
             );
 
 
-            wrapper.AdminPutAdminPlayerRecordConcurrentHandlerV1(operation);
-            return String.Empty;
+            AccelByte.Sdk.Api.Cloudsave.Model.ModelsPlayerRecordConcurrentUpdateResponse? response = wrapper.AdminPutAdminPlayerRecordConcurrentHandlerV1(operation);
+            if (response == null)
+                return "No response from server.";
+
+            return SdkHelper.SerializeToJson(response);
         }
     }
 }
