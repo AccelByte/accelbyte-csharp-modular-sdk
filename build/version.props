@@ -3,7 +3,7 @@
         <CoreAbstractionVersion>0.1.0</CoreAbstractionVersion>
         <AssemblyCoreAbstractionVersion>0.0.0</AssemblyCoreAbstractionVersion>
 
-        <CoreVersion>0.1.0</CoreVersion>
+        <CoreVersion>0.2.0</CoreVersion>
         <AssemblyCoreVersion>0.0.0</AssemblyCoreVersion>
 
         <CoreAuthenticationVersion>0.1.0</CoreAuthenticationVersion>
