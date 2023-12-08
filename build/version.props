@@ -9,7 +9,7 @@
         <CoreAuthenticationVersion>0.1.0</CoreAuthenticationVersion>
         <CompatVersion>0.1.0</CompatVersion>
         <FeatureAutoRefreshTokenVersion>0.1.0</FeatureAutoRefreshTokenVersion>
-        <FeatureLocalTokenValidationVersion>0.1.0</FeatureLocalTokenValidationVersion>
+        <FeatureLocalTokenValidationVersion>0.2.0</FeatureLocalTokenValidationVersion>
 
         <ApiAchievementVersion>0.1.0</ApiAchievementVersion>
         <ApiAmsVersion>0.1.0</ApiAmsVersion>

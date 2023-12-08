@@ -87,6 +87,9 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
         [JsonPropertyName("parent_namespace")]
         public string? ParentNamespace { get; set; } = null;
 
+        [JsonPropertyName("extend_namespace")]
+        public string? ExtendNamespace { get; set; } = null;
+
         [JsonPropertyName("namespace_roles")]
         public List<Types.Role>? NamespaceRoles { get; set; }
 
