@@ -23,6 +23,8 @@ sdkCodegenPath = null
 mockServerPath = null
 sdkPath = null
 
+sdkCodegenExe = "accelbyte-codegen-linux_amd64"
+
 breakingChangeCheckExitCode = 0
 outstandingDeprecationCount = 0
 
