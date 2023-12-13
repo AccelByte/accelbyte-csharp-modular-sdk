@@ -9,6 +9,7 @@ using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Api.Achievement;
 using AccelByte.Sdk.Api.Ams;
 using AccelByte.Sdk.Api.Basic;
+using AccelByte.Sdk.Api.Chat;
 using AccelByte.Sdk.Api.Cloudsave;
 using AccelByte.Sdk.Api.Dslogmanager;
 using AccelByte.Sdk.Api.Dsmc;
@@ -17,6 +18,7 @@ using AccelByte.Sdk.Api.Gametelemetry;
 using AccelByte.Sdk.Api.Gdpr;
 using AccelByte.Sdk.Api.Group;
 using AccelByte.Sdk.Api.Iam;
+using AccelByte.Sdk.Api.Inventory;
 using AccelByte.Sdk.Api.Leaderboard;
 using AccelByte.Sdk.Api.Legal;
 using AccelByte.Sdk.Api.Lobby;
@@ -43,6 +45,7 @@ namespace AccelByte.Sdk.Core
         public AchievementApi Achievement { get => ((IAccelByteSdk)this).GetAchievementApi(); }
         public AmsApi Ams { get => ((IAccelByteSdk)this).GetAmsApi(); }
         public BasicApi Basic { get => ((IAccelByteSdk)this).GetBasicApi(); }
+        public ChatApi Chat { get => ((IAccelByteSdk)this).GetChatApi(); }
         public CloudsaveApi Cloudsave { get => ((IAccelByteSdk)this).GetCloudsaveApi(); }
         public DslogmanagerApi Dslogmanager { get => ((IAccelByteSdk)this).GetDslogmanagerApi(); }
         public DsmcApi Dsmc { get => ((IAccelByteSdk)this).GetDsmcApi(); }
@@ -51,6 +54,7 @@ namespace AccelByte.Sdk.Core
         public GdprApi Gdpr { get => ((IAccelByteSdk)this).GetGdprApi(); }
         public GroupApi Group { get => ((IAccelByteSdk)this).GetGroupApi(); }
         public IamApi Iam { get => ((IAccelByteSdk)this).GetIamApi(); }
+        public InventoryApi Inventory { get => ((IAccelByteSdk)this).GetInventoryApi(); }
         public LeaderboardApi Leaderboard { get => ((IAccelByteSdk)this).GetLeaderboardApi(); }
         public LegalApi Legal { get => ((IAccelByteSdk)this).GetLegalApi(); }
         public LobbyApi Lobby { get => ((IAccelByteSdk)this).GetLobbyApi(); }

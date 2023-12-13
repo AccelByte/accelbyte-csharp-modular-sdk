@@ -21,6 +21,12 @@ namespace AccelByte.Sdk.Core
             return new String(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
+        public static string GenerateRandomAlphabet(this Random random, int length)
+        {
+            string chars = "abcdefghijklmnopqrstuvwxyz";
+            return new String(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
         public static string RandomizeChar(this Random random, string source, int length)
         {
             string result = String.Empty;

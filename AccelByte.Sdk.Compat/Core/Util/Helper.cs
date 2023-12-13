@@ -43,6 +43,12 @@ namespace AccelByte.Sdk.Core.Util
             return random.GenerateRandomId(length);
         }
 
+        public static string GenerateRandomAlphabet(int length)
+        {
+            Random random = new Random();
+            return random.GenerateRandomAlphabet(length);
+        }
+
         private static string RandomizeChar(Random random, string source, int length)
         {
             return random.RandomizeChar(source, length);

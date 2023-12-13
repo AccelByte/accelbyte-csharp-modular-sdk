@@ -111,6 +111,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccelByte.Sdk.Sample.OnDema
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccelByte.Sdk.Api.Inventory", "apis\AccelByte.Sdk.Api.Inventory\AccelByte.Sdk.Api.Inventory.csproj", "{AECBEB5D-207A-4C83-94DF-22379BEA9574}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccelByte.Sdk.Api.Chat", "apis\AccelByte.Sdk.Api.Chat\AccelByte.Sdk.Api.Chat.csproj", "{3F1FCC46-26F6-4118-84F4-2D1703B06D78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -301,6 +303,10 @@ Global
 		{AECBEB5D-207A-4C83-94DF-22379BEA9574}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AECBEB5D-207A-4C83-94DF-22379BEA9574}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AECBEB5D-207A-4C83-94DF-22379BEA9574}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F1FCC46-26F6-4118-84F4-2D1703B06D78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F1FCC46-26F6-4118-84F4-2D1703B06D78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F1FCC46-26F6-4118-84F4-2D1703B06D78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F1FCC46-26F6-4118-84F4-2D1703B06D78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -350,6 +356,7 @@ Global
 		{00CD93EE-4783-4954-BB09-E20115193DD4} = {8472313F-B140-4C96-A273-C3ECB50D8717}
 		{F5E725C2-F302-48E8-8796-C70C28A1FDF8} = {8472313F-B140-4C96-A273-C3ECB50D8717}
 		{AECBEB5D-207A-4C83-94DF-22379BEA9574} = {6F34025E-DE17-4034-B377-CC435F5102B5}
+		{3F1FCC46-26F6-4118-84F4-2D1703B06D78} = {6F34025E-DE17-4034-B377-CC435F5102B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4EAFA846-7587-4FA9-A922-E501D7FBA11A}

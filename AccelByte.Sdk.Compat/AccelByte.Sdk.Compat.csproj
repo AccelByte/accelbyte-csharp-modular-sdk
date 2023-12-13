@@ -59,6 +59,7 @@ and restrictions contact your company contract manager.
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Achievement\AccelByte.Sdk.Api.Achievement.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Ams\AccelByte.Sdk.Api.Ams.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Basic\AccelByte.Sdk.Api.Basic.csproj" />
+    <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Chat\AccelByte.Sdk.Api.Chat.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Cloudsave\AccelByte.Sdk.Api.Cloudsave.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Dslogmanager\AccelByte.Sdk.Api.Dslogmanager.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Dsmc\AccelByte.Sdk.Api.Dsmc.csproj" />
@@ -67,6 +68,7 @@ and restrictions contact your company contract manager.
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Gdpr\AccelByte.Sdk.Api.Gdpr.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Group\AccelByte.Sdk.Api.Group.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Iam\AccelByte.Sdk.Api.Iam.csproj" />
+    <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Inventory\AccelByte.Sdk.Api.Inventory.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Leaderboard\AccelByte.Sdk.Api.Leaderboard.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Legal\AccelByte.Sdk.Api.Legal.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Lobby\AccelByte.Sdk.Api.Lobby.csproj" />
