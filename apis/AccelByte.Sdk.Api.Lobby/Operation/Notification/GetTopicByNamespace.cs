@@ -22,8 +22,6 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     /// <summary>
     /// getTopicByNamespace
     ///
-    /// Required permission : `NAMESPACE:{namespace}:TOPIC [READ]` with scope `social`
-    /// 
     /// get topic by namespace.
     /// </summary>
     public class GetTopicByNamespace : AccelByte.Sdk.Core.Operation

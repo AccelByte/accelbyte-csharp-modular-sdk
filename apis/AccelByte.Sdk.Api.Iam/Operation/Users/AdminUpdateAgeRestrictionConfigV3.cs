@@ -22,7 +22,6 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// <summary>
     /// AdminUpdateAgeRestrictionConfigV3
     ///
-    /// Required permission 'ADMIN:NAMESPACE:{namespace}:AGERESTRICTION [UPDATE]'
     /// action code: 10122
     /// </summary>
     public class AdminUpdateAgeRestrictionConfigV3 : AccelByte.Sdk.Core.Operation

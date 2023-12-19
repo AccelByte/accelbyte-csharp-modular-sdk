@@ -25,30 +25,30 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
         }
 
         #region Operation Builders
-        public QoSRegionsUpdate.QoSRegionsUpdateBuilder QoSRegionsUpdateOp
-        {
-            get { return new Operation.QoSRegionsUpdate.QoSRegionsUpdateBuilder(_sdk); }
-        }
         public QoSRegionsGet.QoSRegionsGetBuilder QoSRegionsGetOp
         {
             get { return new Operation.QoSRegionsGet.QoSRegionsGetBuilder(_sdk); }
         }
+        public QoSRegionsUpdate.QoSRegionsUpdateBuilder QoSRegionsUpdateOp
+        {
+            get { return new Operation.QoSRegionsUpdate.QoSRegionsUpdateBuilder(_sdk); }
+        }
         #endregion
 
-        public void QoSRegionsUpdate(QoSRegionsUpdate input)
-        {
-            var response = _sdk.RunRequest(input);
-
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
         public Model.ApiQoSEndpointResponse? QoSRegionsGet(QoSRegionsGet input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void QoSRegionsUpdate(QoSRegionsUpdate input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

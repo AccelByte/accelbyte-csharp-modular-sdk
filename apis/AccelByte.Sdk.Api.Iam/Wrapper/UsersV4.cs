@@ -29,6 +29,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.AdminCreateTestUsersV4.AdminCreateTestUsersV4Builder(_sdk); }
         }
+        public AdminBulkUpdateUserAccountTypeV4.AdminBulkUpdateUserAccountTypeV4Builder AdminBulkUpdateUserAccountTypeV4Op
+        {
+            get { return new Operation.AdminBulkUpdateUserAccountTypeV4.AdminBulkUpdateUserAccountTypeV4Builder(_sdk); }
+        }
         public AdminBulkCheckValidUserIDV4.AdminBulkCheckValidUserIDV4Builder AdminBulkCheckValidUserIDV4Op
         {
             get { return new Operation.AdminBulkCheckValidUserIDV4.AdminBulkCheckValidUserIDV4Builder(_sdk); }
@@ -225,6 +229,15 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void AdminBulkUpdateUserAccountTypeV4(AdminBulkUpdateUserAccountTypeV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

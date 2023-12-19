@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminQueryTopic op = new AdminQueryTopic(this,
-                    namespace_                    
+                    namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -159,7 +159,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.IncludeMembers != null) QueryParams["includeMembers"] = Convert.ToString(builder.IncludeMembers)!;
             if (builder.IncludePastMembers != null) QueryParams["includePastMembers"] = Convert.ToString(builder.IncludePastMembers)!;
             if (builder.IncludePastTopics != null) QueryParams["includePastTopics"] = Convert.ToString(builder.IncludePastTopics)!;
@@ -169,32 +169,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             if (builder.TopicSubType is not null) QueryParams["topicSubType"] = builder.TopicSubType.Value;
             if (builder.TopicType is not null) QueryParams["topicType"] = builder.TopicType.Value;
             if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
-            
 
-            
+
+
             CollectionFormatMap["topic"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public AdminQueryTopic(
-            string namespace_,            
-            bool? includeMembers,            
-            bool? includePastMembers,            
-            bool? includePastTopics,            
-            long? limit,            
-            long? offset,            
-            List<string>? topic,            
-            AdminQueryTopicTopicSubType? topicSubType,            
-            AdminQueryTopicTopicType? topicType,            
-            string? userId            
+            string namespace_,
+            bool? includeMembers,
+            bool? includePastMembers,
+            bool? includePastTopics,
+            long? limit,
+            long? offset,
+            List<string>? topic,
+            AdminQueryTopicTopicSubType? topicSubType,
+            AdminQueryTopicTopicType? topicType,
+            string? userId
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (includeMembers != null) QueryParams["includeMembers"] = Convert.ToString(includeMembers)!;
             if (includePastMembers != null) QueryParams["includePastMembers"] = Convert.ToString(includePastMembers)!;
             if (includePastTopics != null) QueryParams["includePastTopics"] = Convert.ToString(includePastTopics)!;
@@ -204,12 +204,12 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             if (topicSubType is not null) QueryParams["topicSubType"] = topicSubType.Value;
             if (topicType is not null) QueryParams["topicType"] = topicType.Value;
             if (userId is not null) QueryParams["userId"] = userId;
-            
 
-            
+
+
             CollectionFormatMap["topic"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -220,10 +220,10 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public List<Model.ModelsTopicInfo>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -236,9 +236,9 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             {
                 return JsonSerializer.Deserialize<List<Model.ModelsTopicInfo>>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

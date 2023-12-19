@@ -133,6 +133,15 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         {
             get { return new Operation.RevokeUserEntitlement.RevokeUserEntitlementBuilder(_sdk); }
         }
+        public RevokeUserEntitlementByUseCount.RevokeUserEntitlementByUseCountBuilder RevokeUserEntitlementByUseCountOp
+        {
+            get { return new Operation.RevokeUserEntitlementByUseCount.RevokeUserEntitlementByUseCountBuilder(_sdk); }
+        }
+        public PreCheckRevokeUserEntitlementByUseCount.PreCheckRevokeUserEntitlementByUseCountBuilder PreCheckRevokeUserEntitlementByUseCountOp
+        {
+            get { return new Operation.PreCheckRevokeUserEntitlementByUseCount.PreCheckRevokeUserEntitlementByUseCountBuilder(_sdk); }
+        }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RevokeUseCount.RevokeUseCountBuilder RevokeUseCountOp
         {
             get { return new Operation.RevokeUseCount.RevokeUseCountBuilder(_sdk); }
@@ -458,6 +467,26 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public Model.EntitlementIfc? RevokeUserEntitlementByUseCount(RevokeUserEntitlementByUseCount input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.EntitlementPrechekResult? PreCheckRevokeUserEntitlementByUseCount(PreCheckRevokeUserEntitlementByUseCount input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.EntitlementInfo? RevokeUseCount(RevokeUseCount input)
         {
             var response = _sdk.RunRequest(input);
@@ -467,6 +496,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
         public Model.EntitlementSoldResult? SellUserEntitlement(SellUserEntitlement input)
         {
             var response = _sdk.RunRequest(input);

@@ -36,6 +36,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
         [SdkCommandArgument("limit")]
         public long? Limit { get; set; }
 
+        [SdkCommandArgument("name")]
+        public string? Name { get; set; }
+
         [SdkCommandArgument("offset")]
         public long? Offset { get; set; }
 
@@ -55,6 +58,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
 
             if (Limit != null)
                 opBuilder.SetLimit((long)Limit);
+            if (Name != null)
+                opBuilder.SetName((string)Name);
             if (Offset != null)
                 opBuilder.SetOffset((long)Offset);
             if (SortBy != null)

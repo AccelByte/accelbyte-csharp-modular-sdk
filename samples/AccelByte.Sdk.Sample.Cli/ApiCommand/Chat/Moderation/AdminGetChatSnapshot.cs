@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Chat.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Chat
 {
-    [SdkConsoleCommand("chat","admingetchatsnapshot")]
-    public class AdminGetChatSnapshotCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("chat", "admingetchatsnapshot")]
+    public class AdminGetChatSnapshotCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Chat"; } }
+        public string ServiceName { get { return "Chat"; } }
 
-        public string OperationName{ get { return "AdminGetChatSnapshot"; } }
+        public string OperationName { get { return "AdminGetChatSnapshot"; } }
 
         [SdkCommandArgument("chatId")]
         public string ChatId { get; set; } = String.Empty;

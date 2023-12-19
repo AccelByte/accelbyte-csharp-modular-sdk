@@ -77,6 +77,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.TokenRevocationV3.TokenRevocationV3Builder(_sdk); }
         }
+        public SimultaneousLoginV3.SimultaneousLoginV3Builder SimultaneousLoginV3Op
+        {
+            get { return new Operation.SimultaneousLoginV3.SimultaneousLoginV3Builder(_sdk); }
+        }
         public TokenGrantV3.TokenGrantV3Builder TokenGrantV3Op
         {
             get { return new Operation.TokenGrantV3.TokenGrantV3Builder(_sdk); }
@@ -200,6 +204,15 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.OauthmodelTokenResponseV3? SimultaneousLoginV3(SimultaneousLoginV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

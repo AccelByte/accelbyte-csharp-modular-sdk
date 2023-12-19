@@ -22,15 +22,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// <summary>
     /// AdminUnbanDeviceV4
     ///
-    /// 
-    /// 
-    /// This is the endpoint for an admin to unban device.
-    /// 
-    /// 
-    /// 
-    /// Required permission
-    /// 
-    ///                                                                         'ADMIN:NAMESPACE:{namespace}:DEVICE [UPDATE]'
+    /// This is the endpoint for an admin to unban device
     /// </summary>
     public class AdminUnbanDeviceV4 : AccelByte.Sdk.Core.Operation
     {

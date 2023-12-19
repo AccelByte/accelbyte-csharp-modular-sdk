@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Chat.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Chat
 {
-    [SdkConsoleCommand("chat","adminprofanitycreatebulk")]
-    public class AdminProfanityCreateBulkCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("chat", "adminprofanitycreatebulk")]
+    public class AdminProfanityCreateBulkCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Chat"; } }
+        public string ServiceName { get { return "Chat"; } }
 
-        public string OperationName{ get { return "AdminProfanityCreateBulk"; } }
+        public string OperationName { get { return "AdminProfanityCreateBulk"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

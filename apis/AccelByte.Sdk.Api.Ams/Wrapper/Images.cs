@@ -25,10 +25,6 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
         }
 
         #region Operation Builders
-        public FleetArtifactSamplingRulesGet.FleetArtifactSamplingRulesGetBuilder FleetArtifactSamplingRulesGetOp
-        {
-            get { return new Operation.FleetArtifactSamplingRulesGet.FleetArtifactSamplingRulesGetBuilder(_sdk); }
-        }
         public ImageList.ImageListBuilder ImageListOp
         {
             get { return new Operation.ImageList.ImageListBuilder(_sdk); }
@@ -43,15 +39,6 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
         }
         #endregion
 
-        public Model.ApiFleetArtifactsSampleRulesResponse? FleetArtifactSamplingRulesGet(FleetArtifactSamplingRulesGet input)
-        {
-            var response = _sdk.RunRequest(input);
-
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
         public Model.ApiImageList? ImageList(ImageList input)
         {
             var response = _sdk.RunRequest(input);

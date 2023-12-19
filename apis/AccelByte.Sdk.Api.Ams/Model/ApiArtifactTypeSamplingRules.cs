@@ -10,13 +10,13 @@ using System.Text.Json.Serialization;
 
 namespace AccelByte.Sdk.Api.Ams.Model
 {
-    public class ApiArtifactSamplingRuleResponse : AccelByte.Sdk.Core.Model
+    public class ApiArtifactTypeSamplingRules : AccelByte.Sdk.Core.Model
     {
-        [JsonPropertyName("collect")]
-        public bool? Collect { get; set; }
+        [JsonPropertyName("crashed")]
+        public ApiArtifactSamplingRule? Crashed { get; set; }
 
-        [JsonPropertyName("percentage")]
-        public double? Percentage { get; set; }
+        [JsonPropertyName("success")]
+        public ApiArtifactSamplingRule? Success { get; set; }
 
     }
 

@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
         {
             get { return new Operation.AdminChannelTopicInfo.AdminChannelTopicInfoBuilder(_sdk); }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminTopicChatHistory.AdminTopicChatHistoryBuilder AdminTopicChatHistoryOp
         {
             get { return new Operation.AdminTopicChatHistory.AdminTopicChatHistoryBuilder(_sdk); }
@@ -243,8 +243,8 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.ModelsChatMessageWithPaginationResponse? AdminTopicChatHistory(AdminTopicChatHistory input)
         {
             var response = _sdk.RunRequest(input);
@@ -254,7 +254,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
         public List<Model.ModelsChatMessageResponse>? AdminSendChat(AdminSendChat input)
         {
             var response = _sdk.RunRequest(input);
@@ -264,7 +264,8 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteChat(AdminDeleteChat input) {
+        public void AdminDeleteChat(AdminDeleteChat input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
@@ -371,7 +372,8 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicDeleteChat(PublicDeleteChat input) {
+        public void PublicDeleteChat(PublicDeleteChat input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
@@ -379,7 +381,8 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicMuteUser(PublicMuteUser input) {
+        public void PublicMuteUser(PublicMuteUser input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
@@ -396,7 +399,8 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicUnmuteUser(PublicUnmuteUser input) {
+        public void PublicUnmuteUser(PublicUnmuteUser input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(

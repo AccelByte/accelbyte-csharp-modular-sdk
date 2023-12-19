@@ -22,8 +22,6 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     /// <summary>
     /// getTemplateSlugLocalizationsTemplateV1Admin
     ///
-    /// Required permission : `ADMIN:NAMESPACE:{namespace}:NOTIFICATION [READ]` with scope `social`
-    /// 
     /// Get all templates in a namespace
     /// 
     /// Action Code: 50205

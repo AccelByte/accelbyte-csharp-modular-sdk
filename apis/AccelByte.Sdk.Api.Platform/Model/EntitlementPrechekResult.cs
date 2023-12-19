@@ -8,15 +8,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace AccelByte.Sdk.Api.Ams.Model
+namespace AccelByte.Sdk.Api.Platform.Model
 {
-    public class ApiArtifactTypeSamplingRulesResponse : AccelByte.Sdk.Core.Model
+    public class EntitlementPrechekResult : AccelByte.Sdk.Core.Model
     {
-        [JsonPropertyName("crashed")]
-        public ApiArtifactSamplingRuleResponse? Crashed { get; set; }
-
-        [JsonPropertyName("success")]
-        public ApiArtifactSamplingRuleResponse? Success { get; set; }
+        [JsonPropertyName("isRevokePossible")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? IsRevokePossible { get; set; }
 
     }
 

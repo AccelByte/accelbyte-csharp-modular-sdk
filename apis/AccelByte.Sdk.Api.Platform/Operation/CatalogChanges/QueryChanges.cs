@@ -60,6 +60,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             public string? UpdatedAtStart { get; set; }
 
+            public bool? WithTotal { get; set; }
+
 
 
 
@@ -138,6 +140,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return this;
             }
 
+            public QueryChangesBuilder SetWithTotal(bool _withTotal)
+            {
+                WithTotal = _withTotal;
+                return this;
+            }
+
 
 
 
@@ -158,7 +166,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
-            public Model.CatalogChangePagingSlicedResult? Execute(
+            public Model.CatalogChangePagingResult? Execute(
                 string namespace_,
                 string storeId
             )
@@ -198,6 +206,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (builder.Type is not null) QueryParams["type"] = builder.Type.Value;
             if (builder.UpdatedAtEnd is not null) QueryParams["updatedAtEnd"] = builder.UpdatedAtEnd;
             if (builder.UpdatedAtStart is not null) QueryParams["updatedAtStart"] = builder.UpdatedAtStart;
+            if (builder.WithTotal != null) QueryParams["withTotal"] = Convert.ToString(builder.WithTotal)!;
 
 
 
@@ -222,7 +231,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             QueryChangesStatus? status,
             QueryChangesType? type,
             string? updatedAtEnd,
-            string? updatedAtStart
+            string? updatedAtStart,
+            bool? withTotal
         )
         {
             PathParams["namespace"] = namespace_;
@@ -239,6 +249,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (type is not null) QueryParams["type"] = type.Value;
             if (updatedAtEnd is not null) QueryParams["updatedAtEnd"] = updatedAtEnd;
             if (updatedAtStart is not null) QueryParams["updatedAtStart"] = updatedAtStart;
+            if (withTotal != null) QueryParams["withTotal"] = Convert.ToString(withTotal)!;
 
 
 
@@ -257,7 +268,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public Model.CatalogChangePagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.CatalogChangePagingResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -265,11 +276,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.CatalogChangePagingSlicedResult>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.CatalogChangePagingResult>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.CatalogChangePagingSlicedResult>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.CatalogChangePagingResult>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

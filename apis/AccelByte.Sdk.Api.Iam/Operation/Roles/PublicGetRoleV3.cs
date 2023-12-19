@@ -22,7 +22,6 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// <summary>
     /// PublicGetRoleV3
     ///
-    /// 
     /// This endpoint is used to get non-admin role based on specify roleId.
     /// action code : 10417
     /// </summary>

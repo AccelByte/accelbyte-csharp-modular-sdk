@@ -35,6 +35,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
             public long? Limit { get; set; }
 
+            public string? Name { get; set; }
+
             public long? Offset { get; set; }
 
             public string? SortBy { get; set; }
@@ -54,6 +56,12 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             public AdminGetContentByChannelIDV2Builder SetLimit(long _limit)
             {
                 Limit = _limit;
+                return this;
+            }
+
+            public AdminGetContentByChannelIDV2Builder SetName(string _name)
+            {
+                Name = _name;
                 return this;
             }
 
@@ -119,6 +127,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["namespace"] = namespace_;
 
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
+            if (builder.Name is not null) QueryParams["name"] = builder.Name;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy;
 
@@ -135,6 +144,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             string channelId,
             string namespace_,
             long? limit,
+            string? name,
             long? offset,
             string? sortBy
         )
@@ -143,6 +153,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["namespace"] = namespace_;
 
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
+            if (name is not null) QueryParams["name"] = name;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy;
 

@@ -56,9 +56,9 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 PublicUnmuteUser op = new PublicUnmuteUser(this,
-                    body,                    
-                    namespace_,                    
-                    topic                    
+                    body,
+                    namespace_,
+                    topic
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -84,7 +84,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -98,33 +98,33 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PublicUnmuteUser(
-            string namespace_,            
-            string topic,            
-            Model.ApiUnmuteUserRequest body            
+            string namespace_,
+            string topic,
+            Model.ApiUnmuteUserRequest body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -135,17 +135,17 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

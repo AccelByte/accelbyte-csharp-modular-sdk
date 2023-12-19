@@ -8,15 +8,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace AccelByte.Sdk.Api.Ams.Model
+namespace AccelByte.Sdk.Api.Iam.Model
 {
-    public class ApiFleetArtifactsSampleRulesResponse : AccelByte.Sdk.Core.Model
+    public class ModelUsersPlatformInfosResponse : AccelByte.Sdk.Core.Model
     {
-        [JsonPropertyName("coredumps")]
-        public ApiArtifactTypeSamplingRulesResponse? Coredumps { get; set; }
-
-        [JsonPropertyName("logs")]
-        public ApiArtifactTypeSamplingRulesResponse? Logs { get; set; }
+        [JsonPropertyName("data")]
+        public List<ModelUserPlatformInfos>? Data { get; set; }
 
     }
 

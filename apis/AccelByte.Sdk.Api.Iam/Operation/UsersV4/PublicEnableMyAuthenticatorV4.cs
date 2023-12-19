@@ -22,14 +22,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// <summary>
     /// PublicEnableMyAuthenticatorV4
     ///
-    /// 
-    /// 
     /// This endpoint is used to enable 2FA authenticator.
-    /// 
-    /// 
-    /// 
-    /// 
-    /// This endpoint Requires valid user access token
     /// </summary>
     public class PublicEnableMyAuthenticatorV4 : AccelByte.Sdk.Core.Operation
     {

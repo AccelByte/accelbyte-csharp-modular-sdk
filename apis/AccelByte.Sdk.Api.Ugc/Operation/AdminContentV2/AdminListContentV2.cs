@@ -48,6 +48,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             : OperationBuilder<AdminListContentV2Builder>
         {
 
+            public bool? IsOfficial { get; set; }
+
             public long? Limit { get; set; }
 
             public string? Name { get; set; }
@@ -73,6 +75,12 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                 _Sdk = sdk;
             }
 
+
+            public AdminListContentV2Builder SetIsOfficial(bool _isOfficial)
+            {
+                IsOfficial = _isOfficial;
+                return this;
+            }
 
             public AdminListContentV2Builder SetLimit(long _limit)
             {
@@ -159,6 +167,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         {
             PathParams["namespace"] = namespace_;
 
+            if (builder.IsOfficial != null) QueryParams["isOfficial"] = Convert.ToString(builder.IsOfficial)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Name is not null) QueryParams["name"] = builder.Name;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
@@ -179,6 +188,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
         public AdminListContentV2(
             string namespace_,
+            bool? isOfficial,
             long? limit,
             string? name,
             long? offset,
@@ -190,6 +200,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         {
             PathParams["namespace"] = namespace_;
 
+            if (isOfficial != null) QueryParams["isOfficial"] = Convert.ToString(isOfficial)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (name is not null) QueryParams["name"] = name;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;

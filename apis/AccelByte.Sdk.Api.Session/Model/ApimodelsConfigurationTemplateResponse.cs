@@ -46,6 +46,7 @@ namespace AccelByte.Sdk.Api.Session.Model
         public string? DsSource { get; set; }
 
         [JsonPropertyName("enableSecret")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? EnableSecret { get; set; }
 
         [JsonPropertyName("fallbackClaimKeys")]
@@ -67,6 +68,10 @@ namespace AccelByte.Sdk.Api.Session.Model
 
         [JsonPropertyName("last")]
         public string? Last { get; set; }
+
+        [JsonPropertyName("leaderElectionGracePeriod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? LeaderElectionGracePeriod { get; set; }
 
         [JsonPropertyName("maxActiveSessions")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -150,6 +155,7 @@ namespace AccelByte.Sdk.Api.Session.Model
         public string? DsSource { get; set; }
 
         [JsonPropertyName("enableSecret")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? EnableSecret { get; set; }
 
         [JsonPropertyName("fallbackClaimKeys")]
@@ -171,6 +177,10 @@ namespace AccelByte.Sdk.Api.Session.Model
 
         [JsonPropertyName("last")]
         public string? Last { get; set; }
+
+        [JsonPropertyName("leaderElectionGracePeriod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? LeaderElectionGracePeriod { get; set; }
 
         [JsonPropertyName("maxActiveSessions")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

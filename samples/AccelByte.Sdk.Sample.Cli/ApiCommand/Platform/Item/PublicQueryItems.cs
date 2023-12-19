@@ -33,6 +33,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
         [SdkCommandArgument("appType")]
         public string? AppType { get; set; }
 
+        [SdkCommandArgument("autoCalcEstimatedPrice")]
+        public bool? AutoCalcEstimatedPrice { get; set; }
+
         [SdkCommandArgument("baseAppId")]
         public string? BaseAppId { get; set; }
 
@@ -82,6 +85,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 
             if (AppType != null)
                 opBuilder.SetAppType(PublicQueryItemsAppType.NewValue(AppType));
+            if (AutoCalcEstimatedPrice != null)
+                opBuilder.SetAutoCalcEstimatedPrice((bool)AutoCalcEstimatedPrice);
             if (BaseAppId != null)
                 opBuilder.SetBaseAppId((string)BaseAppId);
             if (CategoryPath != null)

@@ -57,10 +57,10 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminAddTopicMember op = new AdminAddTopicMember(this,
-                    body,                    
-                    namespace_,                    
-                    topic,                    
-                    userId                    
+                    body,
+                    namespace_,
+                    topic,
+                    userId
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -104,35 +104,35 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public AdminAddTopicMember(
-            string namespace_,            
-            string topic,            
-            string userId,            
-            Model.ApiAddMemberParams body            
+            string namespace_,
+            string topic,
+            string userId,
+            Model.ApiAddMemberParams body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -143,10 +143,10 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.MessageActionAddUserToTopicResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -159,9 +159,9 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             {
                 return JsonSerializer.Deserialize<Model.MessageActionAddUserToTopicResult>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

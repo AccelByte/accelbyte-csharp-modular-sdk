@@ -23,7 +23,6 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// LinkHeadlessAccountToMyAccountV3
     ///
     /// Note:
-    /// 
     /// 1. My account should be full account
     /// 2. My account not linked to headless account's third platform.
     /// </summary>

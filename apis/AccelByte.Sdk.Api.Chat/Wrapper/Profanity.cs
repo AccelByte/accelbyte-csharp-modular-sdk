@@ -122,7 +122,8 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminProfanityDelete(AdminProfanityDelete input) {
+        public void AdminProfanityDelete(AdminProfanityDelete input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(

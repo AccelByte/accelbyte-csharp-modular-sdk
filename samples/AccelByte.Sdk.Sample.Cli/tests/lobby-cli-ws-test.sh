@@ -39,7 +39,7 @@ TEMP_FILE_UPLOAD="file_upload.bin"
 SERVICE_NAME="lobby"
 
 echo "TAP version 13"
-echo "1..90"
+echo "1..105"
 
 #- 1 Login
 $CLI_EXE --op login --lt user --user user --pass user > test.out 2>&1
@@ -52,984 +52,1149 @@ fi
 
 echo "foo" > "$CLI_TOKEN_FILE"
 
-#- 2 HandlersGetUsersPresenceResponse
-# echo "Testing 'HandlersGetUsersPresenceResponse'"
-printf 'type: handlers.GetUsersPresenceResponse\naway: 49\nbusy: 91\ndata: [{'activity': 'RNcdrajy', 'availability': '8i2JGdhW', 'lastSeenAt': 'ZrUkPqoN', 'namespace': '6QEkfieU', 'platform': 'GVZZbVeL', 'userID': 'ZM4LjES0'},{'activity': 'rDaDORmZ', 'availability': 'NFDActXy', 'lastSeenAt': 'scdHBODS', 'namespace': 'BjgPda52', 'platform': 'SDEa1Phl', 'userID': 'RePedDKC'},{'activity': 'YCb9mAMw', 'availability': 'swf5q4if', 'lastSeenAt': 'i1Su90cu', 'namespace': 'kSDBSrJq', 'platform': 'ZSEqtkPP', 'userID': 'wHE9TtAA'}]\ninvisible: 87\noffline: 2\nonline: 2' > $TEMP_FILE_UPLOAD
+#- 2 AcceptFriendsNotif
+# echo "Testing 'AcceptFriendsNotif'"
+printf 'type: acceptFriendsNotif\nfriendId: TlEUuCSq' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 2 'HandlersGetUsersPresenceResponse' test.out
+eval_tap $? 2 'AcceptFriendsNotif' test.out
 
-#- 3 HandlersUserPresence
-# echo "Testing 'HandlersUserPresence'"
-printf 'type: handlers.UserPresence\nactivity: ptDCHvTk\navailability: PVXVQA03\nlastSeenAt: soctEdbD\nnamespace: qQUiSYEy\nplatform: j6YG9Gnf\nuserID: DMrw3g4Z' > $TEMP_FILE_UPLOAD
+#- 3 AcceptFriendsRequest
+# echo "Testing 'AcceptFriendsRequest'"
+printf 'type: acceptFriendsRequest\nid: HaQqsFWW\nfriendId: vbbUbl0O' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 3 'HandlersUserPresence' test.out
+eval_tap $? 3 'AcceptFriendsRequest' test.out
 
-#- 4 LogAppMessageDeclaration
-# echo "Testing 'LogAppMessageDeclaration'"
-printf 'type: log.AppMessageDeclaration\nAttributes: [prtEp5XZ,sOSA6Owx,hKfpViN6]\nCode: NjFsGeLt\nCodeName: QBekjriP\nSection: 81adedHl\nService: 2qaiqMxG\nText: elRv38s9' > $TEMP_FILE_UPLOAD
+#- 4 AcceptFriendsResponse
+# echo "Testing 'AcceptFriendsResponse'"
+printf 'type: acceptFriendsResponse\nid: wGlQaY17\ncode: 18' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 4 'LogAppMessageDeclaration' test.out
+eval_tap $? 4 'AcceptFriendsResponse' test.out
 
-#- 5 ModelBulkFriendsRequest
-# echo "Testing 'ModelBulkFriendsRequest'"
-printf 'type: model.BulkFriendsRequest\nfriendIds: [QafT1TZQ,dPEUP5KS,YTUjDGi8]' > $TEMP_FILE_UPLOAD
+#- 5 BlockPlayerNotif
+# echo "Testing 'BlockPlayerNotif'"
+printf 'type: blockPlayerNotif\nblockedUserId: cgJNrXpU\nuserId: zU7WOzOb' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 5 'ModelBulkFriendsRequest' test.out
+eval_tap $? 5 'BlockPlayerNotif' test.out
 
-#- 6 ModelBulkFriendsResponse
-# echo "Testing 'ModelBulkFriendsResponse'"
-printf 'type: model.BulkFriendsResponse\nrowsAffected: 88' > $TEMP_FILE_UPLOAD
+#- 6 BlockPlayerRequest
+# echo "Testing 'BlockPlayerRequest'"
+printf 'type: blockPlayerRequest\nid: YSuBZiXq\nblockUserId: uF96hE5W\nnamespace: l2TclMy7' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 6 'ModelBulkFriendsResponse' test.out
+eval_tap $? 6 'BlockPlayerRequest' test.out
 
-#- 7 ModelBulkUsersFreeFormNotificationRequestV1
-# echo "Testing 'ModelBulkUsersFreeFormNotificationRequestV1'"
-printf 'type: model.BulkUsersFreeFormNotificationRequestV1\nmessage: zIWLwyv3\ntopicName: K72OBgC4\nuserIds: [H9huo3iz,LYDuiUDb,lEr8MUkA]' > $TEMP_FILE_UPLOAD
+#- 7 BlockPlayerResponse
+# echo "Testing 'BlockPlayerResponse'"
+printf 'type: blockPlayerResponse\nid: EQt2Mrcv\nblockUserId: STBxasQK\ncode: 55\nnamespace: IcJuAQCX' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 7 'ModelBulkUsersFreeFormNotificationRequestV1' test.out
+eval_tap $? 7 'BlockPlayerResponse' test.out
 
-#- 8 ModelCreateTemplateRequest
-# echo "Testing 'ModelCreateTemplateRequest'"
-printf 'type: model.CreateTemplateRequest\ntemplateContent: O6zsvzeP\ntemplateLanguage: MJ8LQU7f\ntemplateSlug: jUnEI1yO' > $TEMP_FILE_UPLOAD
+#- 8 CancelFriendsNotif
+# echo "Testing 'CancelFriendsNotif'"
+printf 'type: cancelFriendsNotif\nuserId: SEWMOIBi' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 8 'ModelCreateTemplateRequest' test.out
+eval_tap $? 8 'CancelFriendsNotif' test.out
 
-#- 9 ModelCreateTopicRequest
-# echo "Testing 'ModelCreateTopicRequest'"
-printf 'type: model.CreateTopicRequest\ndescription: pdFK58V5\ntopic: G7YXtwjO' > $TEMP_FILE_UPLOAD
+#- 9 CancelFriendsRequest
+# echo "Testing 'CancelFriendsRequest'"
+printf 'type: cancelFriendsRequest\nid: Q8y4hLii\nfriendId: yIb3MtAs' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 9 'ModelCreateTopicRequest' test.out
+eval_tap $? 9 'CancelFriendsRequest' test.out
 
-#- 10 ModelCreateTopicRequestV1
-# echo "Testing 'ModelCreateTopicRequestV1'"
-printf 'type: model.CreateTopicRequestV1\ndescription: j2Zz95vg\ntopicName: uEcA8qWf' > $TEMP_FILE_UPLOAD
+#- 10 CancelFriendsResponse
+# echo "Testing 'CancelFriendsResponse'"
+printf 'type: cancelFriendsResponse\nid: SspCsdN8\ncode: 94' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 10 'ModelCreateTopicRequestV1' test.out
+eval_tap $? 10 'CancelFriendsResponse' test.out
 
-#- 11 ModelFreeFormNotificationRequest
-# echo "Testing 'ModelFreeFormNotificationRequest'"
-printf 'type: model.FreeFormNotificationRequest\nmessage: En4SzjmB\ntopic: ffOAPWhz' > $TEMP_FILE_UPLOAD
+#- 11 CancelMatchmakingRequest
+# echo "Testing 'CancelMatchmakingRequest'"
+printf 'type: cancelMatchmakingRequest\nid: sv6U1P4j\ngameMode: 8jzjQftM\nisTempParty: True' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 11 'ModelFreeFormNotificationRequest' test.out
+eval_tap $? 11 'CancelMatchmakingRequest' test.out
 
-#- 12 ModelFreeFormNotificationRequestV1
-# echo "Testing 'ModelFreeFormNotificationRequestV1'"
-printf 'type: model.FreeFormNotificationRequestV1\nmessage: 87PfLaxi\ntopicName: Dh0qPz3M' > $TEMP_FILE_UPLOAD
+#- 12 CancelMatchmakingResponse
+# echo "Testing 'CancelMatchmakingResponse'"
+printf 'type: cancelMatchmakingResponse\nid: zx8riOns\ncode: 23' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 12 'ModelFreeFormNotificationRequestV1' test.out
+eval_tap $? 12 'CancelMatchmakingResponse' test.out
 
-#- 13 ModelFriendWithPlatform
-# echo "Testing 'ModelFriendWithPlatform'"
-printf 'type: model.FriendWithPlatform\nplatformId: WgpBUFjF\nuserId: 1pKlazp6' > $TEMP_FILE_UPLOAD
+#- 13 ChannelChatNotif
+# echo "Testing 'ChannelChatNotif'"
+printf 'type: channelChatNotif\nchannelSlug: CdSXfze8\nfrom: 1oEzy0J2\npayload: W2PhdfHZ\nsentAt: g9il611I' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 13 'ModelFriendWithPlatform' test.out
+eval_tap $? 13 'ChannelChatNotif' test.out
 
-#- 14 ModelGetAllNotificationTemplateSlugResp
-# echo "Testing 'ModelGetAllNotificationTemplateSlugResp'"
-printf 'type: model.GetAllNotificationTemplateSlugResp\ndata: [{'lastDraftAt': 'AqVgKTaW', 'lastPublishedAt': '3W2Bi7mX', 'templateContent': {'draft': 'c47swuVb', 'published': 'Q8SEuBKO'}, 'templateLanguage': '2RulXkYi'},{'lastDraftAt': 'cEGRJPcD', 'lastPublishedAt': 'K3VjcHlH', 'templateContent': {'draft': 'e3N6COpp', 'published': 'f5QuABQJ'}, 'templateLanguage': 'K0TOCHj2'},{'lastDraftAt': 'YPFwZNM1', 'lastPublishedAt': 'cjCCIQrf', 'templateContent': {'draft': 'n4V6OwDU', 'published': 'h7kytZ52'}, 'templateLanguage': 'RlhbKpyn'}]\npaging: {"first":"nAEFecmr","last":"auNeKfPM","next":"vqE0WSL1","previous":"8CUXWNV8"}' > $TEMP_FILE_UPLOAD
+#- 14 ClientResetRequest
+# echo "Testing 'ClientResetRequest'"
+printf 'type: clientResetRequest\nnamespace: xec7DNme\nuserId: 3mkFhokt' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 14 'ModelGetAllNotificationTemplateSlugResp' test.out
+eval_tap $? 14 'ClientResetRequest' test.out
 
-#- 15 ModelGetAllNotificationTopicsResponse
-# echo "Testing 'ModelGetAllNotificationTopicsResponse'"
-printf 'type: model.GetAllNotificationTopicsResponse\ndata: [{'createdAt': 63, 'description': 'cScQslU1', 'namespace': 'M9rNv2TQ', 'topicName': 'ZorSpO7P'},{'createdAt': 83, 'description': 'gDESeJxM', 'namespace': 'eLyHGi1a', 'topicName': '67hc5SWw'},{'createdAt': 55, 'description': 'srIdBYAY', 'namespace': 'KlDYI0aZ', 'topicName': 'lNo2kcEY'}]\npaging: {"first":"D6sNc9l4","last":"vHSTtiEd","next":"b50BMmiD","previous":"M7RKTxZw"}' > $TEMP_FILE_UPLOAD
+#- 15 ConnectNotif
+# echo "Testing 'ConnectNotif'"
+printf 'type: connectNotif\nlobbySessionId: 1rYpjEjC' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 15 'ModelGetAllNotificationTopicsResponse' test.out
+eval_tap $? 15 'ConnectNotif' test.out
 
-#- 16 ModelGetFriendsResponse
-# echo "Testing 'ModelGetFriendsResponse'"
-printf 'type: model.GetFriendsResponse\nfriendIDs: [g1D9pHtw,IEtRSsDy,WzkGhGuL]\nfriends: [{'platformId': 'SV6u50n1', 'userId': 'nybotqCf'},{'platformId': 'BPeP7kQt', 'userId': '7wwNbvJW'},{'platformId': 'rxf2CBw0', 'userId': 'umY47mKh'}]\nfriendsSinceTimes: [hTFCVRCe,Fw0yNp6w,H33XIBQG]\npaging: {"first":"IJyuG3AR","last":"3d8wQ4ei","next":"Gipq5qfa","previous":"5tskSPWj"}' > $TEMP_FILE_UPLOAD
+#- 16 DisconnectNotif
+# echo "Testing 'DisconnectNotif'"
+printf 'type: disconnectNotif\nconnectionId: hNWxWBmy\nnamespace: CAhZTzG5' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 16 'ModelGetFriendsResponse' test.out
+eval_tap $? 16 'DisconnectNotif' test.out
 
-#- 17 ModelGetUserFriendsResponse
-# echo "Testing 'ModelGetUserFriendsResponse'"
-printf 'type: model.GetUserFriendsResponse\nfriendIDs: [OKSpUT34,04tCmgBY,1VLk5tTv]\nfriends: [{'platformId': 'yIrACqrO', 'userId': 'Nj2QZehW'},{'platformId': '7vG4amVG', 'userId': 'tVIwWgTM'},{'platformId': 'vSdtetrd', 'userId': 'aTaGWgY7'}]\npaging: {"first":"s1posMGo","last":"j5eXkR3O","next":"TWB3HG5q","previous":"FOvG4yH8"}' > $TEMP_FILE_UPLOAD
+#- 17 DsNotif
+# echo "Testing 'DsNotif'"
+printf 'type: dsNotif\nalternateIps: [MKS55tth,W50ENveX,V31zyXIG]\ncustomAttribute: Q2yDKGQ8\ndeployment: s1R2Rxik\ngameVersion: DL6diqOs\nimageVersion: MZjVSIgT\nip: Kr7kb7nj\nisOK: True\nisOverrideGameVersion: True\nlastUpdate: LPej2pDn\nmatchId: tgluyTiw\nmessage: F1XETDMH\nnamespace: SgNq1Q8I\npodName: uyn7udT8\nport: 82\nports: {"fA85mFNr":57,"Ie7bn6US":2,"L4QR0Ea8":31}\nprotocol: oH5WQICz\nprovider: fvPOucnh\nregion: K1jHqh8v\nsessionId: JycEeCMo\nstatus: tQwSPlQw' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 17 'ModelGetUserFriendsResponse' test.out
+eval_tap $? 17 'DsNotif' test.out
 
-#- 18 ModelGetUserIncomingFriendsResponse
-# echo "Testing 'ModelGetUserIncomingFriendsResponse'"
-printf 'type: model.GetUserIncomingFriendsResponse\nfriendIDs: [SJ2T32VE,1HGOniPN,INY0fekF]\npaging: {"first":"kmoG3Ytq","last":"PBrJ1j70","next":"AVzAnL3D","previous":"Umbf5TOp"}' > $TEMP_FILE_UPLOAD
+#- 18 ErrorNotif
+# echo "Testing 'ErrorNotif'"
+printf 'type: errorNotif\nmessage: us3kX6EA' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 18 'ModelGetUserIncomingFriendsResponse' test.out
+eval_tap $? 18 'ErrorNotif' test.out
 
-#- 19 ModelGetUserOutgoingFriendsResponse
-# echo "Testing 'ModelGetUserOutgoingFriendsResponse'"
-printf 'type: model.GetUserOutgoingFriendsResponse\nfriendIDs: [N8R1ojEE,GXEAw621,5wLRSlZx]\npaging: {"first":"UoZFh9Gc","last":"r8Dkm2T0","next":"okMCL7GN","previous":"iiCSjofX"}' > $TEMP_FILE_UPLOAD
+#- 19 ExitAllChannel
+# echo "Testing 'ExitAllChannel'"
+printf 'type: exitAllChannel\nnamespace: z5PJWIWi\nuserId: 8LRSiYJL' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 19 'ModelGetUserOutgoingFriendsResponse' test.out
+eval_tap $? 19 'ExitAllChannel' test.out
 
-#- 20 ModelGlobalConfiguration
-# echo "Testing 'ModelGlobalConfiguration'"
-printf 'type: model.GlobalConfiguration\nregionRetryMapping: {"z55i9vsk":["N3zL6TDd","OxtVFbyf","MXcXTQoG"],"HzcXXsK1":["LbMlf5iT","eHh78O3w","zmtnlj9n"],"0VP5dLAg":["qT4uhoLW","jRlpPrpQ","5SA1R4cY"]}\nregionURLMapping: [3S50PZGC,8D6B1z8p,ZSH9Q9s8]\ntestGameMode: qjTSc0rq\ntestRegionURLMapping: [wrJferw0,pgU3mdlB,7HC1vKhD]\ntestTargetUserIDs: [sQOeco1C,VVt59Fcz,DKnnx5s3]\nupdatedAt: IcZ1Oo2k' > $TEMP_FILE_UPLOAD
+#- 20 FriendsStatusRequest
+# echo "Testing 'FriendsStatusRequest'"
+printf 'type: friendsStatusRequest\nid: OazgbKjy' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 20 'ModelGlobalConfiguration' test.out
+eval_tap $? 20 'FriendsStatusRequest' test.out
 
-#- 21 ModelIncomingFriendsWithTimeData
-# echo "Testing 'ModelIncomingFriendsWithTimeData'"
-printf 'type: model.IncomingFriendsWithTimeData\nfriendId: CeP6s1Dt\nrequestedAt: 1991-07-06T00:00:00Z' > $TEMP_FILE_UPLOAD
+#- 21 FriendsStatusResponse
+# echo "Testing 'FriendsStatusResponse'"
+printf 'type: friendsStatusResponse\nid: 82tbcFxH\nactivity: [Vh3JmkOL,9FyECqcG,ZZ5Wg8G4]\navailability: [77,2,1]\ncode: 18\nfriendIds: [X2zbpLWp,JSP7ICM9,2Y2OEwbC]\nlastSeenAt: [SQeseszi,063hu9Y6,QW85J32E]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 21 'ModelIncomingFriendsWithTimeData' test.out
+eval_tap $? 21 'FriendsStatusResponse' test.out
 
-#- 22 ModelListBulkUserPlatformsResponse
-# echo "Testing 'ModelListBulkUserPlatformsResponse'"
-printf 'type: model.ListBulkUserPlatformsResponse\ndata: [{'avatarUrl': 'UF4TLRWd', 'displayName': '0VGuykdN', 'platformInfos': [{'platformDisplayName': 'zzSiX4xA', 'platformName': 'hDa8S07X', 'platformUserId': 'EbMDOzlq'}, {'platformDisplayName': 'cVe7g0Qk', 'platformName': 'llQxKzgq', 'platformUserId': 'r1rwD4Af'}, {'platformDisplayName': 'jj8Gdue9', 'platformName': 'hyjeX06b', 'platformUserId': 'rA0wheYh'}], 'userId': 'lFho4yTZ', 'username': 'bBh31iYF'},{'avatarUrl': '6B8KK7Oe', 'displayName': 'IMXMDexn', 'platformInfos': [{'platformDisplayName': 'tbmZg8PH', 'platformName': '2DPcydbr', 'platformUserId': 'Yqv0i66M'}, {'platformDisplayName': 'rJzAKi6F', 'platformName': 'NcKKMzau', 'platformUserId': 'jt6dXtAn'}, {'platformDisplayName': 'Q7eauPQW', 'platformName': '5TkiSWix', 'platformUserId': 'yViSzoEr'}], 'userId': 'zx6CPDI9', 'username': 'CPiabdE5'},{'avatarUrl': 'p3fPJpIG', 'displayName': 'cIOBlfwA', 'platformInfos': [{'platformDisplayName': 'qx8suL3Z', 'platformName': 'L2sxHC5t', 'platformUserId': 'Tlm70x3p'}, {'platformDisplayName': 'OmrB29gQ', 'platformName': 'eIfTe2HK', 'platformUserId': 'TeRlNHs3'}, {'platformDisplayName': 'H9i9rNMR', 'platformName': 'FUJTEsE4', 'platformUserId': '6ojdgfm7'}], 'userId': 'BwynuhF3', 'username': 'PUtTOpEj'}]' > $TEMP_FILE_UPLOAD
+#- 22 GetAllSessionAttributeRequest
+# echo "Testing 'GetAllSessionAttributeRequest'"
+printf 'type: getAllSessionAttributeRequest\nid: CS247u1P' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 22 'ModelListBulkUserPlatformsResponse' test.out
+eval_tap $? 22 'GetAllSessionAttributeRequest' test.out
 
-#- 23 ModelLoadIncomingFriendsWithTimeResponse
-# echo "Testing 'ModelLoadIncomingFriendsWithTimeResponse'"
-printf 'type: model.LoadIncomingFriendsWithTimeResponse\ndata: [{'friendId': 'ZksZR1SR', 'requestedAt': '1996-04-06T00:00:00Z'},{'friendId': 'BWnqR0JN', 'requestedAt': '1980-06-20T00:00:00Z'},{'friendId': '3eNk2axv', 'requestedAt': '1993-12-20T00:00:00Z'}]\npaging: {"first":"bv8lit0o","last":"apAE9GAR","next":"bITtGnJS","previous":"uv41YiOL"}' > $TEMP_FILE_UPLOAD
+#- 23 GetAllSessionAttributeResponse
+# echo "Testing 'GetAllSessionAttributeResponse'"
+printf 'type: getAllSessionAttributeResponse\nid: BXsaa8sg\nattributes: {"ec4iOxNh":"DvzYQIR2","m8gVvl4T":"dtTKFSyM","NvTFe5cF":"6amorTcd"}\ncode: 4' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 23 'ModelLoadIncomingFriendsWithTimeResponse' test.out
+eval_tap $? 23 'GetAllSessionAttributeResponse' test.out
 
-#- 24 ModelLoadOutgoingFriendsWithTimeResponse
-# echo "Testing 'ModelLoadOutgoingFriendsWithTimeResponse'"
-printf 'type: model.LoadOutgoingFriendsWithTimeResponse\ndata: [{'friendId': 'bBJPMEOQ', 'requestedAt': '1983-03-20T00:00:00Z'},{'friendId': 'UUr78m1V', 'requestedAt': '1973-04-12T00:00:00Z'},{'friendId': 'nEUgtAZ9', 'requestedAt': '1979-10-29T00:00:00Z'}]\npaging: {"first":"kobZymEo","last":"9hcATjNj","next":"s08xn8sI","previous":"J9lKAaJE"}' > $TEMP_FILE_UPLOAD
+#- 24 GetFriendshipStatusRequest
+# echo "Testing 'GetFriendshipStatusRequest'"
+printf 'type: getFriendshipStatusRequest\nid: goU9Vnw6\nfriendId: UfHQSr5U' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 24 'ModelLoadOutgoingFriendsWithTimeResponse' test.out
+eval_tap $? 24 'GetFriendshipStatusRequest' test.out
 
-#- 25 ModelLocalization
-# echo "Testing 'ModelLocalization'"
-printf 'type: model.Localization\nlastDraftAt: ypysz0b7\nlastPublishedAt: AVGJg5OM\ntemplateContent: {"draft":"S9EfXZVs","published":"BN9bNjiD"}\ntemplateLanguage: 8BMLTSEO' > $TEMP_FILE_UPLOAD
+#- 25 GetFriendshipStatusResponse
+# echo "Testing 'GetFriendshipStatusResponse'"
+printf 'type: getFriendshipStatusResponse\nid: Wg7WH5g6\ncode: 100\nfriendshipStatus: csEjhd7M' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 25 'ModelLocalization' test.out
+eval_tap $? 25 'GetFriendshipStatusResponse' test.out
 
-#- 26 ModelNativeFriendRequest
-# echo "Testing 'ModelNativeFriendRequest'"
-printf 'type: model.NativeFriendRequest\nisLogin: True\nplatformId: HqEzxK4X\nplatformToken: V2Rtcd5m\npsnEnv: KoWh8aOd' > $TEMP_FILE_UPLOAD
+#- 26 GetSessionAttributeRequest
+# echo "Testing 'GetSessionAttributeRequest'"
+printf 'type: getSessionAttributeRequest\nid: KuJiD4db\nkey: HI8c3HTb' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 26 'ModelNativeFriendRequest' test.out
+eval_tap $? 26 'GetSessionAttributeRequest' test.out
 
-#- 27 ModelNativeFriendSyncResponse
-# echo "Testing 'ModelNativeFriendSyncResponse'"
-printf 'type: model.NativeFriendSyncResponse\ndetail: bJy46ob4\nplatformId: 5zO8Hny9\nstatus: mfTkaFVe' > $TEMP_FILE_UPLOAD
+#- 27 GetSessionAttributeResponse
+# echo "Testing 'GetSessionAttributeResponse'"
+printf 'type: getSessionAttributeResponse\nid: u33K6XQK\ncode: 14\nvalue: 7odWo1sY' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 27 'ModelNativeFriendSyncResponse' test.out
+eval_tap $? 27 'GetSessionAttributeResponse' test.out
 
-#- 28 ModelNotificationTemplateResponse
-# echo "Testing 'ModelNotificationTemplateResponse'"
-printf 'type: model.NotificationTemplateResponse\ntemplateLocalizations: [{'lastDraftAt': '14ugIblE', 'lastPublishedAt': 'EVJwODIU', 'templateContent': {'draft': '6tVJhvF3', 'published': 'YhFcTTE7'}, 'templateLanguage': 'g5Dx4R0l'},{'lastDraftAt': 'pe4Xe44Z', 'lastPublishedAt': 'wFtAMNLQ', 'templateContent': {'draft': 'Ek45eAb9', 'published': 'kBBs8NNK'}, 'templateLanguage': 'BhDvaTeB'},{'lastDraftAt': 'qHseJMPL', 'lastPublishedAt': 'KmGoZ8eW', 'templateContent': {'draft': 'A5bLI5Ui', 'published': 'pWULcBmY'}, 'templateLanguage': 'tWBon52j'}]\ntemplateSlug: L3ReihrH' > $TEMP_FILE_UPLOAD
+#- 28 Heartbeat
+# echo "Testing 'Heartbeat'"
+printf 'type: heartbeat' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 28 'ModelNotificationTemplateResponse' test.out
+eval_tap $? 28 'Heartbeat' test.out
 
-#- 29 ModelNotificationTopicResponse
-# echo "Testing 'ModelNotificationTopicResponse'"
-printf 'type: model.NotificationTopicResponse\ncreatedAt: 57\ndescription: 41gCTW0A\nnamespace: bGSLMhYr\ntopic: UXhHd9hA' > $TEMP_FILE_UPLOAD
+#- 29 JoinDefaultChannelRequest
+# echo "Testing 'JoinDefaultChannelRequest'"
+printf 'type: joinDefaultChannelRequest\nid: IcPngdmT' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 29 'ModelNotificationTopicResponse' test.out
+eval_tap $? 29 'JoinDefaultChannelRequest' test.out
 
-#- 30 ModelNotificationTopicResponseV1
-# echo "Testing 'ModelNotificationTopicResponseV1'"
-printf 'type: model.NotificationTopicResponseV1\ncreatedAt: 89\ndescription: D74k3hKQ\nnamespace: VoJlmUcz\ntopicName: Csa4N6yV' > $TEMP_FILE_UPLOAD
+#- 30 JoinDefaultChannelResponse
+# echo "Testing 'JoinDefaultChannelResponse'"
+printf 'type: joinDefaultChannelResponse\nid: Gw7X0hrK\nchannelSlug: rU5jTvEs\ncode: 39' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 30 'ModelNotificationTopicResponseV1' test.out
+eval_tap $? 30 'JoinDefaultChannelResponse' test.out
 
-#- 31 ModelNotificationWithTemplateRequest
-# echo "Testing 'ModelNotificationWithTemplateRequest'"
-printf 'type: model.NotificationWithTemplateRequest\ntemplateContext: {"RWh3JUG6":"7qKXQsM9","CaXEurqz":"8wMWSWvv","AIisFUKd":"uNmJXwq6"}\ntemplateLanguage: BHaNyEDM\ntemplateSlug: uPW3X4I7\ntopic: 9EC91Qc8' > $TEMP_FILE_UPLOAD
+#- 31 ListIncomingFriendsRequest
+# echo "Testing 'ListIncomingFriendsRequest'"
+printf 'type: listIncomingFriendsRequest\nid: 0ftxKwJ5' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 31 'ModelNotificationWithTemplateRequest' test.out
+eval_tap $? 31 'ListIncomingFriendsRequest' test.out
 
-#- 32 ModelNotificationWithTemplateRequestV1
-# echo "Testing 'ModelNotificationWithTemplateRequestV1'"
-printf 'type: model.NotificationWithTemplateRequestV1\ntemplateContext: {"rWBTzJrv":"3lDnFj9q","NoUQ0vF5":"q6ksnPBy","9aUQCbrd":"l54PwaOr"}\ntemplateLanguage: LXTvHeMC\ntemplateSlug: iRHKQfhl\ntopicName: oK09Mhzi' > $TEMP_FILE_UPLOAD
+#- 32 ListIncomingFriendsResponse
+# echo "Testing 'ListIncomingFriendsResponse'"
+printf 'type: listIncomingFriendsResponse\nid: sswBXkCE\ncode: 22\nuserIds: [hTdHVy6l,iYEknTxr,TwRbQubw]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 32 'ModelNotificationWithTemplateRequestV1' test.out
+eval_tap $? 32 'ListIncomingFriendsResponse' test.out
 
-#- 33 ModelOutgoingFriendsWithTimeData
-# echo "Testing 'ModelOutgoingFriendsWithTimeData'"
-printf 'type: model.OutgoingFriendsWithTimeData\nfriendId: 37pjcy5X\nrequestedAt: 1989-05-15T00:00:00Z' > $TEMP_FILE_UPLOAD
+#- 33 ListOfFriendsRequest
+# echo "Testing 'ListOfFriendsRequest'"
+printf 'type: listOfFriendsRequest\nid: ZNcMbE2u\nfriendId: IIikoDLV' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 33 'ModelOutgoingFriendsWithTimeData' test.out
+eval_tap $? 33 'ListOfFriendsRequest' test.out
 
-#- 34 ModelPagination
-# echo "Testing 'ModelPagination'"
-printf 'type: model.Pagination\nfirst: Tdf7t5Ej\nlast: TPpBQZDL\nnext: ZYBxX07c\nprevious: VcJccFSm' > $TEMP_FILE_UPLOAD
+#- 34 ListOfFriendsResponse
+# echo "Testing 'ListOfFriendsResponse'"
+printf 'type: listOfFriendsResponse\nid: OyUGynvZ\ncode: 42\nfriendIds: [dnT6sEjv,kRYXRDCn,LaEWCGLg]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 34 'ModelPagination' test.out
+eval_tap $? 34 'ListOfFriendsResponse' test.out
 
-#- 35 ModelPutGlobalConfigurationRequest
-# echo "Testing 'ModelPutGlobalConfigurationRequest'"
-printf 'type: model.PutGlobalConfigurationRequest\nregionRetryMapping: {"9VfY08mV":["8IoDBpYY","PYK7vFQG","WFlRExKB"],"IsYca7LM":["848GOx4O","SgAHwxcy","va49JqFV"],"dBkDWQfN":["9NeGLOhu","Td5DwQ5s","NgB57jxa"]}\nregionURLMapping: [uz0yoOiI,lGWkdFZj,pWIeGPJf]\ntestGameMode: sKDH20NU\ntestRegionURLMapping: [7gvU3mID,EVHekZDQ,JEhU8gvW]\ntestTargetUserIDs: [7U0kSaXm,ynRQLupw,WssdkCJR]' > $TEMP_FILE_UPLOAD
+#- 35 ListOnlineFriendsRequest
+# echo "Testing 'ListOnlineFriendsRequest'"
+printf 'type: listOnlineFriendsRequest\nid: E5nETG8o' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 35 'ModelPutGlobalConfigurationRequest' test.out
+eval_tap $? 35 'ListOnlineFriendsRequest' test.out
 
-#- 36 ModelTemplateContent
-# echo "Testing 'ModelTemplateContent'"
-printf 'type: model.TemplateContent\ndraft: u4DFOsBa\npublished: jwskRUyY' > $TEMP_FILE_UPLOAD
+#- 36 ListOutgoingFriendsRequest
+# echo "Testing 'ListOutgoingFriendsRequest'"
+printf 'type: listOutgoingFriendsRequest\nid: junjacCW' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 36 'ModelTemplateContent' test.out
+eval_tap $? 36 'ListOutgoingFriendsRequest' test.out
 
-#- 37 ModelTemplateLocalization
-# echo "Testing 'ModelTemplateLocalization'"
-printf 'type: model.TemplateLocalization\nlastDraftAt: fWmNfaQv\nlastPublishedAt: 6FWrSBkW\ntemplateContent: {"draft":"42rXBFNl","published":"js5bUGf0"}\ntemplateLanguage: VIP15SQX\ntemplateSlug: fCS4a6Vj' > $TEMP_FILE_UPLOAD
+#- 37 ListOutgoingFriendsResponse
+# echo "Testing 'ListOutgoingFriendsResponse'"
+printf 'type: listOutgoingFriendsResponse\nid: kZLty2ia\ncode: 10\nfriendIds: [flGpTvK8,S75dWrZf,dwhMnV82]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 37 'ModelTemplateLocalization' test.out
+eval_tap $? 37 'ListOutgoingFriendsResponse' test.out
 
-#- 38 ModelTemplateLocalizationResponse
-# echo "Testing 'ModelTemplateLocalizationResponse'"
-printf 'type: model.TemplateLocalizationResponse\nfirst: Vu7tZdNv\nlast: uQQvnkCd\nnext: t66iMLr2\nprevious: 6gPA1ppz\ntemplateLocalization: [{'lastDraftAt': 'eApRLjf7', 'lastPublishedAt': 'drdXagPg', 'templateContent': {'draft': 'THMbASQC', 'published': 'moPps02D'}, 'templateLanguage': '9mAhZ9ht', 'templateSlug': 'oqyQtJNa'},{'lastDraftAt': 'jVaUO4My', 'lastPublishedAt': 'y0LS2PLw', 'templateContent': {'draft': 'l2fl5t0j', 'published': 'GqP36BAy'}, 'templateLanguage': 'Ca2dpXjr', 'templateSlug': 'sOUZBpoU'},{'lastDraftAt': 'd87mHgpX', 'lastPublishedAt': 'qG3CRFjo', 'templateContent': {'draft': 'lJnsJUk8', 'published': 'r2wcCuqu'}, 'templateLanguage': 'aoKYTarw', 'templateSlug': '9czi1GZy'}]' > $TEMP_FILE_UPLOAD
+#- 38 MatchmakingNotif
+# echo "Testing 'MatchmakingNotif'"
+printf 'type: matchmakingNotif\ncounterPartyMember: [Nnop6aMV,MjdpeIHm,PWYqqpEC]\nmatchId: y5LEeQHN\nmessage: vPDPCkZt\npartyMember: [0jAFMPaM,hmM1pWlU,2ht1W1W8]\nreadyDuration: 81\nstatus: AKAlnPlV' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 38 'ModelTemplateLocalizationResponse' test.out
+eval_tap $? 38 'MatchmakingNotif' test.out
 
-#- 39 ModelTemplateResponse
-# echo "Testing 'ModelTemplateResponse'"
-printf 'type: model.TemplateResponse\nlocalizations: [{'lastDraftAt': 'kOVH9l89', 'lastPublishedAt': 'FscBMwj7', 'templateContent': {'draft': '9TstP4ZJ', 'published': 'C4fVtMRp'}, 'templateLanguage': 'uHEDv3MQ'},{'lastDraftAt': 'pNi8zCs0', 'lastPublishedAt': 'IcWyEXdH', 'templateContent': {'draft': 'QmAhF9Uw', 'published': 'mIPkhxVY'}, 'templateLanguage': '1MyVCdNI'},{'lastDraftAt': 'iF5qSASj', 'lastPublishedAt': 'pP3cynQc', 'templateContent': {'draft': 'nrC54MME', 'published': '5iz98PWa'}, 'templateLanguage': 'hkIYVh9C'}]\ntemplateSlug: Tixrc27G' > $TEMP_FILE_UPLOAD
+#- 39 MessageNotif
+# echo "Testing 'MessageNotif'"
+printf 'type: messageNotif\nid: FNdyDI9i\nfrom: 3t5rJLfO\npayload: UFIpLho2\nsentAt: 100\nto: UvyYacYp\ntopic: s4cmh906' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 39 'ModelTemplateResponse' test.out
+eval_tap $? 39 'MessageNotif' test.out
 
-#- 40 ModelTopicByNamespacesResponse
-# echo "Testing 'ModelTopicByNamespacesResponse'"
-printf 'type: model.TopicByNamespacesResponse\nfirst: Cyxsm8j7\nlast: 62HjiDyY\nnext: OdDE9FHk\nprevious: zbgjszXJ\ntopics: [{'createdAt': 90, 'description': 'RV3XOwZJ', 'namespace': 'EM7Yjf7F', 'topic': 'eLlltf2J'},{'createdAt': 94, 'description': '5PBdAu3s', 'namespace': 'uATdp2uU', 'topic': '7nU1YbbB'},{'createdAt': 84, 'description': 'JvvKIIug', 'namespace': 'JIRoHoWZ', 'topic': 'TD2gPvMF'}]' > $TEMP_FILE_UPLOAD
+#- 40 OfflineNotificationRequest
+# echo "Testing 'OfflineNotificationRequest'"
+printf 'type: offlineNotificationRequest\nid: B4JxTsn3' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 40 'ModelTopicByNamespacesResponse' test.out
+eval_tap $? 40 'OfflineNotificationRequest' test.out
 
-#- 41 ModelUpdateTemplateRequest
-# echo "Testing 'ModelUpdateTemplateRequest'"
-printf 'type: model.UpdateTemplateRequest\ntemplateContent: ToRulgK3' > $TEMP_FILE_UPLOAD
+#- 41 OfflineNotificationResponse
+# echo "Testing 'OfflineNotificationResponse'"
+printf 'type: offlineNotificationResponse\nid: giJwSg6n\ncode: 93' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 41 'ModelUpdateTemplateRequest' test.out
+eval_tap $? 41 'OfflineNotificationResponse' test.out
 
-#- 42 ModelUpdateTopicRequest
-# echo "Testing 'ModelUpdateTopicRequest'"
-printf 'type: model.UpdateTopicRequest\ndescription: wltxWaOn' > $TEMP_FILE_UPLOAD
+#- 42 OnlineFriends
+# echo "Testing 'OnlineFriends'"
+printf 'type: onlineFriends\nid: uO0zu4x3\ncode: 95\nonlineFriendIds: [rNVfmilF,LV5T1bmT,bqeffsk4]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 42 'ModelUpdateTopicRequest' test.out
+eval_tap $? 42 'OnlineFriends' test.out
 
-#- 43 ModelUserAcceptFriendRequest
-# echo "Testing 'ModelUserAcceptFriendRequest'"
-printf 'type: model.UserAcceptFriendRequest\nfriendId: i92Ve1nO' > $TEMP_FILE_UPLOAD
+#- 43 PartyChatNotif
+# echo "Testing 'PartyChatNotif'"
+printf 'type: partyChatNotif\nid: WnbPnuFx\nfrom: k2KdWkEE\npayload: NEXXx0uj\nreceivedAt: 48\nto: fsHszXEv' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 43 'ModelUserAcceptFriendRequest' test.out
+eval_tap $? 43 'PartyChatNotif' test.out
 
-#- 44 ModelUserCancelFriendRequest
-# echo "Testing 'ModelUserCancelFriendRequest'"
-printf 'type: model.UserCancelFriendRequest\nfriendId: xuXivLt1' > $TEMP_FILE_UPLOAD
+#- 44 PartyChatRequest
+# echo "Testing 'PartyChatRequest'"
+printf 'type: partyChatRequest\nid: 72tvJ9tX\nfrom: FzrW8vwY\npayload: 1pV2NhnP\nreceivedAt: 99\nto: FP46GX4h' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 44 'ModelUserCancelFriendRequest' test.out
+eval_tap $? 44 'PartyChatRequest' test.out
 
-#- 45 ModelUserGetFriendshipStatusResponse
-# echo "Testing 'ModelUserGetFriendshipStatusResponse'"
-printf 'type: model.UserGetFriendshipStatusResponse\ncode: 26\nname: gouFKGJa' > $TEMP_FILE_UPLOAD
+#- 45 PartyChatResponse
+# echo "Testing 'PartyChatResponse'"
+printf 'type: partyChatResponse\nid: AeSGmPPP\ncode: 65' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 45 'ModelUserGetFriendshipStatusResponse' test.out
+eval_tap $? 45 'PartyChatResponse' test.out
 
-#- 46 ModelUserPlatformInfo
-# echo "Testing 'ModelUserPlatformInfo'"
-printf 'type: model.UserPlatformInfo\nplatformDisplayName: Zh5oStQ4\nplatformName: LxzjzbI8\nplatformUserId: ky88GguF' > $TEMP_FILE_UPLOAD
+#- 46 PartyCreateRequest
+# echo "Testing 'PartyCreateRequest'"
+printf 'type: partyCreateRequest\nid: TRqiX5ts' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 46 'ModelUserPlatformInfo' test.out
+eval_tap $? 46 'PartyCreateRequest' test.out
 
-#- 47 ModelUserRejectFriendRequest
-# echo "Testing 'ModelUserRejectFriendRequest'"
-printf 'type: model.UserRejectFriendRequest\nfriendId: Z6j20EIB' > $TEMP_FILE_UPLOAD
+#- 47 PartyCreateResponse
+# echo "Testing 'PartyCreateResponse'"
+printf 'type: partyCreateResponse\nid: kT8tFZgn\ncode: 60\ninvitationToken: 3mqZXBkV\ninvitees: DHREvVYy\nleaderId: BjEFuvlx\nmembers: H1s7STsZ\npartyId: 5lODuZxt' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 47 'ModelUserRejectFriendRequest' test.out
+eval_tap $? 47 'PartyCreateResponse' test.out
 
-#- 48 ModelUserRequestFriendRequest
-# echo "Testing 'ModelUserRequestFriendRequest'"
-printf 'type: model.UserRequestFriendRequest\nfriendId: tpR0phv2\nfriendPublicId: NgZs2UEI' > $TEMP_FILE_UPLOAD
+#- 48 PartyDataUpdateNotif
+# echo "Testing 'PartyDataUpdateNotif'"
+printf 'type: partyDataUpdateNotif\ncustomAttributes: {"tm23PAUI":{},"8HLDazLF":{},"6Hr9sMj1":{}}\ninvitees: [3GSRCNBm,8kghtgHM,Dd6ZnsFm]\nleader: L7e16y5a\nmembers: [UZpItWvu,iZy7tMNz,9KU3tPVC]\nnamespace: LbI5N6pE\npartyId: DA4ohrtZ\nupdatedAt: 83' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 48 'ModelUserRequestFriendRequest' test.out
+eval_tap $? 48 'PartyDataUpdateNotif' test.out
 
-#- 49 ModelUserUnfriendRequest
-# echo "Testing 'ModelUserUnfriendRequest'"
-printf 'type: model.UserUnfriendRequest\nfriendId: wVQVf9yo' > $TEMP_FILE_UPLOAD
+#- 49 PartyGetInvitedNotif
+# echo "Testing 'PartyGetInvitedNotif'"
+printf 'type: partyGetInvitedNotif\nfrom: OOAnfhF6\ninvitationToken: lZsJtTag\npartyId: rkJopfXb' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 49 'ModelUserUnfriendRequest' test.out
+eval_tap $? 49 'PartyGetInvitedNotif' test.out
 
-#- 50 ModelUserWithPlatformInfo
-# echo "Testing 'ModelUserWithPlatformInfo'"
-printf 'type: model.UserWithPlatformInfo\navatarUrl: hEnE4Cwh\ndisplayName: U0QVb8b1\nplatformInfos: [{'platformDisplayName': 'liRA2FUe', 'platformName': '3NV8nTA5', 'platformUserId': 'AKJhPAhh'},{'platformDisplayName': 'DTeIuBYw', 'platformName': 'a7qPJQDm', 'platformUserId': 'Nx7erX1k'},{'platformDisplayName': 'FjyK5Nr6', 'platformName': 'GMc61XKK', 'platformUserId': 'JCuMfGu8'}]\nuserId: uG1iJo2k\nusername: KNh0IBq7' > $TEMP_FILE_UPLOAD
+#- 50 PartyInfoRequest
+# echo "Testing 'PartyInfoRequest'"
+printf 'type: partyInfoRequest\nid: yBL9jENL' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 50 'ModelUserWithPlatformInfo' test.out
+eval_tap $? 50 'PartyInfoRequest' test.out
 
-#- 51 ModelsAdminAddProfanityFilterIntoListRequest
-# echo "Testing 'ModelsAdminAddProfanityFilterIntoListRequest'"
-printf 'type: models.AdminAddProfanityFilterIntoListRequest\nfilter: xxQ0sH24\nnote: GvEyfFtC' > $TEMP_FILE_UPLOAD
+#- 51 PartyInfoResponse
+# echo "Testing 'PartyInfoResponse'"
+printf 'type: partyInfoResponse\nid: 3EpLGwvD\ncode: 78\ncustomAttributes: {"CnKVdlCN":{},"sGTcft0i":{},"po1CCXBe":{}}\ninvitationToken: F3lkyQ4Z\ninvitees: 49JmjJRC\nleaderId: TM5a1J8S\nmembers: GYPCVG09\npartyId: grmgchif' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 51 'ModelsAdminAddProfanityFilterIntoListRequest' test.out
+eval_tap $? 51 'PartyInfoResponse' test.out
 
-#- 52 ModelsAdminAddProfanityFiltersFilterRequest
-# echo "Testing 'ModelsAdminAddProfanityFiltersFilterRequest'"
-printf 'type: models.AdminAddProfanityFiltersFilterRequest\nfilter: Q1YKbMnX\nnote: voE7SWCr' > $TEMP_FILE_UPLOAD
+#- 52 PartyInviteNotif
+# echo "Testing 'PartyInviteNotif'"
+printf 'type: partyInviteNotif\ninviteeId: Np8IOIlr\ninviterId: P5KVBxMC' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 52 'ModelsAdminAddProfanityFiltersFilterRequest' test.out
+eval_tap $? 52 'PartyInviteNotif' test.out
 
-#- 53 ModelsAdminAddProfanityFiltersRequest
-# echo "Testing 'ModelsAdminAddProfanityFiltersRequest'"
-printf 'type: models.AdminAddProfanityFiltersRequest\nfilters: [{'filter': 'M5GAavqR', 'note': '2XLJQDku'},{'filter': 'caFfa9My', 'note': 'pXRicgg3'},{'filter': 'r8lM0fm4', 'note': 'rjsvpFMB'}]' > $TEMP_FILE_UPLOAD
+#- 53 PartyInviteRequest
+# echo "Testing 'PartyInviteRequest'"
+printf 'type: partyInviteRequest\nid: BSOMm35y\nfriendId: uwvZqrcR' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 53 'ModelsAdminAddProfanityFiltersRequest' test.out
+eval_tap $? 53 'PartyInviteRequest' test.out
 
-#- 54 ModelsAdminCreateProfanityListRequest
-# echo "Testing 'ModelsAdminCreateProfanityListRequest'"
-printf 'type: models.AdminCreateProfanityListRequest\nisEnabled: False\nisMandatory: True\nname: hxOsM6LH' > $TEMP_FILE_UPLOAD
+#- 54 PartyInviteResponse
+# echo "Testing 'PartyInviteResponse'"
+printf 'type: partyInviteResponse\nid: SF5rhBIJ\ncode: 65' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 54 'ModelsAdminCreateProfanityListRequest' test.out
+eval_tap $? 54 'PartyInviteResponse' test.out
 
-#- 55 ModelsAdminDeleteProfanityFilterRequest
-# echo "Testing 'ModelsAdminDeleteProfanityFilterRequest'"
-printf 'type: models.AdminDeleteProfanityFilterRequest\nfilter: q0iI7tNI' > $TEMP_FILE_UPLOAD
+#- 55 PartyJoinNotif
+# echo "Testing 'PartyJoinNotif'"
+printf 'type: partyJoinNotif\nuserId: cVaKwi16' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 55 'ModelsAdminDeleteProfanityFilterRequest' test.out
+eval_tap $? 55 'PartyJoinNotif' test.out
 
-#- 56 ModelsAdminGetProfanityListFiltersV1Response
-# echo "Testing 'ModelsAdminGetProfanityListFiltersV1Response'"
-printf 'type: models.AdminGetProfanityListFiltersV1Response\nfilters: [{'filter': 'hau7c4Ay', 'listName': '3BnqeBMO', 'namespace': '9ABV8HGS', 'note': '2B0vd51m'},{'filter': 'MxoS2y1t', 'listName': 'FO0D08bV', 'namespace': '6alP2X4N', 'note': 'QVuBPHQ3'},{'filter': 'h1HGFmbU', 'listName': 'knSpOpcI', 'namespace': 'cthxHCvE', 'note': '6YMRGHVw'}]' > $TEMP_FILE_UPLOAD
+#- 56 PartyJoinRequest
+# echo "Testing 'PartyJoinRequest'"
+printf 'type: partyJoinRequest\nid: HPbF7srR\ninvitationToken: zujMQE3E\npartyId: qIX1SrwQ' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 56 'ModelsAdminGetProfanityListFiltersV1Response' test.out
+eval_tap $? 56 'PartyJoinRequest' test.out
 
-#- 57 ModelsAdminGetProfanityListsListResponse
-# echo "Testing 'ModelsAdminGetProfanityListsListResponse'"
-printf 'type: models.AdminGetProfanityListsListResponse\nisEnabled: True\nisMandatory: True\nname: l1IyKFem' > $TEMP_FILE_UPLOAD
+#- 57 PartyJoinResponse
+# echo "Testing 'PartyJoinResponse'"
+printf 'type: partyJoinResponse\nid: 31mo6YpE\ncode: 61\ninvitationToken: GqG2vu3q\ninvitees: eP3jAL1u\nleaderId: YsaukN9V\nmembers: AlZr3cFF\npartyId: PwfGuI0S' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 57 'ModelsAdminGetProfanityListsListResponse' test.out
+eval_tap $? 57 'PartyJoinResponse' test.out
 
-#- 58 ModelsAdminSetProfanityRuleForNamespaceRequest
-# echo "Testing 'ModelsAdminSetProfanityRuleForNamespaceRequest'"
-printf 'type: models.AdminSetProfanityRuleForNamespaceRequest\nrule: qXoZSyRx' > $TEMP_FILE_UPLOAD
+#- 58 PartyKickNotif
+# echo "Testing 'PartyKickNotif'"
+printf 'type: partyKickNotif\nleaderId: dIHu48m4\npartyId: Kg2zG2j4\nuserId: JM9HyKgh' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 58 'ModelsAdminSetProfanityRuleForNamespaceRequest' test.out
+eval_tap $? 58 'PartyKickNotif' test.out
 
-#- 59 ModelsAdminUpdateProfanityList
-# echo "Testing 'ModelsAdminUpdateProfanityList'"
-printf 'type: models.AdminUpdateProfanityList\nisEnabled: True\nisMandatory: False\nnewName: 4zJCI3ub' > $TEMP_FILE_UPLOAD
+#- 59 PartyKickRequest
+# echo "Testing 'PartyKickRequest'"
+printf 'type: partyKickRequest\nid: 44xDR7Dg\nmemberId: xgXMSOUi' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 59 'ModelsAdminUpdateProfanityList' test.out
+eval_tap $? 59 'PartyKickRequest' test.out
 
-#- 60 ModelsAdminVerifyMessageProfanityRequest
-# echo "Testing 'ModelsAdminVerifyMessageProfanityRequest'"
-printf 'type: models.AdminVerifyMessageProfanityRequest\nmessage: Im2Pg5K5\nprofanityLevel: ApWYSJ8N' > $TEMP_FILE_UPLOAD
+#- 60 PartyKickResponse
+# echo "Testing 'PartyKickResponse'"
+printf 'type: partyKickResponse\nid: hd6wUBN8\ncode: 70' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 60 'ModelsAdminVerifyMessageProfanityRequest' test.out
+eval_tap $? 60 'PartyKickResponse' test.out
 
-#- 61 ModelsAdminVerifyMessageProfanityResponse
-# echo "Testing 'ModelsAdminVerifyMessageProfanityResponse'"
-printf 'type: models.AdminVerifyMessageProfanityResponse\nfilteredMessage: sTGY6mXq\nhasProfanity: True' > $TEMP_FILE_UPLOAD
+#- 61 PartyLeaveNotif
+# echo "Testing 'PartyLeaveNotif'"
+printf 'type: partyLeaveNotif\nleaderId: yCR89MJn\nuserId: mqt55HI8' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 61 'ModelsAdminVerifyMessageProfanityResponse' test.out
+eval_tap $? 61 'PartyLeaveNotif' test.out
 
-#- 62 ModelsBlockedByPlayerData
-# echo "Testing 'ModelsBlockedByPlayerData'"
-printf 'type: models.BlockedByPlayerData\nblockedAt: 1992-01-23T00:00:00Z\nuserId: vRPGcHG5' > $TEMP_FILE_UPLOAD
+#- 62 PartyLeaveRequest
+# echo "Testing 'PartyLeaveRequest'"
+printf 'type: partyLeaveRequest\nid: u65zCwiQ\nignoreUserRegistry: True' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 62 'ModelsBlockedByPlayerData' test.out
+eval_tap $? 62 'PartyLeaveRequest' test.out
 
-#- 63 ModelsBlockedPlayerData
-# echo "Testing 'ModelsBlockedPlayerData'"
-printf 'type: models.BlockedPlayerData\nblockedAt: 1984-06-19T00:00:00Z\nblockedUserId: lbIERmzd' > $TEMP_FILE_UPLOAD
+#- 63 PartyLeaveResponse
+# echo "Testing 'PartyLeaveResponse'"
+printf 'type: partyLeaveResponse\nid: jkq6iNrO\ncode: 85' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 63 'ModelsBlockedPlayerData' test.out
+eval_tap $? 63 'PartyLeaveResponse' test.out
 
-#- 64 ModelsConfig
-# echo "Testing 'ModelsConfig'"
-printf 'type: models.Config\nallowInviteNonConnectedUser: False\nallowJoinPartyDuringMatchmaking: False\nautoKickOnDisconnect: False\nautoKickOnDisconnectDelay: 78\ncancelTicketOnDisconnect: True\nchatRateLimitBurst: 17\nchatRateLimitDuration: 88\nconcurrentUsersLimit: 85\ndisableInvitationOnJoinParty: False\nenableChat: False\nentitlementCheck: True\nentitlementItemID: mkmnsAOA\ngeneralRateLimitBurst: 48\ngeneralRateLimitDuration: 29\nkeepPresenceActivityOnDisconnect: False\nmaxDSWaitTime: 39\nmaxFriendsLimit: 45\nmaxPartyMember: 95\nnamespace: hVB9PeoG\nprofanityFilter: False\nreadyConsentTimeout: 97\nunregisterDelay: 10' > $TEMP_FILE_UPLOAD
+#- 64 PartyPromoteLeaderRequest
+# echo "Testing 'PartyPromoteLeaderRequest'"
+printf 'type: partyPromoteLeaderRequest\nid: iiOxXF4b\nnewLeaderUserId: RlfSOVIw' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 64 'ModelsConfig' test.out
+eval_tap $? 64 'PartyPromoteLeaderRequest' test.out
 
-#- 65 ModelsConfigList
-# echo "Testing 'ModelsConfigList'"
-printf 'type: models.ConfigList\nconfigs: [{'allowInviteNonConnectedUser': True, 'allowJoinPartyDuringMatchmaking': True, 'autoKickOnDisconnect': False, 'autoKickOnDisconnectDelay': 29, 'cancelTicketOnDisconnect': False, 'chatRateLimitBurst': 98, 'chatRateLimitDuration': 5, 'concurrentUsersLimit': 38, 'disableInvitationOnJoinParty': False, 'enableChat': True, 'entitlementCheck': False, 'entitlementItemID': 'VFwXiCRD', 'generalRateLimitBurst': 1, 'generalRateLimitDuration': 27, 'keepPresenceActivityOnDisconnect': False, 'maxDSWaitTime': 95, 'maxFriendsLimit': 81, 'maxPartyMember': 96, 'namespace': 'ItlZm8f0', 'profanityFilter': True, 'readyConsentTimeout': 50, 'unregisterDelay': 58},{'allowInviteNonConnectedUser': False, 'allowJoinPartyDuringMatchmaking': True, 'autoKickOnDisconnect': False, 'autoKickOnDisconnectDelay': 9, 'cancelTicketOnDisconnect': False, 'chatRateLimitBurst': 72, 'chatRateLimitDuration': 44, 'concurrentUsersLimit': 35, 'disableInvitationOnJoinParty': True, 'enableChat': False, 'entitlementCheck': True, 'entitlementItemID': 'PwZs3RpK', 'generalRateLimitBurst': 59, 'generalRateLimitDuration': 24, 'keepPresenceActivityOnDisconnect': True, 'maxDSWaitTime': 23, 'maxFriendsLimit': 34, 'maxPartyMember': 13, 'namespace': 'BLD7B3CJ', 'profanityFilter': False, 'readyConsentTimeout': 37, 'unregisterDelay': 73},{'allowInviteNonConnectedUser': False, 'allowJoinPartyDuringMatchmaking': True, 'autoKickOnDisconnect': False, 'autoKickOnDisconnectDelay': 60, 'cancelTicketOnDisconnect': False, 'chatRateLimitBurst': 3, 'chatRateLimitDuration': 66, 'concurrentUsersLimit': 3, 'disableInvitationOnJoinParty': True, 'enableChat': True, 'entitlementCheck': False, 'entitlementItemID': 'hLTMtocD', 'generalRateLimitBurst': 70, 'generalRateLimitDuration': 63, 'keepPresenceActivityOnDisconnect': True, 'maxDSWaitTime': 29, 'maxFriendsLimit': 83, 'maxPartyMember': 3, 'namespace': 'a1k8LDUc', 'profanityFilter': True, 'readyConsentTimeout': 20, 'unregisterDelay': 6}]' > $TEMP_FILE_UPLOAD
+#- 65 PartyPromoteLeaderResponse
+# echo "Testing 'PartyPromoteLeaderResponse'"
+printf 'type: partyPromoteLeaderResponse\nid: ZacBS5pc\ncode: 23\ninvitationToken: gfnVOTrk\ninvitees: gtoz8A4q\nleaderId: uEb2w980\nmembers: bXtEx9Z2\npartyId: d8OyR4rC' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 65 'ModelsConfigList' test.out
+eval_tap $? 65 'PartyPromoteLeaderResponse' test.out
 
-#- 66 ModelsConfigReq
-# echo "Testing 'ModelsConfigReq'"
-printf 'type: models.ConfigReq\nallowInviteNonConnectedUser: True\nallowJoinPartyDuringMatchmaking: False\nautoKickOnDisconnect: False\nautoKickOnDisconnectDelay: 57\ncancelTicketOnDisconnect: True\nchatRateLimitBurst: 99\nchatRateLimitDuration: 55\nconcurrentUsersLimit: 21\ndisableInvitationOnJoinParty: False\nenableChat: False\nentitlementCheck: False\nentitlementItemID: SupRuU06\ngeneralRateLimitBurst: 16\ngeneralRateLimitDuration: 39\nkeepPresenceActivityOnDisconnect: True\nmaxDSWaitTime: 22\nmaxFriendsLimit: 25\nmaxPartyMember: 33\nprofanityFilter: False\nreadyConsentTimeout: 39\nunregisterDelay: 2' > $TEMP_FILE_UPLOAD
+#- 66 PartyRejectNotif
+# echo "Testing 'PartyRejectNotif'"
+printf 'type: partyRejectNotif\nleaderId: poneChMA\npartyId: fRVNZBUS\nuserId: xrJ3AFcg' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 66 'ModelsConfigReq' test.out
+eval_tap $? 66 'PartyRejectNotif' test.out
 
-#- 67 ModelsCreateConfigRequest
-# echo "Testing 'ModelsCreateConfigRequest'"
-printf 'type: models.CreateConfigRequest\napiKey: ovmJqaWA' > $TEMP_FILE_UPLOAD
+#- 67 PartyRejectRequest
+# echo "Testing 'PartyRejectRequest'"
+printf 'type: partyRejectRequest\nid: 42CAdoe2\ninvitationToken: dFR77e6c\npartyId: G3dtFhP4' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 67 'ModelsCreateConfigRequest' test.out
+eval_tap $? 67 'PartyRejectRequest' test.out
 
-#- 68 ModelsCreateConfigResponse
-# echo "Testing 'ModelsCreateConfigResponse'"
-printf 'type: models.CreateConfigResponse\napiKey: TSiMAyKg\nnamespace: UemGThfp' > $TEMP_FILE_UPLOAD
+#- 68 PartyRejectResponse
+# echo "Testing 'PartyRejectResponse'"
+printf 'type: partyRejectResponse\nid: nEeXsUBm\ncode: 58\npartyId: XQy7xCzD' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 68 'ModelsCreateConfigResponse' test.out
+eval_tap $? 68 'PartyRejectResponse' test.out
 
-#- 69 ModelsDebugProfanityFilterRequest
-# echo "Testing 'ModelsDebugProfanityFilterRequest'"
-printf 'type: models.DebugProfanityFilterRequest\ntext: 3RxApAMz' > $TEMP_FILE_UPLOAD
+#- 69 PersonalChatHistoryRequest
+# echo "Testing 'PersonalChatHistoryRequest'"
+printf 'type: personalChatHistoryRequest\nid: oNho1E4z\nfriendId: jn3UtIOS' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 69 'ModelsDebugProfanityFilterRequest' test.out
+eval_tap $? 69 'PersonalChatHistoryRequest' test.out
 
-#- 70 ModelsGetAllPlayerBlockedByUsersResponse
-# echo "Testing 'ModelsGetAllPlayerBlockedByUsersResponse'"
-printf 'type: models.GetAllPlayerBlockedByUsersResponse\ndata: [{'blockedAt': '1981-02-11T00:00:00Z', 'userId': 'jCLR4Anj'},{'blockedAt': '1999-10-15T00:00:00Z', 'userId': 'jUZzKgvs'},{'blockedAt': '1982-04-05T00:00:00Z', 'userId': 'oRO7wNl5'}]' > $TEMP_FILE_UPLOAD
+#- 70 PersonalChatHistoryResponse
+# echo "Testing 'PersonalChatHistoryResponse'"
+printf 'type: personalChatHistoryResponse\nid: l6eeo0et\nchat: e5642Hf2\ncode: 31\nfriendId: XTLuyg42' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 70 'ModelsGetAllPlayerBlockedByUsersResponse' test.out
+eval_tap $? 70 'PersonalChatHistoryResponse' test.out
 
-#- 71 ModelsGetAllPlayerBlockedUsersResponse
-# echo "Testing 'ModelsGetAllPlayerBlockedUsersResponse'"
-printf 'type: models.GetAllPlayerBlockedUsersResponse\ndata: [{'blockedAt': '1983-09-17T00:00:00Z', 'blockedUserId': 'iCLIK4Gi'},{'blockedAt': '1984-10-04T00:00:00Z', 'blockedUserId': 'APjL94rz'},{'blockedAt': '1980-11-17T00:00:00Z', 'blockedUserId': 'NmPOky8w'}]' > $TEMP_FILE_UPLOAD
+#- 71 PersonalChatNotif
+# echo "Testing 'PersonalChatNotif'"
+printf 'type: personalChatNotif\nid: 9CsmLTSM\nfrom: vWixNkBK\npayload: breU4p1u\nreceivedAt: 22\nto: fbaXndQM' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 71 'ModelsGetAllPlayerBlockedUsersResponse' test.out
+eval_tap $? 71 'PersonalChatNotif' test.out
 
-#- 72 ModelsGetAllPlayerSessionAttributeResponse
-# echo "Testing 'ModelsGetAllPlayerSessionAttributeResponse'"
-printf 'type: models.GetAllPlayerSessionAttributeResponse\nattributes: {"Ch3HiptB":"sKC3Ijyd","3X18TvT8":"ST0oF3Z8","ebNeOBP6":"lpfIMuym"}' > $TEMP_FILE_UPLOAD
+#- 72 PersonalChatRequest
+# echo "Testing 'PersonalChatRequest'"
+printf 'type: personalChatRequest\nid: lfX1KANS\nfrom: OdJiAzqv\npayload: 9QsZJde1\nreceivedAt: 30\nto: WeLavUCY' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 72 'ModelsGetAllPlayerSessionAttributeResponse' test.out
+eval_tap $? 72 'PersonalChatRequest' test.out
 
-#- 73 ModelsGetBulkAllPlayerBlockedUsersRequest
-# echo "Testing 'ModelsGetBulkAllPlayerBlockedUsersRequest'"
-printf 'type: models.GetBulkAllPlayerBlockedUsersRequest\nlistBlockedUserId: [O0odG8XM,9zxE6EEr,XGvu0swN]' > $TEMP_FILE_UPLOAD
+#- 73 PersonalChatResponse
+# echo "Testing 'PersonalChatResponse'"
+printf 'type: personalChatResponse\nid: F80RTbkQ\ncode: 91' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 73 'ModelsGetBulkAllPlayerBlockedUsersRequest' test.out
+eval_tap $? 73 'PersonalChatResponse' test.out
 
-#- 74 ModelsGetBulkAllPlayerBlockedUsersResponse
-# echo "Testing 'ModelsGetBulkAllPlayerBlockedUsersResponse'"
-printf 'type: models.GetBulkAllPlayerBlockedUsersResponse\ndata: {"M3b4LmOw":[{"blockedAt":"1983-04-18T00:00:00Z","blockedUserId":"58NrAzMh"},{"blockedAt":"1981-07-27T00:00:00Z","blockedUserId":"x67Xny0I"},{"blockedAt":"1990-04-28T00:00:00Z","blockedUserId":"KCf6zbne"}],"3DQAvowj":[{"blockedAt":"1991-01-14T00:00:00Z","blockedUserId":"kh9C0LEa"},{"blockedAt":"1995-03-12T00:00:00Z","blockedUserId":"Oi7WpP0l"},{"blockedAt":"1972-01-15T00:00:00Z","blockedUserId":"pNNsLNyn"}],"T2kQVm4X":[{"blockedAt":"1987-01-16T00:00:00Z","blockedUserId":"2i8PKUNi"},{"blockedAt":"1974-10-30T00:00:00Z","blockedUserId":"RLRckZql"},{"blockedAt":"1999-05-08T00:00:00Z","blockedUserId":"ZXnZxhIC"}]}' > $TEMP_FILE_UPLOAD
+#- 74 RefreshTokenRequest
+# echo "Testing 'RefreshTokenRequest'"
+printf 'type: refreshTokenRequest\nid: znzZ2ApV\ntoken: 8aeMUys4' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 74 'ModelsGetBulkAllPlayerBlockedUsersResponse' test.out
+eval_tap $? 74 'RefreshTokenRequest' test.out
 
-#- 75 ModelsGetConfigResponse
-# echo "Testing 'ModelsGetConfigResponse'"
-printf 'type: models.GetConfigResponse\napiKey: kcvbSXUH\nnamespace: U3MZMgXv' > $TEMP_FILE_UPLOAD
+#- 75 RefreshTokenResponse
+# echo "Testing 'RefreshTokenResponse'"
+printf 'type: refreshTokenResponse\nid: 982L7bLz\ncode: 76' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 75 'ModelsGetConfigResponse' test.out
+eval_tap $? 75 'RefreshTokenResponse' test.out
 
-#- 76 ModelsGetLobbyCcuResponse
-# echo "Testing 'ModelsGetLobbyCcuResponse'"
-printf 'type: models.GetLobbyCcuResponse\ncountCurrentUsers: 12' > $TEMP_FILE_UPLOAD
+#- 76 RejectFriendsNotif
+# echo "Testing 'RejectFriendsNotif'"
+printf 'type: rejectFriendsNotif\nuserId: THTHqkJo' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 76 'ModelsGetLobbyCcuResponse' test.out
+eval_tap $? 76 'RejectFriendsNotif' test.out
 
-#- 77 ModelsGetPlayerSessionAttributeResponse
-# echo "Testing 'ModelsGetPlayerSessionAttributeResponse'"
-printf 'type: models.GetPlayerSessionAttributeResponse\nkey: m5M4J2hk\nvalue: oAPp8wY2' > $TEMP_FILE_UPLOAD
+#- 77 RejectFriendsRequest
+# echo "Testing 'RejectFriendsRequest'"
+printf 'type: rejectFriendsRequest\nid: 4dJiE9Ez\nfriendId: wQRWMBzk' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 77 'ModelsGetPlayerSessionAttributeResponse' test.out
+eval_tap $? 77 'RejectFriendsRequest' test.out
 
-#- 78 ModelsImportConfigResponse
-# echo "Testing 'ModelsImportConfigResponse'"
-printf 'type: models.ImportConfigResponse\nfailedConfigs: [bePDKXMz,p8YYHqrm,1YUVUZdH]\nignoredConfigs: [FyFBsyxA,CjOSHfTq,zGDo9vbO]\nnewConfigs: [SR6Oar78,1nQqYbRn,mFNb2IvH]\nreplacedConfigs: [6dxemsqk,mvOmkoQE,Pznf3hrZ]' > $TEMP_FILE_UPLOAD
+#- 78 RejectFriendsResponse
+# echo "Testing 'RejectFriendsResponse'"
+printf 'type: rejectFriendsResponse\nid: Q7HMarPQ\ncode: 89' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 78 'ModelsImportConfigResponse' test.out
+eval_tap $? 78 'RejectFriendsResponse' test.out
 
-#- 79 ModelsListBlockedPlayerRequest
-# echo "Testing 'ModelsListBlockedPlayerRequest'"
-printf 'type: models.ListBlockedPlayerRequest\nlistBlockedUserId: [gvxqlaya,RnIrnpLJ,3ohuIz2b]' > $TEMP_FILE_UPLOAD
+#- 79 RematchmakingNotif
+# echo "Testing 'RematchmakingNotif'"
+printf 'type: rematchmakingNotif\nbanDuration: 34' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 79 'ModelsListBlockedPlayerRequest' test.out
+eval_tap $? 79 'RematchmakingNotif' test.out
 
-#- 80 ModelsPartyData
-# echo "Testing 'ModelsPartyData'"
-printf 'type: models.PartyData\ncustom_attribute: {"wu22rcXH":{},"xPx3CXgG":{},"LL12AOaM":{}}\ninvitees: [1gBqZMRT,jLJAvrDX,e60fKgmm]\nleader: UtApEqZs\nmembers: [smB1H6vz,yED5OoQU,zBATH6rt]\nnamespace: nziPfH2g\npartyId: oAAPp9JZ\nupdatedAt: 95' > $TEMP_FILE_UPLOAD
+#- 80 RequestFriendsNotif
+# echo "Testing 'RequestFriendsNotif'"
+printf 'type: requestFriendsNotif\nfriendId: OQJYLN4T' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 80 'ModelsPartyData' test.out
+eval_tap $? 80 'RequestFriendsNotif' test.out
 
-#- 81 ModelsPartyPUTCustomAttributesRequest
-# echo "Testing 'ModelsPartyPUTCustomAttributesRequest'"
-printf 'type: models.PartyPUTCustomAttributesRequest\ncustom_attribute: {"EdagFCUU":{},"Bfd86qAw":{},"AETesdQA":{}}\nupdatedAt: 56' > $TEMP_FILE_UPLOAD
+#- 81 RequestFriendsRequest
+# echo "Testing 'RequestFriendsRequest'"
+printf 'type: requestFriendsRequest\nid: e28pGrDy\nfriendId: Cna0gXDV' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 81 'ModelsPartyPUTCustomAttributesRequest' test.out
+eval_tap $? 81 'RequestFriendsRequest' test.out
 
-#- 82 ModelsPartyPUTLimitSizeRequest
-# echo "Testing 'ModelsPartyPUTLimitSizeRequest'"
-printf 'type: models.PartyPUTLimitSizeRequest\nlimit: 37' > $TEMP_FILE_UPLOAD
+#- 82 RequestFriendsResponse
+# echo "Testing 'RequestFriendsResponse'"
+printf 'type: requestFriendsResponse\nid: ORNx2v3G\ncode: 96' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 82 'ModelsPartyPUTLimitSizeRequest' test.out
+eval_tap $? 82 'RequestFriendsResponse' test.out
 
-#- 83 ModelsProfanityFilter
-# echo "Testing 'ModelsProfanityFilter'"
-printf 'type: models.ProfanityFilter\nfilter: KzKoyv9N\nlistName: tqCa4Nzc\nnamespace: UalmUZOD\nnote: RbZlRCjd' > $TEMP_FILE_UPLOAD
+#- 83 SendChannelChatRequest
+# echo "Testing 'SendChannelChatRequest'"
+printf 'type: sendChannelChatRequest\nid: WSXT2iww\nchannelSlug: TOIaksQM\npayload: MSHTxNIp' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 83 'ModelsProfanityFilter' test.out
+eval_tap $? 83 'SendChannelChatRequest' test.out
 
-#- 84 ModelsProfanityRule
-# echo "Testing 'ModelsProfanityRule'"
-printf 'type: models.ProfanityRule\nNamespace: uk1uA0ep\nRule: BF8KJjli' > $TEMP_FILE_UPLOAD
+#- 84 SendChannelChatResponse
+# echo "Testing 'SendChannelChatResponse'"
+printf 'type: sendChannelChatResponse\nid: jDcelB8T\ncode: 7' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 84 'ModelsProfanityRule' test.out
+eval_tap $? 84 'SendChannelChatResponse' test.out
 
-#- 85 ModelsSetPlayerSessionAttributeRequest
-# echo "Testing 'ModelsSetPlayerSessionAttributeRequest'"
-printf 'type: models.SetPlayerSessionAttributeRequest\nattributes: {"OGAvoMzG":"pdhPc8PY","ymTbaiY6":"uI4up4Ss","jXIu2oGe":"LOEPz8VC"}' > $TEMP_FILE_UPLOAD
+#- 85 SetReadyConsentNotif
+# echo "Testing 'SetReadyConsentNotif'"
+printf 'type: setReadyConsentNotif\nmatchId: japyqLxl\nuserId: 0KsGnswF' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 85 'ModelsSetPlayerSessionAttributeRequest' test.out
+eval_tap $? 85 'SetReadyConsentNotif' test.out
 
-#- 86 ModelsUpdateConfigRequest
-# echo "Testing 'ModelsUpdateConfigRequest'"
-printf 'type: models.UpdateConfigRequest\napiKey: lxnqD99o' > $TEMP_FILE_UPLOAD
+#- 86 SetReadyConsentRequest
+# echo "Testing 'SetReadyConsentRequest'"
+printf 'type: setReadyConsentRequest\nid: hFx6iQCQ\nmatchId: VzD76p4C' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 86 'ModelsUpdateConfigRequest' test.out
+eval_tap $? 86 'SetReadyConsentRequest' test.out
 
-#- 87 ModelsUpdateConfigResponse
-# echo "Testing 'ModelsUpdateConfigResponse'"
-printf 'type: models.UpdateConfigResponse\napiKey: egUiYDp9\nnamespace: TUWUOAwf' > $TEMP_FILE_UPLOAD
+#- 87 SetReadyConsentResponse
+# echo "Testing 'SetReadyConsentResponse'"
+printf 'type: setReadyConsentResponse\nid: pgLEeadb\ncode: 60' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 87 'ModelsUpdateConfigResponse' test.out
+eval_tap $? 87 'SetReadyConsentResponse' test.out
 
-#- 88 ResponseError
-# echo "Testing 'ResponseError'"
-printf 'type: response.Error\nerrorCode: 48\nerrorMessage: Z2SaFEWc' > $TEMP_FILE_UPLOAD
+#- 88 SetSessionAttributeRequest
+# echo "Testing 'SetSessionAttributeRequest'"
+printf 'type: setSessionAttributeRequest\nid: WnhXsG6L\nkey: OLGUkg4Z\nnamespace: IzF5lDZR\nvalue: gStxTpTv' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 88 'ResponseError' test.out
+eval_tap $? 88 'SetSessionAttributeRequest' test.out
 
-#- 89 RestapiErrorResponseBody
-# echo "Testing 'RestapiErrorResponseBody'"
-printf 'type: restapi.ErrorResponseBody\nErrorCode: 34\nErrorMessage: luxRnhTB' > $TEMP_FILE_UPLOAD
+#- 89 SetSessionAttributeResponse
+# echo "Testing 'SetSessionAttributeResponse'"
+printf 'type: setSessionAttributeResponse\nid: hhIBxhpj\ncode: 44' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 89 'RestapiErrorResponseBody' test.out
+eval_tap $? 89 'SetSessionAttributeResponse' test.out
 
-#- 90 RestapiErrorResponseV1
-# echo "Testing 'RestapiErrorResponseV1'"
-printf 'type: restapi.ErrorResponseV1\nerrorCode: 16\nerrorMessage: 7b0wivJf' > $TEMP_FILE_UPLOAD
+#- 90 SetUserStatusRequest
+# echo "Testing 'SetUserStatusRequest'"
+printf 'type: setUserStatusRequest\nid: 1l6yiK7w\nactivity: nSAGbX0r\navailability: 95' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
     --retry-on-ws-message-error \
     --ws-payload-file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
-eval_tap $? 90 'RestapiErrorResponseV1' test.out
+eval_tap $? 90 'SetUserStatusRequest' test.out
+
+#- 91 SetUserStatusResponse
+# echo "Testing 'SetUserStatusResponse'"
+printf 'type: setUserStatusResponse\nid: vfin29kq\ncode: 26' > $TEMP_FILE_UPLOAD
+$CLI_EXE \
+    --ws \
+    --sn $SERVICE_NAME \
+    --retry-on-ws-message-error \
+    --ws-payload-file $TEMP_FILE_UPLOAD \
+    > test.out 2>&1
+eval_tap $? 91 'SetUserStatusResponse' test.out
+
+#- 92 ShutdownNotif
+# echo "Testing 'ShutdownNotif'"
+printf 'type: shutdownNotif\nmessage: L1TCPqB7' > $TEMP_FILE_UPLOAD
+$CLI_EXE \
+    --ws \
+    --sn $SERVICE_NAME \
+    --retry-on-ws-message-error \
+    --ws-payload-file $TEMP_FILE_UPLOAD \
+    > test.out 2>&1
+eval_tap $? 92 'ShutdownNotif' test.out
+
+#- 93 SignalingP2PNotif
+# echo "Testing 'SignalingP2PNotif'"
+printf 'type: signalingP2PNotif\ndestinationId: 0okiF2LJ\nmessage: yBc7DeZL' > $TEMP_FILE_UPLOAD
+$CLI_EXE \
+    --ws \
+    --sn $SERVICE_NAME \
+    --retry-on-ws-message-error \
+    --ws-payload-file $TEMP_FILE_UPLOAD \
+    > test.out 2>&1
+eval_tap $? 93 'SignalingP2PNotif' test.out
+
+#- 94 StartMatchmakingRequest
+# echo "Testing 'StartMatchmakingRequest'"
+printf 'type: startMatchmakingRequest\nid: 7NQJn5z2\nextraAttributes: 5Eb3lyqq\ngameMode: OJnSU2My\npartyAttributes: {"UGn19xs0":{},"mnqAFKk8":{},"b7WCszOk":{}}\npriority: 14\ntempParty: jEVMCC6y' > $TEMP_FILE_UPLOAD
+$CLI_EXE \
+    --ws \
+    --sn $SERVICE_NAME \
+    --retry-on-ws-message-error \
+    --ws-payload-file $TEMP_FILE_UPLOAD \
+    > test.out 2>&1
+eval_tap $? 94 'StartMatchmakingRequest' test.out
+
+#- 95 StartMatchmakingResponse
+# echo "Testing 'StartMatchmakingResponse'"
+printf 'type: startMatchmakingResponse\nid: xj14Vb1x\ncode: 68' > $TEMP_FILE_UPLOAD
+$CLI_EXE \
+    --ws \
+    --sn $SERVICE_NAME \
+    --retry-on-ws-message-error \
+    --ws-payload-file $TEMP_FILE_UPLOAD \
+    > test.out 2>&1
+eval_tap $? 95 'StartMatchmakingResponse' test.out
+
+#- 96 UnblockPlayerNotif
+# echo "Testing 'UnblockPlayerNotif'"
+printf 'type: unblockPlayerNotif\nunblockedUserId: K9lJLdyO\nuserId: 7T7kjXW3' > $TEMP_FILE_UPLOAD
+$CLI_EXE \
+    --ws \
+    --sn $SERVICE_NAME \
+    --retry-on-ws-message-error \
+    --ws-payload-file $TEMP_FILE_UPLOAD \
+    > test.out 2>&1
+eval_tap $? 96 'UnblockPlayerNotif' test.out
+
+#- 97 UnblockPlayerRequest
+# echo "Testing 'UnblockPlayerRequest'"
+printf 'type: unblockPlayerRequest\nid: e4dRlt4C\nnamespace: SED0C3Cc\nunblockedUserId: mMjwX3Xx' > $TEMP_FILE_UPLOAD
+$CLI_EXE \
+    --ws \
+    --sn $SERVICE_NAME \
+    --retry-on-ws-message-error \
+    --ws-payload-file $TEMP_FILE_UPLOAD \
+    > test.out 2>&1
+eval_tap $? 97 'UnblockPlayerRequest' test.out
+
+#- 98 UnblockPlayerResponse
+# echo "Testing 'UnblockPlayerResponse'"
+printf 'type: unblockPlayerResponse\nid: dOKCtkTL\ncode: 86\nnamespace: kPflNWLw\nunblockedUserId: 4HyfYIg6' > $TEMP_FILE_UPLOAD
+$CLI_EXE \
+    --ws \
+    --sn $SERVICE_NAME \
+    --retry-on-ws-message-error \
+    --ws-payload-file $TEMP_FILE_UPLOAD \
+    > test.out 2>&1
+eval_tap $? 98 'UnblockPlayerResponse' test.out
+
+#- 99 UnfriendNotif
+# echo "Testing 'UnfriendNotif'"
+printf 'type: unfriendNotif\nfriendId: KE9keuAN' > $TEMP_FILE_UPLOAD
+$CLI_EXE \
+    --ws \
+    --sn $SERVICE_NAME \
+    --retry-on-ws-message-error \
+    --ws-payload-file $TEMP_FILE_UPLOAD \
+    > test.out 2>&1
+eval_tap $? 99 'UnfriendNotif' test.out
+
+#- 100 UnfriendRequest
+# echo "Testing 'UnfriendRequest'"
+printf 'type: unfriendRequest\nid: 1lrd0MiS\nfriendId: Rfhg9uhm' > $TEMP_FILE_UPLOAD
+$CLI_EXE \
+    --ws \
+    --sn $SERVICE_NAME \
+    --retry-on-ws-message-error \
+    --ws-payload-file $TEMP_FILE_UPLOAD \
+    > test.out 2>&1
+eval_tap $? 100 'UnfriendRequest' test.out
+
+#- 101 UnfriendResponse
+# echo "Testing 'UnfriendResponse'"
+printf 'type: unfriendResponse\nid: lODt7rn5\ncode: 13' > $TEMP_FILE_UPLOAD
+$CLI_EXE \
+    --ws \
+    --sn $SERVICE_NAME \
+    --retry-on-ws-message-error \
+    --ws-payload-file $TEMP_FILE_UPLOAD \
+    > test.out 2>&1
+eval_tap $? 101 'UnfriendResponse' test.out
+
+#- 102 UserBannedNotification
+# echo "Testing 'UserBannedNotification'"
+printf 'type: userBannedNotification' > $TEMP_FILE_UPLOAD
+$CLI_EXE \
+    --ws \
+    --sn $SERVICE_NAME \
+    --retry-on-ws-message-error \
+    --ws-payload-file $TEMP_FILE_UPLOAD \
+    > test.out 2>&1
+eval_tap $? 102 'UserBannedNotification' test.out
+
+#- 103 UserMetricRequest
+# echo "Testing 'UserMetricRequest'"
+printf 'type: userMetricRequest\nid: 7mMl99wW' > $TEMP_FILE_UPLOAD
+$CLI_EXE \
+    --ws \
+    --sn $SERVICE_NAME \
+    --retry-on-ws-message-error \
+    --ws-payload-file $TEMP_FILE_UPLOAD \
+    > test.out 2>&1
+eval_tap $? 103 'UserMetricRequest' test.out
+
+#- 104 UserMetricResponse
+# echo "Testing 'UserMetricResponse'"
+printf 'type: userMetricResponse\nid: 33CagqOC\ncode: 72\nplayerCount: 32' > $TEMP_FILE_UPLOAD
+$CLI_EXE \
+    --ws \
+    --sn $SERVICE_NAME \
+    --retry-on-ws-message-error \
+    --ws-payload-file $TEMP_FILE_UPLOAD \
+    > test.out 2>&1
+eval_tap $? 104 'UserMetricResponse' test.out
+
+#- 105 UserStatusNotif
+# echo "Testing 'UserStatusNotif'"
+printf 'type: userStatusNotif\nactivity: NCS0iZ9t\navailability: 91\nlastSeenAt: qek7JjtK\nuserId: IbZQ81Ru' > $TEMP_FILE_UPLOAD
+$CLI_EXE \
+    --ws \
+    --sn $SERVICE_NAME \
+    --retry-on-ws-message-error \
+    --ws-payload-file $TEMP_FILE_UPLOAD \
+    > test.out 2>&1
+eval_tap $? 105 'UserStatusNotif' test.out
 
 
 exit $EXIT_CODE

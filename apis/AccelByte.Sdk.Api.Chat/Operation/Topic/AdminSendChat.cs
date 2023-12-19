@@ -56,9 +56,9 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminSendChat op = new AdminSendChat(this,
-                    body,                    
-                    namespace_,                    
-                    topic                    
+                    body,
+                    namespace_,
+                    topic
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
                 op.RequestJsonOptions = RequestJsonOptions;
@@ -84,7 +84,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -98,33 +98,33 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public AdminSendChat(
-            string namespace_,            
-            string topic,            
-            Model.ApiSendChatParams body            
+            string namespace_,
+            string topic,
+            Model.ApiSendChatParams body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -135,10 +135,10 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public List<Model.ModelsChatMessageResponse>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -151,9 +151,9 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             {
                 return JsonSerializer.Deserialize<List<Model.ModelsChatMessageResponse>>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

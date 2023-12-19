@@ -48,7 +48,8 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteChatSnapshot(AdminDeleteChatSnapshot input) {
+        public void AdminDeleteChatSnapshot(AdminDeleteChatSnapshot input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(

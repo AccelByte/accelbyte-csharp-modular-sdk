@@ -22,8 +22,6 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// <summary>
     /// PublicVerifyRegistrationCode
     ///
-    /// 
-    /// 
     /// Verify the registration code
     /// </summary>
     public class PublicVerifyRegistrationCode : AccelByte.Sdk.Core.Operation

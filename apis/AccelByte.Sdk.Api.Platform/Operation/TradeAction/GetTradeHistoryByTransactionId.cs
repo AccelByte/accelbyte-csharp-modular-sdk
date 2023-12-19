@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
-            public void Execute(
+            public Model.TradeChainActionHistoryInfo? Execute(
                 string namespace_,
                 string transactionId
             )
@@ -84,7 +84,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
+                return op.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+            }
+
+            public Model.TradeChainActionHistoryInfo<T1>? Execute<T1>(
+                string namespace_,
+                string transactionId
+            )
+            {
+                GetTradeHistoryByTransactionId op = Build(
+                    namespace_,
+                    transactionId
+                );
+
+                if (_Sdk == null)
+                    throw IncompleteComponentException.NoSdkObject;
+
+                var response = _Sdk.RunRequest(op);
+                return op.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
                     response.Payload);
@@ -134,9 +154,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.TradeChainActionHistoryInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            //do nothing since response code is "default".
+            if (code == (HttpStatusCode)204)
+            {
+                return null;
+            }
+            else if (code == (HttpStatusCode)201)
+            {
+                return JsonSerializer.Deserialize<Model.TradeChainActionHistoryInfo>(payload, ResponseJsonOptions);
+            }
+            else if (code == (HttpStatusCode)200)
+            {
+                return JsonSerializer.Deserialize<Model.TradeChainActionHistoryInfo>(payload, ResponseJsonOptions);
+            }
+
+            var payloadString = payload.ReadToString();
+
+            throw new HttpResponseException(code, payloadString);
+        }
+
+        public Model.TradeChainActionHistoryInfo<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
+        {
+            if (code == (HttpStatusCode)204)
+            {
+                return null;
+            }
+            else if (code == (HttpStatusCode)201)
+            {
+                return JsonSerializer.Deserialize<Model.TradeChainActionHistoryInfo<T1>>(payload, ResponseJsonOptions);
+            }
+            else if (code == (HttpStatusCode)200)
+            {
+                return JsonSerializer.Deserialize<Model.TradeChainActionHistoryInfo<T1>>(payload, ResponseJsonOptions);
+            }
+
+            var payloadString = payload.ReadToString();
+            throw new HttpResponseException(code, payloadString);
         }
     }
 

@@ -22,8 +22,6 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// <summary>
     /// PublicGetInputValidationByField
     ///
-    /// 
-    /// 
     /// This endpoint is to get input validation configuration by field.
     /// </summary>
     public class PublicGetInputValidationByField : AccelByte.Sdk.Core.Operation

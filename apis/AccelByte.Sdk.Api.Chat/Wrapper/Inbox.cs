@@ -117,7 +117,8 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteInboxCategory(AdminDeleteInboxCategory input) {
+        public void AdminDeleteInboxCategory(AdminDeleteInboxCategory input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
@@ -125,7 +126,8 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminUpdateInboxCategory(AdminUpdateInboxCategory input) {
+        public void AdminUpdateInboxCategory(AdminUpdateInboxCategory input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
@@ -142,7 +144,8 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteInboxMessage(AdminDeleteInboxMessage input) {
+        public void AdminDeleteInboxMessage(AdminDeleteInboxMessage input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
@@ -196,7 +199,8 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminUpdateInboxMessage(AdminUpdateInboxMessage input) {
+        public void AdminUpdateInboxMessage(AdminUpdateInboxMessage input)
+        {
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(

@@ -22,13 +22,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// <summary>
     /// AdminDeleteUserRoleV3
     ///
-    /// 
-    /// 
-    /// This endpoint removes role from user. Required permission ADMIN:NAMESPACE:{namespace}:ROLE:USER:{userId} [DELETE]
-    /// 
-    /// 
-    /// 
-    /// 
+    /// This endpoint removes role from user
     /// action code: 10110
     /// </summary>
     public class AdminDeleteUserRoleV3 : AccelByte.Sdk.Core.Operation

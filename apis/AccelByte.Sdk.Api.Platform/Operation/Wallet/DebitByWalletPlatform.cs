@@ -55,8 +55,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.DebitByWalletPlatformRequest? Body { get; set; }
-
 
 
 
@@ -69,22 +67,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public DebitByWalletPlatformBuilder SetBody(Model.DebitByWalletPlatformRequest _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public DebitByWalletPlatform Build(
+                DebitByWalletPlatformRequest request,
                 string currencyCode,
                 string namespace_,
                 string userId
             )
             {
                 DebitByWalletPlatform op = new DebitByWalletPlatform(this,
+                    request,
                     currencyCode,
                     namespace_,
                     userId
@@ -97,12 +91,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.PlatformWallet? Execute(
+                DebitByWalletPlatformRequest request,
                 string currencyCode,
                 string namespace_,
                 string userId
             )
             {
                 DebitByWalletPlatform op = Build(
+                    request,
                     currencyCode,
                     namespace_,
                     userId
@@ -120,6 +116,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         }
 
         private DebitByWalletPlatform(DebitByWalletPlatformBuilder builder,
+            DebitByWalletPlatformRequest request,
             string currencyCode,
             string namespace_,
             string userId
@@ -133,7 +130,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            BodyParams = builder.Body;
+            BodyParams = request;
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
@@ -144,7 +141,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             string currencyCode,
             string namespace_,
             string userId,
-            Model.DebitByWalletPlatformRequest body
+            Model.DebitByWalletPlatformRequest request
         )
         {
             PathParams["currencyCode"] = currencyCode;
@@ -155,7 +152,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            BodyParams = body;
+            BodyParams = request;
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);

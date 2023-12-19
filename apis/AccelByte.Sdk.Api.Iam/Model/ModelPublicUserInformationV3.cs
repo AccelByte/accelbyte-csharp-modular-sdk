@@ -27,6 +27,10 @@ namespace AccelByte.Sdk.Api.Iam.Model
         [JsonPropertyName("userName")]
         public string? UserName { get; set; }
 
+        [JsonPropertyName("userPlatformInfos")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<ModelUserPlatformInfo>? UserPlatformInfos { get; set; }
+
     }
 
 

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 {
-    [SdkConsoleCommand("ams", "fleetartifactsamplingrulesget")]
-    public class FleetArtifactSamplingRulesGetCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("ams", "fleetartifactsamplingrulesset")]
+    public class FleetArtifactSamplingRulesSetCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
         public string ServiceName { get { return "Ams"; } }
 
-        public string OperationName { get { return "FleetArtifactSamplingRulesGet"; } }
+        public string OperationName { get { return "FleetArtifactSamplingRulesSet"; } }
 
         [SdkCommandArgument("fleetID")]
         public string FleetID { get; set; } = String.Empty;
@@ -33,28 +33,32 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
-        public FleetArtifactSamplingRulesGetCommand(IAccelByteSdk sdk)
+        [SdkCommandData("body")]
+        public ApiFleetArtifactsSampleRules Body { get; set; } = new ApiFleetArtifactsSampleRules();
+
+        public FleetArtifactSamplingRulesSetCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
         public string Run()
         {
-            AccelByte.Sdk.Api.Ams.Wrapper.Images wrapper = new AccelByte.Sdk.Api.Ams.Wrapper.Images(_SDK);
+            AccelByte.Sdk.Api.Ams.Wrapper.Artifacts wrapper = new AccelByte.Sdk.Api.Ams.Wrapper.Artifacts(_SDK);
 
-            var opBuilder = AccelByte.Sdk.Api.Ams.Operation.FleetArtifactSamplingRulesGet.Builder;
-
-
+            var opBuilder = AccelByte.Sdk.Api.Ams.Operation.FleetArtifactSamplingRulesSet.Builder;
 
 
 
-            FleetArtifactSamplingRulesGet operation = opBuilder.Build(
+
+
+            FleetArtifactSamplingRulesSet operation = opBuilder.Build(
+                Body,
                 FleetID,
                 Namespace
             );
 
 
-            AccelByte.Sdk.Api.Ams.Model.ApiFleetArtifactsSampleRulesResponse? response = wrapper.FleetArtifactSamplingRulesGet(operation);
+            AccelByte.Sdk.Api.Ams.Model.ApiFleetArtifactsSampleRules? response = wrapper.FleetArtifactSamplingRulesSet(operation);
             if (response == null)
                 return "No response from server.";
 

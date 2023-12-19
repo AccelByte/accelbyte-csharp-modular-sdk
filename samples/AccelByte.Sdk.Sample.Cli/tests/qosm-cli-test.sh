@@ -53,12 +53,12 @@ fi
 
 #- 2 UpdateServerConfig
 # body param: body
-echo '{"status": "6adKoBoR"}' > $TEMP_JSON_INPUT
+echo '{"status": "phQKDdYX"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn qosm \
     --op UpdateServerConfig \
     --namespace $AB_NAMESPACE \
-    --region 'WWOQgaqu' \
+    --region 'DT83xfZp' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 2 'UpdateServerConfig' test.out
@@ -67,17 +67,17 @@ eval_tap $? 2 'UpdateServerConfig' test.out
 $CLI_EXE \
     --sn qosm \
     --op DeleteServer \
-    --region 'KrgRy8Du' \
+    --region 'RkkV4HXw' \
     > test.out 2>&1
 eval_tap $? 3 'DeleteServer' test.out
 
 #- 4 SetServerAlias
 # body param: body
-echo '{"alias": "zO0LF2Qo"}' > $TEMP_JSON_INPUT
+echo '{"alias": "LTtV7DxA"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn qosm \
     --op SetServerAlias \
-    --region 'GFfi618D' \
+    --region 'PpKEoK7k' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 4 'SetServerAlias' test.out
@@ -87,7 +87,7 @@ $CLI_EXE \
     --sn qosm \
     --op ListServerPerNamespace \
     --namespace $AB_NAMESPACE \
-    --status 'z4aYUwg3' \
+    --status 'g1WG2eH1' \
     > test.out 2>&1
 eval_tap $? 5 'ListServerPerNamespace' test.out
 
@@ -100,7 +100,7 @@ eval_tap $? 6 'ListServer' test.out
 
 #- 7 Heartbeat
 # body param: body
-echo '{"ip": "GhspmQA0", "port": 30, "region": "ONjVgslK"}' > $TEMP_JSON_INPUT
+echo '{"ip": "9B1lRe0m", "port": 79, "region": "cMOT0oRM"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn qosm \
     --op Heartbeat \

@@ -33,9 +33,6 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
         [SdkCommandArgument("sessionId")]
         public string SessionId { get; set; } = String.Empty;
 
-        [SdkCommandData("body")]
-        public ApimodelsServerSecret Body { get; set; } = new ApimodelsServerSecret();
-
         public GetSessionServerSecretCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -52,7 +49,6 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 
 
             GetSessionServerSecret operation = opBuilder.Build(
-                Body,
                 Namespace,
                 SessionId
             );

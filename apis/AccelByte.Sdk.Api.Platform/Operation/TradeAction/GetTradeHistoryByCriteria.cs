@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
-            public void Execute(
+            public Model.TradeActionPagingSlicedResult? Execute(
                 string namespace_
             )
             {
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
+                return op.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
@@ -181,9 +181,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.TradeActionPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            //do nothing since response code is "default".
+            if (code == (HttpStatusCode)204)
+            {
+                return null;
+            }
+            else if (code == (HttpStatusCode)201)
+            {
+                return JsonSerializer.Deserialize<Model.TradeActionPagingSlicedResult>(payload, ResponseJsonOptions);
+            }
+            else if (code == (HttpStatusCode)200)
+            {
+                return JsonSerializer.Deserialize<Model.TradeActionPagingSlicedResult>(payload, ResponseJsonOptions);
+            }
+
+            var payloadString = payload.ReadToString();
+
+            throw new HttpResponseException(code, payloadString);
         }
     }
 

@@ -21,8 +21,6 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 {
     /// <summary>
     /// getReasonGroup
-    ///
-    /// Required permission: ADMIN:NAMESPACE:{namespace}:REASON [READ]
     /// </summary>
     public class GetReasonGroup : AccelByte.Sdk.Core.Operation
     {

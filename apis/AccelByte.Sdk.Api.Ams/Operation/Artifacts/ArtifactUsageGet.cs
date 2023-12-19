@@ -20,26 +20,26 @@ using AccelByte.Sdk.Api.Ams.Model;
 namespace AccelByte.Sdk.Api.Ams.Operation
 {
     /// <summary>
-    /// FleetArtifactSamplingRulesGet
+    /// ArtifactUsageGet
     ///
-    /// Required Permission: ADMIN:NAMESPACE:{namespace}:AMS:ARTIFACTS [READ]
+    /// Required Permission: ADMIN:NAMESPACE:{namespace}:AMS:ARTIFACT [READ]
     /// </summary>
-    public class FleetArtifactSamplingRulesGet : AccelByte.Sdk.Core.Operation
+    public class ArtifactUsageGet : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static FleetArtifactSamplingRulesGetBuilder Builder { get => new FleetArtifactSamplingRulesGetBuilder(); }
+        public static ArtifactUsageGetBuilder Builder { get => new ArtifactUsageGetBuilder(); }
 
-        public class FleetArtifactSamplingRulesGetBuilder
-            : OperationBuilder<FleetArtifactSamplingRulesGetBuilder>
+        public class ArtifactUsageGetBuilder
+            : OperationBuilder<ArtifactUsageGetBuilder>
         {
 
 
 
 
 
-            internal FleetArtifactSamplingRulesGetBuilder() { }
+            internal ArtifactUsageGetBuilder() { }
 
-            internal FleetArtifactSamplingRulesGetBuilder(IAccelByteSdk sdk)
+            internal ArtifactUsageGetBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -49,13 +49,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            public FleetArtifactSamplingRulesGet Build(
-                string fleetID,
+            public ArtifactUsageGet Build(
                 string namespace_
             )
             {
-                FleetArtifactSamplingRulesGet op = new FleetArtifactSamplingRulesGet(this,
-                    fleetID,
+                ArtifactUsageGet op = new ArtifactUsageGet(this,
                     namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
@@ -65,13 +63,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 return op;
             }
 
-            public Model.ApiFleetArtifactsSampleRulesResponse? Execute(
-                string fleetID,
+            public Model.ApiArtifactUsageResponse? Execute(
                 string namespace_
             )
             {
-                FleetArtifactSamplingRulesGet op = Build(
-                    fleetID,
+                ArtifactUsageGet op = Build(
                     namespace_
                 );
 
@@ -86,12 +82,10 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private FleetArtifactSamplingRulesGet(FleetArtifactSamplingRulesGetBuilder builder,
-            string fleetID,
+        private ArtifactUsageGet(ArtifactUsageGetBuilder builder,
             string namespace_
         )
         {
-            PathParams["fleetID"] = fleetID;
             PathParams["namespace"] = namespace_;
 
 
@@ -104,12 +98,10 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         }
         #endregion
 
-        public FleetArtifactSamplingRulesGet(
-            string fleetID,
+        public ArtifactUsageGet(
             string namespace_
         )
         {
-            PathParams["fleetID"] = fleetID;
             PathParams["namespace"] = namespace_;
 
 
@@ -121,7 +113,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/ams/v1/admin/namespaces/{namespace}/fleets/{fleetID}/artifacts-sampling-rules";
+        public override string Path => "/ams/v1/admin/namespaces/{namespace}/artifacts/usage";
 
         public override HttpMethod Method => HttpMethod.Get;
 
@@ -129,7 +121,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public Model.ApiFleetArtifactsSampleRulesResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.ApiArtifactUsageResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -137,11 +129,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.ApiFleetArtifactsSampleRulesResponse>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ApiArtifactUsageResponse>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.ApiFleetArtifactsSampleRulesResponse>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ApiArtifactUsageResponse>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

@@ -56,11 +56,11 @@ $CLI_EXE \
     --sn gdpr \
     --op AdminGetListDeletionDataRequest \
     --namespace $AB_NAMESPACE \
-    --after 'Fr5hYRbP' \
-    --before 'VKfzWI9y' \
-    --limit '58' \
-    --offset '14' \
-    --requestDate 'THiSk4b9' \
+    --after 'RUJjO1h3' \
+    --before '5eJAjOt8' \
+    --limit '1' \
+    --offset '21' \
+    --requestDate 'TmlWKIYD' \
     > test.out 2>&1
 eval_tap $? 2 'AdminGetListDeletionDataRequest' test.out
 
@@ -74,7 +74,7 @@ eval_tap $? 3 'GetAdminEmailConfiguration' test.out
 
 #- 4 UpdateAdminEmailConfiguration
 # body param: body
-echo '["An7OHiZO", "1FkrhfcI", "cdxlulIh"]' > $TEMP_JSON_INPUT
+echo '["68H0QAdR", "XrL7F9qx", "OYvxBybZ"]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn gdpr \
     --op UpdateAdminEmailConfiguration \
@@ -85,7 +85,7 @@ eval_tap $? 4 'UpdateAdminEmailConfiguration' test.out
 
 #- 5 SaveAdminEmailConfiguration
 # body param: body
-echo '["PRI9YduU", "8wnlmndG", "L7H7qfce"]' > $TEMP_JSON_INPUT
+echo '["0ELtO4CP", "sOJQHGBc", "8Hu2EH0p"]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn gdpr \
     --op SaveAdminEmailConfiguration \
@@ -99,7 +99,7 @@ $CLI_EXE \
     --sn gdpr \
     --op DeleteAdminEmailConfiguration \
     --namespace $AB_NAMESPACE \
-    --emails '["MHMaeYR1", "jIsOVthU", "A0csVFtd"]' \
+    --emails '["40PjBdnZ", "QC9GYix2", "qEU8nbk4"]' \
     > test.out 2>&1
 eval_tap $? 6 'DeleteAdminEmailConfiguration' test.out
 
@@ -108,9 +108,9 @@ $CLI_EXE \
     --sn gdpr \
     --op AdminGetListPersonalDataRequest \
     --namespace $AB_NAMESPACE \
-    --limit '23' \
-    --offset '34' \
-    --requestDate 'uzflIRhY' \
+    --limit '64' \
+    --offset '37' \
+    --requestDate 'YjWbSO7Q' \
     > test.out 2>&1
 eval_tap $? 7 'AdminGetListPersonalDataRequest' test.out
 
@@ -124,7 +124,7 @@ eval_tap $? 8 'AdminGetServicesConfiguration' test.out
 
 #- 9 AdminUpdateServicesConfiguration
 # body param: body
-echo '{"services": [{"extendConfig": {"appName": "QUEOALTc", "namespace": "w8Z9QUan"}, "id": "DZh9IYXd", "serviceConfig": {"protocol": "GRPC", "url": "6oSBoOHS"}, "type": "SERVICE"}, {"extendConfig": {"appName": "FmzrVjJB", "namespace": "U0OR7qvD"}, "id": "SgnTjh1X", "serviceConfig": {"protocol": "GRPC", "url": "EvZ5GOc0"}, "type": "EXTEND"}, {"extendConfig": {"appName": "AYsKKOLu", "namespace": "ny0B10sH"}, "id": "IL9LO7i6", "serviceConfig": {"protocol": "GRPC", "url": "Vqp1b1hm"}, "type": "SERVICE"}]}' > $TEMP_JSON_INPUT
+echo '{"services": [{"extendConfig": {"appName": "HolnzTVg", "namespace": "pK1ztGwz"}, "id": "Y207wQMv", "serviceConfig": {"protocol": "GRPC", "url": "RzboonQW"}, "type": "EXTEND"}, {"extendConfig": {"appName": "IM20ZyTT", "namespace": "7eU2GjQ0"}, "id": "bbb2Vtc2", "serviceConfig": {"protocol": "GRPC", "url": "vc4heJ3J"}, "type": "EXTEND"}, {"extendConfig": {"appName": "4m7XMl5Y", "namespace": "7tN9rYuN"}, "id": "Lzo0JSn8", "serviceConfig": {"protocol": "GRPC", "url": "6UTZWtcy"}, "type": "EXTEND"}]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn gdpr \
     --op AdminUpdateServicesConfiguration \
@@ -146,7 +146,7 @@ $CLI_EXE \
     --sn gdpr \
     --op AdminGetUserAccountDeletionRequest \
     --namespace $AB_NAMESPACE \
-    --userId 'qGSRyOiv' \
+    --userId '9khKaa6N' \
     > test.out 2>&1
 eval_tap $? 11 'AdminGetUserAccountDeletionRequest' test.out
 
@@ -155,7 +155,7 @@ $CLI_EXE \
     --sn gdpr \
     --op AdminSubmitUserAccountDeletionRequest \
     --namespace $AB_NAMESPACE \
-    --userId 'taPn5KuH' \
+    --userId 'CyUXkMRv' \
     > test.out 2>&1
 eval_tap $? 12 'AdminSubmitUserAccountDeletionRequest' test.out
 
@@ -164,7 +164,7 @@ $CLI_EXE \
     --sn gdpr \
     --op AdminCancelUserAccountDeletionRequest \
     --namespace $AB_NAMESPACE \
-    --userId 'BpEeRlK9' \
+    --userId 'rSEBGytn' \
     > test.out 2>&1
 eval_tap $? 13 'AdminCancelUserAccountDeletionRequest' test.out
 
@@ -173,9 +173,9 @@ $CLI_EXE \
     --sn gdpr \
     --op AdminGetUserPersonalDataRequests \
     --namespace $AB_NAMESPACE \
-    --userId 'VWookw5J' \
-    --limit '58' \
-    --offset '65' \
+    --userId 'jI1BvjdA' \
+    --limit '82' \
+    --offset '49' \
     > test.out 2>&1
 eval_tap $? 14 'AdminGetUserPersonalDataRequests' test.out
 
@@ -184,8 +184,8 @@ $CLI_EXE \
     --sn gdpr \
     --op AdminRequestDataRetrieval \
     --namespace $AB_NAMESPACE \
-    --userId 'r6YnCVHc' \
-    --password '8YawNHSc' \
+    --userId '4Yr0ZWFQ' \
+    --password 'AV6ajDCy' \
     > test.out 2>&1
 eval_tap $? 15 'AdminRequestDataRetrieval' test.out
 
@@ -194,8 +194,8 @@ $CLI_EXE \
     --sn gdpr \
     --op AdminCancelUserPersonalDataRequest \
     --namespace $AB_NAMESPACE \
-    --requestDate 'T7ZnJKQ3' \
-    --userId 'vIAP7aun' \
+    --requestDate 'rBgMbOEC' \
+    --userId '0u9SMbKR' \
     > test.out 2>&1
 eval_tap $? 16 'AdminCancelUserPersonalDataRequest' test.out
 
@@ -204,9 +204,9 @@ $CLI_EXE \
     --sn gdpr \
     --op AdminGeneratePersonalDataURL \
     --namespace $AB_NAMESPACE \
-    --requestDate 'udUC5iJv' \
-    --userId 'FwmuLwSy' \
-    --password 'aM7GXaU8' \
+    --requestDate '3K9mCrL1' \
+    --userId 'iQpCcu32' \
+    --password '8EFKhJGZ' \
     > test.out 2>&1
 eval_tap $? 17 'AdminGeneratePersonalDataURL' test.out
 
@@ -215,8 +215,8 @@ $CLI_EXE \
     --sn gdpr \
     --op PublicSubmitUserAccountDeletionRequest \
     --namespace $AB_NAMESPACE \
-    --userId 'hLCaxF9O' \
-    --password 'krTbYlYN' \
+    --userId '7ZYNI274' \
+    --password 'BY4ltfmR' \
     > test.out 2>&1
 eval_tap $? 18 'PublicSubmitUserAccountDeletionRequest' test.out
 
@@ -225,7 +225,7 @@ $CLI_EXE \
     --sn gdpr \
     --op PublicCancelUserAccountDeletionRequest \
     --namespace $AB_NAMESPACE \
-    --userId 'xEimxQqq' \
+    --userId 'oGsL0Bzi' \
     > test.out 2>&1
 eval_tap $? 19 'PublicCancelUserAccountDeletionRequest' test.out
 
@@ -234,7 +234,7 @@ $CLI_EXE \
     --sn gdpr \
     --op PublicGetUserAccountDeletionStatus \
     --namespace $AB_NAMESPACE \
-    --userId 'c1Ki4iRt' \
+    --userId 'DFBGkSMB' \
     > test.out 2>&1
 eval_tap $? 20 'PublicGetUserAccountDeletionStatus' test.out
 
@@ -243,9 +243,9 @@ $CLI_EXE \
     --sn gdpr \
     --op PublicGetUserPersonalDataRequests \
     --namespace $AB_NAMESPACE \
-    --userId 'Dbejr1Q7' \
-    --limit '47' \
-    --offset '85' \
+    --userId 'HhMLD3QI' \
+    --limit '39' \
+    --offset '10' \
     > test.out 2>&1
 eval_tap $? 21 'PublicGetUserPersonalDataRequests' test.out
 
@@ -254,8 +254,8 @@ $CLI_EXE \
     --sn gdpr \
     --op PublicRequestDataRetrieval \
     --namespace $AB_NAMESPACE \
-    --userId 'cSwY2AJr' \
-    --password 'hT1BVPhE' \
+    --userId 'W8rRWUGF' \
+    --password 'WsBCaFP6' \
     > test.out 2>&1
 eval_tap $? 22 'PublicRequestDataRetrieval' test.out
 
@@ -264,8 +264,8 @@ $CLI_EXE \
     --sn gdpr \
     --op PublicCancelUserPersonalDataRequest \
     --namespace $AB_NAMESPACE \
-    --requestDate 'Y5BXxP1G' \
-    --userId '71cSXSy5' \
+    --requestDate 'g9W0Rl0t' \
+    --userId '3nnOAFcv' \
     > test.out 2>&1
 eval_tap $? 23 'PublicCancelUserPersonalDataRequest' test.out
 
@@ -274,9 +274,9 @@ $CLI_EXE \
     --sn gdpr \
     --op PublicGeneratePersonalDataURL \
     --namespace $AB_NAMESPACE \
-    --requestDate 'SbCqXH2V' \
-    --userId 'nY18Rfs6' \
-    --password 'Vh5iySXM' \
+    --requestDate 'AGv4yEUE' \
+    --userId 'L65tlnRd' \
+    --password 'TAIxio6T' \
     > test.out 2>&1
 eval_tap $? 24 'PublicGeneratePersonalDataURL' test.out
 
@@ -284,8 +284,8 @@ eval_tap $? 24 'PublicGeneratePersonalDataURL' test.out
 $CLI_EXE \
     --sn gdpr \
     --op PublicSubmitMyAccountDeletionRequest \
-    --platformId '36L2AFyd' \
-    --platformToken '9v1IcSMV' \
+    --platformId 'Ly8sc7Hc' \
+    --platformToken 'W2dxNw7q' \
     > test.out 2>&1
 eval_tap $? 25 'PublicSubmitMyAccountDeletionRequest' test.out
 
