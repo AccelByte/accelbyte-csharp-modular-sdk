@@ -26,9 +26,12 @@ find . -type f -path "./AccelByte.Sdk.*/module.txt" | while read line
 do
     SERVICE_PKG_NAME=$(echo $line | sed -nr "s/.\/(\S*)\/(\S*)/\1/p")
     SERVICE_TAG_PREFIX=$(cat $line)
-    SERVICE_VER=$(git tag --contains $(git rev-list -n 1 "ags/v$AGS_VERSION") | grep "$SERVICE_TAG_PREFIX" | sed -nr "s/(\S*)\/v(\S*)/\2/p")
-    
-    PKG_NAME=$SERVICE_PKG_NAME"."$SERVICE_VER".nupkg"
-    cp ".publish/"$PKG_NAME .publish_pick/
-    echo $PKG_NAME
+    SERVICE_VER=$(git tag --contains $(git rev-list -n 1 "ags/v$AGS_VERSION") | { grep "$SERVICE_TAG_PREFIX" || echo "NOTFOUND"; } | sed -nr "s/(\S*)\/v(\S*)/\2/p")
+
+    # Copy package if the version tag exists
+    if [ ! -z "$SERVICE_VER" ]; then
+        PKG_NAME=$SERVICE_PKG_NAME"."$SERVICE_VER".nupkg"
+        cp ".publish/"$PKG_NAME .publish_pick/
+        echo $PKG_NAME
+    fi
 done
