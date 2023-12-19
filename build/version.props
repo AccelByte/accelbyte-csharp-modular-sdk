@@ -11,30 +11,30 @@
         <FeatureAutoRefreshTokenVersion>0.1.0</FeatureAutoRefreshTokenVersion>
         <FeatureLocalTokenValidationVersion>0.2.0</FeatureLocalTokenValidationVersion>
 
-        <ApiAchievementVersion>0.2.0</ApiAchievementVersion>
+        <ApiAchievementVersion>0.1.0</ApiAchievementVersion>
         <ApiAmsVersion>0.2.0</ApiAmsVersion>
-        <ApiBasicVersion>0.2.0</ApiBasicVersion>
+        <ApiBasicVersion>0.1.0</ApiBasicVersion>
 		<ApiChatVersion>0.1.0</ApiChatVersion>
         <ApiCloudsaveVersion>0.3.0</ApiCloudsaveVersion>
-        <ApiDslogmanagerVersion>0.2.0</ApiDslogmanagerVersion>
-        <ApiDsmcVersion>0.2.0</ApiDsmcVersion>
-        <ApiEventlogVersion>0.2.0</ApiEventlogVersion>
-        <ApiGametelemetryVersion>0.3.0</ApiGametelemetryVersion>
-        <ApiGdprVersion>0.2.0</ApiGdprVersion>
-        <ApiGroupVersion>0.2.0</ApiGroupVersion>
+        <ApiDslogmanagerVersion>0.1.0</ApiDslogmanagerVersion>
+        <ApiDsmcVersion>0.1.0</ApiDsmcVersion>
+        <ApiEventlogVersion>0.1.0</ApiEventlogVersion>
+        <ApiGametelemetryVersion>0.2.0</ApiGametelemetryVersion>
+        <ApiGdprVersion>0.1.0</ApiGdprVersion>
+        <ApiGroupVersion>0.1.0</ApiGroupVersion>
         <ApiIamVersion>0.3.0</ApiIamVersion>
-        <ApiInventoryVersion>0.2.0</ApiInventoryVersion>
-        <ApiLeaderboardVersion>0.2.0</ApiLeaderboardVersion>
-        <ApiLegalVersion>0.2.0</ApiLegalVersion>
+        <ApiInventoryVersion>0.1.0</ApiInventoryVersion>
+        <ApiLeaderboardVersion>0.1.0</ApiLeaderboardVersion>
+        <ApiLegalVersion>0.1.0</ApiLegalVersion>
         <ApiLobbyVersion>0.2.0</ApiLobbyVersion>
-        <ApiMatch2Version>0.2.0</ApiMatch2Version>
+        <ApiMatch2Version>0.1.0</ApiMatch2Version>
         <ApiMatchmakingVersion>0.3.0</ApiMatchmakingVersion>
         <ApiPlatformVersion>0.3.0</ApiPlatformVersion>
-        <ApiQosmVersion>0.2.0</ApiQosmVersion>
+        <ApiQosmVersion>0.1.0</ApiQosmVersion>
         <ApiReportingVersion>0.2.0</ApiReportingVersion>
-        <ApiSeasonpassVersion>0.2.0</ApiSeasonpassVersion>
+        <ApiSeasonpassVersion>0.1.0</ApiSeasonpassVersion>
         <ApiSessionVersion>0.3.0</ApiSessionVersion>
-        <ApiSessionbrowserVersion>0.2.0</ApiSessionbrowserVersion>
+        <ApiSessionbrowserVersion>0.1.0</ApiSessionbrowserVersion>
         <ApiSocialVersion>0.2.0</ApiSocialVersion>
         <ApiUgcVersion>0.3.0</ApiUgcVersion>
     </PropertyGroup>
