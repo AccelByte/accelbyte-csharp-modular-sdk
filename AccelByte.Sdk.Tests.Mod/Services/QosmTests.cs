@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             string? respRegion = string.Empty;
             int? respPort = 0;
 
-            if (listServers != null)
+            if (listServers != null && servers.Count > 0)
             {
                 var resp = servers[0];
                 respIp = resp.Ip;
