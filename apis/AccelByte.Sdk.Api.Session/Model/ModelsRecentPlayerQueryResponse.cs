@@ -13,7 +13,7 @@ namespace AccelByte.Sdk.Api.Session.Model
     public class ModelsRecentPlayerQueryResponse : AccelByte.Sdk.Core.Model
     {
         [JsonPropertyName("data")]
-        public List<ModelsUserInfo>? Data { get; set; }
+        public List<ModelsUserInfoResponse>? Data { get; set; }
 
     }
 

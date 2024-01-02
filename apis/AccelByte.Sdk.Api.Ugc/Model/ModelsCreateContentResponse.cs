@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Ugc.Model
 {
@@ -14,6 +16,11 @@ namespace AccelByte.Sdk.Api.Ugc.Model
     {
         [JsonPropertyName("channelId")]
         public string? ChannelId { get; set; }
+
+        [JsonPropertyName("contentStatus")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public ModelsCreateContentResponseContentStatus? ContentStatus { get; set; }
 
         [JsonPropertyName("contentType")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -86,6 +93,11 @@ namespace AccelByte.Sdk.Api.Ugc.Model
         [JsonPropertyName("channelId")]
         public string? ChannelId { get; set; }
 
+        [JsonPropertyName("contentStatus")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public ModelsCreateContentResponseContentStatus? ContentStatus { get; set; }
+
         [JsonPropertyName("contentType")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ContentType { get; set; }
@@ -152,4 +164,25 @@ namespace AccelByte.Sdk.Api.Ugc.Model
 
     }
 
+
+    public class ModelsCreateContentResponseContentStatus : StringEnum<ModelsCreateContentResponseContentStatus>
+    {
+        public static readonly ModelsCreateContentResponseContentStatus PUBLISHED
+            = new ModelsCreateContentResponseContentStatus("PUBLISHED");
+
+        public static readonly ModelsCreateContentResponseContentStatus UNDERREVIEW
+            = new ModelsCreateContentResponseContentStatus("UNDER_REVIEW");
+
+
+        public static implicit operator ModelsCreateContentResponseContentStatus(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ModelsCreateContentResponseContentStatus(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

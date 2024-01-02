@@ -39,6 +39,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
         [SdkCommandArgument("entitlementClazz")]
         public string? EntitlementClazz { get; set; }
 
+        [SdkCommandArgument("platform")]
+        public string? Platform { get; set; }
+
         [SdkCommandArgument("itemId")]
         public string ItemId { get; set; } = String.Empty;
 
@@ -57,6 +60,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
                 opBuilder.SetActiveOnly((bool)ActiveOnly);
             if (EntitlementClazz != null)
                 opBuilder.SetEntitlementClazz(GetUserEntitlementByItemIdEntitlementClazz.NewValue(EntitlementClazz));
+            if (Platform != null)
+                opBuilder.SetPlatform((string)Platform);
 
 
 

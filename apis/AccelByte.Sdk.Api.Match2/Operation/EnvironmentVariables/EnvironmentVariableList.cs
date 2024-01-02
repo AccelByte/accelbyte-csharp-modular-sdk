@@ -22,10 +22,6 @@ namespace AccelByte.Sdk.Api.Match2.Operation
     /// <summary>
     /// EnvironmentVariableList
     ///
-    /// Required Permission: ADMIN:MATCHMAKING:CONFIGURATION:ENVIRONMENTVARIABLE [READ]
-    /// 
-    /// Required Scope: social
-    /// 
     /// List environment variables.
     /// </summary>
     public class EnvironmentVariableList : AccelByte.Sdk.Core.Operation

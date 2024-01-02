@@ -39,6 +39,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
         [SdkCommandArgument("itemIds")]
         public List<string>? ItemIds { get; set; }
 
+        [SdkCommandArgument("platform")]
+        public string? Platform { get; set; }
+
         [SdkCommandArgument("skus")]
         public List<string>? Skus { get; set; }
 
@@ -57,6 +60,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
                 opBuilder.SetAppIds((List<string>)AppIds);
             if (ItemIds != null)
                 opBuilder.SetItemIds((List<string>)ItemIds);
+            if (Platform != null)
+                opBuilder.SetPlatform((string)Platform);
             if (Skus != null)
                 opBuilder.SetSkus((List<string>)Skus);
 

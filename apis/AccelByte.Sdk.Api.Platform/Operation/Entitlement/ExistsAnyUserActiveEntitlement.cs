@@ -41,6 +41,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             public List<string>? ItemIds { get; set; }
 
+            public string? Platform { get; set; }
+
             public List<string>? Skus { get; set; }
 
 
@@ -64,6 +66,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             public ExistsAnyUserActiveEntitlementBuilder SetItemIds(List<string> _itemIds)
             {
                 ItemIds = _itemIds;
+                return this;
+            }
+
+            public ExistsAnyUserActiveEntitlementBuilder SetPlatform(string _platform)
+            {
+                Platform = _platform;
                 return this;
             }
 
@@ -124,6 +132,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             if (builder.AppIds is not null) QueryParams["appIds"] = builder.AppIds;
             if (builder.ItemIds is not null) QueryParams["itemIds"] = builder.ItemIds;
+            if (builder.Platform is not null) QueryParams["platform"] = builder.Platform;
             if (builder.Skus is not null) QueryParams["skus"] = builder.Skus;
 
 
@@ -143,6 +152,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             string userId,
             List<string>? appIds,
             List<string>? itemIds,
+            string? platform,
             List<string>? skus
         )
         {
@@ -151,6 +161,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             if (appIds is not null) QueryParams["appIds"] = appIds;
             if (itemIds is not null) QueryParams["itemIds"] = itemIds;
+            if (platform is not null) QueryParams["platform"] = platform;
             if (skus is not null) QueryParams["skus"] = skus;
 
 

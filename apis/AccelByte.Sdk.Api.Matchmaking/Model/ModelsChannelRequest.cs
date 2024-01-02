@@ -7,11 +7,18 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Matchmaking.Model
 {
     public class ModelsChannelRequest : AccelByte.Sdk.Core.Model
     {
+        [JsonPropertyName("blocked_player_option")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public ModelsChannelRequestBlockedPlayerOption? BlockedPlayerOption { get; set; }
+
         [JsonPropertyName("deployment")]
         public string? Deployment { get; set; }
 
@@ -68,4 +75,28 @@ namespace AccelByte.Sdk.Api.Matchmaking.Model
     }
 
 
+
+    public class ModelsChannelRequestBlockedPlayerOption : StringEnum<ModelsChannelRequestBlockedPlayerOption>
+    {
+        public static readonly ModelsChannelRequestBlockedPlayerOption BlockedPlayerCanMatch
+            = new ModelsChannelRequestBlockedPlayerOption("blockedPlayerCanMatch");
+
+        public static readonly ModelsChannelRequestBlockedPlayerOption BlockedPlayerCanMatchOnDifferentTeam
+            = new ModelsChannelRequestBlockedPlayerOption("blockedPlayerCanMatchOnDifferentTeam");
+
+        public static readonly ModelsChannelRequestBlockedPlayerOption BlockedPlayerCannotMatch
+            = new ModelsChannelRequestBlockedPlayerOption("blockedPlayerCannotMatch");
+
+
+        public static implicit operator ModelsChannelRequestBlockedPlayerOption(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ModelsChannelRequestBlockedPlayerOption(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

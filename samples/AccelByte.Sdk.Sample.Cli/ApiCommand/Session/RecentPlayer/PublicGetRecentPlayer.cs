@@ -30,11 +30,11 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
-        [SdkCommandArgument("userId")]
-        public string UserId { get; set; } = String.Empty;
-
         [SdkCommandArgument("limit")]
         public long? Limit { get; set; }
+
+        [SdkCommandArgument("userId")]
+        public string? UserId { get; set; }
 
         public PublicGetRecentPlayerCommand(IAccelByteSdk sdk)
         {
@@ -49,13 +49,14 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 
             if (Limit != null)
                 opBuilder.SetLimit((long)Limit);
+            if (UserId != null)
+                opBuilder.SetUserId((string)UserId);
 
 
 
 
             PublicGetRecentPlayer operation = opBuilder.Build(
-                Namespace,
-                UserId
+                Namespace
             );
 
 

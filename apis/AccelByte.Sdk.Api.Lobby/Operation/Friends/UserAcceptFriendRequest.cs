@@ -21,6 +21,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 {
     /// <summary>
     /// userAcceptFriendRequest
+    ///
+    /// User accept friend.
     /// </summary>
     public class UserAcceptFriendRequest : AccelByte.Sdk.Core.Operation
     {

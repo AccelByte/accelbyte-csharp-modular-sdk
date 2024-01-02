@@ -53,7 +53,7 @@ fi
 
 #- 2 AdminCreateChainingOperations
 # body param: body
-echo '{"message": "mXk1C4R8", "operations": [{"consumeItems": [{"inventoryId": "TgIIR0dr", "qty": 42, "slotId": "UCmAQ8Kk", "sourceItemId": "u4mKJ9I6"}, {"inventoryId": "ieOhzCEK", "qty": 71, "slotId": "YXThDrqi", "sourceItemId": "0sOf9fkJ"}, {"inventoryId": "AwMMKSjE", "qty": 55, "slotId": "OHcW2JBe", "sourceItemId": "ZywFEyNY"}], "createItems": [{"customAttributes": {"NgkACqHp": {}, "TdqN8vnq": {}, "j08tBdOr": {}}, "inventoryConfigurationCode": "pG8j5zcf", "inventoryId": "YDOiAkcd", "qty": 82, "serverCustomAttributes": {"8Clhx94I": {}, "omfKXsJU": {}, "I049IJRL": {}}, "slotId": "xOVWM8Fp", "slotUsed": 45, "sourceItemId": "khj09OTo", "tags": ["6bH6xLYm", "2B8FBEoT", "3c7KVHQy"], "toSpecificInventory": true, "type": "5MBmabPv"}, {"customAttributes": {"0FB6YXg0": {}, "3fPTtepb": {}, "KyMBm3zL": {}}, "inventoryConfigurationCode": "Kp1tu4yy", "inventoryId": "HTKSw35h", "qty": 82, "serverCustomAttributes": {"EP3GUPj2": {}, "ZDxkzaPc": {}, "JMTBJNUE": {}}, "slotId": "6PSi54D4", "slotUsed": 90, "sourceItemId": "2wm9fWvj", "tags": ["Hl29bwaM", "tScftCxh", "U5yIYm3C"], "toSpecificInventory": false, "type": "o1Q0f5vn"}, {"customAttributes": {"g5CesSZs": {}, "SHm1NU7L": {}, "fDIpyemq": {}}, "inventoryConfigurationCode": "8FwLggEo", "inventoryId": "U6kceuWe", "qty": 28, "serverCustomAttributes": {"qqAZ00Ob": {}, "xbaa5LwQ": {}, "YOnIw77I": {}}, "slotId": "2UkEq7WD", "slotUsed": 77, "sourceItemId": "A5VPV9Ch", "tags": ["bYwq1p2i", "b2I69JI6", "b032vEeP"], "toSpecificInventory": true, "type": "CiQMMFER"}], "removeItems": [{"inventoryId": "qYIkpFnD", "slotId": "IlP6Clcm", "sourceItemId": "SiVed8nM"}, {"inventoryId": "uiJQELwb", "slotId": "CLGt1I1u", "sourceItemId": "6Sx7y7u3"}, {"inventoryId": "ckbIfDs5", "slotId": "Rv9vnP54", "sourceItemId": "VjDspTxF"}], "targetUserId": "EkN78vXJ", "updateItems": [{"customAttributes": {"EEEOldly": {}, "3sUkjCW6": {}, "F7YlNb3L": {}}, "inventoryId": "9trTMZVV", "serverCustomAttributes": {"PwznGmnU": {}, "DdRWmOIy": {}, "Bqg7xCeL": {}}, "slotId": "5vEKQ7Qz", "sourceItemId": "dN2LF84w", "tags": ["EwYqo9eI", "SFUnKeLW", "U4KSZJdS"], "type": "eg81gz9v"}, {"customAttributes": {"wUHFtaKx": {}, "A45GpYhz": {}, "ntmakQYZ": {}}, "inventoryId": "BmRRXEyI", "serverCustomAttributes": {"3St6IP0s": {}, "viWPZcwO": {}, "LU5LjWdt": {}}, "slotId": "1LnUPLrg", "sourceItemId": "MPWhG0jT", "tags": ["WGQHoyKC", "Sev38w2D", "8OFmJSWJ"], "type": "z8O2B19X"}, {"customAttributes": {"RnNigRIu": {}, "cDZclVbb": {}, "f5Rebi15": {}}, "inventoryId": "PsgHJXrt", "serverCustomAttributes": {"OG9QSbUT": {}, "Fm1HmRK1": {}, "AVJPzS6M": {}}, "slotId": "AU8OvPtr", "sourceItemId": "mFpEEcmW", "tags": ["fuNnOQ43", "HGx0IGh2", "vwdtSxkY"], "type": "XVwBrt6f"}]}, {"consumeItems": [{"inventoryId": "gCv5s95R", "qty": 81, "slotId": "TKX7tEgS", "sourceItemId": "gflQzyyJ"}, {"inventoryId": "vxwherO1", "qty": 67, "slotId": "qok6YSkX", "sourceItemId": "Fi1PWHt5"}, {"inventoryId": "S8rx3slx", "qty": 75, "slotId": "EBNkuwYC", "sourceItemId": "SNlR7OvE"}], "createItems": [{"customAttributes": {"1LrO6cKW": {}, "hjZRFAMQ": {}, "OiCpjUg6": {}}, "inventoryConfigurationCode": "Tt8M2Pqm", "inventoryId": "BeQmaSzy", "qty": 7, "serverCustomAttributes": {"35kZQlX5": {}, "lDw2cScl": {}, "EL9s0mJo": {}}, "slotId": "bTcpzykR", "slotUsed": 70, "sourceItemId": "lo2b456A", "tags": ["p9qBRS8p", "3keP6FLy", "PmvQjqyE"], "toSpecificInventory": true, "type": "Ki5Ox7eT"}, {"customAttributes": {"B7ZWj562": {}, "bGbx9kZx": {}, "szxCodhW": {}}, "inventoryConfigurationCode": "1DgGRizJ", "inventoryId": "7BqvQWp9", "qty": 62, "serverCustomAttributes": {"vm7p1wM5": {}, "3zAX7h39": {}, "2QH3qt5o": {}}, "slotId": "w2LrjnkW", "slotUsed": 88, "sourceItemId": "khV4oboW", "tags": ["LchF3tUc", "V5JSt2Ww", "rog7rEdm"], "toSpecificInventory": false, "type": "J3u97l0I"}, {"customAttributes": {"5UMMwlff": {}, "ThYZ5Fk6": {}, "Mdj15NeV": {}}, "inventoryConfigurationCode": "V2nPO3Sn", "inventoryId": "imSJA0uB", "qty": 34, "serverCustomAttributes": {"Sv5yBOis": {}, "N3h6P6nY": {}, "r3SA2riz": {}}, "slotId": "jDR1EhUi", "slotUsed": 76, "sourceItemId": "n6y32PkO", "tags": ["Cq6aRmWf", "6fQmAKyo", "fSgf1T37"], "toSpecificInventory": false, "type": "qzIsWEo1"}], "removeItems": [{"inventoryId": "YYaEgQg1", "slotId": "8TMeuLQX", "sourceItemId": "MS8Fxs3N"}, {"inventoryId": "pMoyKKMU", "slotId": "kImT4J0x", "sourceItemId": "s4Obmsi6"}, {"inventoryId": "oylcsFy8", "slotId": "oDig3D0B", "sourceItemId": "dxomUf5v"}], "targetUserId": "J4vho4ME", "updateItems": [{"customAttributes": {"WVnibtXq": {}, "veB540ZM": {}, "PSSvHpZo": {}}, "inventoryId": "nrcK90Kc", "serverCustomAttributes": {"Botwgmag": {}, "b0UEAMbq": {}, "rw0nszR9": {}}, "slotId": "PsqiKSpg", "sourceItemId": "gOMSO5pc", "tags": ["0lQKkWQG", "nFRuwOxC", "siVaZL63"], "type": "vgJEJ5sy"}, {"customAttributes": {"qruaRBal": {}, "1jxDyiMq": {}, "IywVSXCQ": {}}, "inventoryId": "fdaDyT1U", "serverCustomAttributes": {"6hgWo0e7": {}, "sREedwTl": {}, "oWltTAuQ": {}}, "slotId": "3QjYWqJp", "sourceItemId": "kXupWAcL", "tags": ["0AfHP9Cu", "Tc9GTVIC", "HQSXb4Jr"], "type": "Tf84vlNl"}, {"customAttributes": {"PaRW15B7": {}, "LMxa3Jt2": {}, "TDwiyM5m": {}}, "inventoryId": "CA5yNRVq", "serverCustomAttributes": {"LclNVDIH": {}, "bjdxz8iS": {}, "vNJFgdaz": {}}, "slotId": "VhdFMeHf", "sourceItemId": "05wzgnO8", "tags": ["Vk5GShEg", "RxmzGyB9", "sStH4aEr"], "type": "4Co6P8rU"}]}, {"consumeItems": [{"inventoryId": "ORaAIm3Y", "qty": 73, "slotId": "F9uAhJ5i", "sourceItemId": "060FU20F"}, {"inventoryId": "FlME7dOc", "qty": 30, "slotId": "mwuHrRei", "sourceItemId": "vxsl0vTo"}, {"inventoryId": "Hk8UyXrx", "qty": 6, "slotId": "lsBcRRz1", "sourceItemId": "w9bBhrch"}], "createItems": [{"customAttributes": {"DbE0Va43": {}, "6LIxRQlh": {}, "EGPTUwuI": {}}, "inventoryConfigurationCode": "ZQwb9zR9", "inventoryId": "xPlmW3dh", "qty": 83, "serverCustomAttributes": {"eOCuDyRX": {}, "999bwo6c": {}, "FX5ynHkf": {}}, "slotId": "v8hn1vqP", "slotUsed": 48, "sourceItemId": "g0fSsxNb", "tags": ["6gwf1rct", "zualXylf", "LDFnVsHT"], "toSpecificInventory": false, "type": "BMaRxVTv"}, {"customAttributes": {"H3qVupyn": {}, "YpVAhmt5": {}, "PNhnMtfr": {}}, "inventoryConfigurationCode": "sC3m4PHy", "inventoryId": "6vuTh1w4", "qty": 93, "serverCustomAttributes": {"avbNFXWe": {}, "VhqJN0cT": {}, "VCdhClCI": {}}, "slotId": "mSiVUxtK", "slotUsed": 51, "sourceItemId": "ZEY9nN0h", "tags": ["PwlKtibW", "GmlBP0u5", "BP7ZVdRw"], "toSpecificInventory": true, "type": "L5KHWKal"}, {"customAttributes": {"9Md5imUX": {}, "54YqgBoT": {}, "TSZnDSNs": {}}, "inventoryConfigurationCode": "XcLRmxu7", "inventoryId": "FmA96Lj6", "qty": 50, "serverCustomAttributes": {"52K2NfU3": {}, "JfUDimRv": {}, "HY8DT8Sw": {}}, "slotId": "VQg98i8M", "slotUsed": 74, "sourceItemId": "DjmVPTcv", "tags": ["FCRTtzBU", "waO7VOT2", "6X1cFoBa"], "toSpecificInventory": true, "type": "DDQYDv6C"}], "removeItems": [{"inventoryId": "vxAO7Qff", "slotId": "ZGfbdbkr", "sourceItemId": "eIj3GweR"}, {"inventoryId": "HYpQoKld", "slotId": "vy9v66MK", "sourceItemId": "uGEa9LYG"}, {"inventoryId": "N9GfeyXD", "slotId": "5EjhUYKR", "sourceItemId": "KBX8edIG"}], "targetUserId": "fa9A9JA0", "updateItems": [{"customAttributes": {"zXEnIdJG": {}, "luYwB3S0": {}, "6UV4W3lE": {}}, "inventoryId": "xH6TLHZz", "serverCustomAttributes": {"afb61mvY": {}, "9gUNh0At": {}, "cxHqtta6": {}}, "slotId": "bWYjnj7Y", "sourceItemId": "3Fs7gm17", "tags": ["GhJclaIz", "6CiwYoMw", "KO6FQ6yu"], "type": "c7ecvnTc"}, {"customAttributes": {"FQW9EMfN": {}, "VuBdKIYv": {}, "KV61pO61": {}}, "inventoryId": "pyrDc5Hb", "serverCustomAttributes": {"GHSPyiSw": {}, "uZoAOixD": {}, "gsppMfgE": {}}, "slotId": "gwTsQWQ9", "sourceItemId": "Vcac7chB", "tags": ["iBl3iMB3", "pjDgfcF1", "IvAOtfnF"], "type": "Sht4mpQx"}, {"customAttributes": {"5BrzAzrs": {}, "2VgGCfio": {}, "14y7eGw3": {}}, "inventoryId": "xPW2HKmg", "serverCustomAttributes": {"zFLwGSgO": {}, "x1lpHCui": {}, "3D1d4RtQ": {}}, "slotId": "2ht6ucaR", "sourceItemId": "XmpeB8uy", "tags": ["QydGJETy", "48ouXumV", "TBrV6qxB"], "type": "T5bAyK6f"}]}], "requestId": "gvaE34wy"}' > $TEMP_JSON_INPUT
+echo '{"message": "QAmjdIFQ", "operations": [{"consumeItems": [{"inventoryId": "xUxFaXxB", "qty": 67, "slotId": "OqesHQFa", "sourceItemId": "N106P8aS"}, {"inventoryId": "IdS5KpdJ", "qty": 21, "slotId": "UPkFeZfL", "sourceItemId": "WvlkQSmh"}, {"inventoryId": "rej91na6", "qty": 3, "slotId": "pRzPiYc8", "sourceItemId": "67phB8cQ"}], "createItems": [{"customAttributes": {"Louu24UJ": {}, "wJjmgFMF": {}, "ZuYLirBZ": {}}, "inventoryConfigurationCode": "bxqSNAk6", "inventoryId": "7VVL9FSk", "qty": 31, "serverCustomAttributes": {"wUXvX7nr": {}, "G2ioggfc": {}, "PxLQTZUK": {}}, "slotId": "GicNmuvG", "slotUsed": 44, "sourceItemId": "rKUWeME8", "tags": ["cLAAapeE", "X3kq1eCz", "GCIWp1hx"], "toSpecificInventory": false, "type": "waRQm6P0"}, {"customAttributes": {"DLhgmptA": {}, "sFmOaky0": {}, "DS1zXtAO": {}}, "inventoryConfigurationCode": "83R8HTwr", "inventoryId": "pAsIAfVM", "qty": 18, "serverCustomAttributes": {"BKmlXxPh": {}, "fsh6b3LH": {}, "JwXjMZDQ": {}}, "slotId": "uTzQlrZ4", "slotUsed": 25, "sourceItemId": "M98kzGPN", "tags": ["aPY2D98D", "FXkFSTlO", "EA576Clj"], "toSpecificInventory": true, "type": "bzuw32c5"}, {"customAttributes": {"is1pPaUI": {}, "RaT8pJmf": {}, "uDmqdLc2": {}}, "inventoryConfigurationCode": "2WM5585u", "inventoryId": "fHHlnUdz", "qty": 42, "serverCustomAttributes": {"0knDOnTD": {}, "wH4ooFJn": {}, "3UMktZhp": {}}, "slotId": "G7gYB9pe", "slotUsed": 35, "sourceItemId": "w857sk8E", "tags": ["pyOJVTny", "W4ezZqK2", "lfdQEIyy"], "toSpecificInventory": true, "type": "uRnlcAfe"}], "removeItems": [{"inventoryId": "SfAREpUa", "slotId": "MxCRRi6D", "sourceItemId": "HuwE88Wq"}, {"inventoryId": "6IHbH5aP", "slotId": "Ywj2FTFu", "sourceItemId": "odXThsPa"}, {"inventoryId": "ffo1SYuA", "slotId": "C9s2s9tq", "sourceItemId": "UlZyTwRk"}], "targetUserId": "F4k7jLiG", "updateItems": [{"customAttributes": {"ALIICGTH": {}, "QqxbTBih": {}, "rjvZldQg": {}}, "inventoryId": "I3iAgPZr", "serverCustomAttributes": {"v1E9MDCp": {}, "L1wE4LRo": {}, "NJauVVpn": {}}, "slotId": "OSwwVO8X", "sourceItemId": "3vpFsXJa", "tags": ["sR1Q0a4x", "XucNxBiG", "PSBuCFEZ"], "type": "8LgWqpCU"}, {"customAttributes": {"Lx285nii": {}, "hEJMCa94": {}, "hATwSsa5": {}}, "inventoryId": "LhmJilIN", "serverCustomAttributes": {"jGTLQUYy": {}, "WsEF2h93": {}, "vMLhAWqT": {}}, "slotId": "Q1CqeUmB", "sourceItemId": "CYeRQTHf", "tags": ["WpITOXXe", "SyIc9v9W", "g4HgPH62"], "type": "mquFLrVa"}, {"customAttributes": {"9xrHdhMA": {}, "cbRaBqjR": {}, "nSomDxC5": {}}, "inventoryId": "NIeIhbnI", "serverCustomAttributes": {"1V3NHfj7": {}, "2v9JYWCk": {}, "t6mBsywj": {}}, "slotId": "BPqt6oMl", "sourceItemId": "KOUv2m0k", "tags": ["VB9b2JrA", "jKVtQ15U", "USXvDwYK"], "type": "qVyq5dDp"}]}, {"consumeItems": [{"inventoryId": "vQADZJuN", "qty": 49, "slotId": "U6vblamU", "sourceItemId": "dOOzlrra"}, {"inventoryId": "zap6Xn7T", "qty": 86, "slotId": "ne6thghj", "sourceItemId": "A9oa9vZE"}, {"inventoryId": "vEYRip10", "qty": 71, "slotId": "VGn06ji8", "sourceItemId": "HNXe3aau"}], "createItems": [{"customAttributes": {"cp0QV1qu": {}, "FymX5ie3": {}, "8kdOmnCq": {}}, "inventoryConfigurationCode": "RtBAx52c", "inventoryId": "KATxdA8s", "qty": 0, "serverCustomAttributes": {"lbBWgW7L": {}, "8TgGym7W": {}, "6L94YIHg": {}}, "slotId": "yga5zNf2", "slotUsed": 91, "sourceItemId": "tzOUknJY", "tags": ["U4nWQiNt", "I3Frfeih", "qMACckdp"], "toSpecificInventory": false, "type": "WUhA62na"}, {"customAttributes": {"C4gPTFe9": {}, "o2hJ5kWJ": {}, "fXJBCgUG": {}}, "inventoryConfigurationCode": "q6QNh4OG", "inventoryId": "vQCDHrNO", "qty": 79, "serverCustomAttributes": {"FPRMLiKz": {}, "VJNK6pUz": {}, "fc28CKG1": {}}, "slotId": "19IMzPGD", "slotUsed": 79, "sourceItemId": "pVf54NhP", "tags": ["Up3Orlfp", "hqnTi0PU", "uyvLlQXz"], "toSpecificInventory": true, "type": "ctBdOT3F"}, {"customAttributes": {"BBDlGz0T": {}, "h86ZypdI": {}, "vtqmMdVO": {}}, "inventoryConfigurationCode": "ITul980R", "inventoryId": "E5dOOAUr", "qty": 66, "serverCustomAttributes": {"dl5VClO2": {}, "g9jua8c4": {}, "mNWBdCwr": {}}, "slotId": "CPj4EnHm", "slotUsed": 6, "sourceItemId": "Vyzx3x3I", "tags": ["CBVjhTS2", "9UvstUAP", "TTi4zO3m"], "toSpecificInventory": false, "type": "sVfopAGK"}], "removeItems": [{"inventoryId": "BiUZrQAm", "slotId": "dxUYfN65", "sourceItemId": "UtPxL0kE"}, {"inventoryId": "yVxLWYFf", "slotId": "dKJqlmO4", "sourceItemId": "UdpUq20U"}, {"inventoryId": "BkWUD0J4", "slotId": "BWJ3Zzny", "sourceItemId": "uXTisaN1"}], "targetUserId": "ffA0AI9x", "updateItems": [{"customAttributes": {"Y83YoHxx": {}, "S7LGlLJ8": {}, "cGgPrC8z": {}}, "inventoryId": "M9tyEmTn", "serverCustomAttributes": {"n8kr7sPW": {}, "dKnE0QU6": {}, "ySB1Yock": {}}, "slotId": "WEwrrhJs", "sourceItemId": "U4aBPNXI", "tags": ["o6paa9Tl", "To1X9sVL", "qbdIivAM"], "type": "JTjMc53u"}, {"customAttributes": {"CGXMWaXu": {}, "rfr1a4wU": {}, "Vzo7FdUD": {}}, "inventoryId": "60bFqQ9b", "serverCustomAttributes": {"8CdWYhMP": {}, "dXw234SF": {}, "m8FF6Sgl": {}}, "slotId": "EnUsISca", "sourceItemId": "kck1Sv19", "tags": ["TBhl50Ao", "GeBJjqtO", "bDy02TSQ"], "type": "HDIJ3qE4"}, {"customAttributes": {"nITjNJvv": {}, "EGoFrcap": {}, "WinasAnj": {}}, "inventoryId": "fgiCMKVV", "serverCustomAttributes": {"XFgxJSHt": {}, "stynRANa": {}, "v7oUNVMz": {}}, "slotId": "q8nbxy4p", "sourceItemId": "5PSHsMT0", "tags": ["zG9sCG7G", "NkpUbfkS", "ooBBOGIz"], "type": "W3M6C5BL"}]}, {"consumeItems": [{"inventoryId": "MRd3UwNP", "qty": 43, "slotId": "LsnDEKCG", "sourceItemId": "uWdOUQSB"}, {"inventoryId": "2nsOxBox", "qty": 47, "slotId": "DIEIALkX", "sourceItemId": "QUqdYeGO"}, {"inventoryId": "8mMYSIp4", "qty": 74, "slotId": "Fyh3lcoX", "sourceItemId": "aVgrkUrJ"}], "createItems": [{"customAttributes": {"v5DX9sYT": {}, "aDa1DOvU": {}, "SlNlAIjM": {}}, "inventoryConfigurationCode": "kAoEylL7", "inventoryId": "6dTy5l0D", "qty": 21, "serverCustomAttributes": {"vF8kTKlZ": {}, "CpeLViM3": {}, "kCwFWUSr": {}}, "slotId": "HhK29ezK", "slotUsed": 45, "sourceItemId": "gz1x5ylA", "tags": ["iFVLO1wP", "qgr1MUEc", "fhLz0t8c"], "toSpecificInventory": true, "type": "dPsCbfYj"}, {"customAttributes": {"uuN9OsM5": {}, "4TmgHmi2": {}, "xfBB31DY": {}}, "inventoryConfigurationCode": "AEyY7cXW", "inventoryId": "bwft5OdU", "qty": 75, "serverCustomAttributes": {"CnpFTlIa": {}, "9Zrj5qxg": {}, "zeWCsWhO": {}}, "slotId": "s9g145zj", "slotUsed": 47, "sourceItemId": "TAdmXgFM", "tags": ["WGw5Ov3Q", "HAfYQBTl", "XqMJBnss"], "toSpecificInventory": false, "type": "kVdHODoZ"}, {"customAttributes": {"et4u7g4I": {}, "S7kqt4ED": {}, "hGKzd1fv": {}}, "inventoryConfigurationCode": "YEbtqB6t", "inventoryId": "srqg8QB1", "qty": 69, "serverCustomAttributes": {"BjocdV0U": {}, "11Cmad6z": {}, "l2IaK6io": {}}, "slotId": "Sa6Km5rm", "slotUsed": 90, "sourceItemId": "1wrg9B6E", "tags": ["FLpIUfeb", "AASFde5T", "DjEYOboQ"], "toSpecificInventory": true, "type": "4Rvn9OSu"}], "removeItems": [{"inventoryId": "l8Hhqmg9", "slotId": "7PNzApOh", "sourceItemId": "jUaVdz43"}, {"inventoryId": "eg0ZeqmQ", "slotId": "YJda4wEG", "sourceItemId": "jugZoXRl"}, {"inventoryId": "xX18GSVl", "slotId": "Gt4ZBuez", "sourceItemId": "aCzwUtOn"}], "targetUserId": "wu1lbW30", "updateItems": [{"customAttributes": {"g6r78jmu": {}, "A4rSVpBo": {}, "r8QhCglI": {}}, "inventoryId": "7tKEtozU", "serverCustomAttributes": {"NCllauI3": {}, "DkcSQlTm": {}, "sX5v75Xv": {}}, "slotId": "IukN5NIX", "sourceItemId": "Si8N5Ht7", "tags": ["0o8dHAUD", "M4MQVs1X", "cJwwNp8S"], "type": "L3R5U6f3"}, {"customAttributes": {"QTQCaSD2": {}, "EPFvoNeC": {}, "ZqKiUBMK": {}}, "inventoryId": "teI0xWkE", "serverCustomAttributes": {"hQgA3hZG": {}, "7Tqo6qAD": {}, "BsKpJJ0Z": {}}, "slotId": "XxitAvs9", "sourceItemId": "Y53zZa4O", "tags": ["gM6g4Zd1", "STv3XTHZ", "k6m0sQho"], "type": "4dfug91v"}, {"customAttributes": {"MaPMjKmF": {}, "3k8nuYiq": {}, "8AgFbhiN": {}}, "inventoryId": "zLKq7hf4", "serverCustomAttributes": {"uLxbrG3F": {}, "pbTvbXIb": {}, "us82GbU6": {}}, "slotId": "4Oam4B8X", "sourceItemId": "CfSc6Xj4", "tags": ["V9QczHua", "NXzVkuaC", "ShEpyrN1"], "type": "2bKNaWHK"}]}], "requestId": "LERPqf4C"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminCreateChainingOperations \
@@ -67,17 +67,17 @@ $CLI_EXE \
     --sn inventory \
     --op AdminListInventories \
     --namespace $AB_NAMESPACE \
-    --inventoryConfigurationCode 'iYkm5UEs' \
-    --limit '30' \
-    --offset '94' \
-    --sortBy 'inventoryConfigurationCode:desc' \
-    --userId 'rtoZ1tPz' \
+    --inventoryConfigurationCode 'MHO4SX0f' \
+    --limit '25' \
+    --offset '54' \
+    --sortBy 'updatedAt' \
+    --userId 'CHthocI1' \
     > test.out 2>&1
 eval_tap $? 3 'AdminListInventories' test.out
 
 #- 4 AdminCreateInventory
 # body param: body
-echo '{"inventoryConfigurationCode": "EyUZqcJ5", "userId": "fkAm3ZHx"}' > $TEMP_JSON_INPUT
+echo '{"inventoryConfigurationCode": "3ofS7XcU", "userId": "zAmF6SoI"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminCreateInventory \
@@ -90,18 +90,18 @@ eval_tap $? 4 'AdminCreateInventory' test.out
 $CLI_EXE \
     --sn inventory \
     --op AdminGetInventory \
-    --inventoryId '4dTbOeyq' \
+    --inventoryId '6Tn7TpWR' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 5 'AdminGetInventory' test.out
 
 #- 6 AdminUpdateInventory
 # body param: body
-echo '{"incMaxSlots": 20}' > $TEMP_JSON_INPUT
+echo '{"incMaxSlots": 13}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminUpdateInventory \
-    --inventoryId '0KvnZ1uy' \
+    --inventoryId '0wvh6lYg' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -109,11 +109,11 @@ eval_tap $? 6 'AdminUpdateInventory' test.out
 
 #- 7 DeleteInventory
 # body param: body
-echo '{"message": "NnSglCA8"}' > $TEMP_JSON_INPUT
+echo '{"message": "B4xmlbmU"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op DeleteInventory \
-    --inventoryId 'MelM03kA' \
+    --inventoryId 'YBYhDPuU' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -123,14 +123,14 @@ eval_tap $? 7 'DeleteInventory' test.out
 $CLI_EXE \
     --sn inventory \
     --op AdminListItems \
-    --inventoryId 'O6F2ca6U' \
+    --inventoryId 'kSiPEgIH' \
     --namespace $AB_NAMESPACE \
-    --limit '65' \
-    --offset '20' \
-    --qtyGte '0' \
-    --sortBy 'updatedAt' \
-    --sourceItemId 'FANbP5RJ' \
-    --tags 'Tgs9C0BQ' \
+    --limit '32' \
+    --offset '30' \
+    --qtyGte '73' \
+    --sortBy 'qty:asc' \
+    --sourceItemId 'gWcYjNMG' \
+    --tags 'qyI7dJgs' \
     > test.out 2>&1
 eval_tap $? 8 'AdminListItems' test.out
 
@@ -138,10 +138,10 @@ eval_tap $? 8 'AdminListItems' test.out
 $CLI_EXE \
     --sn inventory \
     --op AdminGetInventoryItem \
-    --inventoryId 'O1FuxIl0' \
+    --inventoryId 'z7qCjtUn' \
     --namespace $AB_NAMESPACE \
-    --slotId 'cjtC2cYN' \
-    --sourceItemId 'f2ZCGYAq' \
+    --slotId 'jFbi2kF2' \
+    --sourceItemId 'QgFf7Q5Y' \
     > test.out 2>&1
 eval_tap $? 9 'AdminGetInventoryItem' test.out
 
@@ -150,16 +150,16 @@ $CLI_EXE \
     --sn inventory \
     --op AdminListInventoryConfigurations \
     --namespace $AB_NAMESPACE \
-    --code 'Lyrx2khh' \
-    --limit '17' \
-    --offset '15' \
-    --sortBy 'code:desc' \
+    --code 'Mu4qPEcv' \
+    --limit '91' \
+    --offset '61' \
+    --sortBy 'updatedAt' \
     > test.out 2>&1
 eval_tap $? 10 'AdminListInventoryConfigurations' test.out
 
 #- 11 AdminCreateInventoryConfiguration
 # body param: body
-echo '{"code": "V7dqlz8q", "description": "QXtHr0pI", "initialMaxSlots": 59, "maxInstancesPerUser": 100, "maxUpgradeSlots": 38, "name": "eNg8tgxD"}' > $TEMP_JSON_INPUT
+echo '{"code": "ZI3rCEXU", "description": "6WxrLttV", "initialMaxSlots": 36, "maxInstancesPerUser": 43, "maxUpgradeSlots": 100, "name": "rMxIvNgs"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminCreateInventoryConfiguration \
@@ -172,18 +172,18 @@ eval_tap $? 11 'AdminCreateInventoryConfiguration' test.out
 $CLI_EXE \
     --sn inventory \
     --op AdminGetInventoryConfiguration \
-    --inventoryConfigurationId 'QNV2wdul' \
+    --inventoryConfigurationId 'gisIdPvc' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 12 'AdminGetInventoryConfiguration' test.out
 
 #- 13 AdminUpdateInventoryConfiguration
 # body param: body
-echo '{"code": "Lz4ZjNLd", "description": "GRGmQZwK", "initialMaxSlots": 100, "maxInstancesPerUser": 60, "maxUpgradeSlots": 97, "name": "coGHg6LJ"}' > $TEMP_JSON_INPUT
+echo '{"code": "usEEVX9v", "description": "e8ybYtZe", "initialMaxSlots": 14, "maxInstancesPerUser": 26, "maxUpgradeSlots": 24, "name": "Ijqm3RIr"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminUpdateInventoryConfiguration \
-    --inventoryConfigurationId 'JvD7CiBe' \
+    --inventoryConfigurationId 'bcfJS3Wk' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -193,7 +193,7 @@ eval_tap $? 13 'AdminUpdateInventoryConfiguration' test.out
 $CLI_EXE \
     --sn inventory \
     --op AdminDeleteInventoryConfiguration \
-    --inventoryConfigurationId 'GKbQQGe6' \
+    --inventoryConfigurationId 'EBhHAwLf' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 14 'AdminDeleteInventoryConfiguration' test.out
@@ -203,15 +203,15 @@ $CLI_EXE \
     --sn inventory \
     --op AdminListItemTypes \
     --namespace $AB_NAMESPACE \
-    --limit '36' \
-    --offset '5' \
+    --limit '45' \
+    --offset '83' \
     --sortBy 'createdAt' \
     > test.out 2>&1
 eval_tap $? 15 'AdminListItemTypes' test.out
 
 #- 16 AdminCreateItemType
 # body param: body
-echo '{"name": "Dl5zz3SM"}' > $TEMP_JSON_INPUT
+echo '{"name": "VbVgvQ2x"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminCreateItemType \
@@ -224,7 +224,7 @@ eval_tap $? 16 'AdminCreateItemType' test.out
 $CLI_EXE \
     --sn inventory \
     --op AdminDeleteItemType \
-    --itemTypeName 'kTWLupcq' \
+    --itemTypeName 'yaCPBpP3' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 17 'AdminDeleteItemType' test.out
@@ -234,16 +234,16 @@ $CLI_EXE \
     --sn inventory \
     --op AdminListTags \
     --namespace $AB_NAMESPACE \
-    --limit '19' \
-    --offset '65' \
-    --owner '6JFcE2vF' \
+    --limit '69' \
+    --offset '86' \
+    --owner 'eZCDFNAa' \
     --sortBy 'name:asc' \
     > test.out 2>&1
 eval_tap $? 18 'AdminListTags' test.out
 
 #- 19 AdminCreateTag
 # body param: body
-echo '{"name": "kIRt8RIZ", "owner": "SERVER"}' > $TEMP_JSON_INPUT
+echo '{"name": "1y6R7kas", "owner": "SERVER"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminCreateTag \
@@ -257,70 +257,70 @@ $CLI_EXE \
     --sn inventory \
     --op AdminDeleteTag \
     --namespace $AB_NAMESPACE \
-    --tagName 'cMGrHnW6' \
+    --tagName 'pji77qT6' \
     > test.out 2>&1
 eval_tap $? 20 'AdminDeleteTag' test.out
 
 #- 21 AdminConsumeUserItem
 # body param: body
-echo '{"qty": 81, "slotId": "65FuU4sf", "sourceItemId": "4hiJALVI"}' > $TEMP_JSON_INPUT
+echo '{"qty": 14, "slotId": "0Iq8wZM7", "sourceItemId": "NfrOgFJF"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminConsumeUserItem \
-    --inventoryId 'qJ2ZZ8q9' \
+    --inventoryId 'ZPvkvKOR' \
     --namespace $AB_NAMESPACE \
-    --userId 'jQieW0Rk' \
+    --userId 'B688Tkim' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 21 'AdminConsumeUserItem' test.out
 
 #- 22 AdminBulkUpdateMyItems
 # body param: body
-echo '[{"customAttributes": {"DjDhjYPl": {}, "oWUMXRkR": {}, "YOmJJWG6": {}}, "serverCustomAttributes": {"zsZsdoWZ": {}, "IPR3Gy6L": {}, "evpRynuU": {}}, "slotId": "lP2Zvqai", "sourceItemId": "ezJM68Ln", "tags": ["oOPTgTt7", "WwaTAkLq", "hyIVaL6Y"], "type": "V13Llqm4"}, {"customAttributes": {"zOXolbk2": {}, "zh4Geepw": {}, "kBp261S8": {}}, "serverCustomAttributes": {"YTuxIi8n": {}, "yYM2wRlw": {}, "bmDDGALo": {}}, "slotId": "cNFjBWI2", "sourceItemId": "AFWNcMTi", "tags": ["Ti1OfRR4", "inDR2u5k", "3c0bmHIZ"], "type": "seWvi6Zp"}, {"customAttributes": {"fdbiAdd0": {}, "BZ3YffMe": {}, "PbcupRUq": {}}, "serverCustomAttributes": {"CQvZqNpv": {}, "1GhTYDRS": {}, "kRscpZzc": {}}, "slotId": "6nHkJanx", "sourceItemId": "tYEfmjFd", "tags": ["uWsghrfh", "8OXidLHl", "BHBxWApN"], "type": "gU7Oua1C"}]' > $TEMP_JSON_INPUT
+echo '[{"customAttributes": {"xnrCjZgD": {}, "4EYGzIHW": {}, "Yw6W5oWW": {}}, "serverCustomAttributes": {"1TUwbakb": {}, "qcPL0WZ7": {}, "Mskxws9K": {}}, "slotId": "hF085L0r", "sourceItemId": "wwxu5fIL", "tags": ["G9Puk2O2", "BJe6Kp0P", "eXN9frma"], "type": "MugWMU1I"}, {"customAttributes": {"UhPIKFM7": {}, "HzJLOSzW": {}, "UIoJ3BvQ": {}}, "serverCustomAttributes": {"ML9eFbGS": {}, "e8aoR4X0": {}, "ElNCOXkN": {}}, "slotId": "Tip0qfV9", "sourceItemId": "Wm5Np9r6", "tags": ["wEYEpuSg", "rrW1m3yE", "uC174ike"], "type": "3qGxGDuI"}, {"customAttributes": {"FBsQGORO": {}, "akRkK6iY": {}, "ijfoZEcc": {}}, "serverCustomAttributes": {"CFtRuKMg": {}, "6MWS5Zf3": {}, "9GDhXx1u": {}}, "slotId": "5c3nVuGA", "sourceItemId": "pzvPfgkK", "tags": ["bGZQhque", "06He4boD", "nFr08V75"], "type": "vDnPz0Uc"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminBulkUpdateMyItems \
-    --inventoryId '8tg28zR9' \
+    --inventoryId 'n0abUbNp' \
     --namespace $AB_NAMESPACE \
-    --userId 'Wmdso714' \
+    --userId '0zacb49l' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 22 'AdminBulkUpdateMyItems' test.out
 
 #- 23 AdminSaveItemToInventory
 # body param: body
-echo '{"customAttributes": {"v6QOjj1O": {}, "UU000usD": {}, "8lWr1emm": {}}, "qty": 10, "serverCustomAttributes": {"haKjwx3c": {}, "YcpObrfP": {}, "lLMkHynR": {}}, "slotId": "HyoLbIAX", "slotUsed": 7, "sourceItemId": "562WXsTb", "tags": ["H65FJARh", "nXvFqPP9", "bLfpxlOx"], "type": "L7smVO7x"}' > $TEMP_JSON_INPUT
+echo '{"customAttributes": {"ee80q2q9": {}, "OCiN9khY": {}, "cT3riBQL": {}}, "qty": 46, "serverCustomAttributes": {"93IXDVdN": {}, "PbHXkCnz": {}, "cYEtHlFe": {}}, "slotId": "VfMH0xdV", "slotUsed": 100, "sourceItemId": "asWZzDDl", "tags": ["tu9jp3MI", "imiykWF3", "16Tg7eve"], "type": "nDStuLYG"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminSaveItemToInventory \
-    --inventoryId 'vymMiTV4' \
+    --inventoryId 'cfrexhgf' \
     --namespace $AB_NAMESPACE \
-    --userId 'x4hBtoOf' \
+    --userId 'zFQd5mda' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 23 'AdminSaveItemToInventory' test.out
 
 #- 24 AdminBulkRemoveItems
 # body param: body
-echo '[{"slotId": "XbWUird7", "sourceItemId": "FgVBZc5g"}, {"slotId": "7ZmpYmN6", "sourceItemId": "i8pXjzK7"}, {"slotId": "ipp1uBdk", "sourceItemId": "SEAIo7xq"}]' > $TEMP_JSON_INPUT
+echo '[{"slotId": "lCUgDaDI", "sourceItemId": "RJhBo7CF"}, {"slotId": "JIs4jjaG", "sourceItemId": "wsAYrTRG"}, {"slotId": "8f9yKA76", "sourceItemId": "2WPqfYkM"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminBulkRemoveItems \
-    --inventoryId 'iMjxoWqB' \
+    --inventoryId 'iKrBwlnl' \
     --namespace $AB_NAMESPACE \
-    --userId 'vp8qnc53' \
+    --userId 'pP4rY5S6' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 24 'AdminBulkRemoveItems' test.out
 
 #- 25 AdminSaveItem
 # body param: body
-echo '{"customAttributes": {"OgXhSI95": {}, "F3xlTK5C": {}, "FSxLzpib": {}}, "inventoryConfigurationCode": "R7jF733S", "qty": 79, "serverCustomAttributes": {"3ZC7uL8U": {}, "uAMiBvjH": {}, "jeZr8Tlv": {}}, "slotId": "TWcVRuIH", "slotUsed": 65, "sourceItemId": "sv7ABLnZ", "tags": ["5rlY7VWw", "Bm08LJpD", "I5Wzbeby"], "type": "BsAWJP45"}' > $TEMP_JSON_INPUT
+echo '{"customAttributes": {"bX4vuq1H": {}, "nQr8SQfp": {}, "EOkEunXk": {}}, "inventoryConfigurationCode": "L4DK5BPA", "qty": 85, "serverCustomAttributes": {"d8h1MfS6": {}, "DfS7FSWQ": {}, "UJDssIhC": {}}, "slotId": "EO969hp4", "slotUsed": 14, "sourceItemId": "eYultJy1", "tags": ["ffEf5GSW", "LY3LSLDm", "TWx520oR"], "type": "LIuu7dET"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op AdminSaveItem \
     --namespace $AB_NAMESPACE \
-    --userId 'RyHaAJKG' \
+    --userId 'zTN0Iej4' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 25 'AdminSaveItem' test.out
@@ -330,10 +330,10 @@ $CLI_EXE \
     --sn inventory \
     --op PublicListInventoryConfigurations \
     --namespace $AB_NAMESPACE \
-    --code 'JhuILzhW' \
-    --limit '17' \
-    --offset '71' \
-    --sortBy 'code:desc' \
+    --code '9nViZDF1' \
+    --limit '97' \
+    --offset '5' \
+    --sortBy 'updatedAt:asc' \
     > test.out 2>&1
 eval_tap $? 26 'PublicListInventoryConfigurations' test.out
 
@@ -342,9 +342,9 @@ $CLI_EXE \
     --sn inventory \
     --op PublicListItemTypes \
     --namespace $AB_NAMESPACE \
-    --limit '37' \
-    --offset '41' \
-    --sortBy 'name:asc' \
+    --limit '11' \
+    --offset '50' \
+    --sortBy 'name:desc' \
     > test.out 2>&1
 eval_tap $? 27 'PublicListItemTypes' test.out
 
@@ -353,8 +353,8 @@ $CLI_EXE \
     --sn inventory \
     --op PublicListTags \
     --namespace $AB_NAMESPACE \
-    --limit '96' \
-    --offset '87' \
+    --limit '48' \
+    --offset '89' \
     --sortBy 'createdAt' \
     > test.out 2>&1
 eval_tap $? 28 'PublicListTags' test.out
@@ -364,20 +364,20 @@ $CLI_EXE \
     --sn inventory \
     --op PublicListInventories \
     --namespace $AB_NAMESPACE \
-    --inventoryConfigurationCode '4Txg4pc4' \
-    --limit '30' \
-    --offset '38' \
-    --sortBy 'updatedAt' \
+    --inventoryConfigurationCode 'R2DeRNTm' \
+    --limit '33' \
+    --offset '86' \
+    --sortBy 'createdAt:desc' \
     > test.out 2>&1
 eval_tap $? 29 'PublicListInventories' test.out
 
 #- 30 PublicConsumeMyItem
 # body param: body
-echo '{"qty": 28, "slotId": "qkSOzo0i", "sourceItemId": "IhFhG1mi"}' > $TEMP_JSON_INPUT
+echo '{"qty": 70, "slotId": "nQSOItO3", "sourceItemId": "PUFs8nd4"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op PublicConsumeMyItem \
-    --inventoryId 'QVxVOhkC' \
+    --inventoryId 'D3IiJ67l' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -387,24 +387,24 @@ eval_tap $? 30 'PublicConsumeMyItem' test.out
 $CLI_EXE \
     --sn inventory \
     --op PublicListItems \
-    --inventoryId 'B0kGaySB' \
+    --inventoryId 'VKzNuuAq' \
     --namespace $AB_NAMESPACE \
-    --limit '75' \
-    --offset '64' \
-    --qtyGte '40' \
-    --sortBy 'createdAt:asc' \
-    --sourceItemId 'addIPRHz' \
-    --tags 'XioNBGZb' \
+    --limit '45' \
+    --offset '7' \
+    --qtyGte '45' \
+    --sortBy 'qty' \
+    --sourceItemId 'DovHxSmb' \
+    --tags 'n4SBvhHU' \
     > test.out 2>&1
 eval_tap $? 31 'PublicListItems' test.out
 
 #- 32 PublicBulkUpdateMyItems
 # body param: body
-echo '[{"customAttributes": {"JfxolcDA": {}, "8BcAG27t": {}, "eyLrBdgk": {}}, "slotId": "XslBOYBa", "sourceItemId": "b5CcHN2M", "tags": ["mLbmFUiG", "pwjJIHIZ", "cbSCR1tL"]}, {"customAttributes": {"Qc1Nxujz": {}, "i1qpKdue": {}, "8ABUtEYi": {}}, "slotId": "LRTmUvrW", "sourceItemId": "wp9PbJQE", "tags": ["Ko9MkJxj", "xRlHSnjR", "4jnsdG1S"]}, {"customAttributes": {"AVB5W20R": {}, "LB6O3lOs": {}, "iTiln2OH": {}}, "slotId": "7MRZhI1n", "sourceItemId": "bAukyVZW", "tags": ["PYdNBVQm", "Mb6f4JLY", "h6Fg0wlb"]}]' > $TEMP_JSON_INPUT
+echo '[{"customAttributes": {"r0ZiGQsU": {}, "p0mlbGPO": {}, "z7HdXoEM": {}}, "slotId": "WC0Wdxx3", "sourceItemId": "vfGsbqQE", "tags": ["BNkwm54T", "uUF28tbb", "F7xC4MQ7"]}, {"customAttributes": {"myHEnwgZ": {}, "g2qiBMwb": {}, "M8LSNTrA": {}}, "slotId": "x8AidlkV", "sourceItemId": "w2aM5fjf", "tags": ["7bc9sWO8", "cVoaGFXO", "DmtGJ3gO"]}, {"customAttributes": {"oXYxJbn9": {}, "i3ERVE0A": {}, "1fjzqLJf": {}}, "slotId": "aFAfxCYX", "sourceItemId": "bVEmZRJR", "tags": ["6vLrWbI8", "KINI60Qz", "ZlvdSfIu"]}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op PublicBulkUpdateMyItems \
-    --inventoryId '3VVAqqCO' \
+    --inventoryId '07ehRmAi' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -412,11 +412,11 @@ eval_tap $? 32 'PublicBulkUpdateMyItems' test.out
 
 #- 33 PublicBulkRemoveMyItems
 # body param: body
-echo '[{"slotId": "sf1bc8QB", "sourceItemId": "je2aJ9fJ"}, {"slotId": "JNHgpyRy", "sourceItemId": "nTM0XCG4"}, {"slotId": "u8R7QHpa", "sourceItemId": "vkWwPEkL"}]' > $TEMP_JSON_INPUT
+echo '[{"slotId": "cpwWHxKU", "sourceItemId": "BUbhLIPg"}, {"slotId": "UwCHvBSf", "sourceItemId": "oc0qMESI"}, {"slotId": "fqfM9RXi", "sourceItemId": "klTGvunP"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op PublicBulkRemoveMyItems \
-    --inventoryId '8vIFT25z' \
+    --inventoryId 'kSzyWkes' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -424,11 +424,11 @@ eval_tap $? 33 'PublicBulkRemoveMyItems' test.out
 
 #- 34 PublicMoveMyItems
 # body param: body
-echo '{"items": [{"qty": 84, "slotId": "s90OTpdD", "sourceItemId": "hlEeFlG3"}, {"qty": 77, "slotId": "Dn7yISY1", "sourceItemId": "vw8zyqvS"}, {"qty": 26, "slotId": "JbhxAQoJ", "sourceItemId": "Je1ZTc2x"}], "srcInventoryId": "737U2fYb"}' > $TEMP_JSON_INPUT
+echo '{"items": [{"qty": 3, "slotId": "MNSfPiJ5", "sourceItemId": "PyrlwKJl"}, {"qty": 3, "slotId": "wTpm9QdT", "sourceItemId": "hEESaiqK"}, {"qty": 42, "slotId": "WluiRvKF", "sourceItemId": "iPcX3LXz"}], "srcInventoryId": "5UYvLrIK"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn inventory \
     --op PublicMoveMyItems \
-    --inventoryId 'APjrzG63' \
+    --inventoryId '4pW6zady' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -438,10 +438,10 @@ eval_tap $? 34 'PublicMoveMyItems' test.out
 $CLI_EXE \
     --sn inventory \
     --op PublicGetItem \
-    --inventoryId 'Af9CqHxY' \
+    --inventoryId 'POSQ9Ts0' \
     --namespace $AB_NAMESPACE \
-    --slotId 'ZjCIfruE' \
-    --sourceItemId 'rvksoNVR' \
+    --slotId 'gurl2e7O' \
+    --sourceItemId 'K3JZ3IkB' \
     > test.out 2>&1
 eval_tap $? 35 'PublicGetItem' test.out
 

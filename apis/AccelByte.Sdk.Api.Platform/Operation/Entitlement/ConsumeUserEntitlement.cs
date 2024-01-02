@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.EntitlementDecrement? Body { get; set; }
+            public Model.AdminEntitlementDecrement? Body { get; set; }
 
 
 
@@ -52,7 +52,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public ConsumeUserEntitlementBuilder SetBody(Model.EntitlementDecrement _body)
+            public ConsumeUserEntitlementBuilder SetBody(Model.AdminEntitlementDecrement _body)
             {
                 Body = _body;
                 return this;
@@ -127,7 +127,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             string entitlementId,
             string namespace_,
             string userId,
-            Model.EntitlementDecrement body
+            Model.AdminEntitlementDecrement body
         )
         {
             PathParams["entitlementId"] = entitlementId;

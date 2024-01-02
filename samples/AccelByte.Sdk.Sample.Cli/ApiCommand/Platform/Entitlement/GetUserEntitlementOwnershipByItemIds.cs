@@ -36,6 +36,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
         [SdkCommandArgument("ids")]
         public List<string>? Ids { get; set; }
 
+        [SdkCommandArgument("platform")]
+        public string? Platform { get; set; }
+
         public GetUserEntitlementOwnershipByItemIdsCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -49,6 +52,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 
             if (Ids != null)
                 opBuilder.SetIds((List<string>)Ids);
+            if (Platform != null)
+                opBuilder.SetPlatform((string)Platform);
 
 
 

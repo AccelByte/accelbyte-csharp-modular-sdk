@@ -22,6 +22,11 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? EndDate { get; set; }
 
+        [JsonPropertyName("entitlementOrigin")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public FulfillmentRequestEntitlementOrigin? EntitlementOrigin { get; set; }
+
         [JsonPropertyName("itemId")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ItemId { get; set; }
@@ -87,6 +92,11 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? EndDate { get; set; }
 
+        [JsonPropertyName("entitlementOrigin")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public FulfillmentRequestEntitlementOrigin? EntitlementOrigin { get; set; }
+
         [JsonPropertyName("itemId")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ItemId { get; set; }
@@ -142,6 +152,54 @@ namespace AccelByte.Sdk.Api.Platform.Model
 
     }
 
+
+    public class FulfillmentRequestEntitlementOrigin : StringEnum<FulfillmentRequestEntitlementOrigin>
+    {
+        public static readonly FulfillmentRequestEntitlementOrigin Epic
+            = new FulfillmentRequestEntitlementOrigin("Epic");
+
+        public static readonly FulfillmentRequestEntitlementOrigin GooglePlay
+            = new FulfillmentRequestEntitlementOrigin("GooglePlay");
+
+        public static readonly FulfillmentRequestEntitlementOrigin IOS
+            = new FulfillmentRequestEntitlementOrigin("IOS");
+
+        public static readonly FulfillmentRequestEntitlementOrigin Nintendo
+            = new FulfillmentRequestEntitlementOrigin("Nintendo");
+
+        public static readonly FulfillmentRequestEntitlementOrigin Oculus
+            = new FulfillmentRequestEntitlementOrigin("Oculus");
+
+        public static readonly FulfillmentRequestEntitlementOrigin Other
+            = new FulfillmentRequestEntitlementOrigin("Other");
+
+        public static readonly FulfillmentRequestEntitlementOrigin Playstation
+            = new FulfillmentRequestEntitlementOrigin("Playstation");
+
+        public static readonly FulfillmentRequestEntitlementOrigin Steam
+            = new FulfillmentRequestEntitlementOrigin("Steam");
+
+        public static readonly FulfillmentRequestEntitlementOrigin System
+            = new FulfillmentRequestEntitlementOrigin("System");
+
+        public static readonly FulfillmentRequestEntitlementOrigin Twitch
+            = new FulfillmentRequestEntitlementOrigin("Twitch");
+
+        public static readonly FulfillmentRequestEntitlementOrigin Xbox
+            = new FulfillmentRequestEntitlementOrigin("Xbox");
+
+
+        public static implicit operator FulfillmentRequestEntitlementOrigin(string value)
+        {
+            return NewValue(value);
+        }
+
+        public FulfillmentRequestEntitlementOrigin(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 
     public class FulfillmentRequestOrigin : StringEnum<FulfillmentRequestOrigin>
     {

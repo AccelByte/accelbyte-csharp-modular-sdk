@@ -39,6 +39,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             public GetUserEntitlementOwnershipByItemIdEntitlementClazz? EntitlementClazz { get; set; }
 
+            public string? Platform { get; set; }
+
 
 
 
@@ -54,6 +56,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             public GetUserEntitlementOwnershipByItemIdBuilder SetEntitlementClazz(GetUserEntitlementOwnershipByItemIdEntitlementClazz _entitlementClazz)
             {
                 EntitlementClazz = _entitlementClazz;
+                return this;
+            }
+
+            public GetUserEntitlementOwnershipByItemIdBuilder SetPlatform(string _platform)
+            {
+                Platform = _platform;
                 return this;
             }
 
@@ -112,6 +120,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["userId"] = userId;
 
             if (builder.EntitlementClazz is not null) QueryParams["entitlementClazz"] = builder.EntitlementClazz.Value;
+            if (builder.Platform is not null) QueryParams["platform"] = builder.Platform;
             if (itemId is not null) QueryParams["itemId"] = itemId;
 
 
@@ -127,6 +136,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             string namespace_,
             string userId,
             GetUserEntitlementOwnershipByItemIdEntitlementClazz? entitlementClazz,
+            string? platform,
             string itemId
         )
         {
@@ -134,6 +144,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["userId"] = userId;
 
             if (entitlementClazz is not null) QueryParams["entitlementClazz"] = entitlementClazz.Value;
+            if (platform is not null) QueryParams["platform"] = platform;
             if (itemId is not null) QueryParams["itemId"] = itemId;
 
 

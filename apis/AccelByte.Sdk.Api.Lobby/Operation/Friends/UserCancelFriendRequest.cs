@@ -21,6 +21,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 {
     /// <summary>
     /// userCancelFriendRequest
+    ///
+    /// User cancel a friend request.
     /// </summary>
     public class UserCancelFriendRequest : AccelByte.Sdk.Core.Operation
     {

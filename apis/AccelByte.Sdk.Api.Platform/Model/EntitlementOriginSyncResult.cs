@@ -8,21 +8,21 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace AccelByte.Sdk.Api.Session.Model
+namespace AccelByte.Sdk.Api.Platform.Model
 {
-    public class ModelsUserInfo : AccelByte.Sdk.Core.Model
+    public class EntitlementOriginSyncResult : AccelByte.Sdk.Core.Model
     {
-        [JsonPropertyName("namespace")]
+        [JsonPropertyName("reason")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string? Namespace { get; set; }
+        public string? Reason { get; set; }
 
-        [JsonPropertyName("platformName")]
+        [JsonPropertyName("reward")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string? PlatformName { get; set; }
+        public PlatformReward? Reward { get; set; }
 
-        [JsonPropertyName("userID")]
+        [JsonPropertyName("summary")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string? UserID { get; set; }
+        public List<RewardMigrationResult>? Summary { get; set; }
 
     }
 

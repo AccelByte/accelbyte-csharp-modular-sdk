@@ -21,6 +21,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 {
     /// <summary>
     /// getUserFriendsUpdated
+    ///
+    /// Get list of friends in a namespace.
     /// </summary>
     public class GetUserFriendsUpdated : AccelByte.Sdk.Core.Operation
     {

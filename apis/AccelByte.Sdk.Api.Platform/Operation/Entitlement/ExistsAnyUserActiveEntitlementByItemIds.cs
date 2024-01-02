@@ -37,6 +37,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             : OperationBuilder<ExistsAnyUserActiveEntitlementByItemIdsBuilder>
         {
 
+            public string? Platform { get; set; }
+
 
 
 
@@ -48,6 +50,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 _Sdk = sdk;
             }
 
+
+            public ExistsAnyUserActiveEntitlementByItemIdsBuilder SetPlatform(string _platform)
+            {
+                Platform = _platform;
+                return this;
+            }
 
 
 
@@ -103,6 +111,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
 
+            if (builder.Platform is not null) QueryParams["platform"] = builder.Platform;
             if (itemIds is not null) QueryParams["itemIds"] = itemIds;
 
 
@@ -118,12 +127,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public ExistsAnyUserActiveEntitlementByItemIds(
             string namespace_,
             string userId,
+            string? platform,
             List<string> itemIds
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
 
+            if (platform is not null) QueryParams["platform"] = platform;
             if (itemIds is not null) QueryParams["itemIds"] = itemIds;
 
 

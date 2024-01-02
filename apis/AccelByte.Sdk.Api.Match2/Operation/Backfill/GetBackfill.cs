@@ -22,10 +22,6 @@ namespace AccelByte.Sdk.Api.Match2.Operation
     /// <summary>
     /// GetBackfill
     ///
-    /// Required Permission: NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [GET]
-    /// 
-    /// Required Scope: social
-    /// 
     /// Get backfill ticket by ID
     /// </summary>
     public class GetBackfill : AccelByte.Sdk.Core.Operation

@@ -202,6 +202,17 @@ namespace AccelByte.Sdk.Api.Ugc
         }
         private Wrapper.AdminConfig? _AdminConfig = null;
 
+        public Wrapper.AdminStagingContent AdminStagingContent
+        {
+            get
+            {
+                if (_AdminStagingContent == null)
+                    _AdminStagingContent = new Wrapper.AdminStagingContent(_Sdk);
+                return _AdminStagingContent;
+            }
+        }
+        private Wrapper.AdminStagingContent? _AdminStagingContent = null;
+
         public Wrapper.PublicContentV2 PublicContentV2
         {
             get
@@ -234,6 +245,17 @@ namespace AccelByte.Sdk.Api.Ugc
             }
         }
         private Wrapper.PublicLikeV2? _PublicLikeV2 = null;
+
+        public Wrapper.PublicStagingContent PublicStagingContent
+        {
+            get
+            {
+                if (_PublicStagingContent == null)
+                    _PublicStagingContent = new Wrapper.PublicStagingContent(_Sdk);
+                return _PublicStagingContent;
+            }
+        }
+        private Wrapper.PublicStagingContent? _PublicStagingContent = null;
 
         internal UgcApi(IAccelByteSdk sdk)
         {

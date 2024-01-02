@@ -39,6 +39,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public List<string>? Features { get; set; }
 
         [JsonPropertyName("grantedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? GrantedAt { get; set; }
 
         [JsonPropertyName("grantedCode")]
@@ -59,10 +60,20 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public ItemSnapshot? ItemSnapshot { get; set; }
 
         [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Name { get; set; }
 
         [JsonPropertyName("namespace")]
         public string? Namespace { get; set; }
+
+        [JsonPropertyName("noOrigin")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? NoOrigin { get; set; }
+
+        [JsonPropertyName("origin")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public EntitlementDecrementResultOrigin? Origin { get; set; }
 
         [JsonPropertyName("replayed")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -81,6 +92,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public string? Sku { get; set; }
 
         [JsonPropertyName("source")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonStringEnum]
         public EntitlementDecrementResultSource? Source { get; set; }
 
@@ -101,6 +113,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public string? StoreId { get; set; }
 
         [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonStringEnum]
         public EntitlementDecrementResultType? Type { get; set; }
 
@@ -112,6 +125,7 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public int? UseCount { get; set; }
 
         [JsonPropertyName("userId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? UserId { get; set; }
 
     }
@@ -175,6 +189,54 @@ namespace AccelByte.Sdk.Api.Platform.Model
         }
 
         public EntitlementDecrementResultClazz(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
+
+    public class EntitlementDecrementResultOrigin : StringEnum<EntitlementDecrementResultOrigin>
+    {
+        public static readonly EntitlementDecrementResultOrigin Epic
+            = new EntitlementDecrementResultOrigin("Epic");
+
+        public static readonly EntitlementDecrementResultOrigin GooglePlay
+            = new EntitlementDecrementResultOrigin("GooglePlay");
+
+        public static readonly EntitlementDecrementResultOrigin IOS
+            = new EntitlementDecrementResultOrigin("IOS");
+
+        public static readonly EntitlementDecrementResultOrigin Nintendo
+            = new EntitlementDecrementResultOrigin("Nintendo");
+
+        public static readonly EntitlementDecrementResultOrigin Oculus
+            = new EntitlementDecrementResultOrigin("Oculus");
+
+        public static readonly EntitlementDecrementResultOrigin Other
+            = new EntitlementDecrementResultOrigin("Other");
+
+        public static readonly EntitlementDecrementResultOrigin Playstation
+            = new EntitlementDecrementResultOrigin("Playstation");
+
+        public static readonly EntitlementDecrementResultOrigin Steam
+            = new EntitlementDecrementResultOrigin("Steam");
+
+        public static readonly EntitlementDecrementResultOrigin System
+            = new EntitlementDecrementResultOrigin("System");
+
+        public static readonly EntitlementDecrementResultOrigin Twitch
+            = new EntitlementDecrementResultOrigin("Twitch");
+
+        public static readonly EntitlementDecrementResultOrigin Xbox
+            = new EntitlementDecrementResultOrigin("Xbox");
+
+
+        public static implicit operator EntitlementDecrementResultOrigin(string value)
+        {
+            return NewValue(value);
+        }
+
+        public EntitlementDecrementResultOrigin(string enumValue)
             : base(enumValue)
         {
 

@@ -158,9 +158,13 @@
 |---|---|---|---|---|
 | `/platform/admin/namespaces/{namespace}/entitlements` | GET | QueryEntitlements | [QueryEntitlements](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/QueryEntitlements.cs) | [QueryEntitlements](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/QueryEntitlements.cs) |
 | `/platform/admin/namespaces/{namespace}/entitlements/byItemIds` | GET | QueryEntitlements1 | [QueryEntitlements1](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/QueryEntitlements1.cs) | [QueryEntitlements1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/QueryEntitlements1.cs) |
+| `/platform/admin/namespaces/{namespace}/entitlements/config/entitlementOrigin/enable` | PUT | EnableEntitlementOriginFeature | [EnableEntitlementOriginFeature](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/EnableEntitlementOriginFeature.cs) | [EnableEntitlementOriginFeature](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/EnableEntitlementOriginFeature.cs) |
+| `/platform/admin/namespaces/{namespace}/entitlements/config/info` | GET | GetEntitlementConfigInfo | [GetEntitlementConfigInfo](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/GetEntitlementConfigInfo.cs) | [GetEntitlementConfigInfo](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GetEntitlementConfigInfo.cs) |
 | `/platform/admin/namespaces/{namespace}/entitlements/grant` | POST | GrantEntitlements | [GrantEntitlements](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/GrantEntitlements.cs) | [GrantEntitlements](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GrantEntitlements.cs) |
 | `/platform/admin/namespaces/{namespace}/entitlements/revoke` | POST | RevokeEntitlements | [RevokeEntitlements](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/RevokeEntitlements.cs) | [RevokeEntitlements](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/RevokeEntitlements.cs) |
 | `/platform/admin/namespaces/{namespace}/entitlements/{entitlementId}` | GET | GetEntitlement | [GetEntitlement](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/GetEntitlement.cs) | [GetEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GetEntitlement.cs) |
+| `/platform/admin/namespaces/{namespace}/platforms/{platform}/entitlement/config` | GET | GetPlatformEntitlementConfig | [GetPlatformEntitlementConfig](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/GetPlatformEntitlementConfig.cs) | [GetPlatformEntitlementConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GetPlatformEntitlementConfig.cs) |
+| `/platform/admin/namespaces/{namespace}/platforms/{platform}/entitlement/config` | PUT | UpdatePlatformEntitlementConfig | [UpdatePlatformEntitlementConfig](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/UpdatePlatformEntitlementConfig.cs) | [UpdatePlatformEntitlementConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/UpdatePlatformEntitlementConfig.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements` | GET | QueryUserEntitlements | [QueryUserEntitlements](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/QueryUserEntitlements.cs) | [QueryUserEntitlements](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/QueryUserEntitlements.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements` | POST | GrantUserEntitlement | [GrantUserEntitlement](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/GrantUserEntitlement.cs) | [GrantUserEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GrantUserEntitlement.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/byAppId` | GET | GetUserAppEntitlementByAppId | [GetUserAppEntitlementByAppId](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/GetUserAppEntitlementByAppId.cs) | [GetUserAppEntitlementByAppId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GetUserAppEntitlementByAppId.cs) |
@@ -195,8 +199,8 @@
 | `/platform/public/namespaces/{namespace}/users/{userId}/entitlements` | GET | PublicQueryUserEntitlements | [PublicQueryUserEntitlements](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicQueryUserEntitlements.cs) | [PublicQueryUserEntitlements](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicQueryUserEntitlements.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byAppId` | GET | PublicGetUserAppEntitlementByAppId | [PublicGetUserAppEntitlementByAppId](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicGetUserAppEntitlementByAppId.cs) | [PublicGetUserAppEntitlementByAppId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicGetUserAppEntitlementByAppId.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byAppType` | GET | PublicQueryUserEntitlementsByAppType | [PublicQueryUserEntitlementsByAppType](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicQueryUserEntitlementsByAppType.cs) | [PublicQueryUserEntitlementsByAppType](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicQueryUserEntitlementsByAppType.cs) |
-| `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byItemId` | GET | PublicGetUserEntitlementByItemId | [PublicGetUserEntitlementByItemId](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicGetUserEntitlementByItemId.cs) | [PublicGetUserEntitlementByItemId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicGetUserEntitlementByItemId.cs) |
-| `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/bySku` | GET | PublicGetUserEntitlementBySku | [PublicGetUserEntitlementBySku](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicGetUserEntitlementBySku.cs) | [PublicGetUserEntitlementBySku](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicGetUserEntitlementBySku.cs) |
+| [DEPRECATED] `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byItemId` | GET | PublicGetUserEntitlementByItemId | [PublicGetUserEntitlementByItemId](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicGetUserEntitlementByItemId.cs) | [PublicGetUserEntitlementByItemId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicGetUserEntitlementByItemId.cs) |
+| [DEPRECATED] `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/bySku` | GET | PublicGetUserEntitlementBySku | [PublicGetUserEntitlementBySku](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicGetUserEntitlementBySku.cs) | [PublicGetUserEntitlementBySku](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicGetUserEntitlementBySku.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/ownership/any` | GET | PublicExistsAnyUserActiveEntitlement | [PublicExistsAnyUserActiveEntitlement](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicExistsAnyUserActiveEntitlement.cs) | [PublicExistsAnyUserActiveEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicExistsAnyUserActiveEntitlement.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/ownership/byAppId` | GET | PublicGetUserAppEntitlementOwnershipByAppId | [PublicGetUserAppEntitlementOwnershipByAppId](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicGetUserAppEntitlementOwnershipByAppId.cs) | [PublicGetUserAppEntitlementOwnershipByAppId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicGetUserAppEntitlementOwnershipByAppId.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/ownership/byItemId` | GET | PublicGetUserEntitlementOwnershipByItemId | [PublicGetUserEntitlementOwnershipByItemId](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicGetUserEntitlementOwnershipByItemId.cs) | [PublicGetUserEntitlementOwnershipByItemId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicGetUserEntitlementOwnershipByItemId.cs) |
@@ -730,6 +734,8 @@
 | `ActionRequest` | [ActionRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/ActionRequest.cs) |
 | `AdditionalData` | [AdditionalData](../../apis/AccelByte.Sdk.Api.Platform/Model/AdditionalData.cs) |
 | `AdditionalDataEntitlement` | [AdditionalDataEntitlement](../../apis/AccelByte.Sdk.Api.Platform/Model/AdditionalDataEntitlement.cs) |
+| `AdminEntitlementDecrement` | [AdminEntitlementDecrement](../../apis/AccelByte.Sdk.Api.Platform/Model/AdminEntitlementDecrement.cs) |
+| `AdminEntitlementSoldRequest` | [AdminEntitlementSoldRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/AdminEntitlementSoldRequest.cs) |
 | `AdminOrderCreate` | [AdminOrderCreate](../../apis/AccelByte.Sdk.Api.Platform/Model/AdminOrderCreate.cs) |
 | `AdyenConfig` | [AdyenConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/AdyenConfig.cs) |
 | `AliPayConfig` | [AliPayConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/AliPayConfig.cs) |
@@ -814,6 +820,7 @@
 | `DetailedWalletTransactionInfo` | [DetailedWalletTransactionInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/DetailedWalletTransactionInfo.cs) |
 | `DetailedWalletTransactionPagingSlicedResult` | [DetailedWalletTransactionPagingSlicedResult](../../apis/AccelByte.Sdk.Api.Platform/Model/DetailedWalletTransactionPagingSlicedResult.cs) |
 | `DurableEntitlementRevocationConfig` | [DurableEntitlementRevocationConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/DurableEntitlementRevocationConfig.cs) |
+| `EntitlementConfigInfo` | [EntitlementConfigInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementConfigInfo.cs) |
 | `EntitlementDecrement` | [EntitlementDecrement](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementDecrement.cs) |
 | `EntitlementDecrementResult` | [EntitlementDecrementResult](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementDecrementResult.cs) |
 | `EntitlementGrant` | [EntitlementGrant](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementGrant.cs) |
@@ -824,6 +831,8 @@
 | `EntitlementLootBoxReward` | [EntitlementLootBoxReward](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementLootBoxReward.cs) |
 | `EntitlementOwnership` | [EntitlementOwnership](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementOwnership.cs) |
 | `EntitlementPagingSlicedResult` | [EntitlementPagingSlicedResult](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementPagingSlicedResult.cs) |
+| `EntitlementPlatformConfigInfo` | [EntitlementPlatformConfigInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementPlatformConfigInfo.cs) |
+| `EntitlementPlatformConfigUpdate` | [EntitlementPlatformConfigUpdate](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementPlatformConfigUpdate.cs) |
 | `EntitlementPrechekResult` | [EntitlementPrechekResult](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementPrechekResult.cs) |
 | `EntitlementRevocation` | [EntitlementRevocation](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementRevocation.cs) |
 | `EntitlementRevocationConfig` | [EntitlementRevocationConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementRevocationConfig.cs) |
@@ -1037,6 +1046,7 @@
 | `RewardCreate` | [RewardCreate](../../apis/AccelByte.Sdk.Api.Platform/Model/RewardCreate.cs) |
 | `RewardInfo` | [RewardInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/RewardInfo.cs) |
 | `RewardItem` | [RewardItem](../../apis/AccelByte.Sdk.Api.Platform/Model/RewardItem.cs) |
+| `RewardMigrationResult` | [RewardMigrationResult](../../apis/AccelByte.Sdk.Api.Platform/Model/RewardMigrationResult.cs) |
 | `RewardPagingSlicedResult` | [RewardPagingSlicedResult](../../apis/AccelByte.Sdk.Api.Platform/Model/RewardPagingSlicedResult.cs) |
 | `RewardUpdate` | [RewardUpdate](../../apis/AccelByte.Sdk.Api.Platform/Model/RewardUpdate.cs) |
 | `RewardsRequest` | [RewardsRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/RewardsRequest.cs) |
@@ -1121,3 +1131,4 @@
 | `XsollaConfig` | [XsollaConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/XsollaConfig.cs) |
 | `XsollaPaywallConfig` | [XsollaPaywallConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/XsollaPaywallConfig.cs) |
 | `XsollaPaywallConfigRequest` | [XsollaPaywallConfigRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/XsollaPaywallConfigRequest.cs) |
+| `entitlement origin sync result` | [EntitlementOriginSyncResult](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementOriginSyncResult.cs) |

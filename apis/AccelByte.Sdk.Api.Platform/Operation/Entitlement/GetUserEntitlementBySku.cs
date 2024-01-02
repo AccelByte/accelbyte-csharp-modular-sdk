@@ -41,6 +41,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             public GetUserEntitlementBySkuEntitlementClazz? EntitlementClazz { get; set; }
 
+            public string? Platform { get; set; }
+
 
 
 
@@ -62,6 +64,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             public GetUserEntitlementBySkuBuilder SetEntitlementClazz(GetUserEntitlementBySkuEntitlementClazz _entitlementClazz)
             {
                 EntitlementClazz = _entitlementClazz;
+                return this;
+            }
+
+            public GetUserEntitlementBySkuBuilder SetPlatform(string _platform)
+            {
+                Platform = _platform;
                 return this;
             }
 
@@ -121,6 +129,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
             if (builder.EntitlementClazz is not null) QueryParams["entitlementClazz"] = builder.EntitlementClazz.Value;
+            if (builder.Platform is not null) QueryParams["platform"] = builder.Platform;
             if (sku is not null) QueryParams["sku"] = sku;
 
 
@@ -137,6 +146,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             string userId,
             bool? activeOnly,
             GetUserEntitlementBySkuEntitlementClazz? entitlementClazz,
+            string? platform,
             string sku
         )
         {
@@ -145,6 +155,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
             if (entitlementClazz is not null) QueryParams["entitlementClazz"] = entitlementClazz.Value;
+            if (platform is not null) QueryParams["platform"] = platform;
             if (sku is not null) QueryParams["sku"] = sku;
 
 

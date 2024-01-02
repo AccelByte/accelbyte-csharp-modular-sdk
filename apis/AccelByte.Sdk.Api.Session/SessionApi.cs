@@ -103,6 +103,17 @@ namespace AccelByte.Sdk.Api.Session
         }
         private Wrapper.GameSession? _GameSession = null;
 
+        public Wrapper.NativeSession NativeSession
+        {
+            get
+            {
+                if (_NativeSession == null)
+                    _NativeSession = new Wrapper.NativeSession(_Sdk);
+                return _NativeSession;
+            }
+        }
+        private Wrapper.NativeSession? _NativeSession = null;
+
         public Wrapper.Party Party
         {
             get
