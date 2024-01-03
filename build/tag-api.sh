@@ -8,7 +8,7 @@ test -n "$SERVICE_API_KEY" || (echo "SERVICE_API_KEY is not set"; exit 1)
 
 SERVICE_API_NAME=`echo $SERVICE_API_KEY | sed -r 's/(^|_)([a-z])/\U\2/g'`
 CONFIG_KEY="Api"$SERVICE_API_NAME"Version"
-LAST_TAG=`git tag --list "api-"$SERVICE_API_KEY"/*" --sort -version:refname | tail -n 1`
+LAST_TAG=`git tag --list "api-"$SERVICE_API_KEY"/*" --sort=version:refname | tail -n 1`
 LAST_COMMIT=`git log --format="%H" -n 1`
 
 CHANGE_COUNT=`git diff --name-only $LAST_TAG | { grep -c "apis/AccelByte.Sdk.Api."$SERVICE_API_NAME"/version.txt" || test $? = 1; } | { grep -v grep || test $? = 1; }`

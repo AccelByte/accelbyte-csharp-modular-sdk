@@ -85,6 +85,7 @@ push_tags:
 		git tag --contains $$(git rev-list -n 1 'ags/v$(AGS_VER)') | \
 			grep -v 'ags/v$(AGS_VER)' | \
 			xargs -I{} sh -c 'git push origin {} || exit 255'; \
+		git push origin ags/v$(AGS_VER); \
 	else \
 		echo "AGS tag does not exists!"; exit 1; \
 	fi
@@ -141,3 +142,13 @@ outstanding_deprecation:
 			}' \
 		| tee outstanding_deprecation.out
 	@echo 1..$$(grep -c '^\(not \)\?ok' outstanding_deprecation.out)
+
+prep_release:
+	@test -n "$(AGS_VER)" || (echo "AGS_VER is not set" ; exit 1)
+        @echo "AGS version: "$(AGS_VER)
+	git fetch origin
+	make tag_api
+	make tag_ags AGS_VER=$(AGS_VER)
+	# make push_tags # need more test
+	make pack
+	make pack_pick AGS_VER=$(AGS_VER)

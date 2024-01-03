@@ -112,7 +112,7 @@ pipeline {
               sh "make pack_pick AGS_VER=${params.AGS_VERSION}"
 
               //Zip nuget packaged files as job artifact
-              zip zipFile: "csharp_modular_sdk_ags_${params.AGS_VERSION}.zip", dir: "/data/.publish_pick", overwrite: true, archive: true
+              zip zipFile: "csharp_modular_sdk_ags_${params.AGS_VERSION}.zip", dir: ".publish_pick", overwrite: true, archive: true
 
               withCredentials([usernamePassword(credentialsId: 'nuget-accelbyte-csharp-sdk', passwordVariable: 'NUGET_TOKEN', usernameVariable: 'NUGET_EMAIL')]) {
                 // sh "make pack_push_only NUGET_API_KEY=\$NUGET_TOKEN"
