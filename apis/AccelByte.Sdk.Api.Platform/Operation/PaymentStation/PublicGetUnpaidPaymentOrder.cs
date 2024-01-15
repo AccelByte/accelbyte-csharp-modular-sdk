@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// publicGetUnpaidPaymentOrder
     ///
-    /// Get payment order info.
+    ///  [Not Supported Yet In Starter] Get payment order info.
     /// Other detail info:
     /// 
     ///   * Returns : Payment order details

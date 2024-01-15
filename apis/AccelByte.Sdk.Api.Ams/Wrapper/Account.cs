@@ -25,52 +25,65 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
         }
 
         #region Operation Builders
+        public AdminAccountGet.AdminAccountGetBuilder AdminAccountGetOp
+        {
+            get { return new Operation.AdminAccountGet.AdminAccountGetBuilder(_sdk); }
+        }
+        public AdminAccountCreate.AdminAccountCreateBuilder AdminAccountCreateOp
+        {
+            get { return new Operation.AdminAccountCreate.AdminAccountCreateBuilder(_sdk); }
+        }
+        public AdminAccountLinkTokenGet.AdminAccountLinkTokenGetBuilder AdminAccountLinkTokenGetOp
+        {
+            get { return new Operation.AdminAccountLinkTokenGet.AdminAccountLinkTokenGetBuilder(_sdk); }
+        }
+        public AdminAccountLinkTokenPost.AdminAccountLinkTokenPostBuilder AdminAccountLinkTokenPostOp
+        {
+            get { return new Operation.AdminAccountLinkTokenPost.AdminAccountLinkTokenPostBuilder(_sdk); }
+        }
         public AccountGet.AccountGetBuilder AccountGetOp
         {
             get { return new Operation.AccountGet.AccountGetBuilder(_sdk); }
         }
-        public AccountCreate.AccountCreateBuilder AccountCreateOp
-        {
-            get { return new Operation.AccountCreate.AccountCreateBuilder(_sdk); }
-        }
-        public AccountLinkTokenGet.AccountLinkTokenGetBuilder AccountLinkTokenGetOp
-        {
-            get { return new Operation.AccountLinkTokenGet.AccountLinkTokenGetBuilder(_sdk); }
-        }
-        public AccountLink.AccountLinkBuilder AccountLinkOp
-        {
-            get { return new Operation.AccountLink.AccountLinkBuilder(_sdk); }
-        }
         #endregion
 
+        public Model.ApiAccountResponse? AdminAccountGet(AdminAccountGet input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ApiAccountCreateResponse? AdminAccountCreate(AdminAccountCreate input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ApiAccountLinkTokenResponse? AdminAccountLinkTokenGet(AdminAccountLinkTokenGet input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ApiAccountLinkResponse? AdminAccountLinkTokenPost(AdminAccountLinkTokenPost input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.ApiAccountResponse? AccountGet(AccountGet input)
-        {
-            var response = _sdk.RunRequest(input);
-
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApiAccountCreateResponse? AccountCreate(AccountCreate input)
-        {
-            var response = _sdk.RunRequest(input);
-
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApiAccountLinkTokenResponse? AccountLinkTokenGet(AccountLinkTokenGet input)
-        {
-            var response = _sdk.RunRequest(input);
-
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApiAccountLinkResponse? AccountLink(AccountLink input)
         {
             var response = _sdk.RunRequest(input);
 

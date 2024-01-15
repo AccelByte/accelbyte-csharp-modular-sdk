@@ -20,7 +20,7 @@ namespace AccelByte.Sdk.Api.Lobby.WSModel
 
         [AwesomeProperty("availability")]
         [JsonPropertyName("availability")]
-        public List<long>? Availability { get; set; }
+        public List<string>? Availability { get; set; }
 
         [AwesomeProperty("code")]
         [JsonPropertyName("code")]

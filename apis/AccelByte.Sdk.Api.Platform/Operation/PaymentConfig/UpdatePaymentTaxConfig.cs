@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// updatePaymentTaxConfig
     ///
-    /// Update payment tax config.
+    ///  [Not Supported Yet In Starter] Update payment tax config.
     /// 
     /// 
     /// 

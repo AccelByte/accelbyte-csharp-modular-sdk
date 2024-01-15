@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// listFulfillmentScripts
     ///
-    /// List all fulfillment scripts.
+    /// [Not Supported Yet In Starter] List all fulfillment scripts.
     /// Other detail info:
     /// 
     ///   * Required permission : resource="ADMIN:FULFILLMENT", action=2 (READ)

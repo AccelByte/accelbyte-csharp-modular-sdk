@@ -21,10 +21,11 @@
 ### Account Wrapper:  [Account](../../apis/AccelByte.Sdk.Api.Ams/Wrapper/Account.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
-| `/ams/v1/admin/namespaces/{namespace}/account` | GET | AccountGet | [AccountGet](../../apis/AccelByte.Sdk.Api.Ams/Operation/Account/AccountGet.cs) | [AccountGet](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Account/AccountGet.cs) |
-| `/ams/v1/admin/namespaces/{namespace}/account` | POST | AccountCreate | [AccountCreate](../../apis/AccelByte.Sdk.Api.Ams/Operation/Account/AccountCreate.cs) | [AccountCreate](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Account/AccountCreate.cs) |
-| `/ams/v1/admin/namespaces/{namespace}/account/link` | GET | AccountLinkTokenGet | [AccountLinkTokenGet](../../apis/AccelByte.Sdk.Api.Ams/Operation/Account/AccountLinkTokenGet.cs) | [AccountLinkTokenGet](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Account/AccountLinkTokenGet.cs) |
-| `/ams/v1/admin/namespaces/{namespace}/account/link` | POST | AccountLink | [AccountLink](../../apis/AccelByte.Sdk.Api.Ams/Operation/Account/AccountLink.cs) | [AccountLink](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Account/AccountLink.cs) |
+| `/ams/v1/admin/namespaces/{namespace}/account` | GET | AdminAccountGet | [AdminAccountGet](../../apis/AccelByte.Sdk.Api.Ams/Operation/Account/AdminAccountGet.cs) | [AdminAccountGet](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Account/AdminAccountGet.cs) |
+| `/ams/v1/admin/namespaces/{namespace}/account` | POST | AdminAccountCreate | [AdminAccountCreate](../../apis/AccelByte.Sdk.Api.Ams/Operation/Account/AdminAccountCreate.cs) | [AdminAccountCreate](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Account/AdminAccountCreate.cs) |
+| `/ams/v1/admin/namespaces/{namespace}/account/link` | GET | AdminAccountLinkTokenGet | [AdminAccountLinkTokenGet](../../apis/AccelByte.Sdk.Api.Ams/Operation/Account/AdminAccountLinkTokenGet.cs) | [AdminAccountLinkTokenGet](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Account/AdminAccountLinkTokenGet.cs) |
+| `/ams/v1/admin/namespaces/{namespace}/account/link` | POST | AdminAccountLinkTokenPost | [AdminAccountLinkTokenPost](../../apis/AccelByte.Sdk.Api.Ams/Operation/Account/AdminAccountLinkTokenPost.cs) | [AdminAccountLinkTokenPost](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Account/AdminAccountLinkTokenPost.cs) |
+| `/ams/v1/namespaces/{namespace}/account` | GET | AccountGet | [AccountGet](../../apis/AccelByte.Sdk.Api.Ams/Operation/Account/AccountGet.cs) | [AccountGet](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Account/AccountGet.cs) |
 
 ### Artifacts Wrapper:  [Artifacts](../../apis/AccelByte.Sdk.Api.Ams/Wrapper/Artifacts.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -73,6 +74,7 @@
 |---|---|---|---|---|
 | `/ams/v1/admin/namespaces/{namespace}/regions` | GET | InfoRegions | [InfoRegions](../../apis/AccelByte.Sdk.Api.Ams/Operation/AMSInfo/InfoRegions.cs) | [InfoRegions](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/AMSInfo/InfoRegions.cs) |
 | `/ams/v1/admin/namespaces/{namespace}/supported-instances` | GET | InfoSupportedInstances | [InfoSupportedInstances](../../apis/AccelByte.Sdk.Api.Ams/Operation/AMSInfo/InfoSupportedInstances.cs) | [InfoSupportedInstances](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/AMSInfo/InfoSupportedInstances.cs) |
+| `/ams/v1/upload-url` | GET | UploadURLGet | [UploadURLGet](../../apis/AccelByte.Sdk.Api.Ams/Operation/AMSInfo/UploadURLGet.cs) | [UploadURLGet](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/AMSInfo/UploadURLGet.cs) |
 
 ### Watchdogs Wrapper:  [Watchdogs](../../apis/AccelByte.Sdk.Api.Ams/Wrapper/Watchdogs.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -175,10 +177,6 @@
 | `api.QoSServer` | [ApiQoSServer](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiQoSServer.cs) |
 | `api.ReferencingFleet` | [ApiReferencingFleet](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiReferencingFleet.cs) |
 | `api.RegionConfig` | [ApiRegionConfig](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiRegionConfig.cs) |
-| `api.Time` | [ApiTime](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiTime.cs) |
 | `api.Timeout` | [ApiTimeout](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiTimeout.cs) |
 | `api.UpdateServerRequest` | [ApiUpdateServerRequest](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiUpdateServerRequest.cs) |
 | `response.ErrorResponse` | [ResponseErrorResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ResponseErrorResponse.cs) |
-| `time.Location` | [TimeLocation](../../apis/AccelByte.Sdk.Api.Ams/Model/TimeLocation.cs) |
-| `time.zone` | [TimeZone](../../apis/AccelByte.Sdk.Api.Ams/Model/TimeZone.cs) |
-| `time.zoneTrans` | [TimeZoneTrans](../../apis/AccelByte.Sdk.Api.Ams/Model/TimeZoneTrans.cs) |

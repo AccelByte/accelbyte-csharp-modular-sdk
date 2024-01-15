@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Cloudsave.Model
 {
@@ -26,7 +28,8 @@ namespace AccelByte.Sdk.Api.Cloudsave.Model
 
         [JsonPropertyName("set_by")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string? SetBy { get; set; }
+        [JsonStringEnum]
+        public ModelsPlayerRecordResponseSetBy? SetBy { get; set; }
 
         [JsonPropertyName("updated_at")]
         public DateTime? UpdatedAt { get; set; }
@@ -55,7 +58,8 @@ namespace AccelByte.Sdk.Api.Cloudsave.Model
 
         [JsonPropertyName("set_by")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string? SetBy { get; set; }
+        [JsonStringEnum]
+        public ModelsPlayerRecordResponseSetBy? SetBy { get; set; }
 
         [JsonPropertyName("updated_at")]
         public DateTime? UpdatedAt { get; set; }
@@ -68,4 +72,25 @@ namespace AccelByte.Sdk.Api.Cloudsave.Model
 
     }
 
+
+    public class ModelsPlayerRecordResponseSetBy : StringEnum<ModelsPlayerRecordResponseSetBy>
+    {
+        public static readonly ModelsPlayerRecordResponseSetBy CLIENT
+            = new ModelsPlayerRecordResponseSetBy("CLIENT");
+
+        public static readonly ModelsPlayerRecordResponseSetBy SERVER
+            = new ModelsPlayerRecordResponseSetBy("SERVER");
+
+
+        public static implicit operator ModelsPlayerRecordResponseSetBy(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ModelsPlayerRecordResponseSetBy(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

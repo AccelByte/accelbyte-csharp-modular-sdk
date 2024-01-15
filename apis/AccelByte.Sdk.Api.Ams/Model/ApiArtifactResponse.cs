@@ -16,13 +16,16 @@ namespace AccelByte.Sdk.Api.Ams.Model
         public string? ArtifactType { get; set; }
 
         [JsonPropertyName("createdOn")]
-        public ApiTime? CreatedOn { get; set; }
+        public DateTime? CreatedOn { get; set; }
 
         [JsonPropertyName("dsId")]
         public string? DsId { get; set; }
 
         [JsonPropertyName("expiresOn")]
-        public ApiTime? ExpiresOn { get; set; }
+        public DateTime? ExpiresOn { get; set; }
+
+        [JsonPropertyName("filename")]
+        public string? Filename { get; set; }
 
         [JsonPropertyName("fleetId")]
         public string? FleetId { get; set; }
@@ -37,13 +40,10 @@ namespace AccelByte.Sdk.Api.Ams.Model
         public string? Namespace { get; set; }
 
         [JsonPropertyName("sizeBytes")]
-        public int? SizeBytes { get; set; }
+        public long? SizeBytes { get; set; }
 
         [JsonPropertyName("status")]
         public string? Status { get; set; }
-
-        [JsonPropertyName("storagePath")]
-        public string? StoragePath { get; set; }
 
     }
 

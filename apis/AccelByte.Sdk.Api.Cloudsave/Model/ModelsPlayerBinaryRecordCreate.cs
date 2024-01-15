@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Cloudsave.Model
 {
@@ -23,9 +25,31 @@ namespace AccelByte.Sdk.Api.Cloudsave.Model
         public string? Key { get; set; }
 
         [JsonPropertyName("set_by")]
-        public string? SetBy { get; set; }
+        [JsonStringEnum]
+        public ModelsPlayerBinaryRecordCreateSetBy? SetBy { get; set; }
 
     }
 
 
+
+    public class ModelsPlayerBinaryRecordCreateSetBy : StringEnum<ModelsPlayerBinaryRecordCreateSetBy>
+    {
+        public static readonly ModelsPlayerBinaryRecordCreateSetBy CLIENT
+            = new ModelsPlayerBinaryRecordCreateSetBy("CLIENT");
+
+        public static readonly ModelsPlayerBinaryRecordCreateSetBy SERVER
+            = new ModelsPlayerBinaryRecordCreateSetBy("SERVER");
+
+
+        public static implicit operator ModelsPlayerBinaryRecordCreateSetBy(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ModelsPlayerBinaryRecordCreateSetBy(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

@@ -7,15 +7,39 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Cloudsave.Model
 {
     public class ModelsGameBinaryRecordMetadataRequest : AccelByte.Sdk.Core.Model
     {
         [JsonPropertyName("set_by")]
-        public string? SetBy { get; set; }
+        [JsonStringEnum]
+        public ModelsGameBinaryRecordMetadataRequestSetBy? SetBy { get; set; }
 
     }
 
 
+
+    public class ModelsGameBinaryRecordMetadataRequestSetBy : StringEnum<ModelsGameBinaryRecordMetadataRequestSetBy>
+    {
+        public static readonly ModelsGameBinaryRecordMetadataRequestSetBy CLIENT
+            = new ModelsGameBinaryRecordMetadataRequestSetBy("CLIENT");
+
+        public static readonly ModelsGameBinaryRecordMetadataRequestSetBy SERVER
+            = new ModelsGameBinaryRecordMetadataRequestSetBy("SERVER");
+
+
+        public static implicit operator ModelsGameBinaryRecordMetadataRequestSetBy(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ModelsGameBinaryRecordMetadataRequestSetBy(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

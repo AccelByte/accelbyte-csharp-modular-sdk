@@ -22,6 +22,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
     /// <summary>
     /// FleetUpdate
     ///
+    /// Optionally, sampling rules for the fleet can also be updated
+    /// 
     /// Required Permission: ADMIN:NAMESPACE:{namespace}:ARMADA:FLEET [UPDATE]
     /// </summary>
     public class FleetUpdate : AccelByte.Sdk.Core.Operation

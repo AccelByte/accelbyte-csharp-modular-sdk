@@ -20,26 +20,26 @@ using AccelByte.Sdk.Api.Ams.Model;
 namespace AccelByte.Sdk.Api.Ams.Operation
 {
     /// <summary>
-    /// AccountLink
+    /// AdminAccountGet
     ///
-    /// Required Permission: ADMIN:NAMESPACE:{namespace}:ARMADA:ACCOUNT [CREATE]
+    /// Required Permission: ADMIN:NAMESPACE:{namespace}:ARMADA:ACCOUNT [READ]
     /// </summary>
-    public class AccountLink : AccelByte.Sdk.Core.Operation
+    public class AdminAccountGet : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static AccountLinkBuilder Builder { get => new AccountLinkBuilder(); }
+        public static AdminAccountGetBuilder Builder { get => new AdminAccountGetBuilder(); }
 
-        public class AccountLinkBuilder
-            : OperationBuilder<AccountLinkBuilder>
+        public class AdminAccountGetBuilder
+            : OperationBuilder<AdminAccountGetBuilder>
         {
 
 
 
 
 
-            internal AccountLinkBuilder() { }
+            internal AdminAccountGetBuilder() { }
 
-            internal AccountLinkBuilder(IAccelByteSdk sdk)
+            internal AdminAccountGetBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -49,13 +49,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            public AccountLink Build(
-                ApiAccountLinkRequest body,
+            public AdminAccountGet Build(
                 string namespace_
             )
             {
-                AccountLink op = new AccountLink(this,
-                    body,
+                AdminAccountGet op = new AdminAccountGet(this,
                     namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
@@ -65,13 +63,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 return op;
             }
 
-            public Model.ApiAccountLinkResponse? Execute(
-                ApiAccountLinkRequest body,
+            public Model.ApiAccountResponse? Execute(
                 string namespace_
             )
             {
-                AccountLink op = Build(
-                    body,
+                AdminAccountGet op = Build(
                     namespace_
                 );
 
@@ -86,8 +82,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private AccountLink(AccountLinkBuilder builder,
-            ApiAccountLinkRequest body,
+        private AdminAccountGet(AdminAccountGetBuilder builder,
             string namespace_
         )
         {
@@ -97,16 +92,14 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            BodyParams = body;
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public AccountLink(
-            string namespace_,
-            Model.ApiAccountLinkRequest body
+        public AdminAccountGet(
+            string namespace_
         )
         {
             PathParams["namespace"] = namespace_;
@@ -115,21 +108,20 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            BodyParams = body;
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/ams/v1/admin/namespaces/{namespace}/account/link";
+        public override string Path => "/ams/v1/admin/namespaces/{namespace}/account";
 
-        public override HttpMethod Method => HttpMethod.Post;
+        public override HttpMethod Method => HttpMethod.Get;
 
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
 
-        public Model.ApiAccountLinkResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.ApiAccountResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -137,11 +129,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.ApiAccountLinkResponse>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ApiAccountResponse>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.ApiAccountLinkResponse>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ApiAccountResponse>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

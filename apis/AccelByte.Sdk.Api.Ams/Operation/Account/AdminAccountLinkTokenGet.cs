@@ -20,26 +20,28 @@ using AccelByte.Sdk.Api.Ams.Model;
 namespace AccelByte.Sdk.Api.Ams.Operation
 {
     /// <summary>
-    /// AccountCreate
+    /// AdminAccountLinkTokenGet
     ///
-    /// Required Permission: ADMIN:NAMESPACE:{namespace}:ARMADA:ACCOUNT [CREATE]
+    /// The link token returned can be used to connect another namespace to the account in which the provided namespace is linked. This route fails if there is no account linked to the specified namespace.
+    /// 
+    /// Required Permission: ADMIN:NAMESPACE:{namespace}:ARMADA:ACCOUNT [READ]
     /// </summary>
-    public class AccountCreate : AccelByte.Sdk.Core.Operation
+    public class AdminAccountLinkTokenGet : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static AccountCreateBuilder Builder { get => new AccountCreateBuilder(); }
+        public static AdminAccountLinkTokenGetBuilder Builder { get => new AdminAccountLinkTokenGetBuilder(); }
 
-        public class AccountCreateBuilder
-            : OperationBuilder<AccountCreateBuilder>
+        public class AdminAccountLinkTokenGetBuilder
+            : OperationBuilder<AdminAccountLinkTokenGetBuilder>
         {
 
 
 
 
 
-            internal AccountCreateBuilder() { }
+            internal AdminAccountLinkTokenGetBuilder() { }
 
-            internal AccountCreateBuilder(IAccelByteSdk sdk)
+            internal AdminAccountLinkTokenGetBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -49,13 +51,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            public AccountCreate Build(
-                ApiAccountCreateRequest body,
+            public AdminAccountLinkTokenGet Build(
                 string namespace_
             )
             {
-                AccountCreate op = new AccountCreate(this,
-                    body,
+                AdminAccountLinkTokenGet op = new AdminAccountLinkTokenGet(this,
                     namespace_
                 );
                 op.PreferredSecurityMethod = PreferredSecurityMethod;
@@ -65,13 +65,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 return op;
             }
 
-            public Model.ApiAccountCreateResponse? Execute(
-                ApiAccountCreateRequest body,
+            public Model.ApiAccountLinkTokenResponse? Execute(
                 string namespace_
             )
             {
-                AccountCreate op = Build(
-                    body,
+                AdminAccountLinkTokenGet op = Build(
                     namespace_
                 );
 
@@ -86,8 +84,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private AccountCreate(AccountCreateBuilder builder,
-            ApiAccountCreateRequest body,
+        private AdminAccountLinkTokenGet(AdminAccountLinkTokenGetBuilder builder,
             string namespace_
         )
         {
@@ -97,16 +94,14 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            BodyParams = body;
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public AccountCreate(
-            string namespace_,
-            Model.ApiAccountCreateRequest body
+        public AdminAccountLinkTokenGet(
+            string namespace_
         )
         {
             PathParams["namespace"] = namespace_;
@@ -115,21 +110,20 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            BodyParams = body;
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/ams/v1/admin/namespaces/{namespace}/account";
+        public override string Path => "/ams/v1/admin/namespaces/{namespace}/account/link";
 
-        public override HttpMethod Method => HttpMethod.Post;
+        public override HttpMethod Method => HttpMethod.Get;
 
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
 
-        public Model.ApiAccountCreateResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.ApiAccountLinkTokenResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -137,11 +131,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.ApiAccountCreateResponse>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ApiAccountLinkTokenResponse>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.ApiAccountCreateResponse>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ApiAccountLinkTokenResponse>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

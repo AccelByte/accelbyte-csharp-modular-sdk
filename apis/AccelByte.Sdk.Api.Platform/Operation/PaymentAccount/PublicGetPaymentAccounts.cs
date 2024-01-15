@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// publicGetPaymentAccounts
     ///
-    /// Get payment accounts.
+    ///  [Not Supported Yet In Starter] Get payment accounts.
     /// Other detail info:
     /// 
     ///   * Required permission : resource="NAMESPACE:{namespace}:USER:{userId}:PAYMENT:ACCOUNT", action=2 (READ)
