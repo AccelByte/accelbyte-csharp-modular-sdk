@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -27,6 +27,8 @@ namespace AccelByte.Sdk.Core
         public IOperationProcessPipeline OpProcess { get; } = new OperationProcessPipeline();
 
         public string Namespace { get => Configuration.ConfigRepository.Namespace; }
+
+        public string FlightId { get; private set; } = String.Empty;
 
         public AccelByteSdk(IAccelByteConfig config)
         {
@@ -146,6 +148,11 @@ namespace AccelByte.Sdk.Core
                 return Configuration.TokenValidator.Validate(this, accessToken, permission, action, aNamespace, userId);
             else
                 throw new Exception("Could not validate token. No token validator assigned.");
+        }
+
+        public void UpdateFlightId(string flightId)
+        {
+            FlightId = flightId;
         }
     }
 }

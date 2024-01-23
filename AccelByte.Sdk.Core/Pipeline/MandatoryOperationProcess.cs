@@ -66,6 +66,11 @@ namespace AccelByte.Sdk.Core.Pipeline
                 operation.HeaderParams["X-Amzn-Trace-Id"] = amazonTraceId;
             }
 
+            string xFlightId = operation.FlightId;
+            if (xFlightId == "")
+                xFlightId = sdk.FlightId;
+            operation.HeaderParams["x-flight-id"] = xFlightId;
+
             return operation;
         }
     }

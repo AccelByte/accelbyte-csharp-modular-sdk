@@ -38,6 +38,8 @@ namespace AccelByte.Sdk.Core
 
         IAccelByteSdkBuilder<T> RegisterEvent(string key, object eventAction);
 
+        IAccelByteSdkBuilder<T> SetFlightId(string flightId);
+
         T Build();
     }
 }

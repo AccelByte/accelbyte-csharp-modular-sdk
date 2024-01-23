@@ -16,7 +16,22 @@ using AccelByte.Sdk.Core.Pipeline;
 
 namespace AccelByte.Sdk.Core
 {
-    public class AccelByteSdkBuilder<T> : IAccelByteSdkBuilder<T> where T : IAccelByteSdk
+    public abstract class AccelByteSdkBuilder
+    {
+        private static string _DefaultFlightId;
+
+        protected string GetDefaultFlightId()
+        {
+            return _DefaultFlightId;
+        }
+
+        static AccelByteSdkBuilder()
+        {
+            _DefaultFlightId = Guid.NewGuid().ToString();
+        }
+    }
+
+    public class AccelByteSdkBuilder<T> : AccelByteSdkBuilder, IAccelByteSdkBuilder<T> where T : IAccelByteSdk
     {
         private IHttpClient? _Client = null;
 
@@ -39,6 +54,8 @@ namespace AccelByte.Sdk.Core
         private Dictionary<string, bool> _Flags = new();
 
         private ISdkEvents _Events = new SdkEvents();
+
+        private string _FlightId = "";
 
         public IAccelByteSdkBuilder<T> SetHttpClient(IHttpClient client)
         {
@@ -116,6 +133,12 @@ namespace AccelByte.Sdk.Core
             return this;
         }
 
+        public IAccelByteSdkBuilder<T> SetFlightId(string flightId)
+        {
+            _FlightId = flightId;
+            return this;
+        }
+
         public T Build()
         {
             if (_Client == null)
@@ -162,6 +185,10 @@ namespace AccelByte.Sdk.Core
                 foreach (IOperationProcess opp in _OpProcesses)
                     sdk.OpProcess.AppendToChain(opp);
             }
+
+            if (_FlightId == "")
+                _FlightId = GetDefaultFlightId();
+            sdk.UpdateFlightId(_FlightId);
 
             return sdk;
         }

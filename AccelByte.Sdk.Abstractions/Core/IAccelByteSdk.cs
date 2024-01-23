@@ -21,6 +21,8 @@ namespace AccelByte.Sdk.Core
 
         string Namespace { get; }
 
+        string FlightId { get; }
+
         void StopServices();
 
         T? GetService<T>() where T : ISdkService;
@@ -36,5 +38,7 @@ namespace AccelByte.Sdk.Core
         bool ValidateToken(string accessToken);
 
         bool ValidateToken(string accessToken, string permission, int action);
+
+        void UpdateFlightId(string flightId);
     }
 }

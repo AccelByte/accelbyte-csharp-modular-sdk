@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,6 +36,8 @@ namespace AccelByte.Sdk.Core
         public abstract List<string> Produces { get; }
 
         public string PreferredSecurityMethod { get; set; } = String.Empty;
+
+        public string FlightId { get; set; } = String.Empty;
 
         public List<string> Securities { get; } = new List<string>();
 
@@ -151,6 +153,14 @@ namespace AccelByte.Sdk.Core
             }
 
             return url.ToString();
+        }
+
+        protected void SetBaseFields<T>(OperationBuilder<T> opBuilder) where T : OperationBuilder<T>
+        {
+            PreferredSecurityMethod = opBuilder.PreferredSecurityMethod;
+            RequestJsonOptions = opBuilder.RequestJsonOptions;
+            ResponseJsonOptions = opBuilder.ResponseJsonOptions;
+            FlightId = opBuilder.FlightId;
         }
     }
 }
