@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 ValidateOneTimeLinkingCodeV3 op = new ValidateOneTimeLinkingCodeV3(this,
                     oneTimeLinkCode
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ValidateOneTimeLinkingCodeV3Builder>(this);
                 return op;
             }
 

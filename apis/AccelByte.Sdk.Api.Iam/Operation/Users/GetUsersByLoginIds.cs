@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 GetUsersByLoginIds op = new GetUsersByLoginIds(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetUsersByLoginIdsBuilder>(this);
                 return op;
             }
 

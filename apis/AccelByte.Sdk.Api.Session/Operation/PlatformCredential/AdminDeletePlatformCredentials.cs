@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 AdminDeletePlatformCredentials op = new AdminDeletePlatformCredentials(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminDeletePlatformCredentialsBuilder>(this);
                 return op;
             }
 

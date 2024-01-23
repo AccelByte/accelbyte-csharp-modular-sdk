@@ -69,10 +69,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             {
                 CreateNamespace op = new CreateNamespace(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CreateNamespaceBuilder>(this);
                 return op;
             }
 

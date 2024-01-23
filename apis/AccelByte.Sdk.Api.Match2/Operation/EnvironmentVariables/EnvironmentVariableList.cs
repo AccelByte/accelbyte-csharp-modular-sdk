@@ -54,10 +54,8 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             {
                 EnvironmentVariableList op = new EnvironmentVariableList(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<EnvironmentVariableListBuilder>(this);
                 return op;
             }
 

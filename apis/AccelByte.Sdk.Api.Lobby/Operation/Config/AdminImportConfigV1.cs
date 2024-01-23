@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 AdminImportConfigV1 op = new AdminImportConfigV1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminImportConfigV1Builder>(this);
                 return op;
             }
 

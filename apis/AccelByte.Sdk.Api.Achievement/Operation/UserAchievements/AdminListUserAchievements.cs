@@ -116,10 +116,8 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     namespace_,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminListUserAchievementsBuilder>(this);
                 return op;
             }
 

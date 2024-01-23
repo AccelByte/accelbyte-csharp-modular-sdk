@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     body,
                     clientId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateClientBuilder>(this);
                 return op;
             }
 

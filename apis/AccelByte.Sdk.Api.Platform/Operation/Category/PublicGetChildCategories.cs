@@ -80,10 +80,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     categoryPath,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetChildCategoriesBuilder>(this);
                 return op;
             }
 

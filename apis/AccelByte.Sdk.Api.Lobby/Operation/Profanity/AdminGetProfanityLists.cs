@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 AdminGetProfanityLists op = new AdminGetProfanityLists(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetProfanityListsBuilder>(this);
                 return op;
             }
 

@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 GetPublishedStoreBackup op = new GetPublishedStoreBackup(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetPublishedStoreBackupBuilder>(this);
                 return op;
             }
 

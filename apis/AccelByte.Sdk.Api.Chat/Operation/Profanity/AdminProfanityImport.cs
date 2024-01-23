@@ -74,10 +74,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     file,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminProfanityImportBuilder>(this);
                 return op;
             }
 

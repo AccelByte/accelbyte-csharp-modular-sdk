@@ -78,10 +78,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 PublicGetRootCategories op = new PublicGetRootCategories(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetRootCategoriesBuilder>(this);
                 return op;
             }
 

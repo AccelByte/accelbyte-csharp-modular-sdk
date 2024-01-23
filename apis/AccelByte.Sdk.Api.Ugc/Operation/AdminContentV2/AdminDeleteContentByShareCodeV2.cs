@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     shareCode,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminDeleteContentByShareCodeV2Builder>(this);
                 return op;
             }
 

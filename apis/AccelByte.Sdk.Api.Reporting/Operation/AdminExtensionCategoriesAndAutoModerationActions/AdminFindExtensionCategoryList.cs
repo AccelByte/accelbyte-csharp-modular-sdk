@@ -70,10 +70,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             {
                 AdminFindExtensionCategoryList op = new AdminFindExtensionCategoryList(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminFindExtensionCategoryListBuilder>(this);
                 return op;
             }
 

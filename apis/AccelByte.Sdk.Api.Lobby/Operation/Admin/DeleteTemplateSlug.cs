@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     namespace_,
                     templateSlug
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteTemplateSlugBuilder>(this);
                 return op;
             }
 

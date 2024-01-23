@@ -54,10 +54,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             {
                 PublicGetMessages op = new PublicGetMessages(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetMessagesBuilder>(this);
                 return op;
             }
 

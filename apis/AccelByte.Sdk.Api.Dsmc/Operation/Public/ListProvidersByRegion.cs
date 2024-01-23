@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                 ListProvidersByRegion op = new ListProvidersByRegion(this,
                     region
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListProvidersByRegionBuilder>(this);
                 return op;
             }
 

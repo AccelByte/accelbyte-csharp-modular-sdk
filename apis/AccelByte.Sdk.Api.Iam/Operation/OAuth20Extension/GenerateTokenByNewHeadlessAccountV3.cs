@@ -74,10 +74,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 GenerateTokenByNewHeadlessAccountV3 op = new GenerateTokenByNewHeadlessAccountV3(this,
                     linkingToken
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GenerateTokenByNewHeadlessAccountV3Builder>(this);
                 return op;
             }
 

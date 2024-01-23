@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 LinkHeadlessAccountToMyAccountV3 op = new LinkHeadlessAccountToMyAccountV3(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<LinkHeadlessAccountToMyAccountV3Builder>(this);
                 return op;
             }
 

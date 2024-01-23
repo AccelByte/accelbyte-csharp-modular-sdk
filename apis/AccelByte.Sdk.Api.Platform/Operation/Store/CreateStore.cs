@@ -69,10 +69,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 CreateStore op = new CreateStore(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CreateStoreBuilder>(this);
                 return op;
             }
 

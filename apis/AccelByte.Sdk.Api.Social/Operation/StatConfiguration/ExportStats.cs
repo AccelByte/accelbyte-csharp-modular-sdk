@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 ExportStats op = new ExportStats(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ExportStatsBuilder>(this);
                 return op;
             }
 

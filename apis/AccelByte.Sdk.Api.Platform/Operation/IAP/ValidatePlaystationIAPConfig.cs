@@ -66,10 +66,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 ValidatePlaystationIAPConfig op = new ValidatePlaystationIAPConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ValidatePlaystationIAPConfigBuilder>(this);
                 return op;
             }
 

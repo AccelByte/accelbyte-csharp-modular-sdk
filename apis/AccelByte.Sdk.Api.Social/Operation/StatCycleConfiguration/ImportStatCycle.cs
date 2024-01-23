@@ -75,10 +75,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 ImportStatCycle op = new ImportStatCycle(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ImportStatCycleBuilder>(this);
                 return op;
             }
 

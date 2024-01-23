@@ -92,10 +92,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 QueryFulfillmentHistories op = new QueryFulfillmentHistories(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<QueryFulfillmentHistoriesBuilder>(this);
                 return op;
             }
 

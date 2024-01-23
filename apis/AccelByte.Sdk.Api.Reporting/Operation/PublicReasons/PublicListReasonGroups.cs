@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                 PublicListReasonGroups op = new PublicListReasonGroups(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicListReasonGroupsBuilder>(this);
                 return op;
             }
 

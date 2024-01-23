@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
             {
                 SpecificEventIDDescriptionHandler op = new SpecificEventIDDescriptionHandler(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<SpecificEventIDDescriptionHandlerBuilder>(this);
                 return op;
             }
 

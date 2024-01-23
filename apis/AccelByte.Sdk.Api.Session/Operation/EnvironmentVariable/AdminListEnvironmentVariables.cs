@@ -54,10 +54,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
             {
                 AdminListEnvironmentVariables op = new AdminListEnvironmentVariables(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminListEnvironmentVariablesBuilder>(this);
                 return op;
             }
 

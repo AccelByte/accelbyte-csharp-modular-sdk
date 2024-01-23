@@ -73,10 +73,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 BulkUpdateUserStatItemV2 op = new BulkUpdateUserStatItemV2(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<BulkUpdateUserStatItemV2Builder>(this);
                 return op;
             }
 

@@ -57,10 +57,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 ListFulfillmentScripts op = new ListFulfillmentScripts(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListFulfillmentScriptsBuilder>(this);
                 return op;
             }
 

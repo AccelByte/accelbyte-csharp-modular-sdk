@@ -77,10 +77,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     password,
                     username
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AuthenticationWithPlatformLinkV3Builder>(this);
                 return op;
             }
 

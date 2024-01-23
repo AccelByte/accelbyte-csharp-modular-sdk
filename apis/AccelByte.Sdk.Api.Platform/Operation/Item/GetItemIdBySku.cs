@@ -79,10 +79,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_,
                     sku
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetItemIdBySkuBuilder>(this);
                 return op;
             }
 

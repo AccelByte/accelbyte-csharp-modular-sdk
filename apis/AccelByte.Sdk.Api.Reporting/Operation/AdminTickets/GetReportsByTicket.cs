@@ -74,10 +74,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     namespace_,
                     ticketId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetReportsByTicketBuilder>(this);
                 return op;
             }
 

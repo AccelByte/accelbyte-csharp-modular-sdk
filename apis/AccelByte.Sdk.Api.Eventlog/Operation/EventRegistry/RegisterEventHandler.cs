@@ -57,10 +57,8 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
                 RegisterEventHandler op = new RegisterEventHandler(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RegisterEventHandlerBuilder>(this);
                 return op;
             }
 

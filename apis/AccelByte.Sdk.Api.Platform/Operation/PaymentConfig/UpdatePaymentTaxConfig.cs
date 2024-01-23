@@ -80,10 +80,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 UpdatePaymentTaxConfig op = new UpdatePaymentTaxConfig(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdatePaymentTaxConfigBuilder>(this);
                 return op;
             }
 

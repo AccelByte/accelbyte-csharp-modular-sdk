@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 RetrieveAllActiveThirdPartyLoginPlatformCredentialPublicV3 op = new RetrieveAllActiveThirdPartyLoginPlatformCredentialPublicV3(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RetrieveAllActiveThirdPartyLoginPlatformCredentialPublicV3Builder>(this);
                 return op;
             }
 

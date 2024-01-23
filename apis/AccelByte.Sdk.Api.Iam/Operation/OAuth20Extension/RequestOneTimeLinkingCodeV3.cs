@@ -80,10 +80,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 RequestOneTimeLinkingCodeV3 op = new RequestOneTimeLinkingCodeV3(this,
                     platformId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RequestOneTimeLinkingCodeV3Builder>(this);
                 return op;
             }
 

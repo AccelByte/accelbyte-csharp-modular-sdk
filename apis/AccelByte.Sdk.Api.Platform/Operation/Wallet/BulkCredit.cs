@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 BulkCredit op = new BulkCredit(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<BulkCreditBuilder>(this);
                 return op;
             }
 

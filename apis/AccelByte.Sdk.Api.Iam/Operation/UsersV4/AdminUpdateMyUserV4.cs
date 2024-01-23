@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminUpdateMyUserV4 op = new AdminUpdateMyUserV4(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminUpdateMyUserV4Builder>(this);
                 return op;
             }
 

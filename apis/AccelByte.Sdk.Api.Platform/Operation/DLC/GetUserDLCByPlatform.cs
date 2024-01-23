@@ -64,10 +64,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId,
                     type
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetUserDLCByPlatformBuilder>(this);
                 return op;
             }
 

@@ -76,10 +76,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 UpdateXsollaConfig op = new UpdateXsollaConfig(this,
                     id
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateXsollaConfigBuilder>(this);
                 return op;
             }
 

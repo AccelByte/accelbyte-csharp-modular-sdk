@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
                     namespace_,
                     userID
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetRecentPlayerBuilder>(this);
                 return op;
             }
 

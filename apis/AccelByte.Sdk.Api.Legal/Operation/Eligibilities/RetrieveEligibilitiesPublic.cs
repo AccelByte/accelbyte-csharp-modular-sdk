@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 RetrieveEligibilitiesPublic op = new RetrieveEligibilitiesPublic(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RetrieveEligibilitiesPublicBuilder>(this);
                 return op;
             }
 

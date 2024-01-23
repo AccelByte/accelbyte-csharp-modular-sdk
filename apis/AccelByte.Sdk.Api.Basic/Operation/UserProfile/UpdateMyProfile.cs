@@ -75,10 +75,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 UpdateMyProfile op = new UpdateMyProfile(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateMyProfileBuilder>(this);
                 return op;
             }
 

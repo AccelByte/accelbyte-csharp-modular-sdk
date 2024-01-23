@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     invitationId,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetAdminInvitationV3Builder>(this);
                 return op;
             }
 

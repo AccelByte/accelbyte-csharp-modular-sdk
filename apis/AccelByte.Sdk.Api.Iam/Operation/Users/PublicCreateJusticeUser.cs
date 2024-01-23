@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_,
                     targetNamespace
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicCreateJusticeUserBuilder>(this);
                 return op;
             }
 

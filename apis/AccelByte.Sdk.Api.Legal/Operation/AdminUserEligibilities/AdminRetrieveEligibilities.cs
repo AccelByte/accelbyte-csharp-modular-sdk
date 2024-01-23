@@ -75,10 +75,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     clientId,
                     countryCode
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminRetrieveEligibilitiesBuilder>(this);
                 return op;
             }
 

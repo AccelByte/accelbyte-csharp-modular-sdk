@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 DeleteServicePluginConfig op = new DeleteServicePluginConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteServicePluginConfigBuilder>(this);
                 return op;
             }
 

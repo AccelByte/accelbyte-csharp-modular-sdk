@@ -65,10 +65,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_,
                     storeId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteCategoryBuilder>(this);
                 return op;
             }
 

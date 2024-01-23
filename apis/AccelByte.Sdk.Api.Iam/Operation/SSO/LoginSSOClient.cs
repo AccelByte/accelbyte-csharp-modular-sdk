@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 LoginSSOClient op = new LoginSSOClient(this,
                     platformId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<LoginSSOClientBuilder>(this);
                 return op;
             }
 

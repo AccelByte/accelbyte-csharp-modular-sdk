@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                 DeletePluginConfig op = new DeletePluginConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeletePluginConfigBuilder>(this);
                 return op;
             }
 

@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 PublicGetLanguages op = new PublicGetLanguages(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetLanguagesBuilder>(this);
                 return op;
             }
 

@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     messageId,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminUpdateInboxMessageBuilder>(this);
                 return op;
             }
 

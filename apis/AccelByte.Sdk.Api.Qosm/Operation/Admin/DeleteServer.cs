@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
                 DeleteServer op = new DeleteServer(this,
                     region
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteServerBuilder>(this);
                 return op;
             }
 

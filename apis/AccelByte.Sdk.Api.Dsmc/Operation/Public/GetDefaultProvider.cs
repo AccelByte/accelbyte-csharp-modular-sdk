@@ -54,10 +54,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             {
                 GetDefaultProvider op = new GetDefaultProvider(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetDefaultProviderBuilder>(this);
                 return op;
             }
 

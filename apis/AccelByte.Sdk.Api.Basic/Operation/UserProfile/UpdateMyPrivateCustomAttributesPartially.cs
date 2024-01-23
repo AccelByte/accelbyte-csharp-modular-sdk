@@ -70,10 +70,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 UpdateMyPrivateCustomAttributesPartially op = new UpdateMyPrivateCustomAttributesPartially(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateMyPrivateCustomAttributesPartiallyBuilder>(this);
                 return op;
             }
 

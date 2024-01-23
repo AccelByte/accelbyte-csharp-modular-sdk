@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 ReportUser op = new ReportUser(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ReportUserBuilder>(this);
                 return op;
             }
 

@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 GetRoleAdminStatus op = new GetRoleAdminStatus(this,
                     roleId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetRoleAdminStatusBuilder>(this);
                 return op;
             }
 

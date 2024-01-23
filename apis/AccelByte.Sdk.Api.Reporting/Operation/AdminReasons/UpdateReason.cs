@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     namespace_,
                     reasonId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateReasonBuilder>(this);
                 return op;
             }
 

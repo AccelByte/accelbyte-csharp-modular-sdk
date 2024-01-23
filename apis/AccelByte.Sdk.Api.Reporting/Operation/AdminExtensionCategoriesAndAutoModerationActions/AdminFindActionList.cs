@@ -54,10 +54,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             {
                 AdminFindActionList op = new AdminFindActionList(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminFindActionListBuilder>(this);
                 return op;
             }
 

@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                 ExportConfigV1 op = new ExportConfigV1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ExportConfigV1Builder>(this);
                 return op;
             }
 

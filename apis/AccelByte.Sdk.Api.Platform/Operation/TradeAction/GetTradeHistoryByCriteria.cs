@@ -101,10 +101,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 GetTradeHistoryByCriteria op = new GetTradeHistoryByCriteria(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetTradeHistoryByCriteriaBuilder>(this);
                 return op;
             }
 

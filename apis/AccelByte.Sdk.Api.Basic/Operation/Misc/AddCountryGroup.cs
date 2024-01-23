@@ -70,10 +70,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 AddCountryGroup op = new AddCountryGroup(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AddCountryGroupBuilder>(this);
                 return op;
             }
 

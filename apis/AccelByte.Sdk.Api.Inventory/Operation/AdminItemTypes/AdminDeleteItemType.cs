@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     itemTypeName,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminDeleteItemTypeBuilder>(this);
                 return op;
             }
 

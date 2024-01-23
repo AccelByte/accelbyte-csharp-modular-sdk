@@ -100,10 +100,8 @@ namespace AccelByte.Sdk.Api.Group.Operation
                 GetGroupListPublicV1 op = new GetGroupListPublicV1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetGroupListPublicV1Builder>(this);
                 return op;
             }
 

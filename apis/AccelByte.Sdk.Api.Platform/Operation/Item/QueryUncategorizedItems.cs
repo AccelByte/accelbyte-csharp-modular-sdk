@@ -101,10 +101,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 QueryUncategorizedItems op = new QueryUncategorizedItems(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<QueryUncategorizedItemsBuilder>(this);
                 return op;
             }
 

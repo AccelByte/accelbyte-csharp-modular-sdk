@@ -81,10 +81,8 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     leaderboardCode,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetAllTimeLeaderboardRankingAdminV3Builder>(this);
                 return op;
             }
 

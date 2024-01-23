@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminMakeFactorMyDefaultV4 op = new AdminMakeFactorMyDefaultV4(this,
                     factor
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminMakeFactorMyDefaultV4Builder>(this);
                 return op;
             }
 

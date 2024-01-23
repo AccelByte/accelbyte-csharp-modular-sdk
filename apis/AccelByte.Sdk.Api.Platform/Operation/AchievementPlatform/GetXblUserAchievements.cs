@@ -64,10 +64,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId,
                     xboxUserId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetXblUserAchievementsBuilder>(this);
                 return op;
             }
 

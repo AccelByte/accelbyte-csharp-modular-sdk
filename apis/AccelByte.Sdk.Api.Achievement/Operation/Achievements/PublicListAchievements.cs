@@ -101,10 +101,8 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     namespace_,
                     language
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicListAchievementsBuilder>(this);
                 return op;
             }
 

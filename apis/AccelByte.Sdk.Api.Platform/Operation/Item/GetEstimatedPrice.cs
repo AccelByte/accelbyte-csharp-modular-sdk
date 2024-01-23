@@ -76,10 +76,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     itemIds,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetEstimatedPriceBuilder>(this);
                 return op;
             }
 

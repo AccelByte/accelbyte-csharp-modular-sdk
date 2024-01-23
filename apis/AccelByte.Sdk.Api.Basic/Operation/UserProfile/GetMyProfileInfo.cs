@@ -67,10 +67,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 GetMyProfileInfo op = new GetMyProfileInfo(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetMyProfileInfoBuilder>(this);
                 return op;
             }
 

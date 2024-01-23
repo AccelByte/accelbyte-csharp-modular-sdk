@@ -102,10 +102,8 @@ namespace AccelByte.Sdk.Api.Group.Operation
                 GetUserGroupInformationPublicV2 op = new GetUserGroupInformationPublicV2(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetUserGroupInformationPublicV2Builder>(this);
                 return op;
             }
 

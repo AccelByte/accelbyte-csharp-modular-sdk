@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     namespace_,
                     ticketid
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<MatchTicketDetailsBuilder>(this);
                 return op;
             }
 

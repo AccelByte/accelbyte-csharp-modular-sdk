@@ -81,10 +81,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId,
                     appType
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicQueryUserEntitlementsByAppTypeBuilder>(this);
                 return op;
             }
 

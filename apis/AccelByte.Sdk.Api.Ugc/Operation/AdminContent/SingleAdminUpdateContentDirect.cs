@@ -65,10 +65,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     contentId,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<SingleAdminUpdateContentDirectBuilder>(this);
                 return op;
             }
 

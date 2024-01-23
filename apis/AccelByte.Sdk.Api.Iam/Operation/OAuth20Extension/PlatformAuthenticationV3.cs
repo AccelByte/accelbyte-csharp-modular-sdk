@@ -179,10 +179,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     platformId,
                     state
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PlatformAuthenticationV3Builder>(this);
                 return op;
             }
 

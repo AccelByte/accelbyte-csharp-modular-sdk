@@ -63,10 +63,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     namespace_,
                     podName
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetGameSessionByPodNameBuilder>(this);
                 return op;
             }
 

@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 CreateKeyGroup op = new CreateKeyGroup(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CreateKeyGroupBuilder>(this);
                 return op;
             }
 

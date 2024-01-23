@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     sessionId,
                     statusType
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminUpdateGameSessionMemberBuilder>(this);
                 return op;
             }
 

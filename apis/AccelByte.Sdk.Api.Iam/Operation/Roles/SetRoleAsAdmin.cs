@@ -63,10 +63,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 SetRoleAsAdmin op = new SetRoleAsAdmin(this,
                     roleId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<SetRoleAsAdminBuilder>(this);
                 return op;
             }
 

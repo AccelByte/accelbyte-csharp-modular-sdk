@@ -55,10 +55,8 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             {
                 GetNamespacesGameTelemetryV1AdminNamespacesGet op = new GetNamespacesGameTelemetryV1AdminNamespacesGet(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetNamespacesGameTelemetryV1AdminNamespacesGetBuilder>(this);
                 return op;
             }
 

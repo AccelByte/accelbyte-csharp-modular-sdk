@@ -84,10 +84,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 PublicExistsAnyMyActiveEntitlement op = new PublicExistsAnyMyActiveEntitlement(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicExistsAnyMyActiveEntitlementBuilder>(this);
                 return op;
             }
 

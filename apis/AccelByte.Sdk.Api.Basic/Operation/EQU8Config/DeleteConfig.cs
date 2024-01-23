@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 DeleteConfig op = new DeleteConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteConfigBuilder>(this);
                 return op;
             }
 

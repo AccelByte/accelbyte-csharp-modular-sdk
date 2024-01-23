@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_,
                     extTxId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListExtOrderNoByExtTxIdBuilder>(this);
                 return op;
             }
 

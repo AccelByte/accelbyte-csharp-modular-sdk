@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     namespace_,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetCustomAttributesInfoBuilder>(this);
                 return op;
             }
 

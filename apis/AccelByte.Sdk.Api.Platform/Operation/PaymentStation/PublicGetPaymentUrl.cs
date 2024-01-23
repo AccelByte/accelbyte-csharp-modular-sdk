@@ -67,10 +67,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 PublicGetPaymentUrl op = new PublicGetPaymentUrl(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetPaymentUrlBuilder>(this);
                 return op;
             }
 

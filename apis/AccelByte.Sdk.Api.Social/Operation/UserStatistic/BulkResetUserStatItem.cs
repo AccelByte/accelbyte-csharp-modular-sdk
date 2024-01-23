@@ -69,10 +69,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 BulkResetUserStatItem op = new BulkResetUserStatItem(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<BulkResetUserStatItemBuilder>(this);
                 return op;
             }
 

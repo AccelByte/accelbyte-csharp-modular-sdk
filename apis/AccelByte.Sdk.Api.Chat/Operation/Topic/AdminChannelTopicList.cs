@@ -80,10 +80,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                 AdminChannelTopicList op = new AdminChannelTopicList(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminChannelTopicListBuilder>(this);
                 return op;
             }
 

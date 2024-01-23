@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 VerifyTokenV3 op = new VerifyTokenV3(this,
                     token
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<VerifyTokenV3Builder>(this);
                 return op;
             }
 

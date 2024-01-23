@@ -57,10 +57,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 PublicGenerateMyAuthenticatorKeyV4 op = new PublicGenerateMyAuthenticatorKeyV4(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGenerateMyAuthenticatorKeyV4Builder>(this);
                 return op;
             }
 

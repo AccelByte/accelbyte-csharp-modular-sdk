@@ -83,10 +83,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 ListAdminsV3 op = new ListAdminsV3(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListAdminsV3Builder>(this);
                 return op;
             }
 

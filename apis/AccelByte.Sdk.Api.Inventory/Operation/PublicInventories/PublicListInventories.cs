@@ -90,10 +90,8 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                 PublicListInventories op = new PublicListInventories(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicListInventoriesBuilder>(this);
                 return op;
             }
 

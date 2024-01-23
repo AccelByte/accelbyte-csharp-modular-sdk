@@ -66,10 +66,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             {
                 InvalidateUserInfoCache op = new InvalidateUserInfoCache(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<InvalidateUserInfoCacheBuilder>(this);
                 return op;
             }
 

@@ -65,10 +65,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 RetrieveAcceptedAgreementsForMultiUsers op = new RetrieveAcceptedAgreementsForMultiUsers(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RetrieveAcceptedAgreementsForMultiUsersBuilder>(this);
                 return op;
             }
 

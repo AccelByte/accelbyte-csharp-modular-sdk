@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                 GetType op = new GetType(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetTypeBuilder>(this);
                 return op;
             }
 

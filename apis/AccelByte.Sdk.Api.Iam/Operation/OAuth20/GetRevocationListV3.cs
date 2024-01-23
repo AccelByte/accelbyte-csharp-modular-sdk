@@ -57,10 +57,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 GetRevocationListV3 op = new GetRevocationListV3(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetRevocationListV3Builder>(this);
                 return op;
             }
 

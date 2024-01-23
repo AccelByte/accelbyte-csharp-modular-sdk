@@ -66,10 +66,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                     namespace_,
                     region
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CreateRootRegionOverrideBuilder>(this);
                 return op;
             }
 

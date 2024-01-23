@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                     name,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeletePortBuilder>(this);
                 return op;
             }
 

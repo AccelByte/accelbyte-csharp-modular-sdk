@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 AdminAccountGet op = new AdminAccountGet(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminAccountGetBuilder>(this);
                 return op;
             }
 

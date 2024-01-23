@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_,
                     resource
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminDeleteClientPermissionV3Builder>(this);
                 return op;
             }
 

@@ -77,10 +77,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 PublicGetMyUserV3 op = new PublicGetMyUserV3(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetMyUserV3Builder>(this);
                 return op;
             }
 

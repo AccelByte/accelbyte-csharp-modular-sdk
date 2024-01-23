@@ -96,10 +96,8 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
                 GetActiveMatchmakingGameSessions op = new GetActiveMatchmakingGameSessions(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetActiveMatchmakingGameSessionsBuilder>(this);
                 return op;
             }
 

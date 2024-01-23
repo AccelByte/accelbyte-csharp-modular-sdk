@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminGetCountryBlacklistV3 op = new AdminGetCountryBlacklistV3(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetCountryBlacklistV3Builder>(this);
                 return op;
             }
 

@@ -63,10 +63,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     body,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminUpdatePlatformCredentialsBuilder>(this);
                 return op;
             }
 

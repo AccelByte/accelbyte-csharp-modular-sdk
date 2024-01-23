@@ -130,10 +130,8 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
                     namespace_,
                     sessionType
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminQuerySessionBuilder>(this);
                 return op;
             }
 

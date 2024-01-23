@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     namespace_,
                     watchdogID
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<WatchdogConnectBuilder>(this);
                 return op;
             }
 

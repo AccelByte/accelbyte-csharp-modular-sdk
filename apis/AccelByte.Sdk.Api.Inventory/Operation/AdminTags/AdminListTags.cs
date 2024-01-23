@@ -92,10 +92,8 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                 AdminListTags op = new AdminListTags(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminListTagsBuilder>(this);
                 return op;
             }
 

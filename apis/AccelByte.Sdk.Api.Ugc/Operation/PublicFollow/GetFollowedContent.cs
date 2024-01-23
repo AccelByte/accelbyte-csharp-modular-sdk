@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                 GetFollowedContent op = new GetFollowedContent(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetFollowedContentBuilder>(this);
                 return op;
             }
 

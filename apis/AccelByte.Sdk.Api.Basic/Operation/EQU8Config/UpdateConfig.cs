@@ -67,10 +67,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 UpdateConfig op = new UpdateConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateConfigBuilder>(this);
                 return op;
             }
 

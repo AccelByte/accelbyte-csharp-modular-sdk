@@ -93,10 +93,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 QueryEntitlements1 op = new QueryEntitlements1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<QueryEntitlements1Builder>(this);
                 return op;
             }
 

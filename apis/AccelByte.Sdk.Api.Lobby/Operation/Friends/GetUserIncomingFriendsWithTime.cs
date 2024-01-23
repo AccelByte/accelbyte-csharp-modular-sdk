@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 GetUserIncomingFriendsWithTime op = new GetUserIncomingFriendsWithTime(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetUserIncomingFriendsWithTimeBuilder>(this);
                 return op;
             }
 

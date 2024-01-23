@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 GetPaymentMerchantConfig op = new GetPaymentMerchantConfig(this,
                     id
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetPaymentMerchantConfigBuilder>(this);
                 return op;
             }
 

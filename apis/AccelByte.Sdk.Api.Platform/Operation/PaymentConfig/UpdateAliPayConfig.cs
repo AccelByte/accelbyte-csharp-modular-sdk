@@ -84,10 +84,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 UpdateAliPayConfig op = new UpdateAliPayConfig(this,
                     id
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateAliPayConfigBuilder>(this);
                 return op;
             }
 

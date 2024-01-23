@@ -65,10 +65,8 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     seasonId,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetUserSeasonBuilder>(this);
                 return op;
             }
 

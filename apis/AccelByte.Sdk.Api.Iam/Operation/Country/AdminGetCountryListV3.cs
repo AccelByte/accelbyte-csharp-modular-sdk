@@ -64,10 +64,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminGetCountryListV3 op = new AdminGetCountryListV3(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetCountryListV3Builder>(this);
                 return op;
             }
 

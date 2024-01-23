@@ -71,10 +71,8 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                 ExportAchievements op = new ExportAchievements(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ExportAchievementsBuilder>(this);
                 return op;
             }
 

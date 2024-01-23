@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 DeleteGoogleIAPConfig op = new DeleteGoogleIAPConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteGoogleIAPConfigBuilder>(this);
                 return op;
             }
 

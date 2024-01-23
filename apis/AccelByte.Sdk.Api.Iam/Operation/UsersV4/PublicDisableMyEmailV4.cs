@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 PublicDisableMyEmailV4 op = new PublicDisableMyEmailV4(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicDisableMyEmailV4Builder>(this);
                 return op;
             }
 

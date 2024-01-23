@@ -66,10 +66,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     type,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicDeletePaymentAccountBuilder>(this);
                 return op;
             }
 

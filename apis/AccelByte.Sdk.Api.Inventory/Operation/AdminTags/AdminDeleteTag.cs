@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     namespace_,
                     tagName
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminDeleteTagBuilder>(this);
                 return op;
             }
 

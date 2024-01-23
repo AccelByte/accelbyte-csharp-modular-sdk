@@ -54,10 +54,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 AdminSendMyMFAEmailCodeV4 op = new AdminSendMyMFAEmailCodeV4(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminSendMyMFAEmailCodeV4Builder>(this);
                 return op;
             }
 

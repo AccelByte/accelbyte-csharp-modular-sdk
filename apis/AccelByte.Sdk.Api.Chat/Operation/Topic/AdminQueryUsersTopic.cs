@@ -98,10 +98,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     namespace_,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminQueryUsersTopicBuilder>(this);
                 return op;
             }
 

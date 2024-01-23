@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 ListCurrencies op = new ListCurrencies(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListCurrenciesBuilder>(this);
                 return op;
             }
 

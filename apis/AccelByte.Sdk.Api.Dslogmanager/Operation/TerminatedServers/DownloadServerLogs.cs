@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
                     namespace_,
                     podName
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DownloadServerLogsBuilder>(this);
                 return op;
             }
 

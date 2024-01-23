@@ -70,10 +70,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                 CreateImagePatch op = new CreateImagePatch(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CreateImagePatchBuilder>(this);
                 return op;
             }
 

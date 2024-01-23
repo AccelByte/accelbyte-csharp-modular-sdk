@@ -173,10 +173,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 PlatformTokenGrantV3 op = new PlatformTokenGrantV3(this,
                     platformId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PlatformTokenGrantV3Builder>(this);
                 return op;
             }
 

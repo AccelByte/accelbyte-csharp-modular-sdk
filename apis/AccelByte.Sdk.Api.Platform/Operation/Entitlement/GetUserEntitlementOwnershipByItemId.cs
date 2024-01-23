@@ -80,10 +80,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId,
                     itemId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetUserEntitlementOwnershipByItemIdBuilder>(this);
                 return op;
             }
 

@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     screenshotId,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteContentScreenshotBuilder>(this);
                 return op;
             }
 

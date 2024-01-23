@@ -75,10 +75,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 AdminQueryPlayerAttributes op = new AdminQueryPlayerAttributes(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminQueryPlayerAttributesBuilder>(this);
                 return op;
             }
 

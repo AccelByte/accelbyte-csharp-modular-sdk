@@ -96,10 +96,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminGetBannedDevicesV4 op = new AdminGetBannedDevicesV4(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetBannedDevicesV4Builder>(this);
                 return op;
             }
 

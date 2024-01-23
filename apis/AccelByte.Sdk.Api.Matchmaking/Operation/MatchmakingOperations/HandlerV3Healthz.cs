@@ -52,10 +52,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
             {
                 HandlerV3Healthz op = new HandlerV3Healthz(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<HandlerV3HealthzBuilder>(this);
                 return op;
             }
 

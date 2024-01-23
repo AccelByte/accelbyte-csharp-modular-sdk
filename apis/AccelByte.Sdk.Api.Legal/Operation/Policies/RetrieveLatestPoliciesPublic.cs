@@ -101,10 +101,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 RetrieveLatestPoliciesPublic op = new RetrieveLatestPoliciesPublic(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RetrieveLatestPoliciesPublicBuilder>(this);
                 return op;
             }
 

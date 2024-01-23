@@ -128,10 +128,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                 AdminQueryTopic op = new AdminQueryTopic(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminQueryTopicBuilder>(this);
                 return op;
             }
 

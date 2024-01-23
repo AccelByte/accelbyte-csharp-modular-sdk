@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                 GetFollowedUsers op = new GetFollowedUsers(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetFollowedUsersBuilder>(this);
                 return op;
             }
 

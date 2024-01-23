@@ -67,10 +67,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 GetLootBoxGrpcInfo op = new GetLootBoxGrpcInfo(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetLootBoxGrpcInfoBuilder>(this);
                 return op;
             }
 

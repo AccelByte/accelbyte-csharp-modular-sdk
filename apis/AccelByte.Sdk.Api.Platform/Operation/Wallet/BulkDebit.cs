@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 BulkDebit op = new BulkDebit(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<BulkDebitBuilder>(this);
                 return op;
             }
 

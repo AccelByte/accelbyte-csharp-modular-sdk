@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     namespace_,
                     topicName
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetNotificationTopicV1AdminBuilder>(this);
                 return op;
             }
 

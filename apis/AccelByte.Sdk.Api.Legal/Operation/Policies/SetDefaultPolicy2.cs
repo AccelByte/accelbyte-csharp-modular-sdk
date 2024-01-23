@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 SetDefaultPolicy2 op = new SetDefaultPolicy2(this,
                     policyId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<SetDefaultPolicy2Builder>(this);
                 return op;
             }
 

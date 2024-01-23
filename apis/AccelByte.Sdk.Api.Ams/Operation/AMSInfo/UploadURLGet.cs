@@ -52,10 +52,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             {
                 UploadURLGet op = new UploadURLGet(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UploadURLGetBuilder>(this);
                 return op;
             }
 

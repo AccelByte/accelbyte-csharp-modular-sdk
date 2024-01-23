@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                 CountSession op = new CountSession(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CountSessionBuilder>(this);
                 return op;
             }
 

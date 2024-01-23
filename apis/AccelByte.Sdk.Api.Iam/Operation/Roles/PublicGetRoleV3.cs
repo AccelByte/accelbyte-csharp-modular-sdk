@@ -57,10 +57,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 PublicGetRoleV3 op = new PublicGetRoleV3(this,
                     roleId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetRoleV3Builder>(this);
                 return op;
             }
 

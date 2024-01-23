@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_,
                     code
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetQRCodeBuilder>(this);
                 return op;
             }
 

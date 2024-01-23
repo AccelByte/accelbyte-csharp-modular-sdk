@@ -82,10 +82,8 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     namespace_,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CancelInvitationGroupMemberV2Builder>(this);
                 return op;
             }
 

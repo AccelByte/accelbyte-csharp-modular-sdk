@@ -93,10 +93,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 QueryRewards1 op = new QueryRewards1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<QueryRewards1Builder>(this);
                 return op;
             }
 

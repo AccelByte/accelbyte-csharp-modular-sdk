@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     code,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicEnableMyEmailV4Builder>(this);
                 return op;
             }
 

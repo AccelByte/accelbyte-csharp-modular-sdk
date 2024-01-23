@@ -93,10 +93,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     namespace_,
                     keyword
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<QueryStatsBuilder>(this);
                 return op;
             }
 

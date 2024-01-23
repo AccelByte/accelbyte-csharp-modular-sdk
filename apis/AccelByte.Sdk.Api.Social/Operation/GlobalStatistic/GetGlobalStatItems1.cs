@@ -83,10 +83,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 GetGlobalStatItems1 op = new GetGlobalStatItems1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetGlobalStatItems1Builder>(this);
                 return op;
             }
 

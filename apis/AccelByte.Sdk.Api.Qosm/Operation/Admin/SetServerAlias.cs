@@ -63,10 +63,8 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
                     body,
                     region
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<SetServerAliasBuilder>(this);
                 return op;
             }
 

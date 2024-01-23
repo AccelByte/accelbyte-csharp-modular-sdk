@@ -84,10 +84,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 UpdateStripeConfig op = new UpdateStripeConfig(this,
                     id
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateStripeConfigBuilder>(this);
                 return op;
             }
 

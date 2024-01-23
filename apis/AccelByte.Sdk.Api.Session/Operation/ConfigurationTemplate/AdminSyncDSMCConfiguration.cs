@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 AdminSyncDSMCConfiguration op = new AdminSyncDSMCConfiguration(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminSyncDSMCConfigurationBuilder>(this);
                 return op;
             }
 

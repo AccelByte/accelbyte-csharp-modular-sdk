@@ -71,10 +71,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     paymentOrderNo,
                     paymentProvider
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetPaymentTaxValueBuilder>(this);
                 return op;
             }
 

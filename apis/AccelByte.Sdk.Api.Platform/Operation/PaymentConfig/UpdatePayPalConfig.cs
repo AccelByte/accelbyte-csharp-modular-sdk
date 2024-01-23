@@ -84,10 +84,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 UpdatePayPalConfig op = new UpdatePayPalConfig(this,
                     id
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdatePayPalConfigBuilder>(this);
                 return op;
             }
 

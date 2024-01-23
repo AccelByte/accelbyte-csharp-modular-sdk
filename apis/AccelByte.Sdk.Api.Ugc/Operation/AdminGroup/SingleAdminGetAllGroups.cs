@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                 SingleAdminGetAllGroups op = new SingleAdminGetAllGroups(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<SingleAdminGetAllGroupsBuilder>(this);
                 return op;
             }
 

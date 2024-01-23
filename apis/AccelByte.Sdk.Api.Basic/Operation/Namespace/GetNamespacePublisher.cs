@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 GetNamespacePublisher op = new GetNamespacePublisher(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetNamespacePublisherBuilder>(this);
                 return op;
             }
 

@@ -132,10 +132,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 QueryPaymentNotifications op = new QueryPaymentNotifications(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<QueryPaymentNotificationsBuilder>(this);
                 return op;
             }
 

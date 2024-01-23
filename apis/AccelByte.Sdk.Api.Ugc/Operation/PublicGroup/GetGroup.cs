@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     namespace_,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetGroupBuilder>(this);
                 return op;
             }
 

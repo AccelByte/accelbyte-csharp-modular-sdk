@@ -173,10 +173,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     paymentProvider,
                     returnUrl
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicNormalizePaymentReturnUrlBuilder>(this);
                 return op;
             }
 

@@ -69,10 +69,8 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                 BulkGetUserSeasonProgression op = new BulkGetUserSeasonProgression(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<BulkGetUserSeasonProgressionBuilder>(this);
                 return op;
             }
 

@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 DeleteNamespace op = new DeleteNamespace(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteNamespaceBuilder>(this);
                 return op;
             }
 

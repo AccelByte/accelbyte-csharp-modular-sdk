@@ -69,10 +69,8 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                 CreateSeason op = new CreateSeason(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CreateSeasonBuilder>(this);
                 return op;
             }
 

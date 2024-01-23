@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                 AdminGetAllReasons op = new AdminGetAllReasons(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetAllReasonsBuilder>(this);
                 return op;
             }
 

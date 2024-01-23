@@ -82,10 +82,8 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                 AdminGetListPersonalDataRequest op = new AdminGetListPersonalDataRequest(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetListPersonalDataRequestBuilder>(this);
                 return op;
             }
 

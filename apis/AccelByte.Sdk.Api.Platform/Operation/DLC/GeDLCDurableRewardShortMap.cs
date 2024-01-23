@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_,
                     dlcType
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GeDLCDurableRewardShortMapBuilder>(this);
                 return op;
             }
 

@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     namespace_,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<SetUserVisibilityStatusV2Builder>(this);
                 return op;
             }
 

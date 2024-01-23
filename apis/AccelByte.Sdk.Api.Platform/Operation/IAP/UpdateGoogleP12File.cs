@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 UpdateGoogleP12File op = new UpdateGoogleP12File(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateGoogleP12FileBuilder>(this);
                 return op;
             }
 

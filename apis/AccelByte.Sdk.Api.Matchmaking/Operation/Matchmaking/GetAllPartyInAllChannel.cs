@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 GetAllPartyInAllChannel op = new GetAllPartyInAllChannel(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetAllPartyInAllChannelBuilder>(this);
                 return op;
             }
 

@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminInviteUserNewV4 op = new AdminInviteUserNewV4(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminInviteUserNewV4Builder>(this);
                 return op;
             }
 

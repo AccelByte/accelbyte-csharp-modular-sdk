@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                 ClearCache op = new ClearCache(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ClearCacheBuilder>(this);
                 return op;
             }
 

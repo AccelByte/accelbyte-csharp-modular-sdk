@@ -154,10 +154,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 ArtifactGet op = new ArtifactGet(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ArtifactGetBuilder>(this);
                 return op;
             }
 

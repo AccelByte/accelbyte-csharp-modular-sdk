@@ -90,10 +90,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 QueryPaymentProviderConfig op = new QueryPaymentProviderConfig(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<QueryPaymentProviderConfigBuilder>(this);
                 return op;
             }
 

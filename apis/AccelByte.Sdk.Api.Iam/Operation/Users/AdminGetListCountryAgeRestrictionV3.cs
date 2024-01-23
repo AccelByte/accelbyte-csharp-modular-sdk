@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminGetListCountryAgeRestrictionV3 op = new AdminGetListCountryAgeRestrictionV3(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetListCountryAgeRestrictionV3Builder>(this);
                 return op;
             }
 

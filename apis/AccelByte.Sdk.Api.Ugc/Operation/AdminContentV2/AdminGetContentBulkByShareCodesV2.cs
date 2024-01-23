@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     body,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetContentBulkByShareCodesV2Builder>(this);
                 return op;
             }
 

@@ -66,10 +66,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     platformID,
                     platformUserID
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetUserByPlatformUserIDBuilder>(this);
                 return op;
             }
 

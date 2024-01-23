@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 PublicGetRecentPlayer op = new PublicGetRecentPlayer(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetRecentPlayerBuilder>(this);
                 return op;
             }
 

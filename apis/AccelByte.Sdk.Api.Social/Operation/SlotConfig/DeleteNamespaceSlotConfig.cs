@@ -65,10 +65,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 DeleteNamespaceSlotConfig op = new DeleteNamespaceSlotConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteNamespaceSlotConfigBuilder>(this);
                 return op;
             }
 

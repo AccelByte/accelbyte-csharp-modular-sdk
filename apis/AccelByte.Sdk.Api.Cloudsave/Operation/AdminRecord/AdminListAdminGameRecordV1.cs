@@ -80,10 +80,8 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                 AdminListAdminGameRecordV1 op = new AdminListAdminGameRecordV1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminListAdminGameRecordV1Builder>(this);
                 return op;
             }
 

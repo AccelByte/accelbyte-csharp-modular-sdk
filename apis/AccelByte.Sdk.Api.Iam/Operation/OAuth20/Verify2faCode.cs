@@ -65,10 +65,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     mfaToken,
                     rememberDevice
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<Verify2faCodeBuilder>(this);
                 return op;
             }
 

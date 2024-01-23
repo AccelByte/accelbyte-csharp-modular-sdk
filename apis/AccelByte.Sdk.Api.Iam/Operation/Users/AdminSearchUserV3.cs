@@ -155,10 +155,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminSearchUserV3 op = new AdminSearchUserV3(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminSearchUserV3Builder>(this);
                 return op;
             }
 

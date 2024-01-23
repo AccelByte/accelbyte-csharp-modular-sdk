@@ -77,10 +77,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 GetBulkItemIdBySkus op = new GetBulkItemIdBySkus(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetBulkItemIdBySkusBuilder>(this);
                 return op;
             }
 

@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 PublicGetInputValidationByField op = new PublicGetInputValidationByField(this,
                     field
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetInputValidationByFieldBuilder>(this);
                 return op;
             }
 

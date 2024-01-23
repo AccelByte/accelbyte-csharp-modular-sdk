@@ -69,10 +69,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                 CreateImage op = new CreateImage(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CreateImageBuilder>(this);
                 return op;
             }
 

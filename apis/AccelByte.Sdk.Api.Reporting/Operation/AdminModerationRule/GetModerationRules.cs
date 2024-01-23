@@ -88,10 +88,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                 GetModerationRules op = new GetModerationRules(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetModerationRulesBuilder>(this);
                 return op;
             }
 

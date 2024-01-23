@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 DeleteClient op = new DeleteClient(this,
                     clientId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteClientBuilder>(this);
                 return op;
             }
 

@@ -117,10 +117,8 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
                     limit,
                     offset
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminSearchSessionsV2Builder>(this);
                 return op;
             }
 

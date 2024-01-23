@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 GetOrderStatistics op = new GetOrderStatistics(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetOrderStatisticsBuilder>(this);
                 return op;
             }
 

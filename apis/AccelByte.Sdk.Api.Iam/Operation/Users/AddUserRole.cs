@@ -63,10 +63,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     roleId,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AddUserRoleBuilder>(this);
                 return op;
             }
 

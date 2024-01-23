@@ -84,10 +84,8 @@ namespace AccelByte.Sdk.Api.Group.Operation
                 GetMemberRolesListAdminV1 op = new GetMemberRolesListAdminV1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetMemberRolesListAdminV1Builder>(this);
                 return op;
             }
 

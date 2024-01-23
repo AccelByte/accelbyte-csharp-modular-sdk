@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 RetrieveAllLegalPoliciesByNamespace op = new RetrieveAllLegalPoliciesByNamespace(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RetrieveAllLegalPoliciesByNamespaceBuilder>(this);
                 return op;
             }
 

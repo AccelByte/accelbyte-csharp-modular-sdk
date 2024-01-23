@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                 GetAdminEmailConfiguration op = new GetAdminEmailConfiguration(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetAdminEmailConfigurationBuilder>(this);
                 return op;
             }
 

@@ -82,10 +82,8 @@ namespace AccelByte.Sdk.Api.Group.Operation
                 ListGroupConfigurationAdminV1 op = new ListGroupConfigurationAdminV1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListGroupConfigurationAdminV1Builder>(this);
                 return op;
             }
 

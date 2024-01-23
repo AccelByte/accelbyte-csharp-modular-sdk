@@ -96,10 +96,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminGetClientsByNamespaceV3 op = new AdminGetClientsByNamespaceV3(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetClientsByNamespaceV3Builder>(this);
                 return op;
             }
 

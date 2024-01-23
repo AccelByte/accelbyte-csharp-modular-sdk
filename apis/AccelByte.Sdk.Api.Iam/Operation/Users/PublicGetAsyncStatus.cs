@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_,
                     requestId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetAsyncStatusBuilder>(this);
                 return op;
             }
 

@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     countryCode,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetCountryAgeRestrictionV3Builder>(this);
                 return op;
             }
 

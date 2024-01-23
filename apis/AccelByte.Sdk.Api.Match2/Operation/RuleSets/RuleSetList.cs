@@ -80,10 +80,8 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                 RuleSetList op = new RuleSetList(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RuleSetListBuilder>(this);
                 return op;
             }
 

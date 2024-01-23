@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 GetEntitlementConfigInfo op = new GetEntitlementConfigInfo(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetEntitlementConfigInfoBuilder>(this);
                 return op;
             }
 

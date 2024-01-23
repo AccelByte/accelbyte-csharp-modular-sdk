@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 TokenIntrospectionV3 op = new TokenIntrospectionV3(this,
                     token
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<TokenIntrospectionV3Builder>(this);
                 return op;
             }
 

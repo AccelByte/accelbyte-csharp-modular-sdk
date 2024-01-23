@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                 GetTag op = new GetTag(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetTagBuilder>(this);
                 return op;
             }
 

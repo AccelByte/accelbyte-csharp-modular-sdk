@@ -92,10 +92,8 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
                     body,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<QueryEventStreamHandlerBuilder>(this);
                 return op;
             }
 

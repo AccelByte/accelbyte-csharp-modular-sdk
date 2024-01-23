@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminRemoveRoleAdminV3 op = new AdminRemoveRoleAdminV3(this,
                     roleId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminRemoveRoleAdminV3Builder>(this);
                 return op;
             }
 

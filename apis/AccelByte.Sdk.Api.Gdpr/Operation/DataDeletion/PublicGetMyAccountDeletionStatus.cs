@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             {
                 PublicGetMyAccountDeletionStatus op = new PublicGetMyAccountDeletionStatus(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetMyAccountDeletionStatusBuilder>(this);
                 return op;
             }
 

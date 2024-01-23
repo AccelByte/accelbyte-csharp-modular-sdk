@@ -57,10 +57,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminDeleteRoleV4 op = new AdminDeleteRoleV4(this,
                     roleId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminDeleteRoleV4Builder>(this);
                 return op;
             }
 

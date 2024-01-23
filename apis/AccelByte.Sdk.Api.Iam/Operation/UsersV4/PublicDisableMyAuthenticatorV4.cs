@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 PublicDisableMyAuthenticatorV4 op = new PublicDisableMyAuthenticatorV4(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicDisableMyAuthenticatorV4Builder>(this);
                 return op;
             }
 

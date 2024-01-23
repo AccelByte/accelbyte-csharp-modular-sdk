@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     namespace_,
                     sessionId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateGameSessionBackfillTicketIDBuilder>(this);
                 return op;
             }
 

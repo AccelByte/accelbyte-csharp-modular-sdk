@@ -64,10 +64,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                     namespace_,
                     version
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetImagePatchesBuilder>(this);
                 return op;
             }
 

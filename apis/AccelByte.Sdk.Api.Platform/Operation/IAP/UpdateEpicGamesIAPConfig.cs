@@ -66,10 +66,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 UpdateEpicGamesIAPConfig op = new UpdateEpicGamesIAPConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateEpicGamesIAPConfigBuilder>(this);
                 return op;
             }
 

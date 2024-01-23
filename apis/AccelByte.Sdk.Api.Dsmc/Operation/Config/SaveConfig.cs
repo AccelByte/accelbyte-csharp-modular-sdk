@@ -130,10 +130,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                 SaveConfig op = new SaveConfig(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<SaveConfigBuilder>(this);
                 return op;
             }
 

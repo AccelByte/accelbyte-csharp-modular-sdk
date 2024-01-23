@@ -66,10 +66,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 UpdateOculusIAPConfig op = new UpdateOculusIAPConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateOculusIAPConfigBuilder>(this);
                 return op;
             }
 

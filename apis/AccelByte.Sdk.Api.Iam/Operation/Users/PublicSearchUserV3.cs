@@ -137,10 +137,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 PublicSearchUserV3 op = new PublicSearchUserV3(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicSearchUserV3Builder>(this);
                 return op;
             }
 

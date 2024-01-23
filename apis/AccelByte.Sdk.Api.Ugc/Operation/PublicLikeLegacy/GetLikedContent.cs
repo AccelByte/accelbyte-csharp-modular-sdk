@@ -148,10 +148,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                 GetLikedContent op = new GetLikedContent(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetLikedContentBuilder>(this);
                 return op;
             }
 

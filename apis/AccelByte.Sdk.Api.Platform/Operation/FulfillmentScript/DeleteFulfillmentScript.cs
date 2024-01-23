@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 DeleteFulfillmentScript op = new DeleteFulfillmentScript(this,
                     id
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteFulfillmentScriptBuilder>(this);
                 return op;
             }
 

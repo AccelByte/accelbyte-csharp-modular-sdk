@@ -88,10 +88,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                 AdminListStagingContents op = new AdminListStagingContents(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminListStagingContentsBuilder>(this);
                 return op;
             }
 

@@ -57,10 +57,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                 ExportConfig op = new ExportConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ExportConfigBuilder>(this);
                 return op;
             }
 

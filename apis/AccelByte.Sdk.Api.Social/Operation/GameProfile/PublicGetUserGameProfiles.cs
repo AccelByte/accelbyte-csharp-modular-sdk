@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     namespace_,
                     userIds
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetUserGameProfilesBuilder>(this);
                 return op;
             }
 

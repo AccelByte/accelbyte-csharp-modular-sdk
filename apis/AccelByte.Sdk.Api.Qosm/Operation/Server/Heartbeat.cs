@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
                 Heartbeat op = new Heartbeat(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<HeartbeatBuilder>(this);
                 return op;
             }
 

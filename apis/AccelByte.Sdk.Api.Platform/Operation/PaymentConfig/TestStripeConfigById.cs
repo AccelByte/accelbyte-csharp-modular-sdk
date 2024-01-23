@@ -67,10 +67,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 TestStripeConfigById op = new TestStripeConfigById(this,
                     id
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<TestStripeConfigByIdBuilder>(this);
                 return op;
             }
 

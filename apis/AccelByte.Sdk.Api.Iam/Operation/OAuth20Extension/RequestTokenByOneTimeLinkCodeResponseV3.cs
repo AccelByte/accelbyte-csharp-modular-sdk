@@ -80,10 +80,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     clientId,
                     oneTimeLinkCode
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RequestTokenByOneTimeLinkCodeResponseV3Builder>(this);
                 return op;
             }
 

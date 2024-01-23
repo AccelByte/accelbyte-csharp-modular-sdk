@@ -57,10 +57,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 GetBansType op = new GetBansType(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetBansTypeBuilder>(this);
                 return op;
             }
 

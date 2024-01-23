@@ -52,10 +52,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             {
                 Func1 op = new Func1(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<Func1Builder>(this);
                 return op;
             }
 

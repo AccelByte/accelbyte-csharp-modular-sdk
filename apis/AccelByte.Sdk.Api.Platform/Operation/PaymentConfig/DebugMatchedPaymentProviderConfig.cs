@@ -74,10 +74,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 DebugMatchedPaymentProviderConfig op = new DebugMatchedPaymentProviderConfig(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DebugMatchedPaymentProviderConfigBuilder>(this);
                 return op;
             }
 

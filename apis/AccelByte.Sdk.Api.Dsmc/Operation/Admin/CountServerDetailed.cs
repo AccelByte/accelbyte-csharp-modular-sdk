@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                 CountServerDetailed op = new CountServerDetailed(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CountServerDetailedBuilder>(this);
                 return op;
             }
 

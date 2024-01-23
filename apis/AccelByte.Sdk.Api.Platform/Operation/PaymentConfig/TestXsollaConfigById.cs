@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 TestXsollaConfigById op = new TestXsollaConfigById(this,
                     id
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<TestXsollaConfigByIdBuilder>(this);
                 return op;
             }
 

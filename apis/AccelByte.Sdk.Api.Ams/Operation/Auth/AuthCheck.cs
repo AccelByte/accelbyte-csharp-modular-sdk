@@ -54,10 +54,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             {
                 AuthCheck op = new AuthCheck(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AuthCheckBuilder>(this);
                 return op;
             }
 

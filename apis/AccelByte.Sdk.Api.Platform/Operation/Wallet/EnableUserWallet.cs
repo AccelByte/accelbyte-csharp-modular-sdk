@@ -64,10 +64,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId,
                     walletId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<EnableUserWalletBuilder>(this);
                 return op;
             }
 

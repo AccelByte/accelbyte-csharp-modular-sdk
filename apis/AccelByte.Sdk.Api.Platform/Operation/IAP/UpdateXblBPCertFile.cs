@@ -76,10 +76,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 UpdateXblBPCertFile op = new UpdateXblBPCertFile(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateXblBPCertFileBuilder>(this);
                 return op;
             }
 

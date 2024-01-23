@@ -82,10 +82,8 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                 PublicListItemTypes op = new PublicListItemTypes(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicListItemTypesBuilder>(this);
                 return op;
             }
 

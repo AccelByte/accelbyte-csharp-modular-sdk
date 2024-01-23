@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     countryGroupCode,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteCountryGroupBuilder>(this);
                 return op;
             }
 

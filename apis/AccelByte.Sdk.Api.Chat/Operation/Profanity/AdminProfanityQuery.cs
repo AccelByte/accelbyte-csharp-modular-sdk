@@ -112,10 +112,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                 AdminProfanityQuery op = new AdminProfanityQuery(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminProfanityQueryBuilder>(this);
                 return op;
             }
 

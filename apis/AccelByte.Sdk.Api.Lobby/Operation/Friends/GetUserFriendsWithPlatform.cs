@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 GetUserFriendsWithPlatform op = new GetUserFriendsWithPlatform(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetUserFriendsWithPlatformBuilder>(this);
                 return op;
             }
 

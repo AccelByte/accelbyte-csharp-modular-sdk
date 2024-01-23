@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 GetGameTemplate op = new GetGameTemplate(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetGameTemplateBuilder>(this);
                 return op;
             }
 

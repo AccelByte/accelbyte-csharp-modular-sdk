@@ -54,10 +54,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 AdminDisableMyBackupCodesV4 op = new AdminDisableMyBackupCodesV4(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminDisableMyBackupCodesV4Builder>(this);
                 return op;
             }
 

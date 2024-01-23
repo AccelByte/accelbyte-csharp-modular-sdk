@@ -64,10 +64,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 GetNamespaceSlotConfig op = new GetNamespaceSlotConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetNamespaceSlotConfigBuilder>(this);
                 return op;
             }
 

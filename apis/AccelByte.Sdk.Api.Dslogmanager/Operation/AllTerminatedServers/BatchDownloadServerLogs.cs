@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
                 BatchDownloadServerLogs op = new BatchDownloadServerLogs(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<BatchDownloadServerLogsBuilder>(this);
                 return op;
             }
 

@@ -66,10 +66,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                 ImportConfig op = new ImportConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ImportConfigBuilder>(this);
                 return op;
             }
 

@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 DeleteSteamIAPConfig op = new DeleteSteamIAPConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteSteamIAPConfigBuilder>(this);
                 return op;
             }
 

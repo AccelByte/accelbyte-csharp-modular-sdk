@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 AdminGetThirdPartyConfig op = new AdminGetThirdPartyConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetThirdPartyConfigBuilder>(this);
                 return op;
             }
 

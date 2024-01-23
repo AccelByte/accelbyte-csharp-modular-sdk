@@ -69,10 +69,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_,
                     orderNo
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RefundOrderBuilder>(this);
                 return op;
             }
 

@@ -67,10 +67,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             {
                 PublicGetNamespaces op = new PublicGetNamespaces(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetNamespacesBuilder>(this);
                 return op;
             }
 

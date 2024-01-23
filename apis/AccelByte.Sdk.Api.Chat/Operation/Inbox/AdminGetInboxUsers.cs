@@ -90,10 +90,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     inbox,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetInboxUsersBuilder>(this);
                 return op;
             }
 

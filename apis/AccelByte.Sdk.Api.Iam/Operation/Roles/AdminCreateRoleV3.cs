@@ -65,10 +65,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminCreateRoleV3 op = new AdminCreateRoleV3(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminCreateRoleV3Builder>(this);
                 return op;
             }
 

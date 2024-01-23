@@ -98,10 +98,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 GetAdminUsersByRoleID op = new GetAdminUsersByRoleID(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetAdminUsersByRoleIDBuilder>(this);
                 return op;
             }
 

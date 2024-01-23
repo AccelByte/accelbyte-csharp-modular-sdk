@@ -106,10 +106,8 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
                     body
 
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder>(this);
                 return op;
             }
 

@@ -74,10 +74,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_,
                     deviceType
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGenerateReportV4Builder>(this);
                 return op;
             }
 

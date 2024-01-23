@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                 ExportImages op = new ExportImages(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ExportImagesBuilder>(this);
                 return op;
             }
 

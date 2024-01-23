@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     platformId,
                     platformToken
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicSubmitMyAccountDeletionRequestBuilder>(this);
                 return op;
             }
 

@@ -65,10 +65,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     namespace_,
                     fileType
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GeneratedUploadUrlBuilder>(this);
                 return op;
             }
 

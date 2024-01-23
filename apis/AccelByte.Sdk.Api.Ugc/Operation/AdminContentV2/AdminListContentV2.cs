@@ -135,10 +135,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                 AdminListContentV2 op = new AdminListContentV2(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminListContentV2Builder>(this);
                 return op;
             }
 

@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 GetAllChannelsHandler op = new GetAllChannelsHandler(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetAllChannelsHandlerBuilder>(this);
                 return op;
             }
 

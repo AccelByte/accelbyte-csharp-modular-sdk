@@ -67,10 +67,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             {
                 GetUserInfoStatus op = new GetUserInfoStatus(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetUserInfoStatusBuilder>(this);
                 return op;
             }
 

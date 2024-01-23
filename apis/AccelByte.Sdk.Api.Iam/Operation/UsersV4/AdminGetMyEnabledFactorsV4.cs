@@ -54,10 +54,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 AdminGetMyEnabledFactorsV4 op = new AdminGetMyEnabledFactorsV4(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetMyEnabledFactorsV4Builder>(this);
                 return op;
             }
 

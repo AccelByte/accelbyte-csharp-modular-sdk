@@ -82,10 +82,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                     count,
                     offset
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListSessionBuilder>(this);
                 return op;
             }
 

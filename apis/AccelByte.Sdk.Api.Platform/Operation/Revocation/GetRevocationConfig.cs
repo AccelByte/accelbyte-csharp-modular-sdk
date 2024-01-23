@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 GetRevocationConfig op = new GetRevocationConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetRevocationConfigBuilder>(this);
                 return op;
             }
 

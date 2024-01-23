@@ -70,10 +70,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     end,
                     start
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<SyncPaymentOrdersBuilder>(this);
                 return op;
             }
 

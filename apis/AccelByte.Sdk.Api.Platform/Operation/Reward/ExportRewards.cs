@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 ExportRewards op = new ExportRewards(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ExportRewardsBuilder>(this);
                 return op;
             }
 

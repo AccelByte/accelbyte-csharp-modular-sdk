@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     requestDate,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminCancelUserPersonalDataRequestBuilder>(this);
                 return op;
             }
 

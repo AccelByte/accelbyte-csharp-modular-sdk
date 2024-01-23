@@ -76,10 +76,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 UpdateWxPayConfig op = new UpdateWxPayConfig(this,
                     id
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateWxPayConfigBuilder>(this);
                 return op;
             }
 

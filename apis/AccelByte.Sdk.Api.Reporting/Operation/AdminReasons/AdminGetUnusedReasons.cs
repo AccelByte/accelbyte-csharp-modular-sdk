@@ -66,10 +66,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     namespace_,
                     category
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetUnusedReasonsBuilder>(this);
                 return op;
             }
 

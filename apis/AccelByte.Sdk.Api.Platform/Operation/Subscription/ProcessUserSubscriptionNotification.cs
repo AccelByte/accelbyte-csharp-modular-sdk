@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     subscriptionId,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ProcessUserSubscriptionNotificationBuilder>(this);
                 return op;
             }
 

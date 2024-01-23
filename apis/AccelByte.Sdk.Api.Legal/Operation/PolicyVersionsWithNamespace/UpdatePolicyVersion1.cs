@@ -69,10 +69,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     namespace_,
                     policyVersionId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdatePolicyVersion1Builder>(this);
                 return op;
             }
 

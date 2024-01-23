@@ -82,10 +82,8 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                 GetLeaderboardConfigurationsPublicV3 op = new GetLeaderboardConfigurationsPublicV3(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetLeaderboardConfigurationsPublicV3Builder>(this);
                 return op;
             }
 

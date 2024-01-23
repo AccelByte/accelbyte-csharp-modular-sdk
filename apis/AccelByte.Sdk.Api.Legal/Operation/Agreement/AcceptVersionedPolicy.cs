@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 AcceptVersionedPolicy op = new AcceptVersionedPolicy(this,
                     localizedPolicyVersionId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AcceptVersionedPolicyBuilder>(this);
                 return op;
             }
 

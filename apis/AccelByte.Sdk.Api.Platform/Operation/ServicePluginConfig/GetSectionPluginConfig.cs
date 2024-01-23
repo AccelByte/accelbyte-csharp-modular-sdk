@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 GetSectionPluginConfig op = new GetSectionPluginConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetSectionPluginConfigBuilder>(this);
                 return op;
             }
 

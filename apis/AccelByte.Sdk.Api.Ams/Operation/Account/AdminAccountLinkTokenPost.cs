@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     body,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminAccountLinkTokenPostBuilder>(this);
                 return op;
             }
 

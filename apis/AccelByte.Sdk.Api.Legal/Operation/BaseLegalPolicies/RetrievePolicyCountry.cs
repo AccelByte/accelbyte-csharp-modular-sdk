@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     basePolicyId,
                     countryCode
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RetrievePolicyCountryBuilder>(this);
                 return op;
             }
 

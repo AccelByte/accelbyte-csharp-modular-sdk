@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 MockPlayStationStreamEvent op = new MockPlayStationStreamEvent(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<MockPlayStationStreamEventBuilder>(this);
                 return op;
             }
 

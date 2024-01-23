@@ -97,10 +97,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     nativePlatform,
                     nativePlatformTicket
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<SimultaneousLoginV3Builder>(this);
                 return op;
             }
 

@@ -70,10 +70,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_,
                     replaceExisting
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ImportRewardsBuilder>(this);
                 return op;
             }
 

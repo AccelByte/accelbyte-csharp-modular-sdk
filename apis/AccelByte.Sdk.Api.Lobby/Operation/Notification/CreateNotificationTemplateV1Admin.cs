@@ -64,10 +64,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     body,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CreateNotificationTemplateV1AdminBuilder>(this);
                 return op;
             }
 

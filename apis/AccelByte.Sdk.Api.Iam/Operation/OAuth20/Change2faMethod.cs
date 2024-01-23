@@ -63,10 +63,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     factor,
                     mfaToken
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<Change2faMethodBuilder>(this);
                 return op;
             }
 

@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 GetRoleManagers op = new GetRoleManagers(this,
                     roleId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetRoleManagersBuilder>(this);
                 return op;
             }
 

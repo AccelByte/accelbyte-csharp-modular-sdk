@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     body,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminUpdateConfigV1Builder>(this);
                 return op;
             }
 

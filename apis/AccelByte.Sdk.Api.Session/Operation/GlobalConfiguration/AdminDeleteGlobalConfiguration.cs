@@ -54,10 +54,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
             {
                 AdminDeleteGlobalConfiguration op = new AdminDeleteGlobalConfiguration(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminDeleteGlobalConfigurationBuilder>(this);
                 return op;
             }
 

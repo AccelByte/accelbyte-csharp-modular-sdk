@@ -182,10 +182,8 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
                 ListTerminatedServers op = new ListTerminatedServers(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListTerminatedServersBuilder>(this);
                 return op;
             }
 

@@ -54,10 +54,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             {
                 PublicGetTime op = new PublicGetTime(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetTimeBuilder>(this);
                 return op;
             }
 

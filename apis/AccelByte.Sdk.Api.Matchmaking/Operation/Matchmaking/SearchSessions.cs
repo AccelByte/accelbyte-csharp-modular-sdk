@@ -123,10 +123,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                     limit,
                     offset
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<SearchSessionsBuilder>(this);
                 return op;
             }
 

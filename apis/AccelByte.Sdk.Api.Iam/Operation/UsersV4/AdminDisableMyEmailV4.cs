@@ -54,10 +54,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 AdminDisableMyEmailV4 op = new AdminDisableMyEmailV4(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminDisableMyEmailV4Builder>(this);
                 return op;
             }
 

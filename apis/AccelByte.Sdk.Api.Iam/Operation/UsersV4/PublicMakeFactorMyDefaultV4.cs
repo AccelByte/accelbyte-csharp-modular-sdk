@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     factor,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicMakeFactorMyDefaultV4Builder>(this);
                 return op;
             }
 

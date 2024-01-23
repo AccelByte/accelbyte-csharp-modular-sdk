@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     namespace_,
                     statCode
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteStatBuilder>(this);
                 return op;
             }
 

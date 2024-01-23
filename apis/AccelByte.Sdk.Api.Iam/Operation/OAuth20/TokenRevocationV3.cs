@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 TokenRevocationV3 op = new TokenRevocationV3(this,
                     token
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<TokenRevocationV3Builder>(this);
                 return op;
             }
 

@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 DeletePaymentProviderConfig op = new DeletePaymentProviderConfig(this,
                     id
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeletePaymentProviderConfigBuilder>(this);
                 return op;
             }
 

@@ -67,10 +67,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 RequestPresignedURL op = new RequestPresignedURL(this,
                     localizedPolicyVersionId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RequestPresignedURLBuilder>(this);
                 return op;
             }
 

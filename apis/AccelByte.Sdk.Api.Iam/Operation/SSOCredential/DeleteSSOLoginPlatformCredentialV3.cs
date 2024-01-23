@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_,
                     platformId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteSSOLoginPlatformCredentialV3Builder>(this);
                 return op;
             }
 

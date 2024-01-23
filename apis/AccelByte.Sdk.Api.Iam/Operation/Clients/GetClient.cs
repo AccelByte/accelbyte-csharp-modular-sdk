@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 GetClient op = new GetClient(this,
                     clientId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetClientBuilder>(this);
                 return op;
             }
 

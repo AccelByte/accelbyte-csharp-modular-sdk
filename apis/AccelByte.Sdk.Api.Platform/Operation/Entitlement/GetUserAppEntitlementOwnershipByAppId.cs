@@ -64,10 +64,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId,
                     appId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetUserAppEntitlementOwnershipByAppIdBuilder>(this);
                 return op;
             }
 

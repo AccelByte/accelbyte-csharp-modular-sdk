@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     deviceId,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminDecryptDeviceV4Builder>(this);
                 return op;
             }
 

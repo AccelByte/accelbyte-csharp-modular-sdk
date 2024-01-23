@@ -70,10 +70,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     field,
                     query
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CheckUserAvailabilityBuilder>(this);
                 return op;
             }
 

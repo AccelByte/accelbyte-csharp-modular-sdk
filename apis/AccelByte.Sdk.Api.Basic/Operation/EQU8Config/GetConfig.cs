@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 GetConfig op = new GetConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetConfigBuilder>(this);
                 return op;
             }
 

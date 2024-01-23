@@ -90,10 +90,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminGetBannedUsersV3 op = new AdminGetBannedUsersV3(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetBannedUsersV3Builder>(this);
                 return op;
             }
 

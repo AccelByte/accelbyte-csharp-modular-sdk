@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 DeleteRole op = new DeleteRole(this,
                     roleId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteRoleBuilder>(this);
                 return op;
             }
 

@@ -52,10 +52,8 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             {
                 GetHealthcheckInfo op = new GetHealthcheckInfo(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetHealthcheckInfoBuilder>(this);
                 return op;
             }
 

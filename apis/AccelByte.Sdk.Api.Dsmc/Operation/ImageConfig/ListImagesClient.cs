@@ -102,10 +102,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                 ListImagesClient op = new ListImagesClient(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListImagesClientBuilder>(this);
                 return op;
             }
 

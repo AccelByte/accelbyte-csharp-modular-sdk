@@ -84,10 +84,8 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                 AdminListItemTypes op = new AdminListItemTypes(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminListItemTypesBuilder>(this);
                 return op;
             }
 

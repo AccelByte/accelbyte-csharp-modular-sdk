@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 GetLootBoxPluginConfig op = new GetLootBoxPluginConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetLootBoxPluginConfigBuilder>(this);
                 return op;
             }
 

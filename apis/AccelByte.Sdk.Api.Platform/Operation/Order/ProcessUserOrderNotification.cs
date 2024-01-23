@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     orderNo,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ProcessUserOrderNotificationBuilder>(this);
                 return op;
             }
 

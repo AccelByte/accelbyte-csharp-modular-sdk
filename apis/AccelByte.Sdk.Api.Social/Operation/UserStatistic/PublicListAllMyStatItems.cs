@@ -86,10 +86,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 PublicListAllMyStatItems op = new PublicListAllMyStatItems(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicListAllMyStatItemsBuilder>(this);
                 return op;
             }
 

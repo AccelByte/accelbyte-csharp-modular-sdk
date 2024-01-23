@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 UpdatePaymentCallbackConfig op = new UpdatePaymentCallbackConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdatePaymentCallbackConfigBuilder>(this);
                 return op;
             }
 

@@ -64,10 +64,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminGetDevicesByUserV4 op = new AdminGetDevicesByUserV4(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetDevicesByUserV4Builder>(this);
                 return op;
             }
 

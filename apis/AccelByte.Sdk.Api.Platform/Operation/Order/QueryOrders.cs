@@ -124,10 +124,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 QueryOrders op = new QueryOrders(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<QueryOrdersBuilder>(this);
                 return op;
             }
 

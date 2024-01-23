@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_,
                     deviceToken
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicRemoveTrustedDeviceV4Builder>(this);
                 return op;
             }
 

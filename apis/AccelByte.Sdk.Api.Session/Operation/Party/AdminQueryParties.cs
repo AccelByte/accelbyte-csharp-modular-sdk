@@ -144,10 +144,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 AdminQueryParties op = new AdminQueryParties(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminQueryPartiesBuilder>(this);
                 return op;
             }
 

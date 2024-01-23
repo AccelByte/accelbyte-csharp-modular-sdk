@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 InfoRegions op = new InfoRegions(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<InfoRegionsBuilder>(this);
                 return op;
             }
 

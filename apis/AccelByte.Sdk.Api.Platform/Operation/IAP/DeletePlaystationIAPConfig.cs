@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 DeletePlaystationIAPConfig op = new DeletePlaystationIAPConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeletePlaystationIAPConfigBuilder>(this);
                 return op;
             }
 

@@ -75,10 +75,8 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     leaderboardCode,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteUserRankingByLeaderboardCodeAdminV1Builder>(this);
                 return op;
             }
 

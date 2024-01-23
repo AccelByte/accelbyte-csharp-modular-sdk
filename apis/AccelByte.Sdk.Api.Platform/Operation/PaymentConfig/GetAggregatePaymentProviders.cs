@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 GetAggregatePaymentProviders op = new GetAggregatePaymentProviders(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetAggregatePaymentProvidersBuilder>(this);
                 return op;
             }
 

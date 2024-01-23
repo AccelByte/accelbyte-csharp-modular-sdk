@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     limit,
                     offset
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListGameRecordsHandlerV1Builder>(this);
                 return op;
             }
 

@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 GetAllNotificationTemplatesV1Admin op = new GetAllNotificationTemplatesV1Admin(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetAllNotificationTemplatesV1AdminBuilder>(this);
                 return op;
             }
 

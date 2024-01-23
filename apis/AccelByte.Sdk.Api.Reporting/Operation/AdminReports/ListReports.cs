@@ -99,10 +99,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                 ListReports op = new ListReports(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListReportsBuilder>(this);
                 return op;
             }
 

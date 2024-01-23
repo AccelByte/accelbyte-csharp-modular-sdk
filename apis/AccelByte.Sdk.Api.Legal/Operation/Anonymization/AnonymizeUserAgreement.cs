@@ -57,10 +57,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 AnonymizeUserAgreement op = new AnonymizeUserAgreement(this,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AnonymizeUserAgreementBuilder>(this);
                 return op;
             }
 

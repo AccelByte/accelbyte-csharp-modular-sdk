@@ -115,10 +115,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     redirectUri,
                     responseType
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AuthorizationBuilder>(this);
                 return op;
             }
 

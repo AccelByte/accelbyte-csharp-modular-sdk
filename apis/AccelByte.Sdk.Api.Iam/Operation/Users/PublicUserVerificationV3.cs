@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     body,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicUserVerificationV3Builder>(this);
                 return op;
             }
 

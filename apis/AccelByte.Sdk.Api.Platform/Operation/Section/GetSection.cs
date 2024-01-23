@@ -71,10 +71,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_,
                     sectionId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetSectionBuilder>(this);
                 return op;
             }
 

@@ -65,10 +65,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 GetIAPItemMapping op = new GetIAPItemMapping(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetIAPItemMappingBuilder>(this);
                 return op;
             }
 

@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 PublicGetTimeZones op = new PublicGetTimeZones(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetTimeZonesBuilder>(this);
                 return op;
             }
 

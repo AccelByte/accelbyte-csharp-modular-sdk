@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     imageID,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ImageGetBuilder>(this);
                 return op;
             }
 

@@ -79,10 +79,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     platformId,
                     state
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PlatformAuthenticateSAMLV3HandlerBuilder>(this);
                 return op;
             }
 

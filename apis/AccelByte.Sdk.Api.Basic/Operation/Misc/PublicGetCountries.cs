@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 PublicGetCountries op = new PublicGetCountries(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetCountriesBuilder>(this);
                 return op;
             }
 

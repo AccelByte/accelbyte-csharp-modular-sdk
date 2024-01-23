@@ -65,10 +65,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminGetUserByEmailAddressV3 op = new AdminGetUserByEmailAddressV3(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetUserByEmailAddressV3Builder>(this);
                 return op;
             }
 

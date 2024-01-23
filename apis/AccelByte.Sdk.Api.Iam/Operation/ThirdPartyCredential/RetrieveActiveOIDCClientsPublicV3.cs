@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_,
                     clientId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RetrieveActiveOIDCClientsPublicV3Builder>(this);
                 return op;
             }
 

@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 ListItemTypeConfigs op = new ListItemTypeConfigs(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListItemTypeConfigsBuilder>(this);
                 return op;
             }
 

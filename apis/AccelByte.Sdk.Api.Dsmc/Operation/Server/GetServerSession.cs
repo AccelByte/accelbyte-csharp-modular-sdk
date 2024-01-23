@@ -65,10 +65,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                     namespace_,
                     podName
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetServerSessionBuilder>(this);
                 return op;
             }
 

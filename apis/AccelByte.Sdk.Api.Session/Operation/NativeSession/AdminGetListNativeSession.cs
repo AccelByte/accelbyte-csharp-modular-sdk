@@ -80,10 +80,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 AdminGetListNativeSession op = new AdminGetListNativeSession(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetListNativeSessionBuilder>(this);
                 return op;
             }
 

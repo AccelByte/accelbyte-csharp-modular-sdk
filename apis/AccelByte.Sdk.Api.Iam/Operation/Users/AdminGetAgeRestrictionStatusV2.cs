@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminGetAgeRestrictionStatusV2 op = new AdminGetAgeRestrictionStatusV2(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetAgeRestrictionStatusV2Builder>(this);
                 return op;
             }
 

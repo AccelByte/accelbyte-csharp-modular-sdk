@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 AdminUpdateGlobalConfiguration op = new AdminUpdateGlobalConfiguration(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminUpdateGlobalConfigurationBuilder>(this);
                 return op;
             }
 

@@ -79,10 +79,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 TestCheckoutConfig op = new TestCheckoutConfig(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<TestCheckoutConfigBuilder>(this);
                 return op;
             }
 

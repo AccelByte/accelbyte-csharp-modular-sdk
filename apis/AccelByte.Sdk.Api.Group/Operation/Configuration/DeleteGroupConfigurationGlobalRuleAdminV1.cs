@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     configurationCode,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteGroupConfigurationGlobalRuleAdminV1Builder>(this);
                 return op;
             }
 

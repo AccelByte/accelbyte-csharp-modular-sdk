@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 DeleteIAPItemConfig op = new DeleteIAPItemConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteIAPItemConfigBuilder>(this);
                 return op;
             }
 

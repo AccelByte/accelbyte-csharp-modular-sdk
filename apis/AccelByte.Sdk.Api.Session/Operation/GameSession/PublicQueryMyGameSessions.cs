@@ -87,10 +87,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 PublicQueryMyGameSessions op = new PublicQueryMyGameSessions(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicQueryMyGameSessionsBuilder>(this);
                 return op;
             }
 

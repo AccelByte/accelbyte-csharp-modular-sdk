@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                 AdminProfanityExport op = new AdminProfanityExport(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminProfanityExportBuilder>(this);
                 return op;
             }
 

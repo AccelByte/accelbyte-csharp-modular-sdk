@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 AdminDeleteConfigurationAlertV1 op = new AdminDeleteConfigurationAlertV1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminDeleteConfigurationAlertV1Builder>(this);
                 return op;
             }
 

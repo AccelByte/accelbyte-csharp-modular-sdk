@@ -69,10 +69,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 ListCategoriesBasic op = new ListCategoriesBasic(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListCategoriesBasicBuilder>(this);
                 return op;
             }
 

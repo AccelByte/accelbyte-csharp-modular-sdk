@@ -70,10 +70,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                 ImportConfigV1 op = new ImportConfigV1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ImportConfigV1Builder>(this);
                 return op;
             }
 

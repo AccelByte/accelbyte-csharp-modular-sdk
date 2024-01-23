@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                     channelName,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateMatchmakingChannelBuilder>(this);
                 return op;
             }
 

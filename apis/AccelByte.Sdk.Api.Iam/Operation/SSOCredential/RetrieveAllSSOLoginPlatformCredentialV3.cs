@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 RetrieveAllSSOLoginPlatformCredentialV3 op = new RetrieveAllSSOLoginPlatformCredentialV3(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RetrieveAllSSOLoginPlatformCredentialV3Builder>(this);
                 return op;
             }
 

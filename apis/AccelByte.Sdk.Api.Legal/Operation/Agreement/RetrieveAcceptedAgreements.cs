@@ -57,10 +57,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 RetrieveAcceptedAgreements op = new RetrieveAcceptedAgreements(this,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RetrieveAcceptedAgreementsBuilder>(this);
                 return op;
             }
 

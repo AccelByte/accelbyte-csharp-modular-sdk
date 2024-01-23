@@ -67,10 +67,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 TestCheckoutConfigById op = new TestCheckoutConfigById(this,
                     id
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<TestCheckoutConfigByIdBuilder>(this);
                 return op;
             }
 

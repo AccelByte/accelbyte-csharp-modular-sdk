@@ -81,10 +81,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 RetrieveAllUsersByPolicyVersion op = new RetrieveAllUsersByPolicyVersion(this,
                     policyVersionId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RetrieveAllUsersByPolicyVersionBuilder>(this);
                 return op;
             }
 

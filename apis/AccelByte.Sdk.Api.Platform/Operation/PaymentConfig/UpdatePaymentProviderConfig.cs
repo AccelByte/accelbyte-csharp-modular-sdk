@@ -89,10 +89,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 UpdatePaymentProviderConfig op = new UpdatePaymentProviderConfig(this,
                     id
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdatePaymentProviderConfigBuilder>(this);
                 return op;
             }
 

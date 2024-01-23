@@ -84,10 +84,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 UpdateCheckoutConfig op = new UpdateCheckoutConfig(this,
                     id
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateCheckoutConfigBuilder>(this);
                 return op;
             }
 

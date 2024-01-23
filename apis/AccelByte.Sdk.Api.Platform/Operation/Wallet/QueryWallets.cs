@@ -101,10 +101,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 QueryWallets op = new QueryWallets(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<QueryWalletsBuilder>(this);
                 return op;
             }
 

@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     factor,
                     mfaToken
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<SendMFAAuthenticationCodeBuilder>(this);
                 return op;
             }
 

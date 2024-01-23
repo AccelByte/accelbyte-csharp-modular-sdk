@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminCreateRoleV4 op = new AdminCreateRoleV4(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminCreateRoleV4Builder>(this);
                 return op;
             }
 

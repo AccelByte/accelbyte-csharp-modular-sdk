@@ -110,10 +110,8 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     body,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CreateNewGroupPublicV2Builder>(this);
                 return op;
             }
 

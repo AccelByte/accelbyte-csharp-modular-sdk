@@ -67,10 +67,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                 CreateRepository op = new CreateRepository(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CreateRepositoryBuilder>(this);
                 return op;
             }
 

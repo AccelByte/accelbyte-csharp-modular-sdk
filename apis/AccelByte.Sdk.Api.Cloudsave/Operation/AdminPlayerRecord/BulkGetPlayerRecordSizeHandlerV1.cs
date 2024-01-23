@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     body,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<BulkGetPlayerRecordSizeHandlerV1Builder>(this);
                 return op;
             }
 

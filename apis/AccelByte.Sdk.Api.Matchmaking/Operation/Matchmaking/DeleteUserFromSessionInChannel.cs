@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                     namespace_,
                     userID
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteUserFromSessionInChannelBuilder>(this);
                 return op;
             }
 

@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                 ImageLimitClient op = new ImageLimitClient(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ImageLimitClientBuilder>(this);
                 return op;
             }
 

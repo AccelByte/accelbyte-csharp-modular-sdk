@@ -71,10 +71,8 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
                     pageSize,
                     startDate
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetEventByNamespaceHandlerBuilder>(this);
                 return op;
             }
 

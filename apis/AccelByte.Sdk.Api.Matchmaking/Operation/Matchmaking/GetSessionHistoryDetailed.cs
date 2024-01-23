@@ -83,10 +83,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                     matchID,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetSessionHistoryDetailedBuilder>(this);
                 return op;
             }
 

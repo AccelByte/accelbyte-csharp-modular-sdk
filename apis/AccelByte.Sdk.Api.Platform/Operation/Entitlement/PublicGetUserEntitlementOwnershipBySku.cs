@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId,
                     sku
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetUserEntitlementOwnershipBySkuBuilder>(this);
                 return op;
             }
 

@@ -71,10 +71,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_,
                     rewardId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteRewardConditionRecordBuilder>(this);
                 return op;
             }
 

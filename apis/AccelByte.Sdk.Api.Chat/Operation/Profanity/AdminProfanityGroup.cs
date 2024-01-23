@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                 AdminProfanityGroup op = new AdminProfanityGroup(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminProfanityGroupBuilder>(this);
                 return op;
             }
 

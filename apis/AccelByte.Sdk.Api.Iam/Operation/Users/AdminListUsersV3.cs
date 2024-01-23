@@ -74,10 +74,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminListUsersV3 op = new AdminListUsersV3(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminListUsersV3Builder>(this);
                 return op;
             }
 

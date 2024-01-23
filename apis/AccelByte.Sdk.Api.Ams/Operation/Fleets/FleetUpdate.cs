@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     fleetID,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<FleetUpdateBuilder>(this);
                 return op;
             }
 

@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 TestAliPayConfigById op = new TestAliPayConfigById(this,
                     id
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<TestAliPayConfigByIdBuilder>(this);
                 return op;
             }
 

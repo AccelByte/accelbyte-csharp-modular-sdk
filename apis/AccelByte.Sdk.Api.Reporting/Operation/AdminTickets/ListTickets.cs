@@ -123,10 +123,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                 ListTickets op = new ListTickets(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListTicketsBuilder>(this);
                 return op;
             }
 

@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                 PublicGetMutedTopics op = new PublicGetMutedTopics(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetMutedTopicsBuilder>(this);
                 return op;
             }
 

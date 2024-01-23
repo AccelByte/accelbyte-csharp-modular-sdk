@@ -80,10 +80,8 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                 ListMyBinaryRecordsV1 op = new ListMyBinaryRecordsV1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListMyBinaryRecordsV1Builder>(this);
                 return op;
             }
 

@@ -65,10 +65,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             {
                 BulkAcceptVersionedPolicy op = new BulkAcceptVersionedPolicy(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<BulkAcceptVersionedPolicyBuilder>(this);
                 return op;
             }
 

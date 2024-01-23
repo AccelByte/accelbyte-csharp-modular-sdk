@@ -69,10 +69,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                 UpdateImage op = new UpdateImage(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateImageBuilder>(this);
                 return op;
             }
 

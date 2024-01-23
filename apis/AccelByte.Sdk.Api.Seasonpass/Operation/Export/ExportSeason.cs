@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                 ExportSeason op = new ExportSeason(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ExportSeasonBuilder>(this);
                 return op;
             }
 

@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     targetNamespace,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetUserMappingBuilder>(this);
                 return op;
             }
 

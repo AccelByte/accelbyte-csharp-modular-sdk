@@ -80,10 +80,8 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                 ListGameBinaryRecordsV1 op = new ListGameBinaryRecordsV1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListGameBinaryRecordsV1Builder>(this);
                 return op;
             }
 

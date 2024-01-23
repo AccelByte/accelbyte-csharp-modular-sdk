@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             {
                 CheckReadiness op = new CheckReadiness(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CheckReadinessBuilder>(this);
                 return op;
             }
 

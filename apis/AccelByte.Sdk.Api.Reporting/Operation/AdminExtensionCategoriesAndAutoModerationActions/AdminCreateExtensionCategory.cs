@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                 AdminCreateExtensionCategory op = new AdminCreateExtensionCategory(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminCreateExtensionCategoryBuilder>(this);
                 return op;
             }
 

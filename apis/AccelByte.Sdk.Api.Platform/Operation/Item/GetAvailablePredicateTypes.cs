@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 GetAvailablePredicateTypes op = new GetAvailablePredicateTypes(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetAvailablePredicateTypesBuilder>(this);
                 return op;
             }
 

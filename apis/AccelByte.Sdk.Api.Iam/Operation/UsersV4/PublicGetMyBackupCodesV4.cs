@@ -57,10 +57,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 PublicGetMyBackupCodesV4 op = new PublicGetMyBackupCodesV4(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetMyBackupCodesV4Builder>(this);
                 return op;
             }
 

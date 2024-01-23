@@ -67,10 +67,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 UnBanUsers op = new UnBanUsers(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UnBanUsersBuilder>(this);
                 return op;
             }
 

@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 TestWxPayConfigById op = new TestWxPayConfigById(this,
                     id
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<TestWxPayConfigByIdBuilder>(this);
                 return op;
             }
 

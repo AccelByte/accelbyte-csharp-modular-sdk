@@ -69,10 +69,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 SearchItemTypeConfig op = new SearchItemTypeConfig(this,
                     itemType
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<SearchItemTypeConfigBuilder>(this);
                 return op;
             }
 

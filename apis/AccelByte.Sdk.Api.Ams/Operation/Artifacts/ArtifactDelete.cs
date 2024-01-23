@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     artifactID,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ArtifactDeleteBuilder>(this);
                 return op;
             }
 

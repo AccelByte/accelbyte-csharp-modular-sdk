@@ -73,10 +73,8 @@ namespace AccelByte.Sdk.Api.Group.Operation
                 LeaveGroupPublicV1 op = new LeaveGroupPublicV1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<LeaveGroupPublicV1Builder>(this);
                 return op;
             }
 

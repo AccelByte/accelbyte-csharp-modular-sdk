@@ -64,10 +64,8 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
                 GetTotalActiveSession op = new GetTotalActiveSession(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetTotalActiveSessionBuilder>(this);
                 return op;
             }
 

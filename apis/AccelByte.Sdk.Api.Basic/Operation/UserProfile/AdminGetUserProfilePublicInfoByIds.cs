@@ -69,10 +69,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 AdminGetUserProfilePublicInfoByIds op = new AdminGetUserProfilePublicInfoByIds(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetUserProfilePublicInfoByIdsBuilder>(this);
                 return op;
             }
 

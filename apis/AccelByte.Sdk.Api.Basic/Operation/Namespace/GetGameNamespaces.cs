@@ -70,10 +70,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 GetGameNamespaces op = new GetGameNamespaces(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetGameNamespacesBuilder>(this);
                 return op;
             }
 

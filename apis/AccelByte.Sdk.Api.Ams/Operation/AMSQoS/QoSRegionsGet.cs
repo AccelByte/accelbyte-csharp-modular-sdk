@@ -81,10 +81,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 QoSRegionsGet op = new QoSRegionsGet(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<QoSRegionsGetBuilder>(this);
                 return op;
             }
 

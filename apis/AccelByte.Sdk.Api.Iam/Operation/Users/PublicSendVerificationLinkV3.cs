@@ -57,10 +57,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 PublicSendVerificationLinkV3 op = new PublicSendVerificationLinkV3(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicSendVerificationLinkV3Builder>(this);
                 return op;
             }
 

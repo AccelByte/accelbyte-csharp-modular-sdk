@@ -64,10 +64,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 CreateRole op = new CreateRole(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CreateRoleBuilder>(this);
                 return op;
             }
 

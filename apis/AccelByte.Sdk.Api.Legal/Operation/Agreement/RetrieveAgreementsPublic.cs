@@ -57,10 +57,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             {
                 RetrieveAgreementsPublic op = new RetrieveAgreementsPublic(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RetrieveAgreementsPublicBuilder>(this);
                 return op;
             }
 

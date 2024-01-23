@@ -192,10 +192,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 AdminQueryGameSessions op = new AdminQueryGameSessions(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminQueryGameSessionsBuilder>(this);
                 return op;
             }
 

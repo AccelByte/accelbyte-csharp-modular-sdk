@@ -80,10 +80,8 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                 ImportAchievements op = new ImportAchievements(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ImportAchievementsBuilder>(this);
                 return op;
             }
 

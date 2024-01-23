@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 GetMyZipCode op = new GetMyZipCode(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetMyZipCodeBuilder>(this);
                 return op;
             }
 

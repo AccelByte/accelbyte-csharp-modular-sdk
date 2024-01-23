@@ -66,10 +66,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 RequestTargetTokenResponseV3 op = new RequestTargetTokenResponseV3(this,
                     code
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RequestTargetTokenResponseV3Builder>(this);
                 return op;
             }
 

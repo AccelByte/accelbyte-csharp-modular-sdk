@@ -65,10 +65,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     body,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ForgotPasswordBuilder>(this);
                 return op;
             }
 

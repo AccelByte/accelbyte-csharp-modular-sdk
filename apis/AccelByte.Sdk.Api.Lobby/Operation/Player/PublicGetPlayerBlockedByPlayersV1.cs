@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 PublicGetPlayerBlockedByPlayersV1 op = new PublicGetPlayerBlockedByPlayersV1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetPlayerBlockedByPlayersV1Builder>(this);
                 return op;
             }
 

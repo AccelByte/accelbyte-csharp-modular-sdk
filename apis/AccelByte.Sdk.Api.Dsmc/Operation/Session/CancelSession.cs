@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                     namespace_,
                     sessionID
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CancelSessionBuilder>(this);
                 return op;
             }
 

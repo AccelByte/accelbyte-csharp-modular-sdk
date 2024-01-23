@@ -80,10 +80,8 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
                 ListServerPerNamespace op = new ListServerPerNamespace(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListServerPerNamespaceBuilder>(this);
                 return op;
             }
 

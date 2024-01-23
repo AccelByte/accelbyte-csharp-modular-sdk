@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_,
                     platformId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateSSOPlatformCredentialBuilder>(this);
                 return op;
             }
 

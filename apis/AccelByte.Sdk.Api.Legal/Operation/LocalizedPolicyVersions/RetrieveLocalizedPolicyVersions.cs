@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 RetrieveLocalizedPolicyVersions op = new RetrieveLocalizedPolicyVersions(this,
                     policyVersionId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RetrieveLocalizedPolicyVersionsBuilder>(this);
                 return op;
             }
 

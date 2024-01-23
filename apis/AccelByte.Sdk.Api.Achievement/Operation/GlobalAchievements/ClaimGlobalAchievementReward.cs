@@ -73,10 +73,8 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     namespace_,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ClaimGlobalAchievementRewardBuilder>(this);
                 return op;
             }
 

@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     backfillID,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteBackfillBuilder>(this);
                 return op;
             }
 

@@ -88,10 +88,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     statCode,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateUserStatItemValueBuilder>(this);
                 return op;
             }
 

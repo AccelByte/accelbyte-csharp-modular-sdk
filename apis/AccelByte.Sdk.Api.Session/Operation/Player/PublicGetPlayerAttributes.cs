@@ -67,10 +67,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 PublicGetPlayerAttributes op = new PublicGetPlayerAttributes(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetPlayerAttributesBuilder>(this);
                 return op;
             }
 

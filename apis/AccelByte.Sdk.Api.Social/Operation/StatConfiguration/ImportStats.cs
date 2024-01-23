@@ -75,10 +75,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 ImportStats op = new ImportStats(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ImportStatsBuilder>(this);
                 return op;
             }
 

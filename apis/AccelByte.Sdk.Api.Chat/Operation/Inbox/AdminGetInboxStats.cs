@@ -64,10 +64,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                 AdminGetInboxStats op = new AdminGetInboxStats(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetInboxStatsBuilder>(this);
                 return op;
             }
 

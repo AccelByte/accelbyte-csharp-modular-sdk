@@ -181,10 +181,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 QueryItems op = new QueryItems(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<QueryItemsBuilder>(this);
                 return op;
             }
 

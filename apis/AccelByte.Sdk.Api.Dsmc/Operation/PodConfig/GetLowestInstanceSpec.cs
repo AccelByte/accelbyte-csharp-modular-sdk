@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             {
                 GetLowestInstanceSpec op = new GetLowestInstanceSpec(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetLowestInstanceSpecBuilder>(this);
                 return op;
             }
 

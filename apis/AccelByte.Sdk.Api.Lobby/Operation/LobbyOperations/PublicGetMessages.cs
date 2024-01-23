@@ -54,10 +54,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             {
                 PublicGetMessages op = new PublicGetMessages(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetMessagesBuilder>(this);
                 return op;
             }
 

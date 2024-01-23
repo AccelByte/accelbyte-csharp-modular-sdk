@@ -63,10 +63,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     profileId,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetProfileBuilder>(this);
                 return op;
             }
 

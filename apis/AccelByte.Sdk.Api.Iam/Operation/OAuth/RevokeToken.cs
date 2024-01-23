@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 RevokeToken op = new RevokeToken(this,
                     token
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RevokeTokenBuilder>(this);
                 return op;
             }
 

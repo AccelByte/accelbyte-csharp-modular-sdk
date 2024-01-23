@@ -86,10 +86,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_,
                     roleId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetAdminUsersByRoleIdV3Builder>(this);
                 return op;
             }
 

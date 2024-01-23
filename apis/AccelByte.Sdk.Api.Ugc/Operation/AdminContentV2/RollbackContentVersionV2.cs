@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     namespace_,
                     versionId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RollbackContentVersionV2Builder>(this);
                 return op;
             }
 

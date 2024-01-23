@@ -65,10 +65,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     currencyCode,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetMyWalletBuilder>(this);
                 return op;
             }
 

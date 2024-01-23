@@ -67,10 +67,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     namespace_,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetUserNamespaceSlotsBuilder>(this);
                 return op;
             }
 

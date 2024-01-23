@@ -69,10 +69,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 CreateStat1 op = new CreateStat1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CreateStat1Builder>(this);
                 return op;
             }
 

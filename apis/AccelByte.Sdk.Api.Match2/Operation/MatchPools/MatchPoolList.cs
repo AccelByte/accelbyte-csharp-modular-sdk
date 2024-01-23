@@ -80,10 +80,8 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                 MatchPoolList op = new MatchPoolList(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<MatchPoolListBuilder>(this);
                 return op;
             }
 

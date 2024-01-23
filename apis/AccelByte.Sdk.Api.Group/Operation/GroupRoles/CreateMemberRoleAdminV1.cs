@@ -92,10 +92,8 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     body,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CreateMemberRoleAdminV1Builder>(this);
                 return op;
             }
 

@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 GetMyPrivateCustomAttributesInfo op = new GetMyPrivateCustomAttributesInfo(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetMyPrivateCustomAttributesInfoBuilder>(this);
                 return op;
             }
 

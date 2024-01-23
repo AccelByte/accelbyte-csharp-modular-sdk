@@ -63,10 +63,8 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     slotId,
                     sourceItemId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetItemBuilder>(this);
                 return op;
             }
 

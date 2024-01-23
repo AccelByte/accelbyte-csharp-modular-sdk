@@ -64,10 +64,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 BulkGetSessions op = new BulkGetSessions(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<BulkGetSessionsBuilder>(this);
                 return op;
             }
 

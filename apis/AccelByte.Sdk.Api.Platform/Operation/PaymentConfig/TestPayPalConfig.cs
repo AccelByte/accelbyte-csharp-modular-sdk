@@ -85,10 +85,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 TestPayPalConfig op = new TestPayPalConfig(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<TestPayPalConfigBuilder>(this);
                 return op;
             }
 

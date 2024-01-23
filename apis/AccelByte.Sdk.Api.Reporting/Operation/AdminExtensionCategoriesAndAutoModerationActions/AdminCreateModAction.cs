@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                 AdminCreateModAction op = new AdminCreateModAction(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminCreateModActionBuilder>(this);
                 return op;
             }
 

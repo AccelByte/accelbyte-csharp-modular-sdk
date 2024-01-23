@@ -52,10 +52,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
             {
                 VersionCheckHandler op = new VersionCheckHandler(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<VersionCheckHandlerBuilder>(this);
                 return op;
             }
 

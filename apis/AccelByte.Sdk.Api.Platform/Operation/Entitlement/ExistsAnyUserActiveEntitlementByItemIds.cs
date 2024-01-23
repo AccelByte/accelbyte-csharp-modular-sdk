@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId,
                     itemIds
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ExistsAnyUserActiveEntitlementByItemIdsBuilder>(this);
                 return op;
             }
 

@@ -54,10 +54,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
             {
                 AdminGetDSMCConfigurationDefault op = new AdminGetDSMCConfigurationDefault(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetDSMCConfigurationDefaultBuilder>(this);
                 return op;
             }
 

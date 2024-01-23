@@ -86,10 +86,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                 PublicGetReasons op = new PublicGetReasons(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetReasonsBuilder>(this);
                 return op;
             }
 

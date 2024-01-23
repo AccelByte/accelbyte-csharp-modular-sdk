@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 GetItemTypeConfig op = new GetItemTypeConfig(this,
                     id
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetItemTypeConfigBuilder>(this);
                 return op;
             }
 

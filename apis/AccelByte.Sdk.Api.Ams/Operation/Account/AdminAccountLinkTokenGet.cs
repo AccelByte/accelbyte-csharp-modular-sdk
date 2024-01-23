@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 AdminAccountLinkTokenGet op = new AdminAccountLinkTokenGet(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminAccountLinkTokenGetBuilder>(this);
                 return op;
             }
 

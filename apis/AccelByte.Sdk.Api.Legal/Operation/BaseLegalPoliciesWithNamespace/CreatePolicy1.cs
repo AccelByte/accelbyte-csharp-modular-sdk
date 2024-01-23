@@ -67,10 +67,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 CreatePolicy1 op = new CreatePolicy1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CreatePolicy1Builder>(this);
                 return op;
             }
 

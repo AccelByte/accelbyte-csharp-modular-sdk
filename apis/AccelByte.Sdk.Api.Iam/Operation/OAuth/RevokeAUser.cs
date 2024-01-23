@@ -63,10 +63,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 RevokeAUser op = new RevokeAUser(this,
                     userID
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RevokeAUserBuilder>(this);
                 return op;
             }
 

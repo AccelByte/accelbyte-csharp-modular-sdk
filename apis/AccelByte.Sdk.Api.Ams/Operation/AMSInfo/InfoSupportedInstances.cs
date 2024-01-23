@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 InfoSupportedInstances op = new InfoSupportedInstances(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<InfoSupportedInstancesBuilder>(this);
                 return op;
             }
 

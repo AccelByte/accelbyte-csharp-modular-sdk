@@ -89,10 +89,8 @@ namespace AccelByte.Sdk.Api.Group.Operation
                 GetGroupInvitationRequestPublicV1 op = new GetGroupInvitationRequestPublicV1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetGroupInvitationRequestPublicV1Builder>(this);
                 return op;
             }
 

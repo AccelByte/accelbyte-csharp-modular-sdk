@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 CreateClient op = new CreateClient(this,
                     body
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CreateClientBuilder>(this);
                 return op;
             }
 

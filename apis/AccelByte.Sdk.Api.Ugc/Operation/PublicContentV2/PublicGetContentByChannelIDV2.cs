@@ -90,10 +90,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     channelId,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetContentByChannelIDV2Builder>(this);
                 return op;
             }
 

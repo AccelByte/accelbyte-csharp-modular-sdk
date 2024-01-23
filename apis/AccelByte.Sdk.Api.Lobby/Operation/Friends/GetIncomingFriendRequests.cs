@@ -82,10 +82,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     namespace_,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetIncomingFriendRequestsBuilder>(this);
                 return op;
             }
 

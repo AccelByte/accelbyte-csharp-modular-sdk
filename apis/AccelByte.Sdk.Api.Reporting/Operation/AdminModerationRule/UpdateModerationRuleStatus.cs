@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     namespace_,
                     ruleId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateModerationRuleStatusBuilder>(this);
                 return op;
             }
 

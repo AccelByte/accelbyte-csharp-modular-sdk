@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                     body,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdatePlayTimeWeightBuilder>(this);
                 return op;
             }
 

@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 LogoutSSOClient op = new LogoutSSOClient(this,
                     platformId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<LogoutSSOClientBuilder>(this);
                 return op;
             }
 

@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 ImageList op = new ImageList(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ImageListBuilder>(this);
                 return op;
             }
 

@@ -80,10 +80,8 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                 GetMyMatchTickets op = new GetMyMatchTickets(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetMyMatchTicketsBuilder>(this);
                 return op;
             }
 

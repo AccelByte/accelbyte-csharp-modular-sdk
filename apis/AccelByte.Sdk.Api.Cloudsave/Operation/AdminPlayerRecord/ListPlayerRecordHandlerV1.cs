@@ -81,10 +81,8 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                 ListPlayerRecordHandlerV1 op = new ListPlayerRecordHandlerV1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListPlayerRecordHandlerV1Builder>(this);
                 return op;
             }
 

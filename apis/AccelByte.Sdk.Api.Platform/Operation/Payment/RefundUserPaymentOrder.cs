@@ -71,10 +71,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     paymentOrderNo,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RefundUserPaymentOrderBuilder>(this);
                 return op;
             }
 

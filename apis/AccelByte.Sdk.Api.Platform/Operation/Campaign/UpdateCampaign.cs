@@ -70,10 +70,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     campaignId,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateCampaignBuilder>(this);
                 return op;
             }
 

@@ -136,10 +136,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                 AdminChatHistory op = new AdminChatHistory(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminChatHistoryBuilder>(this);
                 return op;
             }
 

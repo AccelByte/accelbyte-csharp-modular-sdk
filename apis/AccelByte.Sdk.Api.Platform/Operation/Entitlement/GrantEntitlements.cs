@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 GrantEntitlements op = new GrantEntitlements(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GrantEntitlementsBuilder>(this);
                 return op;
             }
 

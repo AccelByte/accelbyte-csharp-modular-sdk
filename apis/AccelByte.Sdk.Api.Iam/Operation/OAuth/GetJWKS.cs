@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 GetJWKS op = new GetJWKS(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetJWKSBuilder>(this);
                 return op;
             }
 

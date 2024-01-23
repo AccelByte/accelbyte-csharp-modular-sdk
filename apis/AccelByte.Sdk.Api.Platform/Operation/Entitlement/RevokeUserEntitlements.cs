@@ -64,10 +64,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId,
                     entitlementIds
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RevokeUserEntitlementsBuilder>(this);
                 return op;
             }
 

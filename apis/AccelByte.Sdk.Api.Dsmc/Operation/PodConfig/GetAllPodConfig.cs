@@ -66,10 +66,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                     count,
                     offset
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetAllPodConfigBuilder>(this);
                 return op;
             }
 

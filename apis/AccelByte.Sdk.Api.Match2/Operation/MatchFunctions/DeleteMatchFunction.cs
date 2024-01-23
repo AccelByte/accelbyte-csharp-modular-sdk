@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     name,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteMatchFunctionBuilder>(this);
                 return op;
             }
 

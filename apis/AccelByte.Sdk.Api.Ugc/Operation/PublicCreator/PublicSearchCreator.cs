@@ -88,10 +88,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                 PublicSearchCreator op = new PublicSearchCreator(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicSearchCreatorBuilder>(this);
                 return op;
             }
 

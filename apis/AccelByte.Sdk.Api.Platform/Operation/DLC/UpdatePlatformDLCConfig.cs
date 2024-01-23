@@ -84,10 +84,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 UpdatePlatformDLCConfig op = new UpdatePlatformDLCConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdatePlatformDLCConfigBuilder>(this);
                 return op;
             }
 

@@ -69,10 +69,8 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
                     userId,
                     pageSize
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetUserActivitiesHandlerBuilder>(this);
                 return op;
             }
 

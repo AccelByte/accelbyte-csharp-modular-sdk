@@ -65,10 +65,8 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     body,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<DeleteBulkLeaderboardConfigurationAdminV3Builder>(this);
                 return op;
             }
 

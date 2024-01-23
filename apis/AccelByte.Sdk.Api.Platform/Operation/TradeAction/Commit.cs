@@ -88,10 +88,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 Commit op = new Commit(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CommitBuilder>(this);
                 return op;
             }
 

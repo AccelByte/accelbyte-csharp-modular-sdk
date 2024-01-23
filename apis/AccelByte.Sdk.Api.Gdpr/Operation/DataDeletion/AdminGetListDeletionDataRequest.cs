@@ -96,10 +96,8 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                 AdminGetListDeletionDataRequest op = new AdminGetListDeletionDataRequest(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetListDeletionDataRequestBuilder>(this);
                 return op;
             }
 

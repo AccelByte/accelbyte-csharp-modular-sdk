@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     namespace_,
                     userIds
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetBannedUsersBuilder>(this);
                 return op;
             }
 

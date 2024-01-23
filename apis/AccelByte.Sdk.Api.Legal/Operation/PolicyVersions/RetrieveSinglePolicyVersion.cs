@@ -67,10 +67,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 RetrieveSinglePolicyVersion op = new RetrieveSinglePolicyVersion(this,
                     policyId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<RetrieveSinglePolicyVersionBuilder>(this);
                 return op;
             }
 

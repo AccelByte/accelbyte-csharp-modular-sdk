@@ -189,10 +189,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 TokenGrantV3 op = new TokenGrantV3(this,
                     grantType
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<TokenGrantV3Builder>(this);
                 return op;
             }
 

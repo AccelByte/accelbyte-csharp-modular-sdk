@@ -53,10 +53,8 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
             {
                 UXNameDescriptionHandler op = new UXNameDescriptionHandler(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UXNameDescriptionHandlerBuilder>(this);
                 return op;
             }
 

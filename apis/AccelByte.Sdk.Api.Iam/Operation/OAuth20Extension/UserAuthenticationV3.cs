@@ -94,10 +94,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     requestId,
                     userName
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UserAuthenticationV3Builder>(this);
                 return op;
             }
 

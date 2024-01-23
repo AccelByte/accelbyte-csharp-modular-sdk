@@ -67,10 +67,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 IndirectBulkAcceptVersionedPolicy1 op = new IndirectBulkAcceptVersionedPolicy1(this,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<IndirectBulkAcceptVersionedPolicy1Builder>(this);
                 return op;
             }
 

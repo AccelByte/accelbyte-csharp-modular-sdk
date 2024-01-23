@@ -67,10 +67,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 UpdateItemTypeConfig op = new UpdateItemTypeConfig(this,
                     id
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UpdateItemTypeConfigBuilder>(this);
                 return op;
             }
 

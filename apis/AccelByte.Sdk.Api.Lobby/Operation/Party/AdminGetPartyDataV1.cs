@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     namespace_,
                     partyId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetPartyDataV1Builder>(this);
                 return op;
             }
 

@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                 PublicGetCurrentSeason op = new PublicGetCurrentSeason(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetCurrentSeasonBuilder>(this);
                 return op;
             }
 

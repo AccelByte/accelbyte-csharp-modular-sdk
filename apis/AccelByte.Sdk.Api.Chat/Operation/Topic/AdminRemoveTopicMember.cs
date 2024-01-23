@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     topic,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminRemoveTopicMemberBuilder>(this);
                 return op;
             }
 

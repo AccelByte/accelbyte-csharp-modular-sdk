@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
                     namespace_,
                     userIds
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetSessionByUserIDsBuilder>(this);
                 return op;
             }
 

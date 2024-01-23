@@ -134,10 +134,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                 PublicListContentV2 op = new PublicListContentV2(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicListContentV2Builder>(this);
                 return op;
             }
 

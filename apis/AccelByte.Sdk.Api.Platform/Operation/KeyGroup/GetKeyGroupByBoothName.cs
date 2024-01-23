@@ -63,10 +63,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_,
                     boothName
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetKeyGroupByBoothNameBuilder>(this);
                 return op;
             }
 

@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                 ImportImages op = new ImportImages(this,
                     file
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ImportImagesBuilder>(this);
                 return op;
             }
 

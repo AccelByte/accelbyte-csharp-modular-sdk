@@ -66,10 +66,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     namespace_,
                     userIds
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UsersPresenceHandlerV1Builder>(this);
                 return op;
             }
 

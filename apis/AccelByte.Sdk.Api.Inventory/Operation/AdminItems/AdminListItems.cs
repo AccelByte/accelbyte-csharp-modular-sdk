@@ -110,10 +110,8 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     inventoryId,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminListItemsBuilder>(this);
                 return op;
             }
 

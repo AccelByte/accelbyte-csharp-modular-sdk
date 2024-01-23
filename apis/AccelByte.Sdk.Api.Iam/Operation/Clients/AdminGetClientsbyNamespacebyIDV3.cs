@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     clientId,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetClientsbyNamespacebyIDV3Builder>(this);
                 return op;
             }
 

@@ -108,10 +108,8 @@ namespace AccelByte.Sdk.Api.Group.Operation
                 GetGroupListAdminV1 op = new GetGroupListAdminV1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetGroupListAdminV1Builder>(this);
                 return op;
             }
 

@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 PublicGetLinkHeadlessAccountToMyAccountConflictV3 op = new PublicGetLinkHeadlessAccountToMyAccountConflictV3(this,
                     oneTimeLinkCode
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicGetLinkHeadlessAccountToMyAccountConflictV3Builder>(this);
                 return op;
             }
 

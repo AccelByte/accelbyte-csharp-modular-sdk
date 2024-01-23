@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 FleetList op = new FleetList(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<FleetListBuilder>(this);
                 return op;
             }
 

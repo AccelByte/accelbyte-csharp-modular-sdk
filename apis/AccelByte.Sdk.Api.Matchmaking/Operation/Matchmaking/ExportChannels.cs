@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 ExportChannels op = new ExportChannels(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ExportChannelsBuilder>(this);
                 return op;
             }
 

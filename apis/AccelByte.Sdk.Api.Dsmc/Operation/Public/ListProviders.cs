@@ -54,10 +54,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             {
                 ListProviders op = new ListProviders(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListProvidersBuilder>(this);
                 return op;
             }
 

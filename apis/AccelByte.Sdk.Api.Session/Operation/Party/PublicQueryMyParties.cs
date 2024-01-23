@@ -80,10 +80,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 PublicQueryMyParties op = new PublicQueryMyParties(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicQueryMyPartiesBuilder>(this);
                 return op;
             }
 

@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                 AdminGetConfigV1 op = new AdminGetConfigV1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminGetConfigV1Builder>(this);
                 return op;
             }
 

@@ -70,10 +70,8 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
             {
                 ListServer op = new ListServer(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ListServerBuilder>(this);
                 return op;
             }
 

@@ -97,10 +97,8 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                 AdminListAchievements op = new AdminListAchievements(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminListAchievementsBuilder>(this);
                 return op;
             }
 

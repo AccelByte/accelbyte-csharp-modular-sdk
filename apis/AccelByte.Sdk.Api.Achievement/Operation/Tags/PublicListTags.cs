@@ -91,10 +91,8 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                 PublicListTags op = new PublicListTags(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicListTagsBuilder>(this);
                 return op;
             }
 

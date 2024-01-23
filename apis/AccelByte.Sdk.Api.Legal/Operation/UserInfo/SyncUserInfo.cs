@@ -60,10 +60,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 SyncUserInfo op = new SyncUserInfo(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<SyncUserInfoBuilder>(this);
                 return op;
             }
 

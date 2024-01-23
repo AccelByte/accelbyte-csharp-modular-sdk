@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     templateLanguage,
                     templateSlug
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublishTemplateLocalizationV1AdminBuilder>(this);
                 return op;
             }
 

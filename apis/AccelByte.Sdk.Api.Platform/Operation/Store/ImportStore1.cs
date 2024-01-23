@@ -84,10 +84,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 ImportStore1 op = new ImportStore1(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ImportStore1Builder>(this);
                 return op;
             }
 

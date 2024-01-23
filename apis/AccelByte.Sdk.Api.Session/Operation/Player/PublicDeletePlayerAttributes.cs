@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 PublicDeletePlayerAttributes op = new PublicDeletePlayerAttributes(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicDeletePlayerAttributesBuilder>(this);
                 return op;
             }
 

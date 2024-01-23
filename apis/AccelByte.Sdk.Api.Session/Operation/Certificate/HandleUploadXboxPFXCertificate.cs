@@ -70,10 +70,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     password,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<HandleUploadXboxPFXCertificateBuilder>(this);
                 return op;
             }
 

@@ -114,10 +114,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     keyword,
                     language
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicSearchItemsBuilder>(this);
                 return op;
             }
 

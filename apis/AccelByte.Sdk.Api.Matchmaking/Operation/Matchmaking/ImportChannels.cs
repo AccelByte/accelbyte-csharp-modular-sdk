@@ -77,10 +77,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 ImportChannels op = new ImportChannels(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ImportChannelsBuilder>(this);
                 return op;
             }
 

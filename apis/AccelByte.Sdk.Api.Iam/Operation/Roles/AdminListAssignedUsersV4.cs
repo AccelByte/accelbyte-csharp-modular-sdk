@@ -81,10 +81,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminListAssignedUsersV4 op = new AdminListAssignedUsersV4(this,
                     roleId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminListAssignedUsersV4Builder>(this);
                 return op;
             }
 

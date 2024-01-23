@@ -57,10 +57,8 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
                 UnregisterEventIDHandler op = new UnregisterEventIDHandler(this,
                     eventId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<UnregisterEventIDHandlerBuilder>(this);
                 return op;
             }
 

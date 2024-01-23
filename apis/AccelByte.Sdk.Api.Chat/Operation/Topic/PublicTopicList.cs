@@ -80,10 +80,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                 PublicTopicList op = new PublicTopicList(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicTopicListBuilder>(this);
                 return op;
             }
 

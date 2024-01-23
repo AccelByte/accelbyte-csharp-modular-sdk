@@ -91,10 +91,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 TestAdyenConfig op = new TestAdyenConfig(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<TestAdyenConfigBuilder>(this);
                 return op;
             }
 

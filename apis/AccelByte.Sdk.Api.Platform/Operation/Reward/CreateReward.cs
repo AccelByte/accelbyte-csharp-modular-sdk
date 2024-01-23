@@ -69,10 +69,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 CreateReward op = new CreateReward(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CreateRewardBuilder>(this);
                 return op;
             }
 

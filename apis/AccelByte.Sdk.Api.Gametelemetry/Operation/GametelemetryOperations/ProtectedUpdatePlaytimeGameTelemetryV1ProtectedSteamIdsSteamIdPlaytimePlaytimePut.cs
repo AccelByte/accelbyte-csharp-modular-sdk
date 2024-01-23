@@ -62,10 +62,8 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
                     steamId
 
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePutBuilder>(this);
                 return op;
             }
 

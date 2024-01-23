@@ -120,10 +120,8 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     namespace_,
                     userId
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<QueryUserExpGrantHistoryBuilder>(this);
                 return op;
             }
 

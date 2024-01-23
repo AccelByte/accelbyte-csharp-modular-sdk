@@ -66,10 +66,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     messageId,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminDeleteInboxMessageBuilder>(this);
                 return op;
             }
 

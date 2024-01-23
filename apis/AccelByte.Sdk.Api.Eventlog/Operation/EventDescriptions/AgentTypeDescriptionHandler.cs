@@ -53,10 +53,8 @@ namespace AccelByte.Sdk.Api.Eventlog.Operation
             {
                 AgentTypeDescriptionHandler op = new AgentTypeDescriptionHandler(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AgentTypeDescriptionHandlerBuilder>(this);
                 return op;
             }
 

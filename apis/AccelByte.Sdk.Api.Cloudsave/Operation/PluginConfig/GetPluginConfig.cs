@@ -58,10 +58,8 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                 GetPluginConfig op = new GetPluginConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetPluginConfigBuilder>(this);
                 return op;
             }
 

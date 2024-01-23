@@ -56,10 +56,8 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             {
                 PublicCancelMyAccountDeletionRequest op = new PublicCancelMyAccountDeletionRequest(this
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<PublicCancelMyAccountDeletionRequestBuilder>(this);
                 return op;
             }
 

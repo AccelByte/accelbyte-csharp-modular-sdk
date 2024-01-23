@@ -72,10 +72,8 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                 MatchFunctionList op = new MatchFunctionList(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<MatchFunctionListBuilder>(this);
                 return op;
             }
 

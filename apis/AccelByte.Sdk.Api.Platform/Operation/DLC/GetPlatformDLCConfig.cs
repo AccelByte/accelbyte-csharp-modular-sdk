@@ -59,10 +59,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 GetPlatformDLCConfig op = new GetPlatformDLCConfig(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetPlatformDLCConfigBuilder>(this);
                 return op;
             }
 

@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                     body,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<ServerHeartbeatBuilder>(this);
                 return op;
             }
 

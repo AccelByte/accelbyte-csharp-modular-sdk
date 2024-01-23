@@ -100,10 +100,8 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                 AdminListInventories op = new AdminListInventories(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminListInventoriesBuilder>(this);
                 return op;
             }
 

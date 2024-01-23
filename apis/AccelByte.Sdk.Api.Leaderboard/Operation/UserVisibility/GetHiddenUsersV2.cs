@@ -74,10 +74,8 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     leaderboardCode,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetHiddenUsersV2Builder>(this);
                 return op;
             }
 

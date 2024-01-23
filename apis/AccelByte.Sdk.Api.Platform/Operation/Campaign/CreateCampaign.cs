@@ -68,10 +68,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 CreateCampaign op = new CreateCampaign(this,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<CreateCampaignBuilder>(this);
                 return op;
             }
 

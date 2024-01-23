@@ -61,10 +61,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     name,
                     namespace_
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<AdminReconcileMaxActiveSessionBuilder>(this);
                 return op;
             }
 

@@ -71,10 +71,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     paymentProvider,
                     region
                 );
-                op.PreferredSecurityMethod = PreferredSecurityMethod;
-                op.RequestJsonOptions = RequestJsonOptions;
-                op.ResponseJsonOptions = ResponseJsonOptions;
 
+                op.SetBaseFields<GetPaymentPublicConfigBuilder>(this);
                 return op;
             }
 
