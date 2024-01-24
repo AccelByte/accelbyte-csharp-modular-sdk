@@ -12,6 +12,19 @@ namespace AccelByte.Sdk.Core
 {
     public class AccelByteConfig : IAccelByteConfig
     {
+        public static string DefaultFlightId { get; private set; }
+
+        static AccelByteConfig()
+        {
+            DefaultFlightId = Guid.NewGuid().ToString();
+        }
+
+        public void UpdateDefaultFlightId(string flightId)
+        {
+            DefaultFlightId = flightId;
+        }
+
+
         public IHttpClient HttpClient { get; }
 
         public ITokenRepository TokenRepository { get; }

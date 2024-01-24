@@ -16,22 +16,7 @@ using AccelByte.Sdk.Core.Pipeline;
 
 namespace AccelByte.Sdk.Core
 {
-    public abstract class AccelByteSdkBuilder
-    {
-        private static string _DefaultFlightId;
-
-        protected string GetDefaultFlightId()
-        {
-            return _DefaultFlightId;
-        }
-
-        static AccelByteSdkBuilder()
-        {
-            _DefaultFlightId = Guid.NewGuid().ToString();
-        }
-    }
-
-    public class AccelByteSdkBuilder<T> : AccelByteSdkBuilder, IAccelByteSdkBuilder<T> where T : IAccelByteSdk
+    public class AccelByteSdkBuilder<T> : IAccelByteSdkBuilder<T> where T : IAccelByteSdk
     {
         private IHttpClient? _Client = null;
 
@@ -187,7 +172,7 @@ namespace AccelByte.Sdk.Core
             }
 
             if (_FlightId == "")
-                _FlightId = GetDefaultFlightId();
+                _FlightId = AccelByteConfig.DefaultFlightId;
             sdk.UpdateFlightId(_FlightId);
 
             return sdk;
