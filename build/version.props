@@ -1,15 +1,15 @@
 <Project>
     <PropertyGroup>
-        <CoreAbstractionVersion>0.1.0</CoreAbstractionVersion>
+        <CoreAbstractionVersion>0.2.0</CoreAbstractionVersion>
         <AssemblyCoreAbstractionVersion>0.0.0</AssemblyCoreAbstractionVersion>
 
-        <CoreVersion>0.3.0</CoreVersion>
+        <CoreVersion>0.4.0</CoreVersion>
         <AssemblyCoreVersion>0.0.0</AssemblyCoreVersion>
 
         <CoreAuthenticationVersion>0.1.0</CoreAuthenticationVersion>
         <CompatVersion>0.2.0</CompatVersion>
         <FeatureAutoRefreshTokenVersion>0.1.0</FeatureAutoRefreshTokenVersion>
-        <FeatureLocalTokenValidationVersion>0.2.0</FeatureLocalTokenValidationVersion>
+        <FeatureLocalTokenValidationVersion>0.3.0</FeatureLocalTokenValidationVersion>
 
         <ApiAchievementVersion>0.1.0</ApiAchievementVersion>
         <ApiAmsVersion>0.3.0</ApiAmsVersion>
