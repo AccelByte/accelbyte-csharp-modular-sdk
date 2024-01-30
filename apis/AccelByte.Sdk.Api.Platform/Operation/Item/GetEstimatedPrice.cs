@@ -33,6 +33,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             : OperationBuilder<GetEstimatedPriceBuilder>
         {
 
+            public string? Platform { get; set; }
+
             public string? Region { get; set; }
 
             public string? StoreId { get; set; }
@@ -48,6 +50,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 _Sdk = sdk;
             }
 
+
+            public GetEstimatedPriceBuilder SetPlatform(string _platform)
+            {
+                Platform = _platform;
+                return this;
+            }
 
             public GetEstimatedPriceBuilder SetRegion(string _region)
             {
@@ -112,6 +120,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
 
+            if (builder.Platform is not null) QueryParams["platform"] = builder.Platform;
             if (builder.Region is not null) QueryParams["region"] = builder.Region;
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
             if (itemIds is not null) QueryParams["itemIds"] = itemIds;
@@ -128,6 +137,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public GetEstimatedPrice(
             string namespace_,
+            string? platform,
             string? region,
             string? storeId,
             string itemIds,
@@ -136,6 +146,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
 
+            if (platform is not null) QueryParams["platform"] = platform;
             if (region is not null) QueryParams["region"] = region;
             if (storeId is not null) QueryParams["storeId"] = storeId;
             if (itemIds is not null) QueryParams["itemIds"] = itemIds;

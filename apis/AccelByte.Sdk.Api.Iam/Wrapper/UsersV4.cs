@@ -29,6 +29,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.AdminCreateTestUsersV4.AdminCreateTestUsersV4Builder(_sdk); }
         }
+        public AdminCreateUserV4.AdminCreateUserV4Builder AdminCreateUserV4Op
+        {
+            get { return new Operation.AdminCreateUserV4.AdminCreateUserV4Builder(_sdk); }
+        }
         public AdminBulkUpdateUserAccountTypeV4.AdminBulkUpdateUserAccountTypeV4Builder AdminBulkUpdateUserAccountTypeV4Op
         {
             get { return new Operation.AdminBulkUpdateUserAccountTypeV4.AdminBulkUpdateUserAccountTypeV4Builder(_sdk); }
@@ -225,6 +229,15 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         #endregion
 
         public Model.AccountCreateTestUsersResponseV4? AdminCreateTestUsersV4(AdminCreateTestUsersV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.AccountCreateUserResponseV4? AdminCreateUserV4(AdminCreateUserV4 input)
         {
             var response = _sdk.RunRequest(input);
 

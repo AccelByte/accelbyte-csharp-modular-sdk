@@ -42,6 +42,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             public QueryUserEntitlementsAppType? AppType { get; set; }
 
+            public string? CollectionId { get; set; }
+
             public QueryUserEntitlementsEntitlementClazz? EntitlementClazz { get; set; }
 
             public string? EntitlementName { get; set; }
@@ -79,6 +81,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             public QueryUserEntitlementsBuilder SetAppType(QueryUserEntitlementsAppType _appType)
             {
                 AppType = _appType;
+                return this;
+            }
+
+            public QueryUserEntitlementsBuilder SetCollectionId(string _collectionId)
+            {
+                CollectionId = _collectionId;
                 return this;
             }
 
@@ -179,6 +187,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
             if (builder.AppType is not null) QueryParams["appType"] = builder.AppType.Value;
+            if (builder.CollectionId is not null) QueryParams["collectionId"] = builder.CollectionId;
             if (builder.EntitlementClazz is not null) QueryParams["entitlementClazz"] = builder.EntitlementClazz.Value;
             if (builder.EntitlementName is not null) QueryParams["entitlementName"] = builder.EntitlementName;
             if (builder.Features is not null) QueryParams["features"] = builder.Features;
@@ -204,6 +213,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             string userId,
             bool? activeOnly,
             QueryUserEntitlementsAppType? appType,
+            string? collectionId,
             QueryUserEntitlementsEntitlementClazz? entitlementClazz,
             string? entitlementName,
             List<string>? features,
@@ -219,6 +229,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
             if (appType is not null) QueryParams["appType"] = appType.Value;
+            if (collectionId is not null) QueryParams["collectionId"] = collectionId;
             if (entitlementClazz is not null) QueryParams["entitlementClazz"] = entitlementClazz.Value;
             if (entitlementName is not null) QueryParams["entitlementName"] = entitlementName;
             if (features is not null) QueryParams["features"] = features;

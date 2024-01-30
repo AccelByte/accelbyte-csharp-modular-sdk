@@ -199,6 +199,7 @@
 | `/platform/public/namespaces/{namespace}/users/{userId}/entitlements` | GET | PublicQueryUserEntitlements | [PublicQueryUserEntitlements](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicQueryUserEntitlements.cs) | [PublicQueryUserEntitlements](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicQueryUserEntitlements.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byAppId` | GET | PublicGetUserAppEntitlementByAppId | [PublicGetUserAppEntitlementByAppId](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicGetUserAppEntitlementByAppId.cs) | [PublicGetUserAppEntitlementByAppId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicGetUserAppEntitlementByAppId.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byAppType` | GET | PublicQueryUserEntitlementsByAppType | [PublicQueryUserEntitlementsByAppType](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicQueryUserEntitlementsByAppType.cs) | [PublicQueryUserEntitlementsByAppType](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicQueryUserEntitlementsByAppType.cs) |
+| `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byIds` | GET | PublicGetUserEntitlementsByIds | [PublicGetUserEntitlementsByIds](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicGetUserEntitlementsByIds.cs) | [PublicGetUserEntitlementsByIds](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicGetUserEntitlementsByIds.cs) |
 | [DEPRECATED] `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byItemId` | GET | PublicGetUserEntitlementByItemId | [PublicGetUserEntitlementByItemId](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicGetUserEntitlementByItemId.cs) | [PublicGetUserEntitlementByItemId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicGetUserEntitlementByItemId.cs) |
 | [DEPRECATED] `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/bySku` | GET | PublicGetUserEntitlementBySku | [PublicGetUserEntitlementBySku](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicGetUserEntitlementBySku.cs) | [PublicGetUserEntitlementBySku](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicGetUserEntitlementBySku.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/ownership/any` | GET | PublicExistsAnyUserActiveEntitlement | [PublicExistsAnyUserActiveEntitlement](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicExistsAnyUserActiveEntitlement.cs) | [PublicExistsAnyUserActiveEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicExistsAnyUserActiveEntitlement.cs) |
@@ -209,6 +210,8 @@
 | `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}` | GET | PublicGetUserEntitlement | [PublicGetUserEntitlement](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicGetUserEntitlement.cs) | [PublicGetUserEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicGetUserEntitlement.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}/decrement` | PUT | PublicConsumeUserEntitlement | [PublicConsumeUserEntitlement](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicConsumeUserEntitlement.cs) | [PublicConsumeUserEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicConsumeUserEntitlement.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}/sell` | PUT | PublicSellUserEntitlement | [PublicSellUserEntitlement](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicSellUserEntitlement.cs) | [PublicSellUserEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicSellUserEntitlement.cs) |
+| `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}/split` | PUT | PublicSplitUserEntitlement | [PublicSplitUserEntitlement](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicSplitUserEntitlement.cs) | [PublicSplitUserEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicSplitUserEntitlement.cs) |
+| `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/{entitlementId}/transfer` | PUT | PublicTransferUserEntitlement | [PublicTransferUserEntitlement](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicTransferUserEntitlement.cs) | [PublicTransferUserEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicTransferUserEntitlement.cs) |
 
 ### Fulfillment Wrapper:  [Fulfillment](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/Fulfillment.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -413,6 +416,9 @@
 |---|---|---|---|---|
 | `/platform/admin/namespaces/{namespace}/stores` | GET | ListStores | [ListStores](../../apis/AccelByte.Sdk.Api.Platform/Operation/Store/ListStores.cs) | [ListStores](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Store/ListStores.cs) |
 | `/platform/admin/namespaces/{namespace}/stores` | POST | CreateStore | [CreateStore](../../apis/AccelByte.Sdk.Api.Platform/Operation/Store/CreateStore.cs) | [CreateStore](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Store/CreateStore.cs) |
+| `/platform/admin/namespaces/{namespace}/stores/catalogDefinition` | GET | GetCatalogDefinition | [GetCatalogDefinition](../../apis/AccelByte.Sdk.Api.Platform/Operation/Store/GetCatalogDefinition.cs) | [GetCatalogDefinition](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Store/GetCatalogDefinition.cs) |
+| `/platform/admin/namespaces/{namespace}/stores/downloadCSVTemplates` | GET | DownloadCSVTemplates | [DownloadCSVTemplates](../../apis/AccelByte.Sdk.Api.Platform/Operation/Store/DownloadCSVTemplates.cs) | [DownloadCSVTemplates](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Store/DownloadCSVTemplates.cs) |
+| `/platform/admin/namespaces/{namespace}/stores/exportByCSV` | POST | ExportStoreByCSV | [ExportStoreByCSV](../../apis/AccelByte.Sdk.Api.Platform/Operation/Store/ExportStoreByCSV.cs) | [ExportStoreByCSV](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Store/ExportStoreByCSV.cs) |
 | [DEPRECATED] `/platform/admin/namespaces/{namespace}/stores/import` | PUT | ImportStore | [ImportStore](../../apis/AccelByte.Sdk.Api.Platform/Operation/Store/ImportStore.cs) | [ImportStore](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Store/ImportStore.cs) |
 | `/platform/admin/namespaces/{namespace}/stores/published` | GET | GetPublishedStore | [GetPublishedStore](../../apis/AccelByte.Sdk.Api.Platform/Operation/Store/GetPublishedStore.cs) | [GetPublishedStore](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Store/GetPublishedStore.cs) |
 | `/platform/admin/namespaces/{namespace}/stores/published` | DELETE | DeletePublishedStore | [DeletePublishedStore](../../apis/AccelByte.Sdk.Api.Platform/Operation/Store/DeletePublishedStore.cs) | [DeletePublishedStore](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Store/DeletePublishedStore.cs) |
@@ -423,6 +429,8 @@
 | `/platform/admin/namespaces/{namespace}/stores/{storeId}` | DELETE | DeleteStore | [DeleteStore](../../apis/AccelByte.Sdk.Api.Platform/Operation/Store/DeleteStore.cs) | [DeleteStore](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Store/DeleteStore.cs) |
 | `/platform/admin/namespaces/{namespace}/stores/{storeId}/clone` | PUT | CloneStore | [CloneStore](../../apis/AccelByte.Sdk.Api.Platform/Operation/Store/CloneStore.cs) | [CloneStore](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Store/CloneStore.cs) |
 | [DEPRECATED] `/platform/admin/namespaces/{namespace}/stores/{storeId}/export` | GET | ExportStore | [ExportStore](../../apis/AccelByte.Sdk.Api.Platform/Operation/Store/ExportStore.cs) | [ExportStore](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Store/ExportStore.cs) |
+| `/platform/admin/namespaces/{namespace}/stores/{storeId}/import/history` | GET | QueryImportHistory | [QueryImportHistory](../../apis/AccelByte.Sdk.Api.Platform/Operation/Store/QueryImportHistory.cs) | [QueryImportHistory](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Store/QueryImportHistory.cs) |
+| `/platform/admin/namespaces/{namespace}/stores/{storeId}/importByCSV` | POST | ImportStoreByCSV | [ImportStoreByCSV](../../apis/AccelByte.Sdk.Api.Platform/Operation/Store/ImportStoreByCSV.cs) | [ImportStoreByCSV](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Store/ImportStoreByCSV.cs) |
 | `/platform/public/namespaces/{namespace}/stores` | GET | PublicListStores | [PublicListStores](../../apis/AccelByte.Sdk.Api.Platform/Operation/Store/PublicListStores.cs) | [PublicListStores](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Store/PublicListStores.cs) |
 | `/platform/v2/admin/namespaces/{namespace}/stores/import` | PUT | ImportStore1 | [ImportStore1](../../apis/AccelByte.Sdk.Api.Platform/Operation/Store/ImportStore1.cs) | [ImportStore1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Store/ImportStore1.cs) |
 | `/platform/v2/admin/namespaces/{namespace}/stores/{storeId}/export` | POST | ExportStore1 | [ExportStore1](../../apis/AccelByte.Sdk.Api.Platform/Operation/Store/ExportStore1.cs) | [ExportStore1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Store/ExportStore1.cs) |
@@ -622,6 +630,7 @@
 ### Clawback Wrapper:  [Clawback](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/Clawback.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
+| `/platform/admin/namespaces/{namespace}/iap/clawback/playstation/mock` | POST | MockPlayStationStreamEvent | [MockPlayStationStreamEvent](../../apis/AccelByte.Sdk.Api.Platform/Operation/Clawback/MockPlayStationStreamEvent.cs) | [MockPlayStationStreamEvent](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Clawback/MockPlayStationStreamEvent.cs) |
 
 ### IAP Wrapper:  [IAP](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/IAP.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -778,6 +787,7 @@
 | `CatalogChangeInfo` | [CatalogChangeInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/CatalogChangeInfo.cs) |
 | `CatalogChangePagingResult` | [CatalogChangePagingResult](../../apis/AccelByte.Sdk.Api.Platform/Model/CatalogChangePagingResult.cs) |
 | `CatalogChangeStatistics` | [CatalogChangeStatistics](../../apis/AccelByte.Sdk.Api.Platform/Model/CatalogChangeStatistics.cs) |
+| `CatalogDefinitionInfo` | [CatalogDefinitionInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/CatalogDefinitionInfo.cs) |
 | `CategoryCreate` | [CategoryCreate](../../apis/AccelByte.Sdk.Api.Platform/Model/CategoryCreate.cs) |
 | `CategoryInfo` | [CategoryInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/CategoryInfo.cs) |
 | `CategoryUpdate` | [CategoryUpdate](../../apis/AccelByte.Sdk.Api.Platform/Model/CategoryUpdate.cs) |
@@ -839,7 +849,11 @@
 | `EntitlementRevokeResult` | [EntitlementRevokeResult](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementRevokeResult.cs) |
 | `EntitlementSoldRequest` | [EntitlementSoldRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementSoldRequest.cs) |
 | `EntitlementSoldResult` | [EntitlementSoldResult](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementSoldResult.cs) |
+| `EntitlementSplitRequest` | [EntitlementSplitRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementSplitRequest.cs) |
+| `EntitlementSplitResult` | [EntitlementSplitResult](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementSplitResult.cs) |
 | `EntitlementSummary` | [EntitlementSummary](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementSummary.cs) |
+| `EntitlementTransferRequest` | [EntitlementTransferRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementTransferRequest.cs) |
+| `EntitlementTransferResult` | [EntitlementTransferResult](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementTransferResult.cs) |
 | `EntitlementUpdate` | [EntitlementUpdate](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementUpdate.cs) |
 | `EpicGamesDLCSyncRequest` | [EpicGamesDLCSyncRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/EpicGamesDLCSyncRequest.cs) |
 | `EpicGamesIAPConfigInfo` | [EpicGamesIAPConfigInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/EpicGamesIAPConfigInfo.cs) |
@@ -851,6 +865,7 @@
 | `EventAdditionalData` | [EventAdditionalData](../../apis/AccelByte.Sdk.Api.Platform/Model/EventAdditionalData.cs) |
 | `EventPayload` | [EventPayload](../../apis/AccelByte.Sdk.Api.Platform/Model/EventPayload.cs) |
 | `ExportStoreRequest` | [ExportStoreRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/ExportStoreRequest.cs) |
+| `ExportStoreToCSVRequest` | [ExportStoreToCSVRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/ExportStoreToCSVRequest.cs) |
 | `ExtensionFulfillmentSummary` | [ExtensionFulfillmentSummary](../../apis/AccelByte.Sdk.Api.Platform/Model/ExtensionFulfillmentSummary.cs) |
 | `ExternalPaymentOrderCreate` | [ExternalPaymentOrderCreate](../../apis/AccelByte.Sdk.Api.Platform/Model/ExternalPaymentOrderCreate.cs) |
 | `FieldValidationError` | [FieldValidationError](../../apis/AccelByte.Sdk.Api.Platform/Model/FieldValidationError.cs) |
@@ -895,11 +910,14 @@
 | `ImportStoreAppInfo` | [ImportStoreAppInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportStoreAppInfo.cs) |
 | `ImportStoreCategoryInfo` | [ImportStoreCategoryInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportStoreCategoryInfo.cs) |
 | `ImportStoreError` | [ImportStoreError](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportStoreError.cs) |
+| `ImportStoreHistoryInfo` | [ImportStoreHistoryInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportStoreHistoryInfo.cs) |
+| `ImportStoreHistoryPagingResult` | [ImportStoreHistoryPagingResult](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportStoreHistoryPagingResult.cs) |
 | `ImportStoreItemInfo` | [ImportStoreItemInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportStoreItemInfo.cs) |
 | `ImportStoreResult` | [ImportStoreResult](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportStoreResult.cs) |
 | `ImportStoreSectionInfo` | [ImportStoreSectionInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportStoreSectionInfo.cs) |
 | `ImportStoreViewInfo` | [ImportStoreViewInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportStoreViewInfo.cs) |
 | `InGameItemSync` | [InGameItemSync](../../apis/AccelByte.Sdk.Api.Platform/Model/InGameItemSync.cs) |
+| `InventoryConfig` | [InventoryConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/InventoryConfig.cs) |
 | `InvoiceCurrencySummary` | [InvoiceCurrencySummary](../../apis/AccelByte.Sdk.Api.Platform/Model/InvoiceCurrencySummary.cs) |
 | `InvoiceSummary` | [InvoiceSummary](../../apis/AccelByte.Sdk.Api.Platform/Model/InvoiceSummary.cs) |
 | `ItemAcquireRequest` | [ItemAcquireRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/ItemAcquireRequest.cs) |

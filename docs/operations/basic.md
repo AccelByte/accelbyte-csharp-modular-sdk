@@ -14,6 +14,8 @@
 | `/basic/v1/admin/namespaces/{namespace}` | GET | GetNamespace | [GetNamespace](../../apis/AccelByte.Sdk.Api.Basic/Operation/Namespace/GetNamespace.cs) | [GetNamespace](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Namespace/GetNamespace.cs) |
 | `/basic/v1/admin/namespaces/{namespace}` | DELETE | DeleteNamespace | [DeleteNamespace](../../apis/AccelByte.Sdk.Api.Basic/Operation/Namespace/DeleteNamespace.cs) | [DeleteNamespace](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Namespace/DeleteNamespace.cs) |
 | `/basic/v1/admin/namespaces/{namespace}/basic` | PATCH | UpdateNamespace | [UpdateNamespace](../../apis/AccelByte.Sdk.Api.Basic/Operation/Namespace/UpdateNamespace.cs) | [UpdateNamespace](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Namespace/UpdateNamespace.cs) |
+| `/basic/v1/admin/namespaces/{namespace}/child` | GET | GetChildNamespaces | [GetChildNamespaces](../../apis/AccelByte.Sdk.Api.Basic/Operation/Namespace/GetChildNamespaces.cs) | [GetChildNamespaces](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Namespace/GetChildNamespaces.cs) |
+| `/basic/v1/admin/namespaces/{namespace}/context` | GET | GetNamespaceContext | [GetNamespaceContext](../../apis/AccelByte.Sdk.Api.Basic/Operation/Namespace/GetNamespaceContext.cs) | [GetNamespaceContext](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Namespace/GetNamespaceContext.cs) |
 | `/basic/v1/admin/namespaces/{namespace}/game` | GET | GetGameNamespaces | [GetGameNamespaces](../../apis/AccelByte.Sdk.Api.Basic/Operation/Namespace/GetGameNamespaces.cs) | [GetGameNamespaces](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Namespace/GetGameNamespaces.cs) |
 | `/basic/v1/admin/namespaces/{namespace}/publisher` | GET | GetNamespacePublisher | [GetNamespacePublisher](../../apis/AccelByte.Sdk.Api.Basic/Operation/Namespace/GetNamespacePublisher.cs) | [GetNamespacePublisher](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Namespace/GetNamespacePublisher.cs) |
 | `/basic/v1/admin/namespaces/{namespace}/status` | PATCH | ChangeNamespaceStatus | [ChangeNamespaceStatus](../../apis/AccelByte.Sdk.Api.Basic/Operation/Namespace/ChangeNamespaceStatus.cs) | [ChangeNamespaceStatus](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Namespace/ChangeNamespaceStatus.cs) |
@@ -167,6 +169,7 @@
 | `ErrorEntity` | [ErrorEntity](../../apis/AccelByte.Sdk.Api.Basic/Model/ErrorEntity.cs) |
 | `FieldValidationError` | [FieldValidationError](../../apis/AccelByte.Sdk.Api.Basic/Model/FieldValidationError.cs) |
 | `FileUploadUrlInfo` | [FileUploadUrlInfo](../../apis/AccelByte.Sdk.Api.Basic/Model/FileUploadUrlInfo.cs) |
+| `NamespaceContext` | [NamespaceContext](../../apis/AccelByte.Sdk.Api.Basic/Model/NamespaceContext.cs) |
 | `NamespaceCreate` | [NamespaceCreate](../../apis/AccelByte.Sdk.Api.Basic/Model/NamespaceCreate.cs) |
 | `NamespaceInfo` | [NamespaceInfo](../../apis/AccelByte.Sdk.Api.Basic/Model/NamespaceInfo.cs) |
 | `NamespacePublisherInfo` | [NamespacePublisherInfo](../../apis/AccelByte.Sdk.Api.Basic/Model/NamespacePublisherInfo.cs) |

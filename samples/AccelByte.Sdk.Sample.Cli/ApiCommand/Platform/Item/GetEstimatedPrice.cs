@@ -30,6 +30,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
+        [SdkCommandArgument("platform")]
+        public string? Platform { get; set; }
+
         [SdkCommandArgument("region")]
         public string? Region { get; set; }
 
@@ -53,6 +56,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 
             var opBuilder = AccelByte.Sdk.Api.Platform.Operation.GetEstimatedPrice.Builder;
 
+            if (Platform != null)
+                opBuilder.SetPlatform((string)Platform);
             if (Region != null)
                 opBuilder.SetRegion((string)Region);
             if (StoreId != null)

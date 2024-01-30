@@ -13,7 +13,7 @@
 
         <ApiAchievementVersion>0.1.0</ApiAchievementVersion>
         <ApiAmsVersion>0.3.0</ApiAmsVersion>
-        <ApiBasicVersion>0.1.0</ApiBasicVersion>
+        <ApiBasicVersion>0.2.0</ApiBasicVersion>
 		<ApiChatVersion>0.2.0</ApiChatVersion>
         <ApiCloudsaveVersion>0.4.0</ApiCloudsaveVersion>
         <ApiDslogmanagerVersion>0.1.0</ApiDslogmanagerVersion>
@@ -22,18 +22,18 @@
         <ApiGametelemetryVersion>0.2.0</ApiGametelemetryVersion>
         <ApiGdprVersion>0.1.0</ApiGdprVersion>
         <ApiGroupVersion>0.1.0</ApiGroupVersion>
-        <ApiIamVersion>0.5.0</ApiIamVersion>
+        <ApiIamVersion>0.6.0</ApiIamVersion>
         <ApiInventoryVersion>0.1.0</ApiInventoryVersion>
         <ApiLeaderboardVersion>0.1.0</ApiLeaderboardVersion>
         <ApiLegalVersion>0.1.0</ApiLegalVersion>
         <ApiLobbyVersion>0.4.0</ApiLobbyVersion>
         <ApiMatch2Version>0.2.0</ApiMatch2Version>
         <ApiMatchmakingVersion>0.5.0</ApiMatchmakingVersion>
-        <ApiPlatformVersion>0.5.0</ApiPlatformVersion>
+        <ApiPlatformVersion>0.6.0</ApiPlatformVersion>
         <ApiQosmVersion>0.1.0</ApiQosmVersion>
         <ApiReportingVersion>0.2.0</ApiReportingVersion>
         <ApiSeasonpassVersion>0.1.0</ApiSeasonpassVersion>
-        <ApiSessionVersion>0.4.0</ApiSessionVersion>
+        <ApiSessionVersion>0.5.0</ApiSessionVersion>
         <ApiSessionbrowserVersion>0.2.0</ApiSessionbrowserVersion>
         <ApiSocialVersion>0.2.0</ApiSocialVersion>
         <ApiUgcVersion>0.4.0</ApiUgcVersion>

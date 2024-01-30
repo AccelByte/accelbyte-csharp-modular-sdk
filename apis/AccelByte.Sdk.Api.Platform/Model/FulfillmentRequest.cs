@@ -22,6 +22,10 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? EndDate { get; set; }
 
+        [JsonPropertyName("entitlementCollectionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? EntitlementCollectionId { get; set; }
+
         [JsonPropertyName("entitlementOrigin")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonStringEnum]
@@ -91,6 +95,10 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonPropertyName("endDate")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? EndDate { get; set; }
+
+        [JsonPropertyName("entitlementCollectionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? EntitlementCollectionId { get; set; }
 
         [JsonPropertyName("entitlementOrigin")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
