@@ -27,6 +27,12 @@ namespace AccelByte.Sdk.Tests.Mod.Services
         [Test]
         public void MatchPoolTests()
         {
+            if (IsUsingAGSStarter())
+            {
+                Assert.Inconclusive("Temporarily disabled in AGS Starter due to issue in session service.");
+                return;
+            }
+
             Assert.IsNotNull(_Sdk);
             if (_Sdk == null)
                 return;

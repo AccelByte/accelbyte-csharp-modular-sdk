@@ -47,6 +47,12 @@ namespace AccelByte.Sdk.Tests.Mod.Services
         [Test]
         public void ConfigurationTemplateTests()
         {
+            if (IsUsingAGSStarter())
+            {
+                Assert.Inconclusive("Temporarily disabled in AGS Starter due to issue in session service.");
+                return;
+            }
+
             Assert.IsNotNull(_Sdk);
             if (_Sdk == null)
                 return;
@@ -116,6 +122,12 @@ namespace AccelByte.Sdk.Tests.Mod.Services
         [Test]
         public void GameSessionTests()
         {
+            if (IsUsingAGSStarter())
+            {
+                Assert.Inconclusive("Temporarily disabled in AGS Starter due to issue in session service.");
+                return;
+            }
+
             Assert.IsNotNull(_Sdk);
             if (_Sdk == null)
                 return;
@@ -227,6 +239,12 @@ namespace AccelByte.Sdk.Tests.Mod.Services
         [Test]
         public void PartyTests()
         {
+            if (IsUsingAGSStarter())
+            {
+                Assert.Inconclusive("Temporarily disabled in AGS Starter due to issue in session service.");
+                return;
+            }
+
             Assert.IsNotNull(_Sdk);
             if (_Sdk == null)
                 return;
