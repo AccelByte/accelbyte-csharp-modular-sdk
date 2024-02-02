@@ -49,9 +49,12 @@ namespace AccelByte.Sdk.Sample.Cli.Command
                 SdkCommandFileAttribute? ufArg = pi.GetCustomAttribute<SdkCommandFileAttribute>();
                 if (ufArg != null)
                 {
-                    if (cArgs.FileUpload == null)
+                    if (cArgs.FileUploads.ContainsKey(ufArg.ParameterName))
+                        pi.SetValue(cmd, cArgs.FileUploads[ufArg.ParameterName]);
+                    else if (cArgs.FileUploads.ContainsKey("___"))
+                        pi.SetValue(cmd, cArgs.FileUploads["___"]);
+                    else
                         continue;
-                    pi.SetValue(cmd, cArgs.FileUpload);
                 }
             }
         }
