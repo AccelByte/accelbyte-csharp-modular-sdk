@@ -38,19 +38,19 @@ pipeline {
             }
           }
         }
-        // stage('CLI Tests') {
-        //   steps {            
-        //     sh "make test_cli SDK_MOCK_SERVER_PATH=.justice-codegen-sdk-mock-server"
-        //   }
-        //   post {
-        //     always {
-        //       script {
-        //         archiveArtifacts artifacts: 'samples/AccelByte.Sdk.Sample.Cli/tests/*.tap'
-        //         step([$class: "TapPublisher", testResults: "samples/AccelByte.Sdk.Sample.Cli/tests/*.tap"])
-        //       }
-        //     }
-        //   }
-        // }
+        stage('CLI Tests') {
+          steps {            
+            sh "make test_cli SDK_MOCK_SERVER_PATH=.justice-codegen-sdk-mock-server"
+          }
+          post {
+            always {
+              script {
+                archiveArtifacts artifacts: 'samples/AccelByte.Sdk.Sample.Cli/tests/*.tap'
+                step([$class: "TapPublisher", testResults: "samples/AccelByte.Sdk.Sample.Cli/tests/*.tap"])
+              }
+            }
+          }
+        }
         stage('Integration Tests') {
           options {
             lock("justice-demo-serversdktest")
