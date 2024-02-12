@@ -24,6 +24,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     ///
     /// This endpoint is used to enable 2FA backup codes.
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class PublicEnableMyBackupCodesV4 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -61,6 +62,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public Model.ModelBackupCodesResponseV4? Execute(
                 string namespace_
             )

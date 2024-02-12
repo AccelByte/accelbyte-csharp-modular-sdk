@@ -25,6 +25,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// Check user's account availability.
     /// Available field :
     /// - displayName
+    /// - uniqueDisplayName
     /// - username
     /// 
     /// If request include access token with user ID data, that user ID will be excluded from availability check.

@@ -26,6 +26,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// User will be able to login after completing submitting the data through this endpoint.
     /// Available Authentication Types:
     /// EMAILPASSWD: an authentication type used for new user registration through email.
+    /// 
+    /// **Note**:
+    /// * **uniqueDisplayName**: this is required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true.
+    /// 
     /// Country use ISO3166-1 alpha-2 two letter, e.g. US.
     /// Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.
     /// </summary>
@@ -55,7 +59,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
             public CreateUserFromInvitationV3 Build(
-                ModelUserCreateFromInvitationRequestV3 body,
+                ModelUserCreateRequestV3 body,
                 string invitationId,
                 string namespace_
             )
@@ -71,7 +75,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
 
             public Model.ModelUserCreateResponseV3? Execute(
-                ModelUserCreateFromInvitationRequestV3 body,
+                ModelUserCreateRequestV3 body,
                 string invitationId,
                 string namespace_
             )
@@ -94,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         }
 
         private CreateUserFromInvitationV3(CreateUserFromInvitationV3Builder builder,
-            ModelUserCreateFromInvitationRequestV3 body,
+            ModelUserCreateRequestV3 body,
             string invitationId,
             string namespace_
         )
@@ -116,7 +120,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public CreateUserFromInvitationV3(
             string invitationId,
             string namespace_,
-            Model.ModelUserCreateFromInvitationRequestV3 body
+            Model.ModelUserCreateRequestV3 body
         )
         {
             PathParams["invitationId"] = invitationId;

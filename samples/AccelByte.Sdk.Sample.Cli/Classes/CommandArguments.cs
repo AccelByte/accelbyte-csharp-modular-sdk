@@ -166,7 +166,7 @@ namespace AccelByte.Sdk.Sample.Cli
                                     FileUploads["___"] = fuStream;
                                 else
                                     FileUploads.Add("___", fuStream);
-                            }                         
+                            }
                         }
                         else if (aKey == "lt")
                         {

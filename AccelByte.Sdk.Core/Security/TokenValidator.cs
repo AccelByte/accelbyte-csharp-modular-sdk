@@ -78,7 +78,7 @@ namespace AccelByte.Sdk.Core.Security
                 return new LocalNamespaceContext();
             }
         }
-        
+
         protected string ReplacePlaceholder(string sResource, Dictionary<string, string> parameters)
         {
             string result = sResource;

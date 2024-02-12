@@ -30,6 +30,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
+        [SdkCommandArgument("isSoftDeleted")]
+        public string? IsSoftDeleted { get; set; }
+
         [SdkCommandArgument("joinability")]
         public string? Joinability { get; set; }
 
@@ -74,6 +77,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 
             var opBuilder = AccelByte.Sdk.Api.Session.Operation.AdminQueryParties.Builder;
 
+            if (IsSoftDeleted != null)
+                opBuilder.SetIsSoftDeleted((string)IsSoftDeleted);
             if (Joinability != null)
                 opBuilder.SetJoinability((string)Joinability);
             if (Key != null)

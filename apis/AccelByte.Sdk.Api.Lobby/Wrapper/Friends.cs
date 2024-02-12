@@ -93,6 +93,10 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         {
             get { return new Operation.GetIncomingFriendRequests.GetIncomingFriendRequestsBuilder(_sdk); }
         }
+        public AdminListFriendsOfFriends.AdminListFriendsOfFriendsBuilder AdminListFriendsOfFriendsOp
+        {
+            get { return new Operation.AdminListFriendsOfFriends.AdminListFriendsOfFriendsBuilder(_sdk); }
+        }
         public GetOutgoingFriendRequests.GetOutgoingFriendRequestsBuilder GetOutgoingFriendRequestsOp
         {
             get { return new Operation.GetOutgoingFriendRequests.GetOutgoingFriendRequestsBuilder(_sdk); }
@@ -244,6 +248,15 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.Payload);
         }
         public Model.ModelLoadIncomingFriendsWithTimeResponse? GetIncomingFriendRequests(GetIncomingFriendRequests input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelFriendshipConnectionResponse? AdminListFriendsOfFriends(AdminListFriendsOfFriends input)
         {
             var response = _sdk.RunRequest(input);
 

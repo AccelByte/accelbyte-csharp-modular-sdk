@@ -47,6 +47,7 @@ namespace AccelByte.Sdk.Api.Session.Model
         public string? DsSource { get; set; }
 
         [JsonPropertyName("enableSecret")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? EnableSecret { get; set; }
 
         [JsonPropertyName("fallbackClaimKeys")]
@@ -146,6 +147,7 @@ namespace AccelByte.Sdk.Api.Session.Model
         public string? DsSource { get; set; }
 
         [JsonPropertyName("enableSecret")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? EnableSecret { get; set; }
 
         [JsonPropertyName("fallbackClaimKeys")]

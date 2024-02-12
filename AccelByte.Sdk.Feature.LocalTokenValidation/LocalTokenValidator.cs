@@ -229,7 +229,7 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
                 {
                     GetNamespaceContext(sdk, aNamespace, _NamespaceFetchFunction);
                     pParams.Add("namespace", aNamespace);
-                }   
+                }
                 if (userId != null)
                     pParams.Add("userId", userId);
 

@@ -159,7 +159,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 return op;
             }
 
-            public List<Model.ApiArtifactResponse>? Execute(
+            public Model.ApiArtifactListResponse? Execute(
                 string namespace_
             )
             {
@@ -253,7 +253,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public List<Model.ApiArtifactResponse>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.ApiArtifactListResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -261,11 +261,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<List<Model.ApiArtifactResponse>>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ApiArtifactListResponse>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<List<Model.ApiArtifactResponse>>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ApiArtifactListResponse>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

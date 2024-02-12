@@ -37,6 +37,17 @@ namespace AccelByte.Sdk.Api.Cloudsave
         }
         private Wrapper.AdminGameBinaryRecord? _AdminGameBinaryRecord = null;
 
+        public Wrapper.TTLConfig TTLConfig
+        {
+            get
+            {
+                if (_TTLConfig == null)
+                    _TTLConfig = new Wrapper.TTLConfig(_Sdk);
+                return _TTLConfig;
+            }
+        }
+        private Wrapper.TTLConfig? _TTLConfig = null;
+
         public Wrapper.AdminConcurrentRecord AdminConcurrentRecord
         {
             get
@@ -69,6 +80,17 @@ namespace AccelByte.Sdk.Api.Cloudsave
             }
         }
         private Wrapper.AdminGameRecord? _AdminGameRecord = null;
+
+        public Wrapper.Tags Tags
+        {
+            get
+            {
+                if (_Tags == null)
+                    _Tags = new Wrapper.Tags(_Sdk);
+                return _Tags;
+            }
+        }
+        private Wrapper.Tags? _Tags = null;
 
         public Wrapper.AdminPlayerRecord AdminPlayerRecord
         {

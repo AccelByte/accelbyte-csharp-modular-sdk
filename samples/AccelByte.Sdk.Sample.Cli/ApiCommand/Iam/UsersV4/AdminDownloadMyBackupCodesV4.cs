@@ -36,6 +36,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
         {
             AccelByte.Sdk.Api.Iam.Wrapper.UsersV4 wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.UsersV4(_SDK);
 
+#pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Iam.Operation.AdminDownloadMyBackupCodesV4.Builder;
 
 
@@ -45,12 +46,15 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             AdminDownloadMyBackupCodesV4 operation = opBuilder.Build(
             );
 
+#pragma warning restore ab_deprecated_operation
 
+#pragma warning disable ab_deprecated_operation_wrapper
             Stream? response = wrapper.AdminDownloadMyBackupCodesV4(operation);
             if (response == null)
                 return "No response from server.";
 
             return response.ReadToString();
+#pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

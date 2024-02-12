@@ -150,7 +150,7 @@ namespace AccelByte.Sdk.Authentication
                 {
                     GetNamespaceContext(sdk, aNamespace, _NamespaceFetchFunction);
                     pParams.Add("namespace", aNamespace);
-                }   
+                }
                 if (userId != null)
                     pParams.Add("userId", userId);
 

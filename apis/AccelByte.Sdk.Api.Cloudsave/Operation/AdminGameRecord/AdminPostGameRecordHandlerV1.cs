@@ -78,12 +78,20 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
     /// Indicate which party that could modify the game record.
     /// SERVER: record can be modified by server only.
     /// CLIENT: record can be modified by client and server.
+    /// 2. ttl_config (default: *empty*, type: object)
+    /// Indicate the TTL configuration for the game record.
+    /// action:
+    /// - DELETE: record will be deleted after TTL is reached
     /// 
     /// **Request Body Example:**
     /// ```
     /// {
     /// "__META": {
-    /// "set_by": "SERVER"
+    /// "set_by": "SERVER",
+    /// "ttl_config": {
+    /// "expires_at": "2026-01-02T15:04:05Z", // should be in RFC3339 format
+    /// "action": "DELETE"
+    /// }
     /// }
     /// ...
     /// }
@@ -130,7 +138,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                 return op;
             }
 
-            public Model.ModelsGameRecordResponse? Execute(
+            public Model.ModelsGameRecordAdminResponse? Execute(
                 ModelsGameRecordRequest body,
                 string key,
                 string namespace_
@@ -152,7 +160,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     response.Payload);
             }
 
-            public Model.ModelsGameRecordResponse<T1>? Execute<T1>(
+            public Model.ModelsGameRecordAdminResponse<T1>? Execute<T1>(
                 ModelsGameRecordRequest body,
                 string key,
                 string namespace_
@@ -222,7 +230,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public Model.ModelsGameRecordResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.ModelsGameRecordAdminResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -230,11 +238,11 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.ModelsGameRecordResponse>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ModelsGameRecordAdminResponse>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.ModelsGameRecordResponse>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ModelsGameRecordAdminResponse>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();
@@ -242,7 +250,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             throw new HttpResponseException(code, payloadString);
         }
 
-        public Model.ModelsGameRecordResponse<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
+        public Model.ModelsGameRecordAdminResponse<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -250,11 +258,11 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.ModelsGameRecordResponse<T1>>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ModelsGameRecordAdminResponse<T1>>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.ModelsGameRecordResponse<T1>>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ModelsGameRecordAdminResponse<T1>>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

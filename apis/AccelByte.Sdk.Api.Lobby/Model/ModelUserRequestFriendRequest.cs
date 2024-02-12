@@ -13,9 +13,11 @@ namespace AccelByte.Sdk.Api.Lobby.Model
     public class ModelUserRequestFriendRequest : AccelByte.Sdk.Core.Model
     {
         [JsonPropertyName("friendId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? FriendId { get; set; }
 
         [JsonPropertyName("friendPublicId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? FriendPublicId { get; set; }
 
     }

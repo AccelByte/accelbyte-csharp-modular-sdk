@@ -89,10 +89,12 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.AdminGenerateMyAuthenticatorKeyV4.AdminGenerateMyAuthenticatorKeyV4Builder(_sdk); }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetMyBackupCodesV4.AdminGetMyBackupCodesV4Builder AdminGetMyBackupCodesV4Op
         {
             get { return new Operation.AdminGetMyBackupCodesV4.AdminGetMyBackupCodesV4Builder(_sdk); }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGenerateMyBackupCodesV4.AdminGenerateMyBackupCodesV4Builder AdminGenerateMyBackupCodesV4Op
         {
             get { return new Operation.AdminGenerateMyBackupCodesV4.AdminGenerateMyBackupCodesV4Builder(_sdk); }
@@ -101,13 +103,27 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.AdminDisableMyBackupCodesV4.AdminDisableMyBackupCodesV4Builder(_sdk); }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminDownloadMyBackupCodesV4.AdminDownloadMyBackupCodesV4Builder AdminDownloadMyBackupCodesV4Op
         {
             get { return new Operation.AdminDownloadMyBackupCodesV4.AdminDownloadMyBackupCodesV4Builder(_sdk); }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminEnableMyBackupCodesV4.AdminEnableMyBackupCodesV4Builder AdminEnableMyBackupCodesV4Op
         {
             get { return new Operation.AdminEnableMyBackupCodesV4.AdminEnableMyBackupCodesV4Builder(_sdk); }
+        }
+        public AdminGetBackupCodesV4.AdminGetBackupCodesV4Builder AdminGetBackupCodesV4Op
+        {
+            get { return new Operation.AdminGetBackupCodesV4.AdminGetBackupCodesV4Builder(_sdk); }
+        }
+        public AdminGenerateBackupCodesV4.AdminGenerateBackupCodesV4Builder AdminGenerateBackupCodesV4Op
+        {
+            get { return new Operation.AdminGenerateBackupCodesV4.AdminGenerateBackupCodesV4Builder(_sdk); }
+        }
+        public AdminEnableBackupCodesV4.AdminEnableBackupCodesV4Builder AdminEnableBackupCodesV4Op
+        {
+            get { return new Operation.AdminEnableBackupCodesV4.AdminEnableBackupCodesV4Builder(_sdk); }
         }
         public AdminSendMyMFAEmailCodeV4.AdminSendMyMFAEmailCodeV4Builder AdminSendMyMFAEmailCodeV4Op
         {
@@ -174,10 +190,12 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.PublicGenerateMyAuthenticatorKeyV4.PublicGenerateMyAuthenticatorKeyV4Builder(_sdk); }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetMyBackupCodesV4.PublicGetMyBackupCodesV4Builder PublicGetMyBackupCodesV4Op
         {
             get { return new Operation.PublicGetMyBackupCodesV4.PublicGetMyBackupCodesV4Builder(_sdk); }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGenerateMyBackupCodesV4.PublicGenerateMyBackupCodesV4Builder PublicGenerateMyBackupCodesV4Op
         {
             get { return new Operation.PublicGenerateMyBackupCodesV4.PublicGenerateMyBackupCodesV4Builder(_sdk); }
@@ -186,13 +204,27 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.PublicDisableMyBackupCodesV4.PublicDisableMyBackupCodesV4Builder(_sdk); }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicDownloadMyBackupCodesV4.PublicDownloadMyBackupCodesV4Builder PublicDownloadMyBackupCodesV4Op
         {
             get { return new Operation.PublicDownloadMyBackupCodesV4.PublicDownloadMyBackupCodesV4Builder(_sdk); }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicEnableMyBackupCodesV4.PublicEnableMyBackupCodesV4Builder PublicEnableMyBackupCodesV4Op
         {
             get { return new Operation.PublicEnableMyBackupCodesV4.PublicEnableMyBackupCodesV4Builder(_sdk); }
+        }
+        public PublicGetBackupCodesV4.PublicGetBackupCodesV4Builder PublicGetBackupCodesV4Op
+        {
+            get { return new Operation.PublicGetBackupCodesV4.PublicGetBackupCodesV4Builder(_sdk); }
+        }
+        public PublicGenerateBackupCodesV4.PublicGenerateBackupCodesV4Builder PublicGenerateBackupCodesV4Op
+        {
+            get { return new Operation.PublicGenerateBackupCodesV4.PublicGenerateBackupCodesV4Builder(_sdk); }
+        }
+        public PublicEnableBackupCodesV4.PublicEnableBackupCodesV4Builder PublicEnableBackupCodesV4Op
+        {
+            get { return new Operation.PublicEnableBackupCodesV4.PublicEnableBackupCodesV4Builder(_sdk); }
         }
         public PublicRemoveTrustedDeviceV4.PublicRemoveTrustedDeviceV4Builder PublicRemoveTrustedDeviceV4Op
         {
@@ -372,6 +404,8 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.ModelBackupCodesResponseV4? AdminGetMyBackupCodesV4(AdminGetMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
@@ -381,6 +415,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.ModelBackupCodesResponseV4? AdminGenerateMyBackupCodesV4(AdminGenerateMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
@@ -390,6 +427,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
         public void AdminDisableMyBackupCodesV4(AdminDisableMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
@@ -399,6 +437,8 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Stream? AdminDownloadMyBackupCodesV4(AdminDownloadMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
@@ -408,11 +448,42 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.ModelBackupCodesResponseV4? AdminEnableMyBackupCodesV4(AdminEnableMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+#pragma warning restore ab_deprecated_operation
+        public void AdminGetBackupCodesV4(AdminGetBackupCodesV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void AdminGenerateBackupCodesV4(AdminGenerateBackupCodesV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void AdminEnableBackupCodesV4(AdminEnableBackupCodesV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
@@ -564,6 +635,8 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.ModelBackupCodesResponseV4? PublicGetMyBackupCodesV4(PublicGetMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
@@ -573,6 +646,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.ModelBackupCodesResponseV4? PublicGenerateMyBackupCodesV4(PublicGenerateMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
@@ -582,6 +658,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
         public void PublicDisableMyBackupCodesV4(PublicDisableMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
@@ -591,6 +668,8 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Stream? PublicDownloadMyBackupCodesV4(PublicDownloadMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
@@ -600,11 +679,42 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.ModelBackupCodesResponseV4? PublicEnableMyBackupCodesV4(PublicEnableMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+#pragma warning restore ab_deprecated_operation
+        public void PublicGetBackupCodesV4(PublicGetBackupCodesV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void PublicGenerateBackupCodesV4(PublicGenerateBackupCodesV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void PublicEnableBackupCodesV4(PublicEnableBackupCodesV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

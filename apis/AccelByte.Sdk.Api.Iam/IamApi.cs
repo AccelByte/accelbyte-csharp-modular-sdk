@@ -81,6 +81,17 @@ namespace AccelByte.Sdk.Api.Iam
         }
         private Wrapper.InputValidations? _InputValidations = null;
 
+        public Wrapper.Config Config
+        {
+            get
+            {
+                if (_Config == null)
+                    _Config = new Wrapper.Config(_Sdk);
+                return _Config;
+            }
+        }
+        private Wrapper.Config? _Config = null;
+
         public Wrapper.Country Country
         {
             get

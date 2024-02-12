@@ -25,6 +25,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// This endpoint is used to get 8-digits backup codes.
     /// Each code is a one-time code and will be deleted once used.
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AdminGetMyBackupCodesV4 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -60,6 +61,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public Model.ModelBackupCodesResponseV4? Execute(
             )
             {

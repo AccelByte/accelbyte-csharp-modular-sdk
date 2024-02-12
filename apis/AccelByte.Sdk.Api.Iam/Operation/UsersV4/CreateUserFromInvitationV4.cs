@@ -28,6 +28,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// 
     /// EMAILPASSWD: an authentication type used for new user registration through email.
     /// 
+    /// **Note**:
+    /// * **uniqueDisplayName**: this is required when uniqueDisplayNameEnabled/UNIQUE_DISPLAY_NAME_ENABLED is true.
+    /// 
     /// Country use ISO3166-1 alpha-2 two letter, e.g. US.
     /// 
     /// Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29.
@@ -66,7 +69,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
             public CreateUserFromInvitationV4 Build(
-                ModelUserCreateFromInvitationRequestV4 body,
+                AccountCreateUserRequestV4 body,
                 string invitationId,
                 string namespace_
             )
@@ -82,7 +85,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
 
             public Model.AccountCreateUserResponseV4? Execute(
-                ModelUserCreateFromInvitationRequestV4 body,
+                AccountCreateUserRequestV4 body,
                 string invitationId,
                 string namespace_
             )
@@ -105,7 +108,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         }
 
         private CreateUserFromInvitationV4(CreateUserFromInvitationV4Builder builder,
-            ModelUserCreateFromInvitationRequestV4 body,
+            AccountCreateUserRequestV4 body,
             string invitationId,
             string namespace_
         )
@@ -127,7 +130,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public CreateUserFromInvitationV4(
             string invitationId,
             string namespace_,
-            Model.ModelUserCreateFromInvitationRequestV4 body
+            Model.AccountCreateUserRequestV4 body
         )
         {
             PathParams["invitationId"] = invitationId;

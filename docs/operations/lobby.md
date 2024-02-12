@@ -26,6 +26,7 @@
 | `/friends/sync/namespaces/{namespace}/me` | PATCH | SyncNativeFriends | [SyncNativeFriends](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Friends/SyncNativeFriends.cs) | [SyncNativeFriends](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Friends/SyncNativeFriends.cs) |
 | `/lobby/v1/admin/friend/namespaces/{namespace}/users/{userId}` | GET | GetListOfFriends | [GetListOfFriends](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Friends/GetListOfFriends.cs) | [GetListOfFriends](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Friends/GetListOfFriends.cs) |
 | `/lobby/v1/admin/friend/namespaces/{namespace}/users/{userId}/incoming` | GET | GetIncomingFriendRequests | [GetIncomingFriendRequests](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Friends/GetIncomingFriendRequests.cs) | [GetIncomingFriendRequests](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Friends/GetIncomingFriendRequests.cs) |
+| `/lobby/v1/admin/friend/namespaces/{namespace}/users/{userId}/of-friends` | GET | AdminListFriendsOfFriends | [AdminListFriendsOfFriends](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Friends/AdminListFriendsOfFriends.cs) | [AdminListFriendsOfFriends](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Friends/AdminListFriendsOfFriends.cs) |
 | `/lobby/v1/admin/friend/namespaces/{namespace}/users/{userId}/outgoing` | GET | GetOutgoingFriendRequests | [GetOutgoingFriendRequests](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Friends/GetOutgoingFriendRequests.cs) | [GetOutgoingFriendRequests](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Friends/GetOutgoingFriendRequests.cs) |
 
 ### config Wrapper:  [Config](../../apis/AccelByte.Sdk.Api.Lobby/Wrapper/Config.cs)
@@ -112,8 +113,10 @@
 | `/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/blocked` | GET | AdminGetPlayerBlockedPlayersV1 | [AdminGetPlayerBlockedPlayersV1](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Player/AdminGetPlayerBlockedPlayersV1.cs) | [AdminGetPlayerBlockedPlayersV1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Player/AdminGetPlayerBlockedPlayersV1.cs) |
 | `/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/blocked-by` | GET | AdminGetPlayerBlockedByPlayersV1 | [AdminGetPlayerBlockedByPlayersV1](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Player/AdminGetPlayerBlockedByPlayersV1.cs) | [AdminGetPlayerBlockedByPlayersV1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Player/AdminGetPlayerBlockedByPlayersV1.cs) |
 | `/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/bulk/block` | POST | AdminBulkBlockPlayersV1 | [AdminBulkBlockPlayersV1](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Player/AdminBulkBlockPlayersV1.cs) | [AdminBulkBlockPlayersV1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Player/AdminBulkBlockPlayersV1.cs) |
+| `/lobby/v1/public/player/namespaces/{namespace}/users/me/block` | POST | PublicPlayerBlockPlayersV1 | [PublicPlayerBlockPlayersV1](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Player/PublicPlayerBlockPlayersV1.cs) | [PublicPlayerBlockPlayersV1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Player/PublicPlayerBlockPlayersV1.cs) |
 | `/lobby/v1/public/player/namespaces/{namespace}/users/me/blocked` | GET | PublicGetPlayerBlockedPlayersV1 | [PublicGetPlayerBlockedPlayersV1](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Player/PublicGetPlayerBlockedPlayersV1.cs) | [PublicGetPlayerBlockedPlayersV1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Player/PublicGetPlayerBlockedPlayersV1.cs) |
 | `/lobby/v1/public/player/namespaces/{namespace}/users/me/blocked-by` | GET | PublicGetPlayerBlockedByPlayersV1 | [PublicGetPlayerBlockedByPlayersV1](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Player/PublicGetPlayerBlockedByPlayersV1.cs) | [PublicGetPlayerBlockedByPlayersV1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Player/PublicGetPlayerBlockedByPlayersV1.cs) |
+| `/lobby/v1/public/player/namespaces/{namespace}/users/me/unblock` | POST | PublicUnblockPlayerV1 | [PublicUnblockPlayerV1](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Player/PublicUnblockPlayerV1.cs) | [PublicUnblockPlayerV1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Player/PublicUnblockPlayerV1.cs) |
 
 ### profanity Wrapper:  [Profanity](../../apis/AccelByte.Sdk.Api.Lobby/Wrapper/Profanity.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -214,6 +217,8 @@
 | `model.FreeFormNotificationRequest` | [ModelFreeFormNotificationRequest](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelFreeFormNotificationRequest.cs) |
 | `model.FreeFormNotificationRequestV1` | [ModelFreeFormNotificationRequestV1](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelFreeFormNotificationRequestV1.cs) |
 | `model.FriendWithPlatform` | [ModelFriendWithPlatform](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelFriendWithPlatform.cs) |
+| `model.FriendshipConnection` | [ModelFriendshipConnection](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelFriendshipConnection.cs) |
+| `model.FriendshipConnectionResponse` | [ModelFriendshipConnectionResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelFriendshipConnectionResponse.cs) |
 | `model.GetAllNotificationTemplateSlugResp` | [ModelGetAllNotificationTemplateSlugResp](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelGetAllNotificationTemplateSlugResp.cs) |
 | `model.GetAllNotificationTopicsResponse` | [ModelGetAllNotificationTopicsResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelGetAllNotificationTopicsResponse.cs) |
 | `model.GetFriendsResponse` | [ModelGetFriendsResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelGetFriendsResponse.cs) |
@@ -262,6 +267,7 @@
 | `models.AdminUpdateProfanityList` | [ModelsAdminUpdateProfanityList](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsAdminUpdateProfanityList.cs) |
 | `models.AdminVerifyMessageProfanityRequest` | [ModelsAdminVerifyMessageProfanityRequest](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsAdminVerifyMessageProfanityRequest.cs) |
 | `models.AdminVerifyMessageProfanityResponse` | [ModelsAdminVerifyMessageProfanityResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsAdminVerifyMessageProfanityResponse.cs) |
+| `models.BlockPlayerRequest` | [ModelsBlockPlayerRequest](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsBlockPlayerRequest.cs) |
 | `models.BlockedByPlayerData` | [ModelsBlockedByPlayerData](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsBlockedByPlayerData.cs) |
 | `models.BlockedPlayerData` | [ModelsBlockedPlayerData](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsBlockedPlayerData.cs) |
 | `models.Config` | [ModelsConfig](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsConfig.cs) |
@@ -286,6 +292,7 @@
 | `models.ProfanityFilter` | [ModelsProfanityFilter](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsProfanityFilter.cs) |
 | `models.ProfanityRule` | [ModelsProfanityRule](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsProfanityRule.cs) |
 | `models.SetPlayerSessionAttributeRequest` | [ModelsSetPlayerSessionAttributeRequest](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsSetPlayerSessionAttributeRequest.cs) |
+| `models.UnblockPlayerRequest` | [ModelsUnblockPlayerRequest](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsUnblockPlayerRequest.cs) |
 | `models.UpdateConfigRequest` | [ModelsUpdateConfigRequest](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsUpdateConfigRequest.cs) |
 | `models.UpdateConfigResponse` | [ModelsUpdateConfigResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsUpdateConfigResponse.cs) |
 | `response.Error` | [ResponseError](../../apis/AccelByte.Sdk.Api.Lobby/Model/ResponseError.cs) |

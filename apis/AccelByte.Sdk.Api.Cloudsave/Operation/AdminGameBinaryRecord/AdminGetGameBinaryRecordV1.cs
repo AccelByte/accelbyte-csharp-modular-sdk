@@ -63,7 +63,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                 return op;
             }
 
-            public Model.ModelsGameBinaryRecordResponse? Execute(
+            public Model.ModelsGameBinaryRecordAdminResponse? Execute(
                 string key,
                 string namespace_
             )
@@ -127,7 +127,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public Model.ModelsGameBinaryRecordResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.ModelsGameBinaryRecordAdminResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -135,11 +135,11 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.ModelsGameBinaryRecordResponse>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ModelsGameBinaryRecordAdminResponse>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.ModelsGameBinaryRecordResponse>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ModelsGameBinaryRecordAdminResponse>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

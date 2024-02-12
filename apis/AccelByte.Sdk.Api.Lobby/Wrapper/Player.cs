@@ -57,6 +57,10 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         {
             get { return new Operation.AdminBulkBlockPlayersV1.AdminBulkBlockPlayersV1Builder(_sdk); }
         }
+        public PublicPlayerBlockPlayersV1.PublicPlayerBlockPlayersV1Builder PublicPlayerBlockPlayersV1Op
+        {
+            get { return new Operation.PublicPlayerBlockPlayersV1.PublicPlayerBlockPlayersV1Builder(_sdk); }
+        }
         public PublicGetPlayerBlockedPlayersV1.PublicGetPlayerBlockedPlayersV1Builder PublicGetPlayerBlockedPlayersV1Op
         {
             get { return new Operation.PublicGetPlayerBlockedPlayersV1.PublicGetPlayerBlockedPlayersV1Builder(_sdk); }
@@ -64,6 +68,10 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public PublicGetPlayerBlockedByPlayersV1.PublicGetPlayerBlockedByPlayersV1Builder PublicGetPlayerBlockedByPlayersV1Op
         {
             get { return new Operation.PublicGetPlayerBlockedByPlayersV1.PublicGetPlayerBlockedByPlayersV1Builder(_sdk); }
+        }
+        public PublicUnblockPlayerV1.PublicUnblockPlayerV1Builder PublicUnblockPlayerV1Op
+        {
+            get { return new Operation.PublicUnblockPlayerV1.PublicUnblockPlayerV1Builder(_sdk); }
         }
         #endregion
 
@@ -139,6 +147,15 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public void PublicPlayerBlockPlayersV1(PublicPlayerBlockPlayersV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.ModelsGetAllPlayerBlockedUsersResponse? PublicGetPlayerBlockedPlayersV1(PublicGetPlayerBlockedPlayersV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -153,6 +170,15 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void PublicUnblockPlayerV1(PublicUnblockPlayerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

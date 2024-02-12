@@ -142,6 +142,7 @@
 | `api.AccountLinkResponse` | [ApiAccountLinkResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiAccountLinkResponse.cs) |
 | `api.AccountLinkTokenResponse` | [ApiAccountLinkTokenResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiAccountLinkTokenResponse.cs) |
 | `api.AccountResponse` | [ApiAccountResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiAccountResponse.cs) |
+| `api.ArtifactListResponse` | [ApiArtifactListResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiArtifactListResponse.cs) |
 | `api.ArtifactResponse` | [ApiArtifactResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiArtifactResponse.cs) |
 | `api.ArtifactSamplingRule` | [ApiArtifactSamplingRule](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiArtifactSamplingRule.cs) |
 | `api.ArtifactTypeSamplingRules` | [ApiArtifactTypeSamplingRules](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiArtifactTypeSamplingRules.cs) |
