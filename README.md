@@ -309,6 +309,8 @@ IAccelByteSdk sdk = AccelByteSdk.Builder
     .UseLocalTokenValidator()
     // call this to enable auto refresh for token revocation list
     .UseAutoRefreshForTokenRevocationList()
+    // call this to enable auto cache clear for token validator
+    .UseTokenValidatorAutoClearCache()
     .Build();
 ```
 
@@ -323,6 +325,10 @@ Or, you want to validate the token first before parse it.
 var payload = sdk.ParseAccessToken('<access token>', true);
 //payload will be null if the access token is invalid.
 ```
+
+Permission and namespace context cache can be cleared manually or automatically with set interval.
+- To use it manually, call `sdk.Configuration.TokenValidator.InvalidateCache()`.
+- to enable auto clear, instantiate the sdk with `UseTokenValidatorAutoClearCache(<interval in seconds>)` method.
 
 ## Operation with Generic Response
 C# Extend SDK enable overloaded `ParseOperation` method with generic data type that applies to almost all operations with response model which has one or more object data type in it.
@@ -350,7 +356,7 @@ ModelsGameRecordResponse<GameRecordExample>? response = sdk.GetCloudsaveApi().Pu
 The list of which endpoints that support it can be found in [here](../docs/operations/)
 
 ## FlightID
-Since 0.53, C# Extend SDK enable support for FlightID transmission during Http request. By default, new flight id will be generated when the sdk is loaded. There will be some case that this default value need to be updated with new value.
+C# Extend SDK enable support for FlightID transmission during Http request. By default, new flight id will be generated when the sdk is loaded. There will be some case that this default value need to be updated with new value.
 -   To update default flight id globally, use following code:
     ```csharp
     AccelByteConfig.UpdateDefaultFlightId("<new flight id value>");

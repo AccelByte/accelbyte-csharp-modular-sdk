@@ -58,6 +58,7 @@ and restrictions contact your company contract manager.
   <ItemGroup>
     <ProjectReference Include="..\AccelByte.Sdk.Abstractions\AccelByte.Sdk.Abstractions.csproj" />
     <ProjectReference Include="..\AccelByte.Sdk.Core\AccelByte.Sdk.Core.csproj" />
+    <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Basic\AccelByte.Sdk.Api.Basic.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Iam\AccelByte.Sdk.Api.Iam.csproj" />
   </ItemGroup>
 

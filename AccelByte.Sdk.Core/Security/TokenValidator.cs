@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2023-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -13,14 +13,32 @@ namespace AccelByte.Sdk.Core.Security
     {
         private Dictionary<string, List<LocalPermissionItem>> _PermissionCache = new();
 
+        private Dictionary<string, LocalNamespaceContext> _NamespaceContextCache = new();
+
         protected void AddPermissionToCache(string key, List<LocalPermissionItem> permissions)
         {
             _PermissionCache.Add(key, permissions);
         }
 
+        protected void AddNamespaceContextToCache(string key, LocalNamespaceContext namespaceContext)
+        {
+            _NamespaceContextCache.Add(key, namespaceContext);
+        }
+
         protected void ClearPermissionCache()
         {
             _PermissionCache.Clear();
+        }
+
+        protected void ClearNamespaceContextCache()
+        {
+            _NamespaceContextCache.Clear();
+        }
+
+        public void InvalidateCache()
+        {
+            _PermissionCache.Clear();
+            _NamespaceContextCache.Clear();
         }
 
         protected virtual List<LocalPermissionItem> GetRolePermission(IAccelByteSdk sdk, string roleId,
@@ -41,6 +59,26 @@ namespace AccelByte.Sdk.Core.Security
             }
         }
 
+        protected virtual LocalNamespaceContext GetNamespaceContext(IAccelByteSdk sdk, string aNamespace,
+            Func<IAccelByteSdk, string, LocalNamespaceContext> fetchFunction)
+        {
+            if (_NamespaceContextCache.ContainsKey(aNamespace))
+                return _NamespaceContextCache[aNamespace];
+            try
+            {
+                var namespaceContext = fetchFunction.Invoke(sdk, aNamespace);
+                if (!_NamespaceContextCache.ContainsKey(aNamespace))
+                    _NamespaceContextCache.Add(aNamespace, namespaceContext);
+                else
+                    _NamespaceContextCache[aNamespace] = namespaceContext;
+                return _NamespaceContextCache[aNamespace];
+            }
+            catch
+            {
+                return new LocalNamespaceContext();
+            }
+        }
+        
         protected string ReplacePlaceholder(string sResource, Dictionary<string, string> parameters)
         {
             string result = sResource;
@@ -66,8 +104,33 @@ namespace AccelByte.Sdk.Core.Security
                 string userSection = accessPermResSections[i];
                 string requiredSection = requiredPermResSections[i];
 
+
                 if ((userSection != requiredSection) && (userSection != "*"))
+                {
+                    if (userSection.EndsWith("-") && (i > 0))
+                    {
+                        string previousUserSection = accessPermResSections[i - 1];
+                        if (previousUserSection == "NAMESPACE")
+                        {
+                            if ((requiredSection.Contains("-")) &&
+                                (requiredSection.Split("-").Length == 2) &&
+                                (requiredSection.StartsWith(userSection)))
+                                continue;
+
+                            if (userSection == $"{requiredSection}-")
+                                continue;
+
+                            if (_NamespaceContextCache.ContainsKey(requiredSection))
+                            {
+                                LocalNamespaceContext context = _NamespaceContextCache[requiredSection];
+                                if ((context.Type == NamespaceType.Game) && (userSection.StartsWith(context.StudioNamespace)))
+                                    continue;
+                            }
+                        }
+                    }
+
                     return false;
+                }
             }
 
             if (accessPermResSectionLen == requiredPermResSectionLen)
