@@ -14,8 +14,8 @@ and restrictions contact your company contract manager.
     <DebugType>Embedded</DebugType>
     <EmbedAllSources>true</EmbedAllSources>
 
-    <Version>$(CoreAbstractionVersion)</Version>
-    <AssemblyVersion>$(CoreAbstractionVersion)</AssemblyVersion>
+    <Version>$(CoreAuthenticationVersion)</Version>
+    <AssemblyVersion>$(CoreAuthenticationVersion)</AssemblyVersion>
 
     <Product>AccelByte.Sdk.Authentication</Product>
     <PackageId>AccelByte.Sdk.Authentication</PackageId>
