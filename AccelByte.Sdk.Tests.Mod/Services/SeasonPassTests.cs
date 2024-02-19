@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -15,7 +15,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 {
     [TestFixture(Category = "ServiceIntegration")]
     [Explicit]
-    public class SeasonPassTests : BaseServiceTests
+    public class SeasonPassTests : StoreBasedTests
     {
         public SeasonPassTests() : base(true) { }
 
@@ -32,48 +32,33 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 return;
             }
 
+            CheckAndClearStores(_Sdk);
+
             string nameSeason = "CSharpServerSDKTestSeason";
             DateTime? startTime = new DateTime();
             DateTime? endTime = new DateTime().AddDays(2);
             string defaultDraftStoreId = String.Empty;
             string defaultTierItemId = String.Empty;
 
-            // Arrange store
-            List<StoreInfo>? listStores = _Sdk.GetPlatformApi().Store.ListStoresOp.Execute(_Sdk.Namespace);
-            if (listStores == null)
+            // Create a new store
+            StoreCreate createStore = new StoreCreate()
             {
-                Assert.Fail("List stores is null");
-                return;
-            }
+                Title = "CSharp SDK Store Test",
+                Description = "Description for CSharp Server SDK store service integration test.",
+                DefaultLanguage = "en",
+                DefaultRegion = "US",
+                SupportedLanguages = new List<string>() { "en", "id" },
+                SupportedRegions = new List<string>() { "US", "ID" }
+            };
 
-            // Check list of stores
-            if (listStores.Count > 0)
+            StoreInfo? cStoreForSeason = _Sdk.GetPlatformApi().Store.CreateStoreOp
+                .SetBody(createStore)
+                .Execute(_Sdk.Namespace);
+
+            if (cStoreForSeason != null)
             {
-                // Draft store is exist. Grab the storeId from the first store on list
-                defaultDraftStoreId = listStores[0].StoreId!;
-            }
-            else
-            {
-                // Draft store is none. Create a new one
-                StoreCreate createStore = new StoreCreate()
-                {
-                    Title = "CSharp SDK Store Test",
-                    Description = "Description for CSharp Server SDK store service integration test.",
-                    DefaultLanguage = "en",
-                    DefaultRegion = "US",
-                    SupportedLanguages = new List<string>() { "en", "id" },
-                    SupportedRegions = new List<string>() { "US", "ID" }
-                };
-
-                StoreInfo? cStoreForSeason = _Sdk.GetPlatformApi().Store.CreateStoreOp
-                    .SetBody(createStore)
-                    .Execute(_Sdk.Namespace);
-
-                if (cStoreForSeason != null)
-                {
-                    // Use the new created storeId
-                    defaultDraftStoreId = cStoreForSeason!.StoreId!;
-                }
+                // Use the new created storeId
+                defaultDraftStoreId = cStoreForSeason!.StoreId!;
             }
 
             // Create a store category in platform
@@ -200,22 +185,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (_Sdk == null)
                 return;
 
-            List<StoreInfo>? listStores = _Sdk.GetPlatformApi().Store.ListStoresOp.Execute(_Sdk.Namespace);
-            if (listStores == null)
-            {
-                Assert.Fail("List stores is null");
-                return;
-            }
-
-            // Check list of stores
-            String defaultDraftStoreId;
-            if (listStores.Count > 0)
-            {
-                // Draft store is exist. Grab the storeId from the first store on list
-                defaultDraftStoreId = listStores[0].StoreId!;
-                StoreInfo? cStore = _Sdk.GetPlatformApi().Store.DeleteStoreOp
-                    .Execute(_Sdk.Namespace, defaultDraftStoreId);
-            }
+            CheckAndClearStores(_Sdk);
         }
     }
 }

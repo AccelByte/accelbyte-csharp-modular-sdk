@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -16,7 +16,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 {
     [TestFixture(Category = "ServiceIntegration")]
     [Explicit]
-    public class PlatformTests : BaseServiceTests
+    public class PlatformTests : StoreBasedTests
     {
         public PlatformTests() : base(true) { }
 
@@ -27,23 +27,9 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (_Sdk == null)
                 return;
 
-            string store_id = String.Empty;
+            CheckAndClearStores(_Sdk);
 
-            //Check whether draft store is already exists or not
-            List<StoreInfo>? stores = _Sdk.GetPlatformApi().Store.ListStoresOp
-                .Execute(_Sdk.Namespace);
-            if ((stores != null) && (stores.Count > 0))
-            {
-                foreach (var store in stores)
-                {
-                    if (store.Published! != true)
-                    {
-                        //draft store exists. delete it first.
-                        _Sdk.GetPlatformApi().Store.DeleteStoreOp
-                            .Execute(_Sdk.Namespace, store.StoreId!);
-                    }
-                }
-            }
+            string store_id = String.Empty;
 
             #region Create a store
             StoreCreate createStore = new StoreCreate()
@@ -102,23 +88,9 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (_Sdk == null)
                 return;
 
-            string store_id = String.Empty;
+            CheckAndClearStores(_Sdk);
 
-            //Check whether draft store is already exists or not
-            List<StoreInfo>? stores = _Sdk.GetPlatformApi().Store.ListStoresOp
-                .Execute(_Sdk.Namespace);
-            if ((stores != null) && (stores.Count > 0))
-            {
-                foreach (var store in stores)
-                {
-                    if (store.Published! != true)
-                    {
-                        //draft store exists. delete it first.
-                        _Sdk.GetPlatformApi().Store.DeleteStoreOp
-                            .Execute(_Sdk.Namespace, store.StoreId!);
-                    }
-                }
-            }
+            string store_id = String.Empty;
 
             StoreCreate createStore = new StoreCreate()
             {
