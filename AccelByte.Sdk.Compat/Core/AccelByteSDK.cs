@@ -11,6 +11,7 @@ using AccelByte.Sdk.Api.Ams;
 using AccelByte.Sdk.Api.Basic;
 using AccelByte.Sdk.Api.Chat;
 using AccelByte.Sdk.Api.Cloudsave;
+using AccelByte.Sdk.Api.Dsartifact;
 using AccelByte.Sdk.Api.Dslogmanager;
 using AccelByte.Sdk.Api.Dsmc;
 using AccelByte.Sdk.Api.Eventlog;
@@ -47,6 +48,7 @@ namespace AccelByte.Sdk.Core
         public BasicApi Basic { get => ((IAccelByteSdk)this).GetBasicApi(); }
         public ChatApi Chat { get => ((IAccelByteSdk)this).GetChatApi(); }
         public CloudsaveApi Cloudsave { get => ((IAccelByteSdk)this).GetCloudsaveApi(); }
+        public DsartifactApi Dsartifact { get => ((IAccelByteSdk)this).GetDsartifactApi(); }
         public DslogmanagerApi Dslogmanager { get => ((IAccelByteSdk)this).GetDslogmanagerApi(); }
         public DsmcApi Dsmc { get => ((IAccelByteSdk)this).GetDsmcApi(); }
         public EventlogApi Eventlog { get => ((IAccelByteSdk)this).GetEventlogApi(); }
