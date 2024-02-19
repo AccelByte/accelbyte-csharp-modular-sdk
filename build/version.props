@@ -16,6 +16,7 @@
         <ApiBasicVersion>0.2.0</ApiBasicVersion>
 		<ApiChatVersion>0.3.0</ApiChatVersion>
         <ApiCloudsaveVersion>0.6.0</ApiCloudsaveVersion>
+        <ApiDsartifactVersion>0.1.0</ApiDsartifactVersion>
         <ApiDslogmanagerVersion>0.2.0</ApiDslogmanagerVersion>
         <ApiDsmcVersion>0.2.0</ApiDsmcVersion>
         <ApiEventlogVersion>0.2.0</ApiEventlogVersion>
