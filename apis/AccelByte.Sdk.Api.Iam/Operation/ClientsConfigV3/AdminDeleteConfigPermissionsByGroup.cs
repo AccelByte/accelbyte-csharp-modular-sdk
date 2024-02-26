@@ -15,33 +15,31 @@ using System.IO;
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Core.Net.Http;
 
-using AccelByte.Sdk.Api.Cloudsave.Model;
+using AccelByte.Sdk.Api.Iam.Model;
 
-namespace AccelByte.Sdk.Api.Cloudsave.Operation
+namespace AccelByte.Sdk.Api.Iam.Operation
 {
     /// <summary>
-    /// adminPostTagHandlerV1
+    /// AdminDeleteConfigPermissionsByGroup
     ///
-    /// ## Description
-    /// 
-    /// Endpoint to create a tag
+    /// Delete Client config permissions by module and group.
     /// </summary>
-    public class AdminPostTagHandlerV1 : AccelByte.Sdk.Core.Operation
+    public class AdminDeleteConfigPermissionsByGroup : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static AdminPostTagHandlerV1Builder Builder { get => new AdminPostTagHandlerV1Builder(); }
+        public static AdminDeleteConfigPermissionsByGroupBuilder Builder { get => new AdminDeleteConfigPermissionsByGroupBuilder(); }
 
-        public class AdminPostTagHandlerV1Builder
-            : OperationBuilder<AdminPostTagHandlerV1Builder>
+        public class AdminDeleteConfigPermissionsByGroupBuilder
+            : OperationBuilder<AdminDeleteConfigPermissionsByGroupBuilder>
         {
 
 
 
 
 
-            internal AdminPostTagHandlerV1Builder() { }
+            internal AdminDeleteConfigPermissionsByGroupBuilder() { }
 
-            internal AdminPostTagHandlerV1Builder(IAccelByteSdk sdk)
+            internal AdminDeleteConfigPermissionsByGroupBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -51,28 +49,24 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
 
 
-            public AdminPostTagHandlerV1 Build(
-                ModelsTagRequest body,
-                string namespace_
+            public AdminDeleteConfigPermissionsByGroup Build(
+                ClientmodelPermissionSetDeleteGroupRequest body
             )
             {
-                AdminPostTagHandlerV1 op = new AdminPostTagHandlerV1(this,
-                    body,
-                    namespace_
+                AdminDeleteConfigPermissionsByGroup op = new AdminDeleteConfigPermissionsByGroup(this,
+                    body
                 );
 
-                op.SetBaseFields<AdminPostTagHandlerV1Builder>(this);
+                op.SetBaseFields<AdminDeleteConfigPermissionsByGroupBuilder>(this);
                 return op;
             }
 
             public void Execute(
-                ModelsTagRequest body,
-                string namespace_
+                ClientmodelPermissionSetDeleteGroupRequest body
             )
             {
-                AdminPostTagHandlerV1 op = Build(
-                    body,
-                    namespace_
+                AdminDeleteConfigPermissionsByGroup op = Build(
+                    body
                 );
 
                 if (_Sdk == null)
@@ -86,12 +80,10 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
         }
 
-        private AdminPostTagHandlerV1(AdminPostTagHandlerV1Builder builder,
-            ModelsTagRequest body,
-            string namespace_
+        private AdminDeleteConfigPermissionsByGroup(AdminDeleteConfigPermissionsByGroupBuilder builder,
+            ClientmodelPermissionSetDeleteGroupRequest body
         )
         {
-            PathParams["namespace"] = namespace_;
 
 
 
@@ -104,12 +96,10 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         }
         #endregion
 
-        public AdminPostTagHandlerV1(
-            string namespace_,
-            Model.ModelsTagRequest body
+        public AdminDeleteConfigPermissionsByGroup(
+            Model.ClientmodelPermissionSetDeleteGroupRequest body
         )
         {
-            PathParams["namespace"] = namespace_;
 
 
 
@@ -121,9 +111,9 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/cloudsave/v1/admin/namespaces/{namespace}/tags";
+        public override string Path => "/iam/v3/admin/clientConfig/permissions";
 
-        public override HttpMethod Method => HttpMethod.Post;
+        public override HttpMethod Method => HttpMethod.Delete;
 
         public override List<string> Consumes => new() { "application/json" };
 
@@ -131,7 +121,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)201)
+            if (code == (HttpStatusCode)204)
             {
                 return;
             }

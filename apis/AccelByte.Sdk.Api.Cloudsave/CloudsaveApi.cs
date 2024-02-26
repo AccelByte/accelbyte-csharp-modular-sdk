@@ -81,16 +81,16 @@ namespace AccelByte.Sdk.Api.Cloudsave
         }
         private Wrapper.AdminGameRecord? _AdminGameRecord = null;
 
-        public Wrapper.Tags Tags
+        public Wrapper.AdminTags AdminTags
         {
             get
             {
-                if (_Tags == null)
-                    _Tags = new Wrapper.Tags(_Sdk);
-                return _Tags;
+                if (_AdminTags == null)
+                    _AdminTags = new Wrapper.AdminTags(_Sdk);
+                return _AdminTags;
             }
         }
-        private Wrapper.Tags? _Tags = null;
+        private Wrapper.AdminTags? _AdminTags = null;
 
         public Wrapper.AdminPlayerRecord AdminPlayerRecord
         {
@@ -146,6 +146,17 @@ namespace AccelByte.Sdk.Api.Cloudsave
             }
         }
         private Wrapper.PublicGameRecord? _PublicGameRecord = null;
+
+        public Wrapper.PublicTags PublicTags
+        {
+            get
+            {
+                if (_PublicTags == null)
+                    _PublicTags = new Wrapper.PublicTags(_Sdk);
+                return _PublicTags;
+            }
+        }
+        private Wrapper.PublicTags? _PublicTags = null;
 
         public Wrapper.PublicPlayerBinaryRecord PublicPlayerBinaryRecord
         {

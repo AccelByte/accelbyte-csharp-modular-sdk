@@ -30,6 +30,12 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
+        [SdkCommandArgument("codeChallenge")]
+        public string? CodeChallenge { get; set; }
+
+        [SdkCommandArgument("codeChallengeMethod")]
+        public string? CodeChallengeMethod { get; set; }
+
         [SdkCommandArgument("client_id")]
         public string ClientId { get; set; } = String.Empty;
 
@@ -44,6 +50,10 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 
             var opBuilder = AccelByte.Sdk.Api.Iam.Operation.RequestTokenExchangeCodeV3.Builder;
 
+            if (CodeChallenge != null)
+                opBuilder.SetCodeChallenge((string)CodeChallenge);
+            if (CodeChallengeMethod != null)
+                opBuilder.SetCodeChallengeMethod(RequestTokenExchangeCodeV3CodeChallengeMethod.NewValue(CodeChallengeMethod));
 
 
 

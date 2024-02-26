@@ -33,6 +33,10 @@ namespace AccelByte.Sdk.Api.Iam.Model
         [JsonPropertyName("TwoFactorEnabled")]
         public bool? TwoFactorEnabled { get; set; }
 
+        [JsonPropertyName("modulePermissions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<AccountcommonClientModulePermission>? ModulePermissions { get; set; }
+
     }
 
 

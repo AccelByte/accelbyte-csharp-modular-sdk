@@ -20,28 +20,28 @@ using AccelByte.Sdk.Api.Cloudsave.Model;
 namespace AccelByte.Sdk.Api.Cloudsave.Operation
 {
     /// <summary>
-    /// adminDeleteTagHandlerV1
+    /// adminPostTagHandlerV1
     ///
     /// ## Description
     /// 
-    /// Endpoint to delete a tag
+    /// This endpoint will create new tags
     /// </summary>
-    public class AdminDeleteTagHandlerV1 : AccelByte.Sdk.Core.Operation
+    public class AdminPostTagHandlerV1 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static AdminDeleteTagHandlerV1Builder Builder { get => new AdminDeleteTagHandlerV1Builder(); }
+        public static AdminPostTagHandlerV1Builder Builder { get => new AdminPostTagHandlerV1Builder(); }
 
-        public class AdminDeleteTagHandlerV1Builder
-            : OperationBuilder<AdminDeleteTagHandlerV1Builder>
+        public class AdminPostTagHandlerV1Builder
+            : OperationBuilder<AdminPostTagHandlerV1Builder>
         {
 
 
 
 
 
-            internal AdminDeleteTagHandlerV1Builder() { }
+            internal AdminPostTagHandlerV1Builder() { }
 
-            internal AdminDeleteTagHandlerV1Builder(IAccelByteSdk sdk)
+            internal AdminPostTagHandlerV1Builder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -51,28 +51,28 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
 
 
-            public AdminDeleteTagHandlerV1 Build(
-                string namespace_,
-                string tag
+            public AdminPostTagHandlerV1 Build(
+                ModelsTagRequest body,
+                string namespace_
             )
             {
-                AdminDeleteTagHandlerV1 op = new AdminDeleteTagHandlerV1(this,
-                    namespace_,
-                    tag
+                AdminPostTagHandlerV1 op = new AdminPostTagHandlerV1(this,
+                    body,
+                    namespace_
                 );
 
-                op.SetBaseFields<AdminDeleteTagHandlerV1Builder>(this);
+                op.SetBaseFields<AdminPostTagHandlerV1Builder>(this);
                 return op;
             }
 
             public void Execute(
-                string namespace_,
-                string tag
+                ModelsTagRequest body,
+                string namespace_
             )
             {
-                AdminDeleteTagHandlerV1 op = Build(
-                    namespace_,
-                    tag
+                AdminPostTagHandlerV1 op = Build(
+                    body,
+                    namespace_
                 );
 
                 if (_Sdk == null)
@@ -86,44 +86,44 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
         }
 
-        private AdminDeleteTagHandlerV1(AdminDeleteTagHandlerV1Builder builder,
-            string namespace_,
-            string tag
+        private AdminPostTagHandlerV1(AdminPostTagHandlerV1Builder builder,
+            ModelsTagRequest body,
+            string namespace_
         )
         {
             PathParams["namespace"] = namespace_;
-            PathParams["tag"] = tag;
 
 
 
 
 
+            BodyParams = body;
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public AdminDeleteTagHandlerV1(
+        public AdminPostTagHandlerV1(
             string namespace_,
-            string tag
+            Model.ModelsTagRequest body
         )
         {
             PathParams["namespace"] = namespace_;
-            PathParams["tag"] = tag;
 
 
 
 
 
+            BodyParams = body;
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/cloudsave/v1/admin/namespaces/{namespace}/tags/{tag}";
+        public override string Path => "/cloudsave/v1/admin/namespaces/{namespace}/tags";
 
-        public override HttpMethod Method => HttpMethod.Delete;
+        public override HttpMethod Method => HttpMethod.Post;
 
         public override List<string> Consumes => new() { "application/json" };
 

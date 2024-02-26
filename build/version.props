@@ -15,7 +15,7 @@
         <ApiAmsVersion>0.5.0</ApiAmsVersion>
         <ApiBasicVersion>0.2.0</ApiBasicVersion>
 		<ApiChatVersion>0.3.0</ApiChatVersion>
-        <ApiCloudsaveVersion>0.6.0</ApiCloudsaveVersion>
+        <ApiCloudsaveVersion>0.7.0</ApiCloudsaveVersion>
         <ApiDsartifactVersion>0.1.0</ApiDsartifactVersion>
         <ApiDslogmanagerVersion>0.2.0</ApiDslogmanagerVersion>
         <ApiDsmcVersion>0.2.0</ApiDsmcVersion>
@@ -23,10 +23,10 @@
         <ApiGametelemetryVersion>0.3.0</ApiGametelemetryVersion>
         <ApiGdprVersion>0.3.0</ApiGdprVersion>
         <ApiGroupVersion>0.2.0</ApiGroupVersion>
-        <ApiIamVersion>0.7.0</ApiIamVersion>
+        <ApiIamVersion>0.8.0</ApiIamVersion>
         <ApiInventoryVersion>0.2.0</ApiInventoryVersion>
         <ApiLeaderboardVersion>0.2.0</ApiLeaderboardVersion>
-        <ApiLegalVersion>0.2.0</ApiLegalVersion>
+        <ApiLegalVersion>0.3.0</ApiLegalVersion>
         <ApiLobbyVersion>0.6.0</ApiLobbyVersion>
         <ApiMatch2Version>0.3.0</ApiMatch2Version>
         <ApiMatchmakingVersion>0.6.0</ApiMatchmakingVersion>
@@ -36,7 +36,7 @@
         <ApiSeasonpassVersion>0.2.0</ApiSeasonpassVersion>
         <ApiSessionVersion>0.6.0</ApiSessionVersion>
         <ApiSessionbrowserVersion>0.3.0</ApiSessionbrowserVersion>
-        <ApiSocialVersion>0.3.0</ApiSocialVersion>
+        <ApiSocialVersion>0.4.0</ApiSocialVersion>
         <ApiUgcVersion>0.5.0</ApiUgcVersion>
     </PropertyGroup>
 </Project>

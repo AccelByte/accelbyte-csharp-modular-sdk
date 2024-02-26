@@ -38,6 +38,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             : OperationBuilder<RequestTokenExchangeCodeV3Builder>
         {
 
+            public string? CodeChallenge { get; set; }
+
+            public RequestTokenExchangeCodeV3CodeChallengeMethod? CodeChallengeMethod { get; set; }
+
 
 
 
@@ -49,6 +53,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 _Sdk = sdk;
             }
 
+
+            public RequestTokenExchangeCodeV3Builder SetCodeChallenge(string _codeChallenge)
+            {
+                CodeChallenge = _codeChallenge;
+                return this;
+            }
+
+            public RequestTokenExchangeCodeV3Builder SetCodeChallengeMethod(RequestTokenExchangeCodeV3CodeChallengeMethod _codeChallengeMethod)
+            {
+                CodeChallengeMethod = _codeChallengeMethod;
+                return this;
+            }
 
 
 
@@ -96,6 +112,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
 
+            if (builder.CodeChallenge is not null) QueryParams["code_challenge"] = builder.CodeChallenge;
+            if (builder.CodeChallengeMethod is not null) QueryParams["code_challenge_method"] = builder.CodeChallengeMethod.Value;
 
             if (clientId is not null) FormParams["client_id"] = clientId;
 
@@ -109,11 +127,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public RequestTokenExchangeCodeV3(
             string namespace_,
+            string? codeChallenge,
+            RequestTokenExchangeCodeV3CodeChallengeMethod? codeChallengeMethod,
             string clientId
         )
         {
             PathParams["namespace"] = namespace_;
 
+            if (codeChallenge is not null) QueryParams["code_challenge"] = codeChallenge;
+            if (codeChallengeMethod is not null) QueryParams["code_challenge_method"] = codeChallengeMethod.Value;
 
             if (clientId is not null) FormParams["client_id"] = clientId;
 
@@ -150,6 +172,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             var payloadString = payload.ReadToString();
 
             throw new HttpResponseException(code, payloadString);
+        }
+    }
+
+    public class RequestTokenExchangeCodeV3CodeChallengeMethod : StringEnum<RequestTokenExchangeCodeV3CodeChallengeMethod>
+    {
+        public static readonly RequestTokenExchangeCodeV3CodeChallengeMethod S256
+            = new RequestTokenExchangeCodeV3CodeChallengeMethod("S256");
+
+        public static readonly RequestTokenExchangeCodeV3CodeChallengeMethod Plain
+            = new RequestTokenExchangeCodeV3CodeChallengeMethod("plain");
+
+
+        public static implicit operator RequestTokenExchangeCodeV3CodeChallengeMethod(string value)
+        {
+            return NewValue(value);
+        }
+
+        public RequestTokenExchangeCodeV3CodeChallengeMethod(string enumValue)
+            : base(enumValue)
+        {
+
         }
     }
 

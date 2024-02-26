@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Social.Model
 {
@@ -23,6 +25,11 @@ namespace AccelByte.Sdk.Api.Social.Model
         [JsonPropertyName("description")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
+
+        [JsonPropertyName("globalAggregationMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public StatUpdateGlobalAggregationMethod? GlobalAggregationMethod { get; set; }
 
         [JsonPropertyName("ignoreAdditionalDataOnValueRejected")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -43,4 +50,31 @@ namespace AccelByte.Sdk.Api.Social.Model
     }
 
 
+
+    public class StatUpdateGlobalAggregationMethod : StringEnum<StatUpdateGlobalAggregationMethod>
+    {
+        public static readonly StatUpdateGlobalAggregationMethod LAST
+            = new StatUpdateGlobalAggregationMethod("LAST");
+
+        public static readonly StatUpdateGlobalAggregationMethod MAX
+            = new StatUpdateGlobalAggregationMethod("MAX");
+
+        public static readonly StatUpdateGlobalAggregationMethod MIN
+            = new StatUpdateGlobalAggregationMethod("MIN");
+
+        public static readonly StatUpdateGlobalAggregationMethod TOTAL
+            = new StatUpdateGlobalAggregationMethod("TOTAL");
+
+
+        public static implicit operator StatUpdateGlobalAggregationMethod(string value)
+        {
+            return NewValue(value);
+        }
+
+        public StatUpdateGlobalAggregationMethod(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

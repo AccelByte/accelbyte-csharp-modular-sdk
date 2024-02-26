@@ -20,28 +20,28 @@ using AccelByte.Sdk.Api.Cloudsave.Model;
 namespace AccelByte.Sdk.Api.Cloudsave.Operation
 {
     /// <summary>
-    /// adminListTagsHandlerV1
+    /// adminDeleteTagHandlerV1
     ///
     /// ## Description
     /// 
-    /// Endpoint to list out available tags
+    /// This endpoint will delete tag by name
     /// </summary>
-    public class AdminListTagsHandlerV1 : AccelByte.Sdk.Core.Operation
+    public class AdminDeleteTagHandlerV1 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static AdminListTagsHandlerV1Builder Builder { get => new AdminListTagsHandlerV1Builder(); }
+        public static AdminDeleteTagHandlerV1Builder Builder { get => new AdminDeleteTagHandlerV1Builder(); }
 
-        public class AdminListTagsHandlerV1Builder
-            : OperationBuilder<AdminListTagsHandlerV1Builder>
+        public class AdminDeleteTagHandlerV1Builder
+            : OperationBuilder<AdminDeleteTagHandlerV1Builder>
         {
 
 
 
 
 
-            internal AdminListTagsHandlerV1Builder() { }
+            internal AdminDeleteTagHandlerV1Builder() { }
 
-            internal AdminListTagsHandlerV1Builder(IAccelByteSdk sdk)
+            internal AdminDeleteTagHandlerV1Builder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -51,42 +51,48 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
 
 
-            public AdminListTagsHandlerV1 Build(
-                string namespace_
+            public AdminDeleteTagHandlerV1 Build(
+                string namespace_,
+                string tag
             )
             {
-                AdminListTagsHandlerV1 op = new AdminListTagsHandlerV1(this,
-                    namespace_
+                AdminDeleteTagHandlerV1 op = new AdminDeleteTagHandlerV1(this,
+                    namespace_,
+                    tag
                 );
 
-                op.SetBaseFields<AdminListTagsHandlerV1Builder>(this);
+                op.SetBaseFields<AdminDeleteTagHandlerV1Builder>(this);
                 return op;
             }
 
-            public Model.ModelsListTagsResponse? Execute(
-                string namespace_
+            public void Execute(
+                string namespace_,
+                string tag
             )
             {
-                AdminListTagsHandlerV1 op = Build(
-                    namespace_
+                AdminDeleteTagHandlerV1 op = Build(
+                    namespace_,
+                    tag
                 );
 
                 if (_Sdk == null)
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                return op.ParseResponse(
+                op.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
             }
         }
 
-        private AdminListTagsHandlerV1(AdminListTagsHandlerV1Builder builder,
-            string namespace_
+        private AdminDeleteTagHandlerV1(AdminDeleteTagHandlerV1Builder builder,
+            string namespace_,
+            string tag
         )
         {
             PathParams["namespace"] = namespace_;
+            PathParams["tag"] = tag;
 
 
 
@@ -98,11 +104,13 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         }
         #endregion
 
-        public AdminListTagsHandlerV1(
-            string namespace_
+        public AdminDeleteTagHandlerV1(
+            string namespace_,
+            string tag
         )
         {
             PathParams["namespace"] = namespace_;
+            PathParams["tag"] = tag;
 
 
 
@@ -113,27 +121,19 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/cloudsave/v1/admin/namespaces/{namespace}/tags";
+        public override string Path => "/cloudsave/v1/admin/namespaces/{namespace}/tags/{tag}";
 
-        public override HttpMethod Method => HttpMethod.Get;
+        public override HttpMethod Method => HttpMethod.Delete;
 
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
 
-        public Model.ModelsListTagsResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
-                return null;
-            }
-            else if (code == (HttpStatusCode)201)
-            {
-                return JsonSerializer.Deserialize<Model.ModelsListTagsResponse>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.ModelsListTagsResponse>(payload, ResponseJsonOptions);
+                return;
             }
 
             var payloadString = payload.ReadToString();

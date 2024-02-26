@@ -30,6 +30,12 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
+        [SdkCommandArgument("limit")]
+        public long? Limit { get; set; }
+
+        [SdkCommandArgument("offset")]
+        public long? Offset { get; set; }
+
         public PublicListTagsHandlerV1Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -37,10 +43,14 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
 
         public string Run()
         {
-            AccelByte.Sdk.Api.Cloudsave.Wrapper.Tags wrapper = new AccelByte.Sdk.Api.Cloudsave.Wrapper.Tags(_SDK);
+            AccelByte.Sdk.Api.Cloudsave.Wrapper.PublicTags wrapper = new AccelByte.Sdk.Api.Cloudsave.Wrapper.PublicTags(_SDK);
 
             var opBuilder = AccelByte.Sdk.Api.Cloudsave.Operation.PublicListTagsHandlerV1.Builder;
 
+            if (Limit != null)
+                opBuilder.SetLimit((long)Limit);
+            if (Offset != null)
+                opBuilder.SetOffset((long)Offset);
 
 
 

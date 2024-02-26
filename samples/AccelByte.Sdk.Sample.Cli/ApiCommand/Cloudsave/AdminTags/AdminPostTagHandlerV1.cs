@@ -18,43 +18,44 @@ using AccelByte.Sdk.Api.Cloudsave.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
 {
-    [SdkConsoleCommand("cloudsave", "adminlisttagshandlerv1")]
-    public class AdminListTagsHandlerV1Command : ISdkConsoleCommand
+    [SdkConsoleCommand("cloudsave", "adminposttaghandlerv1")]
+    public class AdminPostTagHandlerV1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
         public string ServiceName { get { return "Cloudsave"; } }
 
-        public string OperationName { get { return "AdminListTagsHandlerV1"; } }
+        public string OperationName { get { return "AdminPostTagHandlerV1"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
-        public AdminListTagsHandlerV1Command(IAccelByteSdk sdk)
+        [SdkCommandData("body")]
+        public ModelsTagRequest Body { get; set; } = new ModelsTagRequest();
+
+        public AdminPostTagHandlerV1Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
         public string Run()
         {
-            AccelByte.Sdk.Api.Cloudsave.Wrapper.Tags wrapper = new AccelByte.Sdk.Api.Cloudsave.Wrapper.Tags(_SDK);
+            AccelByte.Sdk.Api.Cloudsave.Wrapper.AdminTags wrapper = new AccelByte.Sdk.Api.Cloudsave.Wrapper.AdminTags(_SDK);
 
-            var opBuilder = AccelByte.Sdk.Api.Cloudsave.Operation.AdminListTagsHandlerV1.Builder;
-
-
+            var opBuilder = AccelByte.Sdk.Api.Cloudsave.Operation.AdminPostTagHandlerV1.Builder;
 
 
 
-            AdminListTagsHandlerV1 operation = opBuilder.Build(
+
+
+            AdminPostTagHandlerV1 operation = opBuilder.Build(
+                Body,
                 Namespace
             );
 
 
-            AccelByte.Sdk.Api.Cloudsave.Model.ModelsListTagsResponse? response = wrapper.AdminListTagsHandlerV1(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            wrapper.AdminPostTagHandlerV1(operation);
+            return String.Empty;
         }
     }
 }

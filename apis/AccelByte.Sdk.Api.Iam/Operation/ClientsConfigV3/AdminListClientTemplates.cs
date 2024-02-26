@@ -15,33 +15,31 @@ using System.IO;
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Core.Net.Http;
 
-using AccelByte.Sdk.Api.Cloudsave.Model;
+using AccelByte.Sdk.Api.Iam.Model;
 
-namespace AccelByte.Sdk.Api.Cloudsave.Operation
+namespace AccelByte.Sdk.Api.Iam.Operation
 {
     /// <summary>
-    /// publicListTagsHandlerV1
+    /// AdminListClientTemplates
     ///
-    /// ## Description
-    /// 
-    /// Endpoint to list out available tags
+    /// List client templates
     /// </summary>
-    public class PublicListTagsHandlerV1 : AccelByte.Sdk.Core.Operation
+    public class AdminListClientTemplates : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static PublicListTagsHandlerV1Builder Builder { get => new PublicListTagsHandlerV1Builder(); }
+        public static AdminListClientTemplatesBuilder Builder { get => new AdminListClientTemplatesBuilder(); }
 
-        public class PublicListTagsHandlerV1Builder
-            : OperationBuilder<PublicListTagsHandlerV1Builder>
+        public class AdminListClientTemplatesBuilder
+            : OperationBuilder<AdminListClientTemplatesBuilder>
         {
 
 
 
 
 
-            internal PublicListTagsHandlerV1Builder() { }
+            internal AdminListClientTemplatesBuilder() { }
 
-            internal PublicListTagsHandlerV1Builder(IAccelByteSdk sdk)
+            internal AdminListClientTemplatesBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -51,24 +49,20 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
 
 
-            public PublicListTagsHandlerV1 Build(
-                string namespace_
+            public AdminListClientTemplates Build(
             )
             {
-                PublicListTagsHandlerV1 op = new PublicListTagsHandlerV1(this,
-                    namespace_
+                AdminListClientTemplates op = new AdminListClientTemplates(this
                 );
 
-                op.SetBaseFields<PublicListTagsHandlerV1Builder>(this);
+                op.SetBaseFields<AdminListClientTemplatesBuilder>(this);
                 return op;
             }
 
-            public Model.ModelsListTagsResponse? Execute(
-                string namespace_
+            public Model.ClientmodelListTemplatesResponse? Execute(
             )
             {
-                PublicListTagsHandlerV1 op = Build(
-                    namespace_
+                AdminListClientTemplates op = Build(
                 );
 
                 if (_Sdk == null)
@@ -82,11 +76,9 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
         }
 
-        private PublicListTagsHandlerV1(PublicListTagsHandlerV1Builder builder,
-            string namespace_
+        private AdminListClientTemplates(AdminListClientTemplatesBuilder builder
         )
         {
-            PathParams["namespace"] = namespace_;
 
 
 
@@ -98,11 +90,9 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         }
         #endregion
 
-        public PublicListTagsHandlerV1(
-            string namespace_
+        public AdminListClientTemplates(
         )
         {
-            PathParams["namespace"] = namespace_;
 
 
 
@@ -113,15 +103,15 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/cloudsave/v1/namespaces/{namespace}/tags";
+        public override string Path => "/iam/v3/admin/clientConfig/templates";
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { "application/json" };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
 
-        public Model.ModelsListTagsResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.ClientmodelListTemplatesResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -129,11 +119,11 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.ModelsListTagsResponse>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ClientmodelListTemplatesResponse>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.ModelsListTagsResponse>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ClientmodelListTemplatesResponse>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

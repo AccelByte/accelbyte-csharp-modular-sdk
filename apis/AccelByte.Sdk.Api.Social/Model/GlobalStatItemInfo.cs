@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Social.Model
 {
@@ -14,6 +16,11 @@ namespace AccelByte.Sdk.Api.Social.Model
     {
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; }
+
+        [JsonPropertyName("globalAggregationMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public GlobalStatItemInfoGlobalAggregationMethod? GlobalAggregationMethod { get; set; }
 
         [JsonPropertyName("namespace")]
         public string? Namespace { get; set; }
@@ -37,4 +44,31 @@ namespace AccelByte.Sdk.Api.Social.Model
     }
 
 
+
+    public class GlobalStatItemInfoGlobalAggregationMethod : StringEnum<GlobalStatItemInfoGlobalAggregationMethod>
+    {
+        public static readonly GlobalStatItemInfoGlobalAggregationMethod LAST
+            = new GlobalStatItemInfoGlobalAggregationMethod("LAST");
+
+        public static readonly GlobalStatItemInfoGlobalAggregationMethod MAX
+            = new GlobalStatItemInfoGlobalAggregationMethod("MAX");
+
+        public static readonly GlobalStatItemInfoGlobalAggregationMethod MIN
+            = new GlobalStatItemInfoGlobalAggregationMethod("MIN");
+
+        public static readonly GlobalStatItemInfoGlobalAggregationMethod TOTAL
+            = new GlobalStatItemInfoGlobalAggregationMethod("TOTAL");
+
+
+        public static implicit operator GlobalStatItemInfoGlobalAggregationMethod(string value)
+        {
+            return NewValue(value);
+        }
+
+        public GlobalStatItemInfoGlobalAggregationMethod(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

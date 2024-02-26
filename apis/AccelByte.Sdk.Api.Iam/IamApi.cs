@@ -70,6 +70,17 @@ namespace AccelByte.Sdk.Api.Iam
         }
         private Wrapper.Roles? _Roles = null;
 
+        public Wrapper.ClientsConfigV3 ClientsConfigV3
+        {
+            get
+            {
+                if (_ClientsConfigV3 == null)
+                    _ClientsConfigV3 = new Wrapper.ClientsConfigV3(_Sdk);
+                return _ClientsConfigV3;
+            }
+        }
+        private Wrapper.ClientsConfigV3? _ClientsConfigV3 = null;
+
         public Wrapper.InputValidations InputValidations
         {
             get
@@ -190,6 +201,17 @@ namespace AccelByte.Sdk.Api.Iam
             }
         }
         private Wrapper.UsersV4? _UsersV4 = null;
+
+        public Wrapper.OAuth20V4 OAuth20V4
+        {
+            get
+            {
+                if (_OAuth20V4 == null)
+                    _OAuth20V4 = new Wrapper.OAuth20V4(_Sdk);
+                return _OAuth20V4;
+            }
+        }
+        private Wrapper.OAuth20V4? _OAuth20V4 = null;
 
         internal IamApi(IAccelByteSdk sdk)
         {

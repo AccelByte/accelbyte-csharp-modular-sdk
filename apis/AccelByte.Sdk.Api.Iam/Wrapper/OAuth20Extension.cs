@@ -73,11 +73,6 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.RequestTargetTokenResponseV3.RequestTargetTokenResponseV3Builder(_sdk); }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public PlatformTokenRefreshV3Deprecate.PlatformTokenRefreshV3DeprecateBuilder PlatformTokenRefreshV3DeprecateOp
-        {
-            get { return new Operation.PlatformTokenRefreshV3Deprecate.PlatformTokenRefreshV3DeprecateBuilder(_sdk); }
-        }
         #endregion
 
         public string UserAuthenticationV3(UserAuthenticationV3 input)
@@ -188,17 +183,5 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.OauthmodelPlatformTokenRefreshResponseV3? PlatformTokenRefreshV3Deprecate(PlatformTokenRefreshV3Deprecate input)
-        {
-            var response = _sdk.RunRequest(input);
-
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
     }
 }

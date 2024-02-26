@@ -68,6 +68,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public string? Query { get; set; }
 
+            public bool? SkipLoginQueue { get; set; }
+
             public string? StartDate { get; set; }
 
             public bool? TestAccount { get; set; }
@@ -132,6 +134,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return this;
             }
 
+            public AdminSearchUserV3Builder SetSkipLoginQueue(bool _skipLoginQueue)
+            {
+                SkipLoginQueue = _skipLoginQueue;
+                return this;
+            }
+
             public AdminSearchUserV3Builder SetStartDate(string _startDate)
             {
                 StartDate = _startDate;
@@ -193,6 +201,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (builder.PlatformBy is not null) QueryParams["platformBy"] = builder.PlatformBy;
             if (builder.PlatformId is not null) QueryParams["platformId"] = builder.PlatformId;
             if (builder.Query is not null) QueryParams["query"] = builder.Query;
+            if (builder.SkipLoginQueue != null) QueryParams["skipLoginQueue"] = Convert.ToString(builder.SkipLoginQueue)!;
             if (builder.StartDate is not null) QueryParams["startDate"] = builder.StartDate;
             if (builder.TestAccount != null) QueryParams["testAccount"] = Convert.ToString(builder.TestAccount)!;
 
@@ -215,6 +224,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string? platformBy,
             string? platformId,
             string? query,
+            bool? skipLoginQueue,
             string? startDate,
             bool? testAccount
         )
@@ -229,6 +239,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (platformBy is not null) QueryParams["platformBy"] = platformBy;
             if (platformId is not null) QueryParams["platformId"] = platformId;
             if (query is not null) QueryParams["query"] = query;
+            if (skipLoginQueue != null) QueryParams["skipLoginQueue"] = Convert.ToString(skipLoginQueue)!;
             if (startDate is not null) QueryParams["startDate"] = startDate;
             if (testAccount != null) QueryParams["testAccount"] = Convert.ToString(testAccount)!;
 

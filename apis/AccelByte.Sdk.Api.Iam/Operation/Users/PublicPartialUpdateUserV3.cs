@@ -59,7 +59,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
             public PublicPartialUpdateUserV3 Build(
-                ModelUserUpdateRequestV3 body,
+                ModelPublicUserUpdateRequestV3 body,
                 string namespace_
             )
             {
@@ -73,7 +73,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
 
             public Model.ModelUserResponseV3? Execute(
-                ModelUserUpdateRequestV3 body,
+                ModelPublicUserUpdateRequestV3 body,
                 string namespace_
             )
             {
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         }
 
         private PublicPartialUpdateUserV3(PublicPartialUpdateUserV3Builder builder,
-            ModelUserUpdateRequestV3 body,
+            ModelPublicUserUpdateRequestV3 body,
             string namespace_
         )
         {
@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public PublicPartialUpdateUserV3(
             string namespace_,
-            Model.ModelUserUpdateRequestV3 body
+            Model.ModelPublicUserUpdateRequestV3 body
         )
         {
             PathParams["namespace"] = namespace_;
