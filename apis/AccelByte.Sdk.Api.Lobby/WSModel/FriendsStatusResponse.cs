@@ -36,7 +36,7 @@ namespace AccelByte.Sdk.Api.Lobby.WSModel
 
         [AwesomeProperty("lastSeenAt")]
         [JsonPropertyName("lastSeenAt")]
-        public List<string>? LastSeenAt { get; set; }
+        public List<DateTime>? LastSeenAt { get; set; }
 
     }
 }

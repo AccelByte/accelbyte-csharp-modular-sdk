@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// <summary>
     /// AdminDeleteUserContentV2
     ///
-    /// Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE].
+    /// Delete user content by content ID
     /// </summary>
     public class AdminDeleteUserContentV2 : AccelByte.Sdk.Core.Operation
     {

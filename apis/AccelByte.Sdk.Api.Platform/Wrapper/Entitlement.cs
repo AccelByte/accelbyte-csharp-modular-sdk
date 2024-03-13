@@ -212,6 +212,10 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         {
             get { return new Operation.PublicGetUserEntitlementBySku.PublicGetUserEntitlementBySkuBuilder(_sdk); }
         }
+        public PublicUserEntitlementHistory.PublicUserEntitlementHistoryBuilder PublicUserEntitlementHistoryOp
+        {
+            get { return new Operation.PublicUserEntitlementHistory.PublicUserEntitlementHistoryBuilder(_sdk); }
+        }
         public PublicExistsAnyUserActiveEntitlement.PublicExistsAnyUserActiveEntitlementBuilder PublicExistsAnyUserActiveEntitlementOp
         {
             get { return new Operation.PublicExistsAnyUserActiveEntitlement.PublicExistsAnyUserActiveEntitlementBuilder(_sdk); }
@@ -677,6 +681,15 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
 #pragma warning restore ab_deprecated_operation
+        public List<Model.UserEntitlementHistoryPagingSlicedResult>? PublicUserEntitlementHistory(PublicUserEntitlementHistory input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.Ownership? PublicExistsAnyUserActiveEntitlement(PublicExistsAnyUserActiveEntitlement input)
         {
             var response = _sdk.RunRequest(input);

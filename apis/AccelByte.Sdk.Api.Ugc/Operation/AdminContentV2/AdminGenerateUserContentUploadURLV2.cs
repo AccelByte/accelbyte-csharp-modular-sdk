@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// <summary>
     /// AdminGenerateUserContentUploadURLV2
     ///
-    /// Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE].
+    /// generate user content upload URL
     /// </summary>
     public class AdminGenerateUserContentUploadURLV2 : AccelByte.Sdk.Core.Operation
     {

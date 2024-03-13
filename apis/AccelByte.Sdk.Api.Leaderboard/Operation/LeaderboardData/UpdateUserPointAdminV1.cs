@@ -36,9 +36,6 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
     /// 
     /// 
     /// 
-    ///   * Required permission: resource="ADMIN:NAMESPACE:{namespace}:USER:(userId):LEADERBOARD", action=4 (UPDATE)
-    /// 
-    /// 
     ///   * Returns: user ranking
     /// </summary>
     public class UpdateUserPointAdminV1 : AccelByte.Sdk.Core.Operation

@@ -39,6 +39,11 @@
 
 | Model | Class |
 |---|---|
+| `BaseErrorResponse` | [BaseErrorResponse](../../apis/AccelByte.Sdk.Api.Gametelemetry/Model/BaseErrorResponse.cs) |
+| `GetNamespaceEventResponse` | [GetNamespaceEventResponse](../../apis/AccelByte.Sdk.Api.Gametelemetry/Model/GetNamespaceEventResponse.cs) |
 | `HTTPValidationError` | [HTTPValidationError](../../apis/AccelByte.Sdk.Api.Gametelemetry/Model/HTTPValidationError.cs) |
+| `ListBaseResponse_str_` | [ListBaseResponseStr](../../apis/AccelByte.Sdk.Api.Gametelemetry/Model/ListBaseResponseStr.cs) |
+| `PagedResponse_GetNamespaceEventResponse_` | [PagedResponseGetNamespaceEventResponse](../../apis/AccelByte.Sdk.Api.Gametelemetry/Model/PagedResponseGetNamespaceEventResponse.cs) |
+| `PlayTimeResponse` | [PlayTimeResponse](../../apis/AccelByte.Sdk.Api.Gametelemetry/Model/PlayTimeResponse.cs) |
 | `TelemetryBody` | [TelemetryBody](../../apis/AccelByte.Sdk.Api.Gametelemetry/Model/TelemetryBody.cs) |
 | `ValidationError` | [ValidationError](../../apis/AccelByte.Sdk.Api.Gametelemetry/Model/ValidationError.cs) |

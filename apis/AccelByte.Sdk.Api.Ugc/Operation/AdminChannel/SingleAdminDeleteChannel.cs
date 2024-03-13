@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// <summary>
     /// SingleAdminDeleteChannel
     ///
-    /// Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [DELETE]
+    /// Delete official channel
     /// </summary>
     public class SingleAdminDeleteChannel : AccelByte.Sdk.Core.Operation
     {

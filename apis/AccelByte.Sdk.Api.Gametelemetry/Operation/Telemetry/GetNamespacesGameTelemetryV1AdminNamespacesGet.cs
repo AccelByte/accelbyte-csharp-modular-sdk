@@ -60,7 +60,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
                 return op;
             }
 
-            public void Execute(
+            public Model.ListBaseResponseStr? Execute(
             )
             {
                 GetNamespacesGameTelemetryV1AdminNamespacesGet op = Build(
@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
+                return op.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
@@ -114,11 +114,19 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.ListBaseResponseStr? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)200)
+            if (code == (HttpStatusCode)204)
             {
-                return;
+                return null;
+            }
+            else if (code == (HttpStatusCode)201)
+            {
+                return JsonSerializer.Deserialize<Model.ListBaseResponseStr>(payload, ResponseJsonOptions);
+            }
+            else if (code == (HttpStatusCode)200)
+            {
+                return JsonSerializer.Deserialize<Model.ListBaseResponseStr>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// <summary>
     /// AdminDeleteType
     ///
-    /// Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [DELETE]
+    /// Delete existing type
     /// </summary>
     public class AdminDeleteType : AccelByte.Sdk.Core.Operation
     {

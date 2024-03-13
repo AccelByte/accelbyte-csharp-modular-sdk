@@ -67,7 +67,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
                 return op;
             }
 
-            public Dictionary<string, object>? Execute(
+            public Model.PlayTimeResponse? Execute(
                 string steamId
 
             )
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public Dictionary<string, object>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.PlayTimeResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -139,11 +139,11 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.PlayTimeResponse>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.PlayTimeResponse>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// <summary>
     /// AdminGetTag
     ///
-    /// Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [READ]
+    /// Get available tags paginated
     /// </summary>
     public class AdminGetTag : AccelByte.Sdk.Core.Operation
     {

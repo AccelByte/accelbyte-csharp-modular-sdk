@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// <summary>
     /// AddDownloadCount
     ///
-    /// Requires valid user token
+    /// This endpoint can be used to count how many the ugc downloaded
     /// </summary>
     public class AddDownloadCount : AccelByte.Sdk.Core.Operation
     {

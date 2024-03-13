@@ -54,7 +54,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gametelemetry
             );
 
 
-            Dictionary<string, object>? response = wrapper.ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet(operation);
+            AccelByte.Sdk.Api.Gametelemetry.Model.PlayTimeResponse? response = wrapper.ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet(operation);
             if (response == null)
                 return "No response from server.";
 

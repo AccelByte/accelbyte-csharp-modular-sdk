@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// <summary>
     /// SingleAdminGetAllGroups
     ///
-    /// Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ].
+    /// Get user group paginated
     /// </summary>
     public class SingleAdminGetAllGroups : AccelByte.Sdk.Core.Operation
     {

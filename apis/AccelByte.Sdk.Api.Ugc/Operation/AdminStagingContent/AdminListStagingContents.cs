@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// <summary>
     /// AdminListStagingContents
     ///
-    /// Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ].
+    /// List content that need admin's approval
     /// </summary>
     public class AdminListStagingContents : AccelByte.Sdk.Core.Operation
     {

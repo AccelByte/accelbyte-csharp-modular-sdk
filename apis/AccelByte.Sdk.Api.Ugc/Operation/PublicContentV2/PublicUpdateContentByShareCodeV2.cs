@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// <summary>
     /// PublicUpdateContentByShareCodeV2
     ///
-    /// Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENT [UPDATE].
+    /// Update content by share code
     /// </summary>
     public class PublicUpdateContentByShareCodeV2 : AccelByte.Sdk.Core.Operation
     {

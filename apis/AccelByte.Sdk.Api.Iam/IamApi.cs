@@ -180,17 +180,6 @@ namespace AccelByte.Sdk.Api.Iam
         }
         private Wrapper.SSO? _SSO = null;
 
-        public Wrapper.DevicesV4 DevicesV4
-        {
-            get
-            {
-                if (_DevicesV4 == null)
-                    _DevicesV4 = new Wrapper.DevicesV4(_Sdk);
-                return _DevicesV4;
-            }
-        }
-        private Wrapper.DevicesV4? _DevicesV4 = null;
-
         public Wrapper.UsersV4 UsersV4
         {
             get
@@ -201,6 +190,17 @@ namespace AccelByte.Sdk.Api.Iam
             }
         }
         private Wrapper.UsersV4? _UsersV4 = null;
+
+        public Wrapper.DevicesV4 DevicesV4
+        {
+            get
+            {
+                if (_DevicesV4 == null)
+                    _DevicesV4 = new Wrapper.DevicesV4(_Sdk);
+                return _DevicesV4;
+            }
+        }
+        private Wrapper.DevicesV4? _DevicesV4 = null;
 
         public Wrapper.OAuth20V4 OAuth20V4
         {

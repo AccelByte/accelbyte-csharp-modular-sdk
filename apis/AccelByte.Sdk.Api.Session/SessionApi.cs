@@ -136,6 +136,17 @@ namespace AccelByte.Sdk.Api.Session
         }
         private Wrapper.PlatformCredential? _PlatformCredential = null;
 
+        public Wrapper.RecentPlayer RecentPlayer
+        {
+            get
+            {
+                if (_RecentPlayer == null)
+                    _RecentPlayer = new Wrapper.RecentPlayer(_Sdk);
+                return _RecentPlayer;
+            }
+        }
+        private Wrapper.RecentPlayer? _RecentPlayer = null;
+
         public Wrapper.SessionStorage SessionStorage
         {
             get
@@ -157,17 +168,6 @@ namespace AccelByte.Sdk.Api.Session
             }
         }
         private Wrapper.Player? _Player = null;
-
-        public Wrapper.RecentPlayer RecentPlayer
-        {
-            get
-            {
-                if (_RecentPlayer == null)
-                    _RecentPlayer = new Wrapper.RecentPlayer(_Sdk);
-                return _RecentPlayer;
-            }
-        }
-        private Wrapper.RecentPlayer? _RecentPlayer = null;
 
         internal SessionApi(IAccelByteSdk sdk)
         {

@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// <summary>
     /// SingleAdminUpdateChannel
     ///
-    /// Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]
+    /// Update official channel
     /// </summary>
     public class SingleAdminUpdateChannel : AccelByte.Sdk.Core.Operation
     {

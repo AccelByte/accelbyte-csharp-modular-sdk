@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// <summary>
     /// SingleAdminGetChannel
     ///
-    /// Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [READ]
+    /// Get official channel paginated
     /// </summary>
     public class SingleAdminGetChannel : AccelByte.Sdk.Core.Operation
     {

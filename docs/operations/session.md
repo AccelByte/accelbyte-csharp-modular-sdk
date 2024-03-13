@@ -114,6 +114,12 @@
 | `/session/v1/admin/namespaces/{namespace}/platform-credentials` | PUT | AdminUpdatePlatformCredentials | [AdminUpdatePlatformCredentials](../../apis/AccelByte.Sdk.Api.Session/Operation/PlatformCredential/AdminUpdatePlatformCredentials.cs) | [AdminUpdatePlatformCredentials](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/PlatformCredential/AdminUpdatePlatformCredentials.cs) |
 | `/session/v1/admin/namespaces/{namespace}/platform-credentials` | DELETE | AdminDeletePlatformCredentials | [AdminDeletePlatformCredentials](../../apis/AccelByte.Sdk.Api.Session/Operation/PlatformCredential/AdminDeletePlatformCredentials.cs) | [AdminDeletePlatformCredentials](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/PlatformCredential/AdminDeletePlatformCredentials.cs) |
 
+### Recent Player Wrapper:  [RecentPlayer](../../apis/AccelByte.Sdk.Api.Session/Wrapper/RecentPlayer.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/session/v1/admin/namespaces/{namespace}/recent-player` | GET | AdminGetRecentPlayer | [AdminGetRecentPlayer](../../apis/AccelByte.Sdk.Api.Session/Operation/RecentPlayer/AdminGetRecentPlayer.cs) | [AdminGetRecentPlayer](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/RecentPlayer/AdminGetRecentPlayer.cs) |
+| `/session/v1/public/namespaces/{namespace}/recent-player` | GET | PublicGetRecentPlayer | [PublicGetRecentPlayer](../../apis/AccelByte.Sdk.Api.Session/Operation/RecentPlayer/PublicGetRecentPlayer.cs) | [PublicGetRecentPlayer](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/RecentPlayer/PublicGetRecentPlayer.cs) |
+
 ### Session Storage Wrapper:  [SessionStorage](../../apis/AccelByte.Sdk.Api.Session/Wrapper/SessionStorage.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -132,11 +138,6 @@
 | `/session/v1/public/namespaces/{namespace}/users/me/attributes` | GET | PublicGetPlayerAttributes | [PublicGetPlayerAttributes](../../apis/AccelByte.Sdk.Api.Session/Operation/Player/PublicGetPlayerAttributes.cs) | [PublicGetPlayerAttributes](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Player/PublicGetPlayerAttributes.cs) |
 | `/session/v1/public/namespaces/{namespace}/users/me/attributes` | POST | PublicStorePlayerAttributes | [PublicStorePlayerAttributes](../../apis/AccelByte.Sdk.Api.Session/Operation/Player/PublicStorePlayerAttributes.cs) | [PublicStorePlayerAttributes](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Player/PublicStorePlayerAttributes.cs) |
 | `/session/v1/public/namespaces/{namespace}/users/me/attributes` | DELETE | PublicDeletePlayerAttributes | [PublicDeletePlayerAttributes](../../apis/AccelByte.Sdk.Api.Session/Operation/Player/PublicDeletePlayerAttributes.cs) | [PublicDeletePlayerAttributes](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Player/PublicDeletePlayerAttributes.cs) |
-
-### Recent Player Wrapper:  [RecentPlayer](../../apis/AccelByte.Sdk.Api.Session/Wrapper/RecentPlayer.cs)
-| Endpoint | Method | ID | Class | Example |
-|---|---|---|---|---|
-| `/session/v1/public/namespaces/{namespace}/recent-player` | GET | PublicGetRecentPlayer | [PublicGetRecentPlayer](../../apis/AccelByte.Sdk.Api.Session/Operation/RecentPlayer/PublicGetRecentPlayer.cs) | [PublicGetRecentPlayer](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/RecentPlayer/PublicGetRecentPlayer.cs) |
 
 
 &nbsp;
@@ -209,6 +210,10 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
+### Recent Player Wrapper:  [RecentPlayer](../../apis/AccelByte.Sdk.Api.Session/Wrapper/RecentPlayer.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
 ### Session Storage Wrapper:  [SessionStorage](../../apis/AccelByte.Sdk.Api.Session/Wrapper/SessionStorage.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -220,10 +225,6 @@
 | `/session/v1/admin/namespaces/{namespace}/users/{userId}/attributes` | GET | AdminGetPlayerAttributes | [AdminGetPlayerAttributes](../../apis/AccelByte.Sdk.Api.Session/Operation/Player/AdminGetPlayerAttributes.cs) | [AdminGetPlayerAttributes](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Player/AdminGetPlayerAttributes.cs) |
 | `/session/v1/public/namespaces/{namespace}/users/me/attributes` | GET | PublicGetPlayerAttributes | [PublicGetPlayerAttributes](../../apis/AccelByte.Sdk.Api.Session/Operation/Player/PublicGetPlayerAttributes.cs) | [PublicGetPlayerAttributes](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Player/PublicGetPlayerAttributes.cs) |
 | `/session/v1/public/namespaces/{namespace}/users/me/attributes` | POST | PublicStorePlayerAttributes | [PublicStorePlayerAttributes](../../apis/AccelByte.Sdk.Api.Session/Operation/Player/PublicStorePlayerAttributes.cs) | [PublicStorePlayerAttributes](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Player/PublicStorePlayerAttributes.cs) |
-
-### Recent Player Wrapper:  [RecentPlayer](../../apis/AccelByte.Sdk.Api.Session/Wrapper/RecentPlayer.cs)
-| Endpoint | Method | ID | Class | Example |
-|---|---|---|---|---|
 
 
 &nbsp;

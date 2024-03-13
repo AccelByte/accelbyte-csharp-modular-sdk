@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// <summary>
     /// UpdateChannel
     ///
-    /// Required permission NAMESPACE:{namespace}:USER:{userId}:CHANNEL [UPDATE]
+    /// Update user channel
     /// </summary>
     public class UpdateChannel : AccelByte.Sdk.Core.Operation
     {

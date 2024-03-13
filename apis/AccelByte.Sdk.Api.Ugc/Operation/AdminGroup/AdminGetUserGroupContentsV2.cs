@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// <summary>
     /// AdminGetUserGroupContentsV2
     ///
-    /// Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ].
+    /// Get contents belong to a group
     /// </summary>
     public class AdminGetUserGroupContentsV2 : AccelByte.Sdk.Core.Operation
     {

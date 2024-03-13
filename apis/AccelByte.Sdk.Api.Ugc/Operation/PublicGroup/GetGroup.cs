@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// <summary>
     /// GetGroup
     ///
-    /// Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENTGROUP [READ].
+    /// Get user groups by group ID
     /// </summary>
     public class GetGroup : AccelByte.Sdk.Core.Operation
     {

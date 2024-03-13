@@ -34,6 +34,14 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         {
             get { return new Operation.ListPlayerRecordHandlerV1.ListPlayerRecordHandlerV1Builder(_sdk); }
         }
+        public AdminBulkPutPlayerRecordsByKeyHandlerV1.AdminBulkPutPlayerRecordsByKeyHandlerV1Builder AdminBulkPutPlayerRecordsByKeyHandlerV1Op
+        {
+            get { return new Operation.AdminBulkPutPlayerRecordsByKeyHandlerV1.AdminBulkPutPlayerRecordsByKeyHandlerV1Builder(_sdk); }
+        }
+        public AdminBulkGetPlayerRecordsByUserIDsHandlerV1.AdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder AdminBulkGetPlayerRecordsByUserIDsHandlerV1Op
+        {
+            get { return new Operation.AdminBulkGetPlayerRecordsByUserIDsHandlerV1.AdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder(_sdk); }
+        }
         public AdminRetrievePlayerRecords.AdminRetrievePlayerRecordsBuilder AdminRetrievePlayerRecordsOp
         {
             get { return new Operation.AdminRetrievePlayerRecords.AdminRetrievePlayerRecordsBuilder(_sdk); }
@@ -105,6 +113,34 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.Payload);
         }
 #pragma warning restore ab_deprecated_operation
+        public List<Model.ModelsBulkUpdatePlayerRecordByKeyResponse>? AdminBulkPutPlayerRecordsByKeyHandlerV1(AdminBulkPutPlayerRecordsByKeyHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public List<Model.ModelsBulkUpdatePlayerRecordByKeyResponse<T1>>? AdminBulkPutPlayerRecordsByKeyHandlerV1<T1>(AdminBulkPutPlayerRecordsByKeyHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelsBulkGetPlayerRecordResponse? AdminBulkGetPlayerRecordsByUserIDsHandlerV1(AdminBulkGetPlayerRecordsByUserIDsHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.ModelsListPlayerRecordKeysResponse? AdminRetrievePlayerRecords(AdminRetrievePlayerRecords input)
         {
             var response = _sdk.RunRequest(input);

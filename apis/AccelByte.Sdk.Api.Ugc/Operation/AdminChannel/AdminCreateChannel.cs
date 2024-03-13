@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// <summary>
     /// AdminCreateChannel
     ///
-    /// Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId}:CHANNEL [CREATE]
+    /// Create official channel
     /// </summary>
     public class AdminCreateChannel : AccelByte.Sdk.Core.Operation
     {

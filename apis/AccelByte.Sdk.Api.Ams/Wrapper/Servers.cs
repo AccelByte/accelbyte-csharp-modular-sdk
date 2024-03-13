@@ -33,6 +33,10 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
         {
             get { return new Operation.FleetServerInfo.FleetServerInfoBuilder(_sdk); }
         }
+        public FleetServerConnectionInfo.FleetServerConnectionInfoBuilder FleetServerConnectionInfoOp
+        {
+            get { return new Operation.FleetServerConnectionInfo.FleetServerConnectionInfoBuilder(_sdk); }
+        }
         public ServerHistory.ServerHistoryBuilder ServerHistoryOp
         {
             get { return new Operation.ServerHistory.ServerHistoryBuilder(_sdk); }
@@ -49,6 +53,15 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.Payload);
         }
         public Model.ApiFleetServerInfoResponse? FleetServerInfo(FleetServerInfo input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ApiFleetServerConnectionInfoResponse? FleetServerConnectionInfo(FleetServerConnectionInfo input)
         {
             var response = _sdk.RunRequest(input);
 

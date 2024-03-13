@@ -202,6 +202,7 @@
 | `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byIds` | GET | PublicGetUserEntitlementsByIds | [PublicGetUserEntitlementsByIds](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicGetUserEntitlementsByIds.cs) | [PublicGetUserEntitlementsByIds](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicGetUserEntitlementsByIds.cs) |
 | [DEPRECATED] `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/byItemId` | GET | PublicGetUserEntitlementByItemId | [PublicGetUserEntitlementByItemId](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicGetUserEntitlementByItemId.cs) | [PublicGetUserEntitlementByItemId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicGetUserEntitlementByItemId.cs) |
 | [DEPRECATED] `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/bySku` | GET | PublicGetUserEntitlementBySku | [PublicGetUserEntitlementBySku](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicGetUserEntitlementBySku.cs) | [PublicGetUserEntitlementBySku](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicGetUserEntitlementBySku.cs) |
+| `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/history` | GET | PublicUserEntitlementHistory | [PublicUserEntitlementHistory](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicUserEntitlementHistory.cs) | [PublicUserEntitlementHistory](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicUserEntitlementHistory.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/ownership/any` | GET | PublicExistsAnyUserActiveEntitlement | [PublicExistsAnyUserActiveEntitlement](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicExistsAnyUserActiveEntitlement.cs) | [PublicExistsAnyUserActiveEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicExistsAnyUserActiveEntitlement.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/ownership/byAppId` | GET | PublicGetUserAppEntitlementOwnershipByAppId | [PublicGetUserAppEntitlementOwnershipByAppId](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicGetUserAppEntitlementOwnershipByAppId.cs) | [PublicGetUserAppEntitlementOwnershipByAppId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicGetUserAppEntitlementOwnershipByAppId.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/entitlements/ownership/byItemId` | GET | PublicGetUserEntitlementOwnershipByItemId | [PublicGetUserEntitlementOwnershipByItemId](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/PublicGetUserEntitlementOwnershipByItemId.cs) | [PublicGetUserEntitlementOwnershipByItemId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/PublicGetUserEntitlementOwnershipByItemId.cs) |
@@ -839,6 +840,7 @@
 | `EntitlementIfc` | [EntitlementIfc](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementIfc.cs) |
 | `EntitlementInfo` | [EntitlementInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementInfo.cs) |
 | `EntitlementLootBoxReward` | [EntitlementLootBoxReward](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementLootBoxReward.cs) |
+| `EntitlementOriginSyncResult` | [EntitlementOriginSyncResult](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementOriginSyncResult.cs) |
 | `EntitlementOwnership` | [EntitlementOwnership](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementOwnership.cs) |
 | `EntitlementPagingSlicedResult` | [EntitlementPagingSlicedResult](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementPagingSlicedResult.cs) |
 | `EntitlementPlatformConfigInfo` | [EntitlementPlatformConfigInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementPlatformConfigInfo.cs) |
@@ -1028,6 +1030,7 @@
 | `Predicate` | [Predicate](../../apis/AccelByte.Sdk.Api.Platform/Model/Predicate.cs) |
 | `PredicateValidateResult` | [PredicateValidateResult](../../apis/AccelByte.Sdk.Api.Platform/Model/PredicateValidateResult.cs) |
 | `PublicCustomConfigInfo` | [PublicCustomConfigInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/PublicCustomConfigInfo.cs) |
+| `PublicEntitlementHistoryInfo` | [PublicEntitlementHistoryInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/PublicEntitlementHistoryInfo.cs) |
 | `PurchaseCondition` | [PurchaseCondition](../../apis/AccelByte.Sdk.Api.Platform/Model/PurchaseCondition.cs) |
 | `PurchaseConditionUpdate` | [PurchaseConditionUpdate](../../apis/AccelByte.Sdk.Api.Platform/Model/PurchaseConditionUpdate.cs) |
 | `PurchasedItemCount` | [PurchasedItemCount](../../apis/AccelByte.Sdk.Api.Platform/Model/PurchasedItemCount.cs) |
@@ -1126,6 +1129,7 @@
 | `TwitchSyncResult` | [TwitchSyncResult](../../apis/AccelByte.Sdk.Api.Platform/Model/TwitchSyncResult.cs) |
 | `UserDLC` | [UserDLC](../../apis/AccelByte.Sdk.Api.Platform/Model/UserDLC.cs) |
 | `UserDLCRecord` | [UserDLCRecord](../../apis/AccelByte.Sdk.Api.Platform/Model/UserDLCRecord.cs) |
+| `UserEntitlementHistoryPagingSlicedResult` | [UserEntitlementHistoryPagingSlicedResult](../../apis/AccelByte.Sdk.Api.Platform/Model/UserEntitlementHistoryPagingSlicedResult.cs) |
 | `ValidationErrorEntity` | [ValidationErrorEntity](../../apis/AccelByte.Sdk.Api.Platform/Model/ValidationErrorEntity.cs) |
 | `ViewCreate` | [ViewCreate](../../apis/AccelByte.Sdk.Api.Platform/Model/ViewCreate.cs) |
 | `ViewInfo` | [ViewInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ViewInfo.cs) |
@@ -1149,4 +1153,3 @@
 | `XsollaConfig` | [XsollaConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/XsollaConfig.cs) |
 | `XsollaPaywallConfig` | [XsollaPaywallConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/XsollaPaywallConfig.cs) |
 | `XsollaPaywallConfigRequest` | [XsollaPaywallConfigRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/XsollaPaywallConfigRequest.cs) |
-| `entitlement origin sync result` | [EntitlementOriginSyncResult](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementOriginSyncResult.cs) |

@@ -35,8 +35,6 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
             public long? Limit { get; set; }
 
-            public string? UserId { get; set; }
-
 
 
 
@@ -52,12 +50,6 @@ namespace AccelByte.Sdk.Api.Session.Operation
             public PublicGetRecentPlayerBuilder SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
-            }
-
-            public PublicGetRecentPlayerBuilder SetUserId(string _userId)
-            {
-                UserId = _userId;
                 return this;
             }
 
@@ -103,7 +95,6 @@ namespace AccelByte.Sdk.Api.Session.Operation
             PathParams["namespace"] = namespace_;
 
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
-            if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
 
 
 
@@ -116,14 +107,12 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
         public PublicGetRecentPlayer(
             string namespace_,
-            long? limit,
-            string? userId
+            long? limit
         )
         {
             PathParams["namespace"] = namespace_;
 
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
-            if (userId is not null) QueryParams["userId"] = userId;
 
 
 

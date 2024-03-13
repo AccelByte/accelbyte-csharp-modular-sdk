@@ -22,7 +22,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// <summary>
     /// GetUserStagingContentByID
     ///
-    /// Required permission NAMESPACE:{namespace}:USER:{userId}:CONTENT [READ].
+    /// Get user staging content by ID
     /// </summary>
     public class GetUserStagingContentByID : AccelByte.Sdk.Core.Operation
     {

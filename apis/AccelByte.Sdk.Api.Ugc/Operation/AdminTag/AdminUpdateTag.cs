@@ -22,8 +22,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// <summary>
     /// AdminUpdateTag
     ///
-    /// Required permission ADMIN:NAMESPACE:{namespace}:UGCCONFIG [UPDATE]
-    /// updates a tag
+    /// Update existing tag
     /// </summary>
     public class AdminUpdateTag : AccelByte.Sdk.Core.Operation
     {

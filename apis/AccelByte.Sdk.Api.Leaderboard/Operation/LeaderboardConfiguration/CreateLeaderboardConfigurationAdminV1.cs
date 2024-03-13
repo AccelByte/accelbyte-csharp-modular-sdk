@@ -24,12 +24,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
     ///
     /// 
     /// 
-    /// Required permission 'ADMIN:NAMESPACE:{namespace}:LEADERBOARD [CREATE]'
-    /// 
-    /// 
-    /// 
-    /// 
-    /// Fields :
+    ///  Fields :
     /// 
     /// 
     /// 
