@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2023-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -242,6 +242,13 @@ namespace AccelByte.Sdk.Core
 
             sdk.Configuration.TokenRepository.UpdateToken(tokenResponse);
             onTokenReceived?.Invoke(tokenResponse);
+
+            if (sdk.Configuration.TokenRepository is IObservableTokenRepository)
+            {
+                var oTokenRepo = (IObservableTokenRepository)sdk.Configuration.TokenRepository;
+                _ = oTokenRepo.UpdateObserversWithNewToken();
+            }
+
             return true;
         }
 

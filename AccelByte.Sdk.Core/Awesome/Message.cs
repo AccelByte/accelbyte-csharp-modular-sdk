@@ -148,6 +148,12 @@ namespace AccelByte.Sdk.Core.Awesome
             Data = GrabValues(modelObject);
         }
 
+        public Message(string messageType, Dictionary<string, string> data)
+        {
+            MessageType = messageType;
+            Data = data;
+        }
+
         public object To(Type targetType)
         {
             object newObj = Activator.CreateInstance(targetType)!;

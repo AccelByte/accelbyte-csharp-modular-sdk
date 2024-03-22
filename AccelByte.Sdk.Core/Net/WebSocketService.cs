@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -14,10 +14,12 @@ using System.Threading;
 using System.IO;
 
 using AccelByte.Sdk.Core.Awesome;
+using AccelByte.Sdk.Core.Repository;
+using System.Text.Json.Serialization;
 
 namespace AccelByte.Sdk.Core.Net
 {
-    public abstract class WebSocketService
+    public abstract class WebSocketService : ITokenRepositoryObserver
     {
         public const int ERROR_PROCESS_MESSAGE = 1;
 
@@ -55,8 +57,12 @@ namespace AccelByte.Sdk.Core.Net
             _BaseUrl = abConfig.ConfigRepository.BaseUrl.Replace("http://", "ws://").Replace("https://", "wss://");
             _Socket = new ClientWebSocket();
             _MapEventActions();
+
+            if (abConfig.TokenRepository is IObservableTokenRepository)
+                ((IObservableTokenRepository)abConfig.TokenRepository).RegisterObserver(this);
         }
 
+        [Obsolete("Use the one with AccelByteConfig parameter to automatically register OnAccessTokenChanged event.")]
         public WebSocketService(string baseUrl)
         {
             _BaseUrl = baseUrl;
@@ -184,6 +190,11 @@ namespace AccelByte.Sdk.Core.Net
             await _ReceiveWebSocket(_ListenCts.Token);
         }
 
+        public async Task Listen(CancellationToken cancelToken)
+        {
+            await _ReceiveWebSocket(cancelToken);
+        }
+
         public void StopListen()
         {
             _ListenCts.Cancel();
@@ -213,6 +224,28 @@ namespace AccelByte.Sdk.Core.Net
         {
             ArraySegment<byte> dataSegment = Encoding.UTF8.GetBytes(data);
             await _Socket.SendAsync(dataSegment, WebSocketMessageType.Text, true, CancellationToken.None);
+        }
+
+        public async Task Send(Message messageObj)
+        {
+            await _Socket.SendAsync(messageObj.ToByteArray(), WebSocketMessageType.Text, true, CancellationToken.None);
+        }
+
+        public async Task OnAccessTokenChanged(string accessToken)
+        {
+            if (_Socket.State == WebSocketState.Open)
+            {
+                Random rand = new Random();
+                Message requestMessage = new Message("refreshTokenRequest", new()
+                {
+                    { "id", rand.GenerateRandomId(16) },
+                    { "token", accessToken }
+                });
+
+                await Send(requestMessage);
+            }
+            else
+                await Task.CompletedTask;
         }
     }
 }

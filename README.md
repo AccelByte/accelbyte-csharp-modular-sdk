@@ -234,8 +234,9 @@ if (!login)
 {
     Console.WriteLine("Login failed");
 }
+```
 
-Alternative to automatic access token refresh is scheduled access token refresh. Scheduled access tokend refresh is using a timer that periodically refresh the access token. To enable it, instead of using `.UseAutoTokenRefresh()`, use `.UseScheduledTokenRefresh()` while instantiate the sdk.
+Alternative to automatic access token refresh is scheduled access token refresh. Scheduled access token refresh is using a timer that periodically refresh the access token. To enable it, instead of using `.UseAutoTokenRefresh()`, use `.UseScheduledTokenRefresh()` while instantiate the sdk.
 ```csharp
 //Add core namespace
 using AccelByte.Sdk.Core;
@@ -253,6 +254,8 @@ IAccelByteSdk sdk = AccelByteSdk.Builder
     .UseScheduledTokenRefresh()
     .Build();
 ```
+This feature will try to update any open WebSocket connection when refresh action triggered by `AutoTokenRefresh` or `ScheduledTokenRefresh`.
+
 NOTE: Do not use `.UseAutoTokenRefresh()` together with `.UseScheduledTokenRefresh()`. It will introduce unnecessary overhead and possibility of unexpected behaviour.
 
 ## Token Validation
