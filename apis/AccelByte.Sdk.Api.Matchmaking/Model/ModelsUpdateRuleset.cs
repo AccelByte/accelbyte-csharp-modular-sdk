@@ -7,8 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
-using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Matchmaking.Model
 {
@@ -50,8 +48,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Model
         public ModelsUpdateRulesetSubGameModes? SubGameModes { get; set; }
 
         [JsonPropertyName("ticket_flexing_selection")]
-        [JsonStringEnum]
-        public ModelsUpdateRulesetTicketFlexingSelection? TicketFlexingSelection { get; set; }
+        public string? TicketFlexingSelection { get; set; }
 
         [JsonPropertyName("ticket_flexing_selections")]
         public List<ModelsSelectionRule>? TicketFlexingSelections { get; set; }
@@ -63,31 +60,4 @@ namespace AccelByte.Sdk.Api.Matchmaking.Model
     }
 
 
-
-    public class ModelsUpdateRulesetTicketFlexingSelection : StringEnum<ModelsUpdateRulesetTicketFlexingSelection>
-    {
-        public static readonly ModelsUpdateRulesetTicketFlexingSelection Newest
-            = new ModelsUpdateRulesetTicketFlexingSelection("newest");
-
-        public static readonly ModelsUpdateRulesetTicketFlexingSelection Oldest
-            = new ModelsUpdateRulesetTicketFlexingSelection("oldest");
-
-        public static readonly ModelsUpdateRulesetTicketFlexingSelection Pivot
-            = new ModelsUpdateRulesetTicketFlexingSelection("pivot");
-
-        public static readonly ModelsUpdateRulesetTicketFlexingSelection Random
-            = new ModelsUpdateRulesetTicketFlexingSelection("random");
-
-
-        public static implicit operator ModelsUpdateRulesetTicketFlexingSelection(string value)
-        {
-            return NewValue(value);
-        }
-
-        public ModelsUpdateRulesetTicketFlexingSelection(string enumValue)
-            : base(enumValue)
-        {
-
-        }
-    }
 }

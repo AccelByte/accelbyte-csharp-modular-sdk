@@ -16,6 +16,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Model
         public ModelsAllianceRule? Alliance { get; set; }
 
         [JsonPropertyName("alliance_flexing_rule")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<ModelsAllianceFlexingRule>? AllianceFlexingRule { get; set; }
 
         [JsonPropertyName("name")]

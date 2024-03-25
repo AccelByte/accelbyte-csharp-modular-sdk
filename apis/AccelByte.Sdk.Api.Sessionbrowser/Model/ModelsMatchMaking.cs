@@ -38,6 +38,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Model
         public string? MatchId { get; set; }
 
         [JsonPropertyName("matching_allies")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<ModelsMatchingAlly>? MatchingAllies { get; set; }
 
         [JsonPropertyName("namespace")]
@@ -63,6 +64,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Model
         public string? Status { get; set; }
 
         [JsonPropertyName("sub_game_mode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? SubGameMode { get; set; }
 
     }
@@ -95,6 +97,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Model
         public string? MatchId { get; set; }
 
         [JsonPropertyName("matching_allies")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<ModelsMatchingAlly>? MatchingAllies { get; set; }
 
         [JsonPropertyName("namespace")]
@@ -120,6 +123,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Model
         public string? Status { get; set; }
 
         [JsonPropertyName("sub_game_mode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? SubGameMode { get; set; }
 
     }

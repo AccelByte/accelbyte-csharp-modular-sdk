@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Feature.AutoTokenRefresh
                 {
                     _Sdk.LoginUser(true, _RefreshThreshold);
                     _ = UpdateObserversWithNewToken();
-                }   
+                }
             }
             else if (this.LoginType == LoginType.Client)
             {

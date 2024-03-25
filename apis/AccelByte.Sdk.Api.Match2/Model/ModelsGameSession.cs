@@ -18,6 +18,9 @@ namespace AccelByte.Sdk.Api.Match2.Model
         [JsonPropertyName("GameMode")]
         public string? GameMode { get; set; }
 
+        [JsonPropertyName("IsFull")]
+        public bool? IsFull { get; set; }
+
         [JsonPropertyName("JoinType")]
         public string? JoinType { get; set; }
 
@@ -66,6 +69,9 @@ namespace AccelByte.Sdk.Api.Match2.Model
 
         [JsonPropertyName("GameMode")]
         public string? GameMode { get; set; }
+
+        [JsonPropertyName("IsFull")]
+        public bool? IsFull { get; set; }
 
         [JsonPropertyName("JoinType")]
         public string? JoinType { get; set; }

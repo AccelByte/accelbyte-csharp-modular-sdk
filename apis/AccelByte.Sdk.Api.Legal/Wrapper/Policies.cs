@@ -37,6 +37,10 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         {
             get { return new Operation.SetDefaultPolicy2.SetDefaultPolicy2Builder(_sdk); }
         }
+        public RetrieveCountryListWithPolicies.RetrieveCountryListWithPoliciesBuilder RetrieveCountryListWithPoliciesOp
+        {
+            get { return new Operation.RetrieveCountryListWithPolicies.RetrieveCountryListWithPoliciesBuilder(_sdk); }
+        }
         public RetrieveLatestPolicies.RetrieveLatestPoliciesBuilder RetrieveLatestPoliciesOp
         {
             get { return new Operation.RetrieveLatestPolicies.RetrieveLatestPoliciesBuilder(_sdk); }
@@ -74,6 +78,15 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
             var response = _sdk.RunRequest(input);
 
             input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public List<string>? RetrieveCountryListWithPolicies(RetrieveCountryListWithPolicies input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

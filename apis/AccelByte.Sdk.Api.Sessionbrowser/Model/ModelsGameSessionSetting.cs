@@ -40,6 +40,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Model
         public string? Password { get; set; }
 
         [JsonPropertyName("settings")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Dictionary<string, object>? Settings { get; set; }
 
     }
@@ -74,6 +75,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Model
         public string? Password { get; set; }
 
         [JsonPropertyName("settings")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public T1? Settings { get; set; }
 
     }

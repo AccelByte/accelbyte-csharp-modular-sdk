@@ -13,6 +13,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Model
     public class ModelsPartyMember : AccelByte.Sdk.Core.Model
     {
         [JsonPropertyName("extra_attributes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Dictionary<string, object>? ExtraAttributes { get; set; }
 
         [JsonPropertyName("user_id")]
@@ -23,6 +24,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Model
     public class ModelsPartyMember<T1> : AccelByte.Sdk.Core.Model
     {
         [JsonPropertyName("extra_attributes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public T1? ExtraAttributes { get; set; }
 
         [JsonPropertyName("user_id")]

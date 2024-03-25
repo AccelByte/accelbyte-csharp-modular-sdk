@@ -59,6 +59,17 @@ namespace AccelByte.Sdk.Api.Ams
         }
         private Wrapper.Artifacts? _Artifacts = null;
 
+        public Wrapper.Development Development
+        {
+            get
+            {
+                if (_Development == null)
+                    _Development = new Wrapper.Development(_Sdk);
+                return _Development;
+            }
+        }
+        private Wrapper.Development? _Development = null;
+
         public Wrapper.Fleets Fleets
         {
             get

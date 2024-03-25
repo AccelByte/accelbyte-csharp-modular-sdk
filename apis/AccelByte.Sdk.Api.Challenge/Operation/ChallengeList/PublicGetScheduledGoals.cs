@@ -23,7 +23,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
     /// publicGetScheduledGoals
     ///
     /// 
-    ///   * Required permission: NAMESPACE:{namespace}:CHALLENGE [READ]
+    ///     * Required permission: NAMESPACE:{namespace}:CHALLENGE [READ]
     /// </summary>
     public class PublicGetScheduledGoals : AccelByte.Sdk.Core.Operation
     {
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                 return op;
             }
 
-            public List<Model.ModelGoalResponse>? Execute(
+            public Model.ModelGetGoalsResponse? Execute(
                 string challengeCode,
                 string namespace_
             )
@@ -163,7 +163,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public List<Model.ModelGoalResponse>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.ModelGetGoalsResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -171,11 +171,11 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<List<Model.ModelGoalResponse>>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ModelGetGoalsResponse>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<List<Model.ModelGoalResponse>>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ModelGetGoalsResponse>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

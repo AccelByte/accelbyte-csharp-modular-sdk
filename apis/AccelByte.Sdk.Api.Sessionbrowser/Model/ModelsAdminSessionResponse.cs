@@ -19,6 +19,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Model
         public DateTime? CreatedAt { get; set; }
 
         [JsonPropertyName("game_session_setting")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ModelsGameSessionSetting? GameSessionSetting { get; set; }
 
         [JsonPropertyName("game_version")]
@@ -28,6 +29,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Model
         public bool? Joinable { get; set; }
 
         [JsonPropertyName("match")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ModelsMatchMaking? Match { get; set; }
 
         [JsonPropertyName("namespace")]

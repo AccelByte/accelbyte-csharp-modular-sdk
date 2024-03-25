@@ -381,6 +381,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.AdminGetUserByEmailAddressV3.AdminGetUserByEmailAddressV3Builder(_sdk); }
         }
+        public AdminBulkUpdateUsersV3.AdminBulkUpdateUsersV3Builder AdminBulkUpdateUsersV3Op
+        {
+            get { return new Operation.AdminBulkUpdateUsersV3.AdminBulkUpdateUsersV3Builder(_sdk); }
+        }
         public AdminGetBulkUserBanV3.AdminGetBulkUserBanV3Builder AdminGetBulkUserBanV3Op
         {
             get { return new Operation.AdminGetBulkUserBanV3.AdminGetBulkUserBanV3Builder(_sdk); }
@@ -453,6 +457,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.AdminUpdateUserDeletionStatusV3.AdminUpdateUserDeletionStatusV3Builder(_sdk); }
         }
+        public AdminListUserAllPlatformAccountsDistinctV3.AdminListUserAllPlatformAccountsDistinctV3Builder AdminListUserAllPlatformAccountsDistinctV3Op
+        {
+            get { return new Operation.AdminListUserAllPlatformAccountsDistinctV3.AdminListUserAllPlatformAccountsDistinctV3Builder(_sdk); }
+        }
         public AdminUpgradeHeadlessAccountV3.AdminUpgradeHeadlessAccountV3Builder AdminUpgradeHeadlessAccountV3Op
         {
             get { return new Operation.AdminUpgradeHeadlessAccountV3.AdminUpgradeHeadlessAccountV3Builder(_sdk); }
@@ -508,6 +516,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public AdminPlatformUnlinkV3.AdminPlatformUnlinkV3Builder AdminPlatformUnlinkV3Op
         {
             get { return new Operation.AdminPlatformUnlinkV3.AdminPlatformUnlinkV3Builder(_sdk); }
+        }
+        public AdminPlatformUnlinkAllV3.AdminPlatformUnlinkAllV3Builder AdminPlatformUnlinkAllV3Op
+        {
+            get { return new Operation.AdminPlatformUnlinkAllV3.AdminPlatformUnlinkAllV3Builder(_sdk); }
         }
         public AdminPlatformLinkV3.AdminPlatformLinkV3Builder AdminPlatformLinkV3Op
         {
@@ -1593,6 +1605,15 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public void AdminBulkUpdateUsersV3(AdminBulkUpdateUsersV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.ModelGetUserBanV3Response? AdminGetBulkUserBanV3(AdminGetBulkUserBanV3 input)
         {
             var response = _sdk.RunRequest(input);
@@ -1755,6 +1776,15 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public Model.AccountcommonDistinctPlatformResponseV3? AdminListUserAllPlatformAccountsDistinctV3(AdminListUserAllPlatformAccountsDistinctV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.ModelUserResponseV3? AdminUpgradeHeadlessAccountV3(AdminUpgradeHeadlessAccountV3 input)
         {
             var response = _sdk.RunRequest(input);
@@ -1873,6 +1903,15 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
         public void AdminPlatformUnlinkV3(AdminPlatformUnlinkV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void AdminPlatformUnlinkAllV3(AdminPlatformUnlinkAllV3 input)
         {
             var response = _sdk.RunRequest(input);
 

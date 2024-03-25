@@ -89,6 +89,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             get { return new Operation.AdminGetClientsByNamespaceV3.AdminGetClientsByNamespaceV3Builder(_sdk); }
         }
+        public AdminBulkUpdateClientsV3.AdminBulkUpdateClientsV3Builder AdminBulkUpdateClientsV3Op
+        {
+            get { return new Operation.AdminBulkUpdateClientsV3.AdminBulkUpdateClientsV3Builder(_sdk); }
+        }
         public AdminCreateClientV3.AdminCreateClientV3Builder AdminCreateClientV3Op
         {
             get { return new Operation.AdminCreateClientV3.AdminCreateClientV3Builder(_sdk); }
@@ -272,6 +276,15 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             var response = _sdk.RunRequest(input);
 
             return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void AdminBulkUpdateClientsV3(AdminBulkUpdateClientsV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+
+            input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

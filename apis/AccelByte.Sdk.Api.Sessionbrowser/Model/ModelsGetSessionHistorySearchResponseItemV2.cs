@@ -25,6 +25,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Model
         public bool? Joinable { get; set; }
 
         [JsonPropertyName("joining")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<ModelsSessionPlayerJoining>? Joining { get; set; }
 
         [JsonPropertyName("match_id")]
@@ -34,6 +35,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Model
         public string? Namespace { get; set; }
 
         [JsonPropertyName("players")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<ModelsSessionPlayerHistory>? Players { get; set; }
 
         [JsonPropertyName("removed_reason")]
@@ -46,6 +48,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Model
         public string? Status { get; set; }
 
         [JsonPropertyName("sub_game_mode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? SubGameMode { get; set; }
 
         [JsonPropertyName("user_id")]
