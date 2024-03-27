@@ -35,6 +35,8 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
             public string? Query { get; set; }
 
+            public List<string>? Tags { get; set; }
+
 
 
 
@@ -50,6 +52,12 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             public ListGameRecordsHandlerV1Builder SetQuery(string _query)
             {
                 Query = _query;
+                return this;
+            }
+
+            public ListGameRecordsHandlerV1Builder SetTags(List<string> _tags)
+            {
+                Tags = _tags;
                 return this;
             }
 
@@ -105,11 +113,13 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             PathParams["namespace"] = namespace_;
 
             if (builder.Query is not null) QueryParams["query"] = builder.Query;
+            if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
             QueryParams["limit"] = Convert.ToString(limit)!;
             QueryParams["offset"] = Convert.ToString(offset)!;
 
 
 
+            CollectionFormatMap["tags"] = "csv";
 
 
 
@@ -120,6 +130,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         public ListGameRecordsHandlerV1(
             string namespace_,
             string? query,
+            List<string>? tags,
             long limit,
             long offset
         )
@@ -127,11 +138,13 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             PathParams["namespace"] = namespace_;
 
             if (query is not null) QueryParams["query"] = query;
+            if (tags is not null) QueryParams["tags"] = tags;
             QueryParams["limit"] = Convert.ToString(limit)!;
             QueryParams["offset"] = Convert.ToString(offset)!;
 
 
 
+            CollectionFormatMap["tags"] = "csv";
 
 
 
