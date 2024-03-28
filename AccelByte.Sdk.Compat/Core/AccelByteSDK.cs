@@ -31,6 +31,7 @@ using AccelByte.Sdk.Api.Reporting;
 using AccelByte.Sdk.Api.Seasonpass;
 using AccelByte.Sdk.Api.Session;
 using AccelByte.Sdk.Api.Sessionbrowser;
+using AccelByte.Sdk.Api.Sessionhistory;
 using AccelByte.Sdk.Api.Social;
 using AccelByte.Sdk.Api.Ugc;
 using AccelByte.Sdk.Authentication;
@@ -68,6 +69,7 @@ namespace AccelByte.Sdk.Core
         public SeasonpassApi Seasonpass { get => ((IAccelByteSdk)this).GetSeasonpassApi(); }
         public SessionApi Session { get => ((IAccelByteSdk)this).GetSessionApi(); }
         public SessionbrowserApi Sessionbrowser { get => ((IAccelByteSdk)this).GetSessionbrowserApi(); }
+        public SessionhistoryApi Sessionhistory { get => ((IAccelByteSdk)this).GetSessionhistoryApi(); }
         public SocialApi Social { get => ((IAccelByteSdk)this).GetSocialApi(); }
         public UgcApi Ugc { get => ((IAccelByteSdk)this).GetUgcApi(); }
         #endregion
