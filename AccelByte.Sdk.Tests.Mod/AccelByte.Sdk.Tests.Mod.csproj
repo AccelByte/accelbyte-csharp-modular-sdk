@@ -45,6 +45,7 @@
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Reporting\AccelByte.Sdk.Api.Reporting.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Seasonpass\AccelByte.Sdk.Api.Seasonpass.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Sessionbrowser\AccelByte.Sdk.Api.Sessionbrowser.csproj" />
+    <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Sessionhistory\AccelByte.Sdk.Api.Sessionhistory.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Session\AccelByte.Sdk.Api.Session.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Social\AccelByte.Sdk.Api.Social.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Ugc\AccelByte.Sdk.Api.Ugc.csproj" />
