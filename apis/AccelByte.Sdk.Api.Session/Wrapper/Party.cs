@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -90,7 +91,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsPartyQueryResponse? AdminQueryParties(AdminQueryParties input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsPartyQueryResponse?> AdminQueryPartiesAsync(AdminQueryParties input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -99,7 +107,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsPartySessionResponse? PublicPartyJoinCode(PublicPartyJoinCode input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsPartySessionResponse?> PublicPartyJoinCodeAsync(PublicPartyJoinCode input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -109,7 +124,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsPartySessionResponse<T1, T2>? PublicPartyJoinCode<T1, T2>(PublicPartyJoinCode input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsPartySessionResponse<T1, T2>?> PublicPartyJoinCodeAsync<T1, T2>(PublicPartyJoinCode input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
                     response.Code,
                     response.ContentType,
@@ -118,7 +140,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsPartySessionResponse? PublicGetParty(PublicGetParty input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsPartySessionResponse?> PublicGetPartyAsync(PublicGetParty input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -128,7 +157,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsPartySessionResponse<T1, T2>? PublicGetParty<T1, T2>(PublicGetParty input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsPartySessionResponse<T1, T2>?> PublicGetPartyAsync<T1, T2>(PublicGetParty input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
                     response.Code,
                     response.ContentType,
@@ -137,7 +173,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsPartySessionResponse? PublicUpdateParty(PublicUpdateParty input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsPartySessionResponse?> PublicUpdatePartyAsync(PublicUpdateParty input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -147,7 +190,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsPartySessionResponse<T1, T2>? PublicUpdateParty<T1, T2>(PublicUpdateParty input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsPartySessionResponse<T1, T2>?> PublicUpdatePartyAsync<T1, T2>(PublicUpdateParty input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
                     response.Code,
                     response.ContentType,
@@ -156,7 +206,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsPartySessionResponse? PublicPatchUpdateParty(PublicPatchUpdateParty input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsPartySessionResponse?> PublicPatchUpdatePartyAsync(PublicPatchUpdateParty input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -166,7 +223,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsPartySessionResponse<T1, T2>? PublicPatchUpdateParty<T1, T2>(PublicPatchUpdateParty input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsPartySessionResponse<T1, T2>?> PublicPatchUpdatePartyAsync<T1, T2>(PublicPatchUpdateParty input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
                     response.Code,
                     response.ContentType,
@@ -175,7 +239,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsPartySessionResponse? PublicGeneratePartyCode(PublicGeneratePartyCode input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsPartySessionResponse?> PublicGeneratePartyCodeAsync(PublicGeneratePartyCode input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -185,7 +256,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsPartySessionResponse<T1, T2>? PublicGeneratePartyCode<T1, T2>(PublicGeneratePartyCode input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsPartySessionResponse<T1, T2>?> PublicGeneratePartyCodeAsync<T1, T2>(PublicGeneratePartyCode input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
                     response.Code,
                     response.ContentType,
@@ -194,7 +272,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public void PublicRevokePartyCode(PublicRevokePartyCode input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicRevokePartyCodeAsync(PublicRevokePartyCode input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -203,7 +288,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsSessionInviteResponse? PublicPartyInvite(PublicPartyInvite input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsSessionInviteResponse?> PublicPartyInviteAsync(PublicPartyInvite input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -212,7 +304,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsPartySessionResponse? PublicPromotePartyLeader(PublicPromotePartyLeader input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsPartySessionResponse?> PublicPromotePartyLeaderAsync(PublicPromotePartyLeader input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -222,7 +321,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsPartySessionResponse<T1, T2>? PublicPromotePartyLeader<T1, T2>(PublicPromotePartyLeader input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsPartySessionResponse<T1, T2>?> PublicPromotePartyLeaderAsync<T1, T2>(PublicPromotePartyLeader input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
                     response.Code,
                     response.ContentType,
@@ -231,7 +337,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsPartySessionResponse? PublicPartyJoin(PublicPartyJoin input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsPartySessionResponse?> PublicPartyJoinAsync(PublicPartyJoin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -241,7 +354,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsPartySessionResponse<T1, T2>? PublicPartyJoin<T1, T2>(PublicPartyJoin input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsPartySessionResponse<T1, T2>?> PublicPartyJoinAsync<T1, T2>(PublicPartyJoin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
                     response.Code,
                     response.ContentType,
@@ -250,7 +370,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public void PublicPartyLeave(PublicPartyLeave input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicPartyLeaveAsync(PublicPartyLeave input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -259,7 +386,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public void PublicPartyReject(PublicPartyReject input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicPartyRejectAsync(PublicPartyReject input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -268,7 +402,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsKickResponse? PublicPartyKick(PublicPartyKick input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsKickResponse?> PublicPartyKickAsync(PublicPartyKick input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -277,7 +418,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsPartySessionResponse? PublicCreateParty(PublicCreateParty input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsPartySessionResponse?> PublicCreatePartyAsync(PublicCreateParty input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -287,7 +435,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsPartySessionResponse<T1, T2>? PublicCreateParty<T1, T2>(PublicCreateParty input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsPartySessionResponse<T1, T2>?> PublicCreatePartyAsync<T1, T2>(PublicCreateParty input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
                     response.Code,
                     response.ContentType,
@@ -296,7 +451,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         public Model.ApimodelsPartyQueryResponse? PublicQueryMyParties(PublicQueryMyParties input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsPartyQueryResponse?> PublicQueryMyPartiesAsync(PublicQueryMyParties input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -98,7 +99,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsListDeploymentResponse? GetAllDeployment(GetAllDeployment input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsListDeploymentResponse?> GetAllDeploymentAsync(GetAllDeployment input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -107,7 +115,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDeploymentWithOverride? GetDeployment(GetDeployment input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDeploymentWithOverride?> GetDeploymentAsync(GetDeployment input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -116,7 +131,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDeploymentWithOverride? CreateDeployment(CreateDeployment input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDeploymentWithOverride?> CreateDeploymentAsync(CreateDeployment input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -125,7 +147,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public void DeleteDeployment(DeleteDeployment input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteDeploymentAsync(DeleteDeployment input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -134,7 +163,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDeploymentWithOverride? UpdateDeployment(UpdateDeployment input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDeploymentWithOverride?> UpdateDeploymentAsync(UpdateDeployment input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -143,7 +179,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDeploymentWithOverride? CreateRootRegionOverride(CreateRootRegionOverride input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDeploymentWithOverride?> CreateRootRegionOverrideAsync(CreateRootRegionOverride input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -152,7 +195,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDeploymentWithOverride? DeleteRootRegionOverride(DeleteRootRegionOverride input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDeploymentWithOverride?> DeleteRootRegionOverrideAsync(DeleteRootRegionOverride input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -161,7 +211,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDeploymentWithOverride? UpdateRootRegionOverride(UpdateRootRegionOverride input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDeploymentWithOverride?> UpdateRootRegionOverrideAsync(UpdateRootRegionOverride input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -170,7 +227,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDeploymentWithOverride? CreateDeploymentOverride(CreateDeploymentOverride input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDeploymentWithOverride?> CreateDeploymentOverrideAsync(CreateDeploymentOverride input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -179,7 +243,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDeploymentWithOverride? DeleteDeploymentOverride(DeleteDeploymentOverride input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDeploymentWithOverride?> DeleteDeploymentOverrideAsync(DeleteDeploymentOverride input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -188,7 +259,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDeploymentWithOverride? UpdateDeploymentOverride(UpdateDeploymentOverride input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDeploymentWithOverride?> UpdateDeploymentOverrideAsync(UpdateDeploymentOverride input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -197,7 +275,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDeploymentWithOverride? CreateOverrideRegionOverride(CreateOverrideRegionOverride input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDeploymentWithOverride?> CreateOverrideRegionOverrideAsync(CreateOverrideRegionOverride input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -206,7 +291,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDeploymentWithOverride? DeleteOverrideRegionOverride(DeleteOverrideRegionOverride input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDeploymentWithOverride?> DeleteOverrideRegionOverrideAsync(DeleteOverrideRegionOverride input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -215,7 +307,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDeploymentWithOverride? UpdateOverrideRegionOverride(UpdateOverrideRegionOverride input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDeploymentWithOverride?> UpdateOverrideRegionOverrideAsync(UpdateOverrideRegionOverride input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -224,7 +323,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsListDeploymentResponse? GetAllDeploymentClient(GetAllDeploymentClient input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsListDeploymentResponse?> GetAllDeploymentClientAsync(GetAllDeploymentClient input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -233,7 +339,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDeploymentWithOverride? CreateDeploymentClient(CreateDeploymentClient input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDeploymentWithOverride?> CreateDeploymentClientAsync(CreateDeploymentClient input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -242,7 +355,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public void DeleteDeploymentClient(DeleteDeploymentClient input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteDeploymentClientAsync(DeleteDeploymentClient input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,

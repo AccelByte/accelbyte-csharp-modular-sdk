@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -50,7 +51,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGetMemberRequestsListResponseV1? GetGroupJoinRequestPublicV1(GetGroupJoinRequestPublicV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetMemberRequestsListResponseV1?> GetGroupJoinRequestPublicV1Async(GetGroupJoinRequestPublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -59,7 +67,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGetMemberRequestsListResponseV1? GetGroupInvitationRequestPublicV1(GetGroupInvitationRequestPublicV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetMemberRequestsListResponseV1?> GetGroupInvitationRequestPublicV1Async(GetGroupInvitationRequestPublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -68,7 +83,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGetMemberRequestsListResponseV1? GetGroupInviteRequestPublicV2(GetGroupInviteRequestPublicV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetMemberRequestsListResponseV1?> GetGroupInviteRequestPublicV2Async(GetGroupInviteRequestPublicV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -77,7 +99,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGetMemberRequestsListResponseV1? GetGroupJoinRequestPublicV2(GetGroupJoinRequestPublicV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetMemberRequestsListResponseV1?> GetGroupJoinRequestPublicV2Async(GetGroupJoinRequestPublicV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -86,7 +115,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGetMemberRequestsListResponseV1? GetMyGroupJoinRequestV2(GetMyGroupJoinRequestV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetMemberRequestsListResponseV1?> GetMyGroupJoinRequestV2Async(GetMyGroupJoinRequestV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

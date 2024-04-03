@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -79,7 +80,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsListConfigResponse? ListConfig(ListConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsListConfigResponse?> ListConfigAsync(ListConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -90,7 +98,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public void SaveConfig(SaveConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task SaveConfigAsync(SaveConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -100,7 +115,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDSMConfigRecord? GetConfig(GetConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDSMConfigRecord?> GetConfigAsync(GetConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -109,7 +131,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDSMConfigRecord? CreateConfig(CreateConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDSMConfigRecord?> CreateConfigAsync(CreateConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -118,7 +147,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public void DeleteConfig(DeleteConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteConfigAsync(DeleteConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -127,7 +163,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDSMConfigRecord? UpdateConfig(UpdateConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDSMConfigRecord?> UpdateConfigAsync(UpdateConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -136,7 +179,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public void ClearCache(ClearCache input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task ClearCacheAsync(ClearCache input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -145,7 +195,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDSMConfigRecord? AddPort(AddPort input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDSMConfigRecord?> AddPortAsync(AddPort input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -154,7 +211,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDSMConfigRecord? DeletePort(DeletePort input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDSMConfigRecord?> DeletePortAsync(DeletePort input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -163,7 +227,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsDSMConfigRecord? UpdatePort(UpdatePort input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDSMConfigRecord?> UpdatePortAsync(UpdatePort input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -172,7 +243,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Stream? ExportConfigV1(ExportConfigV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Stream?> ExportConfigV1Async(ExportConfigV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -181,7 +259,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsImportResponse? ImportConfigV1(ImportConfigV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsImportResponse?> ImportConfigV1Async(ImportConfigV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

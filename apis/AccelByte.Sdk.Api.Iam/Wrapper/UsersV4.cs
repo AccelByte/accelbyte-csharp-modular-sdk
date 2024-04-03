@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -275,7 +276,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelListInvitationHistoriesV4Response? AdminListInvitationHistoriesV4(AdminListInvitationHistoriesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelListInvitationHistoriesV4Response?> AdminListInvitationHistoriesV4Async(AdminListInvitationHistoriesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -284,7 +292,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelInvitationHistoryResponse? AdminGetNamespaceInvitationHistoryV4(AdminGetNamespaceInvitationHistoryV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelInvitationHistoryResponse?> AdminGetNamespaceInvitationHistoryV4Async(AdminGetNamespaceInvitationHistoryV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -293,7 +308,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelNamespaceInvitationHistoryUserV4Response? AdminGetNamespaceUserInvitationHistoryV4(AdminGetNamespaceUserInvitationHistoryV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelNamespaceInvitationHistoryUserV4Response?> AdminGetNamespaceUserInvitationHistoryV4Async(AdminGetNamespaceUserInvitationHistoryV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -302,7 +324,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.AccountCreateTestUsersResponseV4? AdminCreateTestUsersV4(AdminCreateTestUsersV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.AccountCreateTestUsersResponseV4?> AdminCreateTestUsersV4Async(AdminCreateTestUsersV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -311,7 +340,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.AccountCreateUserResponseV4? AdminCreateUserV4(AdminCreateUserV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.AccountCreateUserResponseV4?> AdminCreateUserV4Async(AdminCreateUserV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -320,7 +356,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminBulkUpdateUserAccountTypeV4(AdminBulkUpdateUserAccountTypeV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminBulkUpdateUserAccountTypeV4Async(AdminBulkUpdateUserAccountTypeV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -329,7 +372,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelListValidUserIDResponseV4? AdminBulkCheckValidUserIDV4(AdminBulkCheckValidUserIDV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelListValidUserIDResponseV4?> AdminBulkCheckValidUserIDV4Async(AdminBulkCheckValidUserIDV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -338,7 +388,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelUserResponseV3? AdminUpdateUserV4(AdminUpdateUserV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelUserResponseV3?> AdminUpdateUserV4Async(AdminUpdateUserV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -347,7 +404,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminUpdateUserEmailAddressV4(AdminUpdateUserEmailAddressV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminUpdateUserEmailAddressV4Async(AdminUpdateUserEmailAddressV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -356,7 +420,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminDisableUserMFAV4(AdminDisableUserMFAV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminDisableUserMFAV4Async(AdminDisableUserMFAV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -365,7 +436,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelListUserRolesV4Response? AdminListUserRolesV4(AdminListUserRolesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelListUserRolesV4Response?> AdminListUserRolesV4Async(AdminListUserRolesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -374,7 +452,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelListUserRolesV4Response? AdminUpdateUserRoleV4(AdminUpdateUserRoleV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelListUserRolesV4Response?> AdminUpdateUserRoleV4Async(AdminUpdateUserRoleV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -383,7 +468,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelListUserRolesV4Response? AdminAddUserRoleV4(AdminAddUserRoleV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelListUserRolesV4Response?> AdminAddUserRoleV4Async(AdminAddUserRoleV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -392,7 +484,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminRemoveUserRoleV4(AdminRemoveUserRoleV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminRemoveUserRoleV4Async(AdminRemoveUserRoleV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -401,7 +500,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelInviteUserResponseV3? AdminInviteUserNewV4(AdminInviteUserNewV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelInviteUserResponseV3?> AdminInviteUserNewV4Async(AdminInviteUserNewV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -410,7 +516,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelUserResponseV3? AdminUpdateMyUserV4(AdminUpdateMyUserV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelUserResponseV3?> AdminUpdateMyUserV4Async(AdminUpdateMyUserV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -419,7 +532,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminDisableMyAuthenticatorV4(AdminDisableMyAuthenticatorV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminDisableMyAuthenticatorV4Async(AdminDisableMyAuthenticatorV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -428,7 +548,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminEnableMyAuthenticatorV4(AdminEnableMyAuthenticatorV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminEnableMyAuthenticatorV4Async(AdminEnableMyAuthenticatorV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -437,7 +564,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelAuthenticatorKeyResponseV4? AdminGenerateMyAuthenticatorKeyV4(AdminGenerateMyAuthenticatorKeyV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelAuthenticatorKeyResponseV4?> AdminGenerateMyAuthenticatorKeyV4Async(AdminGenerateMyAuthenticatorKeyV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -448,7 +582,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelBackupCodesResponseV4? AdminGetMyBackupCodesV4(AdminGetMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelBackupCodesResponseV4?> AdminGetMyBackupCodesV4Async(AdminGetMyBackupCodesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -460,7 +601,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelBackupCodesResponseV4? AdminGenerateMyBackupCodesV4(AdminGenerateMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelBackupCodesResponseV4?> AdminGenerateMyBackupCodesV4Async(AdminGenerateMyBackupCodesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -470,7 +618,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminDisableMyBackupCodesV4(AdminDisableMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminDisableMyBackupCodesV4Async(AdminDisableMyBackupCodesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -481,7 +636,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Stream? AdminDownloadMyBackupCodesV4(AdminDownloadMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Stream?> AdminDownloadMyBackupCodesV4Async(AdminDownloadMyBackupCodesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -493,7 +655,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelBackupCodesResponseV4? AdminEnableMyBackupCodesV4(AdminEnableMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelBackupCodesResponseV4?> AdminEnableMyBackupCodesV4Async(AdminEnableMyBackupCodesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -503,7 +672,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminGetBackupCodesV4(AdminGetBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminGetBackupCodesV4Async(AdminGetBackupCodesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -512,7 +688,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminGenerateBackupCodesV4(AdminGenerateBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminGenerateBackupCodesV4Async(AdminGenerateBackupCodesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -521,7 +704,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminEnableBackupCodesV4(AdminEnableBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminEnableBackupCodesV4Async(AdminEnableBackupCodesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -530,7 +720,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminSendMyMFAEmailCodeV4(AdminSendMyMFAEmailCodeV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminSendMyMFAEmailCodeV4Async(AdminSendMyMFAEmailCodeV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -539,7 +736,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminDisableMyEmailV4(AdminDisableMyEmailV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminDisableMyEmailV4Async(AdminDisableMyEmailV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -548,7 +752,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminEnableMyEmailV4(AdminEnableMyEmailV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminEnableMyEmailV4Async(AdminEnableMyEmailV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -557,7 +768,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelEnabledFactorsResponseV4? AdminGetMyEnabledFactorsV4(AdminGetMyEnabledFactorsV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelEnabledFactorsResponseV4?> AdminGetMyEnabledFactorsV4Async(AdminGetMyEnabledFactorsV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -566,7 +784,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminMakeFactorMyDefaultV4(AdminMakeFactorMyDefaultV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminMakeFactorMyDefaultV4Async(AdminMakeFactorMyDefaultV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -577,7 +802,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelInviteUserResponseV3? AdminInviteUserV4(AdminInviteUserV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelInviteUserResponseV3?> AdminInviteUserV4Async(AdminInviteUserV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -587,7 +819,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.AccountCreateUserResponseV4? PublicCreateTestUserV4(PublicCreateTestUserV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.AccountCreateUserResponseV4?> PublicCreateTestUserV4Async(PublicCreateTestUserV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -596,7 +835,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.AccountCreateUserResponseV4? PublicCreateUserV4(PublicCreateUserV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.AccountCreateUserResponseV4?> PublicCreateUserV4Async(PublicCreateUserV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -605,7 +851,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.AccountCreateUserResponseV4? CreateUserFromInvitationV4(CreateUserFromInvitationV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.AccountCreateUserResponseV4?> CreateUserFromInvitationV4Async(CreateUserFromInvitationV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -614,7 +867,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelUserResponseV3? PublicUpdateUserV4(PublicUpdateUserV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelUserResponseV3?> PublicUpdateUserV4Async(PublicUpdateUserV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -623,7 +883,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void PublicUpdateUserEmailAddressV4(PublicUpdateUserEmailAddressV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicUpdateUserEmailAddressV4Async(PublicUpdateUserEmailAddressV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -632,7 +899,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.AccountUserResponseV4? PublicUpgradeHeadlessAccountWithVerificationCodeV4(PublicUpgradeHeadlessAccountWithVerificationCodeV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.AccountUserResponseV4?> PublicUpgradeHeadlessAccountWithVerificationCodeV4Async(PublicUpgradeHeadlessAccountWithVerificationCodeV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -641,7 +915,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.AccountUserResponseV4? PublicUpgradeHeadlessAccountV4(PublicUpgradeHeadlessAccountV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.AccountUserResponseV4?> PublicUpgradeHeadlessAccountV4Async(PublicUpgradeHeadlessAccountV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -650,7 +931,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void PublicDisableMyAuthenticatorV4(PublicDisableMyAuthenticatorV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicDisableMyAuthenticatorV4Async(PublicDisableMyAuthenticatorV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -659,7 +947,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void PublicEnableMyAuthenticatorV4(PublicEnableMyAuthenticatorV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicEnableMyAuthenticatorV4Async(PublicEnableMyAuthenticatorV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -668,7 +963,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelAuthenticatorKeyResponseV4? PublicGenerateMyAuthenticatorKeyV4(PublicGenerateMyAuthenticatorKeyV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelAuthenticatorKeyResponseV4?> PublicGenerateMyAuthenticatorKeyV4Async(PublicGenerateMyAuthenticatorKeyV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -679,7 +981,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelBackupCodesResponseV4? PublicGetMyBackupCodesV4(PublicGetMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelBackupCodesResponseV4?> PublicGetMyBackupCodesV4Async(PublicGetMyBackupCodesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -691,7 +1000,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelBackupCodesResponseV4? PublicGenerateMyBackupCodesV4(PublicGenerateMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelBackupCodesResponseV4?> PublicGenerateMyBackupCodesV4Async(PublicGenerateMyBackupCodesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -701,7 +1017,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void PublicDisableMyBackupCodesV4(PublicDisableMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicDisableMyBackupCodesV4Async(PublicDisableMyBackupCodesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -712,7 +1035,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Stream? PublicDownloadMyBackupCodesV4(PublicDownloadMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Stream?> PublicDownloadMyBackupCodesV4Async(PublicDownloadMyBackupCodesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -724,7 +1054,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelBackupCodesResponseV4? PublicEnableMyBackupCodesV4(PublicEnableMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelBackupCodesResponseV4?> PublicEnableMyBackupCodesV4Async(PublicEnableMyBackupCodesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -734,7 +1071,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void PublicGetBackupCodesV4(PublicGetBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicGetBackupCodesV4Async(PublicGetBackupCodesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -743,7 +1087,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void PublicGenerateBackupCodesV4(PublicGenerateBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicGenerateBackupCodesV4Async(PublicGenerateBackupCodesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -752,7 +1103,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void PublicEnableBackupCodesV4(PublicEnableBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicEnableBackupCodesV4Async(PublicEnableBackupCodesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -761,7 +1119,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void PublicRemoveTrustedDeviceV4(PublicRemoveTrustedDeviceV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicRemoveTrustedDeviceV4Async(PublicRemoveTrustedDeviceV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -770,7 +1135,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void PublicSendMyMFAEmailCodeV4(PublicSendMyMFAEmailCodeV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicSendMyMFAEmailCodeV4Async(PublicSendMyMFAEmailCodeV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -779,7 +1151,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void PublicDisableMyEmailV4(PublicDisableMyEmailV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicDisableMyEmailV4Async(PublicDisableMyEmailV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -788,7 +1167,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void PublicEnableMyEmailV4(PublicEnableMyEmailV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicEnableMyEmailV4Async(PublicEnableMyEmailV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -797,7 +1183,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelEnabledFactorsResponseV4? PublicGetMyEnabledFactorsV4(PublicGetMyEnabledFactorsV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelEnabledFactorsResponseV4?> PublicGetMyEnabledFactorsV4Async(PublicGetMyEnabledFactorsV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -806,7 +1199,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void PublicMakeFactorMyDefaultV4(PublicMakeFactorMyDefaultV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicMakeFactorMyDefaultV4Async(PublicMakeFactorMyDefaultV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -815,7 +1215,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelUserPublicInfoResponseV4? PublicGetUserPublicInfoByUserIdV4(PublicGetUserPublicInfoByUserIdV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelUserPublicInfoResponseV4?> PublicGetUserPublicInfoByUserIdV4Async(PublicGetUserPublicInfoByUserIdV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -824,7 +1231,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelInviteUserResponseV3? PublicInviteUserV4(PublicInviteUserV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelInviteUserResponseV3?> PublicInviteUserV4Async(PublicInviteUserV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

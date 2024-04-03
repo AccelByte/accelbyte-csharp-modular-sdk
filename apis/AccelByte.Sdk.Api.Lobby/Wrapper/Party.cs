@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -50,7 +51,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsPartyData? AdminGetPartyDataV1(AdminGetPartyDataV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsPartyData?> AdminGetPartyDataV1Async(AdminGetPartyDataV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -60,7 +68,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsPartyData<T1>? AdminGetPartyDataV1<T1>(AdminGetPartyDataV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsPartyData<T1>?> AdminGetPartyDataV1Async<T1>(AdminGetPartyDataV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -69,7 +84,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsPartyData? AdminGetUserPartyV1(AdminGetUserPartyV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsPartyData?> AdminGetUserPartyV1Async(AdminGetUserPartyV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -79,7 +101,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsPartyData<T1>? AdminGetUserPartyV1<T1>(AdminGetUserPartyV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsPartyData<T1>?> AdminGetUserPartyV1Async<T1>(AdminGetUserPartyV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -88,7 +117,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsPartyData? PublicGetPartyDataV1(PublicGetPartyDataV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsPartyData?> PublicGetPartyDataV1Async(PublicGetPartyDataV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -98,7 +134,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsPartyData<T1>? PublicGetPartyDataV1<T1>(PublicGetPartyDataV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsPartyData<T1>?> PublicGetPartyDataV1Async<T1>(PublicGetPartyDataV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -107,7 +150,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsPartyData? PublicUpdatePartyAttributesV1(PublicUpdatePartyAttributesV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsPartyData?> PublicUpdatePartyAttributesV1Async(PublicUpdatePartyAttributesV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -117,7 +167,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsPartyData<T1>? PublicUpdatePartyAttributesV1<T1>(PublicUpdatePartyAttributesV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsPartyData<T1>?> PublicUpdatePartyAttributesV1Async<T1>(PublicUpdatePartyAttributesV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -126,7 +183,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void PublicSetPartyLimitV1(PublicSetPartyLimitV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicSetPartyLimitV1Async(PublicSetPartyLimitV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,

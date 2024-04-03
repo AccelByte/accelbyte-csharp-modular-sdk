@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -241,7 +242,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public List<Model.ModelRoleResponseWithManagers>? GetRoles(GetRoles input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ModelRoleResponseWithManagers>?> GetRolesAsync(GetRoles input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -253,7 +261,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.AccountcommonRole? CreateRole(CreateRole input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.AccountcommonRole?> CreateRoleAsync(CreateRole input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -265,7 +280,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelRoleResponse? GetRole(GetRole input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelRoleResponse?> GetRoleAsync(GetRole input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -277,7 +299,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelRoleResponse? UpdateRole(UpdateRole input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelRoleResponse?> UpdateRoleAsync(UpdateRole input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -289,7 +318,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void DeleteRole(DeleteRole input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteRoleAsync(DeleteRole input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -301,7 +337,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelRoleAdminStatusResponse? GetRoleAdminStatus(GetRoleAdminStatus input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelRoleAdminStatusResponse?> GetRoleAdminStatusAsync(GetRoleAdminStatus input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -313,7 +356,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void SetRoleAsAdmin(SetRoleAsAdmin input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task SetRoleAsAdminAsync(SetRoleAsAdmin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -325,7 +375,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void RemoveRoleAdmin(RemoveRoleAdmin input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task RemoveRoleAdminAsync(RemoveRoleAdmin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -337,7 +394,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelRoleManagersResponse? GetRoleManagers(GetRoleManagers input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelRoleManagersResponse?> GetRoleManagersAsync(GetRoleManagers input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -349,7 +413,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AddRoleManagers(AddRoleManagers input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AddRoleManagersAsync(AddRoleManagers input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -361,7 +432,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void RemoveRoleManagers(RemoveRoleManagers input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task RemoveRoleManagersAsync(RemoveRoleManagers input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -373,7 +451,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelRoleMembersResponse? GetRoleMembers(GetRoleMembers input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelRoleMembersResponse?> GetRoleMembersAsync(GetRoleMembers input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -385,7 +470,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AddRoleMembers(AddRoleMembers input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AddRoleMembersAsync(AddRoleMembers input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -397,7 +489,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void RemoveRoleMembers(RemoveRoleMembers input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task RemoveRoleMembersAsync(RemoveRoleMembers input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -409,7 +508,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void UpdateRolePermissions(UpdateRolePermissions input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task UpdateRolePermissionsAsync(UpdateRolePermissions input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -421,7 +527,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AddRolePermission(AddRolePermission input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AddRolePermissionAsync(AddRolePermission input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -433,7 +546,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void DeleteRolePermission(DeleteRolePermission input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteRolePermissionAsync(DeleteRolePermission input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -443,7 +563,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelRoleResponseWithManagersAndPaginationV3? AdminGetRolesV3(AdminGetRolesV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelRoleResponseWithManagersAndPaginationV3?> AdminGetRolesV3Async(AdminGetRolesV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -452,7 +579,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.AccountcommonRoleV3? AdminCreateRoleV3(AdminCreateRoleV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.AccountcommonRoleV3?> AdminCreateRoleV3Async(AdminCreateRoleV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -461,7 +595,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelRoleResponseV3? AdminGetRoleV3(AdminGetRoleV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelRoleResponseV3?> AdminGetRoleV3Async(AdminGetRoleV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -470,7 +611,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminDeleteRoleV3(AdminDeleteRoleV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminDeleteRoleV3Async(AdminDeleteRoleV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -479,7 +627,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelRoleResponseV3? AdminUpdateRoleV3(AdminUpdateRoleV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelRoleResponseV3?> AdminUpdateRoleV3Async(AdminUpdateRoleV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -488,7 +643,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelRoleAdminStatusResponseV3? AdminGetRoleAdminStatusV3(AdminGetRoleAdminStatusV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelRoleAdminStatusResponseV3?> AdminGetRoleAdminStatusV3Async(AdminGetRoleAdminStatusV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -497,7 +659,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminUpdateAdminRoleStatusV3(AdminUpdateAdminRoleStatusV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminUpdateAdminRoleStatusV3Async(AdminUpdateAdminRoleStatusV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -506,7 +675,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminRemoveRoleAdminV3(AdminRemoveRoleAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminRemoveRoleAdminV3Async(AdminRemoveRoleAdminV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -515,7 +691,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelRoleManagersResponsesV3? AdminGetRoleManagersV3(AdminGetRoleManagersV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelRoleManagersResponsesV3?> AdminGetRoleManagersV3Async(AdminGetRoleManagersV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -524,7 +707,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminAddRoleManagersV3(AdminAddRoleManagersV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminAddRoleManagersV3Async(AdminAddRoleManagersV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -533,7 +723,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminRemoveRoleManagersV3(AdminRemoveRoleManagersV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminRemoveRoleManagersV3Async(AdminRemoveRoleManagersV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -542,7 +739,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelRoleMembersResponseV3? AdminGetRoleMembersV3(AdminGetRoleMembersV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelRoleMembersResponseV3?> AdminGetRoleMembersV3Async(AdminGetRoleMembersV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -551,7 +755,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminAddRoleMembersV3(AdminAddRoleMembersV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminAddRoleMembersV3Async(AdminAddRoleMembersV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -560,7 +771,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminRemoveRoleMembersV3(AdminRemoveRoleMembersV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminRemoveRoleMembersV3Async(AdminRemoveRoleMembersV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -569,7 +787,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminUpdateRolePermissionsV3(AdminUpdateRolePermissionsV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminUpdateRolePermissionsV3Async(AdminUpdateRolePermissionsV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -578,7 +803,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminAddRolePermissionsV3(AdminAddRolePermissionsV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminAddRolePermissionsV3Async(AdminAddRolePermissionsV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -587,7 +819,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminDeleteRolePermissionsV3(AdminDeleteRolePermissionsV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminDeleteRolePermissionsV3Async(AdminDeleteRolePermissionsV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -596,7 +835,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminDeleteRolePermissionV3(AdminDeleteRolePermissionV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminDeleteRolePermissionV3Async(AdminDeleteRolePermissionV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -605,7 +851,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelRoleNamesResponseV3? PublicGetRolesV3(PublicGetRolesV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelRoleNamesResponseV3?> PublicGetRolesV3Async(PublicGetRolesV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -614,7 +867,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelRoleResponse? PublicGetRoleV3(PublicGetRoleV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelRoleResponse?> PublicGetRoleV3Async(PublicGetRoleV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -623,7 +883,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelListRoleV4Response? AdminGetRolesV4(AdminGetRolesV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelListRoleV4Response?> AdminGetRolesV4Async(AdminGetRolesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -632,7 +899,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelRoleV4Response? AdminCreateRoleV4(AdminCreateRoleV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelRoleV4Response?> AdminCreateRoleV4Async(AdminCreateRoleV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -641,7 +915,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelRoleV4Response? AdminGetRoleV4(AdminGetRoleV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelRoleV4Response?> AdminGetRoleV4Async(AdminGetRoleV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -650,7 +931,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminDeleteRoleV4(AdminDeleteRoleV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminDeleteRoleV4Async(AdminDeleteRoleV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -659,7 +947,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelRoleV4Response? AdminUpdateRoleV4(AdminUpdateRoleV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelRoleV4Response?> AdminUpdateRoleV4Async(AdminUpdateRoleV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -668,7 +963,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelRoleV4Response? AdminUpdateRolePermissionsV4(AdminUpdateRolePermissionsV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelRoleV4Response?> AdminUpdateRolePermissionsV4Async(AdminUpdateRolePermissionsV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -677,7 +979,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelRoleV4Response? AdminAddRolePermissionsV4(AdminAddRolePermissionsV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelRoleV4Response?> AdminAddRolePermissionsV4Async(AdminAddRolePermissionsV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -686,7 +995,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminDeleteRolePermissionsV4(AdminDeleteRolePermissionsV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminDeleteRolePermissionsV4Async(AdminDeleteRolePermissionsV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -695,7 +1011,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelListAssignedUsersV4Response? AdminListAssignedUsersV4(AdminListAssignedUsersV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelListAssignedUsersV4Response?> AdminListAssignedUsersV4Async(AdminListAssignedUsersV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -704,7 +1027,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelAssignedUserV4Response? AdminAssignUserToRoleV4(AdminAssignUserToRoleV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelAssignedUserV4Response?> AdminAssignUserToRoleV4Async(AdminAssignUserToRoleV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -713,7 +1043,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void AdminRevokeUserFromRoleV4(AdminRevokeUserFromRoleV4 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminRevokeUserFromRoleV4Async(AdminRevokeUserFromRoleV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,

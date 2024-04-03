@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -202,7 +203,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.UserStatItemInfo>? BulkFetchStatItems(BulkFetchStatItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.UserStatItemInfo>?> BulkFetchStatItemsAsync(BulkFetchStatItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -212,7 +220,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.UserStatItemInfo<T1>>? BulkFetchStatItems<T1>(BulkFetchStatItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.UserStatItemInfo<T1>>?> BulkFetchStatItemsAsync<T1>(BulkFetchStatItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -221,7 +236,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? BulkIncUserStatItem(BulkIncUserStatItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> BulkIncUserStatItemAsync(BulkIncUserStatItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -231,7 +253,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? BulkIncUserStatItem<T1>(BulkIncUserStatItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> BulkIncUserStatItemAsync<T1>(BulkIncUserStatItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -240,7 +269,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? BulkIncUserStatItemValue(BulkIncUserStatItemValue input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> BulkIncUserStatItemValueAsync(BulkIncUserStatItemValue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -250,7 +286,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? BulkIncUserStatItemValue<T1>(BulkIncUserStatItemValue input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> BulkIncUserStatItemValueAsync<T1>(BulkIncUserStatItemValue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -259,7 +302,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.ADTOObjectForUserStatItemValue>? BulkFetchOrDefaultStatItems(BulkFetchOrDefaultStatItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ADTOObjectForUserStatItemValue>?> BulkFetchOrDefaultStatItemsAsync(BulkFetchOrDefaultStatItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -268,7 +318,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? BulkResetUserStatItem(BulkResetUserStatItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> BulkResetUserStatItemAsync(BulkResetUserStatItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -278,7 +335,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? BulkResetUserStatItem<T1>(BulkResetUserStatItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> BulkResetUserStatItemAsync<T1>(BulkResetUserStatItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -287,7 +351,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.StatItemValuePagingSlicedResult? GetStatItems(GetStatItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.StatItemValuePagingSlicedResult?> GetStatItemsAsync(GetStatItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -296,7 +367,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.UserStatItemPagingSlicedResult? GetUserStatItems(GetUserStatItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.UserStatItemPagingSlicedResult?> GetUserStatItemsAsync(GetUserStatItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -305,7 +383,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? BulkCreateUserStatItems(BulkCreateUserStatItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> BulkCreateUserStatItemsAsync(BulkCreateUserStatItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -315,7 +400,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? BulkCreateUserStatItems<T1>(BulkCreateUserStatItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> BulkCreateUserStatItemsAsync<T1>(BulkCreateUserStatItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -324,7 +416,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? BulkIncUserStatItem1(BulkIncUserStatItem1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> BulkIncUserStatItem1Async(BulkIncUserStatItem1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -334,7 +433,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? BulkIncUserStatItem1<T1>(BulkIncUserStatItem1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> BulkIncUserStatItem1Async<T1>(BulkIncUserStatItem1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -343,7 +449,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? BulkIncUserStatItemValue1(BulkIncUserStatItemValue1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> BulkIncUserStatItemValue1Async(BulkIncUserStatItemValue1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -353,7 +466,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? BulkIncUserStatItemValue1<T1>(BulkIncUserStatItemValue1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> BulkIncUserStatItemValue1Async<T1>(BulkIncUserStatItemValue1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -362,7 +482,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? BulkResetUserStatItem1(BulkResetUserStatItem1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> BulkResetUserStatItem1Async(BulkResetUserStatItem1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -372,7 +499,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? BulkResetUserStatItem1<T1>(BulkResetUserStatItem1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> BulkResetUserStatItem1Async<T1>(BulkResetUserStatItem1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -381,7 +515,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public void CreateUserStatItem(CreateUserStatItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task CreateUserStatItemAsync(CreateUserStatItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -390,7 +531,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public void DeleteUserStatItems(DeleteUserStatItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteUserStatItemsAsync(DeleteUserStatItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -399,7 +547,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.StatItemIncResult? IncUserStatItemValue(IncUserStatItemValue input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.StatItemIncResult?> IncUserStatItemValueAsync(IncUserStatItemValue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -408,7 +563,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.StatItemIncResult? ResetUserStatItemValue(ResetUserStatItemValue input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.StatItemIncResult?> ResetUserStatItemValueAsync(ResetUserStatItemValue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -417,7 +579,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.UserStatItemInfo>? BulkFetchStatItems1(BulkFetchStatItems1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.UserStatItemInfo>?> BulkFetchStatItems1Async(BulkFetchStatItems1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -427,7 +596,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.UserStatItemInfo<T1>>? BulkFetchStatItems1<T1>(BulkFetchStatItems1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.UserStatItemInfo<T1>>?> BulkFetchStatItems1Async<T1>(BulkFetchStatItems1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -436,7 +612,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? PublicBulkIncUserStatItem(PublicBulkIncUserStatItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> PublicBulkIncUserStatItemAsync(PublicBulkIncUserStatItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -446,7 +629,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? PublicBulkIncUserStatItem<T1>(PublicBulkIncUserStatItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> PublicBulkIncUserStatItemAsync<T1>(PublicBulkIncUserStatItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -455,7 +645,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? PublicBulkIncUserStatItemValue(PublicBulkIncUserStatItemValue input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> PublicBulkIncUserStatItemValueAsync(PublicBulkIncUserStatItemValue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -465,7 +662,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? PublicBulkIncUserStatItemValue<T1>(PublicBulkIncUserStatItemValue input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> PublicBulkIncUserStatItemValueAsync<T1>(PublicBulkIncUserStatItemValue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -474,7 +678,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? BulkResetUserStatItem2(BulkResetUserStatItem2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> BulkResetUserStatItem2Async(BulkResetUserStatItem2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -484,7 +695,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? BulkResetUserStatItem2<T1>(BulkResetUserStatItem2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> BulkResetUserStatItem2Async<T1>(BulkResetUserStatItem2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -493,7 +711,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.UserStatItemPagingSlicedResult? PublicListMyStatItems(PublicListMyStatItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.UserStatItemPagingSlicedResult?> PublicListMyStatItemsAsync(PublicListMyStatItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -502,7 +727,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.ADTOObjectForUserStatItemValue>? PublicListAllMyStatItems(PublicListAllMyStatItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ADTOObjectForUserStatItemValue>?> PublicListAllMyStatItemsAsync(PublicListAllMyStatItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -511,7 +743,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.UserStatItemPagingSlicedResult? PublicQueryUserStatItems(PublicQueryUserStatItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.UserStatItemPagingSlicedResult?> PublicQueryUserStatItemsAsync(PublicQueryUserStatItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -520,7 +759,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? PublicBulkCreateUserStatItems(PublicBulkCreateUserStatItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> PublicBulkCreateUserStatItemsAsync(PublicBulkCreateUserStatItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -530,7 +776,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? PublicBulkCreateUserStatItems<T1>(PublicBulkCreateUserStatItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> PublicBulkCreateUserStatItemsAsync<T1>(PublicBulkCreateUserStatItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -539,7 +792,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.ADTOObjectForUserStatItemValue>? PublicQueryUserStatItems1(PublicQueryUserStatItems1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ADTOObjectForUserStatItemValue>?> PublicQueryUserStatItems1Async(PublicQueryUserStatItems1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -548,7 +808,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? PublicBulkIncUserStatItem1(PublicBulkIncUserStatItem1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> PublicBulkIncUserStatItem1Async(PublicBulkIncUserStatItem1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -558,7 +825,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? PublicBulkIncUserStatItem1<T1>(PublicBulkIncUserStatItem1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> PublicBulkIncUserStatItem1Async<T1>(PublicBulkIncUserStatItem1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -567,7 +841,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? BulkIncUserStatItemValue2(BulkIncUserStatItemValue2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> BulkIncUserStatItemValue2Async(BulkIncUserStatItemValue2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -577,7 +858,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? BulkIncUserStatItemValue2<T1>(BulkIncUserStatItemValue2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> BulkIncUserStatItemValue2Async<T1>(BulkIncUserStatItemValue2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -586,7 +874,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? BulkResetUserStatItem3(BulkResetUserStatItem3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> BulkResetUserStatItem3Async(BulkResetUserStatItem3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -596,7 +891,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? BulkResetUserStatItem3<T1>(BulkResetUserStatItem3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> BulkResetUserStatItem3Async<T1>(BulkResetUserStatItem3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -605,7 +907,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public void PublicCreateUserStatItem(PublicCreateUserStatItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicCreateUserStatItemAsync(PublicCreateUserStatItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -614,7 +923,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public void DeleteUserStatItems1(DeleteUserStatItems1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteUserStatItems1Async(DeleteUserStatItems1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -623,7 +939,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.StatItemIncResult? PublicIncUserStatItem(PublicIncUserStatItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.StatItemIncResult?> PublicIncUserStatItemAsync(PublicIncUserStatItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -632,7 +955,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.StatItemIncResult? PublicIncUserStatItemValue(PublicIncUserStatItemValue input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.StatItemIncResult?> PublicIncUserStatItemValueAsync(PublicIncUserStatItemValue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -641,7 +971,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.StatItemIncResult? ResetUserStatItemValue1(ResetUserStatItemValue1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.StatItemIncResult?> ResetUserStatItemValue1Async(ResetUserStatItemValue1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -650,7 +987,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? BulkUpdateUserStatItemV2(BulkUpdateUserStatItemV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> BulkUpdateUserStatItemV2Async(BulkUpdateUserStatItemV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -660,7 +1004,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? BulkUpdateUserStatItemV2<T1>(BulkUpdateUserStatItemV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> BulkUpdateUserStatItemV2Async<T1>(BulkUpdateUserStatItemV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -669,7 +1020,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.ADTOObjectForUserStatItemValue>? BulkFetchOrDefaultStatItems1(BulkFetchOrDefaultStatItems1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ADTOObjectForUserStatItemValue>?> BulkFetchOrDefaultStatItems1Async(BulkFetchOrDefaultStatItems1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -678,7 +1036,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.ADTOObjectForUserStatItemValue>? AdminListUsersStatItems(AdminListUsersStatItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ADTOObjectForUserStatItemValue>?> AdminListUsersStatItemsAsync(AdminListUsersStatItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -687,7 +1052,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? BulkUpdateUserStatItem(BulkUpdateUserStatItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> BulkUpdateUserStatItemAsync(BulkUpdateUserStatItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -697,7 +1069,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? BulkUpdateUserStatItem<T1>(BulkUpdateUserStatItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> BulkUpdateUserStatItemAsync<T1>(BulkUpdateUserStatItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -706,7 +1085,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? BulkResetUserStatItemValues(BulkResetUserStatItemValues input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> BulkResetUserStatItemValuesAsync(BulkResetUserStatItemValues input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -716,7 +1102,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? BulkResetUserStatItemValues<T1>(BulkResetUserStatItemValues input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> BulkResetUserStatItemValuesAsync<T1>(BulkResetUserStatItemValues input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -725,7 +1118,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public void DeleteUserStatItems2(DeleteUserStatItems2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteUserStatItems2Async(DeleteUserStatItems2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -734,7 +1134,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.StatItemIncResult? UpdateUserStatItemValue(UpdateUserStatItemValue input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.StatItemIncResult?> UpdateUserStatItemValueAsync(UpdateUserStatItemValue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -743,7 +1150,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? BulkUpdateUserStatItem1(BulkUpdateUserStatItem1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> BulkUpdateUserStatItem1Async(BulkUpdateUserStatItem1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -753,7 +1167,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? BulkUpdateUserStatItem1<T1>(BulkUpdateUserStatItem1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> BulkUpdateUserStatItem1Async<T1>(BulkUpdateUserStatItem1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -762,7 +1183,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.ADTOObjectForUserStatItemValue>? PublicQueryUserStatItems2(PublicQueryUserStatItems2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ADTOObjectForUserStatItemValue>?> PublicQueryUserStatItems2Async(PublicQueryUserStatItems2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -771,7 +1199,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult>? BulkUpdateUserStatItem2(BulkUpdateUserStatItem2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult>?> BulkUpdateUserStatItem2Async(BulkUpdateUserStatItem2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -781,7 +1216,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.BulkStatOperationResult<T1>>? BulkUpdateUserStatItem2<T1>(BulkUpdateUserStatItem2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BulkStatOperationResult<T1>>?> BulkUpdateUserStatItem2Async<T1>(BulkUpdateUserStatItem2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -790,7 +1232,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.StatItemIncResult? UpdateUserStatItemValue1(UpdateUserStatItemValue1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.StatItemIncResult?> UpdateUserStatItemValue1Async(UpdateUserStatItemValue1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

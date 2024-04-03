@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -66,7 +67,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsInstanceSpec? GetLowestInstanceSpec(GetLowestInstanceSpec input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsInstanceSpec?> GetLowestInstanceSpecAsync(GetLowestInstanceSpec input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -75,7 +83,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsListPodConfigResponse? GetAllPodConfig(GetAllPodConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsListPodConfigResponse?> GetAllPodConfigAsync(GetAllPodConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -84,7 +99,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsPodConfigRecord? GetPodConfig(GetPodConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsPodConfigRecord?> GetPodConfigAsync(GetPodConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -93,7 +115,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsPodConfigRecord? CreatePodConfig(CreatePodConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsPodConfigRecord?> CreatePodConfigAsync(CreatePodConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -102,7 +131,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public void DeletePodConfig(DeletePodConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeletePodConfigAsync(DeletePodConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -111,7 +147,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsPodConfigRecord? UpdatePodConfig(UpdatePodConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsPodConfigRecord?> UpdatePodConfigAsync(UpdatePodConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -120,7 +163,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsListPodConfigResponse? GetAllPodConfigClient(GetAllPodConfigClient input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsListPodConfigResponse?> GetAllPodConfigClientAsync(GetAllPodConfigClient input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -129,7 +179,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public Model.ModelsPodConfigRecord? CreatePodConfigClient(CreatePodConfigClient input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsPodConfigRecord?> CreatePodConfigClientAsync(CreatePodConfigClient input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -138,7 +195,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         public void DeletePodConfigClient(DeletePodConfigClient input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeletePodConfigClientAsync(DeletePodConfigClient input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -122,7 +123,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGetGroupsListResponseV1? GetGroupListAdminV1(GetGroupListAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetGroupsListResponseV1?> GetGroupListAdminV1Async(GetGroupListAdminV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -131,7 +139,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1? GetSingleGroupAdminV1(GetSingleGroupAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1?> GetSingleGroupAdminV1Async(GetSingleGroupAdminV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -141,7 +156,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1<T1>? GetSingleGroupAdminV1<T1>(GetSingleGroupAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1<T1>?> GetSingleGroupAdminV1Async<T1>(GetSingleGroupAdminV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -150,7 +172,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public void DeleteGroupAdminV1(DeleteGroupAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteGroupAdminV1Async(DeleteGroupAdminV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -159,7 +188,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGetGroupsListResponseV1? GetGroupListPublicV1(GetGroupListPublicV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetGroupsListResponseV1?> GetGroupListPublicV1Async(GetGroupListPublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -168,7 +204,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1? CreateNewGroupPublicV1(CreateNewGroupPublicV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1?> CreateNewGroupPublicV1Async(CreateNewGroupPublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -178,7 +221,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1<T1>? CreateNewGroupPublicV1<T1>(CreateNewGroupPublicV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1<T1>?> CreateNewGroupPublicV1Async<T1>(CreateNewGroupPublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -187,7 +237,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1? GetSingleGroupPublicV1(GetSingleGroupPublicV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1?> GetSingleGroupPublicV1Async(GetSingleGroupPublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -197,7 +254,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1<T1>? GetSingleGroupPublicV1<T1>(GetSingleGroupPublicV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1<T1>?> GetSingleGroupPublicV1Async<T1>(GetSingleGroupPublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -206,7 +270,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1? UpdateSingleGroupV1(UpdateSingleGroupV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1?> UpdateSingleGroupV1Async(UpdateSingleGroupV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -216,7 +287,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1<T1>? UpdateSingleGroupV1<T1>(UpdateSingleGroupV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1<T1>?> UpdateSingleGroupV1Async<T1>(UpdateSingleGroupV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -225,7 +303,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public void DeleteGroupPublicV1(DeleteGroupPublicV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteGroupPublicV1Async(DeleteGroupPublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -234,7 +319,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1? UpdatePatchSingleGroupPublicV1(UpdatePatchSingleGroupPublicV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1?> UpdatePatchSingleGroupPublicV1Async(UpdatePatchSingleGroupPublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -244,7 +336,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1<T1>? UpdatePatchSingleGroupPublicV1<T1>(UpdatePatchSingleGroupPublicV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1<T1>?> UpdatePatchSingleGroupPublicV1Async<T1>(UpdatePatchSingleGroupPublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -253,7 +352,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1? UpdateGroupCustomAttributesPublicV1(UpdateGroupCustomAttributesPublicV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1?> UpdateGroupCustomAttributesPublicV1Async(UpdateGroupCustomAttributesPublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -263,7 +369,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1<T1>? UpdateGroupCustomAttributesPublicV1<T1>(UpdateGroupCustomAttributesPublicV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1<T1>?> UpdateGroupCustomAttributesPublicV1Async<T1>(UpdateGroupCustomAttributesPublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -272,7 +385,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1? UpdateGroupCustomRulePublicV1(UpdateGroupCustomRulePublicV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1?> UpdateGroupCustomRulePublicV1Async(UpdateGroupCustomRulePublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -282,7 +402,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1<T1>? UpdateGroupCustomRulePublicV1<T1>(UpdateGroupCustomRulePublicV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1<T1>?> UpdateGroupCustomRulePublicV1Async<T1>(UpdateGroupCustomRulePublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -291,7 +418,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1? UpdateGroupPredefinedRulePublicV1(UpdateGroupPredefinedRulePublicV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1?> UpdateGroupPredefinedRulePublicV1Async(UpdateGroupPredefinedRulePublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -301,7 +435,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1<T1>? UpdateGroupPredefinedRulePublicV1<T1>(UpdateGroupPredefinedRulePublicV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1<T1>?> UpdateGroupPredefinedRulePublicV1Async<T1>(UpdateGroupPredefinedRulePublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -310,7 +451,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public void DeleteGroupPredefinedRulePublicV1(DeleteGroupPredefinedRulePublicV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteGroupPredefinedRulePublicV1Async(DeleteGroupPredefinedRulePublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -319,7 +467,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGetGroupsResponseV1? GetListGroupByIDsAdminV2(GetListGroupByIDsAdminV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetGroupsResponseV1?> GetListGroupByIDsAdminV2Async(GetListGroupByIDsAdminV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -328,7 +483,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1? CreateNewGroupPublicV2(CreateNewGroupPublicV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1?> CreateNewGroupPublicV2Async(CreateNewGroupPublicV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -338,7 +500,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1<T1>? CreateNewGroupPublicV2<T1>(CreateNewGroupPublicV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1<T1>?> CreateNewGroupPublicV2Async<T1>(CreateNewGroupPublicV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -347,7 +516,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGetGroupsResponseV1? GetListGroupByIDsV2(GetListGroupByIDsV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetGroupsResponseV1?> GetListGroupByIDsV2Async(GetListGroupByIDsV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -356,7 +532,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1? UpdatePutSingleGroupPublicV2(UpdatePutSingleGroupPublicV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1?> UpdatePutSingleGroupPublicV2Async(UpdatePutSingleGroupPublicV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -366,7 +549,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1<T1>? UpdatePutSingleGroupPublicV2<T1>(UpdatePutSingleGroupPublicV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1<T1>?> UpdatePutSingleGroupPublicV2Async<T1>(UpdatePutSingleGroupPublicV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -375,7 +565,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public void DeleteGroupPublicV2(DeleteGroupPublicV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteGroupPublicV2Async(DeleteGroupPublicV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -384,7 +581,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1? UpdatePatchSingleGroupPublicV2(UpdatePatchSingleGroupPublicV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1?> UpdatePatchSingleGroupPublicV2Async(UpdatePatchSingleGroupPublicV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -394,7 +598,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1<T1>? UpdatePatchSingleGroupPublicV2<T1>(UpdatePatchSingleGroupPublicV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1<T1>?> UpdatePatchSingleGroupPublicV2Async<T1>(UpdatePatchSingleGroupPublicV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -403,7 +614,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1? UpdateGroupCustomAttributesPublicV2(UpdateGroupCustomAttributesPublicV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1?> UpdateGroupCustomAttributesPublicV2Async(UpdateGroupCustomAttributesPublicV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -413,7 +631,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1<T1>? UpdateGroupCustomAttributesPublicV2<T1>(UpdateGroupCustomAttributesPublicV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1<T1>?> UpdateGroupCustomAttributesPublicV2Async<T1>(UpdateGroupCustomAttributesPublicV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -422,7 +647,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1? UpdateGroupCustomRulePublicV2(UpdateGroupCustomRulePublicV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1?> UpdateGroupCustomRulePublicV2Async(UpdateGroupCustomRulePublicV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -432,7 +664,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1<T1>? UpdateGroupCustomRulePublicV2<T1>(UpdateGroupCustomRulePublicV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1<T1>?> UpdateGroupCustomRulePublicV2Async<T1>(UpdateGroupCustomRulePublicV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -441,7 +680,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1? UpdateGroupPredefinedRulePublicV2(UpdateGroupPredefinedRulePublicV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1?> UpdateGroupPredefinedRulePublicV2Async(UpdateGroupPredefinedRulePublicV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -451,7 +697,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGroupResponseV1<T1>? UpdateGroupPredefinedRulePublicV2<T1>(UpdateGroupPredefinedRulePublicV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGroupResponseV1<T1>?> UpdateGroupPredefinedRulePublicV2Async<T1>(UpdateGroupPredefinedRulePublicV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -460,7 +713,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public void DeleteGroupPredefinedRulePublicV2(DeleteGroupPredefinedRulePublicV2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteGroupPredefinedRulePublicV2Async(DeleteGroupPredefinedRulePublicV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,

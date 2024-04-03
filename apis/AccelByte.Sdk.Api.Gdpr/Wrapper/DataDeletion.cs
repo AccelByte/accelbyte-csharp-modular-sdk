@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -70,7 +71,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         public Model.ModelsListDeletionDataResponse? AdminGetListDeletionDataRequest(AdminGetListDeletionDataRequest input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsListDeletionDataResponse?> AdminGetListDeletionDataRequestAsync(AdminGetListDeletionDataRequest input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -79,7 +87,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         public Model.ModelsDeletionData? AdminGetUserAccountDeletionRequest(AdminGetUserAccountDeletionRequest input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDeletionData?> AdminGetUserAccountDeletionRequestAsync(AdminGetUserAccountDeletionRequest input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -88,7 +103,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         public Model.ModelsRequestDeleteResponse? AdminSubmitUserAccountDeletionRequest(AdminSubmitUserAccountDeletionRequest input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsRequestDeleteResponse?> AdminSubmitUserAccountDeletionRequestAsync(AdminSubmitUserAccountDeletionRequest input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -97,7 +119,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         public void AdminCancelUserAccountDeletionRequest(AdminCancelUserAccountDeletionRequest input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminCancelUserAccountDeletionRequestAsync(AdminCancelUserAccountDeletionRequest input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -106,7 +135,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         public Model.ModelsRequestDeleteResponse? PublicSubmitUserAccountDeletionRequest(PublicSubmitUserAccountDeletionRequest input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsRequestDeleteResponse?> PublicSubmitUserAccountDeletionRequestAsync(PublicSubmitUserAccountDeletionRequest input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -115,7 +151,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         public void PublicCancelUserAccountDeletionRequest(PublicCancelUserAccountDeletionRequest input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicCancelUserAccountDeletionRequestAsync(PublicCancelUserAccountDeletionRequest input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -124,7 +167,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         public Model.ModelsDeletionStatus? PublicGetUserAccountDeletionStatus(PublicGetUserAccountDeletionStatus input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDeletionStatus?> PublicGetUserAccountDeletionStatusAsync(PublicGetUserAccountDeletionStatus input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -133,7 +183,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         public Model.ModelsRequestDeleteResponse? PublicSubmitMyAccountDeletionRequest(PublicSubmitMyAccountDeletionRequest input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsRequestDeleteResponse?> PublicSubmitMyAccountDeletionRequestAsync(PublicSubmitMyAccountDeletionRequest input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -142,7 +199,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         public void PublicCancelMyAccountDeletionRequest(PublicCancelMyAccountDeletionRequest input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicCancelMyAccountDeletionRequestAsync(PublicCancelMyAccountDeletionRequest input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -151,7 +215,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         public Model.ModelsDeletionStatus? PublicGetMyAccountDeletionStatus(PublicGetMyAccountDeletionStatus input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsDeletionStatus?> PublicGetMyAccountDeletionStatusAsync(PublicGetMyAccountDeletionStatus input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

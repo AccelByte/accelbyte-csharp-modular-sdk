@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -54,7 +55,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.ListViewInfo>? ListViews(ListViews input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ListViewInfo>?> ListViewsAsync(ListViews input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -63,7 +71,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullViewInfo? CreateView(CreateView input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullViewInfo?> CreateViewAsync(CreateView input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -72,7 +87,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullViewInfo? GetView(GetView input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullViewInfo?> GetViewAsync(GetView input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -81,7 +103,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullViewInfo? UpdateView(UpdateView input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullViewInfo?> UpdateViewAsync(UpdateView input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -90,7 +119,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void DeleteView(DeleteView input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteViewAsync(DeleteView input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -99,7 +135,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.ViewInfo>? PublicListViews(PublicListViews input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ViewInfo>?> PublicListViewsAsync(PublicListViews input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -109,7 +152,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.ViewInfo<T1>>? PublicListViews<T1>(PublicListViews input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ViewInfo<T1>>?> PublicListViewsAsync<T1>(PublicListViews input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,

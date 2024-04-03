@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -77,7 +78,14 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
         public Model.ModelsEventResponse? GetEventByNamespaceHandler(GetEventByNamespaceHandler input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsEventResponse?> GetEventByNamespaceHandlerAsync(GetEventByNamespaceHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -89,7 +97,14 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
         public void PostEventHandler(PostEventHandler input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PostEventHandlerAsync(PostEventHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -101,7 +116,14 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
         public Model.ModelsEventResponse? GetEventByEventIDHandler(GetEventByEventIDHandler input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsEventResponse?> GetEventByEventIDHandlerAsync(GetEventByEventIDHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -113,7 +135,14 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
         public Model.ModelsEventResponse? GetEventByEventTypeHandler(GetEventByEventTypeHandler input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsEventResponse?> GetEventByEventTypeHandlerAsync(GetEventByEventTypeHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -125,7 +154,14 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
         public Model.ModelsEventResponse? GetEventByEventTypeAndEventIDHandler(GetEventByEventTypeAndEventIDHandler input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsEventResponse?> GetEventByEventTypeAndEventIDHandlerAsync(GetEventByEventTypeAndEventIDHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -137,7 +173,14 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
         public Model.ModelsEventResponse? GetEventByUserIDHandler(GetEventByUserIDHandler input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsEventResponse?> GetEventByUserIDHandlerAsync(GetEventByUserIDHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -149,7 +192,14 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
         public Model.ModelsEventResponse? GetEventByUserIDAndEventIDHandler(GetEventByUserIDAndEventIDHandler input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsEventResponse?> GetEventByUserIDAndEventIDHandlerAsync(GetEventByUserIDAndEventIDHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -161,7 +211,14 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
         public Model.ModelsEventResponse? GetEventByUserIDAndEventTypeHandler(GetEventByUserIDAndEventTypeHandler input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsEventResponse?> GetEventByUserIDAndEventTypeHandlerAsync(GetEventByUserIDAndEventTypeHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -173,7 +230,14 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
         public Model.ModelsEventResponse? GetEventByUserEventIDAndEventTypeHandler(GetEventByUserEventIDAndEventTypeHandler input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsEventResponse?> GetEventByUserEventIDAndEventTypeHandlerAsync(GetEventByUserEventIDAndEventTypeHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

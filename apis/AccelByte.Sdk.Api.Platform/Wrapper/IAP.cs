@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -214,7 +215,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.AppleIAPConfigInfo? GetAppleIAPConfig(GetAppleIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.AppleIAPConfigInfo?> GetAppleIAPConfigAsync(GetAppleIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -223,7 +231,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.AppleIAPConfigInfo? UpdateAppleIAPConfig(UpdateAppleIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.AppleIAPConfigInfo?> UpdateAppleIAPConfigAsync(UpdateAppleIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -232,7 +247,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void DeleteAppleIAPConfig(DeleteAppleIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteAppleIAPConfigAsync(DeleteAppleIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -241,7 +263,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.EpicGamesIAPConfigInfo? GetEpicGamesIAPConfig(GetEpicGamesIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.EpicGamesIAPConfigInfo?> GetEpicGamesIAPConfigAsync(GetEpicGamesIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -250,7 +279,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.EpicGamesIAPConfigInfo? UpdateEpicGamesIAPConfig(UpdateEpicGamesIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.EpicGamesIAPConfigInfo?> UpdateEpicGamesIAPConfigAsync(UpdateEpicGamesIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -259,7 +295,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void DeleteEpicGamesIAPConfig(DeleteEpicGamesIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteEpicGamesIAPConfigAsync(DeleteEpicGamesIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -268,7 +311,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.GoogleIAPConfigInfo? GetGoogleIAPConfig(GetGoogleIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.GoogleIAPConfigInfo?> GetGoogleIAPConfigAsync(GetGoogleIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -277,7 +327,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.GoogleIAPConfigInfo? UpdateGoogleIAPConfig(UpdateGoogleIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.GoogleIAPConfigInfo?> UpdateGoogleIAPConfigAsync(UpdateGoogleIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -286,7 +343,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void DeleteGoogleIAPConfig(DeleteGoogleIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteGoogleIAPConfigAsync(DeleteGoogleIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -295,7 +359,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.GoogleIAPConfigInfo? UpdateGoogleP12File(UpdateGoogleP12File input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.GoogleIAPConfigInfo?> UpdateGoogleP12FileAsync(UpdateGoogleP12File input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -304,7 +375,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.IAPItemConfigInfo? GetIAPItemConfig(GetIAPItemConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.IAPItemConfigInfo?> GetIAPItemConfigAsync(GetIAPItemConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -313,7 +391,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.IAPItemConfigInfo? UpdateIAPItemConfig(UpdateIAPItemConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.IAPItemConfigInfo?> UpdateIAPItemConfigAsync(UpdateIAPItemConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -322,7 +407,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void DeleteIAPItemConfig(DeleteIAPItemConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteIAPItemConfigAsync(DeleteIAPItemConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -331,7 +423,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.OculusIAPConfigInfo? GetOculusIAPConfig(GetOculusIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.OculusIAPConfigInfo?> GetOculusIAPConfigAsync(GetOculusIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -340,7 +439,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.OculusIAPConfigInfo? UpdateOculusIAPConfig(UpdateOculusIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.OculusIAPConfigInfo?> UpdateOculusIAPConfigAsync(UpdateOculusIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -349,7 +455,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void DeleteOculusIAPConfig(DeleteOculusIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteOculusIAPConfigAsync(DeleteOculusIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -358,7 +471,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PlayStationIAPConfigInfo? GetPlayStationIAPConfig(GetPlayStationIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PlayStationIAPConfigInfo?> GetPlayStationIAPConfigAsync(GetPlayStationIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -367,7 +487,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PlayStationIAPConfigInfo? UpdatePlaystationIAPConfig(UpdatePlaystationIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PlayStationIAPConfigInfo?> UpdatePlaystationIAPConfigAsync(UpdatePlaystationIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -376,7 +503,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void DeletePlaystationIAPConfig(DeletePlaystationIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeletePlaystationIAPConfigAsync(DeletePlaystationIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -385,7 +519,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.TestResult? ValidateExistedPlaystationIAPConfig(ValidateExistedPlaystationIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TestResult?> ValidateExistedPlaystationIAPConfigAsync(ValidateExistedPlaystationIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -394,7 +535,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.TestResult? ValidatePlaystationIAPConfig(ValidatePlaystationIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TestResult?> ValidatePlaystationIAPConfigAsync(ValidatePlaystationIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -403,7 +551,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.SteamIAPConfig? GetSteamIAPConfig(GetSteamIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.SteamIAPConfig?> GetSteamIAPConfigAsync(GetSteamIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -412,7 +567,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.SteamIAPConfigInfo? UpdateSteamIAPConfig(UpdateSteamIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.SteamIAPConfigInfo?> UpdateSteamIAPConfigAsync(UpdateSteamIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -421,7 +583,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void DeleteSteamIAPConfig(DeleteSteamIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteSteamIAPConfigAsync(DeleteSteamIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -430,7 +599,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.TwitchIAPConfigInfo? GetTwitchIAPConfig(GetTwitchIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TwitchIAPConfigInfo?> GetTwitchIAPConfigAsync(GetTwitchIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -439,7 +615,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.TwitchIAPConfigInfo? UpdateTwitchIAPConfig(UpdateTwitchIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TwitchIAPConfigInfo?> UpdateTwitchIAPConfigAsync(UpdateTwitchIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -448,7 +631,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void DeleteTwitchIAPConfig(DeleteTwitchIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteTwitchIAPConfigAsync(DeleteTwitchIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -457,7 +647,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.XblIAPConfigInfo? GetXblIAPConfig(GetXblIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.XblIAPConfigInfo?> GetXblIAPConfigAsync(GetXblIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -466,7 +663,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.XblIAPConfigInfo? UpdateXblIAPConfig(UpdateXblIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.XblIAPConfigInfo?> UpdateXblIAPConfigAsync(UpdateXblIAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -475,7 +679,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void DeleteXblAPConfig(DeleteXblAPConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteXblAPConfigAsync(DeleteXblAPConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -484,7 +695,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.XblIAPConfigInfo? UpdateXblBPCertFile(UpdateXblBPCertFile input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.XblIAPConfigInfo?> UpdateXblBPCertFileAsync(UpdateXblBPCertFile input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -493,7 +711,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.IAPOrderPagingSlicedResult? QueryUserIAPOrders(QueryUserIAPOrders input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.IAPOrderPagingSlicedResult?> QueryUserIAPOrdersAsync(QueryUserIAPOrders input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -502,7 +727,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.IAPOrderPagingSlicedResult? QueryAllUserIAPOrders(QueryAllUserIAPOrders input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.IAPOrderPagingSlicedResult?> QueryAllUserIAPOrdersAsync(QueryAllUserIAPOrders input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -511,7 +743,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.IAPConsumeHistoryPagingSlicedResult? QueryUserIAPConsumeHistory(QueryUserIAPConsumeHistory input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.IAPConsumeHistoryPagingSlicedResult?> QueryUserIAPConsumeHistoryAsync(QueryUserIAPConsumeHistory input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -520,7 +759,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void MockFulfillIAPItem(MockFulfillIAPItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task MockFulfillIAPItemAsync(MockFulfillIAPItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -529,7 +775,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.IAPItemMappingInfo? GetIAPItemMapping(GetIAPItemMapping input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.IAPItemMappingInfo?> GetIAPItemMappingAsync(GetIAPItemMapping input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -538,7 +791,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.TwitchSyncResult>? SyncTwitchDropsEntitlement(SyncTwitchDropsEntitlement input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.TwitchSyncResult>?> SyncTwitchDropsEntitlementAsync(SyncTwitchDropsEntitlement input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -547,7 +807,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void PublicFulfillAppleIAPItem(PublicFulfillAppleIAPItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicFulfillAppleIAPItemAsync(PublicFulfillAppleIAPItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -556,7 +823,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.EpicGamesReconcileResult>? SyncEpicGamesInventory(SyncEpicGamesInventory input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.EpicGamesReconcileResult>?> SyncEpicGamesInventoryAsync(SyncEpicGamesInventory input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -565,7 +839,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.GoogleReceiptResolveResult? PublicFulfillGoogleIAPItem(PublicFulfillGoogleIAPItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.GoogleReceiptResolveResult?> PublicFulfillGoogleIAPItemAsync(PublicFulfillGoogleIAPItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -574,7 +855,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.OculusReconcileResult>? SyncOculusConsumableEntitlements(SyncOculusConsumableEntitlements input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.OculusReconcileResult>?> SyncOculusConsumableEntitlementsAsync(SyncOculusConsumableEntitlements input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -583,7 +871,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.PlayStationReconcileResult>? PublicReconcilePlayStationStore(PublicReconcilePlayStationStore input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.PlayStationReconcileResult>?> PublicReconcilePlayStationStoreAsync(PublicReconcilePlayStationStore input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -592,7 +887,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.PlayStationReconcileResult>? PublicReconcilePlayStationStoreWithMultipleServiceLabels(PublicReconcilePlayStationStoreWithMultipleServiceLabels input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.PlayStationReconcileResult>?> PublicReconcilePlayStationStoreWithMultipleServiceLabelsAsync(PublicReconcilePlayStationStoreWithMultipleServiceLabels input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -601,7 +903,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void SyncSteamInventory(SyncSteamInventory input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task SyncSteamInventoryAsync(SyncSteamInventory input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -610,7 +919,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void SyncTwitchDropsEntitlement1(SyncTwitchDropsEntitlement1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task SyncTwitchDropsEntitlement1Async(SyncTwitchDropsEntitlement1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -619,7 +935,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.XblReconcileResult>? SyncXboxInventory(SyncXboxInventory input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.XblReconcileResult>?> SyncXboxInventoryAsync(SyncXboxInventory input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

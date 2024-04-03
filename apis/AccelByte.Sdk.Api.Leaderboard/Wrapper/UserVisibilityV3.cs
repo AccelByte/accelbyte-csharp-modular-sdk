@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -46,7 +47,14 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
         public Model.ModelsGetHiddenUserResponse? GetHiddenUsersV3(GetHiddenUsersV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetHiddenUserResponse?> GetHiddenUsersV3Async(GetHiddenUsersV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -55,7 +63,14 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
         public Model.ModelsGetUserVisibilityResponse? GetUserVisibilityStatusV3(GetUserVisibilityStatusV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetUserVisibilityResponse?> GetUserVisibilityStatusV3Async(GetUserVisibilityStatusV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -64,7 +79,14 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
         public Model.ModelsGetUserVisibilityResponse? SetUserLeaderboardVisibilityV3(SetUserLeaderboardVisibilityV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetUserVisibilityResponse?> SetUserLeaderboardVisibilityV3Async(SetUserLeaderboardVisibilityV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -73,7 +95,14 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
         public Model.ModelsGetUserVisibilityResponse? SetUserVisibilityV3(SetUserVisibilityV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetUserVisibilityResponse?> SetUserVisibilityV3Async(SetUserVisibilityV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

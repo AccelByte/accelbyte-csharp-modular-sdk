@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -66,7 +67,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.AccountcommonBans? GetBansType(GetBansType input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.AccountcommonBans?> GetBansTypeAsync(GetBansType input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -78,7 +86,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.AccountcommonBanReasons? GetListBanReason(GetListBanReason input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.AccountcommonBanReasons?> GetListBanReasonAsync(GetListBanReason input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -88,7 +103,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.AccountcommonBansV3? AdminGetBansTypeV3(AdminGetBansTypeV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.AccountcommonBansV3?> AdminGetBansTypeV3Async(AdminGetBansTypeV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -97,7 +119,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.AccountcommonBanReasonsV3? AdminGetListBanReasonV3(AdminGetListBanReasonV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.AccountcommonBanReasonsV3?> AdminGetListBanReasonV3Async(AdminGetListBanReasonV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -106,7 +135,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelGetUserBanV3Response? AdminGetBannedUsersV3(AdminGetBannedUsersV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelGetUserBanV3Response?> AdminGetBannedUsersV3Async(AdminGetBannedUsersV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -115,7 +151,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelListBulkUserBanResponseV3? AdminBanUserBulkV3(AdminBanUserBulkV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelListBulkUserBanResponseV3?> AdminBanUserBulkV3Async(AdminBanUserBulkV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -124,7 +167,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.ModelListBulkUserBanResponseV3? AdminUnbanUserBulkV3(AdminUnbanUserBulkV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelListBulkUserBanResponseV3?> AdminUnbanUserBulkV3Async(AdminUnbanUserBulkV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -133,7 +183,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.AccountcommonBansV3? AdminGetBansTypeWithNamespaceV3(AdminGetBansTypeWithNamespaceV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.AccountcommonBansV3?> AdminGetBansTypeWithNamespaceV3Async(AdminGetBansTypeWithNamespaceV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

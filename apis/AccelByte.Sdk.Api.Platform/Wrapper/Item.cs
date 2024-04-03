@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -222,7 +223,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.ItemTypeConfigInfo>? ListItemTypeConfigs(ListItemTypeConfigs input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ItemTypeConfigInfo>?> ListItemTypeConfigsAsync(ListItemTypeConfigs input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -231,7 +239,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void CreateItemTypeConfig(CreateItemTypeConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task CreateItemTypeConfigAsync(CreateItemTypeConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -240,7 +255,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.ItemTypeConfigInfo? SearchItemTypeConfig(SearchItemTypeConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ItemTypeConfigInfo?> SearchItemTypeConfigAsync(SearchItemTypeConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -249,7 +271,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.ItemTypeConfigInfo? GetItemTypeConfig(GetItemTypeConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ItemTypeConfigInfo?> GetItemTypeConfigAsync(GetItemTypeConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -258,7 +287,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.ItemTypeConfigInfo? UpdateItemTypeConfig(UpdateItemTypeConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ItemTypeConfigInfo?> UpdateItemTypeConfigAsync(UpdateItemTypeConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -267,7 +303,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void DeleteItemTypeConfig(DeleteItemTypeConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteItemTypeConfigAsync(DeleteItemTypeConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -276,7 +319,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo? SyncInGameItem(SyncInGameItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo?> SyncInGameItemAsync(SyncInGameItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -286,7 +336,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo<T1>? SyncInGameItem<T1>(SyncInGameItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo<T1>?> SyncInGameItemAsync<T1>(SyncInGameItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -295,7 +352,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo? CreateItem(CreateItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo?> CreateItemAsync(CreateItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -305,7 +369,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo<T1>? CreateItem<T1>(CreateItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo<T1>?> CreateItemAsync<T1>(CreateItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -314,7 +385,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo? GetItemByAppId(GetItemByAppId input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo?> GetItemByAppIdAsync(GetItemByAppId input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -324,7 +402,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo<T1>? GetItemByAppId<T1>(GetItemByAppId input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo<T1>?> GetItemByAppIdAsync<T1>(GetItemByAppId input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -333,7 +418,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemPagingSlicedResult? QueryItems(QueryItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemPagingSlicedResult?> QueryItemsAsync(QueryItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -342,7 +434,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.BasicItem>? ListBasicItemsByFeatures(ListBasicItemsByFeatures input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.BasicItem>?> ListBasicItemsByFeaturesAsync(ListBasicItemsByFeatures input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -351,7 +450,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.FullItemInfo>? GetItems(GetItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.FullItemInfo>?> GetItemsAsync(GetItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -361,7 +467,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.FullItemInfo<T1>>? GetItems<T1>(GetItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.FullItemInfo<T1>>?> GetItemsAsync<T1>(GetItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -370,7 +483,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo? GetItemBySku(GetItemBySku input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo?> GetItemBySkuAsync(GetItemBySku input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -380,7 +500,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo<T1>? GetItemBySku<T1>(GetItemBySku input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo<T1>?> GetItemBySkuAsync<T1>(GetItemBySku input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -389,7 +516,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PopulatedItemInfo? GetLocaleItemBySku(GetLocaleItemBySku input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PopulatedItemInfo?> GetLocaleItemBySkuAsync(GetLocaleItemBySku input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -399,7 +533,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PopulatedItemInfo<T1, T2>? GetLocaleItemBySku<T1, T2>(GetLocaleItemBySku input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PopulatedItemInfo<T1, T2>?> GetLocaleItemBySkuAsync<T1, T2>(GetLocaleItemBySku input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
                     response.Code,
                     response.ContentType,
@@ -408,7 +549,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.EstimatedPriceInfo? GetEstimatedPrice(GetEstimatedPrice input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.EstimatedPriceInfo?> GetEstimatedPriceAsync(GetEstimatedPrice input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -417,7 +565,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.ItemId? GetItemIdBySku(GetItemIdBySku input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ItemId?> GetItemIdBySkuAsync(GetItemIdBySku input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -426,7 +581,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.ItemId>? GetBulkItemIdBySkus(GetBulkItemIdBySkus input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ItemId>?> GetBulkItemIdBySkusAsync(GetBulkItemIdBySkus input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -435,7 +597,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.ItemInfo>? BulkGetLocaleItems(BulkGetLocaleItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ItemInfo>?> BulkGetLocaleItemsAsync(BulkGetLocaleItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -445,7 +614,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.ItemInfo<T1, T2>>? BulkGetLocaleItems<T1, T2>(BulkGetLocaleItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ItemInfo<T1, T2>>?> BulkGetLocaleItemsAsync<T1, T2>(BulkGetLocaleItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
                     response.Code,
                     response.ContentType,
@@ -454,7 +630,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.AvailablePredicate>? GetAvailablePredicateTypes(GetAvailablePredicateTypes input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.AvailablePredicate>?> GetAvailablePredicateTypesAsync(GetAvailablePredicateTypes input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -463,7 +646,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.ItemPurchaseConditionValidateResult>? ValidateItemPurchaseCondition(ValidateItemPurchaseCondition input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ItemPurchaseConditionValidateResult>?> ValidateItemPurchaseConditionAsync(ValidateItemPurchaseCondition input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -472,7 +662,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void BulkUpdateRegionData(BulkUpdateRegionData input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task BulkUpdateRegionDataAsync(BulkUpdateRegionData input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -481,7 +678,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemPagingSlicedResult? SearchItems(SearchItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemPagingSlicedResult?> SearchItemsAsync(SearchItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -490,7 +694,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemPagingSlicedResult? QueryUncategorizedItems(QueryUncategorizedItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemPagingSlicedResult?> QueryUncategorizedItemsAsync(QueryUncategorizedItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -499,7 +710,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo? GetItem(GetItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo?> GetItemAsync(GetItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -509,7 +727,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo<T1>? GetItem<T1>(GetItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo<T1>?> GetItemAsync<T1>(GetItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -518,7 +743,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo? UpdateItem(UpdateItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo?> UpdateItemAsync(UpdateItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -528,7 +760,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo<T1>? UpdateItem<T1>(UpdateItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo<T1>?> UpdateItemAsync<T1>(UpdateItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -537,7 +776,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void DeleteItem(DeleteItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteItemAsync(DeleteItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -546,7 +792,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.ItemAcquireResult? AcquireItem(AcquireItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ItemAcquireResult?> AcquireItemAsync(AcquireItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -555,7 +808,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullAppInfo? GetApp(GetApp input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullAppInfo?> GetAppAsync(GetApp input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -564,7 +824,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullAppInfo? UpdateApp(UpdateApp input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullAppInfo?> UpdateAppAsync(UpdateApp input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -573,7 +840,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo? DisableItem(DisableItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo?> DisableItemAsync(DisableItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -583,7 +857,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo<T1>? DisableItem<T1>(DisableItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo<T1>?> DisableItemAsync<T1>(DisableItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -592,7 +873,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.ItemDynamicDataInfo? GetItemDynamicData(GetItemDynamicData input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ItemDynamicDataInfo?> GetItemDynamicDataAsync(GetItemDynamicData input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -601,7 +889,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo? EnableItem(EnableItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo?> EnableItemAsync(EnableItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -611,7 +906,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo<T1>? EnableItem<T1>(EnableItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo<T1>?> EnableItemAsync<T1>(EnableItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -620,7 +922,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo? FeatureItem(FeatureItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo?> FeatureItemAsync(FeatureItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -630,7 +939,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo<T1>? FeatureItem<T1>(FeatureItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo<T1>?> FeatureItemAsync<T1>(FeatureItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -639,7 +955,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo? DefeatureItem(DefeatureItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo?> DefeatureItemAsync(DefeatureItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -649,7 +972,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo<T1>? DefeatureItem<T1>(DefeatureItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo<T1>?> DefeatureItemAsync<T1>(DefeatureItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -658,7 +988,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PopulatedItemInfo? GetLocaleItem(GetLocaleItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PopulatedItemInfo?> GetLocaleItemAsync(GetLocaleItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -668,7 +1005,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PopulatedItemInfo<T1, T2>? GetLocaleItem<T1, T2>(GetLocaleItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PopulatedItemInfo<T1, T2>?> GetLocaleItemAsync<T1, T2>(GetLocaleItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
                     response.Code,
                     response.ContentType,
@@ -677,7 +1021,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo? UpdateItemPurchaseCondition(UpdateItemPurchaseCondition input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo?> UpdateItemPurchaseConditionAsync(UpdateItemPurchaseCondition input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -687,7 +1038,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemInfo<T1>? UpdateItemPurchaseCondition<T1>(UpdateItemPurchaseCondition input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemInfo<T1>?> UpdateItemPurchaseConditionAsync<T1>(UpdateItemPurchaseCondition input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -696,7 +1054,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void ReturnItem(ReturnItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task ReturnItemAsync(ReturnItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -705,7 +1070,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.ItemInfo? PublicGetItemByAppId(PublicGetItemByAppId input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ItemInfo?> PublicGetItemByAppIdAsync(PublicGetItemByAppId input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -715,7 +1087,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.ItemInfo<T1, T2>? PublicGetItemByAppId<T1, T2>(PublicGetItemByAppId input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ItemInfo<T1, T2>?> PublicGetItemByAppIdAsync<T1, T2>(PublicGetItemByAppId input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
                     response.Code,
                     response.ContentType,
@@ -724,7 +1103,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.ItemPagingSlicedResult? PublicQueryItems(PublicQueryItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ItemPagingSlicedResult?> PublicQueryItemsAsync(PublicQueryItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -733,7 +1119,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.ItemInfo? PublicGetItemBySku(PublicGetItemBySku input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ItemInfo?> PublicGetItemBySkuAsync(PublicGetItemBySku input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -743,7 +1136,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.ItemInfo<T1, T2>? PublicGetItemBySku<T1, T2>(PublicGetItemBySku input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ItemInfo<T1, T2>?> PublicGetItemBySkuAsync<T1, T2>(PublicGetItemBySku input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
                     response.Code,
                     response.ContentType,
@@ -752,7 +1152,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.EstimatedPriceInfo>? PublicGetEstimatedPrice(PublicGetEstimatedPrice input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.EstimatedPriceInfo>?> PublicGetEstimatedPriceAsync(PublicGetEstimatedPrice input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -761,7 +1168,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.ItemInfo>? PublicBulkGetItems(PublicBulkGetItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ItemInfo>?> PublicBulkGetItemsAsync(PublicBulkGetItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -771,7 +1185,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.ItemInfo<T1, T2>>? PublicBulkGetItems<T1, T2>(PublicBulkGetItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ItemInfo<T1, T2>>?> PublicBulkGetItemsAsync<T1, T2>(PublicBulkGetItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
                     response.Code,
                     response.ContentType,
@@ -780,7 +1201,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.ItemPurchaseConditionValidateResult>? PublicValidateItemPurchaseCondition(PublicValidateItemPurchaseCondition input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ItemPurchaseConditionValidateResult>?> PublicValidateItemPurchaseConditionAsync(PublicValidateItemPurchaseCondition input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -789,7 +1217,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.ItemPagingSlicedResult? PublicSearchItems(PublicSearchItems input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ItemPagingSlicedResult?> PublicSearchItemsAsync(PublicSearchItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -798,7 +1233,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.AppInfo? PublicGetApp(PublicGetApp input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.AppInfo?> PublicGetAppAsync(PublicGetApp input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -807,7 +1249,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.ItemDynamicDataInfo? PublicGetItemDynamicData(PublicGetItemDynamicData input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ItemDynamicDataInfo?> PublicGetItemDynamicDataAsync(PublicGetItemDynamicData input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -816,7 +1265,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PopulatedItemInfo? PublicGetItem(PublicGetItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PopulatedItemInfo?> PublicGetItemAsync(PublicGetItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -826,7 +1282,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PopulatedItemInfo<T1, T2>? PublicGetItem<T1, T2>(PublicGetItem input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PopulatedItemInfo<T1, T2>?> PublicGetItemAsync<T1, T2>(PublicGetItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
                     response.Code,
                     response.ContentType,
@@ -835,7 +1298,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.FullItemPagingResult? QueryItems1(QueryItems1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FullItemPagingResult?> QueryItems1Async(QueryItems1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

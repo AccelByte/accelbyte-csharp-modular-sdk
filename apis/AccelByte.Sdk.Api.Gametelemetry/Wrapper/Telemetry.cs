@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -38,7 +39,14 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Wrapper
         public Model.ListBaseResponseStr? GetNamespacesGameTelemetryV1AdminNamespacesGet(GetNamespacesGameTelemetryV1AdminNamespacesGet input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ListBaseResponseStr?> GetNamespacesGameTelemetryV1AdminNamespacesGetAsync(GetNamespacesGameTelemetryV1AdminNamespacesGet input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -47,7 +55,14 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Wrapper
         public Model.PagedResponseGetNamespaceEventResponse? GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet(GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PagedResponseGetNamespaceEventResponse?> GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetAsync(GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

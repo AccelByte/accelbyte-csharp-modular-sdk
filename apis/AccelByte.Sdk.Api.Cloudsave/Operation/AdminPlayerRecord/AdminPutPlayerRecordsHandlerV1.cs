@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -11,6 +11,7 @@ using System.Text.Json;
 using System.Net;
 using System.Net.Http;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Core.Net.Http;
@@ -87,6 +88,27 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     response.ContentType,
                     response.Payload);
             }
+            public async Task<List<Model.ModelsBulkUpdatePlayerRecordResponse>?> ExecuteAsync(
+                ModelsBulkUpdatePlayerRecordsRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                AdminPutPlayerRecordsHandlerV1 op = Build(
+                    body,
+                    namespace_,
+                    userId
+                );
+
+                if (_Sdk == null)
+                    throw IncompleteComponentException.NoSdkObject;
+
+                var response = await _Sdk.RunRequestAsync(op);
+                return op.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+            }
 
             public List<Model.ModelsBulkUpdatePlayerRecordResponse<T1>>? Execute<T1>(
                 ModelsBulkUpdatePlayerRecordsRequest body,
@@ -104,6 +126,27 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
+                return op.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+            }
+            public async Task<List<Model.ModelsBulkUpdatePlayerRecordResponse<T1>>?> ExecuteAsync<T1>(
+                ModelsBulkUpdatePlayerRecordsRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                AdminPutPlayerRecordsHandlerV1 op = Build(
+                    body,
+                    namespace_,
+                    userId
+                );
+
+                if (_Sdk == null)
+                    throw IncompleteComponentException.NoSdkObject;
+
+                var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,

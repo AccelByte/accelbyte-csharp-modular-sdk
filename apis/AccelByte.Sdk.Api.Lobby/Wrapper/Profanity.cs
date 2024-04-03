@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -82,7 +83,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public List<Model.ModelsProfanityFilter>? AdminDebugProfanityFilters(AdminDebugProfanityFilters input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ModelsProfanityFilter>?> AdminDebugProfanityFiltersAsync(AdminDebugProfanityFilters input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -91,7 +99,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsAdminGetProfanityListFiltersV1Response? AdminGetProfanityListFiltersV1(AdminGetProfanityListFiltersV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsAdminGetProfanityListFiltersV1Response?> AdminGetProfanityListFiltersV1Async(AdminGetProfanityListFiltersV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -100,7 +115,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void AdminAddProfanityFilterIntoList(AdminAddProfanityFilterIntoList input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminAddProfanityFilterIntoListAsync(AdminAddProfanityFilterIntoList input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -109,7 +131,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void AdminAddProfanityFilters(AdminAddProfanityFilters input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminAddProfanityFiltersAsync(AdminAddProfanityFilters input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -118,7 +147,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void AdminImportProfanityFiltersFromFile(AdminImportProfanityFiltersFromFile input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminImportProfanityFiltersFromFileAsync(AdminImportProfanityFiltersFromFile input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -127,7 +163,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public List<Model.ModelsProfanityFilter>? AdminDeleteProfanityFilter(AdminDeleteProfanityFilter input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ModelsProfanityFilter>?> AdminDeleteProfanityFilterAsync(AdminDeleteProfanityFilter input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -136,7 +179,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public List<Model.ModelsAdminGetProfanityListsListResponse>? AdminGetProfanityLists(AdminGetProfanityLists input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ModelsAdminGetProfanityListsListResponse>?> AdminGetProfanityListsAsync(AdminGetProfanityLists input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -145,7 +195,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void AdminCreateProfanityList(AdminCreateProfanityList input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminCreateProfanityListAsync(AdminCreateProfanityList input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -154,7 +211,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void AdminUpdateProfanityList(AdminUpdateProfanityList input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminUpdateProfanityListAsync(AdminUpdateProfanityList input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -163,7 +227,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void AdminDeleteProfanityList(AdminDeleteProfanityList input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminDeleteProfanityListAsync(AdminDeleteProfanityList input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -172,7 +243,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsProfanityRule? AdminGetProfanityRule(AdminGetProfanityRule input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsProfanityRule?> AdminGetProfanityRuleAsync(AdminGetProfanityRule input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -181,7 +259,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void AdminSetProfanityRuleForNamespace(AdminSetProfanityRuleForNamespace input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminSetProfanityRuleForNamespaceAsync(AdminSetProfanityRuleForNamespace input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -190,7 +275,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsAdminVerifyMessageProfanityResponse? AdminVerifyMessageProfanityResponse(AdminVerifyMessageProfanityResponse input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsAdminVerifyMessageProfanityResponse?> AdminVerifyMessageProfanityResponseAsync(AdminVerifyMessageProfanityResponse input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

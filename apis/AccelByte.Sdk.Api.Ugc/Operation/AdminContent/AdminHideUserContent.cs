@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -11,6 +11,7 @@ using System.Text.Json;
 using System.Net;
 using System.Net.Http;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Core.Net.Http;
@@ -90,6 +91,29 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
+            public async Task<Model.ModelsCreateContentResponse?> ExecuteAsync(
+                ModelsHideContentRequest body,
+                string contentId,
+                string namespace_,
+                string userId
+            )
+            {
+                AdminHideUserContent op = Build(
+                    body,
+                    contentId,
+                    namespace_,
+                    userId
+                );
+
+                if (_Sdk == null)
+                    throw IncompleteComponentException.NoSdkObject;
+
+                var response = await _Sdk.RunRequestAsync(op);
+                return op.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+            }
 
             public Model.ModelsCreateContentResponse<T1>? Execute<T1>(
                 ModelsHideContentRequest body,
@@ -109,6 +133,29 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
+                return op.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+            }
+            public async Task<Model.ModelsCreateContentResponse<T1>?> ExecuteAsync<T1>(
+                ModelsHideContentRequest body,
+                string contentId,
+                string namespace_,
+                string userId
+            )
+            {
+                AdminHideUserContent op = Build(
+                    body,
+                    contentId,
+                    namespace_,
+                    userId
+                );
+
+                if (_Sdk == null)
+                    throw IncompleteComponentException.NoSdkObject;
+
+                var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,

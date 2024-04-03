@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -66,7 +67,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void AnonymizeCampaign(AnonymizeCampaign input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AnonymizeCampaignAsync(AnonymizeCampaign input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -75,7 +83,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void AnonymizeEntitlement(AnonymizeEntitlement input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AnonymizeEntitlementAsync(AnonymizeEntitlement input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -84,7 +99,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void AnonymizeFulfillment(AnonymizeFulfillment input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AnonymizeFulfillmentAsync(AnonymizeFulfillment input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -93,7 +115,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void AnonymizeIntegration(AnonymizeIntegration input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AnonymizeIntegrationAsync(AnonymizeIntegration input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -102,7 +131,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void AnonymizeOrder(AnonymizeOrder input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AnonymizeOrderAsync(AnonymizeOrder input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -111,7 +147,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void AnonymizePayment(AnonymizePayment input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AnonymizePaymentAsync(AnonymizePayment input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -120,7 +163,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void AnonymizeRevocation(AnonymizeRevocation input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AnonymizeRevocationAsync(AnonymizeRevocation input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -129,7 +179,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void AnonymizeSubscription(AnonymizeSubscription input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AnonymizeSubscriptionAsync(AnonymizeSubscription input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -138,7 +195,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void AnonymizeWallet(AnonymizeWallet input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AnonymizeWalletAsync(AnonymizeWallet input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,

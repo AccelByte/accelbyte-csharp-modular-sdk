@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -11,6 +11,7 @@ using System.Text.Json;
 using System.Net;
 using System.Net.Http;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Core.Net.Http;
@@ -124,6 +125,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
+            public async Task<Model.ApimodelsConfigurationTemplateResponse?> ExecuteAsync(
+                ApimodelsUpdateConfigurationTemplateRequest body,
+                string name,
+                string namespace_
+            )
+            {
+                AdminUpdateConfigurationTemplateV1 op = Build(
+                    body,
+                    name,
+                    namespace_
+                );
+
+                if (_Sdk == null)
+                    throw IncompleteComponentException.NoSdkObject;
+
+                var response = await _Sdk.RunRequestAsync(op);
+                return op.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+            }
 
             public Model.ApimodelsConfigurationTemplateResponse<T1>? Execute<T1>(
                 ApimodelsUpdateConfigurationTemplateRequest body,
@@ -141,6 +163,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
+                return op.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+            }
+            public async Task<Model.ApimodelsConfigurationTemplateResponse<T1>?> ExecuteAsync<T1>(
+                ApimodelsUpdateConfigurationTemplateRequest body,
+                string name,
+                string namespace_
+            )
+            {
+                AdminUpdateConfigurationTemplateV1 op = Build(
+                    body,
+                    name,
+                    namespace_
+                );
+
+                if (_Sdk == null)
+                    throw IncompleteComponentException.NoSdkObject;
+
+                var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,

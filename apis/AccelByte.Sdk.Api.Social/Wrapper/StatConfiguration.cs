@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -70,7 +71,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.StatPagingSlicedResult? GetStats(GetStats input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.StatPagingSlicedResult?> GetStatsAsync(GetStats input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -79,7 +87,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.StatInfo? CreateStat(CreateStat input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.StatInfo?> CreateStatAsync(CreateStat input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -88,7 +103,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Stream? ExportStats(ExportStats input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Stream?> ExportStatsAsync(ExportStats input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -97,7 +119,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.StatImportInfo? ImportStats(ImportStats input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.StatImportInfo?> ImportStatsAsync(ImportStats input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -106,7 +135,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.StatPagingSlicedResult? QueryStats(QueryStats input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.StatPagingSlicedResult?> QueryStatsAsync(QueryStats input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -115,7 +151,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.StatInfo? GetStat(GetStat input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.StatInfo?> GetStatAsync(GetStat input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -124,7 +167,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public void DeleteStat(DeleteStat input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteStatAsync(DeleteStat input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -133,7 +183,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.StatInfo? UpdateStat(UpdateStat input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.StatInfo?> UpdateStatAsync(UpdateStat input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -142,7 +199,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public void DeleteTiedStat(DeleteTiedStat input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteTiedStatAsync(DeleteTiedStat input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -151,7 +215,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.StatInfo? CreateStat1(CreateStat1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.StatInfo?> CreateStat1Async(CreateStat1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

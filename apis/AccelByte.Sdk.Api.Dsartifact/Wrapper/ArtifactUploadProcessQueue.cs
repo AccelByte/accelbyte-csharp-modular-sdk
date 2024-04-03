@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -70,7 +71,14 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
         public Model.ModelsListNodesIPAddress? ListNodesIPAddress(ListNodesIPAddress input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsListNodesIPAddress?> ListNodesIPAddressAsync(ListNodesIPAddress input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -79,7 +87,14 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
         public void DeleteNodeByID(DeleteNodeByID input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteNodeByIDAsync(DeleteNodeByID input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -88,7 +103,14 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
         public Model.ModelsListQueueResponse? ListQueue(ListQueue input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsListQueueResponse?> ListQueueAsync(ListQueue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -97,7 +119,14 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
         public Model.ModelsQueue? GetActiveQueue(GetActiveQueue input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsQueue?> GetActiveQueueAsync(GetActiveQueue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -106,7 +135,14 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
         public void SetActiveQueue(SetActiveQueue input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task SetActiveQueueAsync(SetActiveQueue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -115,7 +151,14 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
         public void DeleteActiveQueue(DeleteActiveQueue input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteActiveQueueAsync(DeleteActiveQueue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -124,7 +167,14 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
         public void ReportFailedUpload(ReportFailedUpload input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task ReportFailedUploadAsync(ReportFailedUpload input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -133,7 +183,14 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
         public void DeleteQueue(DeleteQueue input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteQueueAsync(DeleteQueue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -142,7 +199,14 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
         public Model.ModelsListAllQueueResponse? ListAllActiveQueue(ListAllActiveQueue input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsListAllQueueResponse?> ListAllActiveQueueAsync(ListAllActiveQueue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -151,7 +215,14 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
         public Model.ModelsListAllQueueResponse? ListAllQueue(ListAllQueue input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsListAllQueueResponse?> ListAllQueueAsync(ListAllQueue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

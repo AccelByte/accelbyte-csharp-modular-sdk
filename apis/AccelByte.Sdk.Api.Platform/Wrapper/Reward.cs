@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -78,7 +79,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.RewardInfo? CreateReward(CreateReward input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.RewardInfo?> CreateRewardAsync(CreateReward input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -87,7 +95,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.RewardPagingSlicedResult? QueryRewards(QueryRewards input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.RewardPagingSlicedResult?> QueryRewardsAsync(QueryRewards input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -96,7 +111,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Stream? ExportRewards(ExportRewards input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Stream?> ExportRewardsAsync(ExportRewards input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -105,7 +127,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void ImportRewards(ImportRewards input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task ImportRewardsAsync(ImportRewards input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -114,7 +143,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.RewardInfo? GetReward(GetReward input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.RewardInfo?> GetRewardAsync(GetReward input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -123,7 +159,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.RewardInfo? UpdateReward(UpdateReward input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.RewardInfo?> UpdateRewardAsync(UpdateReward input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -132,7 +175,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.RewardInfo? DeleteReward(DeleteReward input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.RewardInfo?> DeleteRewardAsync(DeleteReward input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -141,7 +191,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.ConditionMatchResult? CheckEventCondition(CheckEventCondition input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ConditionMatchResult?> CheckEventConditionAsync(CheckEventCondition input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -150,7 +207,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void DeleteRewardConditionRecord(DeleteRewardConditionRecord input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteRewardConditionRecordAsync(DeleteRewardConditionRecord input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -159,7 +223,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.RewardInfo? GetRewardByCode(GetRewardByCode input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.RewardInfo?> GetRewardByCodeAsync(GetRewardByCode input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -168,7 +239,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.RewardPagingSlicedResult? QueryRewards1(QueryRewards1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.RewardPagingSlicedResult?> QueryRewards1Async(QueryRewards1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -177,7 +255,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.RewardInfo? GetReward1(GetReward1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.RewardInfo?> GetReward1Async(GetReward1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

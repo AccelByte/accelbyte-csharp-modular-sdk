@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -58,7 +59,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.CurrencyInfo>? ListCurrencies(ListCurrencies input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.CurrencyInfo>?> ListCurrenciesAsync(ListCurrencies input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -67,7 +75,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.CurrencyInfo? CreateCurrency(CreateCurrency input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.CurrencyInfo?> CreateCurrencyAsync(CreateCurrency input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -76,7 +91,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.CurrencyInfo? UpdateCurrency(UpdateCurrency input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.CurrencyInfo?> UpdateCurrencyAsync(UpdateCurrency input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -85,7 +107,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.CurrencyInfo? DeleteCurrency(DeleteCurrency input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.CurrencyInfo?> DeleteCurrencyAsync(DeleteCurrency input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -94,7 +123,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.CurrencyConfig? GetCurrencyConfig(GetCurrencyConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.CurrencyConfig?> GetCurrencyConfigAsync(GetCurrencyConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -103,7 +139,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.CurrencySummary? GetCurrencySummary(GetCurrencySummary input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.CurrencySummary?> GetCurrencySummaryAsync(GetCurrencySummary input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -112,7 +155,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.CurrencyInfo>? PublicListCurrencies(PublicListCurrencies input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.CurrencyInfo>?> PublicListCurrenciesAsync(PublicListCurrencies input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

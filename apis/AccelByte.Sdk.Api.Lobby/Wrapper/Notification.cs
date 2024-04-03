@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -138,7 +139,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void SendMultipleUsersFreeformNotificationV1Admin(SendMultipleUsersFreeformNotificationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task SendMultipleUsersFreeformNotificationV1AdminAsync(SendMultipleUsersFreeformNotificationV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -147,7 +155,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void SendUsersFreeformNotificationV1Admin(SendUsersFreeformNotificationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task SendUsersFreeformNotificationV1AdminAsync(SendUsersFreeformNotificationV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -156,7 +171,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void SendPartyFreeformNotificationV1Admin(SendPartyFreeformNotificationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task SendPartyFreeformNotificationV1AdminAsync(SendPartyFreeformNotificationV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -165,7 +187,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void SendPartyTemplatedNotificationV1Admin(SendPartyTemplatedNotificationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task SendPartyTemplatedNotificationV1AdminAsync(SendPartyTemplatedNotificationV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -174,7 +203,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public List<Model.ModelNotificationTemplateResponse>? GetAllNotificationTemplatesV1Admin(GetAllNotificationTemplatesV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ModelNotificationTemplateResponse>?> GetAllNotificationTemplatesV1AdminAsync(GetAllNotificationTemplatesV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -183,7 +219,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void CreateNotificationTemplateV1Admin(CreateNotificationTemplateV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task CreateNotificationTemplateV1AdminAsync(CreateNotificationTemplateV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -192,7 +235,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void SendUsersTemplatedNotificationV1Admin(SendUsersTemplatedNotificationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task SendUsersTemplatedNotificationV1AdminAsync(SendUsersTemplatedNotificationV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -201,7 +251,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelGetAllNotificationTemplateSlugResp? GetTemplateSlugLocalizationsTemplateV1Admin(GetTemplateSlugLocalizationsTemplateV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelGetAllNotificationTemplateSlugResp?> GetTemplateSlugLocalizationsTemplateV1AdminAsync(GetTemplateSlugLocalizationsTemplateV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -210,7 +267,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void DeleteNotificationTemplateSlugV1Admin(DeleteNotificationTemplateSlugV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteNotificationTemplateSlugV1AdminAsync(DeleteNotificationTemplateSlugV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -219,7 +283,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelLocalization? GetSingleTemplateLocalizationV1Admin(GetSingleTemplateLocalizationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelLocalization?> GetSingleTemplateLocalizationV1AdminAsync(GetSingleTemplateLocalizationV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -228,7 +299,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void UpdateTemplateLocalizationV1Admin(UpdateTemplateLocalizationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task UpdateTemplateLocalizationV1AdminAsync(UpdateTemplateLocalizationV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -237,7 +315,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void DeleteTemplateLocalizationV1Admin(DeleteTemplateLocalizationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteTemplateLocalizationV1AdminAsync(DeleteTemplateLocalizationV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -246,7 +331,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void PublishTemplateLocalizationV1Admin(PublishTemplateLocalizationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublishTemplateLocalizationV1AdminAsync(PublishTemplateLocalizationV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -255,7 +347,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelGetAllNotificationTopicsResponse? GetAllNotificationTopicsV1Admin(GetAllNotificationTopicsV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelGetAllNotificationTopicsResponse?> GetAllNotificationTopicsV1AdminAsync(GetAllNotificationTopicsV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -264,7 +363,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void CreateNotificationTopicV1Admin(CreateNotificationTopicV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task CreateNotificationTopicV1AdminAsync(CreateNotificationTopicV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -273,7 +379,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelNotificationTopicResponseV1? GetNotificationTopicV1Admin(GetNotificationTopicV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelNotificationTopicResponseV1?> GetNotificationTopicV1AdminAsync(GetNotificationTopicV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -282,7 +395,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void UpdateNotificationTopicV1Admin(UpdateNotificationTopicV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task UpdateNotificationTopicV1AdminAsync(UpdateNotificationTopicV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -291,7 +411,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void DeleteNotificationTopicV1Admin(DeleteNotificationTopicV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteNotificationTopicV1AdminAsync(DeleteNotificationTopicV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -300,7 +427,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void SendSpecificUserFreeformNotificationV1Admin(SendSpecificUserFreeformNotificationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task SendSpecificUserFreeformNotificationV1AdminAsync(SendSpecificUserFreeformNotificationV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -309,7 +443,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void SendSpecificUserTemplatedNotificationV1Admin(SendSpecificUserTemplatedNotificationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task SendSpecificUserTemplatedNotificationV1AdminAsync(SendSpecificUserTemplatedNotificationV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -318,7 +459,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelTopicByNamespacesResponse? GetTopicByNamespace(GetTopicByNamespace input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelTopicByNamespacesResponse?> GetTopicByNamespaceAsync(GetTopicByNamespace input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -327,7 +475,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void CreateTopic(CreateTopic input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task CreateTopicAsync(CreateTopic input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -336,7 +491,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelNotificationTopicResponse? GetTopicByTopicName(GetTopicByTopicName input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelNotificationTopicResponse?> GetTopicByTopicNameAsync(GetTopicByTopicName input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -345,7 +507,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void UpdateTopicByTopicName(UpdateTopicByTopicName input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task UpdateTopicByTopicNameAsync(UpdateTopicByTopicName input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -354,7 +523,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void DeleteTopicByTopicName(DeleteTopicByTopicName input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteTopicByTopicNameAsync(DeleteTopicByTopicName input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -363,7 +539,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void FreeFormNotificationByUserID(FreeFormNotificationByUserID input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task FreeFormNotificationByUserIDAsync(FreeFormNotificationByUserID input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -372,7 +555,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void NotificationWithTemplateByUserID(NotificationWithTemplateByUserID input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task NotificationWithTemplateByUserIDAsync(NotificationWithTemplateByUserID input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,

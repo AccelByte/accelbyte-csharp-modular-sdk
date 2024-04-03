@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -90,7 +91,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.DLCItemConfigInfo? GetDLCItemConfig(GetDLCItemConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.DLCItemConfigInfo?> GetDLCItemConfigAsync(GetDLCItemConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -99,7 +107,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.DLCItemConfigInfo? UpdateDLCItemConfig(UpdateDLCItemConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.DLCItemConfigInfo?> UpdateDLCItemConfigAsync(UpdateDLCItemConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -108,7 +123,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void DeleteDLCItemConfig(DeleteDLCItemConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteDLCItemConfigAsync(DeleteDLCItemConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -117,7 +139,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PlatformDLCConfigInfo? GetPlatformDLCConfig(GetPlatformDLCConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PlatformDLCConfigInfo?> GetPlatformDLCConfigAsync(GetPlatformDLCConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -126,7 +155,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PlatformDLCConfigInfo? UpdatePlatformDLCConfig(UpdatePlatformDLCConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PlatformDLCConfigInfo?> UpdatePlatformDLCConfigAsync(UpdatePlatformDLCConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -135,7 +171,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void DeletePlatformDLCConfig(DeletePlatformDLCConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeletePlatformDLCConfigAsync(DeletePlatformDLCConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -144,7 +187,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.UserDLC? GetUserDLCByPlatform(GetUserDLCByPlatform input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.UserDLC?> GetUserDLCByPlatformAsync(GetUserDLCByPlatform input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -153,7 +203,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.UserDLCRecord>? GetUserDLC(GetUserDLC input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.UserDLCRecord>?> GetUserDLCAsync(GetUserDLC input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -163,7 +220,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<Model.UserDLCRecord<T1>>? GetUserDLC<T1>(GetUserDLC input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.UserDLCRecord<T1>>?> GetUserDLCAsync<T1>(GetUserDLC input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -172,7 +236,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.DLCConfigRewardShortInfo? GeDLCDurableRewardShortMap(GeDLCDurableRewardShortMap input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.DLCConfigRewardShortInfo?> GeDLCDurableRewardShortMapAsync(GeDLCDurableRewardShortMap input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -181,7 +252,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void SyncEpicGameDLC(SyncEpicGameDLC input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task SyncEpicGameDLCAsync(SyncEpicGameDLC input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -190,7 +268,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void SyncOculusDLC(SyncOculusDLC input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task SyncOculusDLCAsync(SyncOculusDLC input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -199,7 +284,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void PublicSyncPsnDlcInventory(PublicSyncPsnDlcInventory input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicSyncPsnDlcInventoryAsync(PublicSyncPsnDlcInventory input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -208,7 +300,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void PublicSyncPsnDlcInventoryWithMultipleServiceLabels(PublicSyncPsnDlcInventoryWithMultipleServiceLabels input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicSyncPsnDlcInventoryWithMultipleServiceLabelsAsync(PublicSyncPsnDlcInventoryWithMultipleServiceLabels input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -217,7 +316,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void SyncSteamDLC(SyncSteamDLC input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task SyncSteamDLCAsync(SyncSteamDLC input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -226,7 +332,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void SyncXboxDLC(SyncXboxDLC input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task SyncXboxDLCAsync(SyncXboxDLC input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,

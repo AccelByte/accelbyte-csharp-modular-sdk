@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -58,7 +59,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         public List<string>? GetAdminEmailConfiguration(GetAdminEmailConfiguration input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<string>?> GetAdminEmailConfigurationAsync(GetAdminEmailConfiguration input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -67,7 +75,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         public void UpdateAdminEmailConfiguration(UpdateAdminEmailConfiguration input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task UpdateAdminEmailConfigurationAsync(UpdateAdminEmailConfiguration input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -76,7 +91,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         public void SaveAdminEmailConfiguration(SaveAdminEmailConfiguration input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task SaveAdminEmailConfigurationAsync(SaveAdminEmailConfiguration input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -85,7 +107,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         public void DeleteAdminEmailConfiguration(DeleteAdminEmailConfiguration input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteAdminEmailConfigurationAsync(DeleteAdminEmailConfiguration input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -94,7 +123,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         public Model.DtoServicesConfigurationResponse? AdminGetServicesConfiguration(AdminGetServicesConfiguration input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.DtoServicesConfigurationResponse?> AdminGetServicesConfigurationAsync(AdminGetServicesConfiguration input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -103,7 +139,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         public Model.DtoServiceConfigurationUpdateRequest? AdminUpdateServicesConfiguration(AdminUpdateServicesConfiguration input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.DtoServiceConfigurationUpdateRequest?> AdminUpdateServicesConfigurationAsync(AdminUpdateServicesConfiguration input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -112,7 +155,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         public void AdminResetServicesConfiguration(AdminResetServicesConfiguration input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminResetServicesConfigurationAsync(AdminResetServicesConfiguration input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,

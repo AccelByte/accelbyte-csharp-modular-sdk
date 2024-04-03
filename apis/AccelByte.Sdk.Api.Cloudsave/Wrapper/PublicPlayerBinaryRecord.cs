@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -78,7 +79,14 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         public Model.ModelsBulkGetPlayerBinaryRecordResponse? BulkGetPlayerPublicBinaryRecordsV1(BulkGetPlayerPublicBinaryRecordsV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsBulkGetPlayerBinaryRecordResponse?> BulkGetPlayerPublicBinaryRecordsV1Async(BulkGetPlayerPublicBinaryRecordsV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -87,7 +95,14 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         public Model.ModelsListPlayerBinaryRecordsResponse? ListMyBinaryRecordsV1(ListMyBinaryRecordsV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsListPlayerBinaryRecordsResponse?> ListMyBinaryRecordsV1Async(ListMyBinaryRecordsV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -96,7 +111,14 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         public Model.ModelsBulkGetPlayerBinaryRecordResponse? BulkGetMyBinaryRecordV1(BulkGetMyBinaryRecordV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsBulkGetPlayerBinaryRecordResponse?> BulkGetMyBinaryRecordV1Async(BulkGetMyBinaryRecordV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -105,7 +127,14 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         public Model.ModelsUploadBinaryRecordResponse? PostPlayerBinaryRecordV1(PostPlayerBinaryRecordV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsUploadBinaryRecordResponse?> PostPlayerBinaryRecordV1Async(PostPlayerBinaryRecordV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -114,7 +143,14 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         public Model.ModelsListPlayerBinaryRecordsResponse? ListOtherPlayerPublicBinaryRecordsV1(ListOtherPlayerPublicBinaryRecordsV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsListPlayerBinaryRecordsResponse?> ListOtherPlayerPublicBinaryRecordsV1Async(ListOtherPlayerPublicBinaryRecordsV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -123,7 +159,14 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         public Model.ModelsBulkGetPlayerBinaryRecordResponse? BulkGetOtherPlayerPublicBinaryRecordsV1(BulkGetOtherPlayerPublicBinaryRecordsV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsBulkGetPlayerBinaryRecordResponse?> BulkGetOtherPlayerPublicBinaryRecordsV1Async(BulkGetOtherPlayerPublicBinaryRecordsV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -132,7 +175,14 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         public Model.ModelsPlayerBinaryRecordResponse? GetPlayerBinaryRecordV1(GetPlayerBinaryRecordV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsPlayerBinaryRecordResponse?> GetPlayerBinaryRecordV1Async(GetPlayerBinaryRecordV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -141,7 +191,14 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         public Model.ModelsPlayerBinaryRecordResponse? PutPlayerBinaryRecordV1(PutPlayerBinaryRecordV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsPlayerBinaryRecordResponse?> PutPlayerBinaryRecordV1Async(PutPlayerBinaryRecordV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -150,7 +207,14 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         public void DeletePlayerBinaryRecordV1(DeletePlayerBinaryRecordV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeletePlayerBinaryRecordV1Async(DeletePlayerBinaryRecordV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -159,7 +223,14 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         public Model.ModelsPlayerBinaryRecordResponse? PutPlayerBinaryRecorMetadataV1(PutPlayerBinaryRecorMetadataV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsPlayerBinaryRecordResponse?> PutPlayerBinaryRecorMetadataV1Async(PutPlayerBinaryRecorMetadataV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -168,7 +239,14 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         public Model.ModelsUploadBinaryRecordResponse? PostPlayerBinaryPresignedURLV1(PostPlayerBinaryPresignedURLV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsUploadBinaryRecordResponse?> PostPlayerBinaryPresignedURLV1Async(PostPlayerBinaryPresignedURLV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -177,7 +255,14 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         public Model.ModelsPlayerBinaryRecordResponse? GetPlayerPublicBinaryRecordsV1(GetPlayerPublicBinaryRecordsV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsPlayerBinaryRecordResponse?> GetPlayerPublicBinaryRecordsV1Async(GetPlayerPublicBinaryRecordsV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

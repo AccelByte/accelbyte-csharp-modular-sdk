@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -11,6 +11,7 @@ using System.Text.Json;
 using System.Net;
 using System.Net.Http;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Core.Net.Http;
@@ -98,6 +99,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
+            public async Task<Model.ApimodelsGameSessionResponse?> ExecuteAsync(
+                ApimodelsPromoteLeaderRequest body,
+                string namespace_,
+                string sessionId
+            )
+            {
+                PublicPromoteGameSessionLeader op = Build(
+                    body,
+                    namespace_,
+                    sessionId
+                );
+
+                if (_Sdk == null)
+                    throw IncompleteComponentException.NoSdkObject;
+
+                var response = await _Sdk.RunRequestAsync(op);
+                return op.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+            }
 
             public Model.ApimodelsGameSessionResponse<T1, T2>? Execute<T1, T2>(
                 ApimodelsPromoteLeaderRequest body,
@@ -115,6 +137,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
+                return op.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+            }
+            public async Task<Model.ApimodelsGameSessionResponse<T1, T2>?> ExecuteAsync<T1, T2>(
+                ApimodelsPromoteLeaderRequest body,
+                string namespace_,
+                string sessionId
+            )
+            {
+                PublicPromoteGameSessionLeader op = Build(
+                    body,
+                    namespace_,
+                    sessionId
+                );
+
+                if (_Sdk == null)
+                    throw IncompleteComponentException.NoSdkObject;
+
+                var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1, T2>(
                     response.Code,
                     response.ContentType,

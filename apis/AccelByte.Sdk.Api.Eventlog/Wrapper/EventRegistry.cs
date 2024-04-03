@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -62,7 +63,14 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
         public Model.ModelsEventRegistry? GetRegisteredEventsHandler(GetRegisteredEventsHandler input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsEventRegistry?> GetRegisteredEventsHandlerAsync(GetRegisteredEventsHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -74,7 +82,14 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
         public void RegisterEventHandler(RegisterEventHandler input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task RegisterEventHandlerAsync(RegisterEventHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -86,7 +101,14 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
         public Model.ModelsEventRegistry? GetRegisteredEventIDHandler(GetRegisteredEventIDHandler input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsEventRegistry?> GetRegisteredEventIDHandlerAsync(GetRegisteredEventIDHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -98,7 +120,14 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
         public void UpdateEventRegistryHandler(UpdateEventRegistryHandler input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task UpdateEventRegistryHandlerAsync(UpdateEventRegistryHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -110,7 +139,14 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
         public void UnregisterEventIDHandler(UnregisterEventIDHandler input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task UnregisterEventIDHandlerAsync(UnregisterEventIDHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -122,7 +158,14 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
         public Model.ModelsEventRegistry? GetRegisteredEventsByEventTypeHandler(GetRegisteredEventsByEventTypeHandler input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsEventRegistry?> GetRegisteredEventsByEventTypeHandlerAsync(GetRegisteredEventsByEventTypeHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

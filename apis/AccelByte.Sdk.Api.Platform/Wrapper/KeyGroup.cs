@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -63,7 +64,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.KeyGroupPagingSlicedResult? QueryKeyGroups(QueryKeyGroups input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.KeyGroupPagingSlicedResult?> QueryKeyGroupsAsync(QueryKeyGroups input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -72,7 +80,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.KeyGroupInfo? CreateKeyGroup(CreateKeyGroup input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.KeyGroupInfo?> CreateKeyGroupAsync(CreateKeyGroup input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -83,7 +98,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.KeyGroupInfo? GetKeyGroupByBoothName(GetKeyGroupByBoothName input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.KeyGroupInfo?> GetKeyGroupByBoothNameAsync(GetKeyGroupByBoothName input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -93,7 +115,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.KeyGroupInfo? GetKeyGroup(GetKeyGroup input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.KeyGroupInfo?> GetKeyGroupAsync(GetKeyGroup input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -102,7 +131,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.KeyGroupInfo? UpdateKeyGroup(UpdateKeyGroup input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.KeyGroupInfo?> UpdateKeyGroupAsync(UpdateKeyGroup input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -111,7 +147,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.KeyGroupDynamicInfo? GetKeyGroupDynamic(GetKeyGroupDynamic input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.KeyGroupDynamicInfo?> GetKeyGroupDynamicAsync(GetKeyGroupDynamic input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -120,7 +163,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.KeyPagingSliceResult? ListKeys(ListKeys input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.KeyPagingSliceResult?> ListKeysAsync(ListKeys input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -129,7 +179,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.BulkOperationResult? UploadKeys(UploadKeys input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.BulkOperationResult?> UploadKeysAsync(UploadKeys input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

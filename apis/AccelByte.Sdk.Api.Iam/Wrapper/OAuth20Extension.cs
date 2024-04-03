@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -78,7 +79,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public string UserAuthenticationV3(UserAuthenticationV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<string> UserAuthenticationV3Async(UserAuthenticationV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -87,7 +95,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.OauthmodelTokenResponseV3? AuthenticationWithPlatformLinkV3(AuthenticationWithPlatformLinkV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.OauthmodelTokenResponseV3?> AuthenticationWithPlatformLinkV3Async(AuthenticationWithPlatformLinkV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -96,7 +111,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.OauthmodelTokenResponseV3? GenerateTokenByNewHeadlessAccountV3(GenerateTokenByNewHeadlessAccountV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.OauthmodelTokenResponseV3?> GenerateTokenByNewHeadlessAccountV3Async(GenerateTokenByNewHeadlessAccountV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -105,7 +127,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.OauthmodelOneTimeLinkingCodeResponse? RequestOneTimeLinkingCodeV3(RequestOneTimeLinkingCodeV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.OauthmodelOneTimeLinkingCodeResponse?> RequestOneTimeLinkingCodeV3Async(RequestOneTimeLinkingCodeV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -114,7 +143,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.OauthmodelOneTimeLinkingCodeValidationResponse? ValidateOneTimeLinkingCodeV3(ValidateOneTimeLinkingCodeV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.OauthmodelOneTimeLinkingCodeValidationResponse?> ValidateOneTimeLinkingCodeV3Async(ValidateOneTimeLinkingCodeV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -123,7 +159,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.OauthmodelTokenResponseV3? RequestTokenByOneTimeLinkCodeResponseV3(RequestTokenByOneTimeLinkCodeResponseV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.OauthmodelTokenResponseV3?> RequestTokenByOneTimeLinkCodeResponseV3Async(RequestTokenByOneTimeLinkCodeResponseV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -132,7 +175,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.OauthmodelCountryLocationResponse? GetCountryLocationV3(GetCountryLocationV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.OauthmodelCountryLocationResponse?> GetCountryLocationV3Async(GetCountryLocationV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -141,7 +191,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public void Logout(Logout input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task LogoutAsync(Logout input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -150,7 +207,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.OauthmodelTargetTokenCodeResponse? RequestTokenExchangeCodeV3(RequestTokenExchangeCodeV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.OauthmodelTargetTokenCodeResponse?> RequestTokenExchangeCodeV3Async(RequestTokenExchangeCodeV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -159,7 +223,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public string PlatformAuthenticationV3(PlatformAuthenticationV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<string> PlatformAuthenticationV3Async(PlatformAuthenticationV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -168,7 +239,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.OauthmodelPlatformTokenRefreshResponseV3? PlatformTokenRefreshV3(PlatformTokenRefreshV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.OauthmodelPlatformTokenRefreshResponseV3?> PlatformTokenRefreshV3Async(PlatformTokenRefreshV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -177,7 +255,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         public Model.OauthmodelTokenResponseV3? RequestTargetTokenResponseV3(RequestTargetTokenResponseV3 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.OauthmodelTokenResponseV3?> RequestTargetTokenResponseV3Async(RequestTargetTokenResponseV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

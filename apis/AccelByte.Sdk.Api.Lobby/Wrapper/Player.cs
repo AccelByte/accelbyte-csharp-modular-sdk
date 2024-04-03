@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -78,7 +79,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsGetLobbyCcuResponse? AdminGetLobbyCCU(AdminGetLobbyCCU input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetLobbyCcuResponse?> AdminGetLobbyCCUAsync(AdminGetLobbyCCU input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -87,7 +95,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsGetBulkAllPlayerBlockedUsersResponse? AdminGetBulkPlayerBlockedPlayersV1(AdminGetBulkPlayerBlockedPlayersV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetBulkAllPlayerBlockedUsersResponse?> AdminGetBulkPlayerBlockedPlayersV1Async(AdminGetBulkPlayerBlockedPlayersV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -96,7 +111,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsGetAllPlayerSessionAttributeResponse? AdminGetAllPlayerSessionAttribute(AdminGetAllPlayerSessionAttribute input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetAllPlayerSessionAttributeResponse?> AdminGetAllPlayerSessionAttributeAsync(AdminGetAllPlayerSessionAttribute input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -105,7 +127,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void AdminSetPlayerSessionAttribute(AdminSetPlayerSessionAttribute input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminSetPlayerSessionAttributeAsync(AdminSetPlayerSessionAttribute input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -114,7 +143,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsGetPlayerSessionAttributeResponse? AdminGetPlayerSessionAttribute(AdminGetPlayerSessionAttribute input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetPlayerSessionAttributeResponse?> AdminGetPlayerSessionAttributeAsync(AdminGetPlayerSessionAttribute input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -123,7 +159,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsGetAllPlayerBlockedUsersResponse? AdminGetPlayerBlockedPlayersV1(AdminGetPlayerBlockedPlayersV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetAllPlayerBlockedUsersResponse?> AdminGetPlayerBlockedPlayersV1Async(AdminGetPlayerBlockedPlayersV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -132,7 +175,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsGetAllPlayerBlockedByUsersResponse? AdminGetPlayerBlockedByPlayersV1(AdminGetPlayerBlockedByPlayersV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetAllPlayerBlockedByUsersResponse?> AdminGetPlayerBlockedByPlayersV1Async(AdminGetPlayerBlockedByPlayersV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -141,7 +191,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void AdminBulkBlockPlayersV1(AdminBulkBlockPlayersV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminBulkBlockPlayersV1Async(AdminBulkBlockPlayersV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -150,7 +207,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void PublicPlayerBlockPlayersV1(PublicPlayerBlockPlayersV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicPlayerBlockPlayersV1Async(PublicPlayerBlockPlayersV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -159,7 +223,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsGetAllPlayerBlockedUsersResponse? PublicGetPlayerBlockedPlayersV1(PublicGetPlayerBlockedPlayersV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetAllPlayerBlockedUsersResponse?> PublicGetPlayerBlockedPlayersV1Async(PublicGetPlayerBlockedPlayersV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -168,7 +239,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public Model.ModelsGetAllPlayerBlockedByUsersResponse? PublicGetPlayerBlockedByPlayersV1(PublicGetPlayerBlockedByPlayersV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetAllPlayerBlockedByUsersResponse?> PublicGetPlayerBlockedByPlayersV1Async(PublicGetPlayerBlockedByPlayersV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -177,7 +255,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         public void PublicUnblockPlayerV1(PublicUnblockPlayerV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicUnblockPlayerV1Async(PublicUnblockPlayerV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,

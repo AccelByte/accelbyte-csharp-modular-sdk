@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -54,7 +55,14 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         public List<Model.RetrieveBasePolicyResponse>? RetrieveAllLegalPoliciesByNamespace(RetrieveAllLegalPoliciesByNamespace input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.RetrieveBasePolicyResponse>?> RetrieveAllLegalPoliciesByNamespaceAsync(RetrieveAllLegalPoliciesByNamespace input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -63,7 +71,14 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         public Model.CreateBasePolicyResponse? CreatePolicy1(CreatePolicy1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.CreateBasePolicyResponse?> CreatePolicy1Async(CreatePolicy1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -72,7 +87,14 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         public Model.RetrieveBasePolicyResponse? RetrieveSinglePolicy1(RetrieveSinglePolicy1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.RetrieveBasePolicyResponse?> RetrieveSinglePolicy1Async(RetrieveSinglePolicy1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -81,7 +103,14 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         public Model.UpdateBasePolicyResponse? PartialUpdatePolicy1(PartialUpdatePolicy1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.UpdateBasePolicyResponse?> PartialUpdatePolicy1Async(PartialUpdatePolicy1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -90,7 +119,14 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         public Model.RetrievePolicyResponse? RetrievePolicyCountry1(RetrievePolicyCountry1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.RetrievePolicyResponse?> RetrievePolicyCountry1Async(RetrievePolicyCountry1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -99,7 +135,14 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         public List<Model.RetrievePolicyTypeResponse>? RetrieveAllPolicyTypes1(RetrieveAllPolicyTypes1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.RetrievePolicyTypeResponse>?> RetrieveAllPolicyTypes1Async(RetrieveAllPolicyTypes1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

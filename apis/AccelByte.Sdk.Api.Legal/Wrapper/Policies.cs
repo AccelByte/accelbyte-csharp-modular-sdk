@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -58,7 +59,14 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         public List<Model.RetrievePolicyResponse>? RetrievePolicies(RetrievePolicies input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.RetrievePolicyResponse>?> RetrievePoliciesAsync(RetrievePolicies input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -67,7 +75,14 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         public void UpdatePolicy(UpdatePolicy input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task UpdatePolicyAsync(UpdatePolicy input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -76,7 +91,14 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         public void SetDefaultPolicy2(SetDefaultPolicy2 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task SetDefaultPolicy2Async(SetDefaultPolicy2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -85,7 +107,14 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         public List<string>? RetrieveCountryListWithPolicies(RetrieveCountryListWithPolicies input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<string>?> RetrieveCountryListWithPoliciesAsync(RetrieveCountryListWithPolicies input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -94,7 +123,14 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         public List<Model.RetrievePolicyPublicResponse>? RetrieveLatestPolicies(RetrieveLatestPolicies input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.RetrievePolicyPublicResponse>?> RetrieveLatestPoliciesAsync(RetrieveLatestPolicies input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -103,7 +139,14 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         public List<Model.RetrievePolicyPublicResponse>? RetrieveLatestPoliciesPublic(RetrieveLatestPoliciesPublic input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.RetrievePolicyPublicResponse>?> RetrieveLatestPoliciesPublicAsync(RetrieveLatestPoliciesPublic input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -112,7 +155,14 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         public List<Model.RetrievePolicyPublicResponse>? RetrieveLatestPoliciesByNamespaceAndCountryPublic(RetrieveLatestPoliciesByNamespaceAndCountryPublic input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.RetrievePolicyPublicResponse>?> RetrieveLatestPoliciesByNamespaceAndCountryPublicAsync(RetrieveLatestPoliciesByNamespaceAndCountryPublic input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

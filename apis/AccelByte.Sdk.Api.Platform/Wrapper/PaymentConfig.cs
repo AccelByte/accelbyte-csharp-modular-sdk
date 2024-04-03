@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -166,7 +167,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.TestResult? TestAdyenConfig(TestAdyenConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TestResult?> TestAdyenConfigAsync(TestAdyenConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -175,7 +183,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.TestResult? TestAliPayConfig(TestAliPayConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TestResult?> TestAliPayConfigAsync(TestAliPayConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -184,7 +199,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.TestResult? TestCheckoutConfig(TestCheckoutConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TestResult?> TestCheckoutConfigAsync(TestCheckoutConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -193,7 +215,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PaymentMerchantConfigInfo? DebugMatchedPaymentMerchantConfig(DebugMatchedPaymentMerchantConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentMerchantConfigInfo?> DebugMatchedPaymentMerchantConfigAsync(DebugMatchedPaymentMerchantConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -202,7 +231,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.TestResult? TestPayPalConfig(TestPayPalConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TestResult?> TestPayPalConfigAsync(TestPayPalConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -211,7 +247,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.TestResult? TestStripeConfig(TestStripeConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TestResult?> TestStripeConfigAsync(TestStripeConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -220,7 +263,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.TestResult? TestWxPayConfig(TestWxPayConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TestResult?> TestWxPayConfigAsync(TestWxPayConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -229,7 +279,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.TestResult? TestXsollaConfig(TestXsollaConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TestResult?> TestXsollaConfigAsync(TestXsollaConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -238,7 +295,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PaymentMerchantConfigInfo? GetPaymentMerchantConfig(GetPaymentMerchantConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentMerchantConfigInfo?> GetPaymentMerchantConfigAsync(GetPaymentMerchantConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -247,7 +311,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PaymentMerchantConfigInfo? UpdateAdyenConfig(UpdateAdyenConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentMerchantConfigInfo?> UpdateAdyenConfigAsync(UpdateAdyenConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -256,7 +327,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.TestResult? TestAdyenConfigById(TestAdyenConfigById input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TestResult?> TestAdyenConfigByIdAsync(TestAdyenConfigById input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -265,7 +343,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PaymentMerchantConfigInfo? UpdateAliPayConfig(UpdateAliPayConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentMerchantConfigInfo?> UpdateAliPayConfigAsync(UpdateAliPayConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -274,7 +359,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.TestResult? TestAliPayConfigById(TestAliPayConfigById input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TestResult?> TestAliPayConfigByIdAsync(TestAliPayConfigById input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -283,7 +375,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PaymentMerchantConfigInfo? UpdateCheckoutConfig(UpdateCheckoutConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentMerchantConfigInfo?> UpdateCheckoutConfigAsync(UpdateCheckoutConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -292,7 +391,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.TestResult? TestCheckoutConfigById(TestCheckoutConfigById input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TestResult?> TestCheckoutConfigByIdAsync(TestCheckoutConfigById input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -301,7 +407,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PaymentMerchantConfigInfo? UpdatePayPalConfig(UpdatePayPalConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentMerchantConfigInfo?> UpdatePayPalConfigAsync(UpdatePayPalConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -310,7 +423,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.TestResult? TestPayPalConfigById(TestPayPalConfigById input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TestResult?> TestPayPalConfigByIdAsync(TestPayPalConfigById input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -319,7 +439,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PaymentMerchantConfigInfo? UpdateStripeConfig(UpdateStripeConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentMerchantConfigInfo?> UpdateStripeConfigAsync(UpdateStripeConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -328,7 +455,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.TestResult? TestStripeConfigById(TestStripeConfigById input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TestResult?> TestStripeConfigByIdAsync(TestStripeConfigById input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -337,7 +471,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PaymentMerchantConfigInfo? UpdateWxPayConfig(UpdateWxPayConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentMerchantConfigInfo?> UpdateWxPayConfigAsync(UpdateWxPayConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -346,7 +487,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PaymentMerchantConfigInfo? UpdateWxPayConfigCert(UpdateWxPayConfigCert input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentMerchantConfigInfo?> UpdateWxPayConfigCertAsync(UpdateWxPayConfigCert input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -355,7 +503,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.TestResult? TestWxPayConfigById(TestWxPayConfigById input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TestResult?> TestWxPayConfigByIdAsync(TestWxPayConfigById input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -364,7 +519,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PaymentMerchantConfigInfo? UpdateXsollaConfig(UpdateXsollaConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentMerchantConfigInfo?> UpdateXsollaConfigAsync(UpdateXsollaConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -373,7 +535,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.TestResult? TestXsollaConfigById(TestXsollaConfigById input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TestResult?> TestXsollaConfigByIdAsync(TestXsollaConfigById input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -382,7 +551,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PaymentMerchantConfigInfo? UpdateXsollaUIConfig(UpdateXsollaUIConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentMerchantConfigInfo?> UpdateXsollaUIConfigAsync(UpdateXsollaUIConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -391,7 +567,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PaymentProviderConfigPagingSlicedResult? QueryPaymentProviderConfig(QueryPaymentProviderConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentProviderConfigPagingSlicedResult?> QueryPaymentProviderConfigAsync(QueryPaymentProviderConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -400,7 +583,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PaymentProviderConfigInfo? CreatePaymentProviderConfig(CreatePaymentProviderConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentProviderConfigInfo?> CreatePaymentProviderConfigAsync(CreatePaymentProviderConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -409,7 +599,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<string>? GetAggregatePaymentProviders(GetAggregatePaymentProviders input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<string>?> GetAggregatePaymentProvidersAsync(GetAggregatePaymentProviders input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -418,7 +615,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PaymentProviderConfigInfo? DebugMatchedPaymentProviderConfig(DebugMatchedPaymentProviderConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentProviderConfigInfo?> DebugMatchedPaymentProviderConfigAsync(DebugMatchedPaymentProviderConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -427,7 +631,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public List<string>? GetSpecialPaymentProviders(GetSpecialPaymentProviders input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<string>?> GetSpecialPaymentProvidersAsync(GetSpecialPaymentProviders input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -436,7 +647,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PaymentProviderConfigInfo? UpdatePaymentProviderConfig(UpdatePaymentProviderConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentProviderConfigInfo?> UpdatePaymentProviderConfigAsync(UpdatePaymentProviderConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -445,7 +663,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public void DeletePaymentProviderConfig(DeletePaymentProviderConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeletePaymentProviderConfigAsync(DeletePaymentProviderConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -454,7 +679,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PaymentTaxConfigInfo? GetPaymentTaxConfig(GetPaymentTaxConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentTaxConfigInfo?> GetPaymentTaxConfigAsync(GetPaymentTaxConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -463,7 +695,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         public Model.PaymentTaxConfigInfo? UpdatePaymentTaxConfig(UpdatePaymentTaxConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentTaxConfigInfo?> UpdatePaymentTaxConfigAsync(UpdatePaymentTaxConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

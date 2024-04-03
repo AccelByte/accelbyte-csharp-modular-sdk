@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -54,7 +55,14 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
         public Model.ApiBackfillCreateResponse? CreateBackfill(CreateBackfill input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApiBackfillCreateResponse?> CreateBackfillAsync(CreateBackfill input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -63,7 +71,14 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
         public Model.ApiBackfillProposalResponse? GetBackfillProposal(GetBackfillProposal input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApiBackfillProposalResponse?> GetBackfillProposalAsync(GetBackfillProposal input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -72,7 +87,14 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
         public Model.ApiBackfillGetResponse? GetBackfill(GetBackfill input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApiBackfillGetResponse?> GetBackfillAsync(GetBackfill input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -81,7 +103,14 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
         public void DeleteBackfill(DeleteBackfill input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteBackfillAsync(DeleteBackfill input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -90,7 +119,14 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
         public Model.ModelsGameSession? AcceptBackfill(AcceptBackfill input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGameSession?> AcceptBackfillAsync(AcceptBackfill input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -100,7 +136,14 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
         public Model.ModelsGameSession<T1>? AcceptBackfill<T1>(AcceptBackfill input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGameSession<T1>?> AcceptBackfillAsync<T1>(AcceptBackfill input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
                     response.Code,
                     response.ContentType,
@@ -109,7 +152,14 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
         public void RejectBackfill(RejectBackfill input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task RejectBackfillAsync(RejectBackfill input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,

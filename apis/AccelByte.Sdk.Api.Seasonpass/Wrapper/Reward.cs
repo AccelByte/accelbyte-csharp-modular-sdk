@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -58,7 +59,14 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
         public List<Model.RewardInfo>? QueryRewards(QueryRewards input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.RewardInfo>?> QueryRewardsAsync(QueryRewards input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -67,7 +75,14 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
         public Model.RewardInfo? CreateReward(CreateReward input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.RewardInfo?> CreateRewardAsync(CreateReward input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -76,7 +91,14 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
         public Model.RewardInfo? GetReward(GetReward input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.RewardInfo?> GetRewardAsync(GetReward input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -85,7 +107,14 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
         public void DeleteReward(DeleteReward input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteRewardAsync(DeleteReward input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -94,7 +123,14 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
         public Model.RewardInfo? UpdateReward(UpdateReward input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.RewardInfo?> UpdateRewardAsync(UpdateReward input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -103,7 +139,14 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
         public Model.ClaimableRewards? PublicClaimUserReward(PublicClaimUserReward input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ClaimableRewards?> PublicClaimUserRewardAsync(PublicClaimUserReward input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -113,7 +156,14 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
         public Model.ClaimableRewards<T1, T2>? PublicClaimUserReward<T1, T2>(PublicClaimUserReward input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ClaimableRewards<T1, T2>?> PublicClaimUserRewardAsync<T1, T2>(PublicClaimUserReward input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
                     response.Code,
                     response.ContentType,
@@ -122,7 +172,14 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
         public Model.ClaimableRewards? PublicBulkClaimUserRewards(PublicBulkClaimUserRewards input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ClaimableRewards?> PublicBulkClaimUserRewardsAsync(PublicBulkClaimUserRewards input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -132,7 +189,14 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
         public Model.ClaimableRewards<T1, T2>? PublicBulkClaimUserRewards<T1, T2>(PublicBulkClaimUserRewards input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ClaimableRewards<T1, T2>?> PublicBulkClaimUserRewardsAsync<T1, T2>(PublicBulkClaimUserRewards input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
                     response.Code,
                     response.ContentType,

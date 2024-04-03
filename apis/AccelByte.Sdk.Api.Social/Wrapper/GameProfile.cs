@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -70,7 +71,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.GameProfileHeader>? GetUserProfiles(GetUserProfiles input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.GameProfileHeader>?> GetUserProfilesAsync(GetUserProfiles input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -79,7 +87,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.GameProfileInfo? GetProfile(GetProfile input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.GameProfileInfo?> GetProfileAsync(GetProfile input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -88,7 +103,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.UserGameProfiles>? PublicGetUserGameProfiles(PublicGetUserGameProfiles input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.UserGameProfiles>?> PublicGetUserGameProfilesAsync(PublicGetUserGameProfiles input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -97,7 +119,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public List<Model.GameProfileHeader>? PublicGetUserProfiles(PublicGetUserProfiles input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.GameProfileHeader>?> PublicGetUserProfilesAsync(PublicGetUserProfiles input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -106,7 +135,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public void PublicCreateProfile(PublicCreateProfile input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicCreateProfileAsync(PublicCreateProfile input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -115,7 +151,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.GameProfileInfo? PublicGetProfile(PublicGetProfile input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.GameProfileInfo?> PublicGetProfileAsync(PublicGetProfile input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -124,7 +167,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.GameProfileInfo? PublicUpdateProfile(PublicUpdateProfile input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.GameProfileInfo?> PublicUpdateProfileAsync(PublicUpdateProfile input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -133,7 +183,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public void PublicDeleteProfile(PublicDeleteProfile input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicDeleteProfileAsync(PublicDeleteProfile input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -142,7 +199,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.Attribute? PublicGetProfileAttribute(PublicGetProfileAttribute input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.Attribute?> PublicGetProfileAttributeAsync(PublicGetProfileAttribute input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -151,7 +215,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         public Model.GameProfileInfo? PublicUpdateAttribute(PublicUpdateAttribute input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.GameProfileInfo?> PublicUpdateAttributeAsync(PublicUpdateAttribute input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

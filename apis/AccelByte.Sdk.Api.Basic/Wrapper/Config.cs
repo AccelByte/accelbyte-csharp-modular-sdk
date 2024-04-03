@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -50,7 +51,14 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
         public Model.ConfigInfo? CreateConfig(CreateConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ConfigInfo?> CreateConfigAsync(CreateConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -59,7 +67,14 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
         public Model.ConfigInfo? GetConfig1(GetConfig1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ConfigInfo?> GetConfig1Async(GetConfig1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -68,7 +83,14 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
         public void DeleteConfig1(DeleteConfig1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteConfig1Async(DeleteConfig1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -77,7 +99,14 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
         public Model.ConfigInfo? UpdateConfig1(UpdateConfig1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ConfigInfo?> UpdateConfig1Async(UpdateConfig1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -86,7 +115,14 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
         public Model.ConfigInfo? GetPublisherConfig(GetPublisherConfig input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ConfigInfo?> GetPublisherConfigAsync(GetPublisherConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,

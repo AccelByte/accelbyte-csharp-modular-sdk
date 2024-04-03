@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core;
 
@@ -62,7 +63,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsListConfigurationResponseV1? ListGroupConfigurationAdminV1(ListGroupConfigurationAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsListConfigurationResponseV1?> ListGroupConfigurationAdminV1Async(ListGroupConfigurationAdminV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -71,7 +79,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsCreateGroupConfigurationResponseV1? CreateGroupConfigurationAdminV1(CreateGroupConfigurationAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsCreateGroupConfigurationResponseV1?> CreateGroupConfigurationAdminV1Async(CreateGroupConfigurationAdminV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -80,7 +95,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsCreateGroupConfigurationResponseV1? InitiateGroupConfigurationAdminV1(InitiateGroupConfigurationAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsCreateGroupConfigurationResponseV1?> InitiateGroupConfigurationAdminV1Async(InitiateGroupConfigurationAdminV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -89,7 +111,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsGetGroupConfigurationResponseV1? GetGroupConfigurationAdminV1(GetGroupConfigurationAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsGetGroupConfigurationResponseV1?> GetGroupConfigurationAdminV1Async(GetGroupConfigurationAdminV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -98,7 +127,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public void DeleteGroupConfigurationV1(DeleteGroupConfigurationV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteGroupConfigurationV1Async(DeleteGroupConfigurationV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -107,7 +143,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsUpdateGroupConfigurationResponseV1? UpdateGroupConfigurationAdminV1(UpdateGroupConfigurationAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsUpdateGroupConfigurationResponseV1?> UpdateGroupConfigurationAdminV1Async(UpdateGroupConfigurationAdminV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -116,7 +159,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsUpdateGroupConfigurationResponseV1? UpdateGroupConfigurationGlobalRuleAdminV1(UpdateGroupConfigurationGlobalRuleAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsUpdateGroupConfigurationResponseV1?> UpdateGroupConfigurationGlobalRuleAdminV1Async(UpdateGroupConfigurationGlobalRuleAdminV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
@@ -125,7 +175,14 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         public Model.ModelsUpdateGroupConfigurationResponseV1? DeleteGroupConfigurationGlobalRuleAdminV1(DeleteGroupConfigurationGlobalRuleAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
-
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsUpdateGroupConfigurationResponseV1?> DeleteGroupConfigurationGlobalRuleAdminV1Async(DeleteGroupConfigurationGlobalRuleAdminV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
                     response.Code,
                     response.ContentType,
