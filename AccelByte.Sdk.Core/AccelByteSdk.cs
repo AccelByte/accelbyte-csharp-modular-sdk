@@ -4,9 +4,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using AccelByte.Sdk.Core.Net.Http;
 using AccelByte.Sdk.Core.Pipeline;
+using AccelByte.Sdk.Core.Security;
 
 namespace AccelByte.Sdk.Core
 {
@@ -98,6 +100,14 @@ namespace AccelByte.Sdk.Core
             return Configuration.HttpClient.SendRequest(pOperation, baseUrl);
         }
 
+        public async Task<IHttpResponse> RunRequestAsync(IOperation operation)
+        {
+            IOperation pOperation = await OpProcess.RunProcessPipelineAsync(operation, this);
+
+            var baseUrl = Configuration.ConfigRepository.BaseUrl;
+            return await Configuration.HttpClient.SendRequestAsync(pOperation, baseUrl);
+        }
+
         public T GetApi<T>(string key) where T : ISdkApi
         {
             if (!_ApiObjects.ContainsKey(key))
@@ -146,6 +156,30 @@ namespace AccelByte.Sdk.Core
         {
             if (Configuration.TokenValidator != null)
                 return Configuration.TokenValidator.Validate(this, accessToken, permission, action, aNamespace, userId);
+            else
+                throw new Exception("Could not validate token. No token validator assigned.");
+        }
+
+        public async Task<bool> ValidateTokenAsync(string accessToken)
+        {
+            if ((Configuration.TokenValidator != null) && (Configuration.TokenValidator is IAsyncTokenValidator))
+                return await ((IAsyncTokenValidator)Configuration.TokenValidator).ValidateAsync(this, accessToken);
+            else
+                throw new Exception("Could not validate token. No token validator assigned or invalid token validator.");
+        }
+
+        public async Task<bool> ValidateTokenAsync(string accessToken, string permission, int action)
+        {
+            if ((Configuration.TokenValidator != null) && (Configuration.TokenValidator is IAsyncTokenValidator))
+                return await ((IAsyncTokenValidator)Configuration.TokenValidator).ValidateAsync(this, accessToken, permission, action);
+            else
+                throw new Exception("Could not validate token. No token validator assigned.");
+        }
+
+        public async Task<bool> ValidateTokenAsync(string accessToken, string permission, int action, string? aNamespace, string? userId)
+        {
+            if ((Configuration.TokenValidator != null) && (Configuration.TokenValidator is IAsyncTokenValidator))
+                return await ((IAsyncTokenValidator)Configuration.TokenValidator).ValidateAsync(this, accessToken, permission, action, aNamespace, userId);
             else
                 throw new Exception("Could not validate token. No token validator assigned.");
         }

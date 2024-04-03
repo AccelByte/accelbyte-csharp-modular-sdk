@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2023-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -6,6 +6,7 @@ using System;
 
 using AccelByte.Sdk.Core.Pipeline;
 using AccelByte.Sdk.Core.Net.Http;
+using System.Threading.Tasks;
 
 namespace AccelByte.Sdk.Core
 {
@@ -29,6 +30,8 @@ namespace AccelByte.Sdk.Core
 
         IHttpResponse RunRequest(IOperation operation);
 
+        Task<IHttpResponse> RunRequestAsync(IOperation operation);
+
         T GetApi<T>(string key) where T : ISdkApi;
 
         T GetApi<T>() where T : ISdkApi;
@@ -38,6 +41,14 @@ namespace AccelByte.Sdk.Core
         bool ValidateToken(string accessToken);
 
         bool ValidateToken(string accessToken, string permission, int action);
+
+        bool ValidateToken(string accessToken, string permission, int action, string? aNamespace, string? userId);
+
+        Task<bool> ValidateTokenAsync(string accessToken);
+
+        Task<bool> ValidateTokenAsync(string accessToken, string permission, int action);
+
+        Task<bool> ValidateTokenAsync(string accessToken, string permission, int action, string? aNamespace, string? userId);
 
         void UpdateFlightId(string flightId);
     }

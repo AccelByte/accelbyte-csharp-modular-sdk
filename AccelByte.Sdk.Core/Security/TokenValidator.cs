@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AccelByte.Sdk.Core.Security
 {
@@ -59,6 +60,24 @@ namespace AccelByte.Sdk.Core.Security
             }
         }
 
+        protected virtual async Task<List<LocalPermissionItem>> GetRolePermissionAsync(IAccelByteSdk sdk, string roleId,
+            Func<IAccelByteSdk, string, Task<List<LocalPermissionItem>>> fetchFunction)
+        {
+            if (_PermissionCache.ContainsKey(roleId))
+                return _PermissionCache[roleId];
+
+            try
+            {
+                var permissions = await fetchFunction.Invoke(sdk, roleId);
+                _PermissionCache[roleId] = permissions;
+                return permissions;
+            }
+            catch
+            {
+                return new List<LocalPermissionItem>();
+            }
+        }
+
         protected virtual LocalNamespaceContext GetNamespaceContext(IAccelByteSdk sdk, string aNamespace,
             Func<IAccelByteSdk, string, LocalNamespaceContext> fetchFunction)
         {
@@ -67,6 +86,26 @@ namespace AccelByte.Sdk.Core.Security
             try
             {
                 var namespaceContext = fetchFunction.Invoke(sdk, aNamespace);
+                if (!_NamespaceContextCache.ContainsKey(aNamespace))
+                    _NamespaceContextCache.Add(aNamespace, namespaceContext);
+                else
+                    _NamespaceContextCache[aNamespace] = namespaceContext;
+                return _NamespaceContextCache[aNamespace];
+            }
+            catch
+            {
+                return new LocalNamespaceContext();
+            }
+        }
+
+        protected virtual async Task<LocalNamespaceContext> GetNamespaceContextAsync(IAccelByteSdk sdk, string aNamespace,
+            Func<IAccelByteSdk, string, Task<LocalNamespaceContext>> fetchFunction)
+        {
+            if (_NamespaceContextCache.ContainsKey(aNamespace))
+                return _NamespaceContextCache[aNamespace];
+            try
+            {
+                var namespaceContext = await fetchFunction.Invoke(sdk, aNamespace);
                 if (!_NamespaceContextCache.ContainsKey(aNamespace))
                     _NamespaceContextCache.Add(aNamespace, namespaceContext);
                 else

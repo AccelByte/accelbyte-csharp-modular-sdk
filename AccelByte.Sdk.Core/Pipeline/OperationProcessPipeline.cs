@@ -3,6 +3,7 @@
 // and restrictions contact your company contract manager.
 
 using System;
+using System.Threading.Tasks;
 
 namespace AccelByte.Sdk.Core.Pipeline
 {
@@ -61,6 +62,32 @@ namespace AccelByte.Sdk.Core.Pipeline
             {
                 handler = handler.Next;
                 resultOp = handler.Handle(resultOp, sdk);
+            }
+
+            return resultOp;
+        }
+
+        public async Task<IOperation> RunProcessPipelineAsync(IOperation op, IAccelByteSdk sdk)
+        {
+            if (First == null)
+                throw new Exception("No operation process handler in chain.");
+
+            IOperationProcess handler = First;
+
+            IOperation resultOp;
+            if (handler is IOperationProcessAsync)
+                resultOp = await ((IOperationProcessAsync)handler).HandleAsync(op, sdk);
+            else
+                resultOp = handler.Handle(op, sdk);
+
+            while (handler.Next != null)
+            {
+                handler = handler.Next;
+
+                if (handler is IOperationProcessAsync)
+                    resultOp = await ((IOperationProcessAsync)handler).HandleAsync(resultOp, sdk);
+                else
+                    resultOp = handler.Handle(resultOp, sdk);
             }
 
             return resultOp;
