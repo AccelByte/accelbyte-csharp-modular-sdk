@@ -21,6 +21,8 @@ namespace AccelByte.Sdk.Core
 
         public string FlightId { get; protected set; } = String.Empty;
 
+        public string CustomBasePath { get; protected set; } = String.Empty;
+
         public T SetPreferredSecurityMethod(string securityMethod)
         {
             PreferredSecurityMethod = securityMethod;
@@ -49,6 +51,12 @@ namespace AccelByte.Sdk.Core
         public T UpdateFlightId(string flightId)
         {
             FlightId = flightId;
+            return (T)this;
+        }
+
+        public T UseCustomBasePath(string value)
+        {
+            CustomBasePath = value;
             return (T)this;
         }
 

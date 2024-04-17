@@ -35,6 +35,8 @@ namespace AccelByte.Sdk.Core
 
         public abstract List<string> Produces { get; }
 
+        public string CustomBasePath { get; set; } = String.Empty;
+
         public string PreferredSecurityMethod { get; set; } = String.Empty;
 
         public string FlightId { get; set; } = String.Empty;
@@ -94,7 +96,11 @@ namespace AccelByte.Sdk.Core
                 throw new ArgumentNullException(nameof(baseUrl));
             }
 
-            var url = new StringBuilder(baseUrl.TrimEnd('/'));
+            StringBuilder url;
+            if (CustomBasePath != "")
+                url = new StringBuilder(CustomBasePath.TrimEnd('/'));
+            else
+                url = new StringBuilder(baseUrl.TrimEnd('/'));
 
             if (pathParams != null)
             {
@@ -161,6 +167,7 @@ namespace AccelByte.Sdk.Core
             RequestJsonOptions = opBuilder.RequestJsonOptions;
             ResponseJsonOptions = opBuilder.ResponseJsonOptions;
             FlightId = opBuilder.FlightId;
+            CustomBasePath = opBuilder.CustomBasePath;
         }
     }
 }

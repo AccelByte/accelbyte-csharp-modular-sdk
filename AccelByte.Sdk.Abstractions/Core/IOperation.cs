@@ -24,6 +24,8 @@ namespace AccelByte.Sdk.Core
 
         List<string> Produces { get; }
 
+        string CustomBasePath { get; }
+
         string PreferredSecurityMethod { get; }
 
         string FlightId { get; }

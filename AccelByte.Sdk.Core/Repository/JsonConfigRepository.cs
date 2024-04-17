@@ -1,8 +1,9 @@
-// Copyright (c) 2022 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -39,8 +40,21 @@ namespace AccelByte.Sdk.Core.Repository
         [JsonPropertyName("enable_user_agent")]
         public bool EnableUserAgentInfo { get; set; } = true;
 
+        [JsonPropertyName("custom_base_paths")]
+        public Dictionary<string, string>? CustomBasePaths { get; set; } = null;
+
         [JsonIgnore]
         public IHttpLogger? Logger { get; set; } = null;
+
+        public string GetCustomServiceBasePath(string serviceName)
+        {
+            string aServiceName = serviceName.Trim();
+            if (CustomBasePaths != null)
+                if (CustomBasePaths.ContainsKey(aServiceName))
+                    return CustomBasePaths[aServiceName];
+
+            return "";
+        }
 
         public static JsonConfigRepository LoadFromString(string json)
         {

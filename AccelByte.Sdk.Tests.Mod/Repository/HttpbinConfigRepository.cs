@@ -43,5 +43,10 @@ namespace AccelByte.Sdk.Tests.Mod.Repository
         public bool EnableUserAgentInfo { get; } = true;
 
         public IHttpLogger? Logger { get; set; } = null;
+
+        public string GetCustomServiceBasePath(string serviceName)
+        {
+            return "";
+        }
     }
 }

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -126,6 +126,16 @@ namespace AccelByte.Sdk.Tests.Mod.Repository
         }
 
         public IHttpLogger? Logger { get; set; } = null;
+
+        public string GetCustomServiceBasePath(string serviceName)
+        {
+            string envName = $"AB_{serviceName.Trim().ToUpper()}_BASE_PATH";
+            string? customPath = Environment.GetEnvironmentVariable(envName);
+            if (customPath == null)
+                return "";
+            else
+                return customPath;
+        }
 
         private string UnQuote(string value)
         {
