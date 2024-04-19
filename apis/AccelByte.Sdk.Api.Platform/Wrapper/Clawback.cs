@@ -20,19 +20,41 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Clawback(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Clawback(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public QueryIAPClawbackHistory.QueryIAPClawbackHistoryBuilder QueryIAPClawbackHistoryOp
         {
-            get { return new Operation.QueryIAPClawbackHistory.QueryIAPClawbackHistoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryIAPClawbackHistory.QueryIAPClawbackHistoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public MockPlayStationStreamEvent.MockPlayStationStreamEventBuilder MockPlayStationStreamEventOp
         {
-            get { return new Operation.MockPlayStationStreamEvent.MockPlayStationStreamEventBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.MockPlayStationStreamEvent.MockPlayStationStreamEventBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

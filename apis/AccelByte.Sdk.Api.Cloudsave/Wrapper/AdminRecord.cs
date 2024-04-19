@@ -20,63 +20,162 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminRecord(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminRecord(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminListAdminGameRecordV1.AdminListAdminGameRecordV1Builder AdminListAdminGameRecordV1Op
         {
-            get { return new Operation.AdminListAdminGameRecordV1.AdminListAdminGameRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListAdminGameRecordV1.AdminListAdminGameRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminBulkGetAdminGameRecordV1.AdminBulkGetAdminGameRecordV1Builder AdminBulkGetAdminGameRecordV1Op
         {
-            get { return new Operation.AdminBulkGetAdminGameRecordV1.AdminBulkGetAdminGameRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminBulkGetAdminGameRecordV1.AdminBulkGetAdminGameRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetAdminGameRecordV1.AdminGetAdminGameRecordV1Builder AdminGetAdminGameRecordV1Op
         {
-            get { return new Operation.AdminGetAdminGameRecordV1.AdminGetAdminGameRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetAdminGameRecordV1.AdminGetAdminGameRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminPutAdminGameRecordV1.AdminPutAdminGameRecordV1Builder AdminPutAdminGameRecordV1Op
         {
-            get { return new Operation.AdminPutAdminGameRecordV1.AdminPutAdminGameRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminPutAdminGameRecordV1.AdminPutAdminGameRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminPostAdminGameRecordV1.AdminPostAdminGameRecordV1Builder AdminPostAdminGameRecordV1Op
         {
-            get { return new Operation.AdminPostAdminGameRecordV1.AdminPostAdminGameRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminPostAdminGameRecordV1.AdminPostAdminGameRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteAdminGameRecordV1.AdminDeleteAdminGameRecordV1Builder AdminDeleteAdminGameRecordV1Op
         {
-            get { return new Operation.AdminDeleteAdminGameRecordV1.AdminDeleteAdminGameRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteAdminGameRecordV1.AdminDeleteAdminGameRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public BulkGetAdminPlayerRecordByUserIdsV1.BulkGetAdminPlayerRecordByUserIdsV1Builder BulkGetAdminPlayerRecordByUserIdsV1Op
         {
-            get { return new Operation.BulkGetAdminPlayerRecordByUserIdsV1.BulkGetAdminPlayerRecordByUserIdsV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BulkGetAdminPlayerRecordByUserIdsV1.BulkGetAdminPlayerRecordByUserIdsV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminListAdminUserRecordsV1.AdminListAdminUserRecordsV1Builder AdminListAdminUserRecordsV1Op
         {
-            get { return new Operation.AdminListAdminUserRecordsV1.AdminListAdminUserRecordsV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListAdminUserRecordsV1.AdminListAdminUserRecordsV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminBulkGetAdminPlayerRecordV1.AdminBulkGetAdminPlayerRecordV1Builder AdminBulkGetAdminPlayerRecordV1Op
         {
-            get { return new Operation.AdminBulkGetAdminPlayerRecordV1.AdminBulkGetAdminPlayerRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminBulkGetAdminPlayerRecordV1.AdminBulkGetAdminPlayerRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetAdminPlayerRecordV1.AdminGetAdminPlayerRecordV1Builder AdminGetAdminPlayerRecordV1Op
         {
-            get { return new Operation.AdminGetAdminPlayerRecordV1.AdminGetAdminPlayerRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetAdminPlayerRecordV1.AdminGetAdminPlayerRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminPutAdminPlayerRecordV1.AdminPutAdminPlayerRecordV1Builder AdminPutAdminPlayerRecordV1Op
         {
-            get { return new Operation.AdminPutAdminPlayerRecordV1.AdminPutAdminPlayerRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminPutAdminPlayerRecordV1.AdminPutAdminPlayerRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminPostPlayerAdminRecordV1.AdminPostPlayerAdminRecordV1Builder AdminPostPlayerAdminRecordV1Op
         {
-            get { return new Operation.AdminPostPlayerAdminRecordV1.AdminPostPlayerAdminRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminPostPlayerAdminRecordV1.AdminPostPlayerAdminRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteAdminPlayerRecordV1.AdminDeleteAdminPlayerRecordV1Builder AdminDeleteAdminPlayerRecordV1Op
         {
-            get { return new Operation.AdminDeleteAdminPlayerRecordV1.AdminDeleteAdminPlayerRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteAdminPlayerRecordV1.AdminDeleteAdminPlayerRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

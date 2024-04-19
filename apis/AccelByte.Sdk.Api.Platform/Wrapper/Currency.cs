@@ -20,39 +20,96 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Currency(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Currency(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ListCurrencies.ListCurrenciesBuilder ListCurrenciesOp
         {
-            get { return new Operation.ListCurrencies.ListCurrenciesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListCurrencies.ListCurrenciesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateCurrency.CreateCurrencyBuilder CreateCurrencyOp
         {
-            get { return new Operation.CreateCurrency.CreateCurrencyBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateCurrency.CreateCurrencyBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateCurrency.UpdateCurrencyBuilder UpdateCurrencyOp
         {
-            get { return new Operation.UpdateCurrency.UpdateCurrencyBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateCurrency.UpdateCurrencyBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteCurrency.DeleteCurrencyBuilder DeleteCurrencyOp
         {
-            get { return new Operation.DeleteCurrency.DeleteCurrencyBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteCurrency.DeleteCurrencyBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetCurrencyConfig.GetCurrencyConfigBuilder GetCurrencyConfigOp
         {
-            get { return new Operation.GetCurrencyConfig.GetCurrencyConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetCurrencyConfig.GetCurrencyConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetCurrencySummary.GetCurrencySummaryBuilder GetCurrencySummaryOp
         {
-            get { return new Operation.GetCurrencySummary.GetCurrencySummaryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetCurrencySummary.GetCurrencySummaryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicListCurrencies.PublicListCurrenciesBuilder PublicListCurrenciesOp
         {
-            get { return new Operation.PublicListCurrencies.PublicListCurrenciesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicListCurrencies.PublicListCurrenciesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

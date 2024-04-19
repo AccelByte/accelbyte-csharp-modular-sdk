@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Basic
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.Namespace Namespace
         {
             get
             {
                 if (_Namespace == null)
-                    _Namespace = new Wrapper.Namespace(_Sdk);
+                    _Namespace = new Wrapper.Namespace(_Sdk, _CustomBasePath);
                 return _Namespace;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Basic
             get
             {
                 if (_UserAction == null)
-                    _UserAction = new Wrapper.UserAction(_Sdk);
+                    _UserAction = new Wrapper.UserAction(_Sdk, _CustomBasePath);
                 return _UserAction;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Basic
             get
             {
                 if (_Config == null)
-                    _Config = new Wrapper.Config(_Sdk);
+                    _Config = new Wrapper.Config(_Sdk, _CustomBasePath);
                 return _Config;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Basic
             get
             {
                 if (_EQU8Config == null)
-                    _EQU8Config = new Wrapper.EQU8Config(_Sdk);
+                    _EQU8Config = new Wrapper.EQU8Config(_Sdk, _CustomBasePath);
                 return _EQU8Config;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Basic
             get
             {
                 if (_FileUpload == null)
-                    _FileUpload = new Wrapper.FileUpload(_Sdk);
+                    _FileUpload = new Wrapper.FileUpload(_Sdk, _CustomBasePath);
                 return _FileUpload;
             }
         }
@@ -75,7 +77,7 @@ namespace AccelByte.Sdk.Api.Basic
             get
             {
                 if (_Misc == null)
-                    _Misc = new Wrapper.Misc(_Sdk);
+                    _Misc = new Wrapper.Misc(_Sdk, _CustomBasePath);
                 return _Misc;
             }
         }
@@ -86,7 +88,7 @@ namespace AccelByte.Sdk.Api.Basic
             get
             {
                 if (_UserProfile == null)
-                    _UserProfile = new Wrapper.UserProfile(_Sdk);
+                    _UserProfile = new Wrapper.UserProfile(_Sdk, _CustomBasePath);
                 return _UserProfile;
             }
         }
@@ -97,7 +99,7 @@ namespace AccelByte.Sdk.Api.Basic
             get
             {
                 if (_Anonymization == null)
-                    _Anonymization = new Wrapper.Anonymization(_Sdk);
+                    _Anonymization = new Wrapper.Anonymization(_Sdk, _CustomBasePath);
                 return _Anonymization;
             }
         }
@@ -106,6 +108,12 @@ namespace AccelByte.Sdk.Api.Basic
         internal BasicApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public BasicApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -118,7 +126,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<BasicApi>("basic", () =>
             {
-                return new BasicApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("basic");
+                if (customPath != "")
+                    return (new BasicApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new BasicApi(sdk);
             });
         }
     }

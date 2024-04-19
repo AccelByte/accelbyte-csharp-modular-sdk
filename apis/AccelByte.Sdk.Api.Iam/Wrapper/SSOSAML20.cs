@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public SSOSAML20(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public SSOSAML20(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public PlatformAuthenticateSAMLV3Handler.PlatformAuthenticateSAMLV3HandlerBuilder PlatformAuthenticateSAMLV3HandlerOp
         {
-            get { return new Operation.PlatformAuthenticateSAMLV3Handler.PlatformAuthenticateSAMLV3HandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PlatformAuthenticateSAMLV3Handler.PlatformAuthenticateSAMLV3HandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

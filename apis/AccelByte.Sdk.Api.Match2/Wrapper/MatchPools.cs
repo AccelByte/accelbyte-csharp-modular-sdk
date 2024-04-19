@@ -20,43 +20,107 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public MatchPools(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public MatchPools(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public MatchPoolList.MatchPoolListBuilder MatchPoolListOp
         {
-            get { return new Operation.MatchPoolList.MatchPoolListBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.MatchPoolList.MatchPoolListBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateMatchPool.CreateMatchPoolBuilder CreateMatchPoolOp
         {
-            get { return new Operation.CreateMatchPool.CreateMatchPoolBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateMatchPool.CreateMatchPoolBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public MatchPoolDetails.MatchPoolDetailsBuilder MatchPoolDetailsOp
         {
-            get { return new Operation.MatchPoolDetails.MatchPoolDetailsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.MatchPoolDetails.MatchPoolDetailsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateMatchPool.UpdateMatchPoolBuilder UpdateMatchPoolOp
         {
-            get { return new Operation.UpdateMatchPool.UpdateMatchPoolBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateMatchPool.UpdateMatchPoolBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteMatchPool.DeleteMatchPoolBuilder DeleteMatchPoolOp
         {
-            get { return new Operation.DeleteMatchPool.DeleteMatchPoolBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteMatchPool.DeleteMatchPoolBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public MatchPoolMetric.MatchPoolMetricBuilder MatchPoolMetricOp
         {
-            get { return new Operation.MatchPoolMetric.MatchPoolMetricBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.MatchPoolMetric.MatchPoolMetricBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPlayerMetric.GetPlayerMetricBuilder GetPlayerMetricOp
         {
-            get { return new Operation.GetPlayerMetric.GetPlayerMetricBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPlayerMetric.GetPlayerMetricBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetMatchPoolTickets.AdminGetMatchPoolTicketsBuilder AdminGetMatchPoolTicketsOp
         {
-            get { return new Operation.AdminGetMatchPoolTickets.AdminGetMatchPoolTicketsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetMatchPoolTickets.AdminGetMatchPoolTicketsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

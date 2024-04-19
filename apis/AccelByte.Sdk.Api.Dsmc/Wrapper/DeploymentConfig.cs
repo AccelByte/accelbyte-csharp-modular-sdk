@@ -20,79 +20,206 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public DeploymentConfig(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public DeploymentConfig(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetAllDeployment.GetAllDeploymentBuilder GetAllDeploymentOp
         {
-            get { return new Operation.GetAllDeployment.GetAllDeploymentBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetAllDeployment.GetAllDeploymentBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetDeployment.GetDeploymentBuilder GetDeploymentOp
         {
-            get { return new Operation.GetDeployment.GetDeploymentBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetDeployment.GetDeploymentBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateDeployment.CreateDeploymentBuilder CreateDeploymentOp
         {
-            get { return new Operation.CreateDeployment.CreateDeploymentBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateDeployment.CreateDeploymentBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteDeployment.DeleteDeploymentBuilder DeleteDeploymentOp
         {
-            get { return new Operation.DeleteDeployment.DeleteDeploymentBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteDeployment.DeleteDeploymentBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateDeployment.UpdateDeploymentBuilder UpdateDeploymentOp
         {
-            get { return new Operation.UpdateDeployment.UpdateDeploymentBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateDeployment.UpdateDeploymentBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateRootRegionOverride.CreateRootRegionOverrideBuilder CreateRootRegionOverrideOp
         {
-            get { return new Operation.CreateRootRegionOverride.CreateRootRegionOverrideBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateRootRegionOverride.CreateRootRegionOverrideBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteRootRegionOverride.DeleteRootRegionOverrideBuilder DeleteRootRegionOverrideOp
         {
-            get { return new Operation.DeleteRootRegionOverride.DeleteRootRegionOverrideBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteRootRegionOverride.DeleteRootRegionOverrideBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateRootRegionOverride.UpdateRootRegionOverrideBuilder UpdateRootRegionOverrideOp
         {
-            get { return new Operation.UpdateRootRegionOverride.UpdateRootRegionOverrideBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateRootRegionOverride.UpdateRootRegionOverrideBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateDeploymentOverride.CreateDeploymentOverrideBuilder CreateDeploymentOverrideOp
         {
-            get { return new Operation.CreateDeploymentOverride.CreateDeploymentOverrideBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateDeploymentOverride.CreateDeploymentOverrideBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteDeploymentOverride.DeleteDeploymentOverrideBuilder DeleteDeploymentOverrideOp
         {
-            get { return new Operation.DeleteDeploymentOverride.DeleteDeploymentOverrideBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteDeploymentOverride.DeleteDeploymentOverrideBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateDeploymentOverride.UpdateDeploymentOverrideBuilder UpdateDeploymentOverrideOp
         {
-            get { return new Operation.UpdateDeploymentOverride.UpdateDeploymentOverrideBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateDeploymentOverride.UpdateDeploymentOverrideBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateOverrideRegionOverride.CreateOverrideRegionOverrideBuilder CreateOverrideRegionOverrideOp
         {
-            get { return new Operation.CreateOverrideRegionOverride.CreateOverrideRegionOverrideBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateOverrideRegionOverride.CreateOverrideRegionOverrideBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteOverrideRegionOverride.DeleteOverrideRegionOverrideBuilder DeleteOverrideRegionOverrideOp
         {
-            get { return new Operation.DeleteOverrideRegionOverride.DeleteOverrideRegionOverrideBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteOverrideRegionOverride.DeleteOverrideRegionOverrideBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateOverrideRegionOverride.UpdateOverrideRegionOverrideBuilder UpdateOverrideRegionOverrideOp
         {
-            get { return new Operation.UpdateOverrideRegionOverride.UpdateOverrideRegionOverrideBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateOverrideRegionOverride.UpdateOverrideRegionOverrideBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetAllDeploymentClient.GetAllDeploymentClientBuilder GetAllDeploymentClientOp
         {
-            get { return new Operation.GetAllDeploymentClient.GetAllDeploymentClientBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetAllDeploymentClient.GetAllDeploymentClientBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateDeploymentClient.CreateDeploymentClientBuilder CreateDeploymentClientOp
         {
-            get { return new Operation.CreateDeploymentClient.CreateDeploymentClientBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateDeploymentClient.CreateDeploymentClientBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteDeploymentClient.DeleteDeploymentClientBuilder DeleteDeploymentClientOp
         {
-            get { return new Operation.DeleteDeploymentClient.DeleteDeploymentClientBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteDeploymentClient.DeleteDeploymentClientBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

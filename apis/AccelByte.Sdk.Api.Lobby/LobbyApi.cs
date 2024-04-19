@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Lobby
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.Friends Friends
         {
             get
             {
                 if (_Friends == null)
-                    _Friends = new Wrapper.Friends(_Sdk);
+                    _Friends = new Wrapper.Friends(_Sdk, _CustomBasePath);
                 return _Friends;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Lobby
             get
             {
                 if (_Config == null)
-                    _Config = new Wrapper.Config(_Sdk);
+                    _Config = new Wrapper.Config(_Sdk, _CustomBasePath);
                 return _Config;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Lobby
             get
             {
                 if (_Admin == null)
-                    _Admin = new Wrapper.Admin(_Sdk);
+                    _Admin = new Wrapper.Admin(_Sdk, _CustomBasePath);
                 return _Admin;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Lobby
             get
             {
                 if (_Notification == null)
-                    _Notification = new Wrapper.Notification(_Sdk);
+                    _Notification = new Wrapper.Notification(_Sdk, _CustomBasePath);
                 return _Notification;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Lobby
             get
             {
                 if (_Party == null)
-                    _Party = new Wrapper.Party(_Sdk);
+                    _Party = new Wrapper.Party(_Sdk, _CustomBasePath);
                 return _Party;
             }
         }
@@ -75,7 +77,7 @@ namespace AccelByte.Sdk.Api.Lobby
             get
             {
                 if (_LobbyOperations == null)
-                    _LobbyOperations = new Wrapper.LobbyOperations(_Sdk);
+                    _LobbyOperations = new Wrapper.LobbyOperations(_Sdk, _CustomBasePath);
                 return _LobbyOperations;
             }
         }
@@ -86,7 +88,7 @@ namespace AccelByte.Sdk.Api.Lobby
             get
             {
                 if (_Player == null)
-                    _Player = new Wrapper.Player(_Sdk);
+                    _Player = new Wrapper.Player(_Sdk, _CustomBasePath);
                 return _Player;
             }
         }
@@ -97,7 +99,7 @@ namespace AccelByte.Sdk.Api.Lobby
             get
             {
                 if (_Profanity == null)
-                    _Profanity = new Wrapper.Profanity(_Sdk);
+                    _Profanity = new Wrapper.Profanity(_Sdk, _CustomBasePath);
                 return _Profanity;
             }
         }
@@ -108,7 +110,7 @@ namespace AccelByte.Sdk.Api.Lobby
             get
             {
                 if (_ThirdParty == null)
-                    _ThirdParty = new Wrapper.ThirdParty(_Sdk);
+                    _ThirdParty = new Wrapper.ThirdParty(_Sdk, _CustomBasePath);
                 return _ThirdParty;
             }
         }
@@ -119,7 +121,7 @@ namespace AccelByte.Sdk.Api.Lobby
             get
             {
                 if (_Presence == null)
-                    _Presence = new Wrapper.Presence(_Sdk);
+                    _Presence = new Wrapper.Presence(_Sdk, _CustomBasePath);
                 return _Presence;
             }
         }
@@ -128,6 +130,12 @@ namespace AccelByte.Sdk.Api.Lobby
         internal LobbyApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public LobbyApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -140,7 +148,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<LobbyApi>("lobby", () =>
             {
-                return new LobbyApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("lobby");
+                if (customPath != "")
+                    return (new LobbyApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new LobbyApi(sdk);
             });
         }
     }

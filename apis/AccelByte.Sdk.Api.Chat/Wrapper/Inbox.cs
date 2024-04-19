@@ -20,63 +20,162 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Inbox(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Inbox(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetInboxCategories.AdminGetInboxCategoriesBuilder AdminGetInboxCategoriesOp
         {
-            get { return new Operation.AdminGetInboxCategories.AdminGetInboxCategoriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetInboxCategories.AdminGetInboxCategoriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminAddInboxCategory.AdminAddInboxCategoryBuilder AdminAddInboxCategoryOp
         {
-            get { return new Operation.AdminAddInboxCategory.AdminAddInboxCategoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminAddInboxCategory.AdminAddInboxCategoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteInboxCategory.AdminDeleteInboxCategoryBuilder AdminDeleteInboxCategoryOp
         {
-            get { return new Operation.AdminDeleteInboxCategory.AdminDeleteInboxCategoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteInboxCategory.AdminDeleteInboxCategoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateInboxCategory.AdminUpdateInboxCategoryBuilder AdminUpdateInboxCategoryOp
         {
-            get { return new Operation.AdminUpdateInboxCategory.AdminUpdateInboxCategoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateInboxCategory.AdminUpdateInboxCategoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetCategorySchema.AdminGetCategorySchemaBuilder AdminGetCategorySchemaOp
         {
-            get { return new Operation.AdminGetCategorySchema.AdminGetCategorySchemaBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetCategorySchema.AdminGetCategorySchemaBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteInboxMessage.AdminDeleteInboxMessageBuilder AdminDeleteInboxMessageOp
         {
-            get { return new Operation.AdminDeleteInboxMessage.AdminDeleteInboxMessageBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteInboxMessage.AdminDeleteInboxMessageBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetInboxMessages.AdminGetInboxMessagesBuilder AdminGetInboxMessagesOp
         {
-            get { return new Operation.AdminGetInboxMessages.AdminGetInboxMessagesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetInboxMessages.AdminGetInboxMessagesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminSaveInboxMessage.AdminSaveInboxMessageBuilder AdminSaveInboxMessageOp
         {
-            get { return new Operation.AdminSaveInboxMessage.AdminSaveInboxMessageBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminSaveInboxMessage.AdminSaveInboxMessageBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUnsendInboxMessage.AdminUnsendInboxMessageBuilder AdminUnsendInboxMessageOp
         {
-            get { return new Operation.AdminUnsendInboxMessage.AdminUnsendInboxMessageBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUnsendInboxMessage.AdminUnsendInboxMessageBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetInboxUsers.AdminGetInboxUsersBuilder AdminGetInboxUsersOp
         {
-            get { return new Operation.AdminGetInboxUsers.AdminGetInboxUsersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetInboxUsers.AdminGetInboxUsersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateInboxMessage.AdminUpdateInboxMessageBuilder AdminUpdateInboxMessageOp
         {
-            get { return new Operation.AdminUpdateInboxMessage.AdminUpdateInboxMessageBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateInboxMessage.AdminUpdateInboxMessageBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminSendInboxMessage.AdminSendInboxMessageBuilder AdminSendInboxMessageOp
         {
-            get { return new Operation.AdminSendInboxMessage.AdminSendInboxMessageBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminSendInboxMessage.AdminSendInboxMessageBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetInboxStats.AdminGetInboxStatsBuilder AdminGetInboxStatsOp
         {
-            get { return new Operation.AdminGetInboxStats.AdminGetInboxStatsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetInboxStats.AdminGetInboxStatsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

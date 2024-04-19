@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminUserEligibilities(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminUserEligibilities(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminRetrieveEligibilities.AdminRetrieveEligibilitiesBuilder AdminRetrieveEligibilitiesOp
         {
-            get { return new Operation.AdminRetrieveEligibilities.AdminRetrieveEligibilitiesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminRetrieveEligibilities.AdminRetrieveEligibilitiesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

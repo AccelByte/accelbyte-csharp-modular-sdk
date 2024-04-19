@@ -20,19 +20,41 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PoliciesWithNamespace(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PoliciesWithNamespace(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public UpdatePolicy1.UpdatePolicy1Builder UpdatePolicy1Op
         {
-            get { return new Operation.UpdatePolicy1.UpdatePolicy1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdatePolicy1.UpdatePolicy1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SetDefaultPolicy3.SetDefaultPolicy3Builder SetDefaultPolicy3Op
         {
-            get { return new Operation.SetDefaultPolicy3.SetDefaultPolicy3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SetDefaultPolicy3.SetDefaultPolicy3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

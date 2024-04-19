@@ -20,47 +20,118 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Anonymization(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Anonymization(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AnonymizeCampaign.AnonymizeCampaignBuilder AnonymizeCampaignOp
         {
-            get { return new Operation.AnonymizeCampaign.AnonymizeCampaignBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AnonymizeCampaign.AnonymizeCampaignBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AnonymizeEntitlement.AnonymizeEntitlementBuilder AnonymizeEntitlementOp
         {
-            get { return new Operation.AnonymizeEntitlement.AnonymizeEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AnonymizeEntitlement.AnonymizeEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AnonymizeFulfillment.AnonymizeFulfillmentBuilder AnonymizeFulfillmentOp
         {
-            get { return new Operation.AnonymizeFulfillment.AnonymizeFulfillmentBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AnonymizeFulfillment.AnonymizeFulfillmentBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AnonymizeIntegration.AnonymizeIntegrationBuilder AnonymizeIntegrationOp
         {
-            get { return new Operation.AnonymizeIntegration.AnonymizeIntegrationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AnonymizeIntegration.AnonymizeIntegrationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AnonymizeOrder.AnonymizeOrderBuilder AnonymizeOrderOp
         {
-            get { return new Operation.AnonymizeOrder.AnonymizeOrderBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AnonymizeOrder.AnonymizeOrderBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AnonymizePayment.AnonymizePaymentBuilder AnonymizePaymentOp
         {
-            get { return new Operation.AnonymizePayment.AnonymizePaymentBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AnonymizePayment.AnonymizePaymentBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AnonymizeRevocation.AnonymizeRevocationBuilder AnonymizeRevocationOp
         {
-            get { return new Operation.AnonymizeRevocation.AnonymizeRevocationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AnonymizeRevocation.AnonymizeRevocationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AnonymizeSubscription.AnonymizeSubscriptionBuilder AnonymizeSubscriptionOp
         {
-            get { return new Operation.AnonymizeSubscription.AnonymizeSubscriptionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AnonymizeSubscription.AnonymizeSubscriptionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AnonymizeWallet.AnonymizeWalletBuilder AnonymizeWalletOp
         {
-            get { return new Operation.AnonymizeWallet.AnonymizeWalletBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AnonymizeWallet.AnonymizeWalletBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

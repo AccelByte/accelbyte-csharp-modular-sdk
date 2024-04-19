@@ -20,35 +20,85 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminTickets(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminTickets(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ListTickets.ListTicketsBuilder ListTicketsOp
         {
-            get { return new Operation.ListTickets.ListTicketsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListTickets.ListTicketsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public TicketStatistic.TicketStatisticBuilder TicketStatisticOp
         {
-            get { return new Operation.TicketStatistic.TicketStatisticBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.TicketStatistic.TicketStatisticBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetTicketDetail.GetTicketDetailBuilder GetTicketDetailOp
         {
-            get { return new Operation.GetTicketDetail.GetTicketDetailBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetTicketDetail.GetTicketDetailBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteTicket.DeleteTicketBuilder DeleteTicketOp
         {
-            get { return new Operation.DeleteTicket.DeleteTicketBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteTicket.DeleteTicketBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetReportsByTicket.GetReportsByTicketBuilder GetReportsByTicketOp
         {
-            get { return new Operation.GetReportsByTicket.GetReportsByTicketBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetReportsByTicket.GetReportsByTicketBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateTicketResolutions.UpdateTicketResolutionsBuilder UpdateTicketResolutionsOp
         {
-            get { return new Operation.UpdateTicketResolutions.UpdateTicketResolutionsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateTicketResolutions.UpdateTicketResolutionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Session(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Session(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public CreateSession.CreateSessionBuilder CreateSessionOp
         {
-            get { return new Operation.CreateSession.CreateSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateSession.CreateSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ClaimServer.ClaimServerBuilder ClaimServerOp
         {
-            get { return new Operation.ClaimServer.ClaimServerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ClaimServer.ClaimServerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetSession.GetSessionBuilder GetSessionOp
         {
-            get { return new Operation.GetSession.GetSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetSession.GetSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CancelSession.CancelSessionBuilder CancelSessionOp
         {
-            get { return new Operation.CancelSession.CancelSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CancelSession.CancelSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

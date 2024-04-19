@@ -20,19 +20,41 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PaymentAccount(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PaymentAccount(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public PublicGetPaymentAccounts.PublicGetPaymentAccountsBuilder PublicGetPaymentAccountsOp
         {
-            get { return new Operation.PublicGetPaymentAccounts.PublicGetPaymentAccountsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetPaymentAccounts.PublicGetPaymentAccountsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicDeletePaymentAccount.PublicDeletePaymentAccountBuilder PublicDeletePaymentAccountOp
         {
-            get { return new Operation.PublicDeletePaymentAccount.PublicDeletePaymentAccountBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicDeletePaymentAccount.PublicDeletePaymentAccountBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

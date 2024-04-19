@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public GlobalConfiguration(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public GlobalConfiguration(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminListGlobalConfiguration.AdminListGlobalConfigurationBuilder AdminListGlobalConfigurationOp
         {
-            get { return new Operation.AdminListGlobalConfiguration.AdminListGlobalConfigurationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListGlobalConfiguration.AdminListGlobalConfigurationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateGlobalConfiguration.AdminUpdateGlobalConfigurationBuilder AdminUpdateGlobalConfigurationOp
         {
-            get { return new Operation.AdminUpdateGlobalConfiguration.AdminUpdateGlobalConfigurationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateGlobalConfiguration.AdminUpdateGlobalConfigurationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteGlobalConfiguration.AdminDeleteGlobalConfigurationBuilder AdminDeleteGlobalConfigurationOp
         {
-            get { return new Operation.AdminDeleteGlobalConfiguration.AdminDeleteGlobalConfigurationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteGlobalConfiguration.AdminDeleteGlobalConfigurationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Challenge
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.ChallengeConfiguration ChallengeConfiguration
         {
             get
             {
                 if (_ChallengeConfiguration == null)
-                    _ChallengeConfiguration = new Wrapper.ChallengeConfiguration(_Sdk);
+                    _ChallengeConfiguration = new Wrapper.ChallengeConfiguration(_Sdk, _CustomBasePath);
                 return _ChallengeConfiguration;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Challenge
             get
             {
                 if (_GoalConfiguration == null)
-                    _GoalConfiguration = new Wrapper.GoalConfiguration(_Sdk);
+                    _GoalConfiguration = new Wrapper.GoalConfiguration(_Sdk, _CustomBasePath);
                 return _GoalConfiguration;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Challenge
             get
             {
                 if (_ChallengeProgression == null)
-                    _ChallengeProgression = new Wrapper.ChallengeProgression(_Sdk);
+                    _ChallengeProgression = new Wrapper.ChallengeProgression(_Sdk, _CustomBasePath);
                 return _ChallengeProgression;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Challenge
             get
             {
                 if (_PlayerReward == null)
-                    _PlayerReward = new Wrapper.PlayerReward(_Sdk);
+                    _PlayerReward = new Wrapper.PlayerReward(_Sdk, _CustomBasePath);
                 return _PlayerReward;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Challenge
             get
             {
                 if (_ChallengeList == null)
-                    _ChallengeList = new Wrapper.ChallengeList(_Sdk);
+                    _ChallengeList = new Wrapper.ChallengeList(_Sdk, _CustomBasePath);
                 return _ChallengeList;
             }
         }
@@ -73,6 +75,12 @@ namespace AccelByte.Sdk.Api.Challenge
         internal ChallengeApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public ChallengeApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -85,7 +93,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<ChallengeApi>("challenge", () =>
             {
-                return new ChallengeApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("challenge");
+                if (customPath != "")
+                    return (new ChallengeApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new ChallengeApi(sdk);
             });
         }
     }

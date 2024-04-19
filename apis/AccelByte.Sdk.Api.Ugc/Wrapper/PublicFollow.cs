@@ -20,31 +20,74 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PublicFollow(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PublicFollow(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetFollowedContent.GetFollowedContentBuilder GetFollowedContentOp
         {
-            get { return new Operation.GetFollowedContent.GetFollowedContentBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetFollowedContent.GetFollowedContentBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetFollowedUsers.GetFollowedUsersBuilder GetFollowedUsersOp
         {
-            get { return new Operation.GetFollowedUsers.GetFollowedUsersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetFollowedUsers.GetFollowedUsersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateUserFollowStatus.UpdateUserFollowStatusBuilder UpdateUserFollowStatusOp
         {
-            get { return new Operation.UpdateUserFollowStatus.UpdateUserFollowStatusBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateUserFollowStatus.UpdateUserFollowStatusBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPublicFollowers.GetPublicFollowersBuilder GetPublicFollowersOp
         {
-            get { return new Operation.GetPublicFollowers.GetPublicFollowersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPublicFollowers.GetPublicFollowersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPublicFollowing.GetPublicFollowingBuilder GetPublicFollowingOp
         {
-            get { return new Operation.GetPublicFollowing.GetPublicFollowingBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPublicFollowing.GetPublicFollowingBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Matchmaking
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.MatchmakingOperations MatchmakingOperations
         {
             get
             {
                 if (_MatchmakingOperations == null)
-                    _MatchmakingOperations = new Wrapper.MatchmakingOperations(_Sdk);
+                    _MatchmakingOperations = new Wrapper.MatchmakingOperations(_Sdk, _CustomBasePath);
                 return _MatchmakingOperations;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Matchmaking
             get
             {
                 if (_Matchmaking == null)
-                    _Matchmaking = new Wrapper.Matchmaking(_Sdk);
+                    _Matchmaking = new Wrapper.Matchmaking(_Sdk, _CustomBasePath);
                 return _Matchmaking;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Matchmaking
             get
             {
                 if (_SocialMatchmaking == null)
-                    _SocialMatchmaking = new Wrapper.SocialMatchmaking(_Sdk);
+                    _SocialMatchmaking = new Wrapper.SocialMatchmaking(_Sdk, _CustomBasePath);
                 return _SocialMatchmaking;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Matchmaking
             get
             {
                 if (_MockMatchmaking == null)
-                    _MockMatchmaking = new Wrapper.MockMatchmaking(_Sdk);
+                    _MockMatchmaking = new Wrapper.MockMatchmaking(_Sdk, _CustomBasePath);
                 return _MockMatchmaking;
             }
         }
@@ -62,6 +64,12 @@ namespace AccelByte.Sdk.Api.Matchmaking
         internal MatchmakingApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public MatchmakingApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -74,7 +82,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<MatchmakingApi>("matchmaking", () =>
             {
-                return new MatchmakingApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("matchmaking");
+                if (customPath != "")
+                    return (new MatchmakingApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new MatchmakingApi(sdk);
             });
         }
     }

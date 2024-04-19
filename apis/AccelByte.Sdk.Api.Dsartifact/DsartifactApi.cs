@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Dsartifact
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.ArtifactUploadProcessQueue ArtifactUploadProcessQueue
         {
             get
             {
                 if (_ArtifactUploadProcessQueue == null)
-                    _ArtifactUploadProcessQueue = new Wrapper.ArtifactUploadProcessQueue(_Sdk);
+                    _ArtifactUploadProcessQueue = new Wrapper.ArtifactUploadProcessQueue(_Sdk, _CustomBasePath);
                 return _ArtifactUploadProcessQueue;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Dsartifact
             get
             {
                 if (_TerminatedServers == null)
-                    _TerminatedServers = new Wrapper.TerminatedServers(_Sdk);
+                    _TerminatedServers = new Wrapper.TerminatedServers(_Sdk, _CustomBasePath);
                 return _TerminatedServers;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Dsartifact
             get
             {
                 if (_DownloadServerArtifact == null)
-                    _DownloadServerArtifact = new Wrapper.DownloadServerArtifact(_Sdk);
+                    _DownloadServerArtifact = new Wrapper.DownloadServerArtifact(_Sdk, _CustomBasePath);
                 return _DownloadServerArtifact;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Dsartifact
             get
             {
                 if (_AllTerminatedServers == null)
-                    _AllTerminatedServers = new Wrapper.AllTerminatedServers(_Sdk);
+                    _AllTerminatedServers = new Wrapper.AllTerminatedServers(_Sdk, _CustomBasePath);
                 return _AllTerminatedServers;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Dsartifact
             get
             {
                 if (_Operations == null)
-                    _Operations = new Wrapper.Operations(_Sdk);
+                    _Operations = new Wrapper.Operations(_Sdk, _CustomBasePath);
                 return _Operations;
             }
         }
@@ -73,6 +75,12 @@ namespace AccelByte.Sdk.Api.Dsartifact
         internal DsartifactApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public DsartifactApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -85,7 +93,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<DsartifactApi>("dsartifact", () =>
             {
-                return new DsartifactApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("dsartifact");
+                if (customPath != "")
+                    return (new DsartifactApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new DsartifactApi(sdk);
             });
         }
     }

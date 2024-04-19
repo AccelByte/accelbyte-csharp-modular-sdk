@@ -20,31 +20,74 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public InputValidations(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public InputValidations(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetInputValidations.AdminGetInputValidationsBuilder AdminGetInputValidationsOp
         {
-            get { return new Operation.AdminGetInputValidations.AdminGetInputValidationsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetInputValidations.AdminGetInputValidationsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateInputValidations.AdminUpdateInputValidationsBuilder AdminUpdateInputValidationsOp
         {
-            get { return new Operation.AdminUpdateInputValidations.AdminUpdateInputValidationsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateInputValidations.AdminUpdateInputValidationsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminResetInputValidations.AdminResetInputValidationsBuilder AdminResetInputValidationsOp
         {
-            get { return new Operation.AdminResetInputValidations.AdminResetInputValidationsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminResetInputValidations.AdminResetInputValidationsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetInputValidations.PublicGetInputValidationsBuilder PublicGetInputValidationsOp
         {
-            get { return new Operation.PublicGetInputValidations.PublicGetInputValidationsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetInputValidations.PublicGetInputValidationsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetInputValidationByField.PublicGetInputValidationByFieldBuilder PublicGetInputValidationByFieldOp
         {
-            get { return new Operation.PublicGetInputValidationByField.PublicGetInputValidationByFieldBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetInputValidationByField.PublicGetInputValidationByFieldBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

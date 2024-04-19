@@ -20,740 +20,1910 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Users(IAccelByteSdk sdk)
         {
             _sdk = sdk;
+        }
+
+        public Users(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
         }
 
         #region Operation Builders
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CreateUser.CreateUserBuilder CreateUserOp
         {
-            get { return new Operation.CreateUser.CreateUserBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateUser.CreateUserBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetAdminUsersByRoleID.GetAdminUsersByRoleIDBuilder GetAdminUsersByRoleIDOp
         {
-            get { return new Operation.GetAdminUsersByRoleID.GetAdminUsersByRoleIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetAdminUsersByRoleID.GetAdminUsersByRoleIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserByLoginID.GetUserByLoginIDBuilder GetUserByLoginIDOp
         {
-            get { return new Operation.GetUserByLoginID.GetUserByLoginIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserByLoginID.GetUserByLoginIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserByPlatformUserID.GetUserByPlatformUserIDBuilder GetUserByPlatformUserIDOp
         {
-            get { return new Operation.GetUserByPlatformUserID.GetUserByPlatformUserIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserByPlatformUserID.GetUserByPlatformUserIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ForgotPassword.ForgotPasswordBuilder ForgotPasswordOp
         {
-            get { return new Operation.ForgotPassword.ForgotPasswordBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ForgotPassword.ForgotPasswordBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUsersByLoginIds.GetUsersByLoginIdsBuilder GetUsersByLoginIdsOp
         {
-            get { return new Operation.GetUsersByLoginIds.GetUsersByLoginIdsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUsersByLoginIds.GetUsersByLoginIdsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ResetPassword.ResetPasswordBuilder ResetPasswordOp
         {
-            get { return new Operation.ResetPassword.ResetPasswordBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ResetPassword.ResetPasswordBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SearchUser.SearchUserBuilder SearchUserOp
         {
-            get { return new Operation.SearchUser.SearchUserBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SearchUser.SearchUserBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserByUserID.GetUserByUserIDBuilder GetUserByUserIDOp
         {
-            get { return new Operation.GetUserByUserID.GetUserByUserIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserByUserID.GetUserByUserIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateUser.UpdateUserBuilder UpdateUserOp
         {
-            get { return new Operation.UpdateUser.UpdateUserBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateUser.UpdateUserBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteUser.DeleteUserBuilder DeleteUserOp
         {
-            get { return new Operation.DeleteUser.DeleteUserBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteUser.DeleteUserBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public BanUser.BanUserBuilder BanUserOp
         {
-            get { return new Operation.BanUser.BanUserBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BanUser.BanUserBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserBanHistory.GetUserBanHistoryBuilder GetUserBanHistoryOp
         {
-            get { return new Operation.GetUserBanHistory.GetUserBanHistoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserBanHistory.GetUserBanHistoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DisableUserBan.DisableUserBanBuilder DisableUserBanOp
         {
-            get { return new Operation.DisableUserBan.DisableUserBanBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DisableUserBan.DisableUserBanBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public EnableUserBan.EnableUserBanBuilder EnableUserBanOp
         {
-            get { return new Operation.EnableUserBan.EnableUserBanBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.EnableUserBan.EnableUserBanBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ListCrossNamespaceAccountLink.ListCrossNamespaceAccountLinkBuilder ListCrossNamespaceAccountLinkOp
         {
-            get { return new Operation.ListCrossNamespaceAccountLink.ListCrossNamespaceAccountLinkBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListCrossNamespaceAccountLink.ListCrossNamespaceAccountLinkBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DisableUser.DisableUserBuilder DisableUserOp
         {
-            get { return new Operation.DisableUser.DisableUserBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DisableUser.DisableUserBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public EnableUser.EnableUserBuilder EnableUserOp
         {
-            get { return new Operation.EnableUser.EnableUserBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.EnableUser.EnableUserBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserInformation.GetUserInformationBuilder GetUserInformationOp
         {
-            get { return new Operation.GetUserInformation.GetUserInformationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserInformation.GetUserInformationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteUserInformation.DeleteUserInformationBuilder DeleteUserInformationOp
         {
-            get { return new Operation.DeleteUserInformation.DeleteUserInformationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteUserInformation.DeleteUserInformationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserLoginHistories.GetUserLoginHistoriesBuilder GetUserLoginHistoriesOp
         {
-            get { return new Operation.GetUserLoginHistories.GetUserLoginHistoriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserLoginHistories.GetUserLoginHistoriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdatePassword.UpdatePasswordBuilder UpdatePasswordOp
         {
-            get { return new Operation.UpdatePassword.UpdatePasswordBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdatePassword.UpdatePasswordBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SaveUserPermission.SaveUserPermissionBuilder SaveUserPermissionOp
         {
-            get { return new Operation.SaveUserPermission.SaveUserPermissionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SaveUserPermission.SaveUserPermissionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AddUserPermission.AddUserPermissionBuilder AddUserPermissionOp
         {
-            get { return new Operation.AddUserPermission.AddUserPermissionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AddUserPermission.AddUserPermissionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteUserPermission.DeleteUserPermissionBuilder DeleteUserPermissionOp
         {
-            get { return new Operation.DeleteUserPermission.DeleteUserPermissionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteUserPermission.DeleteUserPermissionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserPlatformAccounts.GetUserPlatformAccountsBuilder GetUserPlatformAccountsOp
         {
-            get { return new Operation.GetUserPlatformAccounts.GetUserPlatformAccountsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserPlatformAccounts.GetUserPlatformAccountsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserMapping.GetUserMappingBuilder GetUserMappingOp
         {
-            get { return new Operation.GetUserMapping.GetUserMappingBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserMapping.GetUserMappingBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserJusticePlatformAccount.GetUserJusticePlatformAccountBuilder GetUserJusticePlatformAccountOp
         {
-            get { return new Operation.GetUserJusticePlatformAccount.GetUserJusticePlatformAccountBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserJusticePlatformAccount.GetUserJusticePlatformAccountBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PlatformLink.PlatformLinkBuilder PlatformLinkOp
         {
-            get { return new Operation.PlatformLink.PlatformLinkBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PlatformLink.PlatformLinkBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PlatformUnlink.PlatformUnlinkBuilder PlatformUnlinkOp
         {
-            get { return new Operation.PlatformUnlink.PlatformUnlinkBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PlatformUnlink.PlatformUnlinkBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetPublisherUser.GetPublisherUserBuilder GetPublisherUserOp
         {
-            get { return new Operation.GetPublisherUser.GetPublisherUserBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPublisherUser.GetPublisherUserBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SaveUserRoles.SaveUserRolesBuilder SaveUserRolesOp
         {
-            get { return new Operation.SaveUserRoles.SaveUserRolesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SaveUserRoles.SaveUserRolesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AddUserRole.AddUserRoleBuilder AddUserRoleOp
         {
-            get { return new Operation.AddUserRole.AddUserRoleBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AddUserRole.AddUserRoleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteUserRole.DeleteUserRoleBuilder DeleteUserRoleOp
         {
-            get { return new Operation.DeleteUserRole.DeleteUserRoleBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteUserRole.DeleteUserRoleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpgradeHeadlessAccount.UpgradeHeadlessAccountBuilder UpgradeHeadlessAccountOp
         {
-            get { return new Operation.UpgradeHeadlessAccount.UpgradeHeadlessAccountBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpgradeHeadlessAccount.UpgradeHeadlessAccountBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpgradeHeadlessAccountWithVerificationCode.UpgradeHeadlessAccountWithVerificationCodeBuilder UpgradeHeadlessAccountWithVerificationCodeOp
         {
-            get { return new Operation.UpgradeHeadlessAccountWithVerificationCode.UpgradeHeadlessAccountWithVerificationCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpgradeHeadlessAccountWithVerificationCode.UpgradeHeadlessAccountWithVerificationCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UserVerification.UserVerificationBuilder UserVerificationOp
         {
-            get { return new Operation.UserVerification.UserVerificationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UserVerification.UserVerificationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SendVerificationCode.SendVerificationCodeBuilder SendVerificationCodeOp
         {
-            get { return new Operation.SendVerificationCode.SendVerificationCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SendVerificationCode.SendVerificationCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetAgeRestrictionStatusV2.AdminGetAgeRestrictionStatusV2Builder AdminGetAgeRestrictionStatusV2Op
         {
-            get { return new Operation.AdminGetAgeRestrictionStatusV2.AdminGetAgeRestrictionStatusV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetAgeRestrictionStatusV2.AdminGetAgeRestrictionStatusV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUpdateAgeRestrictionConfigV2.AdminUpdateAgeRestrictionConfigV2Builder AdminUpdateAgeRestrictionConfigV2Op
         {
-            get { return new Operation.AdminUpdateAgeRestrictionConfigV2.AdminUpdateAgeRestrictionConfigV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateAgeRestrictionConfigV2.AdminUpdateAgeRestrictionConfigV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetListCountryAgeRestriction.GetListCountryAgeRestrictionBuilder GetListCountryAgeRestrictionOp
         {
-            get { return new Operation.GetListCountryAgeRestriction.GetListCountryAgeRestrictionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetListCountryAgeRestriction.GetListCountryAgeRestrictionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateCountryAgeRestriction.UpdateCountryAgeRestrictionBuilder UpdateCountryAgeRestrictionOp
         {
-            get { return new Operation.UpdateCountryAgeRestriction.UpdateCountryAgeRestrictionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateCountryAgeRestriction.UpdateCountryAgeRestrictionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminSearchUsersV2.AdminSearchUsersV2Builder AdminSearchUsersV2Op
         {
-            get { return new Operation.AdminSearchUsersV2.AdminSearchUsersV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminSearchUsersV2.AdminSearchUsersV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetUserByUserIdV2.AdminGetUserByUserIdV2Builder AdminGetUserByUserIdV2Op
         {
-            get { return new Operation.AdminGetUserByUserIdV2.AdminGetUserByUserIdV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetUserByUserIdV2.AdminGetUserByUserIdV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUpdateUserV2.AdminUpdateUserV2Builder AdminUpdateUserV2Op
         {
-            get { return new Operation.AdminUpdateUserV2.AdminUpdateUserV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateUserV2.AdminUpdateUserV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminBanUserV2.AdminBanUserV2Builder AdminBanUserV2Op
         {
-            get { return new Operation.AdminBanUserV2.AdminBanUserV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminBanUserV2.AdminBanUserV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetUserBanV2.AdminGetUserBanV2Builder AdminGetUserBanV2Op
         {
-            get { return new Operation.AdminGetUserBanV2.AdminGetUserBanV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetUserBanV2.AdminGetUserBanV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminDisableUserV2.AdminDisableUserV2Builder AdminDisableUserV2Op
         {
-            get { return new Operation.AdminDisableUserV2.AdminDisableUserV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDisableUserV2.AdminDisableUserV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminEnableUserV2.AdminEnableUserV2Builder AdminEnableUserV2Op
         {
-            get { return new Operation.AdminEnableUserV2.AdminEnableUserV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminEnableUserV2.AdminEnableUserV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminResetPasswordV2.AdminResetPasswordV2Builder AdminResetPasswordV2Op
         {
-            get { return new Operation.AdminResetPasswordV2.AdminResetPasswordV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminResetPasswordV2.AdminResetPasswordV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminDeletePlatformLinkV2.AdminDeletePlatformLinkV2Builder AdminDeletePlatformLinkV2Op
         {
-            get { return new Operation.AdminDeletePlatformLinkV2.AdminDeletePlatformLinkV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeletePlatformLinkV2.AdminDeletePlatformLinkV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminPutUserRolesV2.AdminPutUserRolesV2Builder AdminPutUserRolesV2Op
         {
-            get { return new Operation.AdminPutUserRolesV2.AdminPutUserRolesV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminPutUserRolesV2.AdminPutUserRolesV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminCreateUserRolesV2.AdminCreateUserRolesV2Builder AdminCreateUserRolesV2Op
         {
-            get { return new Operation.AdminCreateUserRolesV2.AdminCreateUserRolesV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateUserRolesV2.AdminCreateUserRolesV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetCountryAgeRestriction.PublicGetCountryAgeRestrictionBuilder PublicGetCountryAgeRestrictionOp
         {
-            get { return new Operation.PublicGetCountryAgeRestriction.PublicGetCountryAgeRestrictionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetCountryAgeRestriction.PublicGetCountryAgeRestrictionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicCreateUserV2.PublicCreateUserV2Builder PublicCreateUserV2Op
         {
-            get { return new Operation.PublicCreateUserV2.PublicCreateUserV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicCreateUserV2.PublicCreateUserV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicForgotPasswordV2.PublicForgotPasswordV2Builder PublicForgotPasswordV2Op
         {
-            get { return new Operation.PublicForgotPasswordV2.PublicForgotPasswordV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicForgotPasswordV2.PublicForgotPasswordV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicResetPasswordV2.PublicResetPasswordV2Builder PublicResetPasswordV2Op
         {
-            get { return new Operation.PublicResetPasswordV2.PublicResetPasswordV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicResetPasswordV2.PublicResetPasswordV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetUserByUserIDV2.PublicGetUserByUserIDV2Builder PublicGetUserByUserIDV2Op
         {
-            get { return new Operation.PublicGetUserByUserIDV2.PublicGetUserByUserIDV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserByUserIDV2.PublicGetUserByUserIDV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicUpdateUserV2.PublicUpdateUserV2Builder PublicUpdateUserV2Op
         {
-            get { return new Operation.PublicUpdateUserV2.PublicUpdateUserV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpdateUserV2.PublicUpdateUserV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetUserBan.PublicGetUserBanBuilder PublicGetUserBanOp
         {
-            get { return new Operation.PublicGetUserBan.PublicGetUserBanBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserBan.PublicGetUserBanBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicUpdatePasswordV2.PublicUpdatePasswordV2Builder PublicUpdatePasswordV2Op
         {
-            get { return new Operation.PublicUpdatePasswordV2.PublicUpdatePasswordV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpdatePasswordV2.PublicUpdatePasswordV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetListJusticePlatformAccounts.GetListJusticePlatformAccountsBuilder GetListJusticePlatformAccountsOp
         {
-            get { return new Operation.GetListJusticePlatformAccounts.GetListJusticePlatformAccountsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetListJusticePlatformAccounts.GetListJusticePlatformAccountsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicPlatformLinkV2.PublicPlatformLinkV2Builder PublicPlatformLinkV2Op
         {
-            get { return new Operation.PublicPlatformLinkV2.PublicPlatformLinkV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicPlatformLinkV2.PublicPlatformLinkV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicDeletePlatformLinkV2.PublicDeletePlatformLinkV2Builder PublicDeletePlatformLinkV2Op
         {
-            get { return new Operation.PublicDeletePlatformLinkV2.PublicDeletePlatformLinkV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicDeletePlatformLinkV2.PublicDeletePlatformLinkV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListAdminsV3.ListAdminsV3Builder ListAdminsV3Op
         {
-            get { return new Operation.ListAdminsV3.ListAdminsV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListAdminsV3.ListAdminsV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetAgeRestrictionStatusV3.AdminGetAgeRestrictionStatusV3Builder AdminGetAgeRestrictionStatusV3Op
         {
-            get { return new Operation.AdminGetAgeRestrictionStatusV3.AdminGetAgeRestrictionStatusV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetAgeRestrictionStatusV3.AdminGetAgeRestrictionStatusV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateAgeRestrictionConfigV3.AdminUpdateAgeRestrictionConfigV3Builder AdminUpdateAgeRestrictionConfigV3Op
         {
-            get { return new Operation.AdminUpdateAgeRestrictionConfigV3.AdminUpdateAgeRestrictionConfigV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateAgeRestrictionConfigV3.AdminUpdateAgeRestrictionConfigV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetListCountryAgeRestrictionV3.AdminGetListCountryAgeRestrictionV3Builder AdminGetListCountryAgeRestrictionV3Op
         {
-            get { return new Operation.AdminGetListCountryAgeRestrictionV3.AdminGetListCountryAgeRestrictionV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetListCountryAgeRestrictionV3.AdminGetListCountryAgeRestrictionV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateCountryAgeRestrictionV3.AdminUpdateCountryAgeRestrictionV3Builder AdminUpdateCountryAgeRestrictionV3Op
         {
-            get { return new Operation.AdminUpdateCountryAgeRestrictionV3.AdminUpdateCountryAgeRestrictionV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateCountryAgeRestrictionV3.AdminUpdateCountryAgeRestrictionV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminListUserIDByPlatformUserIDsV3.AdminListUserIDByPlatformUserIDsV3Builder AdminListUserIDByPlatformUserIDsV3Op
         {
-            get { return new Operation.AdminListUserIDByPlatformUserIDsV3.AdminListUserIDByPlatformUserIDsV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListUserIDByPlatformUserIDsV3.AdminListUserIDByPlatformUserIDsV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetUserByPlatformUserIDV3.AdminGetUserByPlatformUserIDV3Builder AdminGetUserByPlatformUserIDV3Op
         {
-            get { return new Operation.AdminGetUserByPlatformUserIDV3.AdminGetUserByPlatformUserIDV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetUserByPlatformUserIDV3.AdminGetUserByPlatformUserIDV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetAdminUsersByRoleIdV3.GetAdminUsersByRoleIdV3Builder GetAdminUsersByRoleIdV3Op
         {
-            get { return new Operation.GetAdminUsersByRoleIdV3.GetAdminUsersByRoleIdV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetAdminUsersByRoleIdV3.GetAdminUsersByRoleIdV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetUserByEmailAddressV3.AdminGetUserByEmailAddressV3Builder AdminGetUserByEmailAddressV3Op
         {
-            get { return new Operation.AdminGetUserByEmailAddressV3.AdminGetUserByEmailAddressV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetUserByEmailAddressV3.AdminGetUserByEmailAddressV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminBulkUpdateUsersV3.AdminBulkUpdateUsersV3Builder AdminBulkUpdateUsersV3Op
         {
-            get { return new Operation.AdminBulkUpdateUsersV3.AdminBulkUpdateUsersV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminBulkUpdateUsersV3.AdminBulkUpdateUsersV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetBulkUserBanV3.AdminGetBulkUserBanV3Builder AdminGetBulkUserBanV3Op
         {
-            get { return new Operation.AdminGetBulkUserBanV3.AdminGetBulkUserBanV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetBulkUserBanV3.AdminGetBulkUserBanV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminListUserIDByUserIDsV3.AdminListUserIDByUserIDsV3Builder AdminListUserIDByUserIDsV3Op
         {
-            get { return new Operation.AdminListUserIDByUserIDsV3.AdminListUserIDByUserIDsV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListUserIDByUserIDsV3.AdminListUserIDByUserIDsV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminBulkGetUsersPlatform.AdminBulkGetUsersPlatformBuilder AdminBulkGetUsersPlatformOp
         {
-            get { return new Operation.AdminBulkGetUsersPlatform.AdminBulkGetUsersPlatformBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminBulkGetUsersPlatform.AdminBulkGetUsersPlatformBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminInviteUserV3.AdminInviteUserV3Builder AdminInviteUserV3Op
         {
-            get { return new Operation.AdminInviteUserV3.AdminInviteUserV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminInviteUserV3.AdminInviteUserV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminQueryThirdPlatformLinkHistoryV3.AdminQueryThirdPlatformLinkHistoryV3Builder AdminQueryThirdPlatformLinkHistoryV3Op
         {
-            get { return new Operation.AdminQueryThirdPlatformLinkHistoryV3.AdminQueryThirdPlatformLinkHistoryV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminQueryThirdPlatformLinkHistoryV3.AdminQueryThirdPlatformLinkHistoryV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminListUsersV3.AdminListUsersV3Builder AdminListUsersV3Op
         {
-            get { return new Operation.AdminListUsersV3.AdminListUsersV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListUsersV3.AdminListUsersV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminSearchUserV3.AdminSearchUserV3Builder AdminSearchUserV3Op
         {
-            get { return new Operation.AdminSearchUserV3.AdminSearchUserV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminSearchUserV3.AdminSearchUserV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetBulkUserByEmailAddressV3.AdminGetBulkUserByEmailAddressV3Builder AdminGetBulkUserByEmailAddressV3Op
         {
-            get { return new Operation.AdminGetBulkUserByEmailAddressV3.AdminGetBulkUserByEmailAddressV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetBulkUserByEmailAddressV3.AdminGetBulkUserByEmailAddressV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetUserByUserIdV3.AdminGetUserByUserIdV3Builder AdminGetUserByUserIdV3Op
         {
-            get { return new Operation.AdminGetUserByUserIdV3.AdminGetUserByUserIdV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetUserByUserIdV3.AdminGetUserByUserIdV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateUserV3.AdminUpdateUserV3Builder AdminUpdateUserV3Op
         {
-            get { return new Operation.AdminUpdateUserV3.AdminUpdateUserV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateUserV3.AdminUpdateUserV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetUserBanV3.AdminGetUserBanV3Builder AdminGetUserBanV3Op
         {
-            get { return new Operation.AdminGetUserBanV3.AdminGetUserBanV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetUserBanV3.AdminGetUserBanV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminBanUserV3.AdminBanUserV3Builder AdminBanUserV3Op
         {
-            get { return new Operation.AdminBanUserV3.AdminBanUserV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminBanUserV3.AdminBanUserV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateUserBanV3.AdminUpdateUserBanV3Builder AdminUpdateUserBanV3Op
         {
-            get { return new Operation.AdminUpdateUserBanV3.AdminUpdateUserBanV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateUserBanV3.AdminUpdateUserBanV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminSendVerificationCodeV3.AdminSendVerificationCodeV3Builder AdminSendVerificationCodeV3Op
         {
-            get { return new Operation.AdminSendVerificationCodeV3.AdminSendVerificationCodeV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminSendVerificationCodeV3.AdminSendVerificationCodeV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminVerifyAccountV3.AdminVerifyAccountV3Builder AdminVerifyAccountV3Op
         {
-            get { return new Operation.AdminVerifyAccountV3.AdminVerifyAccountV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminVerifyAccountV3.AdminVerifyAccountV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserVerificationCode.GetUserVerificationCodeBuilder GetUserVerificationCodeOp
         {
-            get { return new Operation.GetUserVerificationCode.GetUserVerificationCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserVerificationCode.GetUserVerificationCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetUserDeletionStatusV3.AdminGetUserDeletionStatusV3Builder AdminGetUserDeletionStatusV3Op
         {
-            get { return new Operation.AdminGetUserDeletionStatusV3.AdminGetUserDeletionStatusV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetUserDeletionStatusV3.AdminGetUserDeletionStatusV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateUserDeletionStatusV3.AdminUpdateUserDeletionStatusV3Builder AdminUpdateUserDeletionStatusV3Op
         {
-            get { return new Operation.AdminUpdateUserDeletionStatusV3.AdminUpdateUserDeletionStatusV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateUserDeletionStatusV3.AdminUpdateUserDeletionStatusV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminListUserAllPlatformAccountsDistinctV3.AdminListUserAllPlatformAccountsDistinctV3Builder AdminListUserAllPlatformAccountsDistinctV3Op
         {
-            get { return new Operation.AdminListUserAllPlatformAccountsDistinctV3.AdminListUserAllPlatformAccountsDistinctV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListUserAllPlatformAccountsDistinctV3.AdminListUserAllPlatformAccountsDistinctV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpgradeHeadlessAccountV3.AdminUpgradeHeadlessAccountV3Builder AdminUpgradeHeadlessAccountV3Op
         {
-            get { return new Operation.AdminUpgradeHeadlessAccountV3.AdminUpgradeHeadlessAccountV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpgradeHeadlessAccountV3.AdminUpgradeHeadlessAccountV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteUserInformationV3.AdminDeleteUserInformationV3Builder AdminDeleteUserInformationV3Op
         {
-            get { return new Operation.AdminDeleteUserInformationV3.AdminDeleteUserInformationV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteUserInformationV3.AdminDeleteUserInformationV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetUserLoginHistoriesV3.AdminGetUserLoginHistoriesV3Builder AdminGetUserLoginHistoriesV3Op
         {
-            get { return new Operation.AdminGetUserLoginHistoriesV3.AdminGetUserLoginHistoriesV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetUserLoginHistoriesV3.AdminGetUserLoginHistoriesV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminResetPasswordV3.AdminResetPasswordV3Builder AdminResetPasswordV3Op
         {
-            get { return new Operation.AdminResetPasswordV3.AdminResetPasswordV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminResetPasswordV3.AdminResetPasswordV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateUserPermissionV3.AdminUpdateUserPermissionV3Builder AdminUpdateUserPermissionV3Op
         {
-            get { return new Operation.AdminUpdateUserPermissionV3.AdminUpdateUserPermissionV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateUserPermissionV3.AdminUpdateUserPermissionV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminAddUserPermissionsV3.AdminAddUserPermissionsV3Builder AdminAddUserPermissionsV3Op
         {
-            get { return new Operation.AdminAddUserPermissionsV3.AdminAddUserPermissionsV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminAddUserPermissionsV3.AdminAddUserPermissionsV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteUserPermissionBulkV3.AdminDeleteUserPermissionBulkV3Builder AdminDeleteUserPermissionBulkV3Op
         {
-            get { return new Operation.AdminDeleteUserPermissionBulkV3.AdminDeleteUserPermissionBulkV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteUserPermissionBulkV3.AdminDeleteUserPermissionBulkV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteUserPermissionV3.AdminDeleteUserPermissionV3Builder AdminDeleteUserPermissionV3Op
         {
-            get { return new Operation.AdminDeleteUserPermissionV3.AdminDeleteUserPermissionV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteUserPermissionV3.AdminDeleteUserPermissionV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetUserPlatformAccountsV3.AdminGetUserPlatformAccountsV3Builder AdminGetUserPlatformAccountsV3Op
         {
-            get { return new Operation.AdminGetUserPlatformAccountsV3.AdminGetUserPlatformAccountsV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetUserPlatformAccountsV3.AdminGetUserPlatformAccountsV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetListJusticePlatformAccounts.AdminGetListJusticePlatformAccountsBuilder AdminGetListJusticePlatformAccountsOp
         {
-            get { return new Operation.AdminGetListJusticePlatformAccounts.AdminGetListJusticePlatformAccountsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetListJusticePlatformAccounts.AdminGetListJusticePlatformAccountsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetUserMapping.AdminGetUserMappingBuilder AdminGetUserMappingOp
         {
-            get { return new Operation.AdminGetUserMapping.AdminGetUserMappingBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetUserMapping.AdminGetUserMappingBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateJusticeUser.AdminCreateJusticeUserBuilder AdminCreateJusticeUserOp
         {
-            get { return new Operation.AdminCreateJusticeUser.AdminCreateJusticeUserBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateJusticeUser.AdminCreateJusticeUserBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminLinkPlatformAccount.AdminLinkPlatformAccountBuilder AdminLinkPlatformAccountOp
         {
-            get { return new Operation.AdminLinkPlatformAccount.AdminLinkPlatformAccountBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminLinkPlatformAccount.AdminLinkPlatformAccountBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminPlatformUnlinkV3.AdminPlatformUnlinkV3Builder AdminPlatformUnlinkV3Op
         {
-            get { return new Operation.AdminPlatformUnlinkV3.AdminPlatformUnlinkV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminPlatformUnlinkV3.AdminPlatformUnlinkV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminPlatformUnlinkAllV3.AdminPlatformUnlinkAllV3Builder AdminPlatformUnlinkAllV3Op
         {
-            get { return new Operation.AdminPlatformUnlinkAllV3.AdminPlatformUnlinkAllV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminPlatformUnlinkAllV3.AdminPlatformUnlinkAllV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminPlatformLinkV3.AdminPlatformLinkV3Builder AdminPlatformLinkV3Op
         {
-            get { return new Operation.AdminPlatformLinkV3.AdminPlatformLinkV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminPlatformLinkV3.AdminPlatformLinkV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteUserLinkingHistoryByPlatformIDV3.AdminDeleteUserLinkingHistoryByPlatformIDV3Builder AdminDeleteUserLinkingHistoryByPlatformIDV3Op
         {
-            get { return new Operation.AdminDeleteUserLinkingHistoryByPlatformIDV3.AdminDeleteUserLinkingHistoryByPlatformIDV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteUserLinkingHistoryByPlatformIDV3.AdminDeleteUserLinkingHistoryByPlatformIDV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetThirdPartyPlatformTokenLinkStatusV3.AdminGetThirdPartyPlatformTokenLinkStatusV3Builder AdminGetThirdPartyPlatformTokenLinkStatusV3Op
         {
-            get { return new Operation.AdminGetThirdPartyPlatformTokenLinkStatusV3.AdminGetThirdPartyPlatformTokenLinkStatusV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetThirdPartyPlatformTokenLinkStatusV3.AdminGetThirdPartyPlatformTokenLinkStatusV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetUserSinglePlatformAccount.AdminGetUserSinglePlatformAccountBuilder AdminGetUserSinglePlatformAccountOp
         {
-            get { return new Operation.AdminGetUserSinglePlatformAccount.AdminGetUserSinglePlatformAccountBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetUserSinglePlatformAccount.AdminGetUserSinglePlatformAccountBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteUserRolesV3.AdminDeleteUserRolesV3Builder AdminDeleteUserRolesV3Op
         {
-            get { return new Operation.AdminDeleteUserRolesV3.AdminDeleteUserRolesV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteUserRolesV3.AdminDeleteUserRolesV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminSaveUserRoleV3.AdminSaveUserRoleV3Builder AdminSaveUserRoleV3Op
         {
-            get { return new Operation.AdminSaveUserRoleV3.AdminSaveUserRoleV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminSaveUserRoleV3.AdminSaveUserRoleV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminAddUserRoleV3.AdminAddUserRoleV3Builder AdminAddUserRoleV3Op
         {
-            get { return new Operation.AdminAddUserRoleV3.AdminAddUserRoleV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminAddUserRoleV3.AdminAddUserRoleV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteUserRoleV3.AdminDeleteUserRoleV3Builder AdminDeleteUserRoleV3Op
         {
-            get { return new Operation.AdminDeleteUserRoleV3.AdminDeleteUserRoleV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteUserRoleV3.AdminDeleteUserRoleV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateUserStatusV3.AdminUpdateUserStatusV3Builder AdminUpdateUserStatusV3Op
         {
-            get { return new Operation.AdminUpdateUserStatusV3.AdminUpdateUserStatusV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateUserStatusV3.AdminUpdateUserStatusV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminTrustlyUpdateUserIdentity.AdminTrustlyUpdateUserIdentityBuilder AdminTrustlyUpdateUserIdentityOp
         {
-            get { return new Operation.AdminTrustlyUpdateUserIdentity.AdminTrustlyUpdateUserIdentityBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminTrustlyUpdateUserIdentity.AdminTrustlyUpdateUserIdentityBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminVerifyUserWithoutVerificationCodeV3.AdminVerifyUserWithoutVerificationCodeV3Builder AdminVerifyUserWithoutVerificationCodeV3Op
         {
-            get { return new Operation.AdminVerifyUserWithoutVerificationCodeV3.AdminVerifyUserWithoutVerificationCodeV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminVerifyUserWithoutVerificationCodeV3.AdminVerifyUserWithoutVerificationCodeV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetMyUserV3.AdminGetMyUserV3Builder AdminGetMyUserV3Op
         {
-            get { return new Operation.AdminGetMyUserV3.AdminGetMyUserV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetMyUserV3.AdminGetMyUserV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetCountryAgeRestrictionV3.PublicGetCountryAgeRestrictionV3Builder PublicGetCountryAgeRestrictionV3Op
         {
-            get { return new Operation.PublicGetCountryAgeRestrictionV3.PublicGetCountryAgeRestrictionV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetCountryAgeRestrictionV3.PublicGetCountryAgeRestrictionV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicListUserIDByPlatformUserIDsV3.PublicListUserIDByPlatformUserIDsV3Builder PublicListUserIDByPlatformUserIDsV3Op
         {
-            get { return new Operation.PublicListUserIDByPlatformUserIDsV3.PublicListUserIDByPlatformUserIDsV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicListUserIDByPlatformUserIDsV3.PublicListUserIDByPlatformUserIDsV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserByPlatformUserIDV3.PublicGetUserByPlatformUserIDV3Builder PublicGetUserByPlatformUserIDV3Op
         {
-            get { return new Operation.PublicGetUserByPlatformUserIDV3.PublicGetUserByPlatformUserIDV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserByPlatformUserIDV3.PublicGetUserByPlatformUserIDV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetAsyncStatus.PublicGetAsyncStatusBuilder PublicGetAsyncStatusOp
         {
-            get { return new Operation.PublicGetAsyncStatus.PublicGetAsyncStatusBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetAsyncStatus.PublicGetAsyncStatusBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicSearchUserV3.PublicSearchUserV3Builder PublicSearchUserV3Op
         {
-            get { return new Operation.PublicSearchUserV3.PublicSearchUserV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicSearchUserV3.PublicSearchUserV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicCreateUserV3.PublicCreateUserV3Builder PublicCreateUserV3Op
         {
-            get { return new Operation.PublicCreateUserV3.PublicCreateUserV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicCreateUserV3.PublicCreateUserV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CheckUserAvailability.CheckUserAvailabilityBuilder CheckUserAvailabilityOp
         {
-            get { return new Operation.CheckUserAvailability.CheckUserAvailabilityBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CheckUserAvailability.CheckUserAvailabilityBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicBulkGetUsers.PublicBulkGetUsersBuilder PublicBulkGetUsersOp
         {
-            get { return new Operation.PublicBulkGetUsers.PublicBulkGetUsersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicBulkGetUsers.PublicBulkGetUsersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicSendRegistrationCode.PublicSendRegistrationCodeBuilder PublicSendRegistrationCodeOp
         {
-            get { return new Operation.PublicSendRegistrationCode.PublicSendRegistrationCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicSendRegistrationCode.PublicSendRegistrationCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicVerifyRegistrationCode.PublicVerifyRegistrationCodeBuilder PublicVerifyRegistrationCodeOp
         {
-            get { return new Operation.PublicVerifyRegistrationCode.PublicVerifyRegistrationCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicVerifyRegistrationCode.PublicVerifyRegistrationCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicForgotPasswordV3.PublicForgotPasswordV3Builder PublicForgotPasswordV3Op
         {
-            get { return new Operation.PublicForgotPasswordV3.PublicForgotPasswordV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicForgotPasswordV3.PublicForgotPasswordV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetAdminInvitationV3.GetAdminInvitationV3Builder GetAdminInvitationV3Op
         {
-            get { return new Operation.GetAdminInvitationV3.GetAdminInvitationV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetAdminInvitationV3.GetAdminInvitationV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateUserFromInvitationV3.CreateUserFromInvitationV3Builder CreateUserFromInvitationV3Op
         {
-            get { return new Operation.CreateUserFromInvitationV3.CreateUserFromInvitationV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateUserFromInvitationV3.CreateUserFromInvitationV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateUserV3.UpdateUserV3Builder UpdateUserV3Op
         {
-            get { return new Operation.UpdateUserV3.UpdateUserV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateUserV3.UpdateUserV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicPartialUpdateUserV3.PublicPartialUpdateUserV3Builder PublicPartialUpdateUserV3Op
         {
-            get { return new Operation.PublicPartialUpdateUserV3.PublicPartialUpdateUserV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicPartialUpdateUserV3.PublicPartialUpdateUserV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicSendVerificationCodeV3.PublicSendVerificationCodeV3Builder PublicSendVerificationCodeV3Op
         {
-            get { return new Operation.PublicSendVerificationCodeV3.PublicSendVerificationCodeV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicSendVerificationCodeV3.PublicSendVerificationCodeV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUserVerificationV3.PublicUserVerificationV3Builder PublicUserVerificationV3Op
         {
-            get { return new Operation.PublicUserVerificationV3.PublicUserVerificationV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUserVerificationV3.PublicUserVerificationV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUpgradeHeadlessAccountV3.PublicUpgradeHeadlessAccountV3Builder PublicUpgradeHeadlessAccountV3Op
         {
-            get { return new Operation.PublicUpgradeHeadlessAccountV3.PublicUpgradeHeadlessAccountV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpgradeHeadlessAccountV3.PublicUpgradeHeadlessAccountV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicVerifyHeadlessAccountV3.PublicVerifyHeadlessAccountV3Builder PublicVerifyHeadlessAccountV3Op
         {
-            get { return new Operation.PublicVerifyHeadlessAccountV3.PublicVerifyHeadlessAccountV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicVerifyHeadlessAccountV3.PublicVerifyHeadlessAccountV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUpdatePasswordV3.PublicUpdatePasswordV3Builder PublicUpdatePasswordV3Op
         {
-            get { return new Operation.PublicUpdatePasswordV3.PublicUpdatePasswordV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpdatePasswordV3.PublicUpdatePasswordV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicCreateJusticeUser.PublicCreateJusticeUserBuilder PublicCreateJusticeUserOp
         {
-            get { return new Operation.PublicCreateJusticeUser.PublicCreateJusticeUserBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicCreateJusticeUser.PublicCreateJusticeUserBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicPlatformLinkV3.PublicPlatformLinkV3Builder PublicPlatformLinkV3Op
         {
-            get { return new Operation.PublicPlatformLinkV3.PublicPlatformLinkV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicPlatformLinkV3.PublicPlatformLinkV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicPlatformUnlinkV3.PublicPlatformUnlinkV3Builder PublicPlatformUnlinkV3Op
         {
-            get { return new Operation.PublicPlatformUnlinkV3.PublicPlatformUnlinkV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicPlatformUnlinkV3.PublicPlatformUnlinkV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicPlatformUnlinkAllV3.PublicPlatformUnlinkAllV3Builder PublicPlatformUnlinkAllV3Op
         {
-            get { return new Operation.PublicPlatformUnlinkAllV3.PublicPlatformUnlinkAllV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicPlatformUnlinkAllV3.PublicPlatformUnlinkAllV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicForcePlatformLinkV3.PublicForcePlatformLinkV3Builder PublicForcePlatformLinkV3Op
         {
-            get { return new Operation.PublicForcePlatformLinkV3.PublicForcePlatformLinkV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicForcePlatformLinkV3.PublicForcePlatformLinkV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicWebLinkPlatform.PublicWebLinkPlatformBuilder PublicWebLinkPlatformOp
         {
-            get { return new Operation.PublicWebLinkPlatform.PublicWebLinkPlatformBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicWebLinkPlatform.PublicWebLinkPlatformBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicWebLinkPlatformEstablish.PublicWebLinkPlatformEstablishBuilder PublicWebLinkPlatformEstablishOp
         {
-            get { return new Operation.PublicWebLinkPlatformEstablish.PublicWebLinkPlatformEstablishBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicWebLinkPlatformEstablish.PublicWebLinkPlatformEstablishBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicProcessWebLinkPlatformV3.PublicProcessWebLinkPlatformV3Builder PublicProcessWebLinkPlatformV3Op
         {
-            get { return new Operation.PublicProcessWebLinkPlatformV3.PublicProcessWebLinkPlatformV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicProcessWebLinkPlatformV3.PublicProcessWebLinkPlatformV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUsersPlatformInfosV3.PublicGetUsersPlatformInfosV3Builder PublicGetUsersPlatformInfosV3Op
         {
-            get { return new Operation.PublicGetUsersPlatformInfosV3.PublicGetUsersPlatformInfosV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUsersPlatformInfosV3.PublicGetUsersPlatformInfosV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ResetPasswordV3.ResetPasswordV3Builder ResetPasswordV3Op
         {
-            get { return new Operation.ResetPasswordV3.ResetPasswordV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ResetPasswordV3.ResetPasswordV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetUserByUserIdV3.PublicGetUserByUserIdV3Builder PublicGetUserByUserIdV3Op
         {
-            get { return new Operation.PublicGetUserByUserIdV3.PublicGetUserByUserIdV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserByUserIdV3.PublicGetUserByUserIdV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserBanHistoryV3.PublicGetUserBanHistoryV3Builder PublicGetUserBanHistoryV3Op
         {
-            get { return new Operation.PublicGetUserBanHistoryV3.PublicGetUserBanHistoryV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserBanHistoryV3.PublicGetUserBanHistoryV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicListUserAllPlatformAccountsDistinctV3.PublicListUserAllPlatformAccountsDistinctV3Builder PublicListUserAllPlatformAccountsDistinctV3Op
         {
-            get { return new Operation.PublicListUserAllPlatformAccountsDistinctV3.PublicListUserAllPlatformAccountsDistinctV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicListUserAllPlatformAccountsDistinctV3.PublicListUserAllPlatformAccountsDistinctV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserInformationV3.PublicGetUserInformationV3Builder PublicGetUserInformationV3Op
         {
-            get { return new Operation.PublicGetUserInformationV3.PublicGetUserInformationV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserInformationV3.PublicGetUserInformationV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserLoginHistoriesV3.PublicGetUserLoginHistoriesV3Builder PublicGetUserLoginHistoriesV3Op
         {
-            get { return new Operation.PublicGetUserLoginHistoriesV3.PublicGetUserLoginHistoriesV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserLoginHistoriesV3.PublicGetUserLoginHistoriesV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserPlatformAccountsV3.PublicGetUserPlatformAccountsV3Builder PublicGetUserPlatformAccountsV3Op
         {
-            get { return new Operation.PublicGetUserPlatformAccountsV3.PublicGetUserPlatformAccountsV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserPlatformAccountsV3.PublicGetUserPlatformAccountsV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicListJusticePlatformAccountsV3.PublicListJusticePlatformAccountsV3Builder PublicListJusticePlatformAccountsV3Op
         {
-            get { return new Operation.PublicListJusticePlatformAccountsV3.PublicListJusticePlatformAccountsV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicListJusticePlatformAccountsV3.PublicListJusticePlatformAccountsV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicLinkPlatformAccount.PublicLinkPlatformAccountBuilder PublicLinkPlatformAccountOp
         {
-            get { return new Operation.PublicLinkPlatformAccount.PublicLinkPlatformAccountBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicLinkPlatformAccount.PublicLinkPlatformAccountBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicForceLinkPlatformWithProgression.PublicForceLinkPlatformWithProgressionBuilder PublicForceLinkPlatformWithProgressionOp
         {
-            get { return new Operation.PublicForceLinkPlatformWithProgression.PublicForceLinkPlatformWithProgressionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicForceLinkPlatformWithProgression.PublicForceLinkPlatformWithProgressionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetPublisherUserV3.PublicGetPublisherUserV3Builder PublicGetPublisherUserV3Op
         {
-            get { return new Operation.PublicGetPublisherUserV3.PublicGetPublisherUserV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetPublisherUserV3.PublicGetPublisherUserV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicValidateUserByUserIDAndPasswordV3.PublicValidateUserByUserIDAndPasswordV3Builder PublicValidateUserByUserIDAndPasswordV3Op
         {
-            get { return new Operation.PublicValidateUserByUserIDAndPasswordV3.PublicValidateUserByUserIDAndPasswordV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicValidateUserByUserIDAndPasswordV3.PublicValidateUserByUserIDAndPasswordV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetMyUserV3.PublicGetMyUserV3Builder PublicGetMyUserV3Op
         {
-            get { return new Operation.PublicGetMyUserV3.PublicGetMyUserV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetMyUserV3.PublicGetMyUserV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetLinkHeadlessAccountToMyAccountConflictV3.PublicGetLinkHeadlessAccountToMyAccountConflictV3Builder PublicGetLinkHeadlessAccountToMyAccountConflictV3Op
         {
-            get { return new Operation.PublicGetLinkHeadlessAccountToMyAccountConflictV3.PublicGetLinkHeadlessAccountToMyAccountConflictV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetLinkHeadlessAccountToMyAccountConflictV3.PublicGetLinkHeadlessAccountToMyAccountConflictV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public LinkHeadlessAccountToMyAccountV3.LinkHeadlessAccountToMyAccountV3Builder LinkHeadlessAccountToMyAccountV3Op
         {
-            get { return new Operation.LinkHeadlessAccountToMyAccountV3.LinkHeadlessAccountToMyAccountV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.LinkHeadlessAccountToMyAccountV3.LinkHeadlessAccountToMyAccountV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicSendVerificationLinkV3.PublicSendVerificationLinkV3Builder PublicSendVerificationLinkV3Op
         {
-            get { return new Operation.PublicSendVerificationLinkV3.PublicSendVerificationLinkV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicSendVerificationLinkV3.PublicSendVerificationLinkV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicVerifyUserByLinkV3.PublicVerifyUserByLinkV3Builder PublicVerifyUserByLinkV3Op
         {
-            get { return new Operation.PublicVerifyUserByLinkV3.PublicVerifyUserByLinkV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicVerifyUserByLinkV3.PublicVerifyUserByLinkV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

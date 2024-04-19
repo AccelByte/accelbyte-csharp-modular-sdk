@@ -20,51 +20,129 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public LeaderboardDataV3(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public LeaderboardDataV3(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetAllTimeLeaderboardRankingAdminV3.GetAllTimeLeaderboardRankingAdminV3Builder GetAllTimeLeaderboardRankingAdminV3Op
         {
-            get { return new Operation.GetAllTimeLeaderboardRankingAdminV3.GetAllTimeLeaderboardRankingAdminV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetAllTimeLeaderboardRankingAdminV3.GetAllTimeLeaderboardRankingAdminV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetCurrentCycleLeaderboardRankingAdminV3.GetCurrentCycleLeaderboardRankingAdminV3Builder GetCurrentCycleLeaderboardRankingAdminV3Op
         {
-            get { return new Operation.GetCurrentCycleLeaderboardRankingAdminV3.GetCurrentCycleLeaderboardRankingAdminV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetCurrentCycleLeaderboardRankingAdminV3.GetCurrentCycleLeaderboardRankingAdminV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteUserRankingByLeaderboardCodeAdminV3.DeleteUserRankingByLeaderboardCodeAdminV3Builder DeleteUserRankingByLeaderboardCodeAdminV3Op
         {
-            get { return new Operation.DeleteUserRankingByLeaderboardCodeAdminV3.DeleteUserRankingByLeaderboardCodeAdminV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteUserRankingByLeaderboardCodeAdminV3.DeleteUserRankingByLeaderboardCodeAdminV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserRankingAdminV3.GetUserRankingAdminV3Builder GetUserRankingAdminV3Op
         {
-            get { return new Operation.GetUserRankingAdminV3.GetUserRankingAdminV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserRankingAdminV3.GetUserRankingAdminV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteUserRankingAdminV3.DeleteUserRankingAdminV3Builder DeleteUserRankingAdminV3Op
         {
-            get { return new Operation.DeleteUserRankingAdminV3.DeleteUserRankingAdminV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteUserRankingAdminV3.DeleteUserRankingAdminV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteUserRankingsAdminV3.DeleteUserRankingsAdminV3Builder DeleteUserRankingsAdminV3Op
         {
-            get { return new Operation.DeleteUserRankingsAdminV3.DeleteUserRankingsAdminV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteUserRankingsAdminV3.DeleteUserRankingsAdminV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetAllTimeLeaderboardRankingPublicV3.GetAllTimeLeaderboardRankingPublicV3Builder GetAllTimeLeaderboardRankingPublicV3Op
         {
-            get { return new Operation.GetAllTimeLeaderboardRankingPublicV3.GetAllTimeLeaderboardRankingPublicV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetAllTimeLeaderboardRankingPublicV3.GetAllTimeLeaderboardRankingPublicV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetCurrentCycleLeaderboardRankingPublicV3.GetCurrentCycleLeaderboardRankingPublicV3Builder GetCurrentCycleLeaderboardRankingPublicV3Op
         {
-            get { return new Operation.GetCurrentCycleLeaderboardRankingPublicV3.GetCurrentCycleLeaderboardRankingPublicV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetCurrentCycleLeaderboardRankingPublicV3.GetCurrentCycleLeaderboardRankingPublicV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public BulkGetUsersRankingPublicV3.BulkGetUsersRankingPublicV3Builder BulkGetUsersRankingPublicV3Op
         {
-            get { return new Operation.BulkGetUsersRankingPublicV3.BulkGetUsersRankingPublicV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BulkGetUsersRankingPublicV3.BulkGetUsersRankingPublicV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserRankingPublicV3.GetUserRankingPublicV3Builder GetUserRankingPublicV3Op
         {
-            get { return new Operation.GetUserRankingPublicV3.GetUserRankingPublicV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserRankingPublicV3.GetUserRankingPublicV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

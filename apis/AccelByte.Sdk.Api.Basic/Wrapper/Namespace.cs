@@ -20,59 +20,151 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Namespace(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Namespace(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetNamespaces.GetNamespacesBuilder GetNamespacesOp
         {
-            get { return new Operation.GetNamespaces.GetNamespacesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetNamespaces.GetNamespacesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateNamespace.CreateNamespaceBuilder CreateNamespaceOp
         {
-            get { return new Operation.CreateNamespace.CreateNamespaceBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateNamespace.CreateNamespaceBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetNamespace.GetNamespaceBuilder GetNamespaceOp
         {
-            get { return new Operation.GetNamespace.GetNamespaceBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetNamespace.GetNamespaceBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteNamespace.DeleteNamespaceBuilder DeleteNamespaceOp
         {
-            get { return new Operation.DeleteNamespace.DeleteNamespaceBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteNamespace.DeleteNamespaceBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateNamespace.UpdateNamespaceBuilder UpdateNamespaceOp
         {
-            get { return new Operation.UpdateNamespace.UpdateNamespaceBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateNamespace.UpdateNamespaceBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetChildNamespaces.GetChildNamespacesBuilder GetChildNamespacesOp
         {
-            get { return new Operation.GetChildNamespaces.GetChildNamespacesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetChildNamespaces.GetChildNamespacesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetNamespaceContext.GetNamespaceContextBuilder GetNamespaceContextOp
         {
-            get { return new Operation.GetNamespaceContext.GetNamespaceContextBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetNamespaceContext.GetNamespaceContextBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetGameNamespaces.GetGameNamespacesBuilder GetGameNamespacesOp
         {
-            get { return new Operation.GetGameNamespaces.GetGameNamespacesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGameNamespaces.GetGameNamespacesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetNamespacePublisher.GetNamespacePublisherBuilder GetNamespacePublisherOp
         {
-            get { return new Operation.GetNamespacePublisher.GetNamespacePublisherBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetNamespacePublisher.GetNamespacePublisherBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ChangeNamespaceStatus.ChangeNamespaceStatusBuilder ChangeNamespaceStatusOp
         {
-            get { return new Operation.ChangeNamespaceStatus.ChangeNamespaceStatusBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ChangeNamespaceStatus.ChangeNamespaceStatusBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetNamespaces.PublicGetNamespacesBuilder PublicGetNamespacesOp
         {
-            get { return new Operation.PublicGetNamespaces.PublicGetNamespacesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetNamespaces.PublicGetNamespacesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetNamespacePublisher.PublicGetNamespacePublisherBuilder PublicGetNamespacePublisherOp
         {
-            get { return new Operation.PublicGetNamespacePublisher.PublicGetNamespacePublisherBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetNamespacePublisher.PublicGetNamespacePublisherBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

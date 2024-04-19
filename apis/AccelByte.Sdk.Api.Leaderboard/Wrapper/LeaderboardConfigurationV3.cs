@@ -20,47 +20,118 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public LeaderboardConfigurationV3(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public LeaderboardConfigurationV3(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetLeaderboardConfigurationsAdminV3.GetLeaderboardConfigurationsAdminV3Builder GetLeaderboardConfigurationsAdminV3Op
         {
-            get { return new Operation.GetLeaderboardConfigurationsAdminV3.GetLeaderboardConfigurationsAdminV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetLeaderboardConfigurationsAdminV3.GetLeaderboardConfigurationsAdminV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateLeaderboardConfigurationAdminV3.CreateLeaderboardConfigurationAdminV3Builder CreateLeaderboardConfigurationAdminV3Op
         {
-            get { return new Operation.CreateLeaderboardConfigurationAdminV3.CreateLeaderboardConfigurationAdminV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateLeaderboardConfigurationAdminV3.CreateLeaderboardConfigurationAdminV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteBulkLeaderboardConfigurationAdminV3.DeleteBulkLeaderboardConfigurationAdminV3Builder DeleteBulkLeaderboardConfigurationAdminV3Op
         {
-            get { return new Operation.DeleteBulkLeaderboardConfigurationAdminV3.DeleteBulkLeaderboardConfigurationAdminV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteBulkLeaderboardConfigurationAdminV3.DeleteBulkLeaderboardConfigurationAdminV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetLeaderboardConfigurationAdminV3.GetLeaderboardConfigurationAdminV3Builder GetLeaderboardConfigurationAdminV3Op
         {
-            get { return new Operation.GetLeaderboardConfigurationAdminV3.GetLeaderboardConfigurationAdminV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetLeaderboardConfigurationAdminV3.GetLeaderboardConfigurationAdminV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateLeaderboardConfigurationAdminV3.UpdateLeaderboardConfigurationAdminV3Builder UpdateLeaderboardConfigurationAdminV3Op
         {
-            get { return new Operation.UpdateLeaderboardConfigurationAdminV3.UpdateLeaderboardConfigurationAdminV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateLeaderboardConfigurationAdminV3.UpdateLeaderboardConfigurationAdminV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteLeaderboardConfigurationAdminV3.DeleteLeaderboardConfigurationAdminV3Builder DeleteLeaderboardConfigurationAdminV3Op
         {
-            get { return new Operation.DeleteLeaderboardConfigurationAdminV3.DeleteLeaderboardConfigurationAdminV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteLeaderboardConfigurationAdminV3.DeleteLeaderboardConfigurationAdminV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public HardDeleteLeaderboardAdminV3.HardDeleteLeaderboardAdminV3Builder HardDeleteLeaderboardAdminV3Op
         {
-            get { return new Operation.HardDeleteLeaderboardAdminV3.HardDeleteLeaderboardAdminV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.HardDeleteLeaderboardAdminV3.HardDeleteLeaderboardAdminV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetLeaderboardConfigurationsPublicV3.GetLeaderboardConfigurationsPublicV3Builder GetLeaderboardConfigurationsPublicV3Op
         {
-            get { return new Operation.GetLeaderboardConfigurationsPublicV3.GetLeaderboardConfigurationsPublicV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetLeaderboardConfigurationsPublicV3.GetLeaderboardConfigurationsPublicV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetLeaderboardConfigurationPublicV3.GetLeaderboardConfigurationPublicV3Builder GetLeaderboardConfigurationPublicV3Op
         {
-            get { return new Operation.GetLeaderboardConfigurationPublicV3.GetLeaderboardConfigurationPublicV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetLeaderboardConfigurationPublicV3.GetLeaderboardConfigurationPublicV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

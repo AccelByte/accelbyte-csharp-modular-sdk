@@ -20,35 +20,85 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Pass(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Pass(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public QueryPasses.QueryPassesBuilder QueryPassesOp
         {
-            get { return new Operation.QueryPasses.QueryPassesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryPasses.QueryPassesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreatePass.CreatePassBuilder CreatePassOp
         {
-            get { return new Operation.CreatePass.CreatePassBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreatePass.CreatePassBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPass.GetPassBuilder GetPassOp
         {
-            get { return new Operation.GetPass.GetPassBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPass.GetPassBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeletePass.DeletePassBuilder DeletePassOp
         {
-            get { return new Operation.DeletePass.DeletePassBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeletePass.DeletePassBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdatePass.UpdatePassBuilder UpdatePassOp
         {
-            get { return new Operation.UpdatePass.UpdatePassBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdatePass.UpdatePassBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GrantUserPass.GrantUserPassBuilder GrantUserPassOp
         {
-            get { return new Operation.GrantUserPass.GrantUserPassBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GrantUserPass.GrantUserPassBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

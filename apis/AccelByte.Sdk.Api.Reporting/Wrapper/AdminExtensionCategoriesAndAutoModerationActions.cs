@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminExtensionCategoriesAndAutoModerationActions(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminExtensionCategoriesAndAutoModerationActions(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminFindActionList.AdminFindActionListBuilder AdminFindActionListOp
         {
-            get { return new Operation.AdminFindActionList.AdminFindActionListBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminFindActionList.AdminFindActionListBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateModAction.AdminCreateModActionBuilder AdminCreateModActionOp
         {
-            get { return new Operation.AdminCreateModAction.AdminCreateModActionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateModAction.AdminCreateModActionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminFindExtensionCategoryList.AdminFindExtensionCategoryListBuilder AdminFindExtensionCategoryListOp
         {
-            get { return new Operation.AdminFindExtensionCategoryList.AdminFindExtensionCategoryListBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminFindExtensionCategoryList.AdminFindExtensionCategoryListBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateExtensionCategory.AdminCreateExtensionCategoryBuilder AdminCreateExtensionCategoryOp
         {
-            get { return new Operation.AdminCreateExtensionCategory.AdminCreateExtensionCategoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateExtensionCategory.AdminCreateExtensionCategoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public SocialMatchmaking(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public SocialMatchmaking(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public UpdatePlayTimeWeight.UpdatePlayTimeWeightBuilder UpdatePlayTimeWeightOp
         {
-            get { return new Operation.UpdatePlayTimeWeight.UpdatePlayTimeWeightBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdatePlayTimeWeight.UpdatePlayTimeWeightBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

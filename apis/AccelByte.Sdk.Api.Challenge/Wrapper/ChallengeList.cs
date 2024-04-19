@@ -20,19 +20,41 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public ChallengeList(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public ChallengeList(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetChallenges.GetChallengesBuilder GetChallengesOp
         {
-            get { return new Operation.GetChallenges.GetChallengesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetChallenges.GetChallengesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetScheduledGoals.PublicGetScheduledGoalsBuilder PublicGetScheduledGoalsOp
         {
-            get { return new Operation.PublicGetScheduledGoals.PublicGetScheduledGoalsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetScheduledGoals.PublicGetScheduledGoalsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

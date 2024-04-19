@@ -20,43 +20,107 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public GlobalAchievements(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public GlobalAchievements(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminListGlobalAchievements.AdminListGlobalAchievementsBuilder AdminListGlobalAchievementsOp
         {
-            get { return new Operation.AdminListGlobalAchievements.AdminListGlobalAchievementsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListGlobalAchievements.AdminListGlobalAchievementsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminListGlobalAchievementContributors.AdminListGlobalAchievementContributorsBuilder AdminListGlobalAchievementContributorsOp
         {
-            get { return new Operation.AdminListGlobalAchievementContributors.AdminListGlobalAchievementContributorsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListGlobalAchievementContributors.AdminListGlobalAchievementContributorsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ResetGlobalAchievement.ResetGlobalAchievementBuilder ResetGlobalAchievementOp
         {
-            get { return new Operation.ResetGlobalAchievement.ResetGlobalAchievementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ResetGlobalAchievement.ResetGlobalAchievementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminListUserContributions.AdminListUserContributionsBuilder AdminListUserContributionsOp
         {
-            get { return new Operation.AdminListUserContributions.AdminListUserContributionsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListUserContributions.AdminListUserContributionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicListGlobalAchievements.PublicListGlobalAchievementsBuilder PublicListGlobalAchievementsOp
         {
-            get { return new Operation.PublicListGlobalAchievements.PublicListGlobalAchievementsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicListGlobalAchievements.PublicListGlobalAchievementsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListGlobalAchievementContributors.ListGlobalAchievementContributorsBuilder ListGlobalAchievementContributorsOp
         {
-            get { return new Operation.ListGlobalAchievementContributors.ListGlobalAchievementContributorsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListGlobalAchievementContributors.ListGlobalAchievementContributorsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListUserContributions.ListUserContributionsBuilder ListUserContributionsOp
         {
-            get { return new Operation.ListUserContributions.ListUserContributionsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListUserContributions.ListUserContributionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ClaimGlobalAchievementReward.ClaimGlobalAchievementRewardBuilder ClaimGlobalAchievementRewardOp
         {
-            get { return new Operation.ClaimGlobalAchievementReward.ClaimGlobalAchievementRewardBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ClaimGlobalAchievementReward.ClaimGlobalAchievementRewardBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

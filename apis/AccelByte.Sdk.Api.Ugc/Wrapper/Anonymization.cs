@@ -20,43 +20,107 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Anonymization(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Anonymization(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminDeleteAllUserChannels.AdminDeleteAllUserChannelsBuilder AdminDeleteAllUserChannelsOp
         {
-            get { return new Operation.AdminDeleteAllUserChannels.AdminDeleteAllUserChannelsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteAllUserChannels.AdminDeleteAllUserChannelsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteAllUserContents.AdminDeleteAllUserContentsBuilder AdminDeleteAllUserContentsOp
         {
-            get { return new Operation.AdminDeleteAllUserContents.AdminDeleteAllUserContentsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteAllUserContents.AdminDeleteAllUserContentsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteAllUserGroup.AdminDeleteAllUserGroupBuilder AdminDeleteAllUserGroupOp
         {
-            get { return new Operation.AdminDeleteAllUserGroup.AdminDeleteAllUserGroupBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteAllUserGroup.AdminDeleteAllUserGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteAllUserStates.AdminDeleteAllUserStatesBuilder AdminDeleteAllUserStatesOp
         {
-            get { return new Operation.AdminDeleteAllUserStates.AdminDeleteAllUserStatesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteAllUserStates.AdminDeleteAllUserStatesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteAllUserChannel.DeleteAllUserChannelBuilder DeleteAllUserChannelOp
         {
-            get { return new Operation.DeleteAllUserChannel.DeleteAllUserChannelBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteAllUserChannel.DeleteAllUserChannelBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteAllUserContents.DeleteAllUserContentsBuilder DeleteAllUserContentsOp
         {
-            get { return new Operation.DeleteAllUserContents.DeleteAllUserContentsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteAllUserContents.DeleteAllUserContentsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteAllUserGroup.DeleteAllUserGroupBuilder DeleteAllUserGroupOp
         {
-            get { return new Operation.DeleteAllUserGroup.DeleteAllUserGroupBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteAllUserGroup.DeleteAllUserGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteAllUserStates.DeleteAllUserStatesBuilder DeleteAllUserStatesOp
         {
-            get { return new Operation.DeleteAllUserStates.DeleteAllUserStatesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteAllUserStates.DeleteAllUserStatesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,31 +20,74 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public FulfillmentScript(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public FulfillmentScript(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ListFulfillmentScripts.ListFulfillmentScriptsBuilder ListFulfillmentScriptsOp
         {
-            get { return new Operation.ListFulfillmentScripts.ListFulfillmentScriptsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListFulfillmentScripts.ListFulfillmentScriptsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetFulfillmentScript.GetFulfillmentScriptBuilder GetFulfillmentScriptOp
         {
-            get { return new Operation.GetFulfillmentScript.GetFulfillmentScriptBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetFulfillmentScript.GetFulfillmentScriptBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateFulfillmentScript.CreateFulfillmentScriptBuilder CreateFulfillmentScriptOp
         {
-            get { return new Operation.CreateFulfillmentScript.CreateFulfillmentScriptBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateFulfillmentScript.CreateFulfillmentScriptBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteFulfillmentScript.DeleteFulfillmentScriptBuilder DeleteFulfillmentScriptOp
         {
-            get { return new Operation.DeleteFulfillmentScript.DeleteFulfillmentScriptBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteFulfillmentScript.DeleteFulfillmentScriptBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateFulfillmentScript.UpdateFulfillmentScriptBuilder UpdateFulfillmentScriptOp
         {
-            get { return new Operation.UpdateFulfillmentScript.UpdateFulfillmentScriptBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateFulfillmentScript.UpdateFulfillmentScriptBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

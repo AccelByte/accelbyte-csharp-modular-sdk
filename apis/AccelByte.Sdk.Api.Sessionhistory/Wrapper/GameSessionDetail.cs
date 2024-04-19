@@ -20,47 +20,118 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public GameSessionDetail(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public GameSessionDetail(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminQueryGameSessionDetail.AdminQueryGameSessionDetailBuilder AdminQueryGameSessionDetailOp
         {
-            get { return new Operation.AdminQueryGameSessionDetail.AdminQueryGameSessionDetailBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminQueryGameSessionDetail.AdminQueryGameSessionDetailBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetGameSessionDetail.GetGameSessionDetailBuilder GetGameSessionDetailOp
         {
-            get { return new Operation.GetGameSessionDetail.GetGameSessionDetailBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGameSessionDetail.GetGameSessionDetailBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminQueryMatchmakingDetail.AdminQueryMatchmakingDetailBuilder AdminQueryMatchmakingDetailOp
         {
-            get { return new Operation.AdminQueryMatchmakingDetail.AdminQueryMatchmakingDetailBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminQueryMatchmakingDetail.AdminQueryMatchmakingDetailBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetMatchmakingDetailBySessionID.AdminGetMatchmakingDetailBySessionIDBuilder AdminGetMatchmakingDetailBySessionIDOp
         {
-            get { return new Operation.AdminGetMatchmakingDetailBySessionID.AdminGetMatchmakingDetailBySessionIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetMatchmakingDetailBySessionID.AdminGetMatchmakingDetailBySessionIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetMatchmakingDetailByTicketID.AdminGetMatchmakingDetailByTicketIDBuilder AdminGetMatchmakingDetailByTicketIDOp
         {
-            get { return new Operation.AdminGetMatchmakingDetailByTicketID.AdminGetMatchmakingDetailByTicketIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetMatchmakingDetailByTicketID.AdminGetMatchmakingDetailByTicketIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminQueryPartyDetail.AdminQueryPartyDetailBuilder AdminQueryPartyDetailOp
         {
-            get { return new Operation.AdminQueryPartyDetail.AdminQueryPartyDetailBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminQueryPartyDetail.AdminQueryPartyDetailBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPartyDetail.GetPartyDetailBuilder GetPartyDetailOp
         {
-            get { return new Operation.GetPartyDetail.GetPartyDetailBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPartyDetail.GetPartyDetailBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminQueryTicketDetail.AdminQueryTicketDetailBuilder AdminQueryTicketDetailOp
         {
-            get { return new Operation.AdminQueryTicketDetail.AdminQueryTicketDetailBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminQueryTicketDetail.AdminQueryTicketDetailBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminTicketDetailGetByTicketID.AdminTicketDetailGetByTicketIDBuilder AdminTicketDetailGetByTicketIDOp
         {
-            get { return new Operation.AdminTicketDetailGetByTicketID.AdminTicketDetailGetByTicketIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminTicketDetailGetByTicketID.AdminTicketDetailGetByTicketIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

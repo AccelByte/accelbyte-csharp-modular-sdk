@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public FleetCommander(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public FleetCommander(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public PortalHealthCheck.PortalHealthCheckBuilder PortalHealthCheckOp
         {
-            get { return new Operation.PortalHealthCheck.PortalHealthCheckBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PortalHealthCheck.PortalHealthCheckBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public Func1.Func1Builder Func1Op
         {
-            get { return new Operation.Func1.Func1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.Func1.Func1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public BasicHealthCheck.BasicHealthCheckBuilder BasicHealthCheckOp
         {
-            get { return new Operation.BasicHealthCheck.BasicHealthCheckBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BasicHealthCheck.BasicHealthCheckBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

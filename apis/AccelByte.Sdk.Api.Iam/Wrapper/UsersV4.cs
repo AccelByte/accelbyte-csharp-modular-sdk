@@ -20,256 +20,677 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public UsersV4(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public UsersV4(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminListInvitationHistoriesV4.AdminListInvitationHistoriesV4Builder AdminListInvitationHistoriesV4Op
         {
-            get { return new Operation.AdminListInvitationHistoriesV4.AdminListInvitationHistoriesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListInvitationHistoriesV4.AdminListInvitationHistoriesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetNamespaceInvitationHistoryV4.AdminGetNamespaceInvitationHistoryV4Builder AdminGetNamespaceInvitationHistoryV4Op
         {
-            get { return new Operation.AdminGetNamespaceInvitationHistoryV4.AdminGetNamespaceInvitationHistoryV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetNamespaceInvitationHistoryV4.AdminGetNamespaceInvitationHistoryV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetNamespaceUserInvitationHistoryV4.AdminGetNamespaceUserInvitationHistoryV4Builder AdminGetNamespaceUserInvitationHistoryV4Op
         {
-            get { return new Operation.AdminGetNamespaceUserInvitationHistoryV4.AdminGetNamespaceUserInvitationHistoryV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetNamespaceUserInvitationHistoryV4.AdminGetNamespaceUserInvitationHistoryV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateTestUsersV4.AdminCreateTestUsersV4Builder AdminCreateTestUsersV4Op
         {
-            get { return new Operation.AdminCreateTestUsersV4.AdminCreateTestUsersV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateTestUsersV4.AdminCreateTestUsersV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateUserV4.AdminCreateUserV4Builder AdminCreateUserV4Op
         {
-            get { return new Operation.AdminCreateUserV4.AdminCreateUserV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateUserV4.AdminCreateUserV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminBulkUpdateUserAccountTypeV4.AdminBulkUpdateUserAccountTypeV4Builder AdminBulkUpdateUserAccountTypeV4Op
         {
-            get { return new Operation.AdminBulkUpdateUserAccountTypeV4.AdminBulkUpdateUserAccountTypeV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminBulkUpdateUserAccountTypeV4.AdminBulkUpdateUserAccountTypeV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminBulkCheckValidUserIDV4.AdminBulkCheckValidUserIDV4Builder AdminBulkCheckValidUserIDV4Op
         {
-            get { return new Operation.AdminBulkCheckValidUserIDV4.AdminBulkCheckValidUserIDV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminBulkCheckValidUserIDV4.AdminBulkCheckValidUserIDV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateUserV4.AdminUpdateUserV4Builder AdminUpdateUserV4Op
         {
-            get { return new Operation.AdminUpdateUserV4.AdminUpdateUserV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateUserV4.AdminUpdateUserV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateUserEmailAddressV4.AdminUpdateUserEmailAddressV4Builder AdminUpdateUserEmailAddressV4Op
         {
-            get { return new Operation.AdminUpdateUserEmailAddressV4.AdminUpdateUserEmailAddressV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateUserEmailAddressV4.AdminUpdateUserEmailAddressV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDisableUserMFAV4.AdminDisableUserMFAV4Builder AdminDisableUserMFAV4Op
         {
-            get { return new Operation.AdminDisableUserMFAV4.AdminDisableUserMFAV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDisableUserMFAV4.AdminDisableUserMFAV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminListUserRolesV4.AdminListUserRolesV4Builder AdminListUserRolesV4Op
         {
-            get { return new Operation.AdminListUserRolesV4.AdminListUserRolesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListUserRolesV4.AdminListUserRolesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateUserRoleV4.AdminUpdateUserRoleV4Builder AdminUpdateUserRoleV4Op
         {
-            get { return new Operation.AdminUpdateUserRoleV4.AdminUpdateUserRoleV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateUserRoleV4.AdminUpdateUserRoleV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminAddUserRoleV4.AdminAddUserRoleV4Builder AdminAddUserRoleV4Op
         {
-            get { return new Operation.AdminAddUserRoleV4.AdminAddUserRoleV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminAddUserRoleV4.AdminAddUserRoleV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminRemoveUserRoleV4.AdminRemoveUserRoleV4Builder AdminRemoveUserRoleV4Op
         {
-            get { return new Operation.AdminRemoveUserRoleV4.AdminRemoveUserRoleV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminRemoveUserRoleV4.AdminRemoveUserRoleV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminInviteUserNewV4.AdminInviteUserNewV4Builder AdminInviteUserNewV4Op
         {
-            get { return new Operation.AdminInviteUserNewV4.AdminInviteUserNewV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminInviteUserNewV4.AdminInviteUserNewV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateMyUserV4.AdminUpdateMyUserV4Builder AdminUpdateMyUserV4Op
         {
-            get { return new Operation.AdminUpdateMyUserV4.AdminUpdateMyUserV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateMyUserV4.AdminUpdateMyUserV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDisableMyAuthenticatorV4.AdminDisableMyAuthenticatorV4Builder AdminDisableMyAuthenticatorV4Op
         {
-            get { return new Operation.AdminDisableMyAuthenticatorV4.AdminDisableMyAuthenticatorV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDisableMyAuthenticatorV4.AdminDisableMyAuthenticatorV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminEnableMyAuthenticatorV4.AdminEnableMyAuthenticatorV4Builder AdminEnableMyAuthenticatorV4Op
         {
-            get { return new Operation.AdminEnableMyAuthenticatorV4.AdminEnableMyAuthenticatorV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminEnableMyAuthenticatorV4.AdminEnableMyAuthenticatorV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGenerateMyAuthenticatorKeyV4.AdminGenerateMyAuthenticatorKeyV4Builder AdminGenerateMyAuthenticatorKeyV4Op
         {
-            get { return new Operation.AdminGenerateMyAuthenticatorKeyV4.AdminGenerateMyAuthenticatorKeyV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGenerateMyAuthenticatorKeyV4.AdminGenerateMyAuthenticatorKeyV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetMyBackupCodesV4.AdminGetMyBackupCodesV4Builder AdminGetMyBackupCodesV4Op
         {
-            get { return new Operation.AdminGetMyBackupCodesV4.AdminGetMyBackupCodesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetMyBackupCodesV4.AdminGetMyBackupCodesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGenerateMyBackupCodesV4.AdminGenerateMyBackupCodesV4Builder AdminGenerateMyBackupCodesV4Op
         {
-            get { return new Operation.AdminGenerateMyBackupCodesV4.AdminGenerateMyBackupCodesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGenerateMyBackupCodesV4.AdminGenerateMyBackupCodesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDisableMyBackupCodesV4.AdminDisableMyBackupCodesV4Builder AdminDisableMyBackupCodesV4Op
         {
-            get { return new Operation.AdminDisableMyBackupCodesV4.AdminDisableMyBackupCodesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDisableMyBackupCodesV4.AdminDisableMyBackupCodesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminDownloadMyBackupCodesV4.AdminDownloadMyBackupCodesV4Builder AdminDownloadMyBackupCodesV4Op
         {
-            get { return new Operation.AdminDownloadMyBackupCodesV4.AdminDownloadMyBackupCodesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDownloadMyBackupCodesV4.AdminDownloadMyBackupCodesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminEnableMyBackupCodesV4.AdminEnableMyBackupCodesV4Builder AdminEnableMyBackupCodesV4Op
         {
-            get { return new Operation.AdminEnableMyBackupCodesV4.AdminEnableMyBackupCodesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminEnableMyBackupCodesV4.AdminEnableMyBackupCodesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetBackupCodesV4.AdminGetBackupCodesV4Builder AdminGetBackupCodesV4Op
         {
-            get { return new Operation.AdminGetBackupCodesV4.AdminGetBackupCodesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetBackupCodesV4.AdminGetBackupCodesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGenerateBackupCodesV4.AdminGenerateBackupCodesV4Builder AdminGenerateBackupCodesV4Op
         {
-            get { return new Operation.AdminGenerateBackupCodesV4.AdminGenerateBackupCodesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGenerateBackupCodesV4.AdminGenerateBackupCodesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminEnableBackupCodesV4.AdminEnableBackupCodesV4Builder AdminEnableBackupCodesV4Op
         {
-            get { return new Operation.AdminEnableBackupCodesV4.AdminEnableBackupCodesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminEnableBackupCodesV4.AdminEnableBackupCodesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminSendMyMFAEmailCodeV4.AdminSendMyMFAEmailCodeV4Builder AdminSendMyMFAEmailCodeV4Op
         {
-            get { return new Operation.AdminSendMyMFAEmailCodeV4.AdminSendMyMFAEmailCodeV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminSendMyMFAEmailCodeV4.AdminSendMyMFAEmailCodeV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDisableMyEmailV4.AdminDisableMyEmailV4Builder AdminDisableMyEmailV4Op
         {
-            get { return new Operation.AdminDisableMyEmailV4.AdminDisableMyEmailV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDisableMyEmailV4.AdminDisableMyEmailV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminEnableMyEmailV4.AdminEnableMyEmailV4Builder AdminEnableMyEmailV4Op
         {
-            get { return new Operation.AdminEnableMyEmailV4.AdminEnableMyEmailV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminEnableMyEmailV4.AdminEnableMyEmailV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetMyEnabledFactorsV4.AdminGetMyEnabledFactorsV4Builder AdminGetMyEnabledFactorsV4Op
         {
-            get { return new Operation.AdminGetMyEnabledFactorsV4.AdminGetMyEnabledFactorsV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetMyEnabledFactorsV4.AdminGetMyEnabledFactorsV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminMakeFactorMyDefaultV4.AdminMakeFactorMyDefaultV4Builder AdminMakeFactorMyDefaultV4Op
         {
-            get { return new Operation.AdminMakeFactorMyDefaultV4.AdminMakeFactorMyDefaultV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminMakeFactorMyDefaultV4.AdminMakeFactorMyDefaultV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminInviteUserV4.AdminInviteUserV4Builder AdminInviteUserV4Op
         {
-            get { return new Operation.AdminInviteUserV4.AdminInviteUserV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminInviteUserV4.AdminInviteUserV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicCreateTestUserV4.PublicCreateTestUserV4Builder PublicCreateTestUserV4Op
         {
-            get { return new Operation.PublicCreateTestUserV4.PublicCreateTestUserV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicCreateTestUserV4.PublicCreateTestUserV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicCreateUserV4.PublicCreateUserV4Builder PublicCreateUserV4Op
         {
-            get { return new Operation.PublicCreateUserV4.PublicCreateUserV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicCreateUserV4.PublicCreateUserV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateUserFromInvitationV4.CreateUserFromInvitationV4Builder CreateUserFromInvitationV4Op
         {
-            get { return new Operation.CreateUserFromInvitationV4.CreateUserFromInvitationV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateUserFromInvitationV4.CreateUserFromInvitationV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUpdateUserV4.PublicUpdateUserV4Builder PublicUpdateUserV4Op
         {
-            get { return new Operation.PublicUpdateUserV4.PublicUpdateUserV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpdateUserV4.PublicUpdateUserV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUpdateUserEmailAddressV4.PublicUpdateUserEmailAddressV4Builder PublicUpdateUserEmailAddressV4Op
         {
-            get { return new Operation.PublicUpdateUserEmailAddressV4.PublicUpdateUserEmailAddressV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpdateUserEmailAddressV4.PublicUpdateUserEmailAddressV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUpgradeHeadlessAccountWithVerificationCodeV4.PublicUpgradeHeadlessAccountWithVerificationCodeV4Builder PublicUpgradeHeadlessAccountWithVerificationCodeV4Op
         {
-            get { return new Operation.PublicUpgradeHeadlessAccountWithVerificationCodeV4.PublicUpgradeHeadlessAccountWithVerificationCodeV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpgradeHeadlessAccountWithVerificationCodeV4.PublicUpgradeHeadlessAccountWithVerificationCodeV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUpgradeHeadlessAccountV4.PublicUpgradeHeadlessAccountV4Builder PublicUpgradeHeadlessAccountV4Op
         {
-            get { return new Operation.PublicUpgradeHeadlessAccountV4.PublicUpgradeHeadlessAccountV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpgradeHeadlessAccountV4.PublicUpgradeHeadlessAccountV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicDisableMyAuthenticatorV4.PublicDisableMyAuthenticatorV4Builder PublicDisableMyAuthenticatorV4Op
         {
-            get { return new Operation.PublicDisableMyAuthenticatorV4.PublicDisableMyAuthenticatorV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicDisableMyAuthenticatorV4.PublicDisableMyAuthenticatorV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicEnableMyAuthenticatorV4.PublicEnableMyAuthenticatorV4Builder PublicEnableMyAuthenticatorV4Op
         {
-            get { return new Operation.PublicEnableMyAuthenticatorV4.PublicEnableMyAuthenticatorV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicEnableMyAuthenticatorV4.PublicEnableMyAuthenticatorV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGenerateMyAuthenticatorKeyV4.PublicGenerateMyAuthenticatorKeyV4Builder PublicGenerateMyAuthenticatorKeyV4Op
         {
-            get { return new Operation.PublicGenerateMyAuthenticatorKeyV4.PublicGenerateMyAuthenticatorKeyV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGenerateMyAuthenticatorKeyV4.PublicGenerateMyAuthenticatorKeyV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetMyBackupCodesV4.PublicGetMyBackupCodesV4Builder PublicGetMyBackupCodesV4Op
         {
-            get { return new Operation.PublicGetMyBackupCodesV4.PublicGetMyBackupCodesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetMyBackupCodesV4.PublicGetMyBackupCodesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGenerateMyBackupCodesV4.PublicGenerateMyBackupCodesV4Builder PublicGenerateMyBackupCodesV4Op
         {
-            get { return new Operation.PublicGenerateMyBackupCodesV4.PublicGenerateMyBackupCodesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGenerateMyBackupCodesV4.PublicGenerateMyBackupCodesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicDisableMyBackupCodesV4.PublicDisableMyBackupCodesV4Builder PublicDisableMyBackupCodesV4Op
         {
-            get { return new Operation.PublicDisableMyBackupCodesV4.PublicDisableMyBackupCodesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicDisableMyBackupCodesV4.PublicDisableMyBackupCodesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicDownloadMyBackupCodesV4.PublicDownloadMyBackupCodesV4Builder PublicDownloadMyBackupCodesV4Op
         {
-            get { return new Operation.PublicDownloadMyBackupCodesV4.PublicDownloadMyBackupCodesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicDownloadMyBackupCodesV4.PublicDownloadMyBackupCodesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicEnableMyBackupCodesV4.PublicEnableMyBackupCodesV4Builder PublicEnableMyBackupCodesV4Op
         {
-            get { return new Operation.PublicEnableMyBackupCodesV4.PublicEnableMyBackupCodesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicEnableMyBackupCodesV4.PublicEnableMyBackupCodesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetBackupCodesV4.PublicGetBackupCodesV4Builder PublicGetBackupCodesV4Op
         {
-            get { return new Operation.PublicGetBackupCodesV4.PublicGetBackupCodesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetBackupCodesV4.PublicGetBackupCodesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGenerateBackupCodesV4.PublicGenerateBackupCodesV4Builder PublicGenerateBackupCodesV4Op
         {
-            get { return new Operation.PublicGenerateBackupCodesV4.PublicGenerateBackupCodesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGenerateBackupCodesV4.PublicGenerateBackupCodesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicEnableBackupCodesV4.PublicEnableBackupCodesV4Builder PublicEnableBackupCodesV4Op
         {
-            get { return new Operation.PublicEnableBackupCodesV4.PublicEnableBackupCodesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicEnableBackupCodesV4.PublicEnableBackupCodesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicRemoveTrustedDeviceV4.PublicRemoveTrustedDeviceV4Builder PublicRemoveTrustedDeviceV4Op
         {
-            get { return new Operation.PublicRemoveTrustedDeviceV4.PublicRemoveTrustedDeviceV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicRemoveTrustedDeviceV4.PublicRemoveTrustedDeviceV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicSendMyMFAEmailCodeV4.PublicSendMyMFAEmailCodeV4Builder PublicSendMyMFAEmailCodeV4Op
         {
-            get { return new Operation.PublicSendMyMFAEmailCodeV4.PublicSendMyMFAEmailCodeV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicSendMyMFAEmailCodeV4.PublicSendMyMFAEmailCodeV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicDisableMyEmailV4.PublicDisableMyEmailV4Builder PublicDisableMyEmailV4Op
         {
-            get { return new Operation.PublicDisableMyEmailV4.PublicDisableMyEmailV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicDisableMyEmailV4.PublicDisableMyEmailV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicEnableMyEmailV4.PublicEnableMyEmailV4Builder PublicEnableMyEmailV4Op
         {
-            get { return new Operation.PublicEnableMyEmailV4.PublicEnableMyEmailV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicEnableMyEmailV4.PublicEnableMyEmailV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetMyEnabledFactorsV4.PublicGetMyEnabledFactorsV4Builder PublicGetMyEnabledFactorsV4Op
         {
-            get { return new Operation.PublicGetMyEnabledFactorsV4.PublicGetMyEnabledFactorsV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetMyEnabledFactorsV4.PublicGetMyEnabledFactorsV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicMakeFactorMyDefaultV4.PublicMakeFactorMyDefaultV4Builder PublicMakeFactorMyDefaultV4Op
         {
-            get { return new Operation.PublicMakeFactorMyDefaultV4.PublicMakeFactorMyDefaultV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicMakeFactorMyDefaultV4.PublicMakeFactorMyDefaultV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserPublicInfoByUserIdV4.PublicGetUserPublicInfoByUserIdV4Builder PublicGetUserPublicInfoByUserIdV4Op
         {
-            get { return new Operation.PublicGetUserPublicInfoByUserIdV4.PublicGetUserPublicInfoByUserIdV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserPublicInfoByUserIdV4.PublicGetUserPublicInfoByUserIdV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicInviteUserV4.PublicInviteUserV4Builder PublicInviteUserV4Op
         {
-            get { return new Operation.PublicInviteUserV4.PublicInviteUserV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicInviteUserV4.PublicInviteUserV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

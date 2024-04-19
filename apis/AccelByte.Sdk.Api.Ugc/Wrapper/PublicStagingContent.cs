@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PublicStagingContent(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PublicStagingContent(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ListUserStagingContents.ListUserStagingContentsBuilder ListUserStagingContentsOp
         {
-            get { return new Operation.ListUserStagingContents.ListUserStagingContentsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListUserStagingContents.ListUserStagingContentsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserStagingContentByID.GetUserStagingContentByIDBuilder GetUserStagingContentByIDOp
         {
-            get { return new Operation.GetUserStagingContentByID.GetUserStagingContentByIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserStagingContentByID.GetUserStagingContentByIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateStagingContent.UpdateStagingContentBuilder UpdateStagingContentOp
         {
-            get { return new Operation.UpdateStagingContent.UpdateStagingContentBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateStagingContent.UpdateStagingContentBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteUserStagingContentByID.DeleteUserStagingContentByIDBuilder DeleteUserStagingContentByIDOp
         {
-            get { return new Operation.DeleteUserStagingContentByID.DeleteUserStagingContentByIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteUserStagingContentByID.DeleteUserStagingContentByIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,39 +20,96 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public UserAction(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public UserAction(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetActions.GetActionsBuilder GetActionsOp
         {
-            get { return new Operation.GetActions.GetActionsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetActions.GetActionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public BanUsers.BanUsersBuilder BanUsersOp
         {
-            get { return new Operation.BanUsers.BanUsersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BanUsers.BanUsersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetBannedUsers.GetBannedUsersBuilder GetBannedUsersOp
         {
-            get { return new Operation.GetBannedUsers.GetBannedUsersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetBannedUsers.GetBannedUsersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ReportUser.ReportUserBuilder ReportUserOp
         {
-            get { return new Operation.ReportUser.ReportUserBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ReportUser.ReportUserBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserStatus.GetUserStatusBuilder GetUserStatusOp
         {
-            get { return new Operation.GetUserStatus.GetUserStatusBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserStatus.GetUserStatusBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UnBanUsers.UnBanUsersBuilder UnBanUsersOp
         {
-            get { return new Operation.UnBanUsers.UnBanUsersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UnBanUsers.UnBanUsersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicReportUser.PublicReportUserBuilder PublicReportUserOp
         {
-            get { return new Operation.PublicReportUser.PublicReportUserBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicReportUser.PublicReportUserBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

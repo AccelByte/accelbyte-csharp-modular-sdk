@@ -20,39 +20,96 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Tier(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Tier(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public QueryTiers.QueryTiersBuilder QueryTiersOp
         {
-            get { return new Operation.QueryTiers.QueryTiersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryTiers.QueryTiersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateTier.CreateTierBuilder CreateTierOp
         {
-            get { return new Operation.CreateTier.CreateTierBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateTier.CreateTierBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateTier.UpdateTierBuilder UpdateTierOp
         {
-            get { return new Operation.UpdateTier.UpdateTierBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateTier.UpdateTierBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteTier.DeleteTierBuilder DeleteTierOp
         {
-            get { return new Operation.DeleteTier.DeleteTierBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteTier.DeleteTierBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ReorderTier.ReorderTierBuilder ReorderTierOp
         {
-            get { return new Operation.ReorderTier.ReorderTierBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ReorderTier.ReorderTierBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GrantUserExp.GrantUserExpBuilder GrantUserExpOp
         {
-            get { return new Operation.GrantUserExp.GrantUserExpBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GrantUserExp.GrantUserExpBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GrantUserTier.GrantUserTierBuilder GrantUserTierOp
         {
-            get { return new Operation.GrantUserTier.GrantUserTierBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GrantUserTier.GrantUserTierBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

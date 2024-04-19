@@ -20,44 +20,108 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public KeyGroup(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public KeyGroup(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public QueryKeyGroups.QueryKeyGroupsBuilder QueryKeyGroupsOp
         {
-            get { return new Operation.QueryKeyGroups.QueryKeyGroupsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryKeyGroups.QueryKeyGroupsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateKeyGroup.CreateKeyGroupBuilder CreateKeyGroupOp
         {
-            get { return new Operation.CreateKeyGroup.CreateKeyGroupBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateKeyGroup.CreateKeyGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetKeyGroupByBoothName.GetKeyGroupByBoothNameBuilder GetKeyGroupByBoothNameOp
         {
-            get { return new Operation.GetKeyGroupByBoothName.GetKeyGroupByBoothNameBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetKeyGroupByBoothName.GetKeyGroupByBoothNameBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetKeyGroup.GetKeyGroupBuilder GetKeyGroupOp
         {
-            get { return new Operation.GetKeyGroup.GetKeyGroupBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetKeyGroup.GetKeyGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateKeyGroup.UpdateKeyGroupBuilder UpdateKeyGroupOp
         {
-            get { return new Operation.UpdateKeyGroup.UpdateKeyGroupBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateKeyGroup.UpdateKeyGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetKeyGroupDynamic.GetKeyGroupDynamicBuilder GetKeyGroupDynamicOp
         {
-            get { return new Operation.GetKeyGroupDynamic.GetKeyGroupDynamicBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetKeyGroupDynamic.GetKeyGroupDynamicBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListKeys.ListKeysBuilder ListKeysOp
         {
-            get { return new Operation.ListKeys.ListKeysBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListKeys.ListKeysBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UploadKeys.UploadKeysBuilder UploadKeysOp
         {
-            get { return new Operation.UploadKeys.UploadKeysBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UploadKeys.UploadKeysBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

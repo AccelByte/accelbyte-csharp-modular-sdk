@@ -20,39 +20,96 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminItems(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminItems(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminListItems.AdminListItemsBuilder AdminListItemsOp
         {
-            get { return new Operation.AdminListItems.AdminListItemsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListItems.AdminListItemsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetInventoryItem.AdminGetInventoryItemBuilder AdminGetInventoryItemOp
         {
-            get { return new Operation.AdminGetInventoryItem.AdminGetInventoryItemBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetInventoryItem.AdminGetInventoryItemBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminConsumeUserItem.AdminConsumeUserItemBuilder AdminConsumeUserItemOp
         {
-            get { return new Operation.AdminConsumeUserItem.AdminConsumeUserItemBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminConsumeUserItem.AdminConsumeUserItemBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminBulkUpdateMyItems.AdminBulkUpdateMyItemsBuilder AdminBulkUpdateMyItemsOp
         {
-            get { return new Operation.AdminBulkUpdateMyItems.AdminBulkUpdateMyItemsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminBulkUpdateMyItems.AdminBulkUpdateMyItemsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminSaveItemToInventory.AdminSaveItemToInventoryBuilder AdminSaveItemToInventoryOp
         {
-            get { return new Operation.AdminSaveItemToInventory.AdminSaveItemToInventoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminSaveItemToInventory.AdminSaveItemToInventoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminBulkRemoveItems.AdminBulkRemoveItemsBuilder AdminBulkRemoveItemsOp
         {
-            get { return new Operation.AdminBulkRemoveItems.AdminBulkRemoveItemsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminBulkRemoveItems.AdminBulkRemoveItemsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminSaveItem.AdminSaveItemBuilder AdminSaveItemOp
         {
-            get { return new Operation.AdminSaveItem.AdminSaveItemBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminSaveItem.AdminSaveItemBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

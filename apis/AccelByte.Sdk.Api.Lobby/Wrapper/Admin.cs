@@ -20,63 +20,162 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Admin(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Admin(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetGlobalConfig.AdminGetGlobalConfigBuilder AdminGetGlobalConfigOp
         {
-            get { return new Operation.AdminGetGlobalConfig.AdminGetGlobalConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetGlobalConfig.AdminGetGlobalConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateGlobalConfig.AdminUpdateGlobalConfigBuilder AdminUpdateGlobalConfigOp
         {
-            get { return new Operation.AdminUpdateGlobalConfig.AdminUpdateGlobalConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateGlobalConfig.AdminUpdateGlobalConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteGlobalConfig.AdminDeleteGlobalConfigBuilder AdminDeleteGlobalConfigOp
         {
-            get { return new Operation.AdminDeleteGlobalConfig.AdminDeleteGlobalConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteGlobalConfig.AdminDeleteGlobalConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public FreeFormNotification.FreeFormNotificationBuilder FreeFormNotificationOp
         {
-            get { return new Operation.FreeFormNotification.FreeFormNotificationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FreeFormNotification.FreeFormNotificationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public NotificationWithTemplate.NotificationWithTemplateBuilder NotificationWithTemplateOp
         {
-            get { return new Operation.NotificationWithTemplate.NotificationWithTemplateBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.NotificationWithTemplate.NotificationWithTemplateBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetGameTemplate.GetGameTemplateBuilder GetGameTemplateOp
         {
-            get { return new Operation.GetGameTemplate.GetGameTemplateBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGameTemplate.GetGameTemplateBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateTemplate.CreateTemplateBuilder CreateTemplateOp
         {
-            get { return new Operation.CreateTemplate.CreateTemplateBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateTemplate.CreateTemplateBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetSlugTemplate.GetSlugTemplateBuilder GetSlugTemplateOp
         {
-            get { return new Operation.GetSlugTemplate.GetSlugTemplateBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetSlugTemplate.GetSlugTemplateBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteTemplateSlug.DeleteTemplateSlugBuilder DeleteTemplateSlugOp
         {
-            get { return new Operation.DeleteTemplateSlug.DeleteTemplateSlugBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteTemplateSlug.DeleteTemplateSlugBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetLocalizationTemplate.GetLocalizationTemplateBuilder GetLocalizationTemplateOp
         {
-            get { return new Operation.GetLocalizationTemplate.GetLocalizationTemplateBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetLocalizationTemplate.GetLocalizationTemplateBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateLocalizationTemplate.UpdateLocalizationTemplateBuilder UpdateLocalizationTemplateOp
         {
-            get { return new Operation.UpdateLocalizationTemplate.UpdateLocalizationTemplateBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateLocalizationTemplate.UpdateLocalizationTemplateBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteTemplateLocalization.DeleteTemplateLocalizationBuilder DeleteTemplateLocalizationOp
         {
-            get { return new Operation.DeleteTemplateLocalization.DeleteTemplateLocalizationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteTemplateLocalization.DeleteTemplateLocalizationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublishTemplate.PublishTemplateBuilder PublishTemplateOp
         {
-            get { return new Operation.PublishTemplate.PublishTemplateBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublishTemplate.PublishTemplateBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,35 +20,85 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Player(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Player(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminQueryPlayerAttributes.AdminQueryPlayerAttributesBuilder AdminQueryPlayerAttributesOp
         {
-            get { return new Operation.AdminQueryPlayerAttributes.AdminQueryPlayerAttributesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminQueryPlayerAttributes.AdminQueryPlayerAttributesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetPlayerAttributes.AdminGetPlayerAttributesBuilder AdminGetPlayerAttributesOp
         {
-            get { return new Operation.AdminGetPlayerAttributes.AdminGetPlayerAttributesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetPlayerAttributes.AdminGetPlayerAttributesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetBulkPlayerCurrentPlatform.PublicGetBulkPlayerCurrentPlatformBuilder PublicGetBulkPlayerCurrentPlatformOp
         {
-            get { return new Operation.PublicGetBulkPlayerCurrentPlatform.PublicGetBulkPlayerCurrentPlatformBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetBulkPlayerCurrentPlatform.PublicGetBulkPlayerCurrentPlatformBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetPlayerAttributes.PublicGetPlayerAttributesBuilder PublicGetPlayerAttributesOp
         {
-            get { return new Operation.PublicGetPlayerAttributes.PublicGetPlayerAttributesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetPlayerAttributes.PublicGetPlayerAttributesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicStorePlayerAttributes.PublicStorePlayerAttributesBuilder PublicStorePlayerAttributesOp
         {
-            get { return new Operation.PublicStorePlayerAttributes.PublicStorePlayerAttributesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicStorePlayerAttributes.PublicStorePlayerAttributesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicDeletePlayerAttributes.PublicDeletePlayerAttributesBuilder PublicDeletePlayerAttributesOp
         {
-            get { return new Operation.PublicDeletePlayerAttributes.PublicDeletePlayerAttributesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicDeletePlayerAttributes.PublicDeletePlayerAttributesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

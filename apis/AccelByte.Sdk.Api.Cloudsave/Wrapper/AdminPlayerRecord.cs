@@ -20,76 +20,196 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminPlayerRecord(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminPlayerRecord(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public BulkGetPlayerRecordSizeHandlerV1.BulkGetPlayerRecordSizeHandlerV1Builder BulkGetPlayerRecordSizeHandlerV1Op
         {
-            get { return new Operation.BulkGetPlayerRecordSizeHandlerV1.BulkGetPlayerRecordSizeHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BulkGetPlayerRecordSizeHandlerV1.BulkGetPlayerRecordSizeHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ListPlayerRecordHandlerV1.ListPlayerRecordHandlerV1Builder ListPlayerRecordHandlerV1Op
         {
-            get { return new Operation.ListPlayerRecordHandlerV1.ListPlayerRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListPlayerRecordHandlerV1.ListPlayerRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminBulkPutPlayerRecordsByKeyHandlerV1.AdminBulkPutPlayerRecordsByKeyHandlerV1Builder AdminBulkPutPlayerRecordsByKeyHandlerV1Op
         {
-            get { return new Operation.AdminBulkPutPlayerRecordsByKeyHandlerV1.AdminBulkPutPlayerRecordsByKeyHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminBulkPutPlayerRecordsByKeyHandlerV1.AdminBulkPutPlayerRecordsByKeyHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminBulkGetPlayerRecordsByUserIDsHandlerV1.AdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder AdminBulkGetPlayerRecordsByUserIDsHandlerV1Op
         {
-            get { return new Operation.AdminBulkGetPlayerRecordsByUserIDsHandlerV1.AdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminBulkGetPlayerRecordsByUserIDsHandlerV1.AdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminRetrievePlayerRecords.AdminRetrievePlayerRecordsBuilder AdminRetrievePlayerRecordsOp
         {
-            get { return new Operation.AdminRetrievePlayerRecords.AdminRetrievePlayerRecordsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminRetrievePlayerRecords.AdminRetrievePlayerRecordsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminPutPlayerRecordsHandlerV1.AdminPutPlayerRecordsHandlerV1Builder AdminPutPlayerRecordsHandlerV1Op
         {
-            get { return new Operation.AdminPutPlayerRecordsHandlerV1.AdminPutPlayerRecordsHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminPutPlayerRecordsHandlerV1.AdminPutPlayerRecordsHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetPlayerRecordsHandlerV1.AdminGetPlayerRecordsHandlerV1Builder AdminGetPlayerRecordsHandlerV1Op
         {
-            get { return new Operation.AdminGetPlayerRecordsHandlerV1.AdminGetPlayerRecordsHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetPlayerRecordsHandlerV1.AdminGetPlayerRecordsHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetPlayerRecordHandlerV1.AdminGetPlayerRecordHandlerV1Builder AdminGetPlayerRecordHandlerV1Op
         {
-            get { return new Operation.AdminGetPlayerRecordHandlerV1.AdminGetPlayerRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetPlayerRecordHandlerV1.AdminGetPlayerRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminPutPlayerRecordHandlerV1.AdminPutPlayerRecordHandlerV1Builder AdminPutPlayerRecordHandlerV1Op
         {
-            get { return new Operation.AdminPutPlayerRecordHandlerV1.AdminPutPlayerRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminPutPlayerRecordHandlerV1.AdminPutPlayerRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminPostPlayerRecordHandlerV1.AdminPostPlayerRecordHandlerV1Builder AdminPostPlayerRecordHandlerV1Op
         {
-            get { return new Operation.AdminPostPlayerRecordHandlerV1.AdminPostPlayerRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminPostPlayerRecordHandlerV1.AdminPostPlayerRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeletePlayerRecordHandlerV1.AdminDeletePlayerRecordHandlerV1Builder AdminDeletePlayerRecordHandlerV1Op
         {
-            get { return new Operation.AdminDeletePlayerRecordHandlerV1.AdminDeletePlayerRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeletePlayerRecordHandlerV1.AdminDeletePlayerRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetPlayerPublicRecordHandlerV1.AdminGetPlayerPublicRecordHandlerV1Builder AdminGetPlayerPublicRecordHandlerV1Op
         {
-            get { return new Operation.AdminGetPlayerPublicRecordHandlerV1.AdminGetPlayerPublicRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetPlayerPublicRecordHandlerV1.AdminGetPlayerPublicRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminPutPlayerPublicRecordHandlerV1.AdminPutPlayerPublicRecordHandlerV1Builder AdminPutPlayerPublicRecordHandlerV1Op
         {
-            get { return new Operation.AdminPutPlayerPublicRecordHandlerV1.AdminPutPlayerPublicRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminPutPlayerPublicRecordHandlerV1.AdminPutPlayerPublicRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminPostPlayerPublicRecordHandlerV1.AdminPostPlayerPublicRecordHandlerV1Builder AdminPostPlayerPublicRecordHandlerV1Op
         {
-            get { return new Operation.AdminPostPlayerPublicRecordHandlerV1.AdminPostPlayerPublicRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminPostPlayerPublicRecordHandlerV1.AdminPostPlayerPublicRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeletePlayerPublicRecordHandlerV1.AdminDeletePlayerPublicRecordHandlerV1Builder AdminDeletePlayerPublicRecordHandlerV1Op
         {
-            get { return new Operation.AdminDeletePlayerPublicRecordHandlerV1.AdminDeletePlayerPublicRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeletePlayerPublicRecordHandlerV1.AdminDeletePlayerPublicRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetPlayerRecordSizeHandlerV1.AdminGetPlayerRecordSizeHandlerV1Builder AdminGetPlayerRecordSizeHandlerV1Op
         {
-            get { return new Operation.AdminGetPlayerRecordSizeHandlerV1.AdminGetPlayerRecordSizeHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetPlayerRecordSizeHandlerV1.AdminGetPlayerRecordSizeHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

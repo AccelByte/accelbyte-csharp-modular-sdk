@@ -20,60 +20,152 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Config(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Config(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ListConfig.ListConfigBuilder ListConfigOp
         {
-            get { return new Operation.ListConfig.ListConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListConfig.ListConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SaveConfig.SaveConfigBuilder SaveConfigOp
         {
-            get { return new Operation.SaveConfig.SaveConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SaveConfig.SaveConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetConfig.GetConfigBuilder GetConfigOp
         {
-            get { return new Operation.GetConfig.GetConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetConfig.GetConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateConfig.CreateConfigBuilder CreateConfigOp
         {
-            get { return new Operation.CreateConfig.CreateConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateConfig.CreateConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteConfig.DeleteConfigBuilder DeleteConfigOp
         {
-            get { return new Operation.DeleteConfig.DeleteConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteConfig.DeleteConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateConfig.UpdateConfigBuilder UpdateConfigOp
         {
-            get { return new Operation.UpdateConfig.UpdateConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateConfig.UpdateConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ClearCache.ClearCacheBuilder ClearCacheOp
         {
-            get { return new Operation.ClearCache.ClearCacheBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ClearCache.ClearCacheBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AddPort.AddPortBuilder AddPortOp
         {
-            get { return new Operation.AddPort.AddPortBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AddPort.AddPortBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeletePort.DeletePortBuilder DeletePortOp
         {
-            get { return new Operation.DeletePort.DeletePortBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeletePort.DeletePortBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdatePort.UpdatePortBuilder UpdatePortOp
         {
-            get { return new Operation.UpdatePort.UpdatePortBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdatePort.UpdatePortBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ExportConfigV1.ExportConfigV1Builder ExportConfigV1Op
         {
-            get { return new Operation.ExportConfigV1.ExportConfigV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ExportConfigV1.ExportConfigV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ImportConfigV1.ImportConfigV1Builder ImportConfigV1Op
         {
-            get { return new Operation.ImportConfigV1.ImportConfigV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ImportConfigV1.ImportConfigV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

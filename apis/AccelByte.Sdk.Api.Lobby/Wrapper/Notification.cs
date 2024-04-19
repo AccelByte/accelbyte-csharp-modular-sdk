@@ -20,119 +20,316 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Notification(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Notification(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public SendMultipleUsersFreeformNotificationV1Admin.SendMultipleUsersFreeformNotificationV1AdminBuilder SendMultipleUsersFreeformNotificationV1AdminOp
         {
-            get { return new Operation.SendMultipleUsersFreeformNotificationV1Admin.SendMultipleUsersFreeformNotificationV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SendMultipleUsersFreeformNotificationV1Admin.SendMultipleUsersFreeformNotificationV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SendUsersFreeformNotificationV1Admin.SendUsersFreeformNotificationV1AdminBuilder SendUsersFreeformNotificationV1AdminOp
         {
-            get { return new Operation.SendUsersFreeformNotificationV1Admin.SendUsersFreeformNotificationV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SendUsersFreeformNotificationV1Admin.SendUsersFreeformNotificationV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SendPartyFreeformNotificationV1Admin.SendPartyFreeformNotificationV1AdminBuilder SendPartyFreeformNotificationV1AdminOp
         {
-            get { return new Operation.SendPartyFreeformNotificationV1Admin.SendPartyFreeformNotificationV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SendPartyFreeformNotificationV1Admin.SendPartyFreeformNotificationV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SendPartyTemplatedNotificationV1Admin.SendPartyTemplatedNotificationV1AdminBuilder SendPartyTemplatedNotificationV1AdminOp
         {
-            get { return new Operation.SendPartyTemplatedNotificationV1Admin.SendPartyTemplatedNotificationV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SendPartyTemplatedNotificationV1Admin.SendPartyTemplatedNotificationV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetAllNotificationTemplatesV1Admin.GetAllNotificationTemplatesV1AdminBuilder GetAllNotificationTemplatesV1AdminOp
         {
-            get { return new Operation.GetAllNotificationTemplatesV1Admin.GetAllNotificationTemplatesV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetAllNotificationTemplatesV1Admin.GetAllNotificationTemplatesV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateNotificationTemplateV1Admin.CreateNotificationTemplateV1AdminBuilder CreateNotificationTemplateV1AdminOp
         {
-            get { return new Operation.CreateNotificationTemplateV1Admin.CreateNotificationTemplateV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateNotificationTemplateV1Admin.CreateNotificationTemplateV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SendUsersTemplatedNotificationV1Admin.SendUsersTemplatedNotificationV1AdminBuilder SendUsersTemplatedNotificationV1AdminOp
         {
-            get { return new Operation.SendUsersTemplatedNotificationV1Admin.SendUsersTemplatedNotificationV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SendUsersTemplatedNotificationV1Admin.SendUsersTemplatedNotificationV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetTemplateSlugLocalizationsTemplateV1Admin.GetTemplateSlugLocalizationsTemplateV1AdminBuilder GetTemplateSlugLocalizationsTemplateV1AdminOp
         {
-            get { return new Operation.GetTemplateSlugLocalizationsTemplateV1Admin.GetTemplateSlugLocalizationsTemplateV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetTemplateSlugLocalizationsTemplateV1Admin.GetTemplateSlugLocalizationsTemplateV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteNotificationTemplateSlugV1Admin.DeleteNotificationTemplateSlugV1AdminBuilder DeleteNotificationTemplateSlugV1AdminOp
         {
-            get { return new Operation.DeleteNotificationTemplateSlugV1Admin.DeleteNotificationTemplateSlugV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteNotificationTemplateSlugV1Admin.DeleteNotificationTemplateSlugV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetSingleTemplateLocalizationV1Admin.GetSingleTemplateLocalizationV1AdminBuilder GetSingleTemplateLocalizationV1AdminOp
         {
-            get { return new Operation.GetSingleTemplateLocalizationV1Admin.GetSingleTemplateLocalizationV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetSingleTemplateLocalizationV1Admin.GetSingleTemplateLocalizationV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateTemplateLocalizationV1Admin.UpdateTemplateLocalizationV1AdminBuilder UpdateTemplateLocalizationV1AdminOp
         {
-            get { return new Operation.UpdateTemplateLocalizationV1Admin.UpdateTemplateLocalizationV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateTemplateLocalizationV1Admin.UpdateTemplateLocalizationV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteTemplateLocalizationV1Admin.DeleteTemplateLocalizationV1AdminBuilder DeleteTemplateLocalizationV1AdminOp
         {
-            get { return new Operation.DeleteTemplateLocalizationV1Admin.DeleteTemplateLocalizationV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteTemplateLocalizationV1Admin.DeleteTemplateLocalizationV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublishTemplateLocalizationV1Admin.PublishTemplateLocalizationV1AdminBuilder PublishTemplateLocalizationV1AdminOp
         {
-            get { return new Operation.PublishTemplateLocalizationV1Admin.PublishTemplateLocalizationV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublishTemplateLocalizationV1Admin.PublishTemplateLocalizationV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetAllNotificationTopicsV1Admin.GetAllNotificationTopicsV1AdminBuilder GetAllNotificationTopicsV1AdminOp
         {
-            get { return new Operation.GetAllNotificationTopicsV1Admin.GetAllNotificationTopicsV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetAllNotificationTopicsV1Admin.GetAllNotificationTopicsV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateNotificationTopicV1Admin.CreateNotificationTopicV1AdminBuilder CreateNotificationTopicV1AdminOp
         {
-            get { return new Operation.CreateNotificationTopicV1Admin.CreateNotificationTopicV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateNotificationTopicV1Admin.CreateNotificationTopicV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetNotificationTopicV1Admin.GetNotificationTopicV1AdminBuilder GetNotificationTopicV1AdminOp
         {
-            get { return new Operation.GetNotificationTopicV1Admin.GetNotificationTopicV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetNotificationTopicV1Admin.GetNotificationTopicV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateNotificationTopicV1Admin.UpdateNotificationTopicV1AdminBuilder UpdateNotificationTopicV1AdminOp
         {
-            get { return new Operation.UpdateNotificationTopicV1Admin.UpdateNotificationTopicV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateNotificationTopicV1Admin.UpdateNotificationTopicV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteNotificationTopicV1Admin.DeleteNotificationTopicV1AdminBuilder DeleteNotificationTopicV1AdminOp
         {
-            get { return new Operation.DeleteNotificationTopicV1Admin.DeleteNotificationTopicV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteNotificationTopicV1Admin.DeleteNotificationTopicV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SendSpecificUserFreeformNotificationV1Admin.SendSpecificUserFreeformNotificationV1AdminBuilder SendSpecificUserFreeformNotificationV1AdminOp
         {
-            get { return new Operation.SendSpecificUserFreeformNotificationV1Admin.SendSpecificUserFreeformNotificationV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SendSpecificUserFreeformNotificationV1Admin.SendSpecificUserFreeformNotificationV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SendSpecificUserTemplatedNotificationV1Admin.SendSpecificUserTemplatedNotificationV1AdminBuilder SendSpecificUserTemplatedNotificationV1AdminOp
         {
-            get { return new Operation.SendSpecificUserTemplatedNotificationV1Admin.SendSpecificUserTemplatedNotificationV1AdminBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SendSpecificUserTemplatedNotificationV1Admin.SendSpecificUserTemplatedNotificationV1AdminBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetTopicByNamespace.GetTopicByNamespaceBuilder GetTopicByNamespaceOp
         {
-            get { return new Operation.GetTopicByNamespace.GetTopicByNamespaceBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetTopicByNamespace.GetTopicByNamespaceBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateTopic.CreateTopicBuilder CreateTopicOp
         {
-            get { return new Operation.CreateTopic.CreateTopicBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateTopic.CreateTopicBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetTopicByTopicName.GetTopicByTopicNameBuilder GetTopicByTopicNameOp
         {
-            get { return new Operation.GetTopicByTopicName.GetTopicByTopicNameBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetTopicByTopicName.GetTopicByTopicNameBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateTopicByTopicName.UpdateTopicByTopicNameBuilder UpdateTopicByTopicNameOp
         {
-            get { return new Operation.UpdateTopicByTopicName.UpdateTopicByTopicNameBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateTopicByTopicName.UpdateTopicByTopicNameBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteTopicByTopicName.DeleteTopicByTopicNameBuilder DeleteTopicByTopicNameOp
         {
-            get { return new Operation.DeleteTopicByTopicName.DeleteTopicByTopicNameBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteTopicByTopicName.DeleteTopicByTopicNameBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public FreeFormNotificationByUserID.FreeFormNotificationByUserIDBuilder FreeFormNotificationByUserIDOp
         {
-            get { return new Operation.FreeFormNotificationByUserID.FreeFormNotificationByUserIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FreeFormNotificationByUserID.FreeFormNotificationByUserIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public NotificationWithTemplateByUserID.NotificationWithTemplateByUserIDBuilder NotificationWithTemplateByUserIDOp
         {
-            get { return new Operation.NotificationWithTemplateByUserID.NotificationWithTemplateByUserIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.NotificationWithTemplateByUserID.NotificationWithTemplateByUserIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

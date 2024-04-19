@@ -20,39 +20,96 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminChannel(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminChannel(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public SingleAdminGetChannel.SingleAdminGetChannelBuilder SingleAdminGetChannelOp
         {
-            get { return new Operation.SingleAdminGetChannel.SingleAdminGetChannelBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SingleAdminGetChannel.SingleAdminGetChannelBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateChannel.AdminCreateChannelBuilder AdminCreateChannelOp
         {
-            get { return new Operation.AdminCreateChannel.AdminCreateChannelBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateChannel.AdminCreateChannelBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SingleAdminUpdateChannel.SingleAdminUpdateChannelBuilder SingleAdminUpdateChannelOp
         {
-            get { return new Operation.SingleAdminUpdateChannel.SingleAdminUpdateChannelBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SingleAdminUpdateChannel.SingleAdminUpdateChannelBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SingleAdminDeleteChannel.SingleAdminDeleteChannelBuilder SingleAdminDeleteChannelOp
         {
-            get { return new Operation.SingleAdminDeleteChannel.SingleAdminDeleteChannelBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SingleAdminDeleteChannel.SingleAdminDeleteChannelBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetChannel.AdminGetChannelBuilder AdminGetChannelOp
         {
-            get { return new Operation.AdminGetChannel.AdminGetChannelBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetChannel.AdminGetChannelBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateChannel.AdminUpdateChannelBuilder AdminUpdateChannelOp
         {
-            get { return new Operation.AdminUpdateChannel.AdminUpdateChannelBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateChannel.AdminUpdateChannelBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteChannel.AdminDeleteChannelBuilder AdminDeleteChannelOp
         {
-            get { return new Operation.AdminDeleteChannel.AdminDeleteChannelBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteChannel.AdminDeleteChannelBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

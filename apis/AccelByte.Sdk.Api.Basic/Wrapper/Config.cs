@@ -20,31 +20,74 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Config(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Config(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public CreateConfig.CreateConfigBuilder CreateConfigOp
         {
-            get { return new Operation.CreateConfig.CreateConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateConfig.CreateConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetConfig1.GetConfig1Builder GetConfig1Op
         {
-            get { return new Operation.GetConfig1.GetConfig1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetConfig1.GetConfig1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteConfig1.DeleteConfig1Builder DeleteConfig1Op
         {
-            get { return new Operation.DeleteConfig1.DeleteConfig1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteConfig1.DeleteConfig1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateConfig1.UpdateConfig1Builder UpdateConfig1Op
         {
-            get { return new Operation.UpdateConfig1.UpdateConfig1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateConfig1.UpdateConfig1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPublisherConfig.GetPublisherConfigBuilder GetPublisherConfigOp
         {
-            get { return new Operation.GetPublisherConfig.GetPublisherConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPublisherConfig.GetPublisherConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

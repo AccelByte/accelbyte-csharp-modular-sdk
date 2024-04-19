@@ -20,19 +20,41 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AllTerminatedServers(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AllTerminatedServers(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public BatchDownloadServerLogs.BatchDownloadServerLogsBuilder BatchDownloadServerLogsOp
         {
-            get { return new Operation.BatchDownloadServerLogs.BatchDownloadServerLogsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BatchDownloadServerLogs.BatchDownloadServerLogsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListAllTerminatedServers.ListAllTerminatedServersBuilder ListAllTerminatedServersOp
         {
-            get { return new Operation.ListAllTerminatedServers.ListAllTerminatedServersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListAllTerminatedServers.ListAllTerminatedServersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Qosm.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Admin(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Admin(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public UpdateServerConfig.UpdateServerConfigBuilder UpdateServerConfigOp
         {
-            get { return new Operation.UpdateServerConfig.UpdateServerConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateServerConfig.UpdateServerConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteServer.DeleteServerBuilder DeleteServerOp
         {
-            get { return new Operation.DeleteServer.DeleteServerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteServer.DeleteServerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SetServerAlias.SetServerAliasBuilder SetServerAliasOp
         {
-            get { return new Operation.SetServerAlias.SetServerAliasBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SetServerAlias.SetServerAliasBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

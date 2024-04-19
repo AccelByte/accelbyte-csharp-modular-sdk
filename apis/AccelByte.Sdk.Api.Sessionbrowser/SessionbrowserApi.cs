@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Sessionbrowser
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.Session Session
         {
             get
             {
                 if (_Session == null)
-                    _Session = new Wrapper.Session(_Sdk);
+                    _Session = new Wrapper.Session(_Sdk, _CustomBasePath);
                 return _Session;
             }
         }
@@ -29,6 +31,12 @@ namespace AccelByte.Sdk.Api.Sessionbrowser
         internal SessionbrowserApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public SessionbrowserApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -41,7 +49,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<SessionbrowserApi>("sessionbrowser", () =>
             {
-                return new SessionbrowserApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("sessionbrowser");
+                if (customPath != "")
+                    return (new SessionbrowserApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new SessionbrowserApi(sdk);
             });
         }
     }

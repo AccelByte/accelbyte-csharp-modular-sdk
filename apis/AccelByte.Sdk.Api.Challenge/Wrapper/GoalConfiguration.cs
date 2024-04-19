@@ -20,31 +20,74 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public GoalConfiguration(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public GoalConfiguration(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetGoals.AdminGetGoalsBuilder AdminGetGoalsOp
         {
-            get { return new Operation.AdminGetGoals.AdminGetGoalsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetGoals.AdminGetGoalsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateGoal.AdminCreateGoalBuilder AdminCreateGoalOp
         {
-            get { return new Operation.AdminCreateGoal.AdminCreateGoalBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateGoal.AdminCreateGoalBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetGoal.AdminGetGoalBuilder AdminGetGoalOp
         {
-            get { return new Operation.AdminGetGoal.AdminGetGoalBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetGoal.AdminGetGoalBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateGoals.AdminUpdateGoalsBuilder AdminUpdateGoalsOp
         {
-            get { return new Operation.AdminUpdateGoals.AdminUpdateGoalsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateGoals.AdminUpdateGoalsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteGoal.AdminDeleteGoalBuilder AdminDeleteGoalOp
         {
-            get { return new Operation.AdminDeleteGoal.AdminDeleteGoalBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteGoal.AdminDeleteGoalBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

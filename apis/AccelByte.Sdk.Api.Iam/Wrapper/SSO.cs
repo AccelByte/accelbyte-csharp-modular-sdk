@@ -20,19 +20,41 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public SSO(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public SSO(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public LoginSSOClient.LoginSSOClientBuilder LoginSSOClientOp
         {
-            get { return new Operation.LoginSSOClient.LoginSSOClientBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.LoginSSOClient.LoginSSOClientBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public LogoutSSOClient.LogoutSSOClientBuilder LogoutSSOClientOp
         {
-            get { return new Operation.LogoutSSOClient.LogoutSSOClientBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.LogoutSSOClient.LogoutSSOClientBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

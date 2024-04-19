@@ -20,71 +20,184 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public DLC(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public DLC(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetDLCItemConfig.GetDLCItemConfigBuilder GetDLCItemConfigOp
         {
-            get { return new Operation.GetDLCItemConfig.GetDLCItemConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetDLCItemConfig.GetDLCItemConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateDLCItemConfig.UpdateDLCItemConfigBuilder UpdateDLCItemConfigOp
         {
-            get { return new Operation.UpdateDLCItemConfig.UpdateDLCItemConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateDLCItemConfig.UpdateDLCItemConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteDLCItemConfig.DeleteDLCItemConfigBuilder DeleteDLCItemConfigOp
         {
-            get { return new Operation.DeleteDLCItemConfig.DeleteDLCItemConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteDLCItemConfig.DeleteDLCItemConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPlatformDLCConfig.GetPlatformDLCConfigBuilder GetPlatformDLCConfigOp
         {
-            get { return new Operation.GetPlatformDLCConfig.GetPlatformDLCConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPlatformDLCConfig.GetPlatformDLCConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdatePlatformDLCConfig.UpdatePlatformDLCConfigBuilder UpdatePlatformDLCConfigOp
         {
-            get { return new Operation.UpdatePlatformDLCConfig.UpdatePlatformDLCConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdatePlatformDLCConfig.UpdatePlatformDLCConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeletePlatformDLCConfig.DeletePlatformDLCConfigBuilder DeletePlatformDLCConfigOp
         {
-            get { return new Operation.DeletePlatformDLCConfig.DeletePlatformDLCConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeletePlatformDLCConfig.DeletePlatformDLCConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserDLCByPlatform.GetUserDLCByPlatformBuilder GetUserDLCByPlatformOp
         {
-            get { return new Operation.GetUserDLCByPlatform.GetUserDLCByPlatformBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserDLCByPlatform.GetUserDLCByPlatformBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserDLC.GetUserDLCBuilder GetUserDLCOp
         {
-            get { return new Operation.GetUserDLC.GetUserDLCBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserDLC.GetUserDLCBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GeDLCDurableRewardShortMap.GeDLCDurableRewardShortMapBuilder GeDLCDurableRewardShortMapOp
         {
-            get { return new Operation.GeDLCDurableRewardShortMap.GeDLCDurableRewardShortMapBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GeDLCDurableRewardShortMap.GeDLCDurableRewardShortMapBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SyncEpicGameDLC.SyncEpicGameDLCBuilder SyncEpicGameDLCOp
         {
-            get { return new Operation.SyncEpicGameDLC.SyncEpicGameDLCBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SyncEpicGameDLC.SyncEpicGameDLCBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SyncOculusDLC.SyncOculusDLCBuilder SyncOculusDLCOp
         {
-            get { return new Operation.SyncOculusDLC.SyncOculusDLCBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SyncOculusDLC.SyncOculusDLCBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicSyncPsnDlcInventory.PublicSyncPsnDlcInventoryBuilder PublicSyncPsnDlcInventoryOp
         {
-            get { return new Operation.PublicSyncPsnDlcInventory.PublicSyncPsnDlcInventoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicSyncPsnDlcInventory.PublicSyncPsnDlcInventoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicSyncPsnDlcInventoryWithMultipleServiceLabels.PublicSyncPsnDlcInventoryWithMultipleServiceLabelsBuilder PublicSyncPsnDlcInventoryWithMultipleServiceLabelsOp
         {
-            get { return new Operation.PublicSyncPsnDlcInventoryWithMultipleServiceLabels.PublicSyncPsnDlcInventoryWithMultipleServiceLabelsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicSyncPsnDlcInventoryWithMultipleServiceLabels.PublicSyncPsnDlcInventoryWithMultipleServiceLabelsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SyncSteamDLC.SyncSteamDLCBuilder SyncSteamDLCOp
         {
-            get { return new Operation.SyncSteamDLC.SyncSteamDLCBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SyncSteamDLC.SyncSteamDLCBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SyncXboxDLC.SyncXboxDLCBuilder SyncXboxDLCOp
         {
-            get { return new Operation.SyncXboxDLC.SyncXboxDLCBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SyncXboxDLC.SyncXboxDLCBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

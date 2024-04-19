@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Group
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.Configuration Configuration
         {
             get
             {
                 if (_Configuration == null)
-                    _Configuration = new Wrapper.Configuration(_Sdk);
+                    _Configuration = new Wrapper.Configuration(_Sdk, _CustomBasePath);
                 return _Configuration;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Group
             get
             {
                 if (_Group == null)
-                    _Group = new Wrapper.Group(_Sdk);
+                    _Group = new Wrapper.Group(_Sdk, _CustomBasePath);
                 return _Group;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Group
             get
             {
                 if (_GroupMember == null)
-                    _GroupMember = new Wrapper.GroupMember(_Sdk);
+                    _GroupMember = new Wrapper.GroupMember(_Sdk, _CustomBasePath);
                 return _GroupMember;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Group
             get
             {
                 if (_GroupRoles == null)
-                    _GroupRoles = new Wrapper.GroupRoles(_Sdk);
+                    _GroupRoles = new Wrapper.GroupRoles(_Sdk, _CustomBasePath);
                 return _GroupRoles;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Group
             get
             {
                 if (_MemberRequest == null)
-                    _MemberRequest = new Wrapper.MemberRequest(_Sdk);
+                    _MemberRequest = new Wrapper.MemberRequest(_Sdk, _CustomBasePath);
                 return _MemberRequest;
             }
         }
@@ -73,6 +75,12 @@ namespace AccelByte.Sdk.Api.Group
         internal GroupApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public GroupApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -85,7 +93,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<GroupApi>("group", () =>
             {
-                return new GroupApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("group");
+                if (customPath != "")
+                    return (new GroupApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new GroupApi(sdk);
             });
         }
     }

@@ -20,43 +20,107 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public ChallengeConfiguration(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public ChallengeConfiguration(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetChallenges.AdminGetChallengesBuilder AdminGetChallengesOp
         {
-            get { return new Operation.AdminGetChallenges.AdminGetChallengesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetChallenges.AdminGetChallengesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateChallenge.AdminCreateChallengeBuilder AdminCreateChallengeOp
         {
-            get { return new Operation.AdminCreateChallenge.AdminCreateChallengeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateChallenge.AdminCreateChallengeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetChallenge.AdminGetChallengeBuilder AdminGetChallengeOp
         {
-            get { return new Operation.AdminGetChallenge.AdminGetChallengeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetChallenge.AdminGetChallengeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateChallenge.AdminUpdateChallengeBuilder AdminUpdateChallengeOp
         {
-            get { return new Operation.AdminUpdateChallenge.AdminUpdateChallengeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateChallenge.AdminUpdateChallengeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteChallenge.AdminDeleteChallengeBuilder AdminDeleteChallengeOp
         {
-            get { return new Operation.AdminDeleteChallenge.AdminDeleteChallengeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteChallenge.AdminDeleteChallengeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetPeriods.AdminGetPeriodsBuilder AdminGetPeriodsOp
         {
-            get { return new Operation.AdminGetPeriods.AdminGetPeriodsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetPeriods.AdminGetPeriodsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminRandomizeChallenge.AdminRandomizeChallengeBuilder AdminRandomizeChallengeOp
         {
-            get { return new Operation.AdminRandomizeChallenge.AdminRandomizeChallengeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminRandomizeChallenge.AdminRandomizeChallengeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteTiedChallenge.AdminDeleteTiedChallengeBuilder AdminDeleteTiedChallengeOp
         {
-            get { return new Operation.AdminDeleteTiedChallenge.AdminDeleteTiedChallengeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteTiedChallenge.AdminDeleteTiedChallengeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

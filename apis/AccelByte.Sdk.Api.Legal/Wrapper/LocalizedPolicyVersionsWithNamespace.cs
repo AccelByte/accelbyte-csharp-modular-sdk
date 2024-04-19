@@ -20,39 +20,96 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public LocalizedPolicyVersionsWithNamespace(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public LocalizedPolicyVersionsWithNamespace(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public RetrieveLocalizedPolicyVersions1.RetrieveLocalizedPolicyVersions1Builder RetrieveLocalizedPolicyVersions1Op
         {
-            get { return new Operation.RetrieveLocalizedPolicyVersions1.RetrieveLocalizedPolicyVersions1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveLocalizedPolicyVersions1.RetrieveLocalizedPolicyVersions1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateLocalizedPolicyVersion1.CreateLocalizedPolicyVersion1Builder CreateLocalizedPolicyVersion1Op
         {
-            get { return new Operation.CreateLocalizedPolicyVersion1.CreateLocalizedPolicyVersion1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateLocalizedPolicyVersion1.CreateLocalizedPolicyVersion1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RetrieveSingleLocalizedPolicyVersion1.RetrieveSingleLocalizedPolicyVersion1Builder RetrieveSingleLocalizedPolicyVersion1Op
         {
-            get { return new Operation.RetrieveSingleLocalizedPolicyVersion1.RetrieveSingleLocalizedPolicyVersion1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveSingleLocalizedPolicyVersion1.RetrieveSingleLocalizedPolicyVersion1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateLocalizedPolicyVersion1.UpdateLocalizedPolicyVersion1Builder UpdateLocalizedPolicyVersion1Op
         {
-            get { return new Operation.UpdateLocalizedPolicyVersion1.UpdateLocalizedPolicyVersion1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateLocalizedPolicyVersion1.UpdateLocalizedPolicyVersion1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RequestPresignedURL1.RequestPresignedURL1Builder RequestPresignedURL1Op
         {
-            get { return new Operation.RequestPresignedURL1.RequestPresignedURL1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RequestPresignedURL1.RequestPresignedURL1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SetDefaultPolicy1.SetDefaultPolicy1Builder SetDefaultPolicy1Op
         {
-            get { return new Operation.SetDefaultPolicy1.SetDefaultPolicy1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SetDefaultPolicy1.SetDefaultPolicy1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RetrieveSingleLocalizedPolicyVersion3.RetrieveSingleLocalizedPolicyVersion3Builder RetrieveSingleLocalizedPolicyVersion3Op
         {
-            get { return new Operation.RetrieveSingleLocalizedPolicyVersion3.RetrieveSingleLocalizedPolicyVersion3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveSingleLocalizedPolicyVersion3.RetrieveSingleLocalizedPolicyVersion3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

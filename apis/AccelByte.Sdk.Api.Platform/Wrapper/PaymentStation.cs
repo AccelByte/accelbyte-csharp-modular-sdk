@@ -20,52 +20,130 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PaymentStation(IAccelByteSdk sdk)
         {
             _sdk = sdk;
+        }
+
+        public PaymentStation(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
         }
 
         #region Operation Builders
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetPaymentCustomization.GetPaymentCustomizationBuilder GetPaymentCustomizationOp
         {
-            get { return new Operation.GetPaymentCustomization.GetPaymentCustomizationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPaymentCustomization.GetPaymentCustomizationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetPaymentUrl.PublicGetPaymentUrlBuilder PublicGetPaymentUrlOp
         {
-            get { return new Operation.PublicGetPaymentUrl.PublicGetPaymentUrlBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetPaymentUrl.PublicGetPaymentUrlBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetPaymentMethods.PublicGetPaymentMethodsBuilder PublicGetPaymentMethodsOp
         {
-            get { return new Operation.PublicGetPaymentMethods.PublicGetPaymentMethodsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetPaymentMethods.PublicGetPaymentMethodsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUnpaidPaymentOrder.PublicGetUnpaidPaymentOrderBuilder PublicGetUnpaidPaymentOrderOp
         {
-            get { return new Operation.PublicGetUnpaidPaymentOrder.PublicGetUnpaidPaymentOrderBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUnpaidPaymentOrder.PublicGetUnpaidPaymentOrderBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public Pay.PayBuilder PayOp
         {
-            get { return new Operation.Pay.PayBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.Pay.PayBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicCheckPaymentOrderPaidStatus.PublicCheckPaymentOrderPaidStatusBuilder PublicCheckPaymentOrderPaidStatusOp
         {
-            get { return new Operation.PublicCheckPaymentOrderPaidStatus.PublicCheckPaymentOrderPaidStatusBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicCheckPaymentOrderPaidStatus.PublicCheckPaymentOrderPaidStatusBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPaymentPublicConfig.GetPaymentPublicConfigBuilder GetPaymentPublicConfigOp
         {
-            get { return new Operation.GetPaymentPublicConfig.GetPaymentPublicConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPaymentPublicConfig.GetPaymentPublicConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetQRCode.PublicGetQRCodeBuilder PublicGetQRCodeOp
         {
-            get { return new Operation.PublicGetQRCode.PublicGetQRCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetQRCode.PublicGetQRCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicNormalizePaymentReturnUrl.PublicNormalizePaymentReturnUrlBuilder PublicNormalizePaymentReturnUrlOp
         {
-            get { return new Operation.PublicNormalizePaymentReturnUrl.PublicNormalizePaymentReturnUrlBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicNormalizePaymentReturnUrl.PublicNormalizePaymentReturnUrlBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPaymentTaxValue.GetPaymentTaxValueBuilder GetPaymentTaxValueOp
         {
-            get { return new Operation.GetPaymentTaxValue.GetPaymentTaxValueBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPaymentTaxValue.GetPaymentTaxValueBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

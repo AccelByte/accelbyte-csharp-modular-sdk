@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Cloudsave
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.AdminRecord AdminRecord
         {
             get
             {
                 if (_AdminRecord == null)
-                    _AdminRecord = new Wrapper.AdminRecord(_Sdk);
+                    _AdminRecord = new Wrapper.AdminRecord(_Sdk, _CustomBasePath);
                 return _AdminRecord;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Cloudsave
             get
             {
                 if (_AdminGameBinaryRecord == null)
-                    _AdminGameBinaryRecord = new Wrapper.AdminGameBinaryRecord(_Sdk);
+                    _AdminGameBinaryRecord = new Wrapper.AdminGameBinaryRecord(_Sdk, _CustomBasePath);
                 return _AdminGameBinaryRecord;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Cloudsave
             get
             {
                 if (_TTLConfig == null)
-                    _TTLConfig = new Wrapper.TTLConfig(_Sdk);
+                    _TTLConfig = new Wrapper.TTLConfig(_Sdk, _CustomBasePath);
                 return _TTLConfig;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Cloudsave
             get
             {
                 if (_AdminConcurrentRecord == null)
-                    _AdminConcurrentRecord = new Wrapper.AdminConcurrentRecord(_Sdk);
+                    _AdminConcurrentRecord = new Wrapper.AdminConcurrentRecord(_Sdk, _CustomBasePath);
                 return _AdminConcurrentRecord;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Cloudsave
             get
             {
                 if (_PluginConfig == null)
-                    _PluginConfig = new Wrapper.PluginConfig(_Sdk);
+                    _PluginConfig = new Wrapper.PluginConfig(_Sdk, _CustomBasePath);
                 return _PluginConfig;
             }
         }
@@ -75,7 +77,7 @@ namespace AccelByte.Sdk.Api.Cloudsave
             get
             {
                 if (_AdminGameRecord == null)
-                    _AdminGameRecord = new Wrapper.AdminGameRecord(_Sdk);
+                    _AdminGameRecord = new Wrapper.AdminGameRecord(_Sdk, _CustomBasePath);
                 return _AdminGameRecord;
             }
         }
@@ -86,7 +88,7 @@ namespace AccelByte.Sdk.Api.Cloudsave
             get
             {
                 if (_AdminTags == null)
-                    _AdminTags = new Wrapper.AdminTags(_Sdk);
+                    _AdminTags = new Wrapper.AdminTags(_Sdk, _CustomBasePath);
                 return _AdminTags;
             }
         }
@@ -97,7 +99,7 @@ namespace AccelByte.Sdk.Api.Cloudsave
             get
             {
                 if (_AdminPlayerRecord == null)
-                    _AdminPlayerRecord = new Wrapper.AdminPlayerRecord(_Sdk);
+                    _AdminPlayerRecord = new Wrapper.AdminPlayerRecord(_Sdk, _CustomBasePath);
                 return _AdminPlayerRecord;
             }
         }
@@ -108,7 +110,7 @@ namespace AccelByte.Sdk.Api.Cloudsave
             get
             {
                 if (_AdminPlayerBinaryRecord == null)
-                    _AdminPlayerBinaryRecord = new Wrapper.AdminPlayerBinaryRecord(_Sdk);
+                    _AdminPlayerBinaryRecord = new Wrapper.AdminPlayerBinaryRecord(_Sdk, _CustomBasePath);
                 return _AdminPlayerBinaryRecord;
             }
         }
@@ -119,7 +121,7 @@ namespace AccelByte.Sdk.Api.Cloudsave
             get
             {
                 if (_PublicGameBinaryRecord == null)
-                    _PublicGameBinaryRecord = new Wrapper.PublicGameBinaryRecord(_Sdk);
+                    _PublicGameBinaryRecord = new Wrapper.PublicGameBinaryRecord(_Sdk, _CustomBasePath);
                 return _PublicGameBinaryRecord;
             }
         }
@@ -130,7 +132,7 @@ namespace AccelByte.Sdk.Api.Cloudsave
             get
             {
                 if (_ConcurrentRecord == null)
-                    _ConcurrentRecord = new Wrapper.ConcurrentRecord(_Sdk);
+                    _ConcurrentRecord = new Wrapper.ConcurrentRecord(_Sdk, _CustomBasePath);
                 return _ConcurrentRecord;
             }
         }
@@ -141,7 +143,7 @@ namespace AccelByte.Sdk.Api.Cloudsave
             get
             {
                 if (_PublicGameRecord == null)
-                    _PublicGameRecord = new Wrapper.PublicGameRecord(_Sdk);
+                    _PublicGameRecord = new Wrapper.PublicGameRecord(_Sdk, _CustomBasePath);
                 return _PublicGameRecord;
             }
         }
@@ -152,7 +154,7 @@ namespace AccelByte.Sdk.Api.Cloudsave
             get
             {
                 if (_PublicTags == null)
-                    _PublicTags = new Wrapper.PublicTags(_Sdk);
+                    _PublicTags = new Wrapper.PublicTags(_Sdk, _CustomBasePath);
                 return _PublicTags;
             }
         }
@@ -163,7 +165,7 @@ namespace AccelByte.Sdk.Api.Cloudsave
             get
             {
                 if (_PublicPlayerBinaryRecord == null)
-                    _PublicPlayerBinaryRecord = new Wrapper.PublicPlayerBinaryRecord(_Sdk);
+                    _PublicPlayerBinaryRecord = new Wrapper.PublicPlayerBinaryRecord(_Sdk, _CustomBasePath);
                 return _PublicPlayerBinaryRecord;
             }
         }
@@ -174,7 +176,7 @@ namespace AccelByte.Sdk.Api.Cloudsave
             get
             {
                 if (_PublicPlayerRecord == null)
-                    _PublicPlayerRecord = new Wrapper.PublicPlayerRecord(_Sdk);
+                    _PublicPlayerRecord = new Wrapper.PublicPlayerRecord(_Sdk, _CustomBasePath);
                 return _PublicPlayerRecord;
             }
         }
@@ -183,6 +185,12 @@ namespace AccelByte.Sdk.Api.Cloudsave
         internal CloudsaveApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public CloudsaveApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -195,7 +203,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<CloudsaveApi>("cloudsave", () =>
             {
-                return new CloudsaveApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("cloudsave");
+                if (customPath != "")
+                    return (new CloudsaveApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new CloudsaveApi(sdk);
             });
         }
     }

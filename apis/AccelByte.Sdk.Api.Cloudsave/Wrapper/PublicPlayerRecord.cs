@@ -20,63 +20,162 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PublicPlayerRecord(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PublicPlayerRecord(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public BulkGetPlayerPublicRecordHandlerV1.BulkGetPlayerPublicRecordHandlerV1Builder BulkGetPlayerPublicRecordHandlerV1Op
         {
-            get { return new Operation.BulkGetPlayerPublicRecordHandlerV1.BulkGetPlayerPublicRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BulkGetPlayerPublicRecordHandlerV1.BulkGetPlayerPublicRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RetrievePlayerRecords.RetrievePlayerRecordsBuilder RetrievePlayerRecordsOp
         {
-            get { return new Operation.RetrievePlayerRecords.RetrievePlayerRecordsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrievePlayerRecords.RetrievePlayerRecordsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPlayerRecordsBulkHandlerV1.GetPlayerRecordsBulkHandlerV1Builder GetPlayerRecordsBulkHandlerV1Op
         {
-            get { return new Operation.GetPlayerRecordsBulkHandlerV1.GetPlayerRecordsBulkHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPlayerRecordsBulkHandlerV1.GetPlayerRecordsBulkHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicDeletePlayerPublicRecordHandlerV1.PublicDeletePlayerPublicRecordHandlerV1Builder PublicDeletePlayerPublicRecordHandlerV1Op
         {
-            get { return new Operation.PublicDeletePlayerPublicRecordHandlerV1.PublicDeletePlayerPublicRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicDeletePlayerPublicRecordHandlerV1.PublicDeletePlayerPublicRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetOtherPlayerPublicRecordKeyHandlerV1.GetOtherPlayerPublicRecordKeyHandlerV1Builder GetOtherPlayerPublicRecordKeyHandlerV1Op
         {
-            get { return new Operation.GetOtherPlayerPublicRecordKeyHandlerV1.GetOtherPlayerPublicRecordKeyHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetOtherPlayerPublicRecordKeyHandlerV1.GetOtherPlayerPublicRecordKeyHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetOtherPlayerPublicRecordHandlerV1.GetOtherPlayerPublicRecordHandlerV1Builder GetOtherPlayerPublicRecordHandlerV1Op
         {
-            get { return new Operation.GetOtherPlayerPublicRecordHandlerV1.GetOtherPlayerPublicRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetOtherPlayerPublicRecordHandlerV1.GetOtherPlayerPublicRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPlayerRecordHandlerV1.GetPlayerRecordHandlerV1Builder GetPlayerRecordHandlerV1Op
         {
-            get { return new Operation.GetPlayerRecordHandlerV1.GetPlayerRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPlayerRecordHandlerV1.GetPlayerRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PutPlayerRecordHandlerV1.PutPlayerRecordHandlerV1Builder PutPlayerRecordHandlerV1Op
         {
-            get { return new Operation.PutPlayerRecordHandlerV1.PutPlayerRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PutPlayerRecordHandlerV1.PutPlayerRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PostPlayerRecordHandlerV1.PostPlayerRecordHandlerV1Builder PostPlayerRecordHandlerV1Op
         {
-            get { return new Operation.PostPlayerRecordHandlerV1.PostPlayerRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PostPlayerRecordHandlerV1.PostPlayerRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeletePlayerRecordHandlerV1.DeletePlayerRecordHandlerV1Builder DeletePlayerRecordHandlerV1Op
         {
-            get { return new Operation.DeletePlayerRecordHandlerV1.DeletePlayerRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeletePlayerRecordHandlerV1.DeletePlayerRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPlayerPublicRecordHandlerV1.GetPlayerPublicRecordHandlerV1Builder GetPlayerPublicRecordHandlerV1Op
         {
-            get { return new Operation.GetPlayerPublicRecordHandlerV1.GetPlayerPublicRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPlayerPublicRecordHandlerV1.GetPlayerPublicRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PutPlayerPublicRecordHandlerV1.PutPlayerPublicRecordHandlerV1Builder PutPlayerPublicRecordHandlerV1Op
         {
-            get { return new Operation.PutPlayerPublicRecordHandlerV1.PutPlayerPublicRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PutPlayerPublicRecordHandlerV1.PutPlayerPublicRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PostPlayerPublicRecordHandlerV1.PostPlayerPublicRecordHandlerV1Builder PostPlayerPublicRecordHandlerV1Op
         {
-            get { return new Operation.PostPlayerPublicRecordHandlerV1.PostPlayerPublicRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PostPlayerPublicRecordHandlerV1.PostPlayerPublicRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

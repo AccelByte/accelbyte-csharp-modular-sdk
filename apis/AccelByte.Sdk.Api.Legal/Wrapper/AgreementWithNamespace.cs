@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AgreementWithNamespace(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AgreementWithNamespace(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public RetrieveAcceptedAgreementsForMultiUsers.RetrieveAcceptedAgreementsForMultiUsersBuilder RetrieveAcceptedAgreementsForMultiUsersOp
         {
-            get { return new Operation.RetrieveAcceptedAgreementsForMultiUsers.RetrieveAcceptedAgreementsForMultiUsersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveAcceptedAgreementsForMultiUsers.RetrieveAcceptedAgreementsForMultiUsersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RetrieveAcceptedAgreements1.RetrieveAcceptedAgreements1Builder RetrieveAcceptedAgreements1Op
         {
-            get { return new Operation.RetrieveAcceptedAgreements1.RetrieveAcceptedAgreements1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveAcceptedAgreements1.RetrieveAcceptedAgreements1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RetrieveAllUsersByPolicyVersion1.RetrieveAllUsersByPolicyVersion1Builder RetrieveAllUsersByPolicyVersion1Op
         {
-            get { return new Operation.RetrieveAllUsersByPolicyVersion1.RetrieveAllUsersByPolicyVersion1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveAllUsersByPolicyVersion1.RetrieveAllUsersByPolicyVersion1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,45 +20,109 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Bans(IAccelByteSdk sdk)
         {
             _sdk = sdk;
+        }
+
+        public Bans(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
         }
 
         #region Operation Builders
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetBansType.GetBansTypeBuilder GetBansTypeOp
         {
-            get { return new Operation.GetBansType.GetBansTypeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetBansType.GetBansTypeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetListBanReason.GetListBanReasonBuilder GetListBanReasonOp
         {
-            get { return new Operation.GetListBanReason.GetListBanReasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetListBanReason.GetListBanReasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetBansTypeV3.AdminGetBansTypeV3Builder AdminGetBansTypeV3Op
         {
-            get { return new Operation.AdminGetBansTypeV3.AdminGetBansTypeV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetBansTypeV3.AdminGetBansTypeV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetListBanReasonV3.AdminGetListBanReasonV3Builder AdminGetListBanReasonV3Op
         {
-            get { return new Operation.AdminGetListBanReasonV3.AdminGetListBanReasonV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetListBanReasonV3.AdminGetListBanReasonV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetBannedUsersV3.AdminGetBannedUsersV3Builder AdminGetBannedUsersV3Op
         {
-            get { return new Operation.AdminGetBannedUsersV3.AdminGetBannedUsersV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetBannedUsersV3.AdminGetBannedUsersV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminBanUserBulkV3.AdminBanUserBulkV3Builder AdminBanUserBulkV3Op
         {
-            get { return new Operation.AdminBanUserBulkV3.AdminBanUserBulkV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminBanUserBulkV3.AdminBanUserBulkV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUnbanUserBulkV3.AdminUnbanUserBulkV3Builder AdminUnbanUserBulkV3Op
         {
-            get { return new Operation.AdminUnbanUserBulkV3.AdminUnbanUserBulkV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUnbanUserBulkV3.AdminUnbanUserBulkV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetBansTypeWithNamespaceV3.AdminGetBansTypeWithNamespaceV3Builder AdminGetBansTypeWithNamespaceV3Op
         {
-            get { return new Operation.AdminGetBansTypeWithNamespaceV3.AdminGetBansTypeWithNamespaceV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetBansTypeWithNamespaceV3.AdminGetBansTypeWithNamespaceV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

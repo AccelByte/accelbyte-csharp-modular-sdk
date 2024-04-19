@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PolicyVersions(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PolicyVersions(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public UpdatePolicyVersion.UpdatePolicyVersionBuilder UpdatePolicyVersionOp
         {
-            get { return new Operation.UpdatePolicyVersion.UpdatePolicyVersionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdatePolicyVersion.UpdatePolicyVersionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublishPolicyVersion.PublishPolicyVersionBuilder PublishPolicyVersionOp
         {
-            get { return new Operation.PublishPolicyVersion.PublishPolicyVersionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublishPolicyVersion.PublishPolicyVersionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RetrieveSinglePolicyVersion.RetrieveSinglePolicyVersionBuilder RetrieveSinglePolicyVersionOp
         {
-            get { return new Operation.RetrieveSinglePolicyVersion.RetrieveSinglePolicyVersionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveSinglePolicyVersion.RetrieveSinglePolicyVersionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreatePolicyVersion.CreatePolicyVersionBuilder CreatePolicyVersionOp
         {
-            get { return new Operation.CreatePolicyVersion.CreatePolicyVersionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreatePolicyVersion.CreatePolicyVersionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

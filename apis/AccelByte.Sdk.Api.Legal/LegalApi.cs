@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Legal
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.Agreement Agreement
         {
             get
             {
                 if (_Agreement == null)
-                    _Agreement = new Wrapper.Agreement(_Sdk);
+                    _Agreement = new Wrapper.Agreement(_Sdk, _CustomBasePath);
                 return _Agreement;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Legal
             get
             {
                 if (_BaseLegalPolicies == null)
-                    _BaseLegalPolicies = new Wrapper.BaseLegalPolicies(_Sdk);
+                    _BaseLegalPolicies = new Wrapper.BaseLegalPolicies(_Sdk, _CustomBasePath);
                 return _BaseLegalPolicies;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Legal
             get
             {
                 if (_LocalizedPolicyVersions == null)
-                    _LocalizedPolicyVersions = new Wrapper.LocalizedPolicyVersions(_Sdk);
+                    _LocalizedPolicyVersions = new Wrapper.LocalizedPolicyVersions(_Sdk, _CustomBasePath);
                 return _LocalizedPolicyVersions;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Legal
             get
             {
                 if (_AgreementWithNamespace == null)
-                    _AgreementWithNamespace = new Wrapper.AgreementWithNamespace(_Sdk);
+                    _AgreementWithNamespace = new Wrapper.AgreementWithNamespace(_Sdk, _CustomBasePath);
                 return _AgreementWithNamespace;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Legal
             get
             {
                 if (_BaseLegalPoliciesWithNamespace == null)
-                    _BaseLegalPoliciesWithNamespace = new Wrapper.BaseLegalPoliciesWithNamespace(_Sdk);
+                    _BaseLegalPoliciesWithNamespace = new Wrapper.BaseLegalPoliciesWithNamespace(_Sdk, _CustomBasePath);
                 return _BaseLegalPoliciesWithNamespace;
             }
         }
@@ -75,7 +77,7 @@ namespace AccelByte.Sdk.Api.Legal
             get
             {
                 if (_LocalizedPolicyVersionsWithNamespace == null)
-                    _LocalizedPolicyVersionsWithNamespace = new Wrapper.LocalizedPolicyVersionsWithNamespace(_Sdk);
+                    _LocalizedPolicyVersionsWithNamespace = new Wrapper.LocalizedPolicyVersionsWithNamespace(_Sdk, _CustomBasePath);
                 return _LocalizedPolicyVersionsWithNamespace;
             }
         }
@@ -86,7 +88,7 @@ namespace AccelByte.Sdk.Api.Legal
             get
             {
                 if (_PolicyVersionsWithNamespace == null)
-                    _PolicyVersionsWithNamespace = new Wrapper.PolicyVersionsWithNamespace(_Sdk);
+                    _PolicyVersionsWithNamespace = new Wrapper.PolicyVersionsWithNamespace(_Sdk, _CustomBasePath);
                 return _PolicyVersionsWithNamespace;
             }
         }
@@ -97,7 +99,7 @@ namespace AccelByte.Sdk.Api.Legal
             get
             {
                 if (_PoliciesWithNamespace == null)
-                    _PoliciesWithNamespace = new Wrapper.PoliciesWithNamespace(_Sdk);
+                    _PoliciesWithNamespace = new Wrapper.PoliciesWithNamespace(_Sdk, _CustomBasePath);
                 return _PoliciesWithNamespace;
             }
         }
@@ -108,7 +110,7 @@ namespace AccelByte.Sdk.Api.Legal
             get
             {
                 if (_AdminUserAgreement == null)
-                    _AdminUserAgreement = new Wrapper.AdminUserAgreement(_Sdk);
+                    _AdminUserAgreement = new Wrapper.AdminUserAgreement(_Sdk, _CustomBasePath);
                 return _AdminUserAgreement;
             }
         }
@@ -119,7 +121,7 @@ namespace AccelByte.Sdk.Api.Legal
             get
             {
                 if (_AdminUserEligibilities == null)
-                    _AdminUserEligibilities = new Wrapper.AdminUserEligibilities(_Sdk);
+                    _AdminUserEligibilities = new Wrapper.AdminUserEligibilities(_Sdk, _CustomBasePath);
                 return _AdminUserEligibilities;
             }
         }
@@ -130,7 +132,7 @@ namespace AccelByte.Sdk.Api.Legal
             get
             {
                 if (_Policies == null)
-                    _Policies = new Wrapper.Policies(_Sdk);
+                    _Policies = new Wrapper.Policies(_Sdk, _CustomBasePath);
                 return _Policies;
             }
         }
@@ -141,7 +143,7 @@ namespace AccelByte.Sdk.Api.Legal
             get
             {
                 if (_PolicyVersions == null)
-                    _PolicyVersions = new Wrapper.PolicyVersions(_Sdk);
+                    _PolicyVersions = new Wrapper.PolicyVersions(_Sdk, _CustomBasePath);
                 return _PolicyVersions;
             }
         }
@@ -152,7 +154,7 @@ namespace AccelByte.Sdk.Api.Legal
             get
             {
                 if (_UserInfo == null)
-                    _UserInfo = new Wrapper.UserInfo(_Sdk);
+                    _UserInfo = new Wrapper.UserInfo(_Sdk, _CustomBasePath);
                 return _UserInfo;
             }
         }
@@ -163,7 +165,7 @@ namespace AccelByte.Sdk.Api.Legal
             get
             {
                 if (_Anonymization == null)
-                    _Anonymization = new Wrapper.Anonymization(_Sdk);
+                    _Anonymization = new Wrapper.Anonymization(_Sdk, _CustomBasePath);
                 return _Anonymization;
             }
         }
@@ -174,7 +176,7 @@ namespace AccelByte.Sdk.Api.Legal
             get
             {
                 if (_Eligibilities == null)
-                    _Eligibilities = new Wrapper.Eligibilities(_Sdk);
+                    _Eligibilities = new Wrapper.Eligibilities(_Sdk, _CustomBasePath);
                 return _Eligibilities;
             }
         }
@@ -185,7 +187,7 @@ namespace AccelByte.Sdk.Api.Legal
             get
             {
                 if (_Utility == null)
-                    _Utility = new Wrapper.Utility(_Sdk);
+                    _Utility = new Wrapper.Utility(_Sdk, _CustomBasePath);
                 return _Utility;
             }
         }
@@ -194,6 +196,12 @@ namespace AccelByte.Sdk.Api.Legal
         internal LegalApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public LegalApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -206,7 +214,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<LegalApi>("legal", () =>
             {
-                return new LegalApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("legal");
+                if (customPath != "")
+                    return (new LegalApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new LegalApi(sdk);
             });
         }
     }

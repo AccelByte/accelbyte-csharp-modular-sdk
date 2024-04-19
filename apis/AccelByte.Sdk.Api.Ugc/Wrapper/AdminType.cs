@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminType(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminType(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetType.AdminGetTypeBuilder AdminGetTypeOp
         {
-            get { return new Operation.AdminGetType.AdminGetTypeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetType.AdminGetTypeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateType.AdminCreateTypeBuilder AdminCreateTypeOp
         {
-            get { return new Operation.AdminCreateType.AdminCreateTypeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateType.AdminCreateTypeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateType.AdminUpdateTypeBuilder AdminUpdateTypeOp
         {
-            get { return new Operation.AdminUpdateType.AdminUpdateTypeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateType.AdminUpdateTypeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteType.AdminDeleteTypeBuilder AdminDeleteTypeOp
         {
-            get { return new Operation.AdminDeleteType.AdminDeleteTypeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteType.AdminDeleteTypeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

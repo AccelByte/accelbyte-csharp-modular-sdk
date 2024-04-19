@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Development(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Development(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public DevelopmentServerConfigurationList.DevelopmentServerConfigurationListBuilder DevelopmentServerConfigurationListOp
         {
-            get { return new Operation.DevelopmentServerConfigurationList.DevelopmentServerConfigurationListBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DevelopmentServerConfigurationList.DevelopmentServerConfigurationListBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DevelopmentServerConfigurationCreate.DevelopmentServerConfigurationCreateBuilder DevelopmentServerConfigurationCreateOp
         {
-            get { return new Operation.DevelopmentServerConfigurationCreate.DevelopmentServerConfigurationCreateBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DevelopmentServerConfigurationCreate.DevelopmentServerConfigurationCreateBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DevelopmentServerConfigurationGet.DevelopmentServerConfigurationGetBuilder DevelopmentServerConfigurationGetOp
         {
-            get { return new Operation.DevelopmentServerConfigurationGet.DevelopmentServerConfigurationGetBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DevelopmentServerConfigurationGet.DevelopmentServerConfigurationGetBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DevelopmentServerConfigurationDelete.DevelopmentServerConfigurationDeleteBuilder DevelopmentServerConfigurationDeleteOp
         {
-            get { return new Operation.DevelopmentServerConfigurationDelete.DevelopmentServerConfigurationDeleteBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DevelopmentServerConfigurationDelete.DevelopmentServerConfigurationDeleteBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

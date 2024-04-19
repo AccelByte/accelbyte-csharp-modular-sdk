@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Reporting
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.AdminExtensionCategoriesAndAutoModerationActions AdminExtensionCategoriesAndAutoModerationActions
         {
             get
             {
                 if (_AdminExtensionCategoriesAndAutoModerationActions == null)
-                    _AdminExtensionCategoriesAndAutoModerationActions = new Wrapper.AdminExtensionCategoriesAndAutoModerationActions(_Sdk);
+                    _AdminExtensionCategoriesAndAutoModerationActions = new Wrapper.AdminExtensionCategoriesAndAutoModerationActions(_Sdk, _CustomBasePath);
                 return _AdminExtensionCategoriesAndAutoModerationActions;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Reporting
             get
             {
                 if (_AdminConfigurations == null)
-                    _AdminConfigurations = new Wrapper.AdminConfigurations(_Sdk);
+                    _AdminConfigurations = new Wrapper.AdminConfigurations(_Sdk, _CustomBasePath);
                 return _AdminConfigurations;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Reporting
             get
             {
                 if (_AdminReasons == null)
-                    _AdminReasons = new Wrapper.AdminReasons(_Sdk);
+                    _AdminReasons = new Wrapper.AdminReasons(_Sdk, _CustomBasePath);
                 return _AdminReasons;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Reporting
             get
             {
                 if (_AdminReports == null)
-                    _AdminReports = new Wrapper.AdminReports(_Sdk);
+                    _AdminReports = new Wrapper.AdminReports(_Sdk, _CustomBasePath);
                 return _AdminReports;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Reporting
             get
             {
                 if (_AdminModerationRule == null)
-                    _AdminModerationRule = new Wrapper.AdminModerationRule(_Sdk);
+                    _AdminModerationRule = new Wrapper.AdminModerationRule(_Sdk, _CustomBasePath);
                 return _AdminModerationRule;
             }
         }
@@ -75,7 +77,7 @@ namespace AccelByte.Sdk.Api.Reporting
             get
             {
                 if (_AdminTickets == null)
-                    _AdminTickets = new Wrapper.AdminTickets(_Sdk);
+                    _AdminTickets = new Wrapper.AdminTickets(_Sdk, _CustomBasePath);
                 return _AdminTickets;
             }
         }
@@ -86,7 +88,7 @@ namespace AccelByte.Sdk.Api.Reporting
             get
             {
                 if (_PublicReasons == null)
-                    _PublicReasons = new Wrapper.PublicReasons(_Sdk);
+                    _PublicReasons = new Wrapper.PublicReasons(_Sdk, _CustomBasePath);
                 return _PublicReasons;
             }
         }
@@ -97,7 +99,7 @@ namespace AccelByte.Sdk.Api.Reporting
             get
             {
                 if (_PublicReports == null)
-                    _PublicReports = new Wrapper.PublicReports(_Sdk);
+                    _PublicReports = new Wrapper.PublicReports(_Sdk, _CustomBasePath);
                 return _PublicReports;
             }
         }
@@ -106,6 +108,12 @@ namespace AccelByte.Sdk.Api.Reporting
         internal ReportingApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public ReportingApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -118,7 +126,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<ReportingApi>("reporting", () =>
             {
-                return new ReportingApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("reporting");
+                if (customPath != "")
+                    return (new ReportingApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new ReportingApi(sdk);
             });
         }
     }

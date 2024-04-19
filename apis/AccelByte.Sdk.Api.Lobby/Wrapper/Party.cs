@@ -20,31 +20,74 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Party(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Party(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetPartyDataV1.AdminGetPartyDataV1Builder AdminGetPartyDataV1Op
         {
-            get { return new Operation.AdminGetPartyDataV1.AdminGetPartyDataV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetPartyDataV1.AdminGetPartyDataV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetUserPartyV1.AdminGetUserPartyV1Builder AdminGetUserPartyV1Op
         {
-            get { return new Operation.AdminGetUserPartyV1.AdminGetUserPartyV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetUserPartyV1.AdminGetUserPartyV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetPartyDataV1.PublicGetPartyDataV1Builder PublicGetPartyDataV1Op
         {
-            get { return new Operation.PublicGetPartyDataV1.PublicGetPartyDataV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetPartyDataV1.PublicGetPartyDataV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUpdatePartyAttributesV1.PublicUpdatePartyAttributesV1Builder PublicUpdatePartyAttributesV1Op
         {
-            get { return new Operation.PublicUpdatePartyAttributesV1.PublicUpdatePartyAttributesV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpdatePartyAttributesV1.PublicUpdatePartyAttributesV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicSetPartyLimitV1.PublicSetPartyLimitV1Builder PublicSetPartyLimitV1Op
         {
-            get { return new Operation.PublicSetPartyLimitV1.PublicSetPartyLimitV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicSetPartyLimitV1.PublicSetPartyLimitV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

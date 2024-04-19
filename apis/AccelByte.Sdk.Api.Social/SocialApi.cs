@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Social
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.SlotConfig SlotConfig
         {
             get
             {
                 if (_SlotConfig == null)
-                    _SlotConfig = new Wrapper.SlotConfig(_Sdk);
+                    _SlotConfig = new Wrapper.SlotConfig(_Sdk, _CustomBasePath);
                 return _SlotConfig;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Social
             get
             {
                 if (_GameProfile == null)
-                    _GameProfile = new Wrapper.GameProfile(_Sdk);
+                    _GameProfile = new Wrapper.GameProfile(_Sdk, _CustomBasePath);
                 return _GameProfile;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Social
             get
             {
                 if (_Slot == null)
-                    _Slot = new Wrapper.Slot(_Sdk);
+                    _Slot = new Wrapper.Slot(_Sdk, _CustomBasePath);
                 return _Slot;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Social
             get
             {
                 if (_GlobalStatistic == null)
-                    _GlobalStatistic = new Wrapper.GlobalStatistic(_Sdk);
+                    _GlobalStatistic = new Wrapper.GlobalStatistic(_Sdk, _CustomBasePath);
                 return _GlobalStatistic;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Social
             get
             {
                 if (_StatCycleConfiguration == null)
-                    _StatCycleConfiguration = new Wrapper.StatCycleConfiguration(_Sdk);
+                    _StatCycleConfiguration = new Wrapper.StatCycleConfiguration(_Sdk, _CustomBasePath);
                 return _StatCycleConfiguration;
             }
         }
@@ -75,7 +77,7 @@ namespace AccelByte.Sdk.Api.Social
             get
             {
                 if (_UserStatistic == null)
-                    _UserStatistic = new Wrapper.UserStatistic(_Sdk);
+                    _UserStatistic = new Wrapper.UserStatistic(_Sdk, _CustomBasePath);
                 return _UserStatistic;
             }
         }
@@ -86,7 +88,7 @@ namespace AccelByte.Sdk.Api.Social
             get
             {
                 if (_StatConfiguration == null)
-                    _StatConfiguration = new Wrapper.StatConfiguration(_Sdk);
+                    _StatConfiguration = new Wrapper.StatConfiguration(_Sdk, _CustomBasePath);
                 return _StatConfiguration;
             }
         }
@@ -97,7 +99,7 @@ namespace AccelByte.Sdk.Api.Social
             get
             {
                 if (_UserStatisticCycle == null)
-                    _UserStatisticCycle = new Wrapper.UserStatisticCycle(_Sdk);
+                    _UserStatisticCycle = new Wrapper.UserStatisticCycle(_Sdk, _CustomBasePath);
                 return _UserStatisticCycle;
             }
         }
@@ -106,6 +108,12 @@ namespace AccelByte.Sdk.Api.Social
         internal SocialApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public SocialApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -118,7 +126,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<SocialApi>("social", () =>
             {
-                return new SocialApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("social");
+                if (customPath != "")
+                    return (new SocialApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new SocialApi(sdk);
             });
         }
     }

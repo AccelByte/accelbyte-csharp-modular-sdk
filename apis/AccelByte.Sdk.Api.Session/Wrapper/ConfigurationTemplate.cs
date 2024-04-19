@@ -20,55 +20,140 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public ConfigurationTemplate(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public ConfigurationTemplate(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetConfigurationAlertV1.AdminGetConfigurationAlertV1Builder AdminGetConfigurationAlertV1Op
         {
-            get { return new Operation.AdminGetConfigurationAlertV1.AdminGetConfigurationAlertV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetConfigurationAlertV1.AdminGetConfigurationAlertV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateConfigurationAlertV1.AdminUpdateConfigurationAlertV1Builder AdminUpdateConfigurationAlertV1Op
         {
-            get { return new Operation.AdminUpdateConfigurationAlertV1.AdminUpdateConfigurationAlertV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateConfigurationAlertV1.AdminUpdateConfigurationAlertV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateConfigurationAlertV1.AdminCreateConfigurationAlertV1Builder AdminCreateConfigurationAlertV1Op
         {
-            get { return new Operation.AdminCreateConfigurationAlertV1.AdminCreateConfigurationAlertV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateConfigurationAlertV1.AdminCreateConfigurationAlertV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteConfigurationAlertV1.AdminDeleteConfigurationAlertV1Builder AdminDeleteConfigurationAlertV1Op
         {
-            get { return new Operation.AdminDeleteConfigurationAlertV1.AdminDeleteConfigurationAlertV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteConfigurationAlertV1.AdminDeleteConfigurationAlertV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateConfigurationTemplateV1.AdminCreateConfigurationTemplateV1Builder AdminCreateConfigurationTemplateV1Op
         {
-            get { return new Operation.AdminCreateConfigurationTemplateV1.AdminCreateConfigurationTemplateV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateConfigurationTemplateV1.AdminCreateConfigurationTemplateV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetAllConfigurationTemplatesV1.AdminGetAllConfigurationTemplatesV1Builder AdminGetAllConfigurationTemplatesV1Op
         {
-            get { return new Operation.AdminGetAllConfigurationTemplatesV1.AdminGetAllConfigurationTemplatesV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetAllConfigurationTemplatesV1.AdminGetAllConfigurationTemplatesV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetConfigurationTemplateV1.AdminGetConfigurationTemplateV1Builder AdminGetConfigurationTemplateV1Op
         {
-            get { return new Operation.AdminGetConfigurationTemplateV1.AdminGetConfigurationTemplateV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetConfigurationTemplateV1.AdminGetConfigurationTemplateV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateConfigurationTemplateV1.AdminUpdateConfigurationTemplateV1Builder AdminUpdateConfigurationTemplateV1Op
         {
-            get { return new Operation.AdminUpdateConfigurationTemplateV1.AdminUpdateConfigurationTemplateV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateConfigurationTemplateV1.AdminUpdateConfigurationTemplateV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteConfigurationTemplateV1.AdminDeleteConfigurationTemplateV1Builder AdminDeleteConfigurationTemplateV1Op
         {
-            get { return new Operation.AdminDeleteConfigurationTemplateV1.AdminDeleteConfigurationTemplateV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteConfigurationTemplateV1.AdminDeleteConfigurationTemplateV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetDSMCConfiguration.AdminGetDSMCConfigurationBuilder AdminGetDSMCConfigurationOp
         {
-            get { return new Operation.AdminGetDSMCConfiguration.AdminGetDSMCConfigurationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetDSMCConfiguration.AdminGetDSMCConfigurationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminSyncDSMCConfiguration.AdminSyncDSMCConfigurationBuilder AdminSyncDSMCConfigurationOp
         {
-            get { return new Operation.AdminSyncDSMCConfiguration.AdminSyncDSMCConfigurationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminSyncDSMCConfiguration.AdminSyncDSMCConfigurationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,51 +20,129 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public GameProfile(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public GameProfile(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetUserProfiles.GetUserProfilesBuilder GetUserProfilesOp
         {
-            get { return new Operation.GetUserProfiles.GetUserProfilesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserProfiles.GetUserProfilesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetProfile.GetProfileBuilder GetProfileOp
         {
-            get { return new Operation.GetProfile.GetProfileBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetProfile.GetProfileBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserGameProfiles.PublicGetUserGameProfilesBuilder PublicGetUserGameProfilesOp
         {
-            get { return new Operation.PublicGetUserGameProfiles.PublicGetUserGameProfilesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserGameProfiles.PublicGetUserGameProfilesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserProfiles.PublicGetUserProfilesBuilder PublicGetUserProfilesOp
         {
-            get { return new Operation.PublicGetUserProfiles.PublicGetUserProfilesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserProfiles.PublicGetUserProfilesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicCreateProfile.PublicCreateProfileBuilder PublicCreateProfileOp
         {
-            get { return new Operation.PublicCreateProfile.PublicCreateProfileBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicCreateProfile.PublicCreateProfileBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetProfile.PublicGetProfileBuilder PublicGetProfileOp
         {
-            get { return new Operation.PublicGetProfile.PublicGetProfileBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetProfile.PublicGetProfileBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUpdateProfile.PublicUpdateProfileBuilder PublicUpdateProfileOp
         {
-            get { return new Operation.PublicUpdateProfile.PublicUpdateProfileBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpdateProfile.PublicUpdateProfileBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicDeleteProfile.PublicDeleteProfileBuilder PublicDeleteProfileOp
         {
-            get { return new Operation.PublicDeleteProfile.PublicDeleteProfileBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicDeleteProfile.PublicDeleteProfileBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetProfileAttribute.PublicGetProfileAttributeBuilder PublicGetProfileAttributeOp
         {
-            get { return new Operation.PublicGetProfileAttribute.PublicGetProfileAttributeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetProfileAttribute.PublicGetProfileAttributeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUpdateAttribute.PublicUpdateAttributeBuilder PublicUpdateAttributeOp
         {
-            get { return new Operation.PublicUpdateAttribute.PublicUpdateAttributeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpdateAttribute.PublicUpdateAttributeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

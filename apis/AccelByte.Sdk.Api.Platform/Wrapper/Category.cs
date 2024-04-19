@@ -20,63 +20,162 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Category(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Category(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetRootCategories.GetRootCategoriesBuilder GetRootCategoriesOp
         {
-            get { return new Operation.GetRootCategories.GetRootCategoriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetRootCategories.GetRootCategoriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateCategory.CreateCategoryBuilder CreateCategoryOp
         {
-            get { return new Operation.CreateCategory.CreateCategoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateCategory.CreateCategoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListCategoriesBasic.ListCategoriesBasicBuilder ListCategoriesBasicOp
         {
-            get { return new Operation.ListCategoriesBasic.ListCategoriesBasicBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListCategoriesBasic.ListCategoriesBasicBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetCategory.GetCategoryBuilder GetCategoryOp
         {
-            get { return new Operation.GetCategory.GetCategoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetCategory.GetCategoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateCategory.UpdateCategoryBuilder UpdateCategoryOp
         {
-            get { return new Operation.UpdateCategory.UpdateCategoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateCategory.UpdateCategoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteCategory.DeleteCategoryBuilder DeleteCategoryOp
         {
-            get { return new Operation.DeleteCategory.DeleteCategoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteCategory.DeleteCategoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetChildCategories.GetChildCategoriesBuilder GetChildCategoriesOp
         {
-            get { return new Operation.GetChildCategories.GetChildCategoriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetChildCategories.GetChildCategoriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetDescendantCategories.GetDescendantCategoriesBuilder GetDescendantCategoriesOp
         {
-            get { return new Operation.GetDescendantCategories.GetDescendantCategoriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetDescendantCategories.GetDescendantCategoriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetRootCategories.PublicGetRootCategoriesBuilder PublicGetRootCategoriesOp
         {
-            get { return new Operation.PublicGetRootCategories.PublicGetRootCategoriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetRootCategories.PublicGetRootCategoriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DownloadCategories.DownloadCategoriesBuilder DownloadCategoriesOp
         {
-            get { return new Operation.DownloadCategories.DownloadCategoriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DownloadCategories.DownloadCategoriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetCategory.PublicGetCategoryBuilder PublicGetCategoryOp
         {
-            get { return new Operation.PublicGetCategory.PublicGetCategoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetCategory.PublicGetCategoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetChildCategories.PublicGetChildCategoriesBuilder PublicGetChildCategoriesOp
         {
-            get { return new Operation.PublicGetChildCategories.PublicGetChildCategoriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetChildCategories.PublicGetChildCategoriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetDescendantCategories.PublicGetDescendantCategoriesBuilder PublicGetDescendantCategoriesOp
         {
-            get { return new Operation.PublicGetDescendantCategories.PublicGetDescendantCategoriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetDescendantCategories.PublicGetDescendantCategoriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

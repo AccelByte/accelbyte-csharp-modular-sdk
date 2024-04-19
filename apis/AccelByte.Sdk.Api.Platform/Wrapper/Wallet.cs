@@ -20,111 +20,280 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wallet(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Wallet(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetPlatformWalletConfig.GetPlatformWalletConfigBuilder GetPlatformWalletConfigOp
         {
-            get { return new Operation.GetPlatformWalletConfig.GetPlatformWalletConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPlatformWalletConfig.GetPlatformWalletConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdatePlatformWalletConfig.UpdatePlatformWalletConfigBuilder UpdatePlatformWalletConfigOp
         {
-            get { return new Operation.UpdatePlatformWalletConfig.UpdatePlatformWalletConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdatePlatformWalletConfig.UpdatePlatformWalletConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ResetPlatformWalletConfig.ResetPlatformWalletConfigBuilder ResetPlatformWalletConfigOp
         {
-            get { return new Operation.ResetPlatformWalletConfig.ResetPlatformWalletConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ResetPlatformWalletConfig.ResetPlatformWalletConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryUserCurrencyWallets.QueryUserCurrencyWalletsBuilder QueryUserCurrencyWalletsOp
         {
-            get { return new Operation.QueryUserCurrencyWallets.QueryUserCurrencyWalletsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryUserCurrencyWallets.QueryUserCurrencyWalletsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DebitUserWalletByCurrencyCode.DebitUserWalletByCurrencyCodeBuilder DebitUserWalletByCurrencyCodeOp
         {
-            get { return new Operation.DebitUserWalletByCurrencyCode.DebitUserWalletByCurrencyCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DebitUserWalletByCurrencyCode.DebitUserWalletByCurrencyCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListUserCurrencyTransactions.ListUserCurrencyTransactionsBuilder ListUserCurrencyTransactionsOp
         {
-            get { return new Operation.ListUserCurrencyTransactions.ListUserCurrencyTransactionsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListUserCurrencyTransactions.ListUserCurrencyTransactionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CheckBalance.CheckBalanceBuilder CheckBalanceOp
         {
-            get { return new Operation.CheckBalance.CheckBalanceBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CheckBalance.CheckBalanceBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CheckWallet.CheckWalletBuilder CheckWalletOp
         {
-            get { return new Operation.CheckWallet.CheckWalletBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CheckWallet.CheckWalletBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreditUserWallet.CreditUserWalletBuilder CreditUserWalletOp
         {
-            get { return new Operation.CreditUserWallet.CreditUserWalletBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreditUserWallet.CreditUserWalletBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DebitByWalletPlatform.DebitByWalletPlatformBuilder DebitByWalletPlatformOp
         {
-            get { return new Operation.DebitByWalletPlatform.DebitByWalletPlatformBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DebitByWalletPlatform.DebitByWalletPlatformBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PayWithUserWallet.PayWithUserWalletBuilder PayWithUserWalletOp
         {
-            get { return new Operation.PayWithUserWallet.PayWithUserWalletBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PayWithUserWallet.PayWithUserWalletBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserWallet.GetUserWalletBuilder GetUserWalletOp
         {
-            get { return new Operation.GetUserWallet.GetUserWalletBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserWallet.GetUserWalletBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DebitUserWallet.DebitUserWalletBuilder DebitUserWalletOp
         {
-            get { return new Operation.DebitUserWallet.DebitUserWalletBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DebitUserWallet.DebitUserWalletBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DisableUserWallet.DisableUserWalletBuilder DisableUserWalletOp
         {
-            get { return new Operation.DisableUserWallet.DisableUserWalletBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DisableUserWallet.DisableUserWalletBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public EnableUserWallet.EnableUserWalletBuilder EnableUserWalletOp
         {
-            get { return new Operation.EnableUserWallet.EnableUserWalletBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.EnableUserWallet.EnableUserWalletBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ListUserWalletTransactions.ListUserWalletTransactionsBuilder ListUserWalletTransactionsOp
         {
-            get { return new Operation.ListUserWalletTransactions.ListUserWalletTransactionsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListUserWalletTransactions.ListUserWalletTransactionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public QueryWallets.QueryWalletsBuilder QueryWalletsOp
         {
-            get { return new Operation.QueryWallets.QueryWalletsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryWallets.QueryWalletsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public BulkCredit.BulkCreditBuilder BulkCreditOp
         {
-            get { return new Operation.BulkCredit.BulkCreditBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BulkCredit.BulkCreditBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public BulkDebit.BulkDebitBuilder BulkDebitOp
         {
-            get { return new Operation.BulkDebit.BulkDebitBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BulkDebit.BulkDebitBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetWallet.GetWalletBuilder GetWalletOp
         {
-            get { return new Operation.GetWallet.GetWalletBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetWallet.GetWalletBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetMyWallet.PublicGetMyWalletBuilder PublicGetMyWalletOp
         {
-            get { return new Operation.PublicGetMyWallet.PublicGetMyWalletBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetMyWallet.PublicGetMyWalletBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetWallet.PublicGetWalletBuilder PublicGetWalletOp
         {
-            get { return new Operation.PublicGetWallet.PublicGetWalletBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetWallet.PublicGetWalletBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicListUserWalletTransactions.PublicListUserWalletTransactionsBuilder PublicListUserWalletTransactionsOp
         {
-            get { return new Operation.PublicListUserWalletTransactions.PublicListUserWalletTransactionsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicListUserWalletTransactions.PublicListUserWalletTransactionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Qosm
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.Admin Admin
         {
             get
             {
                 if (_Admin == null)
-                    _Admin = new Wrapper.Admin(_Sdk);
+                    _Admin = new Wrapper.Admin(_Sdk, _CustomBasePath);
                 return _Admin;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Qosm
             get
             {
                 if (_Public == null)
-                    _Public = new Wrapper.Public(_Sdk);
+                    _Public = new Wrapper.Public(_Sdk, _CustomBasePath);
                 return _Public;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Qosm
             get
             {
                 if (_Server == null)
-                    _Server = new Wrapper.Server(_Sdk);
+                    _Server = new Wrapper.Server(_Sdk, _CustomBasePath);
                 return _Server;
             }
         }
@@ -51,6 +53,12 @@ namespace AccelByte.Sdk.Api.Qosm
         internal QosmApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public QosmApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -63,7 +71,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<QosmApi>("qosm", () =>
             {
-                return new QosmApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("qosm");
+                if (customPath != "")
+                    return (new QosmApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new QosmApi(sdk);
             });
         }
     }

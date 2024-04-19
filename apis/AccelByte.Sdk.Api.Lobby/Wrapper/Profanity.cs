@@ -20,63 +20,162 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Profanity(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Profanity(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminDebugProfanityFilters.AdminDebugProfanityFiltersBuilder AdminDebugProfanityFiltersOp
         {
-            get { return new Operation.AdminDebugProfanityFilters.AdminDebugProfanityFiltersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDebugProfanityFilters.AdminDebugProfanityFiltersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetProfanityListFiltersV1.AdminGetProfanityListFiltersV1Builder AdminGetProfanityListFiltersV1Op
         {
-            get { return new Operation.AdminGetProfanityListFiltersV1.AdminGetProfanityListFiltersV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetProfanityListFiltersV1.AdminGetProfanityListFiltersV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminAddProfanityFilterIntoList.AdminAddProfanityFilterIntoListBuilder AdminAddProfanityFilterIntoListOp
         {
-            get { return new Operation.AdminAddProfanityFilterIntoList.AdminAddProfanityFilterIntoListBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminAddProfanityFilterIntoList.AdminAddProfanityFilterIntoListBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminAddProfanityFilters.AdminAddProfanityFiltersBuilder AdminAddProfanityFiltersOp
         {
-            get { return new Operation.AdminAddProfanityFilters.AdminAddProfanityFiltersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminAddProfanityFilters.AdminAddProfanityFiltersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminImportProfanityFiltersFromFile.AdminImportProfanityFiltersFromFileBuilder AdminImportProfanityFiltersFromFileOp
         {
-            get { return new Operation.AdminImportProfanityFiltersFromFile.AdminImportProfanityFiltersFromFileBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminImportProfanityFiltersFromFile.AdminImportProfanityFiltersFromFileBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteProfanityFilter.AdminDeleteProfanityFilterBuilder AdminDeleteProfanityFilterOp
         {
-            get { return new Operation.AdminDeleteProfanityFilter.AdminDeleteProfanityFilterBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteProfanityFilter.AdminDeleteProfanityFilterBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetProfanityLists.AdminGetProfanityListsBuilder AdminGetProfanityListsOp
         {
-            get { return new Operation.AdminGetProfanityLists.AdminGetProfanityListsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetProfanityLists.AdminGetProfanityListsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateProfanityList.AdminCreateProfanityListBuilder AdminCreateProfanityListOp
         {
-            get { return new Operation.AdminCreateProfanityList.AdminCreateProfanityListBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateProfanityList.AdminCreateProfanityListBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateProfanityList.AdminUpdateProfanityListBuilder AdminUpdateProfanityListOp
         {
-            get { return new Operation.AdminUpdateProfanityList.AdminUpdateProfanityListBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateProfanityList.AdminUpdateProfanityListBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteProfanityList.AdminDeleteProfanityListBuilder AdminDeleteProfanityListOp
         {
-            get { return new Operation.AdminDeleteProfanityList.AdminDeleteProfanityListBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteProfanityList.AdminDeleteProfanityListBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetProfanityRule.AdminGetProfanityRuleBuilder AdminGetProfanityRuleOp
         {
-            get { return new Operation.AdminGetProfanityRule.AdminGetProfanityRuleBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetProfanityRule.AdminGetProfanityRuleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminSetProfanityRuleForNamespace.AdminSetProfanityRuleForNamespaceBuilder AdminSetProfanityRuleForNamespaceOp
         {
-            get { return new Operation.AdminSetProfanityRuleForNamespace.AdminSetProfanityRuleForNamespaceBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminSetProfanityRuleForNamespace.AdminSetProfanityRuleForNamespaceBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminVerifyMessageProfanityResponse.AdminVerifyMessageProfanityResponseBuilder AdminVerifyMessageProfanityResponseOp
         {
-            get { return new Operation.AdminVerifyMessageProfanityResponse.AdminVerifyMessageProfanityResponseBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminVerifyMessageProfanityResponse.AdminVerifyMessageProfanityResponseBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

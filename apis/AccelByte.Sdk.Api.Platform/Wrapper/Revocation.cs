@@ -20,31 +20,74 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Revocation(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Revocation(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetRevocationConfig.GetRevocationConfigBuilder GetRevocationConfigOp
         {
-            get { return new Operation.GetRevocationConfig.GetRevocationConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetRevocationConfig.GetRevocationConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateRevocationConfig.UpdateRevocationConfigBuilder UpdateRevocationConfigOp
         {
-            get { return new Operation.UpdateRevocationConfig.UpdateRevocationConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateRevocationConfig.UpdateRevocationConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteRevocationConfig.DeleteRevocationConfigBuilder DeleteRevocationConfigOp
         {
-            get { return new Operation.DeleteRevocationConfig.DeleteRevocationConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteRevocationConfig.DeleteRevocationConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryRevocationHistories.QueryRevocationHistoriesBuilder QueryRevocationHistoriesOp
         {
-            get { return new Operation.QueryRevocationHistories.QueryRevocationHistoriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryRevocationHistories.QueryRevocationHistoriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DoRevocation.DoRevocationBuilder DoRevocationOp
         {
-            get { return new Operation.DoRevocation.DoRevocationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DoRevocation.DoRevocationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

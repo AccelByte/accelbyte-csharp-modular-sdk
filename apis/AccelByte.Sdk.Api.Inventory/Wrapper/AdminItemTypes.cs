@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminItemTypes(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminItemTypes(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminListItemTypes.AdminListItemTypesBuilder AdminListItemTypesOp
         {
-            get { return new Operation.AdminListItemTypes.AdminListItemTypesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListItemTypes.AdminListItemTypesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateItemType.AdminCreateItemTypeBuilder AdminCreateItemTypeOp
         {
-            get { return new Operation.AdminCreateItemType.AdminCreateItemTypeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateItemType.AdminCreateItemTypeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteItemType.AdminDeleteItemTypeBuilder AdminDeleteItemTypeOp
         {
-            get { return new Operation.AdminDeleteItemType.AdminDeleteItemTypeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteItemType.AdminDeleteItemTypeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Auth(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Auth(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AuthCheck.AuthCheckBuilder AuthCheckOp
         {
-            get { return new Operation.AuthCheck.AuthCheckBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AuthCheck.AuthCheckBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

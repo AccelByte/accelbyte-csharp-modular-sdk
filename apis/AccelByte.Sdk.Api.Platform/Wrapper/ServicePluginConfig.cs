@@ -20,78 +20,198 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public ServicePluginConfig(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public ServicePluginConfig(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetLootBoxPluginConfig.GetLootBoxPluginConfigBuilder GetLootBoxPluginConfigOp
         {
-            get { return new Operation.GetLootBoxPluginConfig.GetLootBoxPluginConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetLootBoxPluginConfig.GetLootBoxPluginConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateLootBoxPluginConfig.UpdateLootBoxPluginConfigBuilder UpdateLootBoxPluginConfigOp
         {
-            get { return new Operation.UpdateLootBoxPluginConfig.UpdateLootBoxPluginConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateLootBoxPluginConfig.UpdateLootBoxPluginConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteLootBoxPluginConfig.DeleteLootBoxPluginConfigBuilder DeleteLootBoxPluginConfigOp
         {
-            get { return new Operation.DeleteLootBoxPluginConfig.DeleteLootBoxPluginConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteLootBoxPluginConfig.DeleteLootBoxPluginConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UplodLootBoxPluginConfigCert.UplodLootBoxPluginConfigCertBuilder UplodLootBoxPluginConfigCertOp
         {
-            get { return new Operation.UplodLootBoxPluginConfigCert.UplodLootBoxPluginConfigCertBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UplodLootBoxPluginConfigCert.UplodLootBoxPluginConfigCertBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetLootBoxGrpcInfo.GetLootBoxGrpcInfoBuilder GetLootBoxGrpcInfoOp
         {
-            get { return new Operation.GetLootBoxGrpcInfo.GetLootBoxGrpcInfoBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetLootBoxGrpcInfo.GetLootBoxGrpcInfoBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetSectionPluginConfig.GetSectionPluginConfigBuilder GetSectionPluginConfigOp
         {
-            get { return new Operation.GetSectionPluginConfig.GetSectionPluginConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetSectionPluginConfig.GetSectionPluginConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateSectionPluginConfig.UpdateSectionPluginConfigBuilder UpdateSectionPluginConfigOp
         {
-            get { return new Operation.UpdateSectionPluginConfig.UpdateSectionPluginConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateSectionPluginConfig.UpdateSectionPluginConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteSectionPluginConfig.DeleteSectionPluginConfigBuilder DeleteSectionPluginConfigOp
         {
-            get { return new Operation.DeleteSectionPluginConfig.DeleteSectionPluginConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteSectionPluginConfig.DeleteSectionPluginConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UploadSectionPluginConfigCert.UploadSectionPluginConfigCertBuilder UploadSectionPluginConfigCertOp
         {
-            get { return new Operation.UploadSectionPluginConfigCert.UploadSectionPluginConfigCertBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UploadSectionPluginConfigCert.UploadSectionPluginConfigCertBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetServicePluginConfig.GetServicePluginConfigBuilder GetServicePluginConfigOp
         {
-            get { return new Operation.GetServicePluginConfig.GetServicePluginConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetServicePluginConfig.GetServicePluginConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateServicePluginConfig.UpdateServicePluginConfigBuilder UpdateServicePluginConfigOp
         {
-            get { return new Operation.UpdateServicePluginConfig.UpdateServicePluginConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateServicePluginConfig.UpdateServicePluginConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteServicePluginConfig.DeleteServicePluginConfigBuilder DeleteServicePluginConfigOp
         {
-            get { return new Operation.DeleteServicePluginConfig.DeleteServicePluginConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteServicePluginConfig.DeleteServicePluginConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetRevocationPluginConfig.GetRevocationPluginConfigBuilder GetRevocationPluginConfigOp
         {
-            get { return new Operation.GetRevocationPluginConfig.GetRevocationPluginConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetRevocationPluginConfig.GetRevocationPluginConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateRevocationPluginConfig.UpdateRevocationPluginConfigBuilder UpdateRevocationPluginConfigOp
         {
-            get { return new Operation.UpdateRevocationPluginConfig.UpdateRevocationPluginConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateRevocationPluginConfig.UpdateRevocationPluginConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteRevocationPluginConfig.DeleteRevocationPluginConfigBuilder DeleteRevocationPluginConfigOp
         {
-            get { return new Operation.DeleteRevocationPluginConfig.DeleteRevocationPluginConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteRevocationPluginConfig.DeleteRevocationPluginConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UploadRevocationPluginConfigCert.UploadRevocationPluginConfigCertBuilder UploadRevocationPluginConfigCertOp
         {
-            get { return new Operation.UploadRevocationPluginConfigCert.UploadRevocationPluginConfigCertBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UploadRevocationPluginConfigCert.UploadRevocationPluginConfigCertBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

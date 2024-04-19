@@ -20,51 +20,129 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Admin(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Admin(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ListServer.ListServerBuilder ListServerOp
         {
-            get { return new Operation.ListServer.ListServerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListServer.ListServerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CountServer.CountServerBuilder CountServerOp
         {
-            get { return new Operation.CountServer.CountServerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CountServer.CountServerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CountServerDetailed.CountServerDetailedBuilder CountServerDetailedOp
         {
-            get { return new Operation.CountServerDetailed.CountServerDetailedBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CountServerDetailed.CountServerDetailedBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListLocalServer.ListLocalServerBuilder ListLocalServerOp
         {
-            get { return new Operation.ListLocalServer.ListLocalServerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListLocalServer.ListLocalServerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteLocalServer.DeleteLocalServerBuilder DeleteLocalServerOp
         {
-            get { return new Operation.DeleteLocalServer.DeleteLocalServerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteLocalServer.DeleteLocalServerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetServer.GetServerBuilder GetServerOp
         {
-            get { return new Operation.GetServer.GetServerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetServer.GetServerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteServer.DeleteServerBuilder DeleteServerOp
         {
-            get { return new Operation.DeleteServer.DeleteServerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteServer.DeleteServerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListSession.ListSessionBuilder ListSessionOp
         {
-            get { return new Operation.ListSession.ListSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListSession.ListSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CountSession.CountSessionBuilder CountSessionOp
         {
-            get { return new Operation.CountSession.CountSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CountSession.CountSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteSession.DeleteSessionBuilder DeleteSessionOp
         {
-            get { return new Operation.DeleteSession.DeleteSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteSession.DeleteSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

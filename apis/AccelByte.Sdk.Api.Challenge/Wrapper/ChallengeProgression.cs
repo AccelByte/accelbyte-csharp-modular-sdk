@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public ChallengeProgression(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public ChallengeProgression(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminEvaluateProgress.AdminEvaluateProgressBuilder AdminEvaluateProgressOp
         {
-            get { return new Operation.AdminEvaluateProgress.AdminEvaluateProgressBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminEvaluateProgress.AdminEvaluateProgressBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public EvaluateMyProgress.EvaluateMyProgressBuilder EvaluateMyProgressOp
         {
-            get { return new Operation.EvaluateMyProgress.EvaluateMyProgressBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.EvaluateMyProgress.EvaluateMyProgressBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserProgression.PublicGetUserProgressionBuilder PublicGetUserProgressionOp
         {
-            get { return new Operation.PublicGetUserProgression.PublicGetUserProgressionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserProgression.PublicGetUserProgressionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

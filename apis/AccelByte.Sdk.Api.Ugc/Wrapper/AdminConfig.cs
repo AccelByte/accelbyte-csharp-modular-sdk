@@ -20,19 +20,41 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminConfig(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminConfig(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetConfigs.AdminGetConfigsBuilder AdminGetConfigsOp
         {
-            get { return new Operation.AdminGetConfigs.AdminGetConfigsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetConfigs.AdminGetConfigsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateConfig.AdminUpdateConfigBuilder AdminUpdateConfigOp
         {
-            get { return new Operation.AdminUpdateConfig.AdminUpdateConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateConfig.AdminUpdateConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

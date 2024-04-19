@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public ClientsConfigV3(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public ClientsConfigV3(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminListClientAvailablePermissions.AdminListClientAvailablePermissionsBuilder AdminListClientAvailablePermissionsOp
         {
-            get { return new Operation.AdminListClientAvailablePermissions.AdminListClientAvailablePermissionsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListClientAvailablePermissions.AdminListClientAvailablePermissionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateAvailablePermissionsByModule.AdminUpdateAvailablePermissionsByModuleBuilder AdminUpdateAvailablePermissionsByModuleOp
         {
-            get { return new Operation.AdminUpdateAvailablePermissionsByModule.AdminUpdateAvailablePermissionsByModuleBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateAvailablePermissionsByModule.AdminUpdateAvailablePermissionsByModuleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteConfigPermissionsByGroup.AdminDeleteConfigPermissionsByGroupBuilder AdminDeleteConfigPermissionsByGroupOp
         {
-            get { return new Operation.AdminDeleteConfigPermissionsByGroup.AdminDeleteConfigPermissionsByGroupBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteConfigPermissionsByGroup.AdminDeleteConfigPermissionsByGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminListClientTemplates.AdminListClientTemplatesBuilder AdminListClientTemplatesOp
         {
-            get { return new Operation.AdminListClientTemplates.AdminListClientTemplatesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListClientTemplates.AdminListClientTemplatesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

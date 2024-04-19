@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminTags(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminTags(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminListTagsHandlerV1.AdminListTagsHandlerV1Builder AdminListTagsHandlerV1Op
         {
-            get { return new Operation.AdminListTagsHandlerV1.AdminListTagsHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListTagsHandlerV1.AdminListTagsHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminPostTagHandlerV1.AdminPostTagHandlerV1Builder AdminPostTagHandlerV1Op
         {
-            get { return new Operation.AdminPostTagHandlerV1.AdminPostTagHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminPostTagHandlerV1.AdminPostTagHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteTagHandlerV1.AdminDeleteTagHandlerV1Builder AdminDeleteTagHandlerV1Op
         {
-            get { return new Operation.AdminDeleteTagHandlerV1.AdminDeleteTagHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteTagHandlerV1.AdminDeleteTagHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

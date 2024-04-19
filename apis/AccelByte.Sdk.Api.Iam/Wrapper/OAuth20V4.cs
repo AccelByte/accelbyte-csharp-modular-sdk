@@ -20,39 +20,96 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public OAuth20V4(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public OAuth20V4(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AuthenticationWithPlatformLinkV4.AuthenticationWithPlatformLinkV4Builder AuthenticationWithPlatformLinkV4Op
         {
-            get { return new Operation.AuthenticationWithPlatformLinkV4.AuthenticationWithPlatformLinkV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AuthenticationWithPlatformLinkV4.AuthenticationWithPlatformLinkV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GenerateTokenByNewHeadlessAccountV4.GenerateTokenByNewHeadlessAccountV4Builder GenerateTokenByNewHeadlessAccountV4Op
         {
-            get { return new Operation.GenerateTokenByNewHeadlessAccountV4.GenerateTokenByNewHeadlessAccountV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GenerateTokenByNewHeadlessAccountV4.GenerateTokenByNewHeadlessAccountV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public Verify2faCodeV4.Verify2faCodeV4Builder Verify2faCodeV4Op
         {
-            get { return new Operation.Verify2faCodeV4.Verify2faCodeV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.Verify2faCodeV4.Verify2faCodeV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PlatformTokenGrantV4.PlatformTokenGrantV4Builder PlatformTokenGrantV4Op
         {
-            get { return new Operation.PlatformTokenGrantV4.PlatformTokenGrantV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PlatformTokenGrantV4.PlatformTokenGrantV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SimultaneousLoginV4.SimultaneousLoginV4Builder SimultaneousLoginV4Op
         {
-            get { return new Operation.SimultaneousLoginV4.SimultaneousLoginV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SimultaneousLoginV4.SimultaneousLoginV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public TokenGrantV4.TokenGrantV4Builder TokenGrantV4Op
         {
-            get { return new Operation.TokenGrantV4.TokenGrantV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.TokenGrantV4.TokenGrantV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RequestTargetTokenResponseV4.RequestTargetTokenResponseV4Builder RequestTargetTokenResponseV4Op
         {
-            get { return new Operation.RequestTargetTokenResponseV4.RequestTargetTokenResponseV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RequestTargetTokenResponseV4.RequestTargetTokenResponseV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

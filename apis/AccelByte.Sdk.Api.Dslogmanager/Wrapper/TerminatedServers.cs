@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public TerminatedServers(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public TerminatedServers(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ListTerminatedServers.ListTerminatedServersBuilder ListTerminatedServersOp
         {
-            get { return new Operation.ListTerminatedServers.ListTerminatedServersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListTerminatedServers.ListTerminatedServersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DownloadServerLogs.DownloadServerLogsBuilder DownloadServerLogsOp
         {
-            get { return new Operation.DownloadServerLogs.DownloadServerLogsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DownloadServerLogs.DownloadServerLogsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CheckServerLogs.CheckServerLogsBuilder CheckServerLogsOp
         {
-            get { return new Operation.CheckServerLogs.CheckServerLogsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CheckServerLogs.CheckServerLogsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

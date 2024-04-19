@@ -251,12 +251,12 @@ namespace AccelByte.Sdk.Core.Net.Http
                     if (policy.RetryLogicHandler != null)
                     {
                         if (!policy.RetryLogicHandler.ExecuteRetryLogic(policy, retryCount, xSocket))
-                            throw xSocket;
+                            throw;
                         else
                             retryCount++;
                     }
                     else
-                        throw xSocket;
+                        throw;
                 }
                 catch (HttpRequestException xHttpReq)
                 {

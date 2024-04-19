@@ -20,26 +20,55 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public UserInformation(IAccelByteSdk sdk)
         {
             _sdk = sdk;
+        }
+
+        public UserInformation(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
         }
 
         #region Operation Builders
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserActivitiesHandler.GetUserActivitiesHandlerBuilder GetUserActivitiesHandlerOp
         {
-            get { return new Operation.GetUserActivitiesHandler.GetUserActivitiesHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserActivitiesHandler.GetUserActivitiesHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteUserActivitiesHandler.DeleteUserActivitiesHandlerBuilder DeleteUserActivitiesHandlerOp
         {
-            get { return new Operation.DeleteUserActivitiesHandler.DeleteUserActivitiesHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteUserActivitiesHandler.DeleteUserActivitiesHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public LastUserActivityTimeHandler.LastUserActivityTimeHandlerBuilder LastUserActivityTimeHandlerOp
         {
-            get { return new Operation.LastUserActivityTimeHandler.LastUserActivityTimeHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.LastUserActivityTimeHandler.LastUserActivityTimeHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

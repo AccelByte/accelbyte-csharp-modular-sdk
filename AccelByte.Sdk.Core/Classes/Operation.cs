@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Core
                 }
                 else
                     url = new StringBuilder(CustomBasePath.TrimEnd('/'));
-            }   
+            }
             else
                 url = new StringBuilder(baseUrl.TrimEnd('/'));
 

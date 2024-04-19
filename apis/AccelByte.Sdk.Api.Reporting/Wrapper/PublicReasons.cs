@@ -20,19 +20,41 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PublicReasons(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PublicReasons(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public PublicListReasonGroups.PublicListReasonGroupsBuilder PublicListReasonGroupsOp
         {
-            get { return new Operation.PublicListReasonGroups.PublicListReasonGroupsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicListReasonGroups.PublicListReasonGroupsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetReasons.PublicGetReasonsBuilder PublicGetReasonsOp
         {
-            get { return new Operation.PublicGetReasons.PublicGetReasonsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetReasons.PublicGetReasonsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Sessionhistory
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.Operations Operations
         {
             get
             {
                 if (_Operations == null)
-                    _Operations = new Wrapper.Operations(_Sdk);
+                    _Operations = new Wrapper.Operations(_Sdk, _CustomBasePath);
                 return _Operations;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory
             get
             {
                 if (_GameSessionDetail == null)
-                    _GameSessionDetail = new Wrapper.GameSessionDetail(_Sdk);
+                    _GameSessionDetail = new Wrapper.GameSessionDetail(_Sdk, _CustomBasePath);
                 return _GameSessionDetail;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory
             get
             {
                 if (_XRay == null)
-                    _XRay = new Wrapper.XRay(_Sdk);
+                    _XRay = new Wrapper.XRay(_Sdk, _CustomBasePath);
                 return _XRay;
             }
         }
@@ -51,6 +53,12 @@ namespace AccelByte.Sdk.Api.Sessionhistory
         internal SessionhistoryApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public SessionhistoryApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -63,7 +71,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<SessionhistoryApi>("sessionhistory", () =>
             {
-                return new SessionhistoryApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("sessionhistory");
+                if (customPath != "")
+                    return (new SessionhistoryApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new SessionhistoryApi(sdk);
             });
         }
     }

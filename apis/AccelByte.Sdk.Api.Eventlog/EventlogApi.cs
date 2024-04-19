@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Eventlog
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.EventDescriptions EventDescriptions
         {
             get
             {
                 if (_EventDescriptions == null)
-                    _EventDescriptions = new Wrapper.EventDescriptions(_Sdk);
+                    _EventDescriptions = new Wrapper.EventDescriptions(_Sdk, _CustomBasePath);
                 return _EventDescriptions;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Eventlog
             get
             {
                 if (_Event == null)
-                    _Event = new Wrapper.Event(_Sdk);
+                    _Event = new Wrapper.Event(_Sdk, _CustomBasePath);
                 return _Event;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Eventlog
             get
             {
                 if (_UserInformation == null)
-                    _UserInformation = new Wrapper.UserInformation(_Sdk);
+                    _UserInformation = new Wrapper.UserInformation(_Sdk, _CustomBasePath);
                 return _UserInformation;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Eventlog
             get
             {
                 if (_EventRegistry == null)
-                    _EventRegistry = new Wrapper.EventRegistry(_Sdk);
+                    _EventRegistry = new Wrapper.EventRegistry(_Sdk, _CustomBasePath);
                 return _EventRegistry;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Eventlog
             get
             {
                 if (_EventV2 == null)
-                    _EventV2 = new Wrapper.EventV2(_Sdk);
+                    _EventV2 = new Wrapper.EventV2(_Sdk, _CustomBasePath);
                 return _EventV2;
             }
         }
@@ -73,6 +75,12 @@ namespace AccelByte.Sdk.Api.Eventlog
         internal EventlogApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public EventlogApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -85,7 +93,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<EventlogApi>("eventlog", () =>
             {
-                return new EventlogApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("eventlog");
+                if (customPath != "")
+                    return (new EventlogApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new EventlogApi(sdk);
             });
         }
     }

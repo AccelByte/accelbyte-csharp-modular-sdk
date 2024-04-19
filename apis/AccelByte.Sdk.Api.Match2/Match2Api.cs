@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Match2
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.Operations Operations
         {
             get
             {
                 if (_Operations == null)
-                    _Operations = new Wrapper.Operations(_Sdk);
+                    _Operations = new Wrapper.Operations(_Sdk, _CustomBasePath);
                 return _Operations;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Match2
             get
             {
                 if (_Config == null)
-                    _Config = new Wrapper.Config(_Sdk);
+                    _Config = new Wrapper.Config(_Sdk, _CustomBasePath);
                 return _Config;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Match2
             get
             {
                 if (_EnvironmentVariables == null)
-                    _EnvironmentVariables = new Wrapper.EnvironmentVariables(_Sdk);
+                    _EnvironmentVariables = new Wrapper.EnvironmentVariables(_Sdk, _CustomBasePath);
                 return _EnvironmentVariables;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Match2
             get
             {
                 if (_Backfill == null)
-                    _Backfill = new Wrapper.Backfill(_Sdk);
+                    _Backfill = new Wrapper.Backfill(_Sdk, _CustomBasePath);
                 return _Backfill;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Match2
             get
             {
                 if (_MatchFunctions == null)
-                    _MatchFunctions = new Wrapper.MatchFunctions(_Sdk);
+                    _MatchFunctions = new Wrapper.MatchFunctions(_Sdk, _CustomBasePath);
                 return _MatchFunctions;
             }
         }
@@ -75,7 +77,7 @@ namespace AccelByte.Sdk.Api.Match2
             get
             {
                 if (_MatchPools == null)
-                    _MatchPools = new Wrapper.MatchPools(_Sdk);
+                    _MatchPools = new Wrapper.MatchPools(_Sdk, _CustomBasePath);
                 return _MatchPools;
             }
         }
@@ -86,7 +88,7 @@ namespace AccelByte.Sdk.Api.Match2
             get
             {
                 if (_MatchTickets == null)
-                    _MatchTickets = new Wrapper.MatchTickets(_Sdk);
+                    _MatchTickets = new Wrapper.MatchTickets(_Sdk, _CustomBasePath);
                 return _MatchTickets;
             }
         }
@@ -97,7 +99,7 @@ namespace AccelByte.Sdk.Api.Match2
             get
             {
                 if (_RuleSets == null)
-                    _RuleSets = new Wrapper.RuleSets(_Sdk);
+                    _RuleSets = new Wrapper.RuleSets(_Sdk, _CustomBasePath);
                 return _RuleSets;
             }
         }
@@ -106,6 +108,12 @@ namespace AccelByte.Sdk.Api.Match2
         internal Match2Api(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public Match2Api WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -118,7 +126,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<Match2Api>("match2", () =>
             {
-                return new Match2Api(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("match2");
+                if (customPath != "")
+                    return (new Match2Api(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new Match2Api(sdk);
             });
         }
     }

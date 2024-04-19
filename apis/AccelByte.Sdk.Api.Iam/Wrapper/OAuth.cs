@@ -20,56 +20,127 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public OAuth(IAccelByteSdk sdk)
         {
             _sdk = sdk;
+        }
+
+        public OAuth(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
         }
 
         #region Operation Builders
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Authorization.AuthorizationBuilder AuthorizationOp
         {
-            get { return new Operation.Authorization.AuthorizationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.Authorization.AuthorizationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetJWKS.GetJWKSBuilder GetJWKSOp
         {
-            get { return new Operation.GetJWKS.GetJWKSBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetJWKS.GetJWKSBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PlatformTokenRequestHandler.PlatformTokenRequestHandlerBuilder PlatformTokenRequestHandlerOp
         {
-            get { return new Operation.PlatformTokenRequestHandler.PlatformTokenRequestHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PlatformTokenRequestHandler.PlatformTokenRequestHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RevokeUser.RevokeUserBuilder RevokeUserOp
         {
-            get { return new Operation.RevokeUser.RevokeUserBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RevokeUser.RevokeUserBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetRevocationList.GetRevocationListBuilder GetRevocationListOp
         {
-            get { return new Operation.GetRevocationList.GetRevocationListBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetRevocationList.GetRevocationListBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RevokeToken.RevokeTokenBuilder RevokeTokenOp
         {
-            get { return new Operation.RevokeToken.RevokeTokenBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RevokeToken.RevokeTokenBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RevokeAUser.RevokeAUserBuilder RevokeAUserOp
         {
-            get { return new Operation.RevokeAUser.RevokeAUserBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RevokeAUser.RevokeAUserBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public TokenGrant.TokenGrantBuilder TokenGrantOp
         {
-            get { return new Operation.TokenGrant.TokenGrantBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.TokenGrant.TokenGrantBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public VerifyToken.VerifyTokenBuilder VerifyTokenOp
         {
-            get { return new Operation.VerifyToken.VerifyTokenBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.VerifyToken.VerifyTokenBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

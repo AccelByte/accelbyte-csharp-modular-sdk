@@ -20,51 +20,129 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public LeaderboardConfiguration(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public LeaderboardConfiguration(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetLeaderboardConfigurationsAdminV1.GetLeaderboardConfigurationsAdminV1Builder GetLeaderboardConfigurationsAdminV1Op
         {
-            get { return new Operation.GetLeaderboardConfigurationsAdminV1.GetLeaderboardConfigurationsAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetLeaderboardConfigurationsAdminV1.GetLeaderboardConfigurationsAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateLeaderboardConfigurationAdminV1.CreateLeaderboardConfigurationAdminV1Builder CreateLeaderboardConfigurationAdminV1Op
         {
-            get { return new Operation.CreateLeaderboardConfigurationAdminV1.CreateLeaderboardConfigurationAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateLeaderboardConfigurationAdminV1.CreateLeaderboardConfigurationAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteBulkLeaderboardConfigurationAdminV1.DeleteBulkLeaderboardConfigurationAdminV1Builder DeleteBulkLeaderboardConfigurationAdminV1Op
         {
-            get { return new Operation.DeleteBulkLeaderboardConfigurationAdminV1.DeleteBulkLeaderboardConfigurationAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteBulkLeaderboardConfigurationAdminV1.DeleteBulkLeaderboardConfigurationAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetLeaderboardConfigurationAdminV1.GetLeaderboardConfigurationAdminV1Builder GetLeaderboardConfigurationAdminV1Op
         {
-            get { return new Operation.GetLeaderboardConfigurationAdminV1.GetLeaderboardConfigurationAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetLeaderboardConfigurationAdminV1.GetLeaderboardConfigurationAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateLeaderboardConfigurationAdminV1.UpdateLeaderboardConfigurationAdminV1Builder UpdateLeaderboardConfigurationAdminV1Op
         {
-            get { return new Operation.UpdateLeaderboardConfigurationAdminV1.UpdateLeaderboardConfigurationAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateLeaderboardConfigurationAdminV1.UpdateLeaderboardConfigurationAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteLeaderboardConfigurationAdminV1.DeleteLeaderboardConfigurationAdminV1Builder DeleteLeaderboardConfigurationAdminV1Op
         {
-            get { return new Operation.DeleteLeaderboardConfigurationAdminV1.DeleteLeaderboardConfigurationAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteLeaderboardConfigurationAdminV1.DeleteLeaderboardConfigurationAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public HardDeleteLeaderboardAdminV1.HardDeleteLeaderboardAdminV1Builder HardDeleteLeaderboardAdminV1Op
         {
-            get { return new Operation.HardDeleteLeaderboardAdminV1.HardDeleteLeaderboardAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.HardDeleteLeaderboardAdminV1.HardDeleteLeaderboardAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetLeaderboardConfigurationsPublicV1.GetLeaderboardConfigurationsPublicV1Builder GetLeaderboardConfigurationsPublicV1Op
         {
-            get { return new Operation.GetLeaderboardConfigurationsPublicV1.GetLeaderboardConfigurationsPublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetLeaderboardConfigurationsPublicV1.GetLeaderboardConfigurationsPublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateLeaderboardConfigurationPublicV1.CreateLeaderboardConfigurationPublicV1Builder CreateLeaderboardConfigurationPublicV1Op
         {
-            get { return new Operation.CreateLeaderboardConfigurationPublicV1.CreateLeaderboardConfigurationPublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateLeaderboardConfigurationPublicV1.CreateLeaderboardConfigurationPublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetLeaderboardConfigurationsPublicV2.GetLeaderboardConfigurationsPublicV2Builder GetLeaderboardConfigurationsPublicV2Op
         {
-            get { return new Operation.GetLeaderboardConfigurationsPublicV2.GetLeaderboardConfigurationsPublicV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetLeaderboardConfigurationsPublicV2.GetLeaderboardConfigurationsPublicV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

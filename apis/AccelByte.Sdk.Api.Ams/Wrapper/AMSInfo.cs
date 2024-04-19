@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AMSInfo(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AMSInfo(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public InfoRegions.InfoRegionsBuilder InfoRegionsOp
         {
-            get { return new Operation.InfoRegions.InfoRegionsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.InfoRegions.InfoRegionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public InfoSupportedInstances.InfoSupportedInstancesBuilder InfoSupportedInstancesOp
         {
-            get { return new Operation.InfoSupportedInstances.InfoSupportedInstancesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.InfoSupportedInstances.InfoSupportedInstancesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UploadURLGet.UploadURLGetBuilder UploadURLGetOp
         {
-            get { return new Operation.UploadURLGet.UploadURLGetBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UploadURLGet.UploadURLGetBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

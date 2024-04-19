@@ -20,59 +20,151 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public OAuth20Extension(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public OAuth20Extension(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public UserAuthenticationV3.UserAuthenticationV3Builder UserAuthenticationV3Op
         {
-            get { return new Operation.UserAuthenticationV3.UserAuthenticationV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UserAuthenticationV3.UserAuthenticationV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AuthenticationWithPlatformLinkV3.AuthenticationWithPlatformLinkV3Builder AuthenticationWithPlatformLinkV3Op
         {
-            get { return new Operation.AuthenticationWithPlatformLinkV3.AuthenticationWithPlatformLinkV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AuthenticationWithPlatformLinkV3.AuthenticationWithPlatformLinkV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GenerateTokenByNewHeadlessAccountV3.GenerateTokenByNewHeadlessAccountV3Builder GenerateTokenByNewHeadlessAccountV3Op
         {
-            get { return new Operation.GenerateTokenByNewHeadlessAccountV3.GenerateTokenByNewHeadlessAccountV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GenerateTokenByNewHeadlessAccountV3.GenerateTokenByNewHeadlessAccountV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RequestOneTimeLinkingCodeV3.RequestOneTimeLinkingCodeV3Builder RequestOneTimeLinkingCodeV3Op
         {
-            get { return new Operation.RequestOneTimeLinkingCodeV3.RequestOneTimeLinkingCodeV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RequestOneTimeLinkingCodeV3.RequestOneTimeLinkingCodeV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ValidateOneTimeLinkingCodeV3.ValidateOneTimeLinkingCodeV3Builder ValidateOneTimeLinkingCodeV3Op
         {
-            get { return new Operation.ValidateOneTimeLinkingCodeV3.ValidateOneTimeLinkingCodeV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ValidateOneTimeLinkingCodeV3.ValidateOneTimeLinkingCodeV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RequestTokenByOneTimeLinkCodeResponseV3.RequestTokenByOneTimeLinkCodeResponseV3Builder RequestTokenByOneTimeLinkCodeResponseV3Op
         {
-            get { return new Operation.RequestTokenByOneTimeLinkCodeResponseV3.RequestTokenByOneTimeLinkCodeResponseV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RequestTokenByOneTimeLinkCodeResponseV3.RequestTokenByOneTimeLinkCodeResponseV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetCountryLocationV3.GetCountryLocationV3Builder GetCountryLocationV3Op
         {
-            get { return new Operation.GetCountryLocationV3.GetCountryLocationV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetCountryLocationV3.GetCountryLocationV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public Logout.LogoutBuilder LogoutOp
         {
-            get { return new Operation.Logout.LogoutBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.Logout.LogoutBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RequestTokenExchangeCodeV3.RequestTokenExchangeCodeV3Builder RequestTokenExchangeCodeV3Op
         {
-            get { return new Operation.RequestTokenExchangeCodeV3.RequestTokenExchangeCodeV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RequestTokenExchangeCodeV3.RequestTokenExchangeCodeV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PlatformAuthenticationV3.PlatformAuthenticationV3Builder PlatformAuthenticationV3Op
         {
-            get { return new Operation.PlatformAuthenticationV3.PlatformAuthenticationV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PlatformAuthenticationV3.PlatformAuthenticationV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PlatformTokenRefreshV3.PlatformTokenRefreshV3Builder PlatformTokenRefreshV3Op
         {
-            get { return new Operation.PlatformTokenRefreshV3.PlatformTokenRefreshV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PlatformTokenRefreshV3.PlatformTokenRefreshV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RequestTargetTokenResponseV3.RequestTargetTokenResponseV3Builder RequestTargetTokenResponseV3Op
         {
-            get { return new Operation.RequestTargetTokenResponseV3.RequestTargetTokenResponseV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RequestTargetTokenResponseV3.RequestTargetTokenResponseV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

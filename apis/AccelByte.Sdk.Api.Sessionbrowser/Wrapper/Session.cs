@@ -20,91 +20,239 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Session(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Session(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminQuerySession.AdminQuerySessionBuilder AdminQuerySessionOp
         {
-            get { return new Operation.AdminQuerySession.AdminQuerySessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminQuerySession.AdminQuerySessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetTotalActiveSession.GetTotalActiveSessionBuilder GetTotalActiveSessionOp
         {
-            get { return new Operation.GetTotalActiveSession.GetTotalActiveSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetTotalActiveSession.GetTotalActiveSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetActiveCustomGameSessions.GetActiveCustomGameSessionsBuilder GetActiveCustomGameSessionsOp
         {
-            get { return new Operation.GetActiveCustomGameSessions.GetActiveCustomGameSessionsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetActiveCustomGameSessions.GetActiveCustomGameSessionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetActiveMatchmakingGameSessions.GetActiveMatchmakingGameSessionsBuilder GetActiveMatchmakingGameSessionsOp
         {
-            get { return new Operation.GetActiveMatchmakingGameSessions.GetActiveMatchmakingGameSessionsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetActiveMatchmakingGameSessions.GetActiveMatchmakingGameSessionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetSession.AdminGetSessionBuilder AdminGetSessionOp
         {
-            get { return new Operation.AdminGetSession.AdminGetSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetSession.AdminGetSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteSession.AdminDeleteSessionBuilder AdminDeleteSessionOp
         {
-            get { return new Operation.AdminDeleteSession.AdminDeleteSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteSession.AdminDeleteSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminSearchSessionsV2.AdminSearchSessionsV2Builder AdminSearchSessionsV2Op
         {
-            get { return new Operation.AdminSearchSessionsV2.AdminSearchSessionsV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminSearchSessionsV2.AdminSearchSessionsV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetSessionHistoryDetailed.GetSessionHistoryDetailedBuilder GetSessionHistoryDetailedOp
         {
-            get { return new Operation.GetSessionHistoryDetailed.GetSessionHistoryDetailedBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetSessionHistoryDetailed.GetSessionHistoryDetailedBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UserQuerySession.UserQuerySessionBuilder UserQuerySessionOp
         {
-            get { return new Operation.UserQuerySession.UserQuerySessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UserQuerySession.UserQuerySessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateSession.CreateSessionBuilder CreateSessionOp
         {
-            get { return new Operation.CreateSession.CreateSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateSession.CreateSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetSessionByUserIDs.GetSessionByUserIDsBuilder GetSessionByUserIDsOp
         {
-            get { return new Operation.GetSessionByUserIDs.GetSessionByUserIDsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetSessionByUserIDs.GetSessionByUserIDsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetSession.GetSessionBuilder GetSessionOp
         {
-            get { return new Operation.GetSession.GetSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetSession.GetSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateSession.UpdateSessionBuilder UpdateSessionOp
         {
-            get { return new Operation.UpdateSession.UpdateSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateSession.UpdateSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteSession.DeleteSessionBuilder DeleteSessionOp
         {
-            get { return new Operation.DeleteSession.DeleteSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteSession.DeleteSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public JoinSession.JoinSessionBuilder JoinSessionOp
         {
-            get { return new Operation.JoinSession.JoinSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.JoinSession.JoinSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteSessionLocalDS.DeleteSessionLocalDSBuilder DeleteSessionLocalDSOp
         {
-            get { return new Operation.DeleteSessionLocalDS.DeleteSessionLocalDSBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteSessionLocalDS.DeleteSessionLocalDSBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AddPlayerToSession.AddPlayerToSessionBuilder AddPlayerToSessionOp
         {
-            get { return new Operation.AddPlayerToSession.AddPlayerToSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AddPlayerToSession.AddPlayerToSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RemovePlayerFromSession.RemovePlayerFromSessionBuilder RemovePlayerFromSessionOp
         {
-            get { return new Operation.RemovePlayerFromSession.RemovePlayerFromSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RemovePlayerFromSession.RemovePlayerFromSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateSettings.UpdateSettingsBuilder UpdateSettingsOp
         {
-            get { return new Operation.UpdateSettings.UpdateSettingsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateSettings.UpdateSettingsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetRecentPlayer.GetRecentPlayerBuilder GetRecentPlayerOp
         {
-            get { return new Operation.GetRecentPlayer.GetRecentPlayerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetRecentPlayer.GetRecentPlayerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,51 +20,115 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Slot(IAccelByteSdk sdk)
         {
             _sdk = sdk;
+        }
+
+        public Slot(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
         }
 
         #region Operation Builders
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserNamespaceSlots.GetUserNamespaceSlotsBuilder GetUserNamespaceSlotsOp
         {
-            get { return new Operation.GetUserNamespaceSlots.GetUserNamespaceSlotsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserNamespaceSlots.GetUserNamespaceSlotsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetSlotData.GetSlotDataBuilder GetSlotDataOp
         {
-            get { return new Operation.GetSlotData.GetSlotDataBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetSlotData.GetSlotDataBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetUserNamespaceSlots.PublicGetUserNamespaceSlotsBuilder PublicGetUserNamespaceSlotsOp
         {
-            get { return new Operation.PublicGetUserNamespaceSlots.PublicGetUserNamespaceSlotsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserNamespaceSlots.PublicGetUserNamespaceSlotsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicCreateUserNamespaceSlot.PublicCreateUserNamespaceSlotBuilder PublicCreateUserNamespaceSlotOp
         {
-            get { return new Operation.PublicCreateUserNamespaceSlot.PublicCreateUserNamespaceSlotBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicCreateUserNamespaceSlot.PublicCreateUserNamespaceSlotBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetSlotData.PublicGetSlotDataBuilder PublicGetSlotDataOp
         {
-            get { return new Operation.PublicGetSlotData.PublicGetSlotDataBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetSlotData.PublicGetSlotDataBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicUpdateUserNamespaceSlot.PublicUpdateUserNamespaceSlotBuilder PublicUpdateUserNamespaceSlotOp
         {
-            get { return new Operation.PublicUpdateUserNamespaceSlot.PublicUpdateUserNamespaceSlotBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpdateUserNamespaceSlot.PublicUpdateUserNamespaceSlotBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicDeleteUserNamespaceSlot.PublicDeleteUserNamespaceSlotBuilder PublicDeleteUserNamespaceSlotOp
         {
-            get { return new Operation.PublicDeleteUserNamespaceSlot.PublicDeleteUserNamespaceSlotBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicDeleteUserNamespaceSlot.PublicDeleteUserNamespaceSlotBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicUpdateUserNamespaceSlotMetadata.PublicUpdateUserNamespaceSlotMetadataBuilder PublicUpdateUserNamespaceSlotMetadataOp
         {
-            get { return new Operation.PublicUpdateUserNamespaceSlotMetadata.PublicUpdateUserNamespaceSlotMetadataBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpdateUserNamespaceSlotMetadata.PublicUpdateUserNamespaceSlotMetadataBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

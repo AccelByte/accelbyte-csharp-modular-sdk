@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PaymentDedicated(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PaymentDedicated(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public CreatePaymentOrderByDedicated.CreatePaymentOrderByDedicatedBuilder CreatePaymentOrderByDedicatedOp
         {
-            get { return new Operation.CreatePaymentOrderByDedicated.CreatePaymentOrderByDedicatedBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreatePaymentOrderByDedicated.CreatePaymentOrderByDedicatedBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RefundPaymentOrderByDedicated.RefundPaymentOrderByDedicatedBuilder RefundPaymentOrderByDedicatedOp
         {
-            get { return new Operation.RefundPaymentOrderByDedicated.RefundPaymentOrderByDedicatedBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RefundPaymentOrderByDedicated.RefundPaymentOrderByDedicatedBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SyncPaymentOrders.SyncPaymentOrdersBuilder SyncPaymentOrdersOp
         {
-            get { return new Operation.SyncPaymentOrders.SyncPaymentOrdersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SyncPaymentOrders.SyncPaymentOrdersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

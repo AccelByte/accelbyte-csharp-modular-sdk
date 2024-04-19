@@ -20,31 +20,74 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public SessionStorage(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public SessionStorage(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminReadSessionStorage.AdminReadSessionStorageBuilder AdminReadSessionStorageOp
         {
-            get { return new Operation.AdminReadSessionStorage.AdminReadSessionStorageBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminReadSessionStorage.AdminReadSessionStorageBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteUserSessionStorage.AdminDeleteUserSessionStorageBuilder AdminDeleteUserSessionStorageOp
         {
-            get { return new Operation.AdminDeleteUserSessionStorage.AdminDeleteUserSessionStorageBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteUserSessionStorage.AdminDeleteUserSessionStorageBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminReadUserSessionStorage.AdminReadUserSessionStorageBuilder AdminReadUserSessionStorageOp
         {
-            get { return new Operation.AdminReadUserSessionStorage.AdminReadUserSessionStorageBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminReadUserSessionStorage.AdminReadUserSessionStorageBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUpdateInsertSessionStorageLeader.PublicUpdateInsertSessionStorageLeaderBuilder PublicUpdateInsertSessionStorageLeaderOp
         {
-            get { return new Operation.PublicUpdateInsertSessionStorageLeader.PublicUpdateInsertSessionStorageLeaderBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpdateInsertSessionStorageLeader.PublicUpdateInsertSessionStorageLeaderBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUpdateInsertSessionStorage.PublicUpdateInsertSessionStorageBuilder PublicUpdateInsertSessionStorageOp
         {
-            get { return new Operation.PublicUpdateInsertSessionStorage.PublicUpdateInsertSessionStorageBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpdateInsertSessionStorage.PublicUpdateInsertSessionStorageBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

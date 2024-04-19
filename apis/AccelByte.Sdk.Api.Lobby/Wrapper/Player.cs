@@ -20,59 +20,151 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Player(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Player(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetLobbyCCU.AdminGetLobbyCCUBuilder AdminGetLobbyCCUOp
         {
-            get { return new Operation.AdminGetLobbyCCU.AdminGetLobbyCCUBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetLobbyCCU.AdminGetLobbyCCUBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetBulkPlayerBlockedPlayersV1.AdminGetBulkPlayerBlockedPlayersV1Builder AdminGetBulkPlayerBlockedPlayersV1Op
         {
-            get { return new Operation.AdminGetBulkPlayerBlockedPlayersV1.AdminGetBulkPlayerBlockedPlayersV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetBulkPlayerBlockedPlayersV1.AdminGetBulkPlayerBlockedPlayersV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetAllPlayerSessionAttribute.AdminGetAllPlayerSessionAttributeBuilder AdminGetAllPlayerSessionAttributeOp
         {
-            get { return new Operation.AdminGetAllPlayerSessionAttribute.AdminGetAllPlayerSessionAttributeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetAllPlayerSessionAttribute.AdminGetAllPlayerSessionAttributeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminSetPlayerSessionAttribute.AdminSetPlayerSessionAttributeBuilder AdminSetPlayerSessionAttributeOp
         {
-            get { return new Operation.AdminSetPlayerSessionAttribute.AdminSetPlayerSessionAttributeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminSetPlayerSessionAttribute.AdminSetPlayerSessionAttributeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetPlayerSessionAttribute.AdminGetPlayerSessionAttributeBuilder AdminGetPlayerSessionAttributeOp
         {
-            get { return new Operation.AdminGetPlayerSessionAttribute.AdminGetPlayerSessionAttributeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetPlayerSessionAttribute.AdminGetPlayerSessionAttributeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetPlayerBlockedPlayersV1.AdminGetPlayerBlockedPlayersV1Builder AdminGetPlayerBlockedPlayersV1Op
         {
-            get { return new Operation.AdminGetPlayerBlockedPlayersV1.AdminGetPlayerBlockedPlayersV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetPlayerBlockedPlayersV1.AdminGetPlayerBlockedPlayersV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetPlayerBlockedByPlayersV1.AdminGetPlayerBlockedByPlayersV1Builder AdminGetPlayerBlockedByPlayersV1Op
         {
-            get { return new Operation.AdminGetPlayerBlockedByPlayersV1.AdminGetPlayerBlockedByPlayersV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetPlayerBlockedByPlayersV1.AdminGetPlayerBlockedByPlayersV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminBulkBlockPlayersV1.AdminBulkBlockPlayersV1Builder AdminBulkBlockPlayersV1Op
         {
-            get { return new Operation.AdminBulkBlockPlayersV1.AdminBulkBlockPlayersV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminBulkBlockPlayersV1.AdminBulkBlockPlayersV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicPlayerBlockPlayersV1.PublicPlayerBlockPlayersV1Builder PublicPlayerBlockPlayersV1Op
         {
-            get { return new Operation.PublicPlayerBlockPlayersV1.PublicPlayerBlockPlayersV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicPlayerBlockPlayersV1.PublicPlayerBlockPlayersV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetPlayerBlockedPlayersV1.PublicGetPlayerBlockedPlayersV1Builder PublicGetPlayerBlockedPlayersV1Op
         {
-            get { return new Operation.PublicGetPlayerBlockedPlayersV1.PublicGetPlayerBlockedPlayersV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetPlayerBlockedPlayersV1.PublicGetPlayerBlockedPlayersV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetPlayerBlockedByPlayersV1.PublicGetPlayerBlockedByPlayersV1Builder PublicGetPlayerBlockedByPlayersV1Op
         {
-            get { return new Operation.PublicGetPlayerBlockedByPlayersV1.PublicGetPlayerBlockedByPlayersV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetPlayerBlockedByPlayersV1.PublicGetPlayerBlockedByPlayersV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUnblockPlayerV1.PublicUnblockPlayerV1Builder PublicUnblockPlayerV1Op
         {
-            get { return new Operation.PublicUnblockPlayerV1.PublicUnblockPlayerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUnblockPlayerV1.PublicUnblockPlayerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminStagingContent(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminStagingContent(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminListStagingContents.AdminListStagingContentsBuilder AdminListStagingContentsOp
         {
-            get { return new Operation.AdminListStagingContents.AdminListStagingContentsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListStagingContents.AdminListStagingContentsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetStagingContentByID.AdminGetStagingContentByIDBuilder AdminGetStagingContentByIDOp
         {
-            get { return new Operation.AdminGetStagingContentByID.AdminGetStagingContentByIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetStagingContentByID.AdminGetStagingContentByIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminApproveStagingContent.AdminApproveStagingContentBuilder AdminApproveStagingContentOp
         {
-            get { return new Operation.AdminApproveStagingContent.AdminApproveStagingContentBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminApproveStagingContent.AdminApproveStagingContentBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminListUserStagingContents.AdminListUserStagingContentsBuilder AdminListUserStagingContentsOp
         {
-            get { return new Operation.AdminListUserStagingContents.AdminListUserStagingContentsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListUserStagingContents.AdminListUserStagingContentsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

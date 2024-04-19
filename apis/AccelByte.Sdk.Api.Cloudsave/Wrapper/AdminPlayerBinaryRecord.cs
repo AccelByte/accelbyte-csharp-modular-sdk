@@ -20,39 +20,96 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminPlayerBinaryRecord(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminPlayerBinaryRecord(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminListPlayerBinaryRecordsV1.AdminListPlayerBinaryRecordsV1Builder AdminListPlayerBinaryRecordsV1Op
         {
-            get { return new Operation.AdminListPlayerBinaryRecordsV1.AdminListPlayerBinaryRecordsV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListPlayerBinaryRecordsV1.AdminListPlayerBinaryRecordsV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminPostPlayerBinaryRecordV1.AdminPostPlayerBinaryRecordV1Builder AdminPostPlayerBinaryRecordV1Op
         {
-            get { return new Operation.AdminPostPlayerBinaryRecordV1.AdminPostPlayerBinaryRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminPostPlayerBinaryRecordV1.AdminPostPlayerBinaryRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetPlayerBinaryRecordV1.AdminGetPlayerBinaryRecordV1Builder AdminGetPlayerBinaryRecordV1Op
         {
-            get { return new Operation.AdminGetPlayerBinaryRecordV1.AdminGetPlayerBinaryRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetPlayerBinaryRecordV1.AdminGetPlayerBinaryRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminPutPlayerBinaryRecordV1.AdminPutPlayerBinaryRecordV1Builder AdminPutPlayerBinaryRecordV1Op
         {
-            get { return new Operation.AdminPutPlayerBinaryRecordV1.AdminPutPlayerBinaryRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminPutPlayerBinaryRecordV1.AdminPutPlayerBinaryRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeletePlayerBinaryRecordV1.AdminDeletePlayerBinaryRecordV1Builder AdminDeletePlayerBinaryRecordV1Op
         {
-            get { return new Operation.AdminDeletePlayerBinaryRecordV1.AdminDeletePlayerBinaryRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeletePlayerBinaryRecordV1.AdminDeletePlayerBinaryRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminPutPlayerBinaryRecorMetadataV1.AdminPutPlayerBinaryRecorMetadataV1Builder AdminPutPlayerBinaryRecorMetadataV1Op
         {
-            get { return new Operation.AdminPutPlayerBinaryRecorMetadataV1.AdminPutPlayerBinaryRecorMetadataV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminPutPlayerBinaryRecorMetadataV1.AdminPutPlayerBinaryRecorMetadataV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminPostPlayerBinaryPresignedURLV1.AdminPostPlayerBinaryPresignedURLV1Builder AdminPostPlayerBinaryPresignedURLV1Op
         {
-            get { return new Operation.AdminPostPlayerBinaryPresignedURLV1.AdminPostPlayerBinaryPresignedURLV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminPostPlayerBinaryPresignedURLV1.AdminPostPlayerBinaryPresignedURLV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

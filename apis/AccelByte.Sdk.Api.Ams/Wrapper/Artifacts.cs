@@ -20,35 +20,85 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Artifacts(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Artifacts(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ArtifactGet.ArtifactGetBuilder ArtifactGetOp
         {
-            get { return new Operation.ArtifactGet.ArtifactGetBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ArtifactGet.ArtifactGetBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ArtifactUsageGet.ArtifactUsageGetBuilder ArtifactUsageGetOp
         {
-            get { return new Operation.ArtifactUsageGet.ArtifactUsageGetBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ArtifactUsageGet.ArtifactUsageGetBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ArtifactDelete.ArtifactDeleteBuilder ArtifactDeleteOp
         {
-            get { return new Operation.ArtifactDelete.ArtifactDeleteBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ArtifactDelete.ArtifactDeleteBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ArtifactGetURL.ArtifactGetURLBuilder ArtifactGetURLOp
         {
-            get { return new Operation.ArtifactGetURL.ArtifactGetURLBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ArtifactGetURL.ArtifactGetURLBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public FleetArtifactSamplingRulesGet.FleetArtifactSamplingRulesGetBuilder FleetArtifactSamplingRulesGetOp
         {
-            get { return new Operation.FleetArtifactSamplingRulesGet.FleetArtifactSamplingRulesGetBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FleetArtifactSamplingRulesGet.FleetArtifactSamplingRulesGetBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public FleetArtifactSamplingRulesSet.FleetArtifactSamplingRulesSetBuilder FleetArtifactSamplingRulesSetOp
         {
-            get { return new Operation.FleetArtifactSamplingRulesSet.FleetArtifactSamplingRulesSetBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FleetArtifactSamplingRulesSet.FleetArtifactSamplingRulesSetBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

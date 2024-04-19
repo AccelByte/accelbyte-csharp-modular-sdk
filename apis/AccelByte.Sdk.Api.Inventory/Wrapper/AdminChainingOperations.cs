@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminChainingOperations(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminChainingOperations(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminCreateChainingOperations.AdminCreateChainingOperationsBuilder AdminCreateChainingOperationsOp
         {
-            get { return new Operation.AdminCreateChainingOperations.AdminCreateChainingOperationsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateChainingOperations.AdminCreateChainingOperationsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

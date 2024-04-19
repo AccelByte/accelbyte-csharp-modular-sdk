@@ -20,103 +20,272 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Season(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Season(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public QuerySeasons.QuerySeasonsBuilder QuerySeasonsOp
         {
-            get { return new Operation.QuerySeasons.QuerySeasonsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QuerySeasons.QuerySeasonsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateSeason.CreateSeasonBuilder CreateSeasonOp
         {
-            get { return new Operation.CreateSeason.CreateSeasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateSeason.CreateSeasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetCurrentSeason.GetCurrentSeasonBuilder GetCurrentSeasonOp
         {
-            get { return new Operation.GetCurrentSeason.GetCurrentSeasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetCurrentSeason.GetCurrentSeasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public BulkGetUserSeasonProgression.BulkGetUserSeasonProgressionBuilder BulkGetUserSeasonProgressionOp
         {
-            get { return new Operation.BulkGetUserSeasonProgression.BulkGetUserSeasonProgressionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BulkGetUserSeasonProgression.BulkGetUserSeasonProgressionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetSeason.GetSeasonBuilder GetSeasonOp
         {
-            get { return new Operation.GetSeason.GetSeasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetSeason.GetSeasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteSeason.DeleteSeasonBuilder DeleteSeasonOp
         {
-            get { return new Operation.DeleteSeason.DeleteSeasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteSeason.DeleteSeasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateSeason.UpdateSeasonBuilder UpdateSeasonOp
         {
-            get { return new Operation.UpdateSeason.UpdateSeasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateSeason.UpdateSeasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CloneSeason.CloneSeasonBuilder CloneSeasonOp
         {
-            get { return new Operation.CloneSeason.CloneSeasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CloneSeason.CloneSeasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetFullSeason.GetFullSeasonBuilder GetFullSeasonOp
         {
-            get { return new Operation.GetFullSeason.GetFullSeasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetFullSeason.GetFullSeasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublishSeason.PublishSeasonBuilder PublishSeasonOp
         {
-            get { return new Operation.PublishSeason.PublishSeasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublishSeason.PublishSeasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RetireSeason.RetireSeasonBuilder RetireSeasonOp
         {
-            get { return new Operation.RetireSeason.RetireSeasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetireSeason.RetireSeasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UnpublishSeason.UnpublishSeasonBuilder UnpublishSeasonOp
         {
-            get { return new Operation.UnpublishSeason.UnpublishSeasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UnpublishSeason.UnpublishSeasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserParticipatedSeasons.GetUserParticipatedSeasonsBuilder GetUserParticipatedSeasonsOp
         {
-            get { return new Operation.GetUserParticipatedSeasons.GetUserParticipatedSeasonsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserParticipatedSeasons.GetUserParticipatedSeasonsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ExistsAnyPassByPassCodes.ExistsAnyPassByPassCodesBuilder ExistsAnyPassByPassCodesOp
         {
-            get { return new Operation.ExistsAnyPassByPassCodes.ExistsAnyPassByPassCodesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ExistsAnyPassByPassCodes.ExistsAnyPassByPassCodesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetCurrentUserSeasonProgression.GetCurrentUserSeasonProgressionBuilder GetCurrentUserSeasonProgressionOp
         {
-            get { return new Operation.GetCurrentUserSeasonProgression.GetCurrentUserSeasonProgressionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetCurrentUserSeasonProgression.GetCurrentUserSeasonProgressionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CheckSeasonPurchasable.CheckSeasonPurchasableBuilder CheckSeasonPurchasableOp
         {
-            get { return new Operation.CheckSeasonPurchasable.CheckSeasonPurchasableBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CheckSeasonPurchasable.CheckSeasonPurchasableBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ResetUserSeason.ResetUserSeasonBuilder ResetUserSeasonOp
         {
-            get { return new Operation.ResetUserSeason.ResetUserSeasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ResetUserSeason.ResetUserSeasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryUserExpGrantHistory.QueryUserExpGrantHistoryBuilder QueryUserExpGrantHistoryOp
         {
-            get { return new Operation.QueryUserExpGrantHistory.QueryUserExpGrantHistoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryUserExpGrantHistory.QueryUserExpGrantHistoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryUserExpGrantHistoryTag.QueryUserExpGrantHistoryTagBuilder QueryUserExpGrantHistoryTagOp
         {
-            get { return new Operation.QueryUserExpGrantHistoryTag.QueryUserExpGrantHistoryTagBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryUserExpGrantHistoryTag.QueryUserExpGrantHistoryTagBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserSeason.GetUserSeasonBuilder GetUserSeasonOp
         {
-            get { return new Operation.GetUserSeason.GetUserSeasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserSeason.GetUserSeasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetCurrentSeason.PublicGetCurrentSeasonBuilder PublicGetCurrentSeasonOp
         {
-            get { return new Operation.PublicGetCurrentSeason.PublicGetCurrentSeasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetCurrentSeason.PublicGetCurrentSeasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetCurrentUserSeason.PublicGetCurrentUserSeasonBuilder PublicGetCurrentUserSeasonOp
         {
-            get { return new Operation.PublicGetCurrentUserSeason.PublicGetCurrentUserSeasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetCurrentUserSeason.PublicGetCurrentUserSeasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserSeason.PublicGetUserSeasonBuilder PublicGetUserSeasonOp
         {
-            get { return new Operation.PublicGetUserSeason.PublicGetUserSeasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserSeason.PublicGetUserSeasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

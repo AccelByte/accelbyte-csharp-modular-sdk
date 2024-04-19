@@ -20,87 +20,228 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Friends(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Friends(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetUserFriendsUpdated.GetUserFriendsUpdatedBuilder GetUserFriendsUpdatedOp
         {
-            get { return new Operation.GetUserFriendsUpdated.GetUserFriendsUpdatedBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserFriendsUpdated.GetUserFriendsUpdatedBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserIncomingFriends.GetUserIncomingFriendsBuilder GetUserIncomingFriendsOp
         {
-            get { return new Operation.GetUserIncomingFriends.GetUserIncomingFriendsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserIncomingFriends.GetUserIncomingFriendsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserIncomingFriendsWithTime.GetUserIncomingFriendsWithTimeBuilder GetUserIncomingFriendsWithTimeOp
         {
-            get { return new Operation.GetUserIncomingFriendsWithTime.GetUserIncomingFriendsWithTimeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserIncomingFriendsWithTime.GetUserIncomingFriendsWithTimeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserOutgoingFriends.GetUserOutgoingFriendsBuilder GetUserOutgoingFriendsOp
         {
-            get { return new Operation.GetUserOutgoingFriends.GetUserOutgoingFriendsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserOutgoingFriends.GetUserOutgoingFriendsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserOutgoingFriendsWithTime.GetUserOutgoingFriendsWithTimeBuilder GetUserOutgoingFriendsWithTimeOp
         {
-            get { return new Operation.GetUserOutgoingFriendsWithTime.GetUserOutgoingFriendsWithTimeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserOutgoingFriendsWithTime.GetUserOutgoingFriendsWithTimeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserFriendsWithPlatform.GetUserFriendsWithPlatformBuilder GetUserFriendsWithPlatformOp
         {
-            get { return new Operation.GetUserFriendsWithPlatform.GetUserFriendsWithPlatformBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserFriendsWithPlatform.GetUserFriendsWithPlatformBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UserRequestFriend.UserRequestFriendBuilder UserRequestFriendOp
         {
-            get { return new Operation.UserRequestFriend.UserRequestFriendBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UserRequestFriend.UserRequestFriendBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UserAcceptFriendRequest.UserAcceptFriendRequestBuilder UserAcceptFriendRequestOp
         {
-            get { return new Operation.UserAcceptFriendRequest.UserAcceptFriendRequestBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UserAcceptFriendRequest.UserAcceptFriendRequestBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UserCancelFriendRequest.UserCancelFriendRequestBuilder UserCancelFriendRequestOp
         {
-            get { return new Operation.UserCancelFriendRequest.UserCancelFriendRequestBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UserCancelFriendRequest.UserCancelFriendRequestBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UserRejectFriendRequest.UserRejectFriendRequestBuilder UserRejectFriendRequestOp
         {
-            get { return new Operation.UserRejectFriendRequest.UserRejectFriendRequestBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UserRejectFriendRequest.UserRejectFriendRequestBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UserGetFriendshipStatus.UserGetFriendshipStatusBuilder UserGetFriendshipStatusOp
         {
-            get { return new Operation.UserGetFriendshipStatus.UserGetFriendshipStatusBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UserGetFriendshipStatus.UserGetFriendshipStatusBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UserUnfriendRequest.UserUnfriendRequestBuilder UserUnfriendRequestOp
         {
-            get { return new Operation.UserUnfriendRequest.UserUnfriendRequestBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UserUnfriendRequest.UserUnfriendRequestBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AddFriendsWithoutConfirmation.AddFriendsWithoutConfirmationBuilder AddFriendsWithoutConfirmationOp
         {
-            get { return new Operation.AddFriendsWithoutConfirmation.AddFriendsWithoutConfirmationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AddFriendsWithoutConfirmation.AddFriendsWithoutConfirmationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public BulkDeleteFriends.BulkDeleteFriendsBuilder BulkDeleteFriendsOp
         {
-            get { return new Operation.BulkDeleteFriends.BulkDeleteFriendsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BulkDeleteFriends.BulkDeleteFriendsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SyncNativeFriends.SyncNativeFriendsBuilder SyncNativeFriendsOp
         {
-            get { return new Operation.SyncNativeFriends.SyncNativeFriendsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SyncNativeFriends.SyncNativeFriendsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetListOfFriends.GetListOfFriendsBuilder GetListOfFriendsOp
         {
-            get { return new Operation.GetListOfFriends.GetListOfFriendsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetListOfFriends.GetListOfFriendsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetIncomingFriendRequests.GetIncomingFriendRequestsBuilder GetIncomingFriendRequestsOp
         {
-            get { return new Operation.GetIncomingFriendRequests.GetIncomingFriendRequestsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetIncomingFriendRequests.GetIncomingFriendRequestsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminListFriendsOfFriends.AdminListFriendsOfFriendsBuilder AdminListFriendsOfFriendsOp
         {
-            get { return new Operation.AdminListFriendsOfFriends.AdminListFriendsOfFriendsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListFriendsOfFriends.AdminListFriendsOfFriendsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetOutgoingFriendRequests.GetOutgoingFriendRequestsBuilder GetOutgoingFriendRequestsOp
         {
-            get { return new Operation.GetOutgoingFriendRequests.GetOutgoingFriendRequestsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetOutgoingFriendRequests.GetOutgoingFriendRequestsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

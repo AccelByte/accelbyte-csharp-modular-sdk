@@ -20,19 +20,41 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public MaxActive(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public MaxActive(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetMemberActiveSession.AdminGetMemberActiveSessionBuilder AdminGetMemberActiveSessionOp
         {
-            get { return new Operation.AdminGetMemberActiveSession.AdminGetMemberActiveSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetMemberActiveSession.AdminGetMemberActiveSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminReconcileMaxActiveSession.AdminReconcileMaxActiveSessionBuilder AdminReconcileMaxActiveSessionOp
         {
-            get { return new Operation.AdminReconcileMaxActiveSession.AdminReconcileMaxActiveSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminReconcileMaxActiveSession.AdminReconcileMaxActiveSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

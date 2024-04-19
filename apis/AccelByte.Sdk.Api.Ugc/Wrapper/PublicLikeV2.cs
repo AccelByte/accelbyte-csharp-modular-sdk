@@ -20,19 +20,41 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PublicLikeV2(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PublicLikeV2(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public PublicListContentLikeV2.PublicListContentLikeV2Builder PublicListContentLikeV2Op
         {
-            get { return new Operation.PublicListContentLikeV2.PublicListContentLikeV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicListContentLikeV2.PublicListContentLikeV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateContentLikeStatusV2.UpdateContentLikeStatusV2Builder UpdateContentLikeStatusV2Op
         {
-            get { return new Operation.UpdateContentLikeStatusV2.UpdateContentLikeStatusV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateContentLikeStatusV2.UpdateContentLikeStatusV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

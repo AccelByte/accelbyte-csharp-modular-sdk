@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Gametelemetry
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.Telemetry Telemetry
         {
             get
             {
                 if (_Telemetry == null)
-                    _Telemetry = new Wrapper.Telemetry(_Sdk);
+                    _Telemetry = new Wrapper.Telemetry(_Sdk, _CustomBasePath);
                 return _Telemetry;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry
             get
             {
                 if (_GametelemetryOperations == null)
-                    _GametelemetryOperations = new Wrapper.GametelemetryOperations(_Sdk);
+                    _GametelemetryOperations = new Wrapper.GametelemetryOperations(_Sdk, _CustomBasePath);
                 return _GametelemetryOperations;
             }
         }
@@ -40,6 +42,12 @@ namespace AccelByte.Sdk.Api.Gametelemetry
         internal GametelemetryApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public GametelemetryApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -52,7 +60,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<GametelemetryApi>("gametelemetry", () =>
             {
-                return new GametelemetryApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("gametelemetry");
+                if (customPath != "")
+                    return (new GametelemetryApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new GametelemetryApi(sdk);
             });
         }
     }

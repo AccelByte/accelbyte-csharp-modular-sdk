@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PublicReports(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PublicReports(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public SubmitReport.SubmitReportBuilder SubmitReportOp
         {
-            get { return new Operation.SubmitReport.SubmitReportBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SubmitReport.SubmitReportBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

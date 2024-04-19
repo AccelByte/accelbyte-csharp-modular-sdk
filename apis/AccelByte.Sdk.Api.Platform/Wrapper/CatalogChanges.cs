@@ -20,47 +20,118 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public CatalogChanges(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public CatalogChanges(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public QueryChanges.QueryChangesBuilder QueryChangesOp
         {
-            get { return new Operation.QueryChanges.QueryChangesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryChanges.QueryChangesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublishAll.PublishAllBuilder PublishAllOp
         {
-            get { return new Operation.PublishAll.PublishAllBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublishAll.PublishAllBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublishSelected.PublishSelectedBuilder PublishSelectedOp
         {
-            get { return new Operation.PublishSelected.PublishSelectedBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublishSelected.PublishSelectedBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SelectAllRecords.SelectAllRecordsBuilder SelectAllRecordsOp
         {
-            get { return new Operation.SelectAllRecords.SelectAllRecordsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SelectAllRecords.SelectAllRecordsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SelectAllRecordsByCriteria.SelectAllRecordsByCriteriaBuilder SelectAllRecordsByCriteriaOp
         {
-            get { return new Operation.SelectAllRecordsByCriteria.SelectAllRecordsByCriteriaBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SelectAllRecordsByCriteria.SelectAllRecordsByCriteriaBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetStatistic.GetStatisticBuilder GetStatisticOp
         {
-            get { return new Operation.GetStatistic.GetStatisticBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetStatistic.GetStatisticBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UnselectAllRecords.UnselectAllRecordsBuilder UnselectAllRecordsOp
         {
-            get { return new Operation.UnselectAllRecords.UnselectAllRecordsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UnselectAllRecords.UnselectAllRecordsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SelectRecord.SelectRecordBuilder SelectRecordOp
         {
-            get { return new Operation.SelectRecord.SelectRecordBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SelectRecord.SelectRecordBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UnselectRecord.UnselectRecordBuilder UnselectRecordOp
         {
-            get { return new Operation.UnselectRecord.UnselectRecordBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UnselectRecord.UnselectRecordBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

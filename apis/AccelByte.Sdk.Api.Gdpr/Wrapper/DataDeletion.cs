@@ -20,51 +20,129 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public DataDeletion(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public DataDeletion(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetListDeletionDataRequest.AdminGetListDeletionDataRequestBuilder AdminGetListDeletionDataRequestOp
         {
-            get { return new Operation.AdminGetListDeletionDataRequest.AdminGetListDeletionDataRequestBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetListDeletionDataRequest.AdminGetListDeletionDataRequestBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetUserAccountDeletionRequest.AdminGetUserAccountDeletionRequestBuilder AdminGetUserAccountDeletionRequestOp
         {
-            get { return new Operation.AdminGetUserAccountDeletionRequest.AdminGetUserAccountDeletionRequestBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetUserAccountDeletionRequest.AdminGetUserAccountDeletionRequestBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminSubmitUserAccountDeletionRequest.AdminSubmitUserAccountDeletionRequestBuilder AdminSubmitUserAccountDeletionRequestOp
         {
-            get { return new Operation.AdminSubmitUserAccountDeletionRequest.AdminSubmitUserAccountDeletionRequestBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminSubmitUserAccountDeletionRequest.AdminSubmitUserAccountDeletionRequestBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCancelUserAccountDeletionRequest.AdminCancelUserAccountDeletionRequestBuilder AdminCancelUserAccountDeletionRequestOp
         {
-            get { return new Operation.AdminCancelUserAccountDeletionRequest.AdminCancelUserAccountDeletionRequestBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCancelUserAccountDeletionRequest.AdminCancelUserAccountDeletionRequestBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicSubmitUserAccountDeletionRequest.PublicSubmitUserAccountDeletionRequestBuilder PublicSubmitUserAccountDeletionRequestOp
         {
-            get { return new Operation.PublicSubmitUserAccountDeletionRequest.PublicSubmitUserAccountDeletionRequestBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicSubmitUserAccountDeletionRequest.PublicSubmitUserAccountDeletionRequestBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicCancelUserAccountDeletionRequest.PublicCancelUserAccountDeletionRequestBuilder PublicCancelUserAccountDeletionRequestOp
         {
-            get { return new Operation.PublicCancelUserAccountDeletionRequest.PublicCancelUserAccountDeletionRequestBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicCancelUserAccountDeletionRequest.PublicCancelUserAccountDeletionRequestBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserAccountDeletionStatus.PublicGetUserAccountDeletionStatusBuilder PublicGetUserAccountDeletionStatusOp
         {
-            get { return new Operation.PublicGetUserAccountDeletionStatus.PublicGetUserAccountDeletionStatusBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserAccountDeletionStatus.PublicGetUserAccountDeletionStatusBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicSubmitMyAccountDeletionRequest.PublicSubmitMyAccountDeletionRequestBuilder PublicSubmitMyAccountDeletionRequestOp
         {
-            get { return new Operation.PublicSubmitMyAccountDeletionRequest.PublicSubmitMyAccountDeletionRequestBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicSubmitMyAccountDeletionRequest.PublicSubmitMyAccountDeletionRequestBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicCancelMyAccountDeletionRequest.PublicCancelMyAccountDeletionRequestBuilder PublicCancelMyAccountDeletionRequestOp
         {
-            get { return new Operation.PublicCancelMyAccountDeletionRequest.PublicCancelMyAccountDeletionRequestBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicCancelMyAccountDeletionRequest.PublicCancelMyAccountDeletionRequestBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetMyAccountDeletionStatus.PublicGetMyAccountDeletionStatusBuilder PublicGetMyAccountDeletionStatusOp
         {
-            get { return new Operation.PublicGetMyAccountDeletionStatus.PublicGetMyAccountDeletionStatusBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetMyAccountDeletionStatus.PublicGetMyAccountDeletionStatusBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

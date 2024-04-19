@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Presence(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Presence(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public UsersPresenceHandlerV1.UsersPresenceHandlerV1Builder UsersPresenceHandlerV1Op
         {
-            get { return new Operation.UsersPresenceHandlerV1.UsersPresenceHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UsersPresenceHandlerV1.UsersPresenceHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

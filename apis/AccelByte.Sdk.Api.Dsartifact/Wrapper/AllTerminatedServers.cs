@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AllTerminatedServers(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AllTerminatedServers(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ListTerminatedServers.ListTerminatedServersBuilder ListTerminatedServersOp
         {
-            get { return new Operation.ListTerminatedServers.ListTerminatedServersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListTerminatedServers.ListTerminatedServersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

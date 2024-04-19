@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public EQU8Config(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public EQU8Config(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetConfig.GetConfigBuilder GetConfigOp
         {
-            get { return new Operation.GetConfig.GetConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetConfig.GetConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteConfig.DeleteConfigBuilder DeleteConfigOp
         {
-            get { return new Operation.DeleteConfig.DeleteConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteConfig.DeleteConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateConfig.UpdateConfigBuilder UpdateConfigOp
         {
-            get { return new Operation.UpdateConfig.UpdateConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateConfig.UpdateConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

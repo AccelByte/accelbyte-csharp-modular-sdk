@@ -20,59 +20,151 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PublicPlayerBinaryRecord(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PublicPlayerBinaryRecord(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public BulkGetPlayerPublicBinaryRecordsV1.BulkGetPlayerPublicBinaryRecordsV1Builder BulkGetPlayerPublicBinaryRecordsV1Op
         {
-            get { return new Operation.BulkGetPlayerPublicBinaryRecordsV1.BulkGetPlayerPublicBinaryRecordsV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BulkGetPlayerPublicBinaryRecordsV1.BulkGetPlayerPublicBinaryRecordsV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListMyBinaryRecordsV1.ListMyBinaryRecordsV1Builder ListMyBinaryRecordsV1Op
         {
-            get { return new Operation.ListMyBinaryRecordsV1.ListMyBinaryRecordsV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListMyBinaryRecordsV1.ListMyBinaryRecordsV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public BulkGetMyBinaryRecordV1.BulkGetMyBinaryRecordV1Builder BulkGetMyBinaryRecordV1Op
         {
-            get { return new Operation.BulkGetMyBinaryRecordV1.BulkGetMyBinaryRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BulkGetMyBinaryRecordV1.BulkGetMyBinaryRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PostPlayerBinaryRecordV1.PostPlayerBinaryRecordV1Builder PostPlayerBinaryRecordV1Op
         {
-            get { return new Operation.PostPlayerBinaryRecordV1.PostPlayerBinaryRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PostPlayerBinaryRecordV1.PostPlayerBinaryRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListOtherPlayerPublicBinaryRecordsV1.ListOtherPlayerPublicBinaryRecordsV1Builder ListOtherPlayerPublicBinaryRecordsV1Op
         {
-            get { return new Operation.ListOtherPlayerPublicBinaryRecordsV1.ListOtherPlayerPublicBinaryRecordsV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListOtherPlayerPublicBinaryRecordsV1.ListOtherPlayerPublicBinaryRecordsV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public BulkGetOtherPlayerPublicBinaryRecordsV1.BulkGetOtherPlayerPublicBinaryRecordsV1Builder BulkGetOtherPlayerPublicBinaryRecordsV1Op
         {
-            get { return new Operation.BulkGetOtherPlayerPublicBinaryRecordsV1.BulkGetOtherPlayerPublicBinaryRecordsV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BulkGetOtherPlayerPublicBinaryRecordsV1.BulkGetOtherPlayerPublicBinaryRecordsV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPlayerBinaryRecordV1.GetPlayerBinaryRecordV1Builder GetPlayerBinaryRecordV1Op
         {
-            get { return new Operation.GetPlayerBinaryRecordV1.GetPlayerBinaryRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPlayerBinaryRecordV1.GetPlayerBinaryRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PutPlayerBinaryRecordV1.PutPlayerBinaryRecordV1Builder PutPlayerBinaryRecordV1Op
         {
-            get { return new Operation.PutPlayerBinaryRecordV1.PutPlayerBinaryRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PutPlayerBinaryRecordV1.PutPlayerBinaryRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeletePlayerBinaryRecordV1.DeletePlayerBinaryRecordV1Builder DeletePlayerBinaryRecordV1Op
         {
-            get { return new Operation.DeletePlayerBinaryRecordV1.DeletePlayerBinaryRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeletePlayerBinaryRecordV1.DeletePlayerBinaryRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PutPlayerBinaryRecorMetadataV1.PutPlayerBinaryRecorMetadataV1Builder PutPlayerBinaryRecorMetadataV1Op
         {
-            get { return new Operation.PutPlayerBinaryRecorMetadataV1.PutPlayerBinaryRecorMetadataV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PutPlayerBinaryRecorMetadataV1.PutPlayerBinaryRecorMetadataV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PostPlayerBinaryPresignedURLV1.PostPlayerBinaryPresignedURLV1Builder PostPlayerBinaryPresignedURLV1Op
         {
-            get { return new Operation.PostPlayerBinaryPresignedURLV1.PostPlayerBinaryPresignedURLV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PostPlayerBinaryPresignedURLV1.PostPlayerBinaryPresignedURLV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPlayerPublicBinaryRecordsV1.GetPlayerPublicBinaryRecordsV1Builder GetPlayerPublicBinaryRecordsV1Op
         {
-            get { return new Operation.GetPlayerPublicBinaryRecordsV1.GetPlayerPublicBinaryRecordsV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPlayerPublicBinaryRecordsV1.GetPlayerPublicBinaryRecordsV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,41 +20,91 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public SlotConfig(IAccelByteSdk sdk)
         {
             _sdk = sdk;
+        }
+
+        public SlotConfig(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
         }
 
         #region Operation Builders
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetNamespaceSlotConfig.GetNamespaceSlotConfigBuilder GetNamespaceSlotConfigOp
         {
-            get { return new Operation.GetNamespaceSlotConfig.GetNamespaceSlotConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetNamespaceSlotConfig.GetNamespaceSlotConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateNamespaceSlotConfig.UpdateNamespaceSlotConfigBuilder UpdateNamespaceSlotConfigOp
         {
-            get { return new Operation.UpdateNamespaceSlotConfig.UpdateNamespaceSlotConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateNamespaceSlotConfig.UpdateNamespaceSlotConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteNamespaceSlotConfig.DeleteNamespaceSlotConfigBuilder DeleteNamespaceSlotConfigOp
         {
-            get { return new Operation.DeleteNamespaceSlotConfig.DeleteNamespaceSlotConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteNamespaceSlotConfig.DeleteNamespaceSlotConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserSlotConfig.GetUserSlotConfigBuilder GetUserSlotConfigOp
         {
-            get { return new Operation.GetUserSlotConfig.GetUserSlotConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserSlotConfig.GetUserSlotConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateUserSlotConfig.UpdateUserSlotConfigBuilder UpdateUserSlotConfigOp
         {
-            get { return new Operation.UpdateUserSlotConfig.UpdateUserSlotConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateUserSlotConfig.UpdateUserSlotConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteUserSlotConfig.DeleteUserSlotConfigBuilder DeleteUserSlotConfigOp
         {
-            get { return new Operation.DeleteUserSlotConfig.DeleteUserSlotConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteUserSlotConfig.DeleteUserSlotConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

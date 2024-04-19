@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public MatchTickets(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public MatchTickets(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public CreateMatchTicket.CreateMatchTicketBuilder CreateMatchTicketOp
         {
-            get { return new Operation.CreateMatchTicket.CreateMatchTicketBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateMatchTicket.CreateMatchTicketBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetMyMatchTickets.GetMyMatchTicketsBuilder GetMyMatchTicketsOp
         {
-            get { return new Operation.GetMyMatchTickets.GetMyMatchTicketsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetMyMatchTickets.GetMyMatchTicketsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public MatchTicketDetails.MatchTicketDetailsBuilder MatchTicketDetailsOp
         {
-            get { return new Operation.MatchTicketDetails.MatchTicketDetailsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.MatchTicketDetails.MatchTicketDetailsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteMatchTicket.DeleteMatchTicketBuilder DeleteMatchTicketOp
         {
-            get { return new Operation.DeleteMatchTicket.DeleteMatchTicketBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteMatchTicket.DeleteMatchTicketBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

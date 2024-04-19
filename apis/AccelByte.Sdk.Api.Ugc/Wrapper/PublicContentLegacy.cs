@@ -20,89 +20,230 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PublicContentLegacy(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PublicContentLegacy(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public SearchChannelSpecificContent.SearchChannelSpecificContentBuilder SearchChannelSpecificContentOp
         {
-            get { return new Operation.SearchChannelSpecificContent.SearchChannelSpecificContentBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SearchChannelSpecificContent.SearchChannelSpecificContentBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicSearchContent.PublicSearchContentBuilder PublicSearchContentOp
         {
-            get { return new Operation.PublicSearchContent.PublicSearchContentBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicSearchContent.PublicSearchContentBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetContentBulk.PublicGetContentBulkBuilder PublicGetContentBulkOp
         {
-            get { return new Operation.PublicGetContentBulk.PublicGetContentBulkBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetContentBulk.PublicGetContentBulkBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetContentBulkByShareCodes.PublicGetContentBulkByShareCodesBuilder PublicGetContentBulkByShareCodesOp
         {
-            get { return new Operation.PublicGetContentBulkByShareCodes.PublicGetContentBulkByShareCodesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetContentBulkByShareCodes.PublicGetContentBulkByShareCodesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicDownloadContentByShareCode.PublicDownloadContentByShareCodeBuilder PublicDownloadContentByShareCodeOp
         {
-            get { return new Operation.PublicDownloadContentByShareCode.PublicDownloadContentByShareCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicDownloadContentByShareCode.PublicDownloadContentByShareCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicDownloadContentByContentID.PublicDownloadContentByContentIDBuilder PublicDownloadContentByContentIDOp
         {
-            get { return new Operation.PublicDownloadContentByContentID.PublicDownloadContentByContentIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicDownloadContentByContentID.PublicDownloadContentByContentIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicDownloadContentPreview.PublicDownloadContentPreviewBuilder PublicDownloadContentPreviewOp
         {
-            get { return new Operation.PublicDownloadContentPreview.PublicDownloadContentPreviewBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicDownloadContentPreview.PublicDownloadContentPreviewBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CreateContentDirect.CreateContentDirectBuilder CreateContentDirectOp
         {
-            get { return new Operation.CreateContentDirect.CreateContentDirectBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateContentDirect.CreateContentDirectBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateContentS3.CreateContentS3Builder CreateContentS3Op
         {
-            get { return new Operation.CreateContentS3.CreateContentS3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateContentS3.CreateContentS3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUpdateContentByShareCode.PublicUpdateContentByShareCodeBuilder PublicUpdateContentByShareCodeOp
         {
-            get { return new Operation.PublicUpdateContentByShareCode.PublicUpdateContentByShareCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpdateContentByShareCode.PublicUpdateContentByShareCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateContentS3.UpdateContentS3Builder UpdateContentS3Op
         {
-            get { return new Operation.UpdateContentS3.UpdateContentS3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateContentS3.UpdateContentS3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicDeleteContentByShareCode.PublicDeleteContentByShareCodeBuilder PublicDeleteContentByShareCodeOp
         {
-            get { return new Operation.PublicDeleteContentByShareCode.PublicDeleteContentByShareCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicDeleteContentByShareCode.PublicDeleteContentByShareCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateContentDirect.UpdateContentDirectBuilder UpdateContentDirectOp
         {
-            get { return new Operation.UpdateContentDirect.UpdateContentDirectBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateContentDirect.UpdateContentDirectBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteContent.DeleteContentBuilder DeleteContentOp
         {
-            get { return new Operation.DeleteContent.DeleteContentBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteContent.DeleteContentBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateContentShareCode.UpdateContentShareCodeBuilder UpdateContentShareCodeOp
         {
-            get { return new Operation.UpdateContentShareCode.UpdateContentShareCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateContentShareCode.UpdateContentShareCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserContent.PublicGetUserContentBuilder PublicGetUserContentOp
         {
-            get { return new Operation.PublicGetUserContent.PublicGetUserContentBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserContent.PublicGetUserContentBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateScreenshots.UpdateScreenshotsBuilder UpdateScreenshotsOp
         {
-            get { return new Operation.UpdateScreenshots.UpdateScreenshotsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateScreenshots.UpdateScreenshotsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UploadContentScreenshot.UploadContentScreenshotBuilder UploadContentScreenshotOp
         {
-            get { return new Operation.UploadContentScreenshot.UploadContentScreenshotBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UploadContentScreenshot.UploadContentScreenshotBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteContentScreenshot.DeleteContentScreenshotBuilder DeleteContentScreenshotOp
         {
-            get { return new Operation.DeleteContentScreenshot.DeleteContentScreenshotBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteContentScreenshot.DeleteContentScreenshotBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

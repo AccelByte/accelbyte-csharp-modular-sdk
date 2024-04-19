@@ -20,91 +20,239 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Order(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Order(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public QueryOrders.QueryOrdersBuilder QueryOrdersOp
         {
-            get { return new Operation.QueryOrders.QueryOrdersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryOrders.QueryOrdersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetOrderStatistics.GetOrderStatisticsBuilder GetOrderStatisticsOp
         {
-            get { return new Operation.GetOrderStatistics.GetOrderStatisticsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetOrderStatistics.GetOrderStatisticsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetOrder.GetOrderBuilder GetOrderOp
         {
-            get { return new Operation.GetOrder.GetOrderBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetOrder.GetOrderBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RefundOrder.RefundOrderBuilder RefundOrderOp
         {
-            get { return new Operation.RefundOrder.RefundOrderBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RefundOrder.RefundOrderBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryUserOrders.QueryUserOrdersBuilder QueryUserOrdersOp
         {
-            get { return new Operation.QueryUserOrders.QueryUserOrdersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryUserOrders.QueryUserOrdersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateUserOrder.AdminCreateUserOrderBuilder AdminCreateUserOrderOp
         {
-            get { return new Operation.AdminCreateUserOrder.AdminCreateUserOrderBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateUserOrder.AdminCreateUserOrderBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CountOfPurchasedItem.CountOfPurchasedItemBuilder CountOfPurchasedItemOp
         {
-            get { return new Operation.CountOfPurchasedItem.CountOfPurchasedItemBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CountOfPurchasedItem.CountOfPurchasedItemBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserOrder.GetUserOrderBuilder GetUserOrderOp
         {
-            get { return new Operation.GetUserOrder.GetUserOrderBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserOrder.GetUserOrderBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateUserOrderStatus.UpdateUserOrderStatusBuilder UpdateUserOrderStatusOp
         {
-            get { return new Operation.UpdateUserOrderStatus.UpdateUserOrderStatusBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateUserOrderStatus.UpdateUserOrderStatusBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public FulfillUserOrder.FulfillUserOrderBuilder FulfillUserOrderOp
         {
-            get { return new Operation.FulfillUserOrder.FulfillUserOrderBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FulfillUserOrder.FulfillUserOrderBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserOrderGrant.GetUserOrderGrantBuilder GetUserOrderGrantOp
         {
-            get { return new Operation.GetUserOrderGrant.GetUserOrderGrantBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserOrderGrant.GetUserOrderGrantBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserOrderHistories.GetUserOrderHistoriesBuilder GetUserOrderHistoriesOp
         {
-            get { return new Operation.GetUserOrderHistories.GetUserOrderHistoriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserOrderHistories.GetUserOrderHistoriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ProcessUserOrderNotification.ProcessUserOrderNotificationBuilder ProcessUserOrderNotificationOp
         {
-            get { return new Operation.ProcessUserOrderNotification.ProcessUserOrderNotificationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ProcessUserOrderNotification.ProcessUserOrderNotificationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DownloadUserOrderReceipt.DownloadUserOrderReceiptBuilder DownloadUserOrderReceiptOp
         {
-            get { return new Operation.DownloadUserOrderReceipt.DownloadUserOrderReceiptBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DownloadUserOrderReceipt.DownloadUserOrderReceiptBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicQueryUserOrders.PublicQueryUserOrdersBuilder PublicQueryUserOrdersOp
         {
-            get { return new Operation.PublicQueryUserOrders.PublicQueryUserOrdersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicQueryUserOrders.PublicQueryUserOrdersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicCreateUserOrder.PublicCreateUserOrderBuilder PublicCreateUserOrderOp
         {
-            get { return new Operation.PublicCreateUserOrder.PublicCreateUserOrderBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicCreateUserOrder.PublicCreateUserOrderBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserOrder.PublicGetUserOrderBuilder PublicGetUserOrderOp
         {
-            get { return new Operation.PublicGetUserOrder.PublicGetUserOrderBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserOrder.PublicGetUserOrderBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicCancelUserOrder.PublicCancelUserOrderBuilder PublicCancelUserOrderOp
         {
-            get { return new Operation.PublicCancelUserOrder.PublicCancelUserOrderBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicCancelUserOrder.PublicCancelUserOrderBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserOrderHistories.PublicGetUserOrderHistoriesBuilder PublicGetUserOrderHistoriesOp
         {
-            get { return new Operation.PublicGetUserOrderHistories.PublicGetUserOrderHistoriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserOrderHistories.PublicGetUserOrderHistoriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicDownloadUserOrderReceipt.PublicDownloadUserOrderReceiptBuilder PublicDownloadUserOrderReceiptOp
         {
-            get { return new Operation.PublicDownloadUserOrderReceipt.PublicDownloadUserOrderReceiptBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicDownloadUserOrderReceipt.PublicDownloadUserOrderReceiptBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

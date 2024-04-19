@@ -20,35 +20,85 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PublicItems(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PublicItems(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public PublicConsumeMyItem.PublicConsumeMyItemBuilder PublicConsumeMyItemOp
         {
-            get { return new Operation.PublicConsumeMyItem.PublicConsumeMyItemBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicConsumeMyItem.PublicConsumeMyItemBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicListItems.PublicListItemsBuilder PublicListItemsOp
         {
-            get { return new Operation.PublicListItems.PublicListItemsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicListItems.PublicListItemsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicBulkUpdateMyItems.PublicBulkUpdateMyItemsBuilder PublicBulkUpdateMyItemsOp
         {
-            get { return new Operation.PublicBulkUpdateMyItems.PublicBulkUpdateMyItemsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicBulkUpdateMyItems.PublicBulkUpdateMyItemsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicBulkRemoveMyItems.PublicBulkRemoveMyItemsBuilder PublicBulkRemoveMyItemsOp
         {
-            get { return new Operation.PublicBulkRemoveMyItems.PublicBulkRemoveMyItemsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicBulkRemoveMyItems.PublicBulkRemoveMyItemsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicMoveMyItems.PublicMoveMyItemsBuilder PublicMoveMyItemsOp
         {
-            get { return new Operation.PublicMoveMyItems.PublicMoveMyItemsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicMoveMyItems.PublicMoveMyItemsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetItem.PublicGetItemBuilder PublicGetItemOp
         {
-            get { return new Operation.PublicGetItem.PublicGetItemBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetItem.PublicGetItemBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

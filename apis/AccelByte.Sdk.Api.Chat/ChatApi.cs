@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Chat
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.Topic Topic
         {
             get
             {
                 if (_Topic == null)
-                    _Topic = new Wrapper.Topic(_Sdk);
+                    _Topic = new Wrapper.Topic(_Sdk, _CustomBasePath);
                 return _Topic;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Chat
             get
             {
                 if (_Config == null)
-                    _Config = new Wrapper.Config(_Sdk);
+                    _Config = new Wrapper.Config(_Sdk, _CustomBasePath);
                 return _Config;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Chat
             get
             {
                 if (_Inbox == null)
-                    _Inbox = new Wrapper.Inbox(_Sdk);
+                    _Inbox = new Wrapper.Inbox(_Sdk, _CustomBasePath);
                 return _Inbox;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Chat
             get
             {
                 if (_Moderation == null)
-                    _Moderation = new Wrapper.Moderation(_Sdk);
+                    _Moderation = new Wrapper.Moderation(_Sdk, _CustomBasePath);
                 return _Moderation;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Chat
             get
             {
                 if (_Profanity == null)
-                    _Profanity = new Wrapper.Profanity(_Sdk);
+                    _Profanity = new Wrapper.Profanity(_Sdk, _CustomBasePath);
                 return _Profanity;
             }
         }
@@ -75,7 +77,7 @@ namespace AccelByte.Sdk.Api.Chat
             get
             {
                 if (_Operations == null)
-                    _Operations = new Wrapper.Operations(_Sdk);
+                    _Operations = new Wrapper.Operations(_Sdk, _CustomBasePath);
                 return _Operations;
             }
         }
@@ -84,6 +86,12 @@ namespace AccelByte.Sdk.Api.Chat
         internal ChatApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public ChatApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -96,7 +104,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<ChatApi>("chat", () =>
             {
-                return new ChatApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("chat");
+                if (customPath != "")
+                    return (new ChatApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new ChatApi(sdk);
             });
         }
     }

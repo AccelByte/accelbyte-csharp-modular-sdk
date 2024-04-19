@@ -20,31 +20,74 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public RuleSets(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public RuleSets(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public RuleSetList.RuleSetListBuilder RuleSetListOp
         {
-            get { return new Operation.RuleSetList.RuleSetListBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RuleSetList.RuleSetListBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateRuleSet.CreateRuleSetBuilder CreateRuleSetOp
         {
-            get { return new Operation.CreateRuleSet.CreateRuleSetBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateRuleSet.CreateRuleSetBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RuleSetDetails.RuleSetDetailsBuilder RuleSetDetailsOp
         {
-            get { return new Operation.RuleSetDetails.RuleSetDetailsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RuleSetDetails.RuleSetDetailsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateRuleSet.UpdateRuleSetBuilder UpdateRuleSetOp
         {
-            get { return new Operation.UpdateRuleSet.UpdateRuleSetBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateRuleSet.UpdateRuleSetBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteRuleSet.DeleteRuleSetBuilder DeleteRuleSetOp
         {
-            get { return new Operation.DeleteRuleSet.DeleteRuleSetBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteRuleSet.DeleteRuleSetBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,59 +20,151 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Reward(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Reward(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public CreateReward.CreateRewardBuilder CreateRewardOp
         {
-            get { return new Operation.CreateReward.CreateRewardBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateReward.CreateRewardBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryRewards.QueryRewardsBuilder QueryRewardsOp
         {
-            get { return new Operation.QueryRewards.QueryRewardsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryRewards.QueryRewardsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ExportRewards.ExportRewardsBuilder ExportRewardsOp
         {
-            get { return new Operation.ExportRewards.ExportRewardsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ExportRewards.ExportRewardsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ImportRewards.ImportRewardsBuilder ImportRewardsOp
         {
-            get { return new Operation.ImportRewards.ImportRewardsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ImportRewards.ImportRewardsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetReward.GetRewardBuilder GetRewardOp
         {
-            get { return new Operation.GetReward.GetRewardBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetReward.GetRewardBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateReward.UpdateRewardBuilder UpdateRewardOp
         {
-            get { return new Operation.UpdateReward.UpdateRewardBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateReward.UpdateRewardBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteReward.DeleteRewardBuilder DeleteRewardOp
         {
-            get { return new Operation.DeleteReward.DeleteRewardBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteReward.DeleteRewardBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CheckEventCondition.CheckEventConditionBuilder CheckEventConditionOp
         {
-            get { return new Operation.CheckEventCondition.CheckEventConditionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CheckEventCondition.CheckEventConditionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteRewardConditionRecord.DeleteRewardConditionRecordBuilder DeleteRewardConditionRecordOp
         {
-            get { return new Operation.DeleteRewardConditionRecord.DeleteRewardConditionRecordBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteRewardConditionRecord.DeleteRewardConditionRecordBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetRewardByCode.GetRewardByCodeBuilder GetRewardByCodeOp
         {
-            get { return new Operation.GetRewardByCode.GetRewardByCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetRewardByCode.GetRewardByCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryRewards1.QueryRewards1Builder QueryRewards1Op
         {
-            get { return new Operation.QueryRewards1.QueryRewards1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryRewards1.QueryRewards1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetReward1.GetReward1Builder GetReward1Op
         {
-            get { return new Operation.GetReward1.GetReward1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetReward1.GetReward1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

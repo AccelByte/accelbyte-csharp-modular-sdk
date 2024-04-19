@@ -20,47 +20,118 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public DataRetrieval(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public DataRetrieval(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetListPersonalDataRequest.AdminGetListPersonalDataRequestBuilder AdminGetListPersonalDataRequestOp
         {
-            get { return new Operation.AdminGetListPersonalDataRequest.AdminGetListPersonalDataRequestBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetListPersonalDataRequest.AdminGetListPersonalDataRequestBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetUserPersonalDataRequests.AdminGetUserPersonalDataRequestsBuilder AdminGetUserPersonalDataRequestsOp
         {
-            get { return new Operation.AdminGetUserPersonalDataRequests.AdminGetUserPersonalDataRequestsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetUserPersonalDataRequests.AdminGetUserPersonalDataRequestsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminRequestDataRetrieval.AdminRequestDataRetrievalBuilder AdminRequestDataRetrievalOp
         {
-            get { return new Operation.AdminRequestDataRetrieval.AdminRequestDataRetrievalBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminRequestDataRetrieval.AdminRequestDataRetrievalBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCancelUserPersonalDataRequest.AdminCancelUserPersonalDataRequestBuilder AdminCancelUserPersonalDataRequestOp
         {
-            get { return new Operation.AdminCancelUserPersonalDataRequest.AdminCancelUserPersonalDataRequestBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCancelUserPersonalDataRequest.AdminCancelUserPersonalDataRequestBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGeneratePersonalDataURL.AdminGeneratePersonalDataURLBuilder AdminGeneratePersonalDataURLOp
         {
-            get { return new Operation.AdminGeneratePersonalDataURL.AdminGeneratePersonalDataURLBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGeneratePersonalDataURL.AdminGeneratePersonalDataURLBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserPersonalDataRequests.PublicGetUserPersonalDataRequestsBuilder PublicGetUserPersonalDataRequestsOp
         {
-            get { return new Operation.PublicGetUserPersonalDataRequests.PublicGetUserPersonalDataRequestsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserPersonalDataRequests.PublicGetUserPersonalDataRequestsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicRequestDataRetrieval.PublicRequestDataRetrievalBuilder PublicRequestDataRetrievalOp
         {
-            get { return new Operation.PublicRequestDataRetrieval.PublicRequestDataRetrievalBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicRequestDataRetrieval.PublicRequestDataRetrievalBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicCancelUserPersonalDataRequest.PublicCancelUserPersonalDataRequestBuilder PublicCancelUserPersonalDataRequestOp
         {
-            get { return new Operation.PublicCancelUserPersonalDataRequest.PublicCancelUserPersonalDataRequestBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicCancelUserPersonalDataRequest.PublicCancelUserPersonalDataRequestBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGeneratePersonalDataURL.PublicGeneratePersonalDataURLBuilder PublicGeneratePersonalDataURLOp
         {
-            get { return new Operation.PublicGeneratePersonalDataURL.PublicGeneratePersonalDataURLBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGeneratePersonalDataURL.PublicGeneratePersonalDataURLBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

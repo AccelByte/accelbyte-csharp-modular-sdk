@@ -20,35 +20,85 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public View(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public View(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ListViews.ListViewsBuilder ListViewsOp
         {
-            get { return new Operation.ListViews.ListViewsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListViews.ListViewsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateView.CreateViewBuilder CreateViewOp
         {
-            get { return new Operation.CreateView.CreateViewBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateView.CreateViewBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetView.GetViewBuilder GetViewOp
         {
-            get { return new Operation.GetView.GetViewBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetView.GetViewBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateView.UpdateViewBuilder UpdateViewOp
         {
-            get { return new Operation.UpdateView.UpdateViewBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateView.UpdateViewBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteView.DeleteViewBuilder DeleteViewOp
         {
-            get { return new Operation.DeleteView.DeleteViewBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteView.DeleteViewBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicListViews.PublicListViewsBuilder PublicListViewsOp
         {
-            get { return new Operation.PublicListViews.PublicListViewsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicListViews.PublicListViewsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

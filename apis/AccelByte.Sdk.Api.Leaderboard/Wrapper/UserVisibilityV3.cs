@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public UserVisibilityV3(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public UserVisibilityV3(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetHiddenUsersV3.GetHiddenUsersV3Builder GetHiddenUsersV3Op
         {
-            get { return new Operation.GetHiddenUsersV3.GetHiddenUsersV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetHiddenUsersV3.GetHiddenUsersV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserVisibilityStatusV3.GetUserVisibilityStatusV3Builder GetUserVisibilityStatusV3Op
         {
-            get { return new Operation.GetUserVisibilityStatusV3.GetUserVisibilityStatusV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserVisibilityStatusV3.GetUserVisibilityStatusV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SetUserLeaderboardVisibilityV3.SetUserLeaderboardVisibilityV3Builder SetUserLeaderboardVisibilityV3Op
         {
-            get { return new Operation.SetUserLeaderboardVisibilityV3.SetUserLeaderboardVisibilityV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SetUserLeaderboardVisibilityV3.SetUserLeaderboardVisibilityV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SetUserVisibilityV3.SetUserVisibilityV3Builder SetUserVisibilityV3Op
         {
-            get { return new Operation.SetUserVisibilityV3.SetUserVisibilityV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SetUserVisibilityV3.SetUserVisibilityV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

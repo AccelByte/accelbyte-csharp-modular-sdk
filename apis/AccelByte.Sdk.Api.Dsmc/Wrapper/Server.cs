@@ -20,43 +20,107 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Server(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Server(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ListServerClient.ListServerClientBuilder ListServerClientOp
         {
-            get { return new Operation.ListServerClient.ListServerClientBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListServerClient.ListServerClientBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ServerHeartbeat.ServerHeartbeatBuilder ServerHeartbeatOp
         {
-            get { return new Operation.ServerHeartbeat.ServerHeartbeatBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ServerHeartbeat.ServerHeartbeatBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeregisterLocalServer.DeregisterLocalServerBuilder DeregisterLocalServerOp
         {
-            get { return new Operation.DeregisterLocalServer.DeregisterLocalServerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeregisterLocalServer.DeregisterLocalServerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RegisterLocalServer.RegisterLocalServerBuilder RegisterLocalServerOp
         {
-            get { return new Operation.RegisterLocalServer.RegisterLocalServerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RegisterLocalServer.RegisterLocalServerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RegisterServer.RegisterServerBuilder RegisterServerOp
         {
-            get { return new Operation.RegisterServer.RegisterServerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RegisterServer.RegisterServerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ShutdownServer.ShutdownServerBuilder ShutdownServerOp
         {
-            get { return new Operation.ShutdownServer.ShutdownServerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ShutdownServer.ShutdownServerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetServerSessionTimeout.GetServerSessionTimeoutBuilder GetServerSessionTimeoutOp
         {
-            get { return new Operation.GetServerSessionTimeout.GetServerSessionTimeoutBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetServerSessionTimeout.GetServerSessionTimeoutBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetServerSession.GetServerSessionBuilder GetServerSessionOp
         {
-            get { return new Operation.GetServerSession.GetServerSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetServerSession.GetServerSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

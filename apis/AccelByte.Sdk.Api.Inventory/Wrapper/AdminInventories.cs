@@ -20,31 +20,74 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminInventories(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminInventories(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminListInventories.AdminListInventoriesBuilder AdminListInventoriesOp
         {
-            get { return new Operation.AdminListInventories.AdminListInventoriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListInventories.AdminListInventoriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateInventory.AdminCreateInventoryBuilder AdminCreateInventoryOp
         {
-            get { return new Operation.AdminCreateInventory.AdminCreateInventoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateInventory.AdminCreateInventoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetInventory.AdminGetInventoryBuilder AdminGetInventoryOp
         {
-            get { return new Operation.AdminGetInventory.AdminGetInventoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetInventory.AdminGetInventoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateInventory.AdminUpdateInventoryBuilder AdminUpdateInventoryOp
         {
-            get { return new Operation.AdminUpdateInventory.AdminUpdateInventoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateInventory.AdminUpdateInventoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteInventory.DeleteInventoryBuilder DeleteInventoryOp
         {
-            get { return new Operation.DeleteInventory.DeleteInventoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteInventory.DeleteInventoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

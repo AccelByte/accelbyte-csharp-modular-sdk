@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Servers(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Servers(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public FleetServerHistory.FleetServerHistoryBuilder FleetServerHistoryOp
         {
-            get { return new Operation.FleetServerHistory.FleetServerHistoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FleetServerHistory.FleetServerHistoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public FleetServerInfo.FleetServerInfoBuilder FleetServerInfoOp
         {
-            get { return new Operation.FleetServerInfo.FleetServerInfoBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FleetServerInfo.FleetServerInfoBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public FleetServerConnectionInfo.FleetServerConnectionInfoBuilder FleetServerConnectionInfoOp
         {
-            get { return new Operation.FleetServerConnectionInfo.FleetServerConnectionInfoBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FleetServerConnectionInfo.FleetServerConnectionInfoBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ServerHistory.ServerHistoryBuilder ServerHistoryOp
         {
-            get { return new Operation.ServerHistory.ServerHistoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ServerHistory.ServerHistoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,31 +20,74 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Ticket(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Ticket(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetTicketDynamic.GetTicketDynamicBuilder GetTicketDynamicOp
         {
-            get { return new Operation.GetTicketDynamic.GetTicketDynamicBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetTicketDynamic.GetTicketDynamicBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DecreaseTicketSale.DecreaseTicketSaleBuilder DecreaseTicketSaleOp
         {
-            get { return new Operation.DecreaseTicketSale.DecreaseTicketSaleBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DecreaseTicketSale.DecreaseTicketSaleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetTicketBoothID.GetTicketBoothIDBuilder GetTicketBoothIDOp
         {
-            get { return new Operation.GetTicketBoothID.GetTicketBoothIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetTicketBoothID.GetTicketBoothIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public IncreaseTicketSale.IncreaseTicketSaleBuilder IncreaseTicketSaleOp
         {
-            get { return new Operation.IncreaseTicketSale.IncreaseTicketSaleBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.IncreaseTicketSale.IncreaseTicketSaleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AcquireUserTicket.AcquireUserTicketBuilder AcquireUserTicketOp
         {
-            get { return new Operation.AcquireUserTicket.AcquireUserTicketBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AcquireUserTicket.AcquireUserTicketBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

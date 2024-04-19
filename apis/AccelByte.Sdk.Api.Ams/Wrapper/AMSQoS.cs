@@ -20,19 +20,41 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AMSQoS(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AMSQoS(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public QoSRegionsGet.QoSRegionsGetBuilder QoSRegionsGetOp
         {
-            get { return new Operation.QoSRegionsGet.QoSRegionsGetBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QoSRegionsGet.QoSRegionsGetBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QoSRegionsUpdate.QoSRegionsUpdateBuilder QoSRegionsUpdateOp
         {
-            get { return new Operation.QoSRegionsUpdate.QoSRegionsUpdateBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QoSRegionsUpdate.QoSRegionsUpdateBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

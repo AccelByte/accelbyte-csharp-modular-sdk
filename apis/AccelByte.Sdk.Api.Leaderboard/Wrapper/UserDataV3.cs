@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public UserDataV3(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public UserDataV3(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetUserLeaderboardRankingsAdminV3.GetUserLeaderboardRankingsAdminV3Builder GetUserLeaderboardRankingsAdminV3Op
         {
-            get { return new Operation.GetUserLeaderboardRankingsAdminV3.GetUserLeaderboardRankingsAdminV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserLeaderboardRankingsAdminV3.GetUserLeaderboardRankingsAdminV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

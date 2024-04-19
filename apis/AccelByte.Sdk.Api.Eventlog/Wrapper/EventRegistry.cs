@@ -20,41 +20,91 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public EventRegistry(IAccelByteSdk sdk)
         {
             _sdk = sdk;
+        }
+
+        public EventRegistry(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
         }
 
         #region Operation Builders
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetRegisteredEventsHandler.GetRegisteredEventsHandlerBuilder GetRegisteredEventsHandlerOp
         {
-            get { return new Operation.GetRegisteredEventsHandler.GetRegisteredEventsHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetRegisteredEventsHandler.GetRegisteredEventsHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RegisterEventHandler.RegisterEventHandlerBuilder RegisterEventHandlerOp
         {
-            get { return new Operation.RegisterEventHandler.RegisterEventHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RegisterEventHandler.RegisterEventHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetRegisteredEventIDHandler.GetRegisteredEventIDHandlerBuilder GetRegisteredEventIDHandlerOp
         {
-            get { return new Operation.GetRegisteredEventIDHandler.GetRegisteredEventIDHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetRegisteredEventIDHandler.GetRegisteredEventIDHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateEventRegistryHandler.UpdateEventRegistryHandlerBuilder UpdateEventRegistryHandlerOp
         {
-            get { return new Operation.UpdateEventRegistryHandler.UpdateEventRegistryHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateEventRegistryHandler.UpdateEventRegistryHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UnregisterEventIDHandler.UnregisterEventIDHandlerBuilder UnregisterEventIDHandlerOp
         {
-            get { return new Operation.UnregisterEventIDHandler.UnregisterEventIDHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UnregisterEventIDHandler.UnregisterEventIDHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetRegisteredEventsByEventTypeHandler.GetRegisteredEventsByEventTypeHandlerBuilder GetRegisteredEventsByEventTypeHandlerOp
         {
-            get { return new Operation.GetRegisteredEventsByEventTypeHandler.GetRegisteredEventsByEventTypeHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetRegisteredEventsByEventTypeHandler.GetRegisteredEventsByEventTypeHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

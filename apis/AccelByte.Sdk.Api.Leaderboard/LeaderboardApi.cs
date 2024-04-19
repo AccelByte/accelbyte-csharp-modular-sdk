@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Leaderboard
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.LeaderboardConfiguration LeaderboardConfiguration
         {
             get
             {
                 if (_LeaderboardConfiguration == null)
-                    _LeaderboardConfiguration = new Wrapper.LeaderboardConfiguration(_Sdk);
+                    _LeaderboardConfiguration = new Wrapper.LeaderboardConfiguration(_Sdk, _CustomBasePath);
                 return _LeaderboardConfiguration;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Leaderboard
             get
             {
                 if (_LeaderboardData == null)
-                    _LeaderboardData = new Wrapper.LeaderboardData(_Sdk);
+                    _LeaderboardData = new Wrapper.LeaderboardData(_Sdk, _CustomBasePath);
                 return _LeaderboardData;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Leaderboard
             get
             {
                 if (_Anonymization == null)
-                    _Anonymization = new Wrapper.Anonymization(_Sdk);
+                    _Anonymization = new Wrapper.Anonymization(_Sdk, _CustomBasePath);
                 return _Anonymization;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Leaderboard
             get
             {
                 if (_UserData == null)
-                    _UserData = new Wrapper.UserData(_Sdk);
+                    _UserData = new Wrapper.UserData(_Sdk, _CustomBasePath);
                 return _UserData;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Leaderboard
             get
             {
                 if (_UserVisibility == null)
-                    _UserVisibility = new Wrapper.UserVisibility(_Sdk);
+                    _UserVisibility = new Wrapper.UserVisibility(_Sdk, _CustomBasePath);
                 return _UserVisibility;
             }
         }
@@ -75,7 +77,7 @@ namespace AccelByte.Sdk.Api.Leaderboard
             get
             {
                 if (_LeaderboardConfigurationV3 == null)
-                    _LeaderboardConfigurationV3 = new Wrapper.LeaderboardConfigurationV3(_Sdk);
+                    _LeaderboardConfigurationV3 = new Wrapper.LeaderboardConfigurationV3(_Sdk, _CustomBasePath);
                 return _LeaderboardConfigurationV3;
             }
         }
@@ -86,7 +88,7 @@ namespace AccelByte.Sdk.Api.Leaderboard
             get
             {
                 if (_LeaderboardDataV3 == null)
-                    _LeaderboardDataV3 = new Wrapper.LeaderboardDataV3(_Sdk);
+                    _LeaderboardDataV3 = new Wrapper.LeaderboardDataV3(_Sdk, _CustomBasePath);
                 return _LeaderboardDataV3;
             }
         }
@@ -97,7 +99,7 @@ namespace AccelByte.Sdk.Api.Leaderboard
             get
             {
                 if (_UserVisibilityV3 == null)
-                    _UserVisibilityV3 = new Wrapper.UserVisibilityV3(_Sdk);
+                    _UserVisibilityV3 = new Wrapper.UserVisibilityV3(_Sdk, _CustomBasePath);
                 return _UserVisibilityV3;
             }
         }
@@ -108,7 +110,7 @@ namespace AccelByte.Sdk.Api.Leaderboard
             get
             {
                 if (_UserDataV3 == null)
-                    _UserDataV3 = new Wrapper.UserDataV3(_Sdk);
+                    _UserDataV3 = new Wrapper.UserDataV3(_Sdk, _CustomBasePath);
                 return _UserDataV3;
             }
         }
@@ -117,6 +119,12 @@ namespace AccelByte.Sdk.Api.Leaderboard
         internal LeaderboardApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public LeaderboardApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -129,7 +137,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<LeaderboardApi>("leaderboard", () =>
             {
-                return new LeaderboardApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("leaderboard");
+                if (customPath != "")
+                    return (new LeaderboardApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new LeaderboardApi(sdk);
             });
         }
     }

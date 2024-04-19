@@ -20,51 +20,129 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Achievements(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Achievements(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminListAchievements.AdminListAchievementsBuilder AdminListAchievementsOp
         {
-            get { return new Operation.AdminListAchievements.AdminListAchievementsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListAchievements.AdminListAchievementsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateNewAchievement.AdminCreateNewAchievementBuilder AdminCreateNewAchievementOp
         {
-            get { return new Operation.AdminCreateNewAchievement.AdminCreateNewAchievementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateNewAchievement.AdminCreateNewAchievementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ExportAchievements.ExportAchievementsBuilder ExportAchievementsOp
         {
-            get { return new Operation.ExportAchievements.ExportAchievementsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ExportAchievements.ExportAchievementsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ImportAchievements.ImportAchievementsBuilder ImportAchievementsOp
         {
-            get { return new Operation.ImportAchievements.ImportAchievementsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ImportAchievements.ImportAchievementsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetAchievement.AdminGetAchievementBuilder AdminGetAchievementOp
         {
-            get { return new Operation.AdminGetAchievement.AdminGetAchievementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetAchievement.AdminGetAchievementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateAchievement.AdminUpdateAchievementBuilder AdminUpdateAchievementOp
         {
-            get { return new Operation.AdminUpdateAchievement.AdminUpdateAchievementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateAchievement.AdminUpdateAchievementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteAchievement.AdminDeleteAchievementBuilder AdminDeleteAchievementOp
         {
-            get { return new Operation.AdminDeleteAchievement.AdminDeleteAchievementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteAchievement.AdminDeleteAchievementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateAchievementListOrder.AdminUpdateAchievementListOrderBuilder AdminUpdateAchievementListOrderOp
         {
-            get { return new Operation.AdminUpdateAchievementListOrder.AdminUpdateAchievementListOrderBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateAchievementListOrder.AdminUpdateAchievementListOrderBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicListAchievements.PublicListAchievementsBuilder PublicListAchievementsOp
         {
-            get { return new Operation.PublicListAchievements.PublicListAchievementsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicListAchievements.PublicListAchievementsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetAchievement.PublicGetAchievementBuilder PublicGetAchievementOp
         {
-            get { return new Operation.PublicGetAchievement.PublicGetAchievementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetAchievement.PublicGetAchievementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

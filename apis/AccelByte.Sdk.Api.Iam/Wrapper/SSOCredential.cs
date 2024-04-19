@@ -20,31 +20,74 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public SSOCredential(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public SSOCredential(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public RetrieveAllSSOLoginPlatformCredentialV3.RetrieveAllSSOLoginPlatformCredentialV3Builder RetrieveAllSSOLoginPlatformCredentialV3Op
         {
-            get { return new Operation.RetrieveAllSSOLoginPlatformCredentialV3.RetrieveAllSSOLoginPlatformCredentialV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveAllSSOLoginPlatformCredentialV3.RetrieveAllSSOLoginPlatformCredentialV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RetrieveSSOLoginPlatformCredential.RetrieveSSOLoginPlatformCredentialBuilder RetrieveSSOLoginPlatformCredentialOp
         {
-            get { return new Operation.RetrieveSSOLoginPlatformCredential.RetrieveSSOLoginPlatformCredentialBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveSSOLoginPlatformCredential.RetrieveSSOLoginPlatformCredentialBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AddSSOLoginPlatformCredential.AddSSOLoginPlatformCredentialBuilder AddSSOLoginPlatformCredentialOp
         {
-            get { return new Operation.AddSSOLoginPlatformCredential.AddSSOLoginPlatformCredentialBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AddSSOLoginPlatformCredential.AddSSOLoginPlatformCredentialBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteSSOLoginPlatformCredentialV3.DeleteSSOLoginPlatformCredentialV3Builder DeleteSSOLoginPlatformCredentialV3Op
         {
-            get { return new Operation.DeleteSSOLoginPlatformCredentialV3.DeleteSSOLoginPlatformCredentialV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteSSOLoginPlatformCredentialV3.DeleteSSOLoginPlatformCredentialV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateSSOPlatformCredential.UpdateSSOPlatformCredentialBuilder UpdateSSOPlatformCredentialOp
         {
-            get { return new Operation.UpdateSSOPlatformCredential.UpdateSSOPlatformCredentialBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateSSOPlatformCredential.UpdateSSOPlatformCredentialBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

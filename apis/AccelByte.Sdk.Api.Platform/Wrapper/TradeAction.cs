@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public TradeAction(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public TradeAction(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public Commit.CommitBuilder CommitOp
         {
-            get { return new Operation.Commit.CommitBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.Commit.CommitBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetTradeHistoryByCriteria.GetTradeHistoryByCriteriaBuilder GetTradeHistoryByCriteriaOp
         {
-            get { return new Operation.GetTradeHistoryByCriteria.GetTradeHistoryByCriteriaBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetTradeHistoryByCriteria.GetTradeHistoryByCriteriaBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetTradeHistoryByTransactionId.GetTradeHistoryByTransactionIdBuilder GetTradeHistoryByTransactionIdOp
         {
-            get { return new Operation.GetTradeHistoryByTransactionId.GetTradeHistoryByTransactionIdBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetTradeHistoryByTransactionId.GetTradeHistoryByTransactionIdBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public DSMCDefaultConfiguration(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public DSMCDefaultConfiguration(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetDSMCConfigurationDefault.AdminGetDSMCConfigurationDefaultBuilder AdminGetDSMCConfigurationDefaultOp
         {
-            get { return new Operation.AdminGetDSMCConfigurationDefault.AdminGetDSMCConfigurationDefaultBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetDSMCConfigurationDefault.AdminGetDSMCConfigurationDefaultBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Ams
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.Auth Auth
         {
             get
             {
                 if (_Auth == null)
-                    _Auth = new Wrapper.Auth(_Sdk);
+                    _Auth = new Wrapper.Auth(_Sdk, _CustomBasePath);
                 return _Auth;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Ams
             get
             {
                 if (_FleetCommander == null)
-                    _FleetCommander = new Wrapper.FleetCommander(_Sdk);
+                    _FleetCommander = new Wrapper.FleetCommander(_Sdk, _CustomBasePath);
                 return _FleetCommander;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Ams
             get
             {
                 if (_Account == null)
-                    _Account = new Wrapper.Account(_Sdk);
+                    _Account = new Wrapper.Account(_Sdk, _CustomBasePath);
                 return _Account;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Ams
             get
             {
                 if (_Artifacts == null)
-                    _Artifacts = new Wrapper.Artifacts(_Sdk);
+                    _Artifacts = new Wrapper.Artifacts(_Sdk, _CustomBasePath);
                 return _Artifacts;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Ams
             get
             {
                 if (_Development == null)
-                    _Development = new Wrapper.Development(_Sdk);
+                    _Development = new Wrapper.Development(_Sdk, _CustomBasePath);
                 return _Development;
             }
         }
@@ -75,7 +77,7 @@ namespace AccelByte.Sdk.Api.Ams
             get
             {
                 if (_Fleets == null)
-                    _Fleets = new Wrapper.Fleets(_Sdk);
+                    _Fleets = new Wrapper.Fleets(_Sdk, _CustomBasePath);
                 return _Fleets;
             }
         }
@@ -86,7 +88,7 @@ namespace AccelByte.Sdk.Api.Ams
             get
             {
                 if (_Servers == null)
-                    _Servers = new Wrapper.Servers(_Sdk);
+                    _Servers = new Wrapper.Servers(_Sdk, _CustomBasePath);
                 return _Servers;
             }
         }
@@ -97,7 +99,7 @@ namespace AccelByte.Sdk.Api.Ams
             get
             {
                 if (_Images == null)
-                    _Images = new Wrapper.Images(_Sdk);
+                    _Images = new Wrapper.Images(_Sdk, _CustomBasePath);
                 return _Images;
             }
         }
@@ -108,7 +110,7 @@ namespace AccelByte.Sdk.Api.Ams
             get
             {
                 if (_AMSQoS == null)
-                    _AMSQoS = new Wrapper.AMSQoS(_Sdk);
+                    _AMSQoS = new Wrapper.AMSQoS(_Sdk, _CustomBasePath);
                 return _AMSQoS;
             }
         }
@@ -119,7 +121,7 @@ namespace AccelByte.Sdk.Api.Ams
             get
             {
                 if (_AMSInfo == null)
-                    _AMSInfo = new Wrapper.AMSInfo(_Sdk);
+                    _AMSInfo = new Wrapper.AMSInfo(_Sdk, _CustomBasePath);
                 return _AMSInfo;
             }
         }
@@ -130,7 +132,7 @@ namespace AccelByte.Sdk.Api.Ams
             get
             {
                 if (_Watchdogs == null)
-                    _Watchdogs = new Wrapper.Watchdogs(_Sdk);
+                    _Watchdogs = new Wrapper.Watchdogs(_Sdk, _CustomBasePath);
                 return _Watchdogs;
             }
         }
@@ -139,6 +141,12 @@ namespace AccelByte.Sdk.Api.Ams
         internal AmsApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public AmsApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -151,7 +159,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<AmsApi>("ams", () =>
             {
-                return new AmsApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("ams");
+                if (customPath != "")
+                    return (new AmsApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new AmsApi(sdk);
             });
         }
     }

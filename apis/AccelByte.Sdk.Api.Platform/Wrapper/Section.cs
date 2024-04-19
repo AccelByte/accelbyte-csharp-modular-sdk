@@ -20,39 +20,96 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Section(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Section(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public QuerySections.QuerySectionsBuilder QuerySectionsOp
         {
-            get { return new Operation.QuerySections.QuerySectionsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QuerySections.QuerySectionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateSection.CreateSectionBuilder CreateSectionOp
         {
-            get { return new Operation.CreateSection.CreateSectionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateSection.CreateSectionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PurgeExpiredSection.PurgeExpiredSectionBuilder PurgeExpiredSectionOp
         {
-            get { return new Operation.PurgeExpiredSection.PurgeExpiredSectionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PurgeExpiredSection.PurgeExpiredSectionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetSection.GetSectionBuilder GetSectionOp
         {
-            get { return new Operation.GetSection.GetSectionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetSection.GetSectionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateSection.UpdateSectionBuilder UpdateSectionOp
         {
-            get { return new Operation.UpdateSection.UpdateSectionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateSection.UpdateSectionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteSection.DeleteSectionBuilder DeleteSectionOp
         {
-            get { return new Operation.DeleteSection.DeleteSectionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteSection.DeleteSectionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicListActiveSections.PublicListActiveSectionsBuilder PublicListActiveSectionsOp
         {
-            get { return new Operation.PublicListActiveSections.PublicListActiveSectionsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicListActiveSections.PublicListActiveSectionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

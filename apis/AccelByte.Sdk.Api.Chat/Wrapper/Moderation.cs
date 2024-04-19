@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Moderation(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Moderation(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetChatSnapshot.AdminGetChatSnapshotBuilder AdminGetChatSnapshotOp
         {
-            get { return new Operation.AdminGetChatSnapshot.AdminGetChatSnapshotBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetChatSnapshot.AdminGetChatSnapshotBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteChatSnapshot.AdminDeleteChatSnapshotBuilder AdminDeleteChatSnapshotOp
         {
-            get { return new Operation.AdminDeleteChatSnapshot.AdminDeleteChatSnapshotBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteChatSnapshot.AdminDeleteChatSnapshotBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetChatSnapshot.PublicGetChatSnapshotBuilder PublicGetChatSnapshotOp
         {
-            get { return new Operation.PublicGetChatSnapshot.PublicGetChatSnapshotBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetChatSnapshot.PublicGetChatSnapshotBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

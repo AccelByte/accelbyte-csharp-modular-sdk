@@ -20,242 +20,649 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Entitlement(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Entitlement(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public QueryEntitlements.QueryEntitlementsBuilder QueryEntitlementsOp
         {
-            get { return new Operation.QueryEntitlements.QueryEntitlementsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryEntitlements.QueryEntitlementsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryEntitlements1.QueryEntitlements1Builder QueryEntitlements1Op
         {
-            get { return new Operation.QueryEntitlements1.QueryEntitlements1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryEntitlements1.QueryEntitlements1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public EnableEntitlementOriginFeature.EnableEntitlementOriginFeatureBuilder EnableEntitlementOriginFeatureOp
         {
-            get { return new Operation.EnableEntitlementOriginFeature.EnableEntitlementOriginFeatureBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.EnableEntitlementOriginFeature.EnableEntitlementOriginFeatureBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetEntitlementConfigInfo.GetEntitlementConfigInfoBuilder GetEntitlementConfigInfoOp
         {
-            get { return new Operation.GetEntitlementConfigInfo.GetEntitlementConfigInfoBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetEntitlementConfigInfo.GetEntitlementConfigInfoBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GrantEntitlements.GrantEntitlementsBuilder GrantEntitlementsOp
         {
-            get { return new Operation.GrantEntitlements.GrantEntitlementsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GrantEntitlements.GrantEntitlementsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RevokeEntitlements.RevokeEntitlementsBuilder RevokeEntitlementsOp
         {
-            get { return new Operation.RevokeEntitlements.RevokeEntitlementsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RevokeEntitlements.RevokeEntitlementsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetEntitlement.GetEntitlementBuilder GetEntitlementOp
         {
-            get { return new Operation.GetEntitlement.GetEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetEntitlement.GetEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPlatformEntitlementConfig.GetPlatformEntitlementConfigBuilder GetPlatformEntitlementConfigOp
         {
-            get { return new Operation.GetPlatformEntitlementConfig.GetPlatformEntitlementConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPlatformEntitlementConfig.GetPlatformEntitlementConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdatePlatformEntitlementConfig.UpdatePlatformEntitlementConfigBuilder UpdatePlatformEntitlementConfigOp
         {
-            get { return new Operation.UpdatePlatformEntitlementConfig.UpdatePlatformEntitlementConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdatePlatformEntitlementConfig.UpdatePlatformEntitlementConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryUserEntitlements.QueryUserEntitlementsBuilder QueryUserEntitlementsOp
         {
-            get { return new Operation.QueryUserEntitlements.QueryUserEntitlementsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryUserEntitlements.QueryUserEntitlementsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GrantUserEntitlement.GrantUserEntitlementBuilder GrantUserEntitlementOp
         {
-            get { return new Operation.GrantUserEntitlement.GrantUserEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GrantUserEntitlement.GrantUserEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserAppEntitlementByAppId.GetUserAppEntitlementByAppIdBuilder GetUserAppEntitlementByAppIdOp
         {
-            get { return new Operation.GetUserAppEntitlementByAppId.GetUserAppEntitlementByAppIdBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserAppEntitlementByAppId.GetUserAppEntitlementByAppIdBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryUserEntitlementsByAppType.QueryUserEntitlementsByAppTypeBuilder QueryUserEntitlementsByAppTypeOp
         {
-            get { return new Operation.QueryUserEntitlementsByAppType.QueryUserEntitlementsByAppTypeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryUserEntitlementsByAppType.QueryUserEntitlementsByAppTypeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserEntitlementByItemId.GetUserEntitlementByItemIdBuilder GetUserEntitlementByItemIdOp
         {
-            get { return new Operation.GetUserEntitlementByItemId.GetUserEntitlementByItemIdBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserEntitlementByItemId.GetUserEntitlementByItemIdBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserActiveEntitlementsByItemIds.GetUserActiveEntitlementsByItemIdsBuilder GetUserActiveEntitlementsByItemIdsOp
         {
-            get { return new Operation.GetUserActiveEntitlementsByItemIds.GetUserActiveEntitlementsByItemIdsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserActiveEntitlementsByItemIds.GetUserActiveEntitlementsByItemIdsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserEntitlementBySku.GetUserEntitlementBySkuBuilder GetUserEntitlementBySkuOp
         {
-            get { return new Operation.GetUserEntitlementBySku.GetUserEntitlementBySkuBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserEntitlementBySku.GetUserEntitlementBySkuBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ExistsAnyUserActiveEntitlement.ExistsAnyUserActiveEntitlementBuilder ExistsAnyUserActiveEntitlementOp
         {
-            get { return new Operation.ExistsAnyUserActiveEntitlement.ExistsAnyUserActiveEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ExistsAnyUserActiveEntitlement.ExistsAnyUserActiveEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ExistsAnyUserActiveEntitlementByItemIds.ExistsAnyUserActiveEntitlementByItemIdsBuilder ExistsAnyUserActiveEntitlementByItemIdsOp
         {
-            get { return new Operation.ExistsAnyUserActiveEntitlementByItemIds.ExistsAnyUserActiveEntitlementByItemIdsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ExistsAnyUserActiveEntitlementByItemIds.ExistsAnyUserActiveEntitlementByItemIdsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserAppEntitlementOwnershipByAppId.GetUserAppEntitlementOwnershipByAppIdBuilder GetUserAppEntitlementOwnershipByAppIdOp
         {
-            get { return new Operation.GetUserAppEntitlementOwnershipByAppId.GetUserAppEntitlementOwnershipByAppIdBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserAppEntitlementOwnershipByAppId.GetUserAppEntitlementOwnershipByAppIdBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserEntitlementOwnershipByItemId.GetUserEntitlementOwnershipByItemIdBuilder GetUserEntitlementOwnershipByItemIdOp
         {
-            get { return new Operation.GetUserEntitlementOwnershipByItemId.GetUserEntitlementOwnershipByItemIdBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserEntitlementOwnershipByItemId.GetUserEntitlementOwnershipByItemIdBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserEntitlementOwnershipByItemIds.GetUserEntitlementOwnershipByItemIdsBuilder GetUserEntitlementOwnershipByItemIdsOp
         {
-            get { return new Operation.GetUserEntitlementOwnershipByItemIds.GetUserEntitlementOwnershipByItemIdsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserEntitlementOwnershipByItemIds.GetUserEntitlementOwnershipByItemIdsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserEntitlementOwnershipBySku.GetUserEntitlementOwnershipBySkuBuilder GetUserEntitlementOwnershipBySkuOp
         {
-            get { return new Operation.GetUserEntitlementOwnershipBySku.GetUserEntitlementOwnershipBySkuBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserEntitlementOwnershipBySku.GetUserEntitlementOwnershipBySkuBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RevokeAllEntitlements.RevokeAllEntitlementsBuilder RevokeAllEntitlementsOp
         {
-            get { return new Operation.RevokeAllEntitlements.RevokeAllEntitlementsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RevokeAllEntitlements.RevokeAllEntitlementsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RevokeUserEntitlements.RevokeUserEntitlementsBuilder RevokeUserEntitlementsOp
         {
-            get { return new Operation.RevokeUserEntitlements.RevokeUserEntitlementsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RevokeUserEntitlements.RevokeUserEntitlementsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserEntitlement.GetUserEntitlementBuilder GetUserEntitlementOp
         {
-            get { return new Operation.GetUserEntitlement.GetUserEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserEntitlement.GetUserEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateUserEntitlement.UpdateUserEntitlementBuilder UpdateUserEntitlementOp
         {
-            get { return new Operation.UpdateUserEntitlement.UpdateUserEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateUserEntitlement.UpdateUserEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ConsumeUserEntitlement.ConsumeUserEntitlementBuilder ConsumeUserEntitlementOp
         {
-            get { return new Operation.ConsumeUserEntitlement.ConsumeUserEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ConsumeUserEntitlement.ConsumeUserEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DisableUserEntitlement.DisableUserEntitlementBuilder DisableUserEntitlementOp
         {
-            get { return new Operation.DisableUserEntitlement.DisableUserEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DisableUserEntitlement.DisableUserEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public EnableUserEntitlement.EnableUserEntitlementBuilder EnableUserEntitlementOp
         {
-            get { return new Operation.EnableUserEntitlement.EnableUserEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.EnableUserEntitlement.EnableUserEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserEntitlementHistories.GetUserEntitlementHistoriesBuilder GetUserEntitlementHistoriesOp
         {
-            get { return new Operation.GetUserEntitlementHistories.GetUserEntitlementHistoriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserEntitlementHistories.GetUserEntitlementHistoriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RevokeUserEntitlement.RevokeUserEntitlementBuilder RevokeUserEntitlementOp
         {
-            get { return new Operation.RevokeUserEntitlement.RevokeUserEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RevokeUserEntitlement.RevokeUserEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RevokeUserEntitlementByUseCount.RevokeUserEntitlementByUseCountBuilder RevokeUserEntitlementByUseCountOp
         {
-            get { return new Operation.RevokeUserEntitlementByUseCount.RevokeUserEntitlementByUseCountBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RevokeUserEntitlementByUseCount.RevokeUserEntitlementByUseCountBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PreCheckRevokeUserEntitlementByUseCount.PreCheckRevokeUserEntitlementByUseCountBuilder PreCheckRevokeUserEntitlementByUseCountOp
         {
-            get { return new Operation.PreCheckRevokeUserEntitlementByUseCount.PreCheckRevokeUserEntitlementByUseCountBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PreCheckRevokeUserEntitlementByUseCount.PreCheckRevokeUserEntitlementByUseCountBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RevokeUseCount.RevokeUseCountBuilder RevokeUseCountOp
         {
-            get { return new Operation.RevokeUseCount.RevokeUseCountBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RevokeUseCount.RevokeUseCountBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SellUserEntitlement.SellUserEntitlementBuilder SellUserEntitlementOp
         {
-            get { return new Operation.SellUserEntitlement.SellUserEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SellUserEntitlement.SellUserEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicExistsAnyMyActiveEntitlement.PublicExistsAnyMyActiveEntitlementBuilder PublicExistsAnyMyActiveEntitlementOp
         {
-            get { return new Operation.PublicExistsAnyMyActiveEntitlement.PublicExistsAnyMyActiveEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicExistsAnyMyActiveEntitlement.PublicExistsAnyMyActiveEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetMyAppEntitlementOwnershipByAppId.PublicGetMyAppEntitlementOwnershipByAppIdBuilder PublicGetMyAppEntitlementOwnershipByAppIdOp
         {
-            get { return new Operation.PublicGetMyAppEntitlementOwnershipByAppId.PublicGetMyAppEntitlementOwnershipByAppIdBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetMyAppEntitlementOwnershipByAppId.PublicGetMyAppEntitlementOwnershipByAppIdBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetMyEntitlementOwnershipByItemId.PublicGetMyEntitlementOwnershipByItemIdBuilder PublicGetMyEntitlementOwnershipByItemIdOp
         {
-            get { return new Operation.PublicGetMyEntitlementOwnershipByItemId.PublicGetMyEntitlementOwnershipByItemIdBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetMyEntitlementOwnershipByItemId.PublicGetMyEntitlementOwnershipByItemIdBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetMyEntitlementOwnershipBySku.PublicGetMyEntitlementOwnershipBySkuBuilder PublicGetMyEntitlementOwnershipBySkuOp
         {
-            get { return new Operation.PublicGetMyEntitlementOwnershipBySku.PublicGetMyEntitlementOwnershipBySkuBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetMyEntitlementOwnershipBySku.PublicGetMyEntitlementOwnershipBySkuBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetEntitlementOwnershipToken.PublicGetEntitlementOwnershipTokenBuilder PublicGetEntitlementOwnershipTokenOp
         {
-            get { return new Operation.PublicGetEntitlementOwnershipToken.PublicGetEntitlementOwnershipTokenBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetEntitlementOwnershipToken.PublicGetEntitlementOwnershipTokenBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicQueryUserEntitlements.PublicQueryUserEntitlementsBuilder PublicQueryUserEntitlementsOp
         {
-            get { return new Operation.PublicQueryUserEntitlements.PublicQueryUserEntitlementsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicQueryUserEntitlements.PublicQueryUserEntitlementsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserAppEntitlementByAppId.PublicGetUserAppEntitlementByAppIdBuilder PublicGetUserAppEntitlementByAppIdOp
         {
-            get { return new Operation.PublicGetUserAppEntitlementByAppId.PublicGetUserAppEntitlementByAppIdBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserAppEntitlementByAppId.PublicGetUserAppEntitlementByAppIdBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicQueryUserEntitlementsByAppType.PublicQueryUserEntitlementsByAppTypeBuilder PublicQueryUserEntitlementsByAppTypeOp
         {
-            get { return new Operation.PublicQueryUserEntitlementsByAppType.PublicQueryUserEntitlementsByAppTypeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicQueryUserEntitlementsByAppType.PublicQueryUserEntitlementsByAppTypeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserEntitlementsByIds.PublicGetUserEntitlementsByIdsBuilder PublicGetUserEntitlementsByIdsOp
         {
-            get { return new Operation.PublicGetUserEntitlementsByIds.PublicGetUserEntitlementsByIdsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserEntitlementsByIds.PublicGetUserEntitlementsByIdsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetUserEntitlementByItemId.PublicGetUserEntitlementByItemIdBuilder PublicGetUserEntitlementByItemIdOp
         {
-            get { return new Operation.PublicGetUserEntitlementByItemId.PublicGetUserEntitlementByItemIdBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserEntitlementByItemId.PublicGetUserEntitlementByItemIdBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetUserEntitlementBySku.PublicGetUserEntitlementBySkuBuilder PublicGetUserEntitlementBySkuOp
         {
-            get { return new Operation.PublicGetUserEntitlementBySku.PublicGetUserEntitlementBySkuBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserEntitlementBySku.PublicGetUserEntitlementBySkuBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUserEntitlementHistory.PublicUserEntitlementHistoryBuilder PublicUserEntitlementHistoryOp
         {
-            get { return new Operation.PublicUserEntitlementHistory.PublicUserEntitlementHistoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUserEntitlementHistory.PublicUserEntitlementHistoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicExistsAnyUserActiveEntitlement.PublicExistsAnyUserActiveEntitlementBuilder PublicExistsAnyUserActiveEntitlementOp
         {
-            get { return new Operation.PublicExistsAnyUserActiveEntitlement.PublicExistsAnyUserActiveEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicExistsAnyUserActiveEntitlement.PublicExistsAnyUserActiveEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserAppEntitlementOwnershipByAppId.PublicGetUserAppEntitlementOwnershipByAppIdBuilder PublicGetUserAppEntitlementOwnershipByAppIdOp
         {
-            get { return new Operation.PublicGetUserAppEntitlementOwnershipByAppId.PublicGetUserAppEntitlementOwnershipByAppIdBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserAppEntitlementOwnershipByAppId.PublicGetUserAppEntitlementOwnershipByAppIdBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserEntitlementOwnershipByItemId.PublicGetUserEntitlementOwnershipByItemIdBuilder PublicGetUserEntitlementOwnershipByItemIdOp
         {
-            get { return new Operation.PublicGetUserEntitlementOwnershipByItemId.PublicGetUserEntitlementOwnershipByItemIdBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserEntitlementOwnershipByItemId.PublicGetUserEntitlementOwnershipByItemIdBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserEntitlementOwnershipByItemIds.PublicGetUserEntitlementOwnershipByItemIdsBuilder PublicGetUserEntitlementOwnershipByItemIdsOp
         {
-            get { return new Operation.PublicGetUserEntitlementOwnershipByItemIds.PublicGetUserEntitlementOwnershipByItemIdsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserEntitlementOwnershipByItemIds.PublicGetUserEntitlementOwnershipByItemIdsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserEntitlementOwnershipBySku.PublicGetUserEntitlementOwnershipBySkuBuilder PublicGetUserEntitlementOwnershipBySkuOp
         {
-            get { return new Operation.PublicGetUserEntitlementOwnershipBySku.PublicGetUserEntitlementOwnershipBySkuBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserEntitlementOwnershipBySku.PublicGetUserEntitlementOwnershipBySkuBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserEntitlement.PublicGetUserEntitlementBuilder PublicGetUserEntitlementOp
         {
-            get { return new Operation.PublicGetUserEntitlement.PublicGetUserEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserEntitlement.PublicGetUserEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicConsumeUserEntitlement.PublicConsumeUserEntitlementBuilder PublicConsumeUserEntitlementOp
         {
-            get { return new Operation.PublicConsumeUserEntitlement.PublicConsumeUserEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicConsumeUserEntitlement.PublicConsumeUserEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicSellUserEntitlement.PublicSellUserEntitlementBuilder PublicSellUserEntitlementOp
         {
-            get { return new Operation.PublicSellUserEntitlement.PublicSellUserEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicSellUserEntitlement.PublicSellUserEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicSplitUserEntitlement.PublicSplitUserEntitlementBuilder PublicSplitUserEntitlementOp
         {
-            get { return new Operation.PublicSplitUserEntitlement.PublicSplitUserEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicSplitUserEntitlement.PublicSplitUserEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicTransferUserEntitlement.PublicTransferUserEntitlementBuilder PublicTransferUserEntitlementOp
         {
-            get { return new Operation.PublicTransferUserEntitlement.PublicTransferUserEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicTransferUserEntitlement.PublicTransferUserEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

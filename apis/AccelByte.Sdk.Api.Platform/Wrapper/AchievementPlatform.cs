@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AchievementPlatform(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AchievementPlatform(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public UnlockSteamUserAchievement.UnlockSteamUserAchievementBuilder UnlockSteamUserAchievementOp
         {
-            get { return new Operation.UnlockSteamUserAchievement.UnlockSteamUserAchievementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UnlockSteamUserAchievement.UnlockSteamUserAchievementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetXblUserAchievements.GetXblUserAchievementsBuilder GetXblUserAchievementsOp
         {
-            get { return new Operation.GetXblUserAchievements.GetXblUserAchievementsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetXblUserAchievements.GetXblUserAchievementsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateXblUserAchievement.UpdateXblUserAchievementBuilder UpdateXblUserAchievementOp
         {
-            get { return new Operation.UpdateXblUserAchievement.UpdateXblUserAchievementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateXblUserAchievement.UpdateXblUserAchievementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

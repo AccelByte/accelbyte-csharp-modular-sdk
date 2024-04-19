@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public MatchFunctions(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public MatchFunctions(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public MatchFunctionList.MatchFunctionListBuilder MatchFunctionListOp
         {
-            get { return new Operation.MatchFunctionList.MatchFunctionListBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.MatchFunctionList.MatchFunctionListBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateMatchFunction.CreateMatchFunctionBuilder CreateMatchFunctionOp
         {
-            get { return new Operation.CreateMatchFunction.CreateMatchFunctionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateMatchFunction.CreateMatchFunctionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateMatchFunction.UpdateMatchFunctionBuilder UpdateMatchFunctionOp
         {
-            get { return new Operation.UpdateMatchFunction.UpdateMatchFunctionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateMatchFunction.UpdateMatchFunctionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteMatchFunction.DeleteMatchFunctionBuilder DeleteMatchFunctionOp
         {
-            get { return new Operation.DeleteMatchFunction.DeleteMatchFunctionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteMatchFunction.DeleteMatchFunctionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

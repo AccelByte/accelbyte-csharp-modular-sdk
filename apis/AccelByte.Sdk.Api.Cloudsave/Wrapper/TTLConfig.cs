@@ -20,19 +20,41 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public TTLConfig(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public TTLConfig(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public DeleteGameBinaryRecordTTLConfig.DeleteGameBinaryRecordTTLConfigBuilder DeleteGameBinaryRecordTTLConfigOp
         {
-            get { return new Operation.DeleteGameBinaryRecordTTLConfig.DeleteGameBinaryRecordTTLConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteGameBinaryRecordTTLConfig.DeleteGameBinaryRecordTTLConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteGameRecordTTLConfig.DeleteGameRecordTTLConfigBuilder DeleteGameRecordTTLConfigOp
         {
-            get { return new Operation.DeleteGameRecordTTLConfig.DeleteGameRecordTTLConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteGameRecordTTLConfig.DeleteGameRecordTTLConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

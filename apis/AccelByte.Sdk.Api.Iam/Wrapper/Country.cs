@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Country(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Country(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetCountryListV3.AdminGetCountryListV3Builder AdminGetCountryListV3Op
         {
-            get { return new Operation.AdminGetCountryListV3.AdminGetCountryListV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetCountryListV3.AdminGetCountryListV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetCountryBlacklistV3.AdminGetCountryBlacklistV3Builder AdminGetCountryBlacklistV3Op
         {
-            get { return new Operation.AdminGetCountryBlacklistV3.AdminGetCountryBlacklistV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetCountryBlacklistV3.AdminGetCountryBlacklistV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminAddCountryBlacklistV3.AdminAddCountryBlacklistV3Builder AdminAddCountryBlacklistV3Op
         {
-            get { return new Operation.AdminAddCountryBlacklistV3.AdminAddCountryBlacklistV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminAddCountryBlacklistV3.AdminAddCountryBlacklistV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetCountryListV3.PublicGetCountryListV3Builder PublicGetCountryListV3Op
         {
-            get { return new Operation.PublicGetCountryListV3.PublicGetCountryListV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetCountryListV3.PublicGetCountryListV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

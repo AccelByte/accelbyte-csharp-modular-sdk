@@ -20,39 +20,96 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Policies(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Policies(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public RetrievePolicies.RetrievePoliciesBuilder RetrievePoliciesOp
         {
-            get { return new Operation.RetrievePolicies.RetrievePoliciesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrievePolicies.RetrievePoliciesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdatePolicy.UpdatePolicyBuilder UpdatePolicyOp
         {
-            get { return new Operation.UpdatePolicy.UpdatePolicyBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdatePolicy.UpdatePolicyBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SetDefaultPolicy2.SetDefaultPolicy2Builder SetDefaultPolicy2Op
         {
-            get { return new Operation.SetDefaultPolicy2.SetDefaultPolicy2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SetDefaultPolicy2.SetDefaultPolicy2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RetrieveCountryListWithPolicies.RetrieveCountryListWithPoliciesBuilder RetrieveCountryListWithPoliciesOp
         {
-            get { return new Operation.RetrieveCountryListWithPolicies.RetrieveCountryListWithPoliciesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveCountryListWithPolicies.RetrieveCountryListWithPoliciesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RetrieveLatestPolicies.RetrieveLatestPoliciesBuilder RetrieveLatestPoliciesOp
         {
-            get { return new Operation.RetrieveLatestPolicies.RetrieveLatestPoliciesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveLatestPolicies.RetrieveLatestPoliciesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RetrieveLatestPoliciesPublic.RetrieveLatestPoliciesPublicBuilder RetrieveLatestPoliciesPublicOp
         {
-            get { return new Operation.RetrieveLatestPoliciesPublic.RetrieveLatestPoliciesPublicBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveLatestPoliciesPublic.RetrieveLatestPoliciesPublicBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RetrieveLatestPoliciesByNamespaceAndCountryPublic.RetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder RetrieveLatestPoliciesByNamespaceAndCountryPublicOp
         {
-            get { return new Operation.RetrieveLatestPoliciesByNamespaceAndCountryPublic.RetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveLatestPoliciesByNamespaceAndCountryPublic.RetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

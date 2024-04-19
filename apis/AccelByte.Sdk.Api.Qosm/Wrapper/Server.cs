@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Qosm.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Server(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Server(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public Heartbeat.HeartbeatBuilder HeartbeatOp
         {
-            get { return new Operation.Heartbeat.HeartbeatBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.Heartbeat.HeartbeatBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

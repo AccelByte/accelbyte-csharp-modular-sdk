@@ -20,39 +20,96 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PublicGameBinaryRecord(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PublicGameBinaryRecord(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ListGameBinaryRecordsV1.ListGameBinaryRecordsV1Builder ListGameBinaryRecordsV1Op
         {
-            get { return new Operation.ListGameBinaryRecordsV1.ListGameBinaryRecordsV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListGameBinaryRecordsV1.ListGameBinaryRecordsV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PostGameBinaryRecordV1.PostGameBinaryRecordV1Builder PostGameBinaryRecordV1Op
         {
-            get { return new Operation.PostGameBinaryRecordV1.PostGameBinaryRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PostGameBinaryRecordV1.PostGameBinaryRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public BulkGetGameBinaryRecordV1.BulkGetGameBinaryRecordV1Builder BulkGetGameBinaryRecordV1Op
         {
-            get { return new Operation.BulkGetGameBinaryRecordV1.BulkGetGameBinaryRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BulkGetGameBinaryRecordV1.BulkGetGameBinaryRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetGameBinaryRecordV1.GetGameBinaryRecordV1Builder GetGameBinaryRecordV1Op
         {
-            get { return new Operation.GetGameBinaryRecordV1.GetGameBinaryRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGameBinaryRecordV1.GetGameBinaryRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PutGameBinaryRecordV1.PutGameBinaryRecordV1Builder PutGameBinaryRecordV1Op
         {
-            get { return new Operation.PutGameBinaryRecordV1.PutGameBinaryRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PutGameBinaryRecordV1.PutGameBinaryRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteGameBinaryRecordV1.DeleteGameBinaryRecordV1Builder DeleteGameBinaryRecordV1Op
         {
-            get { return new Operation.DeleteGameBinaryRecordV1.DeleteGameBinaryRecordV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteGameBinaryRecordV1.DeleteGameBinaryRecordV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PostGameBinaryPresignedURLV1.PostGameBinaryPresignedURLV1Builder PostGameBinaryPresignedURLV1Op
         {
-            get { return new Operation.PostGameBinaryPresignedURLV1.PostGameBinaryPresignedURLV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PostGameBinaryPresignedURLV1.PostGameBinaryPresignedURLV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

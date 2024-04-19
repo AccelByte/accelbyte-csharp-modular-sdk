@@ -20,19 +20,41 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Eligibilities(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Eligibilities(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public RetrieveEligibilitiesPublic.RetrieveEligibilitiesPublicBuilder RetrieveEligibilitiesPublicOp
         {
-            get { return new Operation.RetrieveEligibilitiesPublic.RetrieveEligibilitiesPublicBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveEligibilitiesPublic.RetrieveEligibilitiesPublicBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RetrieveEligibilitiesPublicIndirect.RetrieveEligibilitiesPublicIndirectBuilder RetrieveEligibilitiesPublicIndirectOp
         {
-            get { return new Operation.RetrieveEligibilitiesPublicIndirect.RetrieveEligibilitiesPublicIndirectBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveEligibilitiesPublicIndirect.RetrieveEligibilitiesPublicIndirectBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

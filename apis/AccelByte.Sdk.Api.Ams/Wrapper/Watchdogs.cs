@@ -20,19 +20,41 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Watchdogs(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Watchdogs(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public LocalWatchdogConnect.LocalWatchdogConnectBuilder LocalWatchdogConnectOp
         {
-            get { return new Operation.LocalWatchdogConnect.LocalWatchdogConnectBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.LocalWatchdogConnect.LocalWatchdogConnectBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public WatchdogConnect.WatchdogConnectBuilder WatchdogConnectOp
         {
-            get { return new Operation.WatchdogConnect.WatchdogConnectBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.WatchdogConnect.WatchdogConnectBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

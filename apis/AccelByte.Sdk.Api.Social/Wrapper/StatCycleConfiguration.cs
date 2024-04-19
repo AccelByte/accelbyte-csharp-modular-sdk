@@ -20,63 +20,162 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public StatCycleConfiguration(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public StatCycleConfiguration(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetStatCycles.GetStatCyclesBuilder GetStatCyclesOp
         {
-            get { return new Operation.GetStatCycles.GetStatCyclesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetStatCycles.GetStatCyclesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateStatCycle.CreateStatCycleBuilder CreateStatCycleOp
         {
-            get { return new Operation.CreateStatCycle.CreateStatCycleBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateStatCycle.CreateStatCycleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public BulkGetStatCycle.BulkGetStatCycleBuilder BulkGetStatCycleOp
         {
-            get { return new Operation.BulkGetStatCycle.BulkGetStatCycleBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BulkGetStatCycle.BulkGetStatCycleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ExportStatCycle.ExportStatCycleBuilder ExportStatCycleOp
         {
-            get { return new Operation.ExportStatCycle.ExportStatCycleBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ExportStatCycle.ExportStatCycleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ImportStatCycle.ImportStatCycleBuilder ImportStatCycleOp
         {
-            get { return new Operation.ImportStatCycle.ImportStatCycleBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ImportStatCycle.ImportStatCycleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetStatCycle.GetStatCycleBuilder GetStatCycleOp
         {
-            get { return new Operation.GetStatCycle.GetStatCycleBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetStatCycle.GetStatCycleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateStatCycle.UpdateStatCycleBuilder UpdateStatCycleOp
         {
-            get { return new Operation.UpdateStatCycle.UpdateStatCycleBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateStatCycle.UpdateStatCycleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteStatCycle.DeleteStatCycleBuilder DeleteStatCycleOp
         {
-            get { return new Operation.DeleteStatCycle.DeleteStatCycleBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteStatCycle.DeleteStatCycleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public BulkAddStats.BulkAddStatsBuilder BulkAddStatsOp
         {
-            get { return new Operation.BulkAddStats.BulkAddStatsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BulkAddStats.BulkAddStatsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public StopStatCycle.StopStatCycleBuilder StopStatCycleOp
         {
-            get { return new Operation.StopStatCycle.StopStatCycleBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.StopStatCycle.StopStatCycleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetStatCycles1.GetStatCycles1Builder GetStatCycles1Op
         {
-            get { return new Operation.GetStatCycles1.GetStatCycles1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetStatCycles1.GetStatCycles1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public BulkGetStatCycle1.BulkGetStatCycle1Builder BulkGetStatCycle1Op
         {
-            get { return new Operation.BulkGetStatCycle1.BulkGetStatCycle1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BulkGetStatCycle1.BulkGetStatCycle1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetStatCycle1.GetStatCycle1Builder GetStatCycle1Op
         {
-            get { return new Operation.GetStatCycle1.GetStatCycle1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetStatCycle1.GetStatCycle1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,111 +20,273 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Clients(IAccelByteSdk sdk)
         {
             _sdk = sdk;
+        }
+
+        public Clients(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
         }
 
         #region Operation Builders
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetClients.GetClientsBuilder GetClientsOp
         {
-            get { return new Operation.GetClients.GetClientsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetClients.GetClientsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CreateClient.CreateClientBuilder CreateClientOp
         {
-            get { return new Operation.CreateClient.CreateClientBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateClient.CreateClientBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetClient.GetClientBuilder GetClientOp
         {
-            get { return new Operation.GetClient.GetClientBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetClient.GetClientBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateClient.UpdateClientBuilder UpdateClientOp
         {
-            get { return new Operation.UpdateClient.UpdateClientBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateClient.UpdateClientBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteClient.DeleteClientBuilder DeleteClientOp
         {
-            get { return new Operation.DeleteClient.DeleteClientBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteClient.DeleteClientBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateClientPermission.UpdateClientPermissionBuilder UpdateClientPermissionOp
         {
-            get { return new Operation.UpdateClientPermission.UpdateClientPermissionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateClientPermission.UpdateClientPermissionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AddClientPermission.AddClientPermissionBuilder AddClientPermissionOp
         {
-            get { return new Operation.AddClientPermission.AddClientPermissionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AddClientPermission.AddClientPermissionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteClientPermission.DeleteClientPermissionBuilder DeleteClientPermissionOp
         {
-            get { return new Operation.DeleteClientPermission.DeleteClientPermissionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteClientPermission.DeleteClientPermissionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateClientSecret.UpdateClientSecretBuilder UpdateClientSecretOp
         {
-            get { return new Operation.UpdateClientSecret.UpdateClientSecretBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateClientSecret.UpdateClientSecretBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetClientsbyNamespace.GetClientsbyNamespaceBuilder GetClientsbyNamespaceOp
         {
-            get { return new Operation.GetClientsbyNamespace.GetClientsbyNamespaceBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetClientsbyNamespace.GetClientsbyNamespaceBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CreateClientByNamespace.CreateClientByNamespaceBuilder CreateClientByNamespaceOp
         {
-            get { return new Operation.CreateClientByNamespace.CreateClientByNamespaceBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateClientByNamespace.CreateClientByNamespaceBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteClientByNamespace.DeleteClientByNamespaceBuilder DeleteClientByNamespaceOp
         {
-            get { return new Operation.DeleteClientByNamespace.DeleteClientByNamespaceBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteClientByNamespace.DeleteClientByNamespaceBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetClientsByNamespaceV3.AdminGetClientsByNamespaceV3Builder AdminGetClientsByNamespaceV3Op
         {
-            get { return new Operation.AdminGetClientsByNamespaceV3.AdminGetClientsByNamespaceV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetClientsByNamespaceV3.AdminGetClientsByNamespaceV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminBulkUpdateClientsV3.AdminBulkUpdateClientsV3Builder AdminBulkUpdateClientsV3Op
         {
-            get { return new Operation.AdminBulkUpdateClientsV3.AdminBulkUpdateClientsV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminBulkUpdateClientsV3.AdminBulkUpdateClientsV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateClientV3.AdminCreateClientV3Builder AdminCreateClientV3Op
         {
-            get { return new Operation.AdminCreateClientV3.AdminCreateClientV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateClientV3.AdminCreateClientV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetClientsbyNamespacebyIDV3.AdminGetClientsbyNamespacebyIDV3Builder AdminGetClientsbyNamespacebyIDV3Op
         {
-            get { return new Operation.AdminGetClientsbyNamespacebyIDV3.AdminGetClientsbyNamespacebyIDV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetClientsbyNamespacebyIDV3.AdminGetClientsbyNamespacebyIDV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteClientV3.AdminDeleteClientV3Builder AdminDeleteClientV3Op
         {
-            get { return new Operation.AdminDeleteClientV3.AdminDeleteClientV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteClientV3.AdminDeleteClientV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateClientV3.AdminUpdateClientV3Builder AdminUpdateClientV3Op
         {
-            get { return new Operation.AdminUpdateClientV3.AdminUpdateClientV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateClientV3.AdminUpdateClientV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateClientPermissionV3.AdminUpdateClientPermissionV3Builder AdminUpdateClientPermissionV3Op
         {
-            get { return new Operation.AdminUpdateClientPermissionV3.AdminUpdateClientPermissionV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateClientPermissionV3.AdminUpdateClientPermissionV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminAddClientPermissionsV3.AdminAddClientPermissionsV3Builder AdminAddClientPermissionsV3Op
         {
-            get { return new Operation.AdminAddClientPermissionsV3.AdminAddClientPermissionsV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminAddClientPermissionsV3.AdminAddClientPermissionsV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteClientPermissionV3.AdminDeleteClientPermissionV3Builder AdminDeleteClientPermissionV3Op
         {
-            get { return new Operation.AdminDeleteClientPermissionV3.AdminDeleteClientPermissionV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteClientPermissionV3.AdminDeleteClientPermissionV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateClientSecretV3.AdminUpdateClientSecretV3Builder AdminUpdateClientSecretV3Op
         {
-            get { return new Operation.AdminUpdateClientSecretV3.AdminUpdateClientSecretV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateClientSecretV3.AdminUpdateClientSecretV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

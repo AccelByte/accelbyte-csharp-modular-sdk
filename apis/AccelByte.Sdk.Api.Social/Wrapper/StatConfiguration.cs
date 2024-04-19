@@ -20,51 +20,129 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public StatConfiguration(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public StatConfiguration(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetStats.GetStatsBuilder GetStatsOp
         {
-            get { return new Operation.GetStats.GetStatsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetStats.GetStatsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateStat.CreateStatBuilder CreateStatOp
         {
-            get { return new Operation.CreateStat.CreateStatBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateStat.CreateStatBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ExportStats.ExportStatsBuilder ExportStatsOp
         {
-            get { return new Operation.ExportStats.ExportStatsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ExportStats.ExportStatsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ImportStats.ImportStatsBuilder ImportStatsOp
         {
-            get { return new Operation.ImportStats.ImportStatsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ImportStats.ImportStatsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryStats.QueryStatsBuilder QueryStatsOp
         {
-            get { return new Operation.QueryStats.QueryStatsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryStats.QueryStatsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetStat.GetStatBuilder GetStatOp
         {
-            get { return new Operation.GetStat.GetStatBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetStat.GetStatBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteStat.DeleteStatBuilder DeleteStatOp
         {
-            get { return new Operation.DeleteStat.DeleteStatBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteStat.DeleteStatBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateStat.UpdateStatBuilder UpdateStatOp
         {
-            get { return new Operation.UpdateStat.UpdateStatBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateStat.UpdateStatBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteTiedStat.DeleteTiedStatBuilder DeleteTiedStatOp
         {
-            get { return new Operation.DeleteTiedStat.DeleteTiedStatBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteTiedStat.DeleteTiedStatBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateStat1.CreateStat1Builder CreateStat1Op
         {
-            get { return new Operation.CreateStat1.CreateStat1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateStat1.CreateStat1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

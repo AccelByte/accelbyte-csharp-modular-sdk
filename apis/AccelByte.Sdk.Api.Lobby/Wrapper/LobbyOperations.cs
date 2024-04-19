@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public LobbyOperations(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public LobbyOperations(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminUpdatePartyAttributesV1.AdminUpdatePartyAttributesV1Builder AdminUpdatePartyAttributesV1Op
         {
-            get { return new Operation.AdminUpdatePartyAttributesV1.AdminUpdatePartyAttributesV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdatePartyAttributesV1.AdminUpdatePartyAttributesV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminJoinPartyV1.AdminJoinPartyV1Builder AdminJoinPartyV1Op
         {
-            get { return new Operation.AdminJoinPartyV1.AdminJoinPartyV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminJoinPartyV1.AdminJoinPartyV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetMessages.PublicGetMessagesBuilder PublicGetMessagesOp
         {
-            get { return new Operation.PublicGetMessages.PublicGetMessagesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetMessages.PublicGetMessagesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

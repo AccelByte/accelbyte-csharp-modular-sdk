@@ -20,75 +20,195 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public OAuth20(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public OAuth20(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminRetrieveUserThirdPartyPlatformTokenV3.AdminRetrieveUserThirdPartyPlatformTokenV3Builder AdminRetrieveUserThirdPartyPlatformTokenV3Op
         {
-            get { return new Operation.AdminRetrieveUserThirdPartyPlatformTokenV3.AdminRetrieveUserThirdPartyPlatformTokenV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminRetrieveUserThirdPartyPlatformTokenV3.AdminRetrieveUserThirdPartyPlatformTokenV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RevokeUserV3.RevokeUserV3Builder RevokeUserV3Op
         {
-            get { return new Operation.RevokeUserV3.RevokeUserV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RevokeUserV3.RevokeUserV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AuthorizeV3.AuthorizeV3Builder AuthorizeV3Op
         {
-            get { return new Operation.AuthorizeV3.AuthorizeV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AuthorizeV3.AuthorizeV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public TokenIntrospectionV3.TokenIntrospectionV3Builder TokenIntrospectionV3Op
         {
-            get { return new Operation.TokenIntrospectionV3.TokenIntrospectionV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.TokenIntrospectionV3.TokenIntrospectionV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetJWKSV3.GetJWKSV3Builder GetJWKSV3Op
         {
-            get { return new Operation.GetJWKSV3.GetJWKSV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetJWKSV3.GetJWKSV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SendMFAAuthenticationCode.SendMFAAuthenticationCodeBuilder SendMFAAuthenticationCodeOp
         {
-            get { return new Operation.SendMFAAuthenticationCode.SendMFAAuthenticationCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SendMFAAuthenticationCode.SendMFAAuthenticationCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public Change2faMethod.Change2faMethodBuilder Change2faMethodOp
         {
-            get { return new Operation.Change2faMethod.Change2faMethodBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.Change2faMethod.Change2faMethodBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public Verify2faCode.Verify2faCodeBuilder Verify2faCodeOp
         {
-            get { return new Operation.Verify2faCode.Verify2faCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.Verify2faCode.Verify2faCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RetrieveUserThirdPartyPlatformTokenV3.RetrieveUserThirdPartyPlatformTokenV3Builder RetrieveUserThirdPartyPlatformTokenV3Op
         {
-            get { return new Operation.RetrieveUserThirdPartyPlatformTokenV3.RetrieveUserThirdPartyPlatformTokenV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveUserThirdPartyPlatformTokenV3.RetrieveUserThirdPartyPlatformTokenV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AuthCodeRequestV3.AuthCodeRequestV3Builder AuthCodeRequestV3Op
         {
-            get { return new Operation.AuthCodeRequestV3.AuthCodeRequestV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AuthCodeRequestV3.AuthCodeRequestV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PlatformTokenGrantV3.PlatformTokenGrantV3Builder PlatformTokenGrantV3Op
         {
-            get { return new Operation.PlatformTokenGrantV3.PlatformTokenGrantV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PlatformTokenGrantV3.PlatformTokenGrantV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetRevocationListV3.GetRevocationListV3Builder GetRevocationListV3Op
         {
-            get { return new Operation.GetRevocationListV3.GetRevocationListV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetRevocationListV3.GetRevocationListV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public TokenRevocationV3.TokenRevocationV3Builder TokenRevocationV3Op
         {
-            get { return new Operation.TokenRevocationV3.TokenRevocationV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.TokenRevocationV3.TokenRevocationV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SimultaneousLoginV3.SimultaneousLoginV3Builder SimultaneousLoginV3Op
         {
-            get { return new Operation.SimultaneousLoginV3.SimultaneousLoginV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SimultaneousLoginV3.SimultaneousLoginV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public TokenGrantV3.TokenGrantV3Builder TokenGrantV3Op
         {
-            get { return new Operation.TokenGrantV3.TokenGrantV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.TokenGrantV3.TokenGrantV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public VerifyTokenV3.VerifyTokenV3Builder VerifyTokenV3Op
         {
-            get { return new Operation.VerifyTokenV3.VerifyTokenV3Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.VerifyTokenV3.VerifyTokenV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

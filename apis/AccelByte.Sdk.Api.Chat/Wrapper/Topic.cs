@@ -20,128 +20,339 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Topic(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Topic(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminChatHistory.AdminChatHistoryBuilder AdminChatHistoryOp
         {
-            get { return new Operation.AdminChatHistory.AdminChatHistoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminChatHistory.AdminChatHistoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateNamespaceTopic.AdminCreateNamespaceTopicBuilder AdminCreateNamespaceTopicOp
         {
-            get { return new Operation.AdminCreateNamespaceTopic.AdminCreateNamespaceTopicBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateNamespaceTopic.AdminCreateNamespaceTopicBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminTopicList.AdminTopicListBuilder AdminTopicListOp
         {
-            get { return new Operation.AdminTopicList.AdminTopicListBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminTopicList.AdminTopicListBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateTopic.AdminCreateTopicBuilder AdminCreateTopicOp
         {
-            get { return new Operation.AdminCreateTopic.AdminCreateTopicBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateTopic.AdminCreateTopicBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminChannelTopicList.AdminChannelTopicListBuilder AdminChannelTopicListOp
         {
-            get { return new Operation.AdminChannelTopicList.AdminChannelTopicListBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminChannelTopicList.AdminChannelTopicListBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminChannelTopicSummary.AdminChannelTopicSummaryBuilder AdminChannelTopicSummaryOp
         {
-            get { return new Operation.AdminChannelTopicSummary.AdminChannelTopicSummaryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminChannelTopicSummary.AdminChannelTopicSummaryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminQueryTopicLog.AdminQueryTopicLogBuilder AdminQueryTopicLogOp
         {
-            get { return new Operation.AdminQueryTopicLog.AdminQueryTopicLogBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminQueryTopicLog.AdminQueryTopicLogBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateTopic.AdminUpdateTopicBuilder AdminUpdateTopicOp
         {
-            get { return new Operation.AdminUpdateTopic.AdminUpdateTopicBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateTopic.AdminUpdateTopicBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteTopic.AdminDeleteTopicBuilder AdminDeleteTopicOp
         {
-            get { return new Operation.AdminDeleteTopic.AdminDeleteTopicBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteTopic.AdminDeleteTopicBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminBanTopicMembers.AdminBanTopicMembersBuilder AdminBanTopicMembersOp
         {
-            get { return new Operation.AdminBanTopicMembers.AdminBanTopicMembersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminBanTopicMembers.AdminBanTopicMembersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminChannelTopicInfo.AdminChannelTopicInfoBuilder AdminChannelTopicInfoOp
         {
-            get { return new Operation.AdminChannelTopicInfo.AdminChannelTopicInfoBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminChannelTopicInfo.AdminChannelTopicInfoBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminTopicChatHistory.AdminTopicChatHistoryBuilder AdminTopicChatHistoryOp
         {
-            get { return new Operation.AdminTopicChatHistory.AdminTopicChatHistoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminTopicChatHistory.AdminTopicChatHistoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminSendChat.AdminSendChatBuilder AdminSendChatOp
         {
-            get { return new Operation.AdminSendChat.AdminSendChatBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminSendChat.AdminSendChatBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteChat.AdminDeleteChatBuilder AdminDeleteChatOp
         {
-            get { return new Operation.AdminDeleteChat.AdminDeleteChatBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteChat.AdminDeleteChatBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminTopicMembers.AdminTopicMembersBuilder AdminTopicMembersOp
         {
-            get { return new Operation.AdminTopicMembers.AdminTopicMembersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminTopicMembers.AdminTopicMembersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminTopicShards.AdminTopicShardsBuilder AdminTopicShardsOp
         {
-            get { return new Operation.AdminTopicShards.AdminTopicShardsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminTopicShards.AdminTopicShardsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUnbanTopicMembers.AdminUnbanTopicMembersBuilder AdminUnbanTopicMembersOp
         {
-            get { return new Operation.AdminUnbanTopicMembers.AdminUnbanTopicMembersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUnbanTopicMembers.AdminUnbanTopicMembersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminAddTopicMember.AdminAddTopicMemberBuilder AdminAddTopicMemberOp
         {
-            get { return new Operation.AdminAddTopicMember.AdminAddTopicMemberBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminAddTopicMember.AdminAddTopicMemberBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminRemoveTopicMember.AdminRemoveTopicMemberBuilder AdminRemoveTopicMemberOp
         {
-            get { return new Operation.AdminRemoveTopicMember.AdminRemoveTopicMemberBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminRemoveTopicMember.AdminRemoveTopicMemberBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminQueryTopic.AdminQueryTopicBuilder AdminQueryTopicOp
         {
-            get { return new Operation.AdminQueryTopic.AdminQueryTopicBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminQueryTopic.AdminQueryTopicBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminQueryUsersTopic.AdminQueryUsersTopicBuilder AdminQueryUsersTopicOp
         {
-            get { return new Operation.AdminQueryUsersTopic.AdminQueryUsersTopicBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminQueryUsersTopic.AdminQueryUsersTopicBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetMutedTopics.PublicGetMutedTopicsBuilder PublicGetMutedTopicsOp
         {
-            get { return new Operation.PublicGetMutedTopics.PublicGetMutedTopicsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetMutedTopics.PublicGetMutedTopicsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicTopicList.PublicTopicListBuilder PublicTopicListOp
         {
-            get { return new Operation.PublicTopicList.PublicTopicListBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicTopicList.PublicTopicListBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicBanTopicMembers.PublicBanTopicMembersBuilder PublicBanTopicMembersOp
         {
-            get { return new Operation.PublicBanTopicMembers.PublicBanTopicMembersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicBanTopicMembers.PublicBanTopicMembersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicChatHistory.PublicChatHistoryBuilder PublicChatHistoryOp
         {
-            get { return new Operation.PublicChatHistory.PublicChatHistoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicChatHistory.PublicChatHistoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicDeleteChat.PublicDeleteChatBuilder PublicDeleteChatOp
         {
-            get { return new Operation.PublicDeleteChat.PublicDeleteChatBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicDeleteChat.PublicDeleteChatBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicMuteUser.PublicMuteUserBuilder PublicMuteUserOp
         {
-            get { return new Operation.PublicMuteUser.PublicMuteUserBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicMuteUser.PublicMuteUserBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUnbanTopicMembers.PublicUnbanTopicMembersBuilder PublicUnbanTopicMembersOp
         {
-            get { return new Operation.PublicUnbanTopicMembers.PublicUnbanTopicMembersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUnbanTopicMembers.PublicUnbanTopicMembersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUnmuteUser.PublicUnmuteUserBuilder PublicUnmuteUserOp
         {
-            get { return new Operation.PublicUnmuteUser.PublicUnmuteUserBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUnmuteUser.PublicUnmuteUserBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

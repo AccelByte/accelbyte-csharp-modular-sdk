@@ -20,31 +20,74 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Account(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Account(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminAccountGet.AdminAccountGetBuilder AdminAccountGetOp
         {
-            get { return new Operation.AdminAccountGet.AdminAccountGetBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminAccountGet.AdminAccountGetBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminAccountCreate.AdminAccountCreateBuilder AdminAccountCreateOp
         {
-            get { return new Operation.AdminAccountCreate.AdminAccountCreateBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminAccountCreate.AdminAccountCreateBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminAccountLinkTokenGet.AdminAccountLinkTokenGetBuilder AdminAccountLinkTokenGetOp
         {
-            get { return new Operation.AdminAccountLinkTokenGet.AdminAccountLinkTokenGetBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminAccountLinkTokenGet.AdminAccountLinkTokenGetBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminAccountLinkTokenPost.AdminAccountLinkTokenPostBuilder AdminAccountLinkTokenPostOp
         {
-            get { return new Operation.AdminAccountLinkTokenPost.AdminAccountLinkTokenPostBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminAccountLinkTokenPost.AdminAccountLinkTokenPostBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AccountGet.AccountGetBuilder AccountGetOp
         {
-            get { return new Operation.AccountGet.AccountGetBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AccountGet.AccountGetBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

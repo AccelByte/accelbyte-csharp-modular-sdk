@@ -20,71 +20,184 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Party(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Party(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminQueryParties.AdminQueryPartiesBuilder AdminQueryPartiesOp
         {
-            get { return new Operation.AdminQueryParties.AdminQueryPartiesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminQueryParties.AdminQueryPartiesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicPartyJoinCode.PublicPartyJoinCodeBuilder PublicPartyJoinCodeOp
         {
-            get { return new Operation.PublicPartyJoinCode.PublicPartyJoinCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicPartyJoinCode.PublicPartyJoinCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetParty.PublicGetPartyBuilder PublicGetPartyOp
         {
-            get { return new Operation.PublicGetParty.PublicGetPartyBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetParty.PublicGetPartyBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUpdateParty.PublicUpdatePartyBuilder PublicUpdatePartyOp
         {
-            get { return new Operation.PublicUpdateParty.PublicUpdatePartyBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpdateParty.PublicUpdatePartyBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicPatchUpdateParty.PublicPatchUpdatePartyBuilder PublicPatchUpdatePartyOp
         {
-            get { return new Operation.PublicPatchUpdateParty.PublicPatchUpdatePartyBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicPatchUpdateParty.PublicPatchUpdatePartyBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGeneratePartyCode.PublicGeneratePartyCodeBuilder PublicGeneratePartyCodeOp
         {
-            get { return new Operation.PublicGeneratePartyCode.PublicGeneratePartyCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGeneratePartyCode.PublicGeneratePartyCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicRevokePartyCode.PublicRevokePartyCodeBuilder PublicRevokePartyCodeOp
         {
-            get { return new Operation.PublicRevokePartyCode.PublicRevokePartyCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicRevokePartyCode.PublicRevokePartyCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicPartyInvite.PublicPartyInviteBuilder PublicPartyInviteOp
         {
-            get { return new Operation.PublicPartyInvite.PublicPartyInviteBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicPartyInvite.PublicPartyInviteBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicPromotePartyLeader.PublicPromotePartyLeaderBuilder PublicPromotePartyLeaderOp
         {
-            get { return new Operation.PublicPromotePartyLeader.PublicPromotePartyLeaderBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicPromotePartyLeader.PublicPromotePartyLeaderBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicPartyJoin.PublicPartyJoinBuilder PublicPartyJoinOp
         {
-            get { return new Operation.PublicPartyJoin.PublicPartyJoinBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicPartyJoin.PublicPartyJoinBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicPartyLeave.PublicPartyLeaveBuilder PublicPartyLeaveOp
         {
-            get { return new Operation.PublicPartyLeave.PublicPartyLeaveBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicPartyLeave.PublicPartyLeaveBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicPartyReject.PublicPartyRejectBuilder PublicPartyRejectOp
         {
-            get { return new Operation.PublicPartyReject.PublicPartyRejectBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicPartyReject.PublicPartyRejectBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicPartyKick.PublicPartyKickBuilder PublicPartyKickOp
         {
-            get { return new Operation.PublicPartyKick.PublicPartyKickBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicPartyKick.PublicPartyKickBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicCreateParty.PublicCreatePartyBuilder PublicCreatePartyOp
         {
-            get { return new Operation.PublicCreateParty.PublicCreatePartyBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicCreateParty.PublicCreatePartyBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicQueryMyParties.PublicQueryMyPartiesBuilder PublicQueryMyPartiesOp
         {
-            get { return new Operation.PublicQueryMyParties.PublicQueryMyPartiesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicQueryMyParties.PublicQueryMyPartiesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

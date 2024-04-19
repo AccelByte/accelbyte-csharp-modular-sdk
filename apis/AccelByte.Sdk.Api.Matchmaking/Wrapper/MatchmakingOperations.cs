@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public MatchmakingOperations(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public MatchmakingOperations(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetHealthcheckInfo.GetHealthcheckInfoBuilder GetHealthcheckInfoOp
         {
-            get { return new Operation.GetHealthcheckInfo.GetHealthcheckInfoBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetHealthcheckInfo.GetHealthcheckInfoBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public HandlerV3Healthz.HandlerV3HealthzBuilder HandlerV3HealthzOp
         {
-            get { return new Operation.HandlerV3Healthz.HandlerV3HealthzBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.HandlerV3Healthz.HandlerV3HealthzBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetMessages.PublicGetMessagesBuilder PublicGetMessagesOp
         {
-            get { return new Operation.PublicGetMessages.PublicGetMessagesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetMessages.PublicGetMessagesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public VersionCheckHandler.VersionCheckHandlerBuilder VersionCheckHandlerOp
         {
-            get { return new Operation.VersionCheckHandler.VersionCheckHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.VersionCheckHandler.VersionCheckHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

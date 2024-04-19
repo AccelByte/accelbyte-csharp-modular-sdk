@@ -20,95 +20,250 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public LeaderboardData(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public LeaderboardData(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetArchivedLeaderboardRankingDataV1Handler.AdminGetArchivedLeaderboardRankingDataV1HandlerBuilder AdminGetArchivedLeaderboardRankingDataV1HandlerOp
         {
-            get { return new Operation.AdminGetArchivedLeaderboardRankingDataV1Handler.AdminGetArchivedLeaderboardRankingDataV1HandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetArchivedLeaderboardRankingDataV1Handler.AdminGetArchivedLeaderboardRankingDataV1HandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateArchivedLeaderboardRankingDataV1Handler.CreateArchivedLeaderboardRankingDataV1HandlerBuilder CreateArchivedLeaderboardRankingDataV1HandlerOp
         {
-            get { return new Operation.CreateArchivedLeaderboardRankingDataV1Handler.CreateArchivedLeaderboardRankingDataV1HandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateArchivedLeaderboardRankingDataV1Handler.CreateArchivedLeaderboardRankingDataV1HandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetAllTimeLeaderboardRankingAdminV1.GetAllTimeLeaderboardRankingAdminV1Builder GetAllTimeLeaderboardRankingAdminV1Op
         {
-            get { return new Operation.GetAllTimeLeaderboardRankingAdminV1.GetAllTimeLeaderboardRankingAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetAllTimeLeaderboardRankingAdminV1.GetAllTimeLeaderboardRankingAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetCurrentMonthLeaderboardRankingAdminV1.GetCurrentMonthLeaderboardRankingAdminV1Builder GetCurrentMonthLeaderboardRankingAdminV1Op
         {
-            get { return new Operation.GetCurrentMonthLeaderboardRankingAdminV1.GetCurrentMonthLeaderboardRankingAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetCurrentMonthLeaderboardRankingAdminV1.GetCurrentMonthLeaderboardRankingAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteUserRankingByLeaderboardCodeAdminV1.DeleteUserRankingByLeaderboardCodeAdminV1Builder DeleteUserRankingByLeaderboardCodeAdminV1Op
         {
-            get { return new Operation.DeleteUserRankingByLeaderboardCodeAdminV1.DeleteUserRankingByLeaderboardCodeAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteUserRankingByLeaderboardCodeAdminV1.DeleteUserRankingByLeaderboardCodeAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetCurrentSeasonLeaderboardRankingAdminV1.GetCurrentSeasonLeaderboardRankingAdminV1Builder GetCurrentSeasonLeaderboardRankingAdminV1Op
         {
-            get { return new Operation.GetCurrentSeasonLeaderboardRankingAdminV1.GetCurrentSeasonLeaderboardRankingAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetCurrentSeasonLeaderboardRankingAdminV1.GetCurrentSeasonLeaderboardRankingAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetTodayLeaderboardRankingAdminV1.GetTodayLeaderboardRankingAdminV1Builder GetTodayLeaderboardRankingAdminV1Op
         {
-            get { return new Operation.GetTodayLeaderboardRankingAdminV1.GetTodayLeaderboardRankingAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetTodayLeaderboardRankingAdminV1.GetTodayLeaderboardRankingAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserRankingAdminV1.GetUserRankingAdminV1Builder GetUserRankingAdminV1Op
         {
-            get { return new Operation.GetUserRankingAdminV1.GetUserRankingAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserRankingAdminV1.GetUserRankingAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateUserPointAdminV1.UpdateUserPointAdminV1Builder UpdateUserPointAdminV1Op
         {
-            get { return new Operation.UpdateUserPointAdminV1.UpdateUserPointAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateUserPointAdminV1.UpdateUserPointAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteUserRankingAdminV1.DeleteUserRankingAdminV1Builder DeleteUserRankingAdminV1Op
         {
-            get { return new Operation.DeleteUserRankingAdminV1.DeleteUserRankingAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteUserRankingAdminV1.DeleteUserRankingAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetCurrentWeekLeaderboardRankingAdminV1.GetCurrentWeekLeaderboardRankingAdminV1Builder GetCurrentWeekLeaderboardRankingAdminV1Op
         {
-            get { return new Operation.GetCurrentWeekLeaderboardRankingAdminV1.GetCurrentWeekLeaderboardRankingAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetCurrentWeekLeaderboardRankingAdminV1.GetCurrentWeekLeaderboardRankingAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteUserRankingsAdminV1.DeleteUserRankingsAdminV1Builder DeleteUserRankingsAdminV1Op
         {
-            get { return new Operation.DeleteUserRankingsAdminV1.DeleteUserRankingsAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteUserRankingsAdminV1.DeleteUserRankingsAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetAllTimeLeaderboardRankingPublicV1.GetAllTimeLeaderboardRankingPublicV1Builder GetAllTimeLeaderboardRankingPublicV1Op
         {
-            get { return new Operation.GetAllTimeLeaderboardRankingPublicV1.GetAllTimeLeaderboardRankingPublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetAllTimeLeaderboardRankingPublicV1.GetAllTimeLeaderboardRankingPublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetArchivedLeaderboardRankingDataV1Handler.GetArchivedLeaderboardRankingDataV1HandlerBuilder GetArchivedLeaderboardRankingDataV1HandlerOp
         {
-            get { return new Operation.GetArchivedLeaderboardRankingDataV1Handler.GetArchivedLeaderboardRankingDataV1HandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetArchivedLeaderboardRankingDataV1Handler.GetArchivedLeaderboardRankingDataV1HandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetCurrentMonthLeaderboardRankingPublicV1.GetCurrentMonthLeaderboardRankingPublicV1Builder GetCurrentMonthLeaderboardRankingPublicV1Op
         {
-            get { return new Operation.GetCurrentMonthLeaderboardRankingPublicV1.GetCurrentMonthLeaderboardRankingPublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetCurrentMonthLeaderboardRankingPublicV1.GetCurrentMonthLeaderboardRankingPublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetCurrentSeasonLeaderboardRankingPublicV1.GetCurrentSeasonLeaderboardRankingPublicV1Builder GetCurrentSeasonLeaderboardRankingPublicV1Op
         {
-            get { return new Operation.GetCurrentSeasonLeaderboardRankingPublicV1.GetCurrentSeasonLeaderboardRankingPublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetCurrentSeasonLeaderboardRankingPublicV1.GetCurrentSeasonLeaderboardRankingPublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetTodayLeaderboardRankingPublicV1.GetTodayLeaderboardRankingPublicV1Builder GetTodayLeaderboardRankingPublicV1Op
         {
-            get { return new Operation.GetTodayLeaderboardRankingPublicV1.GetTodayLeaderboardRankingPublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetTodayLeaderboardRankingPublicV1.GetTodayLeaderboardRankingPublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserRankingPublicV1.GetUserRankingPublicV1Builder GetUserRankingPublicV1Op
         {
-            get { return new Operation.GetUserRankingPublicV1.GetUserRankingPublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserRankingPublicV1.GetUserRankingPublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteUserRankingPublicV1.DeleteUserRankingPublicV1Builder DeleteUserRankingPublicV1Op
         {
-            get { return new Operation.DeleteUserRankingPublicV1.DeleteUserRankingPublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteUserRankingPublicV1.DeleteUserRankingPublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetCurrentWeekLeaderboardRankingPublicV1.GetCurrentWeekLeaderboardRankingPublicV1Builder GetCurrentWeekLeaderboardRankingPublicV1Op
         {
-            get { return new Operation.GetCurrentWeekLeaderboardRankingPublicV1.GetCurrentWeekLeaderboardRankingPublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetCurrentWeekLeaderboardRankingPublicV1.GetCurrentWeekLeaderboardRankingPublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetAllTimeLeaderboardRankingPublicV2.GetAllTimeLeaderboardRankingPublicV2Builder GetAllTimeLeaderboardRankingPublicV2Op
         {
-            get { return new Operation.GetAllTimeLeaderboardRankingPublicV2.GetAllTimeLeaderboardRankingPublicV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetAllTimeLeaderboardRankingPublicV2.GetAllTimeLeaderboardRankingPublicV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

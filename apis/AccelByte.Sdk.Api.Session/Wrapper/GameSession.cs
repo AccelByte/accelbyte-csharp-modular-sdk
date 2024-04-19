@@ -20,107 +20,283 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public GameSession(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public GameSession(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminQueryGameSessions.AdminQueryGameSessionsBuilder AdminQueryGameSessionsOp
         {
-            get { return new Operation.AdminQueryGameSessions.AdminQueryGameSessionsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminQueryGameSessions.AdminQueryGameSessionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminQueryGameSessionsByAttributes.AdminQueryGameSessionsByAttributesBuilder AdminQueryGameSessionsByAttributesOp
         {
-            get { return new Operation.AdminQueryGameSessionsByAttributes.AdminQueryGameSessionsByAttributesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminQueryGameSessionsByAttributes.AdminQueryGameSessionsByAttributesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteBulkGameSessions.AdminDeleteBulkGameSessionsBuilder AdminDeleteBulkGameSessionsOp
         {
-            get { return new Operation.AdminDeleteBulkGameSessions.AdminDeleteBulkGameSessionsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteBulkGameSessions.AdminDeleteBulkGameSessionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminSetDSReady.AdminSetDSReadyBuilder AdminSetDSReadyOp
         {
-            get { return new Operation.AdminSetDSReady.AdminSetDSReadyBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminSetDSReady.AdminSetDSReadyBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateGameSessionMember.AdminUpdateGameSessionMemberBuilder AdminUpdateGameSessionMemberOp
         {
-            get { return new Operation.AdminUpdateGameSessionMember.AdminUpdateGameSessionMemberBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateGameSessionMember.AdminUpdateGameSessionMemberBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateGameSession.CreateGameSessionBuilder CreateGameSessionOp
         {
-            get { return new Operation.CreateGameSession.CreateGameSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateGameSession.CreateGameSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicQueryGameSessionsByAttributes.PublicQueryGameSessionsByAttributesBuilder PublicQueryGameSessionsByAttributesOp
         {
-            get { return new Operation.PublicQueryGameSessionsByAttributes.PublicQueryGameSessionsByAttributesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicQueryGameSessionsByAttributes.PublicQueryGameSessionsByAttributesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicSessionJoinCode.PublicSessionJoinCodeBuilder PublicSessionJoinCodeOp
         {
-            get { return new Operation.PublicSessionJoinCode.PublicSessionJoinCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicSessionJoinCode.PublicSessionJoinCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetGameSessionByPodName.GetGameSessionByPodNameBuilder GetGameSessionByPodNameOp
         {
-            get { return new Operation.GetGameSessionByPodName.GetGameSessionByPodNameBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGameSessionByPodName.GetGameSessionByPodNameBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetGameSession.GetGameSessionBuilder GetGameSessionOp
         {
-            get { return new Operation.GetGameSession.GetGameSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGameSession.GetGameSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateGameSession.UpdateGameSessionBuilder UpdateGameSessionOp
         {
-            get { return new Operation.UpdateGameSession.UpdateGameSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateGameSession.UpdateGameSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteGameSession.DeleteGameSessionBuilder DeleteGameSessionOp
         {
-            get { return new Operation.DeleteGameSession.DeleteGameSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteGameSession.DeleteGameSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PatchUpdateGameSession.PatchUpdateGameSessionBuilder PatchUpdateGameSessionOp
         {
-            get { return new Operation.PatchUpdateGameSession.PatchUpdateGameSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PatchUpdateGameSession.PatchUpdateGameSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateGameSessionBackfillTicketID.UpdateGameSessionBackfillTicketIDBuilder UpdateGameSessionBackfillTicketIDOp
         {
-            get { return new Operation.UpdateGameSessionBackfillTicketID.UpdateGameSessionBackfillTicketIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateGameSessionBackfillTicketID.UpdateGameSessionBackfillTicketIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GameSessionGenerateCode.GameSessionGenerateCodeBuilder GameSessionGenerateCodeOp
         {
-            get { return new Operation.GameSessionGenerateCode.GameSessionGenerateCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GameSessionGenerateCode.GameSessionGenerateCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicRevokeGameSessionCode.PublicRevokeGameSessionCodeBuilder PublicRevokeGameSessionCodeOp
         {
-            get { return new Operation.PublicRevokeGameSessionCode.PublicRevokeGameSessionCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicRevokeGameSessionCode.PublicRevokeGameSessionCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGameSessionInvite.PublicGameSessionInviteBuilder PublicGameSessionInviteOp
         {
-            get { return new Operation.PublicGameSessionInvite.PublicGameSessionInviteBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGameSessionInvite.PublicGameSessionInviteBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public JoinGameSession.JoinGameSessionBuilder JoinGameSessionOp
         {
-            get { return new Operation.JoinGameSession.JoinGameSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.JoinGameSession.JoinGameSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicPromoteGameSessionLeader.PublicPromoteGameSessionLeaderBuilder PublicPromoteGameSessionLeaderOp
         {
-            get { return new Operation.PublicPromoteGameSessionLeader.PublicPromoteGameSessionLeaderBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicPromoteGameSessionLeader.PublicPromoteGameSessionLeaderBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public LeaveGameSession.LeaveGameSessionBuilder LeaveGameSessionOp
         {
-            get { return new Operation.LeaveGameSession.LeaveGameSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.LeaveGameSession.LeaveGameSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGameSessionReject.PublicGameSessionRejectBuilder PublicGameSessionRejectOp
         {
-            get { return new Operation.PublicGameSessionReject.PublicGameSessionRejectBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGameSessionReject.PublicGameSessionRejectBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetSessionServerSecret.GetSessionServerSecretBuilder GetSessionServerSecretOp
         {
-            get { return new Operation.GetSessionServerSecret.GetSessionServerSecretBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetSessionServerSecret.GetSessionServerSecretBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AppendTeamGameSession.AppendTeamGameSessionBuilder AppendTeamGameSessionOp
         {
-            get { return new Operation.AppendTeamGameSession.AppendTeamGameSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AppendTeamGameSession.AppendTeamGameSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicQueryMyGameSessions.PublicQueryMyGameSessionsBuilder PublicQueryMyGameSessionsOp
         {
-            get { return new Operation.PublicQueryMyGameSessions.PublicQueryMyGameSessionsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicQueryMyGameSessions.PublicQueryMyGameSessionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

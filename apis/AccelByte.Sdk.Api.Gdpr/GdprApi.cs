@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Gdpr
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.DataDeletion DataDeletion
         {
             get
             {
                 if (_DataDeletion == null)
-                    _DataDeletion = new Wrapper.DataDeletion(_Sdk);
+                    _DataDeletion = new Wrapper.DataDeletion(_Sdk, _CustomBasePath);
                 return _DataDeletion;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Gdpr
             get
             {
                 if (_Configuration == null)
-                    _Configuration = new Wrapper.Configuration(_Sdk);
+                    _Configuration = new Wrapper.Configuration(_Sdk, _CustomBasePath);
                 return _Configuration;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Gdpr
             get
             {
                 if (_DataRetrieval == null)
-                    _DataRetrieval = new Wrapper.DataRetrieval(_Sdk);
+                    _DataRetrieval = new Wrapper.DataRetrieval(_Sdk, _CustomBasePath);
                 return _DataRetrieval;
             }
         }
@@ -51,6 +53,12 @@ namespace AccelByte.Sdk.Api.Gdpr
         internal GdprApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public GdprApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -63,7 +71,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<GdprApi>("gdpr", () =>
             {
-                return new GdprApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("gdpr");
+                if (customPath != "")
+                    return (new GdprApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new GdprApi(sdk);
             });
         }
     }

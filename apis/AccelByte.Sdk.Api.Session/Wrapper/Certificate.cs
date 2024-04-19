@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Certificate(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Certificate(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public HandleUploadXboxPFXCertificate.HandleUploadXboxPFXCertificateBuilder HandleUploadXboxPFXCertificateOp
         {
-            get { return new Operation.HandleUploadXboxPFXCertificate.HandleUploadXboxPFXCertificateBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.HandleUploadXboxPFXCertificate.HandleUploadXboxPFXCertificateBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,195 +20,525 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public IAP(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public IAP(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetAppleIAPConfig.GetAppleIAPConfigBuilder GetAppleIAPConfigOp
         {
-            get { return new Operation.GetAppleIAPConfig.GetAppleIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetAppleIAPConfig.GetAppleIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateAppleIAPConfig.UpdateAppleIAPConfigBuilder UpdateAppleIAPConfigOp
         {
-            get { return new Operation.UpdateAppleIAPConfig.UpdateAppleIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateAppleIAPConfig.UpdateAppleIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteAppleIAPConfig.DeleteAppleIAPConfigBuilder DeleteAppleIAPConfigOp
         {
-            get { return new Operation.DeleteAppleIAPConfig.DeleteAppleIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteAppleIAPConfig.DeleteAppleIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetEpicGamesIAPConfig.GetEpicGamesIAPConfigBuilder GetEpicGamesIAPConfigOp
         {
-            get { return new Operation.GetEpicGamesIAPConfig.GetEpicGamesIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetEpicGamesIAPConfig.GetEpicGamesIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateEpicGamesIAPConfig.UpdateEpicGamesIAPConfigBuilder UpdateEpicGamesIAPConfigOp
         {
-            get { return new Operation.UpdateEpicGamesIAPConfig.UpdateEpicGamesIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateEpicGamesIAPConfig.UpdateEpicGamesIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteEpicGamesIAPConfig.DeleteEpicGamesIAPConfigBuilder DeleteEpicGamesIAPConfigOp
         {
-            get { return new Operation.DeleteEpicGamesIAPConfig.DeleteEpicGamesIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteEpicGamesIAPConfig.DeleteEpicGamesIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetGoogleIAPConfig.GetGoogleIAPConfigBuilder GetGoogleIAPConfigOp
         {
-            get { return new Operation.GetGoogleIAPConfig.GetGoogleIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGoogleIAPConfig.GetGoogleIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateGoogleIAPConfig.UpdateGoogleIAPConfigBuilder UpdateGoogleIAPConfigOp
         {
-            get { return new Operation.UpdateGoogleIAPConfig.UpdateGoogleIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateGoogleIAPConfig.UpdateGoogleIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteGoogleIAPConfig.DeleteGoogleIAPConfigBuilder DeleteGoogleIAPConfigOp
         {
-            get { return new Operation.DeleteGoogleIAPConfig.DeleteGoogleIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteGoogleIAPConfig.DeleteGoogleIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateGoogleP12File.UpdateGoogleP12FileBuilder UpdateGoogleP12FileOp
         {
-            get { return new Operation.UpdateGoogleP12File.UpdateGoogleP12FileBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateGoogleP12File.UpdateGoogleP12FileBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetIAPItemConfig.GetIAPItemConfigBuilder GetIAPItemConfigOp
         {
-            get { return new Operation.GetIAPItemConfig.GetIAPItemConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetIAPItemConfig.GetIAPItemConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateIAPItemConfig.UpdateIAPItemConfigBuilder UpdateIAPItemConfigOp
         {
-            get { return new Operation.UpdateIAPItemConfig.UpdateIAPItemConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateIAPItemConfig.UpdateIAPItemConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteIAPItemConfig.DeleteIAPItemConfigBuilder DeleteIAPItemConfigOp
         {
-            get { return new Operation.DeleteIAPItemConfig.DeleteIAPItemConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteIAPItemConfig.DeleteIAPItemConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetOculusIAPConfig.GetOculusIAPConfigBuilder GetOculusIAPConfigOp
         {
-            get { return new Operation.GetOculusIAPConfig.GetOculusIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetOculusIAPConfig.GetOculusIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateOculusIAPConfig.UpdateOculusIAPConfigBuilder UpdateOculusIAPConfigOp
         {
-            get { return new Operation.UpdateOculusIAPConfig.UpdateOculusIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateOculusIAPConfig.UpdateOculusIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteOculusIAPConfig.DeleteOculusIAPConfigBuilder DeleteOculusIAPConfigOp
         {
-            get { return new Operation.DeleteOculusIAPConfig.DeleteOculusIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteOculusIAPConfig.DeleteOculusIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPlayStationIAPConfig.GetPlayStationIAPConfigBuilder GetPlayStationIAPConfigOp
         {
-            get { return new Operation.GetPlayStationIAPConfig.GetPlayStationIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPlayStationIAPConfig.GetPlayStationIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdatePlaystationIAPConfig.UpdatePlaystationIAPConfigBuilder UpdatePlaystationIAPConfigOp
         {
-            get { return new Operation.UpdatePlaystationIAPConfig.UpdatePlaystationIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdatePlaystationIAPConfig.UpdatePlaystationIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeletePlaystationIAPConfig.DeletePlaystationIAPConfigBuilder DeletePlaystationIAPConfigOp
         {
-            get { return new Operation.DeletePlaystationIAPConfig.DeletePlaystationIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeletePlaystationIAPConfig.DeletePlaystationIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ValidateExistedPlaystationIAPConfig.ValidateExistedPlaystationIAPConfigBuilder ValidateExistedPlaystationIAPConfigOp
         {
-            get { return new Operation.ValidateExistedPlaystationIAPConfig.ValidateExistedPlaystationIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ValidateExistedPlaystationIAPConfig.ValidateExistedPlaystationIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ValidatePlaystationIAPConfig.ValidatePlaystationIAPConfigBuilder ValidatePlaystationIAPConfigOp
         {
-            get { return new Operation.ValidatePlaystationIAPConfig.ValidatePlaystationIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ValidatePlaystationIAPConfig.ValidatePlaystationIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetSteamIAPConfig.GetSteamIAPConfigBuilder GetSteamIAPConfigOp
         {
-            get { return new Operation.GetSteamIAPConfig.GetSteamIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetSteamIAPConfig.GetSteamIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateSteamIAPConfig.UpdateSteamIAPConfigBuilder UpdateSteamIAPConfigOp
         {
-            get { return new Operation.UpdateSteamIAPConfig.UpdateSteamIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateSteamIAPConfig.UpdateSteamIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteSteamIAPConfig.DeleteSteamIAPConfigBuilder DeleteSteamIAPConfigOp
         {
-            get { return new Operation.DeleteSteamIAPConfig.DeleteSteamIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteSteamIAPConfig.DeleteSteamIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetTwitchIAPConfig.GetTwitchIAPConfigBuilder GetTwitchIAPConfigOp
         {
-            get { return new Operation.GetTwitchIAPConfig.GetTwitchIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetTwitchIAPConfig.GetTwitchIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateTwitchIAPConfig.UpdateTwitchIAPConfigBuilder UpdateTwitchIAPConfigOp
         {
-            get { return new Operation.UpdateTwitchIAPConfig.UpdateTwitchIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateTwitchIAPConfig.UpdateTwitchIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteTwitchIAPConfig.DeleteTwitchIAPConfigBuilder DeleteTwitchIAPConfigOp
         {
-            get { return new Operation.DeleteTwitchIAPConfig.DeleteTwitchIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteTwitchIAPConfig.DeleteTwitchIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetXblIAPConfig.GetXblIAPConfigBuilder GetXblIAPConfigOp
         {
-            get { return new Operation.GetXblIAPConfig.GetXblIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetXblIAPConfig.GetXblIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateXblIAPConfig.UpdateXblIAPConfigBuilder UpdateXblIAPConfigOp
         {
-            get { return new Operation.UpdateXblIAPConfig.UpdateXblIAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateXblIAPConfig.UpdateXblIAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteXblAPConfig.DeleteXblAPConfigBuilder DeleteXblAPConfigOp
         {
-            get { return new Operation.DeleteXblAPConfig.DeleteXblAPConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteXblAPConfig.DeleteXblAPConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateXblBPCertFile.UpdateXblBPCertFileBuilder UpdateXblBPCertFileOp
         {
-            get { return new Operation.UpdateXblBPCertFile.UpdateXblBPCertFileBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateXblBPCertFile.UpdateXblBPCertFileBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryUserIAPOrders.QueryUserIAPOrdersBuilder QueryUserIAPOrdersOp
         {
-            get { return new Operation.QueryUserIAPOrders.QueryUserIAPOrdersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryUserIAPOrders.QueryUserIAPOrdersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryAllUserIAPOrders.QueryAllUserIAPOrdersBuilder QueryAllUserIAPOrdersOp
         {
-            get { return new Operation.QueryAllUserIAPOrders.QueryAllUserIAPOrdersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryAllUserIAPOrders.QueryAllUserIAPOrdersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryUserIAPConsumeHistory.QueryUserIAPConsumeHistoryBuilder QueryUserIAPConsumeHistoryOp
         {
-            get { return new Operation.QueryUserIAPConsumeHistory.QueryUserIAPConsumeHistoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryUserIAPConsumeHistory.QueryUserIAPConsumeHistoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public MockFulfillIAPItem.MockFulfillIAPItemBuilder MockFulfillIAPItemOp
         {
-            get { return new Operation.MockFulfillIAPItem.MockFulfillIAPItemBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.MockFulfillIAPItem.MockFulfillIAPItemBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetIAPItemMapping.GetIAPItemMappingBuilder GetIAPItemMappingOp
         {
-            get { return new Operation.GetIAPItemMapping.GetIAPItemMappingBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetIAPItemMapping.GetIAPItemMappingBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SyncTwitchDropsEntitlement.SyncTwitchDropsEntitlementBuilder SyncTwitchDropsEntitlementOp
         {
-            get { return new Operation.SyncTwitchDropsEntitlement.SyncTwitchDropsEntitlementBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SyncTwitchDropsEntitlement.SyncTwitchDropsEntitlementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicFulfillAppleIAPItem.PublicFulfillAppleIAPItemBuilder PublicFulfillAppleIAPItemOp
         {
-            get { return new Operation.PublicFulfillAppleIAPItem.PublicFulfillAppleIAPItemBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicFulfillAppleIAPItem.PublicFulfillAppleIAPItemBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SyncEpicGamesInventory.SyncEpicGamesInventoryBuilder SyncEpicGamesInventoryOp
         {
-            get { return new Operation.SyncEpicGamesInventory.SyncEpicGamesInventoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SyncEpicGamesInventory.SyncEpicGamesInventoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicFulfillGoogleIAPItem.PublicFulfillGoogleIAPItemBuilder PublicFulfillGoogleIAPItemOp
         {
-            get { return new Operation.PublicFulfillGoogleIAPItem.PublicFulfillGoogleIAPItemBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicFulfillGoogleIAPItem.PublicFulfillGoogleIAPItemBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SyncOculusConsumableEntitlements.SyncOculusConsumableEntitlementsBuilder SyncOculusConsumableEntitlementsOp
         {
-            get { return new Operation.SyncOculusConsumableEntitlements.SyncOculusConsumableEntitlementsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SyncOculusConsumableEntitlements.SyncOculusConsumableEntitlementsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicReconcilePlayStationStore.PublicReconcilePlayStationStoreBuilder PublicReconcilePlayStationStoreOp
         {
-            get { return new Operation.PublicReconcilePlayStationStore.PublicReconcilePlayStationStoreBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicReconcilePlayStationStore.PublicReconcilePlayStationStoreBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicReconcilePlayStationStoreWithMultipleServiceLabels.PublicReconcilePlayStationStoreWithMultipleServiceLabelsBuilder PublicReconcilePlayStationStoreWithMultipleServiceLabelsOp
         {
-            get { return new Operation.PublicReconcilePlayStationStoreWithMultipleServiceLabels.PublicReconcilePlayStationStoreWithMultipleServiceLabelsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicReconcilePlayStationStoreWithMultipleServiceLabels.PublicReconcilePlayStationStoreWithMultipleServiceLabelsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SyncSteamInventory.SyncSteamInventoryBuilder SyncSteamInventoryOp
         {
-            get { return new Operation.SyncSteamInventory.SyncSteamInventoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SyncSteamInventory.SyncSteamInventoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SyncTwitchDropsEntitlement1.SyncTwitchDropsEntitlement1Builder SyncTwitchDropsEntitlement1Op
         {
-            get { return new Operation.SyncTwitchDropsEntitlement1.SyncTwitchDropsEntitlement1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SyncTwitchDropsEntitlement1.SyncTwitchDropsEntitlement1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SyncXboxInventory.SyncXboxInventoryBuilder SyncXboxInventoryOp
         {
-            get { return new Operation.SyncXboxInventory.SyncXboxInventoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SyncXboxInventory.SyncXboxInventoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

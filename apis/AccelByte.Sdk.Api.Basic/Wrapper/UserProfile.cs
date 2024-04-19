@@ -20,115 +20,305 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public UserProfile(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public UserProfile(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetUserProfileInfoByPublicId.GetUserProfileInfoByPublicIdBuilder GetUserProfileInfoByPublicIdOp
         {
-            get { return new Operation.GetUserProfileInfoByPublicId.GetUserProfileInfoByPublicIdBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserProfileInfoByPublicId.GetUserProfileInfoByPublicIdBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetUserProfilePublicInfoByIds.AdminGetUserProfilePublicInfoByIdsBuilder AdminGetUserProfilePublicInfoByIdsOp
         {
-            get { return new Operation.AdminGetUserProfilePublicInfoByIds.AdminGetUserProfilePublicInfoByIdsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetUserProfilePublicInfoByIds.AdminGetUserProfilePublicInfoByIdsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserProfileInfo.GetUserProfileInfoBuilder GetUserProfileInfoOp
         {
-            get { return new Operation.GetUserProfileInfo.GetUserProfileInfoBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserProfileInfo.GetUserProfileInfoBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateUserProfile.UpdateUserProfileBuilder UpdateUserProfileOp
         {
-            get { return new Operation.UpdateUserProfile.UpdateUserProfileBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateUserProfile.UpdateUserProfileBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteUserProfile.DeleteUserProfileBuilder DeleteUserProfileOp
         {
-            get { return new Operation.DeleteUserProfile.DeleteUserProfileBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteUserProfile.DeleteUserProfileBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetCustomAttributesInfo.GetCustomAttributesInfoBuilder GetCustomAttributesInfoOp
         {
-            get { return new Operation.GetCustomAttributesInfo.GetCustomAttributesInfoBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetCustomAttributesInfo.GetCustomAttributesInfoBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateCustomAttributesPartially.UpdateCustomAttributesPartiallyBuilder UpdateCustomAttributesPartiallyOp
         {
-            get { return new Operation.UpdateCustomAttributesPartially.UpdateCustomAttributesPartiallyBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateCustomAttributesPartially.UpdateCustomAttributesPartiallyBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPrivateCustomAttributesInfo.GetPrivateCustomAttributesInfoBuilder GetPrivateCustomAttributesInfoOp
         {
-            get { return new Operation.GetPrivateCustomAttributesInfo.GetPrivateCustomAttributesInfoBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPrivateCustomAttributesInfo.GetPrivateCustomAttributesInfoBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdatePrivateCustomAttributesPartially.UpdatePrivateCustomAttributesPartiallyBuilder UpdatePrivateCustomAttributesPartiallyOp
         {
-            get { return new Operation.UpdatePrivateCustomAttributesPartially.UpdatePrivateCustomAttributesPartiallyBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdatePrivateCustomAttributesPartially.UpdatePrivateCustomAttributesPartiallyBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateUserProfileStatus.UpdateUserProfileStatusBuilder UpdateUserProfileStatusOp
         {
-            get { return new Operation.UpdateUserProfileStatus.UpdateUserProfileStatusBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateUserProfileStatus.UpdateUserProfileStatusBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserProfilePublicInfoByIds.PublicGetUserProfilePublicInfoByIdsBuilder PublicGetUserProfilePublicInfoByIdsOp
         {
-            get { return new Operation.PublicGetUserProfilePublicInfoByIds.PublicGetUserProfilePublicInfoByIdsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserProfilePublicInfoByIds.PublicGetUserProfilePublicInfoByIdsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserProfileInfoByPublicId.PublicGetUserProfileInfoByPublicIdBuilder PublicGetUserProfileInfoByPublicIdOp
         {
-            get { return new Operation.PublicGetUserProfileInfoByPublicId.PublicGetUserProfileInfoByPublicIdBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserProfileInfoByPublicId.PublicGetUserProfileInfoByPublicIdBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetMyProfileInfo.GetMyProfileInfoBuilder GetMyProfileInfoOp
         {
-            get { return new Operation.GetMyProfileInfo.GetMyProfileInfoBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetMyProfileInfo.GetMyProfileInfoBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateMyProfile.UpdateMyProfileBuilder UpdateMyProfileOp
         {
-            get { return new Operation.UpdateMyProfile.UpdateMyProfileBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateMyProfile.UpdateMyProfileBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateMyProfile.CreateMyProfileBuilder CreateMyProfileOp
         {
-            get { return new Operation.CreateMyProfile.CreateMyProfileBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateMyProfile.CreateMyProfileBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetMyPrivateCustomAttributesInfo.GetMyPrivateCustomAttributesInfoBuilder GetMyPrivateCustomAttributesInfoOp
         {
-            get { return new Operation.GetMyPrivateCustomAttributesInfo.GetMyPrivateCustomAttributesInfoBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetMyPrivateCustomAttributesInfo.GetMyPrivateCustomAttributesInfoBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateMyPrivateCustomAttributesPartially.UpdateMyPrivateCustomAttributesPartiallyBuilder UpdateMyPrivateCustomAttributesPartiallyOp
         {
-            get { return new Operation.UpdateMyPrivateCustomAttributesPartially.UpdateMyPrivateCustomAttributesPartiallyBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateMyPrivateCustomAttributesPartially.UpdateMyPrivateCustomAttributesPartiallyBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetMyZipCode.GetMyZipCodeBuilder GetMyZipCodeOp
         {
-            get { return new Operation.GetMyZipCode.GetMyZipCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetMyZipCode.GetMyZipCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateMyZipCode.UpdateMyZipCodeBuilder UpdateMyZipCodeOp
         {
-            get { return new Operation.UpdateMyZipCode.UpdateMyZipCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateMyZipCode.UpdateMyZipCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserProfileInfo.PublicGetUserProfileInfoBuilder PublicGetUserProfileInfoOp
         {
-            get { return new Operation.PublicGetUserProfileInfo.PublicGetUserProfileInfoBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserProfileInfo.PublicGetUserProfileInfoBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUpdateUserProfile.PublicUpdateUserProfileBuilder PublicUpdateUserProfileOp
         {
-            get { return new Operation.PublicUpdateUserProfile.PublicUpdateUserProfileBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpdateUserProfile.PublicUpdateUserProfileBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicCreateUserProfile.PublicCreateUserProfileBuilder PublicCreateUserProfileOp
         {
-            get { return new Operation.PublicCreateUserProfile.PublicCreateUserProfileBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicCreateUserProfile.PublicCreateUserProfileBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetCustomAttributesInfo.PublicGetCustomAttributesInfoBuilder PublicGetCustomAttributesInfoOp
         {
-            get { return new Operation.PublicGetCustomAttributesInfo.PublicGetCustomAttributesInfoBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetCustomAttributesInfo.PublicGetCustomAttributesInfoBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUpdateCustomAttributesPartially.PublicUpdateCustomAttributesPartiallyBuilder PublicUpdateCustomAttributesPartiallyOp
         {
-            get { return new Operation.PublicUpdateCustomAttributesPartially.PublicUpdateCustomAttributesPartiallyBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpdateCustomAttributesPartially.PublicUpdateCustomAttributesPartiallyBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetUserProfilePublicInfo.PublicGetUserProfilePublicInfoBuilder PublicGetUserProfilePublicInfoOp
         {
-            get { return new Operation.PublicGetUserProfilePublicInfo.PublicGetUserProfilePublicInfoBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserProfilePublicInfo.PublicGetUserProfilePublicInfoBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicUpdateUserProfileStatus.PublicUpdateUserProfileStatusBuilder PublicUpdateUserProfileStatusOp
         {
-            get { return new Operation.PublicUpdateUserProfileStatus.PublicUpdateUserProfileStatusBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicUpdateUserProfileStatus.PublicUpdateUserProfileStatusBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

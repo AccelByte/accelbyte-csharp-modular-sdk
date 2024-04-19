@@ -20,39 +20,96 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public MockMatchmaking(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public MockMatchmaking(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public CleanAllMocks.CleanAllMocksBuilder CleanAllMocksOp
         {
-            get { return new Operation.CleanAllMocks.CleanAllMocksBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CleanAllMocks.CleanAllMocksBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetAllMockMatches.GetAllMockMatchesBuilder GetAllMockMatchesOp
         {
-            get { return new Operation.GetAllMockMatches.GetAllMockMatchesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetAllMockMatches.GetAllMockMatchesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetMockMatchesByTimestamp.GetMockMatchesByTimestampBuilder GetMockMatchesByTimestampOp
         {
-            get { return new Operation.GetMockMatchesByTimestamp.GetMockMatchesByTimestampBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetMockMatchesByTimestamp.GetMockMatchesByTimestampBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetAllMockTickets.GetAllMockTicketsBuilder GetAllMockTicketsOp
         {
-            get { return new Operation.GetAllMockTickets.GetAllMockTicketsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetAllMockTickets.GetAllMockTicketsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateMockTickets.CreateMockTicketsBuilder CreateMockTicketsOp
         {
-            get { return new Operation.CreateMockTickets.CreateMockTicketsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateMockTickets.CreateMockTicketsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public BulkCreateMockTickets.BulkCreateMockTicketsBuilder BulkCreateMockTicketsOp
         {
-            get { return new Operation.BulkCreateMockTickets.BulkCreateMockTicketsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BulkCreateMockTickets.BulkCreateMockTicketsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetMockTicketsByTimestamp.GetMockTicketsByTimestampBuilder GetMockTicketsByTimestampOp
         {
-            get { return new Operation.GetMockTicketsByTimestamp.GetMockTicketsByTimestampBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetMockTicketsByTimestamp.GetMockTicketsByTimestampBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,103 +20,272 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Group(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Group(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetGroupListAdminV1.GetGroupListAdminV1Builder GetGroupListAdminV1Op
         {
-            get { return new Operation.GetGroupListAdminV1.GetGroupListAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGroupListAdminV1.GetGroupListAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetSingleGroupAdminV1.GetSingleGroupAdminV1Builder GetSingleGroupAdminV1Op
         {
-            get { return new Operation.GetSingleGroupAdminV1.GetSingleGroupAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetSingleGroupAdminV1.GetSingleGroupAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteGroupAdminV1.DeleteGroupAdminV1Builder DeleteGroupAdminV1Op
         {
-            get { return new Operation.DeleteGroupAdminV1.DeleteGroupAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteGroupAdminV1.DeleteGroupAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetGroupListPublicV1.GetGroupListPublicV1Builder GetGroupListPublicV1Op
         {
-            get { return new Operation.GetGroupListPublicV1.GetGroupListPublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGroupListPublicV1.GetGroupListPublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateNewGroupPublicV1.CreateNewGroupPublicV1Builder CreateNewGroupPublicV1Op
         {
-            get { return new Operation.CreateNewGroupPublicV1.CreateNewGroupPublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateNewGroupPublicV1.CreateNewGroupPublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetSingleGroupPublicV1.GetSingleGroupPublicV1Builder GetSingleGroupPublicV1Op
         {
-            get { return new Operation.GetSingleGroupPublicV1.GetSingleGroupPublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetSingleGroupPublicV1.GetSingleGroupPublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateSingleGroupV1.UpdateSingleGroupV1Builder UpdateSingleGroupV1Op
         {
-            get { return new Operation.UpdateSingleGroupV1.UpdateSingleGroupV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateSingleGroupV1.UpdateSingleGroupV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteGroupPublicV1.DeleteGroupPublicV1Builder DeleteGroupPublicV1Op
         {
-            get { return new Operation.DeleteGroupPublicV1.DeleteGroupPublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteGroupPublicV1.DeleteGroupPublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdatePatchSingleGroupPublicV1.UpdatePatchSingleGroupPublicV1Builder UpdatePatchSingleGroupPublicV1Op
         {
-            get { return new Operation.UpdatePatchSingleGroupPublicV1.UpdatePatchSingleGroupPublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdatePatchSingleGroupPublicV1.UpdatePatchSingleGroupPublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateGroupCustomAttributesPublicV1.UpdateGroupCustomAttributesPublicV1Builder UpdateGroupCustomAttributesPublicV1Op
         {
-            get { return new Operation.UpdateGroupCustomAttributesPublicV1.UpdateGroupCustomAttributesPublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateGroupCustomAttributesPublicV1.UpdateGroupCustomAttributesPublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateGroupCustomRulePublicV1.UpdateGroupCustomRulePublicV1Builder UpdateGroupCustomRulePublicV1Op
         {
-            get { return new Operation.UpdateGroupCustomRulePublicV1.UpdateGroupCustomRulePublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateGroupCustomRulePublicV1.UpdateGroupCustomRulePublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateGroupPredefinedRulePublicV1.UpdateGroupPredefinedRulePublicV1Builder UpdateGroupPredefinedRulePublicV1Op
         {
-            get { return new Operation.UpdateGroupPredefinedRulePublicV1.UpdateGroupPredefinedRulePublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateGroupPredefinedRulePublicV1.UpdateGroupPredefinedRulePublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteGroupPredefinedRulePublicV1.DeleteGroupPredefinedRulePublicV1Builder DeleteGroupPredefinedRulePublicV1Op
         {
-            get { return new Operation.DeleteGroupPredefinedRulePublicV1.DeleteGroupPredefinedRulePublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteGroupPredefinedRulePublicV1.DeleteGroupPredefinedRulePublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetListGroupByIDsAdminV2.GetListGroupByIDsAdminV2Builder GetListGroupByIDsAdminV2Op
         {
-            get { return new Operation.GetListGroupByIDsAdminV2.GetListGroupByIDsAdminV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetListGroupByIDsAdminV2.GetListGroupByIDsAdminV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateNewGroupPublicV2.CreateNewGroupPublicV2Builder CreateNewGroupPublicV2Op
         {
-            get { return new Operation.CreateNewGroupPublicV2.CreateNewGroupPublicV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateNewGroupPublicV2.CreateNewGroupPublicV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetListGroupByIDsV2.GetListGroupByIDsV2Builder GetListGroupByIDsV2Op
         {
-            get { return new Operation.GetListGroupByIDsV2.GetListGroupByIDsV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetListGroupByIDsV2.GetListGroupByIDsV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdatePutSingleGroupPublicV2.UpdatePutSingleGroupPublicV2Builder UpdatePutSingleGroupPublicV2Op
         {
-            get { return new Operation.UpdatePutSingleGroupPublicV2.UpdatePutSingleGroupPublicV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdatePutSingleGroupPublicV2.UpdatePutSingleGroupPublicV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteGroupPublicV2.DeleteGroupPublicV2Builder DeleteGroupPublicV2Op
         {
-            get { return new Operation.DeleteGroupPublicV2.DeleteGroupPublicV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteGroupPublicV2.DeleteGroupPublicV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdatePatchSingleGroupPublicV2.UpdatePatchSingleGroupPublicV2Builder UpdatePatchSingleGroupPublicV2Op
         {
-            get { return new Operation.UpdatePatchSingleGroupPublicV2.UpdatePatchSingleGroupPublicV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdatePatchSingleGroupPublicV2.UpdatePatchSingleGroupPublicV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateGroupCustomAttributesPublicV2.UpdateGroupCustomAttributesPublicV2Builder UpdateGroupCustomAttributesPublicV2Op
         {
-            get { return new Operation.UpdateGroupCustomAttributesPublicV2.UpdateGroupCustomAttributesPublicV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateGroupCustomAttributesPublicV2.UpdateGroupCustomAttributesPublicV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateGroupCustomRulePublicV2.UpdateGroupCustomRulePublicV2Builder UpdateGroupCustomRulePublicV2Op
         {
-            get { return new Operation.UpdateGroupCustomRulePublicV2.UpdateGroupCustomRulePublicV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateGroupCustomRulePublicV2.UpdateGroupCustomRulePublicV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateGroupPredefinedRulePublicV2.UpdateGroupPredefinedRulePublicV2Builder UpdateGroupPredefinedRulePublicV2Op
         {
-            get { return new Operation.UpdateGroupPredefinedRulePublicV2.UpdateGroupPredefinedRulePublicV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateGroupPredefinedRulePublicV2.UpdateGroupPredefinedRulePublicV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteGroupPredefinedRulePublicV2.DeleteGroupPredefinedRulePublicV2Builder DeleteGroupPredefinedRulePublicV2Op
         {
-            get { return new Operation.DeleteGroupPredefinedRulePublicV2.DeleteGroupPredefinedRulePublicV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteGroupPredefinedRulePublicV2.DeleteGroupPredefinedRulePublicV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

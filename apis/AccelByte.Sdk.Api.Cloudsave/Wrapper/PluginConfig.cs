@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PluginConfig(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PluginConfig(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetPluginConfig.GetPluginConfigBuilder GetPluginConfigOp
         {
-            get { return new Operation.GetPluginConfig.GetPluginConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPluginConfig.GetPluginConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreatePluginConfig.CreatePluginConfigBuilder CreatePluginConfigOp
         {
-            get { return new Operation.CreatePluginConfig.CreatePluginConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreatePluginConfig.CreatePluginConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeletePluginConfig.DeletePluginConfigBuilder DeletePluginConfigOp
         {
-            get { return new Operation.DeletePluginConfig.DeletePluginConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeletePluginConfig.DeletePluginConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdatePluginConfig.UpdatePluginConfigBuilder UpdatePluginConfigOp
         {
-            get { return new Operation.UpdatePluginConfig.UpdatePluginConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdatePluginConfig.UpdatePluginConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

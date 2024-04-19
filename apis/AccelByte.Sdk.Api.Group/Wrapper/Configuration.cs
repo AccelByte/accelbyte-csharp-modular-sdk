@@ -20,43 +20,107 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Configuration(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Configuration(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ListGroupConfigurationAdminV1.ListGroupConfigurationAdminV1Builder ListGroupConfigurationAdminV1Op
         {
-            get { return new Operation.ListGroupConfigurationAdminV1.ListGroupConfigurationAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListGroupConfigurationAdminV1.ListGroupConfigurationAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateGroupConfigurationAdminV1.CreateGroupConfigurationAdminV1Builder CreateGroupConfigurationAdminV1Op
         {
-            get { return new Operation.CreateGroupConfigurationAdminV1.CreateGroupConfigurationAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateGroupConfigurationAdminV1.CreateGroupConfigurationAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public InitiateGroupConfigurationAdminV1.InitiateGroupConfigurationAdminV1Builder InitiateGroupConfigurationAdminV1Op
         {
-            get { return new Operation.InitiateGroupConfigurationAdminV1.InitiateGroupConfigurationAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.InitiateGroupConfigurationAdminV1.InitiateGroupConfigurationAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetGroupConfigurationAdminV1.GetGroupConfigurationAdminV1Builder GetGroupConfigurationAdminV1Op
         {
-            get { return new Operation.GetGroupConfigurationAdminV1.GetGroupConfigurationAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGroupConfigurationAdminV1.GetGroupConfigurationAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteGroupConfigurationV1.DeleteGroupConfigurationV1Builder DeleteGroupConfigurationV1Op
         {
-            get { return new Operation.DeleteGroupConfigurationV1.DeleteGroupConfigurationV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteGroupConfigurationV1.DeleteGroupConfigurationV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateGroupConfigurationAdminV1.UpdateGroupConfigurationAdminV1Builder UpdateGroupConfigurationAdminV1Op
         {
-            get { return new Operation.UpdateGroupConfigurationAdminV1.UpdateGroupConfigurationAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateGroupConfigurationAdminV1.UpdateGroupConfigurationAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateGroupConfigurationGlobalRuleAdminV1.UpdateGroupConfigurationGlobalRuleAdminV1Builder UpdateGroupConfigurationGlobalRuleAdminV1Op
         {
-            get { return new Operation.UpdateGroupConfigurationGlobalRuleAdminV1.UpdateGroupConfigurationGlobalRuleAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateGroupConfigurationGlobalRuleAdminV1.UpdateGroupConfigurationGlobalRuleAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteGroupConfigurationGlobalRuleAdminV1.DeleteGroupConfigurationGlobalRuleAdminV1Builder DeleteGroupConfigurationGlobalRuleAdminV1Op
         {
-            get { return new Operation.DeleteGroupConfigurationGlobalRuleAdminV1.DeleteGroupConfigurationGlobalRuleAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteGroupConfigurationGlobalRuleAdminV1.DeleteGroupConfigurationGlobalRuleAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

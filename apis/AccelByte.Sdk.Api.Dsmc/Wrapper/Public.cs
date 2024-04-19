@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Public(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Public(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetDefaultProvider.GetDefaultProviderBuilder GetDefaultProviderOp
         {
-            get { return new Operation.GetDefaultProvider.GetDefaultProviderBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetDefaultProvider.GetDefaultProviderBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListProviders.ListProvidersBuilder ListProvidersOp
         {
-            get { return new Operation.ListProviders.ListProvidersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListProviders.ListProvidersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListProvidersByRegion.ListProvidersByRegionBuilder ListProvidersByRegionOp
         {
-            get { return new Operation.ListProvidersByRegion.ListProvidersByRegionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListProvidersByRegion.ListProvidersByRegionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

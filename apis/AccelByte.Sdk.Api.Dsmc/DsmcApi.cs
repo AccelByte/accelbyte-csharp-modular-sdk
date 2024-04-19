@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Dsmc
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.Config Config
         {
             get
             {
                 if (_Config == null)
-                    _Config = new Wrapper.Config(_Sdk);
+                    _Config = new Wrapper.Config(_Sdk, _CustomBasePath);
                 return _Config;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Dsmc
             get
             {
                 if (_ImageConfig == null)
-                    _ImageConfig = new Wrapper.ImageConfig(_Sdk);
+                    _ImageConfig = new Wrapper.ImageConfig(_Sdk, _CustomBasePath);
                 return _ImageConfig;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Dsmc
             get
             {
                 if (_PodConfig == null)
-                    _PodConfig = new Wrapper.PodConfig(_Sdk);
+                    _PodConfig = new Wrapper.PodConfig(_Sdk, _CustomBasePath);
                 return _PodConfig;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Dsmc
             get
             {
                 if (_DeploymentConfig == null)
-                    _DeploymentConfig = new Wrapper.DeploymentConfig(_Sdk);
+                    _DeploymentConfig = new Wrapper.DeploymentConfig(_Sdk, _CustomBasePath);
                 return _DeploymentConfig;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Dsmc
             get
             {
                 if (_Admin == null)
-                    _Admin = new Wrapper.Admin(_Sdk);
+                    _Admin = new Wrapper.Admin(_Sdk, _CustomBasePath);
                 return _Admin;
             }
         }
@@ -75,7 +77,7 @@ namespace AccelByte.Sdk.Api.Dsmc
             get
             {
                 if (_Server == null)
-                    _Server = new Wrapper.Server(_Sdk);
+                    _Server = new Wrapper.Server(_Sdk, _CustomBasePath);
                 return _Server;
             }
         }
@@ -86,7 +88,7 @@ namespace AccelByte.Sdk.Api.Dsmc
             get
             {
                 if (_Session == null)
-                    _Session = new Wrapper.Session(_Sdk);
+                    _Session = new Wrapper.Session(_Sdk, _CustomBasePath);
                 return _Session;
             }
         }
@@ -97,7 +99,7 @@ namespace AccelByte.Sdk.Api.Dsmc
             get
             {
                 if (_Public == null)
-                    _Public = new Wrapper.Public(_Sdk);
+                    _Public = new Wrapper.Public(_Sdk, _CustomBasePath);
                 return _Public;
             }
         }
@@ -108,7 +110,7 @@ namespace AccelByte.Sdk.Api.Dsmc
             get
             {
                 if (_DsmcOperations == null)
-                    _DsmcOperations = new Wrapper.DsmcOperations(_Sdk);
+                    _DsmcOperations = new Wrapper.DsmcOperations(_Sdk, _CustomBasePath);
                 return _DsmcOperations;
             }
         }
@@ -117,6 +119,12 @@ namespace AccelByte.Sdk.Api.Dsmc
         internal DsmcApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public DsmcApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -129,7 +137,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<DsmcApi>("dsmc", () =>
             {
-                return new DsmcApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("dsmc");
+                if (customPath != "")
+                    return (new DsmcApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new DsmcApi(sdk);
             });
         }
     }

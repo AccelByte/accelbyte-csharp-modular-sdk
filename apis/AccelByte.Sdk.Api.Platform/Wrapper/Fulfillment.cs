@@ -20,39 +20,96 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Fulfillment(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Fulfillment(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public QueryFulfillmentHistories.QueryFulfillmentHistoriesBuilder QueryFulfillmentHistoriesOp
         {
-            get { return new Operation.QueryFulfillmentHistories.QueryFulfillmentHistoriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryFulfillmentHistories.QueryFulfillmentHistoriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public FulfillItem.FulfillItemBuilder FulfillItemOp
         {
-            get { return new Operation.FulfillItem.FulfillItemBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FulfillItem.FulfillItemBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RedeemCode.RedeemCodeBuilder RedeemCodeOp
         {
-            get { return new Operation.RedeemCode.RedeemCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RedeemCode.RedeemCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PreCheckFulfillItem.PreCheckFulfillItemBuilder PreCheckFulfillItemOp
         {
-            get { return new Operation.PreCheckFulfillItem.PreCheckFulfillItemBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PreCheckFulfillItem.PreCheckFulfillItemBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public FulfillRewards.FulfillRewardsBuilder FulfillRewardsOp
         {
-            get { return new Operation.FulfillRewards.FulfillRewardsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FulfillRewards.FulfillRewardsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicRedeemCode.PublicRedeemCodeBuilder PublicRedeemCodeOp
         {
-            get { return new Operation.PublicRedeemCode.PublicRedeemCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicRedeemCode.PublicRedeemCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public FulfillRewardsV2.FulfillRewardsV2Builder FulfillRewardsV2Op
         {
-            get { return new Operation.FulfillRewardsV2.FulfillRewardsV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FulfillRewardsV2.FulfillRewardsV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

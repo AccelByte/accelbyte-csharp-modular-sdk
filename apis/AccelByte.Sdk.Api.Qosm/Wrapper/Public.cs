@@ -20,19 +20,41 @@ namespace AccelByte.Sdk.Api.Qosm.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Public(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Public(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ListServerPerNamespace.ListServerPerNamespaceBuilder ListServerPerNamespaceOp
         {
-            get { return new Operation.ListServerPerNamespace.ListServerPerNamespaceBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListServerPerNamespace.ListServerPerNamespaceBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListServer.ListServerBuilder ListServerOp
         {
-            get { return new Operation.ListServer.ListServerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListServer.ListServerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

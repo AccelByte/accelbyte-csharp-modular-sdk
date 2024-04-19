@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public EnvironmentVariable(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public EnvironmentVariable(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminListEnvironmentVariables.AdminListEnvironmentVariablesBuilder AdminListEnvironmentVariablesOp
         {
-            get { return new Operation.AdminListEnvironmentVariables.AdminListEnvironmentVariablesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListEnvironmentVariables.AdminListEnvironmentVariablesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

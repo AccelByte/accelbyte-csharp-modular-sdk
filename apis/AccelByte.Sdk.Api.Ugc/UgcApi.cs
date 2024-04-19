@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Ugc
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.AdminChannel AdminChannel
         {
             get
             {
                 if (_AdminChannel == null)
-                    _AdminChannel = new Wrapper.AdminChannel(_Sdk);
+                    _AdminChannel = new Wrapper.AdminChannel(_Sdk, _CustomBasePath);
                 return _AdminChannel;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_AdminContent == null)
-                    _AdminContent = new Wrapper.AdminContent(_Sdk);
+                    _AdminContent = new Wrapper.AdminContent(_Sdk, _CustomBasePath);
                 return _AdminContent;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_AdminGroup == null)
-                    _AdminGroup = new Wrapper.AdminGroup(_Sdk);
+                    _AdminGroup = new Wrapper.AdminGroup(_Sdk, _CustomBasePath);
                 return _AdminGroup;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_AdminTag == null)
-                    _AdminTag = new Wrapper.AdminTag(_Sdk);
+                    _AdminTag = new Wrapper.AdminTag(_Sdk, _CustomBasePath);
                 return _AdminTag;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_AdminType == null)
-                    _AdminType = new Wrapper.AdminType(_Sdk);
+                    _AdminType = new Wrapper.AdminType(_Sdk, _CustomBasePath);
                 return _AdminType;
             }
         }
@@ -75,7 +77,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_Anonymization == null)
-                    _Anonymization = new Wrapper.Anonymization(_Sdk);
+                    _Anonymization = new Wrapper.Anonymization(_Sdk, _CustomBasePath);
                 return _Anonymization;
             }
         }
@@ -86,7 +88,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_PublicContentLegacy == null)
-                    _PublicContentLegacy = new Wrapper.PublicContentLegacy(_Sdk);
+                    _PublicContentLegacy = new Wrapper.PublicContentLegacy(_Sdk, _CustomBasePath);
                 return _PublicContentLegacy;
             }
         }
@@ -97,7 +99,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_PublicFollow == null)
-                    _PublicFollow = new Wrapper.PublicFollow(_Sdk);
+                    _PublicFollow = new Wrapper.PublicFollow(_Sdk, _CustomBasePath);
                 return _PublicFollow;
             }
         }
@@ -108,7 +110,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_PublicLikeLegacy == null)
-                    _PublicLikeLegacy = new Wrapper.PublicLikeLegacy(_Sdk);
+                    _PublicLikeLegacy = new Wrapper.PublicLikeLegacy(_Sdk, _CustomBasePath);
                 return _PublicLikeLegacy;
             }
         }
@@ -119,7 +121,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_PublicDownloadCountLegacy == null)
-                    _PublicDownloadCountLegacy = new Wrapper.PublicDownloadCountLegacy(_Sdk);
+                    _PublicDownloadCountLegacy = new Wrapper.PublicDownloadCountLegacy(_Sdk, _CustomBasePath);
                 return _PublicDownloadCountLegacy;
             }
         }
@@ -130,7 +132,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_PublicTag == null)
-                    _PublicTag = new Wrapper.PublicTag(_Sdk);
+                    _PublicTag = new Wrapper.PublicTag(_Sdk, _CustomBasePath);
                 return _PublicTag;
             }
         }
@@ -141,7 +143,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_PublicType == null)
-                    _PublicType = new Wrapper.PublicType(_Sdk);
+                    _PublicType = new Wrapper.PublicType(_Sdk, _CustomBasePath);
                 return _PublicType;
             }
         }
@@ -152,7 +154,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_PublicCreator == null)
-                    _PublicCreator = new Wrapper.PublicCreator(_Sdk);
+                    _PublicCreator = new Wrapper.PublicCreator(_Sdk, _CustomBasePath);
                 return _PublicCreator;
             }
         }
@@ -163,7 +165,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_PublicChannel == null)
-                    _PublicChannel = new Wrapper.PublicChannel(_Sdk);
+                    _PublicChannel = new Wrapper.PublicChannel(_Sdk, _CustomBasePath);
                 return _PublicChannel;
             }
         }
@@ -174,7 +176,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_PublicGroup == null)
-                    _PublicGroup = new Wrapper.PublicGroup(_Sdk);
+                    _PublicGroup = new Wrapper.PublicGroup(_Sdk, _CustomBasePath);
                 return _PublicGroup;
             }
         }
@@ -185,7 +187,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_AdminContentV2 == null)
-                    _AdminContentV2 = new Wrapper.AdminContentV2(_Sdk);
+                    _AdminContentV2 = new Wrapper.AdminContentV2(_Sdk, _CustomBasePath);
                 return _AdminContentV2;
             }
         }
@@ -196,7 +198,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_AdminConfig == null)
-                    _AdminConfig = new Wrapper.AdminConfig(_Sdk);
+                    _AdminConfig = new Wrapper.AdminConfig(_Sdk, _CustomBasePath);
                 return _AdminConfig;
             }
         }
@@ -207,7 +209,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_AdminStagingContent == null)
-                    _AdminStagingContent = new Wrapper.AdminStagingContent(_Sdk);
+                    _AdminStagingContent = new Wrapper.AdminStagingContent(_Sdk, _CustomBasePath);
                 return _AdminStagingContent;
             }
         }
@@ -218,7 +220,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_PublicContentV2 == null)
-                    _PublicContentV2 = new Wrapper.PublicContentV2(_Sdk);
+                    _PublicContentV2 = new Wrapper.PublicContentV2(_Sdk, _CustomBasePath);
                 return _PublicContentV2;
             }
         }
@@ -229,7 +231,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_PublicDownloadCountV2 == null)
-                    _PublicDownloadCountV2 = new Wrapper.PublicDownloadCountV2(_Sdk);
+                    _PublicDownloadCountV2 = new Wrapper.PublicDownloadCountV2(_Sdk, _CustomBasePath);
                 return _PublicDownloadCountV2;
             }
         }
@@ -240,7 +242,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_PublicLikeV2 == null)
-                    _PublicLikeV2 = new Wrapper.PublicLikeV2(_Sdk);
+                    _PublicLikeV2 = new Wrapper.PublicLikeV2(_Sdk, _CustomBasePath);
                 return _PublicLikeV2;
             }
         }
@@ -251,7 +253,7 @@ namespace AccelByte.Sdk.Api.Ugc
             get
             {
                 if (_PublicStagingContent == null)
-                    _PublicStagingContent = new Wrapper.PublicStagingContent(_Sdk);
+                    _PublicStagingContent = new Wrapper.PublicStagingContent(_Sdk, _CustomBasePath);
                 return _PublicStagingContent;
             }
         }
@@ -260,6 +262,12 @@ namespace AccelByte.Sdk.Api.Ugc
         internal UgcApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public UgcApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -272,7 +280,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<UgcApi>("ugc", () =>
             {
-                return new UgcApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("ugc");
+                if (customPath != "")
+                    return (new UgcApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new UgcApi(sdk);
             });
         }
     }

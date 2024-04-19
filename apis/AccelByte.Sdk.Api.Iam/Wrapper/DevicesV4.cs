@@ -20,59 +20,151 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public DevicesV4(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public DevicesV4(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetDevicesByUserV4.AdminGetDevicesByUserV4Builder AdminGetDevicesByUserV4Op
         {
-            get { return new Operation.AdminGetDevicesByUserV4.AdminGetDevicesByUserV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetDevicesByUserV4.AdminGetDevicesByUserV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetBannedDevicesV4.AdminGetBannedDevicesV4Builder AdminGetBannedDevicesV4Op
         {
-            get { return new Operation.AdminGetBannedDevicesV4.AdminGetBannedDevicesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetBannedDevicesV4.AdminGetBannedDevicesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetUserDeviceBansV4.AdminGetUserDeviceBansV4Builder AdminGetUserDeviceBansV4Op
         {
-            get { return new Operation.AdminGetUserDeviceBansV4.AdminGetUserDeviceBansV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetUserDeviceBansV4.AdminGetUserDeviceBansV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminBanDeviceV4.AdminBanDeviceV4Builder AdminBanDeviceV4Op
         {
-            get { return new Operation.AdminBanDeviceV4.AdminBanDeviceV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminBanDeviceV4.AdminBanDeviceV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetDeviceBanV4.AdminGetDeviceBanV4Builder AdminGetDeviceBanV4Op
         {
-            get { return new Operation.AdminGetDeviceBanV4.AdminGetDeviceBanV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetDeviceBanV4.AdminGetDeviceBanV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateDeviceBanV4.AdminUpdateDeviceBanV4Builder AdminUpdateDeviceBanV4Op
         {
-            get { return new Operation.AdminUpdateDeviceBanV4.AdminUpdateDeviceBanV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateDeviceBanV4.AdminUpdateDeviceBanV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGenerateReportV4.AdminGenerateReportV4Builder AdminGenerateReportV4Op
         {
-            get { return new Operation.AdminGenerateReportV4.AdminGenerateReportV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGenerateReportV4.AdminGenerateReportV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetDeviceTypesV4.AdminGetDeviceTypesV4Builder AdminGetDeviceTypesV4Op
         {
-            get { return new Operation.AdminGetDeviceTypesV4.AdminGetDeviceTypesV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetDeviceTypesV4.AdminGetDeviceTypesV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetDeviceBansV4.AdminGetDeviceBansV4Builder AdminGetDeviceBansV4Op
         {
-            get { return new Operation.AdminGetDeviceBansV4.AdminGetDeviceBansV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetDeviceBansV4.AdminGetDeviceBansV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDecryptDeviceV4.AdminDecryptDeviceV4Builder AdminDecryptDeviceV4Op
         {
-            get { return new Operation.AdminDecryptDeviceV4.AdminDecryptDeviceV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDecryptDeviceV4.AdminDecryptDeviceV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUnbanDeviceV4.AdminUnbanDeviceV4Builder AdminUnbanDeviceV4Op
         {
-            get { return new Operation.AdminUnbanDeviceV4.AdminUnbanDeviceV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUnbanDeviceV4.AdminUnbanDeviceV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetUsersByDeviceV4.AdminGetUsersByDeviceV4Builder AdminGetUsersByDeviceV4Op
         {
-            get { return new Operation.AdminGetUsersByDeviceV4.AdminGetUsersByDeviceV4Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetUsersByDeviceV4.AdminGetUsersByDeviceV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PublicInventoryConfigurations(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PublicInventoryConfigurations(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public PublicListInventoryConfigurations.PublicListInventoryConfigurationsBuilder PublicListInventoryConfigurationsOp
         {
-            get { return new Operation.PublicListInventoryConfigurations.PublicListInventoryConfigurationsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicListInventoryConfigurations.PublicListInventoryConfigurationsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

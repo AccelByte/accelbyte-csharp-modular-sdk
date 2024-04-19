@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public ConcurrentRecord(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public ConcurrentRecord(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public PutGameRecordConcurrentHandlerV1.PutGameRecordConcurrentHandlerV1Builder PutGameRecordConcurrentHandlerV1Op
         {
-            get { return new Operation.PutGameRecordConcurrentHandlerV1.PutGameRecordConcurrentHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PutGameRecordConcurrentHandlerV1.PutGameRecordConcurrentHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PutPlayerRecordConcurrentHandlerV1.PutPlayerRecordConcurrentHandlerV1Builder PutPlayerRecordConcurrentHandlerV1Op
         {
-            get { return new Operation.PutPlayerRecordConcurrentHandlerV1.PutPlayerRecordConcurrentHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PutPlayerRecordConcurrentHandlerV1.PutPlayerRecordConcurrentHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PutPlayerPublicRecordConcurrentHandlerV1.PutPlayerPublicRecordConcurrentHandlerV1Builder PutPlayerPublicRecordConcurrentHandlerV1Op
         {
-            get { return new Operation.PutPlayerPublicRecordConcurrentHandlerV1.PutPlayerPublicRecordConcurrentHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PutPlayerPublicRecordConcurrentHandlerV1.PutPlayerPublicRecordConcurrentHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

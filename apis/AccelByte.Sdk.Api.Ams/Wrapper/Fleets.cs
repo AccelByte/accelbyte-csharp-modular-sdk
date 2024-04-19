@@ -20,43 +20,107 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Fleets(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Fleets(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public FleetList.FleetListBuilder FleetListOp
         {
-            get { return new Operation.FleetList.FleetListBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FleetList.FleetListBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public FleetCreate.FleetCreateBuilder FleetCreateOp
         {
-            get { return new Operation.FleetCreate.FleetCreateBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FleetCreate.FleetCreateBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public FleetGet.FleetGetBuilder FleetGetOp
         {
-            get { return new Operation.FleetGet.FleetGetBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FleetGet.FleetGetBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public FleetUpdate.FleetUpdateBuilder FleetUpdateOp
         {
-            get { return new Operation.FleetUpdate.FleetUpdateBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FleetUpdate.FleetUpdateBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public FleetDelete.FleetDeleteBuilder FleetDeleteOp
         {
-            get { return new Operation.FleetDelete.FleetDeleteBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FleetDelete.FleetDeleteBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public FleetServers.FleetServersBuilder FleetServersOp
         {
-            get { return new Operation.FleetServers.FleetServersBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FleetServers.FleetServersBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public FleetClaimByID.FleetClaimByIDBuilder FleetClaimByIDOp
         {
-            get { return new Operation.FleetClaimByID.FleetClaimByIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FleetClaimByID.FleetClaimByIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public FleetClaimByKeys.FleetClaimByKeysBuilder FleetClaimByKeysOp
         {
-            get { return new Operation.FleetClaimByKeys.FleetClaimByKeysBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.FleetClaimByKeys.FleetClaimByKeysBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

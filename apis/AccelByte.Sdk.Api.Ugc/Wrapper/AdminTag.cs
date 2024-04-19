@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminTag(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminTag(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetTag.AdminGetTagBuilder AdminGetTagOp
         {
-            get { return new Operation.AdminGetTag.AdminGetTagBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetTag.AdminGetTagBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateTag.AdminCreateTagBuilder AdminCreateTagOp
         {
-            get { return new Operation.AdminCreateTag.AdminCreateTagBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateTag.AdminCreateTagBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateTag.AdminUpdateTagBuilder AdminUpdateTagOp
         {
-            get { return new Operation.AdminUpdateTag.AdminUpdateTagBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateTag.AdminUpdateTagBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteTag.AdminDeleteTagBuilder AdminDeleteTagOp
         {
-            get { return new Operation.AdminDeleteTag.AdminDeleteTagBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteTag.AdminDeleteTagBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

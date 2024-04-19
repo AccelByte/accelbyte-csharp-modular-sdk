@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Session
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.Operations Operations
         {
             get
             {
                 if (_Operations == null)
-                    _Operations = new Wrapper.Operations(_Sdk);
+                    _Operations = new Wrapper.Operations(_Sdk, _CustomBasePath);
                 return _Operations;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Session
             get
             {
                 if (_DSMCDefaultConfiguration == null)
-                    _DSMCDefaultConfiguration = new Wrapper.DSMCDefaultConfiguration(_Sdk);
+                    _DSMCDefaultConfiguration = new Wrapper.DSMCDefaultConfiguration(_Sdk, _CustomBasePath);
                 return _DSMCDefaultConfiguration;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Session
             get
             {
                 if (_EnvironmentVariable == null)
-                    _EnvironmentVariable = new Wrapper.EnvironmentVariable(_Sdk);
+                    _EnvironmentVariable = new Wrapper.EnvironmentVariable(_Sdk, _CustomBasePath);
                 return _EnvironmentVariable;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Session
             get
             {
                 if (_GlobalConfiguration == null)
-                    _GlobalConfiguration = new Wrapper.GlobalConfiguration(_Sdk);
+                    _GlobalConfiguration = new Wrapper.GlobalConfiguration(_Sdk, _CustomBasePath);
                 return _GlobalConfiguration;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Session
             get
             {
                 if (_ConfigurationTemplate == null)
-                    _ConfigurationTemplate = new Wrapper.ConfigurationTemplate(_Sdk);
+                    _ConfigurationTemplate = new Wrapper.ConfigurationTemplate(_Sdk, _CustomBasePath);
                 return _ConfigurationTemplate;
             }
         }
@@ -75,7 +77,7 @@ namespace AccelByte.Sdk.Api.Session
             get
             {
                 if (_Certificate == null)
-                    _Certificate = new Wrapper.Certificate(_Sdk);
+                    _Certificate = new Wrapper.Certificate(_Sdk, _CustomBasePath);
                 return _Certificate;
             }
         }
@@ -86,7 +88,7 @@ namespace AccelByte.Sdk.Api.Session
             get
             {
                 if (_MaxActive == null)
-                    _MaxActive = new Wrapper.MaxActive(_Sdk);
+                    _MaxActive = new Wrapper.MaxActive(_Sdk, _CustomBasePath);
                 return _MaxActive;
             }
         }
@@ -97,7 +99,7 @@ namespace AccelByte.Sdk.Api.Session
             get
             {
                 if (_GameSession == null)
-                    _GameSession = new Wrapper.GameSession(_Sdk);
+                    _GameSession = new Wrapper.GameSession(_Sdk, _CustomBasePath);
                 return _GameSession;
             }
         }
@@ -108,7 +110,7 @@ namespace AccelByte.Sdk.Api.Session
             get
             {
                 if (_NativeSession == null)
-                    _NativeSession = new Wrapper.NativeSession(_Sdk);
+                    _NativeSession = new Wrapper.NativeSession(_Sdk, _CustomBasePath);
                 return _NativeSession;
             }
         }
@@ -119,7 +121,7 @@ namespace AccelByte.Sdk.Api.Session
             get
             {
                 if (_Party == null)
-                    _Party = new Wrapper.Party(_Sdk);
+                    _Party = new Wrapper.Party(_Sdk, _CustomBasePath);
                 return _Party;
             }
         }
@@ -130,7 +132,7 @@ namespace AccelByte.Sdk.Api.Session
             get
             {
                 if (_PlatformCredential == null)
-                    _PlatformCredential = new Wrapper.PlatformCredential(_Sdk);
+                    _PlatformCredential = new Wrapper.PlatformCredential(_Sdk, _CustomBasePath);
                 return _PlatformCredential;
             }
         }
@@ -141,7 +143,7 @@ namespace AccelByte.Sdk.Api.Session
             get
             {
                 if (_RecentPlayer == null)
-                    _RecentPlayer = new Wrapper.RecentPlayer(_Sdk);
+                    _RecentPlayer = new Wrapper.RecentPlayer(_Sdk, _CustomBasePath);
                 return _RecentPlayer;
             }
         }
@@ -152,7 +154,7 @@ namespace AccelByte.Sdk.Api.Session
             get
             {
                 if (_SessionStorage == null)
-                    _SessionStorage = new Wrapper.SessionStorage(_Sdk);
+                    _SessionStorage = new Wrapper.SessionStorage(_Sdk, _CustomBasePath);
                 return _SessionStorage;
             }
         }
@@ -163,7 +165,7 @@ namespace AccelByte.Sdk.Api.Session
             get
             {
                 if (_Player == null)
-                    _Player = new Wrapper.Player(_Sdk);
+                    _Player = new Wrapper.Player(_Sdk, _CustomBasePath);
                 return _Player;
             }
         }
@@ -172,6 +174,12 @@ namespace AccelByte.Sdk.Api.Session
         internal SessionApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public SessionApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -184,7 +192,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<SessionApi>("session", () =>
             {
-                return new SessionApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("session");
+                if (customPath != "")
+                    return (new SessionApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new SessionApi(sdk);
             });
         }
     }

@@ -20,79 +20,206 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public ImageConfig(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public ImageConfig(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public UpdateImage.UpdateImageBuilder UpdateImageOp
         {
-            get { return new Operation.UpdateImage.UpdateImageBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateImage.UpdateImageBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateImage.CreateImageBuilder CreateImageOp
         {
-            get { return new Operation.CreateImage.CreateImageBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateImage.CreateImageBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ImportImages.ImportImagesBuilder ImportImagesOp
         {
-            get { return new Operation.ImportImages.ImportImagesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ImportImages.ImportImagesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateImagePatch.CreateImagePatchBuilder CreateImagePatchOp
         {
-            get { return new Operation.CreateImagePatch.CreateImagePatchBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateImagePatch.CreateImagePatchBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListImages.ListImagesBuilder ListImagesOp
         {
-            get { return new Operation.ListImages.ListImagesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListImages.ListImagesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteImage.DeleteImageBuilder DeleteImageOp
         {
-            get { return new Operation.DeleteImage.DeleteImageBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteImage.DeleteImageBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ExportImages.ExportImagesBuilder ExportImagesOp
         {
-            get { return new Operation.ExportImages.ExportImagesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ExportImages.ExportImagesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetImageLimit.GetImageLimitBuilder GetImageLimitOp
         {
-            get { return new Operation.GetImageLimit.GetImageLimitBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetImageLimit.GetImageLimitBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteImagePatch.DeleteImagePatchBuilder DeleteImagePatchOp
         {
-            get { return new Operation.DeleteImagePatch.DeleteImagePatchBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteImagePatch.DeleteImagePatchBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetImageDetail.GetImageDetailBuilder GetImageDetailOp
         {
-            get { return new Operation.GetImageDetail.GetImageDetailBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetImageDetail.GetImageDetailBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetImagePatches.GetImagePatchesBuilder GetImagePatchesOp
         {
-            get { return new Operation.GetImagePatches.GetImagePatchesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetImagePatches.GetImagePatchesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetImagePatchDetail.GetImagePatchDetailBuilder GetImagePatchDetailOp
         {
-            get { return new Operation.GetImagePatchDetail.GetImagePatchDetailBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetImagePatchDetail.GetImagePatchDetailBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetRepository.GetRepositoryBuilder GetRepositoryOp
         {
-            get { return new Operation.GetRepository.GetRepositoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetRepository.GetRepositoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateRepository.CreateRepositoryBuilder CreateRepositoryOp
         {
-            get { return new Operation.CreateRepository.CreateRepositoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateRepository.CreateRepositoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListImagesClient.ListImagesClientBuilder ListImagesClientOp
         {
-            get { return new Operation.ListImagesClient.ListImagesClientBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListImagesClient.ListImagesClientBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ImageLimitClient.ImageLimitClientBuilder ImageLimitClientOp
         {
-            get { return new Operation.ImageLimitClient.ImageLimitClientBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ImageLimitClient.ImageLimitClientBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ImageDetailClient.ImageDetailClientBuilder ImageDetailClientOp
         {
-            get { return new Operation.ImageDetailClient.ImageDetailClientBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ImageDetailClient.ImageDetailClientBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

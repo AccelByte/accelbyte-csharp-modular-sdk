@@ -20,19 +20,41 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public RecentPlayer(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public RecentPlayer(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetRecentPlayer.AdminGetRecentPlayerBuilder AdminGetRecentPlayerOp
         {
-            get { return new Operation.AdminGetRecentPlayer.AdminGetRecentPlayerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetRecentPlayer.AdminGetRecentPlayerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetRecentPlayer.PublicGetRecentPlayerBuilder PublicGetRecentPlayerOp
         {
-            get { return new Operation.PublicGetRecentPlayer.PublicGetRecentPlayerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetRecentPlayer.PublicGetRecentPlayerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

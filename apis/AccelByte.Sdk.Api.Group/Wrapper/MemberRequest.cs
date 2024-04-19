@@ -20,31 +20,74 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public MemberRequest(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public MemberRequest(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetGroupJoinRequestPublicV1.GetGroupJoinRequestPublicV1Builder GetGroupJoinRequestPublicV1Op
         {
-            get { return new Operation.GetGroupJoinRequestPublicV1.GetGroupJoinRequestPublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGroupJoinRequestPublicV1.GetGroupJoinRequestPublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetGroupInvitationRequestPublicV1.GetGroupInvitationRequestPublicV1Builder GetGroupInvitationRequestPublicV1Op
         {
-            get { return new Operation.GetGroupInvitationRequestPublicV1.GetGroupInvitationRequestPublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGroupInvitationRequestPublicV1.GetGroupInvitationRequestPublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetGroupInviteRequestPublicV2.GetGroupInviteRequestPublicV2Builder GetGroupInviteRequestPublicV2Op
         {
-            get { return new Operation.GetGroupInviteRequestPublicV2.GetGroupInviteRequestPublicV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGroupInviteRequestPublicV2.GetGroupInviteRequestPublicV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetGroupJoinRequestPublicV2.GetGroupJoinRequestPublicV2Builder GetGroupJoinRequestPublicV2Op
         {
-            get { return new Operation.GetGroupJoinRequestPublicV2.GetGroupJoinRequestPublicV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGroupJoinRequestPublicV2.GetGroupJoinRequestPublicV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetMyGroupJoinRequestV2.GetMyGroupJoinRequestV2Builder GetMyGroupJoinRequestV2Op
         {
-            get { return new Operation.GetMyGroupJoinRequestV2.GetMyGroupJoinRequestV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetMyGroupJoinRequestV2.GetMyGroupJoinRequestV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PublicChannel(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PublicChannel(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetChannels.GetChannelsBuilder GetChannelsOp
         {
-            get { return new Operation.GetChannels.GetChannelsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetChannels.GetChannelsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicCreateChannel.PublicCreateChannelBuilder PublicCreateChannelOp
         {
-            get { return new Operation.PublicCreateChannel.PublicCreateChannelBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicCreateChannel.PublicCreateChannelBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateChannel.UpdateChannelBuilder UpdateChannelOp
         {
-            get { return new Operation.UpdateChannel.UpdateChannelBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateChannel.UpdateChannelBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteChannel.DeleteChannelBuilder DeleteChannelOp
         {
-            get { return new Operation.DeleteChannel.DeleteChannelBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteChannel.DeleteChannelBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminTags(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminTags(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminListTags.AdminListTagsBuilder AdminListTagsOp
         {
-            get { return new Operation.AdminListTags.AdminListTagsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListTags.AdminListTagsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateTag.AdminCreateTagBuilder AdminCreateTagOp
         {
-            get { return new Operation.AdminCreateTag.AdminCreateTagBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateTag.AdminCreateTagBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteTag.AdminDeleteTagBuilder AdminDeleteTagOp
         {
-            get { return new Operation.AdminDeleteTag.AdminDeleteTagBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteTag.AdminDeleteTagBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

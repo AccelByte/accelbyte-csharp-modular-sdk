@@ -20,25 +20,54 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public UserInfo(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public UserInfo(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetUserInfoStatus.GetUserInfoStatusBuilder GetUserInfoStatusOp
         {
-            get { return new Operation.GetUserInfoStatus.GetUserInfoStatusBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserInfoStatus.GetUserInfoStatusBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SyncUserInfo.SyncUserInfoBuilder SyncUserInfoOp
         {
-            get { return new Operation.SyncUserInfo.SyncUserInfoBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SyncUserInfo.SyncUserInfoBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public InvalidateUserInfoCache.InvalidateUserInfoCacheBuilder InvalidateUserInfoCacheOp
         {
-            get { return new Operation.InvalidateUserInfoCache.InvalidateUserInfoCacheBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.InvalidateUserInfoCache.InvalidateUserInfoCacheBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

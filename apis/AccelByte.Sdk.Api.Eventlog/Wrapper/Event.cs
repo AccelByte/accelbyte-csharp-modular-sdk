@@ -20,56 +20,127 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Event(IAccelByteSdk sdk)
         {
             _sdk = sdk;
+        }
+
+        public Event(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
         }
 
         #region Operation Builders
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetEventByNamespaceHandler.GetEventByNamespaceHandlerBuilder GetEventByNamespaceHandlerOp
         {
-            get { return new Operation.GetEventByNamespaceHandler.GetEventByNamespaceHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetEventByNamespaceHandler.GetEventByNamespaceHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PostEventHandler.PostEventHandlerBuilder PostEventHandlerOp
         {
-            get { return new Operation.PostEventHandler.PostEventHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PostEventHandler.PostEventHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetEventByEventIDHandler.GetEventByEventIDHandlerBuilder GetEventByEventIDHandlerOp
         {
-            get { return new Operation.GetEventByEventIDHandler.GetEventByEventIDHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetEventByEventIDHandler.GetEventByEventIDHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetEventByEventTypeHandler.GetEventByEventTypeHandlerBuilder GetEventByEventTypeHandlerOp
         {
-            get { return new Operation.GetEventByEventTypeHandler.GetEventByEventTypeHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetEventByEventTypeHandler.GetEventByEventTypeHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetEventByEventTypeAndEventIDHandler.GetEventByEventTypeAndEventIDHandlerBuilder GetEventByEventTypeAndEventIDHandlerOp
         {
-            get { return new Operation.GetEventByEventTypeAndEventIDHandler.GetEventByEventTypeAndEventIDHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetEventByEventTypeAndEventIDHandler.GetEventByEventTypeAndEventIDHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetEventByUserIDHandler.GetEventByUserIDHandlerBuilder GetEventByUserIDHandlerOp
         {
-            get { return new Operation.GetEventByUserIDHandler.GetEventByUserIDHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetEventByUserIDHandler.GetEventByUserIDHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetEventByUserIDAndEventIDHandler.GetEventByUserIDAndEventIDHandlerBuilder GetEventByUserIDAndEventIDHandlerOp
         {
-            get { return new Operation.GetEventByUserIDAndEventIDHandler.GetEventByUserIDAndEventIDHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetEventByUserIDAndEventIDHandler.GetEventByUserIDAndEventIDHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetEventByUserIDAndEventTypeHandler.GetEventByUserIDAndEventTypeHandlerBuilder GetEventByUserIDAndEventTypeHandlerOp
         {
-            get { return new Operation.GetEventByUserIDAndEventTypeHandler.GetEventByUserIDAndEventTypeHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetEventByUserIDAndEventTypeHandler.GetEventByUserIDAndEventTypeHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetEventByUserEventIDAndEventTypeHandler.GetEventByUserEventIDAndEventTypeHandlerBuilder GetEventByUserEventIDAndEventTypeHandlerOp
         {
-            get { return new Operation.GetEventByUserEventIDAndEventTypeHandler.GetEventByUserEventIDAndEventTypeHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetEventByUserEventIDAndEventTypeHandler.GetEventByUserEventIDAndEventTypeHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

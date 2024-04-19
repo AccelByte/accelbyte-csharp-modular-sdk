@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public EnvironmentVariables(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public EnvironmentVariables(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public EnvironmentVariableList.EnvironmentVariableListBuilder EnvironmentVariableListOp
         {
-            get { return new Operation.EnvironmentVariableList.EnvironmentVariableListBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.EnvironmentVariableList.EnvironmentVariableListBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

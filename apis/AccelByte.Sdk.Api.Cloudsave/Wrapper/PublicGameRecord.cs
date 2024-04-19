@@ -20,31 +20,74 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PublicGameRecord(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PublicGameRecord(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetGameRecordsBulk.GetGameRecordsBulkBuilder GetGameRecordsBulkOp
         {
-            get { return new Operation.GetGameRecordsBulk.GetGameRecordsBulkBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGameRecordsBulk.GetGameRecordsBulkBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetGameRecordHandlerV1.GetGameRecordHandlerV1Builder GetGameRecordHandlerV1Op
         {
-            get { return new Operation.GetGameRecordHandlerV1.GetGameRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGameRecordHandlerV1.GetGameRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PutGameRecordHandlerV1.PutGameRecordHandlerV1Builder PutGameRecordHandlerV1Op
         {
-            get { return new Operation.PutGameRecordHandlerV1.PutGameRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PutGameRecordHandlerV1.PutGameRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PostGameRecordHandlerV1.PostGameRecordHandlerV1Builder PostGameRecordHandlerV1Op
         {
-            get { return new Operation.PostGameRecordHandlerV1.PostGameRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PostGameRecordHandlerV1.PostGameRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteGameRecordHandlerV1.DeleteGameRecordHandlerV1Builder DeleteGameRecordHandlerV1Op
         {
-            get { return new Operation.DeleteGameRecordHandlerV1.DeleteGameRecordHandlerV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteGameRecordHandlerV1.DeleteGameRecordHandlerV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

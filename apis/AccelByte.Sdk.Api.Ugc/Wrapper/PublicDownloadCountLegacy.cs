@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PublicDownloadCountLegacy(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PublicDownloadCountLegacy(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AddDownloadCount.AddDownloadCountBuilder AddDownloadCountOp
         {
-            get { return new Operation.AddDownloadCount.AddDownloadCountBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AddDownloadCount.AddDownloadCountBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

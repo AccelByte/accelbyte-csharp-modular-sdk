@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PlatformCredential(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PlatformCredential(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetPlatformCredentials.AdminGetPlatformCredentialsBuilder AdminGetPlatformCredentialsOp
         {
-            get { return new Operation.AdminGetPlatformCredentials.AdminGetPlatformCredentialsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetPlatformCredentials.AdminGetPlatformCredentialsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdatePlatformCredentials.AdminUpdatePlatformCredentialsBuilder AdminUpdatePlatformCredentialsOp
         {
-            get { return new Operation.AdminUpdatePlatformCredentials.AdminUpdatePlatformCredentialsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdatePlatformCredentials.AdminUpdatePlatformCredentialsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeletePlatformCredentials.AdminDeletePlatformCredentialsBuilder AdminDeletePlatformCredentialsOp
         {
-            get { return new Operation.AdminDeletePlatformCredentials.AdminDeletePlatformCredentialsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeletePlatformCredentials.AdminDeletePlatformCredentialsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

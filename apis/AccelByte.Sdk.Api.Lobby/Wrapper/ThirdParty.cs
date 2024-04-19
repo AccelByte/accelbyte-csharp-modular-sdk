@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public ThirdParty(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public ThirdParty(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetThirdPartyConfig.AdminGetThirdPartyConfigBuilder AdminGetThirdPartyConfigOp
         {
-            get { return new Operation.AdminGetThirdPartyConfig.AdminGetThirdPartyConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetThirdPartyConfig.AdminGetThirdPartyConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateThirdPartyConfig.AdminUpdateThirdPartyConfigBuilder AdminUpdateThirdPartyConfigOp
         {
-            get { return new Operation.AdminUpdateThirdPartyConfig.AdminUpdateThirdPartyConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateThirdPartyConfig.AdminUpdateThirdPartyConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminCreateThirdPartyConfig.AdminCreateThirdPartyConfigBuilder AdminCreateThirdPartyConfigOp
         {
-            get { return new Operation.AdminCreateThirdPartyConfig.AdminCreateThirdPartyConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminCreateThirdPartyConfig.AdminCreateThirdPartyConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminDeleteThirdPartyConfig.AdminDeleteThirdPartyConfigBuilder AdminDeleteThirdPartyConfigOp
         {
-            get { return new Operation.AdminDeleteThirdPartyConfig.AdminDeleteThirdPartyConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminDeleteThirdPartyConfig.AdminDeleteThirdPartyConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

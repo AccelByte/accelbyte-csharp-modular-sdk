@@ -20,47 +20,118 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PodConfig(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PodConfig(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetLowestInstanceSpec.GetLowestInstanceSpecBuilder GetLowestInstanceSpecOp
         {
-            get { return new Operation.GetLowestInstanceSpec.GetLowestInstanceSpecBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetLowestInstanceSpec.GetLowestInstanceSpecBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetAllPodConfig.GetAllPodConfigBuilder GetAllPodConfigOp
         {
-            get { return new Operation.GetAllPodConfig.GetAllPodConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetAllPodConfig.GetAllPodConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPodConfig.GetPodConfigBuilder GetPodConfigOp
         {
-            get { return new Operation.GetPodConfig.GetPodConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPodConfig.GetPodConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreatePodConfig.CreatePodConfigBuilder CreatePodConfigOp
         {
-            get { return new Operation.CreatePodConfig.CreatePodConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreatePodConfig.CreatePodConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeletePodConfig.DeletePodConfigBuilder DeletePodConfigOp
         {
-            get { return new Operation.DeletePodConfig.DeletePodConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeletePodConfig.DeletePodConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdatePodConfig.UpdatePodConfigBuilder UpdatePodConfigOp
         {
-            get { return new Operation.UpdatePodConfig.UpdatePodConfigBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdatePodConfig.UpdatePodConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetAllPodConfigClient.GetAllPodConfigClientBuilder GetAllPodConfigClientOp
         {
-            get { return new Operation.GetAllPodConfigClient.GetAllPodConfigClientBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetAllPodConfigClient.GetAllPodConfigClientBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreatePodConfigClient.CreatePodConfigClientBuilder CreatePodConfigClientOp
         {
-            get { return new Operation.CreatePodConfigClient.CreatePodConfigClientBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreatePodConfigClient.CreatePodConfigClientBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeletePodConfigClient.DeletePodConfigClientBuilder DeletePodConfigClientOp
         {
-            get { return new Operation.DeletePodConfigClient.DeletePodConfigClientBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeletePodConfigClient.DeletePodConfigClientBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

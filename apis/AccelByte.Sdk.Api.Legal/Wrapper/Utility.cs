@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Utility(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Utility(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public CheckReadiness.CheckReadinessBuilder CheckReadinessOp
         {
-            get { return new Operation.CheckReadiness.CheckReadinessBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CheckReadiness.CheckReadinessBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

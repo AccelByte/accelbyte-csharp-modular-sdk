@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Export(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Export(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ExportSeason.ExportSeasonBuilder ExportSeasonOp
         {
-            get { return new Operation.ExportSeason.ExportSeasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ExportSeason.ExportSeasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

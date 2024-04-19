@@ -20,49 +20,120 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Agreement(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Agreement(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ChangePreferenceConsent.ChangePreferenceConsentBuilder ChangePreferenceConsentOp
         {
-            get { return new Operation.ChangePreferenceConsent.ChangePreferenceConsentBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ChangePreferenceConsent.ChangePreferenceConsentBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RetrieveAcceptedAgreements.RetrieveAcceptedAgreementsBuilder RetrieveAcceptedAgreementsOp
         {
-            get { return new Operation.RetrieveAcceptedAgreements.RetrieveAcceptedAgreementsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveAcceptedAgreements.RetrieveAcceptedAgreementsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RetrieveAllUsersByPolicyVersion.RetrieveAllUsersByPolicyVersionBuilder RetrieveAllUsersByPolicyVersionOp
         {
-            get { return new Operation.RetrieveAllUsersByPolicyVersion.RetrieveAllUsersByPolicyVersionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveAllUsersByPolicyVersion.RetrieveAllUsersByPolicyVersionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ChangePreferenceConsent1.ChangePreferenceConsent1Builder ChangePreferenceConsent1Op
         {
-            get { return new Operation.ChangePreferenceConsent1.ChangePreferenceConsent1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ChangePreferenceConsent1.ChangePreferenceConsent1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AcceptVersionedPolicy.AcceptVersionedPolicyBuilder AcceptVersionedPolicyOp
         {
-            get { return new Operation.AcceptVersionedPolicy.AcceptVersionedPolicyBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AcceptVersionedPolicy.AcceptVersionedPolicyBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RetrieveAgreementsPublic.RetrieveAgreementsPublicBuilder RetrieveAgreementsPublicOp
         {
-            get { return new Operation.RetrieveAgreementsPublic.RetrieveAgreementsPublicBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RetrieveAgreementsPublic.RetrieveAgreementsPublicBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public BulkAcceptVersionedPolicy.BulkAcceptVersionedPolicyBuilder BulkAcceptVersionedPolicyOp
         {
-            get { return new Operation.BulkAcceptVersionedPolicy.BulkAcceptVersionedPolicyBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.BulkAcceptVersionedPolicy.BulkAcceptVersionedPolicyBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public IndirectBulkAcceptVersionedPolicyV2.IndirectBulkAcceptVersionedPolicyV2Builder IndirectBulkAcceptVersionedPolicyV2Op
         {
-            get { return new Operation.IndirectBulkAcceptVersionedPolicyV2.IndirectBulkAcceptVersionedPolicyV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.IndirectBulkAcceptVersionedPolicyV2.IndirectBulkAcceptVersionedPolicyV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public IndirectBulkAcceptVersionedPolicy1.IndirectBulkAcceptVersionedPolicy1Builder IndirectBulkAcceptVersionedPolicy1Op
         {
-            get { return new Operation.IndirectBulkAcceptVersionedPolicy1.IndirectBulkAcceptVersionedPolicy1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.IndirectBulkAcceptVersionedPolicy1.IndirectBulkAcceptVersionedPolicy1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

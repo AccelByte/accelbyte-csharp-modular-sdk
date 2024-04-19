@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public FileUpload(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public FileUpload(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GeneratedUploadUrl.GeneratedUploadUrlBuilder GeneratedUploadUrlOp
         {
-            get { return new Operation.GeneratedUploadUrl.GeneratedUploadUrlBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GeneratedUploadUrl.GeneratedUploadUrlBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GeneratedUserUploadContentUrl.GeneratedUserUploadContentUrlBuilder GeneratedUserUploadContentUrlOp
         {
-            get { return new Operation.GeneratedUserUploadContentUrl.GeneratedUserUploadContentUrlBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GeneratedUserUploadContentUrl.GeneratedUserUploadContentUrlBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGeneratedUploadUrl.PublicGeneratedUploadUrlBuilder PublicGeneratedUploadUrlOp
         {
-            get { return new Operation.PublicGeneratedUploadUrl.PublicGeneratedUploadUrlBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGeneratedUploadUrl.PublicGeneratedUploadUrlBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGeneratedUserUploadContentUrl.PublicGeneratedUserUploadContentUrlBuilder PublicGeneratedUserUploadContentUrlOp
         {
-            get { return new Operation.PublicGeneratedUserUploadContentUrl.PublicGeneratedUserUploadContentUrlBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGeneratedUserUploadContentUrl.PublicGeneratedUserUploadContentUrlBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

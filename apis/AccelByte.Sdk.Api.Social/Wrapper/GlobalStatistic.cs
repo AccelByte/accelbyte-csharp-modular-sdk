@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public GlobalStatistic(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public GlobalStatistic(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetGlobalStatItems.GetGlobalStatItemsBuilder GetGlobalStatItemsOp
         {
-            get { return new Operation.GetGlobalStatItems.GetGlobalStatItemsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGlobalStatItems.GetGlobalStatItemsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetGlobalStatItemByStatCode.GetGlobalStatItemByStatCodeBuilder GetGlobalStatItemByStatCodeOp
         {
-            get { return new Operation.GetGlobalStatItemByStatCode.GetGlobalStatItemByStatCodeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGlobalStatItemByStatCode.GetGlobalStatItemByStatCodeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetGlobalStatItems1.GetGlobalStatItems1Builder GetGlobalStatItems1Op
         {
-            get { return new Operation.GetGlobalStatItems1.GetGlobalStatItems1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGlobalStatItems1.GetGlobalStatItems1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetGlobalStatItemByStatCode1.GetGlobalStatItemByStatCode1Builder GetGlobalStatItemByStatCode1Op
         {
-            get { return new Operation.GetGlobalStatItemByStatCode1.GetGlobalStatItemByStatCode1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGlobalStatItemByStatCode1.GetGlobalStatItemByStatCode1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Achievement
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.Achievements Achievements
         {
             get
             {
                 if (_Achievements == null)
-                    _Achievements = new Wrapper.Achievements(_Sdk);
+                    _Achievements = new Wrapper.Achievements(_Sdk, _CustomBasePath);
                 return _Achievements;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Achievement
             get
             {
                 if (_GlobalAchievements == null)
-                    _GlobalAchievements = new Wrapper.GlobalAchievements(_Sdk);
+                    _GlobalAchievements = new Wrapper.GlobalAchievements(_Sdk, _CustomBasePath);
                 return _GlobalAchievements;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Achievement
             get
             {
                 if (_Tags == null)
-                    _Tags = new Wrapper.Tags(_Sdk);
+                    _Tags = new Wrapper.Tags(_Sdk, _CustomBasePath);
                 return _Tags;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Achievement
             get
             {
                 if (_UserAchievements == null)
-                    _UserAchievements = new Wrapper.UserAchievements(_Sdk);
+                    _UserAchievements = new Wrapper.UserAchievements(_Sdk, _CustomBasePath);
                 return _UserAchievements;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Achievement
             get
             {
                 if (_Anonymization == null)
-                    _Anonymization = new Wrapper.Anonymization(_Sdk);
+                    _Anonymization = new Wrapper.Anonymization(_Sdk, _CustomBasePath);
                 return _Anonymization;
             }
         }
@@ -73,6 +75,12 @@ namespace AccelByte.Sdk.Api.Achievement
         internal AchievementApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public AchievementApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -85,7 +93,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<AchievementApi>("achievement", () =>
             {
-                return new AchievementApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("achievement");
+                if (customPath != "")
+                    return (new AchievementApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new AchievementApi(sdk);
             });
         }
     }

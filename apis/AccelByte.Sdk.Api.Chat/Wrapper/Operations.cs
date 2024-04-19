@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Operations(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Operations(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public PublicGetMessages.PublicGetMessagesBuilder PublicGetMessagesOp
         {
-            get { return new Operation.PublicGetMessages.PublicGetMessagesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetMessages.PublicGetMessagesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

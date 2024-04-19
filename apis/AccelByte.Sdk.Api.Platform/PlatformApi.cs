@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Platform
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.FulfillmentScript FulfillmentScript
         {
             get
             {
                 if (_FulfillmentScript == null)
-                    _FulfillmentScript = new Wrapper.FulfillmentScript(_Sdk);
+                    _FulfillmentScript = new Wrapper.FulfillmentScript(_Sdk, _CustomBasePath);
                 return _FulfillmentScript;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_Item == null)
-                    _Item = new Wrapper.Item(_Sdk);
+                    _Item = new Wrapper.Item(_Sdk, _CustomBasePath);
                 return _Item;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_Campaign == null)
-                    _Campaign = new Wrapper.Campaign(_Sdk);
+                    _Campaign = new Wrapper.Campaign(_Sdk, _CustomBasePath);
                 return _Campaign;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_ServicePluginConfig == null)
-                    _ServicePluginConfig = new Wrapper.ServicePluginConfig(_Sdk);
+                    _ServicePluginConfig = new Wrapper.ServicePluginConfig(_Sdk, _CustomBasePath);
                 return _ServicePluginConfig;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_Category == null)
-                    _Category = new Wrapper.Category(_Sdk);
+                    _Category = new Wrapper.Category(_Sdk, _CustomBasePath);
                 return _Category;
             }
         }
@@ -75,7 +77,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_Currency == null)
-                    _Currency = new Wrapper.Currency(_Sdk);
+                    _Currency = new Wrapper.Currency(_Sdk, _CustomBasePath);
                 return _Currency;
             }
         }
@@ -86,7 +88,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_DLC == null)
-                    _DLC = new Wrapper.DLC(_Sdk);
+                    _DLC = new Wrapper.DLC(_Sdk, _CustomBasePath);
                 return _DLC;
             }
         }
@@ -97,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_Entitlement == null)
-                    _Entitlement = new Wrapper.Entitlement(_Sdk);
+                    _Entitlement = new Wrapper.Entitlement(_Sdk, _CustomBasePath);
                 return _Entitlement;
             }
         }
@@ -108,7 +110,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_Fulfillment == null)
-                    _Fulfillment = new Wrapper.Fulfillment(_Sdk);
+                    _Fulfillment = new Wrapper.Fulfillment(_Sdk, _CustomBasePath);
                 return _Fulfillment;
             }
         }
@@ -119,7 +121,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_Clawback == null)
-                    _Clawback = new Wrapper.Clawback(_Sdk);
+                    _Clawback = new Wrapper.Clawback(_Sdk, _CustomBasePath);
                 return _Clawback;
             }
         }
@@ -130,7 +132,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_IAP == null)
-                    _IAP = new Wrapper.IAP(_Sdk);
+                    _IAP = new Wrapper.IAP(_Sdk, _CustomBasePath);
                 return _IAP;
             }
         }
@@ -141,7 +143,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_Invoice == null)
-                    _Invoice = new Wrapper.Invoice(_Sdk);
+                    _Invoice = new Wrapper.Invoice(_Sdk, _CustomBasePath);
                 return _Invoice;
             }
         }
@@ -152,7 +154,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_KeyGroup == null)
-                    _KeyGroup = new Wrapper.KeyGroup(_Sdk);
+                    _KeyGroup = new Wrapper.KeyGroup(_Sdk, _CustomBasePath);
                 return _KeyGroup;
             }
         }
@@ -163,7 +165,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_Order == null)
-                    _Order = new Wrapper.Order(_Sdk);
+                    _Order = new Wrapper.Order(_Sdk, _CustomBasePath);
                 return _Order;
             }
         }
@@ -174,7 +176,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_PaymentCallbackConfig == null)
-                    _PaymentCallbackConfig = new Wrapper.PaymentCallbackConfig(_Sdk);
+                    _PaymentCallbackConfig = new Wrapper.PaymentCallbackConfig(_Sdk, _CustomBasePath);
                 return _PaymentCallbackConfig;
             }
         }
@@ -185,7 +187,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_Payment == null)
-                    _Payment = new Wrapper.Payment(_Sdk);
+                    _Payment = new Wrapper.Payment(_Sdk, _CustomBasePath);
                 return _Payment;
             }
         }
@@ -196,7 +198,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_PaymentDedicated == null)
-                    _PaymentDedicated = new Wrapper.PaymentDedicated(_Sdk);
+                    _PaymentDedicated = new Wrapper.PaymentDedicated(_Sdk, _CustomBasePath);
                 return _PaymentDedicated;
             }
         }
@@ -207,7 +209,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_Wallet == null)
-                    _Wallet = new Wrapper.Wallet(_Sdk);
+                    _Wallet = new Wrapper.Wallet(_Sdk, _CustomBasePath);
                 return _Wallet;
             }
         }
@@ -218,7 +220,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_Revocation == null)
-                    _Revocation = new Wrapper.Revocation(_Sdk);
+                    _Revocation = new Wrapper.Revocation(_Sdk, _CustomBasePath);
                 return _Revocation;
             }
         }
@@ -229,7 +231,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_Reward == null)
-                    _Reward = new Wrapper.Reward(_Sdk);
+                    _Reward = new Wrapper.Reward(_Sdk, _CustomBasePath);
                 return _Reward;
             }
         }
@@ -240,7 +242,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_Section == null)
-                    _Section = new Wrapper.Section(_Sdk);
+                    _Section = new Wrapper.Section(_Sdk, _CustomBasePath);
                 return _Section;
             }
         }
@@ -251,7 +253,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_Store == null)
-                    _Store = new Wrapper.Store(_Sdk);
+                    _Store = new Wrapper.Store(_Sdk, _CustomBasePath);
                 return _Store;
             }
         }
@@ -262,7 +264,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_CatalogChanges == null)
-                    _CatalogChanges = new Wrapper.CatalogChanges(_Sdk);
+                    _CatalogChanges = new Wrapper.CatalogChanges(_Sdk, _CustomBasePath);
                 return _CatalogChanges;
             }
         }
@@ -273,7 +275,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_Subscription == null)
-                    _Subscription = new Wrapper.Subscription(_Sdk);
+                    _Subscription = new Wrapper.Subscription(_Sdk, _CustomBasePath);
                 return _Subscription;
             }
         }
@@ -284,7 +286,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_Ticket == null)
-                    _Ticket = new Wrapper.Ticket(_Sdk);
+                    _Ticket = new Wrapper.Ticket(_Sdk, _CustomBasePath);
                 return _Ticket;
             }
         }
@@ -295,7 +297,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_TradeAction == null)
-                    _TradeAction = new Wrapper.TradeAction(_Sdk);
+                    _TradeAction = new Wrapper.TradeAction(_Sdk, _CustomBasePath);
                 return _TradeAction;
             }
         }
@@ -306,7 +308,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_AchievementPlatform == null)
-                    _AchievementPlatform = new Wrapper.AchievementPlatform(_Sdk);
+                    _AchievementPlatform = new Wrapper.AchievementPlatform(_Sdk, _CustomBasePath);
                 return _AchievementPlatform;
             }
         }
@@ -317,7 +319,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_Anonymization == null)
-                    _Anonymization = new Wrapper.Anonymization(_Sdk);
+                    _Anonymization = new Wrapper.Anonymization(_Sdk, _CustomBasePath);
                 return _Anonymization;
             }
         }
@@ -328,7 +330,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_SessionPlatform == null)
-                    _SessionPlatform = new Wrapper.SessionPlatform(_Sdk);
+                    _SessionPlatform = new Wrapper.SessionPlatform(_Sdk, _CustomBasePath);
                 return _SessionPlatform;
             }
         }
@@ -339,7 +341,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_View == null)
-                    _View = new Wrapper.View(_Sdk);
+                    _View = new Wrapper.View(_Sdk, _CustomBasePath);
                 return _View;
             }
         }
@@ -350,7 +352,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_OrderDedicated == null)
-                    _OrderDedicated = new Wrapper.OrderDedicated(_Sdk);
+                    _OrderDedicated = new Wrapper.OrderDedicated(_Sdk, _CustomBasePath);
                 return _OrderDedicated;
             }
         }
@@ -361,7 +363,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_PaymentConfig == null)
-                    _PaymentConfig = new Wrapper.PaymentConfig(_Sdk);
+                    _PaymentConfig = new Wrapper.PaymentConfig(_Sdk, _CustomBasePath);
                 return _PaymentConfig;
             }
         }
@@ -372,7 +374,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_PaymentStation == null)
-                    _PaymentStation = new Wrapper.PaymentStation(_Sdk);
+                    _PaymentStation = new Wrapper.PaymentStation(_Sdk, _CustomBasePath);
                 return _PaymentStation;
             }
         }
@@ -383,7 +385,7 @@ namespace AccelByte.Sdk.Api.Platform
             get
             {
                 if (_PaymentAccount == null)
-                    _PaymentAccount = new Wrapper.PaymentAccount(_Sdk);
+                    _PaymentAccount = new Wrapper.PaymentAccount(_Sdk, _CustomBasePath);
                 return _PaymentAccount;
             }
         }
@@ -392,6 +394,12 @@ namespace AccelByte.Sdk.Api.Platform
         internal PlatformApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public PlatformApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -404,7 +412,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<PlatformApi>("platform", () =>
             {
-                return new PlatformApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("platform");
+                if (customPath != "")
+                    return (new PlatformApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new PlatformApi(sdk);
             });
         }
     }

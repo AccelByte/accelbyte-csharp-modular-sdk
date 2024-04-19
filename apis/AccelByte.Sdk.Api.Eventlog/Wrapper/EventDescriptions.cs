@@ -20,61 +20,139 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public EventDescriptions(IAccelByteSdk sdk)
         {
             _sdk = sdk;
+        }
+
+        public EventDescriptions(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
         }
 
         #region Operation Builders
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AgentTypeDescriptionHandler.AgentTypeDescriptionHandlerBuilder AgentTypeDescriptionHandlerOp
         {
-            get { return new Operation.AgentTypeDescriptionHandler.AgentTypeDescriptionHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AgentTypeDescriptionHandler.AgentTypeDescriptionHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SpecificAgentTypeDescriptionHandler.SpecificAgentTypeDescriptionHandlerBuilder SpecificAgentTypeDescriptionHandlerOp
         {
-            get { return new Operation.SpecificAgentTypeDescriptionHandler.SpecificAgentTypeDescriptionHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SpecificAgentTypeDescriptionHandler.SpecificAgentTypeDescriptionHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public EventIDDescriptionHandler.EventIDDescriptionHandlerBuilder EventIDDescriptionHandlerOp
         {
-            get { return new Operation.EventIDDescriptionHandler.EventIDDescriptionHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.EventIDDescriptionHandler.EventIDDescriptionHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SpecificEventIDDescriptionHandler.SpecificEventIDDescriptionHandlerBuilder SpecificEventIDDescriptionHandlerOp
         {
-            get { return new Operation.SpecificEventIDDescriptionHandler.SpecificEventIDDescriptionHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SpecificEventIDDescriptionHandler.SpecificEventIDDescriptionHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public EventLevelDescriptionHandler.EventLevelDescriptionHandlerBuilder EventLevelDescriptionHandlerOp
         {
-            get { return new Operation.EventLevelDescriptionHandler.EventLevelDescriptionHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.EventLevelDescriptionHandler.EventLevelDescriptionHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SpecificEventLevelDescriptionHandler.SpecificEventLevelDescriptionHandlerBuilder SpecificEventLevelDescriptionHandlerOp
         {
-            get { return new Operation.SpecificEventLevelDescriptionHandler.SpecificEventLevelDescriptionHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SpecificEventLevelDescriptionHandler.SpecificEventLevelDescriptionHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public EventTypeDescriptionHandler.EventTypeDescriptionHandlerBuilder EventTypeDescriptionHandlerOp
         {
-            get { return new Operation.EventTypeDescriptionHandler.EventTypeDescriptionHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.EventTypeDescriptionHandler.EventTypeDescriptionHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SpecificEventTypeDescriptionHandler.SpecificEventTypeDescriptionHandlerBuilder SpecificEventTypeDescriptionHandlerOp
         {
-            get { return new Operation.SpecificEventTypeDescriptionHandler.SpecificEventTypeDescriptionHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SpecificEventTypeDescriptionHandler.SpecificEventTypeDescriptionHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UXNameDescriptionHandler.UXNameDescriptionHandlerBuilder UXNameDescriptionHandlerOp
         {
-            get { return new Operation.UXNameDescriptionHandler.UXNameDescriptionHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UXNameDescriptionHandler.UXNameDescriptionHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SpecificUXDescriptionHandler.SpecificUXDescriptionHandlerBuilder SpecificUXDescriptionHandlerOp
         {
-            get { return new Operation.SpecificUXDescriptionHandler.SpecificUXDescriptionHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SpecificUXDescriptionHandler.SpecificUXDescriptionHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

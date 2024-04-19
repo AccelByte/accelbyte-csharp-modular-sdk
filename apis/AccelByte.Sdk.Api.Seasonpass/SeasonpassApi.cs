@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Seasonpass
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.Export Export
         {
             get
             {
                 if (_Export == null)
-                    _Export = new Wrapper.Export(_Sdk);
+                    _Export = new Wrapper.Export(_Sdk, _CustomBasePath);
                 return _Export;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Seasonpass
             get
             {
                 if (_Season == null)
-                    _Season = new Wrapper.Season(_Sdk);
+                    _Season = new Wrapper.Season(_Sdk, _CustomBasePath);
                 return _Season;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Seasonpass
             get
             {
                 if (_Pass == null)
-                    _Pass = new Wrapper.Pass(_Sdk);
+                    _Pass = new Wrapper.Pass(_Sdk, _CustomBasePath);
                 return _Pass;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Seasonpass
             get
             {
                 if (_Reward == null)
-                    _Reward = new Wrapper.Reward(_Sdk);
+                    _Reward = new Wrapper.Reward(_Sdk, _CustomBasePath);
                 return _Reward;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Seasonpass
             get
             {
                 if (_Tier == null)
-                    _Tier = new Wrapper.Tier(_Sdk);
+                    _Tier = new Wrapper.Tier(_Sdk, _CustomBasePath);
                 return _Tier;
             }
         }
@@ -73,6 +75,12 @@ namespace AccelByte.Sdk.Api.Seasonpass
         internal SeasonpassApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public SeasonpassApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -85,7 +93,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<SeasonpassApi>("seasonpass", () =>
             {
-                return new SeasonpassApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("seasonpass");
+                if (customPath != "")
+                    return (new SeasonpassApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new SeasonpassApi(sdk);
             });
         }
     }

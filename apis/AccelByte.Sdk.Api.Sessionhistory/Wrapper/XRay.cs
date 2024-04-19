@@ -20,91 +20,239 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public XRay(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public XRay(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public QueryXrayMatchPool.QueryXrayMatchPoolBuilder QueryXrayMatchPoolOp
         {
-            get { return new Operation.QueryXrayMatchPool.QueryXrayMatchPoolBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryXrayMatchPool.QueryXrayMatchPoolBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryDetailTickMatchPool.QueryDetailTickMatchPoolBuilder QueryDetailTickMatchPoolOp
         {
-            get { return new Operation.QueryDetailTickMatchPool.QueryDetailTickMatchPoolBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryDetailTickMatchPool.QueryDetailTickMatchPoolBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryDetailTickMatchPoolMatches.QueryDetailTickMatchPoolMatchesBuilder QueryDetailTickMatchPoolMatchesOp
         {
-            get { return new Operation.QueryDetailTickMatchPoolMatches.QueryDetailTickMatchPoolMatchesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryDetailTickMatchPoolMatches.QueryDetailTickMatchPoolMatchesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryDetailTickMatchPoolTicket.QueryDetailTickMatchPoolTicketBuilder QueryDetailTickMatchPoolTicketOp
         {
-            get { return new Operation.QueryDetailTickMatchPoolTicket.QueryDetailTickMatchPoolTicketBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryDetailTickMatchPoolTicket.QueryDetailTickMatchPoolTicketBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryMatchHistories.QueryMatchHistoriesBuilder QueryMatchHistoriesOp
         {
-            get { return new Operation.QueryMatchHistories.QueryMatchHistoriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryMatchHistories.QueryMatchHistoriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryMatchTicketHistories.QueryMatchTicketHistoriesBuilder QueryMatchTicketHistoriesOp
         {
-            get { return new Operation.QueryMatchTicketHistories.QueryMatchTicketHistoriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryMatchTicketHistories.QueryMatchTicketHistoriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryXrayMatch.QueryXrayMatchBuilder QueryXrayMatchOp
         {
-            get { return new Operation.QueryXrayMatch.QueryXrayMatchBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryXrayMatch.QueryXrayMatchBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryAcquiringDS.QueryAcquiringDSBuilder QueryAcquiringDSOp
         {
-            get { return new Operation.QueryAcquiringDS.QueryAcquiringDSBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryAcquiringDS.QueryAcquiringDSBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryAcquiringDSWaitTimeAvg.QueryAcquiringDSWaitTimeAvgBuilder QueryAcquiringDSWaitTimeAvgOp
         {
-            get { return new Operation.QueryAcquiringDSWaitTimeAvg.QueryAcquiringDSWaitTimeAvgBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryAcquiringDSWaitTimeAvg.QueryAcquiringDSWaitTimeAvgBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryMatchLengthDurationpAvg.QueryMatchLengthDurationpAvgBuilder QueryMatchLengthDurationpAvgOp
         {
-            get { return new Operation.QueryMatchLengthDurationpAvg.QueryMatchLengthDurationpAvgBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryMatchLengthDurationpAvg.QueryMatchLengthDurationpAvgBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryMatchLengthDurationp99.QueryMatchLengthDurationp99Builder QueryMatchLengthDurationp99Op
         {
-            get { return new Operation.QueryMatchLengthDurationp99.QueryMatchLengthDurationp99Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryMatchLengthDurationp99.QueryMatchLengthDurationp99Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryTotalActiveSession.QueryTotalActiveSessionBuilder QueryTotalActiveSessionOp
         {
-            get { return new Operation.QueryTotalActiveSession.QueryTotalActiveSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryTotalActiveSession.QueryTotalActiveSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryTotalMatchmakingMatch.QueryTotalMatchmakingMatchBuilder QueryTotalMatchmakingMatchOp
         {
-            get { return new Operation.QueryTotalMatchmakingMatch.QueryTotalMatchmakingMatchBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryTotalMatchmakingMatch.QueryTotalMatchmakingMatchBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryTotalPlayerPersession.QueryTotalPlayerPersessionBuilder QueryTotalPlayerPersessionOp
         {
-            get { return new Operation.QueryTotalPlayerPersession.QueryTotalPlayerPersessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryTotalPlayerPersession.QueryTotalPlayerPersessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryTotalMatchmakingCanceled.QueryTotalMatchmakingCanceledBuilder QueryTotalMatchmakingCanceledOp
         {
-            get { return new Operation.QueryTotalMatchmakingCanceled.QueryTotalMatchmakingCanceledBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryTotalMatchmakingCanceled.QueryTotalMatchmakingCanceledBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryTotalMatchmakingCreated.QueryTotalMatchmakingCreatedBuilder QueryTotalMatchmakingCreatedOp
         {
-            get { return new Operation.QueryTotalMatchmakingCreated.QueryTotalMatchmakingCreatedBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryTotalMatchmakingCreated.QueryTotalMatchmakingCreatedBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryTotalMatchmakingExpired.QueryTotalMatchmakingExpiredBuilder QueryTotalMatchmakingExpiredOp
         {
-            get { return new Operation.QueryTotalMatchmakingExpired.QueryTotalMatchmakingExpiredBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryTotalMatchmakingExpired.QueryTotalMatchmakingExpiredBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryTotalMatchmakingMatchTicket.QueryTotalMatchmakingMatchTicketBuilder QueryTotalMatchmakingMatchTicketOp
         {
-            get { return new Operation.QueryTotalMatchmakingMatchTicket.QueryTotalMatchmakingMatchTicketBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryTotalMatchmakingMatchTicket.QueryTotalMatchmakingMatchTicketBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryXrayTimelineByTicketID.QueryXrayTimelineByTicketIDBuilder QueryXrayTimelineByTicketIDOp
         {
-            get { return new Operation.QueryXrayTimelineByTicketID.QueryXrayTimelineByTicketIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryXrayTimelineByTicketID.QueryXrayTimelineByTicketIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryXrayTimelineByUserID.QueryXrayTimelineByUserIDBuilder QueryXrayTimelineByUserIDOp
         {
-            get { return new Operation.QueryXrayTimelineByUserID.QueryXrayTimelineByUserIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryXrayTimelineByUserID.QueryXrayTimelineByUserIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

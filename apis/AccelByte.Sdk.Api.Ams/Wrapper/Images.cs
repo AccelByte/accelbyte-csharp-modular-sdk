@@ -20,23 +20,52 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Images(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Images(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ImageList.ImageListBuilder ImageListOp
         {
-            get { return new Operation.ImageList.ImageListBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ImageList.ImageListBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ImageGet.ImageGetBuilder ImageGetOp
         {
-            get { return new Operation.ImageGet.ImageGetBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ImageGet.ImageGetBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ImagePatch.ImagePatchBuilder ImagePatchOp
         {
-            get { return new Operation.ImagePatch.ImagePatchBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ImagePatch.ImagePatchBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

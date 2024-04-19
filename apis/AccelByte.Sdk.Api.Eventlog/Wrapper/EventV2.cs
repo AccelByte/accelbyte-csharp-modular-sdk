@@ -20,27 +20,63 @@ namespace AccelByte.Sdk.Api.Eventlog.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public EventV2(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public EventV2(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public QueryEventStreamHandler.QueryEventStreamHandlerBuilder QueryEventStreamHandlerOp
         {
-            get { return new Operation.QueryEventStreamHandler.QueryEventStreamHandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryEventStreamHandler.QueryEventStreamHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetEventSpecificUserV2Handler.GetEventSpecificUserV2HandlerBuilder GetEventSpecificUserV2HandlerOp
         {
-            get { return new Operation.GetEventSpecificUserV2Handler.GetEventSpecificUserV2HandlerBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetEventSpecificUserV2Handler.GetEventSpecificUserV2HandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPublicEditHistory.GetPublicEditHistoryBuilder GetPublicEditHistoryOp
         {
-            get { return new Operation.GetPublicEditHistory.GetPublicEditHistoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPublicEditHistory.GetPublicEditHistoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetUserEventsV2Public.GetUserEventsV2PublicBuilder GetUserEventsV2PublicOp
         {
-            get { return new Operation.GetUserEventsV2Public.GetUserEventsV2PublicBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetUserEventsV2Public.GetUserEventsV2PublicBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

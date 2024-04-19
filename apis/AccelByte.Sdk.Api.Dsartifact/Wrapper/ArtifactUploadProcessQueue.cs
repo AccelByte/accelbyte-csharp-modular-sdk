@@ -20,51 +20,129 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public ArtifactUploadProcessQueue(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public ArtifactUploadProcessQueue(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ListNodesIPAddress.ListNodesIPAddressBuilder ListNodesIPAddressOp
         {
-            get { return new Operation.ListNodesIPAddress.ListNodesIPAddressBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListNodesIPAddress.ListNodesIPAddressBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteNodeByID.DeleteNodeByIDBuilder DeleteNodeByIDOp
         {
-            get { return new Operation.DeleteNodeByID.DeleteNodeByIDBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteNodeByID.DeleteNodeByIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListQueue.ListQueueBuilder ListQueueOp
         {
-            get { return new Operation.ListQueue.ListQueueBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListQueue.ListQueueBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetActiveQueue.GetActiveQueueBuilder GetActiveQueueOp
         {
-            get { return new Operation.GetActiveQueue.GetActiveQueueBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetActiveQueue.GetActiveQueueBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SetActiveQueue.SetActiveQueueBuilder SetActiveQueueOp
         {
-            get { return new Operation.SetActiveQueue.SetActiveQueueBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SetActiveQueue.SetActiveQueueBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteActiveQueue.DeleteActiveQueueBuilder DeleteActiveQueueOp
         {
-            get { return new Operation.DeleteActiveQueue.DeleteActiveQueueBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteActiveQueue.DeleteActiveQueueBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ReportFailedUpload.ReportFailedUploadBuilder ReportFailedUploadOp
         {
-            get { return new Operation.ReportFailedUpload.ReportFailedUploadBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ReportFailedUpload.ReportFailedUploadBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteQueue.DeleteQueueBuilder DeleteQueueOp
         {
-            get { return new Operation.DeleteQueue.DeleteQueueBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteQueue.DeleteQueueBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListAllActiveQueue.ListAllActiveQueueBuilder ListAllActiveQueueOp
         {
-            get { return new Operation.ListAllActiveQueue.ListAllActiveQueueBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListAllActiveQueue.ListAllActiveQueueBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ListAllQueue.ListAllQueueBuilder ListAllQueueOp
         {
-            get { return new Operation.ListAllQueue.ListAllQueueBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListAllQueue.ListAllQueueBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

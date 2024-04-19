@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Admin(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Admin(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetServerLogs.GetServerLogsBuilder GetServerLogsOp
         {
-            get { return new Operation.GetServerLogs.GetServerLogsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetServerLogs.GetServerLogsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

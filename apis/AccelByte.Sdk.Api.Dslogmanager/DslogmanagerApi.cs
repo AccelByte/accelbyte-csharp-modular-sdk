@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Dslogmanager
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.Admin Admin
         {
             get
             {
                 if (_Admin == null)
-                    _Admin = new Wrapper.Admin(_Sdk);
+                    _Admin = new Wrapper.Admin(_Sdk, _CustomBasePath);
                 return _Admin;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager
             get
             {
                 if (_TerminatedServers == null)
-                    _TerminatedServers = new Wrapper.TerminatedServers(_Sdk);
+                    _TerminatedServers = new Wrapper.TerminatedServers(_Sdk, _CustomBasePath);
                 return _TerminatedServers;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager
             get
             {
                 if (_AllTerminatedServers == null)
-                    _AllTerminatedServers = new Wrapper.AllTerminatedServers(_Sdk);
+                    _AllTerminatedServers = new Wrapper.AllTerminatedServers(_Sdk, _CustomBasePath);
                 return _AllTerminatedServers;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager
             get
             {
                 if (_DslogmanagerOperations == null)
-                    _DslogmanagerOperations = new Wrapper.DslogmanagerOperations(_Sdk);
+                    _DslogmanagerOperations = new Wrapper.DslogmanagerOperations(_Sdk, _CustomBasePath);
                 return _DslogmanagerOperations;
             }
         }
@@ -62,6 +64,12 @@ namespace AccelByte.Sdk.Api.Dslogmanager
         internal DslogmanagerApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public DslogmanagerApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -74,7 +82,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<DslogmanagerApi>("dslogmanager", () =>
             {
-                return new DslogmanagerApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("dslogmanager");
+                if (customPath != "")
+                    return (new DslogmanagerApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new DslogmanagerApi(sdk);
             });
         }
     }

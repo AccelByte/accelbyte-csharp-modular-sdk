@@ -20,59 +20,151 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public GroupRoles(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public GroupRoles(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetMemberRolesListAdminV1.GetMemberRolesListAdminV1Builder GetMemberRolesListAdminV1Op
         {
-            get { return new Operation.GetMemberRolesListAdminV1.GetMemberRolesListAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetMemberRolesListAdminV1.GetMemberRolesListAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateMemberRoleAdminV1.CreateMemberRoleAdminV1Builder CreateMemberRoleAdminV1Op
         {
-            get { return new Operation.CreateMemberRoleAdminV1.CreateMemberRoleAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateMemberRoleAdminV1.CreateMemberRoleAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetSingleMemberRoleAdminV1.GetSingleMemberRoleAdminV1Builder GetSingleMemberRoleAdminV1Op
         {
-            get { return new Operation.GetSingleMemberRoleAdminV1.GetSingleMemberRoleAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetSingleMemberRoleAdminV1.GetSingleMemberRoleAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteMemberRoleAdminV1.DeleteMemberRoleAdminV1Builder DeleteMemberRoleAdminV1Op
         {
-            get { return new Operation.DeleteMemberRoleAdminV1.DeleteMemberRoleAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteMemberRoleAdminV1.DeleteMemberRoleAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateMemberRoleAdminV1.UpdateMemberRoleAdminV1Builder UpdateMemberRoleAdminV1Op
         {
-            get { return new Operation.UpdateMemberRoleAdminV1.UpdateMemberRoleAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateMemberRoleAdminV1.UpdateMemberRoleAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateMemberRolePermissionAdminV1.UpdateMemberRolePermissionAdminV1Builder UpdateMemberRolePermissionAdminV1Op
         {
-            get { return new Operation.UpdateMemberRolePermissionAdminV1.UpdateMemberRolePermissionAdminV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateMemberRolePermissionAdminV1.UpdateMemberRolePermissionAdminV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetMemberRolesListPublicV1.GetMemberRolesListPublicV1Builder GetMemberRolesListPublicV1Op
         {
-            get { return new Operation.GetMemberRolesListPublicV1.GetMemberRolesListPublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetMemberRolesListPublicV1.GetMemberRolesListPublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateMemberRolePublicV1.UpdateMemberRolePublicV1Builder UpdateMemberRolePublicV1Op
         {
-            get { return new Operation.UpdateMemberRolePublicV1.UpdateMemberRolePublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateMemberRolePublicV1.UpdateMemberRolePublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteMemberRolePublicV1.DeleteMemberRolePublicV1Builder DeleteMemberRolePublicV1Op
         {
-            get { return new Operation.DeleteMemberRolePublicV1.DeleteMemberRolePublicV1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteMemberRolePublicV1.DeleteMemberRolePublicV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetMemberRolesListPublicV2.GetMemberRolesListPublicV2Builder GetMemberRolesListPublicV2Op
         {
-            get { return new Operation.GetMemberRolesListPublicV2.GetMemberRolesListPublicV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetMemberRolesListPublicV2.GetMemberRolesListPublicV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateMemberRolePublicV2.UpdateMemberRolePublicV2Builder UpdateMemberRolePublicV2Op
         {
-            get { return new Operation.UpdateMemberRolePublicV2.UpdateMemberRolePublicV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateMemberRolePublicV2.UpdateMemberRolePublicV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteMemberRolePublicV2.DeleteMemberRolePublicV2Builder DeleteMemberRolePublicV2Op
         {
-            get { return new Operation.DeleteMemberRolePublicV2.DeleteMemberRolePublicV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteMemberRolePublicV2.DeleteMemberRolePublicV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

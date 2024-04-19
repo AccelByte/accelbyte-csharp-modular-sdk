@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Anonymization(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Anonymization(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AnonymizeUserProfile.AnonymizeUserProfileBuilder AnonymizeUserProfileOp
         {
-            get { return new Operation.AnonymizeUserProfile.AnonymizeUserProfileBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AnonymizeUserProfile.AnonymizeUserProfileBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

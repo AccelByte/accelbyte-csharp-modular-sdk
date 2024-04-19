@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public NativeSession(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public NativeSession(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminGetListNativeSession.AdminGetListNativeSessionBuilder AdminGetListNativeSessionOp
         {
-            get { return new Operation.AdminGetListNativeSession.AdminGetListNativeSessionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetListNativeSession.AdminGetListNativeSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

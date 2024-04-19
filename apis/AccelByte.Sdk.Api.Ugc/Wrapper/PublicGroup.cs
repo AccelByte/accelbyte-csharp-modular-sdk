@@ -20,39 +20,96 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public PublicGroup(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public PublicGroup(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetGroups.GetGroupsBuilder GetGroupsOp
         {
-            get { return new Operation.GetGroups.GetGroupsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGroups.GetGroupsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateGroup.CreateGroupBuilder CreateGroupOp
         {
-            get { return new Operation.CreateGroup.CreateGroupBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateGroup.CreateGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetGroup.GetGroupBuilder GetGroupOp
         {
-            get { return new Operation.GetGroup.GetGroupBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGroup.GetGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateGroup.UpdateGroupBuilder UpdateGroupOp
         {
-            get { return new Operation.UpdateGroup.UpdateGroupBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateGroup.UpdateGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteGroup.DeleteGroupBuilder DeleteGroupOp
         {
-            get { return new Operation.DeleteGroup.DeleteGroupBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteGroup.DeleteGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetGroupContent.GetGroupContentBuilder GetGroupContentOp
         {
-            get { return new Operation.GetGroupContent.GetGroupContentBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetGroupContent.GetGroupContentBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetGroupContentsV2.PublicGetGroupContentsV2Builder PublicGetGroupContentsV2Op
         {
-            get { return new Operation.PublicGetGroupContentsV2.PublicGetGroupContentsV2Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetGroupContentsV2.PublicGetGroupContentsV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

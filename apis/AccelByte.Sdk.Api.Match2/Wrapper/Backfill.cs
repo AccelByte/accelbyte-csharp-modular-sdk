@@ -20,35 +20,85 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Backfill(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Backfill(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public CreateBackfill.CreateBackfillBuilder CreateBackfillOp
         {
-            get { return new Operation.CreateBackfill.CreateBackfillBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateBackfill.CreateBackfillBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetBackfillProposal.GetBackfillProposalBuilder GetBackfillProposalOp
         {
-            get { return new Operation.GetBackfillProposal.GetBackfillProposalBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetBackfillProposal.GetBackfillProposalBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetBackfill.GetBackfillBuilder GetBackfillOp
         {
-            get { return new Operation.GetBackfill.GetBackfillBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetBackfill.GetBackfillBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteBackfill.DeleteBackfillBuilder DeleteBackfillOp
         {
-            get { return new Operation.DeleteBackfill.DeleteBackfillBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteBackfill.DeleteBackfillBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AcceptBackfill.AcceptBackfillBuilder AcceptBackfillOp
         {
-            get { return new Operation.AcceptBackfill.AcceptBackfillBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AcceptBackfill.AcceptBackfillBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RejectBackfill.RejectBackfillBuilder RejectBackfillOp
         {
-            get { return new Operation.RejectBackfill.RejectBackfillBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RejectBackfill.RejectBackfillBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

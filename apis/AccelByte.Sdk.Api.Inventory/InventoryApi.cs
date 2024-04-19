@@ -15,12 +15,14 @@ namespace AccelByte.Sdk.Api.Inventory
     {
         private IAccelByteSdk _Sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Wrapper.AdminChainingOperations AdminChainingOperations
         {
             get
             {
                 if (_AdminChainingOperations == null)
-                    _AdminChainingOperations = new Wrapper.AdminChainingOperations(_Sdk);
+                    _AdminChainingOperations = new Wrapper.AdminChainingOperations(_Sdk, _CustomBasePath);
                 return _AdminChainingOperations;
             }
         }
@@ -31,7 +33,7 @@ namespace AccelByte.Sdk.Api.Inventory
             get
             {
                 if (_AdminInventories == null)
-                    _AdminInventories = new Wrapper.AdminInventories(_Sdk);
+                    _AdminInventories = new Wrapper.AdminInventories(_Sdk, _CustomBasePath);
                 return _AdminInventories;
             }
         }
@@ -42,7 +44,7 @@ namespace AccelByte.Sdk.Api.Inventory
             get
             {
                 if (_AdminItems == null)
-                    _AdminItems = new Wrapper.AdminItems(_Sdk);
+                    _AdminItems = new Wrapper.AdminItems(_Sdk, _CustomBasePath);
                 return _AdminItems;
             }
         }
@@ -53,7 +55,7 @@ namespace AccelByte.Sdk.Api.Inventory
             get
             {
                 if (_AdminInventoryConfigurations == null)
-                    _AdminInventoryConfigurations = new Wrapper.AdminInventoryConfigurations(_Sdk);
+                    _AdminInventoryConfigurations = new Wrapper.AdminInventoryConfigurations(_Sdk, _CustomBasePath);
                 return _AdminInventoryConfigurations;
             }
         }
@@ -64,7 +66,7 @@ namespace AccelByte.Sdk.Api.Inventory
             get
             {
                 if (_AdminItemTypes == null)
-                    _AdminItemTypes = new Wrapper.AdminItemTypes(_Sdk);
+                    _AdminItemTypes = new Wrapper.AdminItemTypes(_Sdk, _CustomBasePath);
                 return _AdminItemTypes;
             }
         }
@@ -75,7 +77,7 @@ namespace AccelByte.Sdk.Api.Inventory
             get
             {
                 if (_AdminTags == null)
-                    _AdminTags = new Wrapper.AdminTags(_Sdk);
+                    _AdminTags = new Wrapper.AdminTags(_Sdk, _CustomBasePath);
                 return _AdminTags;
             }
         }
@@ -86,7 +88,7 @@ namespace AccelByte.Sdk.Api.Inventory
             get
             {
                 if (_PublicInventoryConfigurations == null)
-                    _PublicInventoryConfigurations = new Wrapper.PublicInventoryConfigurations(_Sdk);
+                    _PublicInventoryConfigurations = new Wrapper.PublicInventoryConfigurations(_Sdk, _CustomBasePath);
                 return _PublicInventoryConfigurations;
             }
         }
@@ -97,7 +99,7 @@ namespace AccelByte.Sdk.Api.Inventory
             get
             {
                 if (_PublicItemTypes == null)
-                    _PublicItemTypes = new Wrapper.PublicItemTypes(_Sdk);
+                    _PublicItemTypes = new Wrapper.PublicItemTypes(_Sdk, _CustomBasePath);
                 return _PublicItemTypes;
             }
         }
@@ -108,7 +110,7 @@ namespace AccelByte.Sdk.Api.Inventory
             get
             {
                 if (_PublicTags == null)
-                    _PublicTags = new Wrapper.PublicTags(_Sdk);
+                    _PublicTags = new Wrapper.PublicTags(_Sdk, _CustomBasePath);
                 return _PublicTags;
             }
         }
@@ -119,7 +121,7 @@ namespace AccelByte.Sdk.Api.Inventory
             get
             {
                 if (_PublicInventories == null)
-                    _PublicInventories = new Wrapper.PublicInventories(_Sdk);
+                    _PublicInventories = new Wrapper.PublicInventories(_Sdk, _CustomBasePath);
                 return _PublicInventories;
             }
         }
@@ -130,7 +132,7 @@ namespace AccelByte.Sdk.Api.Inventory
             get
             {
                 if (_PublicItems == null)
-                    _PublicItems = new Wrapper.PublicItems(_Sdk);
+                    _PublicItems = new Wrapper.PublicItems(_Sdk, _CustomBasePath);
                 return _PublicItems;
             }
         }
@@ -139,6 +141,12 @@ namespace AccelByte.Sdk.Api.Inventory
         internal InventoryApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;
+        }
+
+        public InventoryApi WithCustomBasePath(string value)
+        {
+            _CustomBasePath = value;
+            return this;
         }
     }
 }
@@ -151,7 +159,11 @@ namespace AccelByte.Sdk.Api
         {
             return sdk.GetApi<InventoryApi>("inventory", () =>
             {
-                return new InventoryApi(sdk);
+                string customPath = sdk.Configuration.ConfigRepository.GetCustomServiceBasePath("inventory");
+                if (customPath != "")
+                    return (new InventoryApi(sdk)).WithCustomBasePath(customPath);
+                else
+                    return new InventoryApi(sdk);
             });
         }
     }

@@ -20,59 +20,151 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminReasons(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminReasons(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public AdminListReasonGroups.AdminListReasonGroupsBuilder AdminListReasonGroupsOp
         {
-            get { return new Operation.AdminListReasonGroups.AdminListReasonGroupsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminListReasonGroups.AdminListReasonGroupsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateReasonGroup.CreateReasonGroupBuilder CreateReasonGroupOp
         {
-            get { return new Operation.CreateReasonGroup.CreateReasonGroupBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateReasonGroup.CreateReasonGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetReasonGroup.GetReasonGroupBuilder GetReasonGroupOp
         {
-            get { return new Operation.GetReasonGroup.GetReasonGroupBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetReasonGroup.GetReasonGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteReasonGroup.DeleteReasonGroupBuilder DeleteReasonGroupOp
         {
-            get { return new Operation.DeleteReasonGroup.DeleteReasonGroupBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteReasonGroup.DeleteReasonGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateReasonGroup.UpdateReasonGroupBuilder UpdateReasonGroupOp
         {
-            get { return new Operation.UpdateReasonGroup.UpdateReasonGroupBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateReasonGroup.UpdateReasonGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetReasons.AdminGetReasonsBuilder AdminGetReasonsOp
         {
-            get { return new Operation.AdminGetReasons.AdminGetReasonsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetReasons.AdminGetReasonsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateReason.CreateReasonBuilder CreateReasonOp
         {
-            get { return new Operation.CreateReason.CreateReasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateReason.CreateReasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetAllReasons.AdminGetAllReasonsBuilder AdminGetAllReasonsOp
         {
-            get { return new Operation.AdminGetAllReasons.AdminGetAllReasonsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetAllReasons.AdminGetAllReasonsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetUnusedReasons.AdminGetUnusedReasonsBuilder AdminGetUnusedReasonsOp
         {
-            get { return new Operation.AdminGetUnusedReasons.AdminGetUnusedReasonsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetUnusedReasons.AdminGetUnusedReasonsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetReason.AdminGetReasonBuilder AdminGetReasonOp
         {
-            get { return new Operation.AdminGetReason.AdminGetReasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetReason.AdminGetReasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteReason.DeleteReasonBuilder DeleteReasonOp
         {
-            get { return new Operation.DeleteReason.DeleteReasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteReason.DeleteReasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateReason.UpdateReasonBuilder UpdateReasonOp
         {
-            get { return new Operation.UpdateReason.UpdateReasonBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateReason.UpdateReasonBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

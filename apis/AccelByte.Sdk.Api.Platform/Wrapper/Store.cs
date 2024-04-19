@@ -20,93 +20,241 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Store(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Store(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public ListStores.ListStoresBuilder ListStoresOp
         {
-            get { return new Operation.ListStores.ListStoresBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ListStores.ListStoresBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CreateStore.CreateStoreBuilder CreateStoreOp
         {
-            get { return new Operation.CreateStore.CreateStoreBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateStore.CreateStoreBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetCatalogDefinition.GetCatalogDefinitionBuilder GetCatalogDefinitionOp
         {
-            get { return new Operation.GetCatalogDefinition.GetCatalogDefinitionBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetCatalogDefinition.GetCatalogDefinitionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DownloadCSVTemplates.DownloadCSVTemplatesBuilder DownloadCSVTemplatesOp
         {
-            get { return new Operation.DownloadCSVTemplates.DownloadCSVTemplatesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DownloadCSVTemplates.DownloadCSVTemplatesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ExportStoreByCSV.ExportStoreByCSVBuilder ExportStoreByCSVOp
         {
-            get { return new Operation.ExportStoreByCSV.ExportStoreByCSVBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ExportStoreByCSV.ExportStoreByCSVBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ImportStore.ImportStoreBuilder ImportStoreOp
         {
-            get { return new Operation.ImportStore.ImportStoreBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ImportStore.ImportStoreBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPublishedStore.GetPublishedStoreBuilder GetPublishedStoreOp
         {
-            get { return new Operation.GetPublishedStore.GetPublishedStoreBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPublishedStore.GetPublishedStoreBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeletePublishedStore.DeletePublishedStoreBuilder DeletePublishedStoreOp
         {
-            get { return new Operation.DeletePublishedStore.DeletePublishedStoreBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeletePublishedStore.DeletePublishedStoreBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetPublishedStoreBackup.GetPublishedStoreBackupBuilder GetPublishedStoreBackupOp
         {
-            get { return new Operation.GetPublishedStoreBackup.GetPublishedStoreBackupBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetPublishedStoreBackup.GetPublishedStoreBackupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public RollbackPublishedStore.RollbackPublishedStoreBuilder RollbackPublishedStoreOp
         {
-            get { return new Operation.RollbackPublishedStore.RollbackPublishedStoreBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RollbackPublishedStore.RollbackPublishedStoreBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetStore.GetStoreBuilder GetStoreOp
         {
-            get { return new Operation.GetStore.GetStoreBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetStore.GetStoreBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateStore.UpdateStoreBuilder UpdateStoreOp
         {
-            get { return new Operation.UpdateStore.UpdateStoreBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateStore.UpdateStoreBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteStore.DeleteStoreBuilder DeleteStoreOp
         {
-            get { return new Operation.DeleteStore.DeleteStoreBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteStore.DeleteStoreBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public CloneStore.CloneStoreBuilder CloneStoreOp
         {
-            get { return new Operation.CloneStore.CloneStoreBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CloneStore.CloneStoreBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ExportStore.ExportStoreBuilder ExportStoreOp
         {
-            get { return new Operation.ExportStore.ExportStoreBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ExportStore.ExportStoreBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public QueryImportHistory.QueryImportHistoryBuilder QueryImportHistoryOp
         {
-            get { return new Operation.QueryImportHistory.QueryImportHistoryBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.QueryImportHistory.QueryImportHistoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ImportStoreByCSV.ImportStoreByCSVBuilder ImportStoreByCSVOp
         {
-            get { return new Operation.ImportStoreByCSV.ImportStoreByCSVBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ImportStoreByCSV.ImportStoreByCSVBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicListStores.PublicListStoresBuilder PublicListStoresOp
         {
-            get { return new Operation.PublicListStores.PublicListStoresBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicListStores.PublicListStoresBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ImportStore1.ImportStore1Builder ImportStore1Op
         {
-            get { return new Operation.ImportStore1.ImportStore1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ImportStore1.ImportStore1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public ExportStore1.ExportStore1Builder ExportStore1Op
         {
-            get { return new Operation.ExportStore1.ExportStore1Builder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.ExportStore1.ExportStore1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

@@ -20,35 +20,85 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public AdminModerationRule(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public AdminModerationRule(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public CreateModerationRule.CreateModerationRuleBuilder CreateModerationRuleOp
         {
-            get { return new Operation.CreateModerationRule.CreateModerationRuleBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.CreateModerationRule.CreateModerationRuleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateModerationRule.UpdateModerationRuleBuilder UpdateModerationRuleOp
         {
-            get { return new Operation.UpdateModerationRule.UpdateModerationRuleBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateModerationRule.UpdateModerationRuleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteModerationRule.DeleteModerationRuleBuilder DeleteModerationRuleOp
         {
-            get { return new Operation.DeleteModerationRule.DeleteModerationRuleBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteModerationRule.DeleteModerationRuleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateModerationRuleStatus.UpdateModerationRuleStatusBuilder UpdateModerationRuleStatusOp
         {
-            get { return new Operation.UpdateModerationRuleStatus.UpdateModerationRuleStatusBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateModerationRuleStatus.UpdateModerationRuleStatusBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetModerationRules.GetModerationRulesBuilder GetModerationRulesOp
         {
-            get { return new Operation.GetModerationRules.GetModerationRulesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetModerationRules.GetModerationRulesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetModerationRuleDetails.GetModerationRuleDetailsBuilder GetModerationRuleDetailsOp
         {
-            get { return new Operation.GetModerationRuleDetails.GetModerationRuleDetailsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetModerationRuleDetails.GetModerationRuleDetailsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

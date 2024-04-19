@@ -20,57 +20,142 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Misc(IAccelByteSdk sdk)
         {
             _sdk = sdk;
+        }
+
+        public Misc(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
         }
 
         #region Operation Builders
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetCountries.GetCountriesBuilder GetCountriesOp
         {
-            get { return new Operation.GetCountries.GetCountriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetCountries.GetCountriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetCountryGroups.GetCountryGroupsBuilder GetCountryGroupsOp
         {
-            get { return new Operation.GetCountryGroups.GetCountryGroupsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetCountryGroups.GetCountryGroupsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AddCountryGroup.AddCountryGroupBuilder AddCountryGroupOp
         {
-            get { return new Operation.AddCountryGroup.AddCountryGroupBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AddCountryGroup.AddCountryGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateCountryGroup.UpdateCountryGroupBuilder UpdateCountryGroupOp
         {
-            get { return new Operation.UpdateCountryGroup.UpdateCountryGroupBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateCountryGroup.UpdateCountryGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteCountryGroup.DeleteCountryGroupBuilder DeleteCountryGroupOp
         {
-            get { return new Operation.DeleteCountryGroup.DeleteCountryGroupBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteCountryGroup.DeleteCountryGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetLanguages.GetLanguagesBuilder GetLanguagesOp
         {
-            get { return new Operation.GetLanguages.GetLanguagesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetLanguages.GetLanguagesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public GetTimeZones.GetTimeZonesBuilder GetTimeZonesOp
         {
-            get { return new Operation.GetTimeZones.GetTimeZonesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetTimeZones.GetTimeZonesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetTime.PublicGetTimeBuilder PublicGetTimeOp
         {
-            get { return new Operation.PublicGetTime.PublicGetTimeBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetTime.PublicGetTimeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetCountries.PublicGetCountriesBuilder PublicGetCountriesOp
         {
-            get { return new Operation.PublicGetCountries.PublicGetCountriesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetCountries.PublicGetCountriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetLanguages.PublicGetLanguagesBuilder PublicGetLanguagesOp
         {
-            get { return new Operation.PublicGetLanguages.PublicGetLanguagesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetLanguages.PublicGetLanguagesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public PublicGetTimeZones.PublicGetTimeZonesBuilder PublicGetTimeZonesOp
         {
-            get { return new Operation.PublicGetTimeZones.PublicGetTimeZonesBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.PublicGetTimeZones.PublicGetTimeZonesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

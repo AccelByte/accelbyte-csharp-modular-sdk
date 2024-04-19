@@ -20,15 +20,30 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public SessionPlatform(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public SessionPlatform(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public RegisterXblSessions.RegisterXblSessionsBuilder RegisterXblSessionsOp
         {
-            get { return new Operation.RegisterXblSessions.RegisterXblSessionsBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.RegisterXblSessions.RegisterXblSessionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 

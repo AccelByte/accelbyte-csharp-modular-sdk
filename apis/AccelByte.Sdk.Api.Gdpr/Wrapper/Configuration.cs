@@ -20,39 +20,96 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
+        private string _CustomBasePath = String.Empty;
+
         public Configuration(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
+        public Configuration(IAccelByteSdk sdk, string customBasePath)
+        {
+            _sdk = sdk;
+            _CustomBasePath = customBasePath;
+        }
+
         #region Operation Builders
         public GetAdminEmailConfiguration.GetAdminEmailConfigurationBuilder GetAdminEmailConfigurationOp
         {
-            get { return new Operation.GetAdminEmailConfiguration.GetAdminEmailConfigurationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.GetAdminEmailConfiguration.GetAdminEmailConfigurationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public UpdateAdminEmailConfiguration.UpdateAdminEmailConfigurationBuilder UpdateAdminEmailConfigurationOp
         {
-            get { return new Operation.UpdateAdminEmailConfiguration.UpdateAdminEmailConfigurationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.UpdateAdminEmailConfiguration.UpdateAdminEmailConfigurationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public SaveAdminEmailConfiguration.SaveAdminEmailConfigurationBuilder SaveAdminEmailConfigurationOp
         {
-            get { return new Operation.SaveAdminEmailConfiguration.SaveAdminEmailConfigurationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.SaveAdminEmailConfiguration.SaveAdminEmailConfigurationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public DeleteAdminEmailConfiguration.DeleteAdminEmailConfigurationBuilder DeleteAdminEmailConfigurationOp
         {
-            get { return new Operation.DeleteAdminEmailConfiguration.DeleteAdminEmailConfigurationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.DeleteAdminEmailConfiguration.DeleteAdminEmailConfigurationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminGetServicesConfiguration.AdminGetServicesConfigurationBuilder AdminGetServicesConfigurationOp
         {
-            get { return new Operation.AdminGetServicesConfiguration.AdminGetServicesConfigurationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminGetServicesConfiguration.AdminGetServicesConfigurationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminUpdateServicesConfiguration.AdminUpdateServicesConfigurationBuilder AdminUpdateServicesConfigurationOp
         {
-            get { return new Operation.AdminUpdateServicesConfiguration.AdminUpdateServicesConfigurationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateServicesConfiguration.AdminUpdateServicesConfigurationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         public AdminResetServicesConfiguration.AdminResetServicesConfigurationBuilder AdminResetServicesConfigurationOp
         {
-            get { return new Operation.AdminResetServicesConfiguration.AdminResetServicesConfigurationBuilder(_sdk); }
+            get
+            {
+                var opBuilder = new Operation.AdminResetServicesConfiguration.AdminResetServicesConfigurationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
         }
         #endregion
 
