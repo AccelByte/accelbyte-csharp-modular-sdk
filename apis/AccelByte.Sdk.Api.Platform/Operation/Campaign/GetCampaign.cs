@@ -26,8 +26,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// Get campaign info.
     /// Other detail info:
     /// 
-    ///   * Required permission : resource="ADMIN:NAMESPACE:{namespace}:CAMPAIGN", action=2 (READ)
-    ///   *  Returns : campaign info
+    ///   * Returns : campaign info
     /// </summary>
     public class GetCampaign : AccelByte.Sdk.Core.Operation
     {

@@ -50,6 +50,17 @@ namespace AccelByte.Sdk.Api.Platform
         }
         private Wrapper.Campaign? _Campaign = null;
 
+        public Wrapper.Store Store
+        {
+            get
+            {
+                if (_Store == null)
+                    _Store = new Wrapper.Store(_Sdk, _CustomBasePath);
+                return _Store;
+            }
+        }
+        private Wrapper.Store? _Store = null;
+
         public Wrapper.ServicePluginConfig ServicePluginConfig
         {
             get
@@ -247,17 +258,6 @@ namespace AccelByte.Sdk.Api.Platform
             }
         }
         private Wrapper.Section? _Section = null;
-
-        public Wrapper.Store Store
-        {
-            get
-            {
-                if (_Store == null)
-                    _Store = new Wrapper.Store(_Sdk, _CustomBasePath);
-                return _Store;
-            }
-        }
-        private Wrapper.Store? _Store = null;
 
         public Wrapper.CatalogChanges CatalogChanges
         {

@@ -98,10 +98,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// 
     /// 
     /// if there's no active entitlement for the specific params, the entitlements section will be omitted.
-    /// 
-    /// Other detail info:
-    /// 
-    ///   * Required permission : resource="NAMESPACE:{namespace}:ENTITLEMENT", action=2 (READ)
     /// </summary>
     public class PublicGetEntitlementOwnershipToken : AccelByte.Sdk.Core.Operation
     {

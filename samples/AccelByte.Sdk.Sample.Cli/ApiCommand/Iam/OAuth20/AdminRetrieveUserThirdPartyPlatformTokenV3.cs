@@ -36,6 +36,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
         [SdkCommandArgument("userId")]
         public string UserId { get; set; } = String.Empty;
 
+        [SdkCommandArgument("platformUserId")]
+        public string? PlatformUserId { get; set; }
+
         public AdminRetrieveUserThirdPartyPlatformTokenV3Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -47,6 +50,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 
             var opBuilder = AccelByte.Sdk.Api.Iam.Operation.AdminRetrieveUserThirdPartyPlatformTokenV3.Builder;
 
+            if (PlatformUserId != null)
+                opBuilder.SetPlatformUserId((string)PlatformUserId);
 
 
 

@@ -20,34 +20,17 @@
 | `/basic/v1/admin/namespaces/{namespace}/publisher` | GET | GetNamespacePublisher | [GetNamespacePublisher](../../apis/AccelByte.Sdk.Api.Basic/Operation/Namespace/GetNamespacePublisher.cs) | [GetNamespacePublisher](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Namespace/GetNamespacePublisher.cs) |
 | `/basic/v1/admin/namespaces/{namespace}/status` | PATCH | ChangeNamespaceStatus | [ChangeNamespaceStatus](../../apis/AccelByte.Sdk.Api.Basic/Operation/Namespace/ChangeNamespaceStatus.cs) | [ChangeNamespaceStatus](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Namespace/ChangeNamespaceStatus.cs) |
 | `/basic/v1/public/namespaces` | GET | PublicGetNamespaces | [PublicGetNamespaces](../../apis/AccelByte.Sdk.Api.Basic/Operation/Namespace/PublicGetNamespaces.cs) | [PublicGetNamespaces](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Namespace/PublicGetNamespaces.cs) |
+| `/basic/v1/public/namespaces/{namespace}` | GET | GetNamespace1 | [GetNamespace1](../../apis/AccelByte.Sdk.Api.Basic/Operation/Namespace/GetNamespace1.cs) | [GetNamespace1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Namespace/GetNamespace1.cs) |
 | `/basic/v1/public/namespaces/{namespace}/publisher` | GET | PublicGetNamespacePublisher | [PublicGetNamespacePublisher](../../apis/AccelByte.Sdk.Api.Basic/Operation/Namespace/PublicGetNamespacePublisher.cs) | [PublicGetNamespacePublisher](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Namespace/PublicGetNamespacePublisher.cs) |
-
-### UserAction Wrapper:  [UserAction](../../apis/AccelByte.Sdk.Api.Basic/Wrapper/UserAction.cs)
-| Endpoint | Method | ID | Class | Example |
-|---|---|---|---|---|
-| `/basic/v1/admin/namespaces/{namespace}/actions` | GET | GetActions | [GetActions](../../apis/AccelByte.Sdk.Api.Basic/Operation/UserAction/GetActions.cs) | [GetActions](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/UserAction/GetActions.cs) |
-| `/basic/v1/admin/namespaces/{namespace}/actions/ban` | POST | BanUsers | [BanUsers](../../apis/AccelByte.Sdk.Api.Basic/Operation/UserAction/BanUsers.cs) | [BanUsers](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/UserAction/BanUsers.cs) |
-| `/basic/v1/admin/namespaces/{namespace}/actions/banned` | GET | GetBannedUsers | [GetBannedUsers](../../apis/AccelByte.Sdk.Api.Basic/Operation/UserAction/GetBannedUsers.cs) | [GetBannedUsers](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/UserAction/GetBannedUsers.cs) |
-| `/basic/v1/admin/namespaces/{namespace}/actions/report` | POST | ReportUser | [ReportUser](../../apis/AccelByte.Sdk.Api.Basic/Operation/UserAction/ReportUser.cs) | [ReportUser](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/UserAction/ReportUser.cs) |
-| `/basic/v1/admin/namespaces/{namespace}/actions/status` | GET | GetUserStatus | [GetUserStatus](../../apis/AccelByte.Sdk.Api.Basic/Operation/UserAction/GetUserStatus.cs) | [GetUserStatus](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/UserAction/GetUserStatus.cs) |
-| `/basic/v1/admin/namespaces/{namespace}/actions/unban` | POST | UnBanUsers | [UnBanUsers](../../apis/AccelByte.Sdk.Api.Basic/Operation/UserAction/UnBanUsers.cs) | [UnBanUsers](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/UserAction/UnBanUsers.cs) |
-| `/basic/v1/public/namespaces/{namespace}/users/{userId}/actions/report` | POST | PublicReportUser | [PublicReportUser](../../apis/AccelByte.Sdk.Api.Basic/Operation/UserAction/PublicReportUser.cs) | [PublicReportUser](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/UserAction/PublicReportUser.cs) |
 
 ### Config Wrapper:  [Config](../../apis/AccelByte.Sdk.Api.Basic/Wrapper/Config.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 | `/basic/v1/admin/namespaces/{namespace}/configs` | POST | CreateConfig | [CreateConfig](../../apis/AccelByte.Sdk.Api.Basic/Operation/Config/CreateConfig.cs) | [CreateConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Config/CreateConfig.cs) |
-| `/basic/v1/admin/namespaces/{namespace}/configs/{configKey}` | GET | GetConfig1 | [GetConfig1](../../apis/AccelByte.Sdk.Api.Basic/Operation/Config/GetConfig1.cs) | [GetConfig1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Config/GetConfig1.cs) |
-| `/basic/v1/admin/namespaces/{namespace}/configs/{configKey}` | DELETE | DeleteConfig1 | [DeleteConfig1](../../apis/AccelByte.Sdk.Api.Basic/Operation/Config/DeleteConfig1.cs) | [DeleteConfig1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Config/DeleteConfig1.cs) |
-| `/basic/v1/admin/namespaces/{namespace}/configs/{configKey}` | PATCH | UpdateConfig1 | [UpdateConfig1](../../apis/AccelByte.Sdk.Api.Basic/Operation/Config/UpdateConfig1.cs) | [UpdateConfig1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Config/UpdateConfig1.cs) |
+| `/basic/v1/admin/namespaces/{namespace}/configs/{configKey}` | GET | GetConfig | [GetConfig](../../apis/AccelByte.Sdk.Api.Basic/Operation/Config/GetConfig.cs) | [GetConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Config/GetConfig.cs) |
+| `/basic/v1/admin/namespaces/{namespace}/configs/{configKey}` | DELETE | DeleteConfig | [DeleteConfig](../../apis/AccelByte.Sdk.Api.Basic/Operation/Config/DeleteConfig.cs) | [DeleteConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Config/DeleteConfig.cs) |
+| `/basic/v1/admin/namespaces/{namespace}/configs/{configKey}` | PATCH | UpdateConfig | [UpdateConfig](../../apis/AccelByte.Sdk.Api.Basic/Operation/Config/UpdateConfig.cs) | [UpdateConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Config/UpdateConfig.cs) |
 | `/basic/v1/admin/namespaces/{namespace}/publisher/configs/{configKey}` | GET | GetPublisherConfig | [GetPublisherConfig](../../apis/AccelByte.Sdk.Api.Basic/Operation/Config/GetPublisherConfig.cs) | [GetPublisherConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/Config/GetPublisherConfig.cs) |
-
-### EQU8Config Wrapper:  [EQU8Config](../../apis/AccelByte.Sdk.Api.Basic/Wrapper/EQU8Config.cs)
-| Endpoint | Method | ID | Class | Example |
-|---|---|---|---|---|
-| `/basic/v1/admin/namespaces/{namespace}/equ8/config` | GET | GetConfig | [GetConfig](../../apis/AccelByte.Sdk.Api.Basic/Operation/EQU8Config/GetConfig.cs) | [GetConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/EQU8Config/GetConfig.cs) |
-| `/basic/v1/admin/namespaces/{namespace}/equ8/config` | DELETE | DeleteConfig | [DeleteConfig](../../apis/AccelByte.Sdk.Api.Basic/Operation/EQU8Config/DeleteConfig.cs) | [DeleteConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/EQU8Config/DeleteConfig.cs) |
-| `/basic/v1/admin/namespaces/{namespace}/equ8/config` | PATCH | UpdateConfig | [UpdateConfig](../../apis/AccelByte.Sdk.Api.Basic/Operation/EQU8Config/UpdateConfig.cs) | [UpdateConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Basic/EQU8Config/UpdateConfig.cs) |
 
 ### FileUpload Wrapper:  [FileUpload](../../apis/AccelByte.Sdk.Api.Basic/Wrapper/FileUpload.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -116,15 +99,7 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
-### UserAction Wrapper:  [UserAction](../../apis/AccelByte.Sdk.Api.Basic/Wrapper/UserAction.cs)
-| Endpoint | Method | ID | Class | Example |
-|---|---|---|---|---|
-
 ### Config Wrapper:  [Config](../../apis/AccelByte.Sdk.Api.Basic/Wrapper/Config.cs)
-| Endpoint | Method | ID | Class | Example |
-|---|---|---|---|---|
-
-### EQU8Config Wrapper:  [EQU8Config](../../apis/AccelByte.Sdk.Api.Basic/Wrapper/EQU8Config.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
@@ -153,11 +128,6 @@
 
 | Model | Class |
 |---|---|
-| `A DTO for unban user API call.` | [ADTOForUnbanUserAPICall](../../apis/AccelByte.Sdk.Api.Basic/Model/ADTOForUnbanUserAPICall.cs) |
-| `A DTO for update equ8 config API call.` | [ADTOForUpdateEqu8ConfigAPICall](../../apis/AccelByte.Sdk.Api.Basic/Model/ADTOForUpdateEqu8ConfigAPICall.cs) |
-| `A DTO object for equ8 user ban status` | [ADTOObjectForEqu8UserBanStatus](../../apis/AccelByte.Sdk.Api.Basic/Model/ADTOObjectForEqu8UserBanStatus.cs) |
-| `A DTO object for equ8 user status` | [ADTOObjectForEqu8UserStatus](../../apis/AccelByte.Sdk.Api.Basic/Model/ADTOObjectForEqu8UserStatus.cs) |
-| `Action` | [Action](../../apis/AccelByte.Sdk.Api.Basic/Model/Action.cs) |
 | `AddCountryGroupRequest` | [AddCountryGroupRequest](../../apis/AccelByte.Sdk.Api.Basic/Model/AddCountryGroupRequest.cs) |
 | `AddCountryGroupResponse` | [AddCountryGroupResponse](../../apis/AccelByte.Sdk.Api.Basic/Model/AddCountryGroupResponse.cs) |
 | `ConfigCreate` | [ConfigCreate](../../apis/AccelByte.Sdk.Api.Basic/Model/ConfigCreate.cs) |
@@ -165,7 +135,6 @@
 | `ConfigUpdate` | [ConfigUpdate](../../apis/AccelByte.Sdk.Api.Basic/Model/ConfigUpdate.cs) |
 | `CountryGroupObject` | [CountryGroupObject](../../apis/AccelByte.Sdk.Api.Basic/Model/CountryGroupObject.cs) |
 | `CountryObject` | [CountryObject](../../apis/AccelByte.Sdk.Api.Basic/Model/CountryObject.cs) |
-| `Equ8Config` | [Equ8Config](../../apis/AccelByte.Sdk.Api.Basic/Model/Equ8Config.cs) |
 | `ErrorEntity` | [ErrorEntity](../../apis/AccelByte.Sdk.Api.Basic/Model/ErrorEntity.cs) |
 | `FieldValidationError` | [FieldValidationError](../../apis/AccelByte.Sdk.Api.Basic/Model/FieldValidationError.cs) |
 | `FileUploadUrlInfo` | [FileUploadUrlInfo](../../apis/AccelByte.Sdk.Api.Basic/Model/FileUploadUrlInfo.cs) |
@@ -173,12 +142,13 @@
 | `NamespaceCreate` | [NamespaceCreate](../../apis/AccelByte.Sdk.Api.Basic/Model/NamespaceCreate.cs) |
 | `NamespaceInfo` | [NamespaceInfo](../../apis/AccelByte.Sdk.Api.Basic/Model/NamespaceInfo.cs) |
 | `NamespacePublisherInfo` | [NamespacePublisherInfo](../../apis/AccelByte.Sdk.Api.Basic/Model/NamespacePublisherInfo.cs) |
+| `NamespaceSimpleInfo` | [NamespaceSimpleInfo](../../apis/AccelByte.Sdk.Api.Basic/Model/NamespaceSimpleInfo.cs) |
 | `NamespaceStatusUpdate` | [NamespaceStatusUpdate](../../apis/AccelByte.Sdk.Api.Basic/Model/NamespaceStatusUpdate.cs) |
 | `NamespaceUpdate` | [NamespaceUpdate](../../apis/AccelByte.Sdk.Api.Basic/Model/NamespaceUpdate.cs) |
+| `Permission` | [Permission](../../apis/AccelByte.Sdk.Api.Basic/Model/Permission.cs) |
 | `RetrieveCountryGroupResponse` | [RetrieveCountryGroupResponse](../../apis/AccelByte.Sdk.Api.Basic/Model/RetrieveCountryGroupResponse.cs) |
 | `RetrieveTimeResponse` | [RetrieveTimeResponse](../../apis/AccelByte.Sdk.Api.Basic/Model/RetrieveTimeResponse.cs) |
 | `UpdateCountryGroupRequest` | [UpdateCountryGroupRequest](../../apis/AccelByte.Sdk.Api.Basic/Model/UpdateCountryGroupRequest.cs) |
-| `UserBanRequest` | [UserBanRequest](../../apis/AccelByte.Sdk.Api.Basic/Model/UserBanRequest.cs) |
 | `UserProfileAdmin` | [UserProfileAdmin](../../apis/AccelByte.Sdk.Api.Basic/Model/UserProfileAdmin.cs) |
 | `UserProfileBulkRequest` | [UserProfileBulkRequest](../../apis/AccelByte.Sdk.Api.Basic/Model/UserProfileBulkRequest.cs) |
 | `UserProfileCreate` | [UserProfileCreate](../../apis/AccelByte.Sdk.Api.Basic/Model/UserProfileCreate.cs) |
@@ -188,7 +158,6 @@
 | `UserProfilePublicInfo` | [UserProfilePublicInfo](../../apis/AccelByte.Sdk.Api.Basic/Model/UserProfilePublicInfo.cs) |
 | `UserProfileStatusUpdate` | [UserProfileStatusUpdate](../../apis/AccelByte.Sdk.Api.Basic/Model/UserProfileStatusUpdate.cs) |
 | `UserProfileUpdate` | [UserProfileUpdate](../../apis/AccelByte.Sdk.Api.Basic/Model/UserProfileUpdate.cs) |
-| `UserReportRequest` | [UserReportRequest](../../apis/AccelByte.Sdk.Api.Basic/Model/UserReportRequest.cs) |
 | `UserZipCode` | [UserZipCode](../../apis/AccelByte.Sdk.Api.Basic/Model/UserZipCode.cs) |
 | `UserZipCodeUpdate` | [UserZipCodeUpdate](../../apis/AccelByte.Sdk.Api.Basic/Model/UserZipCodeUpdate.cs) |
 | `ValidationErrorEntity` | [ValidationErrorEntity](../../apis/AccelByte.Sdk.Api.Basic/Model/ValidationErrorEntity.cs) |

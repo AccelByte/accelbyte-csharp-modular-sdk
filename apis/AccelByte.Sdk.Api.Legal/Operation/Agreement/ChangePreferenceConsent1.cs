@@ -24,9 +24,6 @@ namespace AccelByte.Sdk.Api.Legal.Operation
     /// changePreferenceConsent_1
     ///
     /// Change marketing preference consent.
-    /// Other detail info:
-    /// 
-    ///   * Required permission : login user
     /// </summary>
     public class ChangePreferenceConsent1 : AccelByte.Sdk.Core.Operation
     {

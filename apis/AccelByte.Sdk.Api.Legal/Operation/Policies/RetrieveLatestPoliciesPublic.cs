@@ -36,7 +36,6 @@ namespace AccelByte.Sdk.Api.Legal.Operation
     ///     * User: Region UA
     ///     * Query: alwaysIncludeDefault: true
     ///     * Response: Document 1 (UA), Document 2 (US), Document 3 (US)
-    ///   *  Required permission: login user
     /// </summary>
     public class RetrieveLatestPoliciesPublic : AccelByte.Sdk.Core.Operation
     {

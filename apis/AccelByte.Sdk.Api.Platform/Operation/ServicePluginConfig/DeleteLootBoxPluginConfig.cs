@@ -24,9 +24,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// deleteLootBoxPluginConfig
     ///
     /// Delete service plugin config.
-    /// Other detail info:
-    /// 
-    ///   * Required permission : resource=ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG, action=8 (DELETE)
     /// </summary>
     public class DeleteLootBoxPluginConfig : AccelByte.Sdk.Core.Operation
     {

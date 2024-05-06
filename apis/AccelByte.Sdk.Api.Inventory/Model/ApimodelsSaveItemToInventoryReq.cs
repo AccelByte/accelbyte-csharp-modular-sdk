@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Inventory.Model
 {
@@ -26,6 +28,10 @@ namespace AccelByte.Sdk.Api.Inventory.Model
 
         [JsonPropertyName("slotUsed")]
         public int? SlotUsed { get; set; }
+
+        [JsonPropertyName("source")]
+        [JsonStringEnum]
+        public ApimodelsSaveItemToInventoryReqSource? Source { get; set; }
 
         [JsonPropertyName("sourceItemId")]
         public string? SourceItemId { get; set; }
@@ -55,6 +61,10 @@ namespace AccelByte.Sdk.Api.Inventory.Model
         [JsonPropertyName("slotUsed")]
         public int? SlotUsed { get; set; }
 
+        [JsonPropertyName("source")]
+        [JsonStringEnum]
+        public ApimodelsSaveItemToInventoryReqSource? Source { get; set; }
+
         [JsonPropertyName("sourceItemId")]
         public string? SourceItemId { get; set; }
 
@@ -66,4 +76,25 @@ namespace AccelByte.Sdk.Api.Inventory.Model
 
     }
 
+
+    public class ApimodelsSaveItemToInventoryReqSource : StringEnum<ApimodelsSaveItemToInventoryReqSource>
+    {
+        public static readonly ApimodelsSaveItemToInventoryReqSource ECOMMERCE
+            = new ApimodelsSaveItemToInventoryReqSource("ECOMMERCE");
+
+        public static readonly ApimodelsSaveItemToInventoryReqSource OTHER
+            = new ApimodelsSaveItemToInventoryReqSource("OTHER");
+
+
+        public static implicit operator ApimodelsSaveItemToInventoryReqSource(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ApimodelsSaveItemToInventoryReqSource(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

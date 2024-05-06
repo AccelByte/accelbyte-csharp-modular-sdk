@@ -26,7 +26,6 @@ namespace AccelByte.Sdk.Api.Basic.Operation
     /// Change a namespace status.
     /// Other detail info:
     /// 
-    ///   * Required permission : resource= "ADMIN:NAMESPACE:{namespace}:NAMESPACE" , action=4 (UPDATE)
     ///   * Action code : 11306
     ///   *  Returns : updated namespace
     /// </summary>

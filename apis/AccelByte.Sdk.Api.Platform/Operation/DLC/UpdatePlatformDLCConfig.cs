@@ -24,8 +24,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// updatePlatformDLCConfig
     ///
     /// Update Platform DLC config. Other detail info:
-    ///   * Required permission : resource="ADMIN:NAMESPACE:{namespace}:DLC:CONFIG", action=4 (UPDATE)
-    ///   *  Returns : updated Platform DLC config
+    ///   * Returns : updated Platform DLC config
     /// 
     /// 
     /// 

@@ -89,6 +89,17 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     return opBuilder;
             }
         }
+        public PublicGetConfigV1.PublicGetConfigV1Builder PublicGetConfigV1Op
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicGetConfigV1.PublicGetConfigV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         #endregion
 
         public Model.ModelsConfigList? AdminGetAllConfigV1(AdminGetAllConfigV1 input)
@@ -164,6 +175,22 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.Payload);
         }
         public async Task<Model.ModelsImportConfigResponse?> ImportConfigAsync(ImportConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelsPublicConfigResponse? PublicGetConfigV1(PublicGetConfigV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsPublicConfigResponse?> PublicGetConfigV1Async(PublicGetConfigV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

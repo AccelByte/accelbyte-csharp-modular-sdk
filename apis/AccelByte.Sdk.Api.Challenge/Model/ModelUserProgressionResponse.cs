@@ -18,6 +18,9 @@ namespace AccelByte.Sdk.Api.Challenge.Model
         [JsonPropertyName("meta")]
         public ModelUserProgressionResponseMeta? Meta { get; set; }
 
+        [JsonPropertyName("paging")]
+        public ModelPagination? Paging { get; set; }
+
     }
 
 

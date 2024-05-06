@@ -24,9 +24,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// debitUserWallet
     ///
     /// Debit a user wallet.
-    /// Other detail info:
-    /// 
-    ///   * Required permission : resource="ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET", action=4 (UPDATE)
     /// </summary>
     [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class DebitUserWallet : AccelByte.Sdk.Core.Operation

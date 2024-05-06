@@ -36,6 +36,15 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
         [SdkCommandArgument("goalCode")]
         public string? GoalCode { get; set; }
 
+        [SdkCommandArgument("limit")]
+        public long? Limit { get; set; }
+
+        [SdkCommandArgument("offset")]
+        public long? Offset { get; set; }
+
+        [SdkCommandArgument("tags")]
+        public List<string>? Tags { get; set; }
+
         public PublicGetUserProgressionCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -49,6 +58,12 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
 
             if (GoalCode != null)
                 opBuilder.SetGoalCode((string)GoalCode);
+            if (Limit != null)
+                opBuilder.SetLimit((long)Limit);
+            if (Offset != null)
+                opBuilder.SetOffset((long)Offset);
+            if (Tags != null)
+                opBuilder.SetTags((List<string>)Tags);
 
 
 

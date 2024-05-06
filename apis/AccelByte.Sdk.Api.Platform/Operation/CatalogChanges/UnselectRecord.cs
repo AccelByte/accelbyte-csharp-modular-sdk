@@ -24,9 +24,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// unselectRecord
     ///
     /// Unselect a change, it will not be included when partial publish.
-    /// Other detail info:
-    /// 
-    ///   * Required permission : resource="ADMIN:NAMESPACE:{namespace}:STORE", action=4 (UPDATE)
     /// </summary>
     public class UnselectRecord : AccelByte.Sdk.Core.Operation
     {

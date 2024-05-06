@@ -26,7 +26,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// Get user currency wallet summary.
     /// Other detail info:
     /// 
-    ///   * Required permission : resource="ADMIN:NAMESPACE:{namespace}:USER:{userId}:WALLET", action=2 (READ)
+    /// (READ)
     ///   *  Returns : currency wallet summary
     /// </summary>
     public class QueryUserCurrencyWallets : AccelByte.Sdk.Core.Operation

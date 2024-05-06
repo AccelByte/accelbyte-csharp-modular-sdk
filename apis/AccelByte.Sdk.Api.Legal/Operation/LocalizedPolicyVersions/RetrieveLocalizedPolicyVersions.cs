@@ -24,9 +24,6 @@ namespace AccelByte.Sdk.Api.Legal.Operation
     /// retrieveLocalizedPolicyVersions
     ///
     /// Retrieve versions of a particular country-specific policy.
-    /// Other detail info:
-    /// 
-    ///   * Required permission : resource="ADMIN:NAMESPACE:*:LEGAL", action=2 (READ)
     /// </summary>
     public class RetrieveLocalizedPolicyVersions : AccelByte.Sdk.Core.Operation
     {

@@ -24,9 +24,6 @@ namespace AccelByte.Sdk.Api.Legal.Operation
     /// retrieveAllLegalPoliciesByNamespace
     ///
     /// Retrieve all base policies in the namespace.
-    /// Other detail info:
-    /// 
-    ///   * Required permission : resource="ADMIN:NAMESPACE:{namespace}:LEGAL", action=2 (READ)
     /// </summary>
     public class RetrieveAllLegalPoliciesByNamespace : AccelByte.Sdk.Core.Operation
     {

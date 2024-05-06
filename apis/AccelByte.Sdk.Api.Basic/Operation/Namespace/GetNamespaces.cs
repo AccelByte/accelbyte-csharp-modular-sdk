@@ -26,8 +26,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
     /// Get all namespaces.
     /// Other detail info:
     /// 
-    ///   * Required permission : resource= "ADMIN:NAMESPACE" , action=2 (READ)
-    ///   *  Action code : 11303
+    ///   * Action code : 11303
     ///   *  Returns : list of namespaces
     /// </summary>
     public class GetNamespaces : AccelByte.Sdk.Core.Operation

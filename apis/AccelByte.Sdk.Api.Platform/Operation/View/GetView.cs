@@ -27,8 +27,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// 
     /// Other detail info:
     /// 
-    ///   * Required permission : resource="ADMIN:NAMESPACE:{namespace}:STORE", action=2 (READ)
-    ///   *  Returns : view data
+    ///   * Returns : view data
     /// </summary>
     public class GetView : AccelByte.Sdk.Core.Operation
     {

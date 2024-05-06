@@ -155,6 +155,17 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     return opBuilder;
             }
         }
+        public GetNamespace1.GetNamespace1Builder GetNamespace1Op
+        {
+            get
+            {
+                var opBuilder = new Operation.GetNamespace1.GetNamespace1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public PublicGetNamespacePublisher.PublicGetNamespacePublisherBuilder PublicGetNamespacePublisherOp
         {
             get
@@ -337,6 +348,22 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.Payload);
         }
         public async Task<List<Model.NamespaceInfo>?> PublicGetNamespacesAsync(PublicGetNamespaces input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.NamespaceSimpleInfo? GetNamespace1(GetNamespace1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.NamespaceSimpleInfo?> GetNamespace1Async(GetNamespace1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

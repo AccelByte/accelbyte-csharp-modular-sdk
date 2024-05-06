@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
         }
         #endregion
 
-        public List<Model.ApiDevelopmentServerConfigurationGetResponse>? DevelopmentServerConfigurationList(DevelopmentServerConfigurationList input)
+        public Model.ApiDevelopmentServerConfigurationListResponse? DevelopmentServerConfigurationList(DevelopmentServerConfigurationList input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ApiDevelopmentServerConfigurationGetResponse>?> DevelopmentServerConfigurationListAsync(DevelopmentServerConfigurationList input)
+        public async Task<Model.ApiDevelopmentServerConfigurationListResponse?> DevelopmentServerConfigurationListAsync(DevelopmentServerConfigurationList input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

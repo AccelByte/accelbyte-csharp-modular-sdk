@@ -34,6 +34,28 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
 
         #region Operation Builders
+        public GetCatalogConfig.GetCatalogConfigBuilder GetCatalogConfigOp
+        {
+            get
+            {
+                var opBuilder = new Operation.GetCatalogConfig.GetCatalogConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public UpdateCatalogConfig.UpdateCatalogConfigBuilder UpdateCatalogConfigOp
+        {
+            get
+            {
+                var opBuilder = new Operation.UpdateCatalogConfig.UpdateCatalogConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public ListStores.ListStoresBuilder ListStoresOp
         {
             get
@@ -258,6 +280,38 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
+        public Model.CatalogConfigInfo? GetCatalogConfig(GetCatalogConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.CatalogConfigInfo?> GetCatalogConfigAsync(GetCatalogConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.CatalogConfigInfo? UpdateCatalogConfig(UpdateCatalogConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.CatalogConfigInfo?> UpdateCatalogConfigAsync(UpdateCatalogConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public List<Model.StoreInfo>? ListStores(ListStores input)
         {
             var response = _sdk.RunRequest(input);

@@ -28,17 +28,6 @@ namespace AccelByte.Sdk.Api.Basic
         }
         private Wrapper.Namespace? _Namespace = null;
 
-        public Wrapper.UserAction UserAction
-        {
-            get
-            {
-                if (_UserAction == null)
-                    _UserAction = new Wrapper.UserAction(_Sdk, _CustomBasePath);
-                return _UserAction;
-            }
-        }
-        private Wrapper.UserAction? _UserAction = null;
-
         public Wrapper.Config Config
         {
             get
@@ -49,17 +38,6 @@ namespace AccelByte.Sdk.Api.Basic
             }
         }
         private Wrapper.Config? _Config = null;
-
-        public Wrapper.EQU8Config EQU8Config
-        {
-            get
-            {
-                if (_EQU8Config == null)
-                    _EQU8Config = new Wrapper.EQU8Config(_Sdk, _CustomBasePath);
-                return _EQU8Config;
-            }
-        }
-        private Wrapper.EQU8Config? _EQU8Config = null;
 
         public Wrapper.FileUpload FileUpload
         {

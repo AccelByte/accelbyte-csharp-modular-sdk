@@ -86,6 +86,7 @@
 | `model.CreateGoalRequest` | [ModelCreateGoalRequest](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelCreateGoalRequest.cs) |
 | `model.EvaluatePlayerProgressionRequest` | [ModelEvaluatePlayerProgressionRequest](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelEvaluatePlayerProgressionRequest.cs) |
 | `model.GetGoalsResponse` | [ModelGetGoalsResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelGetGoalsResponse.cs) |
+| `model.GoalMeta` | [ModelGoalMeta](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelGoalMeta.cs) |
 | `model.GoalOrder` | [ModelGoalOrder](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelGoalOrder.cs) |
 | `model.GoalProgressionResponse` | [ModelGoalProgressionResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelGoalProgressionResponse.cs) |
 | `model.GoalResponse` | [ModelGoalResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelGoalResponse.cs) |

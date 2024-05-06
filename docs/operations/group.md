@@ -6,6 +6,18 @@
 
 ## Operations
 
+### Operations Wrapper:  [Operations](../../apis/AccelByte.Sdk.Api.Group/Wrapper/Operations.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/group/debug/pprof` | GET | IndexHandler | [IndexHandler](../../apis/AccelByte.Sdk.Api.Group/Operation/Operations/IndexHandler.cs) | [IndexHandler](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Group/Operations/IndexHandler.cs) |
+| `/group/debug/pprof/block` | GET | BlockHandler | [BlockHandler](../../apis/AccelByte.Sdk.Api.Group/Operation/Operations/BlockHandler.cs) | [BlockHandler](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Group/Operations/BlockHandler.cs) |
+| `/group/debug/pprof/cmdline` | GET | CmdlineHandler | [CmdlineHandler](../../apis/AccelByte.Sdk.Api.Group/Operation/Operations/CmdlineHandler.cs) | [CmdlineHandler](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Group/Operations/CmdlineHandler.cs) |
+| `/group/debug/pprof/goroutine` | GET | GoroutineHandler | [GoroutineHandler](../../apis/AccelByte.Sdk.Api.Group/Operation/Operations/GoroutineHandler.cs) | [GoroutineHandler](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Group/Operations/GoroutineHandler.cs) |
+| `/group/debug/pprof/heap` | GET | HeapHandler | [HeapHandler](../../apis/AccelByte.Sdk.Api.Group/Operation/Operations/HeapHandler.cs) | [HeapHandler](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Group/Operations/HeapHandler.cs) |
+| `/group/debug/pprof/profile` | GET | Profile | [Profile](../../apis/AccelByte.Sdk.Api.Group/Operation/Operations/Profile.cs) | [Profile](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Group/Operations/Profile.cs) |
+| `/group/debug/pprof/symbol` | GET | SymbolHandler | [SymbolHandler](../../apis/AccelByte.Sdk.Api.Group/Operation/Operations/SymbolHandler.cs) | [SymbolHandler](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Group/Operations/SymbolHandler.cs) |
+| `/group/debug/pprof/threadcreate` | GET | ThreadcreateHandler | [ThreadcreateHandler](../../apis/AccelByte.Sdk.Api.Group/Operation/Operations/ThreadcreateHandler.cs) | [ThreadcreateHandler](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Group/Operations/ThreadcreateHandler.cs) |
+
 ### Configuration Wrapper:  [Configuration](../../apis/AccelByte.Sdk.Api.Group/Wrapper/Configuration.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -103,6 +115,10 @@
 &nbsp;
 
 ## Operations with Generic Response
+
+### Operations Wrapper:  [Operations](../../apis/AccelByte.Sdk.Api.Group/Wrapper/Operations.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
 
 ### Configuration Wrapper:  [Configuration](../../apis/AccelByte.Sdk.Api.Group/Wrapper/Configuration.cs)
 | Endpoint | Method | ID | Class | Example |

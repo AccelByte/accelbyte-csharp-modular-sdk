@@ -111,6 +111,17 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     return opBuilder;
             }
         }
+        public AdminSyncUserEntitlements.AdminSyncUserEntitlementsBuilder AdminSyncUserEntitlementsOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminSyncUserEntitlements.AdminSyncUserEntitlementsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         #endregion
 
         public Model.ApimodelsListItemResp? AdminListItems(AdminListItems input)
@@ -289,6 +300,22 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void AdminSyncUserEntitlements(AdminSyncUserEntitlements input)
+        {
+            var response = _sdk.RunRequest(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminSyncUserEntitlementsAsync(AdminSyncUserEntitlements input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

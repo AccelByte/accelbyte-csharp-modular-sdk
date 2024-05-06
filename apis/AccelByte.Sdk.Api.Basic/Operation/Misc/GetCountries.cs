@@ -26,8 +26,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
     /// List countries.
     /// Other detail info:
     /// 
-    ///   * Required permission : login user
-    ///   *  Action code : 11204
+    ///   * Action code : 11204
     ///   *  Returns : country code list
     /// </summary>
     [Obsolete(DiagnosticId = "ab_deprecated_operation")]

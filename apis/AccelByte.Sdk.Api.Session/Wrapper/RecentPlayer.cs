@@ -45,11 +45,33 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     return opBuilder;
             }
         }
+        public AdminGetRecentTeamPlayer.AdminGetRecentTeamPlayerBuilder AdminGetRecentTeamPlayerOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminGetRecentTeamPlayer.AdminGetRecentTeamPlayerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public PublicGetRecentPlayer.PublicGetRecentPlayerBuilder PublicGetRecentPlayerOp
         {
             get
             {
                 var opBuilder = new Operation.PublicGetRecentPlayer.PublicGetRecentPlayerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public PublicGetRecentTeamPlayer.PublicGetRecentTeamPlayerBuilder PublicGetRecentTeamPlayerOp
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicGetRecentTeamPlayer.PublicGetRecentTeamPlayerBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -74,6 +96,22 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public Model.ModelsRecentPlayerQueryResponse? AdminGetRecentTeamPlayer(AdminGetRecentTeamPlayer input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsRecentPlayerQueryResponse?> AdminGetRecentTeamPlayerAsync(AdminGetRecentTeamPlayer input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.ModelsRecentPlayerQueryResponse? PublicGetRecentPlayer(PublicGetRecentPlayer input)
         {
             var response = _sdk.RunRequest(input);
@@ -83,6 +121,22 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.Payload);
         }
         public async Task<Model.ModelsRecentPlayerQueryResponse?> PublicGetRecentPlayerAsync(PublicGetRecentPlayer input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelsRecentPlayerQueryResponse? PublicGetRecentTeamPlayer(PublicGetRecentTeamPlayer input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsRecentPlayerQueryResponse?> PublicGetRecentTeamPlayerAsync(PublicGetRecentTeamPlayer input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

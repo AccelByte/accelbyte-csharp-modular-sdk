@@ -27,6 +27,10 @@ namespace AccelByte.Sdk.Api.Inventory.Model
         [JsonPropertyName("namespace")]
         public string? Namespace { get; set; }
 
+        [JsonPropertyName("platformAvailable")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? PlatformAvailable { get; set; }
+
         [JsonPropertyName("qty")]
         public int? Qty { get; set; }
 
@@ -75,6 +79,10 @@ namespace AccelByte.Sdk.Api.Inventory.Model
 
         [JsonPropertyName("namespace")]
         public string? Namespace { get; set; }
+
+        [JsonPropertyName("platformAvailable")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? PlatformAvailable { get; set; }
 
         [JsonPropertyName("qty")]
         public int? Qty { get; set; }

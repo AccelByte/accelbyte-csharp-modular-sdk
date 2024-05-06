@@ -46,6 +46,8 @@
 | `/agreement/admin/namespaces/{namespace}/agreements` | POST | RetrieveAcceptedAgreementsForMultiUsers | [RetrieveAcceptedAgreementsForMultiUsers](../../apis/AccelByte.Sdk.Api.Legal/Operation/AgreementWithNamespace/RetrieveAcceptedAgreementsForMultiUsers.cs) | [RetrieveAcceptedAgreementsForMultiUsers](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Legal/AgreementWithNamespace/RetrieveAcceptedAgreementsForMultiUsers.cs) |
 | `/agreement/admin/namespaces/{namespace}/agreements/policies/users/{userId}` | GET | RetrieveAcceptedAgreements1 | [RetrieveAcceptedAgreements1](../../apis/AccelByte.Sdk.Api.Legal/Operation/AgreementWithNamespace/RetrieveAcceptedAgreements1.cs) | [RetrieveAcceptedAgreements1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Legal/AgreementWithNamespace/RetrieveAcceptedAgreements1.cs) |
 | `/agreement/admin/namespaces/{namespace}/agreements/policy-versions/users` | GET | RetrieveAllUsersByPolicyVersion1 | [RetrieveAllUsersByPolicyVersion1](../../apis/AccelByte.Sdk.Api.Legal/Operation/AgreementWithNamespace/RetrieveAllUsersByPolicyVersion1.cs) | [RetrieveAllUsersByPolicyVersion1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Legal/AgreementWithNamespace/RetrieveAllUsersByPolicyVersion1.cs) |
+| `/agreement/admin/namespaces/{namespace}/agreements/policy-versions/users/export-csv/download` | GET | DownloadExportedAgreementsInCSV | [DownloadExportedAgreementsInCSV](../../apis/AccelByte.Sdk.Api.Legal/Operation/AgreementWithNamespace/DownloadExportedAgreementsInCSV.cs) | [DownloadExportedAgreementsInCSV](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Legal/AgreementWithNamespace/DownloadExportedAgreementsInCSV.cs) |
+| `/agreement/admin/namespaces/{namespace}/agreements/policy-versions/users/export-csv/initiate` | POST | InitiateExportAgreementsToCSV | [InitiateExportAgreementsToCSV](../../apis/AccelByte.Sdk.Api.Legal/Operation/AgreementWithNamespace/InitiateExportAgreementsToCSV.cs) | [InitiateExportAgreementsToCSV](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Legal/AgreementWithNamespace/InitiateExportAgreementsToCSV.cs) |
 
 ### Base Legal Policies With Namespace Wrapper:  [BaseLegalPoliciesWithNamespace](../../apis/AccelByte.Sdk.Api.Legal/Wrapper/BaseLegalPoliciesWithNamespace.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -219,12 +221,15 @@
 | `CreateLocalizedPolicyVersionResponse` | [CreateLocalizedPolicyVersionResponse](../../apis/AccelByte.Sdk.Api.Legal/Model/CreateLocalizedPolicyVersionResponse.cs) |
 | `CreatePolicyVersionRequest` | [CreatePolicyVersionRequest](../../apis/AccelByte.Sdk.Api.Legal/Model/CreatePolicyVersionRequest.cs) |
 | `CreatePolicyVersionResponse` | [CreatePolicyVersionResponse](../../apis/AccelByte.Sdk.Api.Legal/Model/CreatePolicyVersionResponse.cs) |
+| `DownloadExportedAgreementsInCSVResponse` | [DownloadExportedAgreementsInCSVResponse](../../apis/AccelByte.Sdk.Api.Legal/Model/DownloadExportedAgreementsInCSVResponse.cs) |
 | `ErrorEntity` | [ErrorEntity](../../apis/AccelByte.Sdk.Api.Legal/Model/ErrorEntity.cs) |
 | `FieldValidationError` | [FieldValidationError](../../apis/AccelByte.Sdk.Api.Legal/Model/FieldValidationError.cs) |
+| `InitiateExportAgreementsToCSVResponse` | [InitiateExportAgreementsToCSVResponse](../../apis/AccelByte.Sdk.Api.Legal/Model/InitiateExportAgreementsToCSVResponse.cs) |
 | `LegalReadinessStatusResponse` | [LegalReadinessStatusResponse](../../apis/AccelByte.Sdk.Api.Legal/Model/LegalReadinessStatusResponse.cs) |
 | `LocalizedPolicyVersionObject` | [LocalizedPolicyVersionObject](../../apis/AccelByte.Sdk.Api.Legal/Model/LocalizedPolicyVersionObject.cs) |
 | `PagedRetrieveUserAcceptedAgreementResponse` | [PagedRetrieveUserAcceptedAgreementResponse](../../apis/AccelByte.Sdk.Api.Legal/Model/PagedRetrieveUserAcceptedAgreementResponse.cs) |
 | `Paging` | [Paging](../../apis/AccelByte.Sdk.Api.Legal/Model/Paging.cs) |
+| `Permission` | [Permission](../../apis/AccelByte.Sdk.Api.Legal/Model/Permission.cs) |
 | `PolicyObject` | [PolicyObject](../../apis/AccelByte.Sdk.Api.Legal/Model/PolicyObject.cs) |
 | `PolicyVersionObject` | [PolicyVersionObject](../../apis/AccelByte.Sdk.Api.Legal/Model/PolicyVersionObject.cs) |
 | `PolicyVersionWithLocalizedVersionObject` | [PolicyVersionWithLocalizedVersionObject](../../apis/AccelByte.Sdk.Api.Legal/Model/PolicyVersionWithLocalizedVersionObject.cs) |

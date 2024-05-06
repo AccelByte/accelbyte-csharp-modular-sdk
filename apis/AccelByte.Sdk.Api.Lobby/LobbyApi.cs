@@ -28,6 +28,17 @@ namespace AccelByte.Sdk.Api.Lobby
         }
         private Wrapper.Friends? _Friends = null;
 
+        public Wrapper.Blocks Blocks
+        {
+            get
+            {
+                if (_Blocks == null)
+                    _Blocks = new Wrapper.Blocks(_Sdk, _CustomBasePath);
+                return _Blocks;
+            }
+        }
+        private Wrapper.Blocks? _Blocks = null;
+
         public Wrapper.Config Config
         {
             get

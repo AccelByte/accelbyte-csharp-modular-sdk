@@ -72,6 +72,10 @@ namespace AccelByte.Sdk.Api.Chat.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? EnableClanChat { get; set; }
 
+        [JsonPropertyName("maxChatMessageLength")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? MaxChatMessageLength { get; set; }
+
         [JsonPropertyName("useDefaultDictionary")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? UseDefaultDictionary { get; set; }

@@ -24,9 +24,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// getSectionPluginConfig
     ///
     /// Get section plugin config.
-    /// Other detail info:
-    /// 
-    ///   * Required permission : resource= ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG , action=2 (READ)
     /// </summary>
     public class GetSectionPluginConfig : AccelByte.Sdk.Core.Operation
     {

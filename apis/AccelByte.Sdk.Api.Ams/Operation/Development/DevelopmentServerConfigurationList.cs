@@ -34,6 +34,10 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             : OperationBuilder<DevelopmentServerConfigurationListBuilder>
         {
 
+            public long? Count { get; set; }
+
+            public long? Offset { get; set; }
+
 
 
 
@@ -45,6 +49,18 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 _Sdk = sdk;
             }
 
+
+            public DevelopmentServerConfigurationListBuilder SetCount(long _count)
+            {
+                Count = _count;
+                return this;
+            }
+
+            public DevelopmentServerConfigurationListBuilder SetOffset(long _offset)
+            {
+                Offset = _offset;
+                return this;
+            }
 
 
 
@@ -62,7 +78,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 return op;
             }
 
-            public List<Model.ApiDevelopmentServerConfigurationGetResponse>? Execute(
+            public Model.ApiDevelopmentServerConfigurationListResponse? Execute(
                 string namespace_
             )
             {
@@ -79,7 +95,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.ApiDevelopmentServerConfigurationGetResponse>?> ExecuteAsync(
+            public async Task<Model.ApiDevelopmentServerConfigurationListResponse?> ExecuteAsync(
                 string namespace_
             )
             {
@@ -104,6 +120,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         {
             PathParams["namespace"] = namespace_;
 
+            if (builder.Count != null) QueryParams["count"] = Convert.ToString(builder.Count)!;
+            if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
 
 
 
@@ -115,11 +133,15 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #endregion
 
         public DevelopmentServerConfigurationList(
-            string namespace_
+            string namespace_,
+            long? count,
+            long? offset
         )
         {
             PathParams["namespace"] = namespace_;
 
+            if (count != null) QueryParams["count"] = Convert.ToString(count)!;
+            if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
 
 
 
@@ -137,7 +159,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public List<Model.ApiDevelopmentServerConfigurationGetResponse>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.ApiDevelopmentServerConfigurationListResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -145,11 +167,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<List<Model.ApiDevelopmentServerConfigurationGetResponse>>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ApiDevelopmentServerConfigurationListResponse>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<List<Model.ApiDevelopmentServerConfigurationGetResponse>>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ApiDevelopmentServerConfigurationListResponse>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

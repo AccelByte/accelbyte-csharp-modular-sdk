@@ -27,8 +27,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// 
     /// Other detail info:
     /// 
-    ///   * Required permission : resource="ADMIN:NAMESPACE:{namespace}:USER:{userId}:SUBSCRIPTION", action=2 (READ)
-    ///   *  Returns : subscribable info
+    ///   * Returns : subscribable info
     /// </summary>
     public class CheckUserSubscriptionSubscribableByItemId : AccelByte.Sdk.Core.Operation
     {

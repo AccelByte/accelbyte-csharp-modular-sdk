@@ -24,9 +24,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// listFulfillmentScripts
     ///
     /// [Not Supported Yet In Starter] List all fulfillment scripts.
-    /// Other detail info:
-    /// 
-    ///   * Required permission : resource="ADMIN:FULFILLMENT", action=2 (READ)
     /// </summary>
     public class ListFulfillmentScripts : AccelByte.Sdk.Core.Operation
     {

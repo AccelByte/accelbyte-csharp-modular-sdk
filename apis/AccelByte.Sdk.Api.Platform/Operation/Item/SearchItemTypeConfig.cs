@@ -27,8 +27,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// 
     /// Other detail info:
     /// 
-    ///   * Required permission : resource="ADMIN:ITEM:CONFIG", action=2 (READ)
-    ///   *  Returns : item type config data
+    ///   * Returns : item type config data
     /// </summary>
     public class SearchItemTypeConfig : AccelByte.Sdk.Core.Operation
     {

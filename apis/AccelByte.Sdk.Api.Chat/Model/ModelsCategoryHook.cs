@@ -7,8 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
-using AccelByte.Sdk.Core;
-using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Chat.Model
 {
@@ -16,8 +14,7 @@ namespace AccelByte.Sdk.Api.Chat.Model
     {
         [JsonPropertyName("driver")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        [JsonStringEnum]
-        public ModelsCategoryHookDriver? Driver { get; set; }
+        public string? Driver { get; set; }
 
         [JsonPropertyName("params")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -29,8 +26,7 @@ namespace AccelByte.Sdk.Api.Chat.Model
     {
         [JsonPropertyName("driver")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        [JsonStringEnum]
-        public ModelsCategoryHookDriver? Driver { get; set; }
+        public string? Driver { get; set; }
 
         [JsonPropertyName("params")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -38,22 +34,4 @@ namespace AccelByte.Sdk.Api.Chat.Model
 
     }
 
-
-    public class ModelsCategoryHookDriver : StringEnum<ModelsCategoryHookDriver>
-    {
-        public static readonly ModelsCategoryHookDriver KAFKA
-            = new ModelsCategoryHookDriver("KAFKA");
-
-
-        public static implicit operator ModelsCategoryHookDriver(string value)
-        {
-            return NewValue(value);
-        }
-
-        public ModelsCategoryHookDriver(string enumValue)
-            : base(enumValue)
-        {
-
-        }
-    }
 }

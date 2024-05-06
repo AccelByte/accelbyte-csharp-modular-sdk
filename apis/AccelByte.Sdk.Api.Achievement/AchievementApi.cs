@@ -39,6 +39,17 @@ namespace AccelByte.Sdk.Api.Achievement
         }
         private Wrapper.GlobalAchievements? _GlobalAchievements = null;
 
+        public Wrapper.PlatformAchievement PlatformAchievement
+        {
+            get
+            {
+                if (_PlatformAchievement == null)
+                    _PlatformAchievement = new Wrapper.PlatformAchievement(_Sdk, _CustomBasePath);
+                return _PlatformAchievement;
+            }
+        }
+        private Wrapper.PlatformAchievement? _PlatformAchievement = null;
+
         public Wrapper.Tags Tags
         {
             get

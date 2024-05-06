@@ -168,6 +168,7 @@
 | `api.DevelopmentServerConfigurationCreateRequest` | [ApiDevelopmentServerConfigurationCreateRequest](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiDevelopmentServerConfigurationCreateRequest.cs) |
 | `api.DevelopmentServerConfigurationCreateResponse` | [ApiDevelopmentServerConfigurationCreateResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiDevelopmentServerConfigurationCreateResponse.cs) |
 | `api.DevelopmentServerConfigurationGetResponse` | [ApiDevelopmentServerConfigurationGetResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiDevelopmentServerConfigurationGetResponse.cs) |
+| `api.DevelopmentServerConfigurationListResponse` | [ApiDevelopmentServerConfigurationListResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiDevelopmentServerConfigurationListResponse.cs) |
 | `api.FleetArtifactsSampleRules` | [ApiFleetArtifactsSampleRules](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiFleetArtifactsSampleRules.cs) |
 | `api.FleetClaimByKeysReq` | [ApiFleetClaimByKeysReq](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiFleetClaimByKeysReq.cs) |
 | `api.FleetClaimReq` | [ApiFleetClaimReq](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiFleetClaimReq.cs) |

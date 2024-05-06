@@ -254,6 +254,17 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
+        public GetMyNotifications.GetMyNotificationsBuilder GetMyNotificationsOp
+        {
+            get
+            {
+                var opBuilder = new Operation.GetMyNotifications.GetMyNotificationsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public GetTopicByNamespace.GetTopicByNamespaceBuilder GetTopicByNamespaceOp
         {
             get
@@ -649,6 +660,22 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         {
             var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelNotificationResponse? GetMyNotifications(GetMyNotifications input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelNotificationResponse?> GetMyNotificationsAsync(GetMyNotifications input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

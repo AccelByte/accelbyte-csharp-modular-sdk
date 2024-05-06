@@ -26,8 +26,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// Query orders.
     /// Other detail info:
     /// 
-    ///   * Required permission : resource="ADMIN:NAMESPACE:{namespace}:ORDER", action=2 (READ)
-    ///   *  Returns : query orders
+    ///   * Returns : query orders
     /// </summary>
     public class QueryOrders : AccelByte.Sdk.Core.Operation
     {

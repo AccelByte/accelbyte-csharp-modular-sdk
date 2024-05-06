@@ -28,6 +28,17 @@ namespace AccelByte.Sdk.Api.Inventory
         }
         private Wrapper.AdminChainingOperations? _AdminChainingOperations = null;
 
+        public Wrapper.AdminIntegrationConfigurations AdminIntegrationConfigurations
+        {
+            get
+            {
+                if (_AdminIntegrationConfigurations == null)
+                    _AdminIntegrationConfigurations = new Wrapper.AdminIntegrationConfigurations(_Sdk, _CustomBasePath);
+                return _AdminIntegrationConfigurations;
+            }
+        }
+        private Wrapper.AdminIntegrationConfigurations? _AdminIntegrationConfigurations = null;
+
         public Wrapper.AdminInventories AdminInventories
         {
             get

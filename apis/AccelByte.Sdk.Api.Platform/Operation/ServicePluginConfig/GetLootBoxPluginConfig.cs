@@ -24,9 +24,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// getLootBoxPluginConfig
     ///
     /// Get lootbox plugin config.
-    /// Other detail info:
-    /// 
-    ///   * Required permission : resource= ADMIN:NAMESPACE:{namespace}:PLUGIN:CATALOG , action=2 (READ)
     /// </summary>
     public class GetLootBoxPluginConfig : AccelByte.Sdk.Core.Operation
     {

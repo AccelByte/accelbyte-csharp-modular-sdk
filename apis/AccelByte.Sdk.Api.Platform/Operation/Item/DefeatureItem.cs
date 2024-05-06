@@ -26,8 +26,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// Remove a feature from an item.
     /// Other detail info:
     /// 
-    ///   * Required permission : resource="ADMIN:NAMESPACE:{namespace}:ITEM", action=4 (UPDATE)
-    ///   *  Returns : updated item
+    ///   * Returns : updated item
     /// </summary>
     public class DefeatureItem : AccelByte.Sdk.Core.Operation
     {

@@ -166,7 +166,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// #### Other detail info:
     /// 
     ///   * Token type : client token
-    ///   *  Required permission : resource="ADMIN:NAMESPACE:{namespace}:PAYMENT", action=4 (UPDATE)
     ///   *  cross namespace allowed
     /// </summary>
     public class RefundPaymentOrderByDedicated : AccelByte.Sdk.Core.Operation

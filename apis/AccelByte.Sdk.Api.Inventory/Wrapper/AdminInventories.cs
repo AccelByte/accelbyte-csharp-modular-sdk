@@ -89,6 +89,17 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     return opBuilder;
             }
         }
+        public AdminPurchasable.AdminPurchasableBuilder AdminPurchasableOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminPurchasable.AdminPurchasableBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         #endregion
 
         public Model.ApimodelsListInventoryResp? AdminListInventories(AdminListInventories input)
@@ -164,6 +175,22 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.Payload);
         }
         public async Task DeleteInventoryAsync(DeleteInventory input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void AdminPurchasable(AdminPurchasable input)
+        {
+            var response = _sdk.RunRequest(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminPurchasableAsync(AdminPurchasable input)
         {
             var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(

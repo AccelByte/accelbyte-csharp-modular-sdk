@@ -32,6 +32,11 @@
 | `/achievement/v1/public/namespaces/{namespace}/users/{userId}/global/achievements` | GET | ListUserContributions | [ListUserContributions](../../apis/AccelByte.Sdk.Api.Achievement/Operation/GlobalAchievements/ListUserContributions.cs) | [ListUserContributions](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Achievement/GlobalAchievements/ListUserContributions.cs) |
 | `/achievement/v1/public/namespaces/{namespace}/users/{userId}/global/achievements/{achievementCode}/claim` | POST | ClaimGlobalAchievementReward | [ClaimGlobalAchievementReward](../../apis/AccelByte.Sdk.Api.Achievement/Operation/GlobalAchievements/ClaimGlobalAchievementReward.cs) | [ClaimGlobalAchievementReward](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Achievement/GlobalAchievements/ClaimGlobalAchievementReward.cs) |
 
+### Platform Achievement Wrapper:  [PlatformAchievement](../../apis/AccelByte.Sdk.Api.Achievement/Wrapper/PlatformAchievement.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/achievement/v1/admin/namespaces/{namespace}/platforms/psn/bulk` | POST | BulkCreatePSNEvent | [BulkCreatePSNEvent](../../apis/AccelByte.Sdk.Api.Achievement/Operation/PlatformAchievement/BulkCreatePSNEvent.cs) | [BulkCreatePSNEvent](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Achievement/PlatformAchievement/BulkCreatePSNEvent.cs) |
+
 ### Tags Wrapper:  [Tags](../../apis/AccelByte.Sdk.Api.Achievement/Wrapper/Tags.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -69,6 +74,10 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
+### Platform Achievement Wrapper:  [PlatformAchievement](../../apis/AccelByte.Sdk.Api.Achievement/Wrapper/PlatformAchievement.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
 ### Tags Wrapper:  [Tags](../../apis/AccelByte.Sdk.Api.Achievement/Wrapper/Tags.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -93,9 +102,16 @@
 | `models.AchievementResponse` | [ModelsAchievementResponse](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsAchievementResponse.cs) |
 | `models.AchievementUpdateRequest` | [ModelsAchievementUpdateRequest](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsAchievementUpdateRequest.cs) |
 | `models.AdditionalInfo` | [ModelsAdditionalInfo](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsAdditionalInfo.cs) |
+| `models.BulkCreatePSNEventResponse` | [ModelsBulkCreatePSNEventResponse](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsBulkCreatePSNEventResponse.cs) |
+| `models.BulkCreatePSNEvents` | [ModelsBulkCreatePSNEvents](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsBulkCreatePSNEvents.cs) |
 | `models.ContributorResponse` | [ModelsContributorResponse](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsContributorResponse.cs) |
+| `models.CreatePSNEvent` | [ModelsCreatePSNEvent](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsCreatePSNEvent.cs) |
+| `models.ErrorDetails` | [ModelsErrorDetails](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsErrorDetails.cs) |
 | `models.GlobalAchievementResponse` | [ModelsGlobalAchievementResponse](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsGlobalAchievementResponse.cs) |
 | `models.Icon` | [ModelsIcon](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsIcon.cs) |
+| `models.PSNEvent` | [ModelsPSNEvent](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsPSNEvent.cs) |
+| `models.PSNEventData` | [ModelsPSNEventData](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsPSNEventData.cs) |
+| `models.PSNEventResult` | [ModelsPSNEventResult](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsPSNEventResult.cs) |
 | `models.PaginatedAchievementResponse` | [ModelsPaginatedAchievementResponse](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsPaginatedAchievementResponse.cs) |
 | `models.PaginatedContributorResponse` | [ModelsPaginatedContributorResponse](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsPaginatedContributorResponse.cs) |
 | `models.PaginatedGlobalAchievementResponse` | [ModelsPaginatedGlobalAchievementResponse](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsPaginatedGlobalAchievementResponse.cs) |

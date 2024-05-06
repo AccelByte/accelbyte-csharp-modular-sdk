@@ -11,6 +11,14 @@
 |---|---|---|---|---|
 | `/inventory/v1/admin/namespaces/{namespace}/chainingOperations` | POST | AdminCreateChainingOperations | [AdminCreateChainingOperations](../../apis/AccelByte.Sdk.Api.Inventory/Operation/AdminChainingOperations/AdminCreateChainingOperations.cs) | [AdminCreateChainingOperations](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Inventory/AdminChainingOperations/AdminCreateChainingOperations.cs) |
 
+### Admin Integration Configurations Wrapper:  [AdminIntegrationConfigurations](../../apis/AccelByte.Sdk.Api.Inventory/Wrapper/AdminIntegrationConfigurations.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/inventory/v1/admin/namespaces/{namespace}/integrationConfigurations` | GET | AdminListIntegrationConfigurations | [AdminListIntegrationConfigurations](../../apis/AccelByte.Sdk.Api.Inventory/Operation/AdminIntegrationConfigurations/AdminListIntegrationConfigurations.cs) | [AdminListIntegrationConfigurations](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Inventory/AdminIntegrationConfigurations/AdminListIntegrationConfigurations.cs) |
+| `/inventory/v1/admin/namespaces/{namespace}/integrationConfigurations` | POST | AdminCreateIntegrationConfiguration | [AdminCreateIntegrationConfiguration](../../apis/AccelByte.Sdk.Api.Inventory/Operation/AdminIntegrationConfigurations/AdminCreateIntegrationConfiguration.cs) | [AdminCreateIntegrationConfiguration](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Inventory/AdminIntegrationConfigurations/AdminCreateIntegrationConfiguration.cs) |
+| `/inventory/v1/admin/namespaces/{namespace}/integrationConfigurations/{integrationConfigurationId}` | PUT | AdminUpdateIntegrationConfiguration | [AdminUpdateIntegrationConfiguration](../../apis/AccelByte.Sdk.Api.Inventory/Operation/AdminIntegrationConfigurations/AdminUpdateIntegrationConfiguration.cs) | [AdminUpdateIntegrationConfiguration](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Inventory/AdminIntegrationConfigurations/AdminUpdateIntegrationConfiguration.cs) |
+| `/inventory/v1/admin/namespaces/{namespace}/integrationConfigurations/{integrationConfigurationId}/status` | PUT | AdminUpdateStatusIntegrationConfiguration | [AdminUpdateStatusIntegrationConfiguration](../../apis/AccelByte.Sdk.Api.Inventory/Operation/AdminIntegrationConfigurations/AdminUpdateStatusIntegrationConfiguration.cs) | [AdminUpdateStatusIntegrationConfiguration](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Inventory/AdminIntegrationConfigurations/AdminUpdateStatusIntegrationConfiguration.cs) |
+
 ### Admin Inventories Wrapper:  [AdminInventories](../../apis/AccelByte.Sdk.Api.Inventory/Wrapper/AdminInventories.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -19,6 +27,7 @@
 | `/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}` | GET | AdminGetInventory | [AdminGetInventory](../../apis/AccelByte.Sdk.Api.Inventory/Operation/AdminInventories/AdminGetInventory.cs) | [AdminGetInventory](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Inventory/AdminInventories/AdminGetInventory.cs) |
 | `/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}` | PUT | AdminUpdateInventory | [AdminUpdateInventory](../../apis/AccelByte.Sdk.Api.Inventory/Operation/AdminInventories/AdminUpdateInventory.cs) | [AdminUpdateInventory](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Inventory/AdminInventories/AdminUpdateInventory.cs) |
 | `/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}` | DELETE | DeleteInventory | [DeleteInventory](../../apis/AccelByte.Sdk.Api.Inventory/Operation/AdminInventories/DeleteInventory.cs) | [DeleteInventory](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Inventory/AdminInventories/DeleteInventory.cs) |
+| `/inventory/v1/admin/namespaces/{namespace}/users/{userId}/purchaseable` | POST | AdminPurchasable | [AdminPurchasable](../../apis/AccelByte.Sdk.Api.Inventory/Operation/AdminInventories/AdminPurchasable.cs) | [AdminPurchasable](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Inventory/AdminInventories/AdminPurchasable.cs) |
 
 ### Admin Items Wrapper:  [AdminItems](../../apis/AccelByte.Sdk.Api.Inventory/Wrapper/AdminItems.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -30,6 +39,7 @@
 | `/inventory/v1/admin/namespaces/{namespace}/users/{userId}/inventories/{inventoryId}/items` | POST | AdminSaveItemToInventory | [AdminSaveItemToInventory](../../apis/AccelByte.Sdk.Api.Inventory/Operation/AdminItems/AdminSaveItemToInventory.cs) | [AdminSaveItemToInventory](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Inventory/AdminItems/AdminSaveItemToInventory.cs) |
 | `/inventory/v1/admin/namespaces/{namespace}/users/{userId}/inventories/{inventoryId}/items` | DELETE | AdminBulkRemoveItems | [AdminBulkRemoveItems](../../apis/AccelByte.Sdk.Api.Inventory/Operation/AdminItems/AdminBulkRemoveItems.cs) | [AdminBulkRemoveItems](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Inventory/AdminItems/AdminBulkRemoveItems.cs) |
 | `/inventory/v1/admin/namespaces/{namespace}/users/{userId}/items` | POST | AdminSaveItem | [AdminSaveItem](../../apis/AccelByte.Sdk.Api.Inventory/Operation/AdminItems/AdminSaveItem.cs) | [AdminSaveItem](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Inventory/AdminItems/AdminSaveItem.cs) |
+| `/inventory/v1/admin/namespaces/{namespace}/users/{userId}/items/entitlements/sync` | PUT | AdminSyncUserEntitlements | [AdminSyncUserEntitlements](../../apis/AccelByte.Sdk.Api.Inventory/Operation/AdminItems/AdminSyncUserEntitlements.cs) | [AdminSyncUserEntitlements](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Inventory/AdminItems/AdminSyncUserEntitlements.cs) |
 
 ### Admin Inventory Configurations Wrapper:  [AdminInventoryConfigurations](../../apis/AccelByte.Sdk.Api.Inventory/Wrapper/AdminInventoryConfigurations.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -93,6 +103,10 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
+### Admin Integration Configurations Wrapper:  [AdminIntegrationConfigurations](../../apis/AccelByte.Sdk.Api.Inventory/Wrapper/AdminIntegrationConfigurations.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
 ### Admin Inventories Wrapper:  [AdminInventories](../../apis/AccelByte.Sdk.Api.Inventory/Wrapper/AdminInventories.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -145,6 +159,7 @@
 | `apimodels.ChainingOperationResp` | [ApimodelsChainingOperationResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsChainingOperationResp.cs) |
 | `apimodels.ConsumeItem` | [ApimodelsConsumeItem](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsConsumeItem.cs) |
 | `apimodels.ConsumeItemReq` | [ApimodelsConsumeItemReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsConsumeItemReq.cs) |
+| `apimodels.CreateIntegrationConfigurationReq` | [ApimodelsCreateIntegrationConfigurationReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsCreateIntegrationConfigurationReq.cs) |
 | `apimodels.CreateInventoryConfigurationReq` | [ApimodelsCreateInventoryConfigurationReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsCreateInventoryConfigurationReq.cs) |
 | `apimodels.CreateInventoryReq` | [ApimodelsCreateInventoryReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsCreateInventoryReq.cs) |
 | `apimodels.CreateItem` | [ApimodelsCreateItem](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsCreateItem.cs) |
@@ -154,10 +169,13 @@
 | `apimodels.CreateTagResp` | [ApimodelsCreateTagResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsCreateTagResp.cs) |
 | `apimodels.DeleteInventoryReq` | [ApimodelsDeleteInventoryReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsDeleteInventoryReq.cs) |
 | `apimodels.ErrorResponse` | [ApimodelsErrorResponse](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsErrorResponse.cs) |
+| `apimodels.IntegrationConfigurationResp` | [ApimodelsIntegrationConfigurationResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsIntegrationConfigurationResp.cs) |
+| `apimodels.InventoryConfig` | [ApimodelsInventoryConfig](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsInventoryConfig.cs) |
 | `apimodels.InventoryConfigurationReq` | [ApimodelsInventoryConfigurationReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsInventoryConfigurationReq.cs) |
 | `apimodels.InventoryConfigurationResp` | [ApimodelsInventoryConfigurationResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsInventoryConfigurationResp.cs) |
 | `apimodels.InventoryResp` | [ApimodelsInventoryResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsInventoryResp.cs) |
 | `apimodels.ItemResp` | [ApimodelsItemResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsItemResp.cs) |
+| `apimodels.ListIntegrationConfigurationsResp` | [ApimodelsListIntegrationConfigurationsResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsListIntegrationConfigurationsResp.cs) |
 | `apimodels.ListInventoryConfigurationsResp` | [ApimodelsListInventoryConfigurationsResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsListInventoryConfigurationsResp.cs) |
 | `apimodels.ListInventoryResp` | [ApimodelsListInventoryResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsListInventoryResp.cs) |
 | `apimodels.ListItemResp` | [ApimodelsListItemResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsListItemResp.cs) |
@@ -167,13 +185,17 @@
 | `apimodels.MoveItemsResp` | [ApimodelsMoveItemsResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsMoveItemsResp.cs) |
 | `apimodels.Operation` | [ApimodelsOperation](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsOperation.cs) |
 | `apimodels.Paging` | [ApimodelsPaging](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsPaging.cs) |
+| `apimodels.PurchaseValidationItemReq` | [ApimodelsPurchaseValidationItemReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsPurchaseValidationItemReq.cs) |
+| `apimodels.PurchaseValidationReq` | [ApimodelsPurchaseValidationReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsPurchaseValidationReq.cs) |
 | `apimodels.RemoveInventoryItemReq` | [ApimodelsRemoveInventoryItemReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsRemoveInventoryItemReq.cs) |
 | `apimodels.RemoveItem` | [ApimodelsRemoveItem](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsRemoveItem.cs) |
 | `apimodels.SaveItemReq` | [ApimodelsSaveItemReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsSaveItemReq.cs) |
 | `apimodels.SaveItemToInventoryReq` | [ApimodelsSaveItemToInventoryReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsSaveItemToInventoryReq.cs) |
 | `apimodels.TradeItem` | [ApimodelsTradeItem](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsTradeItem.cs) |
 | `apimodels.TradeItemResp` | [ApimodelsTradeItemResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsTradeItemResp.cs) |
+| `apimodels.UpdateIntegrationConfigurationReq` | [ApimodelsUpdateIntegrationConfigurationReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsUpdateIntegrationConfigurationReq.cs) |
 | `apimodels.UpdateInventoryReq` | [ApimodelsUpdateInventoryReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsUpdateInventoryReq.cs) |
 | `apimodels.UpdateItem` | [ApimodelsUpdateItem](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsUpdateItem.cs) |
 | `apimodels.UpdateItemReq` | [ApimodelsUpdateItemReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsUpdateItemReq.cs) |
 | `apimodels.UpdateItemResp` | [ApimodelsUpdateItemResp](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsUpdateItemResp.cs) |
+| `apimodels.UpdateStatusIntegrationConfigurationReq` | [ApimodelsUpdateStatusIntegrationConfigurationReq](../../apis/AccelByte.Sdk.Api.Inventory/Model/ApimodelsUpdateStatusIntegrationConfigurationReq.cs) |

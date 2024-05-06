@@ -29,6 +29,11 @@
 | `/lobby/v1/admin/friend/namespaces/{namespace}/users/{userId}/of-friends` | GET | AdminListFriendsOfFriends | [AdminListFriendsOfFriends](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Friends/AdminListFriendsOfFriends.cs) | [AdminListFriendsOfFriends](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Friends/AdminListFriendsOfFriends.cs) |
 | `/lobby/v1/admin/friend/namespaces/{namespace}/users/{userId}/outgoing` | GET | GetOutgoingFriendRequests | [GetOutgoingFriendRequests](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Friends/GetOutgoingFriendRequests.cs) | [GetOutgoingFriendRequests](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Friends/GetOutgoingFriendRequests.cs) |
 
+### blocks Wrapper:  [Blocks](../../apis/AccelByte.Sdk.Api.Lobby/Wrapper/Blocks.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/lobby/sync/namespaces/{namespace}/me/block` | PATCH | SyncNativeBlockedUser | [SyncNativeBlockedUser](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Blocks/SyncNativeBlockedUser.cs) | [SyncNativeBlockedUser](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Blocks/SyncNativeBlockedUser.cs) |
+
 ### config Wrapper:  [Config](../../apis/AccelByte.Sdk.Api.Lobby/Wrapper/Config.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -78,6 +83,7 @@
 | `/lobby/v1/admin/notification/namespaces/{namespace}/topics/{topicName}` | DELETE | DeleteNotificationTopicV1Admin | [DeleteNotificationTopicV1Admin](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Notification/DeleteNotificationTopicV1Admin.cs) | [DeleteNotificationTopicV1Admin](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Notification/DeleteNotificationTopicV1Admin.cs) |
 | `/lobby/v1/admin/notification/namespaces/{namespace}/users/{userId}/freeform/notify` | POST | SendSpecificUserFreeformNotificationV1Admin | [SendSpecificUserFreeformNotificationV1Admin](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Notification/SendSpecificUserFreeformNotificationV1Admin.cs) | [SendSpecificUserFreeformNotificationV1Admin](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Notification/SendSpecificUserFreeformNotificationV1Admin.cs) |
 | `/lobby/v1/admin/notification/namespaces/{namespace}/users/{userId}/templates/notify` | POST | SendSpecificUserTemplatedNotificationV1Admin | [SendSpecificUserTemplatedNotificationV1Admin](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Notification/SendSpecificUserTemplatedNotificationV1Admin.cs) | [SendSpecificUserTemplatedNotificationV1Admin](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Notification/SendSpecificUserTemplatedNotificationV1Admin.cs) |
+| `/notification/namespaces/{namespace}/me` | GET | GetMyNotifications | [GetMyNotifications](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Notification/GetMyNotifications.cs) | [GetMyNotifications](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Notification/GetMyNotifications.cs) |
 | `/notification/namespaces/{namespace}/topics` | GET | GetTopicByNamespace | [GetTopicByNamespace](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Notification/GetTopicByNamespace.cs) | [GetTopicByNamespace](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Notification/GetTopicByNamespace.cs) |
 | `/notification/namespaces/{namespace}/topics` | POST | CreateTopic | [CreateTopic](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Notification/CreateTopic.cs) | [CreateTopic](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Notification/CreateTopic.cs) |
 | `/notification/namespaces/{namespace}/topics/{topic}` | GET | GetTopicByTopicName | [GetTopicByTopicName](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Notification/GetTopicByTopicName.cs) | [GetTopicByTopicName](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Notification/GetTopicByTopicName.cs) |
@@ -157,6 +163,10 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
+### blocks Wrapper:  [Blocks](../../apis/AccelByte.Sdk.Api.Lobby/Wrapper/Blocks.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
 ### config Wrapper:  [Config](../../apis/AccelByte.Sdk.Api.Lobby/Wrapper/Config.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -233,6 +243,9 @@
 | `model.Localization` | [ModelLocalization](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelLocalization.cs) |
 | `model.NativeFriendRequest` | [ModelNativeFriendRequest](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNativeFriendRequest.cs) |
 | `model.NativeFriendSyncResponse` | [ModelNativeFriendSyncResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNativeFriendSyncResponse.cs) |
+| `model.NativeUserBlockRequest` | [ModelNativeUserBlockRequest](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNativeUserBlockRequest.cs) |
+| `model.NativeUserBlockResponse` | [ModelNativeUserBlockResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNativeUserBlockResponse.cs) |
+| `model.NotificationResponse` | [ModelNotificationResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNotificationResponse.cs) |
 | `model.NotificationTemplateResponse` | [ModelNotificationTemplateResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNotificationTemplateResponse.cs) |
 | `model.NotificationTopicResponse` | [ModelNotificationTopicResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNotificationTopicResponse.cs) |
 | `model.NotificationTopicResponseV1` | [ModelNotificationTopicResponseV1](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNotificationTopicResponseV1.cs) |

@@ -30,6 +30,12 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
+        [SdkCommandArgument("count")]
+        public long? Count { get; set; }
+
+        [SdkCommandArgument("offset")]
+        public long? Offset { get; set; }
+
         public DevelopmentServerConfigurationListCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -41,6 +47,10 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 
             var opBuilder = AccelByte.Sdk.Api.Ams.Operation.DevelopmentServerConfigurationList.Builder;
 
+            if (Count != null)
+                opBuilder.SetCount((long)Count);
+            if (Offset != null)
+                opBuilder.SetOffset((long)Offset);
 
 
 
@@ -50,7 +60,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
             );
 
 
-            List<AccelByte.Sdk.Api.Ams.Model.ApiDevelopmentServerConfigurationGetResponse>? response = wrapper.DevelopmentServerConfigurationList(operation);
+            AccelByte.Sdk.Api.Ams.Model.ApiDevelopmentServerConfigurationListResponse? response = wrapper.DevelopmentServerConfigurationList(operation);
             if (response == null)
                 return "No response from server.";
 

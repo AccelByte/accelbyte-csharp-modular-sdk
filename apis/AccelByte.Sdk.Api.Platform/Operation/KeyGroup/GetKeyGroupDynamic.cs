@@ -26,8 +26,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// Get key group dynamic.
     /// Other detail info:
     /// 
-    ///   * Required permission : resource="ADMIN:NAMESPACE:{namespace}:KEYGROUP", action=2 (READ)
-    ///   *  Returns : key group info
+    ///   * Returns : key group info
     /// </summary>
     public class GetKeyGroupDynamic : AccelByte.Sdk.Core.Operation
     {
