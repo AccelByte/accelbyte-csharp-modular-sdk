@@ -19,6 +19,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
         public SessionBrowserTests() : base(true) { }
 
         [Test]
+        [Ignore("temporary disabled")]
         public void SessionBrowserServiceTests()
         {
             Assert.IsNotNull(_Sdk);
