@@ -6,12 +6,12 @@ SHELL := /bin/bash
 
 DOTNETVER := 6.0.302
 
-.PHONY: build test
+.PHONY: build
 
 build:
 	docker run --rm -u $$(id -u):$$(id -g) -v $$(pwd):/data/ -w /data/ -e HOME="/data" -e DOTNET_CLI_HOME="/data" mcr.microsoft.com/dotnet/sdk:6.0 dotnet build
 
-test:
+test_core:
 	@test -n "$(SDK_MOCK_SERVER_PATH)" || (echo "SDK_MOCK_SERVER_PATH is not set" ; exit 1)
 	sed -i "s/\r//" "$(SDK_MOCK_SERVER_PATH)/mock-server.sh" && \
 			trap "docker stop -t 1 justice-codegen-sdk-mock-server; docker rm -f mylocal_httpbin" EXIT && \
