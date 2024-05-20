@@ -325,6 +325,17 @@ namespace AccelByte.Sdk.Api.Platform
         }
         private Wrapper.Anonymization? _Anonymization = null;
 
+        public Wrapper.PlatformAccountClosure PlatformAccountClosure
+        {
+            get
+            {
+                if (_PlatformAccountClosure == null)
+                    _PlatformAccountClosure = new Wrapper.PlatformAccountClosure(_Sdk, _CustomBasePath);
+                return _PlatformAccountClosure;
+            }
+        }
+        private Wrapper.PlatformAccountClosure? _PlatformAccountClosure = null;
+
         public Wrapper.SessionPlatform SessionPlatform
         {
             get

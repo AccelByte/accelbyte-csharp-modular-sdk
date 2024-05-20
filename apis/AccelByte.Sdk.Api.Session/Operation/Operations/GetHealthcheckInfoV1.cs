@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
         public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { };
+        public override List<string> Produces => new() { "application/json" };
 
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {

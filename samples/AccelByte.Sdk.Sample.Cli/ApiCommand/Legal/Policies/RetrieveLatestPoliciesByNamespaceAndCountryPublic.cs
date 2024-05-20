@@ -45,6 +45,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
         [SdkCommandArgument("tags")]
         public string? Tags { get; set; }
 
+        [SdkCommandArgument("visibleOnly")]
+        public bool? VisibleOnly { get; set; }
+
         public RetrieveLatestPoliciesByNamespaceAndCountryPublicCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -64,6 +67,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
                 opBuilder.SetPolicyType(RetrieveLatestPoliciesByNamespaceAndCountryPublicPolicyType.NewValue(PolicyType));
             if (Tags != null)
                 opBuilder.SetTags((string)Tags);
+            if (VisibleOnly != null)
+                opBuilder.SetVisibleOnly((bool)VisibleOnly);
 
 
 

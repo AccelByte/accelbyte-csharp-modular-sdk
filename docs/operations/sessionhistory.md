@@ -12,6 +12,12 @@
 | `/healthz` | GET | GetHealthcheckInfo | [GetHealthcheckInfo](../../apis/AccelByte.Sdk.Api.Sessionhistory/Operation/Operations/GetHealthcheckInfo.cs) | [GetHealthcheckInfo](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Sessionhistory/Operations/GetHealthcheckInfo.cs) |
 | `/sessionhistory/healthz` | GET | GetHealthcheckInfoV1 | [GetHealthcheckInfoV1](../../apis/AccelByte.Sdk.Api.Sessionhistory/Operation/Operations/GetHealthcheckInfoV1.cs) | [GetHealthcheckInfoV1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Sessionhistory/Operations/GetHealthcheckInfoV1.cs) |
 
+### Config Wrapper:  [Config](../../apis/AccelByte.Sdk.Api.Sessionhistory/Wrapper/Config.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/sessionhistory/v1/admin/config/log` | GET | AdminGetLogConfig | [AdminGetLogConfig](../../apis/AccelByte.Sdk.Api.Sessionhistory/Operation/Config/AdminGetLogConfig.cs) | [AdminGetLogConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Sessionhistory/Config/AdminGetLogConfig.cs) |
+| `/sessionhistory/v1/admin/config/log` | PATCH | AdminPatchUpdateLogConfig | [AdminPatchUpdateLogConfig](../../apis/AccelByte.Sdk.Api.Sessionhistory/Operation/Config/AdminPatchUpdateLogConfig.cs) | [AdminPatchUpdateLogConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Sessionhistory/Config/AdminPatchUpdateLogConfig.cs) |
+
 ### Game Session Detail Wrapper:  [GameSessionDetail](../../apis/AccelByte.Sdk.Api.Sessionhistory/Wrapper/GameSessionDetail.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -55,6 +61,10 @@
 ## Operations with Generic Response
 
 ### Operations Wrapper:  [Operations](../../apis/AccelByte.Sdk.Api.Sessionhistory/Wrapper/Operations.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
+### Config Wrapper:  [Config](../../apis/AccelByte.Sdk.Api.Sessionhistory/Wrapper/Config.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
@@ -120,6 +130,7 @@
 | `apimodels.XRayTicketResult` | [ApimodelsXRayTicketResult](../../apis/AccelByte.Sdk.Api.Sessionhistory/Model/ApimodelsXRayTicketResult.cs) |
 | `apimodels.XRayTotalActiveSessionQueryResponse` | [ApimodelsXRayTotalActiveSessionQueryResponse](../../apis/AccelByte.Sdk.Api.Sessionhistory/Model/ApimodelsXRayTotalActiveSessionQueryResponse.cs) |
 | `apimodels.XRayTotalPlayerPersessionAVGQueryResponse` | [ApimodelsXRayTotalPlayerPersessionAVGQueryResponse](../../apis/AccelByte.Sdk.Api.Sessionhistory/Model/ApimodelsXRayTotalPlayerPersessionAVGQueryResponse.cs) |
+| `logconfig.Configuration` | [LogconfigConfiguration](../../apis/AccelByte.Sdk.Api.Sessionhistory/Model/LogconfigConfiguration.cs) |
 | `models.AllianceRule` | [ModelsAllianceRule](../../apis/AccelByte.Sdk.Api.Sessionhistory/Model/ModelsAllianceRule.cs) |
 | `models.BackfillProposal` | [ModelsBackfillProposal](../../apis/AccelByte.Sdk.Api.Sessionhistory/Model/ModelsBackfillProposal.cs) |
 | `models.BackfillTicket` | [ModelsBackfillTicket](../../apis/AccelByte.Sdk.Api.Sessionhistory/Model/ModelsBackfillTicket.cs) |

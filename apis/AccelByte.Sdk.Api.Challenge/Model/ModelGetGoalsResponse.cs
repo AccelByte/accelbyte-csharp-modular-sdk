@@ -15,6 +15,9 @@ namespace AccelByte.Sdk.Api.Challenge.Model
         [JsonPropertyName("data")]
         public List<ModelGoalResponse>? Data { get; set; }
 
+        [JsonPropertyName("meta")]
+        public ModelChallengeResponse? Meta { get; set; }
+
         [JsonPropertyName("paging")]
         public ModelPagination? Paging { get; set; }
 

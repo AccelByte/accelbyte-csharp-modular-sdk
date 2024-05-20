@@ -31,6 +31,10 @@ namespace AccelByte.Sdk.Api.Challenge.Model
         [JsonPropertyName("parameterType")]
         public string? ParameterType { get; set; }
 
+        [JsonPropertyName("statCycleId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? StatCycleId { get; set; }
+
         [JsonPropertyName("targetValue")]
         public double? TargetValue { get; set; }
 

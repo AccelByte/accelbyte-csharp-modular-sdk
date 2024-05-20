@@ -27,6 +27,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 
         public string OperationName { get { return "RetrieveAllLegalPolicies"; } }
 
+        [SdkCommandArgument("visibleOnly")]
+        public bool? VisibleOnly { get; set; }
+
         public RetrieveAllLegalPoliciesCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -38,6 +41,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 
             var opBuilder = AccelByte.Sdk.Api.Legal.Operation.RetrieveAllLegalPolicies.Builder;
 
+            if (VisibleOnly != null)
+                opBuilder.SetVisibleOnly((bool)VisibleOnly);
 
 
 

@@ -17,17 +17,6 @@ namespace AccelByte.Sdk.Api.Group
 
         private string _CustomBasePath = String.Empty;
 
-        public Wrapper.Operations Operations
-        {
-            get
-            {
-                if (_Operations == null)
-                    _Operations = new Wrapper.Operations(_Sdk, _CustomBasePath);
-                return _Operations;
-            }
-        }
-        private Wrapper.Operations? _Operations = null;
-
         public Wrapper.Configuration Configuration
         {
             get

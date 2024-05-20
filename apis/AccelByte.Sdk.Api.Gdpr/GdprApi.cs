@@ -39,6 +39,17 @@ namespace AccelByte.Sdk.Api.Gdpr
         }
         private Wrapper.Configuration? _Configuration = null;
 
+        public Wrapper.PlatformAccountClosureClient PlatformAccountClosureClient
+        {
+            get
+            {
+                if (_PlatformAccountClosureClient == null)
+                    _PlatformAccountClosureClient = new Wrapper.PlatformAccountClosureClient(_Sdk, _CustomBasePath);
+                return _PlatformAccountClosureClient;
+            }
+        }
+        private Wrapper.PlatformAccountClosureClient? _PlatformAccountClosureClient = null;
+
         public Wrapper.DataRetrieval DataRetrieval
         {
             get
@@ -49,6 +60,17 @@ namespace AccelByte.Sdk.Api.Gdpr
             }
         }
         private Wrapper.DataRetrieval? _DataRetrieval = null;
+
+        public Wrapper.PlatformAccountClosureHistory PlatformAccountClosureHistory
+        {
+            get
+            {
+                if (_PlatformAccountClosureHistory == null)
+                    _PlatformAccountClosureHistory = new Wrapper.PlatformAccountClosureHistory(_Sdk, _CustomBasePath);
+                return _PlatformAccountClosureHistory;
+            }
+        }
+        private Wrapper.PlatformAccountClosureHistory? _PlatformAccountClosureHistory = null;
 
         internal GdprApi(IAccelByteSdk sdk)
         {

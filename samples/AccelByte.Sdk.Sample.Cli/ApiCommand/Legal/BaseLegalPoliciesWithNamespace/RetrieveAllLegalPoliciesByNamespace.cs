@@ -30,6 +30,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
+        [SdkCommandArgument("visibleOnly")]
+        public bool? VisibleOnly { get; set; }
+
         public RetrieveAllLegalPoliciesByNamespaceCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -41,6 +44,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 
             var opBuilder = AccelByte.Sdk.Api.Legal.Operation.RetrieveAllLegalPoliciesByNamespace.Builder;
 
+            if (VisibleOnly != null)
+                opBuilder.SetVisibleOnly((bool)VisibleOnly);
 
 
 

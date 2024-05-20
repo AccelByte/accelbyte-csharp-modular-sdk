@@ -15,6 +15,7 @@ namespace AccelByte.Sdk.Api.Chat.Model
     public class ModelsSaveInboxMessageRequest : AccelByte.Sdk.Core.Model
     {
         [JsonPropertyName("category")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Category { get; set; }
 
         [JsonPropertyName("expiredAt")]
@@ -39,6 +40,7 @@ namespace AccelByte.Sdk.Api.Chat.Model
     public class ModelsSaveInboxMessageRequest<T1> : AccelByte.Sdk.Core.Model
     {
         [JsonPropertyName("category")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Category { get; set; }
 
         [JsonPropertyName("expiredAt")]

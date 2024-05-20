@@ -24,6 +24,10 @@ namespace AccelByte.Sdk.Api.Iam.Model
         [JsonPropertyName("IsActive")]
         public bool? IsActive { get; set; }
 
+        [JsonPropertyName("LogoURL")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? LogoURL { get; set; }
+
         [JsonPropertyName("PlatformId")]
         public string? PlatformId { get; set; }
 

@@ -511,6 +511,11 @@
 | `/platform/admin/namespaces/{namespace}/users/{userId}/anonymization/subscriptions` | DELETE | AnonymizeSubscription | [AnonymizeSubscription](../../apis/AccelByte.Sdk.Api.Platform/Operation/Anonymization/AnonymizeSubscription.cs) | [AnonymizeSubscription](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Anonymization/AnonymizeSubscription.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/anonymization/wallets` | DELETE | AnonymizeWallet | [AnonymizeWallet](../../apis/AccelByte.Sdk.Api.Platform/Operation/Anonymization/AnonymizeWallet.cs) | [AnonymizeWallet](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Anonymization/AnonymizeWallet.cs) |
 
+### Platform Account Closure Wrapper:  [PlatformAccountClosure](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/PlatformAccountClosure.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/platform/admin/namespaces/{namespace}/users/{userId}/platform/closure/history` | GET | GetUserPlatformAccountClosureHistories | [GetUserPlatformAccountClosureHistories](../../apis/AccelByte.Sdk.Api.Platform/Operation/PlatformAccountClosure/GetUserPlatformAccountClosureHistories.cs) | [GetUserPlatformAccountClosureHistories](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/PlatformAccountClosure/GetUserPlatformAccountClosureHistories.cs) |
+
 ### Session(Platform) Wrapper:  [SessionPlatform](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/SessionPlatform.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -707,6 +712,10 @@
 |---|---|---|---|---|
 
 ### Anonymization Wrapper:  [Anonymization](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/Anonymization.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
+### Platform Account Closure Wrapper:  [PlatformAccountClosure](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/PlatformAccountClosure.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
@@ -1023,6 +1032,7 @@
 | `PaymentUrl` | [PaymentUrl](../../apis/AccelByte.Sdk.Api.Platform/Model/PaymentUrl.cs) |
 | `PaymentUrlCreate` | [PaymentUrlCreate](../../apis/AccelByte.Sdk.Api.Platform/Model/PaymentUrlCreate.cs) |
 | `Permission` | [Permission](../../apis/AccelByte.Sdk.Api.Platform/Model/Permission.cs) |
+| `PlatformAccountClosureHistoryInfo` | [PlatformAccountClosureHistoryInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/PlatformAccountClosureHistoryInfo.cs) |
 | `PlatformDLCConfigInfo` | [PlatformDLCConfigInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/PlatformDLCConfigInfo.cs) |
 | `PlatformDLCConfigUpdate` | [PlatformDLCConfigUpdate](../../apis/AccelByte.Sdk.Api.Platform/Model/PlatformDLCConfigUpdate.cs) |
 | `PlatformDlcEntry` | [PlatformDlcEntry](../../apis/AccelByte.Sdk.Api.Platform/Model/PlatformDlcEntry.cs) |
@@ -1096,6 +1106,9 @@
 | `SectionUpdate` | [SectionUpdate](../../apis/AccelByte.Sdk.Api.Platform/Model/SectionUpdate.cs) |
 | `ServicePluginConfigInfo` | [ServicePluginConfigInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ServicePluginConfigInfo.cs) |
 | `ServicePluginConfigUpdate` | [ServicePluginConfigUpdate](../../apis/AccelByte.Sdk.Api.Platform/Model/ServicePluginConfigUpdate.cs) |
+| `SimpleEntitlement` | [SimpleEntitlement](../../apis/AccelByte.Sdk.Api.Platform/Model/SimpleEntitlement.cs) |
+| `SimpleUserDLC` | [SimpleUserDLC](../../apis/AccelByte.Sdk.Api.Platform/Model/SimpleUserDLC.cs) |
+| `SimpleWallet` | [SimpleWallet](../../apis/AccelByte.Sdk.Api.Platform/Model/SimpleWallet.cs) |
 | `Slide` | [Slide](../../apis/AccelByte.Sdk.Api.Platform/Model/Slide.cs) |
 | `StackableEntitlementInfo` | [StackableEntitlementInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/StackableEntitlementInfo.cs) |
 | `SteamAchievement` | [SteamAchievement](../../apis/AccelByte.Sdk.Api.Platform/Model/SteamAchievement.cs) |

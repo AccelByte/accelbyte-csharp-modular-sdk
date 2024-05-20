@@ -196,4 +196,4 @@
 | `v2.GetAllLeaderboardConfigsPublicResp` | [V2GetAllLeaderboardConfigsPublicResp](../../apis/AccelByte.Sdk.Api.Leaderboard/Model/V2GetAllLeaderboardConfigsPublicResp.cs) |
 | `v2.GetLeaderboardConfigPublicResp` | [V2GetLeaderboardConfigPublicResp](../../apis/AccelByte.Sdk.Api.Leaderboard/Model/V2GetLeaderboardConfigPublicResp.cs) |
 | `v2.GetPublicLeaderboardRankingResponse` | [V2GetPublicLeaderboardRankingResponse](../../apis/AccelByte.Sdk.Api.Leaderboard/Model/V2GetPublicLeaderboardRankingResponse.cs) |
-| `v2.Pagination` | [V2Pagination](../../apis/AccelByte.Sdk.Api.Leaderboard/Model/V2Pagination.cs) |
+| `v2.PaginationV2` | [V2PaginationV2](../../apis/AccelByte.Sdk.Api.Leaderboard/Model/V2PaginationV2.cs) |

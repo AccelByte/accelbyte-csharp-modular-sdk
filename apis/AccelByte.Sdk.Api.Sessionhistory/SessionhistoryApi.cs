@@ -28,6 +28,17 @@ namespace AccelByte.Sdk.Api.Sessionhistory
         }
         private Wrapper.Operations? _Operations = null;
 
+        public Wrapper.Config Config
+        {
+            get
+            {
+                if (_Config == null)
+                    _Config = new Wrapper.Config(_Sdk, _CustomBasePath);
+                return _Config;
+            }
+        }
+        private Wrapper.Config? _Config = null;
+
         public Wrapper.GameSessionDetail GameSessionDetail
         {
             get
