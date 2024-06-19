@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
+            Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
         #endregion
 
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
+            Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
 
         public override string Path => "/iam/v3/token/exchange";

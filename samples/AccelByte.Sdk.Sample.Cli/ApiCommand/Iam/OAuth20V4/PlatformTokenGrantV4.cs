@@ -54,6 +54,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
         [SdkCommandArgument("platform_token")]
         public string PlatformToken { get; set; } = String.Empty;
 
+        [SdkCommandArgument("serviceLabel")]
+        public double ServiceLabel { get; set; } = 0;
+
         [SdkCommandArgument("skipSetCookie")]
         public bool SkipSetCookie { get; set; } = false;
 
@@ -86,6 +89,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
                 opBuilder.SetMacAddress((string)MacAddress);
             if (PlatformToken != null)
                 opBuilder.SetPlatformToken((string)PlatformToken);
+            if (ServiceLabel != null)
+                opBuilder.SetServiceLabel((double)ServiceLabel);
             if (SkipSetCookie != null)
                 opBuilder.SetSkipSetCookie((bool)SkipSetCookie);
 

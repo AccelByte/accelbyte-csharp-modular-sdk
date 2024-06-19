@@ -24,6 +24,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// AdminSendMyMFAEmailCodeV4
     ///
     /// This endpoint is used to send email code.
+    /// --------------
+    /// Supported actions:
+    /// * ChangePassword
+    /// * DisableMFAEmail
     /// </summary>
     public class AdminSendMyMFAEmailCodeV4 : AccelByte.Sdk.Core.Operation
     {
@@ -36,6 +40,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
+            public string? Action { get; set; }
+
 
 
             internal AdminSendMyMFAEmailCodeV4Builder() { }
@@ -47,6 +53,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
+
+            public AdminSendMyMFAEmailCodeV4Builder SetAction(string _action)
+            {
+                Action = _action;
+                return this;
+            }
 
 
 
@@ -97,6 +109,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
 
 
+            if (builder.Action is not null) FormParams["action"] = builder.Action;
 
 
 
@@ -107,10 +120,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminSendMyMFAEmailCodeV4(
+            string? action
         )
         {
 
 
+            if (action is not null) FormParams["action"] = action;
 
 
 
@@ -123,7 +138,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
 

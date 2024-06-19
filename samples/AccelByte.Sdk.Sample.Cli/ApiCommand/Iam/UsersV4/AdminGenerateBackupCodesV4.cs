@@ -27,6 +27,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 
         public string OperationName { get { return "AdminGenerateBackupCodesV4"; } }
 
+        [SdkCommandArgument("languageTag")]
+        public string? LanguageTag { get; set; }
+
         public AdminGenerateBackupCodesV4Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -38,6 +41,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 
             var opBuilder = AccelByte.Sdk.Api.Iam.Operation.AdminGenerateBackupCodesV4.Builder;
 
+            if (LanguageTag != null)
+                opBuilder.SetLanguageTag((string)LanguageTag);
 
 
 

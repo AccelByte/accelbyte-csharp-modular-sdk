@@ -72,6 +72,28 @@ namespace AccelByte.Sdk.Api.Gdpr
         }
         private Wrapper.PlatformAccountClosureHistory? _PlatformAccountClosureHistory = null;
 
+        public Wrapper.DataDeletionS2S DataDeletionS2S
+        {
+            get
+            {
+                if (_DataDeletionS2S == null)
+                    _DataDeletionS2S = new Wrapper.DataDeletionS2S(_Sdk, _CustomBasePath);
+                return _DataDeletionS2S;
+            }
+        }
+        private Wrapper.DataDeletionS2S? _DataDeletionS2S = null;
+
+        public Wrapper.DataRetrievalS2S DataRetrievalS2S
+        {
+            get
+            {
+                if (_DataRetrievalS2S == null)
+                    _DataRetrievalS2S = new Wrapper.DataRetrievalS2S(_Sdk, _CustomBasePath);
+                return _DataRetrievalS2S;
+            }
+        }
+        private Wrapper.DataRetrievalS2S? _DataRetrievalS2S = null;
+
         internal GdprApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;

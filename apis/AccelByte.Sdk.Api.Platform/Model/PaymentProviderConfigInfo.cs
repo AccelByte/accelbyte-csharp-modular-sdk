@@ -65,6 +65,9 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public static readonly PaymentProviderConfigInfoAggregate CHECKOUT
             = new PaymentProviderConfigInfoAggregate("CHECKOUT");
 
+        public static readonly PaymentProviderConfigInfoAggregate NEONPAY
+            = new PaymentProviderConfigInfoAggregate("NEONPAY");
+
         public static readonly PaymentProviderConfigInfoAggregate STRIPE
             = new PaymentProviderConfigInfoAggregate("STRIPE");
 
@@ -94,6 +97,9 @@ namespace AccelByte.Sdk.Api.Platform.Model
 
         public static readonly PaymentProviderConfigInfoSpecials CHECKOUT
             = new PaymentProviderConfigInfoSpecials("CHECKOUT");
+
+        public static readonly PaymentProviderConfigInfoSpecials NEONPAY
+            = new PaymentProviderConfigInfoSpecials("NEONPAY");
 
         public static readonly PaymentProviderConfigInfoSpecials PAYPAL
             = new PaymentProviderConfigInfoSpecials("PAYPAL");

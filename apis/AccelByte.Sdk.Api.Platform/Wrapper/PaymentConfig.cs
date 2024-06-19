@@ -34,6 +34,28 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
 
         #region Operation Builders
+        public GetPaymentMerchantConfig.GetPaymentMerchantConfigBuilder GetPaymentMerchantConfigOp
+        {
+            get
+            {
+                var opBuilder = new Operation.GetPaymentMerchantConfig.GetPaymentMerchantConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public UpdatePaymentDomainWhitelistConfig.UpdatePaymentDomainWhitelistConfigBuilder UpdatePaymentDomainWhitelistConfigOp
+        {
+            get
+            {
+                var opBuilder = new Operation.UpdatePaymentDomainWhitelistConfig.UpdatePaymentDomainWhitelistConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public TestAdyenConfig.TestAdyenConfigBuilder TestAdyenConfigOp
         {
             get
@@ -72,6 +94,17 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             get
             {
                 var opBuilder = new Operation.DebugMatchedPaymentMerchantConfig.DebugMatchedPaymentMerchantConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public TestNeonPayConfig.TestNeonPayConfigBuilder TestNeonPayConfigOp
+        {
+            get
+            {
+                var opBuilder = new Operation.TestNeonPayConfig.TestNeonPayConfigBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -122,11 +155,11 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        public GetPaymentMerchantConfig.GetPaymentMerchantConfigBuilder GetPaymentMerchantConfigOp
+        public GetPaymentMerchantConfig1.GetPaymentMerchantConfig1Builder GetPaymentMerchantConfig1Op
         {
             get
             {
-                var opBuilder = new Operation.GetPaymentMerchantConfig.GetPaymentMerchantConfigBuilder(_sdk);
+                var opBuilder = new Operation.GetPaymentMerchantConfig1.GetPaymentMerchantConfig1Builder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -193,6 +226,28 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             get
             {
                 var opBuilder = new Operation.TestCheckoutConfigById.TestCheckoutConfigByIdBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public UpdateNeonPayConfig.UpdateNeonPayConfigBuilder UpdateNeonPayConfigOp
+        {
+            get
+            {
+                var opBuilder = new Operation.UpdateNeonPayConfig.UpdateNeonPayConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public TestNeonPayConfigById.TestNeonPayConfigByIdBuilder TestNeonPayConfigByIdOp
+        {
+            get
+            {
+                var opBuilder = new Operation.TestNeonPayConfigById.TestNeonPayConfigByIdBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -410,6 +465,38 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
+        public Model.PaymentDomainWhitelistConfigInfo? GetPaymentMerchantConfig(GetPaymentMerchantConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentDomainWhitelistConfigInfo?> GetPaymentMerchantConfigAsync(GetPaymentMerchantConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.PaymentDomainWhitelistConfigInfo? UpdatePaymentDomainWhitelistConfig(UpdatePaymentDomainWhitelistConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentDomainWhitelistConfigInfo?> UpdatePaymentDomainWhitelistConfigAsync(UpdatePaymentDomainWhitelistConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.TestResult? TestAdyenConfig(TestAdyenConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -467,6 +554,22 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
         public async Task<Model.PaymentMerchantConfigInfo?> DebugMatchedPaymentMerchantConfigAsync(DebugMatchedPaymentMerchantConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.TestResult? TestNeonPayConfig(TestNeonPayConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TestResult?> TestNeonPayConfigAsync(TestNeonPayConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -538,7 +641,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PaymentMerchantConfigInfo? GetPaymentMerchantConfig(GetPaymentMerchantConfig input)
+        public Model.PaymentMerchantConfigInfo? GetPaymentMerchantConfig1(GetPaymentMerchantConfig1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -546,7 +649,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PaymentMerchantConfigInfo?> GetPaymentMerchantConfigAsync(GetPaymentMerchantConfig input)
+        public async Task<Model.PaymentMerchantConfigInfo?> GetPaymentMerchantConfig1Async(GetPaymentMerchantConfig1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -643,6 +746,38 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
         public async Task<Model.TestResult?> TestCheckoutConfigByIdAsync(TestCheckoutConfigById input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.PaymentMerchantConfigInfo? UpdateNeonPayConfig(UpdateNeonPayConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.PaymentMerchantConfigInfo?> UpdateNeonPayConfigAsync(UpdateNeonPayConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.TestResult? TestNeonPayConfigById(TestNeonPayConfigById input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.TestResult?> TestNeonPayConfigByIdAsync(TestNeonPayConfigById input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

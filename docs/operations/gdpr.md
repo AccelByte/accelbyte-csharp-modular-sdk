@@ -59,6 +59,19 @@
 |---|---|---|---|---|
 | `/gdpr/admin/namespaces/{namespace}/users/platforms/closure/histories` | GET | AdminGetUserPlatformAccountClosureHistories | [AdminGetUserPlatformAccountClosureHistories](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/PlatformAccountClosureHistory/AdminGetUserPlatformAccountClosureHistories.cs) | [AdminGetUserPlatformAccountClosureHistories](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/PlatformAccountClosureHistory/AdminGetUserPlatformAccountClosureHistories.cs) |
 
+### Data Deletion (S2S) Wrapper:  [DataDeletionS2S](../../apis/AccelByte.Sdk.Api.Gdpr/Wrapper/DataDeletionS2S.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/gdpr/s2s/namespaces/{namespace}/deletions/finished` | GET | S2SGetListFinishedAccountDeletionRequest | [S2SGetListFinishedAccountDeletionRequest](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/DataDeletionS2S/S2SGetListFinishedAccountDeletionRequest.cs) | [S2SGetListFinishedAccountDeletionRequest](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/DataDeletionS2S/S2SGetListFinishedAccountDeletionRequest.cs) |
+| `/gdpr/s2s/namespaces/{namespace}/users/{userId}/deletions` | POST | S2SSubmitUserAccountDeletionRequest | [S2SSubmitUserAccountDeletionRequest](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/DataDeletionS2S/S2SSubmitUserAccountDeletionRequest.cs) | [S2SSubmitUserAccountDeletionRequest](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/DataDeletionS2S/S2SSubmitUserAccountDeletionRequest.cs) |
+
+### Data Retrieval (S2S) Wrapper:  [DataRetrievalS2S](../../apis/AccelByte.Sdk.Api.Gdpr/Wrapper/DataRetrievalS2S.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/gdpr/s2s/namespaces/{namespace}/requests/finished` | GET | S2SGetListFinishedPersonalDataRequest | [S2SGetListFinishedPersonalDataRequest](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/DataRetrievalS2S/S2SGetListFinishedPersonalDataRequest.cs) | [S2SGetListFinishedPersonalDataRequest](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/DataRetrievalS2S/S2SGetListFinishedPersonalDataRequest.cs) |
+| `/gdpr/s2s/namespaces/{namespace}/users/{userId}/requests` | POST | S2SRequestDataRetrieval | [S2SRequestDataRetrieval](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/DataRetrievalS2S/S2SRequestDataRetrieval.cs) | [S2SRequestDataRetrieval](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/DataRetrievalS2S/S2SRequestDataRetrieval.cs) |
+| `/gdpr/s2s/namespaces/{namespace}/users/{userId}/requests/{requestDate}/generate` | POST | S2SGeneratePersonalDataURL | [S2SGeneratePersonalDataURL](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/DataRetrievalS2S/S2SGeneratePersonalDataURL.cs) | [S2SGeneratePersonalDataURL](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/DataRetrievalS2S/S2SGeneratePersonalDataURL.cs) |
+
 
 &nbsp;
 
@@ -84,6 +97,14 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
+### Data Deletion (S2S) Wrapper:  [DataDeletionS2S](../../apis/AccelByte.Sdk.Api.Gdpr/Wrapper/DataDeletionS2S.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
+### Data Retrieval (S2S) Wrapper:  [DataRetrievalS2S](../../apis/AccelByte.Sdk.Api.Gdpr/Wrapper/DataRetrievalS2S.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
 
 &nbsp;
 
@@ -92,6 +113,10 @@
 | Model | Class |
 |---|---|
 | `dto.ExtendConfigDTO` | [DtoExtendConfigDTO](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoExtendConfigDTO.cs) |
+| `dto.FinishedDataDeletion` | [DtoFinishedDataDeletion](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoFinishedDataDeletion.cs) |
+| `dto.FinishedDataRequest` | [DtoFinishedDataRequest](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoFinishedDataRequest.cs) |
+| `dto.ListFinishedDataDeletion` | [DtoListFinishedDataDeletion](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoListFinishedDataDeletion.cs) |
+| `dto.ListFinishedDataRequests` | [DtoListFinishedDataRequests](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoListFinishedDataRequests.cs) |
 | `dto.PlatformAccountClosureClientRequest` | [DtoPlatformAccountClosureClientRequest](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoPlatformAccountClosureClientRequest.cs) |
 | `dto.PlatformAccountClosureClientResponse` | [DtoPlatformAccountClosureClientResponse](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoPlatformAccountClosureClientResponse.cs) |
 | `dto.ServiceConfigDTO` | [DtoServiceConfigDTO](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoServiceConfigDTO.cs) |
@@ -108,6 +133,9 @@
 | `models.Pagination` | [ModelsPagination](../../apis/AccelByte.Sdk.Api.Gdpr/Model/ModelsPagination.cs) |
 | `models.PersonalData` | [ModelsPersonalData](../../apis/AccelByte.Sdk.Api.Gdpr/Model/ModelsPersonalData.cs) |
 | `models.RequestDeleteResponse` | [ModelsRequestDeleteResponse](../../apis/AccelByte.Sdk.Api.Gdpr/Model/ModelsRequestDeleteResponse.cs) |
+| `models.S2SDataRetrievalResponse` | [ModelsS2SDataRetrievalResponse](../../apis/AccelByte.Sdk.Api.Gdpr/Model/ModelsS2SDataRetrievalResponse.cs) |
+| `models.S2SRequestDeleteResponse` | [ModelsS2SRequestDeleteResponse](../../apis/AccelByte.Sdk.Api.Gdpr/Model/ModelsS2SRequestDeleteResponse.cs) |
+| `models.S2SUserDataURL` | [ModelsS2SUserDataURL](../../apis/AccelByte.Sdk.Api.Gdpr/Model/ModelsS2SUserDataURL.cs) |
 | `models.UserDataURL` | [ModelsUserDataURL](../../apis/AccelByte.Sdk.Api.Gdpr/Model/ModelsUserDataURL.cs) |
 | `models.UserPersonalData` | [ModelsUserPersonalData](../../apis/AccelByte.Sdk.Api.Gdpr/Model/ModelsUserPersonalData.cs) |
 | `models.UserPersonalDataResponse` | [ModelsUserPersonalDataResponse](../../apis/AccelByte.Sdk.Api.Gdpr/Model/ModelsUserPersonalDataResponse.cs) |

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform", "queryitems1")]
-    public class QueryItems1Command : ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "queryitemsv2")]
+    public class QueryItemsV2Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
         public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName { get { return "QueryItems1"; } }
+        public string OperationName { get { return "QueryItemsV2"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
         public string? ItemStatus { get; set; }
 
         [SdkCommandArgument("itemType")]
-        public string? ItemType { get; set; }
+        public List<string>? ItemType { get; set; }
 
         [SdkCommandArgument("limit")]
         public int? Limit { get; set; }
@@ -84,7 +84,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
         [SdkCommandArgument("withTotal")]
         public bool? WithTotal { get; set; }
 
-        public QueryItems1Command(IAccelByteSdk sdk)
+        public QueryItemsV2Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -93,10 +93,10 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
         {
             AccelByte.Sdk.Api.Platform.Wrapper.Item wrapper = new AccelByte.Sdk.Api.Platform.Wrapper.Item(_SDK);
 
-            var opBuilder = AccelByte.Sdk.Api.Platform.Operation.QueryItems1.Builder;
+            var opBuilder = AccelByte.Sdk.Api.Platform.Operation.QueryItemsV2.Builder;
 
             if (AppType != null)
-                opBuilder.SetAppType(QueryItems1AppType.NewValue(AppType));
+                opBuilder.SetAppType(QueryItemsV2AppType.NewValue(AppType));
             if (AvailableDate != null)
                 opBuilder.SetAvailableDate((string)AvailableDate);
             if (BaseAppId != null)
@@ -110,9 +110,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
             if (ItemName != null)
                 opBuilder.SetItemName((string)ItemName);
             if (ItemStatus != null)
-                opBuilder.SetItemStatus(QueryItems1ItemStatus.NewValue(ItemStatus));
+                opBuilder.SetItemStatus(QueryItemsV2ItemStatus.NewValue(ItemStatus));
             if (ItemType != null)
-                opBuilder.SetItemType(QueryItems1ItemType.NewValue(ItemType));
+                opBuilder.SetItemType(QueryItemsV2ItemType.NewValue(ItemType));
             if (Limit != null)
                 opBuilder.SetLimit((int)Limit);
             if (Offset != null)
@@ -122,7 +122,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
             if (SectionExclusive != null)
                 opBuilder.SetSectionExclusive((bool)SectionExclusive);
             if (SortBy != null)
-                opBuilder.SetSortBy(QueryItems1SortBy.NewValue(SortBy));
+                opBuilder.SetSortBy(QueryItemsV2SortBy.NewValue(SortBy));
             if (StoreId != null)
                 opBuilder.SetStoreId((string)StoreId);
             if (Tags != null)
@@ -135,12 +135,12 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 
 
 
-            QueryItems1 operation = opBuilder.Build(
+            QueryItemsV2 operation = opBuilder.Build(
                 Namespace
             );
 
 
-            AccelByte.Sdk.Api.Platform.Model.FullItemPagingResult? response = wrapper.QueryItems1(operation);
+            AccelByte.Sdk.Api.Platform.Model.FullItemPagingResult? response = wrapper.QueryItemsV2(operation);
             if (response == null)
                 return "No response from server.";
 

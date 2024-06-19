@@ -193,6 +193,17 @@ namespace AccelByte.Sdk.Api.Platform
         }
         private Wrapper.PaymentCallbackConfig? _PaymentCallbackConfig = null;
 
+        public Wrapper.PaymentConfig PaymentConfig
+        {
+            get
+            {
+                if (_PaymentConfig == null)
+                    _PaymentConfig = new Wrapper.PaymentConfig(_Sdk, _CustomBasePath);
+                return _PaymentConfig;
+            }
+        }
+        private Wrapper.PaymentConfig? _PaymentConfig = null;
+
         public Wrapper.Payment Payment
         {
             get
@@ -214,6 +225,17 @@ namespace AccelByte.Sdk.Api.Platform
             }
         }
         private Wrapper.PaymentDedicated? _PaymentDedicated = null;
+
+        public Wrapper.Platform Platform
+        {
+            get
+            {
+                if (_Platform == null)
+                    _Platform = new Wrapper.Platform(_Sdk, _CustomBasePath);
+                return _Platform;
+            }
+        }
+        private Wrapper.Platform? _Platform = null;
 
         public Wrapper.Wallet Wallet
         {
@@ -368,17 +390,6 @@ namespace AccelByte.Sdk.Api.Platform
             }
         }
         private Wrapper.OrderDedicated? _OrderDedicated = null;
-
-        public Wrapper.PaymentConfig PaymentConfig
-        {
-            get
-            {
-                if (_PaymentConfig == null)
-                    _PaymentConfig = new Wrapper.PaymentConfig(_Sdk, _CustomBasePath);
-                return _PaymentConfig;
-            }
-        }
-        private Wrapper.PaymentConfig? _PaymentConfig = null;
 
         public Wrapper.PaymentStation PaymentStation
         {

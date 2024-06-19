@@ -335,6 +335,17 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        public AdminChallengeMyMFAV4.AdminChallengeMyMFAV4Builder AdminChallengeMyMFAV4Op
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminChallengeMyMFAV4.AdminChallengeMyMFAV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public AdminSendMyMFAEmailCodeV4.AdminSendMyMFAEmailCodeV4Builder AdminSendMyMFAEmailCodeV4Op
         {
             get
@@ -390,12 +401,34 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        public AdminGetMyMFAStatusV4.AdminGetMyMFAStatusV4Builder AdminGetMyMFAStatusV4Op
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminGetMyMFAStatusV4.AdminGetMyMFAStatusV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminInviteUserV4.AdminInviteUserV4Builder AdminInviteUserV4Op
         {
             get
             {
                 var opBuilder = new Operation.AdminInviteUserV4.AdminInviteUserV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public PublicListUserIDByPlatformUserIDsV4.PublicListUserIDByPlatformUserIDsV4Builder PublicListUserIDByPlatformUserIDsV4Op
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicListUserIDByPlatformUserIDsV4.PublicListUserIDByPlatformUserIDsV4Builder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -604,6 +637,17 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        public PublicChallengeMyMFAV4.PublicChallengeMyMFAV4Builder PublicChallengeMyMFAV4Op
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicChallengeMyMFAV4.PublicChallengeMyMFAV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public PublicRemoveTrustedDeviceV4.PublicRemoveTrustedDeviceV4Builder PublicRemoveTrustedDeviceV4Op
         {
             get
@@ -664,6 +708,17 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             get
             {
                 var opBuilder = new Operation.PublicMakeFactorMyDefaultV4.PublicMakeFactorMyDefaultV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public PublicGetMyMFAStatusV4.PublicGetMyMFAStatusV4Builder PublicGetMyMFAStatusV4Op
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicGetMyMFAStatusV4.PublicGetMyMFAStatusV4Builder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -1138,6 +1193,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public Model.ModelUserMFATokenResponseV4? AdminChallengeMyMFAV4(AdminChallengeMyMFAV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelUserMFATokenResponseV4?> AdminChallengeMyMFAV4Async(AdminChallengeMyMFAV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public void AdminSendMyMFAEmailCodeV4(AdminSendMyMFAEmailCodeV4 input)
         {
             var response = _sdk.RunRequest(input);
@@ -1218,6 +1289,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public Model.ModelUserMFAStatusResponseV4? AdminGetMyMFAStatusV4(AdminGetMyMFAStatusV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelUserMFAStatusResponseV4?> AdminGetMyMFAStatusV4Async(AdminGetMyMFAStatusV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
 #pragma warning disable ab_deprecated_operation
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.ModelInviteUserResponseV3? AdminInviteUserV4(AdminInviteUserV4 input)
@@ -1237,6 +1324,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
 #pragma warning restore ab_deprecated_operation
+        public Model.AccountcommonUserPlatforms? PublicListUserIDByPlatformUserIDsV4(PublicListUserIDByPlatformUserIDsV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.AccountcommonUserPlatforms?> PublicListUserIDByPlatformUserIDsV4Async(PublicListUserIDByPlatformUserIDsV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.AccountCreateUserResponseV4? PublicCreateTestUserV4(PublicCreateTestUserV4 input)
         {
             var response = _sdk.RunRequest(input);
@@ -1537,6 +1640,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public Model.ModelUserMFATokenResponseV4? PublicChallengeMyMFAV4(PublicChallengeMyMFAV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelUserMFATokenResponseV4?> PublicChallengeMyMFAV4Async(PublicChallengeMyMFAV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public void PublicRemoveTrustedDeviceV4(PublicRemoveTrustedDeviceV4 input)
         {
             var response = _sdk.RunRequest(input);
@@ -1629,6 +1748,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelUserMFAStatusResponseV4? PublicGetMyMFAStatusV4(PublicGetMyMFAStatusV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelUserMFAStatusResponseV4?> PublicGetMyMFAStatusV4Async(PublicGetMyMFAStatusV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

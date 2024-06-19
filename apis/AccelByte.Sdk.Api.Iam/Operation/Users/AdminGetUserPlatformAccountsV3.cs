@@ -46,6 +46,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public string? PlatformId { get; set; }
 
+            public string? TargetNamespace { get; set; }
+
 
 
 
@@ -79,6 +81,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             public AdminGetUserPlatformAccountsV3Builder SetPlatformId(string _platformId)
             {
                 PlatformId = _platformId;
+                return this;
+            }
+
+            public AdminGetUserPlatformAccountsV3Builder SetTargetNamespace(string _targetNamespace)
+            {
+                TargetNamespace = _targetNamespace;
                 return this;
             }
 
@@ -152,6 +160,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (builder.Before is not null) QueryParams["before"] = builder.Before;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.PlatformId is not null) QueryParams["platformId"] = builder.PlatformId;
+            if (builder.TargetNamespace is not null) QueryParams["targetNamespace"] = builder.TargetNamespace;
 
 
 
@@ -168,7 +177,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string? after,
             string? before,
             long? limit,
-            string? platformId
+            string? platformId,
+            string? targetNamespace
         )
         {
             PathParams["namespace"] = namespace_;
@@ -178,6 +188,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (before is not null) QueryParams["before"] = before;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (platformId is not null) QueryParams["platformId"] = platformId;
+            if (targetNamespace is not null) QueryParams["targetNamespace"] = targetNamespace;
 
 
 

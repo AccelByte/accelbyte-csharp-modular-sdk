@@ -56,11 +56,33 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     return opBuilder;
             }
         }
+        public ImageMarkForDeletion.ImageMarkForDeletionBuilder ImageMarkForDeletionOp
+        {
+            get
+            {
+                var opBuilder = new Operation.ImageMarkForDeletion.ImageMarkForDeletionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public ImagePatch.ImagePatchBuilder ImagePatchOp
         {
             get
             {
                 var opBuilder = new Operation.ImagePatch.ImagePatchBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public ImageUnmarkForDeletion.ImageUnmarkForDeletionBuilder ImageUnmarkForDeletionOp
+        {
+            get
+            {
+                var opBuilder = new Operation.ImageUnmarkForDeletion.ImageUnmarkForDeletionBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -101,6 +123,22 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public void ImageMarkForDeletion(ImageMarkForDeletion input)
+        {
+            var response = _sdk.RunRequest(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task ImageMarkForDeletionAsync(ImageMarkForDeletion input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.ApiImageDetails? ImagePatch(ImagePatch input)
         {
             var response = _sdk.RunRequest(input);
@@ -113,6 +151,22 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void ImageUnmarkForDeletion(ImageUnmarkForDeletion input)
+        {
+            var response = _sdk.RunRequest(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task ImageUnmarkForDeletionAsync(ImageUnmarkForDeletion input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

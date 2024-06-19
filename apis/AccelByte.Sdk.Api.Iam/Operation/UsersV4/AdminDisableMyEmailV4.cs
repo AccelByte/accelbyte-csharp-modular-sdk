@@ -24,6 +24,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// AdminDisableMyEmailV4
     ///
     /// This endpoint is used to disable 2FA email.
+    /// ------
+    /// **Note**: **mfaToken** is required when all the following are enabled:
+    /// - The environment variable **SENSITIVE_MFA_AUTH_ENABLED** is true
+    /// - The **Two-Factor Authentication** is enabled in the IAM client where user logs in
+    /// - Users already enabled the MFA
     /// </summary>
     public class AdminDisableMyEmailV4 : AccelByte.Sdk.Core.Operation
     {
@@ -51,9 +56,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
             public AdminDisableMyEmailV4 Build(
+                ModelDisableMFARequest body
             )
             {
-                AdminDisableMyEmailV4 op = new AdminDisableMyEmailV4(this
+                AdminDisableMyEmailV4 op = new AdminDisableMyEmailV4(this,
+                    body
                 );
 
                 op.SetBaseFields<AdminDisableMyEmailV4Builder>(this);
@@ -61,9 +68,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
 
             public void Execute(
+                ModelDisableMFARequest body
             )
             {
                 AdminDisableMyEmailV4 op = Build(
+                    body
                 );
 
                 if (_Sdk == null)
@@ -76,9 +85,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.Payload);
             }
             public async Task ExecuteAsync(
+                ModelDisableMFARequest body
             )
             {
                 AdminDisableMyEmailV4 op = Build(
+                    body
                 );
 
                 if (_Sdk == null)
@@ -92,7 +103,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminDisableMyEmailV4(AdminDisableMyEmailV4Builder builder
+        private AdminDisableMyEmailV4(AdminDisableMyEmailV4Builder builder,
+            ModelDisableMFARequest body
         )
         {
 
@@ -100,6 +112,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
+            BodyParams = body;
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
@@ -107,6 +120,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminDisableMyEmailV4(
+            Model.ModelDisableMFARequest body
         )
         {
 
@@ -114,6 +128,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
+            BodyParams = body;
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
@@ -123,7 +138,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
 

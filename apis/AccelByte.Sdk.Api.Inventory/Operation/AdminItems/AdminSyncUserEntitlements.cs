@@ -24,6 +24,8 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
     /// AdminSyncUserEntitlements
     ///
     /// 
+    /// Sync user's entitlement from e-commerce service to inventory for non exist item at user inventory.
+    /// will skip the item if already exist at user inventory.
     /// Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]
     /// </summary>
     public class AdminSyncUserEntitlements : AccelByte.Sdk.Core.Operation
@@ -144,7 +146,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
         public override HttpMethod Method => HttpMethod.Put;
 
-        public override List<string> Consumes => new() { "application/json" };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
 

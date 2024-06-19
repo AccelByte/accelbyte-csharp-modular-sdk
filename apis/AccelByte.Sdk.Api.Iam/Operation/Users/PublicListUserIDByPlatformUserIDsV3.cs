@@ -39,6 +39,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// - oculusweb
     /// - facebook
     /// - google
+    /// - googleplaygames
     /// - twitch
     /// - discord
     /// - apple
@@ -54,6 +55,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// Note:
     /// **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class PublicListUserIDByPlatformUserIDsV3 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -64,6 +66,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
 
             public bool? RawPID { get; set; }
+
+            public bool? RawPUID { get; set; }
 
 
 
@@ -80,6 +84,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             public PublicListUserIDByPlatformUserIDsV3Builder SetRawPID(bool _rawPID)
             {
                 RawPID = _rawPID;
+                return this;
+            }
+
+            public PublicListUserIDByPlatformUserIDsV3Builder SetRawPUID(bool _rawPUID)
+            {
+                RawPUID = _rawPUID;
                 return this;
             }
 
@@ -103,6 +113,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public Model.AccountcommonUserPlatforms? Execute(
                 ModelPlatformUserIDRequest body,
                 string namespace_,
@@ -157,6 +168,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["platformId"] = platformId;
 
             if (builder.RawPID != null) QueryParams["rawPID"] = Convert.ToString(builder.RawPID)!;
+            if (builder.RawPUID != null) QueryParams["rawPUID"] = Convert.ToString(builder.RawPUID)!;
 
 
 
@@ -172,6 +184,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string namespace_,
             string platformId,
             bool? rawPID,
+            bool? rawPUID,
             Model.ModelPlatformUserIDRequest body
         )
         {
@@ -179,6 +192,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["platformId"] = platformId;
 
             if (rawPID != null) QueryParams["rawPID"] = Convert.ToString(rawPID)!;
+            if (rawPUID != null) QueryParams["rawPUID"] = Convert.ToString(rawPUID)!;
 
 
 

@@ -30,6 +30,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
+        [SdkCommandArgument("languageTag")]
+        public string? LanguageTag { get; set; }
+
         public PublicGetBackupCodesV4Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -41,6 +44,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 
             var opBuilder = AccelByte.Sdk.Api.Iam.Operation.PublicGetBackupCodesV4.Builder;
 
+            if (LanguageTag != null)
+                opBuilder.SetLanguageTag((string)LanguageTag);
 
 
 

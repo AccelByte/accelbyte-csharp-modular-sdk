@@ -23,10 +23,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// getPaymentMerchantConfig
     ///
-    ///  [Not Supported Yet In Starter] Get payment merchant config by id.
+    ///  [Not Supported Yet In Starter] Get payment domain whitelist config by namespace.
     /// Other detail info:
     /// 
-    ///   * Returns : payment merchant config info
+    ///   * Returns : payment domain whitelist config info
     /// </summary>
     public class GetPaymentMerchantConfig : AccelByte.Sdk.Core.Operation
     {
@@ -54,23 +54,23 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
             public GetPaymentMerchantConfig Build(
-                string id
+                string namespace_
             )
             {
                 GetPaymentMerchantConfig op = new GetPaymentMerchantConfig(this,
-                    id
+                    namespace_
                 );
 
                 op.SetBaseFields<GetPaymentMerchantConfigBuilder>(this);
                 return op;
             }
 
-            public Model.PaymentMerchantConfigInfo? Execute(
-                string id
+            public Model.PaymentDomainWhitelistConfigInfo? Execute(
+                string namespace_
             )
             {
                 GetPaymentMerchantConfig op = Build(
-                    id
+                    namespace_
                 );
 
                 if (_Sdk == null)
@@ -82,12 +82,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.PaymentMerchantConfigInfo?> ExecuteAsync(
-                string id
+            public async Task<Model.PaymentDomainWhitelistConfigInfo?> ExecuteAsync(
+                string namespace_
             )
             {
                 GetPaymentMerchantConfig op = Build(
-                    id
+                    namespace_
                 );
 
                 if (_Sdk == null)
@@ -102,10 +102,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         }
 
         private GetPaymentMerchantConfig(GetPaymentMerchantConfigBuilder builder,
-            string id
+            string namespace_
         )
         {
-            PathParams["id"] = id;
+            PathParams["namespace"] = namespace_;
 
 
 
@@ -118,10 +118,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public GetPaymentMerchantConfig(
-            string id
+            string namespace_
         )
         {
-            PathParams["id"] = id;
+            PathParams["namespace"] = namespace_;
 
 
 
@@ -132,7 +132,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/platform/admin/payment/config/merchant/{id}";
+        public override string Path => "/platform/admin/namespaces/{namespace}/payment/config/domains";
 
         public override HttpMethod Method => HttpMethod.Get;
 
@@ -140,7 +140,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public Model.PaymentMerchantConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.PaymentDomainWhitelistConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -148,11 +148,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.PaymentDomainWhitelistConfigInfo>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.PaymentDomainWhitelistConfigInfo>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

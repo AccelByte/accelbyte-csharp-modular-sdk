@@ -27,6 +27,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 
         public string OperationName { get { return "AdminDisableMyBackupCodesV4"; } }
 
+        [SdkCommandData("body")]
+        public ModelDisableMFARequest Body { get; set; } = new ModelDisableMFARequest();
+
         public AdminDisableMyBackupCodesV4Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -43,6 +46,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 
 
             AdminDisableMyBackupCodesV4 operation = opBuilder.Build(
+                Body
             );
 
 

@@ -15,6 +15,9 @@ namespace AccelByte.Sdk.Api.Match2.Model
         [JsonPropertyName("CreatedAt")]
         public DateTime? CreatedAt { get; set; }
 
+        [JsonPropertyName("IsActive")]
+        public bool? IsActive { get; set; }
+
         [JsonPropertyName("Latencies")]
         public Dictionary<string, long>? Latencies { get; set; }
 
@@ -39,12 +42,18 @@ namespace AccelByte.Sdk.Api.Match2.Model
         [JsonPropertyName("TicketID")]
         public string? TicketID { get; set; }
 
+        [JsonPropertyName("TicketInformation")]
+        public Dictionary<string, object>? TicketInformation { get; set; }
+
     }
 
-    public class MatchmakerTicket<T1> : AccelByte.Sdk.Core.Model
+    public class MatchmakerTicket<T1, T2> : AccelByte.Sdk.Core.Model
     {
         [JsonPropertyName("CreatedAt")]
         public DateTime? CreatedAt { get; set; }
+
+        [JsonPropertyName("IsActive")]
+        public bool? IsActive { get; set; }
 
         [JsonPropertyName("Latencies")]
         public Dictionary<string, long>? Latencies { get; set; }
@@ -69,6 +78,9 @@ namespace AccelByte.Sdk.Api.Match2.Model
 
         [JsonPropertyName("TicketID")]
         public string? TicketID { get; set; }
+
+        [JsonPropertyName("TicketInformation")]
+        public T2? TicketInformation { get; set; }
 
     }
 

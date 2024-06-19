@@ -36,6 +36,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
         [SdkCommandArgument("rawPID")]
         public bool? RawPID { get; set; }
 
+        [SdkCommandArgument("rawPUID")]
+        public bool? RawPUID { get; set; }
+
         [SdkCommandData("body")]
         public ModelPlatformUserIDRequest Body { get; set; } = new ModelPlatformUserIDRequest();
 
@@ -52,6 +55,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 
             if (RawPID != null)
                 opBuilder.SetRawPID((bool)RawPID);
+            if (RawPUID != null)
+                opBuilder.SetRawPUID((bool)RawPUID);
 
 
 

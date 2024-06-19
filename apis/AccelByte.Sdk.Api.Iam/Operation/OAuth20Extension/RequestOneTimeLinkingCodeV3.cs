@@ -31,6 +31,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// - **steamopenid**
     /// - **facebook**
     /// - **google**
+    /// - **googleplaygames**
     /// - **oculus**
     /// - **twitch**
     /// - **discord**

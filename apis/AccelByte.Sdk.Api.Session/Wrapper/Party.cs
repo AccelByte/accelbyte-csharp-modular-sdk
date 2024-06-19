@@ -45,6 +45,17 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     return opBuilder;
             }
         }
+        public AdminSyncNativeSession.AdminSyncNativeSessionBuilder AdminSyncNativeSessionOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminSyncNativeSession.AdminSyncNativeSessionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public PublicPartyJoinCode.PublicPartyJoinCodeBuilder PublicPartyJoinCodeOp
         {
             get
@@ -213,6 +224,22 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void AdminSyncNativeSession(AdminSyncNativeSession input)
+        {
+            var response = _sdk.RunRequest(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminSyncNativeSessionAsync(AdminSyncNativeSession input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

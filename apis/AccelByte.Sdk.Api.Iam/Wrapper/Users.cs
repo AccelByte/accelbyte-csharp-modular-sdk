@@ -1440,6 +1440,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicListUserIDByPlatformUserIDsV3.PublicListUserIDByPlatformUserIDsV3Builder PublicListUserIDByPlatformUserIDsV3Op
         {
             get
@@ -1544,6 +1545,17 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             get
             {
                 var opBuilder = new Operation.PublicForgotPasswordV3.PublicForgotPasswordV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public PublicValidateUserInput.PublicValidateUserInputBuilder PublicValidateUserInputOp
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicValidateUserInput.PublicValidateUserInputBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -4099,6 +4111,8 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.AccountcommonUserPlatforms? PublicListUserIDByPlatformUserIDsV3(PublicListUserIDByPlatformUserIDsV3 input)
         {
             var response = _sdk.RunRequest(input);
@@ -4115,6 +4129,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
         public Model.ModelUserResponseV3? PublicGetUserByPlatformUserIDV3(PublicGetUserByPlatformUserIDV3 input)
         {
             var response = _sdk.RunRequest(input);
@@ -4272,6 +4287,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelUserInputValidationResponse? PublicValidateUserInput(PublicValidateUserInput input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelUserInputValidationResponse?> PublicValidateUserInputAsync(PublicValidateUserInput input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

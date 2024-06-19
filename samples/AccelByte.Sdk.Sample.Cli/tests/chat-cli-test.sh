@@ -53,7 +53,7 @@ fi
 
 #- 2 AdminFilterChatMessage
 # body param: body
-echo '{"message": "fbTQFeuq", "timestamp": 48, "topicId": "NWRG1Uu7", "topicType": "GROUP", "userId": "aT77y2qc"}' > $TEMP_JSON_INPUT
+echo '{"message": "mz8cfhko", "timestamp": 27, "topicId": "CD2Kq1qO", "topicType": "GROUP", "userId": "j2caF8WE"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op AdminFilterChatMessage \
@@ -68,22 +68,22 @@ $CLI_EXE \
     --sn chat \
     --op AdminChatHistory \
     --namespace $AB_NAMESPACE \
-    --chatId '["h6IB2H1I", "KVhEY1x8", "iBQjDlWv"]' \
-    --endCreatedAt '7' \
-    --keyword 'TiK4G522' \
-    --limit '70' \
-    --offset '98' \
-    --order 'cpYiTWpE' \
-    --senderUserId 'SuTmzQD2' \
-    --shardId '9jEDxzlS' \
-    --startCreatedAt '47' \
-    --topic '["oXpu7CWU", "09LrvZIR", "l4h5IVTe"]' \
+    --chatId '["vTDruYa8", "eZZL1Dr7", "sTUwPu4y"]' \
+    --endCreatedAt '0' \
+    --keyword 'bk7RDtxz' \
+    --limit '21' \
+    --offset '74' \
+    --order 'gtBq7av5' \
+    --senderUserId 'P4xZu3YE' \
+    --shardId 'v1Qmd5v7' \
+    --startCreatedAt '67' \
+    --topic '["0PXP2lhu", "kRw7tm50", "6mg55uxb"]' \
     > test.out 2>&1
 eval_tap $? 3 'AdminChatHistory' test.out
 
 #- 4 AdminCreateNamespaceTopic
 # body param: body
-echo '{"description": "vYrqTpeC", "name": "9lPeKDp6"}' > $TEMP_JSON_INPUT
+echo '{"description": "aEEXP7Gk", "name": "kfxngMRB"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op AdminCreateNamespaceTopic \
@@ -97,15 +97,15 @@ $CLI_EXE \
     --sn chat \
     --op AdminTopicList \
     --namespace $AB_NAMESPACE \
-    --limit '58' \
-    --offset '88' \
-    --topicType 'retSqiqW' \
+    --limit '66' \
+    --offset '33' \
+    --topicType 'gQQfojIS' \
     > test.out 2>&1
 eval_tap $? 5 'AdminTopicList' test.out
 
 #- 6 AdminCreateTopic
 # body param: body
-echo '{"admins": ["IfTMsHga", "loSAgYaD", "mdFjUpC2"], "description": "vj9cLrBy", "isChannel": true, "isJoinable": true, "members": ["7e3LSfG1", "2XBBtmKC", "Qh0FjIXL"], "name": "ajdjUQtv", "shardLimit": 12, "type": "BdNpU9vg"}' > $TEMP_JSON_INPUT
+echo '{"admins": ["9JmERk11", "jGt2aCKS", "d728F7wc"], "description": "QKd2urjI", "isChannel": false, "isJoinable": false, "members": ["aaQv90OH", "4osY4KBm", "0klTNaln"], "name": "PubMYrlU", "shardLimit": 3, "type": "4kNauNmN"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op AdminCreateTopic \
@@ -119,9 +119,9 @@ $CLI_EXE \
     --sn chat \
     --op AdminChannelTopicList \
     --namespace $AB_NAMESPACE \
-    --limit '67' \
-    --offset '9' \
-    --topicName '2T3A76mz' \
+    --limit '71' \
+    --offset '96' \
+    --topicName 'gfMQSajs' \
     > test.out 2>&1
 eval_tap $? 7 'AdminChannelTopicList' test.out
 
@@ -138,25 +138,25 @@ $CLI_EXE \
     --sn chat \
     --op AdminQueryTopicLog \
     --namespace $AB_NAMESPACE \
-    --endCreatedAt '20' \
-    --limit '18' \
-    --offset '64' \
-    --senderUserId 'ZWMpUkTE' \
-    --startCreatedAt '99' \
-    --topicId 'VzeuYBAm' \
-    --topicIds '["I7LAtSoI", "OdySrPpo", "Bv2l9OaL"]' \
-    --userId 'zetErEsk' \
+    --endCreatedAt '91' \
+    --limit '57' \
+    --offset '56' \
+    --senderUserId 'cgbF5sNO' \
+    --startCreatedAt '69' \
+    --topicId 'DefJlzk2' \
+    --topicIds '["Be8OEW8M", "2kTXW0Oj", "EpfEgpUI"]' \
+    --userId '8aYB3oqF' \
     > test.out 2>&1
 eval_tap $? 9 'AdminQueryTopicLog' test.out
 
 #- 10 AdminUpdateTopic
 # body param: body
-echo '{"description": "VT6C7kfq", "isJoinable": false, "name": "HtQDIoWJ"}' > $TEMP_JSON_INPUT
+echo '{"description": "A0uSNkis", "isJoinable": true, "name": "lQOhja1w"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op AdminUpdateTopic \
     --namespace $AB_NAMESPACE \
-    --topic '5nkwL07L' \
+    --topic 'Roj0JcUr' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 10 'AdminUpdateTopic' test.out
@@ -166,18 +166,18 @@ $CLI_EXE \
     --sn chat \
     --op AdminDeleteTopic \
     --namespace $AB_NAMESPACE \
-    --topic 'NEtRsHtg' \
+    --topic 'FgBSzqsY' \
     > test.out 2>&1
 eval_tap $? 11 'AdminDeleteTopic' test.out
 
 #- 12 AdminBanTopicMembers
 # body param: body
-echo '{"userIds": ["FJ4ZaqMN", "LsTqxV5J", "ngWrtlqn"]}' > $TEMP_JSON_INPUT
+echo '{"userIds": ["9idLwvKd", "SUIbkxCB", "pMvrZzs1"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op AdminBanTopicMembers \
     --namespace $AB_NAMESPACE \
-    --topic 'CAnDyRdw' \
+    --topic '61qj1yHD' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 12 'AdminBanTopicMembers' test.out
@@ -187,7 +187,7 @@ $CLI_EXE \
     --sn chat \
     --op AdminChannelTopicInfo \
     --namespace $AB_NAMESPACE \
-    --topic '8C1dPHoL' \
+    --topic 'XsOeIpyY' \
     > test.out 2>&1
 eval_tap $? 13 'AdminChannelTopicInfo' test.out
 
@@ -196,12 +196,12 @@ eval_tap 0 14 'AdminTopicChatHistory # SKIP deprecated' test.out
 
 #- 15 AdminSendChat
 # body param: body
-echo '{"message": "hdExCz8x"}' > $TEMP_JSON_INPUT
+echo '{"message": "pALRLQht"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op AdminSendChat \
     --namespace $AB_NAMESPACE \
-    --topic 'lwEvPDv2' \
+    --topic 'AwOnE8GD' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 15 'AdminSendChat' test.out
@@ -210,9 +210,9 @@ eval_tap $? 15 'AdminSendChat' test.out
 $CLI_EXE \
     --sn chat \
     --op AdminDeleteChat \
-    --chatId 'Xrt1xl4d' \
+    --chatId 'FwIlxR5z' \
     --namespace $AB_NAMESPACE \
-    --topic 'DnQkSIG7' \
+    --topic 'MPjk1dqr' \
     > test.out 2>&1
 eval_tap $? 16 'AdminDeleteChat' test.out
 
@@ -221,12 +221,12 @@ $CLI_EXE \
     --sn chat \
     --op AdminTopicMembers \
     --namespace $AB_NAMESPACE \
-    --topic '0WEUiKQA' \
+    --topic 'q4bSVauD' \
     --isBanned 'true' \
     --isModerator 'true' \
-    --limit '19' \
-    --offset '29' \
-    --shardId 'eboztqHq' \
+    --limit '48' \
+    --offset '42' \
+    --shardId 'qlzhizRs' \
     > test.out 2>&1
 eval_tap $? 17 'AdminTopicMembers' test.out
 
@@ -235,18 +235,18 @@ $CLI_EXE \
     --sn chat \
     --op AdminTopicShards \
     --namespace $AB_NAMESPACE \
-    --topic 'FLBn5rvc' \
+    --topic 'ePjMfoKC' \
     > test.out 2>&1
 eval_tap $? 18 'AdminTopicShards' test.out
 
 #- 19 AdminUnbanTopicMembers
 # body param: body
-echo '{"userIds": ["fBfuP8jM", "TwzvkaZM", "97nmNiLE"]}' > $TEMP_JSON_INPUT
+echo '{"userIds": ["n5KSjOoQ", "yUZ57SU5", "Vhj9BV7P"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op AdminUnbanTopicMembers \
     --namespace $AB_NAMESPACE \
-    --topic 'lHlWYCHU' \
+    --topic 'P1CYrJDS' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 19 'AdminUnbanTopicMembers' test.out
@@ -258,8 +258,8 @@ $CLI_EXE \
     --sn chat \
     --op AdminAddTopicMember \
     --namespace $AB_NAMESPACE \
-    --topic '3t49HA9k' \
-    --userId 'pr7PDnem' \
+    --topic 'TYqkYYl9' \
+    --userId 'KGnNYdpG' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 20 'AdminAddTopicMember' test.out
@@ -269,8 +269,8 @@ $CLI_EXE \
     --sn chat \
     --op AdminRemoveTopicMember \
     --namespace $AB_NAMESPACE \
-    --topic 'hZlmLOJ3' \
-    --userId 'uGPdLMTE' \
+    --topic '7M9RbLbL' \
+    --userId 'BZo4EgHV' \
     > test.out 2>&1
 eval_tap $? 21 'AdminRemoveTopicMember' test.out
 
@@ -279,15 +279,15 @@ $CLI_EXE \
     --sn chat \
     --op AdminQueryTopic \
     --namespace $AB_NAMESPACE \
-    --includeMembers 'true' \
+    --includeMembers 'false' \
     --includePastMembers 'true' \
-    --includePastTopics 'false' \
-    --limit '40' \
-    --offset '95' \
-    --topic '["3PAbs2h9", "fvZdNbHG", "yg3BkV7G"]' \
-    --topicSubType 'CLAN' \
+    --includePastTopics 'true' \
+    --limit '55' \
+    --offset '7' \
+    --topic '["lw7bZE1c", "nsbM9Hcq", "ZAjvx0G1"]' \
+    --topicSubType 'SESSION' \
     --topicType 'PERSONAL' \
-    --userId 'h8DAow8y' \
+    --userId 'MGXB22A2' \
     > test.out 2>&1
 eval_tap $? 22 'AdminQueryTopic' test.out
 
@@ -296,10 +296,10 @@ $CLI_EXE \
     --sn chat \
     --op AdminQueryUsersTopic \
     --namespace $AB_NAMESPACE \
-    --userId 'tdWU804O' \
+    --userId 'EDRLt1L8' \
     --includePastTopics 'false' \
-    --limit '16' \
-    --offset '77' \
+    --limit '86' \
+    --offset '32' \
     --topicSubType 'PARTY' \
     --topicType 'PERSONAL' \
     > test.out 2>&1
@@ -318,20 +318,20 @@ $CLI_EXE \
     --sn chat \
     --op PublicTopicList \
     --namespace $AB_NAMESPACE \
-    --limit '24' \
-    --offset '62' \
-    --topicType '6E5kGo7i' \
+    --limit '54' \
+    --offset '34' \
+    --topicType '06f3cgfo' \
     > test.out 2>&1
 eval_tap $? 25 'PublicTopicList' test.out
 
 #- 26 PublicBanTopicMembers
 # body param: body
-echo '{"userIDs": ["oLrLh6Dy", "XCgN7RL1", "ytk132ve"]}' > $TEMP_JSON_INPUT
+echo '{"userIDs": ["ZxlGC0Rw", "g6MXWr1m", "vFob4aLz"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op PublicBanTopicMembers \
     --namespace $AB_NAMESPACE \
-    --topic 'ImTv8xYf' \
+    --topic '3b76nHMU' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 26 'PublicBanTopicMembers' test.out
@@ -341,10 +341,10 @@ $CLI_EXE \
     --sn chat \
     --op PublicChatHistory \
     --namespace $AB_NAMESPACE \
-    --topic 'aJ9yEkOW' \
-    --limit '85' \
-    --order 'jP2F9w6w' \
-    --startCreatedAt '33' \
+    --topic 'M6pr6rNp' \
+    --limit '59' \
+    --order 'eA8ALECR' \
+    --startCreatedAt '52' \
     > test.out 2>&1
 eval_tap $? 27 'PublicChatHistory' test.out
 
@@ -352,44 +352,44 @@ eval_tap $? 27 'PublicChatHistory' test.out
 $CLI_EXE \
     --sn chat \
     --op PublicDeleteChat \
-    --chatId 'GkHqJZW9' \
+    --chatId '88hcMah4' \
     --namespace $AB_NAMESPACE \
-    --topic 'AohaKgLf' \
+    --topic 'pa1EAb44' \
     > test.out 2>&1
 eval_tap $? 28 'PublicDeleteChat' test.out
 
 #- 29 PublicMuteUser
 # body param: body
-echo '{"duration": 22, "userId": "gefXfEKL"}' > $TEMP_JSON_INPUT
+echo '{"duration": 38, "userId": "3qxwaUDe"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op PublicMuteUser \
     --namespace $AB_NAMESPACE \
-    --topic '8ezAzVWw' \
+    --topic 'vxyfigLQ' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 29 'PublicMuteUser' test.out
 
 #- 30 PublicUnbanTopicMembers
 # body param: body
-echo '{"userIDs": ["0TRAlQ0f", "u5ZjT44m", "rTT7KhAG"]}' > $TEMP_JSON_INPUT
+echo '{"userIDs": ["8mwirWA4", "XAFTVbjI", "AsYaGmOI"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op PublicUnbanTopicMembers \
     --namespace $AB_NAMESPACE \
-    --topic 'TBniPr5W' \
+    --topic 'yikSchfq' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 30 'PublicUnbanTopicMembers' test.out
 
 #- 31 PublicUnmuteUser
 # body param: body
-echo '{"userId": "yPkaQRSC"}' > $TEMP_JSON_INPUT
+echo '{"userId": "wMG92111"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op PublicUnmuteUser \
     --namespace $AB_NAMESPACE \
-    --topic 'TvVk8NUV' \
+    --topic 'izrdsS7A' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 31 'PublicUnmuteUser' test.out
@@ -411,7 +411,7 @@ eval_tap $? 33 'AdminGetConfigV1' test.out
 
 #- 34 AdminUpdateConfigV1
 # body param: body
-echo '{"chatRateLimitBurst": 28, "chatRateLimitDuration": 79, "concurrentUsersLimit": 55, "enableClanChat": false, "enableManualTopicCreation": false, "enableProfanityFilter": false, "filterAppName": "yIcyn1UG", "filterParam": "E6eTBL8X", "filterType": "wdLR7Wzh", "generalRateLimitBurst": 2, "generalRateLimitDuration": 19, "maxChatMessageLength": 84, "shardCapacityLimit": 76, "shardDefaultLimit": 22, "shardHardLimit": 43, "spamChatBurst": 24, "spamChatDuration": 7, "spamMuteDuration": 84}' > $TEMP_JSON_INPUT
+echo '{"chatRateLimitBurst": 78, "chatRateLimitDuration": 77, "concurrentUsersLimit": 0, "enableClanChat": true, "enableManualTopicCreation": false, "enableProfanityFilter": false, "filterAppName": "L1G9Vpl7", "filterParam": "0nc2PQVu", "filterType": "uezzJZHN", "generalRateLimitBurst": 40, "generalRateLimitDuration": 73, "maxChatMessageLength": 13, "shardCapacityLimit": 75, "shardDefaultLimit": 86, "shardHardLimit": 52, "spamChatBurst": 32, "spamChatDuration": 23, "spamMuteDuration": 29}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op AdminUpdateConfigV1 \
@@ -449,7 +449,7 @@ eval_tap $? 37 'AdminGetInboxCategories' test.out
 
 #- 38 AdminAddInboxCategory
 # body param: body
-echo '{"enabled": false, "expiresIn": 51, "hook": {"driver": "C1x50UZ0", "params": {"8k1J81z7": {}, "uMIXwval": {}, "BhRNhWnO": {}}}, "jsonSchema": {"0RBmoccK": {}, "mjPQzq5w": {}, "2tYSkppe": {}}, "name": "pvKkVTm0", "saveInbox": true, "sendNotification": true}' > $TEMP_JSON_INPUT
+echo '{"enabled": false, "expiresIn": 87, "hook": {"driver": "VTgC0KF3", "params": {"0deJ7XlT": {}, "z9IKJYcj": {}, "9Btw69Do": {}}}, "jsonSchema": {"bY9US3Dt": {}, "qx4WDCIP": {}, "MqOh8Z7p": {}}, "name": "Rz7ad3OB", "saveInbox": false, "sendNotification": false}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op AdminAddInboxCategory \
@@ -462,18 +462,18 @@ eval_tap $? 38 'AdminAddInboxCategory' test.out
 $CLI_EXE \
     --sn chat \
     --op AdminDeleteInboxCategory \
-    --category 'plECHqVZ' \
+    --category 'CFs049tz' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 39 'AdminDeleteInboxCategory' test.out
 
 #- 40 AdminUpdateInboxCategory
 # body param: body
-echo '{"enabled": false, "expiresIn": 1, "hook": {"driver": "5IZabII3", "params": {"sfUC8EbD": {}, "B3fgFXg0": {}, "TJ4eJoCC": {}}}, "jsonSchema": {"i4X8v42Q": {}, "Xn5M8lNE": {}, "zfanY8TO": {}}, "saveInbox": true, "sendNotification": false}' > $TEMP_JSON_INPUT
+echo '{"enabled": false, "expiresIn": 45, "hook": {"driver": "jIrwLmaj", "params": {"9Lo7jlvd": {}, "gKtQ0hft": {}, "j5tMTnsQ": {}}}, "jsonSchema": {"30F4NcKL": {}, "esX5vk35": {}, "1ZjjVc2U": {}}, "saveInbox": false, "sendNotification": false}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op AdminUpdateInboxCategory \
-    --category 'NncfWTZx' \
+    --category '9wKDcGRY' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -483,7 +483,7 @@ eval_tap $? 40 'AdminUpdateInboxCategory' test.out
 $CLI_EXE \
     --sn chat \
     --op AdminGetCategorySchema \
-    --category 'pLAZvNWB' \
+    --category 'Ms2z9C5K' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 41 'AdminGetCategorySchema' test.out
@@ -492,7 +492,7 @@ eval_tap $? 41 'AdminGetCategorySchema' test.out
 $CLI_EXE \
     --sn chat \
     --op AdminDeleteInboxMessage \
-    --messageId 'S6heDPeE' \
+    --messageId 'f7nbMxQ2' \
     --namespace $AB_NAMESPACE \
     --force 'false' \
     > test.out 2>&1
@@ -503,22 +503,22 @@ $CLI_EXE \
     --sn chat \
     --op AdminGetInboxMessages \
     --namespace $AB_NAMESPACE \
-    --activeOnly 'false' \
-    --endCreatedAt '14' \
-    --limit '47' \
-    --messageId '["hiDFbWXh", "mJiFDMTw", "L7qHkdId"]' \
-    --offset '3' \
-    --order 'SzwpJNjF' \
+    --activeOnly 'true' \
+    --endCreatedAt '87' \
+    --limit '36' \
+    --messageId '["h4whOSrg", "VmsQQDtB", "TSg60kyP"]' \
+    --offset '73' \
+    --order 'rUU7upnl' \
     --scope 'NAMESPACE' \
-    --startCreatedAt '40' \
-    --status 'UNSENT' \
+    --startCreatedAt '64' \
+    --status 'DRAFT' \
     --transient 'false' \
     > test.out 2>&1
 eval_tap $? 43 'AdminGetInboxMessages' test.out
 
 #- 44 AdminSaveInboxMessage
 # body param: body
-echo '{"category": "Qe8ZxEi5", "expiredAt": 88, "message": {"y4M41G2K": {}, "m2qWl4Ua": {}, "N8IWVBUC": {}}, "scope": "USER", "status": "DRAFT", "userIds": ["MYB4XlIr", "gSY3t3WD", "hMRzpfFN"]}' > $TEMP_JSON_INPUT
+echo '{"category": "V00t7lXN", "expiredAt": 69, "message": {"7YJpI3sz": {}, "lmJV1TXF": {}, "5P5XafO8": {}}, "scope": "NAMESPACE", "status": "DRAFT", "userIds": ["lDLZ8MSL", "R8ktsmSZ", "iMs88LR6"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op AdminSaveInboxMessage \
@@ -529,11 +529,11 @@ eval_tap $? 44 'AdminSaveInboxMessage' test.out
 
 #- 45 AdminUnsendInboxMessage
 # body param: body
-echo '{"userIds": ["xDMUJWcb", "fd3CcGJf", "IpgyX5lB"]}' > $TEMP_JSON_INPUT
+echo '{"userIds": ["wXQKn9X3", "zgPN8iIk", "rn7WuUnx"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op AdminUnsendInboxMessage \
-    --inbox 'I32Iyuhz' \
+    --inbox 'vwRVvZMC' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -543,22 +543,22 @@ eval_tap $? 45 'AdminUnsendInboxMessage' test.out
 $CLI_EXE \
     --sn chat \
     --op AdminGetInboxUsers \
-    --inbox 'MwjsPhVc' \
+    --inbox 'IoAKRrvL' \
     --namespace $AB_NAMESPACE \
-    --limit '78' \
-    --offset '11' \
+    --limit '65' \
+    --offset '83' \
     --status 'UNREAD' \
-    --userId 'dwiXknsg' \
+    --userId 'nP1OlgaY' \
     > test.out 2>&1
 eval_tap $? 46 'AdminGetInboxUsers' test.out
 
 #- 47 AdminUpdateInboxMessage
 # body param: body
-echo '{"expiredAt": 57, "message": {"QbGs4Bp0": {}, "x8xLJfdi": {}, "pOcGMAIh": {}}, "scope": "NAMESPACE", "userIds": ["xwHKAu5f", "WpBlTYAf", "IsPhJrfb"]}' > $TEMP_JSON_INPUT
+echo '{"expiredAt": 75, "message": {"rvJz7t4v": {}, "87FampO2": {}, "oYpltEzl": {}}, "scope": "NAMESPACE", "userIds": ["bQ9Kcera", "l3EqhlCR", "qwKKQDwp"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op AdminUpdateInboxMessage \
-    --messageId 'a3Vyk30U' \
+    --messageId 'TtU0bKjc' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -570,7 +570,7 @@ echo '{}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op AdminSendInboxMessage \
-    --messageId 'NNJGi8cW' \
+    --messageId 'nBxz1m6F' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -581,7 +581,7 @@ $CLI_EXE \
     --sn chat \
     --op AdminGetInboxStats \
     --namespace $AB_NAMESPACE \
-    --messageId '["g3NXBT3Y", "RUNCmYsp", "TF0MbZXx"]' \
+    --messageId '["uwIlRVf4", "R3hfA3sT", "yoSsdPqQ"]' \
     > test.out 2>&1
 eval_tap $? 49 'AdminGetInboxStats' test.out
 
@@ -589,7 +589,7 @@ eval_tap $? 49 'AdminGetInboxStats' test.out
 $CLI_EXE \
     --sn chat \
     --op AdminGetChatSnapshot \
-    --chatId 'jhihigaV' \
+    --chatId '4kS1GYrW' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 50 'AdminGetChatSnapshot' test.out
@@ -598,7 +598,7 @@ eval_tap $? 50 'AdminGetChatSnapshot' test.out
 $CLI_EXE \
     --sn chat \
     --op AdminDeleteChatSnapshot \
-    --chatId 'rPH3wZnS' \
+    --chatId 'pShJwm5d' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 51 'AdminDeleteChatSnapshot' test.out
@@ -608,19 +608,19 @@ $CLI_EXE \
     --sn chat \
     --op AdminProfanityQuery \
     --namespace $AB_NAMESPACE \
-    --filterMask 'TFGWc86W' \
+    --filterMask 'N61iRr61' \
     --includeChildren 'false' \
-    --limit '25' \
-    --offset '99' \
-    --parentId 'NVkKG21T' \
-    --startWith 'WmkAwa7L' \
-    --wordType 'Dl0i3vVA' \
+    --limit '20' \
+    --offset '29' \
+    --parentId 'FW9fwmNH' \
+    --startWith 'h3Zg8f4i' \
+    --wordType 'qczLUoPe' \
     > test.out 2>&1
 eval_tap $? 52 'AdminProfanityQuery' test.out
 
 #- 53 AdminProfanityCreate
 # body param: body
-echo '{"falseNegative": ["cD0lQ3U9", "Es3hszAB", "zplTIHpr"], "falsePositive": ["HPTYIcrW", "oQBH2aBz", "RRsePJ8F"], "word": "ahJwuXmX", "wordType": "Xe6BiEY7"}' > $TEMP_JSON_INPUT
+echo '{"falseNegative": ["mDNkJaDt", "RdGe2u2E", "4uKezreL"], "falsePositive": ["Tsxfp5us", "NAf9DRkJ", "2LlKS78B"], "word": "dTRFL87b", "wordType": "VnuQTOhZ"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op AdminProfanityCreate \
@@ -631,7 +631,7 @@ eval_tap $? 53 'AdminProfanityCreate' test.out
 
 #- 54 AdminProfanityCreateBulk
 # body param: body
-echo '{"dictionaries": [{"falseNegative": ["n1XM3Cb8", "znKD5bRf", "mERgLhOA"], "falsePositive": ["HGPOPy1o", "ID7ddJ7R", "PX5TMzus"], "word": "vCAEOdtw", "wordType": "3s0cIhtU"}, {"falseNegative": ["h0QT6wQD", "iyOxw2p3", "fJ9r5VYd"], "falsePositive": ["dHf09XUQ", "HgdzLVgz", "QVepjkCj"], "word": "vUh5FGhN", "wordType": "HZiMRWjb"}, {"falseNegative": ["roGZ77Pn", "RGsTksey", "5NakdNgC"], "falsePositive": ["3p3O6SQh", "rnRQteOe", "3Zm27xHb"], "word": "omhTLmfV", "wordType": "ljIQ9X78"}]}' > $TEMP_JSON_INPUT
+echo '{"dictionaries": [{"falseNegative": ["JzEuES6F", "S8kbMJEp", "xmlIcVB3"], "falsePositive": ["NyvMoSIT", "pzChA6tv", "iKYGFl1v"], "word": "QxTbQRg6", "wordType": "2QYJ23u0"}, {"falseNegative": ["3njAoATX", "JVcLDV4s", "48XcxGqf"], "falsePositive": ["AwL0pqEL", "oq6jzWJh", "Rv1Xv0Y8"], "word": "6aQx4K0G", "wordType": "vdtdmxys"}, {"falseNegative": ["C2k9QeYm", "UitYklMJ", "vjLcPv0D"], "falsePositive": ["HMYhu0nw", "HT7PpbBI", "k1fE6B1S"], "word": "aurPbPRB", "wordType": "Lb0AZm4B"}]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op AdminProfanityCreateBulk \
@@ -653,8 +653,8 @@ $CLI_EXE \
     --sn chat \
     --op AdminProfanityGroup \
     --namespace $AB_NAMESPACE \
-    --limit '90' \
-    --offset '87' \
+    --limit '52' \
+    --offset '70' \
     > test.out 2>&1
 eval_tap $? 56 'AdminProfanityGroup' test.out
 
@@ -665,19 +665,19 @@ $CLI_EXE \
     --sn chat \
     --op AdminProfanityImport \
     --namespace $AB_NAMESPACE \
-    --action 'FULLREPLACE' \
-    --showResult 'true' \
+    --action 'REPLACE' \
+    --showResult 'false' \
     --upload file $TEMP_FILE_UPLOAD \
     > test.out 2>&1
 eval_tap $? 57 'AdminProfanityImport' test.out
 
 #- 58 AdminProfanityUpdate
 # body param: body
-echo '{"falseNegative": ["0sNE8rn9", "CWtwpeUw", "3WiYGPA2"], "falsePositive": ["dqIfpyjJ", "JOmPgVxe", "rMThyLSr"], "word": "WoKD2gi5", "wordType": "0vFzyGXy"}' > $TEMP_JSON_INPUT
+echo '{"falseNegative": ["QERkPhCk", "gTA1titY", "ZkjrFOc4"], "falsePositive": ["xIuvUFVi", "nOWIfW7V", "HKD1xikl"], "word": "F3KIyyCI", "wordType": "nHoLFdnQ"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn chat \
     --op AdminProfanityUpdate \
-    --id '90S8sNG3' \
+    --id 'JPzUp7XR' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -687,7 +687,7 @@ eval_tap $? 58 'AdminProfanityUpdate' test.out
 $CLI_EXE \
     --sn chat \
     --op AdminProfanityDelete \
-    --id '0hThiYwz' \
+    --id 'RRilz72v' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 59 'AdminProfanityDelete' test.out
@@ -711,9 +711,9 @@ eval_tap $? 61 'PublicGetConfigV1' test.out
 $CLI_EXE \
     --sn chat \
     --op PublicGetChatSnapshot \
-    --chatId '0TjVQJ7B' \
+    --chatId '0oBWp0Yk' \
     --namespace $AB_NAMESPACE \
-    --topic '8Ve2KUIZ' \
+    --topic '9p93cm0R' \
     > test.out 2>&1
 eval_tap $? 62 'PublicGetChatSnapshot' test.out
 

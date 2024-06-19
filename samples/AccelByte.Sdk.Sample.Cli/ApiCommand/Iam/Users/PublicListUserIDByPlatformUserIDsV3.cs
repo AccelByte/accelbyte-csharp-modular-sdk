@@ -36,6 +36,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
         [SdkCommandArgument("rawPID")]
         public bool? RawPID { get; set; }
 
+        [SdkCommandArgument("rawPUID")]
+        public bool? RawPUID { get; set; }
+
         [SdkCommandData("body")]
         public ModelPlatformUserIDRequest Body { get; set; } = new ModelPlatformUserIDRequest();
 
@@ -48,10 +51,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
         {
             AccelByte.Sdk.Api.Iam.Wrapper.Users wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.Users(_SDK);
 
+#pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Iam.Operation.PublicListUserIDByPlatformUserIDsV3.Builder;
 
             if (RawPID != null)
                 opBuilder.SetRawPID((bool)RawPID);
+            if (RawPUID != null)
+                opBuilder.SetRawPUID((bool)RawPUID);
 
 
 
@@ -62,12 +68,15 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
                 PlatformId
             );
 
+#pragma warning restore ab_deprecated_operation
 
+#pragma warning disable ab_deprecated_operation_wrapper
             AccelByte.Sdk.Api.Iam.Model.AccountcommonUserPlatforms? response = wrapper.PublicListUserIDByPlatformUserIDsV3(operation);
             if (response == null)
                 return "No response from server.";
 
             return SdkHelper.SerializeToJson(response);
+#pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

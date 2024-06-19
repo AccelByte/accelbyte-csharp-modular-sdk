@@ -48,6 +48,10 @@ namespace AccelByte.Sdk.Api.Challenge.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public int? RepeatAfter { get; set; }
 
+        [JsonPropertyName("resetConfig")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ModelResetConfig? ResetConfig { get; set; }
+
         [JsonPropertyName("rotation")]
         [JsonStringEnum]
         public ModelCreateChallengeRequestRotation? Rotation { get; set; }

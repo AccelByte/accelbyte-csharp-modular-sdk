@@ -24,8 +24,6 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// deleteStatCycle
     ///
     /// Deletes stat cycle.
-    /// Other detail info:
-    ///         *  Required permission : resource="ADMIN:NAMESPACE:{namespace}:STAT", action=8 (DELETE)
     /// </summary>
     public class DeleteStatCycle : AccelByte.Sdk.Core.Operation
     {

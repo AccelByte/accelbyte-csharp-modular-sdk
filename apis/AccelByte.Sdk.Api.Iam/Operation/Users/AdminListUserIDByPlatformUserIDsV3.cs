@@ -39,6 +39,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// - oculusweb
     /// - facebook
     /// - google
+    /// - googleplaygames
     /// - twitch
     /// - discord
     /// - android
@@ -67,6 +68,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public bool? RawPID { get; set; }
 
+            public bool? RawPUID { get; set; }
+
 
 
 
@@ -82,6 +85,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             public AdminListUserIDByPlatformUserIDsV3Builder SetRawPID(bool _rawPID)
             {
                 RawPID = _rawPID;
+                return this;
+            }
+
+            public AdminListUserIDByPlatformUserIDsV3Builder SetRawPUID(bool _rawPUID)
+            {
+                RawPUID = _rawPUID;
                 return this;
             }
 
@@ -159,6 +168,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["platformId"] = platformId;
 
             if (builder.RawPID != null) QueryParams["rawPID"] = Convert.ToString(builder.RawPID)!;
+            if (builder.RawPUID != null) QueryParams["rawPUID"] = Convert.ToString(builder.RawPUID)!;
 
 
 
@@ -174,6 +184,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string namespace_,
             string platformId,
             bool? rawPID,
+            bool? rawPUID,
             Model.ModelPlatformUserIDRequest body
         )
         {
@@ -181,6 +192,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["platformId"] = platformId;
 
             if (rawPID != null) QueryParams["rawPID"] = Convert.ToString(rawPID)!;
+            if (rawPUID != null) QueryParams["rawPUID"] = Convert.ToString(rawPUID)!;
 
 
 

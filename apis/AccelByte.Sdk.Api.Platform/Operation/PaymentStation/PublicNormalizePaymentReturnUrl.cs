@@ -341,6 +341,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public static readonly PublicNormalizePaymentReturnUrlPaymentProvider CHECKOUT
             = new PublicNormalizePaymentReturnUrlPaymentProvider("CHECKOUT");
 
+        public static readonly PublicNormalizePaymentReturnUrlPaymentProvider NEONPAY
+            = new PublicNormalizePaymentReturnUrlPaymentProvider("NEONPAY");
+
         public static readonly PublicNormalizePaymentReturnUrlPaymentProvider PAYPAL
             = new PublicNormalizePaymentReturnUrlPaymentProvider("PAYPAL");
 

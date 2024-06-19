@@ -35,6 +35,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             : OperationBuilder<AdminGenerateBackupCodesV4Builder>
         {
 
+            public string? LanguageTag { get; set; }
+
 
 
 
@@ -46,6 +48,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 _Sdk = sdk;
             }
 
+
+            public AdminGenerateBackupCodesV4Builder SetLanguageTag(string _languageTag)
+            {
+                LanguageTag = _languageTag;
+                return this;
+            }
 
 
 
@@ -97,6 +105,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
 
+            if (builder.LanguageTag is not null) QueryParams["languageTag"] = builder.LanguageTag;
 
 
 
@@ -108,9 +117,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminGenerateBackupCodesV4(
+            string? languageTag
         )
         {
 
+            if (languageTag is not null) QueryParams["languageTag"] = languageTag;
 
 
 

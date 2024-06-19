@@ -51,7 +51,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// * oculus
     /// * oculusweb
     /// * facebook
+    /// * google group
     /// * google
+    /// * googleplaygames
     /// * twitch
     /// * discord
     /// * android

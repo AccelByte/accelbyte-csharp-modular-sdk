@@ -157,18 +157,18 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.Payload);
         }
 
-        public Model.ApimodelsItemResp<T1, T2>? AdminGetInventoryItem<T1, T2>(AdminGetInventoryItem input)
+        public Model.ApimodelsItemResp<T1, T2, T3>? AdminGetInventoryItem<T1, T2, T3>(AdminGetInventoryItem input)
         {
             var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1, T2>(
+            return input.ParseResponse<T1, T2, T3>(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsItemResp<T1, T2>?> AdminGetInventoryItemAsync<T1, T2>(AdminGetInventoryItem input)
+        public async Task<Model.ApimodelsItemResp<T1, T2, T3>?> AdminGetInventoryItemAsync<T1, T2, T3>(AdminGetInventoryItem input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1, T2>(
+            return input.ParseResponse<T1, T2, T3>(
                     response.Code,
                     response.ContentType,
                     response.Payload);
@@ -190,18 +190,18 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.Payload);
         }
 
-        public Model.ApimodelsItemResp<T1, T2>? AdminConsumeUserItem<T1, T2>(AdminConsumeUserItem input)
+        public Model.ApimodelsItemResp<T1, T2, T3>? AdminConsumeUserItem<T1, T2, T3>(AdminConsumeUserItem input)
         {
             var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1, T2>(
+            return input.ParseResponse<T1, T2, T3>(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsItemResp<T1, T2>?> AdminConsumeUserItemAsync<T1, T2>(AdminConsumeUserItem input)
+        public async Task<Model.ApimodelsItemResp<T1, T2, T3>?> AdminConsumeUserItemAsync<T1, T2, T3>(AdminConsumeUserItem input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1, T2>(
+            return input.ParseResponse<T1, T2, T3>(
                     response.Code,
                     response.ContentType,
                     response.Payload);
@@ -239,18 +239,18 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.Payload);
         }
 
-        public Model.ApimodelsItemResp<T1, T2>? AdminSaveItemToInventory<T1, T2>(AdminSaveItemToInventory input)
+        public Model.ApimodelsItemResp<T1, T2, T3>? AdminSaveItemToInventory<T1, T2, T3>(AdminSaveItemToInventory input)
         {
             var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1, T2>(
+            return input.ParseResponse<T1, T2, T3>(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsItemResp<T1, T2>?> AdminSaveItemToInventoryAsync<T1, T2>(AdminSaveItemToInventory input)
+        public async Task<Model.ApimodelsItemResp<T1, T2, T3>?> AdminSaveItemToInventoryAsync<T1, T2, T3>(AdminSaveItemToInventory input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1, T2>(
+            return input.ParseResponse<T1, T2, T3>(
                     response.Code,
                     response.ContentType,
                     response.Payload);
@@ -288,18 +288,18 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.Payload);
         }
 
-        public Model.ApimodelsItemResp<T1, T2>? AdminSaveItem<T1, T2>(AdminSaveItem input)
+        public Model.ApimodelsItemResp<T1, T2, T3>? AdminSaveItem<T1, T2, T3>(AdminSaveItem input)
         {
             var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1, T2>(
+            return input.ParseResponse<T1, T2, T3>(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsItemResp<T1, T2>?> AdminSaveItemAsync<T1, T2>(AdminSaveItem input)
+        public async Task<Model.ApimodelsItemResp<T1, T2, T3>?> AdminSaveItemAsync<T1, T2, T3>(AdminSaveItem input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1, T2>(
+            return input.ParseResponse<T1, T2, T3>(
                     response.Code,
                     response.ContentType,
                     response.Payload);
