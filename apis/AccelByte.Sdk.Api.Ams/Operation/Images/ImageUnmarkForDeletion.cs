@@ -58,8 +58,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             )
             {
                 ImageUnmarkForDeletion op = new ImageUnmarkForDeletion(this,
-                    imageID,
-                    namespace_
+                    imageID,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<ImageUnmarkForDeletionBuilder>(this);
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -113,30 +113,30 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         {
             PathParams["imageID"] = imageID;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public ImageUnmarkForDeletion(
-            string imageID,
-            string namespace_
+            string imageID,            
+            string namespace_            
         )
         {
             PathParams["imageID"] = imageID;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -145,19 +145,19 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)202)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }
