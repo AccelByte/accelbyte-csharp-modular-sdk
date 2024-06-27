@@ -305,28 +305,32 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
                         }
                     }
                 }
-                else if ((payload.NamespaceRoles != null) && (payload.NamespaceRoles.Count > 0))
-                {
-                    foreach (var r in payload.NamespaceRoles)
-                    {
-                        if (r.RoleId == null)
-                            continue;
 
-                        var permissions = GetRolePermission(sdk, r.RoleId, _FetchFunction);
-                        foreach (var p in permissions)
+                if (!foundMatchingPermission)
+                {
+                    if ((payload.NamespaceRoles != null) && (payload.NamespaceRoles.Count > 0))
+                    {
+                        foreach (var r in payload.NamespaceRoles)
                         {
-                            if (IsResourceAllowed(p.Resource, permission))
+                            if (r.RoleId == null)
+                                continue;
+
+                            var permissions = GetRolePermission(sdk, r.RoleId, _FetchFunction);
+                            foreach (var p in permissions)
                             {
-                                if (PermissionAction.Has(p.Action, action))
+                                if (IsResourceAllowed(p.Resource, permission))
                                 {
-                                    foundMatchingPermission = true;
-                                    break;
+                                    if (PermissionAction.Has(p.Action, action))
+                                    {
+                                        foundMatchingPermission = true;
+                                        break;
+                                    }
                                 }
                             }
-                        }
 
-                        if (foundMatchingPermission)
-                            break;
+                            if (foundMatchingPermission)
+                                break;
+                        }
                     }
                 }
 
@@ -373,32 +377,36 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
                         }
                     }
                 }
-                else if ((payload.NamespaceRoles != null) && (payload.NamespaceRoles.Count > 0))
+
+                if (!foundMatchingPermission)
                 {
-                    foreach (var r in payload.NamespaceRoles)
+                    if ((payload.NamespaceRoles != null) && (payload.NamespaceRoles.Count > 0))
                     {
-                        if (r.RoleId == null)
-                            continue;
-
-                        var permissions = GetRolePermission(sdk, r.RoleId, _FetchFunction);
-                        foreach (var p in permissions)
+                        foreach (var r in payload.NamespaceRoles)
                         {
-                            string aPermission = p.Resource;
-                            if (pParams.Count > 0)
-                                aPermission = ReplacePlaceholder(p.Resource, pParams);
+                            if (r.RoleId == null)
+                                continue;
 
-                            if (IsResourceAllowed(aPermission, permission))
+                            var permissions = GetRolePermission(sdk, r.RoleId, _FetchFunction);
+                            foreach (var p in permissions)
                             {
-                                if (PermissionAction.Has(p.Action, action))
+                                string aPermission = p.Resource;
+                                if (pParams.Count > 0)
+                                    aPermission = ReplacePlaceholder(p.Resource, pParams);
+
+                                if (IsResourceAllowed(aPermission, permission))
                                 {
-                                    foundMatchingPermission = true;
-                                    break;
+                                    if (PermissionAction.Has(p.Action, action))
+                                    {
+                                        foundMatchingPermission = true;
+                                        break;
+                                    }
                                 }
                             }
-                        }
 
-                        if (foundMatchingPermission)
-                            break;
+                            if (foundMatchingPermission)
+                                break;
+                        }
                     }
                 }
 
@@ -445,28 +453,32 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
                         }
                     }
                 }
-                else if ((payload.NamespaceRoles != null) && (payload.NamespaceRoles.Count > 0))
-                {
-                    foreach (var r in payload.NamespaceRoles)
-                    {
-                        if (r.RoleId == null)
-                            continue;
 
-                        var permissions = await GetRolePermissionAsync(sdk, r.RoleId, _FetchFunctionAsync);
-                        foreach (var p in permissions)
+                if (!foundMatchingPermission)
+                {
+                    if ((payload.NamespaceRoles != null) && (payload.NamespaceRoles.Count > 0))
+                    {
+                        foreach (var r in payload.NamespaceRoles)
                         {
-                            if (IsResourceAllowed(p.Resource, permission))
+                            if (r.RoleId == null)
+                                continue;
+
+                            var permissions = await GetRolePermissionAsync(sdk, r.RoleId, _FetchFunctionAsync);
+                            foreach (var p in permissions)
                             {
-                                if (PermissionAction.Has(p.Action, action))
+                                if (IsResourceAllowed(p.Resource, permission))
                                 {
-                                    foundMatchingPermission = true;
-                                    break;
+                                    if (PermissionAction.Has(p.Action, action))
+                                    {
+                                        foundMatchingPermission = true;
+                                        break;
+                                    }
                                 }
                             }
-                        }
 
-                        if (foundMatchingPermission)
-                            break;
+                            if (foundMatchingPermission)
+                                break;
+                        }
                     }
                 }
 
@@ -513,32 +525,36 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
                         }
                     }
                 }
-                else if ((payload.NamespaceRoles != null) && (payload.NamespaceRoles.Count > 0))
+
+                if (!foundMatchingPermission)
                 {
-                    foreach (var r in payload.NamespaceRoles)
+                    if ((payload.NamespaceRoles != null) && (payload.NamespaceRoles.Count > 0))
                     {
-                        if (r.RoleId == null)
-                            continue;
-
-                        var permissions = await GetRolePermissionAsync(sdk, r.RoleId, _FetchFunctionAsync);
-                        foreach (var p in permissions)
+                        foreach (var r in payload.NamespaceRoles)
                         {
-                            string aPermission = p.Resource;
-                            if (pParams.Count > 0)
-                                aPermission = ReplacePlaceholder(p.Resource, pParams);
+                            if (r.RoleId == null)
+                                continue;
 
-                            if (IsResourceAllowed(aPermission, permission))
+                            var permissions = await GetRolePermissionAsync(sdk, r.RoleId, _FetchFunctionAsync);
+                            foreach (var p in permissions)
                             {
-                                if (PermissionAction.Has(p.Action, action))
+                                string aPermission = p.Resource;
+                                if (pParams.Count > 0)
+                                    aPermission = ReplacePlaceholder(p.Resource, pParams);
+
+                                if (IsResourceAllowed(aPermission, permission))
                                 {
-                                    foundMatchingPermission = true;
-                                    break;
+                                    if (PermissionAction.Has(p.Action, action))
+                                    {
+                                        foundMatchingPermission = true;
+                                        break;
+                                    }
                                 }
                             }
-                        }
 
-                        if (foundMatchingPermission)
-                            break;
+                            if (foundMatchingPermission)
+                                break;
+                        }
                     }
                 }
 
