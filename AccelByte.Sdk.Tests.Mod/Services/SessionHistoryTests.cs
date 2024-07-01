@@ -18,6 +18,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
         public SessionHistoryTests() : base(false) { }
 
         [Test]
+        [Ignore("X-Ray metric endpoint is unavailable in stage")]
         public void TotalMatchmakingMatchTests()
         {
             Assert.IsNotNull(_Sdk);
