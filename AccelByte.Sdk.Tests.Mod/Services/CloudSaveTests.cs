@@ -41,6 +41,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .Execute(gameRecord, "foo_bar_record", _Sdk.Namespace);
             #endregion
 
+            Wait();
+
             #region Get game record
             ModelsGameRecordResponse? gRecord = _Sdk.GetCloudsaveApi().PublicGameRecord.GetGameRecordHandlerV1Op
                 .Execute("foo_bar_record", _Sdk.Namespace);
@@ -64,6 +66,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .Execute(updateRecord, "foo_bar_record", _Sdk.Namespace);
             #endregion
 
+            Wait();
+
             //re-check updated game record
             gRecord = _Sdk.GetCloudsaveApi().PublicGameRecord.GetGameRecordHandlerV1Op
                 .Execute("foo_bar_record", _Sdk.Namespace);
@@ -81,6 +85,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             _Sdk.GetCloudsaveApi().PublicGameRecord.DeleteGameRecordHandlerV1Op
                 .Execute("foo_bar_record", _Sdk.Namespace);
             #endregion
+
+            Wait();
 
             //Finally, recheck if the data is truly deleted.
             HttpResponseException? hrx = Assert.Throws<HttpResponseException>(() =>
@@ -111,6 +117,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _Sdk.GetCloudsaveApi().PublicGameRecord.PostGameRecordHandlerV1Op
                 .Execute(myGameRecord, recordKey, _Sdk.Namespace);
+
+            Wait();
 
             var gameRecord = _Sdk.GetCloudsaveApi().PublicGameRecord.GetGameRecordHandlerV1Op
                 .SetResponseJsonOptions(new JsonSerializerOptions()
@@ -161,6 +169,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 })
                 .Execute(myGameRecord, recordKey, _Sdk.Namespace);
+
+            Wait();
 
             var gameRecord = _Sdk.GetCloudsaveApi().PublicGameRecord.GetGameRecordHandlerV1Op
                 .Execute<AnotherGameRecordForTest_CC>(recordKey, _Sdk.Namespace);

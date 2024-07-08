@@ -178,6 +178,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     gameSessionId = newGSResponse.Id!;
             });
 
+            Wait();
+
             if (gameSessionId == String.Empty)
                 Assert.Fail("No game session id");
 
@@ -189,6 +191,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 #endregion
                 Assert.IsNotNull(p2GsJoin);
             });
+
+            Wait();
 
             ApimodelsGameSessionResponse? gsCheck = _Sdk.GetSessionApi().GameSession.GetGameSessionOp
                 .Execute(_Sdk.Namespace, gameSessionId);
@@ -281,6 +285,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             string partyId = String.Empty;
             string joinCode = String.Empty;
 
+            Wait();
+
             _Player1.Run((sdk, player) =>
             {
                 #region User create a party
@@ -307,6 +313,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 }
             });
 
+            Wait();
+
             if (partyId == String.Empty)
                 Assert.Fail("No party id");
             if (joinCode == String.Empty)
@@ -325,6 +333,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 #endregion
                 Assert.IsNotNull(joinResponse);
             });
+
+            Wait();
 
             #region Get party detail
             ApimodelsPartySessionResponse? partyData = _Sdk.GetSessionApi().Party.PublicGetPartyOp

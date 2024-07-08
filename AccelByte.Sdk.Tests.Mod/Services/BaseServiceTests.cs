@@ -1,8 +1,9 @@
-﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
 using System;
+using System.Threading;
 using NUnit.Framework;
 
 using AccelByte.Sdk.Core;
@@ -21,9 +22,16 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
         private bool _UseUserLogin;
 
+        private int _WaitTimeValue = 500; //in milisecs
+
         protected virtual void OnStartup(IAccelByteSdk sdk) { }
 
         protected virtual void OnBeforeEnd() { }
+
+        protected void Wait()
+        {
+            Thread.Sleep(_WaitTimeValue);
+        }
 
         public BaseServiceTests(bool useUserLogin)
         {
