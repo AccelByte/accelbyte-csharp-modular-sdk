@@ -18,40 +18,6 @@ namespace AccelByte.Sdk.Tests.Mod.Services
         public SessionHistoryTests() : base(false) { }
 
         [Test]
-        [Ignore("X-Ray metric endpoint is unavailable in stage")]
-        public void TotalMatchmakingMatchTests()
-        {
-            Assert.IsNotNull(_Sdk);
-            if (_Sdk == null)
-                return;
-
-            if (IsUsingAGSStarter())
-            {
-                Assert.Inconclusive("Temporarily disabled in AGS Starter due to issue in session service.");
-                return;
-            }
-
-            DisableRetry();
-
-            string endDate = DateTime.Now
-                .ToUniversalTime()
-                .ToString("u").Replace(" ", "T");
-            string startDate = DateTime.Now.Subtract(TimeSpan.FromDays(10))
-                .ToUniversalTime()
-                .ToString("u").Replace(" ", "T");
-
-            #region Get total matchmaking match
-            var response = _Sdk.GetSessionhistoryApi().XRay.QueryTotalMatchmakingMatchOp
-                .Execute(_Sdk.Namespace, endDate, startDate);
-            #endregion
-            Assert.IsNotNull(response);
-            if ((response != null) && (response.Data != null))
-                Assert.GreaterOrEqual(response.Data.Count, 0);
-
-            ResetPolicy();
-        }
-
-        [Test]
         public void GameSessionTests()
         {
             Assert.IsNotNull(_Sdk);
