@@ -177,6 +177,17 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     return opBuilder;
             }
         }
+        public PublicPartyCancel.PublicPartyCancelBuilder PublicPartyCancelOp
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicPartyCancel.PublicPartyCancelBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public PublicPartyKick.PublicPartyKickBuilder PublicPartyKickOp
         {
             get
@@ -532,6 +543,22 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.Payload);
         }
         public async Task PublicPartyRejectAsync(PublicPartyReject input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void PublicPartyCancel(PublicPartyCancel input)
+        {
+            var response = _sdk.RunRequest(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task PublicPartyCancelAsync(PublicPartyCancel input)
         {
             var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(

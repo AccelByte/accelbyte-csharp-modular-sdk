@@ -13,6 +13,7 @@ namespace AccelByte.Sdk.Api.Iam.Model
     public class AccountcommonDistinctLinkedPlatformV3 : AccelByte.Sdk.Core.Model
     {
         [JsonPropertyName("details")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<AccountcommonSimpleUserPlatformInfoV3>? Details { get; set; }
 
         [JsonPropertyName("linkedAt")]
@@ -21,6 +22,10 @@ namespace AccelByte.Sdk.Api.Iam.Model
         [JsonPropertyName("logoURL")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? LogoURL { get; set; }
+
+        [JsonPropertyName("platformDisplayName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? PlatformDisplayName { get; set; }
 
         [JsonPropertyName("platformGroup")]
         public string? PlatformGroup { get; set; }
@@ -31,6 +36,9 @@ namespace AccelByte.Sdk.Api.Iam.Model
         [JsonPropertyName("platformUserId")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? PlatformUserId { get; set; }
+
+        [JsonPropertyName("status")]
+        public string? Status { get; set; }
 
     }
 

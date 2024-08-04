@@ -70,6 +70,7 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 | `/ams/v1/admin/namespaces/{namespace}/images` | GET | ImageList | [ImageList](../../apis/AccelByte.Sdk.Api.Ams/Operation/Images/ImageList.cs) | [ImageList](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Images/ImageList.cs) |
+| `/ams/v1/admin/namespaces/{namespace}/images-storage` | GET | ImagesStorage | [ImagesStorage](../../apis/AccelByte.Sdk.Api.Ams/Operation/Images/ImagesStorage.cs) | [ImagesStorage](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Images/ImagesStorage.cs) |
 | `/ams/v1/admin/namespaces/{namespace}/images/{imageID}` | GET | ImageGet | [ImageGet](../../apis/AccelByte.Sdk.Api.Ams/Operation/Images/ImageGet.cs) | [ImageGet](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Images/ImageGet.cs) |
 | `/ams/v1/admin/namespaces/{namespace}/images/{imageID}` | DELETE | ImageMarkForDeletion | [ImageMarkForDeletion](../../apis/AccelByte.Sdk.Api.Ams/Operation/Images/ImageMarkForDeletion.cs) | [ImageMarkForDeletion](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Images/ImageMarkForDeletion.cs) |
 | `/ams/v1/admin/namespaces/{namespace}/images/{imageID}` | PATCH | ImagePatch | [ImagePatch](../../apis/AccelByte.Sdk.Api.Ams/Operation/Images/ImagePatch.cs) | [ImagePatch](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Images/ImagePatch.cs) |
@@ -191,6 +192,7 @@
 | `api.ImageDetails` | [ApiImageDetails](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiImageDetails.cs) |
 | `api.ImageList` | [ApiImageList](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiImageList.cs) |
 | `api.ImageListItem` | [ApiImageListItem](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiImageListItem.cs) |
+| `api.ImageStorage` | [ApiImageStorage](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiImageStorage.cs) |
 | `api.ImageUpdate` | [ApiImageUpdate](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiImageUpdate.cs) |
 | `api.InstanceTypeDescriptionResponse` | [ApiInstanceTypeDescriptionResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiInstanceTypeDescriptionResponse.cs) |
 | `api.PagingInfo` | [ApiPagingInfo](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiPagingInfo.cs) |

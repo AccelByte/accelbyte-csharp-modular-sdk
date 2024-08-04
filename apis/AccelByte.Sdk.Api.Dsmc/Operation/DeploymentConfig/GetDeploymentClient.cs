@@ -21,30 +21,30 @@ using AccelByte.Sdk.Api.Dsmc.Model;
 namespace AccelByte.Sdk.Api.Dsmc.Operation
 {
     /// <summary>
-    /// ExportImages
+    /// GetDeploymentClient
     ///
-    /// Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ]
+    /// Required permission: NAMESPACE:{namespace}:DSM:CONFIG [READ]
     /// 
     /// Required scope: social
     /// 
-    /// This endpoint export a dedicated servers images in a namespace.
+    /// This endpoint get a dedicated server deployment in a namespace
     /// </summary>
-    public class ExportImages : AccelByte.Sdk.Core.Operation
+    public class GetDeploymentClient : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static ExportImagesBuilder Builder { get => new ExportImagesBuilder(); }
+        public static GetDeploymentClientBuilder Builder { get => new GetDeploymentClientBuilder(); }
 
-        public class ExportImagesBuilder
-            : OperationBuilder<ExportImagesBuilder>
+        public class GetDeploymentClientBuilder
+            : OperationBuilder<GetDeploymentClientBuilder>
         {
 
 
 
 
 
-            internal ExportImagesBuilder() { }
+            internal GetDeploymentClientBuilder() { }
 
-            internal ExportImagesBuilder(IAccelByteSdk sdk)
+            internal GetDeploymentClientBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -54,23 +54,27 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
 
 
-            public ExportImages Build(
+            public GetDeploymentClient Build(
+                string deployment,
                 string namespace_
             )
             {
-                ExportImages op = new ExportImages(this,
+                GetDeploymentClient op = new GetDeploymentClient(this,
+                    deployment,
                     namespace_
                 );
 
-                op.SetBaseFields<ExportImagesBuilder>(this);
+                op.SetBaseFields<GetDeploymentClientBuilder>(this);
                 return op;
             }
 
-            public List<Model.ModelsImageRecord>? Execute(
+            public Model.ModelsDeploymentWithOverride? Execute(
+                string deployment,
                 string namespace_
             )
             {
-                ExportImages op = Build(
+                GetDeploymentClient op = Build(
+                    deployment,
                     namespace_
                 );
 
@@ -83,11 +87,13 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.ModelsImageRecord>?> ExecuteAsync(
+            public async Task<Model.ModelsDeploymentWithOverride?> ExecuteAsync(
+                string deployment,
                 string namespace_
             )
             {
-                ExportImages op = Build(
+                GetDeploymentClient op = Build(
+                    deployment,
                     namespace_
                 );
 
@@ -102,10 +108,12 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             }
         }
 
-        private ExportImages(ExportImagesBuilder builder,
+        private GetDeploymentClient(GetDeploymentClientBuilder builder,
+            string deployment,
             string namespace_
         )
         {
+            PathParams["deployment"] = deployment;
             PathParams["namespace"] = namespace_;
 
 
@@ -118,10 +126,12 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         }
         #endregion
 
-        public ExportImages(
+        public GetDeploymentClient(
+            string deployment,
             string namespace_
         )
         {
+            PathParams["deployment"] = deployment;
             PathParams["namespace"] = namespace_;
 
 
@@ -133,7 +143,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/dsmcontroller/admin/namespaces/{namespace}/images/export";
+        public override string Path => "/dsmcontroller/namespaces/{namespace}/configs/deployments/{deployment}";
 
         public override HttpMethod Method => HttpMethod.Get;
 
@@ -141,7 +151,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public List<Model.ModelsImageRecord>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.ModelsDeploymentWithOverride? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -149,11 +159,11 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<List<Model.ModelsImageRecord>>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ModelsDeploymentWithOverride>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<List<Model.ModelsImageRecord>>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ModelsDeploymentWithOverride>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

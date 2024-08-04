@@ -10,7 +10,7 @@ using System.Text.Json.Serialization;
 
 namespace AccelByte.Sdk.Api.Dsmc.Model
 {
-    public class ModelsImageRecord : AccelByte.Sdk.Core.Model
+    public class ModelsPatchImageRecordResponse : AccelByte.Sdk.Core.Model
     {
         [JsonPropertyName("artifactPath")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -46,6 +46,9 @@ namespace AccelByte.Sdk.Api.Dsmc.Model
         [JsonPropertyName("namespace")]
         public string? Namespace { get; set; }
 
+        [JsonPropertyName("patchVersion")]
+        public string? PatchVersion { get; set; }
+
         [JsonPropertyName("persistent")]
         public bool? Persistent { get; set; }
 
@@ -55,6 +58,9 @@ namespace AccelByte.Sdk.Api.Dsmc.Model
 
         [JsonPropertyName("updatedAt")]
         public DateTime? UpdatedAt { get; set; }
+
+        [JsonPropertyName("uploaderFlag")]
+        public string? UploaderFlag { get; set; }
 
         [JsonPropertyName("version")]
         public string? Version { get; set; }

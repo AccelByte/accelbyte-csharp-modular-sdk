@@ -430,6 +430,17 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
+        public BulkGetOrDefaultByUserId.BulkGetOrDefaultByUserIdBuilder BulkGetOrDefaultByUserIdOp
+        {
+            get
+            {
+                var opBuilder = new Operation.BulkGetOrDefaultByUserId.BulkGetOrDefaultByUserIdBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public BulkResetUserStatItemValues.BulkResetUserStatItemValuesBuilder BulkResetUserStatItemValuesOp
         {
             get
@@ -1387,6 +1398,22 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public List<Model.ADTOObjectForUserStatItemValue>? BulkGetOrDefaultByUserId(BulkGetOrDefaultByUserId input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ADTOObjectForUserStatItemValue>?> BulkGetOrDefaultByUserIdAsync(BulkGetOrDefaultByUserId input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

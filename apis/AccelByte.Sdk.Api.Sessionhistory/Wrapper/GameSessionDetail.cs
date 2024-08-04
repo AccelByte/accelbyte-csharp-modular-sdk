@@ -133,6 +133,17 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     return opBuilder;
             }
         }
+        public PublicQueryGameSessionMe.PublicQueryGameSessionMeBuilder PublicQueryGameSessionMeOp
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicQueryGameSessionMe.PublicQueryGameSessionMeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         #endregion
 
         public Model.ApimodelsGameSessionDetailQueryResponse? AdminQueryGameSessionDetail(AdminQueryGameSessionDetail input)
@@ -272,6 +283,22 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.Payload);
         }
         public async Task<Model.ApimodelsTicketObservabilityDetail?> AdminTicketDetailGetByTicketIDAsync(AdminTicketDetailGetByTicketID input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ApimodelsGameSessionDetailQueryResponse? PublicQueryGameSessionMe(PublicQueryGameSessionMe input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApimodelsGameSessionDetailQueryResponse?> PublicQueryGameSessionMeAsync(PublicQueryGameSessionMe input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

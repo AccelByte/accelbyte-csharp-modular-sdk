@@ -45,6 +45,17 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     return opBuilder;
             }
         }
+        public ImagesStorage.ImagesStorageBuilder ImagesStorageOp
+        {
+            get
+            {
+                var opBuilder = new Operation.ImagesStorage.ImagesStorageBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public ImageGet.ImageGetBuilder ImageGetOp
         {
             get
@@ -100,6 +111,22 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.Payload);
         }
         public async Task<Model.ApiImageList?> ImageListAsync(ImageList input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ApiImageStorage? ImagesStorage(ImagesStorage input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApiImageStorage?> ImagesStorageAsync(ImagesStorage input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

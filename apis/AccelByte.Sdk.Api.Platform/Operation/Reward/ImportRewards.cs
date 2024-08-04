@@ -119,6 +119,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
 
+
             QueryParams["replaceExisting"] = Convert.ToString(replaceExisting)!;
 
             if (builder.File is not null) FormParams["file"] = builder.File;
@@ -138,6 +139,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+
 
             QueryParams["replaceExisting"] = Convert.ToString(replaceExisting)!;
 

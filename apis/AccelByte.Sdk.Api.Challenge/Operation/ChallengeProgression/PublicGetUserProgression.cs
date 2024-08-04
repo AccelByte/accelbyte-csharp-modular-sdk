@@ -35,6 +35,8 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             : OperationBuilder<PublicGetUserProgressionBuilder>
         {
 
+            public DateTime? DateTime { get; set; }
+
             public string? GoalCode { get; set; }
 
             public long? Limit { get; set; }
@@ -54,6 +56,12 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                 _Sdk = sdk;
             }
 
+
+            public PublicGetUserProgressionBuilder SetDateTime(DateTime _dateTime)
+            {
+                DateTime = _dateTime;
+                return this;
+            }
 
             public PublicGetUserProgressionBuilder SetGoalCode(string _goalCode)
             {
@@ -145,6 +153,8 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             PathParams["challengeCode"] = challengeCode;
             PathParams["namespace"] = namespace_;
 
+            if (builder.DateTime != null)
+                QueryParams["dateTime"] = builder.DateTime.Value.ToString("O", System.Globalization.CultureInfo.InvariantCulture);
             if (builder.GoalCode is not null) QueryParams["goalCode"] = builder.GoalCode;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
@@ -163,6 +173,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         public PublicGetUserProgression(
             string challengeCode,
             string namespace_,
+            DateTime? dateTime,
             string? goalCode,
             long? limit,
             long? offset,
@@ -172,6 +183,8 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             PathParams["challengeCode"] = challengeCode;
             PathParams["namespace"] = namespace_;
 
+            if (dateTime != null)
+                QueryParams["dateTime"] = dateTime.Value.ToString("O", System.Globalization.CultureInfo.InvariantCulture);
             if (goalCode is not null) QueryParams["goalCode"] = goalCode;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;

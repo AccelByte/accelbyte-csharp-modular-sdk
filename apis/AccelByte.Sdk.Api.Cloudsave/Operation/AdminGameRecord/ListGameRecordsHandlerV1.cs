@@ -136,7 +136,9 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
             if (builder.Query is not null) QueryParams["query"] = builder.Query;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
+
             QueryParams["limit"] = Convert.ToString(limit)!;
+
             QueryParams["offset"] = Convert.ToString(offset)!;
 
 
@@ -161,7 +163,9 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
             if (query is not null) QueryParams["query"] = query;
             if (tags is not null) QueryParams["tags"] = tags;
+
             QueryParams["limit"] = Convert.ToString(limit)!;
+
             QueryParams["offset"] = Convert.ToString(offset)!;
 
 

@@ -8,15 +8,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace AccelByte.Sdk.Api.Dslogmanager.Model
+namespace AccelByte.Sdk.Api.Platform.Model
 {
-    public class ModelsNotifPayloadServerStatusChange : AccelByte.Sdk.Core.Model
+    public class SimpleUserDLCRewardContentsResponse : AccelByte.Sdk.Core.Model
     {
-        [JsonPropertyName("match")]
-        public ModelsMatchResult? Match { get; set; }
-
-        [JsonPropertyName("server")]
-        public ModelsServer? Server { get; set; }
+        [JsonPropertyName("data")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<SimpleUserDLCRewardContent>? Data { get; set; }
 
     }
 

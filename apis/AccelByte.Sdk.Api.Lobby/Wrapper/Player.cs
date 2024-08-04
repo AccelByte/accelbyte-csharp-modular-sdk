@@ -122,6 +122,17 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
+        public AdminBulkUnblockPlayersV1.AdminBulkUnblockPlayersV1Builder AdminBulkUnblockPlayersV1Op
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminBulkUnblockPlayersV1.AdminBulkUnblockPlayersV1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public PublicPlayerBlockPlayersV1.PublicPlayerBlockPlayersV1Builder PublicPlayerBlockPlayersV1Op
         {
             get
@@ -289,6 +300,22 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.Payload);
         }
         public async Task AdminBulkBlockPlayersV1Async(AdminBulkBlockPlayersV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void AdminBulkUnblockPlayersV1(AdminBulkUnblockPlayersV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task AdminBulkUnblockPlayersV1Async(AdminBulkUnblockPlayersV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(

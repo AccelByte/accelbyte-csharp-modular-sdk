@@ -129,6 +129,7 @@
 | `PassCreate` | [PassCreate](../../apis/AccelByte.Sdk.Api.Seasonpass/Model/PassCreate.cs) |
 | `PassInfo` | [PassInfo](../../apis/AccelByte.Sdk.Api.Seasonpass/Model/PassInfo.cs) |
 | `PassUpdate` | [PassUpdate](../../apis/AccelByte.Sdk.Api.Seasonpass/Model/PassUpdate.cs) |
+| `Permission` | [Permission](../../apis/AccelByte.Sdk.Api.Seasonpass/Model/Permission.cs) |
 | `ReasonTagsResult` | [ReasonTagsResult](../../apis/AccelByte.Sdk.Api.Seasonpass/Model/ReasonTagsResult.cs) |
 | `RewardCreate` | [RewardCreate](../../apis/AccelByte.Sdk.Api.Seasonpass/Model/RewardCreate.cs) |
 | `RewardCurrency` | [RewardCurrency](../../apis/AccelByte.Sdk.Api.Seasonpass/Model/RewardCurrency.cs) |

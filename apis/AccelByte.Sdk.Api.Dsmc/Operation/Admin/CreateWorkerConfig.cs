@@ -21,42 +21,30 @@ using AccelByte.Sdk.Api.Dsmc.Model;
 namespace AccelByte.Sdk.Api.Dsmc.Operation
 {
     /// <summary>
-    /// ImportImages
+    /// createWorkerConfig
     ///
-    /// Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE]
+    /// Required permission: ADMIN:NAMESPACE:{namespace}:WORKER:CONFIG [CREATE]
     /// 
     /// Required scope: social
     /// 
-    /// This endpoint import a dedicated servers images in a namespace.
-    /// 
-    /// The image will be upsert. Existing version will be replaced with imported image, will create new one if not found.
-    /// 
-    /// Example data inside imported file
-    /// [
-    /// {
-    /// "namespace": "dewa",
-    /// "image": "123456789.dkr.ecr.us-west-2.amazonaws.com/ds-dewa:0.0.1-alpha",
-    /// "version": "0.0.1",
-    /// "persistent": true
-    /// }
-    /// ]
+    /// This endpoint creates a worker configuration to control the worker in the DSMC.
     /// </summary>
-    public class ImportImages : AccelByte.Sdk.Core.Operation
+    public class CreateWorkerConfig : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static ImportImagesBuilder Builder { get => new ImportImagesBuilder(); }
+        public static CreateWorkerConfigBuilder Builder { get => new CreateWorkerConfigBuilder(); }
 
-        public class ImportImagesBuilder
-            : OperationBuilder<ImportImagesBuilder>
+        public class CreateWorkerConfigBuilder
+            : OperationBuilder<CreateWorkerConfigBuilder>
         {
 
 
 
 
 
-            internal ImportImagesBuilder() { }
+            internal CreateWorkerConfigBuilder() { }
 
-            internal ImportImagesBuilder(IAccelByteSdk sdk)
+            internal CreateWorkerConfigBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,24 +54,28 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
 
 
-            public ImportImages Build(
-                Stream file
+            public CreateWorkerConfig Build(
+                ModelsWorkerConfigRequest body,
+                string namespace_
             )
             {
-                ImportImages op = new ImportImages(this,
-                    file
+                CreateWorkerConfig op = new CreateWorkerConfig(this,
+                    body,
+                    namespace_
                 );
 
-                op.SetBaseFields<ImportImagesBuilder>(this);
+                op.SetBaseFields<CreateWorkerConfigBuilder>(this);
                 return op;
             }
 
-            public Model.ModelsImportResponse? Execute(
-                Stream file
+            public Model.ModelsWorkerConfig? Execute(
+                ModelsWorkerConfigRequest body,
+                string namespace_
             )
             {
-                ImportImages op = Build(
-                    file
+                CreateWorkerConfig op = Build(
+                    body,
+                    namespace_
                 );
 
                 if (_Sdk == null)
@@ -95,12 +87,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsImportResponse?> ExecuteAsync(
-                Stream file
+            public async Task<Model.ModelsWorkerConfig?> ExecuteAsync(
+                ModelsWorkerConfigRequest body,
+                string namespace_
             )
             {
-                ImportImages op = Build(
-                    file
+                CreateWorkerConfig op = Build(
+                    body,
+                    namespace_
                 );
 
                 if (_Sdk == null)
@@ -114,46 +108,50 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             }
         }
 
-        private ImportImages(ImportImagesBuilder builder,
-            Stream file
+        private CreateWorkerConfig(CreateWorkerConfigBuilder builder,
+            ModelsWorkerConfigRequest body,
+            string namespace_
         )
         {
+            PathParams["namespace"] = namespace_;
 
 
-            if (file is not null) FormParams["file"] = file;
 
 
 
+            BodyParams = body;
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public ImportImages(
-            Stream file
+        public CreateWorkerConfig(
+            string namespace_,
+            Model.ModelsWorkerConfigRequest body
         )
         {
+            PathParams["namespace"] = namespace_;
 
 
-            if (file is not null) FormParams["file"] = file;
 
 
 
+            BodyParams = body;
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/dsmcontroller/admin/images/import";
+        public override string Path => "/dsmcontroller/admin/namespace/{namespace}/workers";
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { "multipart/form-data" };
+        public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
 
-        public Model.ModelsImportResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.ModelsWorkerConfig? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -161,11 +159,11 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.ModelsImportResponse>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ModelsWorkerConfig>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.ModelsImportResponse>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ModelsWorkerConfig>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

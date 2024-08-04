@@ -151,7 +151,9 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             if (builder.Q is not null) QueryParams["q"] = builder.Q;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy.Value;
             if (builder.SortDirection is not null) QueryParams["sortDirection"] = builder.SortDirection.Value;
+
             QueryParams["count"] = Convert.ToString(count)!;
+
             QueryParams["offset"] = Convert.ToString(offset)!;
 
 
@@ -177,7 +179,9 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             if (q is not null) QueryParams["q"] = q;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy.Value;
             if (sortDirection is not null) QueryParams["sortDirection"] = sortDirection.Value;
+
             QueryParams["count"] = Convert.ToString(count)!;
+
             QueryParams["offset"] = Convert.ToString(offset)!;
 
 

@@ -59,9 +59,9 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             )
             {
                 FleetUpdate op = new FleetUpdate(this,
-                    body,                    
-                    fleetID,                    
-                    namespace_                    
+                    body,
+                    fleetID,
+                    namespace_
                 );
 
                 op.SetBaseFields<FleetUpdateBuilder>(this);
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -120,33 +120,33 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         {
             PathParams["fleetID"] = fleetID;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public FleetUpdate(
-            string fleetID,            
-            string namespace_,            
-            Model.ApiFleetParameters body            
+            string fleetID,
+            string namespace_,
+            Model.ApiFleetParameters body
         )
         {
             PathParams["fleetID"] = fleetID;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -157,17 +157,17 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

@@ -45,6 +45,17 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
+        public UsersPresenceHandlerV2.UsersPresenceHandlerV2Builder UsersPresenceHandlerV2Op
+        {
+            get
+            {
+                var opBuilder = new Operation.UsersPresenceHandlerV2.UsersPresenceHandlerV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         #endregion
 
         public Model.HandlersGetUsersPresenceResponse? UsersPresenceHandlerV1(UsersPresenceHandlerV1 input)
@@ -56,6 +67,22 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.Payload);
         }
         public async Task<Model.HandlersGetUsersPresenceResponse?> UsersPresenceHandlerV1Async(UsersPresenceHandlerV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.HandlersGetUsersPresenceResponse? UsersPresenceHandlerV2(UsersPresenceHandlerV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.HandlersGetUsersPresenceResponse?> UsersPresenceHandlerV2Async(UsersPresenceHandlerV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

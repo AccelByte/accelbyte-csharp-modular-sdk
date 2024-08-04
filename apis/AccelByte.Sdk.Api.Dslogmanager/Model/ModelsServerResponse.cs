@@ -10,7 +10,7 @@ using System.Text.Json.Serialization;
 
 namespace AccelByte.Sdk.Api.Dslogmanager.Model
 {
-    public class ModelsServer : AccelByte.Sdk.Core.Model
+    public class ModelsServerResponse : AccelByte.Sdk.Core.Model
     {
         [JsonPropertyName("allocation_events")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -22,6 +22,10 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Model
         [JsonPropertyName("alternate_ips")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? AlternateIps { get; set; }
+
+        [JsonPropertyName("artifact_path")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? ArtifactPath { get; set; }
 
         [JsonPropertyName("cpu_limit")]
         public int? CpuLimit { get; set; }
@@ -40,6 +44,10 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Model
 
         [JsonPropertyName("ip")]
         public string? Ip { get; set; }
+
+        [JsonPropertyName("is_core_dump_enabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? IsCoreDumpEnabled { get; set; }
 
         [JsonPropertyName("is_override_game_version")]
         public bool? IsOverrideGameVersion { get; set; }
@@ -93,6 +101,10 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Model
 
         [JsonPropertyName("termination_reason")]
         public string? TerminationReason { get; set; }
+
+        [JsonPropertyName("ulimit_file_size")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? UlimitFileSize { get; set; }
 
     }
 

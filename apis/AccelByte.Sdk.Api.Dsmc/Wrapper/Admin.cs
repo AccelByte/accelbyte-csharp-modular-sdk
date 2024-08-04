@@ -34,6 +34,50 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         }
 
         #region Operation Builders
+        public GetWorkerConfig.GetWorkerConfigBuilder GetWorkerConfigOp
+        {
+            get
+            {
+                var opBuilder = new Operation.GetWorkerConfig.GetWorkerConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public UpdateWorkerConfig.UpdateWorkerConfigBuilder UpdateWorkerConfigOp
+        {
+            get
+            {
+                var opBuilder = new Operation.UpdateWorkerConfig.UpdateWorkerConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public CreateWorkerConfig.CreateWorkerConfigBuilder CreateWorkerConfigOp
+        {
+            get
+            {
+                var opBuilder = new Operation.CreateWorkerConfig.CreateWorkerConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public AddBuffer.AddBufferBuilder AddBufferOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AddBuffer.AddBufferBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public ListServer.ListServerBuilder ListServerOp
         {
             get
@@ -144,8 +188,94 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     return opBuilder;
             }
         }
+        public RunGhostCleanerRequestHandler.RunGhostCleanerRequestHandlerBuilder RunGhostCleanerRequestHandlerOp
+        {
+            get
+            {
+                var opBuilder = new Operation.RunGhostCleanerRequestHandler.RunGhostCleanerRequestHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public RunZombieCleanerRequestHandler.RunZombieCleanerRequestHandlerBuilder RunZombieCleanerRequestHandlerOp
+        {
+            get
+            {
+                var opBuilder = new Operation.RunZombieCleanerRequestHandler.RunZombieCleanerRequestHandlerBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         #endregion
 
+        public Model.ModelsWorkerConfig? GetWorkerConfig(GetWorkerConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsWorkerConfig?> GetWorkerConfigAsync(GetWorkerConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void UpdateWorkerConfig(UpdateWorkerConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task UpdateWorkerConfigAsync(UpdateWorkerConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelsWorkerConfig? CreateWorkerConfig(CreateWorkerConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsWorkerConfig?> CreateWorkerConfigAsync(CreateWorkerConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelsAddBufferResponse? AddBuffer(AddBuffer input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsAddBufferResponse?> AddBufferAsync(AddBuffer input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.ModelsListServerResponse? ListServer(ListServer input)
         {
             var response = _sdk.RunRequest(input);
@@ -226,7 +356,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsServer? GetServer(GetServer input)
+        public Model.ModelsServerDetailsResponse? GetServer(GetServer input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -234,7 +364,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsServer?> GetServerAsync(GetServer input)
+        public async Task<Model.ModelsServerDetailsResponse?> GetServerAsync(GetServer input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -299,6 +429,38 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.Payload);
         }
         public async Task DeleteSessionAsync(DeleteSession input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void RunGhostCleanerRequestHandler(RunGhostCleanerRequestHandler input)
+        {
+            var response = _sdk.RunRequest(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task RunGhostCleanerRequestHandlerAsync(RunGhostCleanerRequestHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void RunZombieCleanerRequestHandler(RunZombieCleanerRequestHandler input)
+        {
+            var response = _sdk.RunRequest(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task RunZombieCleanerRequestHandlerAsync(RunZombieCleanerRequestHandler input)
         {
             var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(

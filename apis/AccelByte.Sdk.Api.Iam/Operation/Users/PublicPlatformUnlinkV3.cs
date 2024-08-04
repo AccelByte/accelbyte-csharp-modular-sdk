@@ -46,6 +46,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// If you want to unlink user's account in a game namespace, you have to specify _platformNamespace_ to that game namespace.
     /// action code : 10121
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class PublicPlatformUnlinkV3 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -87,6 +88,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelUnlinkUserPlatformRequest body,
                 string namespace_,

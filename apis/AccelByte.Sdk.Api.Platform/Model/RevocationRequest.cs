@@ -18,6 +18,10 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Dictionary<string, object>? Meta { get; set; }
 
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Reason { get; set; }
+
         [JsonPropertyName("revokeEntries")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<RevokeEntry>? RevokeEntries { get; set; }
@@ -38,6 +42,10 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonPropertyName("meta")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public T1? Meta { get; set; }
+
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Reason { get; set; }
 
         [JsonPropertyName("revokeEntries")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

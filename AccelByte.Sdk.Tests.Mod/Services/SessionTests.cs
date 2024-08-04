@@ -356,7 +356,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     .Execute(sdk.Namespace, partyId);
                 #endregion
             });
-            
+
             Wait();
 
             ApimodelsPartySessionResponse? uPartyData = _Sdk.GetSessionApi().Party.PublicGetPartyOp

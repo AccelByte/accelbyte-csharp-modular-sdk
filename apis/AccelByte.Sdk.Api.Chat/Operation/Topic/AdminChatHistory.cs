@@ -54,6 +54,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
             public List<string>? Topic { get; set; }
 
+            public bool? Unfiltered { get; set; }
+
 
 
 
@@ -126,6 +128,12 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                 return this;
             }
 
+            public AdminChatHistoryBuilder SetUnfiltered(bool _unfiltered)
+            {
+                Unfiltered = _unfiltered;
+                return this;
+            }
+
 
 
 
@@ -194,6 +202,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             if (builder.ShardId is not null) QueryParams["shardId"] = builder.ShardId;
             if (builder.StartCreatedAt != null) QueryParams["startCreatedAt"] = Convert.ToString(builder.StartCreatedAt)!;
             if (builder.Topic is not null) QueryParams["topic"] = builder.Topic;
+            if (builder.Unfiltered != null) QueryParams["unfiltered"] = Convert.ToString(builder.Unfiltered)!;
 
 
 
@@ -217,7 +226,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             string? senderUserId,
             string? shardId,
             long? startCreatedAt,
-            List<string>? topic
+            List<string>? topic,
+            bool? unfiltered
         )
         {
             PathParams["namespace"] = namespace_;
@@ -232,6 +242,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             if (shardId is not null) QueryParams["shardId"] = shardId;
             if (startCreatedAt != null) QueryParams["startCreatedAt"] = Convert.ToString(startCreatedAt)!;
             if (topic is not null) QueryParams["topic"] = topic;
+            if (unfiltered != null) QueryParams["unfiltered"] = Convert.ToString(unfiltered)!;
 
 
 

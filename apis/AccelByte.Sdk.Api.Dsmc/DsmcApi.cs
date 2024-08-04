@@ -50,17 +50,6 @@ namespace AccelByte.Sdk.Api.Dsmc
         }
         private Wrapper.PodConfig? _PodConfig = null;
 
-        public Wrapper.DeploymentConfig DeploymentConfig
-        {
-            get
-            {
-                if (_DeploymentConfig == null)
-                    _DeploymentConfig = new Wrapper.DeploymentConfig(_Sdk, _CustomBasePath);
-                return _DeploymentConfig;
-            }
-        }
-        private Wrapper.DeploymentConfig? _DeploymentConfig = null;
-
         public Wrapper.Admin Admin
         {
             get
@@ -71,6 +60,17 @@ namespace AccelByte.Sdk.Api.Dsmc
             }
         }
         private Wrapper.Admin? _Admin = null;
+
+        public Wrapper.DeploymentConfig DeploymentConfig
+        {
+            get
+            {
+                if (_DeploymentConfig == null)
+                    _DeploymentConfig = new Wrapper.DeploymentConfig(_Sdk, _CustomBasePath);
+                return _DeploymentConfig;
+            }
+        }
+        private Wrapper.DeploymentConfig? _DeploymentConfig = null;
 
         public Wrapper.Server Server
         {

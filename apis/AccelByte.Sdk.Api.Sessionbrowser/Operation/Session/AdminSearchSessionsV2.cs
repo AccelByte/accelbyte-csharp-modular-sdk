@@ -182,7 +182,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             if (builder.SessionType is not null) QueryParams["sessionType"] = builder.SessionType;
             if (builder.Status is not null) QueryParams["status"] = builder.Status;
             if (builder.UserID is not null) QueryParams["userID"] = builder.UserID;
+
             QueryParams["limit"] = Convert.ToString(limit)!;
+
             QueryParams["offset"] = Convert.ToString(offset)!;
 
 
@@ -216,7 +218,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             if (sessionType is not null) QueryParams["sessionType"] = sessionType;
             if (status is not null) QueryParams["status"] = status;
             if (userID is not null) QueryParams["userID"] = userID;
+
             QueryParams["limit"] = Convert.ToString(limit)!;
+
             QueryParams["offset"] = Convert.ToString(offset)!;
 
 

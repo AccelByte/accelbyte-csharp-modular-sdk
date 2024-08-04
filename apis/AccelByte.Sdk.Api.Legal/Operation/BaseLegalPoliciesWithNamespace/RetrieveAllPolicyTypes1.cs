@@ -120,6 +120,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             PathParams["namespace"] = namespace_;
 
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
+
             QueryParams["limit"] = Convert.ToString(limit)!;
 
 
@@ -140,6 +141,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             PathParams["namespace"] = namespace_;
 
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
+
             QueryParams["limit"] = Convert.ToString(limit)!;
 
 

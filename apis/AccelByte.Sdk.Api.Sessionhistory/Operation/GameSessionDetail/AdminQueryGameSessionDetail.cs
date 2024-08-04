@@ -34,6 +34,8 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             : OperationBuilder<AdminQueryGameSessionDetailBuilder>
         {
 
+            public string? EndDate { get; set; }
+
             public string? GameSessionID { get; set; }
 
             public long? Limit { get; set; }
@@ -43,6 +45,8 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             public string? Order { get; set; }
 
             public string? OrderBy { get; set; }
+
+            public string? StartDate { get; set; }
 
             public string? UserID { get; set; }
 
@@ -57,6 +61,12 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
                 _Sdk = sdk;
             }
 
+
+            public AdminQueryGameSessionDetailBuilder SetEndDate(string _endDate)
+            {
+                EndDate = _endDate;
+                return this;
+            }
 
             public AdminQueryGameSessionDetailBuilder SetGameSessionID(string _gameSessionID)
             {
@@ -85,6 +95,12 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             public AdminQueryGameSessionDetailBuilder SetOrderBy(string _orderBy)
             {
                 OrderBy = _orderBy;
+                return this;
+            }
+
+            public AdminQueryGameSessionDetailBuilder SetStartDate(string _startDate)
+            {
+                StartDate = _startDate;
                 return this;
             }
 
@@ -152,11 +168,13 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         {
             PathParams["namespace"] = namespace_;
 
+            if (builder.EndDate is not null) QueryParams["endDate"] = builder.EndDate;
             if (builder.GameSessionID is not null) QueryParams["gameSessionID"] = builder.GameSessionID;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Order is not null) QueryParams["order"] = builder.Order;
             if (builder.OrderBy is not null) QueryParams["orderBy"] = builder.OrderBy;
+            if (builder.StartDate is not null) QueryParams["startDate"] = builder.StartDate;
             if (builder.UserID is not null) QueryParams["userID"] = builder.UserID;
 
 
@@ -170,21 +188,25 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
 
         public AdminQueryGameSessionDetail(
             string namespace_,
+            string? endDate,
             string? gameSessionID,
             long? limit,
             long? offset,
             string? order,
             string? orderBy,
+            string? startDate,
             string? userID
         )
         {
             PathParams["namespace"] = namespace_;
 
+            if (endDate is not null) QueryParams["endDate"] = endDate;
             if (gameSessionID is not null) QueryParams["gameSessionID"] = gameSessionID;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (order is not null) QueryParams["order"] = order;
             if (orderBy is not null) QueryParams["orderBy"] = orderBy;
+            if (startDate is not null) QueryParams["startDate"] = startDate;
             if (userID is not null) QueryParams["userID"] = userID;
 
 

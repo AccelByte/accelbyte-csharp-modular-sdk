@@ -18,39 +18,43 @@ using AccelByte.Sdk.Api.Dsmc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
 {
-    [SdkConsoleCommand("dsmc", "importimages")]
-    public class ImportImagesCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("dsmc", "addbuffer")]
+    public class AddBufferCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
         public string ServiceName { get { return "Dsmc"; } }
 
-        public string OperationName { get { return "ImportImages"; } }
+        public string OperationName { get { return "AddBuffer"; } }
 
-        [SdkCommandFile("file")]
-        public Stream File { get; set; } = new MemoryStream();
+        [SdkCommandArgument("namespace")]
+        public string Namespace { get; set; } = String.Empty;
 
-        public ImportImagesCommand(IAccelByteSdk sdk)
+        [SdkCommandData("body")]
+        public ModelsAddBufferRequest Body { get; set; } = new ModelsAddBufferRequest();
+
+        public AddBufferCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
         public string Run()
         {
-            AccelByte.Sdk.Api.Dsmc.Wrapper.ImageConfig wrapper = new AccelByte.Sdk.Api.Dsmc.Wrapper.ImageConfig(_SDK);
+            AccelByte.Sdk.Api.Dsmc.Wrapper.Admin wrapper = new AccelByte.Sdk.Api.Dsmc.Wrapper.Admin(_SDK);
 
-            var opBuilder = AccelByte.Sdk.Api.Dsmc.Operation.ImportImages.Builder;
-
-
+            var opBuilder = AccelByte.Sdk.Api.Dsmc.Operation.AddBuffer.Builder;
 
 
 
-            ImportImages operation = opBuilder.Build(
-                File
+
+
+            AddBuffer operation = opBuilder.Build(
+                Body,
+                Namespace
             );
 
 
-            AccelByte.Sdk.Api.Dsmc.Model.ModelsImportResponse? response = wrapper.ImportImages(operation);
+            AccelByte.Sdk.Api.Dsmc.Model.ModelsAddBufferResponse? response = wrapper.AddBuffer(operation);
             if (response == null)
                 return "No response from server.";
 

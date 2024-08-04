@@ -133,7 +133,9 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             PathParams["namespace"] = namespace_;
 
             if (builder.Region is not null) QueryParams["region"] = builder.Region;
+
             QueryParams["count"] = Convert.ToString(count)!;
+
             QueryParams["offset"] = Convert.ToString(offset)!;
 
 
@@ -155,7 +157,9 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             PathParams["namespace"] = namespace_;
 
             if (region is not null) QueryParams["region"] = region;
+
             QueryParams["count"] = Convert.ToString(count)!;
+
             QueryParams["offset"] = Convert.ToString(offset)!;
 
 

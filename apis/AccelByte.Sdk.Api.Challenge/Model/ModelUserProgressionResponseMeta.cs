@@ -25,6 +25,9 @@ namespace AccelByte.Sdk.Api.Challenge.Model
         [JsonPropertyName("name")]
         public string? Name { get; set; }
 
+        [JsonPropertyName("period")]
+        public ModelUserProgressionPeriodResponseMeta? Period { get; set; }
+
         [JsonPropertyName("startDate")]
         public string? StartDate { get; set; }
 

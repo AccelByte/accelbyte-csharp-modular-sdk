@@ -38,7 +38,7 @@ TEMP_JSON_INPUT="input_json.json"
 TEMP_FILE_UPLOAD="file_upload.bin"
 
 echo "TAP version 13"
-echo "1..8"
+echo "1..9"
 
 #- 1 Login
 $CLI_EXE --op login --lt user --user user --pass user > test.out 2>&1
@@ -56,10 +56,10 @@ $CLI_EXE \
     --sn dslogmanager \
     --op GetServerLogs \
     --namespace $AB_NAMESPACE \
-    --podName '0jjEsNKL' \
-    --logType 'UDvBLCAB' \
+    --podName 'n6DFg3Bx' \
+    --logType 'KOSTxbtD' \
     --offset '86' \
-    --origin 'TyHJ2e15' \
+    --origin 'WS4Pz5KI' \
     > test.out 2>&1
 eval_tap $? 2 'GetServerLogs' test.out
 
@@ -68,21 +68,21 @@ $CLI_EXE \
     --sn dslogmanager \
     --op ListTerminatedServers \
     --namespace $AB_NAMESPACE \
-    --deployment 'aZ201wBD' \
-    --endDate '11yS4B0E' \
-    --gameMode '5K7BYmz4' \
-    --limit '66' \
-    --next 'hNfjsgfs' \
-    --partyId 'T0bmLRVN' \
-    --podName '9ettqTYc' \
-    --previous 'KfiY0zYq' \
-    --provider 'SbGHutCd' \
-    --region 'tzPUB3s1' \
-    --sessionId 'SlQRy451' \
-    --source 'j1U1OsCC' \
-    --startDate 'oCoMEB55' \
-    --status 'cDLMyTmY' \
-    --userId 'RpBvBKaA' \
+    --deployment 'O6AX5Cjc' \
+    --endDate 'du3UBq8v' \
+    --gameMode '156hdvix' \
+    --limit '72' \
+    --next 'XI3bY8zE' \
+    --partyId 'BqaBdFJ7' \
+    --podName 'Cux3hErt' \
+    --previous 'dUSan9Vh' \
+    --provider '9PW8gT5B' \
+    --region 'WahwPcgx' \
+    --sessionId 'XygZZ9eq' \
+    --source 'W4AsAalI' \
+    --startDate 'E3vLXkh6' \
+    --status 'VnTBfamb' \
+    --userId 'U6btpuYg' \
     > test.out 2>&1
 eval_tap $? 3 'ListTerminatedServers' test.out
 
@@ -91,7 +91,7 @@ $CLI_EXE \
     --sn dslogmanager \
     --op DownloadServerLogs \
     --namespace $AB_NAMESPACE \
-    --podName 'IOkefolU' \
+    --podName 'zYS3fTwz' \
     > test.out 2>&1
 eval_tap $? 4 'DownloadServerLogs' test.out
 
@@ -100,13 +100,13 @@ $CLI_EXE \
     --sn dslogmanager \
     --op CheckServerLogs \
     --namespace $AB_NAMESPACE \
-    --podName 'YsCpQ0BT' \
+    --podName '81xmY9fA' \
     > test.out 2>&1
 eval_tap $? 5 'CheckServerLogs' test.out
 
 #- 6 BatchDownloadServerLogs
 # body param: body
-echo '{"Downloads": [{"alloc_id": "qEeVK8NB", "namespace": "U195aDn8", "pod_name": "vG5lvtSL"}, {"alloc_id": "oxyGqsYZ", "namespace": "SuPjHp8T", "pod_name": "vn2mjB4d"}, {"alloc_id": "6xHeRama", "namespace": "YHS4UTC5", "pod_name": "SdcIsMqG"}]}' > $TEMP_JSON_INPUT
+echo '{"Downloads": [{"alloc_id": "asfIX7es", "namespace": "fW3Z7R7R", "pod_name": "jmBQH8Ki"}, {"alloc_id": "oV4p0PMK", "namespace": "1erPdRob", "pod_name": "eg0sRkdi"}, {"alloc_id": "c9Mlm8WE", "namespace": "N0AVB4eM", "pod_name": "MSfH19wL"}]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn dslogmanager \
     --op BatchDownloadServerLogs \
@@ -114,34 +114,44 @@ $CLI_EXE \
     > test.out 2>&1
 eval_tap $? 6 'BatchDownloadServerLogs' test.out
 
-#- 7 ListAllTerminatedServers
+#- 7 ListMetadataServers
+# body param: body
+echo '{"pod_names": ["uahbmr06", "qwj5C5gm", "pDt0EEso"]}' > $TEMP_JSON_INPUT
+$CLI_EXE \
+    --sn dslogmanager \
+    --op ListMetadataServers \
+    --reqfile $TEMP_JSON_INPUT \
+    > test.out 2>&1
+eval_tap $? 7 'ListMetadataServers' test.out
+
+#- 8 ListAllTerminatedServers
 $CLI_EXE \
     --sn dslogmanager \
     --op ListAllTerminatedServers \
-    --deployment 'EV73HEEl' \
-    --endDate '2RNWYrDW' \
-    --gameMode '38Htn8LK' \
-    --limit '49' \
-    --namespace_ 'NBzDZFYq' \
-    --next '4A8WVEcx' \
-    --partyId 'T0GVP03Q' \
-    --podName 'iw1RT1iH' \
-    --previous '0N3el9aB' \
-    --provider 'tCE0BxOS' \
-    --region '4Yn1TT4y' \
-    --sessionId 'wAyNdKYx' \
-    --startDate 'Zi7yILY6' \
-    --status 'EqHy5GEB' \
-    --userId 'p4BFIU2g' \
+    --deployment '1vPNRng2' \
+    --endDate 'G0t89DWs' \
+    --gameMode 'YPZJAq2d' \
+    --limit '59' \
+    --namespace_ 'unBBP9hT' \
+    --next 'hzOBckb1' \
+    --partyId 'n2ZlwDCa' \
+    --podName 'i2XwsGCU' \
+    --previous 'pD2b6HNM' \
+    --provider 'B54e0DIe' \
+    --region 'XdRfgHxI' \
+    --sessionId 'JNAy9Gbq' \
+    --startDate 'wg4NERp9' \
+    --status 'gFkYCZro' \
+    --userId 'DDgJfRSn' \
     > test.out 2>&1
-eval_tap $? 7 'ListAllTerminatedServers' test.out
+eval_tap $? 8 'ListAllTerminatedServers' test.out
 
-#- 8 PublicGetMessages
+#- 9 PublicGetMessages
 $CLI_EXE \
     --sn dslogmanager \
     --op PublicGetMessages \
     > test.out 2>&1
-eval_tap $? 8 'PublicGetMessages' test.out
+eval_tap $? 9 'PublicGetMessages' test.out
 
 
 # remove artifacts

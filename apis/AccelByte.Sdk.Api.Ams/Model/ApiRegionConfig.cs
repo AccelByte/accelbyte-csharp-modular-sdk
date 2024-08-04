@@ -15,6 +15,9 @@ namespace AccelByte.Sdk.Api.Ams.Model
         [JsonPropertyName("bufferSize")]
         public int? BufferSize { get; set; }
 
+        [JsonPropertyName("dynamicBuffer")]
+        public bool? DynamicBuffer { get; set; }
+
         [JsonPropertyName("maxServerCount")]
         public int? MaxServerCount { get; set; }
 

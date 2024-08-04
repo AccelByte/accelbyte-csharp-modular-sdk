@@ -124,7 +124,9 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         {
             PathParams["namespace"] = namespace_;
 
+
             QueryParams["count"] = Convert.ToString(count)!;
+
             QueryParams["offset"] = Convert.ToString(offset)!;
 
 
@@ -144,7 +146,9 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         {
             PathParams["namespace"] = namespace_;
 
+
             QueryParams["count"] = Convert.ToString(count)!;
+
             QueryParams["offset"] = Convert.ToString(offset)!;
 
 

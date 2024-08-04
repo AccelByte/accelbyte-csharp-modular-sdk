@@ -18,43 +18,40 @@ using AccelByte.Sdk.Api.Dsmc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
 {
-    [SdkConsoleCommand("dsmc", "exportimages")]
-    public class ExportImagesCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("dsmc", "runghostcleanerrequesthandler")]
+    public class RunGhostCleanerRequestHandlerCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
         public string ServiceName { get { return "Dsmc"; } }
 
-        public string OperationName { get { return "ExportImages"; } }
+        public string OperationName { get { return "RunGhostCleanerRequestHandler"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
-        public ExportImagesCommand(IAccelByteSdk sdk)
+        public RunGhostCleanerRequestHandlerCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
         public string Run()
         {
-            AccelByte.Sdk.Api.Dsmc.Wrapper.ImageConfig wrapper = new AccelByte.Sdk.Api.Dsmc.Wrapper.ImageConfig(_SDK);
+            AccelByte.Sdk.Api.Dsmc.Wrapper.Admin wrapper = new AccelByte.Sdk.Api.Dsmc.Wrapper.Admin(_SDK);
 
-            var opBuilder = AccelByte.Sdk.Api.Dsmc.Operation.ExportImages.Builder;
-
-
+            var opBuilder = AccelByte.Sdk.Api.Dsmc.Operation.RunGhostCleanerRequestHandler.Builder;
 
 
 
-            ExportImages operation = opBuilder.Build(
+
+
+            RunGhostCleanerRequestHandler operation = opBuilder.Build(
                 Namespace
             );
 
 
-            List<AccelByte.Sdk.Api.Dsmc.Model.ModelsImageRecord>? response = wrapper.ExportImages(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            wrapper.RunGhostCleanerRequestHandler(operation);
+            return String.Empty;
         }
     }
 }

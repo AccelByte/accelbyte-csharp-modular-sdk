@@ -229,7 +229,7 @@ namespace AccelByte.Sdk.Authentication
                         }
                     }
                 }
-                
+
                 if (!foundMatchingPermission)
                 {
                     if ((response.NamespaceRoles != null) && (response.NamespaceRoles.Count > 0))

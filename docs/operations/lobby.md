@@ -121,6 +121,7 @@
 | `/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/blocked` | GET | AdminGetPlayerBlockedPlayersV1 | [AdminGetPlayerBlockedPlayersV1](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Player/AdminGetPlayerBlockedPlayersV1.cs) | [AdminGetPlayerBlockedPlayersV1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Player/AdminGetPlayerBlockedPlayersV1.cs) |
 | `/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/blocked-by` | GET | AdminGetPlayerBlockedByPlayersV1 | [AdminGetPlayerBlockedByPlayersV1](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Player/AdminGetPlayerBlockedByPlayersV1.cs) | [AdminGetPlayerBlockedByPlayersV1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Player/AdminGetPlayerBlockedByPlayersV1.cs) |
 | `/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/bulk/block` | POST | AdminBulkBlockPlayersV1 | [AdminBulkBlockPlayersV1](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Player/AdminBulkBlockPlayersV1.cs) | [AdminBulkBlockPlayersV1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Player/AdminBulkBlockPlayersV1.cs) |
+| `/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/bulk/unblock` | DELETE | AdminBulkUnblockPlayersV1 | [AdminBulkUnblockPlayersV1](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Player/AdminBulkUnblockPlayersV1.cs) | [AdminBulkUnblockPlayersV1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Player/AdminBulkUnblockPlayersV1.cs) |
 | `/lobby/v1/public/player/namespaces/{namespace}/users/me/block` | POST | PublicPlayerBlockPlayersV1 | [PublicPlayerBlockPlayersV1](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Player/PublicPlayerBlockPlayersV1.cs) | [PublicPlayerBlockPlayersV1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Player/PublicPlayerBlockPlayersV1.cs) |
 | `/lobby/v1/public/player/namespaces/{namespace}/users/me/blocked` | GET | PublicGetPlayerBlockedPlayersV1 | [PublicGetPlayerBlockedPlayersV1](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Player/PublicGetPlayerBlockedPlayersV1.cs) | [PublicGetPlayerBlockedPlayersV1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Player/PublicGetPlayerBlockedPlayersV1.cs) |
 | `/lobby/v1/public/player/namespaces/{namespace}/users/me/blocked-by` | GET | PublicGetPlayerBlockedByPlayersV1 | [PublicGetPlayerBlockedByPlayersV1](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Player/PublicGetPlayerBlockedByPlayersV1.cs) | [PublicGetPlayerBlockedByPlayersV1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Player/PublicGetPlayerBlockedByPlayersV1.cs) |
@@ -155,6 +156,7 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 | `/lobby/v1/public/presence/namespaces/{namespace}/users/presence` | GET | UsersPresenceHandlerV1 | [UsersPresenceHandlerV1](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Presence/UsersPresenceHandlerV1.cs) | [UsersPresenceHandlerV1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Presence/UsersPresenceHandlerV1.cs) |
+| `/lobby/v1/public/presence/namespaces/{namespace}/users/presence` | POST | UsersPresenceHandlerV2 | [UsersPresenceHandlerV2](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Presence/UsersPresenceHandlerV2.cs) | [UsersPresenceHandlerV2](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Presence/UsersPresenceHandlerV2.cs) |
 
 
 &nbsp;
@@ -257,6 +259,7 @@
 | `model.OutgoingFriendsWithTimeData` | [ModelOutgoingFriendsWithTimeData](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelOutgoingFriendsWithTimeData.cs) |
 | `model.Pagination` | [ModelPagination](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelPagination.cs) |
 | `model.PutGlobalConfigurationRequest` | [ModelPutGlobalConfigurationRequest](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelPutGlobalConfigurationRequest.cs) |
+| `model.RequestUserPresence` | [ModelRequestUserPresence](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelRequestUserPresence.cs) |
 | `model.TemplateContent` | [ModelTemplateContent](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelTemplateContent.cs) |
 | `model.TemplateLocalization` | [ModelTemplateLocalization](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelTemplateLocalization.cs) |
 | `model.TemplateLocalizationResponse` | [ModelTemplateLocalizationResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelTemplateLocalizationResponse.cs) |
@@ -302,6 +305,7 @@
 | `models.GetPlayerSessionAttributeResponse` | [ModelsGetPlayerSessionAttributeResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsGetPlayerSessionAttributeResponse.cs) |
 | `models.ImportConfigResponse` | [ModelsImportConfigResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsImportConfigResponse.cs) |
 | `models.ListBlockedPlayerRequest` | [ModelsListBlockedPlayerRequest](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsListBlockedPlayerRequest.cs) |
+| `models.ListUnblockPlayerRequest` | [ModelsListUnblockPlayerRequest](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsListUnblockPlayerRequest.cs) |
 | `models.PartyData` | [ModelsPartyData](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsPartyData.cs) |
 | `models.PartyPUTCustomAttributesRequest` | [ModelsPartyPUTCustomAttributesRequest](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsPartyPUTCustomAttributesRequest.cs) |
 | `models.PartyPUTLimitSizeRequest` | [ModelsPartyPUTLimitSizeRequest](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelsPartyPUTLimitSizeRequest.cs) |

@@ -56,17 +56,6 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     return opBuilder;
             }
         }
-        public ImportImages.ImportImagesBuilder ImportImagesOp
-        {
-            get
-            {
-                var opBuilder = new Operation.ImportImages.ImportImagesBuilder(_sdk);
-                if (_CustomBasePath != "")
-                    return opBuilder.UseCustomBasePath(_CustomBasePath);
-                else
-                    return opBuilder;
-            }
-        }
         public CreateImagePatch.CreateImagePatchBuilder CreateImagePatchOp
         {
             get
@@ -94,17 +83,6 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
             get
             {
                 var opBuilder = new Operation.DeleteImage.DeleteImageBuilder(_sdk);
-                if (_CustomBasePath != "")
-                    return opBuilder.UseCustomBasePath(_CustomBasePath);
-                else
-                    return opBuilder;
-            }
-        }
-        public ExportImages.ExportImagesBuilder ExportImagesOp
-        {
-            get
-            {
-                var opBuilder = new Operation.ExportImages.ExportImagesBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -255,22 +233,6 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsImportResponse? ImportImages(ImportImages input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsImportResponse?> ImportImagesAsync(ImportImages input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
         public void CreateImagePatch(CreateImagePatch input)
         {
             var response = _sdk.RunRequest(input);
@@ -315,22 +277,6 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         {
             var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public List<Model.ModelsImageRecord>? ExportImages(ExportImages input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<List<Model.ModelsImageRecord>?> ExportImagesAsync(ExportImages input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

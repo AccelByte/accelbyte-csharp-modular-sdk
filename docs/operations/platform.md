@@ -178,6 +178,7 @@
 | `/platform/public/namespaces/{namespace}/users/{userId}/dlc/psn/sync/multiServiceLabels` | PUT | PublicSyncPsnDlcInventoryWithMultipleServiceLabels | [PublicSyncPsnDlcInventoryWithMultipleServiceLabels](../../apis/AccelByte.Sdk.Api.Platform/Operation/DLC/PublicSyncPsnDlcInventoryWithMultipleServiceLabels.cs) | [PublicSyncPsnDlcInventoryWithMultipleServiceLabels](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/DLC/PublicSyncPsnDlcInventoryWithMultipleServiceLabels.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/dlc/steam/sync` | PUT | SyncSteamDLC | [SyncSteamDLC](../../apis/AccelByte.Sdk.Api.Platform/Operation/DLC/SyncSteamDLC.cs) | [SyncSteamDLC](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/DLC/SyncSteamDLC.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/dlc/xbl/sync` | PUT | SyncXboxDLC | [SyncXboxDLC](../../apis/AccelByte.Sdk.Api.Platform/Operation/DLC/SyncXboxDLC.cs) | [SyncXboxDLC](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/DLC/SyncXboxDLC.cs) |
+| `/platform/public/users/me/dlc/content` | GET | PublicGetMyDLCContent | [PublicGetMyDLCContent](../../apis/AccelByte.Sdk.Api.Platform/Operation/DLC/PublicGetMyDLCContent.cs) | [PublicGetMyDLCContent](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/DLC/PublicGetMyDLCContent.cs) |
 
 ### Entitlement Wrapper:  [Entitlement](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/Entitlement.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -249,7 +250,10 @@
 | `/platform/admin/namespaces/{namespace}/users/{userId}/fulfillment/preCheck` | POST | PreCheckFulfillItem | [PreCheckFulfillItem](../../apis/AccelByte.Sdk.Api.Platform/Operation/Fulfillment/PreCheckFulfillItem.cs) | [PreCheckFulfillItem](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Fulfillment/PreCheckFulfillItem.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/fulfillment/rewards` | POST | FulfillRewards | [FulfillRewards](../../apis/AccelByte.Sdk.Api.Platform/Operation/Fulfillment/FulfillRewards.cs) | [FulfillRewards](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Fulfillment/FulfillRewards.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/fulfillment/code` | POST | PublicRedeemCode | [PublicRedeemCode](../../apis/AccelByte.Sdk.Api.Platform/Operation/Fulfillment/PublicRedeemCode.cs) | [PublicRedeemCode](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Fulfillment/PublicRedeemCode.cs) |
+| `/platform/v2/admin/namespaces/{namespace}/fulfillments` | GET | QueryFulfillments | [QueryFulfillments](../../apis/AccelByte.Sdk.Api.Platform/Operation/Fulfillment/QueryFulfillments.cs) | [QueryFulfillments](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Fulfillment/QueryFulfillments.cs) |
 | `/platform/v2/admin/namespaces/{namespace}/users/{userId}/fulfillment/rewards` | POST | FulfillRewardsV2 | [FulfillRewardsV2](../../apis/AccelByte.Sdk.Api.Platform/Operation/Fulfillment/FulfillRewardsV2.cs) | [FulfillRewardsV2](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Fulfillment/FulfillRewardsV2.cs) |
+| `/platform/v2/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId}` | PUT | FulfillItems | [FulfillItems](../../apis/AccelByte.Sdk.Api.Platform/Operation/Fulfillment/FulfillItems.cs) | [FulfillItems](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Fulfillment/FulfillItems.cs) |
+| `/platform/v2/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId}/revoke` | PUT | RevokeItems | [RevokeItems](../../apis/AccelByte.Sdk.Api.Platform/Operation/Fulfillment/RevokeItems.cs) | [RevokeItems](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Fulfillment/RevokeItems.cs) |
 
 ### Clawback Wrapper:  [Clawback](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/Clawback.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -909,7 +913,9 @@
 | `FieldValidationError` | [FieldValidationError](../../apis/AccelByte.Sdk.Api.Platform/Model/FieldValidationError.cs) |
 | `FixedPeriodRotationConfig` | [FixedPeriodRotationConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/FixedPeriodRotationConfig.cs) |
 | `FulFillItemPayload` | [FulFillItemPayload](../../apis/AccelByte.Sdk.Api.Platform/Model/FulFillItemPayload.cs) |
+| `FulfillBundledItemResult` | [FulfillBundledItemResult](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillBundledItemResult.cs) |
 | `FulfillCodeRequest` | [FulfillCodeRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillCodeRequest.cs) |
+| `FulfillItemResult` | [FulfillItemResult](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillItemResult.cs) |
 | `FulfillmentError` | [FulfillmentError](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentError.cs) |
 | `FulfillmentHistoryInfo` | [FulfillmentHistoryInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentHistoryInfo.cs) |
 | `FulfillmentHistoryPagingSlicedResult` | [FulfillmentHistoryPagingSlicedResult](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentHistoryPagingSlicedResult.cs) |
@@ -919,6 +925,10 @@
 | `FulfillmentScriptCreate` | [FulfillmentScriptCreate](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentScriptCreate.cs) |
 | `FulfillmentScriptInfo` | [FulfillmentScriptInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentScriptInfo.cs) |
 | `FulfillmentScriptUpdate` | [FulfillmentScriptUpdate](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentScriptUpdate.cs) |
+| `FulfillmentStateInfo` | [FulfillmentStateInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentStateInfo.cs) |
+| `FulfillmentV2Request` | [FulfillmentV2Request](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentV2Request.cs) |
+| `FulfillmentV2RequestItem` | [FulfillmentV2RequestItem](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentV2RequestItem.cs) |
+| `FulfillmentV2Result` | [FulfillmentV2Result](../../apis/AccelByte.Sdk.Api.Platform/Model/FulfillmentV2Result.cs) |
 | `FullAppInfo` | [FullAppInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/FullAppInfo.cs) |
 | `FullCategoryInfo` | [FullCategoryInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/FullCategoryInfo.cs) |
 | `FullItemInfo` | [FullItemInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/FullItemInfo.cs) |
@@ -1106,6 +1116,7 @@
 | `RevokeEntitlement` | [RevokeEntitlement](../../apis/AccelByte.Sdk.Api.Platform/Model/RevokeEntitlement.cs) |
 | `RevokeEntitlementPayload` | [RevokeEntitlementPayload](../../apis/AccelByte.Sdk.Api.Platform/Model/RevokeEntitlementPayload.cs) |
 | `RevokeEntry` | [RevokeEntry](../../apis/AccelByte.Sdk.Api.Platform/Model/RevokeEntry.cs) |
+| `RevokeFulfillmentV2Result` | [RevokeFulfillmentV2Result](../../apis/AccelByte.Sdk.Api.Platform/Model/RevokeFulfillmentV2Result.cs) |
 | `RevokeItem` | [RevokeItem](../../apis/AccelByte.Sdk.Api.Platform/Model/RevokeItem.cs) |
 | `RevokeItemSummary` | [RevokeItemSummary](../../apis/AccelByte.Sdk.Api.Platform/Model/RevokeItemSummary.cs) |
 | `RevokeResult` | [RevokeResult](../../apis/AccelByte.Sdk.Api.Platform/Model/RevokeResult.cs) |
@@ -1128,8 +1139,11 @@
 | `SectionUpdate` | [SectionUpdate](../../apis/AccelByte.Sdk.Api.Platform/Model/SectionUpdate.cs) |
 | `ServicePluginConfigInfo` | [ServicePluginConfigInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ServicePluginConfigInfo.cs) |
 | `ServicePluginConfigUpdate` | [ServicePluginConfigUpdate](../../apis/AccelByte.Sdk.Api.Platform/Model/ServicePluginConfigUpdate.cs) |
+| `SimpleDLCRewardItem` | [SimpleDLCRewardItem](../../apis/AccelByte.Sdk.Api.Platform/Model/SimpleDLCRewardItem.cs) |
 | `SimpleEntitlement` | [SimpleEntitlement](../../apis/AccelByte.Sdk.Api.Platform/Model/SimpleEntitlement.cs) |
 | `SimpleUserDLC` | [SimpleUserDLC](../../apis/AccelByte.Sdk.Api.Platform/Model/SimpleUserDLC.cs) |
+| `SimpleUserDLCRewardContent` | [SimpleUserDLCRewardContent](../../apis/AccelByte.Sdk.Api.Platform/Model/SimpleUserDLCRewardContent.cs) |
+| `SimpleUserDLCRewardContentsResponse` | [SimpleUserDLCRewardContentsResponse](../../apis/AccelByte.Sdk.Api.Platform/Model/SimpleUserDLCRewardContentsResponse.cs) |
 | `SimpleWallet` | [SimpleWallet](../../apis/AccelByte.Sdk.Api.Platform/Model/SimpleWallet.cs) |
 | `Slide` | [Slide](../../apis/AccelByte.Sdk.Api.Platform/Model/Slide.cs) |
 | `StackableEntitlementInfo` | [StackableEntitlementInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/StackableEntitlementInfo.cs) |

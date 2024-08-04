@@ -38,6 +38,10 @@ namespace AccelByte.Sdk.Api.Iam.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? EmptyStrFieldList { get; set; }
 
+        [JsonPropertyName("EnableServerLicenseValidation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? EnableServerLicenseValidation { get; set; }
+
         [JsonPropertyName("Environment")]
         public string? Environment { get; set; }
 
@@ -46,6 +50,10 @@ namespace AccelByte.Sdk.Api.Iam.Model
 
         [JsonPropertyName("GenericOauthFlow")]
         public bool? GenericOauthFlow { get; set; }
+
+        [JsonPropertyName("IncludePUID")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? IncludePUID { get; set; }
 
         [JsonPropertyName("IsActive")]
         public bool? IsActive { get; set; }

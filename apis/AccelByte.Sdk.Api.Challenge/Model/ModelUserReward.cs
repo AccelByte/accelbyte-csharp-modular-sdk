@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Challenge.Model
 {
@@ -34,10 +36,12 @@ namespace AccelByte.Sdk.Api.Challenge.Model
         public float? Qty { get; set; }
 
         [JsonPropertyName("status")]
-        public string? Status { get; set; }
+        [JsonStringEnum]
+        public ModelUserRewardStatus? Status { get; set; }
 
         [JsonPropertyName("type")]
-        public string? Type { get; set; }
+        [JsonStringEnum]
+        public ModelUserRewardType? Type { get; set; }
 
         [JsonPropertyName("updatedAt")]
         public string? UpdatedAt { get; set; }
@@ -48,4 +52,46 @@ namespace AccelByte.Sdk.Api.Challenge.Model
     }
 
 
+
+    public class ModelUserRewardStatus : StringEnum<ModelUserRewardStatus>
+    {
+        public static readonly ModelUserRewardStatus CLAIM
+            = new ModelUserRewardStatus("CLAIM");
+
+        public static readonly ModelUserRewardStatus UNCLAIMED
+            = new ModelUserRewardStatus("UNCLAIMED");
+
+
+        public static implicit operator ModelUserRewardStatus(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ModelUserRewardStatus(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
+
+    public class ModelUserRewardType : StringEnum<ModelUserRewardType>
+    {
+        public static readonly ModelUserRewardType ENTITLEMENT
+            = new ModelUserRewardType("ENTITLEMENT");
+
+        public static readonly ModelUserRewardType STATISTIC
+            = new ModelUserRewardType("STATISTIC");
+
+
+        public static implicit operator ModelUserRewardType(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ModelUserRewardType(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

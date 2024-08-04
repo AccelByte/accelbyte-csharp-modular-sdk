@@ -68,7 +68,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                 return op;
             }
 
-            public Model.ModelsServer? Execute(
+            public Model.ModelsServerDetailsResponse? Execute(
                 string namespace_,
                 string podName
             )
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsServer?> ExecuteAsync(
+            public async Task<Model.ModelsServerDetailsResponse?> ExecuteAsync(
                 string namespace_,
                 string podName
             )
@@ -151,7 +151,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public Model.ModelsServer? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.ModelsServerDetailsResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -159,11 +159,11 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.ModelsServer>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ModelsServerDetailsResponse>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.ModelsServer>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.ModelsServerDetailsResponse>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

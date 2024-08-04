@@ -57,6 +57,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Chat
         [SdkCommandArgument("startCreatedAt")]
         public long? StartCreatedAt { get; set; }
 
+        [SdkCommandArgument("unfiltered")]
+        public bool? Unfiltered { get; set; }
+
         public AdminTopicChatHistoryCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -85,6 +88,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Chat
                 opBuilder.SetShardId((string)ShardId);
             if (StartCreatedAt != null)
                 opBuilder.SetStartCreatedAt((long)StartCreatedAt);
+            if (Unfiltered != null)
+                opBuilder.SetUnfiltered((bool)Unfiltered);
 
 
 

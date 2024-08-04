@@ -130,6 +130,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
 
+
             QueryParams["quantity"] = Convert.ToString(quantity)!;
 
 
@@ -151,6 +152,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["entitlementId"] = entitlementId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+
 
             QueryParams["quantity"] = Convert.ToString(quantity)!;
 

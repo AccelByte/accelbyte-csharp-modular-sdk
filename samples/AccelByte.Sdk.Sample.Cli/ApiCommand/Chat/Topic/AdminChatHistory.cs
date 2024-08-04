@@ -60,6 +60,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Chat
         [SdkCommandArgument("topic")]
         public List<string>? Topic { get; set; }
 
+        [SdkCommandArgument("unfiltered")]
+        public bool? Unfiltered { get; set; }
+
         public AdminChatHistoryCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -91,6 +94,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Chat
                 opBuilder.SetStartCreatedAt((long)StartCreatedAt);
             if (Topic != null)
                 opBuilder.SetTopic((List<string>)Topic);
+            if (Unfiltered != null)
+                opBuilder.SetUnfiltered((bool)Unfiltered);
 
 
 

@@ -45,6 +45,28 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     return opBuilder;
             }
         }
+        public AdminGetLogConfig.AdminGetLogConfigBuilder AdminGetLogConfigOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminGetLogConfig.AdminGetLogConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public AdminPatchUpdateLogConfig.AdminPatchUpdateLogConfigBuilder AdminPatchUpdateLogConfigOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminPatchUpdateLogConfig.AdminPatchUpdateLogConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public AdminGetConfigV1.AdminGetConfigV1Builder AdminGetConfigV1Op
         {
             get
@@ -111,6 +133,38 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.Payload);
         }
         public async Task<Model.ModelsConfigList?> AdminGetAllConfigV1Async(AdminGetAllConfigV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.LogconfigConfiguration? AdminGetLogConfig(AdminGetLogConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.LogconfigConfiguration?> AdminGetLogConfigAsync(AdminGetLogConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.LogconfigConfiguration? AdminPatchUpdateLogConfig(AdminPatchUpdateLogConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.LogconfigConfiguration?> AdminPatchUpdateLogConfigAsync(AdminPatchUpdateLogConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

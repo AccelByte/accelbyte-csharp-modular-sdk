@@ -18,6 +18,10 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public int? AnyOf { get; set; }
 
+        [JsonPropertyName("code")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Code { get; set; }
+
         [JsonPropertyName("comparison")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonStringEnum]
@@ -93,6 +97,9 @@ namespace AccelByte.Sdk.Api.Platform.Model
 
         public static readonly PredicatePredicateType SeasonTierPredicate
             = new PredicatePredicateType("SeasonTierPredicate");
+
+        public static readonly PredicatePredicateType StatisticCodePredicate
+            = new PredicatePredicateType("StatisticCodePredicate");
 
 
         public static implicit operator PredicatePredicateType(string value)

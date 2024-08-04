@@ -106,6 +106,7 @@
 | `/social/v2/admin/namespaces/{namespace}/statitems/value/bulk/getOrDefault` | GET | BulkFetchOrDefaultStatItems1 | [BulkFetchOrDefaultStatItems1](../../apis/AccelByte.Sdk.Api.Social/Operation/UserStatistic/BulkFetchOrDefaultStatItems1.cs) | [BulkFetchOrDefaultStatItems1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Social/UserStatistic/BulkFetchOrDefaultStatItems1.cs) |
 | `/social/v2/admin/namespaces/{namespace}/users/{userId}/statitems/value/bulk` | GET | AdminListUsersStatItems | [AdminListUsersStatItems](../../apis/AccelByte.Sdk.Api.Social/Operation/UserStatistic/AdminListUsersStatItems.cs) | [AdminListUsersStatItems](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Social/UserStatistic/AdminListUsersStatItems.cs) |
 | `/social/v2/admin/namespaces/{namespace}/users/{userId}/statitems/value/bulk` | PUT | BulkUpdateUserStatItem | [BulkUpdateUserStatItem](../../apis/AccelByte.Sdk.Api.Social/Operation/UserStatistic/BulkUpdateUserStatItem.cs) | [BulkUpdateUserStatItem](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Social/UserStatistic/BulkUpdateUserStatItem.cs) |
+| `/social/v2/admin/namespaces/{namespace}/users/{userId}/statitems/value/bulk/getOrDefault` | POST | BulkGetOrDefaultByUserId | [BulkGetOrDefaultByUserId](../../apis/AccelByte.Sdk.Api.Social/Operation/UserStatistic/BulkGetOrDefaultByUserId.cs) | [BulkGetOrDefaultByUserId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Social/UserStatistic/BulkGetOrDefaultByUserId.cs) |
 | `/social/v2/admin/namespaces/{namespace}/users/{userId}/statitems/value/reset/bulk` | PUT | BulkResetUserStatItemValues | [BulkResetUserStatItemValues](../../apis/AccelByte.Sdk.Api.Social/Operation/UserStatistic/BulkResetUserStatItemValues.cs) | [BulkResetUserStatItemValues](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Social/UserStatistic/BulkResetUserStatItemValues.cs) |
 | `/social/v2/admin/namespaces/{namespace}/users/{userId}/stats/{statCode}/statitems` | DELETE | DeleteUserStatItems2 | [DeleteUserStatItems2](../../apis/AccelByte.Sdk.Api.Social/Operation/UserStatistic/DeleteUserStatItems2.cs) | [DeleteUserStatItems2](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Social/UserStatistic/DeleteUserStatItems2.cs) |
 | `/social/v2/admin/namespaces/{namespace}/users/{userId}/stats/{statCode}/statitems/value` | PUT | UpdateUserStatItemValue | [UpdateUserStatItemValue](../../apis/AccelByte.Sdk.Api.Social/Operation/UserStatistic/UpdateUserStatItemValue.cs) | [UpdateUserStatItemValue](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Social/UserStatistic/UpdateUserStatItemValue.cs) |
@@ -211,6 +212,7 @@
 | `BulkStatItemReset` | [BulkStatItemReset](../../apis/AccelByte.Sdk.Api.Social/Model/BulkStatItemReset.cs) |
 | `BulkStatItemUpdate` | [BulkStatItemUpdate](../../apis/AccelByte.Sdk.Api.Social/Model/BulkStatItemUpdate.cs) |
 | `BulkStatOperationResult` | [BulkStatOperationResult](../../apis/AccelByte.Sdk.Api.Social/Model/BulkStatOperationResult.cs) |
+| `BulkUserStatItemByStatCodes` | [BulkUserStatItemByStatCodes](../../apis/AccelByte.Sdk.Api.Social/Model/BulkUserStatItemByStatCodes.cs) |
 | `BulkUserStatItemInc` | [BulkUserStatItemInc](../../apis/AccelByte.Sdk.Api.Social/Model/BulkUserStatItemInc.cs) |
 | `BulkUserStatItemReset` | [BulkUserStatItemReset](../../apis/AccelByte.Sdk.Api.Social/Model/BulkUserStatItemReset.cs) |
 | `BulkUserStatItemUpdate` | [BulkUserStatItemUpdate](../../apis/AccelByte.Sdk.Api.Social/Model/BulkUserStatItemUpdate.cs) |
@@ -224,6 +226,7 @@
 | `GlobalStatItemPagingSlicedResult` | [GlobalStatItemPagingSlicedResult](../../apis/AccelByte.Sdk.Api.Social/Model/GlobalStatItemPagingSlicedResult.cs) |
 | `NamespaceSlotConfigInfo` | [NamespaceSlotConfigInfo](../../apis/AccelByte.Sdk.Api.Social/Model/NamespaceSlotConfigInfo.cs) |
 | `Paging` | [Paging](../../apis/AccelByte.Sdk.Api.Social/Model/Paging.cs) |
+| `Permission` | [Permission](../../apis/AccelByte.Sdk.Api.Social/Model/Permission.cs) |
 | `SlotConfigUpdate` | [SlotConfigUpdate](../../apis/AccelByte.Sdk.Api.Social/Model/SlotConfigUpdate.cs) |
 | `SlotInfo` | [SlotInfo](../../apis/AccelByte.Sdk.Api.Social/Model/SlotInfo.cs) |
 | `SlotMetadataUpdate` | [SlotMetadataUpdate](../../apis/AccelByte.Sdk.Api.Social/Model/SlotMetadataUpdate.cs) |

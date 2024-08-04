@@ -33,6 +33,7 @@
 | `/challenge/v1/admin/namespaces/{namespace}/progress/evaluate` | POST | AdminEvaluateProgress | [AdminEvaluateProgress](../../apis/AccelByte.Sdk.Api.Challenge/Operation/ChallengeProgression/AdminEvaluateProgress.cs) | [AdminEvaluateProgress](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Challenge/ChallengeProgression/AdminEvaluateProgress.cs) |
 | `/challenge/v1/public/namespaces/{namespace}/users/me/progress/evaluate` | POST | EvaluateMyProgress | [EvaluateMyProgress](../../apis/AccelByte.Sdk.Api.Challenge/Operation/ChallengeProgression/EvaluateMyProgress.cs) | [EvaluateMyProgress](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Challenge/ChallengeProgression/EvaluateMyProgress.cs) |
 | `/challenge/v1/public/namespaces/{namespace}/users/me/progress/{challengeCode}` | GET | PublicGetUserProgression | [PublicGetUserProgression](../../apis/AccelByte.Sdk.Api.Challenge/Operation/ChallengeProgression/PublicGetUserProgression.cs) | [PublicGetUserProgression](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Challenge/ChallengeProgression/PublicGetUserProgression.cs) |
+| `/challenge/v1/public/namespaces/{namespace}/users/me/progress/{challengeCode}/index/{index}` | GET | PublicGetPastUserProgression | [PublicGetPastUserProgression](../../apis/AccelByte.Sdk.Api.Challenge/Operation/ChallengeProgression/PublicGetPastUserProgression.cs) | [PublicGetPastUserProgression](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Challenge/ChallengeProgression/PublicGetPastUserProgression.cs) |
 
 ### Player Reward Wrapper:  [PlayerReward](../../apis/AccelByte.Sdk.Api.Challenge/Wrapper/PlayerReward.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -108,6 +109,7 @@
 | `model.Schedule` | [ModelSchedule](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelSchedule.cs) |
 | `model.UpdateChallengeRequest` | [ModelUpdateChallengeRequest](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelUpdateChallengeRequest.cs) |
 | `model.UpdateGoalRequest` | [ModelUpdateGoalRequest](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelUpdateGoalRequest.cs) |
+| `model.UserProgressionPeriodResponseMeta` | [ModelUserProgressionPeriodResponseMeta](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelUserProgressionPeriodResponseMeta.cs) |
 | `model.UserProgressionResponse` | [ModelUserProgressionResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelUserProgressionResponse.cs) |
 | `model.UserProgressionResponseMeta` | [ModelUserProgressionResponseMeta](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelUserProgressionResponseMeta.cs) |
 | `model.UserReward` | [ModelUserReward](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelUserReward.cs) |

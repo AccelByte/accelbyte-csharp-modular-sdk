@@ -153,7 +153,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             )
             {
                 ArtifactGet op = new ArtifactGet(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<ArtifactGetBuilder>(this);
@@ -173,7 +173,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -190,7 +190,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -201,7 +201,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.ArtifactType is not null) QueryParams["artifactType"] = builder.ArtifactType;
             if (builder.Count != null) QueryParams["count"] = Convert.ToString(builder.Count)!;
             if (builder.EndDate is not null) QueryParams["endDate"] = builder.EndDate;
@@ -214,34 +214,34 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             if (builder.ServerId is not null) QueryParams["serverId"] = builder.ServerId;
             if (builder.StartDate is not null) QueryParams["startDate"] = builder.StartDate;
             if (builder.Status is not null) QueryParams["status"] = builder.Status;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public ArtifactGet(
-            string namespace_,            
-            string? artifactType,            
-            long? count,            
-            string? endDate,            
-            string? fleetID,            
-            string? imageID,            
-            long? maxSize,            
-            long? minSize,            
-            long? offset,            
-            string? region,            
-            string? serverId,            
-            string? startDate,            
-            string? status            
+            string namespace_,
+            string? artifactType,
+            long? count,
+            string? endDate,
+            string? fleetID,
+            string? imageID,
+            long? maxSize,
+            long? minSize,
+            long? offset,
+            string? region,
+            string? serverId,
+            string? startDate,
+            string? status
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (artifactType is not null) QueryParams["artifactType"] = artifactType;
             if (count != null) QueryParams["count"] = Convert.ToString(count)!;
             if (endDate is not null) QueryParams["endDate"] = endDate;
@@ -254,11 +254,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             if (serverId is not null) QueryParams["serverId"] = serverId;
             if (startDate is not null) QueryParams["startDate"] = startDate;
             if (status is not null) QueryParams["status"] = status;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -269,10 +269,10 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ApiArtifactListResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -285,9 +285,9 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             {
                 return JsonSerializer.Deserialize<Model.ApiArtifactListResponse>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }
