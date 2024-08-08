@@ -16,6 +16,7 @@ using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Core.Net;
 
 using AccelByte.Sdk.Api.Lobby.WSModel;
+using AccelByte.Sdk.Core.Awesome;
 
 namespace AccelByte.Sdk.Api.Lobby
 {
@@ -29,10 +30,29 @@ namespace AccelByte.Sdk.Api.Lobby
 
         }
 
+        [Obsolete(DiagnosticId = "ab_deprecated_ws_service_wrapper")]
         public LobbyService(string baseUrl)
             : base(baseUrl)
         {
 
+        }
+
+        protected override void PreHandleMessage(Message message)
+        {
+            if (message.MessageType == "connectNotif")
+            {
+                var connectNotifMessage = message.To<ConnectNotif>();
+                if (!AdditionalHeaders.ContainsKey("X-Ab-LobbySessionID"))
+                    AdditionalHeaders.Add("X-Ab-LobbySessionID", connectNotifMessage.LobbySessionID!);
+                else
+                    AdditionalHeaders["X-Ab-LobbySessionID"] = connectNotifMessage.LobbySessionID!;
+            }
+        }
+
+        protected override void Cleanup()
+        {
+            if (AdditionalHeaders.ContainsKey("X-Ab-LobbySessionID"))
+                AdditionalHeaders.Remove("X-Ab-LobbySessionID");
         }
 
         [WebSocketEvent("acceptFriendsNotif")]
