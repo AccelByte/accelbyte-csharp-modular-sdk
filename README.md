@@ -380,6 +380,55 @@ C# Extend SDK enable support for FlightID transmission during Http request. By d
         .Execute(sdk.Namespace);
     ```
 
+## Web Socket Service
+
+C# Extend SDK is able to connect to Lobby Web Socket Service. Following code demonstrate on how to use it.
+```csharp
+
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Api.Lobby;
+
+var sdk = AccelByteSdk.Builder
+    .UseDefaultHttpClient()
+    .UseDefaultConfigRepository()
+    .Build();
+
+// do login first
+
+var lobbyWs = new LobbyService(sdk.Configuration);
+
+//start connect
+await lobbyWs.Connect(false);
+
+//listen to message, this will block the execution
+await lobbyWs.Listen();
+
+//disconnect
+await lobbyWs.Disconnect();
+```
+
+By default, web socket service is allowed to reconnect when not normal closure is received. To disable it, set `AllowReconnect` to false.
+```csharp
+lobbyWs.AllowReconnect = false;
+```
+
+To handle message, register the event on which message type. For example:
+```csharp
+lobbyWs.OnFriendsStatusResponse = (data) =>
+{
+
+};
+```
+
+In some cases, it is probably desired to handle all incoming message in single handler. To do this, set `RedirectAllReceivedMessagesToMessageReceivedEvent` to true and register an action to `OnMessageReceived`.
+```csharp
+lobbyWs.RedirectAllReceivedMessagesToMessageReceivedEvent = true;
+lobbyWs.OnMessageReceived = (message) =>
+{
+    
+};
+```
+
 ## Migrate from Monolithic Version
 See this [migration info](MIGRATION.md).
 
