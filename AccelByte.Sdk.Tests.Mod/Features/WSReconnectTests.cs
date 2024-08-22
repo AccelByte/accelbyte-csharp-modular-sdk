@@ -19,7 +19,7 @@ using AccelByte.Sdk.Api.Lobby;
 
 namespace AccelByte.Sdk.Tests.Mod.Features
 {
-    [TestFixture(Category = "WebSocketMockTest")]
+    [TestFixture(Category = "MockServerTests")]
     [Explicit]
     public class WSReconnectTests
     {

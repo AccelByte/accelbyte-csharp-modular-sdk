@@ -20,6 +20,9 @@ using AccelByte.Sdk.Feature.AutoTokenRefresh;
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Api.Lobby;
 using AccelByte.Sdk.Api.Achievement.Model;
+using AccelByte.Sdk.Api.Legal.Model;
+using AccelByte.Sdk.Api.Legal.Operation;
+using AccelByte.Sdk.Api.Legal.Wrapper;
 
 namespace AccelByte.Sdk.Tests.Mod.Features
 {
@@ -28,9 +31,83 @@ namespace AccelByte.Sdk.Tests.Mod.Features
     public class TokenRefreshTests
     {
         [Test]
+        public void UserLoginWithAutoRefreshToken()
+        {
+            using var sdk = AccelByteSdk.Builder
+                .UseDefaultHttpClient()
+                .SetConfigRepository(IntegrationTestConfigRepository.Admin)
+                .UseDefaultCredentialRepository()
+                .UseAutoTokenRefresh()
+                .EnableLog()
+                .Build();
+
+            sdk.LoginUser(true);
+
+            //First request, valid token
+            List<RetrieveAcceptedAgreementResponse>? aggrs1 = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublic(
+                RetrieveAgreementsPublic
+                .Builder.Build());
+            Assert.IsNotNull(aggrs1);
+
+            //Force token expire
+            if (sdk.Configuration.TokenRepository is RefreshableTokenRepository)
+            {
+                RefreshableTokenRepository tokenRepo = (RefreshableTokenRepository)sdk.Configuration.TokenRepository;
+                tokenRepo.SetTokenExpiry(5); // expiry in 5 seconds
+
+                //wait for 5 seconds
+                Thread.Sleep(5000);
+            }
+
+            //Second request, expired token, try to do refresh
+            List<RetrieveAcceptedAgreementResponse>? aggrs2 = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublic(
+                RetrieveAgreementsPublic
+                .Builder.Build());
+            Assert.IsNotNull(aggrs2);
+
+            sdk.Logout();
+        }
+
+        [Test]
+        public void ClientLoginWithAutoRefreshToken()
+        {
+            using var sdk = AccelByteSdk.Builder
+                .UseDefaultHttpClient()
+                .SetConfigRepository(IntegrationTestConfigRepository.Admin)
+                .UseDefaultCredentialRepository()
+                .UseAutoTokenRefresh()
+                .EnableLog()
+                .Build();
+
+            sdk.LoginClient(true);
+
+            //First request, valid token
+            ModelsPublicAchievementsResponse? achResp1 = sdk.GetAchievementApi().Achievements.PublicListAchievementsOp
+                .Execute(sdk.Namespace, "en");
+            Assert.IsNotNull(achResp1);
+
+            //Force token expire
+            if (sdk.Configuration.TokenRepository is RefreshableTokenRepository)
+            {
+                RefreshableTokenRepository tokenRepo = (RefreshableTokenRepository)sdk.Configuration.TokenRepository;
+                tokenRepo.SetTokenExpiry(5); // expiry in 5 seconds
+
+                //wait for 5 seconds
+                Thread.Sleep(5000);
+            }
+
+            //Second request, expired token, try to do refresh
+            ModelsPublicAchievementsResponse? achResp2 = sdk.GetAchievementApi().Achievements.PublicListAchievementsOp
+                .Execute(sdk.Namespace, "en");
+            Assert.IsNotNull(achResp2);
+
+            sdk.Logout();
+        }
+
+        [Test]
         public void AutoRefreshTokenForWebSocket()
         {
-            IAccelByteSdk sdk = AccelByteSdk.Builder
+            using var sdk = AccelByteSdk.Builder
                 .UseDefaultHttpClient()
                 .SetConfigRepository(IntegrationTestConfigRepository.Admin)
                 .UseDefaultCredentialRepository()
