@@ -109,7 +109,6 @@ namespace AccelByte.Sdk.Tests.Services
             if (user_login_id == null)
                 throw new Exception("This test requires the value of AB_USERNAME env var. Please specify one.");
 
-            user_login_id = UnQuote(user_login_id);
             string stat_code = "cs-server-sdk-test";
 
             var searchResp = _Sdk.Iam.Users.AdminSearchUserV3Op

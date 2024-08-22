@@ -14,8 +14,10 @@ using AccelByte.Sdk.Tests.Integration;
 
 namespace AccelByte.Sdk.Tests.Services
 {
-    public abstract class BaseServiceTests : BaseIntegrationTest
+    public abstract class BaseServiceTests
     {
+        protected AccelByteSDK? _Sdk = null;
+
         private HttpClientPolicy _RetryPolicy;
 
         private bool _UseUserLogin;
@@ -41,9 +43,9 @@ namespace AccelByte.Sdk.Tests.Services
                 .SetHttpClient(ReliableHttpClient.Builder
                     .SetDefaultPolicy(_RetryPolicy)
                     .Build())
-                .SetConfigRepository(IntegrationTestConfigRepository.Admin)
+                .UseDefaultConfigRepository()
                 .UseDefaultTokenRepository()
-                .SetCredentialRepository(IntegrationTestCredentialRepository.Admin)
+                .UseDefaultCredentialRepository()
                 .EnableLog()
                 .Build();
 
@@ -71,6 +73,14 @@ namespace AccelByte.Sdk.Tests.Services
         public void DisableRetry()
         {
             _RetryPolicy.RetryOnException = false;
+        }
+
+        public bool IsUsingAGSStarter()
+        {
+            if (_Sdk == null)
+                return false;
+
+            return _Sdk.Configuration.ConfigRepository.BaseUrl.Contains("gamingservices.accelbyte.io");
         }
     }
 }
