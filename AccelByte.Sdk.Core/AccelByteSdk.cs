@@ -188,5 +188,25 @@ namespace AccelByte.Sdk.Core
         {
             FlightId = flightId;
         }
+
+        public bool UploadBinaryData(string url, byte[] dataToUpload, string contentType)
+        {
+            return Configuration.HttpClient.UploadBinaryData(url, dataToUpload, contentType);
+        }
+
+        public async Task<bool> UploadBinaryDataAsync(string url, byte[] dataToUpload, string contentType)
+        {
+            return await Configuration.HttpClient.UploadBinaryDataAsync(url, dataToUpload, contentType);
+        }
+
+        public byte[] DownloadBinaryData(string url)
+        {
+            return Configuration.HttpClient.DownloadBinaryData(url);
+        }
+
+        public async Task<byte[]> DownloadBinaryDataAsync(string url)
+        {
+            return await Configuration.HttpClient.DownloadBinaryDataAsync(url);
+        }
     }
 }

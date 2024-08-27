@@ -16,5 +16,13 @@ namespace AccelByte.Sdk.Core.Net.Http
         Task<IHttpResponse> SendRequestAsync(IOperation operation, string baseURL);
 
         IHttpClient SetLogger(IHttpLogger logger);
+
+        bool UploadBinaryData(string url, byte[] dataToUpload, string contentType);
+
+        Task<bool> UploadBinaryDataAsync(string url, byte[] dataToUpload, string contentType);
+
+        byte[] DownloadBinaryData(string url);
+
+        Task<byte[]> DownloadBinaryDataAsync(string url);
     }
 }

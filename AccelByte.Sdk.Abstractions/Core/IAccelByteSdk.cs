@@ -51,5 +51,13 @@ namespace AccelByte.Sdk.Core
         Task<bool> ValidateTokenAsync(string accessToken, string permission, int action, string? aNamespace, string? userId);
 
         void UpdateFlightId(string flightId);
+
+        bool UploadBinaryData(string url, byte[] dataToUpload, string contentType);
+
+        Task<bool> UploadBinaryDataAsync(string url, byte[] dataToUpload, string contentType);
+
+        byte[] DownloadBinaryData(string url);
+
+        Task<byte[]> DownloadBinaryDataAsync(string url);
     }
 }
