@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -187,6 +187,73 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _Sdk.GetCloudsaveApi().PublicGameRecord.DeleteGameRecordHandlerV1Op
                 .Execute(recordKey, _Sdk.Namespace);
+
+            ResetPolicy();
+        }
+
+        [Test]
+        public void UploadAndDownloadTests()
+        {
+            Assert.IsNotNull(_Sdk);
+            if (_Sdk == null)
+                return;
+
+            DisableRetry();
+            Random rand = new Random();
+
+            byte[] sBinary = new byte[32];
+            rand.NextBytes(sBinary);
+
+            string dataKey = $"csharksdk-test-{rand.GenerateRandomId(8)}";
+
+            //create binary record request
+            var cResponse = _Sdk.GetCloudsaveApi().AdminGameBinaryRecord.AdminPostGameBinaryRecordV1Op
+                .Execute(new ModelsGameBinaryRecordCreate()
+                {
+                    Key = dataKey,
+                    FileType = "bin",
+                    SetBy = ModelsGameBinaryRecordCreateSetBy.CLIENT
+                }, _Sdk.Namespace);
+            Assert.IsNotNull(cResponse);
+            if (cResponse != null && cResponse.Url != null)
+            {
+                string contentType = "application/octet-stream";
+                if (cResponse.ContentType != null)
+                    contentType = cResponse.ContentType;
+
+                //upload the binary
+                var isSuccess = _Sdk.UploadBinaryData(cResponse.Url, sBinary, contentType);
+                Assert.IsTrue(isSuccess);
+
+                if (isSuccess)
+                {
+                    //update binary record
+                    var uResponse = _Sdk.GetCloudsaveApi().AdminGameBinaryRecord.AdminPutGameBinaryRecordV1Op
+                        .Execute(new ModelsBinaryRecordRequest()
+                        {
+                            ContentType = contentType,
+                            FileLocation = cResponse.FileLocation
+                        }, dataKey, _Sdk.Namespace);
+                    Assert.IsNotNull(uResponse);
+                }
+            }
+
+            //get binary record
+            var sResponse = _Sdk.GetCloudsaveApi().AdminGameBinaryRecord.AdminGetGameBinaryRecordV1Op
+                .Execute(dataKey, _Sdk.Namespace);
+            Assert.IsNotNull(sResponse);
+            if (sResponse != null && sResponse.BinaryInfo != null && sResponse.BinaryInfo.Url != null)
+            {
+                //download binary
+                string binaryUrl = sResponse.BinaryInfo.Url;
+                byte[] downloadedData = _Sdk.DownloadBinaryData(binaryUrl);
+
+                Assert.AreEqual(sBinary, downloadedData);
+            }
+
+            //download binary record
+            _Sdk.GetCloudsaveApi().AdminGameBinaryRecord.AdminDeleteGameBinaryRecordV1Op
+                .Execute(dataKey, _Sdk.Namespace);
 
             ResetPolicy();
         }
