@@ -122,6 +122,9 @@ namespace AccelByte.Sdk.Sample.Cli.Command
                 Task listenTask = Task.Run(() => wsObj.Listen());
 
                 Task sendTask = wsObj.Send(payload);
+
+                //Add delay before sending first message after start the message listener to give time for mock server.
+                Thread.Sleep(100);
                 sendTask.Wait();
 
                 //Now wait for the response message...
