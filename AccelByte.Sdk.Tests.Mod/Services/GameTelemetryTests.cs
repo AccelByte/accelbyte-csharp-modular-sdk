@@ -68,7 +68,10 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .Execute(steamId);
             #endregion
             Assert.IsNotNull(resGet);
-            Assert.Equals(playTime, resGet.TotalPlaytime!);
+            if (resGet != null)
+            {
+                Assert.Equals(playTime, resGet.TotalPlaytime!);
+            }            
         }
     }
 }

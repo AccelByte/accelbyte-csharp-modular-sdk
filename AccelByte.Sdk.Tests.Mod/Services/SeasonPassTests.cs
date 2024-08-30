@@ -52,8 +52,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             };
 
             StoreInfo? cStoreForSeason = _Sdk.GetPlatformApi().Store.CreateStoreOp
-                .SetBody(createStore)
-                .Execute(_Sdk.Namespace);
+                .Execute(createStore, _Sdk.Namespace);
 
             if (cStoreForSeason != null)
             {
@@ -72,8 +71,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 }
             };
             FullCategoryInfo? cCategoryForSeason = _Sdk.GetPlatformApi().Category.CreateCategoryOp
-                .SetBody(cCategory)
-                .Execute(_Sdk.Namespace, defaultDraftStoreId);
+                .Execute(cCategory, _Sdk.Namespace, defaultDraftStoreId);
 
             // Create an item tier in platform
             Int32 price = 1000;
@@ -107,8 +105,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             };
 
             FullItemInfo? cItemForSeason = _Sdk.GetPlatformApi().Item.CreateItemOp
-                .SetBody(createItemStore)
-                .Execute(_Sdk.Namespace, defaultDraftStoreId);
+                .Execute(createItemStore, _Sdk.Namespace, defaultDraftStoreId);
 
             if (cItemForSeason != null)
             {
