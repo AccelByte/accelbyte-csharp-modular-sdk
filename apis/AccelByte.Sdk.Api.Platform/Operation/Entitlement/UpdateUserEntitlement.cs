@@ -38,8 +38,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.EntitlementUpdate? Body { get; set; }
-
 
 
 
@@ -52,25 +50,21 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UpdateUserEntitlementBuilder SetBody(Model.EntitlementUpdate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public UpdateUserEntitlement Build(
+                EntitlementUpdate body,
                 string entitlementId,
                 string namespace_,
                 string userId
             )
             {
                 UpdateUserEntitlement op = new UpdateUserEntitlement(this,
-                    entitlementId,
-                    namespace_,
-                    userId
+                    body,                    
+                    entitlementId,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<UpdateUserEntitlementBuilder>(this);
@@ -78,12 +72,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.EntitlementInfo? Execute(
+                EntitlementUpdate body,
                 string entitlementId,
                 string namespace_,
                 string userId
             )
             {
                 UpdateUserEntitlement op = Build(
+                    body,
                     entitlementId,
                     namespace_,
                     userId
@@ -94,17 +90,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.EntitlementInfo?> ExecuteAsync(
+                EntitlementUpdate body,
                 string entitlementId,
                 string namespace_,
                 string userId
             )
             {
                 UpdateUserEntitlement op = Build(
+                    body,
                     entitlementId,
                     namespace_,
                     userId
@@ -115,13 +113,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private UpdateUserEntitlement(UpdateUserEntitlementBuilder builder,
+            EntitlementUpdate body,
             string entitlementId,
             string namespace_,
             string userId
@@ -130,35 +129,35 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["entitlementId"] = entitlementId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdateUserEntitlement(
-            string entitlementId,
-            string namespace_,
-            string userId,
-            Model.EntitlementUpdate body
+            string entitlementId,            
+            string namespace_,            
+            string userId,            
+            Model.EntitlementUpdate body            
         )
         {
             PathParams["entitlementId"] = entitlementId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -169,10 +168,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.EntitlementInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -185,9 +184,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.EntitlementInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

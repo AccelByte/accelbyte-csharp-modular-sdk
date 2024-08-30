@@ -23,10 +23,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// fulfillItems
     ///
-    ///  [Not Supported Yet In Starter] Fulfill items by transactionId.
+    ///  [Not supported yet in AGS Shared Cloud] Fulfill items by transactionId.
     /// Other detail info:
     /// 
-    ///   * Returns : fulfillment v2 result
+    ///   * Request body : storeId, region, language, and entitlementCollectionId can be ignored.
+    ///   *  Returns : fulfillment v2 result, storeId field can be ignored.
     /// </summary>
     public class FulfillItems : AccelByte.Sdk.Core.Operation
     {
@@ -37,8 +38,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             : OperationBuilder<FulfillItemsBuilder>
         {
 
-
-            public Model.FulfillmentV2Request? Body { get; set; }
 
 
 
@@ -52,25 +51,21 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public FulfillItemsBuilder SetBody(Model.FulfillmentV2Request _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public FulfillItems Build(
+                FulfillmentV2Request body,
                 string namespace_,
                 string transactionId,
                 string userId
             )
             {
                 FulfillItems op = new FulfillItems(this,
-                    namespace_,
-                    transactionId,
-                    userId
+                    body,                    
+                    namespace_,                    
+                    transactionId,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<FulfillItemsBuilder>(this);
@@ -78,12 +73,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.FulfillmentV2Result? Execute(
+                FulfillmentV2Request body,
                 string namespace_,
                 string transactionId,
                 string userId
             )
             {
                 FulfillItems op = Build(
+                    body,
                     namespace_,
                     transactionId,
                     userId
@@ -94,17 +91,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.FulfillmentV2Result?> ExecuteAsync(
+                FulfillmentV2Request body,
                 string namespace_,
                 string transactionId,
                 string userId
             )
             {
                 FulfillItems op = Build(
+                    body,
                     namespace_,
                     transactionId,
                     userId
@@ -115,13 +114,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private FulfillItems(FulfillItemsBuilder builder,
+            FulfillmentV2Request body,
             string namespace_,
             string transactionId,
             string userId
@@ -130,35 +130,35 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["namespace"] = namespace_;
             PathParams["transactionId"] = transactionId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public FulfillItems(
-            string namespace_,
-            string transactionId,
-            string userId,
-            Model.FulfillmentV2Request body
+            string namespace_,            
+            string transactionId,            
+            string userId,            
+            Model.FulfillmentV2Request body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["transactionId"] = transactionId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -169,10 +169,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.FulfillmentV2Result? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -185,9 +185,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.FulfillmentV2Result>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

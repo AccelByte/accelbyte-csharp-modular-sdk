@@ -39,8 +39,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.RewardUpdate? Body { get; set; }
-
 
 
 
@@ -53,23 +51,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UpdateRewardBuilder SetBody(Model.RewardUpdate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public UpdateReward Build(
+                RewardUpdate body,
                 string namespace_,
                 string rewardId
             )
             {
                 UpdateReward op = new UpdateReward(this,
-                    namespace_,
-                    rewardId
+                    body,                    
+                    namespace_,                    
+                    rewardId                    
                 );
 
                 op.SetBaseFields<UpdateRewardBuilder>(this);
@@ -77,11 +71,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.RewardInfo? Execute(
+                RewardUpdate body,
                 string namespace_,
                 string rewardId
             )
             {
                 UpdateReward op = Build(
+                    body,
                     namespace_,
                     rewardId
                 );
@@ -91,16 +87,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.RewardInfo?> ExecuteAsync(
+                RewardUpdate body,
                 string namespace_,
                 string rewardId
             )
             {
                 UpdateReward op = Build(
+                    body,
                     namespace_,
                     rewardId
                 );
@@ -110,46 +108,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private UpdateReward(UpdateRewardBuilder builder,
+            RewardUpdate body,
             string namespace_,
             string rewardId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["rewardId"] = rewardId;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdateReward(
-            string namespace_,
-            string rewardId,
-            Model.RewardUpdate body
+            string namespace_,            
+            string rewardId,            
+            Model.RewardUpdate body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["rewardId"] = rewardId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -160,10 +159,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.RewardInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -176,9 +175,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.RewardInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

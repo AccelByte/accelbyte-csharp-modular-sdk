@@ -27,6 +27,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// Other detail info:
     /// 
     ///   * Returns : codes csv file
+    ///   * The csv file will always have Batch Name column, but this column will be filled only when the withBatchName parameter is true , or when the batchName filter is not blank.
     /// </summary>
     public class Download : AccelByte.Sdk.Core.Operation
     {
@@ -37,7 +38,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             : OperationBuilder<DownloadBuilder>
         {
 
-            public int? BatchNo { get; set; }
+            public string? BatchName { get; set; }
+
+            public List<int>? BatchNo { get; set; }
+
+            public bool? WithBatchName { get; set; }
 
 
 
@@ -51,9 +56,21 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
 
-            public DownloadBuilder SetBatchNo(int _batchNo)
+            public DownloadBuilder SetBatchName(string _batchName)
+            {
+                BatchName = _batchName;
+                return this;
+            }
+
+            public DownloadBuilder SetBatchNo(List<int> _batchNo)
             {
                 BatchNo = _batchNo;
+                return this;
+            }
+
+            public DownloadBuilder SetWithBatchName(bool _withBatchName)
+            {
+                WithBatchName = _withBatchName;
                 return this;
             }
 
@@ -67,8 +84,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 Download op = new Download(this,
-                    campaignId,
-                    namespace_
+                    campaignId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<DownloadBuilder>(this);
@@ -90,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -109,7 +126,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -122,33 +139,41 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["campaignId"] = campaignId;
             PathParams["namespace"] = namespace_;
+            
+            if (builder.BatchName is not null) QueryParams["batchName"] = builder.BatchName;
+            if (builder.BatchNo is not null) QueryParams["batchNo"] = builder.BatchNo;
+            if (builder.WithBatchName != null) QueryParams["withBatchName"] = Convert.ToString(builder.WithBatchName)!;
+            
 
-            if (builder.BatchNo != null) QueryParams["batchNo"] = Convert.ToString(builder.BatchNo)!;
-
-
-
-
-
+            
+            CollectionFormatMap["batchNo"] = "multi";
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public Download(
-            string campaignId,
-            string namespace_,
-            int? batchNo
+            string campaignId,            
+            string namespace_,            
+            string? batchName,            
+            List<int>? batchNo,            
+            bool? withBatchName            
         )
         {
             PathParams["campaignId"] = campaignId;
             PathParams["namespace"] = namespace_;
+            
+            if (batchName is not null) QueryParams["batchName"] = batchName;
+            if (batchNo is not null) QueryParams["batchNo"] = batchNo;
+            if (withBatchName != null) QueryParams["withBatchName"] = Convert.ToString(withBatchName)!;
+            
 
-            if (batchNo != null) QueryParams["batchNo"] = Convert.ToString(batchNo)!;
-
-
-
-
-
+            
+            CollectionFormatMap["batchNo"] = "multi";
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -157,12 +182,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { "text/csv" };
-
+        public override List<string> Produces => new() { "text/csv" };        
+        
         public Stream? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -175,9 +200,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return payload;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

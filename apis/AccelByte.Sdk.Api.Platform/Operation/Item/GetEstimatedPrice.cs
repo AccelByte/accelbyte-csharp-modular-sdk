@@ -81,9 +81,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetEstimatedPrice op = new GetEstimatedPrice(this,
-                    namespace_,
-                    itemIds,
-                    userId
+                    namespace_,                    
+                    itemIds,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<GetEstimatedPriceBuilder>(this);
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -141,43 +141,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Platform is not null) QueryParams["platform"] = builder.Platform;
             if (builder.Region is not null) QueryParams["region"] = builder.Region;
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
             if (itemIds is not null) QueryParams["itemIds"] = itemIds;
             if (userId is not null) QueryParams["userId"] = userId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GetEstimatedPrice(
-            string namespace_,
-            string? platform,
-            string? region,
-            string? storeId,
-            string itemIds,
-            string userId
+            string namespace_,            
+            string? platform,            
+            string? region,            
+            string? storeId,            
+            string itemIds,            
+            string userId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (platform is not null) QueryParams["platform"] = platform;
             if (region is not null) QueryParams["region"] = region;
             if (storeId is not null) QueryParams["storeId"] = storeId;
             if (itemIds is not null) QueryParams["itemIds"] = itemIds;
             if (userId is not null) QueryParams["userId"] = userId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -188,10 +188,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.EstimatedPriceInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -204,9 +204,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.EstimatedPriceInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

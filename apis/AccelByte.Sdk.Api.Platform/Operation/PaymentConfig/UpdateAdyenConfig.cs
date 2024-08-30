@@ -23,7 +23,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// updateAdyenConfig
     ///
-    ///  [Not Supported Yet In Starter] Update adyen config.
+    ///  [Not supported yet in AGS Shared Cloud] Update adyen config.
     /// Other detail info:
     /// 
     ///   * Returns : updated payment merchant config
@@ -41,8 +41,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             public bool? Validate { get; set; }
 
-
-            public Model.AdyenConfig? Body { get; set; }
 
 
 
@@ -68,21 +66,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
 
-            public UpdateAdyenConfigBuilder SetBody(Model.AdyenConfig _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public UpdateAdyenConfig Build(
+                AdyenConfig body,
                 string id
             )
             {
                 UpdateAdyenConfig op = new UpdateAdyenConfig(this,
-                    id
+                    body,                    
+                    id                    
                 );
 
                 op.SetBaseFields<UpdateAdyenConfigBuilder>(this);
@@ -90,10 +84,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.PaymentMerchantConfigInfo? Execute(
+                AdyenConfig body,
                 string id
             )
             {
                 UpdateAdyenConfig op = Build(
+                    body,
                     id
                 );
 
@@ -102,15 +98,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.PaymentMerchantConfigInfo?> ExecuteAsync(
+                AdyenConfig body,
                 string id
             )
             {
                 UpdateAdyenConfig op = Build(
+                    body,
                     id
                 );
 
@@ -119,48 +117,49 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private UpdateAdyenConfig(UpdateAdyenConfigBuilder builder,
+            AdyenConfig body,
             string id
         )
         {
             PathParams["id"] = id;
-
+            
             if (builder.Sandbox != null) QueryParams["sandbox"] = Convert.ToString(builder.Sandbox)!;
             if (builder.Validate != null) QueryParams["validate"] = Convert.ToString(builder.Validate)!;
+            
 
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdateAdyenConfig(
-            string id,
-            bool? sandbox,
-            bool? validate,
-            Model.AdyenConfig body
+            string id,            
+            bool? sandbox,            
+            bool? validate,            
+            Model.AdyenConfig body            
         )
         {
             PathParams["id"] = id;
-
+            
             if (sandbox != null) QueryParams["sandbox"] = Convert.ToString(sandbox)!;
             if (validate != null) QueryParams["validate"] = Convert.ToString(validate)!;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -171,10 +170,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.PaymentMerchantConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -187,9 +186,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

@@ -35,8 +35,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.ItemReturnRequest? Body { get; set; }
-
 
 
 
@@ -49,23 +47,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public ReturnItemBuilder SetBody(Model.ItemReturnRequest _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public ReturnItem Build(
+                ItemReturnRequest body,
                 string itemId,
                 string namespace_
             )
             {
                 ReturnItem op = new ReturnItem(this,
-                    itemId,
-                    namespace_
+                    body,                    
+                    itemId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<ReturnItemBuilder>(this);
@@ -73,11 +67,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public void Execute(
+                ItemReturnRequest body,
                 string itemId,
                 string namespace_
             )
             {
                 ReturnItem op = Build(
+                    body,
                     itemId,
                     namespace_
                 );
@@ -87,16 +83,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task ExecuteAsync(
+                ItemReturnRequest body,
                 string itemId,
                 string namespace_
             )
             {
                 ReturnItem op = Build(
+                    body,
                     itemId,
                     namespace_
                 );
@@ -106,46 +104,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private ReturnItem(ReturnItemBuilder builder,
+            ItemReturnRequest body,
             string itemId,
             string namespace_
         )
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public ReturnItem(
-            string itemId,
-            string namespace_,
-            Model.ItemReturnRequest body
+            string itemId,            
+            string namespace_,            
+            Model.ItemReturnRequest body            
         )
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,17 +155,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

@@ -23,7 +23,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// pay
     ///
-    ///  [Not Supported Yet In Starter] Do payment(For now, this only support checkout.com).
+    ///  [Not supported yet in AGS Shared Cloud] Do payment(For now, this only support checkout.com).
     /// Other detail info:
     /// 
     ///   * Returns : Payment process result
@@ -41,8 +41,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             public string? ZipCode { get; set; }
 
-
-            public Model.PaymentToken? Body { get; set; }
 
 
 
@@ -68,23 +66,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
 
-            public PayBuilder SetBody(Model.PaymentToken _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public Pay Build(
+                PaymentToken body,
                 string namespace_,
                 string paymentOrderNo
             )
             {
                 Pay op = new Pay(this,
-                    namespace_,
-                    paymentOrderNo
+                    body,                    
+                    namespace_,                    
+                    paymentOrderNo                    
                 );
 
                 op.SetBaseFields<PayBuilder>(this);
@@ -92,11 +86,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.PaymentProcessResult? Execute(
+                PaymentToken body,
                 string namespace_,
                 string paymentOrderNo
             )
             {
                 Pay op = Build(
+                    body,
                     namespace_,
                     paymentOrderNo
                 );
@@ -106,16 +102,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.PaymentProcessResult?> ExecuteAsync(
+                PaymentToken body,
                 string namespace_,
                 string paymentOrderNo
             )
             {
                 Pay op = Build(
+                    body,
                     namespace_,
                     paymentOrderNo
                 );
@@ -125,51 +123,52 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private Pay(PayBuilder builder,
+            PaymentToken body,
             string namespace_,
             string paymentOrderNo
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["paymentOrderNo"] = paymentOrderNo;
-
+            
             if (builder.PaymentProvider is not null) QueryParams["paymentProvider"] = builder.PaymentProvider.Value;
             if (builder.ZipCode is not null) QueryParams["zipCode"] = builder.ZipCode;
+            
 
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
         }
         #endregion
 
         public Pay(
-            string namespace_,
-            string paymentOrderNo,
-            PayPaymentProvider? paymentProvider,
-            string? zipCode,
-            Model.PaymentToken body
+            string namespace_,            
+            string paymentOrderNo,            
+            PayPaymentProvider? paymentProvider,            
+            string? zipCode,            
+            Model.PaymentToken body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["paymentOrderNo"] = paymentOrderNo;
-
+            
             if (paymentProvider is not null) QueryParams["paymentProvider"] = paymentProvider.Value;
             if (zipCode is not null) QueryParams["zipCode"] = zipCode;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
         }
 
@@ -179,10 +178,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.PaymentProcessResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -195,9 +194,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.PaymentProcessResult>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

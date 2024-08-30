@@ -23,7 +23,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// publicGetPaymentUrl
     ///
-    ///  [Not Supported Yet In Starter] Get payment url.
+    ///  [Not supported yet in AGS Shared Cloud] Get payment url.
     /// Other detail info:
     /// 
     ///   * For Neon Pay payment provider, the 'neonPayConfig' field can be used to provide success and cancel URL. If 'neonPayConfig' field is not present, the 'returnUrl' will be used for both success and cancel URL.
@@ -39,8 +39,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.PaymentUrlCreate? Body { get; set; }
-
 
 
 
@@ -53,21 +51,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public PublicGetPaymentUrlBuilder SetBody(Model.PaymentUrlCreate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public PublicGetPaymentUrl Build(
+                PaymentUrlCreate body,
                 string namespace_
             )
             {
                 PublicGetPaymentUrl op = new PublicGetPaymentUrl(this,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicGetPaymentUrlBuilder>(this);
@@ -75,10 +69,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.PaymentUrl? Execute(
+                PaymentUrlCreate body,
                 string namespace_
             )
             {
                 PublicGetPaymentUrl op = Build(
+                    body,
                     namespace_
                 );
 
@@ -87,15 +83,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.PaymentUrl?> ExecuteAsync(
+                PaymentUrlCreate body,
                 string namespace_
             )
             {
                 PublicGetPaymentUrl op = Build(
+                    body,
                     namespace_
                 );
 
@@ -104,41 +102,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private PublicGetPaymentUrl(PublicGetPaymentUrlBuilder builder,
+            PaymentUrlCreate body,
             string namespace_
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
         }
         #endregion
 
         public PublicGetPaymentUrl(
-            string namespace_,
-            Model.PaymentUrlCreate body
+            string namespace_,            
+            Model.PaymentUrlCreate body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
         }
 
@@ -148,10 +147,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.PaymentUrl? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -164,9 +163,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.PaymentUrl>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

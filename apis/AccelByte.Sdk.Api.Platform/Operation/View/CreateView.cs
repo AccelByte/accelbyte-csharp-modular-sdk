@@ -57,8 +57,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.ViewCreate? Body { get; set; }
-
 
 
 
@@ -71,23 +69,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public CreateViewBuilder SetBody(Model.ViewCreate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public CreateView Build(
+                ViewCreate body,
                 string namespace_,
                 string storeId
             )
             {
                 CreateView op = new CreateView(this,
-                    namespace_,
-                    storeId
+                    body,                    
+                    namespace_,                    
+                    storeId                    
                 );
 
                 op.SetBaseFields<CreateViewBuilder>(this);
@@ -95,11 +89,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.FullViewInfo? Execute(
+                ViewCreate body,
                 string namespace_,
                 string storeId
             )
             {
                 CreateView op = Build(
+                    body,
                     namespace_,
                     storeId
                 );
@@ -109,16 +105,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.FullViewInfo?> ExecuteAsync(
+                ViewCreate body,
                 string namespace_,
                 string storeId
             )
             {
                 CreateView op = Build(
+                    body,
                     namespace_,
                     storeId
                 );
@@ -128,46 +126,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private CreateView(CreateViewBuilder builder,
+            ViewCreate body,
             string namespace_,
             string storeId
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public CreateView(
-            string namespace_,
-            string storeId,
-            Model.ViewCreate body
+            string namespace_,            
+            string storeId,            
+            Model.ViewCreate body            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -178,10 +177,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.FullViewInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -194,9 +193,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.FullViewInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

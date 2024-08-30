@@ -23,7 +23,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// createPaymentOrderByDedicated
     ///
-    ///  [Not Supported Yet In Starter]
+    ///  [Not supported yet in AGS Shared Cloud]
     /// 
     /// This API is used to create payment order from non justice service. e.g. from dedicated server, the result contains the payment station url.
     /// 
@@ -202,8 +202,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.ExternalPaymentOrderCreate? Body { get; set; }
-
 
 
 
@@ -216,21 +214,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public CreatePaymentOrderByDedicatedBuilder SetBody(Model.ExternalPaymentOrderCreate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public CreatePaymentOrderByDedicated Build(
+                ExternalPaymentOrderCreate body,
                 string namespace_
             )
             {
                 CreatePaymentOrderByDedicated op = new CreatePaymentOrderByDedicated(this,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<CreatePaymentOrderByDedicatedBuilder>(this);
@@ -238,10 +232,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.PaymentOrderCreateResult? Execute(
+                ExternalPaymentOrderCreate body,
                 string namespace_
             )
             {
                 CreatePaymentOrderByDedicated op = Build(
+                    body,
                     namespace_
                 );
 
@@ -250,15 +246,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.PaymentOrderCreateResult?> ExecuteAsync(
+                ExternalPaymentOrderCreate body,
                 string namespace_
             )
             {
                 CreatePaymentOrderByDedicated op = Build(
+                    body,
                     namespace_
                 );
 
@@ -267,42 +265,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private CreatePaymentOrderByDedicated(CreatePaymentOrderByDedicatedBuilder builder,
+            ExternalPaymentOrderCreate body,
             string namespace_
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public CreatePaymentOrderByDedicated(
-            string namespace_,
-            Model.ExternalPaymentOrderCreate body
+            string namespace_,            
+            Model.ExternalPaymentOrderCreate body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -313,10 +312,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.PaymentOrderCreateResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -329,9 +328,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.PaymentOrderCreateResult>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

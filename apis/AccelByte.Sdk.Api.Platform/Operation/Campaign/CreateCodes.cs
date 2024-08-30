@@ -38,8 +38,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.CodeCreate? Body { get; set; }
-
 
 
 
@@ -52,23 +50,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public CreateCodesBuilder SetBody(Model.CodeCreate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public CreateCodes Build(
+                CodeCreate body,
                 string campaignId,
                 string namespace_
             )
             {
                 CreateCodes op = new CreateCodes(this,
-                    campaignId,
-                    namespace_
+                    body,                    
+                    campaignId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<CreateCodesBuilder>(this);
@@ -76,11 +70,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.CodeCreateResult? Execute(
+                CodeCreate body,
                 string campaignId,
                 string namespace_
             )
             {
                 CreateCodes op = Build(
+                    body,
                     campaignId,
                     namespace_
                 );
@@ -90,16 +86,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.CodeCreateResult?> ExecuteAsync(
+                CodeCreate body,
                 string campaignId,
                 string namespace_
             )
             {
                 CreateCodes op = Build(
+                    body,
                     campaignId,
                     namespace_
                 );
@@ -109,46 +107,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private CreateCodes(CreateCodesBuilder builder,
+            CodeCreate body,
             string campaignId,
             string namespace_
         )
         {
             PathParams["campaignId"] = campaignId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public CreateCodes(
-            string campaignId,
-            string namespace_,
-            Model.CodeCreate body
+            string campaignId,            
+            string namespace_,            
+            Model.CodeCreate body            
         )
         {
             PathParams["campaignId"] = campaignId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -159,10 +158,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { };
-
+        public override List<string> Produces => new() {  };        
+        
         public Model.CodeCreateResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -175,9 +174,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.CodeCreateResult>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

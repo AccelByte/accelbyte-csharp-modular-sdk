@@ -23,7 +23,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// searchItemTypeConfig
     ///
-    ///  [Not Supported Yet In Starter] This API is used to get an item type config.
+    ///  [Not supported yet in AGS Shared Cloud] This API is used to get an item type config.
     /// 
     /// Other detail info:
     /// 
@@ -67,7 +67,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 SearchItemTypeConfig op = new SearchItemTypeConfig(this,
-                    itemType
+                    itemType                    
                 );
 
                 op.SetBaseFields<SearchItemTypeConfigBuilder>(this);
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -114,32 +114,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             SearchItemTypeConfigItemType itemType
         )
         {
-
+            
             if (builder.Clazz is not null) QueryParams["clazz"] = builder.Clazz;
             if (itemType is not null) QueryParams["itemType"] = itemType.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public SearchItemTypeConfig(
-            string? clazz,
-            SearchItemTypeConfigItemType itemType
+            string? clazz,            
+            SearchItemTypeConfigItemType itemType            
         )
         {
-
+            
             if (clazz is not null) QueryParams["clazz"] = clazz;
             if (itemType is not null) QueryParams["itemType"] = itemType.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -148,12 +148,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ItemTypeConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -166,9 +166,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.ItemTypeConfigInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

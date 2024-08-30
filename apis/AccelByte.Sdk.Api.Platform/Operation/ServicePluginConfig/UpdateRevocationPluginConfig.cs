@@ -36,8 +36,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.RevocationPluginConfigUpdate? Body { get; set; }
-
 
 
 
@@ -50,21 +48,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UpdateRevocationPluginConfigBuilder SetBody(Model.RevocationPluginConfigUpdate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public UpdateRevocationPluginConfig Build(
+                RevocationPluginConfigUpdate body,
                 string namespace_
             )
             {
                 UpdateRevocationPluginConfig op = new UpdateRevocationPluginConfig(this,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<UpdateRevocationPluginConfigBuilder>(this);
@@ -72,10 +66,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.RevocationPluginConfigInfo? Execute(
+                RevocationPluginConfigUpdate body,
                 string namespace_
             )
             {
                 UpdateRevocationPluginConfig op = Build(
+                    body,
                     namespace_
                 );
 
@@ -84,15 +80,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.RevocationPluginConfigInfo?> ExecuteAsync(
+                RevocationPluginConfigUpdate body,
                 string namespace_
             )
             {
                 UpdateRevocationPluginConfig op = Build(
+                    body,
                     namespace_
                 );
 
@@ -101,42 +99,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private UpdateRevocationPluginConfig(UpdateRevocationPluginConfigBuilder builder,
+            RevocationPluginConfigUpdate body,
             string namespace_
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdateRevocationPluginConfig(
-            string namespace_,
-            Model.RevocationPluginConfigUpdate body
+            string namespace_,            
+            Model.RevocationPluginConfigUpdate body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,10 +146,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.RevocationPluginConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -163,9 +162,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.RevocationPluginConfigInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

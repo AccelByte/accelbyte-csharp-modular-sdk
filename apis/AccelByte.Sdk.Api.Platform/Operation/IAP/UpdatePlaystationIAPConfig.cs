@@ -36,8 +36,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.PlaystationIAPConfigRequest? Body { get; set; }
-
 
 
 
@@ -50,21 +48,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UpdatePlaystationIAPConfigBuilder SetBody(Model.PlaystationIAPConfigRequest _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public UpdatePlaystationIAPConfig Build(
+                PlaystationIAPConfigRequest body,
                 string namespace_
             )
             {
                 UpdatePlaystationIAPConfig op = new UpdatePlaystationIAPConfig(this,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<UpdatePlaystationIAPConfigBuilder>(this);
@@ -72,10 +66,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.PlayStationIAPConfigInfo? Execute(
+                PlaystationIAPConfigRequest body,
                 string namespace_
             )
             {
                 UpdatePlaystationIAPConfig op = Build(
+                    body,
                     namespace_
                 );
 
@@ -84,15 +80,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.PlayStationIAPConfigInfo?> ExecuteAsync(
+                PlaystationIAPConfigRequest body,
                 string namespace_
             )
             {
                 UpdatePlaystationIAPConfig op = Build(
+                    body,
                     namespace_
                 );
 
@@ -101,42 +99,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private UpdatePlaystationIAPConfig(UpdatePlaystationIAPConfigBuilder builder,
+            PlaystationIAPConfigRequest body,
             string namespace_
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdatePlaystationIAPConfig(
-            string namespace_,
-            Model.PlaystationIAPConfigRequest body
+            string namespace_,            
+            Model.PlaystationIAPConfigRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,10 +146,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.PlayStationIAPConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -163,9 +162,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.PlayStationIAPConfigInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

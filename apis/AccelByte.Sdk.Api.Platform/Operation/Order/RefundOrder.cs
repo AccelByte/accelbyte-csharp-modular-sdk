@@ -35,8 +35,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.OrderRefundCreate? Body { get; set; }
-
 
 
 
@@ -49,23 +47,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public RefundOrderBuilder SetBody(Model.OrderRefundCreate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public RefundOrder Build(
+                OrderRefundCreate body,
                 string namespace_,
                 string orderNo
             )
             {
                 RefundOrder op = new RefundOrder(this,
-                    namespace_,
-                    orderNo
+                    body,                    
+                    namespace_,                    
+                    orderNo                    
                 );
 
                 op.SetBaseFields<RefundOrderBuilder>(this);
@@ -73,11 +67,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.OrderInfo? Execute(
+                OrderRefundCreate body,
                 string namespace_,
                 string orderNo
             )
             {
                 RefundOrder op = Build(
+                    body,
                     namespace_,
                     orderNo
                 );
@@ -87,16 +83,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.OrderInfo?> ExecuteAsync(
+                OrderRefundCreate body,
                 string namespace_,
                 string orderNo
             )
             {
                 RefundOrder op = Build(
+                    body,
                     namespace_,
                     orderNo
                 );
@@ -106,17 +104,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
 
             public Model.OrderInfo<T1>? Execute<T1>(
+                OrderRefundCreate body,
                 string namespace_,
                 string orderNo
             )
             {
                 RefundOrder op = Build(
+                    body,
                     namespace_,
                     orderNo
                 );
@@ -126,16 +126,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.OrderInfo<T1>?> ExecuteAsync<T1>(
+                OrderRefundCreate body,
                 string namespace_,
                 string orderNo
             )
             {
                 RefundOrder op = Build(
+                    body,
                     namespace_,
                     orderNo
                 );
@@ -145,46 +147,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private RefundOrder(RefundOrderBuilder builder,
+            OrderRefundCreate body,
             string namespace_,
             string orderNo
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["orderNo"] = orderNo;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public RefundOrder(
-            string namespace_,
-            string orderNo,
-            Model.OrderRefundCreate body
+            string namespace_,            
+            string orderNo,            
+            Model.OrderRefundCreate body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["orderNo"] = orderNo;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -195,10 +198,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.OrderInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -211,18 +214,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.OrderInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
 
         public Model.OrderInfo<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
-            }
+            }            
             else if (code == (HttpStatusCode)201)
             {
                 return JsonSerializer.Deserialize<Model.OrderInfo<T1>>(payload, ResponseJsonOptions);
@@ -231,7 +234,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.OrderInfo<T1>>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
             throw new HttpResponseException(code, payloadString);
         }

@@ -38,8 +38,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.RevocationConfigUpdate? Body { get; set; }
-
 
 
 
@@ -52,21 +50,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UpdateRevocationConfigBuilder SetBody(Model.RevocationConfigUpdate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public UpdateRevocationConfig Build(
+                RevocationConfigUpdate body,
                 string namespace_
             )
             {
                 UpdateRevocationConfig op = new UpdateRevocationConfig(this,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<UpdateRevocationConfigBuilder>(this);
@@ -74,10 +68,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.RevocationConfigInfo? Execute(
+                RevocationConfigUpdate body,
                 string namespace_
             )
             {
                 UpdateRevocationConfig op = Build(
+                    body,
                     namespace_
                 );
 
@@ -86,15 +82,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.RevocationConfigInfo?> ExecuteAsync(
+                RevocationConfigUpdate body,
                 string namespace_
             )
             {
                 UpdateRevocationConfig op = Build(
+                    body,
                     namespace_
                 );
 
@@ -103,42 +101,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private UpdateRevocationConfig(UpdateRevocationConfigBuilder builder,
+            RevocationConfigUpdate body,
             string namespace_
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdateRevocationConfig(
-            string namespace_,
-            Model.RevocationConfigUpdate body
+            string namespace_,            
+            Model.RevocationConfigUpdate body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -149,10 +148,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.RevocationConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -165,9 +164,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.RevocationConfigInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

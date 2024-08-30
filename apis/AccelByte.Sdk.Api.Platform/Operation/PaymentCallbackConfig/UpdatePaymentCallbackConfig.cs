@@ -23,7 +23,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// updatePaymentCallbackConfig
     ///
-    ///  [Not Supported Yet In Starter] Update payment callback configuration.
+    ///  [Not supported yet in AGS Shared Cloud] Update payment callback configuration.
     /// Other detail info:
     /// 
     ///   * Returns : Payment callback config
@@ -38,8 +38,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.PaymentCallbackConfigUpdate? Body { get; set; }
-
 
 
 
@@ -52,21 +50,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UpdatePaymentCallbackConfigBuilder SetBody(Model.PaymentCallbackConfigUpdate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public UpdatePaymentCallbackConfig Build(
+                PaymentCallbackConfigUpdate body,
                 string namespace_
             )
             {
                 UpdatePaymentCallbackConfig op = new UpdatePaymentCallbackConfig(this,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<UpdatePaymentCallbackConfigBuilder>(this);
@@ -74,10 +68,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.PaymentCallbackConfigInfo? Execute(
+                PaymentCallbackConfigUpdate body,
                 string namespace_
             )
             {
                 UpdatePaymentCallbackConfig op = Build(
+                    body,
                     namespace_
                 );
 
@@ -86,15 +82,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.PaymentCallbackConfigInfo?> ExecuteAsync(
+                PaymentCallbackConfigUpdate body,
                 string namespace_
             )
             {
                 UpdatePaymentCallbackConfig op = Build(
+                    body,
                     namespace_
                 );
 
@@ -103,42 +101,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private UpdatePaymentCallbackConfig(UpdatePaymentCallbackConfigBuilder builder,
+            PaymentCallbackConfigUpdate body,
             string namespace_
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdatePaymentCallbackConfig(
-            string namespace_,
-            Model.PaymentCallbackConfigUpdate body
+            string namespace_,            
+            Model.PaymentCallbackConfigUpdate body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -149,10 +148,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.PaymentCallbackConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -165,9 +164,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.PaymentCallbackConfigInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

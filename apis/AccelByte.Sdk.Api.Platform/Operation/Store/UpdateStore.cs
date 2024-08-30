@@ -39,8 +39,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.StoreUpdate? Body { get; set; }
-
 
 
 
@@ -53,23 +51,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UpdateStoreBuilder SetBody(Model.StoreUpdate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public UpdateStore Build(
+                StoreUpdate body,
                 string namespace_,
                 string storeId
             )
             {
                 UpdateStore op = new UpdateStore(this,
-                    namespace_,
-                    storeId
+                    body,                    
+                    namespace_,                    
+                    storeId                    
                 );
 
                 op.SetBaseFields<UpdateStoreBuilder>(this);
@@ -77,11 +71,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.StoreInfo? Execute(
+                StoreUpdate body,
                 string namespace_,
                 string storeId
             )
             {
                 UpdateStore op = Build(
+                    body,
                     namespace_,
                     storeId
                 );
@@ -91,16 +87,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.StoreInfo?> ExecuteAsync(
+                StoreUpdate body,
                 string namespace_,
                 string storeId
             )
             {
                 UpdateStore op = Build(
+                    body,
                     namespace_,
                     storeId
                 );
@@ -110,46 +108,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private UpdateStore(UpdateStoreBuilder builder,
+            StoreUpdate body,
             string namespace_,
             string storeId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["storeId"] = storeId;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdateStore(
-            string namespace_,
-            string storeId,
-            Model.StoreUpdate body
+            string namespace_,            
+            string storeId,            
+            Model.StoreUpdate body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["storeId"] = storeId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -160,10 +159,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.StoreInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -176,9 +175,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.StoreInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

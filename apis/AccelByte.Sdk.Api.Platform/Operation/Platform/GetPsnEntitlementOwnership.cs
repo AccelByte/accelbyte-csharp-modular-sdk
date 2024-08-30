@@ -35,8 +35,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.PsnEntitlementOwnershipRequest? Body { get; set; }
-
 
 
 
@@ -49,23 +47,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public GetPsnEntitlementOwnershipBuilder SetBody(Model.PsnEntitlementOwnershipRequest _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public GetPsnEntitlementOwnership Build(
+                PsnEntitlementOwnershipRequest body,
                 string entitlementLabel,
                 string namespace_
             )
             {
                 GetPsnEntitlementOwnership op = new GetPsnEntitlementOwnership(this,
-                    entitlementLabel,
-                    namespace_
+                    body,                    
+                    entitlementLabel,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetPsnEntitlementOwnershipBuilder>(this);
@@ -73,11 +67,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.Ownership? Execute(
+                PsnEntitlementOwnershipRequest body,
                 string entitlementLabel,
                 string namespace_
             )
             {
                 GetPsnEntitlementOwnership op = Build(
+                    body,
                     entitlementLabel,
                     namespace_
                 );
@@ -87,16 +83,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.Ownership?> ExecuteAsync(
+                PsnEntitlementOwnershipRequest body,
                 string entitlementLabel,
                 string namespace_
             )
             {
                 GetPsnEntitlementOwnership op = Build(
+                    body,
                     entitlementLabel,
                     namespace_
                 );
@@ -106,46 +104,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private GetPsnEntitlementOwnership(GetPsnEntitlementOwnershipBuilder builder,
+            PsnEntitlementOwnershipRequest body,
             string entitlementLabel,
             string namespace_
         )
         {
             PathParams["entitlementLabel"] = entitlementLabel;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GetPsnEntitlementOwnership(
-            string entitlementLabel,
-            string namespace_,
-            Model.PsnEntitlementOwnershipRequest body
+            string entitlementLabel,            
+            string namespace_,            
+            Model.PsnEntitlementOwnershipRequest body            
         )
         {
             PathParams["entitlementLabel"] = entitlementLabel;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,10 +155,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.Ownership? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -172,9 +171,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.Ownership>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

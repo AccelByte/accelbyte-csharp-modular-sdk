@@ -272,8 +272,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.ItemUpdate? Body { get; set; }
-
 
 
 
@@ -286,25 +284,21 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UpdateItemBuilder SetBody(Model.ItemUpdate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public UpdateItem Build(
+                ItemUpdate body,
                 string itemId,
                 string namespace_,
                 string storeId
             )
             {
                 UpdateItem op = new UpdateItem(this,
-                    itemId,
-                    namespace_,
-                    storeId
+                    body,                    
+                    itemId,                    
+                    namespace_,                    
+                    storeId                    
                 );
 
                 op.SetBaseFields<UpdateItemBuilder>(this);
@@ -312,12 +306,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.FullItemInfo? Execute(
+                ItemUpdate body,
                 string itemId,
                 string namespace_,
                 string storeId
             )
             {
                 UpdateItem op = Build(
+                    body,
                     itemId,
                     namespace_,
                     storeId
@@ -328,17 +324,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.FullItemInfo?> ExecuteAsync(
+                ItemUpdate body,
                 string itemId,
                 string namespace_,
                 string storeId
             )
             {
                 UpdateItem op = Build(
+                    body,
                     itemId,
                     namespace_,
                     storeId
@@ -349,18 +347,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
 
             public Model.FullItemInfo<T1>? Execute<T1>(
+                ItemUpdate body,
                 string itemId,
                 string namespace_,
                 string storeId
             )
             {
                 UpdateItem op = Build(
+                    body,
                     itemId,
                     namespace_,
                     storeId
@@ -371,17 +371,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.FullItemInfo<T1>?> ExecuteAsync<T1>(
+                ItemUpdate body,
                 string itemId,
                 string namespace_,
                 string storeId
             )
             {
                 UpdateItem op = Build(
+                    body,
                     itemId,
                     namespace_,
                     storeId
@@ -392,13 +394,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private UpdateItem(UpdateItemBuilder builder,
+            ItemUpdate body,
             string itemId,
             string namespace_,
             string storeId
@@ -406,36 +409,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-
+            
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdateItem(
-            string itemId,
-            string namespace_,
-            string storeId,
-            Model.ItemUpdate body
+            string itemId,            
+            string namespace_,            
+            string storeId,            
+            Model.ItemUpdate body            
         )
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-
+            
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -446,10 +449,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.FullItemInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -462,18 +465,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.FullItemInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
 
         public Model.FullItemInfo<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
-            }
+            }            
             else if (code == (HttpStatusCode)201)
             {
                 return JsonSerializer.Deserialize<Model.FullItemInfo<T1>>(payload, ResponseJsonOptions);
@@ -482,7 +485,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.FullItemInfo<T1>>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
             throw new HttpResponseException(code, payloadString);
         }

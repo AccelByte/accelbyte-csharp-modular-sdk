@@ -38,8 +38,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.EntitlementDecrement? Body { get; set; }
-
 
 
 
@@ -52,25 +50,21 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public PublicConsumeUserEntitlementBuilder SetBody(Model.EntitlementDecrement _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public PublicConsumeUserEntitlement Build(
+                PublicEntitlementDecrement body,
                 string entitlementId,
                 string namespace_,
                 string userId
             )
             {
                 PublicConsumeUserEntitlement op = new PublicConsumeUserEntitlement(this,
-                    entitlementId,
-                    namespace_,
-                    userId
+                    body,                    
+                    entitlementId,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PublicConsumeUserEntitlementBuilder>(this);
@@ -78,12 +72,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.EntitlementDecrementResult? Execute(
+                PublicEntitlementDecrement body,
                 string entitlementId,
                 string namespace_,
                 string userId
             )
             {
                 PublicConsumeUserEntitlement op = Build(
+                    body,
                     entitlementId,
                     namespace_,
                     userId
@@ -94,17 +90,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.EntitlementDecrementResult?> ExecuteAsync(
+                PublicEntitlementDecrement body,
                 string entitlementId,
                 string namespace_,
                 string userId
             )
             {
                 PublicConsumeUserEntitlement op = Build(
+                    body,
                     entitlementId,
                     namespace_,
                     userId
@@ -115,13 +113,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private PublicConsumeUserEntitlement(PublicConsumeUserEntitlementBuilder builder,
+            PublicEntitlementDecrement body,
             string entitlementId,
             string namespace_,
             string userId
@@ -130,35 +129,35 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["entitlementId"] = entitlementId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PublicConsumeUserEntitlement(
-            string entitlementId,
-            string namespace_,
-            string userId,
-            Model.EntitlementDecrement body
+            string entitlementId,            
+            string namespace_,            
+            string userId,            
+            Model.PublicEntitlementDecrement body            
         )
         {
             PathParams["entitlementId"] = entitlementId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -169,10 +168,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.EntitlementDecrementResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -185,9 +184,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.EntitlementDecrementResult>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

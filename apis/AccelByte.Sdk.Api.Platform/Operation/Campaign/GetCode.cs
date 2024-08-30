@@ -39,6 +39,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             public bool? Redeemable { get; set; }
 
+            public bool? WithBatchName { get; set; }
+
 
 
 
@@ -57,6 +59,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return this;
             }
 
+            public GetCodeBuilder SetWithBatchName(bool _withBatchName)
+            {
+                WithBatchName = _withBatchName;
+                return this;
+            }
+
 
 
 
@@ -67,8 +75,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetCode op = new GetCode(this,
-                    code,
-                    namespace_
+                    code,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetCodeBuilder>(this);
@@ -90,7 +98,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -109,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -122,33 +130,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["code"] = code;
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Redeemable != null) QueryParams["redeemable"] = Convert.ToString(builder.Redeemable)!;
+            if (builder.WithBatchName != null) QueryParams["withBatchName"] = Convert.ToString(builder.WithBatchName)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GetCode(
-            string code,
-            string namespace_,
-            bool? redeemable
+            string code,            
+            string namespace_,            
+            bool? redeemable,            
+            bool? withBatchName            
         )
         {
             PathParams["code"] = code;
             PathParams["namespace"] = namespace_;
-
+            
             if (redeemable != null) QueryParams["redeemable"] = Convert.ToString(redeemable)!;
+            if (withBatchName != null) QueryParams["withBatchName"] = Convert.ToString(withBatchName)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -157,12 +168,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.CodeInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -175,9 +186,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.CodeInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

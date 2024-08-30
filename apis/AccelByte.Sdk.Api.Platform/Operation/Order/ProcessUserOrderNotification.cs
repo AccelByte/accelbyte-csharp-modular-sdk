@@ -38,8 +38,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.TradeNotification? Body { get; set; }
-
 
 
 
@@ -52,25 +50,21 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public ProcessUserOrderNotificationBuilder SetBody(Model.TradeNotification _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public ProcessUserOrderNotification Build(
+                TradeNotification body,
                 string namespace_,
                 string orderNo,
                 string userId
             )
             {
                 ProcessUserOrderNotification op = new ProcessUserOrderNotification(this,
-                    namespace_,
-                    orderNo,
-                    userId
+                    body,                    
+                    namespace_,                    
+                    orderNo,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<ProcessUserOrderNotificationBuilder>(this);
@@ -78,12 +72,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public void Execute(
+                TradeNotification body,
                 string namespace_,
                 string orderNo,
                 string userId
             )
             {
                 ProcessUserOrderNotification op = Build(
+                    body,
                     namespace_,
                     orderNo,
                     userId
@@ -94,17 +90,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task ExecuteAsync(
+                TradeNotification body,
                 string namespace_,
                 string orderNo,
                 string userId
             )
             {
                 ProcessUserOrderNotification op = Build(
+                    body,
                     namespace_,
                     orderNo,
                     userId
@@ -115,13 +113,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private ProcessUserOrderNotification(ProcessUserOrderNotificationBuilder builder,
+            TradeNotification body,
             string namespace_,
             string orderNo,
             string userId
@@ -130,35 +129,35 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["namespace"] = namespace_;
             PathParams["orderNo"] = orderNo;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public ProcessUserOrderNotification(
-            string namespace_,
-            string orderNo,
-            string userId,
-            Model.TradeNotification body
+            string namespace_,            
+            string orderNo,            
+            string userId,            
+            Model.TradeNotification body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["orderNo"] = orderNo;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -169,17 +168,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

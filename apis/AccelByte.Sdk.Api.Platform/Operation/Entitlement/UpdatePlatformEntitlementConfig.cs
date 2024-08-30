@@ -38,8 +38,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.EntitlementPlatformConfigUpdate? Body { get; set; }
-
 
 
 
@@ -52,23 +50,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UpdatePlatformEntitlementConfigBuilder SetBody(Model.EntitlementPlatformConfigUpdate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public UpdatePlatformEntitlementConfig Build(
+                EntitlementPlatformConfigUpdate body,
                 string namespace_,
                 UpdatePlatformEntitlementConfigPlatform platform
             )
             {
                 UpdatePlatformEntitlementConfig op = new UpdatePlatformEntitlementConfig(this,
-                    namespace_,
-                    platform
+                    body,                    
+                    namespace_,                    
+                    platform                    
                 );
 
                 op.SetBaseFields<UpdatePlatformEntitlementConfigBuilder>(this);
@@ -76,11 +70,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.EntitlementPlatformConfigInfo? Execute(
+                EntitlementPlatformConfigUpdate body,
                 string namespace_,
                 string platform
             )
             {
                 UpdatePlatformEntitlementConfig op = Build(
+                    body,
                     namespace_,
                     platform
                 );
@@ -90,16 +86,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.EntitlementPlatformConfigInfo?> ExecuteAsync(
+                EntitlementPlatformConfigUpdate body,
                 string namespace_,
                 string platform
             )
             {
                 UpdatePlatformEntitlementConfig op = Build(
+                    body,
                     namespace_,
                     platform
                 );
@@ -109,46 +107,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private UpdatePlatformEntitlementConfig(UpdatePlatformEntitlementConfigBuilder builder,
+            EntitlementPlatformConfigUpdate body,
             string namespace_,
             UpdatePlatformEntitlementConfigPlatform platform
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platform"] = platform.Value;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdatePlatformEntitlementConfig(
-            string namespace_,
-            UpdatePlatformEntitlementConfigPlatform platform,
-            Model.EntitlementPlatformConfigUpdate body
+            string namespace_,            
+            UpdatePlatformEntitlementConfigPlatform platform,            
+            Model.EntitlementPlatformConfigUpdate body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platform"] = platform.Value;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -159,10 +158,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.EntitlementPlatformConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -175,9 +174,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.EntitlementPlatformConfigInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

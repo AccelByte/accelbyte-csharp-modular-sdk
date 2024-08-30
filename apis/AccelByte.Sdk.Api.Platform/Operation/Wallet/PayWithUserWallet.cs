@@ -35,8 +35,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.PaymentRequest? Body { get; set; }
-
 
 
 
@@ -49,25 +47,21 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public PayWithUserWalletBuilder SetBody(Model.PaymentRequest _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public PayWithUserWallet Build(
+                PaymentRequest body,
                 string currencyCode,
                 string namespace_,
                 string userId
             )
             {
                 PayWithUserWallet op = new PayWithUserWallet(this,
-                    currencyCode,
-                    namespace_,
-                    userId
+                    body,                    
+                    currencyCode,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PayWithUserWalletBuilder>(this);
@@ -75,12 +69,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.PlatformWallet? Execute(
+                PaymentRequest body,
                 string currencyCode,
                 string namespace_,
                 string userId
             )
             {
                 PayWithUserWallet op = Build(
+                    body,
                     currencyCode,
                     namespace_,
                     userId
@@ -91,17 +87,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.PlatformWallet?> ExecuteAsync(
+                PaymentRequest body,
                 string currencyCode,
                 string namespace_,
                 string userId
             )
             {
                 PayWithUserWallet op = Build(
+                    body,
                     currencyCode,
                     namespace_,
                     userId
@@ -112,13 +110,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private PayWithUserWallet(PayWithUserWalletBuilder builder,
+            PaymentRequest body,
             string currencyCode,
             string namespace_,
             string userId
@@ -127,35 +126,35 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["currencyCode"] = currencyCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PayWithUserWallet(
-            string currencyCode,
-            string namespace_,
-            string userId,
-            Model.PaymentRequest body
+            string currencyCode,            
+            string namespace_,            
+            string userId,            
+            Model.PaymentRequest body            
         )
         {
             PathParams["currencyCode"] = currencyCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -166,10 +165,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.PlatformWallet? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -182,9 +181,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.PlatformWallet>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

@@ -23,7 +23,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// testNeonPayConfig
     ///
-    ///  [Not Supported Yet In Starter] Check Neon Pay configuration, Reference: [Neon Pay Document](https://docs.neonpay.com/docs/checkout).
+    ///  [Not supported yet in AGS Shared Cloud] Check Neon Pay configuration, Reference: [Neon Pay Document](https://docs.neonpay.com/docs/checkout).
     /// 
     /// #### Check List:
     /// 
@@ -45,8 +45,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             public bool? Sandbox { get; set; }
 
 
-            public Model.NeonPayConfig? Body { get; set; }
-
 
 
 
@@ -65,19 +63,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
 
-            public TestNeonPayConfigBuilder SetBody(Model.NeonPayConfig _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public TestNeonPayConfig Build(
+                NeonPayConfig body
             )
             {
-                TestNeonPayConfig op = new TestNeonPayConfig(this
+                TestNeonPayConfig op = new TestNeonPayConfig(this,
+                    body                    
                 );
 
                 op.SetBaseFields<TestNeonPayConfigBuilder>(this);
@@ -85,9 +79,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.TestResult? Execute(
+                NeonPayConfig body
             )
             {
                 TestNeonPayConfig op = Build(
+                    body
                 );
 
                 if (_Sdk == null)
@@ -95,14 +91,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.TestResult?> ExecuteAsync(
+                NeonPayConfig body
             )
             {
                 TestNeonPayConfig op = Build(
+                    body
                 );
 
                 if (_Sdk == null)
@@ -110,41 +108,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
-        private TestNeonPayConfig(TestNeonPayConfigBuilder builder
+        private TestNeonPayConfig(TestNeonPayConfigBuilder builder,
+            NeonPayConfig body
         )
         {
-
+            
             if (builder.Sandbox != null) QueryParams["sandbox"] = Convert.ToString(builder.Sandbox)!;
+            
 
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public TestNeonPayConfig(
-            bool? sandbox,
-            Model.NeonPayConfig body
+            bool? sandbox,            
+            Model.NeonPayConfig body            
         )
         {
-
+            
             if (sandbox != null) QueryParams["sandbox"] = Convert.ToString(sandbox)!;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -155,10 +154,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.TestResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -171,9 +170,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

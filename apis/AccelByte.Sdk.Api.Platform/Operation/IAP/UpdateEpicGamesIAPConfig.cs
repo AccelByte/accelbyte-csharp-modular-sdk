@@ -36,8 +36,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.EpicGamesIAPConfigRequest? Body { get; set; }
-
 
 
 
@@ -50,21 +48,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UpdateEpicGamesIAPConfigBuilder SetBody(Model.EpicGamesIAPConfigRequest _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public UpdateEpicGamesIAPConfig Build(
+                EpicGamesIAPConfigRequest body,
                 string namespace_
             )
             {
                 UpdateEpicGamesIAPConfig op = new UpdateEpicGamesIAPConfig(this,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<UpdateEpicGamesIAPConfigBuilder>(this);
@@ -72,10 +66,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.EpicGamesIAPConfigInfo? Execute(
+                EpicGamesIAPConfigRequest body,
                 string namespace_
             )
             {
                 UpdateEpicGamesIAPConfig op = Build(
+                    body,
                     namespace_
                 );
 
@@ -84,15 +80,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.EpicGamesIAPConfigInfo?> ExecuteAsync(
+                EpicGamesIAPConfigRequest body,
                 string namespace_
             )
             {
                 UpdateEpicGamesIAPConfig op = Build(
+                    body,
                     namespace_
                 );
 
@@ -101,42 +99,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private UpdateEpicGamesIAPConfig(UpdateEpicGamesIAPConfigBuilder builder,
+            EpicGamesIAPConfigRequest body,
             string namespace_
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdateEpicGamesIAPConfig(
-            string namespace_,
-            Model.EpicGamesIAPConfigRequest body
+            string namespace_,            
+            Model.EpicGamesIAPConfigRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,10 +146,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.EpicGamesIAPConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -163,9 +162,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.EpicGamesIAPConfigInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

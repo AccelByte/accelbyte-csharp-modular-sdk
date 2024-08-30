@@ -61,10 +61,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PreCheckRevokeUserEntitlementByUseCount op = new PreCheckRevokeUserEntitlementByUseCount(this,
-                    entitlementId,
-                    namespace_,
-                    userId,
-                    quantity
+                    entitlementId,                    
+                    namespace_,                    
+                    userId,                    
+                    quantity                    
                 );
 
                 op.SetBaseFields<PreCheckRevokeUserEntitlementByUseCountBuilder>(this);
@@ -90,7 +90,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -129,37 +129,37 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["entitlementId"] = entitlementId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
-
+            
+            
             QueryParams["quantity"] = Convert.ToString(quantity)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PreCheckRevokeUserEntitlementByUseCount(
-            string entitlementId,
-            string namespace_,
-            string userId,
-            int quantity
+            string entitlementId,            
+            string namespace_,            
+            string userId,            
+            int quantity            
         )
         {
             PathParams["entitlementId"] = entitlementId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
-
+            
+            
             QueryParams["quantity"] = Convert.ToString(quantity)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -168,12 +168,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.EntitlementPrechekResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -186,9 +186,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.EntitlementPrechekResult>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

@@ -50,8 +50,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.BulkEntitlementGrantRequest? Body { get; set; }
-
 
 
 
@@ -64,21 +62,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public GrantEntitlementsBuilder SetBody(Model.BulkEntitlementGrantRequest _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public GrantEntitlements Build(
+                BulkEntitlementGrantRequest body,
                 string namespace_
             )
             {
                 GrantEntitlements op = new GrantEntitlements(this,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GrantEntitlementsBuilder>(this);
@@ -86,10 +80,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.BulkEntitlementGrantResult? Execute(
+                BulkEntitlementGrantRequest body,
                 string namespace_
             )
             {
                 GrantEntitlements op = Build(
+                    body,
                     namespace_
                 );
 
@@ -98,15 +94,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.BulkEntitlementGrantResult?> ExecuteAsync(
+                BulkEntitlementGrantRequest body,
                 string namespace_
             )
             {
                 GrantEntitlements op = Build(
+                    body,
                     namespace_
                 );
 
@@ -115,42 +113,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private GrantEntitlements(GrantEntitlementsBuilder builder,
+            BulkEntitlementGrantRequest body,
             string namespace_
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GrantEntitlements(
-            string namespace_,
-            Model.BulkEntitlementGrantRequest body
+            string namespace_,            
+            Model.BulkEntitlementGrantRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -161,10 +160,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.BulkEntitlementGrantResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -177,9 +176,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.BulkEntitlementGrantResult>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

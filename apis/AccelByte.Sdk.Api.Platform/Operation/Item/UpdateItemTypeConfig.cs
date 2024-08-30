@@ -23,7 +23,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// updateItemTypeConfig
     ///
-    ///  [Not Supported Yet In Starter] This API is used to update an item type config.
+    ///  [Not supported yet in AGS Shared Cloud] This API is used to update an item type config.
     /// 
     /// *  Returns : item type config data
     /// </summary>
@@ -37,8 +37,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.ItemTypeConfigUpdate? Body { get; set; }
-
 
 
 
@@ -51,21 +49,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UpdateItemTypeConfigBuilder SetBody(Model.ItemTypeConfigUpdate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public UpdateItemTypeConfig Build(
+                ItemTypeConfigUpdate body,
                 string id
             )
             {
                 UpdateItemTypeConfig op = new UpdateItemTypeConfig(this,
-                    id
+                    body,                    
+                    id                    
                 );
 
                 op.SetBaseFields<UpdateItemTypeConfigBuilder>(this);
@@ -73,10 +67,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.ItemTypeConfigInfo? Execute(
+                ItemTypeConfigUpdate body,
                 string id
             )
             {
                 UpdateItemTypeConfig op = Build(
+                    body,
                     id
                 );
 
@@ -85,15 +81,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.ItemTypeConfigInfo?> ExecuteAsync(
+                ItemTypeConfigUpdate body,
                 string id
             )
             {
                 UpdateItemTypeConfig op = Build(
+                    body,
                     id
                 );
 
@@ -102,42 +100,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private UpdateItemTypeConfig(UpdateItemTypeConfigBuilder builder,
+            ItemTypeConfigUpdate body,
             string id
         )
         {
             PathParams["id"] = id;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdateItemTypeConfig(
-            string id,
-            Model.ItemTypeConfigUpdate body
+            string id,            
+            Model.ItemTypeConfigUpdate body            
         )
         {
             PathParams["id"] = id;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -148,10 +147,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.ItemTypeConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -164,9 +163,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.ItemTypeConfigInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

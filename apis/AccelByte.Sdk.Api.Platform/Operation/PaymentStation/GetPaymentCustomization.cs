@@ -23,12 +23,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// getPaymentCustomization
     ///
-    ///  [Not Supported Yet In Starter] Get payment provider customization, at current only Adyen provide customization. This api has been deprecated, pls use /public/namespaces/{namespace}/payment/publicconfig to get adyen config
+    ///  [Not supported yet in AGS Shared Cloud] Get payment provider customization, at current only Adyen provide customization. This api has been deprecated, pls use /public/namespaces/{namespace}/payment/publicconfig to get adyen config
     /// Other detail info:
     /// 
     ///   * Returns : customization
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class GetPaymentCustomization : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -69,16 +69,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetPaymentCustomization op = new GetPaymentCustomization(this,
-                    namespace_,
-                    paymentProvider,
-                    region
+                    namespace_,                    
+                    paymentProvider,                    
+                    region                    
                 );
 
                 op.SetBaseFields<GetPaymentCustomizationBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public Model.Customization? Execute(
                 string namespace_,
                 string paymentProvider,
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -130,36 +130,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Sandbox != null) QueryParams["sandbox"] = Convert.ToString(builder.Sandbox)!;
             if (paymentProvider is not null) QueryParams["paymentProvider"] = paymentProvider.Value;
             if (region is not null) QueryParams["region"] = region;
+            
 
-
-
-
-
+            
+            
+            
 
         }
         #endregion
 
         public GetPaymentCustomization(
-            string namespace_,
-            bool? sandbox,
-            GetPaymentCustomizationPaymentProvider paymentProvider,
-            string region
+            string namespace_,            
+            bool? sandbox,            
+            GetPaymentCustomizationPaymentProvider paymentProvider,            
+            string region            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (sandbox != null) QueryParams["sandbox"] = Convert.ToString(sandbox)!;
             if (paymentProvider is not null) QueryParams["paymentProvider"] = paymentProvider.Value;
             if (region is not null) QueryParams["region"] = region;
+            
 
-
-
-
-
+            
+            
+            
 
         }
 
@@ -169,10 +169,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.Customization? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -185,9 +185,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.Customization>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

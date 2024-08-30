@@ -39,8 +39,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.DeleteRewardConditionRequest? Body { get; set; }
-
 
 
 
@@ -53,23 +51,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public DeleteRewardConditionRecordBuilder SetBody(Model.DeleteRewardConditionRequest _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public DeleteRewardConditionRecord Build(
+                DeleteRewardConditionRequest body,
                 string namespace_,
                 string rewardId
             )
             {
                 DeleteRewardConditionRecord op = new DeleteRewardConditionRecord(this,
-                    namespace_,
-                    rewardId
+                    body,                    
+                    namespace_,                    
+                    rewardId                    
                 );
 
                 op.SetBaseFields<DeleteRewardConditionRecordBuilder>(this);
@@ -77,11 +71,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public void Execute(
+                DeleteRewardConditionRequest body,
                 string namespace_,
                 string rewardId
             )
             {
                 DeleteRewardConditionRecord op = Build(
+                    body,
                     namespace_,
                     rewardId
                 );
@@ -91,16 +87,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task ExecuteAsync(
+                DeleteRewardConditionRequest body,
                 string namespace_,
                 string rewardId
             )
             {
                 DeleteRewardConditionRecord op = Build(
+                    body,
                     namespace_,
                     rewardId
                 );
@@ -110,46 +108,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private DeleteRewardConditionRecord(DeleteRewardConditionRecordBuilder builder,
+            DeleteRewardConditionRequest body,
             string namespace_,
             string rewardId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["rewardId"] = rewardId;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public DeleteRewardConditionRecord(
-            string namespace_,
-            string rewardId,
-            Model.DeleteRewardConditionRequest body
+            string namespace_,            
+            string rewardId,            
+            Model.DeleteRewardConditionRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["rewardId"] = rewardId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -160,17 +159,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

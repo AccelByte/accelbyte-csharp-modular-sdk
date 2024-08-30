@@ -36,8 +36,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.TwitchSyncRequest? Body { get; set; }
-
 
 
 
@@ -50,23 +48,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public SyncTwitchDropsEntitlement1Builder SetBody(Model.TwitchSyncRequest _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public SyncTwitchDropsEntitlement1 Build(
+                TwitchSyncRequest body,
                 string namespace_,
                 string userId
             )
             {
                 SyncTwitchDropsEntitlement1 op = new SyncTwitchDropsEntitlement1(this,
-                    namespace_,
-                    userId
+                    body,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<SyncTwitchDropsEntitlement1Builder>(this);
@@ -74,11 +68,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public void Execute(
+                TwitchSyncRequest body,
                 string namespace_,
                 string userId
             )
             {
                 SyncTwitchDropsEntitlement1 op = Build(
+                    body,
                     namespace_,
                     userId
                 );
@@ -88,16 +84,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task ExecuteAsync(
+                TwitchSyncRequest body,
                 string namespace_,
                 string userId
             )
             {
                 SyncTwitchDropsEntitlement1 op = Build(
+                    body,
                     namespace_,
                     userId
                 );
@@ -107,46 +105,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private SyncTwitchDropsEntitlement1(SyncTwitchDropsEntitlement1Builder builder,
+            TwitchSyncRequest body,
             string namespace_,
             string userId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public SyncTwitchDropsEntitlement1(
-            string namespace_,
-            string userId,
-            Model.TwitchSyncRequest body
+            string namespace_,            
+            string userId,            
+            Model.TwitchSyncRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -157,17 +156,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

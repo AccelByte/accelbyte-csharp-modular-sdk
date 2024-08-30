@@ -35,8 +35,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.TicketSaleDecrementRequest? Body { get; set; }
-
 
 
 
@@ -49,23 +47,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public DecreaseTicketSaleBuilder SetBody(Model.TicketSaleDecrementRequest _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public DecreaseTicketSale Build(
+                TicketSaleDecrementRequest body,
                 string boothName,
                 string namespace_
             )
             {
                 DecreaseTicketSale op = new DecreaseTicketSale(this,
-                    boothName,
-                    namespace_
+                    body,                    
+                    boothName,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<DecreaseTicketSaleBuilder>(this);
@@ -73,11 +67,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public void Execute(
+                TicketSaleDecrementRequest body,
                 string boothName,
                 string namespace_
             )
             {
                 DecreaseTicketSale op = Build(
+                    body,
                     boothName,
                     namespace_
                 );
@@ -87,16 +83,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task ExecuteAsync(
+                TicketSaleDecrementRequest body,
                 string boothName,
                 string namespace_
             )
             {
                 DecreaseTicketSale op = Build(
+                    body,
                     boothName,
                     namespace_
                 );
@@ -106,46 +104,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private DecreaseTicketSale(DecreaseTicketSaleBuilder builder,
+            TicketSaleDecrementRequest body,
             string boothName,
             string namespace_
         )
         {
             PathParams["boothName"] = boothName;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public DecreaseTicketSale(
-            string boothName,
-            string namespace_,
-            Model.TicketSaleDecrementRequest body
+            string boothName,            
+            string namespace_,            
+            Model.TicketSaleDecrementRequest body            
         )
         {
             PathParams["boothName"] = boothName;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,17 +155,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

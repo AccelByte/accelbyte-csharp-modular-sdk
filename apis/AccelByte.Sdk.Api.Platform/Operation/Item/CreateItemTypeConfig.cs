@@ -23,7 +23,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// createItemTypeConfig
     ///
-    ///  [Not Supported Yet In Starter] This API is used to create an item type config.
+    ///  [Not supported yet in AGS Shared Cloud] This API is used to create an item type config.
     /// 
     /// *  Returns : item type config data
     /// </summary>
@@ -37,8 +37,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.ItemTypeConfigCreate? Body { get; set; }
-
 
 
 
@@ -51,19 +49,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public CreateItemTypeConfigBuilder SetBody(Model.ItemTypeConfigCreate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public CreateItemTypeConfig Build(
+                ItemTypeConfigCreate body
             )
             {
-                CreateItemTypeConfig op = new CreateItemTypeConfig(this
+                CreateItemTypeConfig op = new CreateItemTypeConfig(this,
+                    body                    
                 );
 
                 op.SetBaseFields<CreateItemTypeConfigBuilder>(this);
@@ -71,9 +65,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public void Execute(
+                ItemTypeConfigCreate body
             )
             {
                 CreateItemTypeConfig op = Build(
+                    body
                 );
 
                 if (_Sdk == null)
@@ -81,14 +77,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task ExecuteAsync(
+                ItemTypeConfigCreate body
             )
             {
                 CreateItemTypeConfig op = Build(
+                    body
                 );
 
                 if (_Sdk == null)
@@ -96,38 +94,39 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
-        private CreateItemTypeConfig(CreateItemTypeConfigBuilder builder
+        private CreateItemTypeConfig(CreateItemTypeConfigBuilder builder,
+            ItemTypeConfigCreate body
         )
         {
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public CreateItemTypeConfig(
-            Model.ItemTypeConfigCreate body
+            Model.ItemTypeConfigCreate body            
         )
         {
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -138,17 +137,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)201)
             {
                 return;
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

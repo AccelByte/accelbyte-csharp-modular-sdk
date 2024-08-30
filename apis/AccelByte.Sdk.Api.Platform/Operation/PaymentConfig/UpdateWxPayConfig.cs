@@ -23,7 +23,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// updateWxPayConfig
     ///
-    ///  [Not Supported Yet In Starter] Update wxpay configuration.
+    ///  [Not supported yet in AGS Shared Cloud] Update wxpay configuration.
     /// Other detail info:
     /// 
     ///   * Returns : updated payment merchant config
@@ -39,8 +39,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             public bool? Validate { get; set; }
 
-
-            public Model.WxPayConfigRequest? Body { get; set; }
 
 
 
@@ -60,21 +58,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
 
-            public UpdateWxPayConfigBuilder SetBody(Model.WxPayConfigRequest _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public UpdateWxPayConfig Build(
+                WxPayConfigRequest body,
                 string id
             )
             {
                 UpdateWxPayConfig op = new UpdateWxPayConfig(this,
-                    id
+                    body,                    
+                    id                    
                 );
 
                 op.SetBaseFields<UpdateWxPayConfigBuilder>(this);
@@ -82,10 +76,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.PaymentMerchantConfigInfo? Execute(
+                WxPayConfigRequest body,
                 string id
             )
             {
                 UpdateWxPayConfig op = Build(
+                    body,
                     id
                 );
 
@@ -94,15 +90,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.PaymentMerchantConfigInfo?> ExecuteAsync(
+                WxPayConfigRequest body,
                 string id
             )
             {
                 UpdateWxPayConfig op = Build(
+                    body,
                     id
                 );
 
@@ -111,45 +109,46 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private UpdateWxPayConfig(UpdateWxPayConfigBuilder builder,
+            WxPayConfigRequest body,
             string id
         )
         {
             PathParams["id"] = id;
-
+            
             if (builder.Validate != null) QueryParams["validate"] = Convert.ToString(builder.Validate)!;
+            
 
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdateWxPayConfig(
-            string id,
-            bool? validate,
-            Model.WxPayConfigRequest body
+            string id,            
+            bool? validate,            
+            Model.WxPayConfigRequest body            
         )
         {
             PathParams["id"] = id;
-
+            
             if (validate != null) QueryParams["validate"] = Convert.ToString(validate)!;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -160,10 +159,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.PaymentMerchantConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -176,9 +175,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

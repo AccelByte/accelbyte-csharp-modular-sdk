@@ -23,7 +23,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// simulatePaymentOrderNotification
     ///
-    ///  [Not Supported Yet In Starter] [TEST FACILITY ONLY] Forbidden in live environment. Simulate payment notification on sandbox payment order, usually for test usage to simulate real currency payment notification.
+    ///  [Not supported yet in AGS Shared Cloud] [TEST FACILITY ONLY] Forbidden in live environment. Simulate payment notification on sandbox payment order, usually for test usage to simulate real currency payment notification.
     /// Other detail info:
     /// 
     ///   * Returns : notification process result
@@ -38,8 +38,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.PaymentOrderNotifySimulation? Body { get; set; }
-
 
 
 
@@ -52,23 +50,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public SimulatePaymentOrderNotificationBuilder SetBody(Model.PaymentOrderNotifySimulation _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public SimulatePaymentOrderNotification Build(
+                PaymentOrderNotifySimulation body,
                 string namespace_,
                 string paymentOrderNo
             )
             {
                 SimulatePaymentOrderNotification op = new SimulatePaymentOrderNotification(this,
-                    namespace_,
-                    paymentOrderNo
+                    body,                    
+                    namespace_,                    
+                    paymentOrderNo                    
                 );
 
                 op.SetBaseFields<SimulatePaymentOrderNotificationBuilder>(this);
@@ -76,11 +70,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.NotificationProcessResult? Execute(
+                PaymentOrderNotifySimulation body,
                 string namespace_,
                 string paymentOrderNo
             )
             {
                 SimulatePaymentOrderNotification op = Build(
+                    body,
                     namespace_,
                     paymentOrderNo
                 );
@@ -90,16 +86,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.NotificationProcessResult?> ExecuteAsync(
+                PaymentOrderNotifySimulation body,
                 string namespace_,
                 string paymentOrderNo
             )
             {
                 SimulatePaymentOrderNotification op = Build(
+                    body,
                     namespace_,
                     paymentOrderNo
                 );
@@ -109,17 +107,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
 
             public Model.NotificationProcessResult<T1>? Execute<T1>(
+                PaymentOrderNotifySimulation body,
                 string namespace_,
                 string paymentOrderNo
             )
             {
                 SimulatePaymentOrderNotification op = Build(
+                    body,
                     namespace_,
                     paymentOrderNo
                 );
@@ -129,16 +129,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.NotificationProcessResult<T1>?> ExecuteAsync<T1>(
+                PaymentOrderNotifySimulation body,
                 string namespace_,
                 string paymentOrderNo
             )
             {
                 SimulatePaymentOrderNotification op = Build(
+                    body,
                     namespace_,
                     paymentOrderNo
                 );
@@ -148,46 +150,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private SimulatePaymentOrderNotification(SimulatePaymentOrderNotificationBuilder builder,
+            PaymentOrderNotifySimulation body,
             string namespace_,
             string paymentOrderNo
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["paymentOrderNo"] = paymentOrderNo;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public SimulatePaymentOrderNotification(
-            string namespace_,
-            string paymentOrderNo,
-            Model.PaymentOrderNotifySimulation body
+            string namespace_,            
+            string paymentOrderNo,            
+            Model.PaymentOrderNotifySimulation body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["paymentOrderNo"] = paymentOrderNo;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -198,10 +201,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.NotificationProcessResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -214,18 +217,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.NotificationProcessResult>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
 
         public Model.NotificationProcessResult<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
-            }
+            }            
             else if (code == (HttpStatusCode)201)
             {
                 return JsonSerializer.Deserialize<Model.NotificationProcessResult<T1>>(payload, ResponseJsonOptions);
@@ -234,7 +237,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.NotificationProcessResult<T1>>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
             throw new HttpResponseException(code, payloadString);
         }

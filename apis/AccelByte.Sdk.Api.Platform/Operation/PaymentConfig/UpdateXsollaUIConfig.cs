@@ -23,7 +23,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// updateXsollaUIConfig
     ///
-    ///  [Not Supported Yet In Starter] Update xsolla UI configuration.Reference: [Xsolla Document](https://developers.xsolla.com/api.html#ui-integrations).
+    ///  [Not supported yet in AGS Shared Cloud] Update xsolla UI configuration.Reference: [Xsolla Document](https://developers.xsolla.com/api.html#ui-integrations).
     /// Other detail info:
     /// 
     ///   * Returns : updated payment merchant config
@@ -38,8 +38,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.XsollaPaywallConfigRequest? Body { get; set; }
-
 
 
 
@@ -52,21 +50,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UpdateXsollaUIConfigBuilder SetBody(Model.XsollaPaywallConfigRequest _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public UpdateXsollaUIConfig Build(
+                XsollaPaywallConfigRequest body,
                 string id
             )
             {
                 UpdateXsollaUIConfig op = new UpdateXsollaUIConfig(this,
-                    id
+                    body,                    
+                    id                    
                 );
 
                 op.SetBaseFields<UpdateXsollaUIConfigBuilder>(this);
@@ -74,10 +68,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.PaymentMerchantConfigInfo? Execute(
+                XsollaPaywallConfigRequest body,
                 string id
             )
             {
                 UpdateXsollaUIConfig op = Build(
+                    body,
                     id
                 );
 
@@ -86,15 +82,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.PaymentMerchantConfigInfo?> ExecuteAsync(
+                XsollaPaywallConfigRequest body,
                 string id
             )
             {
                 UpdateXsollaUIConfig op = Build(
+                    body,
                     id
                 );
 
@@ -103,42 +101,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private UpdateXsollaUIConfig(UpdateXsollaUIConfigBuilder builder,
+            XsollaPaywallConfigRequest body,
             string id
         )
         {
             PathParams["id"] = id;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdateXsollaUIConfig(
-            string id,
-            Model.XsollaPaywallConfigRequest body
+            string id,            
+            Model.XsollaPaywallConfigRequest body            
         )
         {
             PathParams["id"] = id;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -149,10 +148,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.PaymentMerchantConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -165,9 +164,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

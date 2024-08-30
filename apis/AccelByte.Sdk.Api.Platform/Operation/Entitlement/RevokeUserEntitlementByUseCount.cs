@@ -38,8 +38,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.RevokeUseCountRequest? Body { get; set; }
-
 
 
 
@@ -52,25 +50,21 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public RevokeUserEntitlementByUseCountBuilder SetBody(Model.RevokeUseCountRequest _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public RevokeUserEntitlementByUseCount Build(
+                RevokeUseCountRequest body,
                 string entitlementId,
                 string namespace_,
                 string userId
             )
             {
                 RevokeUserEntitlementByUseCount op = new RevokeUserEntitlementByUseCount(this,
-                    entitlementId,
-                    namespace_,
-                    userId
+                    body,                    
+                    entitlementId,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<RevokeUserEntitlementByUseCountBuilder>(this);
@@ -78,12 +72,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.EntitlementIfc? Execute(
+                RevokeUseCountRequest body,
                 string entitlementId,
                 string namespace_,
                 string userId
             )
             {
                 RevokeUserEntitlementByUseCount op = Build(
+                    body,
                     entitlementId,
                     namespace_,
                     userId
@@ -94,17 +90,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.EntitlementIfc?> ExecuteAsync(
+                RevokeUseCountRequest body,
                 string entitlementId,
                 string namespace_,
                 string userId
             )
             {
                 RevokeUserEntitlementByUseCount op = Build(
+                    body,
                     entitlementId,
                     namespace_,
                     userId
@@ -115,13 +113,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private RevokeUserEntitlementByUseCount(RevokeUserEntitlementByUseCountBuilder builder,
+            RevokeUseCountRequest body,
             string entitlementId,
             string namespace_,
             string userId
@@ -130,35 +129,35 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["entitlementId"] = entitlementId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public RevokeUserEntitlementByUseCount(
-            string entitlementId,
-            string namespace_,
-            string userId,
-            Model.RevokeUseCountRequest body
+            string entitlementId,            
+            string namespace_,            
+            string userId,            
+            Model.RevokeUseCountRequest body            
         )
         {
             PathParams["entitlementId"] = entitlementId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -169,10 +168,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.EntitlementIfc? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -185,9 +184,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.EntitlementIfc>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

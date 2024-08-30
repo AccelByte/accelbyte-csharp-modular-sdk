@@ -78,6 +78,28 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
+        public RenameBatch.RenameBatchBuilder RenameBatchOp
+        {
+            get
+            {
+                var opBuilder = new Operation.RenameBatch.RenameBatchBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public QueryCampaignBatchNames.QueryCampaignBatchNamesBuilder QueryCampaignBatchNamesOp
+        {
+            get
+            {
+                var opBuilder = new Operation.QueryCampaignBatchNames.QueryCampaignBatchNamesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public GetCampaignDynamic.GetCampaignDynamicBuilder GetCampaignDynamicOp
         {
             get
@@ -258,6 +280,38 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
         public async Task<Model.CampaignInfo?> UpdateCampaignAsync(UpdateCampaign input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void RenameBatch(RenameBatch input)
+        {
+            var response = _sdk.RunRequest(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task RenameBatchAsync(RenameBatch input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public List<Model.CampaignBatchNameInfo>? QueryCampaignBatchNames(QueryCampaignBatchNames input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.CampaignBatchNameInfo>?> QueryCampaignBatchNamesAsync(QueryCampaignBatchNames input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

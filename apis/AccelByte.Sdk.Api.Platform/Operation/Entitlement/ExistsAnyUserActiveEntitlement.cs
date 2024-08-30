@@ -88,8 +88,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 ExistsAnyUserActiveEntitlement op = new ExistsAnyUserActiveEntitlement(this,
-                    namespace_,
-                    userId
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<ExistsAnyUserActiveEntitlementBuilder>(this);
@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -143,48 +143,48 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.AppIds is not null) QueryParams["appIds"] = builder.AppIds;
             if (builder.ItemIds is not null) QueryParams["itemIds"] = builder.ItemIds;
             if (builder.Platform is not null) QueryParams["platform"] = builder.Platform;
             if (builder.Skus is not null) QueryParams["skus"] = builder.Skus;
+            
 
-
-
+            
             CollectionFormatMap["appIds"] = "multi";
             CollectionFormatMap["itemIds"] = "multi";
             CollectionFormatMap["skus"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public ExistsAnyUserActiveEntitlement(
-            string namespace_,
-            string userId,
-            List<string>? appIds,
-            List<string>? itemIds,
-            string? platform,
-            List<string>? skus
+            string namespace_,            
+            string userId,            
+            List<string>? appIds,            
+            List<string>? itemIds,            
+            string? platform,            
+            List<string>? skus            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (appIds is not null) QueryParams["appIds"] = appIds;
             if (itemIds is not null) QueryParams["itemIds"] = itemIds;
             if (platform is not null) QueryParams["platform"] = platform;
             if (skus is not null) QueryParams["skus"] = skus;
+            
 
-
-
+            
             CollectionFormatMap["appIds"] = "multi";
             CollectionFormatMap["itemIds"] = "multi";
             CollectionFormatMap["skus"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -193,12 +193,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.Ownership? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -211,9 +211,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.Ownership>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

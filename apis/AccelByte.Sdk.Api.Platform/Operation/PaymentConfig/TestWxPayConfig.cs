@@ -23,7 +23,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// testWxPayConfig
     ///
-    ///  [Not Supported Yet In Starter] Test WxPay configuration. Reference: [WxPay Document](https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_1).
+    ///  [Not supported yet in AGS Shared Cloud] Test WxPay configuration. Reference: [WxPay Document](https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_1).
     /// Other detail info:
     /// 
     ///   * Returns : test WxPay config
@@ -38,8 +38,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.WxPayConfigRequest? Body { get; set; }
-
 
 
 
@@ -52,19 +50,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public TestWxPayConfigBuilder SetBody(Model.WxPayConfigRequest _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public TestWxPayConfig Build(
+                WxPayConfigRequest body
             )
             {
-                TestWxPayConfig op = new TestWxPayConfig(this
+                TestWxPayConfig op = new TestWxPayConfig(this,
+                    body                    
                 );
 
                 op.SetBaseFields<TestWxPayConfigBuilder>(this);
@@ -72,9 +66,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.TestResult? Execute(
+                WxPayConfigRequest body
             )
             {
                 TestWxPayConfig op = Build(
+                    body
                 );
 
                 if (_Sdk == null)
@@ -82,14 +78,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.TestResult?> ExecuteAsync(
+                WxPayConfigRequest body
             )
             {
                 TestWxPayConfig op = Build(
+                    body
                 );
 
                 if (_Sdk == null)
@@ -97,38 +95,39 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
-        private TestWxPayConfig(TestWxPayConfigBuilder builder
+        private TestWxPayConfig(TestWxPayConfigBuilder builder,
+            WxPayConfigRequest body
         )
         {
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public TestWxPayConfig(
-            Model.WxPayConfigRequest body
+            Model.WxPayConfigRequest body            
         )
         {
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -139,10 +138,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.TestResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -155,9 +154,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

@@ -23,7 +23,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// createPaymentProviderConfig
     ///
-    ///  [Not Supported Yet In Starter] Create payment provider config.
+    ///  [Not supported yet in AGS Shared Cloud] Create payment provider config.
     /// 
     /// 
     /// 
@@ -59,8 +59,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.PaymentProviderConfigEdit? Body { get; set; }
-
 
 
 
@@ -73,19 +71,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public CreatePaymentProviderConfigBuilder SetBody(Model.PaymentProviderConfigEdit _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public CreatePaymentProviderConfig Build(
+                PaymentProviderConfigEdit body
             )
             {
-                CreatePaymentProviderConfig op = new CreatePaymentProviderConfig(this
+                CreatePaymentProviderConfig op = new CreatePaymentProviderConfig(this,
+                    body                    
                 );
 
                 op.SetBaseFields<CreatePaymentProviderConfigBuilder>(this);
@@ -93,9 +87,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.PaymentProviderConfigInfo? Execute(
+                PaymentProviderConfigEdit body
             )
             {
                 CreatePaymentProviderConfig op = Build(
+                    body
                 );
 
                 if (_Sdk == null)
@@ -103,14 +99,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.PaymentProviderConfigInfo?> ExecuteAsync(
+                PaymentProviderConfigEdit body
             )
             {
                 CreatePaymentProviderConfig op = Build(
+                    body
                 );
 
                 if (_Sdk == null)
@@ -118,38 +116,39 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
-        private CreatePaymentProviderConfig(CreatePaymentProviderConfigBuilder builder
+        private CreatePaymentProviderConfig(CreatePaymentProviderConfigBuilder builder,
+            PaymentProviderConfigEdit body
         )
         {
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public CreatePaymentProviderConfig(
-            Model.PaymentProviderConfigEdit body
+            Model.PaymentProviderConfigEdit body            
         )
         {
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -160,10 +159,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.PaymentProviderConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -176,9 +175,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.PaymentProviderConfigInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }

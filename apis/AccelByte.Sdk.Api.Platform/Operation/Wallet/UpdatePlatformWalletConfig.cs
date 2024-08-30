@@ -38,8 +38,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
-            public Model.PlatformWalletConfigUpdate? Body { get; set; }
-
 
 
 
@@ -52,23 +50,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UpdatePlatformWalletConfigBuilder SetBody(Model.PlatformWalletConfigUpdate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public UpdatePlatformWalletConfig Build(
+                PlatformWalletConfigUpdate body,
                 string namespace_,
                 UpdatePlatformWalletConfigPlatform platform
             )
             {
                 UpdatePlatformWalletConfig op = new UpdatePlatformWalletConfig(this,
-                    namespace_,
-                    platform
+                    body,                    
+                    namespace_,                    
+                    platform                    
                 );
 
                 op.SetBaseFields<UpdatePlatformWalletConfigBuilder>(this);
@@ -76,11 +70,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public Model.PlatformWalletConfigInfo? Execute(
+                PlatformWalletConfigUpdate body,
                 string namespace_,
                 string platform
             )
             {
                 UpdatePlatformWalletConfig op = Build(
+                    body,
                     namespace_,
                     platform
                 );
@@ -90,16 +86,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
             public async Task<Model.PlatformWalletConfigInfo?> ExecuteAsync(
+                PlatformWalletConfigUpdate body,
                 string namespace_,
                 string platform
             )
             {
                 UpdatePlatformWalletConfig op = Build(
+                    body,
                     namespace_,
                     platform
                 );
@@ -109,46 +107,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
         private UpdatePlatformWalletConfig(UpdatePlatformWalletConfigBuilder builder,
+            PlatformWalletConfigUpdate body,
             string namespace_,
             UpdatePlatformWalletConfigPlatform platform
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platform"] = platform.Value;
+            
+            
 
-
-
-
-
-            BodyParams = builder.Body;
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdatePlatformWalletConfig(
-            string namespace_,
-            UpdatePlatformWalletConfigPlatform platform,
-            Model.PlatformWalletConfigUpdate body
+            string namespace_,            
+            UpdatePlatformWalletConfigPlatform platform,            
+            Model.PlatformWalletConfigUpdate body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platform"] = platform.Value;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -159,10 +158,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };
-
+        public override List<string> Produces => new() { "application/json" };        
+        
         public Model.PlatformWalletConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {
+        {            
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -175,9 +174,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.PlatformWalletConfigInfo>(payload, ResponseJsonOptions);
             }
-
+            
             var payloadString = payload.ReadToString();
-
+            
             throw new HttpResponseException(code, payloadString);
         }
     }
