@@ -11,15 +11,14 @@ DOTNETVER := 6.0.302
 build:
 	docker run --rm -u $$(id -u):$$(id -g) -v $$(pwd):/data/ -w /data/ -e HOME="/data" -e DOTNET_CLI_HOME="/data" mcr.microsoft.com/dotnet/sdk:6.0 dotnet build
 
-# Core and mock-required unit tests
+# Core unit tests
 test_core:
 	@test -n "$(SDK_MOCK_SERVER_PATH)" || (echo "SDK_MOCK_SERVER_PATH is not set" ; exit 1)
 	trap "docker stop justice-codegen-sdk-mock-server justice-codegen-sdk-httpbin" EXIT && \
 			docker run --rm -d --name justice-codegen-sdk-httpbin -p 80:80 kennethreitz/httpbin && \
 			(bash "$(SDK_MOCK_SERVER_PATH)/mock-server.sh" -s /data/spec &) && \
 			(for i in $$(seq 1 10); do curl http://localhost:8080/ 2>/dev/null && exit 0 || sleep 10; done; exit 1) && \
-			docker run --rm -u $$(id -u):$$(id -g) -v $$(pwd):/data/ -w /data/ --network host -e AB_HTTPBIN_URL=http://localhost -e HOME="/data" -e DOTNET_CLI_HOME="/data" mcr.microsoft.com/dotnet/sdk:$(DOTNETVER) dotnet test && \
-			docker run --rm -u $$(id -u):$$(id -g) -v $$(pwd):/data/ -w /data/ --network host -e AB_HTTPBIN_URL=http://localhost -e HOME="/data" -e DOTNET_CLI_HOME="/data" mcr.microsoft.com/dotnet/sdk:$(DOTNETVER) dotnet test --filter="TestCategory=MockServerTests"
+			docker run --rm -u $$(id -u):$$(id -g) -v $$(pwd):/data/ -w /data/ --network host -e AB_HTTPBIN_URL=http://localhost -e HOME="/data" -e DOTNET_CLI_HOME="/data" mcr.microsoft.com/dotnet/sdk:$(DOTNETVER) dotnet test
 
 # CLI sample app tests against mock-server
 test_cli:
