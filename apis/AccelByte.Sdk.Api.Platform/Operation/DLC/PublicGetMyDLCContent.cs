@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicGetMyDLCContent op = new PublicGetMyDLCContent(this,
-                    type                    
+                    type
                 );
 
                 op.SetBaseFields<PublicGetMyDLCContentBuilder>(this);
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -113,32 +113,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PublicGetMyDLCContentType type
         )
         {
-            
+
             if (builder.IncludeAllNamespaces != null) QueryParams["includeAllNamespaces"] = Convert.ToString(builder.IncludeAllNamespaces)!;
             if (type is not null) QueryParams["type"] = type.Value;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PublicGetMyDLCContent(
-            bool? includeAllNamespaces,            
-            PublicGetMyDLCContentType type            
+            bool? includeAllNamespaces,
+            PublicGetMyDLCContentType type
         )
         {
-            
+
             if (includeAllNamespaces != null) QueryParams["includeAllNamespaces"] = Convert.ToString(includeAllNamespaces)!;
             if (type is not null) QueryParams["type"] = type.Value;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,12 +147,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.SimpleUserDLCRewardContentsResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -165,9 +165,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.SimpleUserDLCRewardContentsResponse>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

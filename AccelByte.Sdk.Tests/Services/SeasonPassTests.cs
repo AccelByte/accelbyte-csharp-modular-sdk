@@ -67,7 +67,7 @@ namespace AccelByte.Sdk.Tests.Services
                 };
 
                 StoreInfo? cStoreForSeason = _Sdk.Platform.Store.CreateStoreOp
-                    .Execute(createStore,_Sdk.Namespace);
+                    .Execute(createStore, _Sdk.Namespace);
 
                 if (cStoreForSeason != null)
                 {

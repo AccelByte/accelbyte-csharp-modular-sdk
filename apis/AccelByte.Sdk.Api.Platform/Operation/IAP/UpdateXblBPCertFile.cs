@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UpdateXblBPCertFile op = new UpdateXblBPCertFile(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<UpdateXblBPCertFileBuilder>(this);
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -122,34 +122,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
+
+
             if (builder.File is not null) FormParams["file"] = builder.File;
             if (builder.Password is not null) FormParams["password"] = builder.Password;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public UpdateXblBPCertFile(
-            string namespace_,            
-            Stream? file,            
-            string? password            
+            string namespace_,
+            Stream? file,
+            string? password
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
+
+
             if (file is not null) FormParams["file"] = file;
             if (password is not null) FormParams["password"] = password;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -160,10 +160,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "multipart/form-data" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.XblIAPConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -176,9 +176,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.XblIAPConfigInfo>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

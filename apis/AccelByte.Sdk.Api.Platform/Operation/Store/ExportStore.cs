@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// 
     /// This api has been deprecated, pls use /v2/admin/namespaces/{namespace}/stores/export to export store.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class ExportStore : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -59,15 +59,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 ExportStore op = new ExportStore(this,
-                    namespace_,                    
-                    storeId                    
+                    namespace_,
+                    storeId
                 );
 
                 op.SetBaseFields<ExportStoreBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public Stream? Execute(
                 string namespace_,
                 string storeId
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -115,30 +115,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["storeId"] = storeId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public ExportStore(
-            string namespace_,            
-            string storeId            
+            string namespace_,
+            string storeId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["storeId"] = storeId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,12 +147,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/zip" };        
-        
+        public override List<string> Produces => new() { "application/zip" };
+
         public Stream? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -165,9 +165,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return payload;
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

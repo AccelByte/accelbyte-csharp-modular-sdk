@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryFulfillments op = new QueryFulfillments(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<QueryFulfillmentsBuilder>(this);
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -151,7 +151,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -162,7 +162,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.EndTime is not null) QueryParams["endTime"] = builder.EndTime;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
@@ -170,29 +170,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (builder.State is not null) QueryParams["state"] = builder.State.Value;
             if (builder.TransactionId is not null) QueryParams["transactionId"] = builder.TransactionId;
             if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public QueryFulfillments(
-            string namespace_,            
-            string? endTime,            
-            int? limit,            
-            int? offset,            
-            string? startTime,            
-            QueryFulfillmentsState? state,            
-            string? transactionId,            
-            string? userId            
+            string namespace_,
+            string? endTime,
+            int? limit,
+            int? offset,
+            string? startTime,
+            QueryFulfillmentsState? state,
+            string? transactionId,
+            string? userId
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (endTime is not null) QueryParams["endTime"] = endTime;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
@@ -200,11 +200,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (state is not null) QueryParams["state"] = state.Value;
             if (transactionId is not null) QueryParams["transactionId"] = transactionId;
             if (userId is not null) QueryParams["userId"] = userId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -213,12 +213,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.FulfillmentHistoryPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -231,9 +231,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.FulfillmentHistoryPagingSlicedResult>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

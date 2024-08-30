@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// 
     /// This api has been deprecated, pls use /v2/admin/namespaces/{namespace}/stores/import to import store.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class ImportStore : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -74,14 +74,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 ImportStore op = new ImportStore(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<ImportStoreBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public Model.StoreInfo? Execute(
                 string namespace_
             )
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -123,34 +123,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
-            
+
             if (builder.File is not null) FormParams["file"] = builder.File;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public ImportStore(
-            string namespace_,            
-            string? storeId,            
-            Stream? file            
+            string namespace_,
+            string? storeId,
+            Stream? file
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (storeId is not null) QueryParams["storeId"] = storeId;
-            
+
             if (file is not null) FormParams["file"] = file;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -161,10 +161,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "multipart/form-data" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.StoreInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -177,9 +177,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.StoreInfo>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

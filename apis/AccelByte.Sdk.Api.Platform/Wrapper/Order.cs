@@ -144,7 +144,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserOrderGrant.GetUserOrderGrantBuilder GetUserOrderGrantOp
         {
             get
@@ -530,8 +530,8 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.OrderGrantInfo? GetUserOrderGrant(GetUserOrderGrant input)
         {
             var response = _sdk.RunRequest(input);
@@ -548,7 +548,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
         public List<Model.OrderHistoryInfo>? GetUserOrderHistories(GetUserOrderHistories input)
         {
             var response = _sdk.RunRequest(input);

@@ -173,7 +173,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicQueryItems op = new PublicQueryItems(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<PublicQueryItemsBuilder>(this);
@@ -193,7 +193,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -210,7 +210,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -221,7 +221,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.AppType is not null) QueryParams["appType"] = builder.AppType.Value;
             if (builder.AutoCalcEstimatedPrice != null) QueryParams["autoCalcEstimatedPrice"] = Convert.ToString(builder.AutoCalcEstimatedPrice)!;
             if (builder.BaseAppId is not null) QueryParams["baseAppId"] = builder.BaseAppId;
@@ -236,37 +236,37 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy;
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
-            
 
-            
+
+
             CollectionFormatMap["sortBy"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PublicQueryItems(
-            string namespace_,            
-            PublicQueryItemsAppType? appType,            
-            bool? autoCalcEstimatedPrice,            
-            string? baseAppId,            
-            string? categoryPath,            
-            string? features,            
-            bool? includeSubCategoryItem,            
-            PublicQueryItemsItemType? itemType,            
-            string? language,            
-            int? limit,            
-            int? offset,            
-            string? region,            
-            List<PublicQueryItemsSortBy>? sortBy,            
-            string? storeId,            
-            string? tags            
+            string namespace_,
+            PublicQueryItemsAppType? appType,
+            bool? autoCalcEstimatedPrice,
+            string? baseAppId,
+            string? categoryPath,
+            string? features,
+            bool? includeSubCategoryItem,
+            PublicQueryItemsItemType? itemType,
+            string? language,
+            int? limit,
+            int? offset,
+            string? region,
+            List<PublicQueryItemsSortBy>? sortBy,
+            string? storeId,
+            string? tags
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (appType is not null) QueryParams["appType"] = appType.Value;
             if (autoCalcEstimatedPrice != null) QueryParams["autoCalcEstimatedPrice"] = Convert.ToString(autoCalcEstimatedPrice)!;
             if (baseAppId is not null) QueryParams["baseAppId"] = baseAppId;
@@ -281,12 +281,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (sortBy is not null) QueryParams["sortBy"] = sortBy;
             if (storeId is not null) QueryParams["storeId"] = storeId;
             if (tags is not null) QueryParams["tags"] = tags;
-            
 
-            
+
+
             CollectionFormatMap["sortBy"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -295,12 +295,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.ItemPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -313,9 +313,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.ItemPagingSlicedResult>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

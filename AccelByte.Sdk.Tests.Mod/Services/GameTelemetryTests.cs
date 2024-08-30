@@ -71,7 +71,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (resGet != null)
             {
                 Assert.Equals(playTime, resGet.TotalPlaytime!);
-            }            
+            }
         }
     }
 }

@@ -311,7 +311,7 @@ namespace AccelByte.Sdk.Core.Net.Http
             else
                 throw new Exception($"Failed to download from [{url}].");
         }
-    }    
+    }
 
     public static class DefaultHttpClient_SdkBuilderExts
     {

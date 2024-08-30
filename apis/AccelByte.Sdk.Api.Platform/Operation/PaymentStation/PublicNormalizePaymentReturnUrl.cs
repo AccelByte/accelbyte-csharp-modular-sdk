@@ -168,11 +168,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicNormalizePaymentReturnUrl op = new PublicNormalizePaymentReturnUrl(this,
-                    namespace_,                    
-                    orderNo,                    
-                    paymentOrderNo,                    
-                    paymentProvider,                    
-                    returnUrl                    
+                    namespace_,
+                    orderNo,
+                    paymentOrderNo,
+                    paymentProvider,
+                    returnUrl
                 );
 
                 op.SetBaseFields<PublicNormalizePaymentReturnUrlBuilder>(this);
@@ -200,7 +200,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -225,7 +225,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -240,7 +240,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.PayerID is not null) QueryParams["PayerID"] = builder.PayerID;
             if (builder.Foreinginvoice is not null) QueryParams["foreinginvoice"] = builder.Foreinginvoice;
             if (builder.InvoiceId is not null) QueryParams["invoice_id"] = builder.InvoiceId;
@@ -256,36 +256,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (paymentOrderNo is not null) QueryParams["paymentOrderNo"] = paymentOrderNo;
             if (paymentProvider is not null) QueryParams["paymentProvider"] = paymentProvider.Value;
             if (returnUrl is not null) QueryParams["returnUrl"] = returnUrl;
-            
 
-            
-            
-            
+
+
+
+
 
         }
         #endregion
 
         public PublicNormalizePaymentReturnUrl(
-            string namespace_,            
-            string? payerID,            
-            string? foreinginvoice,            
-            string? invoiceId,            
-            string? payload,            
-            string? redirectResult,            
-            string? resultCode,            
-            string? sessionId,            
-            string? status,            
-            string? token,            
-            string? type,            
-            string? userId,            
-            string orderNo,            
-            string paymentOrderNo,            
-            PublicNormalizePaymentReturnUrlPaymentProvider paymentProvider,            
-            string returnUrl            
+            string namespace_,
+            string? payerID,
+            string? foreinginvoice,
+            string? invoiceId,
+            string? payload,
+            string? redirectResult,
+            string? resultCode,
+            string? sessionId,
+            string? status,
+            string? token,
+            string? type,
+            string? userId,
+            string orderNo,
+            string paymentOrderNo,
+            PublicNormalizePaymentReturnUrlPaymentProvider paymentProvider,
+            string returnUrl
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (payerID is not null) QueryParams["PayerID"] = payerID;
             if (foreinginvoice is not null) QueryParams["foreinginvoice"] = foreinginvoice;
             if (invoiceId is not null) QueryParams["invoice_id"] = invoiceId;
@@ -301,11 +301,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (paymentOrderNo is not null) QueryParams["paymentOrderNo"] = paymentOrderNo;
             if (paymentProvider is not null) QueryParams["paymentProvider"] = paymentProvider.Value;
             if (returnUrl is not null) QueryParams["returnUrl"] = returnUrl;
-            
 
-            
-            
-            
+
+
+
+
 
         }
 
@@ -313,19 +313,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() {  };        
-        
+        public override List<string> Produces => new() { };
+
         public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
                 return;
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

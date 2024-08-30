@@ -62,10 +62,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicCancelSubscription op = new PublicCancelSubscription(this,
-                    body,                    
-                    namespace_,                    
-                    subscriptionId,                    
-                    userId                    
+                    body,
+                    namespace_,
+                    subscriptionId,
+                    userId
                 );
 
                 op.SetBaseFields<PublicCancelSubscriptionBuilder>(this);
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -130,35 +130,35 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["namespace"] = namespace_;
             PathParams["subscriptionId"] = subscriptionId;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public PublicCancelSubscription(
-            string namespace_,            
-            string subscriptionId,            
-            string userId,            
-            Model.CancelRequest body            
+            string namespace_,
+            string subscriptionId,
+            string userId,
+            Model.CancelRequest body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["subscriptionId"] = subscriptionId;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -169,10 +169,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.SubscriptionInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -185,9 +185,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.SubscriptionInfo>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

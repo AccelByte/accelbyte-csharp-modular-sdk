@@ -115,8 +115,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryUserIAPOrders op = new QueryUserIAPOrders(this,
-                    namespace_,                    
-                    userId                    
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<QueryUserIAPOrdersBuilder>(this);
@@ -138,7 +138,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -157,7 +157,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -170,7 +170,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (builder.EndTime is not null) QueryParams["endTime"] = builder.EndTime;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
@@ -178,31 +178,31 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (builder.StartTime is not null) QueryParams["startTime"] = builder.StartTime;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
             if (builder.Type is not null) QueryParams["type"] = builder.Type.Value;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public QueryUserIAPOrders(
-            string namespace_,            
-            string userId,            
-            string? endTime,            
-            int? limit,            
-            int? offset,            
-            string? productId,            
-            string? startTime,            
-            QueryUserIAPOrdersStatus? status,            
-            QueryUserIAPOrdersType? type            
+            string namespace_,
+            string userId,
+            string? endTime,
+            int? limit,
+            int? offset,
+            string? productId,
+            string? startTime,
+            QueryUserIAPOrdersStatus? status,
+            QueryUserIAPOrdersType? type
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (endTime is not null) QueryParams["endTime"] = endTime;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
@@ -210,11 +210,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (startTime is not null) QueryParams["startTime"] = startTime;
             if (status is not null) QueryParams["status"] = status.Value;
             if (type is not null) QueryParams["type"] = type.Value;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -223,12 +223,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.IAPOrderPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -241,9 +241,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.IAPOrderPagingSlicedResult>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

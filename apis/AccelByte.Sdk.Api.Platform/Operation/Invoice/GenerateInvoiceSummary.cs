@@ -63,12 +63,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GenerateInvoiceSummary op = new GenerateInvoiceSummary(this,
-                    namespace_,                    
-                    endTime,                    
-                    feature,                    
-                    itemId,                    
-                    itemType,                    
-                    startTime                    
+                    namespace_,
+                    endTime,
+                    feature,
+                    itemId,
+                    itemType,
+                    startTime
                 );
 
                 op.SetBaseFields<GenerateInvoiceSummaryBuilder>(this);
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -141,43 +141,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (endTime is not null) QueryParams["endTime"] = endTime;
             if (feature is not null) QueryParams["feature"] = feature;
             if (itemId is not null) QueryParams["itemId"] = itemId;
             if (itemType is not null) QueryParams["itemType"] = itemType.Value;
             if (startTime is not null) QueryParams["startTime"] = startTime;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         public GenerateInvoiceSummary(
-            string namespace_,            
-            string endTime,            
-            string feature,            
-            string itemId,            
-            GenerateInvoiceSummaryItemType itemType,            
-            string startTime            
+            string namespace_,
+            string endTime,
+            string feature,
+            string itemId,
+            GenerateInvoiceSummaryItemType itemType,
+            string startTime
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (endTime is not null) QueryParams["endTime"] = endTime;
             if (feature is not null) QueryParams["feature"] = feature;
             if (itemId is not null) QueryParams["itemId"] = itemId;
             if (itemType is not null) QueryParams["itemType"] = itemType.Value;
             if (startTime is not null) QueryParams["startTime"] = startTime;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -186,12 +186,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };        
-        
+        public override List<string> Produces => new() { "application/json" };
+
         public Model.InvoiceSummary? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -204,9 +204,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 return JsonSerializer.Deserialize<Model.InvoiceSummary>(payload, ResponseJsonOptions);
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }

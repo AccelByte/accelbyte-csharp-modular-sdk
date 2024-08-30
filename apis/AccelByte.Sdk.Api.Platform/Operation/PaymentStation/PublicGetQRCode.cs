@@ -59,8 +59,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicGetQRCode op = new PublicGetQRCode(this,
-                    namespace_,                    
-                    code                    
+                    namespace_,
+                    code
                 );
 
                 op.SetBaseFields<PublicGetQRCodeBuilder>(this);
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -113,30 +113,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (code is not null) QueryParams["code"] = code;
-            
 
-            
-            
-            
+            if (code is not null) QueryParams["code"] = code;
+
+
+
+
+
 
         }
         #endregion
 
         public PublicGetQRCode(
-            string namespace_,            
-            string code            
+            string namespace_,
+            string code
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (code is not null) QueryParams["code"] = code;
-            
 
-            
-            
-            
+            if (code is not null) QueryParams["code"] = code;
+
+
+
+
+
 
         }
 
@@ -144,12 +144,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "image/png" };        
-        
+        public override List<string> Produces => new() { "image/png" };
+
         public byte[]? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
-        {            
+        {
             if (code == (HttpStatusCode)204)
             {
                 return null;
@@ -170,9 +170,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     return ms.ToArray();
                 }
             }
-            
+
             var payloadString = payload.ReadToString();
-            
+
             throw new HttpResponseException(code, payloadString);
         }
     }
