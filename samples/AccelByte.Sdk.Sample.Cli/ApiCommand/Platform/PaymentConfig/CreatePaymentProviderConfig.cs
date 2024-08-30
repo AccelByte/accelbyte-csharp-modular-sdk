@@ -42,12 +42,11 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
             var opBuilder = AccelByte.Sdk.Api.Platform.Operation.CreatePaymentProviderConfig.Builder;
 
 
-            if (Body != null)
-                opBuilder.SetBody((AccelByte.Sdk.Api.Platform.Model.PaymentProviderConfigEdit)Body);
 
 
 
             CreatePaymentProviderConfig operation = opBuilder.Build(
+                Body
             );
 
 

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform", "updatecampaign")]
-    public class UpdateCampaignCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "querycampaignbatchnames")]
+    public class QueryCampaignBatchNamesCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
         public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName { get { return "UpdateCampaign"; } }
+        public string OperationName { get { return "QueryCampaignBatchNames"; } }
 
         [SdkCommandArgument("campaignId")]
         public string CampaignId { get; set; } = String.Empty;
@@ -33,10 +33,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
-        [SdkCommandData("body")]
-        public CampaignUpdate Body { get; set; } = new CampaignUpdate();
+        [SdkCommandArgument("batchName")]
+        public string? BatchName { get; set; }
 
-        public UpdateCampaignCommand(IAccelByteSdk sdk)
+        [SdkCommandArgument("limit")]
+        public int? Limit { get; set; }
+
+        public QueryCampaignBatchNamesCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
@@ -45,20 +48,23 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
         {
             AccelByte.Sdk.Api.Platform.Wrapper.Campaign wrapper = new AccelByte.Sdk.Api.Platform.Wrapper.Campaign(_SDK);
 
-            var opBuilder = AccelByte.Sdk.Api.Platform.Operation.UpdateCampaign.Builder;
+            var opBuilder = AccelByte.Sdk.Api.Platform.Operation.QueryCampaignBatchNames.Builder;
+
+            if (BatchName != null)
+                opBuilder.SetBatchName((string)BatchName);
+            if (Limit != null)
+                opBuilder.SetLimit((int)Limit);
 
 
 
 
-
-            UpdateCampaign operation = opBuilder.Build(
-                Body,
+            QueryCampaignBatchNames operation = opBuilder.Build(
                 CampaignId,
                 Namespace
             );
 
 
-            AccelByte.Sdk.Api.Platform.Model.CampaignInfo? response = wrapper.UpdateCampaign(operation);
+            List<AccelByte.Sdk.Api.Platform.Model.CampaignBatchNameInfo>? response = wrapper.QueryCampaignBatchNames(operation);
             if (response == null)
                 return "No response from server.";
 

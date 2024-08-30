@@ -36,8 +36,11 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
         [SdkCommandArgument("activeOnly")]
         public bool? ActiveOnly { get; set; }
 
+        [SdkCommandArgument("batchName")]
+        public string? BatchName { get; set; }
+
         [SdkCommandArgument("batchNo")]
-        public int? BatchNo { get; set; }
+        public List<int>? BatchNo { get; set; }
 
         [SdkCommandArgument("code")]
         public string? Code { get; set; }
@@ -47,6 +50,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 
         [SdkCommandArgument("offset")]
         public int? Offset { get; set; }
+
+        [SdkCommandArgument("withBatchName")]
+        public bool? WithBatchName { get; set; }
 
         public QueryCodesCommand(IAccelByteSdk sdk)
         {
@@ -61,14 +67,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 
             if (ActiveOnly != null)
                 opBuilder.SetActiveOnly((bool)ActiveOnly);
+            if (BatchName != null)
+                opBuilder.SetBatchName((string)BatchName);
             if (BatchNo != null)
-                opBuilder.SetBatchNo((int)BatchNo);
+                opBuilder.SetBatchNo((List<int>)BatchNo);
             if (Code != null)
                 opBuilder.SetCode((string)Code);
             if (Limit != null)
                 opBuilder.SetLimit((int)Limit);
             if (Offset != null)
                 opBuilder.SetOffset((int)Offset);
+            if (WithBatchName != null)
+                opBuilder.SetWithBatchName((bool)WithBatchName);
 
 
 

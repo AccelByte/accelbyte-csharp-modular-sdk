@@ -51,12 +51,11 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
             var opBuilder = AccelByte.Sdk.Api.Platform.Operation.UpdateCategory.Builder;
 
 
-            if (Body != null)
-                opBuilder.SetBody((AccelByte.Sdk.Api.Platform.Model.CategoryUpdate)Body);
 
 
 
             UpdateCategory operation = opBuilder.Build(
+                Body,
                 CategoryPath,
                 Namespace,
                 StoreId

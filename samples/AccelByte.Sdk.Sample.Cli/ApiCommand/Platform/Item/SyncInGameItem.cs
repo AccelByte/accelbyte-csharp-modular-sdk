@@ -48,12 +48,11 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
             var opBuilder = AccelByte.Sdk.Api.Platform.Operation.SyncInGameItem.Builder;
 
 
-            if (Body != null)
-                opBuilder.SetBody((AccelByte.Sdk.Api.Platform.Model.InGameItemSync)Body);
 
 
 
             SyncInGameItem operation = opBuilder.Build(
+                Body,
                 Namespace,
                 StoreId
             );

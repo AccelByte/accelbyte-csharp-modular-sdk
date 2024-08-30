@@ -18,47 +18,48 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform", "updatelootboxpluginconfig")]
-    public class UpdateLootBoxPluginConfigCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "renamebatch")]
+    public class RenameBatchCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
         public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName { get { return "UpdateLootBoxPluginConfig"; } }
+        public string OperationName { get { return "RenameBatch"; } }
+
+        [SdkCommandArgument("campaignId")]
+        public string CampaignId { get; set; } = String.Empty;
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
         [SdkCommandData("body")]
-        public LootBoxPluginConfigUpdate Body { get; set; } = new LootBoxPluginConfigUpdate();
+        public CampaignBatchNameChange Body { get; set; } = new CampaignBatchNameChange();
 
-        public UpdateLootBoxPluginConfigCommand(IAccelByteSdk sdk)
+        public RenameBatchCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
         public string Run()
         {
-            AccelByte.Sdk.Api.Platform.Wrapper.ServicePluginConfig wrapper = new AccelByte.Sdk.Api.Platform.Wrapper.ServicePluginConfig(_SDK);
+            AccelByte.Sdk.Api.Platform.Wrapper.Campaign wrapper = new AccelByte.Sdk.Api.Platform.Wrapper.Campaign(_SDK);
 
-            var opBuilder = AccelByte.Sdk.Api.Platform.Operation.UpdateLootBoxPluginConfig.Builder;
-
-
+            var opBuilder = AccelByte.Sdk.Api.Platform.Operation.RenameBatch.Builder;
 
 
 
-            UpdateLootBoxPluginConfig operation = opBuilder.Build(
+
+
+            RenameBatch operation = opBuilder.Build(
                 Body,
+                CampaignId,
                 Namespace
             );
 
 
-            AccelByte.Sdk.Api.Platform.Model.LootBoxPluginConfigInfo? response = wrapper.UpdateLootBoxPluginConfig(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            wrapper.RenameBatch(operation);
+            return String.Empty;
         }
     }
 }

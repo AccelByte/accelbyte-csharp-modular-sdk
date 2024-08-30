@@ -56,12 +56,11 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
             if (Force != null)
                 opBuilder.SetForce((bool)Force);
 
-            if (Body != null)
-                opBuilder.SetBody((AccelByte.Sdk.Api.Platform.Model.CancelRequest)Body);
 
 
 
             CancelSubscription operation = opBuilder.Build(
+                Body,
                 Namespace,
                 SubscriptionId,
                 UserId

@@ -48,12 +48,11 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
             var opBuilder = AccelByte.Sdk.Api.Platform.Operation.GetPsnEntitlementOwnership.Builder;
 
 
-            if (Body != null)
-                opBuilder.SetBody((AccelByte.Sdk.Api.Platform.Model.PsnEntitlementOwnershipRequest)Body);
 
 
 
             GetPsnEntitlementOwnership operation = opBuilder.Build(
+                Body,
                 EntitlementLabel,
                 Namespace
             );

@@ -42,12 +42,11 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
             var opBuilder = AccelByte.Sdk.Api.Platform.Operation.TestXsollaConfig.Builder;
 
 
-            if (Body != null)
-                opBuilder.SetBody((AccelByte.Sdk.Api.Platform.Model.XsollaConfig)Body);
 
 
 
             TestXsollaConfig operation = opBuilder.Build(
+                Body
             );
 
 
