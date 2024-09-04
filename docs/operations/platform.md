@@ -74,6 +74,8 @@
 | `/platform/admin/namespaces/{namespace}/campaigns` | POST | CreateCampaign | [CreateCampaign](../../apis/AccelByte.Sdk.Api.Platform/Operation/Campaign/CreateCampaign.cs) | [CreateCampaign](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Campaign/CreateCampaign.cs) |
 | `/platform/admin/namespaces/{namespace}/campaigns/{campaignId}` | GET | GetCampaign | [GetCampaign](../../apis/AccelByte.Sdk.Api.Platform/Operation/Campaign/GetCampaign.cs) | [GetCampaign](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Campaign/GetCampaign.cs) |
 | `/platform/admin/namespaces/{namespace}/campaigns/{campaignId}` | PUT | UpdateCampaign | [UpdateCampaign](../../apis/AccelByte.Sdk.Api.Platform/Operation/Campaign/UpdateCampaign.cs) | [UpdateCampaign](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Campaign/UpdateCampaign.cs) |
+| `/platform/admin/namespaces/{namespace}/campaigns/{campaignId}/batchName` | PUT | RenameBatch | [RenameBatch](../../apis/AccelByte.Sdk.Api.Platform/Operation/Campaign/RenameBatch.cs) | [RenameBatch](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Campaign/RenameBatch.cs) |
+| `/platform/admin/namespaces/{namespace}/campaigns/{campaignId}/batchNames` | GET | QueryCampaignBatchNames | [QueryCampaignBatchNames](../../apis/AccelByte.Sdk.Api.Platform/Operation/Campaign/QueryCampaignBatchNames.cs) | [QueryCampaignBatchNames](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Campaign/QueryCampaignBatchNames.cs) |
 | `/platform/admin/namespaces/{namespace}/campaigns/{campaignId}/dynamic` | GET | GetCampaignDynamic | [GetCampaignDynamic](../../apis/AccelByte.Sdk.Api.Platform/Operation/Campaign/GetCampaignDynamic.cs) | [GetCampaignDynamic](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Campaign/GetCampaignDynamic.cs) |
 | `/platform/admin/namespaces/{namespace}/codes/campaigns/{campaignId}` | GET | QueryCodes | [QueryCodes](../../apis/AccelByte.Sdk.Api.Platform/Operation/Campaign/QueryCodes.cs) | [QueryCodes](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Campaign/QueryCodes.cs) |
 | `/platform/admin/namespaces/{namespace}/codes/campaigns/{campaignId}` | POST | CreateCodes | [CreateCodes](../../apis/AccelByte.Sdk.Api.Platform/Operation/Campaign/CreateCodes.cs) | [CreateCodes](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Campaign/CreateCodes.cs) |
@@ -810,6 +812,8 @@
 | `BulkOperationResult` | [BulkOperationResult](../../apis/AccelByte.Sdk.Api.Platform/Model/BulkOperationResult.cs) |
 | `BulkRegionDataChangeRequest` | [BulkRegionDataChangeRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/BulkRegionDataChangeRequest.cs) |
 | `BundledItemInfo` | [BundledItemInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/BundledItemInfo.cs) |
+| `CampaignBatchNameChange` | [CampaignBatchNameChange](../../apis/AccelByte.Sdk.Api.Platform/Model/CampaignBatchNameChange.cs) |
+| `CampaignBatchNameInfo` | [CampaignBatchNameInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/CampaignBatchNameInfo.cs) |
 | `CampaignCreate` | [CampaignCreate](../../apis/AccelByte.Sdk.Api.Platform/Model/CampaignCreate.cs) |
 | `CampaignDynamicInfo` | [CampaignDynamicInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/CampaignDynamicInfo.cs) |
 | `CampaignIfc` | [CampaignIfc](../../apis/AccelByte.Sdk.Api.Platform/Model/CampaignIfc.cs) |
@@ -872,7 +876,6 @@
 | `DiscountItem` | [DiscountItem](../../apis/AccelByte.Sdk.Api.Platform/Model/DiscountItem.cs) |
 | `DurableEntitlementRevocationConfig` | [DurableEntitlementRevocationConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/DurableEntitlementRevocationConfig.cs) |
 | `EntitlementConfigInfo` | [EntitlementConfigInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementConfigInfo.cs) |
-| `EntitlementDecrement` | [EntitlementDecrement](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementDecrement.cs) |
 | `EntitlementDecrementResult` | [EntitlementDecrementResult](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementDecrementResult.cs) |
 | `EntitlementGrant` | [EntitlementGrant](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementGrant.cs) |
 | `EntitlementGrantResult` | [EntitlementGrantResult](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementGrantResult.cs) |
@@ -888,6 +891,7 @@
 | `EntitlementPrechekResult` | [EntitlementPrechekResult](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementPrechekResult.cs) |
 | `EntitlementRevocation` | [EntitlementRevocation](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementRevocation.cs) |
 | `EntitlementRevocationConfig` | [EntitlementRevocationConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementRevocationConfig.cs) |
+| `EntitlementRevokeRequest` | [EntitlementRevokeRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementRevokeRequest.cs) |
 | `EntitlementRevokeResult` | [EntitlementRevokeResult](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementRevokeResult.cs) |
 | `EntitlementSoldRequest` | [EntitlementSoldRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementSoldRequest.cs) |
 | `EntitlementSoldResult` | [EntitlementSoldResult](../../apis/AccelByte.Sdk.Api.Platform/Model/EntitlementSoldResult.cs) |
@@ -1087,7 +1091,9 @@
 | `PredicateValidateResult` | [PredicateValidateResult](../../apis/AccelByte.Sdk.Api.Platform/Model/PredicateValidateResult.cs) |
 | `PsnEntitlementOwnershipRequest` | [PsnEntitlementOwnershipRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/PsnEntitlementOwnershipRequest.cs) |
 | `PublicCustomConfigInfo` | [PublicCustomConfigInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/PublicCustomConfigInfo.cs) |
+| `PublicEntitlementDecrement` | [PublicEntitlementDecrement](../../apis/AccelByte.Sdk.Api.Platform/Model/PublicEntitlementDecrement.cs) |
 | `PublicEntitlementHistoryInfo` | [PublicEntitlementHistoryInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/PublicEntitlementHistoryInfo.cs) |
+| `PublicEntitlementMetadata` | [PublicEntitlementMetadata](../../apis/AccelByte.Sdk.Api.Platform/Model/PublicEntitlementMetadata.cs) |
 | `PurchaseCondition` | [PurchaseCondition](../../apis/AccelByte.Sdk.Api.Platform/Model/PurchaseCondition.cs) |
 | `PurchaseConditionUpdate` | [PurchaseConditionUpdate](../../apis/AccelByte.Sdk.Api.Platform/Model/PurchaseConditionUpdate.cs) |
 | `PurchasedItemCount` | [PurchasedItemCount](../../apis/AccelByte.Sdk.Api.Platform/Model/PurchasedItemCount.cs) |
