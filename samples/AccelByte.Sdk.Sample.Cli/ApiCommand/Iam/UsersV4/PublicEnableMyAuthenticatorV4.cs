@@ -46,11 +46,10 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 
 
 
-            if (Code != null)
-                opBuilder.SetCode((string)Code);
 
 
             PublicEnableMyAuthenticatorV4 operation = opBuilder.Build(
+                Code,
                 Namespace
             );
 

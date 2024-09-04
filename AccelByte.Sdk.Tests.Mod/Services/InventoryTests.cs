@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 Assert.Inconclusive("Test does not apply to AGS Starter environment.");
                 return;
             }
-            
+
             Random random = new Random();
             DisableRetry();
 
@@ -44,12 +44,12 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Create an inventory configuration
             ApimodelsCreateInventoryConfigurationReq cInventoryConfigBody = new ApimodelsCreateInventoryConfigurationReq()
             {
-                Code=                codeInventory,
-                Description=         "testing",
-                InitialMaxSlots=     3,
-                MaxInstancesPerUser= 2,
-                MaxUpgradeSlots=     5,
-                Name=                codeInventory
+                Code = codeInventory,
+                Description = "testing",
+                InitialMaxSlots = 3,
+                MaxInstancesPerUser = 2,
+                MaxUpgradeSlots = 5,
+                Name = codeInventory
             };
 
             AccelByte.Sdk.Api.Inventory.Model.ApimodelsInventoryConfigurationResp? configInventory = _Sdk.GetInventoryApi().AdminInventoryConfigurations.AdminCreateInventoryConfigurationOp

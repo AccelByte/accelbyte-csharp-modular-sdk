@@ -100,11 +100,33 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     return opBuilder;
             }
         }
+        public AdminBulkSaveItemToInventory.AdminBulkSaveItemToInventoryBuilder AdminBulkSaveItemToInventoryOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminBulkSaveItemToInventory.AdminBulkSaveItemToInventoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public AdminSaveItem.AdminSaveItemBuilder AdminSaveItemOp
         {
             get
             {
                 var opBuilder = new Operation.AdminSaveItem.AdminSaveItemBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public AdminBulkSaveItem.AdminBulkSaveItemBuilder AdminBulkSaveItemOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminBulkSaveItem.AdminBulkSaveItemBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -271,6 +293,22 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public List<Model.ApimodelsBulkSaveItemResp>? AdminBulkSaveItemToInventory(AdminBulkSaveItemToInventory input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ApimodelsBulkSaveItemResp>?> AdminBulkSaveItemToInventoryAsync(AdminBulkSaveItemToInventory input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public Model.ApimodelsItemResp? AdminSaveItem(AdminSaveItem input)
         {
             var response = _sdk.RunRequest(input);
@@ -300,6 +338,22 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2, T3>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public List<Model.ApimodelsBulkSaveItemResp>? AdminBulkSaveItem(AdminBulkSaveItem input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<List<Model.ApimodelsBulkSaveItemResp>?> AdminBulkSaveItemAsync(AdminBulkSaveItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

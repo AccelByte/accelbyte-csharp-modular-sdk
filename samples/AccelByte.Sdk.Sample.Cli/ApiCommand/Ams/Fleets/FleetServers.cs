@@ -33,6 +33,12 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
+        [SdkCommandArgument("count")]
+        public string? Count { get; set; }
+
+        [SdkCommandArgument("offset")]
+        public long? Offset { get; set; }
+
         public FleetServersCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -44,6 +50,10 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 
             var opBuilder = AccelByte.Sdk.Api.Ams.Operation.FleetServers.Builder;
 
+            if (Count != null)
+                opBuilder.SetCount((string)Count);
+            if (Offset != null)
+                opBuilder.SetOffset((long)Offset);
 
 
 

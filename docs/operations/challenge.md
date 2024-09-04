@@ -27,6 +27,14 @@
 | `/challenge/v1/admin/namespaces/{namespace}/challenges/{challengeCode}/goals/{code}` | PUT | AdminUpdateGoals | [AdminUpdateGoals](../../apis/AccelByte.Sdk.Api.Challenge/Operation/GoalConfiguration/AdminUpdateGoals.cs) | [AdminUpdateGoals](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Challenge/GoalConfiguration/AdminUpdateGoals.cs) |
 | `/challenge/v1/admin/namespaces/{namespace}/challenges/{challengeCode}/goals/{code}` | DELETE | AdminDeleteGoal | [AdminDeleteGoal](../../apis/AccelByte.Sdk.Api.Challenge/Operation/GoalConfiguration/AdminDeleteGoal.cs) | [AdminDeleteGoal](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Challenge/GoalConfiguration/AdminDeleteGoal.cs) |
 
+### Plugins Wrapper:  [Plugins](../../apis/AccelByte.Sdk.Api.Challenge/Wrapper/Plugins.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/challenge/v1/admin/namespaces/{namespace}/plugins/assignment` | GET | AdminGetAssignmentPlugin | [AdminGetAssignmentPlugin](../../apis/AccelByte.Sdk.Api.Challenge/Operation/Plugins/AdminGetAssignmentPlugin.cs) | [AdminGetAssignmentPlugin](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Challenge/Plugins/AdminGetAssignmentPlugin.cs) |
+| `/challenge/v1/admin/namespaces/{namespace}/plugins/assignment` | PUT | AdminUpdateAssignmentPlugin | [AdminUpdateAssignmentPlugin](../../apis/AccelByte.Sdk.Api.Challenge/Operation/Plugins/AdminUpdateAssignmentPlugin.cs) | [AdminUpdateAssignmentPlugin](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Challenge/Plugins/AdminUpdateAssignmentPlugin.cs) |
+| `/challenge/v1/admin/namespaces/{namespace}/plugins/assignment` | POST | AdminCreateAssignmentPlugin | [AdminCreateAssignmentPlugin](../../apis/AccelByte.Sdk.Api.Challenge/Operation/Plugins/AdminCreateAssignmentPlugin.cs) | [AdminCreateAssignmentPlugin](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Challenge/Plugins/AdminCreateAssignmentPlugin.cs) |
+| `/challenge/v1/admin/namespaces/{namespace}/plugins/assignment` | DELETE | AdminDeleteAssignmentPlugin | [AdminDeleteAssignmentPlugin](../../apis/AccelByte.Sdk.Api.Challenge/Operation/Plugins/AdminDeleteAssignmentPlugin.cs) | [AdminDeleteAssignmentPlugin](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Challenge/Plugins/AdminDeleteAssignmentPlugin.cs) |
+
 ### Challenge Progression Wrapper:  [ChallengeProgression](../../apis/AccelByte.Sdk.Api.Challenge/Wrapper/ChallengeProgression.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -60,6 +68,10 @@
 |---|---|---|---|---|
 
 ### Goal Configuration Wrapper:  [GoalConfiguration](../../apis/AccelByte.Sdk.Api.Challenge/Wrapper/GoalConfiguration.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
+### Plugins Wrapper:  [Plugins](../../apis/AccelByte.Sdk.Api.Challenge/Wrapper/Plugins.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
@@ -101,6 +113,10 @@
 | `model.ListPeriodsResponse` | [ModelListPeriodsResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelListPeriodsResponse.cs) |
 | `model.ListUserRewardsResponse` | [ModelListUserRewardsResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelListUserRewardsResponse.cs) |
 | `model.Pagination` | [ModelPagination](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelPagination.cs) |
+| `model.PluginAsignmentAppConfig` | [ModelPluginAsignmentAppConfig](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelPluginAsignmentAppConfig.cs) |
+| `model.PluginAssignmentCustomConfig` | [ModelPluginAssignmentCustomConfig](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelPluginAssignmentCustomConfig.cs) |
+| `model.PluginAssignmentRequest` | [ModelPluginAssignmentRequest](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelPluginAssignmentRequest.cs) |
+| `model.PluginAssignmentResponse` | [ModelPluginAssignmentResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelPluginAssignmentResponse.cs) |
 | `model.Predicate` | [ModelPredicate](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelPredicate.cs) |
 | `model.Requirement` | [ModelRequirement](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelRequirement.cs) |
 | `model.RequirementProgressionResponse` | [ModelRequirementProgressionResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelRequirementProgressionResponse.cs) |

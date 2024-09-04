@@ -401,6 +401,18 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        public AdminGetMyOwnMFAStatusV4.AdminGetMyOwnMFAStatusV4Builder AdminGetMyOwnMFAStatusV4Op
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminGetMyOwnMFAStatusV4.AdminGetMyOwnMFAStatusV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetMyMFAStatusV4.AdminGetMyMFAStatusV4Builder AdminGetMyMFAStatusV4Op
         {
             get
@@ -714,6 +726,18 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        public PublicGetMyOwnMFAStatusV4.PublicGetMyOwnMFAStatusV4Builder PublicGetMyOwnMFAStatusV4Op
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicGetMyOwnMFAStatusV4.PublicGetMyOwnMFAStatusV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetMyMFAStatusV4.PublicGetMyMFAStatusV4Builder PublicGetMyMFAStatusV4Op
         {
             get
@@ -1289,6 +1313,24 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public Model.ModelUserMFAStatusResponseV4? AdminGetMyOwnMFAStatusV4(AdminGetMyOwnMFAStatusV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelUserMFAStatusResponseV4?> AdminGetMyOwnMFAStatusV4Async(AdminGetMyOwnMFAStatusV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.ModelUserMFAStatusResponseV4? AdminGetMyMFAStatusV4(AdminGetMyMFAStatusV4 input)
         {
             var response = _sdk.RunRequest(input);
@@ -1305,6 +1347,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
 #pragma warning disable ab_deprecated_operation
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.ModelInviteUserResponseV3? AdminInviteUserV4(AdminInviteUserV4 input)
@@ -1752,6 +1795,24 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public Model.ModelUserMFAStatusResponseV4? PublicGetMyOwnMFAStatusV4(PublicGetMyOwnMFAStatusV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelUserMFAStatusResponseV4?> PublicGetMyOwnMFAStatusV4Async(PublicGetMyOwnMFAStatusV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Model.ModelUserMFAStatusResponseV4? PublicGetMyMFAStatusV4(PublicGetMyMFAStatusV4 input)
         {
             var response = _sdk.RunRequest(input);
@@ -1768,6 +1829,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
         public Model.ModelUserPublicInfoResponseV4? PublicGetUserPublicInfoByUserIdV4(PublicGetUserPublicInfoByUserIdV4 input)
         {
             var response = _sdk.RunRequest(input);

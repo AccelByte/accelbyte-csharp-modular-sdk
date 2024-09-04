@@ -31,7 +31,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionhistory
         public string Namespace { get; set; } = String.Empty;
 
         [SdkCommandArgument("matchPool")]
-        public string? MatchPool { get; set; }
+        public List<string>? MatchPool { get; set; }
 
         [SdkCommandArgument("endDate")]
         public string EndDate { get; set; } = String.Empty;
@@ -51,7 +51,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionhistory
             var opBuilder = AccelByte.Sdk.Api.Sessionhistory.Operation.QueryTotalMatchmakingCreated.Builder;
 
             if (MatchPool != null)
-                opBuilder.SetMatchPool((string)MatchPool);
+                opBuilder.SetMatchPool((List<string>)MatchPool);
 
 
 

@@ -24,6 +24,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// PublicEnableMyAuthenticatorV4
     ///
     /// This endpoint is used to enable 2FA authenticator.
+    /// ----------
+    /// Prerequisites:
+    /// - Generate the secret key/QR code uri by **_/iam/v4/public/namespaces/{namespace}/users/me/mfa/authenticator/key_**
+    /// - Consume the secret key/QR code by an authenticator app
+    /// - Get the code from the authenticator app
     /// </summary>
     public class PublicEnableMyAuthenticatorV4 : AccelByte.Sdk.Core.Operation
     {
@@ -35,8 +40,6 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
 
 
-
-            public string? Code { get; set; }
 
 
 
@@ -50,19 +53,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            public PublicEnableMyAuthenticatorV4Builder SetCode(string _code)
-            {
-                Code = _code;
-                return this;
-            }
-
 
 
             public PublicEnableMyAuthenticatorV4 Build(
+                string code,
                 string namespace_
             )
             {
                 PublicEnableMyAuthenticatorV4 op = new PublicEnableMyAuthenticatorV4(this,
+                    code,
                     namespace_
                 );
 
@@ -71,10 +70,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
 
             public void Execute(
+                string code,
                 string namespace_
             )
             {
                 PublicEnableMyAuthenticatorV4 op = Build(
+                    code,
                     namespace_
                 );
 
@@ -88,10 +89,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.Payload);
             }
             public async Task ExecuteAsync(
+                string code,
                 string namespace_
             )
             {
                 PublicEnableMyAuthenticatorV4 op = Build(
+                    code,
                     namespace_
                 );
 
@@ -107,13 +110,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         }
 
         private PublicEnableMyAuthenticatorV4(PublicEnableMyAuthenticatorV4Builder builder,
+            string code,
             string namespace_
         )
         {
             PathParams["namespace"] = namespace_;
 
 
-            if (builder.Code is not null) FormParams["code"] = builder.Code;
+            if (code is not null) FormParams["code"] = code;
 
 
 
@@ -125,7 +129,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public PublicEnableMyAuthenticatorV4(
             string namespace_,
-            string? code
+            string code
         )
         {
             PathParams["namespace"] = namespace_;

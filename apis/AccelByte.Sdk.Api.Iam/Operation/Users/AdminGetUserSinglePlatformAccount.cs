@@ -71,6 +71,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             : OperationBuilder<AdminGetUserSinglePlatformAccountBuilder>
         {
 
+            public bool? CrossNamespace { get; set; }
+
 
 
 
@@ -82,6 +84,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 _Sdk = sdk;
             }
 
+
+            public AdminGetUserSinglePlatformAccountBuilder SetCrossNamespace(bool _crossNamespace)
+            {
+                CrossNamespace = _crossNamespace;
+                return this;
+            }
 
 
 
@@ -200,6 +208,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["platformId"] = platformId;
             PathParams["userId"] = userId;
 
+            if (builder.CrossNamespace != null) QueryParams["crossNamespace"] = Convert.ToString(builder.CrossNamespace)!;
 
 
 
@@ -213,13 +222,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public AdminGetUserSinglePlatformAccount(
             string namespace_,
             string platformId,
-            string userId
+            string userId,
+            bool? crossNamespace
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
             PathParams["userId"] = userId;
 
+            if (crossNamespace != null) QueryParams["crossNamespace"] = Convert.ToString(crossNamespace)!;
 
 
 

@@ -35,6 +35,8 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             : OperationBuilder<GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder>
         {
 
+            public string? DeviceType { get; set; }
+
             public string? EndTime { get; set; }
 
             public string? EventId { get; set; }
@@ -64,6 +66,12 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
                 _Sdk = sdk;
             }
 
+
+            public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder SetDeviceType(string _deviceType)
+            {
+                DeviceType = _deviceType;
+                return this;
+            }
 
             public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder SetEndTime(string _endTime)
             {
@@ -177,6 +185,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         {
             PathParams["namespace"] = namespace_;
 
+            if (builder.DeviceType is not null) QueryParams["deviceType"] = builder.DeviceType;
             if (builder.EndTime is not null) QueryParams["endTime"] = builder.EndTime;
             if (builder.EventId is not null) QueryParams["eventId"] = builder.EventId;
             if (builder.EventName is not null) QueryParams["eventName"] = builder.EventName;
@@ -199,6 +208,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
         public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet(
             string namespace_,
+            string? deviceType,
             string? endTime,
             string? eventId,
             string? eventName,
@@ -212,6 +222,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         {
             PathParams["namespace"] = namespace_;
 
+            if (deviceType is not null) QueryParams["deviceType"] = deviceType;
             if (endTime is not null) QueryParams["endTime"] = endTime;
             if (eventId is not null) QueryParams["eventId"] = eventId;
             if (eventName is not null) QueryParams["eventName"] = eventName;

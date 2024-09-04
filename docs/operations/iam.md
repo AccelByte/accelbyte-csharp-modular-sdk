@@ -265,7 +265,7 @@
 | `/iam/v3/admin/roles/{roleId}/managers` | DELETE | AdminRemoveRoleManagersV3 | [AdminRemoveRoleManagersV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/Roles/AdminRemoveRoleManagersV3.cs) | [AdminRemoveRoleManagersV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Roles/AdminRemoveRoleManagersV3.cs) |
 | `/iam/v3/admin/roles/{roleId}/members` | GET | AdminGetRoleMembersV3 | [AdminGetRoleMembersV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/Roles/AdminGetRoleMembersV3.cs) | [AdminGetRoleMembersV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Roles/AdminGetRoleMembersV3.cs) |
 | `/iam/v3/admin/roles/{roleId}/members` | POST | AdminAddRoleMembersV3 | [AdminAddRoleMembersV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/Roles/AdminAddRoleMembersV3.cs) | [AdminAddRoleMembersV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Roles/AdminAddRoleMembersV3.cs) |
-| `/iam/v3/admin/roles/{roleId}/members` | DELETE | AdminRemoveRoleMembersV3 | [AdminRemoveRoleMembersV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/Roles/AdminRemoveRoleMembersV3.cs) | [AdminRemoveRoleMembersV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Roles/AdminRemoveRoleMembersV3.cs) |
+| [DEPRECATED] `/iam/v3/admin/roles/{roleId}/members` | DELETE | AdminRemoveRoleMembersV3 | [AdminRemoveRoleMembersV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/Roles/AdminRemoveRoleMembersV3.cs) | [AdminRemoveRoleMembersV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Roles/AdminRemoveRoleMembersV3.cs) |
 | `/iam/v3/admin/roles/{roleId}/permissions` | PUT | AdminUpdateRolePermissionsV3 | [AdminUpdateRolePermissionsV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/Roles/AdminUpdateRolePermissionsV3.cs) | [AdminUpdateRolePermissionsV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Roles/AdminUpdateRolePermissionsV3.cs) |
 | `/iam/v3/admin/roles/{roleId}/permissions` | POST | AdminAddRolePermissionsV3 | [AdminAddRolePermissionsV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/Roles/AdminAddRolePermissionsV3.cs) | [AdminAddRolePermissionsV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Roles/AdminAddRolePermissionsV3.cs) |
 | `/iam/v3/admin/roles/{roleId}/permissions` | DELETE | AdminDeleteRolePermissionsV3 | [AdminDeleteRolePermissionsV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/Roles/AdminDeleteRolePermissionsV3.cs) | [AdminDeleteRolePermissionsV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Roles/AdminDeleteRolePermissionsV3.cs) |
@@ -338,6 +338,15 @@
 | `/iam/v3/admin/namespaces/{namespace}/platforms/{platformId}/sso` | POST | AddSSOLoginPlatformCredential | [AddSSOLoginPlatformCredential](../../apis/AccelByte.Sdk.Api.Iam/Operation/SSOCredential/AddSSOLoginPlatformCredential.cs) | [AddSSOLoginPlatformCredential](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/SSOCredential/AddSSOLoginPlatformCredential.cs) |
 | `/iam/v3/admin/namespaces/{namespace}/platforms/{platformId}/sso` | DELETE | DeleteSSOLoginPlatformCredentialV3 | [DeleteSSOLoginPlatformCredentialV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/SSOCredential/DeleteSSOLoginPlatformCredentialV3.cs) | [DeleteSSOLoginPlatformCredentialV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/SSOCredential/DeleteSSOLoginPlatformCredentialV3.cs) |
 | `/iam/v3/admin/namespaces/{namespace}/platforms/{platformId}/sso` | PATCH | UpdateSSOPlatformCredential | [UpdateSSOPlatformCredential](../../apis/AccelByte.Sdk.Api.Iam/Operation/SSOCredential/UpdateSSOPlatformCredential.cs) | [UpdateSSOPlatformCredential](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/SSOCredential/UpdateSSOPlatformCredential.cs) |
+
+### Override Role Config v3 Wrapper:  [OverrideRoleConfigV3](../../apis/AccelByte.Sdk.Api.Iam/Wrapper/OverrideRoleConfigV3.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/iam/v3/admin/namespaces/{namespace}/roleoverride` | GET | AdminGetRoleOverrideConfigV3 | [AdminGetRoleOverrideConfigV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/OverrideRoleConfigV3/AdminGetRoleOverrideConfigV3.cs) | [AdminGetRoleOverrideConfigV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/OverrideRoleConfigV3/AdminGetRoleOverrideConfigV3.cs) |
+| `/iam/v3/admin/namespaces/{namespace}/roleoverride` | PATCH | AdminUpdateRoleOverrideConfigV3 | [AdminUpdateRoleOverrideConfigV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/OverrideRoleConfigV3/AdminUpdateRoleOverrideConfigV3.cs) | [AdminUpdateRoleOverrideConfigV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/OverrideRoleConfigV3/AdminUpdateRoleOverrideConfigV3.cs) |
+| `/iam/v3/admin/namespaces/{namespace}/roleoverride/source` | GET | AdminGetRoleSourceV3 | [AdminGetRoleSourceV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/OverrideRoleConfigV3/AdminGetRoleSourceV3.cs) | [AdminGetRoleSourceV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/OverrideRoleConfigV3/AdminGetRoleSourceV3.cs) |
+| `/iam/v3/admin/namespaces/{namespace}/roleoverride/status` | PATCH | AdminChangeRoleOverrideConfigStatusV3 | [AdminChangeRoleOverrideConfigStatusV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/OverrideRoleConfigV3/AdminChangeRoleOverrideConfigStatusV3.cs) | [AdminChangeRoleOverrideConfigStatusV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/OverrideRoleConfigV3/AdminChangeRoleOverrideConfigStatusV3.cs) |
+| `/iam/v3/admin/namespaces/{namespace}/roleoverride/{roleId}/permissions` | GET | AdminGetRoleNamespacePermissionV3 | [AdminGetRoleNamespacePermissionV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/OverrideRoleConfigV3/AdminGetRoleNamespacePermissionV3.cs) | [AdminGetRoleNamespacePermissionV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/OverrideRoleConfigV3/AdminGetRoleNamespacePermissionV3.cs) |
 
 ### OAuth2.0 - Extension Wrapper:  [OAuth20Extension](../../apis/AccelByte.Sdk.Api.Iam/Wrapper/OAuth20Extension.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -422,7 +431,8 @@
 | `/iam/v4/admin/users/me/mfa/email/enable` | POST | AdminEnableMyEmailV4 | [AdminEnableMyEmailV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/AdminEnableMyEmailV4.cs) | [AdminEnableMyEmailV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/AdminEnableMyEmailV4.cs) |
 | `/iam/v4/admin/users/me/mfa/factor` | GET | AdminGetMyEnabledFactorsV4 | [AdminGetMyEnabledFactorsV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/AdminGetMyEnabledFactorsV4.cs) | [AdminGetMyEnabledFactorsV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/AdminGetMyEnabledFactorsV4.cs) |
 | `/iam/v4/admin/users/me/mfa/factor` | POST | AdminMakeFactorMyDefaultV4 | [AdminMakeFactorMyDefaultV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/AdminMakeFactorMyDefaultV4.cs) | [AdminMakeFactorMyDefaultV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/AdminMakeFactorMyDefaultV4.cs) |
-| `/iam/v4/admin/users/me/mfa/status` | POST | AdminGetMyMFAStatusV4 | [AdminGetMyMFAStatusV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/AdminGetMyMFAStatusV4.cs) | [AdminGetMyMFAStatusV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/AdminGetMyMFAStatusV4.cs) |
+| `/iam/v4/admin/users/me/mfa/status` | GET | AdminGetMyOwnMFAStatusV4 | [AdminGetMyOwnMFAStatusV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/AdminGetMyOwnMFAStatusV4.cs) | [AdminGetMyOwnMFAStatusV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/AdminGetMyOwnMFAStatusV4.cs) |
+| [DEPRECATED] `/iam/v4/admin/users/me/mfa/status` | POST | AdminGetMyMFAStatusV4 | [AdminGetMyMFAStatusV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/AdminGetMyMFAStatusV4.cs) | [AdminGetMyMFAStatusV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/AdminGetMyMFAStatusV4.cs) |
 | [DEPRECATED] `/iam/v4/admin/users/users/invite` | POST | AdminInviteUserV4 | [AdminInviteUserV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/AdminInviteUserV4.cs) | [AdminInviteUserV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/AdminInviteUserV4.cs) |
 | `/iam/v4/public/namespaces/{namespace}/platforms/{platformId}/users` | POST | PublicListUserIDByPlatformUserIDsV4 | [PublicListUserIDByPlatformUserIDsV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/PublicListUserIDByPlatformUserIDsV4.cs) | [PublicListUserIDByPlatformUserIDsV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/PublicListUserIDByPlatformUserIDsV4.cs) |
 | `/iam/v4/public/namespaces/{namespace}/test_users` | POST | PublicCreateTestUserV4 | [PublicCreateTestUserV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/PublicCreateTestUserV4.cs) | [PublicCreateTestUserV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/PublicCreateTestUserV4.cs) |
@@ -450,7 +460,8 @@
 | `/iam/v4/public/namespaces/{namespace}/users/me/mfa/email/enable` | POST | PublicEnableMyEmailV4 | [PublicEnableMyEmailV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/PublicEnableMyEmailV4.cs) | [PublicEnableMyEmailV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/PublicEnableMyEmailV4.cs) |
 | `/iam/v4/public/namespaces/{namespace}/users/me/mfa/factor` | GET | PublicGetMyEnabledFactorsV4 | [PublicGetMyEnabledFactorsV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/PublicGetMyEnabledFactorsV4.cs) | [PublicGetMyEnabledFactorsV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/PublicGetMyEnabledFactorsV4.cs) |
 | `/iam/v4/public/namespaces/{namespace}/users/me/mfa/factor` | POST | PublicMakeFactorMyDefaultV4 | [PublicMakeFactorMyDefaultV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/PublicMakeFactorMyDefaultV4.cs) | [PublicMakeFactorMyDefaultV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/PublicMakeFactorMyDefaultV4.cs) |
-| `/iam/v4/public/namespaces/{namespace}/users/me/mfa/status` | POST | PublicGetMyMFAStatusV4 | [PublicGetMyMFAStatusV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/PublicGetMyMFAStatusV4.cs) | [PublicGetMyMFAStatusV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/PublicGetMyMFAStatusV4.cs) |
+| `/iam/v4/public/namespaces/{namespace}/users/me/mfa/status` | GET | PublicGetMyOwnMFAStatusV4 | [PublicGetMyOwnMFAStatusV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/PublicGetMyOwnMFAStatusV4.cs) | [PublicGetMyOwnMFAStatusV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/PublicGetMyOwnMFAStatusV4.cs) |
+| [DEPRECATED] `/iam/v4/public/namespaces/{namespace}/users/me/mfa/status` | POST | PublicGetMyMFAStatusV4 | [PublicGetMyMFAStatusV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/PublicGetMyMFAStatusV4.cs) | [PublicGetMyMFAStatusV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/PublicGetMyMFAStatusV4.cs) |
 | `/iam/v4/public/namespaces/{namespace}/users/{userId}` | GET | PublicGetUserPublicInfoByUserIdV4 | [PublicGetUserPublicInfoByUserIdV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/PublicGetUserPublicInfoByUserIdV4.cs) | [PublicGetUserPublicInfoByUserIdV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/PublicGetUserPublicInfoByUserIdV4.cs) |
 | `/iam/v4/public/users/invite` | POST | PublicInviteUserV4 | [PublicInviteUserV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/PublicInviteUserV4.cs) | [PublicInviteUserV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/PublicInviteUserV4.cs) |
 
@@ -535,6 +546,10 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
+### Override Role Config v3 Wrapper:  [OverrideRoleConfigV3](../../apis/AccelByte.Sdk.Api.Iam/Wrapper/OverrideRoleConfigV3.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
 ### OAuth2.0 - Extension Wrapper:  [OAuth20Extension](../../apis/AccelByte.Sdk.Api.Iam/Wrapper/OAuth20Extension.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -613,6 +628,7 @@
 | `accountcommon.ListUsersWithPlatformAccountsResponse` | [AccountcommonListUsersWithPlatformAccountsResponse](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonListUsersWithPlatformAccountsResponse.cs) |
 | `accountcommon.NamespaceRole` | [AccountcommonNamespaceRole](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonNamespaceRole.cs) |
 | `accountcommon.NetflixCertificates` | [AccountcommonNetflixCertificates](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonNetflixCertificates.cs) |
+| `accountcommon.OverrideRolePermission` | [AccountcommonOverrideRolePermission](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonOverrideRolePermission.cs) |
 | `accountcommon.Pagination` | [AccountcommonPagination](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonPagination.cs) |
 | `accountcommon.PaginationV3` | [AccountcommonPaginationV3](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonPaginationV3.cs) |
 | `accountcommon.Permission` | [AccountcommonPermission](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonPermission.cs) |
@@ -624,6 +640,7 @@
 | `accountcommon.PlatformLinkingHistory` | [AccountcommonPlatformLinkingHistory](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonPlatformLinkingHistory.cs) |
 | `accountcommon.PlatformUserInformationV3` | [AccountcommonPlatformUserInformationV3](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonPlatformUserInformationV3.cs) |
 | `accountcommon.RegisteredDomain` | [AccountcommonRegisteredDomain](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonRegisteredDomain.cs) |
+| `accountcommon.ReplaceRolePermission` | [AccountcommonReplaceRolePermission](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonReplaceRolePermission.cs) |
 | `accountcommon.Role` | [AccountcommonRole](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonRole.cs) |
 | `accountcommon.RoleManager` | [AccountcommonRoleManager](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonRoleManager.cs) |
 | `accountcommon.RoleManagerV3` | [AccountcommonRoleManagerV3](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonRoleManagerV3.cs) |
@@ -777,6 +794,11 @@
 | `model.RoleMembersResponse` | [ModelRoleMembersResponse](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelRoleMembersResponse.cs) |
 | `model.RoleMembersResponseV3` | [ModelRoleMembersResponseV3](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelRoleMembersResponseV3.cs) |
 | `model.RoleNamesResponseV3` | [ModelRoleNamesResponseV3](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelRoleNamesResponseV3.cs) |
+| `model.RoleOverrideResponse` | [ModelRoleOverrideResponse](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelRoleOverrideResponse.cs) |
+| `model.RoleOverrideSourceResponse` | [ModelRoleOverrideSourceResponse](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelRoleOverrideSourceResponse.cs) |
+| `model.RoleOverrideStatsUpdateRequest` | [ModelRoleOverrideStatsUpdateRequest](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelRoleOverrideStatsUpdateRequest.cs) |
+| `model.RoleOverrideUpdateRequest` | [ModelRoleOverrideUpdateRequest](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelRoleOverrideUpdateRequest.cs) |
+| `model.RolePermissionResponseV3` | [ModelRolePermissionResponseV3](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelRolePermissionResponseV3.cs) |
 | `model.RoleResponse` | [ModelRoleResponse](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelRoleResponse.cs) |
 | `model.RoleResponseV3` | [ModelRoleResponseV3](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelRoleResponseV3.cs) |
 | `model.RoleResponseWithManagers` | [ModelRoleResponseWithManagers](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelRoleResponseWithManagers.cs) |

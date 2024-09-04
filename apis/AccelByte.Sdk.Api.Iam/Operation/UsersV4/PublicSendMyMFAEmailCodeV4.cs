@@ -42,6 +42,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public string? Action { get; set; }
 
+            public string? LanguageTag { get; set; }
+
 
 
             internal PublicSendMyMFAEmailCodeV4Builder() { }
@@ -57,6 +59,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             public PublicSendMyMFAEmailCodeV4Builder SetAction(string _action)
             {
                 Action = _action;
+                return this;
+            }
+
+            public PublicSendMyMFAEmailCodeV4Builder SetLanguageTag(string _languageTag)
+            {
+                LanguageTag = _languageTag;
                 return this;
             }
 
@@ -118,6 +126,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
             if (builder.Action is not null) FormParams["action"] = builder.Action;
+            if (builder.LanguageTag is not null) FormParams["languageTag"] = builder.LanguageTag;
 
 
 
@@ -129,13 +138,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public PublicSendMyMFAEmailCodeV4(
             string namespace_,
-            string? action
+            string? action,
+            string? languageTag
         )
         {
             PathParams["namespace"] = namespace_;
 
 
             if (action is not null) FormParams["action"] = action;
+            if (languageTag is not null) FormParams["languageTag"] = languageTag;
 
 
 

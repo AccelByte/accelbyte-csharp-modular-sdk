@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Inventory.Model
 {
@@ -37,7 +39,8 @@ namespace AccelByte.Sdk.Api.Inventory.Model
 
         [JsonPropertyName("source")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string? Source { get; set; }
+        [JsonStringEnum]
+        public ApimodelsCreateItemSource? Source { get; set; }
 
         [JsonPropertyName("sourceItemId")]
         public string? SourceItemId { get; set; }
@@ -80,7 +83,8 @@ namespace AccelByte.Sdk.Api.Inventory.Model
 
         [JsonPropertyName("source")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string? Source { get; set; }
+        [JsonStringEnum]
+        public ApimodelsCreateItemSource? Source { get; set; }
 
         [JsonPropertyName("sourceItemId")]
         public string? SourceItemId { get; set; }
@@ -96,4 +100,25 @@ namespace AccelByte.Sdk.Api.Inventory.Model
 
     }
 
+
+    public class ApimodelsCreateItemSource : StringEnum<ApimodelsCreateItemSource>
+    {
+        public static readonly ApimodelsCreateItemSource ECOMMERCE
+            = new ApimodelsCreateItemSource("ECOMMERCE");
+
+        public static readonly ApimodelsCreateItemSource OTHER
+            = new ApimodelsCreateItemSource("OTHER");
+
+
+        public static implicit operator ApimodelsCreateItemSource(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ApimodelsCreateItemSource(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

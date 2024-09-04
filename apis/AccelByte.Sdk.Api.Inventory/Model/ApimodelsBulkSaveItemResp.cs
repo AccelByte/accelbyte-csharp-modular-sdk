@@ -8,21 +8,20 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace AccelByte.Sdk.Api.Platform.Model
+namespace AccelByte.Sdk.Api.Inventory.Model
 {
-    public class EntitlementDecrement : AccelByte.Sdk.Core.Model
+    public class ApimodelsBulkSaveItemResp : AccelByte.Sdk.Core.Model
     {
-        [JsonPropertyName("options")]
+        [JsonPropertyName("errorDetails")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public List<string>? Options { get; set; }
+        public ApimodelsBulkSaveItemError? ErrorDetails { get; set; }
 
-        [JsonPropertyName("requestId")]
+        [JsonPropertyName("item")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string? RequestId { get; set; }
+        public ApimodelsItemResp? Item { get; set; }
 
-        [JsonPropertyName("useCount")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public int? UseCount { get; set; }
+        [JsonPropertyName("success")]
+        public bool? Success { get; set; }
 
     }
 

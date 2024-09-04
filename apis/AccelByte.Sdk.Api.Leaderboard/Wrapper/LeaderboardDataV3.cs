@@ -56,6 +56,28 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     return opBuilder;
             }
         }
+        public DeleteAllUserRankingByCycleIdAdminV3.DeleteAllUserRankingByCycleIdAdminV3Builder DeleteAllUserRankingByCycleIdAdminV3Op
+        {
+            get
+            {
+                var opBuilder = new Operation.DeleteAllUserRankingByCycleIdAdminV3.DeleteAllUserRankingByCycleIdAdminV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public DeleteUserRankingByCycleIdAdminV3.DeleteUserRankingByCycleIdAdminV3Builder DeleteUserRankingByCycleIdAdminV3Op
+        {
+            get
+            {
+                var opBuilder = new Operation.DeleteUserRankingByCycleIdAdminV3.DeleteUserRankingByCycleIdAdminV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public DeleteUserRankingByLeaderboardCodeAdminV3.DeleteUserRankingByLeaderboardCodeAdminV3Builder DeleteUserRankingByLeaderboardCodeAdminV3Op
         {
             get
@@ -174,6 +196,38 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void DeleteAllUserRankingByCycleIdAdminV3(DeleteAllUserRankingByCycleIdAdminV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteAllUserRankingByCycleIdAdminV3Async(DeleteAllUserRankingByCycleIdAdminV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public void DeleteUserRankingByCycleIdAdminV3(DeleteUserRankingByCycleIdAdminV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task DeleteUserRankingByCycleIdAdminV3Async(DeleteUserRankingByCycleIdAdminV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

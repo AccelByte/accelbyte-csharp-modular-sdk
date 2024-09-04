@@ -50,7 +50,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
             );
 
 
-            Dictionary<string, object>? response = wrapper.GetLanguages(operation);
+            Dictionary<string, string>? response = wrapper.GetLanguages(operation);
             if (response == null)
                 return "No response from server.";
 

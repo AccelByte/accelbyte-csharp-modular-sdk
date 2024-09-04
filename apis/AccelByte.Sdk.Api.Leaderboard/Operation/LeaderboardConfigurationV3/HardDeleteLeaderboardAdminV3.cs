@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
     ///
     /// 
     /// 
-    ///  [Test Facility Only]
+    /// [Test Facility Only]
     /// 
     /// 
     /// 

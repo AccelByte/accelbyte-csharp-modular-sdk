@@ -138,6 +138,17 @@ namespace AccelByte.Sdk.Api.Iam
         }
         private Wrapper.SSOCredential? _SSOCredential = null;
 
+        public Wrapper.OverrideRoleConfigV3 OverrideRoleConfigV3
+        {
+            get
+            {
+                if (_OverrideRoleConfigV3 == null)
+                    _OverrideRoleConfigV3 = new Wrapper.OverrideRoleConfigV3(_Sdk, _CustomBasePath);
+                return _OverrideRoleConfigV3;
+            }
+        }
+        private Wrapper.OverrideRoleConfigV3? _OverrideRoleConfigV3 = null;
+
         public Wrapper.OAuth20Extension OAuth20Extension
         {
             get

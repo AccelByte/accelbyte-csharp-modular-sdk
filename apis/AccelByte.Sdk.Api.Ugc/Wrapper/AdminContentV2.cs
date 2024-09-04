@@ -78,6 +78,17 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     return opBuilder;
             }
         }
+        public AdminCopyContent.AdminCopyContentBuilder AdminCopyContentOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminCopyContent.AdminCopyContentBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public AdminUpdateOfficialContentFileLocation.AdminUpdateOfficialContentFileLocationBuilder AdminUpdateOfficialContentFileLocationOp
         {
             get
@@ -391,6 +402,39 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.Payload);
         }
         public async Task<Model.ModelsUpdateContentResponseV2<T1>?> AdminUpdateOfficialContentV2Async<T1>(AdminUpdateOfficialContentV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelsContentDownloadResponseV2? AdminCopyContent(AdminCopyContent input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsContentDownloadResponseV2?> AdminCopyContentAsync(AdminCopyContent input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public Model.ModelsContentDownloadResponseV2<T1>? AdminCopyContent<T1>(AdminCopyContent input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelsContentDownloadResponseV2<T1>?> AdminCopyContentAsync<T1>(AdminCopyContent input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(

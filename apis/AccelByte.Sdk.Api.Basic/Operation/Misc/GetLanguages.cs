@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 return op;
             }
 
-            public Dictionary<string, object>? Execute(
+            public Dictionary<string, string>? Execute(
                 string namespace_
             )
             {
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Dictionary<string, object>?> ExecuteAsync(
+            public async Task<Dictionary<string, string>?> ExecuteAsync(
                 string namespace_
             )
             {
@@ -141,7 +141,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public Dictionary<string, object>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Dictionary<string, string>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -149,11 +149,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Dictionary<string, string>>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Dictionary<string, string>>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

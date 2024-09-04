@@ -55,10 +55,10 @@ fi
 $CLI_EXE \
     --sn dsartifact \
     --op ListNodesIPAddress \
-    --limit '11' \
-    --next 'SuQi9SeP' \
-    --nodeIP 'XTEpiDid' \
-    --previous 'ovP7sL0I' \
+    --limit '48' \
+    --next 'nNjj3rrP' \
+    --nodeIP '5BVHCLWc' \
+    --previous 'G2mW9Ct2' \
     > test.out 2>&1
 eval_tap $? 2 'ListNodesIPAddress' test.out
 
@@ -66,8 +66,8 @@ eval_tap $? 2 'ListNodesIPAddress' test.out
 $CLI_EXE \
     --sn dsartifact \
     --op DeleteNodeByID \
-    --nodeIP 'U0lO1jQQ' \
-    --podName '3c8dVOum' \
+    --nodeIP 'EHKdKG9s' \
+    --podName 'KGwlxaSr' \
     > test.out 2>&1
 eval_tap $? 3 'DeleteNodeByID' test.out
 
@@ -75,10 +75,10 @@ eval_tap $? 3 'DeleteNodeByID' test.out
 $CLI_EXE \
     --sn dsartifact \
     --op ListQueue \
-    --limit '49' \
-    --next 'p88wgCMU' \
-    --previous '6umIoA8o' \
-    --nodeIP 'VA0u5JEr' \
+    --limit '25' \
+    --next 'Uwdsg5B8' \
+    --previous 'EvuDZnPD' \
+    --nodeIP 'Gzbd1HCo' \
     > test.out 2>&1
 eval_tap $? 4 'ListQueue' test.out
 
@@ -86,7 +86,7 @@ eval_tap $? 4 'ListQueue' test.out
 $CLI_EXE \
     --sn dsartifact \
     --op GetActiveQueue \
-    --nodeIP 'U5eGSnY8' \
+    --nodeIP '1quY7SiX' \
     > test.out 2>&1
 eval_tap $? 5 'GetActiveQueue' test.out
 
@@ -94,8 +94,8 @@ eval_tap $? 5 'GetActiveQueue' test.out
 $CLI_EXE \
     --sn dsartifact \
     --op SetActiveQueue \
-    --nodeIP '7Ap9UI8P' \
-    --podName 'DBc5Z6e2' \
+    --nodeIP 'GYPIHY01' \
+    --podName 'JS5GoIa0' \
     > test.out 2>&1
 eval_tap $? 6 'SetActiveQueue' test.out
 
@@ -103,7 +103,7 @@ eval_tap $? 6 'SetActiveQueue' test.out
 $CLI_EXE \
     --sn dsartifact \
     --op DeleteActiveQueue \
-    --nodeIP 'Sys4hiH8' \
+    --nodeIP 'tklfoGr4' \
     > test.out 2>&1
 eval_tap $? 7 'DeleteActiveQueue' test.out
 
@@ -111,8 +111,8 @@ eval_tap $? 7 'DeleteActiveQueue' test.out
 $CLI_EXE \
     --sn dsartifact \
     --op ReportFailedUpload \
-    --nodeIP 'mvm5phGi' \
-    --podName 'ucEScf8D' \
+    --nodeIP '8V935mLH' \
+    --podName 'ly8YIjce' \
     > test.out 2>&1
 eval_tap $? 8 'ReportFailedUpload' test.out
 
@@ -121,8 +121,8 @@ $CLI_EXE \
     --sn dsartifact \
     --op DeleteQueue \
     --namespace $AB_NAMESPACE \
-    --nodeIP 'AukSMFss' \
-    --podName 'X22SQVz8' \
+    --nodeIP 'qNAbQ6mc' \
+    --podName 'wESQB0sJ' \
     > test.out 2>&1
 eval_tap $? 9 'DeleteQueue' test.out
 
@@ -131,11 +131,11 @@ $CLI_EXE \
     --sn dsartifact \
     --op ListAllActiveQueue \
     --namespace $AB_NAMESPACE \
-    --limit '14' \
-    --next 'gfLYTttm' \
-    --nodeIP 'YwqCo4B0' \
-    --podName '2AhNFtUQ' \
-    --previous 'APnzVYG4' \
+    --limit '37' \
+    --next 'LlWl8UpE' \
+    --nodeIP 'W8UUOWPv' \
+    --podName 'c38G6Kvc' \
+    --previous 'hETfXfUu' \
     > test.out 2>&1
 eval_tap $? 10 'ListAllActiveQueue' test.out
 
@@ -144,13 +144,13 @@ $CLI_EXE \
     --sn dsartifact \
     --op ListAllQueue \
     --namespace $AB_NAMESPACE \
-    --excludeUploading 'false' \
-    --limit '51' \
-    --next 'eYvY15HJ' \
-    --nodeIP '3Sez9hVh' \
-    --order 'udtsmJ4t' \
-    --podName 'zgnxLYxp' \
-    --previous 'n3rAUnF4' \
+    --excludeUploading 'true' \
+    --limit '38' \
+    --next 'Hty1y96C' \
+    --nodeIP 'tBWgWaAH' \
+    --order 'bQy9MaGe' \
+    --podName 'gMLuxYiQ' \
+    --previous 'WVnd5JZZ' \
     > test.out 2>&1
 eval_tap $? 11 'ListAllQueue' test.out
 
@@ -159,17 +159,17 @@ $CLI_EXE \
     --sn dsartifact \
     --op ListTerminatedServersWithNamespace \
     --namespace $AB_NAMESPACE \
-    --deployment 'Puw88Wpe' \
-    --gameMode 'jxO93aVZ' \
-    --limit '76' \
-    --next 'gwGKO60f' \
-    --partyId 'H7ZutUfN' \
-    --podName 'hGec77uh' \
-    --previous 'bQLJuPxq' \
-    --provider 'B6FBrhpT' \
-    --region 'rA29w5v0' \
-    --sessionId '4VqXKyoF' \
-    --userId 'YUr18nAH' \
+    --deployment 'jLlNiuCA' \
+    --gameMode 'omnOenzM' \
+    --limit '83' \
+    --next '5gQjoM1c' \
+    --partyId 'Ce50wv2g' \
+    --podName 'YjzzhyC7' \
+    --previous 'iiOC4VLP' \
+    --provider 'GxegGmWb' \
+    --region 'fChJdbbe' \
+    --sessionId 'tvBaVTMh' \
+    --userId 'UwkwDNoB' \
     > test.out 2>&1
 eval_tap $? 12 'ListTerminatedServersWithNamespace' test.out
 
@@ -178,7 +178,7 @@ $CLI_EXE \
     --sn dsartifact \
     --op DownloadServerArtifacts \
     --namespace $AB_NAMESPACE \
-    --podName 'JJ6ycK5r' \
+    --podName 'Nfit9oo1' \
     > test.out 2>&1
 eval_tap $? 13 'DownloadServerArtifacts' test.out
 
@@ -187,7 +187,7 @@ $CLI_EXE \
     --sn dsartifact \
     --op CheckServerArtifact \
     --namespace $AB_NAMESPACE \
-    --podName 'fWskkVO4' \
+    --podName 'YbgQp4e5' \
     > test.out 2>&1
 eval_tap $? 14 'CheckServerArtifact' test.out
 
@@ -195,17 +195,17 @@ eval_tap $? 14 'CheckServerArtifact' test.out
 $CLI_EXE \
     --sn dsartifact \
     --op ListTerminatedServers \
-    --deployment 'iBC1TyR5' \
-    --gameMode 'a9ouiDCW' \
-    --limit '81' \
-    --next 'zM2fub7s' \
-    --partyId 'eFWVWGMh' \
-    --podName 'lcIsQoFU' \
-    --previous 'wGpA5k7U' \
-    --provider 'DQ4HEcWE' \
-    --region 'drWHW0ut' \
-    --sessionId 'gkMur16a' \
-    --userId 'Jw1X7plQ' \
+    --deployment '7eCRS0sL' \
+    --gameMode 'd1KhWvzH' \
+    --limit '91' \
+    --next 'xdjKMb8m' \
+    --partyId '2WEFbLlZ' \
+    --podName 'dTe2BR12' \
+    --previous '5kOQ2txz' \
+    --provider 'ssPzRU3f' \
+    --region 'WOQaZaXI' \
+    --sessionId 'ztmvzDzQ' \
+    --userId 'rcmlZUEh' \
     > test.out 2>&1
 eval_tap $? 15 'ListTerminatedServers' test.out
 

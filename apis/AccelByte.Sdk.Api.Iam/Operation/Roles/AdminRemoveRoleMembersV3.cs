@@ -26,7 +26,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// Admin roles has its members listed in the role.
     /// Role can only be assigned to other users by the role's manager.
     /// action code: 10411
+    /// Deprecate: Suggest to use this: AdminRevokeUserFromRoleV4
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AdminRemoveRoleMembersV3 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -66,6 +68,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelRoleMembersRequestV3 body,
                 string roleId

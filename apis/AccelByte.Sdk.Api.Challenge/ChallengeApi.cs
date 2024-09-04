@@ -39,6 +39,17 @@ namespace AccelByte.Sdk.Api.Challenge
         }
         private Wrapper.GoalConfiguration? _GoalConfiguration = null;
 
+        public Wrapper.Plugins Plugins
+        {
+            get
+            {
+                if (_Plugins == null)
+                    _Plugins = new Wrapper.Plugins(_Sdk, _CustomBasePath);
+                return _Plugins;
+            }
+        }
+        private Wrapper.Plugins? _Plugins = null;
+
         public Wrapper.ChallengeProgression ChallengeProgression
         {
             get
