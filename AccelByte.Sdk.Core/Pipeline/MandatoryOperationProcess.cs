@@ -50,7 +50,7 @@ namespace AccelByte.Sdk.Core.Pipeline
             if (config.ConfigRepository.EnableUserAgentInfo)
             {
                 Version asVer = this.GetType().Assembly.GetName().Version!;
-                string userAgent = String.Format("AccelByteCSharpSDK/{0}.{1}.{2} ({3})", asVer.Major, asVer.Minor, asVer.Revision, config.ConfigRepository.AppName);
+                string userAgent = String.Format("ModularCSharpSDK/{0}.{1}.{2} ({3})", asVer.Major, asVer.Minor, asVer.Revision, config.ConfigRepository.AppName);
                 operation.HeaderParams["User-Agent"] = userAgent;
             }
 

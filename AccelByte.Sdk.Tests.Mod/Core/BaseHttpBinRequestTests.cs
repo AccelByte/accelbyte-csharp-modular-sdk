@@ -127,7 +127,7 @@ namespace AccelByte.Sdk.Tests.Mod.Core
                 Assert.IsNotNull(result.Headers);
                 string userAgent = result.Headers!["User-Agent"].Trim();
 
-                Regex check = new Regex("AccelByteCSharpSDK/([0-9\\.]+) \\(" + _Sdk.Configuration.ConfigRepository.AppName + "\\)");
+                Regex check = new Regex("ModularCSharpSDK/([0-9\\.]+) \\(" + _Sdk.Configuration.ConfigRepository.AppName + "\\)");
                 Assert.IsTrue(check.IsMatch(userAgent));
             }
         }
