@@ -2,7 +2,7 @@
 
 ## Achievement
 
-Source: [AchievementTests.cs](../AccelByte.Sdk.Tests/Services/AchievementTests.cs)
+Source: [AchievementTests.cs](../AccelByte.Sdk.Tests.Mod/Services/AchievementTests.cs)
 
 ### Create an achievement
 
@@ -42,7 +42,7 @@ ModelsAchievementRequest newAchievement = new ModelsAchievementRequest()
     Tags = new List<string>() { "sdk", "test", "csharp" }
 };
 
-ModelsAchievementResponse? cResp = _Sdk.Achievement.Achievements.AdminCreateNewAchievementOp
+ModelsAchievementResponse? cResp = _Sdk.GetAchievementApi().Achievements.AdminCreateNewAchievementOp
     .Execute(newAchievement, _Sdk.Namespace);
 ```
 
@@ -63,14 +63,14 @@ ModelsAchievementUpdateRequest updateAchievement = new ModelsAchievementUpdateRe
     }
 };
 
-ModelsAchievementResponse? uResp = _Sdk.Achievement.Achievements.AdminUpdateAchievementOp
+ModelsAchievementResponse? uResp = _Sdk.GetAchievementApi().Achievements.AdminUpdateAchievementOp
     .Execute(updateAchievement, achievement_code, _Sdk.Namespace);
 ```
 
 ### Retrieve achievement by code
 
 ```csharp
-ModelsAchievementResponse? rResp = _Sdk.Achievement.Achievements.AdminGetAchievementOp
+ModelsAchievementResponse? rResp = _Sdk.GetAchievementApi().Achievements.AdminGetAchievementOp
     .Execute(achievement_code, _Sdk.Namespace);
 Assert.IsNotNull(rResp);
 ```
@@ -78,7 +78,7 @@ Assert.IsNotNull(rResp);
 ### Get all achievements
 
 ```csharp
-ModelsPaginatedAchievementResponse? gaResp = _Sdk.Achievement.Achievements.AdminListAchievementsOp
+ModelsPaginatedAchievementResponse? gaResp = _Sdk.GetAchievementApi().Achievements.AdminListAchievementsOp
     .SetLimit(100)
     .SetOffset(0)
     .Execute(_Sdk.Namespace);
@@ -87,12 +87,11 @@ ModelsPaginatedAchievementResponse? gaResp = _Sdk.Achievement.Achievements.Admin
 ### Delete an achievement
 
 ```csharp
-_Sdk.Achievement.Achievements.AdminDeleteAchievementOp.Execute(achievement_code, _Sdk.Namespace);
+_Sdk.GetAchievementApi().Achievements.AdminDeleteAchievementOp.Execute(achievement_code, _Sdk.Namespace);
 ```
-
 ## Basic
 
-Source: [BasicTests.cs](../AccelByte.Sdk.Tests/Services/BasicTests.cs)
+Source: [BasicTests.cs](../AccelByte.Sdk.Tests.Mod/Services/BasicTests.cs)
 
 ### Create user's own profile info
 
@@ -105,7 +104,7 @@ UserProfilePrivateCreate createProfile = new UserProfilePrivateCreate()
     Language = "en"
 };
 
-UserProfilePrivateInfo? cInfo = _Sdk.Basic.UserProfile.CreateMyProfileOp
+UserProfilePrivateInfo? cInfo = _Sdk.GetBasicApi().UserProfile.CreateMyProfileOp
     .SetBody(createProfile)
     .Execute(_Sdk.Namespace);
 ```
@@ -113,19 +112,19 @@ UserProfilePrivateInfo? cInfo = _Sdk.Basic.UserProfile.CreateMyProfileOp
 ### Get user's own profile info
 
 ```csharp
-UserProfilePrivateInfo? ownResp = _Sdk.Basic.UserProfile.GetMyProfileInfoOp
+UserProfilePrivateInfo? ownResp = _Sdk.GetBasicApi().UserProfile.GetMyProfileInfoOp
     .Execute(_Sdk.Namespace);
 ```
 
 ### Update user's own profile info
 
 ```csharp
-UserProfilePrivateUpdate updateProfile = new UserProfilePrivateUpdate()
+UserProfileUpdate updateProfile = new UserProfileUpdate()
 {
     TimeZone = "Asia/Jakarta"
 };
 
-UserProfilePrivateInfo? updResp = _Sdk.Basic.UserProfile.UpdateMyProfileOp
+UserProfilePrivateInfo? updResp = _Sdk.GetBasicApi().UserProfile.UpdateMyProfileOp
     .SetBody(updateProfile)
     .Execute(_Sdk.Namespace);
 ```
@@ -133,13 +132,91 @@ UserProfilePrivateInfo? updResp = _Sdk.Basic.UserProfile.UpdateMyProfileOp
 ### Delete user's own profile info
 
 ```csharp
-UserProfilePrivateInfo? delResp = _Sdk.Basic.UserProfile.DeleteUserProfileOp
+UserProfilePrivateInfo? delResp = _Sdk.GetBasicApi().UserProfile.DeleteUserProfileOp
     .Execute(_Sdk.Namespace, userId);
 ```
+## Chat
 
+Source: [ChatTests.cs](../AccelByte.Sdk.Tests.Mod/Services/ChatTests.cs)
+
+### Register a new profanity word
+
+```csharp
+var createResult = _Sdk.GetChatApi().Profanity.AdminProfanityCreateOp
+    .Execute(new ModelsDictionaryInsertRequest()
+    {
+        Word = profanityWord,
+        WordType = "PROFANITY"
+    }, _Sdk.Namespace);
+```
+
+### Query profanity word
+
+```csharp
+var queryResults = _Sdk.GetChatApi().Profanity.AdminProfanityQueryOp
+    .SetIncludeChildren(false)
+    .SetWordType("PROFANITY")
+    .SetStartWith(profanityWord)
+    .Execute(_Sdk.Namespace);
+```
+
+### Update profanity word
+
+```csharp
+var updateResult = _Sdk.GetChatApi().Profanity.AdminProfanityUpdateOp
+    .Execute(new ModelsDictionaryUpdateRequest()
+    {
+        WordType = "PROFANITY",
+        Word = editProfanityWord
+    }, word.Id!, _Sdk.Namespace);
+Assert.IsNotNull(updateResult);
+```
+
+### Delete profanity word
+
+```csharp
+_Sdk.GetChatApi().Profanity.AdminProfanityDeleteOp
+    .Execute(word.Id!, _Sdk.Namespace);
+```
+
+### Add chat inbox category
+
+```csharp
+var insertResult = _Sdk.GetChatApi().Inbox.AdminAddInboxCategoryOp
+    .Execute(new ModelsAddInboxCategoryRequest()
+    {
+        ExpiresIn = 3600000000,
+        Name = inboxName
+
+    }, _Sdk.Namespace);
+```
+
+### Get chat inbox categories
+
+```csharp
+var getResult = _Sdk.GetChatApi().Inbox.AdminGetInboxCategoriesOp
+    .Execute(_Sdk.Namespace);
+```
+
+### Update chat inbox category
+
+```csharp
+_Sdk.GetChatApi().Inbox.AdminUpdateInboxCategoryOp
+    .Execute(new ModelsUpdateInboxCategoryRequest()
+    {
+        ExpiresIn = 1800000000
+    }, inboxName, _Sdk.Namespace);
+```
+
+### Delete chat inbox category
+
+```csharp
+_Sdk.GetChatApi().Inbox.AdminDeleteInboxCategoryOp
+    .Execute(inboxName, _Sdk.Namespace);
+```
 ## CloudSave
 
-Source: [CloudSaveTests.cs](../AccelByte.Sdk.Tests/Services/CloudSaveTests.cs)
+Source: [CloudSaveTests.cs](../AccelByte.Sdk.Tests.Mod/Services/CloudSaveTests.cs)
 
 ### Create new game record
 
@@ -151,14 +228,14 @@ ModelsGameRecordRequestForTest gameRecord = new ModelsGameRecordRequestForTest()
     FooValue = 4893
 };
 
-_Sdk.Cloudsave.PublicGameRecord.PostGameRecordHandlerV1Op
+_Sdk.GetCloudsaveApi().PublicGameRecord.PostGameRecordHandlerV1Op
     .Execute(gameRecord, "foo_bar_record", _Sdk.Namespace);
 ```
 
 ### Get game record
 
 ```csharp
-ModelsGameRecordResponse? gRecord = _Sdk.Cloudsave.PublicGameRecord.GetGameRecordHandlerV1Op
+ModelsGameRecordResponse? gRecord = _Sdk.GetCloudsaveApi().PublicGameRecord.GetGameRecordHandlerV1Op
     .Execute("foo_bar_record", _Sdk.Namespace);
 ```
 
@@ -172,137 +249,24 @@ ModelsGameRecordRequestForTest updateRecord = new ModelsGameRecordRequestForTest
     FooValue = 4893
 };
 
-_Sdk.Cloudsave.PublicGameRecord.PutGameRecordHandlerV1Op
+_Sdk.GetCloudsaveApi().PublicGameRecord.PutGameRecordHandlerV1Op
     .Execute(updateRecord, "foo_bar_record", _Sdk.Namespace);
 ```
 
 ### Delete game record
 
 ```csharp
-_Sdk.Cloudsave.PublicGameRecord.DeleteGameRecordHandlerV1Op
+_Sdk.GetCloudsaveApi().PublicGameRecord.DeleteGameRecordHandlerV1Op
     .Execute("foo_bar_record", _Sdk.Namespace);
 ```
-
-## DSLogManager
-
-Source: [DSLogManagerTests.cs](../AccelByte.Sdk.Tests/Services/DSLogManagerTests.cs)
-
-### Get terminated servers
-
-```csharp
-ModelsListTerminatedServersResponse? tsResp = _Sdk.Dslogmanager.TerminatedServers.ListTerminatedServersOp
-    .SetLimit(10)
-    .Execute(_Sdk.Namespace);
-```
-
-## DSMC
-
-Source: [DsmcTests.cs](../AccelByte.Sdk.Tests/Services/DsmcTests.cs)
-
-### Get local server list
-
-```csharp
-ModelsListServerResponse? serverResp = _Sdk.Dsmc.Admin.ListLocalServerOp
-    .Execute(_Sdk.Namespace);
-```
-
-### Register a session to DSMC service
-
-```csharp
-ModelsCreateSessionRequest sessionRequest = new ModelsCreateSessionRequest()
-{
-    ClientVersion = "0.3.0",
-    Configuration = "",
-    Deployment = target_deployment,
-    GameMode = game_mode,
-    MatchingAllies = new List<ModelsRequestMatchingAlly>()
-    {
-        new ModelsRequestMatchingAlly()
-        {
-            MatchingParties = new List<ModelsRequestMatchParty>()
-            {
-                new ModelsRequestMatchParty()
-                {
-                    PartyAttributes = new Dictionary<string, object>(),
-                    PartyId = party_id,
-                    PartyMembers = new List<ModelsRequestMatchMember>()
-                    {
-                        new ModelsRequestMatchMember()
-                        {
-                            UserId = party_user_id
-                        }
-                    }
-                }
-            }
-        }
-    },
-    Region = "",
-    PodName = "",
-    SessionId = session_id,
-    Namespace = _Sdk.Namespace,
-};
-
-ModelsSessionResponse? csResp = _Sdk.Dsmc.Session.CreateSessionOp
-    .Execute(sessionRequest, _Sdk.Namespace);
-```
-
-### Get registered session
-
-```csharp
-csResp = _Sdk.Dsmc.Session.GetSessionOp.Execute(_Sdk.Namespace, session_id);
-```
-
-### Claim server for specified session
-
-```csharp
-ModelsClaimSessionRequest claimServer = new ModelsClaimSessionRequest()
-{
-    SessionId = session_id
-};
-_Sdk.Dsmc.Session.ClaimServerOp.Execute(claimServer, _Sdk.Namespace);
-```
-
-### Delete a session from DSMC
-
-```csharp
-_Sdk.Dsmc.Admin.DeleteSessionOp.Execute(_Sdk.Namespace, session_id);
-```
-
-## EventLog
-
-Source: [EventLogTests.cs](../AccelByte.Sdk.Tests/Services/EventLogTests.cs)
-
-### Query event stream
-
-```csharp
-ModelsGenericQueryPayload eQueryPayload = new ModelsGenericQueryPayload()
-{
-    ClientId = _Sdk.Configuration.ConfigRepository.ClientId
-};
-
-ModelsEventResponseV2? eResp = _Sdk.Eventlog.EventV2.QueryEventStreamHandlerOp
-    .SetOffset(0)
-    .SetPageSize(10)
-    .Execute(eQueryPayload, _Sdk.Namespace);
-```
-
-### Get specific user's event
-
-```csharp
-ModelsEventResponseV2? cResp = _Sdk.Eventlog.EventV2.GetEventSpecificUserV2HandlerOp
-    .SetOffset(0)
-    .SetPageSize(10)
-    .Execute(_Sdk.Namespace, _Sdk.Configuration.Credential!.UserId);
-```
-
 ## GameTelemetry
 
-Source: [GameTelemetryTests.cs](../AccelByte.Sdk.Tests/Services/GameTelemetryTests.cs)
+Source: [GameTelemetryTests.cs](../AccelByte.Sdk.Tests.Mod/Services/GameTelemetryTests.cs)
 
 ### Save game telemetry event
 
 ```csharp
-_Sdk.Gametelemetry.GametelemetryOperations.ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostOp
+_Sdk.GetGametelemetryApi().GametelemetryOperations.ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostOp
     .Execute(new List<TelemetryBody>
     {
         new TelemetryBody
@@ -322,7 +286,7 @@ _Sdk.Gametelemetry.GametelemetryOperations.ProtectedSaveEventsGameTelemetryV1Pro
 ```csharp
 try
 {
-    _Sdk.Gametelemetry.GametelemetryOperations.ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePutOp
+    _Sdk.GetGametelemetryApi().GametelemetryOperations.ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePutOp
         .Execute(playTime, steamId);
 }
 catch (HttpResponseException e)
@@ -337,19 +301,18 @@ catch (HttpResponseException e)
 ### Get steam's playtime
 
 ```csharp
-Dictionary<string, object>? resGet = _Sdk.Gametelemetry.GametelemetryOperations
+PlayTimeResponse? resGet = _Sdk.GetGametelemetryApi().GametelemetryOperations
     .ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGetOp
     .Execute(steamId);
 ```
-
 ## GDPR
 
-Source: [GdprTests.cs](../AccelByte.Sdk.Tests/Services/GdprTests.cs)
+Source: [GdprTests.cs](../AccelByte.Sdk.Tests.Mod/Services/GdprTests.cs)
 
 ### Save e-mail configuration
 
 ```csharp
-_Sdk.Gdpr.DataRetrieval.SaveAdminEmailConfigurationOp
+_Sdk.GetGdprApi().Configuration.SaveAdminEmailConfigurationOp
     .Execute(new List<string>
     {
         firstEmailToTest
@@ -359,27 +322,26 @@ _Sdk.Gdpr.DataRetrieval.SaveAdminEmailConfigurationOp
 ### Get e-mail configuration
 
 ```csharp
-List<string>? emails = _Sdk.Gdpr.DataRetrieval.GetAdminEmailConfigurationOp
+List<string>? emails = _Sdk.GetGdprApi().Configuration.GetAdminEmailConfigurationOp
     .Execute(_Sdk.Namespace);
 ```
 
 ### Update e-mail configuration
 
 ```csharp
-_Sdk.Gdpr.DataRetrieval.UpdateAdminEmailConfigurationOp
+_Sdk.GetGdprApi().Configuration.UpdateAdminEmailConfigurationOp
     .Execute(new List<string>() { anotherEmailToTest }, _Sdk.Namespace);
 ```
 
 ### Delete e-mail configuration
 
 ```csharp
-_Sdk.Gdpr.DataRetrieval.DeleteAdminEmailConfigurationOp
+_Sdk.GetGdprApi().Configuration.DeleteAdminEmailConfigurationOp
     .Execute(_Sdk.Namespace, new List<string>() { anotherEmailToTest });
 ```
-
 ## Group
 
-Source: [GroupTests.cs](../AccelByte.Sdk.Tests/Services/GroupTests.cs)
+Source: [GroupTests.cs](../AccelByte.Sdk.Tests.Mod/Services/GroupTests.cs)
 
 ### Create group configuration
 
@@ -394,7 +356,7 @@ ModelsCreateGroupConfigurationRequestV1 gcRequest = new ModelsCreateGroupConfigu
     GroupMemberRoleId = defaultMemberRoleId
 };
 
-ModelsCreateGroupConfigurationResponseV1? gcResp = _Sdk.Group.Configuration.CreateGroupConfigurationAdminV1Op
+ModelsCreateGroupConfigurationResponseV1? gcResp = _Sdk.GetGroupApi().Configuration.CreateGroupConfigurationAdminV1Op
     .Execute(gcRequest, _Sdk.Namespace);
 ```
 
@@ -403,22 +365,22 @@ ModelsCreateGroupConfigurationResponseV1? gcResp = _Sdk.Group.Configuration.Crea
 ```csharp
 ModelsPublicCreateNewGroupRequestV1 createGroup = new ModelsPublicCreateNewGroupRequestV1()
 {
-    GroupName = "CSharp SDK Test Group",
+    GroupName = groupName,
     GroupType = "PUBLIC",
-    GroupDescription = "Yeah, anything is welcome here.",
+    GroupDescription = "Yeah, anyone is welcome here.",
     GroupMaxMember = 100,
     GroupRegion = "us",
     ConfigurationCode = configuration_code
 };
 
-ModelsGroupResponseV1? cGroup = _Sdk.Group.Group.CreateNewGroupPublicV1Op
+ModelsGroupResponseV1? cGroup = _Sdk.GetGroupApi().Group.CreateNewGroupPublicV1Op
     .Execute(createGroup, _Sdk.Namespace);
 ```
 
 ### Get single group
 
 ```csharp
-ModelsGroupResponseV1? gGroup = _Sdk.Group.Group.GetSingleGroupPublicV1Op
+ModelsGroupResponseV1? gGroup = _Sdk.GetGroupApi().Group.GetSingleGroupPublicV1Op
     .Execute(group_id, _Sdk.Namespace);
 ```
 
@@ -430,27 +392,26 @@ ModelsUpdateGroupRequestV1 updateGroup = new ModelsUpdateGroupRequestV1()
     GroupDescription = "Updated description."
 };
 
-ModelsGroupResponseV1? uGroup = _Sdk.Group.Group.UpdateSingleGroupV1Op
+ModelsGroupResponseV1? uGroup = _Sdk.GetGroupApi().Group.UpdateSingleGroupV1Op
     .Execute(updateGroup, group_id, _Sdk.Namespace);
 ```
 
 ### Delete a group
 
 ```csharp
-_Sdk.Group.Group.DeleteGroupPublicV1Op
+_Sdk.GetGroupApi().Group.DeleteGroupPublicV1Op
     .Execute(group_id, _Sdk.Namespace);
 ```
 
 ### Delete group configuration
 
 ```csharp
-_Sdk.Group.Configuration.DeleteGroupConfigurationV1Op
+_Sdk.GetGroupApi().Configuration.DeleteGroupConfigurationV1Op
     .Execute(configuration_code, _Sdk.Namespace);
 ```
-
 ## IAM
 
-Source: [IAMTests.cs](../AccelByte.Sdk.Tests/Services/IAMTests.cs)
+Source: [IAMTests.cs](../AccelByte.Sdk.Tests.Mod/Services/IAMTests.cs)
 
 ### Create a user (V3)
 
@@ -465,7 +426,7 @@ ModelUserCreateRequestV3 newUser = new ModelUserCreateRequestV3()
     DateOfBirth = "1995-01-10"
 };
 
-ModelUserCreateResponseV3? cuResp = _Sdk.Iam.Users.PublicCreateUserV3Op
+ModelUserCreateResponseV3? cuResp = _Sdk.GetIamApi().Users.PublicCreateUserV3Op
     .Execute(newUser, _Sdk.Namespace);
 ```
 
@@ -483,14 +444,14 @@ AccountCreateUserRequestV4 newUser = new AccountCreateUserRequestV4()
     DateOfBirth = "1995-01-10"
 };
 
-AccountCreateUserResponseV4? cuResp = _Sdk.Iam.UsersV4.PublicCreateUserV4Op
+AccountCreateUserResponseV4? cuResp = _Sdk.GetIamApi().UsersV4.PublicCreateUserV4Op
     .Execute(newUser, _Sdk.Namespace);
 ```
 
 ### Get user data by user id
 
 ```csharp
-ModelUserResponseV3? gUser = _Sdk.Iam.Users.AdminGetUserByUserIdV3Op
+ModelUserResponseV3? gUser = _Sdk.GetIamApi().Users.AdminGetUserByUserIdV3Op
     .Execute(_Sdk.Namespace, user_id);
 ```
 
@@ -502,19 +463,18 @@ ModelUserUpdateRequestV3 updateUser = new ModelUserUpdateRequestV3()
     DateOfBirth = "1996-01-10"
 };
 
-ModelUserResponseV3? uuResp = _Sdk.Iam.UsersV4.AdminUpdateUserV4Op
+ModelUserResponseV3? uuResp = _Sdk.GetIamApi().UsersV4.AdminUpdateUserV4Op
     .Execute(updateUser, _Sdk.Namespace, user_id);
 ```
 
 ### Delete a user
 
 ```csharp
-_Sdk.Iam.Users.AdminDeleteUserInformationV3Op.Execute(_Sdk.Namespace, user_id);
+_Sdk.GetIamApi().Users.AdminDeleteUserInformationV3Op.Execute(_Sdk.Namespace, user_id);
 ```
-
 ## Leaderboard
 
-Source: [LeaderboardTests.cs](../AccelByte.Sdk.Tests/Services/LeaderboardTests.cs)
+Source: [LeaderboardTests.cs](../AccelByte.Sdk.Tests.Mod/Services/LeaderboardTests.cs)
 
 ### Create a leaderboard
 
@@ -523,7 +483,7 @@ ModelsLeaderboardConfigReq newLeaderboard = new ModelsLeaderboardConfigReq()
 {
     LeaderboardCode = leaderboard_code,
     Name = "CSharp SDK Leaderboard Test",
-    StatCode = "1",
+    StatCode = stat_code,
     SeasonPeriod = 36,
     Descending = false,
     StartTime = start_time,
@@ -543,14 +503,14 @@ ModelsLeaderboardConfigReq newLeaderboard = new ModelsLeaderboardConfigReq()
     }
 };
 
-ModelsLeaderboardConfigReq? cLeaderboard = _Sdk.Leaderboard.LeaderboardConfiguration.CreateLeaderboardConfigurationAdminV1Op
+ModelsLeaderboardConfigReq? cLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardConfiguration.CreateLeaderboardConfigurationAdminV1Op
     .Execute(newLeaderboard, _Sdk.Namespace);
 ```
 
 ### Get a leaderboard
 
 ```csharp
-ModelsGetLeaderboardConfigResp? gLeaderboard = _Sdk.Leaderboard.LeaderboardConfiguration.GetLeaderboardConfigurationAdminV1Op
+ModelsGetLeaderboardConfigResp? gLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardConfiguration.GetLeaderboardConfigurationAdminV1Op
     .Execute(leaderboard_code, _Sdk.Namespace);
 ```
 
@@ -560,30 +520,29 @@ ModelsGetLeaderboardConfigResp? gLeaderboard = _Sdk.Leaderboard.LeaderboardConfi
 ModelsUpdateLeaderboardConfigReq updateLeaderboard = new ModelsUpdateLeaderboardConfigReq()
 {
     Name = "CSharp SDK Leaderboard Test",
-    StatCode = "1",
+    StatCode = stat_code,
     StartTime = start_time,
     SeasonPeriod = 40
 };
 
-ModelsGetLeaderboardConfigResp? uLeaderboard = _Sdk.Leaderboard.LeaderboardConfiguration.UpdateLeaderboardConfigurationAdminV1Op
+ModelsGetLeaderboardConfigResp? uLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardConfiguration.UpdateLeaderboardConfigurationAdminV1Op
     .Execute(updateLeaderboard, leaderboard_code, _Sdk.Namespace);
 ```
 
 ### Delete a leaderboard
 
 ```csharp
-_Sdk.Leaderboard.LeaderboardConfiguration.DeleteLeaderboardConfigurationAdminV1Op
+_Sdk.GetLeaderboardApi().LeaderboardConfiguration.DeleteLeaderboardConfigurationAdminV1Op
     .Execute(leaderboard_code, _Sdk.Namespace);
 ```
-
 ## Legal
 
-Source: [LegalTests.cs](../AccelByte.Sdk.Tests/Services/LegalTests.cs)
+Source: [LegalTests.cs](../AccelByte.Sdk.Tests.Mod/Services/LegalTests.cs)
 
 ### Get all legal policies
 
 ```csharp
-List<RetrieveBasePolicyResponse>? bPolicies = _Sdk.Legal.BaseLegalPolicies.RetrieveAllLegalPoliciesOp.Execute();
+List<RetrieveBasePolicyResponse>? bPolicies = _Sdk.GetLegalApi().BaseLegalPolicies.RetrieveAllLegalPoliciesOp.Execute();
 ```
 
 ### Create a policy for marketing preference.
@@ -600,7 +559,7 @@ CreateBasePolicyRequest createPolicy = new CreateBasePolicyRequest()
     AffectedClientIds = new List<string>()
 };
 
-CreateBasePolicyResponse? bPolResp = _Sdk.Legal.BaseLegalPolicies.CreatePolicyOp
+CreateBasePolicyResponse? bPolResp = _Sdk.GetLegalApi().BaseLegalPolicies.CreatePolicyOp
     .SetBody(createPolicy)
     .Execute();
 ```
@@ -608,14 +567,14 @@ CreateBasePolicyResponse? bPolResp = _Sdk.Legal.BaseLegalPolicies.CreatePolicyOp
 ### Get single policy by policy id
 
 ```csharp
-List<RetrievePolicyVersionResponse>? polVers = _Sdk.Legal.PolicyVersions.RetrieveSinglePolicyVersionOp
+List<RetrievePolicyVersionResponse>? polVers = _Sdk.GetLegalApi().PolicyVersions.RetrieveSinglePolicyVersionOp
     .Execute(targetPolicyId);
 ```
 
 ### Create policy version
 
 ```csharp
-CreatePolicyVersionResponse? polVerResp = _Sdk.Legal.PolicyVersions.CreatePolicyVersionOp
+CreatePolicyVersionResponse? polVerResp = _Sdk.GetLegalApi().PolicyVersions.CreatePolicyVersionOp
     .SetBody(policyVersion)
     .Execute(targetPolicyId);
 ```
@@ -636,7 +595,7 @@ List<AcceptAgreementRequest> aggreementRequests = new List<AcceptAgreementReques
 };
 
 string userId = _Sdk.Configuration.Credential!.UserId;
-_Sdk.Legal.Agreement.ChangePreferenceConsentOp
+_Sdk.GetLegalApi().Agreement.ChangePreferenceConsentOp
     .SetBody(aggreementRequests)
     .Execute(_Sdk.Namespace, userId);
 ```
@@ -644,13 +603,12 @@ _Sdk.Legal.Agreement.ChangePreferenceConsentOp
 ### Get aggrements
 
 ```csharp
-List<RetrieveAcceptedAgreementResponse>? aggrs = _Sdk.Legal.Agreement.RetrieveAgreementsPublicOp
+List<RetrieveAcceptedAgreementResponse>? aggrs = _Sdk.GetLegalApi().Agreement.RetrieveAgreementsPublicOp
     .Execute();
 ```
-
 ## Lobby
 
-Source: [LobbyTests.cs](../AccelByte.Sdk.Tests/Services/LobbyTests.cs)
+Source: [LobbyTests.cs](../AccelByte.Sdk.Tests.Mod/Services/LobbyTests.cs)
 
 ### Send free form notification
 
@@ -661,13 +619,12 @@ ModelFreeFormNotificationRequest notifBody = new ModelFreeFormNotificationReques
     Message = "This is integration test for CSharp Server SDK."
 };
 
-_Sdk.Lobby.Admin.FreeFormNotificationOp
+_Sdk.GetLobbyApi().Admin.FreeFormNotificationOp
     .Execute(notifBody, _Sdk.Namespace);
 ```
-
 ## Matchmaking
 
-Source: [MatchmakingTests.cs](../AccelByte.Sdk.Tests/Services/MatchmakingTests.cs)
+Source: [MatchmakingTests.cs](../AccelByte.Sdk.Tests.Mod/Services/MatchmakingTests.cs)
 
 ### Create a channel
 
@@ -703,21 +660,21 @@ ModelsChannelRequest channelReq = new ModelsChannelRequest()
     }
 };
 
-ModelsCreateChannelResponse? cResp = _Sdk.Matchmaking.Matchmaking.CreateChannelHandlerOp
+ModelsCreateChannelResponse? cResp = _Sdk.GetMatchmakingApi().Matchmaking.CreateChannelHandlerOp
     .Execute(channelReq, _Sdk.Namespace);
 ```
 
 ### Get a channel
 
 ```csharp
-ModelsChannelV1? gResp = _Sdk.Matchmaking.Matchmaking.GetSingleMatchmakingChannelOp
+ModelsChannelV1? gResp = _Sdk.GetMatchmakingApi().Matchmaking.GetSingleMatchmakingChannelOp
     .Execute(channel_name, _Sdk.Namespace);
 ```
 
 ### Get sessions in channel
 
 ```csharp
-List<ModelsMatchmakingResult>? mResults = _Sdk.Matchmaking.Matchmaking.GetAllSessionsInChannelOp
+List<ModelsMatchmakingResult>? mResults = _Sdk.GetMatchmakingApi().Matchmaking.GetAllSessionsInChannelOp
     .Execute(channel_name, _Sdk.Namespace);
 ```
 
@@ -729,27 +686,19 @@ ModelsUpdateChannelRequest updateChannel = new ModelsUpdateChannelRequest()
     Description = "Updated description."
 };
 
-_Sdk.Matchmaking.Matchmaking.UpdateMatchmakingChannelOp
+_Sdk.GetMatchmakingApi().Matchmaking.UpdateMatchmakingChannelOp
     .Execute(updateChannel, channel_name, _Sdk.Namespace);
 ```
 
 ### Delete a channel
 
 ```csharp
-_Sdk.Matchmaking.Matchmaking.DeleteChannelHandlerOp
+_Sdk.GetMatchmakingApi().Matchmaking.DeleteChannelHandlerOp
     .Execute(channel_name, _Sdk.Namespace);
 ```
-
 ## MatchmakingV2
 
-Source: [MatchV2Tests.cs](../AccelByte.Sdk.Tests/Services/MatchV2Tests.cs)
-
-### Match2 healthcheck
-
-```csharp
-_Sdk.Match2.Operations.GetHealthcheckInfoV1Op
-    .Execute();
-```
+Source: [MatchV2Tests.cs](../AccelByte.Sdk.Tests.Mod/Services/MatchV2Tests.cs)
 
 ### Create a match rule set
 
@@ -757,14 +706,51 @@ _Sdk.Match2.Operations.GetHealthcheckInfoV1Op
 ApiRuleSetPayload cRuleSetBody = new ApiRuleSetPayload()
 {
     Name = rulesetName,
-    Data = new Dictionary<string, object>()
-    {
-        {"param_1", 40},
-        {"param_2", "A"}
-    }
+    Data = JsonSerializer.Deserialize<Dictionary<string, object>>(@"
+        {
+            ""alliance"": {
+                ""min_number"": 2,
+                ""max_number"": 10,
+                ""player_min_number"": 2,
+                ""player_max_number"": 4
+            },
+            ""matchingRules"": [
+                {
+                ""attribute"": """",
+                ""criteria"": ""distance"",
+                ""reference"": """"
+                }
+            ],
+            ""flexingRules"": [
+                {
+                ""duration"": 600,
+                ""attribute"": """",
+                ""criteria"": ""distance"",
+                ""reference"": """"
+                }
+            ],
+            ""match_options"": {
+                ""options"": [
+                {
+                    ""name"": """",
+                    ""type"": ""any""
+                }
+                ]
+            },
+            ""alliance_flexing_rule"": [
+                {
+                ""duration"": 600,
+                ""min_number"": 1,
+                ""max_number"": 2,
+                ""player_min_number"": 1,
+                ""player_max_number"": 2
+                }
+            ]
+        }
+    ")
 };
 
-_Sdk.Match2.RuleSets.CreateRuleSetOp
+_Sdk.GetMatch2Api().RuleSets.CreateRuleSetOp
     .Execute(cRuleSetBody, _Sdk.Namespace);
 ```
 
@@ -781,15 +767,22 @@ ApiMatchPool createPoolBody = new ApiMatchPool()
     TicketExpirationSeconds = 600
 };
 
-_Sdk.Match2.MatchPools.CreateMatchPoolOp
+_Sdk.GetMatch2Api().MatchPools.CreateMatchPoolOp
     .Execute(createPoolBody, _Sdk.Namespace);
 ```
 
 ### List match pools
 
 ```csharp
-ApiListMatchPoolsResponse? poolList = _Sdk.Match2.MatchPools.MatchPoolListOp
+ApiListMatchPoolsResponse? poolList = _Sdk.GetMatch2Api().MatchPools.MatchPoolListOp
     .Execute(_Sdk.Namespace);
+```
+
+### Get match pool detail
+
+```csharp
+ApiMatchPool? matchPool = _Sdk.GetMatch2Api().MatchPools.MatchPoolDetailsOp
+    .Execute(_Sdk.Namespace, poolName);
 ```
 
 ### User create a match ticket
@@ -801,41 +794,40 @@ ApiMatchTicketRequest ticketRequest = new ApiMatchTicketRequest()
     SessionID = partyId
 };
 
-ApiMatchTicketResponse? nTicketResponse = sdk.Match2.MatchTickets.CreateMatchTicketOp
+ApiMatchTicketResponse? nTicketResponse = sdk.GetMatch2Api().MatchTickets.CreateMatchTicketOp
     .Execute(ticketRequest, sdk.Namespace);
 ```
 
 ### User delete a match ticket
 
 ```csharp
-sdk.Match2.MatchTickets.DeleteMatchTicketOp
+sdk.GetMatch2Api().MatchTickets.DeleteMatchTicketOp
     .Execute(sdk.Namespace, ticketId);
 ```
 
 ### Delete a match pool
 
 ```csharp
-_Sdk.Match2.MatchPools.DeleteMatchPoolOp
+_Sdk.GetMatch2Api().MatchPools.DeleteMatchPoolOp
     .Execute(_Sdk.Namespace, poolName);
 ```
 
 ### Delete a match rule set
 
 ```csharp
-_Sdk.Match2.RuleSets.DeleteRuleSetOp
+_Sdk.GetMatch2Api().RuleSets.DeleteRuleSetOp
     .Execute(_Sdk.Namespace, rulesetName);
 ```
 
 ### List match functions
 
 ```csharp
-ApiListMatchFunctionsResponse? response = _Sdk.Match2.MatchFunctions.MatchFunctionListOp
+ApiListMatchFunctionsResponse? response = _Sdk.GetMatch2Api().MatchFunctions.MatchFunctionListOp
     .Execute(_Sdk.Namespace);
 ```
-
 ## Platform
 
-Source: [PlatformTests.cs](../AccelByte.Sdk.Tests/Services/PlatformTests.cs)
+Source: [PlatformTests.cs](../AccelByte.Sdk.Tests.Mod/Services/PlatformTests.cs)
 
 ### Create a store
 
@@ -850,15 +842,14 @@ StoreCreate createStore = new StoreCreate()
     SupportedRegions = new List<string>() { "US", "ID" }
 };
 
-StoreInfo? cStore = _Sdk.Platform.Store.CreateStoreOp
-    .SetBody(createStore)
-    .Execute(_Sdk.Namespace);
+StoreInfo? cStore = _Sdk.GetPlatformApi().Store.CreateStoreOp
+    .Execute(createStore, _Sdk.Namespace);
 ```
 
 ### Get a store
 
 ```csharp
-StoreInfo? gStore = _Sdk.Platform.Store.GetStoreOp
+StoreInfo? gStore = _Sdk.GetPlatformApi().Store.GetStoreOp
     .Execute(_Sdk.Namespace, store_id);
 ```
 
@@ -869,15 +860,14 @@ StoreUpdate updateStore = new StoreUpdate()
 {
     Description = "Updated description."
 };
-StoreInfo? cStoreUpdate = _Sdk.Platform.Store.UpdateStoreOp
-    .SetBody(updateStore)
-    .Execute(_Sdk.Namespace, store_id);
+StoreInfo? cStoreUpdate = _Sdk.GetPlatformApi().Store.UpdateStoreOp
+    .Execute(updateStore, _Sdk.Namespace, store_id);
 ```
 
 ### Delete a store
 
 ```csharp
-StoreInfo? dStore = _Sdk.Platform.Store.DeleteStoreOp
+StoreInfo? dStore = _Sdk.GetPlatformApi().Store.DeleteStoreOp
     .Execute(_Sdk.Namespace, store_id);
 ```
 
@@ -885,7 +875,7 @@ StoreInfo? dStore = _Sdk.Platform.Store.DeleteStoreOp
 
 ```csharp
 ExportStoreRequest xRequest = new ExportStoreRequest();
-Stream? stream = _Sdk.Platform.Store.ExportStore1Op
+Stream? stream = _Sdk.GetPlatformApi().Store.ExportStore1Op
     .SetBody(xRequest)
     .Execute(_Sdk.Namespace, store_id);
 ```
@@ -893,38 +883,60 @@ Stream? stream = _Sdk.Platform.Store.ExportStore1Op
 ### Import store
 
 ```csharp
-ImportStoreResult? result = _Sdk.Platform.Store.ImportStore1Op
+ImportStoreResult? result = _Sdk.GetPlatformApi().Store.ImportStore1Op
     .SetFile(uploadStream)
     .SetStoreId(store_id)
     .Execute(_Sdk.Namespace);
 ```
+## Reporting
 
-## QOSM
+Source: [ReportingTests.cs](../AccelByte.Sdk.Tests.Mod/Services/ReportingTests.cs)
 
-Source: [QosmTests.cs](../AccelByte.Sdk.Tests/Services/QosmTests.cs)
-
-### List servers
-
-```csharp
-ModelsListServerResponse? aggrs = _Sdk.Qosm.Public.ListServerOp.Execute();
-```
-
-### Execute heartbeat test against a server
+### Create a Reason
 
 ```csharp
-ModelsHeartbeatRequest createHeartbeat = new ModelsHeartbeatRequest()
+RestapiCreateReasonRequest createReason = new RestapiCreateReasonRequest()
 {
-    Ip = respIp,
-    Region = respRegion,
-    Port = respPort,
+    Description = title,
+    GroupIds = new List<string>(),
+    Title = title,
 };
 
-_Sdk.Qosm.Server.HeartbeatOp.Execute(createHeartbeat);
+RestapiAdminReasonResponse? cReason = _Sdk.GetReportingApi().AdminReasons.CreateReasonOp
+    .Execute(createReason, _Sdk.Namespace);
+Assert.IsNotNull(cReason);
+if (cReason != null)
+{
+    Assert.IsNotNull(cReason.Id);
+    if (cReason.Id != null)
+        reasonId = cReason.Id;
+
+    Assert.AreEqual(title, cReason.Title);
+}
 ```
 
+### Get single Reason
+
+```csharp
+RestapiAdminReasonResponse? cReason2 = _Sdk.GetReportingApi().AdminReasons.AdminGetReasonOp
+    .Execute(_Sdk.Namespace, reasonId);
+Assert.IsNotNull(cReason2);
+if (cReason2 != null)
+{
+    Assert.IsNotNull(cReason2.Id);
+    Assert.AreEqual(title, cReason2.Title);
+}
+```
+
+### Delete a Reporting
+
+```csharp
+_Sdk.GetReportingApi().AdminReasons.DeleteReasonOp
+    .Execute(_Sdk.Namespace, reasonId);
+```
 ## SeasonPass
 
-Source: [SeasonPassTests.cs](../AccelByte.Sdk.Tests/Services/SeasonPassTests.cs)
+Source: [SeasonPassTests.cs](../AccelByte.Sdk.Tests.Mod/Services/SeasonPassTests.cs)
 
 ### Create a season
 
@@ -949,7 +961,7 @@ SeasonCreate cSeasonBody = new SeasonCreate()
     Localizations = sLocalizations
 };
 
-SeasonInfo? cSeason = _Sdk.Seasonpass.Season.CreateSeasonOp
+SeasonInfo? cSeason = _Sdk.GetSeasonpassApi().Season.CreateSeasonOp
     .SetBody(cSeasonBody)
     .Execute(_Sdk.Namespace);
 ```
@@ -957,7 +969,7 @@ SeasonInfo? cSeason = _Sdk.Seasonpass.Season.CreateSeasonOp
 ### Get a season
 
 ```csharp
-SeasonInfo? gSeason = _Sdk.Seasonpass.Season.GetSeasonOp
+SeasonInfo? gSeason = _Sdk.GetSeasonpassApi().Season.GetSeasonOp
     .Execute(_Sdk.Namespace, cSeasonId);
 ```
 
@@ -975,21 +987,85 @@ SeasonUpdate uSeasonBody = new SeasonUpdate()
     Localizations = sLocalizations
 };
 
-SeasonInfo? uSeason = _Sdk.Seasonpass.Season.UpdateSeasonOp
+SeasonInfo? uSeason = _Sdk.GetSeasonpassApi().Season.UpdateSeasonOp
     .SetBody(uSeasonBody)
     .Execute(_Sdk.Namespace, cSeasonId);
 ```
+## SessionBrowser
 
-## Session
+Source: [SessionBrowserTests.cs](../AccelByte.Sdk.Tests.Mod/Services/SessionBrowserTests.cs)
 
-Source: [SessionTests.cs](../AccelByte.Sdk.Tests/Services/SessionTests.cs)
-
-### Session Health Check
+### Create a session
 
 ```csharp
-_Sdk.Session.Operations.GetHealthcheckInfoV1Op
-    .Execute();
+ModelsCreateSessionRequest createSession = new ModelsCreateSessionRequest()
+{
+    SessionType = "dedicated",
+    GameVersion = "0.3.0",
+    Namespace = _Sdk.Namespace,
+    Username = usernameToTest,
+    GameSessionSetting = new ModelsGameSessionSetting()
+    {
+        Mode = "deathmatch",
+        AllowJoinInProgress = true,
+        MapName = "CSharp SDK Integration Test",
+        MaxPlayer = 100
+    }
+};
+
+ModelsSessionResponse? cResp = _Sdk.GetSessionbrowserApi().Session.CreateSessionOp
+    .Execute(createSession, _Sdk.Namespace);
 ```
+
+### Get a session
+
+```csharp
+ModelsSessionResponse? gResp = _Sdk.GetSessionbrowserApi().Session.GetSessionOp
+    .Execute(_Sdk.Namespace, session_id);
+```
+
+### Update a session
+
+```csharp
+ModelsUpdateSessionRequest updateSession = new ModelsUpdateSessionRequest()
+{
+    GameMaxPlayer = 150
+};
+ModelsSessionResponse? uResp = _Sdk.GetSessionbrowserApi().Session.UpdateSessionOp
+    .Execute(updateSession, _Sdk.Namespace, session_id);
+```
+
+### Delete a session
+
+```csharp
+ModelsAdminSessionResponse? dResp = _Sdk.GetSessionbrowserApi().Session.AdminDeleteSessionOp
+    .Execute(_Sdk.Namespace, session_id);
+Assert.IsNotNull(dResp);
+```
+## SessionHistory
+
+Source: [SessionHistoryTests.cs](../AccelByte.Sdk.Tests.Mod/Services/SessionHistoryTests.cs)
+
+### Get all game sessions history
+
+```csharp
+var response = _Sdk.GetSessionhistoryApi().GameSessionDetail.AdminQueryGameSessionDetailOp
+    .SetOffset(0)
+    .SetLimit(20)
+    .Execute(_Sdk.Namespace);
+```
+
+### Get all matchmaking history
+
+```csharp
+var mResponse = _Sdk.GetSessionhistoryApi().GameSessionDetail.AdminQueryMatchmakingDetailOp
+    .SetOffset(0)
+    .SetLimit(20)
+    .Execute(_Sdk.Namespace);
+```
+## Session
+
+Source: [SessionTests.cs](../AccelByte.Sdk.Tests.Mod/Services/SessionTests.cs)
 
 ### Create session configuration template
 
@@ -1010,10 +1086,10 @@ ApimodelsCreateConfigurationTemplateRequest cTemplateBody = new ApimodelsCreateC
     }
 };
 
-_Sdk.Session.ConfigurationTemplate.AdminCreateConfigurationTemplateV1Op
+_Sdk.GetSessionApi().ConfigurationTemplate.AdminCreateConfigurationTemplateV1Op
     .Execute(cTemplateBody, _Sdk.Namespace);
 
-ApimodelsConfigurationTemplateResponse? cfgTemplate = _Sdk.Session.ConfigurationTemplate.AdminGetConfigurationTemplateV1Op
+ApimodelsConfigurationTemplateResponse? cfgTemplate = _Sdk.GetSessionApi().ConfigurationTemplate.AdminGetConfigurationTemplateV1Op
     .Execute(cfgTemplateName, _Sdk.Namespace);
 ```
 
@@ -1028,14 +1104,14 @@ ApimodelsUpdateConfigurationTemplateRequest uTemplateBody = new ApimodelsUpdateC
     MaxPlayers = 4
 };
 
-ApimodelsConfigurationTemplateResponse? uptTemplate = _Sdk.Session.ConfigurationTemplate.AdminUpdateConfigurationTemplateV1Op
+ApimodelsConfigurationTemplateResponse? uptTemplate = _Sdk.GetSessionApi().ConfigurationTemplate.AdminUpdateConfigurationTemplateV1Op
     .Execute(uTemplateBody, cfgTemplateName, _Sdk.Namespace);
 ```
 
 ### Delete session configuration template
 
 ```csharp
-ResponseError? response = _Sdk.Session.ConfigurationTemplate.AdminDeleteConfigurationTemplateV1Op
+_Sdk.GetSessionApi().ConfigurationTemplate.AdminDeleteConfigurationTemplateV1Op
     .Execute(cfgTemplateName, _Sdk.Namespace);
 ```
 
@@ -1047,35 +1123,35 @@ ApimodelsCreateGameSessionRequest newGSRequest = new ApimodelsCreateGameSessionR
     ConfigurationName = cfgTemplateName,
 };
 
-ApimodelsGameSessionResponse? newGSResponse = sdk.Session.GameSession.CreateGameSessionOp
+ApimodelsGameSessionResponse? newGSResponse = sdk.GetSessionApi().GameSession.CreateGameSessionOp
     .Execute(newGSRequest, sdk.Namespace);
 ```
 
 ### Join a game session
 
 ```csharp
-ApimodelsGameSessionResponse? p2GsJoin = sdk.Session.GameSession.JoinGameSessionOp
+ApimodelsGameSessionResponse? p2GsJoin = sdk.GetSessionApi().GameSession.JoinGameSessionOp
     .Execute(sdk.Namespace, gameSessionId);
 ```
 
 ### Leave a game session
 
 ```csharp
-sdk.Session.GameSession.LeaveGameSessionOp
+sdk.GetSessionApi().GameSession.LeaveGameSessionOp
     .Execute(sdk.Namespace, gameSessionId);
 ```
 
 ### Delete a game session
 
 ```csharp
-sdk.Session.GameSession.DeleteGameSessionOp
+sdk.GetSessionApi().GameSession.DeleteGameSessionOp
     .Execute(sdk.Namespace, gameSessionId);
 ```
 
 ### Query game sessions
 
 ```csharp
-var response = _Sdk.Session.GameSession.PublicQueryGameSessionsOp
+var response = _Sdk.GetSessionApi().GameSession.PublicQueryGameSessionsByAttributesOp
     .Execute(new Dictionary<string, object>() { }, _Sdk.Namespace);
 ```
 
@@ -1094,7 +1170,7 @@ ApimodelsCreatePartyRequest partyRequest = new ApimodelsCreatePartyRequest()
     }
 };
 
-ApimodelsPartySessionResponse? partyResponse = sdk.Session.Party.PublicCreatePartyOp
+ApimodelsPartySessionResponse? partyResponse = sdk.GetSessionApi().Party.PublicCreatePartyOp
     .Execute(partyRequest, sdk.Namespace);
 ```
 
@@ -1106,78 +1182,26 @@ ApimodelsJoinByCodeRequest joinRequest = new ApimodelsJoinByCodeRequest()
     Code = joinCode
 };
 
-ApimodelsPartySessionResponse? joinResponse = sdk.Session.Party.PublicPartyJoinCodeOp
+ApimodelsPartySessionResponse? joinResponse = sdk.GetSessionApi().Party.PublicPartyJoinCodeOp
     .Execute(joinRequest, sdk.Namespace);
 ```
 
 ### Get party detail
 
 ```csharp
-ApimodelsPartySessionResponse? partyData = _Sdk.Session.Party.PublicGetPartyOp
+ApimodelsPartySessionResponse? partyData = _Sdk.GetSessionApi().Party.PublicGetPartyOp
     .Execute(_Sdk.Namespace, partyId);
 ```
 
 ### User leave a party
 
 ```csharp
-sdk.Session.Party.PublicPartyLeaveOp
+sdk.GetSessionApi().Party.PublicPartyLeaveOp
     .Execute(sdk.Namespace, partyId);
 ```
-
-## SessionBrowser
-
-Source: [SessionBrowserTests.cs](../AccelByte.Sdk.Tests/Services/SessionBrowserTests.cs)
-
-### Create a session
-
-```csharp
-ModelsCreateSessionRequest createSession = new ModelsCreateSessionRequest()
-{
-    SessionType = "p2p",
-    GameVersion = "0.3.0",
-    Namespace = _Sdk.Namespace,
-    Username = usernameToTest,
-    GameSessionSetting = new ModelsGameSessionSetting()
-    {
-        Mode = "deathmatch",
-        AllowJoinInProgress = true,
-        MapName = "CSharp SDK Integration Test",
-        MaxPlayer = 100
-    }
-};
-
-ModelsSessionResponse? cResp = _Sdk.Sessionbrowser.Session.CreateSessionOp
-    .Execute(createSession, _Sdk.Namespace);
-```
-
-### Get a session
-
-```csharp
-ModelsSessionResponse? gResp = _Sdk.Sessionbrowser.Session.GetSessionOp
-    .Execute(_Sdk.Namespace, session_id);
-```
-
-### Update a session
-
-```csharp
-ModelsUpdateSessionRequest updateSession = new ModelsUpdateSessionRequest()
-{
-    GameMaxPlayer = 150
-};
-ModelsSessionResponse? uResp = _Sdk.Sessionbrowser.Session.UpdateSessionOp
-    .Execute(updateSession, _Sdk.Namespace, session_id);
-```
-
-### Delete a session
-
-```csharp
-ModelsSessionResponse? dResp = _Sdk.Sessionbrowser.Session.DeleteSessionOp
-    .Execute(_Sdk.Namespace, session_id);
-```
-
 ## Social
 
-Source: [SocialTests.cs](../AccelByte.Sdk.Tests/Services/SocialTests.cs)
+Source: [SocialTests.cs](../AccelByte.Sdk.Tests.Mod/Services/SocialTests.cs)
 
 ### Create a stat
 
@@ -1196,7 +1220,7 @@ StatCreate createStat = new StatCreate()
     Tags = new List<string>() { "csharp", "server_sdk", "test" }
 };
 
-StatInfo? cStat = _Sdk.Social.StatConfiguration.CreateStatOp
+StatInfo? cStat = _Sdk.GetSocialApi().StatConfiguration.CreateStatOp
     .SetBody(createStat)
     .Execute(_Sdk.Namespace);
 ```
@@ -1204,7 +1228,7 @@ StatInfo? cStat = _Sdk.Social.StatConfiguration.CreateStatOp
 ### Get a stat
 
 ```csharp
-StatInfo? gStat = _Sdk.Social.StatConfiguration.GetStatOp
+StatInfo? gStat = _Sdk.GetSocialApi().StatConfiguration.GetStatOp
     .Execute(_Sdk.Namespace, stat_code);
 ```
 
@@ -1216,7 +1240,7 @@ StatUpdate updateStat = new StatUpdate()
     Description = "Updated description."
 };
 
-StatInfo? uStat = _Sdk.Social.StatConfiguration.UpdateStatOp
+StatInfo? uStat = _Sdk.GetSocialApi().StatConfiguration.UpdateStatOp
     .SetBody(updateStat)
     .Execute(_Sdk.Namespace, stat_code);
 ```
@@ -1224,13 +1248,12 @@ StatInfo? uStat = _Sdk.Social.StatConfiguration.UpdateStatOp
 ### Delete a stat
 
 ```csharp
-_Sdk.Social.StatConfiguration.DeleteStatOp
+_Sdk.GetSocialApi().StatConfiguration.DeleteStatOp
     .Execute(_Sdk.Namespace, stat_code);
 ```
-
 ## UGC
 
-Source: [UgcTests.cs](../AccelByte.Sdk.Tests/Services/UgcTests.cs)
+Source: [UgcTests.cs](../AccelByte.Sdk.Tests.Mod/Services/UgcTests.cs)
 
 ### Create a tag
 
@@ -1239,14 +1262,14 @@ ModelsCreateTagRequest createTag = new ModelsCreateTagRequest()
 {
     Tag = tag_name
 };
-ModelsCreateTagResponse? cTag = _Sdk.Ugc.AdminTag.AdminCreateTagOp
+ModelsCreateTagResponse? cTag = _Sdk.GetUgcApi().AdminTag.AdminCreateTagOp
     .Execute(createTag, _Sdk.Namespace);
 ```
 
 ### Get tags
 
 ```csharp
-ModelsPaginatedGetTagResponse? gTag = _Sdk.Ugc.AdminTag.AdminGetTagOp
+ModelsPaginatedGetTagResponse? gTag = _Sdk.GetUgcApi().AdminTag.AdminGetTagOp
     .SetOffset(0)
     .SetLimit(10)
     .Execute(_Sdk.Namespace);
@@ -1259,14 +1282,13 @@ ModelsCreateTagRequest updateTag = new ModelsCreateTagRequest()
 {
     Tag = tag_name_u
 };
-ModelsCreateTagResponse? uTag = _Sdk.Ugc.AdminTag.AdminUpdateTagOp
+ModelsCreateTagResponse? uTag = _Sdk.GetUgcApi().AdminTag.AdminUpdateTagOp
     .Execute(updateTag, _Sdk.Namespace, tag_id);
 ```
 
 ### Delete a tag
 
 ```csharp
-_Sdk.Ugc.AdminTag.AdminDeleteTagOp
+_Sdk.GetUgcApi().AdminTag.AdminDeleteTagOp
     .Execute(_Sdk.Namespace, tag_id);
 ```
-
