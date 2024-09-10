@@ -356,7 +356,7 @@ GameRecordExample myGameRecord = new GameRecordExample()
 ModelsGameRecordResponse<GameRecordExample>? response = sdk.GetCloudsaveApi().PublicGameRecord.PostGameRecordHandlerV1Op
     .Execute<GameRecordExample>(myGameRecord, "test_record", sdk.Namespace);
 ```
-The list of which endpoints that support it can be found in [here](../docs/operations/)
+The list of which endpoints that support it can be found in [here](docs/operations/)
 
 ## FlightID
 C# Extend SDK enable support for FlightID transmission during Http request. By default, new flight id will be generated when the sdk is loaded. There will be some case that this default value need to be updated with new value.
