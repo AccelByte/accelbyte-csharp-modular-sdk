@@ -14,7 +14,6 @@ using AccelByte.Sdk.Api.Cloudsave;
 using AccelByte.Sdk.Api.Dsartifact;
 using AccelByte.Sdk.Api.Dslogmanager;
 using AccelByte.Sdk.Api.Dsmc;
-using AccelByte.Sdk.Api.Eventlog;
 using AccelByte.Sdk.Api.Gametelemetry;
 using AccelByte.Sdk.Api.Gdpr;
 using AccelByte.Sdk.Api.Group;
@@ -52,7 +51,6 @@ namespace AccelByte.Sdk.Core
         public DsartifactApi Dsartifact { get => ((IAccelByteSdk)this).GetDsartifactApi(); }
         public DslogmanagerApi Dslogmanager { get => ((IAccelByteSdk)this).GetDslogmanagerApi(); }
         public DsmcApi Dsmc { get => ((IAccelByteSdk)this).GetDsmcApi(); }
-        public EventlogApi Eventlog { get => ((IAccelByteSdk)this).GetEventlogApi(); }
         public GametelemetryApi Gametelemetry { get => ((IAccelByteSdk)this).GetGametelemetryApi(); }
         public GdprApi Gdpr { get => ((IAccelByteSdk)this).GetGdprApi(); }
         public GroupApi Group { get => ((IAccelByteSdk)this).GetGroupApi(); }
