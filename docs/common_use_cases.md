@@ -622,80 +622,7 @@ ModelFreeFormNotificationRequest notifBody = new ModelFreeFormNotificationReques
 _Sdk.GetLobbyApi().Admin.FreeFormNotificationOp
     .Execute(notifBody, _Sdk.Namespace);
 ```
-## Matchmaking
 
-Source: [MatchmakingTests.cs](../AccelByte.Sdk.Tests.Mod/Services/MatchmakingTests.cs)
-
-### Create a channel
-
-```csharp
-ModelsChannelRequest channelReq = new ModelsChannelRequest()
-{
-    Deployment = "",
-    Description = "CSharp Server SDK Test",
-    FindMatchTimeoutSeconds = 3600,
-    GameMode = channel_name,
-    Joinable = false,
-    MaxDelayMs = 0,
-    SessionQueueTimeoutSeconds = 0,
-    SocialMatchmaking = false,
-    UseSubGamemode = false,
-    RuleSet = new ModelsRuleSet()
-    {
-        Alliance = new ModelsAllianceRule()
-        {
-            MaxNumber = 2,
-            MinNumber = 2,
-            PlayerMaxNumber = 1,
-            PlayerMinNumber = 1
-        },
-        AllianceFlexingRule = new List<ModelsAllianceFlexingRule>(),
-        FlexingRule = new List<ModelsFlexingRule>(),
-        MatchOptions = new ModelsMatchOptionRule()
-        {
-            Options = new List<ModelsMatchOption>()
-        },
-        MatchingRule = new List<ModelsMatchingRule>(),
-        SubGameModes = new Dictionary<string, ModelsSubGameMode>()
-    }
-};
-
-ModelsCreateChannelResponse? cResp = _Sdk.GetMatchmakingApi().Matchmaking.CreateChannelHandlerOp
-    .Execute(channelReq, _Sdk.Namespace);
-```
-
-### Get a channel
-
-```csharp
-ModelsChannelV1? gResp = _Sdk.GetMatchmakingApi().Matchmaking.GetSingleMatchmakingChannelOp
-    .Execute(channel_name, _Sdk.Namespace);
-```
-
-### Get sessions in channel
-
-```csharp
-List<ModelsMatchmakingResult>? mResults = _Sdk.GetMatchmakingApi().Matchmaking.GetAllSessionsInChannelOp
-    .Execute(channel_name, _Sdk.Namespace);
-```
-
-### Update a channel
-
-```csharp
-ModelsUpdateChannelRequest updateChannel = new ModelsUpdateChannelRequest()
-{
-    Description = "Updated description."
-};
-
-_Sdk.GetMatchmakingApi().Matchmaking.UpdateMatchmakingChannelOp
-    .Execute(updateChannel, channel_name, _Sdk.Namespace);
-```
-
-### Delete a channel
-
-```csharp
-_Sdk.GetMatchmakingApi().Matchmaking.DeleteChannelHandlerOp
-    .Execute(channel_name, _Sdk.Namespace);
-```
 ## MatchmakingV2
 
 Source: [MatchV2Tests.cs](../AccelByte.Sdk.Tests.Mod/Services/MatchV2Tests.cs)
@@ -991,57 +918,7 @@ SeasonInfo? uSeason = _Sdk.GetSeasonpassApi().Season.UpdateSeasonOp
     .SetBody(uSeasonBody)
     .Execute(_Sdk.Namespace, cSeasonId);
 ```
-## SessionBrowser
 
-Source: [SessionBrowserTests.cs](../AccelByte.Sdk.Tests.Mod/Services/SessionBrowserTests.cs)
-
-### Create a session
-
-```csharp
-ModelsCreateSessionRequest createSession = new ModelsCreateSessionRequest()
-{
-    SessionType = "dedicated",
-    GameVersion = "0.3.0",
-    Namespace = _Sdk.Namespace,
-    Username = usernameToTest,
-    GameSessionSetting = new ModelsGameSessionSetting()
-    {
-        Mode = "deathmatch",
-        AllowJoinInProgress = true,
-        MapName = "CSharp SDK Integration Test",
-        MaxPlayer = 100
-    }
-};
-
-ModelsSessionResponse? cResp = _Sdk.GetSessionbrowserApi().Session.CreateSessionOp
-    .Execute(createSession, _Sdk.Namespace);
-```
-
-### Get a session
-
-```csharp
-ModelsSessionResponse? gResp = _Sdk.GetSessionbrowserApi().Session.GetSessionOp
-    .Execute(_Sdk.Namespace, session_id);
-```
-
-### Update a session
-
-```csharp
-ModelsUpdateSessionRequest updateSession = new ModelsUpdateSessionRequest()
-{
-    GameMaxPlayer = 150
-};
-ModelsSessionResponse? uResp = _Sdk.GetSessionbrowserApi().Session.UpdateSessionOp
-    .Execute(updateSession, _Sdk.Namespace, session_id);
-```
-
-### Delete a session
-
-```csharp
-ModelsAdminSessionResponse? dResp = _Sdk.GetSessionbrowserApi().Session.AdminDeleteSessionOp
-    .Execute(_Sdk.Namespace, session_id);
-Assert.IsNotNull(dResp);
-```
 ## SessionHistory
 
 Source: [SessionHistoryTests.cs](../AccelByte.Sdk.Tests.Mod/Services/SessionHistoryTests.cs)
