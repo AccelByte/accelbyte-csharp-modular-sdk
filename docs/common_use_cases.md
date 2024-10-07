@@ -259,6 +259,48 @@ _Sdk.GetCloudsaveApi().PublicGameRecord.PutGameRecordHandlerV1Op
 _Sdk.GetCloudsaveApi().PublicGameRecord.DeleteGameRecordHandlerV1Op
     .Execute("foo_bar_record", _Sdk.Namespace);
 ```
+
+### Create new player record
+
+```csharp
+ModelsPlayerRecordRequestForTest playerRecord = new ModelsPlayerRecordRequestForTest()
+{
+    Foo = "bar",
+    FooBar = "foo",
+    FooValue = 4893
+};
+
+_Sdk.Cloudsave.PublicPlayerRecord.PostPlayerRecordHandlerV1Op
+    .Execute(playerRecord, "foo_bar_record", _Sdk.Namespace, userId);
+```
+
+### Get player record
+
+```csharp
+ModelsPlayerRecordResponse? gRecord = _Sdk.Cloudsave.PublicPlayerRecord.GetPlayerRecordHandlerV1Op
+    .Execute("foo_bar_record", _Sdk.Namespace, userId);
+```
+
+### Update player record
+
+```csharp
+ModelsPlayerRecordRequestForTest updateRecord = new ModelsPlayerRecordRequestForTest()
+{
+    Foo = "bar",
+    FooBar = "update",
+    FooValue = 4893
+};
+
+_Sdk.Cloudsave.PublicPlayerRecord.PutPlayerRecordHandlerV1Op
+    .Execute(updateRecord, "foo_bar_record", _Sdk.Namespace, userId);
+```
+
+### Delete player record
+
+```csharp
+_Sdk.Cloudsave.PublicPlayerRecord.DeletePlayerRecordHandlerV1Op
+    .Execute("foo_bar_record", _Sdk.Namespace, userId);
+```
 ## GameTelemetry
 
 Source: [GameTelemetryTests.cs](../AccelByte.Sdk.Tests.Mod/Services/GameTelemetryTests.cs)
@@ -622,7 +664,6 @@ ModelFreeFormNotificationRequest notifBody = new ModelFreeFormNotificationReques
 _Sdk.GetLobbyApi().Admin.FreeFormNotificationOp
     .Execute(notifBody, _Sdk.Namespace);
 ```
-
 ## MatchmakingV2
 
 Source: [MatchV2Tests.cs](../AccelByte.Sdk.Tests.Mod/Services/MatchV2Tests.cs)
@@ -659,7 +700,7 @@ ApiRuleSetPayload cRuleSetBody = new ApiRuleSetPayload()
             ""match_options"": {
                 ""options"": [
                 {
-                    ""name"": """",
+                    ""name"": ""myopt"",
                     ""type"": ""any""
                 }
                 ]
@@ -918,7 +959,6 @@ SeasonInfo? uSeason = _Sdk.GetSeasonpassApi().Season.UpdateSeasonOp
     .SetBody(uSeasonBody)
     .Execute(_Sdk.Namespace, cSeasonId);
 ```
-
 ## SessionHistory
 
 Source: [SessionHistoryTests.cs](../AccelByte.Sdk.Tests.Mod/Services/SessionHistoryTests.cs)
