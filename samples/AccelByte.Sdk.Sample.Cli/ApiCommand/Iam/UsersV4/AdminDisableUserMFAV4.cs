@@ -33,6 +33,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
         [SdkCommandArgument("userId")]
         public string UserId { get; set; } = String.Empty;
 
+        [SdkCommandData("body")]
+        public ModelDisableMFARequest Body { get; set; } = new ModelDisableMFARequest();
+
         public AdminDisableUserMFAV4Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -49,6 +52,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 
 
             AdminDisableUserMFAV4 operation = opBuilder.Build(
+                Body,
                 Namespace,
                 UserId
             );

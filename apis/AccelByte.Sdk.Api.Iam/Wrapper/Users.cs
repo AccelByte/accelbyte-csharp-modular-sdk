@@ -1962,6 +1962,17 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        public PublicGetMyProfileAllowUpdateStatusV3.PublicGetMyProfileAllowUpdateStatusV3Builder PublicGetMyProfileAllowUpdateStatusV3Op
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicGetMyProfileAllowUpdateStatusV3.PublicGetMyProfileAllowUpdateStatusV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public PublicSendVerificationLinkV3.PublicSendVerificationLinkV3Builder PublicSendVerificationLinkV3Op
         {
             get
@@ -4944,6 +4955,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelUserProfileUpdateAllowStatus? PublicGetMyProfileAllowUpdateStatusV3(PublicGetMyProfileAllowUpdateStatusV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelUserProfileUpdateAllowStatus?> PublicGetMyProfileAllowUpdateStatusV3Async(PublicGetMyProfileAllowUpdateStatusV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

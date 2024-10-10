@@ -15,6 +15,9 @@ namespace AccelByte.Sdk.Api.Match2.Model
         [JsonPropertyName("CreatedAt")]
         public DateTime? CreatedAt { get; set; }
 
+        [JsonPropertyName("ExcludedSessions")]
+        public List<string>? ExcludedSessions { get; set; }
+
         [JsonPropertyName("IsActive")]
         public bool? IsActive { get; set; }
 
@@ -29,6 +32,9 @@ namespace AccelByte.Sdk.Api.Match2.Model
 
         [JsonPropertyName("MatchPool")]
         public string? MatchPool { get; set; }
+
+        [JsonPropertyName("MatchedAt")]
+        public DateTime? MatchedAt { get; set; }
 
         [JsonPropertyName("Namespace")]
         public string? Namespace { get; set; }
@@ -58,6 +64,9 @@ namespace AccelByte.Sdk.Api.Match2.Model
         [JsonPropertyName("CreatedAt")]
         public DateTime? CreatedAt { get; set; }
 
+        [JsonPropertyName("ExcludedSessions")]
+        public List<string>? ExcludedSessions { get; set; }
+
         [JsonPropertyName("IsActive")]
         public bool? IsActive { get; set; }
 
@@ -72,6 +81,9 @@ namespace AccelByte.Sdk.Api.Match2.Model
 
         [JsonPropertyName("MatchPool")]
         public string? MatchPool { get; set; }
+
+        [JsonPropertyName("MatchedAt")]
+        public DateTime? MatchedAt { get; set; }
 
         [JsonPropertyName("Namespace")]
         public string? Namespace { get; set; }

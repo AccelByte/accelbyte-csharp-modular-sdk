@@ -53,7 +53,7 @@ export AB_BASE_URL="http://127.0.0.1:8000"      # Switch to mock websocket serve
 
 #- 2 AcceptFriendsNotif
 # echo "Testing 'AcceptFriendsNotif'"
-printf 'type: acceptFriendsNotif\nfriendId: gECLl4yj' > $TEMP_FILE_UPLOAD
+printf 'type: acceptFriendsNotif\nfriendId: yCxHJm7T' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -64,7 +64,7 @@ eval_tap $? 2 'AcceptFriendsNotif' test.out
 
 #- 3 AcceptFriendsRequest
 # echo "Testing 'AcceptFriendsRequest'"
-printf 'type: acceptFriendsRequest\nid: z2WGCMJe\nfriendId: n67Nb3ph' > $TEMP_FILE_UPLOAD
+printf 'type: acceptFriendsRequest\nid: OqbvU2D7\nfriendId: 1IsiAWrM' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -75,7 +75,7 @@ eval_tap $? 3 'AcceptFriendsRequest' test.out
 
 #- 4 AcceptFriendsResponse
 # echo "Testing 'AcceptFriendsResponse'"
-printf 'type: acceptFriendsResponse\nid: 5airxFcY\ncode: 21' > $TEMP_FILE_UPLOAD
+printf 'type: acceptFriendsResponse\nid: HT1jY0mw\ncode: 16' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -86,7 +86,7 @@ eval_tap $? 4 'AcceptFriendsResponse' test.out
 
 #- 5 BlockPlayerNotif
 # echo "Testing 'BlockPlayerNotif'"
-printf 'type: blockPlayerNotif\nblockedUserId: CwwY4UKx\nuserId: 2Anrg6cU' > $TEMP_FILE_UPLOAD
+printf 'type: blockPlayerNotif\nblockedUserId: NiX8BIVt\nuserId: UY1mKh3s' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -97,7 +97,7 @@ eval_tap $? 5 'BlockPlayerNotif' test.out
 
 #- 6 BlockPlayerRequest
 # echo "Testing 'BlockPlayerRequest'"
-printf 'type: blockPlayerRequest\nid: zKJSAcdt\nblockUserId: FGOaKYqy\nnamespace: H88SCJP5' > $TEMP_FILE_UPLOAD
+printf 'type: blockPlayerRequest\nid: oBNZT7mC\nblockUserId: jbhZ2h6Z\nnamespace: gNQHJjVI' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -108,7 +108,7 @@ eval_tap $? 6 'BlockPlayerRequest' test.out
 
 #- 7 BlockPlayerResponse
 # echo "Testing 'BlockPlayerResponse'"
-printf 'type: blockPlayerResponse\nid: qaJs61AD\nblockUserId: MQBHd1FY\ncode: 83\nnamespace: BxEIV4s4' > $TEMP_FILE_UPLOAD
+printf 'type: blockPlayerResponse\nid: 5ibxFBCM\nblockUserId: Mb9pf1mu\ncode: 79\nnamespace: i6eQSXDd' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -119,7 +119,7 @@ eval_tap $? 7 'BlockPlayerResponse' test.out
 
 #- 8 CancelFriendsNotif
 # echo "Testing 'CancelFriendsNotif'"
-printf 'type: cancelFriendsNotif\nuserId: iyHE9EmW' > $TEMP_FILE_UPLOAD
+printf 'type: cancelFriendsNotif\nuserId: xyN7cTKX' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -130,7 +130,7 @@ eval_tap $? 8 'CancelFriendsNotif' test.out
 
 #- 9 CancelFriendsRequest
 # echo "Testing 'CancelFriendsRequest'"
-printf 'type: cancelFriendsRequest\nid: P8DC2w9r\nfriendId: d9lqlk7w' > $TEMP_FILE_UPLOAD
+printf 'type: cancelFriendsRequest\nid: JZW8a91n\nfriendId: sC79t9tB' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -141,7 +141,7 @@ eval_tap $? 9 'CancelFriendsRequest' test.out
 
 #- 10 CancelFriendsResponse
 # echo "Testing 'CancelFriendsResponse'"
-printf 'type: cancelFriendsResponse\nid: c0Z8lsUY\ncode: 49' > $TEMP_FILE_UPLOAD
+printf 'type: cancelFriendsResponse\nid: 3L3KwFbi\ncode: 50' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -152,7 +152,7 @@ eval_tap $? 10 'CancelFriendsResponse' test.out
 
 #- 11 CancelMatchmakingRequest
 # echo "Testing 'CancelMatchmakingRequest'"
-printf 'type: cancelMatchmakingRequest\nid: FLhbkUJt\ngameMode: Jp7g4UtP\nisTempParty: True' > $TEMP_FILE_UPLOAD
+printf 'type: cancelMatchmakingRequest\nid: f27Hn6JJ\ngameMode: PuWmFV6N\nisTempParty: True' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -163,7 +163,7 @@ eval_tap $? 11 'CancelMatchmakingRequest' test.out
 
 #- 12 CancelMatchmakingResponse
 # echo "Testing 'CancelMatchmakingResponse'"
-printf 'type: cancelMatchmakingResponse\nid: eymVK0SW\ncode: 77' > $TEMP_FILE_UPLOAD
+printf 'type: cancelMatchmakingResponse\nid: ZafPMzp0\ncode: 86' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -174,7 +174,7 @@ eval_tap $? 12 'CancelMatchmakingResponse' test.out
 
 #- 13 ChannelChatNotif
 # echo "Testing 'ChannelChatNotif'"
-printf 'type: channelChatNotif\nchannelSlug: rPrLOcRh\nfrom: v20JPc4E\npayload: XkXWewfr\nsentAt: 1992-03-23T00:00:00Z' > $TEMP_FILE_UPLOAD
+printf 'type: channelChatNotif\nchannelSlug: lmdH2aBG\nfrom: oJ94IZX7\npayload: lGWKdMj3\nsentAt: 1975-11-06T00:00:00Z' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -185,7 +185,7 @@ eval_tap $? 13 'ChannelChatNotif' test.out
 
 #- 14 ClientResetRequest
 # echo "Testing 'ClientResetRequest'"
-printf 'type: clientResetRequest\nnamespace: oeqCORNv\nuserId: nj2ZC2Qv' > $TEMP_FILE_UPLOAD
+printf 'type: clientResetRequest\nnamespace: krnr39r8\nuserId: 4wrDiw0J' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -196,7 +196,7 @@ eval_tap $? 14 'ClientResetRequest' test.out
 
 #- 15 ConnectNotif
 # echo "Testing 'ConnectNotif'"
-printf 'type: connectNotif\nlobbySessionID: 88sY9kt4' > $TEMP_FILE_UPLOAD
+printf 'type: connectNotif\nlobbySessionID: QcRZ1Y0p' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -207,7 +207,7 @@ eval_tap $? 15 'ConnectNotif' test.out
 
 #- 16 DisconnectNotif
 # echo "Testing 'DisconnectNotif'"
-printf 'type: disconnectNotif\nconnectionId: k8MnDoBo\nnamespace: 3TCYiSIK' > $TEMP_FILE_UPLOAD
+printf 'type: disconnectNotif\nconnectionId: 6SjtEZdO\nnamespace: LxoSk6B0' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -218,7 +218,7 @@ eval_tap $? 16 'DisconnectNotif' test.out
 
 #- 17 DsNotif
 # echo "Testing 'DsNotif'"
-printf 'type: dsNotif\nalternateIps: [SFHSrgov,vwx1e7YC,owdqaq1i]\ncustomAttribute: NTS4FbMa\ndeployment: Hph99wCW\ngameVersion: TeMDCOkW\nimageVersion: zI0ONDaW\nip: PDOG9M4j\nisOK: False\nisOverrideGameVersion: True\nlastUpdate: yEtTHFyQ\nmatchId: l34LjYqg\nmessage: esegNCN6\nnamespace: W4SnWxr5\npodName: 0SOZHIHB\nport: 40\nports: {"rolQt9vK":57,"0GlepjI0":28,"TAC9t35V":50}\nprotocol: nf4NkhLX\nprovider: XoxiURNO\nregion: X0XR48zO\nsessionId: AlKVar8N\nstatus: 0B6Wu4Yv' > $TEMP_FILE_UPLOAD
+printf 'type: dsNotif\nalternateIps: [Y2LEIEi2,NYunZefu,q86WH9F2]\ncustomAttribute: rbk3pwlJ\ndeployment: gr4FXVO0\ngameVersion: PqQebFEx\nimageVersion: p9JjtEb5\nip: D4kUJT0L\nisOK: False\nisOverrideGameVersion: False\nlastUpdate: sOkfr2hs\nmatchId: oK74ETW2\nmessage: uHuGnaPm\nnamespace: 5hN5B2Mg\npodName: n7ZELAcD\nport: 30\nports: {"J7cbyhEn":37,"jY7CZnEE":9,"yVzIjo9Y":82}\nprotocol: C7z6jeI1\nprovider: 1qxRBee8\nregion: Dis3mQkt\nsessionId: cKpJ9Pmq\nstatus: oNlNEOTB' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -229,7 +229,7 @@ eval_tap $? 17 'DsNotif' test.out
 
 #- 18 ErrorNotif
 # echo "Testing 'ErrorNotif'"
-printf 'type: errorNotif\nmessage: IGtqQk9g' > $TEMP_FILE_UPLOAD
+printf 'type: errorNotif\nmessage: PIU9BJqv' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -240,7 +240,7 @@ eval_tap $? 18 'ErrorNotif' test.out
 
 #- 19 ExitAllChannel
 # echo "Testing 'ExitAllChannel'"
-printf 'type: exitAllChannel\nnamespace: Rwxxtl4V\nuserId: gYjTQwqe' > $TEMP_FILE_UPLOAD
+printf 'type: exitAllChannel\nnamespace: 0B3ryJDa\nuserId: epJuFfsJ' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -251,7 +251,7 @@ eval_tap $? 19 'ExitAllChannel' test.out
 
 #- 20 FriendsStatusRequest
 # echo "Testing 'FriendsStatusRequest'"
-printf 'type: friendsStatusRequest\nid: z9FPBrrk' > $TEMP_FILE_UPLOAD
+printf 'type: friendsStatusRequest\nid: ebzQaG2r' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -262,7 +262,7 @@ eval_tap $? 20 'FriendsStatusRequest' test.out
 
 #- 21 FriendsStatusResponse
 # echo "Testing 'FriendsStatusResponse'"
-printf 'type: friendsStatusResponse\nid: AA0opG6D\nactivity: [e1J5Sb3p,7NBIjI0c,jE8sPfR7]\navailability: [Oggk4DkW,cOvKNrNg,2wLiPQ5E]\ncode: 54\nfriendIds: [egLqluvb,FXE9s0Rh,iLLiOUbh]\nlastSeenAt: [1984-02-13T00:00:00Z,1971-08-29T00:00:00Z,1975-04-23T00:00:00Z]' > $TEMP_FILE_UPLOAD
+printf 'type: friendsStatusResponse\nid: 16C4smEr\nactivity: [8B3742BR,OuAiftFQ,EQY9WsSQ]\navailability: [vhc0ZI1G,XiywwRzJ,ocp8tCA5]\ncode: 66\nfriendIds: [X8Z1Mjr5,DmYrEhkI,aqfWPEB8]\nlastSeenAt: [1994-02-16T00:00:00Z,1982-03-28T00:00:00Z,1990-05-05T00:00:00Z]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -273,7 +273,7 @@ eval_tap $? 21 'FriendsStatusResponse' test.out
 
 #- 22 GetAllSessionAttributeRequest
 # echo "Testing 'GetAllSessionAttributeRequest'"
-printf 'type: getAllSessionAttributeRequest\nid: OAncuJ7F' > $TEMP_FILE_UPLOAD
+printf 'type: getAllSessionAttributeRequest\nid: GaPTzTry' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -284,7 +284,7 @@ eval_tap $? 22 'GetAllSessionAttributeRequest' test.out
 
 #- 23 GetAllSessionAttributeResponse
 # echo "Testing 'GetAllSessionAttributeResponse'"
-printf 'type: getAllSessionAttributeResponse\nid: DYZGRHk9\nattributes: {"TY1s3WsY":"S0il1Q2q","atUGKsTq":"IsJjmYEN","04cNbDGZ":"uwEcyRcJ"}\ncode: 61' > $TEMP_FILE_UPLOAD
+printf 'type: getAllSessionAttributeResponse\nid: 8kcPDgXN\nattributes: {"hqg2qCw1":"ViJofRUS","ijXzIHkU":"4SuVCBpc","UZgA6cP6":"ELkV49UJ"}\ncode: 38' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -295,7 +295,7 @@ eval_tap $? 23 'GetAllSessionAttributeResponse' test.out
 
 #- 24 GetFriendshipStatusRequest
 # echo "Testing 'GetFriendshipStatusRequest'"
-printf 'type: getFriendshipStatusRequest\nid: mJ1oaPHT\nfriendId: BSbPoQEQ' > $TEMP_FILE_UPLOAD
+printf 'type: getFriendshipStatusRequest\nid: drCBImwL\nfriendId: khgIW3Gu' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -306,7 +306,7 @@ eval_tap $? 24 'GetFriendshipStatusRequest' test.out
 
 #- 25 GetFriendshipStatusResponse
 # echo "Testing 'GetFriendshipStatusResponse'"
-printf 'type: getFriendshipStatusResponse\nid: WYCl5mtA\ncode: 34\nfriendshipStatus: 2lD7vXmD' > $TEMP_FILE_UPLOAD
+printf 'type: getFriendshipStatusResponse\nid: gE6xOTqo\ncode: 54\nfriendshipStatus: W4ZT4Mbp' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -317,7 +317,7 @@ eval_tap $? 25 'GetFriendshipStatusResponse' test.out
 
 #- 26 GetSessionAttributeRequest
 # echo "Testing 'GetSessionAttributeRequest'"
-printf 'type: getSessionAttributeRequest\nid: Fi6PM3uj\nkey: K4JjvZsJ' > $TEMP_FILE_UPLOAD
+printf 'type: getSessionAttributeRequest\nid: QH7mdaK2\nkey: fg0DkhlS' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -328,7 +328,7 @@ eval_tap $? 26 'GetSessionAttributeRequest' test.out
 
 #- 27 GetSessionAttributeResponse
 # echo "Testing 'GetSessionAttributeResponse'"
-printf 'type: getSessionAttributeResponse\nid: G1F1ZJ8B\ncode: 96\nvalue: jxTPZVa9' > $TEMP_FILE_UPLOAD
+printf 'type: getSessionAttributeResponse\nid: teEanaLq\ncode: 97\nvalue: NV7ljnG1' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -350,7 +350,7 @@ eval_tap $? 28 'Heartbeat' test.out
 
 #- 29 JoinDefaultChannelRequest
 # echo "Testing 'JoinDefaultChannelRequest'"
-printf 'type: joinDefaultChannelRequest\nid: 6xazmDOJ' > $TEMP_FILE_UPLOAD
+printf 'type: joinDefaultChannelRequest\nid: taNtNm2M' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -361,7 +361,7 @@ eval_tap $? 29 'JoinDefaultChannelRequest' test.out
 
 #- 30 JoinDefaultChannelResponse
 # echo "Testing 'JoinDefaultChannelResponse'"
-printf 'type: joinDefaultChannelResponse\nid: ooMnCBe6\nchannelSlug: ZenhnFbN\ncode: 69' > $TEMP_FILE_UPLOAD
+printf 'type: joinDefaultChannelResponse\nid: ylbi0OMh\nchannelSlug: zPccqgMW\ncode: 7' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -372,7 +372,7 @@ eval_tap $? 30 'JoinDefaultChannelResponse' test.out
 
 #- 31 ListIncomingFriendsRequest
 # echo "Testing 'ListIncomingFriendsRequest'"
-printf 'type: listIncomingFriendsRequest\nid: vEtH1hQp' > $TEMP_FILE_UPLOAD
+printf 'type: listIncomingFriendsRequest\nid: bA64EqDN' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -383,7 +383,7 @@ eval_tap $? 31 'ListIncomingFriendsRequest' test.out
 
 #- 32 ListIncomingFriendsResponse
 # echo "Testing 'ListIncomingFriendsResponse'"
-printf 'type: listIncomingFriendsResponse\nid: n399VhpF\ncode: 98\nuserIds: [O9rfQipt,8xQG7twL,iIpYVAwR]' > $TEMP_FILE_UPLOAD
+printf 'type: listIncomingFriendsResponse\nid: K5DnD57J\ncode: 11\nuserIds: [EfuX0wZh,Y0ybMfq7,kID6ZEYJ]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -394,7 +394,7 @@ eval_tap $? 32 'ListIncomingFriendsResponse' test.out
 
 #- 33 ListOfFriendsRequest
 # echo "Testing 'ListOfFriendsRequest'"
-printf 'type: listOfFriendsRequest\nid: qiPLMm0n\nfriendId: u6IB6jha' > $TEMP_FILE_UPLOAD
+printf 'type: listOfFriendsRequest\nid: eDCKLfkt\nfriendId: hnf6UZfw' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -405,7 +405,7 @@ eval_tap $? 33 'ListOfFriendsRequest' test.out
 
 #- 34 ListOfFriendsResponse
 # echo "Testing 'ListOfFriendsResponse'"
-printf 'type: listOfFriendsResponse\nid: 1LyaRtEW\ncode: 15\nfriendIds: [SDOp0ltF,opwpbvK9,hoywPuN0]' > $TEMP_FILE_UPLOAD
+printf 'type: listOfFriendsResponse\nid: QeMH1iZC\ncode: 94\nfriendIds: [mnveqAfN,aWzGbmcn,TlXvszIA]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -416,7 +416,7 @@ eval_tap $? 34 'ListOfFriendsResponse' test.out
 
 #- 35 ListOnlineFriendsRequest
 # echo "Testing 'ListOnlineFriendsRequest'"
-printf 'type: listOnlineFriendsRequest\nid: 6noAh9bK' > $TEMP_FILE_UPLOAD
+printf 'type: listOnlineFriendsRequest\nid: lEimUyxk' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -427,7 +427,7 @@ eval_tap $? 35 'ListOnlineFriendsRequest' test.out
 
 #- 36 ListOutgoingFriendsRequest
 # echo "Testing 'ListOutgoingFriendsRequest'"
-printf 'type: listOutgoingFriendsRequest\nid: Nzgp3SBZ' > $TEMP_FILE_UPLOAD
+printf 'type: listOutgoingFriendsRequest\nid: VQlqXMwq' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -438,7 +438,7 @@ eval_tap $? 36 'ListOutgoingFriendsRequest' test.out
 
 #- 37 ListOutgoingFriendsResponse
 # echo "Testing 'ListOutgoingFriendsResponse'"
-printf 'type: listOutgoingFriendsResponse\nid: Km0gRkt2\ncode: 33\nfriendIds: [b9W2geSn,4GvOZow0,wjDh82nP]' > $TEMP_FILE_UPLOAD
+printf 'type: listOutgoingFriendsResponse\nid: iwX1l3EL\ncode: 35\nfriendIds: [kcTxruPY,OXPBCS5e,lhWZ6cbn]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -449,7 +449,7 @@ eval_tap $? 37 'ListOutgoingFriendsResponse' test.out
 
 #- 38 MatchmakingNotif
 # echo "Testing 'MatchmakingNotif'"
-printf 'type: matchmakingNotif\ncounterPartyMember: [V8QC6adC,iM6FphHR,I8P3OjkT]\nmatchId: 7UguZhqF\nmessage: xLhuaSub\npartyMember: [3puzq84L,eJGy8aG3,1HHrcoDS]\nreadyDuration: 83\nstatus: 7RzjL3Yv' > $TEMP_FILE_UPLOAD
+printf 'type: matchmakingNotif\ncounterPartyMember: [ivBWYsIk,8zYun7fj,0VXuuCEr]\nmatchId: 44o8ggy2\nmessage: fUBDVQ75\npartyMember: [IoJ6gw2e,oaTiYDyz,sS9KL6dp]\nreadyDuration: 85\nstatus: OfA75iFo' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -460,7 +460,7 @@ eval_tap $? 38 'MatchmakingNotif' test.out
 
 #- 39 MessageNotif
 # echo "Testing 'MessageNotif'"
-printf 'type: messageNotif\nid: m5oahGRU\nfrom: zbV10wo2\npayload: iksrDPmo\nsentAt: 1981-04-22T00:00:00Z\nto: UVCxwPKB\ntopic: g4NZcDpU' > $TEMP_FILE_UPLOAD
+printf 'type: messageNotif\nid: lf2Ky9Cf\nfrom: 2U2lCij4\npayload: 7VaJMeLf\nsentAt: 1994-06-04T00:00:00Z\nto: QpKuTrqD\ntopic: UsUiECx4' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -471,7 +471,7 @@ eval_tap $? 39 'MessageNotif' test.out
 
 #- 40 MessageSessionNotif
 # echo "Testing 'MessageSessionNotif'"
-printf 'type: messageSessionNotif\nid: ASl2NAQj\nfrom: 2bUAPX1v\npayload: Ox0NeDYP\nsentAt: 1971-12-08T00:00:00Z\nto: p8X9cAmn\ntopic: DvTCvLow' > $TEMP_FILE_UPLOAD
+printf 'type: messageSessionNotif\nid: zPupDN3A\nfrom: QFpmh2L9\npayload: YooMT3nm\nsentAt: 1971-01-11T00:00:00Z\nto: 2H5wvyiE\ntopic: SuF9mwqG' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -482,7 +482,7 @@ eval_tap $? 40 'MessageSessionNotif' test.out
 
 #- 41 OfflineNotificationRequest
 # echo "Testing 'OfflineNotificationRequest'"
-printf 'type: offlineNotificationRequest\nid: KwF2sao3' > $TEMP_FILE_UPLOAD
+printf 'type: offlineNotificationRequest\nid: ZBTNZuCH' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -493,7 +493,7 @@ eval_tap $? 41 'OfflineNotificationRequest' test.out
 
 #- 42 OfflineNotificationResponse
 # echo "Testing 'OfflineNotificationResponse'"
-printf 'type: offlineNotificationResponse\nid: 9Bfo4xPN\ncode: 5' > $TEMP_FILE_UPLOAD
+printf 'type: offlineNotificationResponse\nid: QONwAKXh\ncode: 18' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -504,7 +504,7 @@ eval_tap $? 42 'OfflineNotificationResponse' test.out
 
 #- 43 OnlineFriends
 # echo "Testing 'OnlineFriends'"
-printf 'type: onlineFriends\nid: P4U9Z0Rr\ncode: 63\nonlineFriendIds: [kgo11f0R,hWWOre1m,9DbtJtc5]' > $TEMP_FILE_UPLOAD
+printf 'type: onlineFriends\nid: tSa7yIiQ\ncode: 62\nonlineFriendIds: [WAfGIcUX,L51mTuLf,FvIlbVv9]' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -515,7 +515,7 @@ eval_tap $? 43 'OnlineFriends' test.out
 
 #- 44 PartyChatNotif
 # echo "Testing 'PartyChatNotif'"
-printf 'type: partyChatNotif\nid: Oev9NomI\nfrom: xWrRopbC\npayload: NA8DyC3u\nreceivedAt: 1987-09-25T00:00:00Z\nto: woiYnVD0' > $TEMP_FILE_UPLOAD
+printf 'type: partyChatNotif\nid: 4F5Zcoe8\nfrom: 2kRbDf8u\npayload: sgyargBW\nreceivedAt: 1978-04-17T00:00:00Z\nto: aObSJA8P' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -526,7 +526,7 @@ eval_tap $? 44 'PartyChatNotif' test.out
 
 #- 45 PartyChatRequest
 # echo "Testing 'PartyChatRequest'"
-printf 'type: partyChatRequest\nid: KE23vBDE\nfrom: qTmpqEr2\npayload: NZc7x3jw\nreceivedAt: 1997-09-22T00:00:00Z\nto: ertGYDlF' > $TEMP_FILE_UPLOAD
+printf 'type: partyChatRequest\nid: x31THg91\nfrom: V28GBvCw\npayload: DV4H4JS5\nreceivedAt: 1987-06-29T00:00:00Z\nto: T3RJZ7bp' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -537,7 +537,7 @@ eval_tap $? 45 'PartyChatRequest' test.out
 
 #- 46 PartyChatResponse
 # echo "Testing 'PartyChatResponse'"
-printf 'type: partyChatResponse\nid: kzYu5YB9\ncode: 12' > $TEMP_FILE_UPLOAD
+printf 'type: partyChatResponse\nid: jwUM6gPa\ncode: 35' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -548,7 +548,7 @@ eval_tap $? 46 'PartyChatResponse' test.out
 
 #- 47 PartyCreateRequest
 # echo "Testing 'PartyCreateRequest'"
-printf 'type: partyCreateRequest\nid: yZDlNkoT' > $TEMP_FILE_UPLOAD
+printf 'type: partyCreateRequest\nid: gbqfwS9w' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -559,7 +559,7 @@ eval_tap $? 47 'PartyCreateRequest' test.out
 
 #- 48 PartyCreateResponse
 # echo "Testing 'PartyCreateResponse'"
-printf 'type: partyCreateResponse\nid: r0nB5olk\ncode: 88\ninvitationToken: 7xVhqH51\ninvitees: GaaA3W30\nleaderId: u564cgzs\nmembers: AK7Ke5Lf\npartyId: O6dyyhUY' > $TEMP_FILE_UPLOAD
+printf 'type: partyCreateResponse\nid: XRfdIEp5\ncode: 88\ninvitationToken: CUo7wLJt\ninvitees: lzPDUbp0\nleaderId: yuH75v56\nmembers: aRGc5ico\npartyId: 4T7oYMSl' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -570,7 +570,7 @@ eval_tap $? 48 'PartyCreateResponse' test.out
 
 #- 49 PartyDataUpdateNotif
 # echo "Testing 'PartyDataUpdateNotif'"
-printf 'type: partyDataUpdateNotif\ncustomAttributes: {"yJpqTZ1z":{},"KrtIQu5P":{},"2gbrcgOk":{}}\ninvitees: [Ajivzaz8,NvkVM9Ro,TPPWf5qr]\nleader: GybjUv4F\nmembers: [4ta4wGKd,sXoieDPc,QpqaS5WA]\nnamespace: uXuZ3LJP\npartyId: bbpeuqAk\nupdatedAt: 1974-10-17T00:00:00Z' > $TEMP_FILE_UPLOAD
+printf 'type: partyDataUpdateNotif\ncustomAttributes: {"bCOl76Y3":{},"HuddzjlV":{},"iHsVUYna":{}}\ninvitees: [boYsvWSK,8BzEytcv,MIWvY1PG]\nleader: S1DQPFrY\nmembers: [wpiJ9FEu,HH9l4Q9o,QWoGuwNH]\nnamespace: IvxdtMCd\npartyId: gfnoYdMW\nupdatedAt: 1977-07-20T00:00:00Z' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -581,7 +581,7 @@ eval_tap $? 49 'PartyDataUpdateNotif' test.out
 
 #- 50 PartyGetInvitedNotif
 # echo "Testing 'PartyGetInvitedNotif'"
-printf 'type: partyGetInvitedNotif\nfrom: 9vokByaT\ninvitationToken: SnmdYhix\npartyId: 0jxefssR' > $TEMP_FILE_UPLOAD
+printf 'type: partyGetInvitedNotif\nfrom: HKcj327S\ninvitationToken: Exmvamgb\npartyId: 8UVAobQd' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -592,7 +592,7 @@ eval_tap $? 50 'PartyGetInvitedNotif' test.out
 
 #- 51 PartyInfoRequest
 # echo "Testing 'PartyInfoRequest'"
-printf 'type: partyInfoRequest\nid: 01U4wU0q' > $TEMP_FILE_UPLOAD
+printf 'type: partyInfoRequest\nid: Nw1N3Cy1' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -603,7 +603,7 @@ eval_tap $? 51 'PartyInfoRequest' test.out
 
 #- 52 PartyInfoResponse
 # echo "Testing 'PartyInfoResponse'"
-printf 'type: partyInfoResponse\nid: KRWqgvaR\ncode: 8\ncustomAttributes: {"ZCPIJSEh":{},"DwA8cnVX":{},"eYk2tohf":{}}\ninvitationToken: ndy7wnfA\ninvitees: EQGrZnYo\nleaderId: y97ZAHEz\nmembers: nJ2LnlTh\npartyId: ccSHPNFT' > $TEMP_FILE_UPLOAD
+printf 'type: partyInfoResponse\nid: sYlLczjN\ncode: 96\ncustomAttributes: {"IHoHOi0v":{},"DO9mARa4":{},"2ogHIl9u":{}}\ninvitationToken: bkmiNRwc\ninvitees: 8MJLq0Cw\nleaderId: EnG28Oq9\nmembers: GIDIYMfu\npartyId: X25HBTTy' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -614,7 +614,7 @@ eval_tap $? 52 'PartyInfoResponse' test.out
 
 #- 53 PartyInviteNotif
 # echo "Testing 'PartyInviteNotif'"
-printf 'type: partyInviteNotif\ninviteeId: y7eokRpm\ninviterId: ZK8fUyyR' > $TEMP_FILE_UPLOAD
+printf 'type: partyInviteNotif\ninviteeId: 8uegJsBF\ninviterId: IvvreHI6' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -625,7 +625,7 @@ eval_tap $? 53 'PartyInviteNotif' test.out
 
 #- 54 PartyInviteRequest
 # echo "Testing 'PartyInviteRequest'"
-printf 'type: partyInviteRequest\nid: t02hEWno\nfriendId: o0LSFqJ7' > $TEMP_FILE_UPLOAD
+printf 'type: partyInviteRequest\nid: r89YWkwf\nfriendId: PYyM5uzH' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -636,7 +636,7 @@ eval_tap $? 54 'PartyInviteRequest' test.out
 
 #- 55 PartyInviteResponse
 # echo "Testing 'PartyInviteResponse'"
-printf 'type: partyInviteResponse\nid: oHWxAeB3\ncode: 4' > $TEMP_FILE_UPLOAD
+printf 'type: partyInviteResponse\nid: BFKC2Nyl\ncode: 66' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -647,7 +647,7 @@ eval_tap $? 55 'PartyInviteResponse' test.out
 
 #- 56 PartyJoinNotif
 # echo "Testing 'PartyJoinNotif'"
-printf 'type: partyJoinNotif\nuserId: 8CFlY9WK' > $TEMP_FILE_UPLOAD
+printf 'type: partyJoinNotif\nuserId: S8qy8psK' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -658,7 +658,7 @@ eval_tap $? 56 'PartyJoinNotif' test.out
 
 #- 57 PartyJoinRequest
 # echo "Testing 'PartyJoinRequest'"
-printf 'type: partyJoinRequest\nid: nvZGFnOV\ninvitationToken: TrFbPFg5\npartyId: nwuV1rUU' > $TEMP_FILE_UPLOAD
+printf 'type: partyJoinRequest\nid: fniuCfZ9\ninvitationToken: kZHR9maK\npartyId: 1UOwyEIU' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -669,7 +669,7 @@ eval_tap $? 57 'PartyJoinRequest' test.out
 
 #- 58 PartyJoinResponse
 # echo "Testing 'PartyJoinResponse'"
-printf 'type: partyJoinResponse\nid: emOjrGqz\ncode: 74\ninvitationToken: iqBMD04V\ninvitees: G7q9wywQ\nleaderId: ClL5C1OR\nmembers: tSIrLYYr\npartyId: gP6mdYfe' > $TEMP_FILE_UPLOAD
+printf 'type: partyJoinResponse\nid: YurXyY6R\ncode: 41\ninvitationToken: w6obfzhy\ninvitees: 2WF4RlEb\nleaderId: XNMBfW08\nmembers: m67Rf7TM\npartyId: 9Josj2vg' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -680,7 +680,7 @@ eval_tap $? 58 'PartyJoinResponse' test.out
 
 #- 59 PartyKickNotif
 # echo "Testing 'PartyKickNotif'"
-printf 'type: partyKickNotif\nleaderId: UOPfgPPD\npartyId: 0PZDkGST\nuserId: ZPyMjYuv' > $TEMP_FILE_UPLOAD
+printf 'type: partyKickNotif\nleaderId: FEDoTkz9\npartyId: JYJnlmid\nuserId: U0JkiiMd' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -691,7 +691,7 @@ eval_tap $? 59 'PartyKickNotif' test.out
 
 #- 60 PartyKickRequest
 # echo "Testing 'PartyKickRequest'"
-printf 'type: partyKickRequest\nid: V9rP9NAT\nmemberId: jx5RyGpD' > $TEMP_FILE_UPLOAD
+printf 'type: partyKickRequest\nid: Wnt68OwN\nmemberId: UTsJVBDs' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -702,7 +702,7 @@ eval_tap $? 60 'PartyKickRequest' test.out
 
 #- 61 PartyKickResponse
 # echo "Testing 'PartyKickResponse'"
-printf 'type: partyKickResponse\nid: TmDG5tjh\ncode: 1' > $TEMP_FILE_UPLOAD
+printf 'type: partyKickResponse\nid: f7NPhPRn\ncode: 38' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -713,7 +713,7 @@ eval_tap $? 61 'PartyKickResponse' test.out
 
 #- 62 PartyLeaveNotif
 # echo "Testing 'PartyLeaveNotif'"
-printf 'type: partyLeaveNotif\nleaderId: O074rQjK\nuserId: a01VrKr6' > $TEMP_FILE_UPLOAD
+printf 'type: partyLeaveNotif\nleaderId: H1IX9Yrp\nuserId: Udky0KT8' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -724,7 +724,7 @@ eval_tap $? 62 'PartyLeaveNotif' test.out
 
 #- 63 PartyLeaveRequest
 # echo "Testing 'PartyLeaveRequest'"
-printf 'type: partyLeaveRequest\nid: tggEjHsY\nignoreUserRegistry: False' > $TEMP_FILE_UPLOAD
+printf 'type: partyLeaveRequest\nid: ooScmOtd\nignoreUserRegistry: False' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -735,7 +735,7 @@ eval_tap $? 63 'PartyLeaveRequest' test.out
 
 #- 64 PartyLeaveResponse
 # echo "Testing 'PartyLeaveResponse'"
-printf 'type: partyLeaveResponse\nid: iua1cABg\ncode: 67' > $TEMP_FILE_UPLOAD
+printf 'type: partyLeaveResponse\nid: TxrkYTX0\ncode: 6' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -746,7 +746,7 @@ eval_tap $? 64 'PartyLeaveResponse' test.out
 
 #- 65 PartyPromoteLeaderRequest
 # echo "Testing 'PartyPromoteLeaderRequest'"
-printf 'type: partyPromoteLeaderRequest\nid: EjYErNDX\nnewLeaderUserId: 5Zbi9tQK' > $TEMP_FILE_UPLOAD
+printf 'type: partyPromoteLeaderRequest\nid: AQnZqqeg\nnewLeaderUserId: OVxdHWTX' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -757,7 +757,7 @@ eval_tap $? 65 'PartyPromoteLeaderRequest' test.out
 
 #- 66 PartyPromoteLeaderResponse
 # echo "Testing 'PartyPromoteLeaderResponse'"
-printf 'type: partyPromoteLeaderResponse\nid: cJrQNXWB\ncode: 73\ninvitationToken: TEswIyP0\ninvitees: mizMk1e8\nleaderId: VAj2lkWt\nmembers: RW6p7xwI\npartyId: QBr47ceN' > $TEMP_FILE_UPLOAD
+printf 'type: partyPromoteLeaderResponse\nid: MB9LvXgv\ncode: 31\ninvitationToken: Dv95SGEy\ninvitees: GAjNOFjO\nleaderId: 9BJR5CqV\nmembers: 6Bac7ZsC\npartyId: QomnGfLq' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -768,7 +768,7 @@ eval_tap $? 66 'PartyPromoteLeaderResponse' test.out
 
 #- 67 PartyRejectNotif
 # echo "Testing 'PartyRejectNotif'"
-printf 'type: partyRejectNotif\nleaderId: oXT9hNnd\npartyId: wWu0riwl\nuserId: uT8RaOHX' > $TEMP_FILE_UPLOAD
+printf 'type: partyRejectNotif\nleaderId: dGDUiX3t\npartyId: Dy3kddol\nuserId: jwtAz3o7' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -779,7 +779,7 @@ eval_tap $? 67 'PartyRejectNotif' test.out
 
 #- 68 PartyRejectRequest
 # echo "Testing 'PartyRejectRequest'"
-printf 'type: partyRejectRequest\nid: cM9dfnIl\ninvitationToken: a5B4Ug3H\npartyId: bpNAuXkm' > $TEMP_FILE_UPLOAD
+printf 'type: partyRejectRequest\nid: 53J3Uie7\ninvitationToken: IxB3TnFj\npartyId: PPnb3sYZ' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -790,7 +790,7 @@ eval_tap $? 68 'PartyRejectRequest' test.out
 
 #- 69 PartyRejectResponse
 # echo "Testing 'PartyRejectResponse'"
-printf 'type: partyRejectResponse\nid: hOZ3kaCo\ncode: 66\npartyId: w65Za4MM' > $TEMP_FILE_UPLOAD
+printf 'type: partyRejectResponse\nid: gMfOeKkN\ncode: 28\npartyId: HWhfWE9z' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -801,7 +801,7 @@ eval_tap $? 69 'PartyRejectResponse' test.out
 
 #- 70 PersonalChatHistoryRequest
 # echo "Testing 'PersonalChatHistoryRequest'"
-printf 'type: personalChatHistoryRequest\nid: KHwPD8g9\nfriendId: IqqPIS0V' > $TEMP_FILE_UPLOAD
+printf 'type: personalChatHistoryRequest\nid: mSzPSMAI\nfriendId: XIopGUhT' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -812,7 +812,7 @@ eval_tap $? 70 'PersonalChatHistoryRequest' test.out
 
 #- 71 PersonalChatHistoryResponse
 # echo "Testing 'PersonalChatHistoryResponse'"
-printf 'type: personalChatHistoryResponse\nid: jj6eXhhN\nchat: qZjHwC5C\ncode: 13\nfriendId: f4D2vtKO' > $TEMP_FILE_UPLOAD
+printf 'type: personalChatHistoryResponse\nid: PPphhlWb\nchat: tDKbRwvs\ncode: 46\nfriendId: Ne9z3AFk' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -823,7 +823,7 @@ eval_tap $? 71 'PersonalChatHistoryResponse' test.out
 
 #- 72 PersonalChatNotif
 # echo "Testing 'PersonalChatNotif'"
-printf 'type: personalChatNotif\nid: gNphfoH9\nfrom: xdJLuKY8\npayload: FXti54nz\nreceivedAt: 1996-07-13T00:00:00Z\nto: 4cgdbAp3' > $TEMP_FILE_UPLOAD
+printf 'type: personalChatNotif\nid: eo3OttWc\nfrom: eZgCPG6O\npayload: RUH72k7F\nreceivedAt: 1980-02-28T00:00:00Z\nto: FW66jMCy' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -834,7 +834,7 @@ eval_tap $? 72 'PersonalChatNotif' test.out
 
 #- 73 PersonalChatRequest
 # echo "Testing 'PersonalChatRequest'"
-printf 'type: personalChatRequest\nid: lAYBSo9u\nfrom: wyTJo2ww\npayload: xtTaSqM2\nreceivedAt: 1978-07-13T00:00:00Z\nto: KBMmT4cv' > $TEMP_FILE_UPLOAD
+printf 'type: personalChatRequest\nid: MABuBWgI\nfrom: mnmMqQEv\npayload: 7zvao5pp\nreceivedAt: 1981-06-24T00:00:00Z\nto: BzSCRqbj' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -845,7 +845,7 @@ eval_tap $? 73 'PersonalChatRequest' test.out
 
 #- 74 PersonalChatResponse
 # echo "Testing 'PersonalChatResponse'"
-printf 'type: personalChatResponse\nid: vk3UjDjo\ncode: 23' > $TEMP_FILE_UPLOAD
+printf 'type: personalChatResponse\nid: kBuqc7NZ\ncode: 43' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -856,7 +856,7 @@ eval_tap $? 74 'PersonalChatResponse' test.out
 
 #- 75 RefreshTokenRequest
 # echo "Testing 'RefreshTokenRequest'"
-printf 'type: refreshTokenRequest\nid: 570nd3x4\ntoken: cglD0QHK' > $TEMP_FILE_UPLOAD
+printf 'type: refreshTokenRequest\nid: e0mK7MWW\ntoken: q6Vz029a' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -867,7 +867,7 @@ eval_tap $? 75 'RefreshTokenRequest' test.out
 
 #- 76 RefreshTokenResponse
 # echo "Testing 'RefreshTokenResponse'"
-printf 'type: refreshTokenResponse\nid: YAtw6z9J\ncode: 14' > $TEMP_FILE_UPLOAD
+printf 'type: refreshTokenResponse\nid: LMlLgZ2J\ncode: 60' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -878,7 +878,7 @@ eval_tap $? 76 'RefreshTokenResponse' test.out
 
 #- 77 RejectFriendsNotif
 # echo "Testing 'RejectFriendsNotif'"
-printf 'type: rejectFriendsNotif\nuserId: n5o9eOgc' > $TEMP_FILE_UPLOAD
+printf 'type: rejectFriendsNotif\nuserId: mRPUneES' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -889,7 +889,7 @@ eval_tap $? 77 'RejectFriendsNotif' test.out
 
 #- 78 RejectFriendsRequest
 # echo "Testing 'RejectFriendsRequest'"
-printf 'type: rejectFriendsRequest\nid: kCtACs0H\nfriendId: 0gNWcrIv' > $TEMP_FILE_UPLOAD
+printf 'type: rejectFriendsRequest\nid: mwR5ytjQ\nfriendId: Maj0ZqNe' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -900,7 +900,7 @@ eval_tap $? 78 'RejectFriendsRequest' test.out
 
 #- 79 RejectFriendsResponse
 # echo "Testing 'RejectFriendsResponse'"
-printf 'type: rejectFriendsResponse\nid: jNuFNvtP\ncode: 32' > $TEMP_FILE_UPLOAD
+printf 'type: rejectFriendsResponse\nid: BEAJOgsC\ncode: 81' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -911,7 +911,7 @@ eval_tap $? 79 'RejectFriendsResponse' test.out
 
 #- 80 RematchmakingNotif
 # echo "Testing 'RematchmakingNotif'"
-printf 'type: rematchmakingNotif\nbanDuration: 93' > $TEMP_FILE_UPLOAD
+printf 'type: rematchmakingNotif\nbanDuration: 21' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -922,7 +922,7 @@ eval_tap $? 80 'RematchmakingNotif' test.out
 
 #- 81 RequestFriendsNotif
 # echo "Testing 'RequestFriendsNotif'"
-printf 'type: requestFriendsNotif\nfriendId: qtXg9zgE' > $TEMP_FILE_UPLOAD
+printf 'type: requestFriendsNotif\nfriendId: A9oRXtSO' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -933,7 +933,7 @@ eval_tap $? 81 'RequestFriendsNotif' test.out
 
 #- 82 RequestFriendsRequest
 # echo "Testing 'RequestFriendsRequest'"
-printf 'type: requestFriendsRequest\nid: aTN3lxhh\nfriendId: hS27lhdI' > $TEMP_FILE_UPLOAD
+printf 'type: requestFriendsRequest\nid: lu80G83u\nfriendId: VZlQWQ0I' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -944,7 +944,7 @@ eval_tap $? 82 'RequestFriendsRequest' test.out
 
 #- 83 RequestFriendsResponse
 # echo "Testing 'RequestFriendsResponse'"
-printf 'type: requestFriendsResponse\nid: QgLN6wkR\ncode: 51' > $TEMP_FILE_UPLOAD
+printf 'type: requestFriendsResponse\nid: X0dSJTv9\ncode: 84' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -955,7 +955,7 @@ eval_tap $? 83 'RequestFriendsResponse' test.out
 
 #- 84 SendChannelChatRequest
 # echo "Testing 'SendChannelChatRequest'"
-printf 'type: sendChannelChatRequest\nid: ccnfuxus\nchannelSlug: OfVhV8px\npayload: BB5d8fji' > $TEMP_FILE_UPLOAD
+printf 'type: sendChannelChatRequest\nid: hchfEETA\nchannelSlug: rBVb4gQv\npayload: 3e5BthGU' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -966,7 +966,7 @@ eval_tap $? 84 'SendChannelChatRequest' test.out
 
 #- 85 SendChannelChatResponse
 # echo "Testing 'SendChannelChatResponse'"
-printf 'type: sendChannelChatResponse\nid: Ckg1y4b8\ncode: 41' > $TEMP_FILE_UPLOAD
+printf 'type: sendChannelChatResponse\nid: 0kHNZkBi\ncode: 94' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -977,7 +977,7 @@ eval_tap $? 85 'SendChannelChatResponse' test.out
 
 #- 86 SetReadyConsentNotif
 # echo "Testing 'SetReadyConsentNotif'"
-printf 'type: setReadyConsentNotif\nmatchId: Un2tGZFT\nuserId: t1DpdH5q' > $TEMP_FILE_UPLOAD
+printf 'type: setReadyConsentNotif\nmatchId: tb0ecRKJ\nuserId: 6BDkivQQ' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -988,7 +988,7 @@ eval_tap $? 86 'SetReadyConsentNotif' test.out
 
 #- 87 SetReadyConsentRequest
 # echo "Testing 'SetReadyConsentRequest'"
-printf 'type: setReadyConsentRequest\nid: nlmN521I\nmatchId: QsNxm9ze' > $TEMP_FILE_UPLOAD
+printf 'type: setReadyConsentRequest\nid: CKVcJxQt\nmatchId: PfZg3vLW' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -999,7 +999,7 @@ eval_tap $? 87 'SetReadyConsentRequest' test.out
 
 #- 88 SetReadyConsentResponse
 # echo "Testing 'SetReadyConsentResponse'"
-printf 'type: setReadyConsentResponse\nid: 3wla3D55\ncode: 66' > $TEMP_FILE_UPLOAD
+printf 'type: setReadyConsentResponse\nid: GG5q6SAD\ncode: 58' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1010,7 +1010,7 @@ eval_tap $? 88 'SetReadyConsentResponse' test.out
 
 #- 89 SetSessionAttributeRequest
 # echo "Testing 'SetSessionAttributeRequest'"
-printf 'type: setSessionAttributeRequest\nid: Db4CK7Ym\nkey: eh8l84tZ\nnamespace: R5YexHHu\nvalue: KDFdtH3q' > $TEMP_FILE_UPLOAD
+printf 'type: setSessionAttributeRequest\nid: jiWrCl7p\nkey: LVtguCfw\nnamespace: hZfYCXL5\nvalue: aCFxOptz' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1021,7 +1021,7 @@ eval_tap $? 89 'SetSessionAttributeRequest' test.out
 
 #- 90 SetSessionAttributeResponse
 # echo "Testing 'SetSessionAttributeResponse'"
-printf 'type: setSessionAttributeResponse\nid: XyrSoE5Q\ncode: 29' > $TEMP_FILE_UPLOAD
+printf 'type: setSessionAttributeResponse\nid: aFAu2Rz9\ncode: 27' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1032,7 +1032,7 @@ eval_tap $? 90 'SetSessionAttributeResponse' test.out
 
 #- 91 SetUserStatusRequest
 # echo "Testing 'SetUserStatusRequest'"
-printf 'type: setUserStatusRequest\nid: PxYNGRyK\nactivity: SI7SQY39\navailability: 19' > $TEMP_FILE_UPLOAD
+printf 'type: setUserStatusRequest\nid: k0yEQoCo\nactivity: MwAnKQud\navailability: 80' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1043,7 +1043,7 @@ eval_tap $? 91 'SetUserStatusRequest' test.out
 
 #- 92 SetUserStatusResponse
 # echo "Testing 'SetUserStatusResponse'"
-printf 'type: setUserStatusResponse\nid: rs8Tbl3Z\ncode: 21' > $TEMP_FILE_UPLOAD
+printf 'type: setUserStatusResponse\nid: MAqflTDH\ncode: 16' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1054,7 +1054,7 @@ eval_tap $? 92 'SetUserStatusResponse' test.out
 
 #- 93 ShutdownNotif
 # echo "Testing 'ShutdownNotif'"
-printf 'type: shutdownNotif\nmessage: xsib1nyd' > $TEMP_FILE_UPLOAD
+printf 'type: shutdownNotif\nmessage: zwPOm0kk' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1065,7 +1065,7 @@ eval_tap $? 93 'ShutdownNotif' test.out
 
 #- 94 SignalingP2PNotif
 # echo "Testing 'SignalingP2PNotif'"
-printf 'type: signalingP2PNotif\ndestinationId: Ecn6Jq2i\nmessage: GKohnzNH' > $TEMP_FILE_UPLOAD
+printf 'type: signalingP2PNotif\ndestinationId: RzwWofLn\nmessage: fCcrc1Xg' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1076,7 +1076,7 @@ eval_tap $? 94 'SignalingP2PNotif' test.out
 
 #- 95 StartMatchmakingRequest
 # echo "Testing 'StartMatchmakingRequest'"
-printf 'type: startMatchmakingRequest\nid: Ifrqlrts\nextraAttributes: KwTcZt76\ngameMode: z4BlX7WU\npartyAttributes: {"HnEkbyVN":{},"C9CC5vAA":{},"y424gNdP":{}}\npriority: 73\ntempParty: AAsRgDDt' > $TEMP_FILE_UPLOAD
+printf 'type: startMatchmakingRequest\nid: H8jiBns2\nextraAttributes: 69vliXT0\ngameMode: v1mNzGOZ\npartyAttributes: {"YkZeafsD":{},"eP5MLDk6":{},"bQo1VAIX":{}}\npriority: 76\ntempParty: OjVJDzI0' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1087,7 +1087,7 @@ eval_tap $? 95 'StartMatchmakingRequest' test.out
 
 #- 96 StartMatchmakingResponse
 # echo "Testing 'StartMatchmakingResponse'"
-printf 'type: startMatchmakingResponse\nid: uEbpfHSV\ncode: 92' > $TEMP_FILE_UPLOAD
+printf 'type: startMatchmakingResponse\nid: O5kURDyZ\ncode: 64' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1098,7 +1098,7 @@ eval_tap $? 96 'StartMatchmakingResponse' test.out
 
 #- 97 UnblockPlayerNotif
 # echo "Testing 'UnblockPlayerNotif'"
-printf 'type: unblockPlayerNotif\nunblockedUserId: 62BrTTru\nuserId: PYVKqliA' > $TEMP_FILE_UPLOAD
+printf 'type: unblockPlayerNotif\nunblockedUserId: IlcxIVvo\nuserId: UF2joZTt' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1109,7 +1109,7 @@ eval_tap $? 97 'UnblockPlayerNotif' test.out
 
 #- 98 UnblockPlayerRequest
 # echo "Testing 'UnblockPlayerRequest'"
-printf 'type: unblockPlayerRequest\nid: rYHOzpiY\nnamespace: PWqMuXkt\nunblockedUserId: ZKNlmzcc' > $TEMP_FILE_UPLOAD
+printf 'type: unblockPlayerRequest\nid: pQ7kJJ6Z\nnamespace: Are99RcW\nunblockedUserId: TMJwhxsK' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1120,7 +1120,7 @@ eval_tap $? 98 'UnblockPlayerRequest' test.out
 
 #- 99 UnblockPlayerResponse
 # echo "Testing 'UnblockPlayerResponse'"
-printf 'type: unblockPlayerResponse\nid: V183HQon\ncode: 6\nnamespace: 0fkBf00i\nunblockedUserId: 207YvGcQ' > $TEMP_FILE_UPLOAD
+printf 'type: unblockPlayerResponse\nid: BjGhL9gz\ncode: 71\nnamespace: 7g7hUE0S\nunblockedUserId: NLnbYVSX' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1131,7 +1131,7 @@ eval_tap $? 99 'UnblockPlayerResponse' test.out
 
 #- 100 UnfriendNotif
 # echo "Testing 'UnfriendNotif'"
-printf 'type: unfriendNotif\nfriendId: cUtI88kX' > $TEMP_FILE_UPLOAD
+printf 'type: unfriendNotif\nfriendId: w3qy8vCo' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1142,7 +1142,7 @@ eval_tap $? 100 'UnfriendNotif' test.out
 
 #- 101 UnfriendRequest
 # echo "Testing 'UnfriendRequest'"
-printf 'type: unfriendRequest\nid: aGKaJWAT\nfriendId: 4le0pnRI' > $TEMP_FILE_UPLOAD
+printf 'type: unfriendRequest\nid: nL7dfMXx\nfriendId: 5ubUuXf7' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1153,7 +1153,7 @@ eval_tap $? 101 'UnfriendRequest' test.out
 
 #- 102 UnfriendResponse
 # echo "Testing 'UnfriendResponse'"
-printf 'type: unfriendResponse\nid: 4PYxhJN0\ncode: 94' > $TEMP_FILE_UPLOAD
+printf 'type: unfriendResponse\nid: 7wkC08ku\ncode: 64' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1175,7 +1175,7 @@ eval_tap $? 103 'UserBannedNotification' test.out
 
 #- 104 UserMetricRequest
 # echo "Testing 'UserMetricRequest'"
-printf 'type: userMetricRequest\nid: M9hFgBCH' > $TEMP_FILE_UPLOAD
+printf 'type: userMetricRequest\nid: a6yB7OCO' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1186,7 +1186,7 @@ eval_tap $? 104 'UserMetricRequest' test.out
 
 #- 105 UserMetricResponse
 # echo "Testing 'UserMetricResponse'"
-printf 'type: userMetricResponse\nid: FT4he11u\ncode: 44\nplayerCount: 98' > $TEMP_FILE_UPLOAD
+printf 'type: userMetricResponse\nid: QnriEvnZ\ncode: 42\nplayerCount: 11' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \
@@ -1197,7 +1197,7 @@ eval_tap $? 105 'UserMetricResponse' test.out
 
 #- 106 UserStatusNotif
 # echo "Testing 'UserStatusNotif'"
-printf 'type: userStatusNotif\nactivity: QlE5BCS8\navailability: 45\nlastSeenAt: 1985-03-12T00:00:00Z\nuserId: fjQA88vs' > $TEMP_FILE_UPLOAD
+printf 'type: userStatusNotif\nactivity: 6ieixWFT\navailability: 59\nlastSeenAt: 1989-08-21T00:00:00Z\nuserId: LbOSCoqc' > $TEMP_FILE_UPLOAD
 $CLI_EXE \
     --ws \
     --sn $SERVICE_NAME \

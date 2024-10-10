@@ -45,6 +45,17 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     return opBuilder;
             }
         }
+        public AdminGetUserProgression.AdminGetUserProgressionBuilder AdminGetUserProgressionOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminGetUserProgression.AdminGetUserProgressionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public EvaluateMyProgress.EvaluateMyProgressBuilder EvaluateMyProgressOp
         {
             get
@@ -92,6 +103,22 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
         {
             var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelUserProgressionResponse? AdminGetUserProgression(AdminGetUserProgression input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelUserProgressionResponse?> AdminGetUserProgressionAsync(AdminGetUserProgression input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

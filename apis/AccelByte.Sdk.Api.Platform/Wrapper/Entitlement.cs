@@ -34,22 +34,22 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
 
         #region Operation Builders
-        public QueryEntitlements.QueryEntitlementsBuilder QueryEntitlementsOp
+        public QueryEntitlements1.QueryEntitlements1Builder QueryEntitlements1Op
         {
             get
             {
-                var opBuilder = new Operation.QueryEntitlements.QueryEntitlementsBuilder(_sdk);
+                var opBuilder = new Operation.QueryEntitlements1.QueryEntitlements1Builder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
                     return opBuilder;
             }
         }
-        public QueryEntitlements1.QueryEntitlements1Builder QueryEntitlements1Op
+        public QueryEntitlements.QueryEntitlementsBuilder QueryEntitlementsOp
         {
             get
             {
-                var opBuilder = new Operation.QueryEntitlements1.QueryEntitlements1Builder(_sdk);
+                var opBuilder = new Operation.QueryEntitlements.QueryEntitlementsBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -666,22 +666,6 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.EntitlementPagingSlicedResult? QueryEntitlements(QueryEntitlements input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.EntitlementPagingSlicedResult?> QueryEntitlementsAsync(QueryEntitlements input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
         public Model.EntitlementPagingSlicedResult? QueryEntitlements1(QueryEntitlements1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -691,6 +675,22 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
         public async Task<Model.EntitlementPagingSlicedResult?> QueryEntitlements1Async(QueryEntitlements1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.EntitlementPagingSlicedResult? QueryEntitlements(QueryEntitlements input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.EntitlementPagingSlicedResult?> QueryEntitlementsAsync(QueryEntitlements input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

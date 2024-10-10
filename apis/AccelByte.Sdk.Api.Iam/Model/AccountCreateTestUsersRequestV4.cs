@@ -15,6 +15,9 @@ namespace AccelByte.Sdk.Api.Iam.Model
         [JsonPropertyName("count")]
         public int? Count { get; set; }
 
+        [JsonPropertyName("userInfo")]
+        public AccountUserInfo? UserInfo { get; set; }
+
     }
 
 

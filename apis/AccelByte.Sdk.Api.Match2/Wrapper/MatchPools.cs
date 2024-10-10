@@ -122,6 +122,17 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     return opBuilder;
             }
         }
+        public PublicGetPlayerMetric.PublicGetPlayerMetricBuilder PublicGetPlayerMetricOp
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicGetPlayerMetric.PublicGetPlayerMetricBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         #endregion
 
         public Model.ApiListMatchPoolsResponse? MatchPoolList(MatchPoolList input)
@@ -245,6 +256,22 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.Payload);
         }
         public async Task<Model.ApiListMatchPoolTicketsResponse?> AdminGetMatchPoolTicketsAsync(AdminGetMatchPoolTickets input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ApiPlayerMetricRecord? PublicGetPlayerMetric(PublicGetPlayerMetric input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ApiPlayerMetricRecord?> PublicGetPlayerMetricAsync(PublicGetPlayerMetric input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

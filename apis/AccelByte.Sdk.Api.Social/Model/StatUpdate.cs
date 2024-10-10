@@ -47,6 +47,11 @@ namespace AccelByte.Sdk.Api.Social.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? Tags { get; set; }
 
+        [JsonPropertyName("visibility")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public StatUpdateVisibility? Visibility { get; set; }
+
     }
 
 
@@ -72,6 +77,27 @@ namespace AccelByte.Sdk.Api.Social.Model
         }
 
         public StatUpdateGlobalAggregationMethod(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
+
+    public class StatUpdateVisibility : StringEnum<StatUpdateVisibility>
+    {
+        public static readonly StatUpdateVisibility SERVERONLY
+            = new StatUpdateVisibility("SERVERONLY");
+
+        public static readonly StatUpdateVisibility SHOWALL
+            = new StatUpdateVisibility("SHOWALL");
+
+
+        public static implicit operator StatUpdateVisibility(string value)
+        {
+            return NewValue(value);
+        }
+
+        public StatUpdateVisibility(string enumValue)
             : base(enumValue)
         {
 

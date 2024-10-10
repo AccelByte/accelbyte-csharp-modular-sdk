@@ -56,6 +56,17 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     return opBuilder;
             }
         }
+        public AdminGetActiveChallenges.AdminGetActiveChallengesBuilder AdminGetActiveChallengesOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminGetActiveChallenges.AdminGetActiveChallengesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public AdminGetChallenge.AdminGetChallengeBuilder AdminGetChallengeOp
         {
             get
@@ -122,6 +133,17 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     return opBuilder;
             }
         }
+        public AdminUpdateTiedChallengeSchedule.AdminUpdateTiedChallengeScheduleBuilder AdminUpdateTiedChallengeScheduleOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateTiedChallengeSchedule.AdminUpdateTiedChallengeScheduleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         #endregion
 
         public Model.ModelListChallengeResponse? AdminGetChallenges(AdminGetChallenges input)
@@ -149,6 +171,22 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.Payload);
         }
         public async Task<Model.ModelChallengeResponse?> AdminCreateChallengeAsync(AdminCreateChallenge input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelListChallengeResponse? AdminGetActiveChallenges(AdminGetActiveChallenges input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelListChallengeResponse?> AdminGetActiveChallengesAsync(AdminGetActiveChallenges input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -248,6 +286,22 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
         {
             var response = await _sdk.RunRequestAsync(input);
             input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.ModelChallengeResponse? AdminUpdateTiedChallengeSchedule(AdminUpdateTiedChallengeSchedule input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.ModelChallengeResponse?> AdminUpdateTiedChallengeScheduleAsync(AdminUpdateTiedChallengeSchedule input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

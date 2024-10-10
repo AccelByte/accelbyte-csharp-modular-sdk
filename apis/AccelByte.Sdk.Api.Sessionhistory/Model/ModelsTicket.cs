@@ -24,6 +24,10 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? MatchPool { get; set; }
 
+        [JsonPropertyName("MatchedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public DateTime? MatchedAt { get; set; }
+
         [JsonPropertyName("Namespace")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Namespace { get; set; }
@@ -63,6 +67,10 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Model
         [JsonPropertyName("MatchPool")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? MatchPool { get; set; }
+
+        [JsonPropertyName("MatchedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public DateTime? MatchedAt { get; set; }
 
         [JsonPropertyName("Namespace")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

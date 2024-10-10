@@ -68,6 +68,11 @@ namespace AccelByte.Sdk.Api.Social.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? Tags { get; set; }
 
+        [JsonPropertyName("visibility")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public StatCreateVisibility? Visibility { get; set; }
+
     }
 
 
@@ -114,6 +119,27 @@ namespace AccelByte.Sdk.Api.Social.Model
         }
 
         public StatCreateSetBy(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
+
+    public class StatCreateVisibility : StringEnum<StatCreateVisibility>
+    {
+        public static readonly StatCreateVisibility SERVERONLY
+            = new StatCreateVisibility("SERVERONLY");
+
+        public static readonly StatCreateVisibility SHOWALL
+            = new StatCreateVisibility("SHOWALL");
+
+
+        public static implicit operator StatCreateVisibility(string value)
+        {
+            return NewValue(value);
+        }
+
+        public StatCreateVisibility(string enumValue)
             : base(enumValue)
         {
 

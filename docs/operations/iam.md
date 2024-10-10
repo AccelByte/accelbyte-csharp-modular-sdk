@@ -216,6 +216,7 @@
 | `/iam/v3/public/users/me` | GET | PublicGetMyUserV3 | [PublicGetMyUserV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/Users/PublicGetMyUserV3.cs) | [PublicGetMyUserV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/PublicGetMyUserV3.cs) |
 | `/iam/v3/public/users/me/headless/link/conflict` | GET | PublicGetLinkHeadlessAccountToMyAccountConflictV3 | [PublicGetLinkHeadlessAccountToMyAccountConflictV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/Users/PublicGetLinkHeadlessAccountToMyAccountConflictV3.cs) | [PublicGetLinkHeadlessAccountToMyAccountConflictV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/PublicGetLinkHeadlessAccountToMyAccountConflictV3.cs) |
 | `/iam/v3/public/users/me/headless/linkWithProgression` | POST | LinkHeadlessAccountToMyAccountV3 | [LinkHeadlessAccountToMyAccountV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/Users/LinkHeadlessAccountToMyAccountV3.cs) | [LinkHeadlessAccountToMyAccountV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/LinkHeadlessAccountToMyAccountV3.cs) |
+| `/iam/v3/public/users/me/profileStatus` | GET | PublicGetMyProfileAllowUpdateStatusV3 | [PublicGetMyProfileAllowUpdateStatusV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/Users/PublicGetMyProfileAllowUpdateStatusV3.cs) | [PublicGetMyProfileAllowUpdateStatusV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/PublicGetMyProfileAllowUpdateStatusV3.cs) |
 | `/iam/v3/public/users/me/verify_link/request` | POST | PublicSendVerificationLinkV3 | [PublicSendVerificationLinkV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/Users/PublicSendVerificationLinkV3.cs) | [PublicSendVerificationLinkV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/PublicSendVerificationLinkV3.cs) |
 | `/iam/v3/public/users/verify_link/verify` | GET | PublicVerifyUserByLinkV3 | [PublicVerifyUserByLinkV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/Users/PublicVerifyUserByLinkV3.cs) | [PublicVerifyUserByLinkV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Users/PublicVerifyUserByLinkV3.cs) |
 
@@ -315,6 +316,12 @@
 | `/iam/v3/admin/namespaces/{namespace}/countries/blacklist` | POST | AdminAddCountryBlacklistV3 | [AdminAddCountryBlacklistV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/Country/AdminAddCountryBlacklistV3.cs) | [AdminAddCountryBlacklistV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Country/AdminAddCountryBlacklistV3.cs) |
 | `/iam/v3/public/namespaces/{namespace}/countries` | GET | PublicGetCountryListV3 | [PublicGetCountryListV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/Country/PublicGetCountryListV3.cs) | [PublicGetCountryListV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/Country/PublicGetCountryListV3.cs) |
 
+### Login Allowlist Wrapper:  [LoginAllowlist](../../apis/AccelByte.Sdk.Api.Iam/Wrapper/LoginAllowlist.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/iam/v3/admin/namespaces/{namespace}/loginAllowlist` | GET | AdminGetLoginAllowlistV3 | [AdminGetLoginAllowlistV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/LoginAllowlist/AdminGetLoginAllowlistV3.cs) | [AdminGetLoginAllowlistV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/LoginAllowlist/AdminGetLoginAllowlistV3.cs) |
+| `/iam/v3/admin/namespaces/{namespace}/loginAllowlist` | PUT | AdminUpdateLoginAllowlistV3 | [AdminUpdateLoginAllowlistV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/LoginAllowlist/AdminUpdateLoginAllowlistV3.cs) | [AdminUpdateLoginAllowlistV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/LoginAllowlist/AdminUpdateLoginAllowlistV3.cs) |
+
 ### Third Party Credential Wrapper:  [ThirdPartyCredential](../../apis/AccelByte.Sdk.Api.Iam/Wrapper/ThirdPartyCredential.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -338,6 +345,13 @@
 | `/iam/v3/admin/namespaces/{namespace}/platforms/{platformId}/sso` | POST | AddSSOLoginPlatformCredential | [AddSSOLoginPlatformCredential](../../apis/AccelByte.Sdk.Api.Iam/Operation/SSOCredential/AddSSOLoginPlatformCredential.cs) | [AddSSOLoginPlatformCredential](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/SSOCredential/AddSSOLoginPlatformCredential.cs) |
 | `/iam/v3/admin/namespaces/{namespace}/platforms/{platformId}/sso` | DELETE | DeleteSSOLoginPlatformCredentialV3 | [DeleteSSOLoginPlatformCredentialV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/SSOCredential/DeleteSSOLoginPlatformCredentialV3.cs) | [DeleteSSOLoginPlatformCredentialV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/SSOCredential/DeleteSSOLoginPlatformCredentialV3.cs) |
 | `/iam/v3/admin/namespaces/{namespace}/platforms/{platformId}/sso` | PATCH | UpdateSSOPlatformCredential | [UpdateSSOPlatformCredential](../../apis/AccelByte.Sdk.Api.Iam/Operation/SSOCredential/UpdateSSOPlatformCredential.cs) | [UpdateSSOPlatformCredential](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/SSOCredential/UpdateSSOPlatformCredential.cs) |
+
+### Profile Update Strategy Wrapper:  [ProfileUpdateStrategy](../../apis/AccelByte.Sdk.Api.Iam/Wrapper/ProfileUpdateStrategy.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/iam/v3/admin/namespaces/{namespace}/profileUpdateStrategies` | GET | AdminGetProfileUpdateStrategyV3 | [AdminGetProfileUpdateStrategyV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/ProfileUpdateStrategy/AdminGetProfileUpdateStrategyV3.cs) | [AdminGetProfileUpdateStrategyV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/ProfileUpdateStrategy/AdminGetProfileUpdateStrategyV3.cs) |
+| `/iam/v3/admin/namespaces/{namespace}/profileUpdateStrategies` | PUT | AdminUpdateProfileUpdateStrategyV3 | [AdminUpdateProfileUpdateStrategyV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/ProfileUpdateStrategy/AdminUpdateProfileUpdateStrategyV3.cs) | [AdminUpdateProfileUpdateStrategyV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/ProfileUpdateStrategy/AdminUpdateProfileUpdateStrategyV3.cs) |
+| `/iam/v3/public/namespaces/{namespace}/profileUpdateStrategies` | GET | PublicGetProfileUpdateStrategyV3 | [PublicGetProfileUpdateStrategyV3](../../apis/AccelByte.Sdk.Api.Iam/Operation/ProfileUpdateStrategy/PublicGetProfileUpdateStrategyV3.cs) | [PublicGetProfileUpdateStrategyV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/ProfileUpdateStrategy/PublicGetProfileUpdateStrategyV3.cs) |
 
 ### Override Role Config v3 Wrapper:  [OverrideRoleConfigV3](../../apis/AccelByte.Sdk.Api.Iam/Wrapper/OverrideRoleConfigV3.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -408,6 +422,7 @@
 | `/iam/v4/admin/namespaces/{namespace}/users/{userId}` | PUT | AdminUpdateUserV4 | [AdminUpdateUserV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/AdminUpdateUserV4.cs) | [AdminUpdateUserV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/AdminUpdateUserV4.cs) |
 | `/iam/v4/admin/namespaces/{namespace}/users/{userId}/email` | PUT | AdminUpdateUserEmailAddressV4 | [AdminUpdateUserEmailAddressV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/AdminUpdateUserEmailAddressV4.cs) | [AdminUpdateUserEmailAddressV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/AdminUpdateUserEmailAddressV4.cs) |
 | `/iam/v4/admin/namespaces/{namespace}/users/{userId}/mfa/disable` | DELETE | AdminDisableUserMFAV4 | [AdminDisableUserMFAV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/AdminDisableUserMFAV4.cs) | [AdminDisableUserMFAV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/AdminDisableUserMFAV4.cs) |
+| `/iam/v4/admin/namespaces/{namespace}/users/{userId}/mfa/status` | GET | AdminGetUserMFAStatusV4 | [AdminGetUserMFAStatusV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/AdminGetUserMFAStatusV4.cs) | [AdminGetUserMFAStatusV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/AdminGetUserMFAStatusV4.cs) |
 | `/iam/v4/admin/namespaces/{namespace}/users/{userId}/roles` | GET | AdminListUserRolesV4 | [AdminListUserRolesV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/AdminListUserRolesV4.cs) | [AdminListUserRolesV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/AdminListUserRolesV4.cs) |
 | `/iam/v4/admin/namespaces/{namespace}/users/{userId}/roles` | PUT | AdminUpdateUserRoleV4 | [AdminUpdateUserRoleV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/AdminUpdateUserRoleV4.cs) | [AdminUpdateUserRoleV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/AdminUpdateUserRoleV4.cs) |
 | `/iam/v4/admin/namespaces/{namespace}/users/{userId}/roles` | POST | AdminAddUserRoleV4 | [AdminAddUserRoleV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/UsersV4/AdminAddUserRoleV4.cs) | [AdminAddUserRoleV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/UsersV4/AdminAddUserRoleV4.cs) |
@@ -477,7 +492,7 @@
 | `/iam/v4/admin/namespaces/{namespace}/devices/report` | GET | AdminGenerateReportV4 | [AdminGenerateReportV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/DevicesV4/AdminGenerateReportV4.cs) | [AdminGenerateReportV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/DevicesV4/AdminGenerateReportV4.cs) |
 | `/iam/v4/admin/namespaces/{namespace}/devices/types` | GET | AdminGetDeviceTypesV4 | [AdminGetDeviceTypesV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/DevicesV4/AdminGetDeviceTypesV4.cs) | [AdminGetDeviceTypesV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/DevicesV4/AdminGetDeviceTypesV4.cs) |
 | `/iam/v4/admin/namespaces/{namespace}/devices/{deviceId}/bans` | GET | AdminGetDeviceBansV4 | [AdminGetDeviceBansV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/DevicesV4/AdminGetDeviceBansV4.cs) | [AdminGetDeviceBansV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/DevicesV4/AdminGetDeviceBansV4.cs) |
-| `/iam/v4/admin/namespaces/{namespace}/devices/{deviceId}/decrypt` | GET | AdminDecryptDeviceV4 | [AdminDecryptDeviceV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/DevicesV4/AdminDecryptDeviceV4.cs) | [AdminDecryptDeviceV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/DevicesV4/AdminDecryptDeviceV4.cs) |
+| [DEPRECATED] `/iam/v4/admin/namespaces/{namespace}/devices/{deviceId}/decrypt` | GET | AdminDecryptDeviceV4 | [AdminDecryptDeviceV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/DevicesV4/AdminDecryptDeviceV4.cs) | [AdminDecryptDeviceV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/DevicesV4/AdminDecryptDeviceV4.cs) |
 | `/iam/v4/admin/namespaces/{namespace}/devices/{deviceId}/unban` | PUT | AdminUnbanDeviceV4 | [AdminUnbanDeviceV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/DevicesV4/AdminUnbanDeviceV4.cs) | [AdminUnbanDeviceV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/DevicesV4/AdminUnbanDeviceV4.cs) |
 | `/iam/v4/admin/namespaces/{namespace}/devices/{deviceId}/users` | GET | AdminGetUsersByDeviceV4 | [AdminGetUsersByDeviceV4](../../apis/AccelByte.Sdk.Api.Iam/Operation/DevicesV4/AdminGetUsersByDeviceV4.cs) | [AdminGetUsersByDeviceV4](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Iam/DevicesV4/AdminGetUsersByDeviceV4.cs) |
 
@@ -538,11 +553,19 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
+### Login Allowlist Wrapper:  [LoginAllowlist](../../apis/AccelByte.Sdk.Api.Iam/Wrapper/LoginAllowlist.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
 ### Third Party Credential Wrapper:  [ThirdPartyCredential](../../apis/AccelByte.Sdk.Api.Iam/Wrapper/ThirdPartyCredential.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
 ### SSO Credential Wrapper:  [SSOCredential](../../apis/AccelByte.Sdk.Api.Iam/Wrapper/SSOCredential.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
+### Profile Update Strategy Wrapper:  [ProfileUpdateStrategy](../../apis/AccelByte.Sdk.Api.Iam/Wrapper/ProfileUpdateStrategy.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
@@ -599,6 +622,7 @@
 | `account.createUserResponseV4` | [AccountCreateUserResponseV4](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountCreateUserResponseV4.cs) |
 | `account.upgradeHeadlessAccountRequestV4` | [AccountUpgradeHeadlessAccountRequestV4](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountUpgradeHeadlessAccountRequestV4.cs) |
 | `account.upgradeHeadlessAccountWithVerificationCodeRequestV4` | [AccountUpgradeHeadlessAccountWithVerificationCodeRequestV4](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountUpgradeHeadlessAccountWithVerificationCodeRequestV4.cs) |
+| `account.userInfo` | [AccountUserInfo](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountUserInfo.cs) |
 | `accountcommon.AllowedPermission` | [AccountcommonAllowedPermission](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonAllowedPermission.cs) |
 | `accountcommon.AvatarConfig` | [AccountcommonAvatarConfig](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonAvatarConfig.cs) |
 | `accountcommon.Ban` | [AccountcommonBan](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonBan.cs) |
@@ -639,6 +663,7 @@
 | `accountcommon.PlatformAccount` | [AccountcommonPlatformAccount](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonPlatformAccount.cs) |
 | `accountcommon.PlatformLinkingHistory` | [AccountcommonPlatformLinkingHistory](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonPlatformLinkingHistory.cs) |
 | `accountcommon.PlatformUserInformationV3` | [AccountcommonPlatformUserInformationV3](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonPlatformUserInformationV3.cs) |
+| `accountcommon.ProfileUpdateConfig` | [AccountcommonProfileUpdateConfig](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonProfileUpdateConfig.cs) |
 | `accountcommon.RegisteredDomain` | [AccountcommonRegisteredDomain](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonRegisteredDomain.cs) |
 | `accountcommon.ReplaceRolePermission` | [AccountcommonReplaceRolePermission](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonReplaceRolePermission.cs) |
 | `accountcommon.Role` | [AccountcommonRole](../../apis/AccelByte.Sdk.Api.Iam/Model/AccountcommonRole.cs) |
@@ -722,10 +747,12 @@
 | `model.EmailUpdateRequestV4` | [ModelEmailUpdateRequestV4](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelEmailUpdateRequestV4.cs) |
 | `model.EnabledFactorsResponseV4` | [ModelEnabledFactorsResponseV4](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelEnabledFactorsResponseV4.cs) |
 | `model.FailedBanUnbanUserV3` | [ModelFailedBanUnbanUserV3](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelFailedBanUnbanUserV3.cs) |
+| `model.FieldUpdateAllowStatus` | [ModelFieldUpdateAllowStatus](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelFieldUpdateAllowStatus.cs) |
 | `model.ForgotPasswordRequestV3` | [ModelForgotPasswordRequestV3](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelForgotPasswordRequestV3.cs) |
 | `model.GetAdminUsersResponse` | [ModelGetAdminUsersResponse](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelGetAdminUsersResponse.cs) |
 | `model.GetBulkUserBansRequest` | [ModelGetBulkUserBansRequest](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelGetBulkUserBansRequest.cs) |
 | `model.GetLinkHeadlessAccountConflictResponse` | [ModelGetLinkHeadlessAccountConflictResponse](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelGetLinkHeadlessAccountConflictResponse.cs) |
+| `model.GetProfileUpdateStrategyConfigResponse` | [ModelGetProfileUpdateStrategyConfigResponse](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelGetProfileUpdateStrategyConfigResponse.cs) |
 | `model.GetPublisherUserResponse` | [ModelGetPublisherUserResponse](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelGetPublisherUserResponse.cs) |
 | `model.GetUserBanSummaryV3` | [ModelGetUserBanSummaryV3](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelGetUserBanSummaryV3.cs) |
 | `model.GetUserBanV3Response` | [ModelGetUserBanV3Response](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelGetUserBanV3Response.cs) |
@@ -759,6 +786,8 @@
 | `model.ListUserResponseV3` | [ModelListUserResponseV3](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelListUserResponseV3.cs) |
 | `model.ListUserRolesV4Response` | [ModelListUserRolesV4Response](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelListUserRolesV4Response.cs) |
 | `model.ListValidUserIDResponseV4` | [ModelListValidUserIDResponseV4](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelListValidUserIDResponseV4.cs) |
+| `model.LoginAllowlistRequest` | [ModelLoginAllowlistRequest](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelLoginAllowlistRequest.cs) |
+| `model.LoginAllowlistResponse` | [ModelLoginAllowlistResponse](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelLoginAllowlistResponse.cs) |
 | `model.LoginHistoriesResponse` | [ModelLoginHistoriesResponse](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelLoginHistoriesResponse.cs) |
 | `model.NamespaceInvitationHistoryUserV4Response` | [ModelNamespaceInvitationHistoryUserV4Response](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelNamespaceInvitationHistoryUserV4Response.cs) |
 | `model.NamespaceRoleRequest` | [ModelNamespaceRoleRequest](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelNamespaceRoleRequest.cs) |
@@ -817,11 +846,13 @@
 | `model.SendVerificationCodeRequest` | [ModelSendVerificationCodeRequest](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelSendVerificationCodeRequest.cs) |
 | `model.SendVerificationCodeRequestV3` | [ModelSendVerificationCodeRequestV3](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelSendVerificationCodeRequestV3.cs) |
 | `model.SendVerificationLinkRequest` | [ModelSendVerificationLinkRequest](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelSendVerificationLinkRequest.cs) |
+| `model.SimpleProfileUpdateStrategyConfigs` | [ModelSimpleProfileUpdateStrategyConfigs](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelSimpleProfileUpdateStrategyConfigs.cs) |
 | `model.ThirdPartyLoginPlatformCredentialRequest` | [ModelThirdPartyLoginPlatformCredentialRequest](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelThirdPartyLoginPlatformCredentialRequest.cs) |
 | `model.ThirdPartyLoginPlatformCredentialResponse` | [ModelThirdPartyLoginPlatformCredentialResponse](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelThirdPartyLoginPlatformCredentialResponse.cs) |
 | `model.TokenThirdPartyLinkStatusResponse` | [ModelTokenThirdPartyLinkStatusResponse](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelTokenThirdPartyLinkStatusResponse.cs) |
 | `model.UnlinkUserPlatformRequest` | [ModelUnlinkUserPlatformRequest](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelUnlinkUserPlatformRequest.cs) |
 | `model.UpdatePermissionScheduleRequest` | [ModelUpdatePermissionScheduleRequest](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelUpdatePermissionScheduleRequest.cs) |
+| `model.UpdateProfileUpdateStrategyConfigRequest` | [ModelUpdateProfileUpdateStrategyConfigRequest](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelUpdateProfileUpdateStrategyConfigRequest.cs) |
 | `model.UpdateUserDeletionStatusRequest` | [ModelUpdateUserDeletionStatusRequest](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelUpdateUserDeletionStatusRequest.cs) |
 | `model.UpdateUserStatusRequest` | [ModelUpdateUserStatusRequest](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelUpdateUserStatusRequest.cs) |
 | `model.UpgradeHeadlessAccountRequest` | [ModelUpgradeHeadlessAccountRequest](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelUpgradeHeadlessAccountRequest.cs) |
@@ -859,6 +890,7 @@
 | `model.UserPlatformLinkHistories` | [ModelUserPlatformLinkHistories](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelUserPlatformLinkHistories.cs) |
 | `model.UserPlatformLinkHistory` | [ModelUserPlatformLinkHistory](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelUserPlatformLinkHistory.cs) |
 | `model.UserPlatformMetadata` | [ModelUserPlatformMetadata](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelUserPlatformMetadata.cs) |
+| `model.UserProfileUpdateAllowStatus` | [ModelUserProfileUpdateAllowStatus](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelUserProfileUpdateAllowStatus.cs) |
 | `model.UserPublicInfoResponseV4` | [ModelUserPublicInfoResponseV4](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelUserPublicInfoResponseV4.cs) |
 | `model.UserResponse` | [ModelUserResponse](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelUserResponse.cs) |
 | `model.UserResponseV3` | [ModelUserResponseV3](../../apis/AccelByte.Sdk.Api.Iam/Model/ModelUserResponseV3.cs) |

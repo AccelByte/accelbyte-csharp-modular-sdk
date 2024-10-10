@@ -67,7 +67,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
-            public byte[]? Execute(
+            public Model.BinarySchema? Execute(
                 string namespace_,
                 string code
             )
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<byte[]?> ExecuteAsync(
+            public async Task<Model.BinarySchema?> ExecuteAsync(
                 string namespace_,
                 string code
             )
@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Produces => new() { "image/png" };
 
-        public byte[]? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.BinarySchema? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -156,19 +156,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    payload.CopyTo(ms);
-                    return ms.ToArray();
-                }
+                return JsonSerializer.Deserialize<Model.BinarySchema>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    payload.CopyTo(ms);
-                    return ms.ToArray();
-                }
+                return JsonSerializer.Deserialize<Model.BinarySchema>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

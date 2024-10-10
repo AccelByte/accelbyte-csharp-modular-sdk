@@ -165,10 +165,13 @@
 | `api.ArtifactTypeSamplingRules` | [ApiArtifactTypeSamplingRules](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiArtifactTypeSamplingRules.cs) |
 | `api.ArtifactURLResponse` | [ApiArtifactURLResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiArtifactURLResponse.cs) |
 | `api.ArtifactUsageResponse` | [ApiArtifactUsageResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiArtifactUsageResponse.cs) |
+| `api.AvailableInstanceType` | [ApiAvailableInstanceType](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiAvailableInstanceType.cs) |
 | `api.AvailableInstanceTypesResponse` | [ApiAvailableInstanceTypesResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiAvailableInstanceTypesResponse.cs) |
+| `api.Capacity` | [ApiCapacity](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiCapacity.cs) |
 | `api.DSHistoryEvent` | [ApiDSHistoryEvent](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiDSHistoryEvent.cs) |
 | `api.DSHistoryList` | [ApiDSHistoryList](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiDSHistoryList.cs) |
 | `api.DSHostConfiguration` | [ApiDSHostConfiguration](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiDSHostConfiguration.cs) |
+| `api.DSHostConfigurationParameters` | [ApiDSHostConfigurationParameters](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiDSHostConfigurationParameters.cs) |
 | `api.DevelopmentServerConfigurationCreateRequest` | [ApiDevelopmentServerConfigurationCreateRequest](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiDevelopmentServerConfigurationCreateRequest.cs) |
 | `api.DevelopmentServerConfigurationCreateResponse` | [ApiDevelopmentServerConfigurationCreateResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiDevelopmentServerConfigurationCreateResponse.cs) |
 | `api.DevelopmentServerConfigurationGetResponse` | [ApiDevelopmentServerConfigurationGetResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiDevelopmentServerConfigurationGetResponse.cs) |
@@ -194,7 +197,6 @@
 | `api.ImageListItem` | [ApiImageListItem](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiImageListItem.cs) |
 | `api.ImageStorage` | [ApiImageStorage](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiImageStorage.cs) |
 | `api.ImageUpdate` | [ApiImageUpdate](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiImageUpdate.cs) |
-| `api.InstanceTypeDescriptionResponse` | [ApiInstanceTypeDescriptionResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiInstanceTypeDescriptionResponse.cs) |
 | `api.PagingInfo` | [ApiPagingInfo](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiPagingInfo.cs) |
 | `api.PortConfiguration` | [ApiPortConfiguration](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiPortConfiguration.cs) |
 | `api.QoSEndpointResponse` | [ApiQoSEndpointResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiQoSEndpointResponse.cs) |

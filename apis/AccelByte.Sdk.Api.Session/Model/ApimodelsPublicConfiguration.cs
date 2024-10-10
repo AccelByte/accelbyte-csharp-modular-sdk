@@ -61,6 +61,10 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? FallbackClaimKeys { get; set; }
 
+        [JsonPropertyName("grpcSessionConfig")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ModelsExtendConfiguration? GrpcSessionConfig { get; set; }
+
         [JsonPropertyName("immutableStorage")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? ImmutableStorage { get; set; }
@@ -172,6 +176,10 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonPropertyName("fallbackClaimKeys")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? FallbackClaimKeys { get; set; }
+
+        [JsonPropertyName("grpcSessionConfig")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ModelsExtendConfiguration? GrpcSessionConfig { get; set; }
 
         [JsonPropertyName("immutableStorage")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

@@ -13,7 +13,7 @@ namespace AccelByte.Sdk.Api.Ams.Model
     public class ApiAvailableInstanceTypesResponse : AccelByte.Sdk.Core.Model
     {
         [JsonPropertyName("availableInstanceTypes")]
-        public List<ApiInstanceTypeDescriptionResponse>? AvailableInstanceTypes { get; set; }
+        public List<ApiAvailableInstanceType>? AvailableInstanceTypes { get; set; }
 
     }
 

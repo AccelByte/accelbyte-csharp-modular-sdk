@@ -17,7 +17,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Model
         public List<string>? Tags { get; set; }
 
         [JsonPropertyName("updatedAt")]
-        public string? UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         [JsonPropertyName("value")]
         public Dictionary<string, object>? Value { get; set; }
@@ -31,7 +31,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Model
         public List<string>? Tags { get; set; }
 
         [JsonPropertyName("updatedAt")]
-        public string? UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         [JsonPropertyName("value")]
         public T1? Value { get; set; }

@@ -26,7 +26,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     ///  [Not supported yet in AGS Shared Cloud] Query fulfillments in a namespace.
     /// Other detail info:
     /// 
-    ///   * Returns : list of fulfillment info, storeId field can be ignored.
+    ///   * Returns : list of fulfillment info:
+    ///     * storeId in items can be ignored
+    ///     * error in successList will always be null
     /// </summary>
     public class QueryFulfillments : AccelByte.Sdk.Core.Operation
     {
@@ -121,7 +123,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
-            public Model.FulfillmentHistoryPagingSlicedResult? Execute(
+            public Model.FulfillmentPagingSlicedResult? Execute(
                 string namespace_
             )
             {
@@ -138,7 +140,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.FulfillmentHistoryPagingSlicedResult?> ExecuteAsync(
+            public async Task<Model.FulfillmentPagingSlicedResult?> ExecuteAsync(
                 string namespace_
             )
             {
@@ -217,7 +219,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public Model.FulfillmentHistoryPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public Model.FulfillmentPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             if (code == (HttpStatusCode)204)
             {
@@ -225,11 +227,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)201)
             {
-                return JsonSerializer.Deserialize<Model.FulfillmentHistoryPagingSlicedResult>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.FulfillmentPagingSlicedResult>(payload, ResponseJsonOptions);
             }
             else if (code == (HttpStatusCode)200)
             {
-                return JsonSerializer.Deserialize<Model.FulfillmentHistoryPagingSlicedResult>(payload, ResponseJsonOptions);
+                return JsonSerializer.Deserialize<Model.FulfillmentPagingSlicedResult>(payload, ResponseJsonOptions);
             }
 
             var payloadString = payload.ReadToString();

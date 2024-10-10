@@ -116,6 +116,17 @@ namespace AccelByte.Sdk.Api.Iam
         }
         private Wrapper.Country? _Country = null;
 
+        public Wrapper.LoginAllowlist LoginAllowlist
+        {
+            get
+            {
+                if (_LoginAllowlist == null)
+                    _LoginAllowlist = new Wrapper.LoginAllowlist(_Sdk, _CustomBasePath);
+                return _LoginAllowlist;
+            }
+        }
+        private Wrapper.LoginAllowlist? _LoginAllowlist = null;
+
         public Wrapper.ThirdPartyCredential ThirdPartyCredential
         {
             get
@@ -137,6 +148,17 @@ namespace AccelByte.Sdk.Api.Iam
             }
         }
         private Wrapper.SSOCredential? _SSOCredential = null;
+
+        public Wrapper.ProfileUpdateStrategy ProfileUpdateStrategy
+        {
+            get
+            {
+                if (_ProfileUpdateStrategy == null)
+                    _ProfileUpdateStrategy = new Wrapper.ProfileUpdateStrategy(_Sdk, _CustomBasePath);
+                return _ProfileUpdateStrategy;
+            }
+        }
+        private Wrapper.ProfileUpdateStrategy? _ProfileUpdateStrategy = null;
 
         public Wrapper.OverrideRoleConfigV3 OverrideRoleConfigV3
         {

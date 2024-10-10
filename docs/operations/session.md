@@ -10,17 +10,6 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 | `/healthz` | GET | GetHealthcheckInfo | [GetHealthcheckInfo](../../apis/AccelByte.Sdk.Api.Session/Operation/Operations/GetHealthcheckInfo.cs) | [GetHealthcheckInfo](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Operations/GetHealthcheckInfo.cs) |
-| `/session/admin/internal/pprof` | GET | PprofHandler | [PprofHandler](../../apis/AccelByte.Sdk.Api.Session/Operation/Operations/PprofHandler.cs) | [PprofHandler](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Operations/PprofHandler.cs) |
-| `/session/admin/internal/pprof/allocs` | GET | AllocsHandler | [AllocsHandler](../../apis/AccelByte.Sdk.Api.Session/Operation/Operations/AllocsHandler.cs) | [AllocsHandler](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Operations/AllocsHandler.cs) |
-| `/session/admin/internal/pprof/block` | GET | BlockHandler | [BlockHandler](../../apis/AccelByte.Sdk.Api.Session/Operation/Operations/BlockHandler.cs) | [BlockHandler](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Operations/BlockHandler.cs) |
-| `/session/admin/internal/pprof/cmdline` | GET | CmdlineHandler | [CmdlineHandler](../../apis/AccelByte.Sdk.Api.Session/Operation/Operations/CmdlineHandler.cs) | [CmdlineHandler](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Operations/CmdlineHandler.cs) |
-| `/session/admin/internal/pprof/goroutine` | GET | GoroutineHandler | [GoroutineHandler](../../apis/AccelByte.Sdk.Api.Session/Operation/Operations/GoroutineHandler.cs) | [GoroutineHandler](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Operations/GoroutineHandler.cs) |
-| `/session/admin/internal/pprof/heap` | GET | HeapHandler | [HeapHandler](../../apis/AccelByte.Sdk.Api.Session/Operation/Operations/HeapHandler.cs) | [HeapHandler](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Operations/HeapHandler.cs) |
-| `/session/admin/internal/pprof/mutex` | GET | MutexHandler | [MutexHandler](../../apis/AccelByte.Sdk.Api.Session/Operation/Operations/MutexHandler.cs) | [MutexHandler](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Operations/MutexHandler.cs) |
-| `/session/admin/internal/pprof/profile` | GET | Profile | [Profile](../../apis/AccelByte.Sdk.Api.Session/Operation/Operations/Profile.cs) | [Profile](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Operations/Profile.cs) |
-| `/session/admin/internal/pprof/symbol` | GET | SymbolHandler | [SymbolHandler](../../apis/AccelByte.Sdk.Api.Session/Operation/Operations/SymbolHandler.cs) | [SymbolHandler](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Operations/SymbolHandler.cs) |
-| `/session/admin/internal/pprof/threadcreate` | GET | ThreadcreateHandler | [ThreadcreateHandler](../../apis/AccelByte.Sdk.Api.Session/Operation/Operations/ThreadcreateHandler.cs) | [ThreadcreateHandler](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Operations/ThreadcreateHandler.cs) |
-| `/session/admin/internal/pprof/trace` | GET | TraceHandler | [TraceHandler](../../apis/AccelByte.Sdk.Api.Session/Operation/Operations/TraceHandler.cs) | [TraceHandler](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Operations/TraceHandler.cs) |
 | `/session/healthz` | GET | GetHealthcheckInfoV1 | [GetHealthcheckInfoV1](../../apis/AccelByte.Sdk.Api.Session/Operation/Operations/GetHealthcheckInfoV1.cs) | [GetHealthcheckInfoV1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Operations/GetHealthcheckInfoV1.cs) |
 
 ### Config Wrapper:  [Config](../../apis/AccelByte.Sdk.Api.Session/Wrapper/Config.cs)
@@ -310,6 +299,7 @@
 | `model.NativeSessionMember` | [ModelNativeSessionMember](../../apis/AccelByte.Sdk.Api.Session/Model/ModelNativeSessionMember.cs) |
 | `models.DSMConfigRecord` | [ModelsDSMConfigRecord](../../apis/AccelByte.Sdk.Api.Session/Model/ModelsDSMConfigRecord.cs) |
 | `models.DefaultDSMCConfig` | [ModelsDefaultDSMCConfig](../../apis/AccelByte.Sdk.Api.Session/Model/ModelsDefaultDSMCConfig.cs) |
+| `models.ExtendConfiguration` | [ModelsExtendConfiguration](../../apis/AccelByte.Sdk.Api.Session/Model/ModelsExtendConfiguration.cs) |
 | `models.GameServer` | [ModelsGameServer](../../apis/AccelByte.Sdk.Api.Session/Model/ModelsGameServer.cs) |
 | `models.MemberActiveSession` | [ModelsMemberActiveSession](../../apis/AccelByte.Sdk.Api.Session/Model/ModelsMemberActiveSession.cs) |
 | `models.NativeSessionSetting` | [ModelsNativeSessionSetting](../../apis/AccelByte.Sdk.Api.Session/Model/ModelsNativeSessionSetting.cs) |

@@ -133,6 +133,17 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
+        public RetryFulfillItems.RetryFulfillItemsBuilder RetryFulfillItemsOp
+        {
+            get
+            {
+                var opBuilder = new Operation.RetryFulfillItems.RetryFulfillItemsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public RevokeItems.RevokeItemsBuilder RevokeItemsOp
         {
             get
@@ -242,7 +253,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FulfillmentHistoryPagingSlicedResult? QueryFulfillments(QueryFulfillments input)
+        public Model.FulfillmentPagingSlicedResult? QueryFulfillments(QueryFulfillments input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -250,7 +261,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FulfillmentHistoryPagingSlicedResult?> QueryFulfillmentsAsync(QueryFulfillments input)
+        public async Task<Model.FulfillmentPagingSlicedResult?> QueryFulfillmentsAsync(QueryFulfillments input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -283,6 +294,22 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
         public async Task<Model.FulfillmentV2Result?> FulfillItemsAsync(FulfillItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Model.FulfillmentV2Result? RetryFulfillItems(RetryFulfillItems input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Model.FulfillmentV2Result?> RetryFulfillItemsAsync(RetryFulfillItems input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
