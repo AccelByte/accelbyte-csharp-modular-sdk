@@ -222,14 +222,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 TokenGrantV4 op = new TokenGrantV4(this,
-                    grantType
+                    grantType                    
                 );
 
                 op.SetBaseFields<TokenGrantV4Builder>(this);
                 return op;
             }
 
-            public Model.OauthmodelTokenWithDeviceCookieResponseV3? Execute(
+            public TokenGrantV4.Response Execute(
                 string grantType
             )
             {
@@ -242,11 +242,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OauthmodelTokenWithDeviceCookieResponseV3?> ExecuteAsync(
+            public async Task<TokenGrantV4.Response> ExecuteAsync(
                 string grantType
             )
             {
@@ -259,7 +259,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -269,10 +269,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             TokenGrantV4GrantType grantType
         )
         {
-
+            
             if (builder.CodeChallenge is not null) QueryParams["code_challenge"] = builder.CodeChallenge;
             if (builder.CodeChallengeMethod is not null) QueryParams["code_challenge_method"] = builder.CodeChallengeMethod.Value;
-
+            
             if (builder.AdditionalData is not null) FormParams["additionalData"] = builder.AdditionalData;
             if (builder.ClientId is not null) FormParams["client_id"] = builder.ClientId;
             if (builder.ClientSecret is not null) FormParams["client_secret"] = builder.ClientSecret;
@@ -287,36 +287,54 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (builder.Username is not null) FormParams["username"] = builder.Username;
             if (grantType is not null) FormParams["grant_type"] = grantType.Value;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
         #endregion
 
-        public TokenGrantV4(
-            string? codeChallenge,
-            TokenGrantV4CodeChallengeMethod? codeChallengeMethod,
-            string? additionalData,
-            string? clientId,
-            string? clientSecret,
-            string? code,
-            string? codeVerifier,
-            string? extendNamespace,
-            bool? extendExp,
-            string? loginQueueTicket,
-            string? password,
-            string? redirectUri,
-            string? refreshToken,
-            string? username,
-            TokenGrantV4GrantType grantType
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.OauthmodelTokenWithDeviceCookieResponseV3>
         {
 
+            public OauthmodelErrorResponse? Error400 { get; set; } = null;
+
+            public OauthmodelErrorResponse? Error401 { get; set; } = null;
+
+            public OauthmodelErrorResponse? Error403 { get; set; } = null;
+
+            public OauthmodelErrorResponse? Error429 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::OAuth20V4::TokenGrantV4";
+        }
+
+        #endregion
+
+        public TokenGrantV4(
+            string? codeChallenge,            
+            TokenGrantV4CodeChallengeMethod? codeChallengeMethod,            
+            string? additionalData,            
+            string? clientId,            
+            string? clientSecret,            
+            string? code,            
+            string? codeVerifier,            
+            string? extendNamespace,            
+            bool? extendExp,            
+            string? loginQueueTicket,            
+            string? password,            
+            string? redirectUri,            
+            string? refreshToken,            
+            string? username,            
+            TokenGrantV4GrantType grantType            
+        )
+        {
+            
             if (codeChallenge is not null) QueryParams["code_challenge"] = codeChallenge;
             if (codeChallengeMethod is not null) QueryParams["code_challenge_method"] = codeChallengeMethod.Value;
-
+            
             if (additionalData is not null) FormParams["additionalData"] = additionalData;
             if (clientId is not null) FormParams["client_id"] = clientId;
             if (clientSecret is not null) FormParams["client_secret"] = clientSecret;
@@ -331,9 +349,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (username is not null) FormParams["username"] = username;
             if (grantType is not null) FormParams["grant_type"] = grantType.Value;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -345,25 +363,46 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OauthmodelTokenWithDeviceCookieResponseV3? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public TokenGrantV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new TokenGrantV4.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenWithDeviceCookieResponseV3>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenWithDeviceCookieResponseV3>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenWithDeviceCookieResponseV3>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)429)
+            {
+                response.Error429 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error429!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

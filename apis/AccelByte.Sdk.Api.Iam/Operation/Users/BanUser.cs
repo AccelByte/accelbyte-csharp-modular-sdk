@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ### Endpoint migration guide
     /// - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans [POST]_**
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class BanUser : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -60,17 +60,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 BanUser op = new BanUser(this,
-                    body,
-                    namespace_,
-                    userId
+                    body,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<BanUserBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public Model.ModelUserBanResponse? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public BanUser.Response Execute(
                 ModelBanCreateRequest body,
                 string namespace_,
                 string userId
@@ -87,11 +87,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelUserBanResponse?> ExecuteAsync(
+            public async Task<BanUser.Response> ExecuteAsync(
                 ModelBanCreateRequest body,
                 string namespace_,
                 string userId
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -122,33 +122,53 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelUserBanResponse>
+        {
+
+            public string Error400 { get; set; } = "";
+
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public RestErrorResponse? Error403 { get; set; } = null;
+
+            public string Error404 { get; set; } = "";
+
+            public string Error500 { get; set; } = "";
+
+
+            protected override string GetFullOperationId() => "Iam::Users::BanUser";
+        }
+
+        #endregion
+
         public BanUser(
-            string namespace_,
-            string userId,
-            Model.ModelBanCreateRequest body
+            string namespace_,            
+            string userId,            
+            Model.ModelBanCreateRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -160,25 +180,51 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelUserBanResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public BanUser.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new BanUser.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelUserBanResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelUserBanResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelUserBanResponse>(payload, ResponseJsonOptions);
+                response.Error400 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error400!);
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error404!);
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error500!);
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

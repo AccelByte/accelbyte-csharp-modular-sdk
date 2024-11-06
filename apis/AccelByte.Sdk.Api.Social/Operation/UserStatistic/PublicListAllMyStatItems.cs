@@ -84,14 +84,14 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 PublicListAllMyStatItems op = new PublicListAllMyStatItems(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicListAllMyStatItemsBuilder>(this);
                 return op;
             }
 
-            public List<Model.ADTOObjectForUserStatItemValue>? Execute(
+            public PublicListAllMyStatItems.Response Execute(
                 string namespace_
             )
             {
@@ -104,11 +104,11 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.ADTOObjectForUserStatItemValue>?> ExecuteAsync(
+            public async Task<PublicListAllMyStatItems.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -132,41 +132,59 @@ namespace AccelByte.Sdk.Api.Social.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.AdditionalKey is not null) QueryParams["additionalKey"] = builder.AdditionalKey;
             if (builder.StatCodes is not null) QueryParams["statCodes"] = builder.StatCodes;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
+            
 
-
-
+            
             CollectionFormatMap["statCodes"] = "multi";
             CollectionFormatMap["tags"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.ADTOObjectForUserStatItemValue>>
+        {
+
+            public ErrorEntity? Error400 { get; set; } = null;
+
+            public ErrorEntity? Error403 { get; set; } = null;
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+            public ValidationErrorEntity? Error422 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Social::UserStatistic::PublicListAllMyStatItems";
+        }
+
+        #endregion
+
         public PublicListAllMyStatItems(
-            string namespace_,
-            string? additionalKey,
-            List<string>? statCodes,
-            List<string>? tags
+            string namespace_,            
+            string? additionalKey,            
+            List<string>? statCodes,            
+            List<string>? tags            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (additionalKey is not null) QueryParams["additionalKey"] = additionalKey;
             if (statCodes is not null) QueryParams["statCodes"] = statCodes;
             if (tags is not null) QueryParams["tags"] = tags;
+            
 
-
-
+            
             CollectionFormatMap["statCodes"] = "multi";
             CollectionFormatMap["tags"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -175,28 +193,49 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.ADTOObjectForUserStatItemValue>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicListAllMyStatItems.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicListAllMyStatItems.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.ADTOObjectForUserStatItemValue>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.ADTOObjectForUserStatItemValue>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<List<Model.ADTOObjectForUserStatItemValue>>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)422)
+            {
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

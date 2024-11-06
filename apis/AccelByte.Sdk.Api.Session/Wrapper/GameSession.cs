@@ -333,7 +333,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         }
         #endregion
 
-        public Model.ApimodelsGameSessionQueryResponse? AdminQueryGameSessions(AdminQueryGameSessions input)
+        public AdminQueryGameSessions.Response AdminQueryGameSessions(AdminQueryGameSessions input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -341,7 +341,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionQueryResponse?> AdminQueryGameSessionsAsync(AdminQueryGameSessions input)
+        public async Task<AdminQueryGameSessions.Response> AdminQueryGameSessionsAsync(AdminQueryGameSessions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -349,7 +349,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsGameSessionQueryResponse? AdminQueryGameSessionsByAttributes(AdminQueryGameSessionsByAttributes input)
+        public AdminQueryGameSessionsByAttributes.Response AdminQueryGameSessionsByAttributes(AdminQueryGameSessionsByAttributes input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -357,7 +357,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionQueryResponse?> AdminQueryGameSessionsByAttributesAsync(AdminQueryGameSessionsByAttributes input)
+        public async Task<AdminQueryGameSessionsByAttributes.Response> AdminQueryGameSessionsByAttributesAsync(AdminQueryGameSessionsByAttributes input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -365,7 +365,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsDeleteBulkGameSessionsAPIResponse? AdminDeleteBulkGameSessions(AdminDeleteBulkGameSessions input)
+        public AdminDeleteBulkGameSessions.Response AdminDeleteBulkGameSessions(AdminDeleteBulkGameSessions input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -373,7 +373,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsDeleteBulkGameSessionsAPIResponse?> AdminDeleteBulkGameSessionsAsync(AdminDeleteBulkGameSessions input)
+        public async Task<AdminDeleteBulkGameSessions.Response> AdminDeleteBulkGameSessionsAsync(AdminDeleteBulkGameSessions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -381,39 +381,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminSetDSReady(AdminSetDSReady input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminSetDSReadyAsync(AdminSetDSReady input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminKickGameSessionMember(AdminKickGameSessionMember input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminKickGameSessionMemberAsync(AdminKickGameSessionMember input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApimodelsUpdateGameSessionMemberStatusResponse? AdminUpdateGameSessionMember(AdminUpdateGameSessionMember input)
+        public AdminSetDSReady.Response AdminSetDSReady(AdminSetDSReady input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -421,7 +389,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsUpdateGameSessionMemberStatusResponse?> AdminUpdateGameSessionMemberAsync(AdminUpdateGameSessionMember input)
+        public async Task<AdminSetDSReady.Response> AdminSetDSReadyAsync(AdminSetDSReady input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -429,7 +397,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsGameSessionResponse? CreateGameSession(CreateGameSession input)
+        public AdminKickGameSessionMember.Response AdminKickGameSessionMember(AdminKickGameSessionMember input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -437,7 +405,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse?> CreateGameSessionAsync(CreateGameSession input)
+        public async Task<AdminKickGameSessionMember.Response> AdminKickGameSessionMemberAsync(AdminKickGameSessionMember input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -445,24 +413,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.ApimodelsGameSessionResponse<T1, T2>? CreateGameSession<T1, T2>(CreateGameSession input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1, T2>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ApimodelsGameSessionResponse<T1, T2>?> CreateGameSessionAsync<T1, T2>(CreateGameSession input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1, T2>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApimodelsGameSessionQueryResponse? PublicQueryGameSessionsByAttributes(PublicQueryGameSessionsByAttributes input)
+        public AdminUpdateGameSessionMember.Response AdminUpdateGameSessionMember(AdminUpdateGameSessionMember input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -470,7 +421,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionQueryResponse?> PublicQueryGameSessionsByAttributesAsync(PublicQueryGameSessionsByAttributes input)
+        public async Task<AdminUpdateGameSessionMember.Response> AdminUpdateGameSessionMemberAsync(AdminUpdateGameSessionMember input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -478,7 +429,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsGameSessionResponse? PublicSessionJoinCode(PublicSessionJoinCode input)
+        public CreateGameSession.Response CreateGameSession(CreateGameSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -486,7 +437,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse?> PublicSessionJoinCodeAsync(PublicSessionJoinCode input)
+        public async Task<CreateGameSession.Response> CreateGameSessionAsync(CreateGameSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -495,7 +446,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.Payload);
         }
 
-        public Model.ApimodelsGameSessionResponse<T1, T2>? PublicSessionJoinCode<T1, T2>(PublicSessionJoinCode input)
+        public CreateGameSession.Response<T1, T2> CreateGameSession<T1, T2>(CreateGameSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -503,7 +454,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse<T1, T2>?> PublicSessionJoinCodeAsync<T1, T2>(PublicSessionJoinCode input)
+        public async Task<CreateGameSession.Response<T1, T2>> CreateGameSessionAsync<T1, T2>(CreateGameSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -511,7 +462,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsGameSessionResponse? GetGameSessionByPodName(GetGameSessionByPodName input)
+        public PublicQueryGameSessionsByAttributes.Response PublicQueryGameSessionsByAttributes(PublicQueryGameSessionsByAttributes input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -519,7 +470,23 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse?> GetGameSessionByPodNameAsync(GetGameSessionByPodName input)
+        public async Task<PublicQueryGameSessionsByAttributes.Response> PublicQueryGameSessionsByAttributesAsync(PublicQueryGameSessionsByAttributes input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicSessionJoinCode.Response PublicSessionJoinCode(PublicSessionJoinCode input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicSessionJoinCode.Response> PublicSessionJoinCodeAsync(PublicSessionJoinCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -528,7 +495,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.Payload);
         }
 
-        public Model.ApimodelsGameSessionResponse<T1, T2>? GetGameSessionByPodName<T1, T2>(GetGameSessionByPodName input)
+        public PublicSessionJoinCode.Response<T1, T2> PublicSessionJoinCode<T1, T2>(PublicSessionJoinCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -536,7 +503,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse<T1, T2>?> GetGameSessionByPodNameAsync<T1, T2>(GetGameSessionByPodName input)
+        public async Task<PublicSessionJoinCode.Response<T1, T2>> PublicSessionJoinCodeAsync<T1, T2>(PublicSessionJoinCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -544,7 +511,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsGameSessionResponse? GetGameSession(GetGameSession input)
+        public GetGameSessionByPodName.Response GetGameSessionByPodName(GetGameSessionByPodName input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -552,7 +519,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse?> GetGameSessionAsync(GetGameSession input)
+        public async Task<GetGameSessionByPodName.Response> GetGameSessionByPodNameAsync(GetGameSessionByPodName input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -561,7 +528,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.Payload);
         }
 
-        public Model.ApimodelsGameSessionResponse<T1, T2>? GetGameSession<T1, T2>(GetGameSession input)
+        public GetGameSessionByPodName.Response<T1, T2> GetGameSessionByPodName<T1, T2>(GetGameSessionByPodName input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -569,7 +536,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse<T1, T2>?> GetGameSessionAsync<T1, T2>(GetGameSession input)
+        public async Task<GetGameSessionByPodName.Response<T1, T2>> GetGameSessionByPodNameAsync<T1, T2>(GetGameSessionByPodName input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -577,7 +544,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsGameSessionResponse? UpdateGameSession(UpdateGameSession input)
+        public GetGameSession.Response GetGameSession(GetGameSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -585,7 +552,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse?> UpdateGameSessionAsync(UpdateGameSession input)
+        public async Task<GetGameSession.Response> GetGameSessionAsync(GetGameSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -594,7 +561,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.Payload);
         }
 
-        public Model.ApimodelsGameSessionResponse<T1, T2>? UpdateGameSession<T1, T2>(UpdateGameSession input)
+        public GetGameSession.Response<T1, T2> GetGameSession<T1, T2>(GetGameSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -602,7 +569,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse<T1, T2>?> UpdateGameSessionAsync<T1, T2>(UpdateGameSession input)
+        public async Task<GetGameSession.Response<T1, T2>> GetGameSessionAsync<T1, T2>(GetGameSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -610,23 +577,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteGameSession(DeleteGameSession input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteGameSessionAsync(DeleteGameSession input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApimodelsGameSessionResponse? PatchUpdateGameSession(PatchUpdateGameSession input)
+        public UpdateGameSession.Response UpdateGameSession(UpdateGameSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -634,7 +585,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse?> PatchUpdateGameSessionAsync(PatchUpdateGameSession input)
+        public async Task<UpdateGameSession.Response> UpdateGameSessionAsync(UpdateGameSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -643,7 +594,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.Payload);
         }
 
-        public Model.ApimodelsGameSessionResponse<T1, T2>? PatchUpdateGameSession<T1, T2>(PatchUpdateGameSession input)
+        public UpdateGameSession.Response<T1, T2> UpdateGameSession<T1, T2>(UpdateGameSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -651,7 +602,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse<T1, T2>?> PatchUpdateGameSessionAsync<T1, T2>(PatchUpdateGameSession input)
+        public async Task<UpdateGameSession.Response<T1, T2>> UpdateGameSessionAsync<T1, T2>(UpdateGameSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -659,7 +610,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsGameSessionResponse? UpdateGameSessionBackfillTicketID(UpdateGameSessionBackfillTicketID input)
+        public DeleteGameSession.Response DeleteGameSession(DeleteGameSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -667,7 +618,23 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse?> UpdateGameSessionBackfillTicketIDAsync(UpdateGameSessionBackfillTicketID input)
+        public async Task<DeleteGameSession.Response> DeleteGameSessionAsync(DeleteGameSession input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PatchUpdateGameSession.Response PatchUpdateGameSession(PatchUpdateGameSession input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PatchUpdateGameSession.Response> PatchUpdateGameSessionAsync(PatchUpdateGameSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -676,7 +643,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.Payload);
         }
 
-        public Model.ApimodelsGameSessionResponse<T1, T2>? UpdateGameSessionBackfillTicketID<T1, T2>(UpdateGameSessionBackfillTicketID input)
+        public PatchUpdateGameSession.Response<T1, T2> PatchUpdateGameSession<T1, T2>(PatchUpdateGameSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -684,7 +651,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse<T1, T2>?> UpdateGameSessionBackfillTicketIDAsync<T1, T2>(UpdateGameSessionBackfillTicketID input)
+        public async Task<PatchUpdateGameSession.Response<T1, T2>> PatchUpdateGameSessionAsync<T1, T2>(PatchUpdateGameSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -692,7 +659,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsGameSessionResponse? GameSessionGenerateCode(GameSessionGenerateCode input)
+        public UpdateGameSessionBackfillTicketID.Response UpdateGameSessionBackfillTicketID(UpdateGameSessionBackfillTicketID input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -700,7 +667,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse?> GameSessionGenerateCodeAsync(GameSessionGenerateCode input)
+        public async Task<UpdateGameSessionBackfillTicketID.Response> UpdateGameSessionBackfillTicketIDAsync(UpdateGameSessionBackfillTicketID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -709,7 +676,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.Payload);
         }
 
-        public Model.ApimodelsGameSessionResponse<T1, T2>? GameSessionGenerateCode<T1, T2>(GameSessionGenerateCode input)
+        public UpdateGameSessionBackfillTicketID.Response<T1, T2> UpdateGameSessionBackfillTicketID<T1, T2>(UpdateGameSessionBackfillTicketID input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -717,7 +684,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse<T1, T2>?> GameSessionGenerateCodeAsync<T1, T2>(GameSessionGenerateCode input)
+        public async Task<UpdateGameSessionBackfillTicketID.Response<T1, T2>> UpdateGameSessionBackfillTicketIDAsync<T1, T2>(UpdateGameSessionBackfillTicketID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -725,39 +692,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicRevokeGameSessionCode(PublicRevokeGameSessionCode input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicRevokeGameSessionCodeAsync(PublicRevokeGameSessionCode input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void PublicGameSessionInvite(PublicGameSessionInvite input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicGameSessionInviteAsync(PublicGameSessionInvite input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApimodelsGameSessionResponse? JoinGameSession(JoinGameSession input)
+        public GameSessionGenerateCode.Response GameSessionGenerateCode(GameSessionGenerateCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -765,7 +700,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse?> JoinGameSessionAsync(JoinGameSession input)
+        public async Task<GameSessionGenerateCode.Response> GameSessionGenerateCodeAsync(GameSessionGenerateCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -774,7 +709,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.Payload);
         }
 
-        public Model.ApimodelsGameSessionResponse<T1, T2>? JoinGameSession<T1, T2>(JoinGameSession input)
+        public GameSessionGenerateCode.Response<T1, T2> GameSessionGenerateCode<T1, T2>(GameSessionGenerateCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -782,7 +717,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse<T1, T2>?> JoinGameSessionAsync<T1, T2>(JoinGameSession input)
+        public async Task<GameSessionGenerateCode.Response<T1, T2>> GameSessionGenerateCodeAsync<T1, T2>(GameSessionGenerateCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -790,7 +725,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsGameSessionResponse? PublicPromoteGameSessionLeader(PublicPromoteGameSessionLeader input)
+        public PublicRevokeGameSessionCode.Response PublicRevokeGameSessionCode(PublicRevokeGameSessionCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -798,7 +733,39 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse?> PublicPromoteGameSessionLeaderAsync(PublicPromoteGameSessionLeader input)
+        public async Task<PublicRevokeGameSessionCode.Response> PublicRevokeGameSessionCodeAsync(PublicRevokeGameSessionCode input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGameSessionInvite.Response PublicGameSessionInvite(PublicGameSessionInvite input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGameSessionInvite.Response> PublicGameSessionInviteAsync(PublicGameSessionInvite input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public JoinGameSession.Response JoinGameSession(JoinGameSession input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<JoinGameSession.Response> JoinGameSessionAsync(JoinGameSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -807,7 +774,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.Payload);
         }
 
-        public Model.ApimodelsGameSessionResponse<T1, T2>? PublicPromoteGameSessionLeader<T1, T2>(PublicPromoteGameSessionLeader input)
+        public JoinGameSession.Response<T1, T2> JoinGameSession<T1, T2>(JoinGameSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -815,7 +782,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse<T1, T2>?> PublicPromoteGameSessionLeaderAsync<T1, T2>(PublicPromoteGameSessionLeader input)
+        public async Task<JoinGameSession.Response<T1, T2>> JoinGameSessionAsync<T1, T2>(JoinGameSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -823,55 +790,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void LeaveGameSession(LeaveGameSession input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task LeaveGameSessionAsync(LeaveGameSession input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void PublicKickGameSessionMember(PublicKickGameSessionMember input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicKickGameSessionMemberAsync(PublicKickGameSessionMember input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void PublicGameSessionReject(PublicGameSessionReject input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicGameSessionRejectAsync(PublicGameSessionReject input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApimodelsServerSecret? GetSessionServerSecret(GetSessionServerSecret input)
+        public PublicPromoteGameSessionLeader.Response PublicPromoteGameSessionLeader(PublicPromoteGameSessionLeader input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -879,23 +798,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsServerSecret?> GetSessionServerSecretAsync(GetSessionServerSecret input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApimodelsGameSessionResponse? AppendTeamGameSession(AppendTeamGameSession input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ApimodelsGameSessionResponse?> AppendTeamGameSessionAsync(AppendTeamGameSession input)
+        public async Task<PublicPromoteGameSessionLeader.Response> PublicPromoteGameSessionLeaderAsync(PublicPromoteGameSessionLeader input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -904,7 +807,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.Payload);
         }
 
-        public Model.ApimodelsGameSessionResponse<T1, T2>? AppendTeamGameSession<T1, T2>(AppendTeamGameSession input)
+        public PublicPromoteGameSessionLeader.Response<T1, T2> PublicPromoteGameSessionLeader<T1, T2>(PublicPromoteGameSessionLeader input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -912,7 +815,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionResponse<T1, T2>?> AppendTeamGameSessionAsync<T1, T2>(AppendTeamGameSession input)
+        public async Task<PublicPromoteGameSessionLeader.Response<T1, T2>> PublicPromoteGameSessionLeaderAsync<T1, T2>(PublicPromoteGameSessionLeader input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -920,23 +823,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicGameSessionCancel(PublicGameSessionCancel input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicGameSessionCancelAsync(PublicGameSessionCancel input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApimodelsGameSessionQueryResponse? PublicQueryMyGameSessions(PublicQueryMyGameSessions input)
+        public LeaveGameSession.Response LeaveGameSession(LeaveGameSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -944,7 +831,120 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionQueryResponse?> PublicQueryMyGameSessionsAsync(PublicQueryMyGameSessions input)
+        public async Task<LeaveGameSession.Response> LeaveGameSessionAsync(LeaveGameSession input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicKickGameSessionMember.Response PublicKickGameSessionMember(PublicKickGameSessionMember input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicKickGameSessionMember.Response> PublicKickGameSessionMemberAsync(PublicKickGameSessionMember input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGameSessionReject.Response PublicGameSessionReject(PublicGameSessionReject input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGameSessionReject.Response> PublicGameSessionRejectAsync(PublicGameSessionReject input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetSessionServerSecret.Response GetSessionServerSecret(GetSessionServerSecret input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetSessionServerSecret.Response> GetSessionServerSecretAsync(GetSessionServerSecret input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AppendTeamGameSession.Response AppendTeamGameSession(AppendTeamGameSession input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AppendTeamGameSession.Response> AppendTeamGameSessionAsync(AppendTeamGameSession input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public AppendTeamGameSession.Response<T1, T2> AppendTeamGameSession<T1, T2>(AppendTeamGameSession input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AppendTeamGameSession.Response<T1, T2>> AppendTeamGameSessionAsync<T1, T2>(AppendTeamGameSession input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGameSessionCancel.Response PublicGameSessionCancel(PublicGameSessionCancel input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGameSessionCancel.Response> PublicGameSessionCancelAsync(PublicGameSessionCancel input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicQueryMyGameSessions.Response PublicQueryMyGameSessions(PublicQueryMyGameSessions input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicQueryMyGameSessions.Response> PublicQueryMyGameSessionsAsync(PublicQueryMyGameSessions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -124,130 +124,130 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public void AdminDeleteAllUserChannels(AdminDeleteAllUserChannels input)
+        public AdminDeleteAllUserChannels.Response AdminDeleteAllUserChannels(AdminDeleteAllUserChannels input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteAllUserChannelsAsync(AdminDeleteAllUserChannels input)
+        public async Task<AdminDeleteAllUserChannels.Response> AdminDeleteAllUserChannelsAsync(AdminDeleteAllUserChannels input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteAllUserContents(AdminDeleteAllUserContents input)
+        public AdminDeleteAllUserContents.Response AdminDeleteAllUserContents(AdminDeleteAllUserContents input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteAllUserContentsAsync(AdminDeleteAllUserContents input)
+        public async Task<AdminDeleteAllUserContents.Response> AdminDeleteAllUserContentsAsync(AdminDeleteAllUserContents input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteAllUserGroup(AdminDeleteAllUserGroup input)
+        public AdminDeleteAllUserGroup.Response AdminDeleteAllUserGroup(AdminDeleteAllUserGroup input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteAllUserGroupAsync(AdminDeleteAllUserGroup input)
+        public async Task<AdminDeleteAllUserGroup.Response> AdminDeleteAllUserGroupAsync(AdminDeleteAllUserGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteAllUserStates(AdminDeleteAllUserStates input)
+        public AdminDeleteAllUserStates.Response AdminDeleteAllUserStates(AdminDeleteAllUserStates input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteAllUserStatesAsync(AdminDeleteAllUserStates input)
+        public async Task<AdminDeleteAllUserStates.Response> AdminDeleteAllUserStatesAsync(AdminDeleteAllUserStates input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteAllUserChannel(DeleteAllUserChannel input)
+        public DeleteAllUserChannel.Response DeleteAllUserChannel(DeleteAllUserChannel input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteAllUserChannelAsync(DeleteAllUserChannel input)
+        public async Task<DeleteAllUserChannel.Response> DeleteAllUserChannelAsync(DeleteAllUserChannel input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteAllUserContents(DeleteAllUserContents input)
+        public DeleteAllUserContents.Response DeleteAllUserContents(DeleteAllUserContents input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteAllUserContentsAsync(DeleteAllUserContents input)
+        public async Task<DeleteAllUserContents.Response> DeleteAllUserContentsAsync(DeleteAllUserContents input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteAllUserGroup(DeleteAllUserGroup input)
+        public DeleteAllUserGroup.Response DeleteAllUserGroup(DeleteAllUserGroup input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteAllUserGroupAsync(DeleteAllUserGroup input)
+        public async Task<DeleteAllUserGroup.Response> DeleteAllUserGroupAsync(DeleteAllUserGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteAllUserStates(DeleteAllUserStates input)
+        public DeleteAllUserStates.Response DeleteAllUserStates(DeleteAllUserStates input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteAllUserStatesAsync(DeleteAllUserStates input)
+        public async Task<DeleteAllUserStates.Response> DeleteAllUserStatesAsync(DeleteAllUserStates input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

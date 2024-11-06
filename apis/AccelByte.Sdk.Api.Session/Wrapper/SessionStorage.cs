@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         }
         #endregion
 
-        public Dictionary<string, object>? AdminReadSessionStorage(AdminReadSessionStorage input)
+        public AdminReadSessionStorage.Response AdminReadSessionStorage(AdminReadSessionStorage input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Dictionary<string, object>?> AdminReadSessionStorageAsync(AdminReadSessionStorage input)
+        public async Task<AdminReadSessionStorage.Response> AdminReadSessionStorageAsync(AdminReadSessionStorage input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -107,23 +107,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteUserSessionStorage(AdminDeleteUserSessionStorage input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteUserSessionStorageAsync(AdminDeleteUserSessionStorage input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Dictionary<string, object>? AdminReadUserSessionStorage(AdminReadUserSessionStorage input)
+        public AdminDeleteUserSessionStorage.Response AdminDeleteUserSessionStorage(AdminDeleteUserSessionStorage input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -131,7 +115,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Dictionary<string, object>?> AdminReadUserSessionStorageAsync(AdminReadUserSessionStorage input)
+        public async Task<AdminDeleteUserSessionStorage.Response> AdminDeleteUserSessionStorageAsync(AdminDeleteUserSessionStorage input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -139,7 +123,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Dictionary<string, object>? PublicUpdateInsertSessionStorageLeader(PublicUpdateInsertSessionStorageLeader input)
+        public AdminReadUserSessionStorage.Response AdminReadUserSessionStorage(AdminReadUserSessionStorage input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -147,7 +131,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Dictionary<string, object>?> PublicUpdateInsertSessionStorageLeaderAsync(PublicUpdateInsertSessionStorageLeader input)
+        public async Task<AdminReadUserSessionStorage.Response> AdminReadUserSessionStorageAsync(AdminReadUserSessionStorage input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -155,7 +139,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Dictionary<string, object>? PublicUpdateInsertSessionStorage(PublicUpdateInsertSessionStorage input)
+        public PublicUpdateInsertSessionStorageLeader.Response PublicUpdateInsertSessionStorageLeader(PublicUpdateInsertSessionStorageLeader input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -163,7 +147,23 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Dictionary<string, object>?> PublicUpdateInsertSessionStorageAsync(PublicUpdateInsertSessionStorage input)
+        public async Task<PublicUpdateInsertSessionStorageLeader.Response> PublicUpdateInsertSessionStorageLeaderAsync(PublicUpdateInsertSessionStorageLeader input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicUpdateInsertSessionStorage.Response PublicUpdateInsertSessionStorage(PublicUpdateInsertSessionStorage input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicUpdateInsertSessionStorage.Response> PublicUpdateInsertSessionStorageAsync(PublicUpdateInsertSessionStorage input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

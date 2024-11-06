@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-        public Model.ModelGetProfileUpdateStrategyConfigResponse? AdminGetProfileUpdateStrategyV3(AdminGetProfileUpdateStrategyV3 input)
+        public AdminGetProfileUpdateStrategyV3.Response AdminGetProfileUpdateStrategyV3(AdminGetProfileUpdateStrategyV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetProfileUpdateStrategyConfigResponse?> AdminGetProfileUpdateStrategyV3Async(AdminGetProfileUpdateStrategyV3 input)
+        public async Task<AdminGetProfileUpdateStrategyV3.Response> AdminGetProfileUpdateStrategyV3Async(AdminGetProfileUpdateStrategyV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelSimpleProfileUpdateStrategyConfigs? AdminUpdateProfileUpdateStrategyV3(AdminUpdateProfileUpdateStrategyV3 input)
+        public AdminUpdateProfileUpdateStrategyV3.Response AdminUpdateProfileUpdateStrategyV3(AdminUpdateProfileUpdateStrategyV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelSimpleProfileUpdateStrategyConfigs?> AdminUpdateProfileUpdateStrategyV3Async(AdminUpdateProfileUpdateStrategyV3 input)
+        public async Task<AdminUpdateProfileUpdateStrategyV3.Response> AdminUpdateProfileUpdateStrategyV3Async(AdminUpdateProfileUpdateStrategyV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelGetProfileUpdateStrategyConfigResponse? PublicGetProfileUpdateStrategyV3(PublicGetProfileUpdateStrategyV3 input)
+        public PublicGetProfileUpdateStrategyV3.Response PublicGetProfileUpdateStrategyV3(PublicGetProfileUpdateStrategyV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetProfileUpdateStrategyConfigResponse?> PublicGetProfileUpdateStrategyV3Async(PublicGetProfileUpdateStrategyV3 input)
+        public async Task<PublicGetProfileUpdateStrategyV3.Response> PublicGetProfileUpdateStrategyV3Async(PublicGetProfileUpdateStrategyV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

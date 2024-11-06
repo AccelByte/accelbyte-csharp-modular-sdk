@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
         }
         #endregion
 
-        public Model.ApiListEnvironmentVariablesResponse? EnvironmentVariableList(EnvironmentVariableList input)
+        public EnvironmentVariableList.Response EnvironmentVariableList(EnvironmentVariableList input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiListEnvironmentVariablesResponse?> EnvironmentVariableListAsync(EnvironmentVariableList input)
+        public async Task<EnvironmentVariableList.Response> EnvironmentVariableListAsync(EnvironmentVariableList input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
         }
 
         #region Operation Builders
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetCountries.GetCountriesBuilder GetCountriesOp
         {
             get
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetCountries.PublicGetCountriesBuilder PublicGetCountriesOp
         {
             get
@@ -159,9 +159,9 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
         }
         #endregion
 
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public List<Model.CountryObject>? GetCountries(GetCountries input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetCountries.Response GetCountries(GetCountries input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -169,7 +169,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.CountryObject>?> GetCountriesAsync(GetCountries input)
+        public async Task<GetCountries.Response> GetCountriesAsync(GetCountries input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -177,8 +177,8 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public List<Model.RetrieveCountryGroupResponse>? GetCountryGroups(GetCountryGroups input)
+        #pragma warning restore ab_deprecated_operation
+        public GetCountryGroups.Response GetCountryGroups(GetCountryGroups input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -186,7 +186,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.RetrieveCountryGroupResponse>?> GetCountryGroupsAsync(GetCountryGroups input)
+        public async Task<GetCountryGroups.Response> GetCountryGroupsAsync(GetCountryGroups input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -194,7 +194,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AddCountryGroupResponse? AddCountryGroup(AddCountryGroup input)
+        public AddCountryGroup.Response AddCountryGroup(AddCountryGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -202,7 +202,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AddCountryGroupResponse?> AddCountryGroupAsync(AddCountryGroup input)
+        public async Task<AddCountryGroup.Response> AddCountryGroupAsync(AddCountryGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -210,7 +210,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.CountryGroupObject? UpdateCountryGroup(UpdateCountryGroup input)
+        public UpdateCountryGroup.Response UpdateCountryGroup(UpdateCountryGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -218,7 +218,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CountryGroupObject?> UpdateCountryGroupAsync(UpdateCountryGroup input)
+        public async Task<UpdateCountryGroup.Response> UpdateCountryGroupAsync(UpdateCountryGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -226,23 +226,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteCountryGroup(DeleteCountryGroup input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteCountryGroupAsync(DeleteCountryGroup input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Dictionary<string, string>? GetLanguages(GetLanguages input)
+        public DeleteCountryGroup.Response DeleteCountryGroup(DeleteCountryGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -250,7 +234,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Dictionary<string, string>?> GetLanguagesAsync(GetLanguages input)
+        public async Task<DeleteCountryGroup.Response> DeleteCountryGroupAsync(DeleteCountryGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -258,7 +242,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<string>? GetTimeZones(GetTimeZones input)
+        public GetLanguages.Response GetLanguages(GetLanguages input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -266,7 +250,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<string>?> GetTimeZonesAsync(GetTimeZones input)
+        public async Task<GetLanguages.Response> GetLanguagesAsync(GetLanguages input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -274,7 +258,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RetrieveTimeResponse? PublicGetTime(PublicGetTime input)
+        public GetTimeZones.Response GetTimeZones(GetTimeZones input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -282,7 +266,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RetrieveTimeResponse?> PublicGetTimeAsync(PublicGetTime input)
+        public async Task<GetTimeZones.Response> GetTimeZonesAsync(GetTimeZones input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -290,9 +274,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public List<Model.CountryObject>? PublicGetCountries(PublicGetCountries input)
+        public PublicGetTime.Response PublicGetTime(PublicGetTime input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -300,7 +282,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.CountryObject>?> PublicGetCountriesAsync(PublicGetCountries input)
+        public async Task<PublicGetTime.Response> PublicGetTimeAsync(PublicGetTime input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -308,8 +290,9 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public Dictionary<string, object>? PublicGetLanguages(PublicGetLanguages input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicGetCountries.Response PublicGetCountries(PublicGetCountries input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -317,7 +300,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Dictionary<string, object>?> PublicGetLanguagesAsync(PublicGetLanguages input)
+        public async Task<PublicGetCountries.Response> PublicGetCountriesAsync(PublicGetCountries input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -325,7 +308,8 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<string>? PublicGetTimeZones(PublicGetTimeZones input)
+        #pragma warning restore ab_deprecated_operation
+        public PublicGetLanguages.Response PublicGetLanguages(PublicGetLanguages input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -333,7 +317,23 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<string>?> PublicGetTimeZonesAsync(PublicGetTimeZones input)
+        public async Task<PublicGetLanguages.Response> PublicGetLanguagesAsync(PublicGetLanguages input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetTimeZones.Response PublicGetTimeZones(PublicGetTimeZones input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetTimeZones.Response> PublicGetTimeZonesAsync(PublicGetTimeZones input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

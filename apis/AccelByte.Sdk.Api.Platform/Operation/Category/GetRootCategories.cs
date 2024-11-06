@@ -67,14 +67,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetRootCategories op = new GetRootCategories(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetRootCategoriesBuilder>(this);
                 return op;
             }
 
-            public List<Model.FullCategoryInfo>? Execute(
+            public GetRootCategories.Response Execute(
                 string namespace_
             )
             {
@@ -87,11 +87,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.FullCategoryInfo>?> ExecuteAsync(
+            public async Task<GetRootCategories.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -115,31 +115,41 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.FullCategoryInfo>>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Category::GetRootCategories";
+        }
+
+        #endregion
+
         public GetRootCategories(
-            string namespace_,
-            string? storeId
+            string namespace_,            
+            string? storeId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -148,28 +158,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.FullCategoryInfo>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetRootCategories.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetRootCategories.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.FullCategoryInfo>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<Model.FullCategoryInfo>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.FullCategoryInfo>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

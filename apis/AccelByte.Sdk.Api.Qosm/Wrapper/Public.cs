@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Qosm.Wrapper
         }
         #endregion
 
-        public Model.ModelsListServerResponse? ListServerPerNamespace(ListServerPerNamespace input)
+        public ListServerPerNamespace.Response ListServerPerNamespace(ListServerPerNamespace input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Qosm.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListServerResponse?> ListServerPerNamespaceAsync(ListServerPerNamespace input)
+        public async Task<ListServerPerNamespace.Response> ListServerPerNamespaceAsync(ListServerPerNamespace input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Qosm.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsListServerResponse? ListServer(ListServer input)
+        public ListServer.Response ListServer(ListServer input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Qosm.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListServerResponse?> ListServerAsync(ListServer input)
+        public async Task<ListServer.Response> ListServerAsync(ListServer input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

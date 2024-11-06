@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
         }
         #endregion
 
-        public Model.ApiListMatchFunctionsResponse? MatchFunctionList(MatchFunctionList input)
+        public MatchFunctionList.Response MatchFunctionList(MatchFunctionList input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiListMatchFunctionsResponse?> MatchFunctionListAsync(MatchFunctionList input)
+        public async Task<MatchFunctionList.Response> MatchFunctionListAsync(MatchFunctionList input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,23 +96,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void CreateMatchFunction(CreateMatchFunction input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task CreateMatchFunctionAsync(CreateMatchFunction input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApiMatchFunctionConfig? UpdateMatchFunction(UpdateMatchFunction input)
+        public CreateMatchFunction.Response CreateMatchFunction(CreateMatchFunction input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +104,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiMatchFunctionConfig?> UpdateMatchFunctionAsync(UpdateMatchFunction input)
+        public async Task<CreateMatchFunction.Response> CreateMatchFunctionAsync(CreateMatchFunction input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,18 +112,34 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteMatchFunction(DeleteMatchFunction input)
+        public UpdateMatchFunction.Response UpdateMatchFunction(UpdateMatchFunction input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteMatchFunctionAsync(DeleteMatchFunction input)
+        public async Task<UpdateMatchFunction.Response> UpdateMatchFunctionAsync(UpdateMatchFunction input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeleteMatchFunction.Response DeleteMatchFunction(DeleteMatchFunction input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteMatchFunction.Response> DeleteMatchFunctionAsync(DeleteMatchFunction input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

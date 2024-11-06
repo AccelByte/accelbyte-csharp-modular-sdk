@@ -397,7 +397,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public RevokeUseCount.RevokeUseCountBuilder RevokeUseCountOp
         {
             get
@@ -519,7 +519,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetUserEntitlementByItemId.PublicGetUserEntitlementByItemIdBuilder PublicGetUserEntitlementByItemIdOp
         {
             get
@@ -531,7 +531,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetUserEntitlementBySku.PublicGetUserEntitlementBySkuBuilder PublicGetUserEntitlementBySkuOp
         {
             get
@@ -666,7 +666,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.EntitlementPagingSlicedResult? QueryEntitlements1(QueryEntitlements1 input)
+        public QueryEntitlements1.Response QueryEntitlements1(QueryEntitlements1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -674,7 +674,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementPagingSlicedResult?> QueryEntitlements1Async(QueryEntitlements1 input)
+        public async Task<QueryEntitlements1.Response> QueryEntitlements1Async(QueryEntitlements1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -682,7 +682,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementPagingSlicedResult? QueryEntitlements(QueryEntitlements input)
+        public QueryEntitlements.Response QueryEntitlements(QueryEntitlements input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -690,7 +690,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementPagingSlicedResult?> QueryEntitlementsAsync(QueryEntitlements input)
+        public async Task<QueryEntitlements.Response> QueryEntitlementsAsync(QueryEntitlements input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -698,7 +698,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementConfigInfo? EnableEntitlementOriginFeature(EnableEntitlementOriginFeature input)
+        public EnableEntitlementOriginFeature.Response EnableEntitlementOriginFeature(EnableEntitlementOriginFeature input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -706,7 +706,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementConfigInfo?> EnableEntitlementOriginFeatureAsync(EnableEntitlementOriginFeature input)
+        public async Task<EnableEntitlementOriginFeature.Response> EnableEntitlementOriginFeatureAsync(EnableEntitlementOriginFeature input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -714,7 +714,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementConfigInfo? GetEntitlementConfigInfo(GetEntitlementConfigInfo input)
+        public GetEntitlementConfigInfo.Response GetEntitlementConfigInfo(GetEntitlementConfigInfo input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -722,7 +722,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementConfigInfo?> GetEntitlementConfigInfoAsync(GetEntitlementConfigInfo input)
+        public async Task<GetEntitlementConfigInfo.Response> GetEntitlementConfigInfoAsync(GetEntitlementConfigInfo input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -730,7 +730,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.BulkEntitlementGrantResult? GrantEntitlements(GrantEntitlements input)
+        public GrantEntitlements.Response GrantEntitlements(GrantEntitlements input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -738,7 +738,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.BulkEntitlementGrantResult?> GrantEntitlementsAsync(GrantEntitlements input)
+        public async Task<GrantEntitlements.Response> GrantEntitlementsAsync(GrantEntitlements input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -746,7 +746,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.BulkEntitlementRevokeResult? RevokeEntitlements(RevokeEntitlements input)
+        public RevokeEntitlements.Response RevokeEntitlements(RevokeEntitlements input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -754,7 +754,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.BulkEntitlementRevokeResult?> RevokeEntitlementsAsync(RevokeEntitlements input)
+        public async Task<RevokeEntitlements.Response> RevokeEntitlementsAsync(RevokeEntitlements input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -762,7 +762,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementInfo? GetEntitlement(GetEntitlement input)
+        public GetEntitlement.Response GetEntitlement(GetEntitlement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -770,7 +770,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementInfo?> GetEntitlementAsync(GetEntitlement input)
+        public async Task<GetEntitlement.Response> GetEntitlementAsync(GetEntitlement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -778,7 +778,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementPlatformConfigInfo? GetPlatformEntitlementConfig(GetPlatformEntitlementConfig input)
+        public GetPlatformEntitlementConfig.Response GetPlatformEntitlementConfig(GetPlatformEntitlementConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -786,7 +786,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementPlatformConfigInfo?> GetPlatformEntitlementConfigAsync(GetPlatformEntitlementConfig input)
+        public async Task<GetPlatformEntitlementConfig.Response> GetPlatformEntitlementConfigAsync(GetPlatformEntitlementConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -794,7 +794,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementPlatformConfigInfo? UpdatePlatformEntitlementConfig(UpdatePlatformEntitlementConfig input)
+        public UpdatePlatformEntitlementConfig.Response UpdatePlatformEntitlementConfig(UpdatePlatformEntitlementConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -802,7 +802,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementPlatformConfigInfo?> UpdatePlatformEntitlementConfigAsync(UpdatePlatformEntitlementConfig input)
+        public async Task<UpdatePlatformEntitlementConfig.Response> UpdatePlatformEntitlementConfigAsync(UpdatePlatformEntitlementConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -810,7 +810,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementPagingSlicedResult? QueryUserEntitlements(QueryUserEntitlements input)
+        public QueryUserEntitlements.Response QueryUserEntitlements(QueryUserEntitlements input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -818,7 +818,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementPagingSlicedResult?> QueryUserEntitlementsAsync(QueryUserEntitlements input)
+        public async Task<QueryUserEntitlements.Response> QueryUserEntitlementsAsync(QueryUserEntitlements input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -826,7 +826,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.StackableEntitlementInfo>? GrantUserEntitlement(GrantUserEntitlement input)
+        public GrantUserEntitlement.Response GrantUserEntitlement(GrantUserEntitlement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -834,7 +834,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.StackableEntitlementInfo>?> GrantUserEntitlementAsync(GrantUserEntitlement input)
+        public async Task<GrantUserEntitlement.Response> GrantUserEntitlementAsync(GrantUserEntitlement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -842,7 +842,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AppEntitlementInfo? GetUserAppEntitlementByAppId(GetUserAppEntitlementByAppId input)
+        public GetUserAppEntitlementByAppId.Response GetUserAppEntitlementByAppId(GetUserAppEntitlementByAppId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -850,7 +850,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AppEntitlementInfo?> GetUserAppEntitlementByAppIdAsync(GetUserAppEntitlementByAppId input)
+        public async Task<GetUserAppEntitlementByAppId.Response> GetUserAppEntitlementByAppIdAsync(GetUserAppEntitlementByAppId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -858,7 +858,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AppEntitlementPagingSlicedResult? QueryUserEntitlementsByAppType(QueryUserEntitlementsByAppType input)
+        public QueryUserEntitlementsByAppType.Response QueryUserEntitlementsByAppType(QueryUserEntitlementsByAppType input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -866,7 +866,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AppEntitlementPagingSlicedResult?> QueryUserEntitlementsByAppTypeAsync(QueryUserEntitlementsByAppType input)
+        public async Task<QueryUserEntitlementsByAppType.Response> QueryUserEntitlementsByAppTypeAsync(QueryUserEntitlementsByAppType input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -874,7 +874,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementInfo? GetUserEntitlementByItemId(GetUserEntitlementByItemId input)
+        public GetUserEntitlementByItemId.Response GetUserEntitlementByItemId(GetUserEntitlementByItemId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -882,7 +882,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementInfo?> GetUserEntitlementByItemIdAsync(GetUserEntitlementByItemId input)
+        public async Task<GetUserEntitlementByItemId.Response> GetUserEntitlementByItemIdAsync(GetUserEntitlementByItemId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -890,7 +890,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.EntitlementInfo>? GetUserActiveEntitlementsByItemIds(GetUserActiveEntitlementsByItemIds input)
+        public GetUserActiveEntitlementsByItemIds.Response GetUserActiveEntitlementsByItemIds(GetUserActiveEntitlementsByItemIds input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -898,7 +898,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.EntitlementInfo>?> GetUserActiveEntitlementsByItemIdsAsync(GetUserActiveEntitlementsByItemIds input)
+        public async Task<GetUserActiveEntitlementsByItemIds.Response> GetUserActiveEntitlementsByItemIdsAsync(GetUserActiveEntitlementsByItemIds input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -906,7 +906,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementInfo? GetUserEntitlementBySku(GetUserEntitlementBySku input)
+        public GetUserEntitlementBySku.Response GetUserEntitlementBySku(GetUserEntitlementBySku input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -914,7 +914,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementInfo?> GetUserEntitlementBySkuAsync(GetUserEntitlementBySku input)
+        public async Task<GetUserEntitlementBySku.Response> GetUserEntitlementBySkuAsync(GetUserEntitlementBySku input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -922,7 +922,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.Ownership? ExistsAnyUserActiveEntitlement(ExistsAnyUserActiveEntitlement input)
+        public ExistsAnyUserActiveEntitlement.Response ExistsAnyUserActiveEntitlement(ExistsAnyUserActiveEntitlement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -930,7 +930,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.Ownership?> ExistsAnyUserActiveEntitlementAsync(ExistsAnyUserActiveEntitlement input)
+        public async Task<ExistsAnyUserActiveEntitlement.Response> ExistsAnyUserActiveEntitlementAsync(ExistsAnyUserActiveEntitlement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -938,7 +938,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.Ownership? ExistsAnyUserActiveEntitlementByItemIds(ExistsAnyUserActiveEntitlementByItemIds input)
+        public ExistsAnyUserActiveEntitlementByItemIds.Response ExistsAnyUserActiveEntitlementByItemIds(ExistsAnyUserActiveEntitlementByItemIds input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -946,7 +946,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.Ownership?> ExistsAnyUserActiveEntitlementByItemIdsAsync(ExistsAnyUserActiveEntitlementByItemIds input)
+        public async Task<ExistsAnyUserActiveEntitlementByItemIds.Response> ExistsAnyUserActiveEntitlementByItemIdsAsync(ExistsAnyUserActiveEntitlementByItemIds input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -954,7 +954,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.Ownership? GetUserAppEntitlementOwnershipByAppId(GetUserAppEntitlementOwnershipByAppId input)
+        public GetUserAppEntitlementOwnershipByAppId.Response GetUserAppEntitlementOwnershipByAppId(GetUserAppEntitlementOwnershipByAppId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -962,7 +962,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.Ownership?> GetUserAppEntitlementOwnershipByAppIdAsync(GetUserAppEntitlementOwnershipByAppId input)
+        public async Task<GetUserAppEntitlementOwnershipByAppId.Response> GetUserAppEntitlementOwnershipByAppIdAsync(GetUserAppEntitlementOwnershipByAppId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -970,7 +970,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.TimedOwnership? GetUserEntitlementOwnershipByItemId(GetUserEntitlementOwnershipByItemId input)
+        public GetUserEntitlementOwnershipByItemId.Response GetUserEntitlementOwnershipByItemId(GetUserEntitlementOwnershipByItemId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -978,7 +978,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.TimedOwnership?> GetUserEntitlementOwnershipByItemIdAsync(GetUserEntitlementOwnershipByItemId input)
+        public async Task<GetUserEntitlementOwnershipByItemId.Response> GetUserEntitlementOwnershipByItemIdAsync(GetUserEntitlementOwnershipByItemId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -986,7 +986,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.EntitlementOwnership>? GetUserEntitlementOwnershipByItemIds(GetUserEntitlementOwnershipByItemIds input)
+        public GetUserEntitlementOwnershipByItemIds.Response GetUserEntitlementOwnershipByItemIds(GetUserEntitlementOwnershipByItemIds input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -994,7 +994,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.EntitlementOwnership>?> GetUserEntitlementOwnershipByItemIdsAsync(GetUserEntitlementOwnershipByItemIds input)
+        public async Task<GetUserEntitlementOwnershipByItemIds.Response> GetUserEntitlementOwnershipByItemIdsAsync(GetUserEntitlementOwnershipByItemIds input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1002,7 +1002,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.TimedOwnership? GetUserEntitlementOwnershipBySku(GetUserEntitlementOwnershipBySku input)
+        public GetUserEntitlementOwnershipBySku.Response GetUserEntitlementOwnershipBySku(GetUserEntitlementOwnershipBySku input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1010,7 +1010,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.TimedOwnership?> GetUserEntitlementOwnershipBySkuAsync(GetUserEntitlementOwnershipBySku input)
+        public async Task<GetUserEntitlementOwnershipBySku.Response> GetUserEntitlementOwnershipBySkuAsync(GetUserEntitlementOwnershipBySku input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1018,7 +1018,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.BulkOperationResult? RevokeAllEntitlements(RevokeAllEntitlements input)
+        public RevokeAllEntitlements.Response RevokeAllEntitlements(RevokeAllEntitlements input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1026,7 +1026,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.BulkOperationResult?> RevokeAllEntitlementsAsync(RevokeAllEntitlements input)
+        public async Task<RevokeAllEntitlements.Response> RevokeAllEntitlementsAsync(RevokeAllEntitlements input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1034,7 +1034,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.BulkOperationResult? RevokeUserEntitlements(RevokeUserEntitlements input)
+        public RevokeUserEntitlements.Response RevokeUserEntitlements(RevokeUserEntitlements input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1042,7 +1042,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.BulkOperationResult?> RevokeUserEntitlementsAsync(RevokeUserEntitlements input)
+        public async Task<RevokeUserEntitlements.Response> RevokeUserEntitlementsAsync(RevokeUserEntitlements input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1050,7 +1050,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementInfo? GetUserEntitlement(GetUserEntitlement input)
+        public GetUserEntitlement.Response GetUserEntitlement(GetUserEntitlement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1058,7 +1058,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementInfo?> GetUserEntitlementAsync(GetUserEntitlement input)
+        public async Task<GetUserEntitlement.Response> GetUserEntitlementAsync(GetUserEntitlement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1066,7 +1066,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementInfo? UpdateUserEntitlement(UpdateUserEntitlement input)
+        public UpdateUserEntitlement.Response UpdateUserEntitlement(UpdateUserEntitlement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1074,7 +1074,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementInfo?> UpdateUserEntitlementAsync(UpdateUserEntitlement input)
+        public async Task<UpdateUserEntitlement.Response> UpdateUserEntitlementAsync(UpdateUserEntitlement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1082,7 +1082,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementDecrementResult? ConsumeUserEntitlement(ConsumeUserEntitlement input)
+        public ConsumeUserEntitlement.Response ConsumeUserEntitlement(ConsumeUserEntitlement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1090,7 +1090,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementDecrementResult?> ConsumeUserEntitlementAsync(ConsumeUserEntitlement input)
+        public async Task<ConsumeUserEntitlement.Response> ConsumeUserEntitlementAsync(ConsumeUserEntitlement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1098,7 +1098,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementInfo? DisableUserEntitlement(DisableUserEntitlement input)
+        public DisableUserEntitlement.Response DisableUserEntitlement(DisableUserEntitlement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1106,7 +1106,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementInfo?> DisableUserEntitlementAsync(DisableUserEntitlement input)
+        public async Task<DisableUserEntitlement.Response> DisableUserEntitlementAsync(DisableUserEntitlement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1114,7 +1114,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementInfo? EnableUserEntitlement(EnableUserEntitlement input)
+        public EnableUserEntitlement.Response EnableUserEntitlement(EnableUserEntitlement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1122,7 +1122,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementInfo?> EnableUserEntitlementAsync(EnableUserEntitlement input)
+        public async Task<EnableUserEntitlement.Response> EnableUserEntitlementAsync(EnableUserEntitlement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1130,7 +1130,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.EntitlementHistoryInfo>? GetUserEntitlementHistories(GetUserEntitlementHistories input)
+        public GetUserEntitlementHistories.Response GetUserEntitlementHistories(GetUserEntitlementHistories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1138,7 +1138,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.EntitlementHistoryInfo>?> GetUserEntitlementHistoriesAsync(GetUserEntitlementHistories input)
+        public async Task<GetUserEntitlementHistories.Response> GetUserEntitlementHistoriesAsync(GetUserEntitlementHistories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1146,7 +1146,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementInfo? RevokeUserEntitlement(RevokeUserEntitlement input)
+        public RevokeUserEntitlement.Response RevokeUserEntitlement(RevokeUserEntitlement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1154,7 +1154,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementInfo?> RevokeUserEntitlementAsync(RevokeUserEntitlement input)
+        public async Task<RevokeUserEntitlement.Response> RevokeUserEntitlementAsync(RevokeUserEntitlement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1162,7 +1162,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementIfc? RevokeUserEntitlementByUseCount(RevokeUserEntitlementByUseCount input)
+        public RevokeUserEntitlementByUseCount.Response RevokeUserEntitlementByUseCount(RevokeUserEntitlementByUseCount input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1170,7 +1170,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementIfc?> RevokeUserEntitlementByUseCountAsync(RevokeUserEntitlementByUseCount input)
+        public async Task<RevokeUserEntitlementByUseCount.Response> RevokeUserEntitlementByUseCountAsync(RevokeUserEntitlementByUseCount input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1178,7 +1178,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementPrechekResult? PreCheckRevokeUserEntitlementByUseCount(PreCheckRevokeUserEntitlementByUseCount input)
+        public PreCheckRevokeUserEntitlementByUseCount.Response PreCheckRevokeUserEntitlementByUseCount(PreCheckRevokeUserEntitlementByUseCount input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1186,7 +1186,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementPrechekResult?> PreCheckRevokeUserEntitlementByUseCountAsync(PreCheckRevokeUserEntitlementByUseCount input)
+        public async Task<PreCheckRevokeUserEntitlementByUseCount.Response> PreCheckRevokeUserEntitlementByUseCountAsync(PreCheckRevokeUserEntitlementByUseCount input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1194,9 +1194,9 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.EntitlementInfo? RevokeUseCount(RevokeUseCount input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public RevokeUseCount.Response RevokeUseCount(RevokeUseCount input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1204,7 +1204,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementInfo?> RevokeUseCountAsync(RevokeUseCount input)
+        public async Task<RevokeUseCount.Response> RevokeUseCountAsync(RevokeUseCount input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1212,8 +1212,8 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public Model.EntitlementSoldResult? SellUserEntitlement(SellUserEntitlement input)
+        #pragma warning restore ab_deprecated_operation
+        public SellUserEntitlement.Response SellUserEntitlement(SellUserEntitlement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1221,7 +1221,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementSoldResult?> SellUserEntitlementAsync(SellUserEntitlement input)
+        public async Task<SellUserEntitlement.Response> SellUserEntitlementAsync(SellUserEntitlement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1229,7 +1229,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.Ownership? PublicExistsAnyMyActiveEntitlement(PublicExistsAnyMyActiveEntitlement input)
+        public PublicExistsAnyMyActiveEntitlement.Response PublicExistsAnyMyActiveEntitlement(PublicExistsAnyMyActiveEntitlement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1237,7 +1237,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.Ownership?> PublicExistsAnyMyActiveEntitlementAsync(PublicExistsAnyMyActiveEntitlement input)
+        public async Task<PublicExistsAnyMyActiveEntitlement.Response> PublicExistsAnyMyActiveEntitlementAsync(PublicExistsAnyMyActiveEntitlement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1245,7 +1245,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.Ownership? PublicGetMyAppEntitlementOwnershipByAppId(PublicGetMyAppEntitlementOwnershipByAppId input)
+        public PublicGetMyAppEntitlementOwnershipByAppId.Response PublicGetMyAppEntitlementOwnershipByAppId(PublicGetMyAppEntitlementOwnershipByAppId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1253,7 +1253,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.Ownership?> PublicGetMyAppEntitlementOwnershipByAppIdAsync(PublicGetMyAppEntitlementOwnershipByAppId input)
+        public async Task<PublicGetMyAppEntitlementOwnershipByAppId.Response> PublicGetMyAppEntitlementOwnershipByAppIdAsync(PublicGetMyAppEntitlementOwnershipByAppId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1261,7 +1261,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.TimedOwnership? PublicGetMyEntitlementOwnershipByItemId(PublicGetMyEntitlementOwnershipByItemId input)
+        public PublicGetMyEntitlementOwnershipByItemId.Response PublicGetMyEntitlementOwnershipByItemId(PublicGetMyEntitlementOwnershipByItemId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1269,7 +1269,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.TimedOwnership?> PublicGetMyEntitlementOwnershipByItemIdAsync(PublicGetMyEntitlementOwnershipByItemId input)
+        public async Task<PublicGetMyEntitlementOwnershipByItemId.Response> PublicGetMyEntitlementOwnershipByItemIdAsync(PublicGetMyEntitlementOwnershipByItemId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1277,7 +1277,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.TimedOwnership? PublicGetMyEntitlementOwnershipBySku(PublicGetMyEntitlementOwnershipBySku input)
+        public PublicGetMyEntitlementOwnershipBySku.Response PublicGetMyEntitlementOwnershipBySku(PublicGetMyEntitlementOwnershipBySku input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1285,7 +1285,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.TimedOwnership?> PublicGetMyEntitlementOwnershipBySkuAsync(PublicGetMyEntitlementOwnershipBySku input)
+        public async Task<PublicGetMyEntitlementOwnershipBySku.Response> PublicGetMyEntitlementOwnershipBySkuAsync(PublicGetMyEntitlementOwnershipBySku input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1293,7 +1293,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OwnershipToken? PublicGetEntitlementOwnershipToken(PublicGetEntitlementOwnershipToken input)
+        public PublicGetEntitlementOwnershipToken.Response PublicGetEntitlementOwnershipToken(PublicGetEntitlementOwnershipToken input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1301,7 +1301,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OwnershipToken?> PublicGetEntitlementOwnershipTokenAsync(PublicGetEntitlementOwnershipToken input)
+        public async Task<PublicGetEntitlementOwnershipToken.Response> PublicGetEntitlementOwnershipTokenAsync(PublicGetEntitlementOwnershipToken input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1309,7 +1309,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementPagingSlicedResult? PublicQueryUserEntitlements(PublicQueryUserEntitlements input)
+        public PublicQueryUserEntitlements.Response PublicQueryUserEntitlements(PublicQueryUserEntitlements input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1317,7 +1317,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementPagingSlicedResult?> PublicQueryUserEntitlementsAsync(PublicQueryUserEntitlements input)
+        public async Task<PublicQueryUserEntitlements.Response> PublicQueryUserEntitlementsAsync(PublicQueryUserEntitlements input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1325,7 +1325,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AppEntitlementInfo? PublicGetUserAppEntitlementByAppId(PublicGetUserAppEntitlementByAppId input)
+        public PublicGetUserAppEntitlementByAppId.Response PublicGetUserAppEntitlementByAppId(PublicGetUserAppEntitlementByAppId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1333,7 +1333,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AppEntitlementInfo?> PublicGetUserAppEntitlementByAppIdAsync(PublicGetUserAppEntitlementByAppId input)
+        public async Task<PublicGetUserAppEntitlementByAppId.Response> PublicGetUserAppEntitlementByAppIdAsync(PublicGetUserAppEntitlementByAppId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1341,7 +1341,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AppEntitlementPagingSlicedResult? PublicQueryUserEntitlementsByAppType(PublicQueryUserEntitlementsByAppType input)
+        public PublicQueryUserEntitlementsByAppType.Response PublicQueryUserEntitlementsByAppType(PublicQueryUserEntitlementsByAppType input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1349,7 +1349,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AppEntitlementPagingSlicedResult?> PublicQueryUserEntitlementsByAppTypeAsync(PublicQueryUserEntitlementsByAppType input)
+        public async Task<PublicQueryUserEntitlementsByAppType.Response> PublicQueryUserEntitlementsByAppTypeAsync(PublicQueryUserEntitlementsByAppType input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1357,7 +1357,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.EntitlementInfo>? PublicGetUserEntitlementsByIds(PublicGetUserEntitlementsByIds input)
+        public PublicGetUserEntitlementsByIds.Response PublicGetUserEntitlementsByIds(PublicGetUserEntitlementsByIds input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1365,7 +1365,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.EntitlementInfo>?> PublicGetUserEntitlementsByIdsAsync(PublicGetUserEntitlementsByIds input)
+        public async Task<PublicGetUserEntitlementsByIds.Response> PublicGetUserEntitlementsByIdsAsync(PublicGetUserEntitlementsByIds input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1373,9 +1373,9 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.EntitlementInfo? PublicGetUserEntitlementByItemId(PublicGetUserEntitlementByItemId input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicGetUserEntitlementByItemId.Response PublicGetUserEntitlementByItemId(PublicGetUserEntitlementByItemId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1383,7 +1383,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementInfo?> PublicGetUserEntitlementByItemIdAsync(PublicGetUserEntitlementByItemId input)
+        public async Task<PublicGetUserEntitlementByItemId.Response> PublicGetUserEntitlementByItemIdAsync(PublicGetUserEntitlementByItemId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1391,10 +1391,10 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.EntitlementInfo? PublicGetUserEntitlementBySku(PublicGetUserEntitlementBySku input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicGetUserEntitlementBySku.Response PublicGetUserEntitlementBySku(PublicGetUserEntitlementBySku input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1402,7 +1402,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementInfo?> PublicGetUserEntitlementBySkuAsync(PublicGetUserEntitlementBySku input)
+        public async Task<PublicGetUserEntitlementBySku.Response> PublicGetUserEntitlementBySkuAsync(PublicGetUserEntitlementBySku input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1410,8 +1410,8 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public List<Model.UserEntitlementHistoryPagingSlicedResult>? PublicUserEntitlementHistory(PublicUserEntitlementHistory input)
+        #pragma warning restore ab_deprecated_operation
+        public PublicUserEntitlementHistory.Response PublicUserEntitlementHistory(PublicUserEntitlementHistory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1419,7 +1419,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.UserEntitlementHistoryPagingSlicedResult>?> PublicUserEntitlementHistoryAsync(PublicUserEntitlementHistory input)
+        public async Task<PublicUserEntitlementHistory.Response> PublicUserEntitlementHistoryAsync(PublicUserEntitlementHistory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1427,7 +1427,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.Ownership? PublicExistsAnyUserActiveEntitlement(PublicExistsAnyUserActiveEntitlement input)
+        public PublicExistsAnyUserActiveEntitlement.Response PublicExistsAnyUserActiveEntitlement(PublicExistsAnyUserActiveEntitlement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1435,7 +1435,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.Ownership?> PublicExistsAnyUserActiveEntitlementAsync(PublicExistsAnyUserActiveEntitlement input)
+        public async Task<PublicExistsAnyUserActiveEntitlement.Response> PublicExistsAnyUserActiveEntitlementAsync(PublicExistsAnyUserActiveEntitlement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1443,7 +1443,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.Ownership? PublicGetUserAppEntitlementOwnershipByAppId(PublicGetUserAppEntitlementOwnershipByAppId input)
+        public PublicGetUserAppEntitlementOwnershipByAppId.Response PublicGetUserAppEntitlementOwnershipByAppId(PublicGetUserAppEntitlementOwnershipByAppId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1451,7 +1451,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.Ownership?> PublicGetUserAppEntitlementOwnershipByAppIdAsync(PublicGetUserAppEntitlementOwnershipByAppId input)
+        public async Task<PublicGetUserAppEntitlementOwnershipByAppId.Response> PublicGetUserAppEntitlementOwnershipByAppIdAsync(PublicGetUserAppEntitlementOwnershipByAppId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1459,7 +1459,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.TimedOwnership? PublicGetUserEntitlementOwnershipByItemId(PublicGetUserEntitlementOwnershipByItemId input)
+        public PublicGetUserEntitlementOwnershipByItemId.Response PublicGetUserEntitlementOwnershipByItemId(PublicGetUserEntitlementOwnershipByItemId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1467,7 +1467,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.TimedOwnership?> PublicGetUserEntitlementOwnershipByItemIdAsync(PublicGetUserEntitlementOwnershipByItemId input)
+        public async Task<PublicGetUserEntitlementOwnershipByItemId.Response> PublicGetUserEntitlementOwnershipByItemIdAsync(PublicGetUserEntitlementOwnershipByItemId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1475,7 +1475,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.EntitlementOwnership>? PublicGetUserEntitlementOwnershipByItemIds(PublicGetUserEntitlementOwnershipByItemIds input)
+        public PublicGetUserEntitlementOwnershipByItemIds.Response PublicGetUserEntitlementOwnershipByItemIds(PublicGetUserEntitlementOwnershipByItemIds input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1483,7 +1483,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.EntitlementOwnership>?> PublicGetUserEntitlementOwnershipByItemIdsAsync(PublicGetUserEntitlementOwnershipByItemIds input)
+        public async Task<PublicGetUserEntitlementOwnershipByItemIds.Response> PublicGetUserEntitlementOwnershipByItemIdsAsync(PublicGetUserEntitlementOwnershipByItemIds input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1491,7 +1491,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.TimedOwnership? PublicGetUserEntitlementOwnershipBySku(PublicGetUserEntitlementOwnershipBySku input)
+        public PublicGetUserEntitlementOwnershipBySku.Response PublicGetUserEntitlementOwnershipBySku(PublicGetUserEntitlementOwnershipBySku input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1499,7 +1499,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.TimedOwnership?> PublicGetUserEntitlementOwnershipBySkuAsync(PublicGetUserEntitlementOwnershipBySku input)
+        public async Task<PublicGetUserEntitlementOwnershipBySku.Response> PublicGetUserEntitlementOwnershipBySkuAsync(PublicGetUserEntitlementOwnershipBySku input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1507,7 +1507,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementInfo? PublicGetUserEntitlement(PublicGetUserEntitlement input)
+        public PublicGetUserEntitlement.Response PublicGetUserEntitlement(PublicGetUserEntitlement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1515,7 +1515,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementInfo?> PublicGetUserEntitlementAsync(PublicGetUserEntitlement input)
+        public async Task<PublicGetUserEntitlement.Response> PublicGetUserEntitlementAsync(PublicGetUserEntitlement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1523,7 +1523,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementDecrementResult? PublicConsumeUserEntitlement(PublicConsumeUserEntitlement input)
+        public PublicConsumeUserEntitlement.Response PublicConsumeUserEntitlement(PublicConsumeUserEntitlement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1531,7 +1531,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementDecrementResult?> PublicConsumeUserEntitlementAsync(PublicConsumeUserEntitlement input)
+        public async Task<PublicConsumeUserEntitlement.Response> PublicConsumeUserEntitlementAsync(PublicConsumeUserEntitlement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1539,7 +1539,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementSoldResult? PublicSellUserEntitlement(PublicSellUserEntitlement input)
+        public PublicSellUserEntitlement.Response PublicSellUserEntitlement(PublicSellUserEntitlement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1547,7 +1547,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementSoldResult?> PublicSellUserEntitlementAsync(PublicSellUserEntitlement input)
+        public async Task<PublicSellUserEntitlement.Response> PublicSellUserEntitlementAsync(PublicSellUserEntitlement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1555,7 +1555,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementSplitResult? PublicSplitUserEntitlement(PublicSplitUserEntitlement input)
+        public PublicSplitUserEntitlement.Response PublicSplitUserEntitlement(PublicSplitUserEntitlement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1563,7 +1563,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementSplitResult?> PublicSplitUserEntitlementAsync(PublicSplitUserEntitlement input)
+        public async Task<PublicSplitUserEntitlement.Response> PublicSplitUserEntitlementAsync(PublicSplitUserEntitlement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1571,7 +1571,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EntitlementTransferResult? PublicTransferUserEntitlement(PublicTransferUserEntitlement input)
+        public PublicTransferUserEntitlement.Response PublicTransferUserEntitlement(PublicTransferUserEntitlement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1579,7 +1579,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EntitlementTransferResult?> PublicTransferUserEntitlementAsync(PublicTransferUserEntitlement input)
+        public async Task<PublicTransferUserEntitlement.Response> PublicTransferUserEntitlementAsync(PublicTransferUserEntitlement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
         }
         #endregion
 
-        public Model.ApimodelsChainingOperationResp? AdminCreateChainingOperations(AdminCreateChainingOperations input)
+        public AdminCreateChainingOperations.Response AdminCreateChainingOperations(AdminCreateChainingOperations input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsChainingOperationResp?> AdminCreateChainingOperationsAsync(AdminCreateChainingOperations input)
+        public async Task<AdminCreateChainingOperations.Response> AdminCreateChainingOperationsAsync(AdminCreateChainingOperations input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

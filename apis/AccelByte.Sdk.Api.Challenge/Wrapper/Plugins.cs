@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
         }
         #endregion
 
-        public Model.ModelPluginAssignmentResponse? AdminGetAssignmentPlugin(AdminGetAssignmentPlugin input)
+        public AdminGetAssignmentPlugin.Response AdminGetAssignmentPlugin(AdminGetAssignmentPlugin input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelPluginAssignmentResponse?> AdminGetAssignmentPluginAsync(AdminGetAssignmentPlugin input)
+        public async Task<AdminGetAssignmentPlugin.Response> AdminGetAssignmentPluginAsync(AdminGetAssignmentPlugin input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelPluginAssignmentResponse? AdminUpdateAssignmentPlugin(AdminUpdateAssignmentPlugin input)
+        public AdminUpdateAssignmentPlugin.Response AdminUpdateAssignmentPlugin(AdminUpdateAssignmentPlugin input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelPluginAssignmentResponse?> AdminUpdateAssignmentPluginAsync(AdminUpdateAssignmentPlugin input)
+        public async Task<AdminUpdateAssignmentPlugin.Response> AdminUpdateAssignmentPluginAsync(AdminUpdateAssignmentPlugin input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelPluginAssignmentResponse? AdminCreateAssignmentPlugin(AdminCreateAssignmentPlugin input)
+        public AdminCreateAssignmentPlugin.Response AdminCreateAssignmentPlugin(AdminCreateAssignmentPlugin input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelPluginAssignmentResponse?> AdminCreateAssignmentPluginAsync(AdminCreateAssignmentPlugin input)
+        public async Task<AdminCreateAssignmentPlugin.Response> AdminCreateAssignmentPluginAsync(AdminCreateAssignmentPlugin input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,18 +128,18 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteAssignmentPlugin(AdminDeleteAssignmentPlugin input)
+        public AdminDeleteAssignmentPlugin.Response AdminDeleteAssignmentPlugin(AdminDeleteAssignmentPlugin input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteAssignmentPluginAsync(AdminDeleteAssignmentPlugin input)
+        public async Task<AdminDeleteAssignmentPlugin.Response> AdminDeleteAssignmentPluginAsync(AdminDeleteAssignmentPlugin input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

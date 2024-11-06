@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedGetChannelResponse? SingleAdminGetChannel(SingleAdminGetChannel input)
+        public SingleAdminGetChannel.Response SingleAdminGetChannel(SingleAdminGetChannel input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedGetChannelResponse?> SingleAdminGetChannelAsync(SingleAdminGetChannel input)
+        public async Task<SingleAdminGetChannel.Response> SingleAdminGetChannelAsync(SingleAdminGetChannel input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsChannelResponse? AdminCreateChannel(AdminCreateChannel input)
+        public AdminCreateChannel.Response AdminCreateChannel(AdminCreateChannel input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -137,7 +137,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsChannelResponse?> AdminCreateChannelAsync(AdminCreateChannel input)
+        public async Task<AdminCreateChannel.Response> AdminCreateChannelAsync(AdminCreateChannel input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -145,7 +145,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsChannelResponse? SingleAdminUpdateChannel(SingleAdminUpdateChannel input)
+        public SingleAdminUpdateChannel.Response SingleAdminUpdateChannel(SingleAdminUpdateChannel input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -153,7 +153,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsChannelResponse?> SingleAdminUpdateChannelAsync(SingleAdminUpdateChannel input)
+        public async Task<SingleAdminUpdateChannel.Response> SingleAdminUpdateChannelAsync(SingleAdminUpdateChannel input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -161,23 +161,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void SingleAdminDeleteChannel(SingleAdminDeleteChannel input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SingleAdminDeleteChannelAsync(SingleAdminDeleteChannel input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsPaginatedGetChannelResponse? AdminGetChannel(AdminGetChannel input)
+        public SingleAdminDeleteChannel.Response SingleAdminDeleteChannel(SingleAdminDeleteChannel input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -185,7 +169,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedGetChannelResponse?> AdminGetChannelAsync(AdminGetChannel input)
+        public async Task<SingleAdminDeleteChannel.Response> SingleAdminDeleteChannelAsync(SingleAdminDeleteChannel input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -193,7 +177,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsChannelResponse? AdminUpdateChannel(AdminUpdateChannel input)
+        public AdminGetChannel.Response AdminGetChannel(AdminGetChannel input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -201,7 +185,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsChannelResponse?> AdminUpdateChannelAsync(AdminUpdateChannel input)
+        public async Task<AdminGetChannel.Response> AdminGetChannelAsync(AdminGetChannel input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -209,18 +193,34 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteChannel(AdminDeleteChannel input)
+        public AdminUpdateChannel.Response AdminUpdateChannel(AdminUpdateChannel input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteChannelAsync(AdminDeleteChannel input)
+        public async Task<AdminUpdateChannel.Response> AdminUpdateChannelAsync(AdminUpdateChannel input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminDeleteChannel.Response AdminDeleteChannel(AdminDeleteChannel input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminDeleteChannel.Response> AdminDeleteChannelAsync(AdminDeleteChannel input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
         }
         #endregion
 
-        public Model.ApiListMatchPoolsResponse? MatchPoolList(MatchPoolList input)
+        public MatchPoolList.Response MatchPoolList(MatchPoolList input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -143,7 +143,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiListMatchPoolsResponse?> MatchPoolListAsync(MatchPoolList input)
+        public async Task<MatchPoolList.Response> MatchPoolListAsync(MatchPoolList input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -151,23 +151,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void CreateMatchPool(CreateMatchPool input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task CreateMatchPoolAsync(CreateMatchPool input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApiMatchPool? MatchPoolDetails(MatchPoolDetails input)
+        public CreateMatchPool.Response CreateMatchPool(CreateMatchPool input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -175,7 +159,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiMatchPool?> MatchPoolDetailsAsync(MatchPoolDetails input)
+        public async Task<CreateMatchPool.Response> CreateMatchPoolAsync(CreateMatchPool input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -183,7 +167,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiMatchPool? UpdateMatchPool(UpdateMatchPool input)
+        public MatchPoolDetails.Response MatchPoolDetails(MatchPoolDetails input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -191,7 +175,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiMatchPool?> UpdateMatchPoolAsync(UpdateMatchPool input)
+        public async Task<MatchPoolDetails.Response> MatchPoolDetailsAsync(MatchPoolDetails input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -199,23 +183,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteMatchPool(DeleteMatchPool input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteMatchPoolAsync(DeleteMatchPool input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApiTicketMetricResultRecord? MatchPoolMetric(MatchPoolMetric input)
+        public UpdateMatchPool.Response UpdateMatchPool(UpdateMatchPool input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -223,7 +191,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiTicketMetricResultRecord?> MatchPoolMetricAsync(MatchPoolMetric input)
+        public async Task<UpdateMatchPool.Response> UpdateMatchPoolAsync(UpdateMatchPool input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -231,7 +199,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiPlayerMetricRecord? GetPlayerMetric(GetPlayerMetric input)
+        public DeleteMatchPool.Response DeleteMatchPool(DeleteMatchPool input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -239,7 +207,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiPlayerMetricRecord?> GetPlayerMetricAsync(GetPlayerMetric input)
+        public async Task<DeleteMatchPool.Response> DeleteMatchPoolAsync(DeleteMatchPool input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -247,7 +215,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiListMatchPoolTicketsResponse? AdminGetMatchPoolTickets(AdminGetMatchPoolTickets input)
+        public MatchPoolMetric.Response MatchPoolMetric(MatchPoolMetric input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -255,7 +223,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiListMatchPoolTicketsResponse?> AdminGetMatchPoolTicketsAsync(AdminGetMatchPoolTickets input)
+        public async Task<MatchPoolMetric.Response> MatchPoolMetricAsync(MatchPoolMetric input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -263,7 +231,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiPlayerMetricRecord? PublicGetPlayerMetric(PublicGetPlayerMetric input)
+        public GetPlayerMetric.Response GetPlayerMetric(GetPlayerMetric input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -271,7 +239,39 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiPlayerMetricRecord?> PublicGetPlayerMetricAsync(PublicGetPlayerMetric input)
+        public async Task<GetPlayerMetric.Response> GetPlayerMetricAsync(GetPlayerMetric input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetMatchPoolTickets.Response AdminGetMatchPoolTickets(AdminGetMatchPoolTickets input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetMatchPoolTickets.Response> AdminGetMatchPoolTicketsAsync(AdminGetMatchPoolTickets input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetPlayerMetric.Response PublicGetPlayerMetric(PublicGetPlayerMetric input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetPlayerMetric.Response> PublicGetPlayerMetricAsync(PublicGetPlayerMetric input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

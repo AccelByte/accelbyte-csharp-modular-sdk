@@ -59,15 +59,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicGetQRCode op = new PublicGetQRCode(this,
-                    namespace_,
-                    code
+                    namespace_,                    
+                    code                    
                 );
 
                 op.SetBaseFields<PublicGetQRCodeBuilder>(this);
                 return op;
             }
 
-            public Model.BinarySchema? Execute(
+            public PublicGetQRCode.Response Execute(
                 string namespace_,
                 string code
             )
@@ -82,11 +82,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.BinarySchema?> ExecuteAsync(
+            public async Task<PublicGetQRCode.Response> ExecuteAsync(
                 string namespace_,
                 string code
             )
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -113,30 +113,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (code is not null) QueryParams["code"] = code;
+            
 
-
-
-
-
+            
+            
+            
 
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.BinarySchema>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::PaymentStation::PublicGetQRCode";
+        }
+
+        #endregion
+
         public PublicGetQRCode(
-            string namespace_,
-            string code
+            string namespace_,            
+            string code            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (code is not null) QueryParams["code"] = code;
+            
 
-
-
-
-
+            
+            
+            
 
         }
 
@@ -144,28 +154,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "image/png" };
-
-        public Model.BinarySchema? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicGetQRCode.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicGetQRCode.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.BinarySchema>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.BinarySchema>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.BinarySchema>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

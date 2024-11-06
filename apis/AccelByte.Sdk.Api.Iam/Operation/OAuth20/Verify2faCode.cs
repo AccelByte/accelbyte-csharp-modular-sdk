@@ -61,17 +61,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 Verify2faCode op = new Verify2faCode(this,
-                    code,
-                    factor,
-                    mfaToken,
-                    rememberDevice
+                    code,                    
+                    factor,                    
+                    mfaToken,                    
+                    rememberDevice                    
                 );
 
                 op.SetBaseFields<Verify2faCodeBuilder>(this);
                 return op;
             }
 
-            public Model.OauthmodelTokenResponseV3? Execute(
+            public Verify2faCode.Response Execute(
                 string code,
                 string factor,
                 string mfaToken,
@@ -90,11 +90,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OauthmodelTokenResponseV3?> ExecuteAsync(
+            public async Task<Verify2faCode.Response> ExecuteAsync(
                 string code,
                 string factor,
                 string mfaToken,
@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -126,38 +126,50 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             bool rememberDevice
         )
         {
-
-
+            
+            
             if (code is not null) FormParams["code"] = code;
             if (factor is not null) FormParams["factor"] = factor;
             if (mfaToken is not null) FormParams["mfaToken"] = mfaToken;
             FormParams["rememberDevice"] = Convert.ToString(rememberDevice)!;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public Verify2faCode(
-            string code,
-            string factor,
-            string mfaToken,
-            bool rememberDevice
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.OauthmodelTokenResponseV3>
         {
 
+            public OauthmodelErrorResponse? Error401 { get; set; } = null;
 
+
+            protected override string GetFullOperationId() => "Iam::OAuth20::Verify2faCode";
+        }
+
+        #endregion
+
+        public Verify2faCode(
+            string code,            
+            string factor,            
+            string mfaToken,            
+            bool rememberDevice            
+        )
+        {
+            
+            
             if (code is not null) FormParams["code"] = code;
             if (factor is not null) FormParams["factor"] = factor;
             if (mfaToken is not null) FormParams["mfaToken"] = mfaToken;
             FormParams["rememberDevice"] = Convert.ToString(rememberDevice)!;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -169,25 +181,31 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OauthmodelTokenResponseV3? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public Verify2faCode.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new Verify2faCode.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)401)
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

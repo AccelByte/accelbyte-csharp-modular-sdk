@@ -179,7 +179,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         }
         #endregion
 
-        public Model.ModelGlobalConfiguration? AdminGetGlobalConfig(AdminGetGlobalConfig input)
+        public AdminGetGlobalConfig.Response AdminGetGlobalConfig(AdminGetGlobalConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -187,7 +187,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGlobalConfiguration?> AdminGetGlobalConfigAsync(AdminGetGlobalConfig input)
+        public async Task<AdminGetGlobalConfig.Response> AdminGetGlobalConfigAsync(AdminGetGlobalConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -195,7 +195,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelGlobalConfiguration? AdminUpdateGlobalConfig(AdminUpdateGlobalConfig input)
+        public AdminUpdateGlobalConfig.Response AdminUpdateGlobalConfig(AdminUpdateGlobalConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -203,7 +203,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGlobalConfiguration?> AdminUpdateGlobalConfigAsync(AdminUpdateGlobalConfig input)
+        public async Task<AdminUpdateGlobalConfig.Response> AdminUpdateGlobalConfigAsync(AdminUpdateGlobalConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -211,7 +211,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public string? AdminDeleteGlobalConfig(AdminDeleteGlobalConfig input)
+        public AdminDeleteGlobalConfig.Response AdminDeleteGlobalConfig(AdminDeleteGlobalConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -219,7 +219,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<string?> AdminDeleteGlobalConfigAsync(AdminDeleteGlobalConfig input)
+        public async Task<AdminDeleteGlobalConfig.Response> AdminDeleteGlobalConfigAsync(AdminDeleteGlobalConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -227,39 +227,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void FreeFormNotification(FreeFormNotification input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task FreeFormNotificationAsync(FreeFormNotification input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void NotificationWithTemplate(NotificationWithTemplate input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task NotificationWithTemplateAsync(NotificationWithTemplate input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public List<Model.ModelTemplateResponse>? GetGameTemplate(GetGameTemplate input)
+        public FreeFormNotification.Response FreeFormNotification(FreeFormNotification input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -267,7 +235,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelTemplateResponse>?> GetGameTemplateAsync(GetGameTemplate input)
+        public async Task<FreeFormNotification.Response> FreeFormNotificationAsync(FreeFormNotification input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -275,23 +243,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void CreateTemplate(CreateTemplate input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task CreateTemplateAsync(CreateTemplate input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelTemplateLocalizationResponse? GetSlugTemplate(GetSlugTemplate input)
+        public NotificationWithTemplate.Response NotificationWithTemplate(NotificationWithTemplate input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -299,7 +251,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelTemplateLocalizationResponse?> GetSlugTemplateAsync(GetSlugTemplate input)
+        public async Task<NotificationWithTemplate.Response> NotificationWithTemplateAsync(NotificationWithTemplate input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -307,23 +259,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteTemplateSlug(DeleteTemplateSlug input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteTemplateSlugAsync(DeleteTemplateSlug input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelTemplateLocalization? GetLocalizationTemplate(GetLocalizationTemplate input)
+        public GetGameTemplate.Response GetGameTemplate(GetGameTemplate input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -331,7 +267,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelTemplateLocalization?> GetLocalizationTemplateAsync(GetLocalizationTemplate input)
+        public async Task<GetGameTemplate.Response> GetGameTemplateAsync(GetGameTemplate input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -339,50 +275,114 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void UpdateLocalizationTemplate(UpdateLocalizationTemplate input)
+        public CreateTemplate.Response CreateTemplate(CreateTemplate input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task UpdateLocalizationTemplateAsync(UpdateLocalizationTemplate input)
+        public async Task<CreateTemplate.Response> CreateTemplateAsync(CreateTemplate input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteTemplateLocalization(DeleteTemplateLocalization input)
+        public GetSlugTemplate.Response GetSlugTemplate(GetSlugTemplate input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteTemplateLocalizationAsync(DeleteTemplateLocalization input)
+        public async Task<GetSlugTemplate.Response> GetSlugTemplateAsync(GetSlugTemplate input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void PublishTemplate(PublishTemplate input)
+        public DeleteTemplateSlug.Response DeleteTemplateSlug(DeleteTemplateSlug input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublishTemplateAsync(PublishTemplate input)
+        public async Task<DeleteTemplateSlug.Response> DeleteTemplateSlugAsync(DeleteTemplateSlug input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetLocalizationTemplate.Response GetLocalizationTemplate(GetLocalizationTemplate input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetLocalizationTemplate.Response> GetLocalizationTemplateAsync(GetLocalizationTemplate input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public UpdateLocalizationTemplate.Response UpdateLocalizationTemplate(UpdateLocalizationTemplate input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpdateLocalizationTemplate.Response> UpdateLocalizationTemplateAsync(UpdateLocalizationTemplate input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeleteTemplateLocalization.Response DeleteTemplateLocalization(DeleteTemplateLocalization input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteTemplateLocalization.Response> DeleteTemplateLocalizationAsync(DeleteTemplateLocalization input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublishTemplate.Response PublishTemplate(PublishTemplate input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublishTemplate.Response> PublishTemplateAsync(PublishTemplate input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

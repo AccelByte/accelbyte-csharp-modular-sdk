@@ -66,14 +66,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicListCurrencies op = new PublicListCurrencies(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicListCurrenciesBuilder>(this);
                 return op;
             }
 
-            public List<Model.CurrencyInfo>? Execute(
+            public PublicListCurrencies.Response Execute(
                 string namespace_
             )
             {
@@ -86,11 +86,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.CurrencyInfo>?> ExecuteAsync(
+            public async Task<PublicListCurrencies.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -114,30 +114,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.CurrencyType is not null) QueryParams["currencyType"] = builder.CurrencyType.Value;
+            
 
-
-
-
-
+            
+            
+            
 
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.CurrencyInfo>>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Currency::PublicListCurrencies";
+        }
+
+        #endregion
+
         public PublicListCurrencies(
-            string namespace_,
-            PublicListCurrenciesCurrencyType? currencyType
+            string namespace_,            
+            PublicListCurrenciesCurrencyType? currencyType            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (currencyType is not null) QueryParams["currencyType"] = currencyType.Value;
+            
 
-
-
-
-
+            
+            
+            
 
         }
 
@@ -148,25 +158,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.CurrencyInfo>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicListCurrencies.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicListCurrencies.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.CurrencyInfo>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<Model.CurrencyInfo>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.CurrencyInfo>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

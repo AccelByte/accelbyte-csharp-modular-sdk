@@ -60,16 +60,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UpdatePlatformWalletConfig op = new UpdatePlatformWalletConfig(this,
-                    body,
-                    namespace_,
-                    platform
+                    body,                    
+                    namespace_,                    
+                    platform                    
                 );
 
                 op.SetBaseFields<UpdatePlatformWalletConfigBuilder>(this);
                 return op;
             }
 
-            public Model.PlatformWalletConfigInfo? Execute(
+            public UpdatePlatformWalletConfig.Response Execute(
                 PlatformWalletConfigUpdate body,
                 string namespace_,
                 string platform
@@ -86,11 +86,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.PlatformWalletConfigInfo?> ExecuteAsync(
+            public async Task<UpdatePlatformWalletConfig.Response> ExecuteAsync(
                 PlatformWalletConfigUpdate body,
                 string namespace_,
                 string platform
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -121,33 +121,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["platform"] = platform.Value;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.PlatformWalletConfigInfo>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Wallet::UpdatePlatformWalletConfig";
+        }
+
+        #endregion
+
         public UpdatePlatformWalletConfig(
-            string namespace_,
-            UpdatePlatformWalletConfigPlatform platform,
-            Model.PlatformWalletConfigUpdate body
+            string namespace_,            
+            UpdatePlatformWalletConfigPlatform platform,            
+            Model.PlatformWalletConfigUpdate body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platform"] = platform.Value;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -159,25 +169,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.PlatformWalletConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public UpdatePlatformWalletConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new UpdatePlatformWalletConfig.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.PlatformWalletConfigInfo>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.PlatformWalletConfigInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.PlatformWalletConfigInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -58,34 +58,34 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
         #endregion
 
-        public void UpdatePolicy1(UpdatePolicy1 input)
+        public UpdatePolicy1.Response UpdatePolicy1(UpdatePolicy1 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task UpdatePolicy1Async(UpdatePolicy1 input)
+        public async Task<UpdatePolicy1.Response> UpdatePolicy1Async(UpdatePolicy1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void SetDefaultPolicy3(SetDefaultPolicy3 input)
+        public SetDefaultPolicy3.Response SetDefaultPolicy3(SetDefaultPolicy3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task SetDefaultPolicy3Async(SetDefaultPolicy3 input)
+        public async Task<SetDefaultPolicy3.Response> SetDefaultPolicy3Async(SetDefaultPolicy3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

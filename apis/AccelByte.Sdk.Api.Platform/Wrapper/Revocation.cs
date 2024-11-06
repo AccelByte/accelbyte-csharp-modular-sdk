@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.RevocationConfigInfo? GetRevocationConfig(GetRevocationConfig input)
+        public GetRevocationConfig.Response GetRevocationConfig(GetRevocationConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RevocationConfigInfo?> GetRevocationConfigAsync(GetRevocationConfig input)
+        public async Task<GetRevocationConfig.Response> GetRevocationConfigAsync(GetRevocationConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RevocationConfigInfo? UpdateRevocationConfig(UpdateRevocationConfig input)
+        public UpdateRevocationConfig.Response UpdateRevocationConfig(UpdateRevocationConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RevocationConfigInfo?> UpdateRevocationConfigAsync(UpdateRevocationConfig input)
+        public async Task<UpdateRevocationConfig.Response> UpdateRevocationConfigAsync(UpdateRevocationConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -123,23 +123,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteRevocationConfig(DeleteRevocationConfig input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteRevocationConfigAsync(DeleteRevocationConfig input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.RevocationHistoryPagingSlicedResult? QueryRevocationHistories(QueryRevocationHistories input)
+        public DeleteRevocationConfig.Response DeleteRevocationConfig(DeleteRevocationConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -147,7 +131,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RevocationHistoryPagingSlicedResult?> QueryRevocationHistoriesAsync(QueryRevocationHistories input)
+        public async Task<DeleteRevocationConfig.Response> DeleteRevocationConfigAsync(DeleteRevocationConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -155,7 +139,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RevocationResult? DoRevocation(DoRevocation input)
+        public QueryRevocationHistories.Response QueryRevocationHistories(QueryRevocationHistories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -163,7 +147,23 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RevocationResult?> DoRevocationAsync(DoRevocation input)
+        public async Task<QueryRevocationHistories.Response> QueryRevocationHistoriesAsync(QueryRevocationHistories input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DoRevocation.Response DoRevocation(DoRevocation input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DoRevocation.Response> DoRevocationAsync(DoRevocation input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

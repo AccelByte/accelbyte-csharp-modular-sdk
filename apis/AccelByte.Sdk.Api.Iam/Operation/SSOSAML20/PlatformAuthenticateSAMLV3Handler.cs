@@ -77,15 +77,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PlatformAuthenticateSAMLV3Handler op = new PlatformAuthenticateSAMLV3Handler(this,
-                    platformId,
-                    state
+                    platformId,                    
+                    state                    
                 );
 
                 op.SetBaseFields<PlatformAuthenticateSAMLV3HandlerBuilder>(this);
                 return op;
             }
 
-            public string Execute(
+            public PlatformAuthenticateSAMLV3Handler.Response Execute(
                 string platformId,
                 string state
             )
@@ -100,11 +100,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<string> ExecuteAsync(
+            public async Task<PlatformAuthenticateSAMLV3Handler.Response> ExecuteAsync(
                 string platformId,
                 string state
             )
@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -131,38 +131,50 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["platformId"] = platformId;
-
+            
             if (builder.Code is not null) QueryParams["code"] = builder.Code;
             if (builder.Error is not null) QueryParams["error"] = builder.Error;
             if (state is not null) QueryParams["state"] = state;
+            
 
-
-
-
-
+            
+            
+            
             LocationQuery = "PLACEHOLDER";
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<string>
+        {
+
+            public string Error302 { get; set; } = "";
+
+
+            protected override string GetFullOperationId() => "Iam::SSOSAML20::PlatformAuthenticateSAMLV3Handler";
+        }
+
+        #endregion
+
         public PlatformAuthenticateSAMLV3Handler(
-            string platformId,
-            string? code,
-            string? error,
-            string state
+            string platformId,            
+            string? code,            
+            string? error,            
+            string state            
         )
         {
             PathParams["platformId"] = platformId;
-
+            
             if (code is not null) QueryParams["code"] = code;
             if (error is not null) QueryParams["error"] = error;
             if (state is not null) QueryParams["state"] = state;
+            
 
-
-
-
-
+            
+            
+            
             LocationQuery = "PLACEHOLDER";
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
@@ -174,18 +186,23 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
-        public override List<string> Produces => new() { };
-
-        public string ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public override List<string> Produces => new() {  };
+        
+        public PlatformAuthenticateSAMLV3Handler.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            var payloadString = payload.ReadToString();
+            var response = new PlatformAuthenticateSAMLV3Handler.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
 
             if (code == (HttpStatusCode)302)
             {
-                return payloadString;
+                response.Data = payload.ReadToString();
+                response.IsSuccess = true;
             }
 
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

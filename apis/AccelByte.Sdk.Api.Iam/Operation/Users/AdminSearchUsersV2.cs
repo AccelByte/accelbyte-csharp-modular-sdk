@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// **Endpoint migration guide**
     /// - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/search [GET]_**
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class AdminSearchUsersV2 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -123,16 +123,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminSearchUsersV2 op = new AdminSearchUsersV2(this,
-                    namespace_,
-                    platformId
+                    namespace_,                    
+                    platformId                    
                 );
 
                 op.SetBaseFields<AdminSearchUsersV2Builder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public Model.ModelSearchUsersByPlatformIDResponse? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminSearchUsersV2.Response Execute(
                 string namespace_,
                 string platformId
             )
@@ -147,11 +147,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelSearchUsersByPlatformIDResponse?> ExecuteAsync(
+            public async Task<AdminSearchUsersV2.Response> ExecuteAsync(
                 string namespace_,
                 string platformId
             )
@@ -166,7 +166,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -178,7 +178,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.After is not null) QueryParams["after"] = builder.After;
             if (builder.Before is not null) QueryParams["before"] = builder.Before;
             if (builder.DisplayName is not null) QueryParams["displayName"] = builder.DisplayName;
@@ -188,31 +188,47 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (builder.RoleId is not null) QueryParams["roleId"] = builder.RoleId;
             if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
             if (platformId is not null) QueryParams["platformId"] = platformId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelSearchUsersByPlatformIDResponse>
+        {
+
+            public RestErrorResponse? Error400 { get; set; } = null;
+
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public RestErrorResponse? Error403 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::Users::AdminSearchUsersV2";
+        }
+
+        #endregion
+
         public AdminSearchUsersV2(
-            string namespace_,
-            string? after,
-            string? before,
-            string? displayName,
-            long? limit,
-            string? loginId,
-            string? platformUserId,
-            string? roleId,
-            string? userId,
-            string platformId
+            string namespace_,            
+            string? after,            
+            string? before,            
+            string? displayName,            
+            long? limit,            
+            string? loginId,            
+            string? platformUserId,            
+            string? roleId,            
+            string? userId,            
+            string platformId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (after is not null) QueryParams["after"] = after;
             if (before is not null) QueryParams["before"] = before;
             if (displayName is not null) QueryParams["displayName"] = displayName;
@@ -222,11 +238,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (roleId is not null) QueryParams["roleId"] = roleId;
             if (userId is not null) QueryParams["userId"] = userId;
             if (platformId is not null) QueryParams["platformId"] = platformId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -235,28 +251,44 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelSearchUsersByPlatformIDResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminSearchUsersV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminSearchUsersV2.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelSearchUsersByPlatformIDResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelSearchUsersByPlatformIDResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelSearchUsersByPlatformIDResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

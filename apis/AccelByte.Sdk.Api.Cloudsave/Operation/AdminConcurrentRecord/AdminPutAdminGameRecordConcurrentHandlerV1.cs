@@ -117,16 +117,16 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             )
             {
                 AdminPutAdminGameRecordConcurrentHandlerV1 op = new AdminPutAdminGameRecordConcurrentHandlerV1(this,
-                    body,
-                    key,
-                    namespace_
+                    body,                    
+                    key,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminPutAdminGameRecordConcurrentHandlerV1Builder>(this);
                 return op;
             }
 
-            public void Execute(
+            public AdminPutAdminGameRecordConcurrentHandlerV1.Response Execute(
                 ModelsAdminGameConcurrentRecordRequest body,
                 string key,
                 string namespace_
@@ -142,12 +142,12 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<AdminPutAdminGameRecordConcurrentHandlerV1.Response> ExecuteAsync(
                 ModelsAdminGameConcurrentRecordRequest body,
                 string key,
                 string namespace_
@@ -163,8 +163,8 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -178,33 +178,53 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         {
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public ModelsResponseError? Error400 { get; set; } = null;
+
+            public ModelsResponseError? Error401 { get; set; } = null;
+
+            public ModelsResponseError? Error403 { get; set; } = null;
+
+            public ModelsResponseError? Error412 { get; set; } = null;
+
+            public ModelsResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Cloudsave::AdminConcurrentRecord::AdminPutAdminGameRecordConcurrentHandlerV1";
+        }
+
+        #endregion
+
         public AdminPutAdminGameRecordConcurrentHandlerV1(
-            string key,
-            string namespace_,
-            Model.ModelsAdminGameConcurrentRecordRequest body
+            string key,            
+            string namespace_,            
+            Model.ModelsAdminGameConcurrentRecordRequest body            
         )
         {
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -216,17 +236,48 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminPutAdminGameRecordConcurrentHandlerV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new AdminPutAdminGameRecordConcurrentHandlerV1.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            
+            {
+                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            
+            {
+                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)412)
+            
+            {
+                response.Error412 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error412!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

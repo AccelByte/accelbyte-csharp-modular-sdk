@@ -78,15 +78,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicGetDescendantCategories op = new PublicGetDescendantCategories(this,
-                    categoryPath,
-                    namespace_
+                    categoryPath,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicGetDescendantCategoriesBuilder>(this);
                 return op;
             }
 
-            public List<Model.CategoryInfo>? Execute(
+            public PublicGetDescendantCategories.Response Execute(
                 string categoryPath,
                 string namespace_
             )
@@ -101,11 +101,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.CategoryInfo>?> ExecuteAsync(
+            public async Task<PublicGetDescendantCategories.Response> ExecuteAsync(
                 string categoryPath,
                 string namespace_
             )
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -133,35 +133,45 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["categoryPath"] = categoryPath;
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Language is not null) QueryParams["language"] = builder.Language;
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
+            
 
-
-
-
-
+            
+            
+            
 
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.CategoryInfo>>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Category::PublicGetDescendantCategories";
+        }
+
+        #endregion
+
         public PublicGetDescendantCategories(
-            string categoryPath,
-            string namespace_,
-            string? language,
-            string? storeId
+            string categoryPath,            
+            string namespace_,            
+            string? language,            
+            string? storeId            
         )
         {
             PathParams["categoryPath"] = categoryPath;
             PathParams["namespace"] = namespace_;
-
+            
             if (language is not null) QueryParams["language"] = language;
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
-
-
+            
+            
+            
 
         }
 
@@ -169,28 +179,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.CategoryInfo>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicGetDescendantCategories.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicGetDescendantCategories.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.CategoryInfo>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<Model.CategoryInfo>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.CategoryInfo>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

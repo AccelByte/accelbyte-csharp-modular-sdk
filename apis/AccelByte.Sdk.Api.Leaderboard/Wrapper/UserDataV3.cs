@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
         }
         #endregion
 
-        public Model.ModelsGetAllUserLeaderboardsRespV3? GetUserLeaderboardRankingsAdminV3(GetUserLeaderboardRankingsAdminV3 input)
+        public GetUserLeaderboardRankingsAdminV3.Response GetUserLeaderboardRankingsAdminV3(GetUserLeaderboardRankingsAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetAllUserLeaderboardsRespV3?> GetUserLeaderboardRankingsAdminV3Async(GetUserLeaderboardRankingsAdminV3 input)
+        public async Task<GetUserLeaderboardRankingsAdminV3.Response> GetUserLeaderboardRankingsAdminV3Async(GetUserLeaderboardRankingsAdminV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

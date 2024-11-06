@@ -58,34 +58,34 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
         }
         #endregion
 
-        public void LocalWatchdogConnect(LocalWatchdogConnect input)
+        public LocalWatchdogConnect.Response LocalWatchdogConnect(LocalWatchdogConnect input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task LocalWatchdogConnectAsync(LocalWatchdogConnect input)
+        public async Task<LocalWatchdogConnect.Response> LocalWatchdogConnectAsync(LocalWatchdogConnect input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void WatchdogConnect(WatchdogConnect input)
+        public WatchdogConnect.Response WatchdogConnect(WatchdogConnect input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task WatchdogConnectAsync(WatchdogConnect input)
+        public async Task<WatchdogConnect.Response> WatchdogConnectAsync(WatchdogConnect input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

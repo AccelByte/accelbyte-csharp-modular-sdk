@@ -57,15 +57,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UpdateSteamIAPConfig op = new UpdateSteamIAPConfig(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<UpdateSteamIAPConfigBuilder>(this);
                 return op;
             }
 
-            public Model.SteamIAPConfigInfo? Execute(
+            public UpdateSteamIAPConfig.Response Execute(
                 SteamIAPConfigRequest body,
                 string namespace_
             )
@@ -80,11 +80,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.SteamIAPConfigInfo?> ExecuteAsync(
+            public async Task<UpdateSteamIAPConfig.Response> ExecuteAsync(
                 SteamIAPConfigRequest body,
                 string namespace_
             )
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,31 +111,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.SteamIAPConfigInfo>
+        {
+
+            public ErrorEntity? Error400 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::IAP::UpdateSteamIAPConfig";
+        }
+
+        #endregion
+
         public UpdateSteamIAPConfig(
-            string namespace_,
-            Model.SteamIAPConfigRequest body
+            string namespace_,            
+            Model.SteamIAPConfigRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,25 +159,31 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.SteamIAPConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public UpdateSteamIAPConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new UpdateSteamIAPConfig.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.SteamIAPConfigInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.SteamIAPConfigInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.SteamIAPConfigInfo>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

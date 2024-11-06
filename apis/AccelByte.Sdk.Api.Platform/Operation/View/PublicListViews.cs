@@ -78,15 +78,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicListViews op = new PublicListViews(this,
-                    namespace_,
-                    userId
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PublicListViewsBuilder>(this);
                 return op;
             }
 
-            public List<Model.ViewInfo>? Execute(
+            public PublicListViews.Response Execute(
                 string namespace_,
                 string userId
             )
@@ -101,11 +101,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.ViewInfo>?> ExecuteAsync(
+            public async Task<PublicListViews.Response> ExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -120,12 +120,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
 
-            public List<Model.ViewInfo<T1>>? Execute<T1>(
+            public PublicListViews.Response<T1> Execute<T1>(
                 string namespace_,
                 string userId
             )
@@ -140,11 +140,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.ViewInfo<T1>>?> ExecuteAsync<T1>(
+            public async Task<PublicListViews.Response<T1>> ExecuteAsync<T1>(
                 string namespace_,
                 string userId
             )
@@ -159,7 +159,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -172,36 +172,51 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.Language is not null) QueryParams["language"] = builder.Language;
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.ViewInfo>>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::View::PublicListViews";
+        }
+
+        public class Response<T1> : ApiResponse<List<Model.ViewInfo<T1>>>
+        {
+
+            protected override string GetFullOperationId() => "Platform::View::PublicListViews";
+        }
+        #endregion
+
         public PublicListViews(
-            string namespace_,
-            string userId,
-            string? language,
-            string? storeId
+            string namespace_,            
+            string userId,            
+            string? language,            
+            string? storeId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (language is not null) QueryParams["language"] = language;
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -210,47 +225,50 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.ViewInfo>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicListViews.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicListViews.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.ViewInfo>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<Model.ViewInfo>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.ViewInfo>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
 
-        public List<Model.ViewInfo<T1>>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
+        public PublicListViews.Response<T1> ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicListViews.Response<T1>()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
-            }
-            else if (code == (HttpStatusCode)201)
+                response.IsSuccess = true;
+            }            
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.ViewInfo<T1>>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.ViewInfo<T1>>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<Model.ViewInfo<T1>>>(payload, ResponseJsonOptions);
-            }
-
-            var payloadString = payload.ReadToString();
-            throw new HttpResponseException(code, payloadString);
+            
+            return response;
         }
     }
 

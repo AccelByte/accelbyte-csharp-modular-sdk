@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// **Endpoint migration guide**
     /// - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/agerestrictions/countries/{countryCode} [PATCH]_**
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class UpdateCountryAgeRestriction : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -60,17 +60,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 UpdateCountryAgeRestriction op = new UpdateCountryAgeRestriction(this,
-                    body,
-                    countryCode,
-                    namespace_
+                    body,                    
+                    countryCode,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<UpdateCountryAgeRestrictionBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public Model.ModelCountry? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public UpdateCountryAgeRestriction.Response Execute(
                 ModelCountryAgeRestrictionRequest body,
                 string countryCode,
                 string namespace_
@@ -87,11 +87,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelCountry?> ExecuteAsync(
+            public async Task<UpdateCountryAgeRestriction.Response> ExecuteAsync(
                 ModelCountryAgeRestrictionRequest body,
                 string countryCode,
                 string namespace_
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -122,33 +122,51 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["countryCode"] = countryCode;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelCountry>
+        {
+
+            public RestErrorResponse? Error400 { get; set; } = null;
+
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public RestErrorResponse? Error403 { get; set; } = null;
+
+            public string Error404 { get; set; } = "";
+
+
+            protected override string GetFullOperationId() => "Iam::Users::UpdateCountryAgeRestriction";
+        }
+
+        #endregion
+
         public UpdateCountryAgeRestriction(
-            string countryCode,
-            string namespace_,
-            Model.ModelCountryAgeRestrictionRequest body
+            string countryCode,            
+            string namespace_,            
+            Model.ModelCountryAgeRestrictionRequest body            
         )
         {
             PathParams["countryCode"] = countryCode;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -160,25 +178,46 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelCountry? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public UpdateCountryAgeRestriction.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new UpdateCountryAgeRestriction.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelCountry>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelCountry>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelCountry>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error404!);
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -59,15 +59,15 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             )
             {
                 AdminSyncUserEntitlements op = new AdminSyncUserEntitlements(this,
-                    namespace_,
-                    userId
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<AdminSyncUserEntitlementsBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public AdminSyncUserEntitlements.Response Execute(
                 string namespace_,
                 string userId
             )
@@ -81,12 +81,12 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<AdminSyncUserEntitlements.Response> ExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -100,8 +100,8 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -114,30 +114,50 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public ApimodelsErrorResponse? Error400 { get; set; } = null;
+
+            public ApimodelsErrorResponse? Error401 { get; set; } = null;
+
+            public ApimodelsErrorResponse? Error403 { get; set; } = null;
+
+            public ApimodelsErrorResponse? Error404 { get; set; } = null;
+
+            public ApimodelsErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Inventory::AdminItems::AdminSyncUserEntitlements";
+        }
+
+        #endregion
+
         public AdminSyncUserEntitlements(
-            string namespace_,
-            string userId
+            string namespace_,            
+            string userId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -146,20 +166,51 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
         public override HttpMethod Method => HttpMethod.Put;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminSyncUserEntitlements.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new AdminSyncUserEntitlements.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            
+            {
+                response.Error401 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            
+            {
+                response.Error403 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

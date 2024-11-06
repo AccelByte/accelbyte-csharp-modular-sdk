@@ -83,14 +83,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 TestAdyenConfig op = new TestAdyenConfig(this,
-                    body
+                    body                    
                 );
 
                 op.SetBaseFields<TestAdyenConfigBuilder>(this);
                 return op;
             }
 
-            public Model.TestResult? Execute(
+            public TestAdyenConfig.Response Execute(
                 AdyenConfig body
             )
             {
@@ -103,11 +103,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.TestResult?> ExecuteAsync(
+            public async Task<TestAdyenConfig.Response> ExecuteAsync(
                 AdyenConfig body
             )
             {
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -130,32 +130,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             AdyenConfig body
         )
         {
-
+            
             if (builder.Sandbox != null) QueryParams["sandbox"] = Convert.ToString(builder.Sandbox)!;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public TestAdyenConfig(
-            bool? sandbox,
-            Model.AdyenConfig body
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.TestResult>
         {
 
+
+            protected override string GetFullOperationId() => "Platform::PaymentConfig::TestAdyenConfig";
+        }
+
+        #endregion
+
+        public TestAdyenConfig(
+            bool? sandbox,            
+            Model.AdyenConfig body            
+        )
+        {
+            
             if (sandbox != null) QueryParams["sandbox"] = Convert.ToString(sandbox)!;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -167,25 +177,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.TestResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public TestAdyenConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new TestAdyenConfig.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

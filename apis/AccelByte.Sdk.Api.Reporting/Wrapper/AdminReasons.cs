@@ -168,7 +168,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
         }
         #endregion
 
-        public Model.RestapiReasonGroupListResponse? AdminListReasonGroups(AdminListReasonGroups input)
+        public AdminListReasonGroups.Response AdminListReasonGroups(AdminListReasonGroups input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -176,7 +176,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiReasonGroupListResponse?> AdminListReasonGroupsAsync(AdminListReasonGroups input)
+        public async Task<AdminListReasonGroups.Response> AdminListReasonGroupsAsync(AdminListReasonGroups input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -184,7 +184,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RestapiReasonGroupResponse? CreateReasonGroup(CreateReasonGroup input)
+        public CreateReasonGroup.Response CreateReasonGroup(CreateReasonGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -192,7 +192,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiReasonGroupResponse?> CreateReasonGroupAsync(CreateReasonGroup input)
+        public async Task<CreateReasonGroup.Response> CreateReasonGroupAsync(CreateReasonGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -200,7 +200,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RestapiReasonGroupResponse? GetReasonGroup(GetReasonGroup input)
+        public GetReasonGroup.Response GetReasonGroup(GetReasonGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -208,7 +208,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiReasonGroupResponse?> GetReasonGroupAsync(GetReasonGroup input)
+        public async Task<GetReasonGroup.Response> GetReasonGroupAsync(GetReasonGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -216,23 +216,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteReasonGroup(DeleteReasonGroup input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteReasonGroupAsync(DeleteReasonGroup input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.RestapiReasonGroupResponse? UpdateReasonGroup(UpdateReasonGroup input)
+        public DeleteReasonGroup.Response DeleteReasonGroup(DeleteReasonGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -240,7 +224,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiReasonGroupResponse?> UpdateReasonGroupAsync(UpdateReasonGroup input)
+        public async Task<DeleteReasonGroup.Response> DeleteReasonGroupAsync(DeleteReasonGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -248,7 +232,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RestapiAdminReasonListResponse? AdminGetReasons(AdminGetReasons input)
+        public UpdateReasonGroup.Response UpdateReasonGroup(UpdateReasonGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -256,7 +240,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiAdminReasonListResponse?> AdminGetReasonsAsync(AdminGetReasons input)
+        public async Task<UpdateReasonGroup.Response> UpdateReasonGroupAsync(UpdateReasonGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -264,7 +248,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RestapiAdminReasonResponse? CreateReason(CreateReason input)
+        public AdminGetReasons.Response AdminGetReasons(AdminGetReasons input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -272,7 +256,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiAdminReasonResponse?> CreateReasonAsync(CreateReason input)
+        public async Task<AdminGetReasons.Response> AdminGetReasonsAsync(AdminGetReasons input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -280,7 +264,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RestapiAdminAllReasonsResponse? AdminGetAllReasons(AdminGetAllReasons input)
+        public CreateReason.Response CreateReason(CreateReason input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -288,7 +272,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiAdminAllReasonsResponse?> AdminGetAllReasonsAsync(AdminGetAllReasons input)
+        public async Task<CreateReason.Response> CreateReasonAsync(CreateReason input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -296,7 +280,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RestapiUnusedReasonListResponse? AdminGetUnusedReasons(AdminGetUnusedReasons input)
+        public AdminGetAllReasons.Response AdminGetAllReasons(AdminGetAllReasons input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -304,7 +288,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiUnusedReasonListResponse?> AdminGetUnusedReasonsAsync(AdminGetUnusedReasons input)
+        public async Task<AdminGetAllReasons.Response> AdminGetAllReasonsAsync(AdminGetAllReasons input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -312,7 +296,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RestapiAdminReasonResponse? AdminGetReason(AdminGetReason input)
+        public AdminGetUnusedReasons.Response AdminGetUnusedReasons(AdminGetUnusedReasons input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -320,7 +304,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiAdminReasonResponse?> AdminGetReasonAsync(AdminGetReason input)
+        public async Task<AdminGetUnusedReasons.Response> AdminGetUnusedReasonsAsync(AdminGetUnusedReasons input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -328,23 +312,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteReason(DeleteReason input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteReasonAsync(DeleteReason input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.RestapiAdminReasonResponse? UpdateReason(UpdateReason input)
+        public AdminGetReason.Response AdminGetReason(AdminGetReason input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -352,7 +320,39 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiAdminReasonResponse?> UpdateReasonAsync(UpdateReason input)
+        public async Task<AdminGetReason.Response> AdminGetReasonAsync(AdminGetReason input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeleteReason.Response DeleteReason(DeleteReason input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteReason.Response> DeleteReasonAsync(DeleteReason input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public UpdateReason.Response UpdateReason(UpdateReason input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpdateReason.Response> UpdateReasonAsync(UpdateReason input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

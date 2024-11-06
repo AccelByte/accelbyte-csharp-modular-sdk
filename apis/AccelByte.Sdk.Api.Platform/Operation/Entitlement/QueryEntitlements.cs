@@ -91,14 +91,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryEntitlements op = new QueryEntitlements(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<QueryEntitlementsBuilder>(this);
                 return op;
             }
 
-            public Model.EntitlementPagingSlicedResult? Execute(
+            public QueryEntitlements.Response Execute(
                 string namespace_
             )
             {
@@ -111,11 +111,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.EntitlementPagingSlicedResult?> ExecuteAsync(
+            public async Task<QueryEntitlements.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -139,42 +139,52 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
             if (builder.ItemIds is not null) QueryParams["itemIds"] = builder.ItemIds;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
+            
 
-
-
+            
             CollectionFormatMap["itemIds"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.EntitlementPagingSlicedResult>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Entitlement::QueryEntitlements";
+        }
+
+        #endregion
+
         public QueryEntitlements(
-            string namespace_,
-            bool? activeOnly,
-            List<string>? itemIds,
-            int? limit,
-            int? offset
+            string namespace_,            
+            bool? activeOnly,            
+            List<string>? itemIds,            
+            int? limit,            
+            int? offset            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
             if (itemIds is not null) QueryParams["itemIds"] = itemIds;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
+            
 
-
-
+            
             CollectionFormatMap["itemIds"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -183,28 +193,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.EntitlementPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public QueryEntitlements.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new QueryEntitlements.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.EntitlementPagingSlicedResult>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.EntitlementPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.EntitlementPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

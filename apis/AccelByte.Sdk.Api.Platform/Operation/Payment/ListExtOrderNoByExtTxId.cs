@@ -59,15 +59,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 ListExtOrderNoByExtTxId op = new ListExtOrderNoByExtTxId(this,
-                    namespace_,
-                    extTxId
+                    namespace_,                    
+                    extTxId                    
                 );
 
                 op.SetBaseFields<ListExtOrderNoByExtTxIdBuilder>(this);
                 return op;
             }
 
-            public List<string>? Execute(
+            public ListExtOrderNoByExtTxId.Response Execute(
                 string namespace_,
                 string extTxId
             )
@@ -82,11 +82,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<string>?> ExecuteAsync(
+            public async Task<ListExtOrderNoByExtTxId.Response> ExecuteAsync(
                 string namespace_,
                 string extTxId
             )
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -113,31 +113,41 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (extTxId is not null) QueryParams["extTxId"] = extTxId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<string>>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Payment::ListExtOrderNoByExtTxId";
+        }
+
+        #endregion
+
         public ListExtOrderNoByExtTxId(
-            string namespace_,
-            string extTxId
+            string namespace_,            
+            string extTxId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (extTxId is not null) QueryParams["extTxId"] = extTxId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -146,28 +156,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<string>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public ListExtOrderNoByExtTxId.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new ListExtOrderNoByExtTxId.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

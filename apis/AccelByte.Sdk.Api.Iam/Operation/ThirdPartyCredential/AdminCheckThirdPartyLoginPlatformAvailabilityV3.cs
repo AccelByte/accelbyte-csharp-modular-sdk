@@ -61,14 +61,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminCheckThirdPartyLoginPlatformAvailabilityV3 op = new AdminCheckThirdPartyLoginPlatformAvailabilityV3(this,
-                    platformId
+                    platformId                    
                 );
 
                 op.SetBaseFields<AdminCheckThirdPartyLoginPlatformAvailabilityV3Builder>(this);
                 return op;
             }
 
-            public Model.ModelCheckAvailabilityResponse? Execute(
+            public AdminCheckThirdPartyLoginPlatformAvailabilityV3.Response Execute(
                 string platformId
             )
             {
@@ -81,11 +81,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelCheckAvailabilityResponse?> ExecuteAsync(
+            public async Task<AdminCheckThirdPartyLoginPlatformAvailabilityV3.Response> ExecuteAsync(
                 string platformId
             )
             {
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -109,28 +109,44 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["platformId"] = platformId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelCheckAvailabilityResponse>
+        {
+
+            public RestErrorResponse? Error400 { get; set; } = null;
+
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public RestErrorResponse? Error403 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::ThirdPartyCredential::AdminCheckThirdPartyLoginPlatformAvailabilityV3";
+        }
+
+        #endregion
+
         public AdminCheckThirdPartyLoginPlatformAvailabilityV3(
-            string platformId
+            string platformId            
         )
         {
             PathParams["platformId"] = platformId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -139,28 +155,44 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelCheckAvailabilityResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminCheckThirdPartyLoginPlatformAvailabilityV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminCheckThirdPartyLoginPlatformAvailabilityV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelCheckAvailabilityResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelCheckAvailabilityResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelCheckAvailabilityResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

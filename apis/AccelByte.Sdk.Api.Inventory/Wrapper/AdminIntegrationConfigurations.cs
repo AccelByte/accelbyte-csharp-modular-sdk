@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
         }
         #endregion
 
-        public Model.ApimodelsListIntegrationConfigurationsResp? AdminListIntegrationConfigurations(AdminListIntegrationConfigurations input)
+        public AdminListIntegrationConfigurations.Response AdminListIntegrationConfigurations(AdminListIntegrationConfigurations input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsListIntegrationConfigurationsResp?> AdminListIntegrationConfigurationsAsync(AdminListIntegrationConfigurations input)
+        public async Task<AdminListIntegrationConfigurations.Response> AdminListIntegrationConfigurationsAsync(AdminListIntegrationConfigurations input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsIntegrationConfigurationResp? AdminCreateIntegrationConfiguration(AdminCreateIntegrationConfiguration input)
+        public AdminCreateIntegrationConfiguration.Response AdminCreateIntegrationConfiguration(AdminCreateIntegrationConfiguration input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsIntegrationConfigurationResp?> AdminCreateIntegrationConfigurationAsync(AdminCreateIntegrationConfiguration input)
+        public async Task<AdminCreateIntegrationConfiguration.Response> AdminCreateIntegrationConfigurationAsync(AdminCreateIntegrationConfiguration input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsIntegrationConfigurationResp? AdminUpdateIntegrationConfiguration(AdminUpdateIntegrationConfiguration input)
+        public AdminUpdateIntegrationConfiguration.Response AdminUpdateIntegrationConfiguration(AdminUpdateIntegrationConfiguration input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsIntegrationConfigurationResp?> AdminUpdateIntegrationConfigurationAsync(AdminUpdateIntegrationConfiguration input)
+        public async Task<AdminUpdateIntegrationConfiguration.Response> AdminUpdateIntegrationConfigurationAsync(AdminUpdateIntegrationConfiguration input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsIntegrationConfigurationResp? AdminUpdateStatusIntegrationConfiguration(AdminUpdateStatusIntegrationConfiguration input)
+        public AdminUpdateStatusIntegrationConfiguration.Response AdminUpdateStatusIntegrationConfiguration(AdminUpdateStatusIntegrationConfiguration input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -136,7 +136,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsIntegrationConfigurationResp?> AdminUpdateStatusIntegrationConfigurationAsync(AdminUpdateStatusIntegrationConfiguration input)
+        public async Task<AdminUpdateStatusIntegrationConfiguration.Response> AdminUpdateStatusIntegrationConfigurationAsync(AdminUpdateStatusIntegrationConfiguration input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

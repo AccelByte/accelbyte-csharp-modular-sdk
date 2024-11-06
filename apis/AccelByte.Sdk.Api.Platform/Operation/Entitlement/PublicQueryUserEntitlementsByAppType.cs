@@ -77,16 +77,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicQueryUserEntitlementsByAppType op = new PublicQueryUserEntitlementsByAppType(this,
-                    namespace_,
-                    userId,
-                    appType
+                    namespace_,                    
+                    userId,                    
+                    appType                    
                 );
 
                 op.SetBaseFields<PublicQueryUserEntitlementsByAppTypeBuilder>(this);
                 return op;
             }
 
-            public Model.AppEntitlementPagingSlicedResult? Execute(
+            public PublicQueryUserEntitlementsByAppType.Response Execute(
                 string namespace_,
                 string userId,
                 string appType
@@ -103,11 +103,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.AppEntitlementPagingSlicedResult?> ExecuteAsync(
+            public async Task<PublicQueryUserEntitlementsByAppType.Response> ExecuteAsync(
                 string namespace_,
                 string userId,
                 string appType
@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -138,39 +138,49 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (appType is not null) QueryParams["appType"] = appType.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.AppEntitlementPagingSlicedResult>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Entitlement::PublicQueryUserEntitlementsByAppType";
+        }
+
+        #endregion
+
         public PublicQueryUserEntitlementsByAppType(
-            string namespace_,
-            string userId,
-            int? limit,
-            int? offset,
-            PublicQueryUserEntitlementsByAppTypeAppType appType
+            string namespace_,            
+            string userId,            
+            int? limit,            
+            int? offset,            
+            PublicQueryUserEntitlementsByAppTypeAppType appType            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (appType is not null) QueryParams["appType"] = appType.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -179,28 +189,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.AppEntitlementPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicQueryUserEntitlementsByAppType.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicQueryUserEntitlementsByAppType.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.AppEntitlementPagingSlicedResult>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.AppEntitlementPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.AppEntitlementPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

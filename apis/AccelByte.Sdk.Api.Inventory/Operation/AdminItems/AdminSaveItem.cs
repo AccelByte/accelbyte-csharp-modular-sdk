@@ -76,16 +76,16 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             )
             {
                 AdminSaveItem op = new AdminSaveItem(this,
-                    body,
-                    namespace_,
-                    userId
+                    body,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<AdminSaveItemBuilder>(this);
                 return op;
             }
 
-            public Model.ApimodelsItemResp? Execute(
+            public AdminSaveItem.Response Execute(
                 ApimodelsSaveItemReq body,
                 string namespace_,
                 string userId
@@ -102,11 +102,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ApimodelsItemResp?> ExecuteAsync(
+            public async Task<AdminSaveItem.Response> ExecuteAsync(
                 ApimodelsSaveItemReq body,
                 string namespace_,
                 string userId
@@ -123,12 +123,12 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
 
-            public Model.ApimodelsItemResp<T1, T2, T3>? Execute<T1, T2, T3>(
+            public AdminSaveItem.Response<T1, T2, T3> Execute<T1, T2, T3>(
                 ApimodelsSaveItemReq body,
                 string namespace_,
                 string userId
@@ -145,11 +145,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1, T2, T3>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ApimodelsItemResp<T1, T2, T3>?> ExecuteAsync<T1, T2, T3>(
+            public async Task<AdminSaveItem.Response<T1, T2, T3>> ExecuteAsync<T1, T2, T3>(
                 ApimodelsSaveItemReq body,
                 string namespace_,
                 string userId
@@ -166,7 +166,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1, T2, T3>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -180,33 +180,56 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ApimodelsItemResp>
+        {
+
+            public ApimodelsErrorResponse? Error400 { get; set; } = null;
+
+            public ApimodelsErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Inventory::AdminItems::AdminSaveItem";
+        }
+
+        public class Response<T1, T2, T3> : ApiResponse<Model.ApimodelsItemResp<T1, T2, T3>>
+        {
+            public ApimodelsErrorResponse? Error400 { get; set; } = null;
+
+            public ApimodelsErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Inventory::AdminItems::AdminSaveItem";
+        }
+        #endregion
+
         public AdminSaveItem(
-            string namespace_,
-            string userId,
-            Model.ApimodelsSaveItemReq body
+            string namespace_,            
+            string userId,            
+            Model.ApimodelsSaveItemReq body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -218,44 +241,67 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ApimodelsItemResp? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminSaveItem.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminSaveItem.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ApimodelsItemResp>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsItemResp>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ApimodelsItemResp>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
 
-        public Model.ApimodelsItemResp<T1, T2, T3>? ParseResponse<T1, T2, T3>(HttpStatusCode code, string contentType, Stream payload)
+        public AdminSaveItem.Response<T1, T2, T3> ParseResponse<T1, T2, T3>(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminSaveItem.Response<T1, T2, T3>()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
-            }
-            else if (code == (HttpStatusCode)201)
+                response.IsSuccess = true;
+            }            
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ApimodelsItemResp<T1, T2, T3>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsItemResp<T1, T2, T3>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ApimodelsItemResp<T1, T2, T3>>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
             }
-
-            var payloadString = payload.ReadToString();
-            throw new HttpResponseException(code, payloadString);
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
+            }
+            
+            return response;
         }
     }
 

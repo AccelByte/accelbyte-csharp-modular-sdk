@@ -147,14 +147,14 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
             )
             {
                 ListTerminatedServersWithNamespace op = new ListTerminatedServersWithNamespace(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<ListTerminatedServersWithNamespaceBuilder>(this);
                 return op;
             }
 
-            public Model.ModelsListTerminatedServersResponse? Execute(
+            public ListTerminatedServersWithNamespace.Response Execute(
                 string namespace_
             )
             {
@@ -167,11 +167,11 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsListTerminatedServersResponse?> ExecuteAsync(
+            public async Task<ListTerminatedServersWithNamespace.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -184,7 +184,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -195,7 +195,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Deployment is not null) QueryParams["deployment"] = builder.Deployment;
             if (builder.GameMode is not null) QueryParams["game_mode"] = builder.GameMode;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
@@ -207,33 +207,49 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
             if (builder.Region is not null) QueryParams["region"] = builder.Region;
             if (builder.SessionId is not null) QueryParams["session_id"] = builder.SessionId;
             if (builder.UserId is not null) QueryParams["user_id"] = builder.UserId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsListTerminatedServersResponse>
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Dsartifact::TerminatedServers::ListTerminatedServersWithNamespace";
+        }
+
+        #endregion
+
         public ListTerminatedServersWithNamespace(
-            string namespace_,
-            string? deployment,
-            string? gameMode,
-            long? limit,
-            string? next,
-            string? partyId,
-            string? podName,
-            string? previous,
-            string? provider,
-            string? region,
-            string? sessionId,
-            string? userId
+            string namespace_,            
+            string? deployment,            
+            string? gameMode,            
+            long? limit,            
+            string? next,            
+            string? partyId,            
+            string? podName,            
+            string? previous,            
+            string? provider,            
+            string? region,            
+            string? sessionId,            
+            string? userId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (deployment is not null) QueryParams["deployment"] = deployment;
             if (gameMode is not null) QueryParams["game_mode"] = gameMode;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
@@ -245,11 +261,11 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
             if (region is not null) QueryParams["region"] = region;
             if (sessionId is not null) QueryParams["session_id"] = sessionId;
             if (userId is not null) QueryParams["user_id"] = userId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -260,26 +276,42 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json", "text/x-log" };
-
-        public Model.ModelsListTerminatedServersResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public override List<string> Produces => new() { "application/json","text/x-log" };
+        
+        public ListTerminatedServersWithNamespace.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new ListTerminatedServersWithNamespace.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsListTerminatedServersResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsListTerminatedServersResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsListTerminatedServersResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

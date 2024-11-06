@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedTagResponse? AdminListTags(AdminListTags input)
+        public AdminListTags.Response AdminListTags(AdminListTags input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedTagResponse?> AdminListTagsAsync(AdminListTags input)
+        public async Task<AdminListTags.Response> AdminListTagsAsync(AdminListTags input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPaginatedTagResponse? PublicListTags(PublicListTags input)
+        public PublicListTags.Response PublicListTags(PublicListTags input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedTagResponse?> PublicListTagsAsync(PublicListTags input)
+        public async Task<PublicListTags.Response> PublicListTagsAsync(PublicListTags input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedListStagingContentResponse? ListUserStagingContents(ListUserStagingContents input)
+        public ListUserStagingContents.Response ListUserStagingContents(ListUserStagingContents input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedListStagingContentResponse?> ListUserStagingContentsAsync(ListUserStagingContents input)
+        public async Task<ListUserStagingContents.Response> ListUserStagingContentsAsync(ListUserStagingContents input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsStagingContentResponse? GetUserStagingContentByID(GetUserStagingContentByID input)
+        public GetUserStagingContentByID.Response GetUserStagingContentByID(GetUserStagingContentByID input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,40 +104,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsStagingContentResponse?> GetUserStagingContentByIDAsync(GetUserStagingContentByID input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-
-        public Model.ModelsStagingContentResponse<T1>? GetUserStagingContentByID<T1>(GetUserStagingContentByID input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsStagingContentResponse<T1>?> GetUserStagingContentByIDAsync<T1>(GetUserStagingContentByID input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsStagingContentResponse? UpdateStagingContent(UpdateStagingContent input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsStagingContentResponse?> UpdateStagingContentAsync(UpdateStagingContent input)
+        public async Task<GetUserStagingContentByID.Response> GetUserStagingContentByIDAsync(GetUserStagingContentByID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -146,7 +113,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsStagingContentResponse<T1>? UpdateStagingContent<T1>(UpdateStagingContent input)
+        public GetUserStagingContentByID.Response<T1> GetUserStagingContentByID<T1>(GetUserStagingContentByID input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -154,7 +121,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsStagingContentResponse<T1>?> UpdateStagingContentAsync<T1>(UpdateStagingContent input)
+        public async Task<GetUserStagingContentByID.Response<T1>> GetUserStagingContentByIDAsync<T1>(GetUserStagingContentByID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -162,18 +129,51 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteUserStagingContentByID(DeleteUserStagingContentByID input)
+        public UpdateStagingContent.Response UpdateStagingContent(UpdateStagingContent input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteUserStagingContentByIDAsync(DeleteUserStagingContentByID input)
+        public async Task<UpdateStagingContent.Response> UpdateStagingContentAsync(UpdateStagingContent input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public UpdateStagingContent.Response<T1> UpdateStagingContent<T1>(UpdateStagingContent input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpdateStagingContent.Response<T1>> UpdateStagingContentAsync<T1>(UpdateStagingContent input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeleteUserStagingContentByID.Response DeleteUserStagingContentByID(DeleteUserStagingContentByID input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteUserStagingContentByID.Response> DeleteUserStagingContentByIDAsync(DeleteUserStagingContentByID input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

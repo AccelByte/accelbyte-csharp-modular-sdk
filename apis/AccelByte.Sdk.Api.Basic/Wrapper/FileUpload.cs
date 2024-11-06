@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
         }
         #endregion
 
-        public Model.FileUploadUrlInfo? GeneratedUploadUrl(GeneratedUploadUrl input)
+        public GeneratedUploadUrl.Response GeneratedUploadUrl(GeneratedUploadUrl input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FileUploadUrlInfo?> GeneratedUploadUrlAsync(GeneratedUploadUrl input)
+        public async Task<GeneratedUploadUrl.Response> GeneratedUploadUrlAsync(GeneratedUploadUrl input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FileUploadUrlInfo? GeneratedUserUploadContentUrl(GeneratedUserUploadContentUrl input)
+        public GeneratedUserUploadContentUrl.Response GeneratedUserUploadContentUrl(GeneratedUserUploadContentUrl input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FileUploadUrlInfo?> GeneratedUserUploadContentUrlAsync(GeneratedUserUploadContentUrl input)
+        public async Task<GeneratedUserUploadContentUrl.Response> GeneratedUserUploadContentUrlAsync(GeneratedUserUploadContentUrl input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FileUploadUrlInfo? PublicGeneratedUploadUrl(PublicGeneratedUploadUrl input)
+        public PublicGeneratedUploadUrl.Response PublicGeneratedUploadUrl(PublicGeneratedUploadUrl input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FileUploadUrlInfo?> PublicGeneratedUploadUrlAsync(PublicGeneratedUploadUrl input)
+        public async Task<PublicGeneratedUploadUrl.Response> PublicGeneratedUploadUrlAsync(PublicGeneratedUploadUrl input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FileUploadUrlInfo? PublicGeneratedUserUploadContentUrl(PublicGeneratedUserUploadContentUrl input)
+        public PublicGeneratedUserUploadContentUrl.Response PublicGeneratedUserUploadContentUrl(PublicGeneratedUserUploadContentUrl input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -136,7 +136,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FileUploadUrlInfo?> PublicGeneratedUserUploadContentUrlAsync(PublicGeneratedUserUploadContentUrl input)
+        public async Task<PublicGeneratedUserUploadContentUrl.Response> PublicGeneratedUserUploadContentUrlAsync(PublicGeneratedUserUploadContentUrl input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
         #endregion
 
-        public List<Model.UserAgreementsResponse>? RetrieveAcceptedAgreementsForMultiUsers(RetrieveAcceptedAgreementsForMultiUsers input)
+        public RetrieveAcceptedAgreementsForMultiUsers.Response RetrieveAcceptedAgreementsForMultiUsers(RetrieveAcceptedAgreementsForMultiUsers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.UserAgreementsResponse>?> RetrieveAcceptedAgreementsForMultiUsersAsync(RetrieveAcceptedAgreementsForMultiUsers input)
+        public async Task<RetrieveAcceptedAgreementsForMultiUsers.Response> RetrieveAcceptedAgreementsForMultiUsersAsync(RetrieveAcceptedAgreementsForMultiUsers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.RetrieveAcceptedAgreementResponse>? RetrieveAcceptedAgreements1(RetrieveAcceptedAgreements1 input)
+        public RetrieveAcceptedAgreements1.Response RetrieveAcceptedAgreements1(RetrieveAcceptedAgreements1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.RetrieveAcceptedAgreementResponse>?> RetrieveAcceptedAgreements1Async(RetrieveAcceptedAgreements1 input)
+        public async Task<RetrieveAcceptedAgreements1.Response> RetrieveAcceptedAgreements1Async(RetrieveAcceptedAgreements1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PagedRetrieveUserAcceptedAgreementResponse? RetrieveAllUsersByPolicyVersion1(RetrieveAllUsersByPolicyVersion1 input)
+        public RetrieveAllUsersByPolicyVersion1.Response RetrieveAllUsersByPolicyVersion1(RetrieveAllUsersByPolicyVersion1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PagedRetrieveUserAcceptedAgreementResponse?> RetrieveAllUsersByPolicyVersion1Async(RetrieveAllUsersByPolicyVersion1 input)
+        public async Task<RetrieveAllUsersByPolicyVersion1.Response> RetrieveAllUsersByPolicyVersion1Async(RetrieveAllUsersByPolicyVersion1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.DownloadExportedAgreementsInCSVResponse? DownloadExportedAgreementsInCSV(DownloadExportedAgreementsInCSV input)
+        public DownloadExportedAgreementsInCSV.Response DownloadExportedAgreementsInCSV(DownloadExportedAgreementsInCSV input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -147,7 +147,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.DownloadExportedAgreementsInCSVResponse?> DownloadExportedAgreementsInCSVAsync(DownloadExportedAgreementsInCSV input)
+        public async Task<DownloadExportedAgreementsInCSV.Response> DownloadExportedAgreementsInCSVAsync(DownloadExportedAgreementsInCSV input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -155,7 +155,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.InitiateExportAgreementsToCSVResponse? InitiateExportAgreementsToCSV(InitiateExportAgreementsToCSV input)
+        public InitiateExportAgreementsToCSV.Response InitiateExportAgreementsToCSV(InitiateExportAgreementsToCSV input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -163,7 +163,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.InitiateExportAgreementsToCSVResponse?> InitiateExportAgreementsToCSVAsync(InitiateExportAgreementsToCSV input)
+        public async Task<InitiateExportAgreementsToCSV.Response> InitiateExportAgreementsToCSVAsync(InitiateExportAgreementsToCSV input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

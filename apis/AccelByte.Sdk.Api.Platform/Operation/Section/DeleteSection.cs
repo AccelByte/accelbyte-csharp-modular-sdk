@@ -57,16 +57,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 DeleteSection op = new DeleteSection(this,
-                    namespace_,
-                    sectionId,
-                    storeId
+                    namespace_,                    
+                    sectionId,                    
+                    storeId                    
                 );
 
                 op.SetBaseFields<DeleteSectionBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public DeleteSection.Response Execute(
                 string namespace_,
                 string sectionId,
                 string storeId
@@ -82,12 +82,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<DeleteSection.Response> ExecuteAsync(
                 string namespace_,
                 string sectionId,
                 string storeId
@@ -103,8 +103,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -118,33 +118,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["sectionId"] = sectionId;
-
+            
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+            public ErrorEntity? Error409 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Section::DeleteSection";
+        }
+
+        #endregion
+
         public DeleteSection(
-            string namespace_,
-            string sectionId,
-            string storeId
+            string namespace_,            
+            string sectionId,            
+            string storeId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["sectionId"] = sectionId;
-
+            
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -153,20 +167,33 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public DeleteSection.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new DeleteSection.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)409)
+            
+            {
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

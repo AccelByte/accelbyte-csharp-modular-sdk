@@ -64,15 +64,15 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
             )
             {
                 CheckServerArtifact op = new CheckServerArtifact(this,
-                    namespace_,
-                    podName
+                    namespace_,                    
+                    podName                    
                 );
 
                 op.SetBaseFields<CheckServerArtifactBuilder>(this);
                 return op;
             }
 
-            public Model.ModelsArtifactFileStatus? Execute(
+            public CheckServerArtifact.Response Execute(
                 string namespace_,
                 string podName
             )
@@ -87,11 +87,11 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsArtifactFileStatus?> ExecuteAsync(
+            public async Task<CheckServerArtifact.Response> ExecuteAsync(
                 string namespace_,
                 string podName
             )
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -119,30 +119,44 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["podName"] = podName;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsArtifactFileStatus>
+        {
+
+            public ResponseError? Error404 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Dsartifact::DownloadServerArtifact::CheckServerArtifact";
+        }
+
+        #endregion
+
         public CheckServerArtifact(
-            string namespace_,
-            string podName
+            string namespace_,            
+            string podName            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["podName"] = podName;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -153,26 +167,37 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json", "text/x-log" };
-
-        public Model.ModelsArtifactFileStatus? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public override List<string> Produces => new() { "application/json","text/x-log" };
+        
+        public CheckServerArtifact.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new CheckServerArtifact.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsArtifactFileStatus>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsArtifactFileStatus>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.ModelsArtifactFileStatus>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

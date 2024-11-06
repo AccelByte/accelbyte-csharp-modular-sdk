@@ -289,7 +289,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
         }
         #endregion
 
-        public Model.ListSeasonInfoPagingSlicedResult? QuerySeasons(QuerySeasons input)
+        public QuerySeasons.Response QuerySeasons(QuerySeasons input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -297,7 +297,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ListSeasonInfoPagingSlicedResult?> QuerySeasonsAsync(QuerySeasons input)
+        public async Task<QuerySeasons.Response> QuerySeasonsAsync(QuerySeasons input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -305,7 +305,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.SeasonInfo? CreateSeason(CreateSeason input)
+        public CreateSeason.Response CreateSeason(CreateSeason input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -313,7 +313,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SeasonInfo?> CreateSeasonAsync(CreateSeason input)
+        public async Task<CreateSeason.Response> CreateSeasonAsync(CreateSeason input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -321,7 +321,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.SeasonSummary? GetCurrentSeason(GetCurrentSeason input)
+        public GetCurrentSeason.Response GetCurrentSeason(GetCurrentSeason input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -329,7 +329,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SeasonSummary?> GetCurrentSeasonAsync(GetCurrentSeason input)
+        public async Task<GetCurrentSeason.Response> GetCurrentSeasonAsync(GetCurrentSeason input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -337,7 +337,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.UserSeasonSummary>? BulkGetUserSeasonProgression(BulkGetUserSeasonProgression input)
+        public BulkGetUserSeasonProgression.Response BulkGetUserSeasonProgression(BulkGetUserSeasonProgression input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -345,7 +345,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.UserSeasonSummary>?> BulkGetUserSeasonProgressionAsync(BulkGetUserSeasonProgression input)
+        public async Task<BulkGetUserSeasonProgression.Response> BulkGetUserSeasonProgressionAsync(BulkGetUserSeasonProgression input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -353,7 +353,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.SeasonInfo? GetSeason(GetSeason input)
+        public GetSeason.Response GetSeason(GetSeason input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -361,7 +361,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SeasonInfo?> GetSeasonAsync(GetSeason input)
+        public async Task<GetSeason.Response> GetSeasonAsync(GetSeason input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -369,23 +369,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteSeason(DeleteSeason input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteSeasonAsync(DeleteSeason input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.SeasonInfo? UpdateSeason(UpdateSeason input)
+        public DeleteSeason.Response DeleteSeason(DeleteSeason input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -393,7 +377,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SeasonInfo?> UpdateSeasonAsync(UpdateSeason input)
+        public async Task<DeleteSeason.Response> DeleteSeasonAsync(DeleteSeason input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -401,7 +385,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.SeasonInfo? CloneSeason(CloneSeason input)
+        public UpdateSeason.Response UpdateSeason(UpdateSeason input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -409,7 +393,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SeasonInfo?> CloneSeasonAsync(CloneSeason input)
+        public async Task<UpdateSeason.Response> UpdateSeasonAsync(UpdateSeason input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -417,7 +401,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FullSeasonInfo? GetFullSeason(GetFullSeason input)
+        public CloneSeason.Response CloneSeason(CloneSeason input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -425,7 +409,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FullSeasonInfo?> GetFullSeasonAsync(GetFullSeason input)
+        public async Task<CloneSeason.Response> CloneSeasonAsync(CloneSeason input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -433,7 +417,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.SeasonInfo? PublishSeason(PublishSeason input)
+        public GetFullSeason.Response GetFullSeason(GetFullSeason input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -441,7 +425,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SeasonInfo?> PublishSeasonAsync(PublishSeason input)
+        public async Task<GetFullSeason.Response> GetFullSeasonAsync(GetFullSeason input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -449,7 +433,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.SeasonInfo? RetireSeason(RetireSeason input)
+        public PublishSeason.Response PublishSeason(PublishSeason input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -457,7 +441,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SeasonInfo?> RetireSeasonAsync(RetireSeason input)
+        public async Task<PublishSeason.Response> PublishSeasonAsync(PublishSeason input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -465,7 +449,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.SeasonInfo? UnpublishSeason(UnpublishSeason input)
+        public RetireSeason.Response RetireSeason(RetireSeason input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -473,7 +457,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SeasonInfo?> UnpublishSeasonAsync(UnpublishSeason input)
+        public async Task<RetireSeason.Response> RetireSeasonAsync(RetireSeason input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -481,7 +465,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ListUserSeasonInfoPagingSlicedResult? GetUserParticipatedSeasons(GetUserParticipatedSeasons input)
+        public UnpublishSeason.Response UnpublishSeason(UnpublishSeason input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -489,7 +473,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ListUserSeasonInfoPagingSlicedResult?> GetUserParticipatedSeasonsAsync(GetUserParticipatedSeasons input)
+        public async Task<UnpublishSeason.Response> UnpublishSeasonAsync(UnpublishSeason input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -497,7 +481,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.Ownership? ExistsAnyPassByPassCodes(ExistsAnyPassByPassCodes input)
+        public GetUserParticipatedSeasons.Response GetUserParticipatedSeasons(GetUserParticipatedSeasons input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -505,7 +489,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.Ownership?> ExistsAnyPassByPassCodesAsync(ExistsAnyPassByPassCodes input)
+        public async Task<GetUserParticipatedSeasons.Response> GetUserParticipatedSeasonsAsync(GetUserParticipatedSeasons input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -513,7 +497,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.UserSeasonSummary? GetCurrentUserSeasonProgression(GetCurrentUserSeasonProgression input)
+        public ExistsAnyPassByPassCodes.Response ExistsAnyPassByPassCodes(ExistsAnyPassByPassCodes input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -521,7 +505,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserSeasonSummary?> GetCurrentUserSeasonProgressionAsync(GetCurrentUserSeasonProgression input)
+        public async Task<ExistsAnyPassByPassCodes.Response> ExistsAnyPassByPassCodesAsync(ExistsAnyPassByPassCodes input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -529,39 +513,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void CheckSeasonPurchasable(CheckSeasonPurchasable input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task CheckSeasonPurchasableAsync(CheckSeasonPurchasable input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void ResetUserSeason(ResetUserSeason input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task ResetUserSeasonAsync(ResetUserSeason input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ExpGrantHistoryPagingSlicedResult? QueryUserExpGrantHistory(QueryUserExpGrantHistory input)
+        public GetCurrentUserSeasonProgression.Response GetCurrentUserSeasonProgression(GetCurrentUserSeasonProgression input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -569,7 +521,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ExpGrantHistoryPagingSlicedResult?> QueryUserExpGrantHistoryAsync(QueryUserExpGrantHistory input)
+        public async Task<GetCurrentUserSeasonProgression.Response> GetCurrentUserSeasonProgressionAsync(GetCurrentUserSeasonProgression input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -577,7 +529,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ReasonTagsResult? QueryUserExpGrantHistoryTag(QueryUserExpGrantHistoryTag input)
+        public CheckSeasonPurchasable.Response CheckSeasonPurchasable(CheckSeasonPurchasable input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -585,7 +537,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ReasonTagsResult?> QueryUserExpGrantHistoryTagAsync(QueryUserExpGrantHistoryTag input)
+        public async Task<CheckSeasonPurchasable.Response> CheckSeasonPurchasableAsync(CheckSeasonPurchasable input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -593,7 +545,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ClaimableUserSeasonInfo? GetUserSeason(GetUserSeason input)
+        public ResetUserSeason.Response ResetUserSeason(ResetUserSeason input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -601,7 +553,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ClaimableUserSeasonInfo?> GetUserSeasonAsync(GetUserSeason input)
+        public async Task<ResetUserSeason.Response> ResetUserSeasonAsync(ResetUserSeason input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -609,24 +561,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.ClaimableUserSeasonInfo<T1, T2>? GetUserSeason<T1, T2>(GetUserSeason input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1, T2>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ClaimableUserSeasonInfo<T1, T2>?> GetUserSeasonAsync<T1, T2>(GetUserSeason input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1, T2>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.LocalizedSeasonInfo? PublicGetCurrentSeason(PublicGetCurrentSeason input)
+        public QueryUserExpGrantHistory.Response QueryUserExpGrantHistory(QueryUserExpGrantHistory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -634,7 +569,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.LocalizedSeasonInfo?> PublicGetCurrentSeasonAsync(PublicGetCurrentSeason input)
+        public async Task<QueryUserExpGrantHistory.Response> QueryUserExpGrantHistoryAsync(QueryUserExpGrantHistory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -642,7 +577,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ClaimableUserSeasonInfo? PublicGetCurrentUserSeason(PublicGetCurrentUserSeason input)
+        public QueryUserExpGrantHistoryTag.Response QueryUserExpGrantHistoryTag(QueryUserExpGrantHistoryTag input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -650,7 +585,23 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ClaimableUserSeasonInfo?> PublicGetCurrentUserSeasonAsync(PublicGetCurrentUserSeason input)
+        public async Task<QueryUserExpGrantHistoryTag.Response> QueryUserExpGrantHistoryTagAsync(QueryUserExpGrantHistoryTag input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetUserSeason.Response GetUserSeason(GetUserSeason input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetUserSeason.Response> GetUserSeasonAsync(GetUserSeason input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -659,7 +610,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.Payload);
         }
 
-        public Model.ClaimableUserSeasonInfo<T1, T2>? PublicGetCurrentUserSeason<T1, T2>(PublicGetCurrentUserSeason input)
+        public GetUserSeason.Response<T1, T2> GetUserSeason<T1, T2>(GetUserSeason input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -667,7 +618,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ClaimableUserSeasonInfo<T1, T2>?> PublicGetCurrentUserSeasonAsync<T1, T2>(PublicGetCurrentUserSeason input)
+        public async Task<GetUserSeason.Response<T1, T2>> GetUserSeasonAsync<T1, T2>(GetUserSeason input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -675,7 +626,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ClaimableUserSeasonInfo? PublicGetUserSeason(PublicGetUserSeason input)
+        public PublicGetCurrentSeason.Response PublicGetCurrentSeason(PublicGetCurrentSeason input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -683,7 +634,23 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ClaimableUserSeasonInfo?> PublicGetUserSeasonAsync(PublicGetUserSeason input)
+        public async Task<PublicGetCurrentSeason.Response> PublicGetCurrentSeasonAsync(PublicGetCurrentSeason input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetCurrentUserSeason.Response PublicGetCurrentUserSeason(PublicGetCurrentUserSeason input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetCurrentUserSeason.Response> PublicGetCurrentUserSeasonAsync(PublicGetCurrentUserSeason input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -692,7 +659,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.Payload);
         }
 
-        public Model.ClaimableUserSeasonInfo<T1, T2>? PublicGetUserSeason<T1, T2>(PublicGetUserSeason input)
+        public PublicGetCurrentUserSeason.Response<T1, T2> PublicGetCurrentUserSeason<T1, T2>(PublicGetCurrentUserSeason input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -700,7 +667,40 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ClaimableUserSeasonInfo<T1, T2>?> PublicGetUserSeasonAsync<T1, T2>(PublicGetUserSeason input)
+        public async Task<PublicGetCurrentUserSeason.Response<T1, T2>> PublicGetCurrentUserSeasonAsync<T1, T2>(PublicGetCurrentUserSeason input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetUserSeason.Response PublicGetUserSeason(PublicGetUserSeason input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetUserSeason.Response> PublicGetUserSeasonAsync(PublicGetUserSeason input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public PublicGetUserSeason.Response<T1, T2> PublicGetUserSeason<T1, T2>(PublicGetUserSeason input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetUserSeason.Response<T1, T2>> PublicGetUserSeasonAsync<T1, T2>(PublicGetUserSeason input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(

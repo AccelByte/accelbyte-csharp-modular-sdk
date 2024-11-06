@@ -45,7 +45,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public SyncUserInfo.SyncUserInfoBuilder SyncUserInfoOp
         {
             get
@@ -57,7 +57,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public InvalidateUserInfoCache.InvalidateUserInfoCacheBuilder InvalidateUserInfoCacheOp
         {
             get
@@ -71,7 +71,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
         #endregion
 
-        public List<Model.RetrieveUserInfoCacheStatusResponse>? GetUserInfoStatus(GetUserInfoStatus input)
+        public GetUserInfoStatus.Response GetUserInfoStatus(GetUserInfoStatus input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.RetrieveUserInfoCacheStatusResponse>?> GetUserInfoStatusAsync(GetUserInfoStatus input)
+        public async Task<GetUserInfoStatus.Response> GetUserInfoStatusAsync(GetUserInfoStatus input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -87,43 +87,43 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void SyncUserInfo(SyncUserInfo input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public SyncUserInfo.Response SyncUserInfo(SyncUserInfo input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task SyncUserInfoAsync(SyncUserInfo input)
+        public async Task<SyncUserInfo.Response> SyncUserInfoAsync(SyncUserInfo input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void InvalidateUserInfoCache(InvalidateUserInfoCache input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public InvalidateUserInfoCache.Response InvalidateUserInfoCache(InvalidateUserInfoCache input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task InvalidateUserInfoCacheAsync(InvalidateUserInfoCache input)
+        public async Task<InvalidateUserInfoCache.Response> InvalidateUserInfoCacheAsync(InvalidateUserInfoCache input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        #pragma warning restore ab_deprecated_operation
     }
 }

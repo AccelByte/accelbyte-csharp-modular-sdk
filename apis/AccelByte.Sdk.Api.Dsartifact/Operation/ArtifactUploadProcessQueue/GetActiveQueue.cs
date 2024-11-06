@@ -59,14 +59,14 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
             )
             {
                 GetActiveQueue op = new GetActiveQueue(this,
-                    nodeIP
+                    nodeIP                    
                 );
 
                 op.SetBaseFields<GetActiveQueueBuilder>(this);
                 return op;
             }
 
-            public Model.ModelsQueue? Execute(
+            public GetActiveQueue.Response Execute(
                 string nodeIP
             )
             {
@@ -79,11 +79,11 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsQueue?> ExecuteAsync(
+            public async Task<GetActiveQueue.Response> ExecuteAsync(
                 string nodeIP
             )
             {
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -106,29 +106,47 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
             string nodeIP
         )
         {
-
+            
             if (nodeIP is not null) QueryParams["nodeIP"] = nodeIP;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public GetActiveQueue(
-            string nodeIP
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsQueue>
         {
 
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error404 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Dsartifact::ArtifactUploadProcessQueue::GetActiveQueue";
+        }
+
+        #endregion
+
+        public GetActiveQueue(
+            string nodeIP            
+        )
+        {
+            
             if (nodeIP is not null) QueryParams["nodeIP"] = nodeIP;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -139,26 +157,47 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json", "text/x-log" };
-
-        public Model.ModelsQueue? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public override List<string> Produces => new() { "application/json","text/x-log" };
+        
+        public GetActiveQueue.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetActiveQueue.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsQueue>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsQueue>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsQueue>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

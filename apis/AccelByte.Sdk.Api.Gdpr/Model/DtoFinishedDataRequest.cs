@@ -41,7 +41,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Model
 
     public class DtoFinishedDataRequestStatus : StringEnum<DtoFinishedDataRequestStatus>
     {
-        public static readonly DtoFinishedDataRequestStatus Completed, Failed
+        public static readonly DtoFinishedDataRequestStatus Completed,Failed
             = new DtoFinishedDataRequestStatus("Completed,Failed");
 
 

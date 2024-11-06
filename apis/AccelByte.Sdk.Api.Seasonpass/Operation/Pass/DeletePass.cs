@@ -57,16 +57,16 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             )
             {
                 DeletePass op = new DeletePass(this,
-                    code,
-                    namespace_,
-                    seasonId
+                    code,                    
+                    namespace_,                    
+                    seasonId                    
                 );
 
                 op.SetBaseFields<DeletePassBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public DeletePass.Response Execute(
                 string code,
                 string namespace_,
                 string seasonId
@@ -82,12 +82,12 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<DeletePass.Response> ExecuteAsync(
                 string code,
                 string namespace_,
                 string seasonId
@@ -103,8 +103,8 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -119,32 +119,48 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             PathParams["code"] = code;
             PathParams["namespace"] = namespace_;
             PathParams["seasonId"] = seasonId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public ErrorEntity? Error400 { get; set; } = null;
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+            public ErrorEntity? Error409 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Seasonpass::Pass::DeletePass";
+        }
+
+        #endregion
+
         public DeletePass(
-            string code,
-            string namespace_,
-            string seasonId
+            string code,            
+            string namespace_,            
+            string seasonId            
         )
         {
             PathParams["code"] = code;
             PathParams["namespace"] = namespace_;
             PathParams["seasonId"] = seasonId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -153,20 +169,39 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public DeletePass.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new DeletePass.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)409)
+            
+            {
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

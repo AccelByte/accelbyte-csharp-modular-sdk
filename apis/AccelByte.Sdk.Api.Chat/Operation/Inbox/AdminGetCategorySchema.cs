@@ -56,15 +56,15 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminGetCategorySchema op = new AdminGetCategorySchema(this,
-                    category,
-                    namespace_
+                    category,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminGetCategorySchemaBuilder>(this);
                 return op;
             }
 
-            public Model.ModelsJSONSchemaType? Execute(
+            public AdminGetCategorySchema.Response Execute(
                 string category,
                 string namespace_
             )
@@ -79,11 +79,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsJSONSchemaType?> ExecuteAsync(
+            public async Task<AdminGetCategorySchema.Response> ExecuteAsync(
                 string category,
                 string namespace_
             )
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,30 +111,50 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         {
             PathParams["category"] = category;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsJSONSchemaType>
+        {
+
+            public RestapiErrorResponseBody? Error400 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error401 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error403 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error404 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Chat::Inbox::AdminGetCategorySchema";
+        }
+
+        #endregion
+
         public AdminGetCategorySchema(
-            string category,
-            string namespace_
+            string category,            
+            string namespace_            
         )
         {
             PathParams["category"] = category;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -146,25 +166,51 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsJSONSchemaType? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminGetCategorySchema.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminGetCategorySchema.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsJSONSchemaType>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsJSONSchemaType>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsJSONSchemaType>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

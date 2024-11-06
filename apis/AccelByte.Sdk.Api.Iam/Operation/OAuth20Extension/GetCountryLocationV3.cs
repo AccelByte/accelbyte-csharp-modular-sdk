@@ -60,7 +60,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
-            public Model.OauthmodelCountryLocationResponse? Execute(
+            public GetCountryLocationV3.Response Execute(
             )
             {
                 GetCountryLocationV3 op = Build(
@@ -71,11 +71,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OauthmodelCountryLocationResponse?> ExecuteAsync(
+            public async Task<GetCountryLocationV3.Response> ExecuteAsync(
             )
             {
                 GetCountryLocationV3 op = Build(
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -95,26 +95,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         private GetCountryLocationV3(GetCountryLocationV3Builder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public GetCountryLocationV3(
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.OauthmodelCountryLocationResponse>
         {
 
 
+            protected override string GetFullOperationId() => "Iam::OAuth20Extension::GetCountryLocationV3";
+        }
 
+        #endregion
 
+        public GetCountryLocationV3(
+        )
+        {
+            
+            
 
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -126,25 +136,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OauthmodelCountryLocationResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetCountryLocationV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetCountryLocationV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelCountryLocationResponse>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.OauthmodelCountryLocationResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelCountryLocationResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

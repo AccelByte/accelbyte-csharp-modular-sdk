@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
         }
         #endregion
 
-        public Model.ModelsUpdatePlayerPlaytimeWeightResponse? UpdatePlayTimeWeight(UpdatePlayTimeWeight input)
+        public UpdatePlayTimeWeight.Response UpdatePlayTimeWeight(UpdatePlayTimeWeight input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUpdatePlayerPlaytimeWeightResponse?> UpdatePlayTimeWeightAsync(UpdatePlayTimeWeight input)
+        public async Task<UpdatePlayTimeWeight.Response> UpdatePlayTimeWeightAsync(UpdatePlayTimeWeight input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

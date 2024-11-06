@@ -57,16 +57,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UnlockSteamUserAchievement op = new UnlockSteamUserAchievement(this,
-                    body,
-                    namespace_,
-                    userId
+                    body,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<UnlockSteamUserAchievementBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public UnlockSteamUserAchievement.Response Execute(
                 SteamAchievementUpdateRequest body,
                 string namespace_,
                 string userId
@@ -82,12 +82,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<UnlockSteamUserAchievement.Response> ExecuteAsync(
                 SteamAchievementUpdateRequest body,
                 string namespace_,
                 string userId
@@ -103,8 +103,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -118,33 +118,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public ValidationErrorEntity? Error400 { get; set; } = null;
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::AchievementPlatform::UnlockSteamUserAchievement";
+        }
+
+        #endregion
+
         public UnlockSteamUserAchievement(
-            string namespace_,
-            string userId,
-            Model.SteamAchievementUpdateRequest body
+            string namespace_,            
+            string userId,            
+            Model.SteamAchievementUpdateRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,17 +170,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public UnlockSteamUserAchievement.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new UnlockSteamUserAchievement.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

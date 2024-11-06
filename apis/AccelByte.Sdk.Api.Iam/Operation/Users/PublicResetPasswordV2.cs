@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// **Endpoint migration guide**
     /// - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/reset [POST]_**
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class PublicResetPasswordV2 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -59,16 +59,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicResetPasswordV2 op = new PublicResetPasswordV2(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicResetPasswordV2Builder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public void Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicResetPasswordV2.Response Execute(
                 ModelResetPasswordRequest body,
                 string namespace_
             )
@@ -82,12 +82,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<PublicResetPasswordV2.Response> ExecuteAsync(
                 ModelResetPasswordRequest body,
                 string namespace_
             )
@@ -101,8 +101,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -114,31 +114,49 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public string Error400 { get; set; } = "";
+
+            public string Error403 { get; set; } = "";
+
+            public string Error404 { get; set; } = "";
+
+            public string Error500 { get; set; } = "";
+
+
+            protected override string GetFullOperationId() => "Iam::Users::PublicResetPasswordV2";
+        }
+
+        #endregion
+
         public PublicResetPasswordV2(
-            string namespace_,
-            Model.ModelResetPasswordRequest body
+            string namespace_,            
+            Model.ModelResetPasswordRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -150,17 +168,42 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicResetPasswordV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new PublicResetPasswordV2.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error400!);
+            }
+            else if (code == (HttpStatusCode)403)
+            
+            {
+                response.Error403 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error403!);
+            }
+            else if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error404!);
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error500!);
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

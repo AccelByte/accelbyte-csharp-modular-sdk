@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
         }
         #endregion
 
-        public Model.TierPagingSlicedResult? QueryTiers(QueryTiers input)
+        public QueryTiers.Response QueryTiers(QueryTiers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.TierPagingSlicedResult?> QueryTiersAsync(QueryTiers input)
+        public async Task<QueryTiers.Response> QueryTiersAsync(QueryTiers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.Tier>? CreateTier(CreateTier input)
+        public CreateTier.Response CreateTier(CreateTier input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -137,7 +137,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.Tier>?> CreateTierAsync(CreateTier input)
+        public async Task<CreateTier.Response> CreateTierAsync(CreateTier input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -145,7 +145,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.Tier? UpdateTier(UpdateTier input)
+        public UpdateTier.Response UpdateTier(UpdateTier input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -153,7 +153,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.Tier?> UpdateTierAsync(UpdateTier input)
+        public async Task<UpdateTier.Response> UpdateTierAsync(UpdateTier input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -161,23 +161,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteTier(DeleteTier input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteTierAsync(DeleteTier input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.Tier? ReorderTier(ReorderTier input)
+        public DeleteTier.Response DeleteTier(DeleteTier input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -185,7 +169,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.Tier?> ReorderTierAsync(ReorderTier input)
+        public async Task<DeleteTier.Response> DeleteTierAsync(DeleteTier input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -193,7 +177,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.UserSeasonSummary? GrantUserExp(GrantUserExp input)
+        public ReorderTier.Response ReorderTier(ReorderTier input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -201,7 +185,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserSeasonSummary?> GrantUserExpAsync(GrantUserExp input)
+        public async Task<ReorderTier.Response> ReorderTierAsync(ReorderTier input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -209,7 +193,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.UserSeasonSummary? GrantUserTier(GrantUserTier input)
+        public GrantUserExp.Response GrantUserExp(GrantUserExp input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -217,7 +201,23 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserSeasonSummary?> GrantUserTierAsync(GrantUserTier input)
+        public async Task<GrantUserExp.Response> GrantUserExpAsync(GrantUserExp input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GrantUserTier.Response GrantUserTier(GrantUserTier input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GrantUserTier.Response> GrantUserTierAsync(GrantUserTier input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

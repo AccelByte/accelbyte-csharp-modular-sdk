@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedGroupResponse? GetGroups(GetGroups input)
+        public GetGroups.Response GetGroups(GetGroups input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedGroupResponse?> GetGroupsAsync(GetGroups input)
+        public async Task<GetGroups.Response> GetGroupsAsync(GetGroups input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCreateGroupResponse? CreateGroup(CreateGroup input)
+        public CreateGroup.Response CreateGroup(CreateGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -137,7 +137,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateGroupResponse?> CreateGroupAsync(CreateGroup input)
+        public async Task<CreateGroup.Response> CreateGroupAsync(CreateGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -145,7 +145,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCreateGroupResponse? GetGroup(GetGroup input)
+        public GetGroup.Response GetGroup(GetGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -153,7 +153,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateGroupResponse?> GetGroupAsync(GetGroup input)
+        public async Task<GetGroup.Response> GetGroupAsync(GetGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -161,7 +161,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCreateGroupResponse? UpdateGroup(UpdateGroup input)
+        public UpdateGroup.Response UpdateGroup(UpdateGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -169,7 +169,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateGroupResponse?> UpdateGroupAsync(UpdateGroup input)
+        public async Task<UpdateGroup.Response> UpdateGroupAsync(UpdateGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -177,23 +177,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteGroup(DeleteGroup input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteGroupAsync(DeleteGroup input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsPaginatedContentDownloadResponse? GetGroupContent(GetGroupContent input)
+        public DeleteGroup.Response DeleteGroup(DeleteGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -201,7 +185,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedContentDownloadResponse?> GetGroupContentAsync(GetGroupContent input)
+        public async Task<DeleteGroup.Response> DeleteGroupAsync(DeleteGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -209,7 +193,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPaginatedContentDownloadResponseV2? PublicGetGroupContentsV2(PublicGetGroupContentsV2 input)
+        public GetGroupContent.Response GetGroupContent(GetGroupContent input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -217,7 +201,23 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedContentDownloadResponseV2?> PublicGetGroupContentsV2Async(PublicGetGroupContentsV2 input)
+        public async Task<GetGroupContent.Response> GetGroupContentAsync(GetGroupContent input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetGroupContentsV2.Response PublicGetGroupContentsV2(PublicGetGroupContentsV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetGroupContentsV2.Response> PublicGetGroupContentsV2Async(PublicGetGroupContentsV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

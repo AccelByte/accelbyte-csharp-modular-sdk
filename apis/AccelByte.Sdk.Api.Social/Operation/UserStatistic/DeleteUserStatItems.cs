@@ -60,16 +60,16 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 DeleteUserStatItems op = new DeleteUserStatItems(this,
-                    namespace_,
-                    statCode,
-                    userId
+                    namespace_,                    
+                    statCode,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<DeleteUserStatItemsBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public DeleteUserStatItems.Response Execute(
                 string namespace_,
                 string statCode,
                 string userId
@@ -85,12 +85,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<DeleteUserStatItems.Response> ExecuteAsync(
                 string namespace_,
                 string statCode,
                 string userId
@@ -106,8 +106,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -122,32 +122,52 @@ namespace AccelByte.Sdk.Api.Social.Operation
             PathParams["namespace"] = namespace_;
             PathParams["statCode"] = statCode;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public ErrorEntity? Error401 { get; set; } = null;
+
+            public ErrorEntity? Error403 { get; set; } = null;
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+            public ValidationErrorEntity? Error422 { get; set; } = null;
+
+            public ErrorEntity? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Social::UserStatistic::DeleteUserStatItems";
+        }
+
+        #endregion
+
         public DeleteUserStatItems(
-            string namespace_,
-            string statCode,
-            string userId
+            string namespace_,            
+            string statCode,            
+            string userId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["statCode"] = statCode;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,20 +176,51 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public DeleteUserStatItems.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new DeleteUserStatItems.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)401)
+            
+            {
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            
+            {
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)422)
+            
+            {
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

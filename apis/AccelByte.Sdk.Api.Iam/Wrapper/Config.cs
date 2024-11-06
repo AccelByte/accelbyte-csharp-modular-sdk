@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-        public Model.ModelConfigValueResponseV3? AdminGetConfigValueV3(AdminGetConfigValueV3 input)
+        public AdminGetConfigValueV3.Response AdminGetConfigValueV3(AdminGetConfigValueV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelConfigValueResponseV3?> AdminGetConfigValueV3Async(AdminGetConfigValueV3 input)
+        public async Task<AdminGetConfigValueV3.Response> AdminGetConfigValueV3Async(AdminGetConfigValueV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -75,7 +75,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelConfigValueResponseV3<T1>? AdminGetConfigValueV3<T1>(AdminGetConfigValueV3 input)
+        public AdminGetConfigValueV3.Response<T1> AdminGetConfigValueV3<T1>(AdminGetConfigValueV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelConfigValueResponseV3<T1>?> AdminGetConfigValueV3Async<T1>(AdminGetConfigValueV3 input)
+        public async Task<AdminGetConfigValueV3.Response<T1>> AdminGetConfigValueV3Async<T1>(AdminGetConfigValueV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelConfigValueResponseV3? PublicGetConfigValueV3(PublicGetConfigValueV3 input)
+        public PublicGetConfigValueV3.Response PublicGetConfigValueV3(PublicGetConfigValueV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelConfigValueResponseV3?> PublicGetConfigValueV3Async(PublicGetConfigValueV3 input)
+        public async Task<PublicGetConfigValueV3.Response> PublicGetConfigValueV3Async(PublicGetConfigValueV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelConfigValueResponseV3<T1>? PublicGetConfigValueV3<T1>(PublicGetConfigValueV3 input)
+        public PublicGetConfigValueV3.Response<T1> PublicGetConfigValueV3<T1>(PublicGetConfigValueV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelConfigValueResponseV3<T1>?> PublicGetConfigValueV3Async<T1>(PublicGetConfigValueV3 input)
+        public async Task<PublicGetConfigValueV3.Response<T1>> PublicGetConfigValueV3Async<T1>(PublicGetConfigValueV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(

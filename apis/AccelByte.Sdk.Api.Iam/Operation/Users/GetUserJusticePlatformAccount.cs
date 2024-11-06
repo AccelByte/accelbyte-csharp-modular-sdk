@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ### Read Justice Platform Account UserID
     /// Without permission the UserID is going to be censored and replaced with âRedactedâ text.
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class GetUserJusticePlatformAccount : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -68,17 +68,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 GetUserJusticePlatformAccount op = new GetUserJusticePlatformAccount(this,
-                    namespace_,
-                    targetNamespace,
-                    userId
+                    namespace_,                    
+                    targetNamespace,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<GetUserJusticePlatformAccountBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public Model.ModelGetUserJusticePlatformAccountResponse? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetUserJusticePlatformAccount.Response Execute(
                 string namespace_,
                 string targetNamespace,
                 string userId
@@ -95,11 +95,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelGetUserJusticePlatformAccountResponse?> ExecuteAsync(
+            public async Task<GetUserJusticePlatformAccount.Response> ExecuteAsync(
                 string namespace_,
                 string targetNamespace,
                 string userId
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -131,32 +131,48 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["namespace"] = namespace_;
             PathParams["targetNamespace"] = targetNamespace;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelGetUserJusticePlatformAccountResponse>
+        {
+
+            public RestErrorResponse? Error400 { get; set; } = null;
+
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public RestErrorResponse? Error403 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::Users::GetUserJusticePlatformAccount";
+        }
+
+        #endregion
+
         public GetUserJusticePlatformAccount(
-            string namespace_,
-            string targetNamespace,
-            string userId
+            string namespace_,            
+            string targetNamespace,            
+            string userId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["targetNamespace"] = targetNamespace;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -168,25 +184,41 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelGetUserJusticePlatformAccountResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetUserJusticePlatformAccount.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetUserJusticePlatformAccount.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelGetUserJusticePlatformAccountResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelGetUserJusticePlatformAccountResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelGetUserJusticePlatformAccountResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

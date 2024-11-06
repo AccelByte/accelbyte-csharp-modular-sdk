@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
         }
         #endregion
 
-        public Model.ApiQoSEndpointResponse? QoSRegionsGet(QoSRegionsGet input)
+        public QoSRegionsGet.Response QoSRegionsGet(QoSRegionsGet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiQoSEndpointResponse?> QoSRegionsGetAsync(QoSRegionsGet input)
+        public async Task<QoSRegionsGet.Response> QoSRegionsGetAsync(QoSRegionsGet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,18 +74,18 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void QoSRegionsUpdate(QoSRegionsUpdate input)
+        public QoSRegionsUpdate.Response QoSRegionsUpdate(QoSRegionsUpdate input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task QoSRegionsUpdateAsync(QoSRegionsUpdate input)
+        public async Task<QoSRegionsUpdate.Response> QoSRegionsUpdateAsync(QoSRegionsUpdate input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

@@ -61,16 +61,16 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 GeneratedUploadUrl op = new GeneratedUploadUrl(this,
-                    folder,
-                    namespace_,
-                    fileType
+                    folder,                    
+                    namespace_,                    
+                    fileType                    
                 );
 
                 op.SetBaseFields<GeneratedUploadUrlBuilder>(this);
                 return op;
             }
 
-            public Model.FileUploadUrlInfo? Execute(
+            public GeneratedUploadUrl.Response Execute(
                 string folder,
                 string namespace_,
                 string fileType
@@ -87,11 +87,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.FileUploadUrlInfo?> ExecuteAsync(
+            public async Task<GeneratedUploadUrl.Response> ExecuteAsync(
                 string folder,
                 string namespace_,
                 string fileType
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -122,33 +122,51 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         {
             PathParams["folder"] = folder;
             PathParams["namespace"] = namespace_;
-
+            
             if (fileType is not null) QueryParams["fileType"] = fileType;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.FileUploadUrlInfo>
+        {
+
+            public ValidationErrorEntity? Error400 { get; set; } = null;
+
+            public ErrorEntity? Error401 { get; set; } = null;
+
+            public ErrorEntity? Error403 { get; set; } = null;
+
+            public ErrorEntity? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Basic::FileUpload::GeneratedUploadUrl";
+        }
+
+        #endregion
+
         public GeneratedUploadUrl(
-            string folder,
-            string namespace_,
-            string fileType
+            string folder,            
+            string namespace_,            
+            string fileType            
         )
         {
             PathParams["folder"] = folder;
             PathParams["namespace"] = namespace_;
-
+            
             if (fileType is not null) QueryParams["fileType"] = fileType;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -157,28 +175,49 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.FileUploadUrlInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GeneratedUploadUrl.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GeneratedUploadUrl.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.FileUploadUrlInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.FileUploadUrlInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.FileUploadUrlInfo>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

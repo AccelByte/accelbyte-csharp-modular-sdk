@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         }
         #endregion
 
-        public Model.ModelsSessionResponse? CreateSession(CreateSession input)
+        public CreateSession.Response CreateSession(CreateSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsSessionResponse?> CreateSessionAsync(CreateSession input)
+        public async Task<CreateSession.Response> CreateSessionAsync(CreateSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,23 +96,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void ClaimServer(ClaimServer input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task ClaimServerAsync(ClaimServer input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsSessionResponse? GetSession(GetSession input)
+        public ClaimServer.Response ClaimServer(ClaimServer input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +104,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsSessionResponse?> GetSessionAsync(GetSession input)
+        public async Task<ClaimServer.Response> ClaimServerAsync(ClaimServer input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,18 +112,34 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void CancelSession(CancelSession input)
+        public GetSession.Response GetSession(GetSession input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task CancelSessionAsync(CancelSession input)
+        public async Task<GetSession.Response> GetSessionAsync(GetSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public CancelSession.Response CancelSession(CancelSession input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<CancelSession.Response> CancelSessionAsync(CancelSession input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

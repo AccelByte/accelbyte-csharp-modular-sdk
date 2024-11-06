@@ -56,15 +56,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GeDLCDurableRewardShortMap op = new GeDLCDurableRewardShortMap(this,
-                    namespace_,
-                    dlcType
+                    namespace_,                    
+                    dlcType                    
                 );
 
                 op.SetBaseFields<GeDLCDurableRewardShortMapBuilder>(this);
                 return op;
             }
 
-            public Model.DLCConfigRewardShortInfo? Execute(
+            public GeDLCDurableRewardShortMap.Response Execute(
                 string namespace_,
                 string dlcType
             )
@@ -79,11 +79,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.DLCConfigRewardShortInfo?> ExecuteAsync(
+            public async Task<GeDLCDurableRewardShortMap.Response> ExecuteAsync(
                 string namespace_,
                 string dlcType
             )
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -110,31 +110,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (dlcType is not null) QueryParams["dlcType"] = dlcType.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.DLCConfigRewardShortInfo>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::DLC::GeDLCDurableRewardShortMap";
+        }
+
+        #endregion
+
         public GeDLCDurableRewardShortMap(
-            string namespace_,
-            GeDLCDurableRewardShortMapDlcType dlcType
+            string namespace_,            
+            GeDLCDurableRewardShortMapDlcType dlcType            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (dlcType is not null) QueryParams["dlcType"] = dlcType.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -143,28 +155,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { };
-
-        public Model.DLCConfigRewardShortInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public override List<string> Produces => new() {  };
+        
+        public GeDLCDurableRewardShortMap.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GeDLCDurableRewardShortMap.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.DLCConfigRewardShortInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.DLCConfigRewardShortInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.DLCConfigRewardShortInfo>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

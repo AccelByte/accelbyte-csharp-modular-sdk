@@ -78,7 +78,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
-            public Model.ModelInputValidationsPublicResponse? Execute(
+            public PublicGetInputValidations.Response Execute(
             )
             {
                 PublicGetInputValidations op = Build(
@@ -89,11 +89,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelInputValidationsPublicResponse?> ExecuteAsync(
+            public async Task<PublicGetInputValidations.Response> ExecuteAsync(
             )
             {
                 PublicGetInputValidations op = Build(
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -113,31 +113,45 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         private PublicGetInputValidations(PublicGetInputValidationsBuilder builder
         )
         {
-
+            
             if (builder.DefaultOnEmpty != null) QueryParams["defaultOnEmpty"] = Convert.ToString(builder.DefaultOnEmpty)!;
             if (builder.LanguageCode is not null) QueryParams["languageCode"] = builder.LanguageCode;
+            
 
-
-
-
-
+            
+            
+            
 
         }
         #endregion
 
-        public PublicGetInputValidations(
-            bool? defaultOnEmpty,
-            string? languageCode
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelInputValidationsPublicResponse>
         {
 
+            public string Error404 { get; set; } = "";
+
+            public RestErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::InputValidations::PublicGetInputValidations";
+        }
+
+        #endregion
+
+        public PublicGetInputValidations(
+            bool? defaultOnEmpty,            
+            string? languageCode            
+        )
+        {
+            
             if (defaultOnEmpty != null) QueryParams["defaultOnEmpty"] = Convert.ToString(defaultOnEmpty)!;
             if (languageCode is not null) QueryParams["languageCode"] = languageCode;
+            
 
-
-
-
-
+            
+            
+            
 
         }
 
@@ -148,25 +162,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelInputValidationsPublicResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicGetInputValidations.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicGetInputValidations.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelInputValidationsPublicResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelInputValidationsPublicResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.ModelInputValidationsPublicResponse>(payload, ResponseJsonOptions);
+                response.Error404 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error404!);
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

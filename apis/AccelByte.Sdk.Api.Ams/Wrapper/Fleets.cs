@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
         }
         #endregion
 
-        public Model.ApiFleetListResponse? FleetList(FleetList input)
+        public FleetList.Response FleetList(FleetList input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -132,7 +132,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiFleetListResponse?> FleetListAsync(FleetList input)
+        public async Task<FleetList.Response> FleetListAsync(FleetList input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -140,7 +140,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiFleetCreateResponse? FleetCreate(FleetCreate input)
+        public FleetCreate.Response FleetCreate(FleetCreate input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiFleetCreateResponse?> FleetCreateAsync(FleetCreate input)
+        public async Task<FleetCreate.Response> FleetCreateAsync(FleetCreate input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -156,7 +156,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiFleetGetResponse? FleetGet(FleetGet input)
+        public FleetGet.Response FleetGet(FleetGet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -164,7 +164,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiFleetGetResponse?> FleetGetAsync(FleetGet input)
+        public async Task<FleetGet.Response> FleetGetAsync(FleetGet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -172,39 +172,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void FleetUpdate(FleetUpdate input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task FleetUpdateAsync(FleetUpdate input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void FleetDelete(FleetDelete input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task FleetDeleteAsync(FleetDelete input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApiFleetServersResponse? FleetServers(FleetServers input)
+        public FleetUpdate.Response FleetUpdate(FleetUpdate input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -212,7 +180,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiFleetServersResponse?> FleetServersAsync(FleetServers input)
+        public async Task<FleetUpdate.Response> FleetUpdateAsync(FleetUpdate input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -220,7 +188,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiFleetClaimResponse? FleetClaimByID(FleetClaimByID input)
+        public FleetDelete.Response FleetDelete(FleetDelete input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -228,7 +196,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiFleetClaimResponse?> FleetClaimByIDAsync(FleetClaimByID input)
+        public async Task<FleetDelete.Response> FleetDeleteAsync(FleetDelete input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -236,7 +204,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiFleetClaimResponse? FleetClaimByKeys(FleetClaimByKeys input)
+        public FleetServers.Response FleetServers(FleetServers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -244,7 +212,39 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiFleetClaimResponse?> FleetClaimByKeysAsync(FleetClaimByKeys input)
+        public async Task<FleetServers.Response> FleetServersAsync(FleetServers input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public FleetClaimByID.Response FleetClaimByID(FleetClaimByID input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<FleetClaimByID.Response> FleetClaimByIDAsync(FleetClaimByID input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public FleetClaimByKeys.Response FleetClaimByKeys(FleetClaimByKeys input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<FleetClaimByKeys.Response> FleetClaimByKeysAsync(FleetClaimByKeys input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

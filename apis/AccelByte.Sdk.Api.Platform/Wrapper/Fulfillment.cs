@@ -157,7 +157,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.FulfillmentHistoryPagingSlicedResult? QueryFulfillmentHistories(QueryFulfillmentHistories input)
+        public QueryFulfillmentHistories.Response QueryFulfillmentHistories(QueryFulfillmentHistories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -165,7 +165,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FulfillmentHistoryPagingSlicedResult?> QueryFulfillmentHistoriesAsync(QueryFulfillmentHistories input)
+        public async Task<QueryFulfillmentHistories.Response> QueryFulfillmentHistoriesAsync(QueryFulfillmentHistories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -173,7 +173,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FulfillmentResult? FulfillItem(FulfillItem input)
+        public FulfillItem.Response FulfillItem(FulfillItem input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -181,7 +181,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FulfillmentResult?> FulfillItemAsync(FulfillItem input)
+        public async Task<FulfillItem.Response> FulfillItemAsync(FulfillItem input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -189,7 +189,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FulfillmentResult? RedeemCode(RedeemCode input)
+        public RedeemCode.Response RedeemCode(RedeemCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -197,7 +197,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FulfillmentResult?> RedeemCodeAsync(RedeemCode input)
+        public async Task<RedeemCode.Response> RedeemCodeAsync(RedeemCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -205,7 +205,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.FulfillmentItem>? PreCheckFulfillItem(PreCheckFulfillItem input)
+        public PreCheckFulfillItem.Response PreCheckFulfillItem(PreCheckFulfillItem input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -213,7 +213,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.FulfillmentItem>?> PreCheckFulfillItemAsync(PreCheckFulfillItem input)
+        public async Task<PreCheckFulfillItem.Response> PreCheckFulfillItemAsync(PreCheckFulfillItem input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -221,23 +221,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void FulfillRewards(FulfillRewards input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task FulfillRewardsAsync(FulfillRewards input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.FulfillmentResult? PublicRedeemCode(PublicRedeemCode input)
+        public FulfillRewards.Response FulfillRewards(FulfillRewards input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -245,7 +229,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FulfillmentResult?> PublicRedeemCodeAsync(PublicRedeemCode input)
+        public async Task<FulfillRewards.Response> FulfillRewardsAsync(FulfillRewards input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -253,7 +237,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FulfillmentPagingSlicedResult? QueryFulfillments(QueryFulfillments input)
+        public PublicRedeemCode.Response PublicRedeemCode(PublicRedeemCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -261,7 +245,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FulfillmentPagingSlicedResult?> QueryFulfillmentsAsync(QueryFulfillments input)
+        public async Task<PublicRedeemCode.Response> PublicRedeemCodeAsync(PublicRedeemCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -269,7 +253,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FulfillmentResult? FulfillRewardsV2(FulfillRewardsV2 input)
+        public QueryFulfillments.Response QueryFulfillments(QueryFulfillments input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -277,7 +261,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FulfillmentResult?> FulfillRewardsV2Async(FulfillRewardsV2 input)
+        public async Task<QueryFulfillments.Response> QueryFulfillmentsAsync(QueryFulfillments input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -285,7 +269,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FulfillmentV2Result? FulfillItems(FulfillItems input)
+        public FulfillRewardsV2.Response FulfillRewardsV2(FulfillRewardsV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -293,7 +277,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FulfillmentV2Result?> FulfillItemsAsync(FulfillItems input)
+        public async Task<FulfillRewardsV2.Response> FulfillRewardsV2Async(FulfillRewardsV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -301,7 +285,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FulfillmentV2Result? RetryFulfillItems(RetryFulfillItems input)
+        public FulfillItems.Response FulfillItems(FulfillItems input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -309,7 +293,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FulfillmentV2Result?> RetryFulfillItemsAsync(RetryFulfillItems input)
+        public async Task<FulfillItems.Response> FulfillItemsAsync(FulfillItems input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -317,7 +301,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RevokeFulfillmentV2Result? RevokeItems(RevokeItems input)
+        public RetryFulfillItems.Response RetryFulfillItems(RetryFulfillItems input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -325,7 +309,23 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RevokeFulfillmentV2Result?> RevokeItemsAsync(RevokeItems input)
+        public async Task<RetryFulfillItems.Response> RetryFulfillItemsAsync(RetryFulfillItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public RevokeItems.Response RevokeItems(RevokeItems input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<RevokeItems.Response> RevokeItemsAsync(RevokeItems input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

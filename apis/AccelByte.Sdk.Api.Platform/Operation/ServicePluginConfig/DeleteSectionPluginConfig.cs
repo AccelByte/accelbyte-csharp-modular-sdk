@@ -55,14 +55,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 DeleteSectionPluginConfig op = new DeleteSectionPluginConfig(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<DeleteSectionPluginConfigBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public DeleteSectionPluginConfig.Response Execute(
                 string namespace_
             )
             {
@@ -74,12 +74,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<DeleteSectionPluginConfig.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -91,8 +91,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -103,28 +103,38 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::ServicePluginConfig::DeleteSectionPluginConfig";
+        }
+
+        #endregion
+
         public DeleteSectionPluginConfig(
-            string namespace_
+            string namespace_            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -133,20 +143,21 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public DeleteSectionPluginConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new DeleteSectionPluginConfig.Response()
             {
-                return;
-            }
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
 
-            var payloadString = payload.ReadToString();
 
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -201,55 +201,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         }
         #endregion
 
-        public void UpdateImage(UpdateImage input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task UpdateImageAsync(UpdateImage input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void CreateImage(CreateImage input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task CreateImageAsync(CreateImage input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void CreateImagePatch(CreateImagePatch input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task CreateImagePatchAsync(CreateImagePatch input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsListImageResponse? ListImages(ListImages input)
+        public UpdateImage.Response UpdateImage(UpdateImage input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -257,7 +209,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListImageResponse?> ListImagesAsync(ListImages input)
+        public async Task<UpdateImage.Response> UpdateImageAsync(UpdateImage input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -265,23 +217,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteImage(DeleteImage input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteImageAsync(DeleteImage input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsGetImageLimitResponse? GetImageLimit(GetImageLimit input)
+        public CreateImage.Response CreateImage(CreateImage input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -289,7 +225,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetImageLimitResponse?> GetImageLimitAsync(GetImageLimit input)
+        public async Task<CreateImage.Response> CreateImageAsync(CreateImage input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -297,23 +233,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteImagePatch(DeleteImagePatch input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteImagePatchAsync(DeleteImagePatch input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsGetImageDetailResponse? GetImageDetail(GetImageDetail input)
+        public CreateImagePatch.Response CreateImagePatch(CreateImagePatch input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -321,7 +241,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetImageDetailResponse?> GetImageDetailAsync(GetImageDetail input)
+        public async Task<CreateImagePatch.Response> CreateImagePatchAsync(CreateImagePatch input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -329,7 +249,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsListImagePatchesResponse? GetImagePatches(GetImagePatches input)
+        public ListImages.Response ListImages(ListImages input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -337,7 +257,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListImagePatchesResponse?> GetImagePatchesAsync(GetImagePatches input)
+        public async Task<ListImages.Response> ListImagesAsync(ListImages input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -345,7 +265,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetImagePatchDetailResponse? GetImagePatchDetail(GetImagePatchDetail input)
+        public DeleteImage.Response DeleteImage(DeleteImage input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -353,7 +273,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetImagePatchDetailResponse?> GetImagePatchDetailAsync(GetImagePatchDetail input)
+        public async Task<DeleteImage.Response> DeleteImageAsync(DeleteImage input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -361,7 +281,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsRepositoryRecord? GetRepository(GetRepository input)
+        public GetImageLimit.Response GetImageLimit(GetImageLimit input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -369,7 +289,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsRepositoryRecord?> GetRepositoryAsync(GetRepository input)
+        public async Task<GetImageLimit.Response> GetImageLimitAsync(GetImageLimit input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -377,23 +297,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void CreateRepository(CreateRepository input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task CreateRepositoryAsync(CreateRepository input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsListImageResponse? ListImagesClient(ListImagesClient input)
+        public DeleteImagePatch.Response DeleteImagePatch(DeleteImagePatch input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -401,7 +305,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListImageResponse?> ListImagesClientAsync(ListImagesClient input)
+        public async Task<DeleteImagePatch.Response> DeleteImagePatchAsync(DeleteImagePatch input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -409,7 +313,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetImageLimitResponse? ImageLimitClient(ImageLimitClient input)
+        public GetImageDetail.Response GetImageDetail(GetImageDetail input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -417,7 +321,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetImageLimitResponse?> ImageLimitClientAsync(ImageLimitClient input)
+        public async Task<GetImageDetail.Response> GetImageDetailAsync(GetImageDetail input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -425,7 +329,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetImageDetailResponse? ImageDetailClient(ImageDetailClient input)
+        public GetImagePatches.Response GetImagePatches(GetImagePatches input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -433,7 +337,103 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetImageDetailResponse?> ImageDetailClientAsync(ImageDetailClient input)
+        public async Task<GetImagePatches.Response> GetImagePatchesAsync(GetImagePatches input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetImagePatchDetail.Response GetImagePatchDetail(GetImagePatchDetail input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetImagePatchDetail.Response> GetImagePatchDetailAsync(GetImagePatchDetail input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetRepository.Response GetRepository(GetRepository input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetRepository.Response> GetRepositoryAsync(GetRepository input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public CreateRepository.Response CreateRepository(CreateRepository input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<CreateRepository.Response> CreateRepositoryAsync(CreateRepository input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public ListImagesClient.Response ListImagesClient(ListImagesClient input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<ListImagesClient.Response> ListImagesClientAsync(ListImagesClient input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public ImageLimitClient.Response ImageLimitClient(ImageLimitClient input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<ImageLimitClient.Response> ImageLimitClientAsync(ImageLimitClient input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public ImageDetailClient.Response ImageDetailClient(ImageDetailClient input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<ImageDetailClient.Response> ImageDetailClientAsync(ImageDetailClient input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

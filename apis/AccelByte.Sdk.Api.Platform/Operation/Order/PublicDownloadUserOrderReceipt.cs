@@ -60,16 +60,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicDownloadUserOrderReceipt op = new PublicDownloadUserOrderReceipt(this,
-                    namespace_,
-                    orderNo,
-                    userId
+                    namespace_,                    
+                    orderNo,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PublicDownloadUserOrderReceiptBuilder>(this);
                 return op;
             }
 
-            public Stream? Execute(
+            public PublicDownloadUserOrderReceipt.Response Execute(
                 string namespace_,
                 string orderNo,
                 string userId
@@ -86,11 +86,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Stream?> ExecuteAsync(
+            public async Task<PublicDownloadUserOrderReceipt.Response> ExecuteAsync(
                 string namespace_,
                 string orderNo,
                 string userId
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -122,32 +122,46 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["namespace"] = namespace_;
             PathParams["orderNo"] = orderNo;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Stream>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+            public ErrorEntity? Error409 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Order::PublicDownloadUserOrderReceipt";
+        }
+
+        #endregion
+
         public PublicDownloadUserOrderReceipt(
-            string namespace_,
-            string orderNo,
-            string userId
+            string namespace_,            
+            string orderNo,            
+            string userId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["orderNo"] = orderNo;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,28 +170,39 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/pdf" };
-
-        public Stream? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicDownloadUserOrderReceipt.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicDownloadUserOrderReceipt.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return payload;
+                response.Data = payload;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return payload;
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)409)
+            {
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -68,16 +68,16 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 InitiateExportAgreementsToCSV op = new InitiateExportAgreementsToCSV(this,
-                    namespace_,
-                    policyVersionId,
-                    start
+                    namespace_,                    
+                    policyVersionId,                    
+                    start                    
                 );
 
                 op.SetBaseFields<InitiateExportAgreementsToCSVBuilder>(this);
                 return op;
             }
 
-            public Model.InitiateExportAgreementsToCSVResponse? Execute(
+            public InitiateExportAgreementsToCSV.Response Execute(
                 string namespace_,
                 string policyVersionId,
                 string start
@@ -94,11 +94,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.InitiateExportAgreementsToCSVResponse?> ExecuteAsync(
+            public async Task<InitiateExportAgreementsToCSV.Response> ExecuteAsync(
                 string namespace_,
                 string policyVersionId,
                 string start
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -128,37 +128,53 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.End is not null) QueryParams["end"] = builder.End;
             if (policyVersionId is not null) QueryParams["policyVersionId"] = policyVersionId;
             if (start is not null) QueryParams["start"] = start;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.InitiateExportAgreementsToCSVResponse>
+        {
+
+            public ErrorEntity? Error400 { get; set; } = null;
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+            public ErrorEntity? Error409 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Legal::AgreementWithNamespace::InitiateExportAgreementsToCSV";
+        }
+
+        #endregion
+
         public InitiateExportAgreementsToCSV(
-            string namespace_,
-            string? end,
-            string policyVersionId,
-            string start
+            string namespace_,            
+            string? end,            
+            string policyVersionId,            
+            string start            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (end is not null) QueryParams["end"] = end;
             if (policyVersionId is not null) QueryParams["policyVersionId"] = policyVersionId;
             if (start is not null) QueryParams["start"] = start;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -167,28 +183,44 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.InitiateExportAgreementsToCSVResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public InitiateExportAgreementsToCSV.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new InitiateExportAgreementsToCSV.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.InitiateExportAgreementsToCSVResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.InitiateExportAgreementsToCSVResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.InitiateExportAgreementsToCSVResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)409)
+            {
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -109,17 +109,17 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             )
             {
                 AdminPutAdminPlayerRecordV1 op = new AdminPutAdminPlayerRecordV1(this,
-                    body,
-                    key,
-                    namespace_,
-                    userId
+                    body,                    
+                    key,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<AdminPutAdminPlayerRecordV1Builder>(this);
                 return op;
             }
 
-            public Model.ModelsAdminPlayerRecordResponse? Execute(
+            public AdminPutAdminPlayerRecordV1.Response Execute(
                 ModelsAdminPlayerRecordRequest body,
                 string key,
                 string namespace_,
@@ -138,11 +138,11 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsAdminPlayerRecordResponse?> ExecuteAsync(
+            public async Task<AdminPutAdminPlayerRecordV1.Response> ExecuteAsync(
                 ModelsAdminPlayerRecordRequest body,
                 string key,
                 string namespace_,
@@ -161,12 +161,12 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
 
-            public Model.ModelsAdminPlayerRecordResponse<T1>? Execute<T1>(
+            public AdminPutAdminPlayerRecordV1.Response<T1> Execute<T1>(
                 ModelsAdminPlayerRecordRequest body,
                 string key,
                 string namespace_,
@@ -185,11 +185,11 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsAdminPlayerRecordResponse<T1>?> ExecuteAsync<T1>(
+            public async Task<AdminPutAdminPlayerRecordV1.Response<T1>> ExecuteAsync<T1>(
                 ModelsAdminPlayerRecordRequest body,
                 string key,
                 string namespace_,
@@ -208,7 +208,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -224,35 +224,66 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsAdminPlayerRecordResponse>
+        {
+
+            public ModelsResponseError? Error400 { get; set; } = null;
+
+            public ModelsResponseError? Error401 { get; set; } = null;
+
+            public ModelsResponseError? Error403 { get; set; } = null;
+
+            public ModelsResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Cloudsave::AdminRecord::AdminPutAdminPlayerRecordV1";
+        }
+
+        public class Response<T1> : ApiResponse<Model.ModelsAdminPlayerRecordResponse<T1>>
+        {
+            public ModelsResponseError? Error400 { get; set; } = null;
+
+            public ModelsResponseError? Error401 { get; set; } = null;
+
+            public ModelsResponseError? Error403 { get; set; } = null;
+
+            public ModelsResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Cloudsave::AdminRecord::AdminPutAdminPlayerRecordV1";
+        }
+        #endregion
+
         public AdminPutAdminPlayerRecordV1(
-            string key,
-            string namespace_,
-            string userId,
-            Model.ModelsAdminPlayerRecordRequest body
+            string key,            
+            string namespace_,            
+            string userId,            
+            Model.ModelsAdminPlayerRecordRequest body            
         )
         {
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -264,44 +295,87 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsAdminPlayerRecordResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminPutAdminPlayerRecordV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminPutAdminPlayerRecordV1.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsAdminPlayerRecordResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsAdminPlayerRecordResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsAdminPlayerRecordResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
 
-        public Model.ModelsAdminPlayerRecordResponse<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
+        public AdminPutAdminPlayerRecordV1.Response<T1> ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminPutAdminPlayerRecordV1.Response<T1>()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
-            }
-            else if (code == (HttpStatusCode)201)
+                response.IsSuccess = true;
+            }            
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsAdminPlayerRecordResponse<T1>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsAdminPlayerRecordResponse<T1>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsAdminPlayerRecordResponse<T1>>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
             }
-
-            var payloadString = payload.ReadToString();
-            throw new HttpResponseException(code, payloadString);
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
+            }
+            
+            return response;
         }
     }
 

@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
         }
         #endregion
 
-        public Model.LogconfigConfiguration? AdminGetLogConfig(AdminGetLogConfig input)
+        public AdminGetLogConfig.Response AdminGetLogConfig(AdminGetLogConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.LogconfigConfiguration?> AdminGetLogConfigAsync(AdminGetLogConfig input)
+        public async Task<AdminGetLogConfig.Response> AdminGetLogConfigAsync(AdminGetLogConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.LogconfigConfiguration? AdminPatchUpdateLogConfig(AdminPatchUpdateLogConfig input)
+        public AdminPatchUpdateLogConfig.Response AdminPatchUpdateLogConfig(AdminPatchUpdateLogConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.LogconfigConfiguration?> AdminPatchUpdateLogConfigAsync(AdminPatchUpdateLogConfig input)
+        public async Task<AdminPatchUpdateLogConfig.Response> AdminPatchUpdateLogConfigAsync(AdminPatchUpdateLogConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

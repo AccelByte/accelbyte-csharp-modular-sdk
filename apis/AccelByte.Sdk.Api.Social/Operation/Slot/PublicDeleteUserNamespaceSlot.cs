@@ -31,7 +31,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// Deletes the slot.
     /// Other detail info:
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class PublicDeleteUserNamespaceSlot : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -64,17 +64,17 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 PublicDeleteUserNamespaceSlot op = new PublicDeleteUserNamespaceSlot(this,
-                    namespace_,
-                    slotId,
-                    userId
+                    namespace_,                    
+                    slotId,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PublicDeleteUserNamespaceSlotBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public void Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicDeleteUserNamespaceSlot.Response Execute(
                 string namespace_,
                 string slotId,
                 string userId
@@ -90,12 +90,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<PublicDeleteUserNamespaceSlot.Response> ExecuteAsync(
                 string namespace_,
                 string slotId,
                 string userId
@@ -111,8 +111,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -127,32 +127,44 @@ namespace AccelByte.Sdk.Api.Social.Operation
             PathParams["namespace"] = namespace_;
             PathParams["slotId"] = slotId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Social::Slot::PublicDeleteUserNamespaceSlot";
+        }
+
+        #endregion
+
         public PublicDeleteUserNamespaceSlot(
-            string namespace_,
-            string slotId,
-            string userId
+            string namespace_,            
+            string slotId,            
+            string userId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["slotId"] = slotId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -161,20 +173,27 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicDeleteUserNamespaceSlot.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new PublicDeleteUserNamespaceSlot.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

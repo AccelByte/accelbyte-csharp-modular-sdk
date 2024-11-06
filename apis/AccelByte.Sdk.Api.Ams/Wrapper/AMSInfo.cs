@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
         }
         #endregion
 
-        public Model.ApiAMSRegionsResponse? InfoRegions(InfoRegions input)
+        public InfoRegions.Response InfoRegions(InfoRegions input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiAMSRegionsResponse?> InfoRegionsAsync(InfoRegions input)
+        public async Task<InfoRegions.Response> InfoRegionsAsync(InfoRegions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiAvailableInstanceTypesResponse? InfoSupportedInstances(InfoSupportedInstances input)
+        public InfoSupportedInstances.Response InfoSupportedInstances(InfoSupportedInstances input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiAvailableInstanceTypesResponse?> InfoSupportedInstancesAsync(InfoSupportedInstances input)
+        public async Task<InfoSupportedInstances.Response> InfoSupportedInstancesAsync(InfoSupportedInstances input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -101,18 +101,18 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void UploadURLGet(UploadURLGet input)
+        public UploadURLGet.Response UploadURLGet(UploadURLGet input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task UploadURLGetAsync(UploadURLGet input)
+        public async Task<UploadURLGet.Response> UploadURLGetAsync(UploadURLGet input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

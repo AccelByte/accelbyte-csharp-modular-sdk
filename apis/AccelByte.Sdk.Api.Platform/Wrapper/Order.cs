@@ -144,7 +144,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetUserOrderGrant.GetUserOrderGrantBuilder GetUserOrderGrantOp
         {
             get
@@ -268,7 +268,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.OrderPagingResult? QueryOrders(QueryOrders input)
+        public QueryOrders.Response QueryOrders(QueryOrders input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -276,7 +276,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderPagingResult?> QueryOrdersAsync(QueryOrders input)
+        public async Task<QueryOrders.Response> QueryOrdersAsync(QueryOrders input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -284,7 +284,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OrderStatistics? GetOrderStatistics(GetOrderStatistics input)
+        public GetOrderStatistics.Response GetOrderStatistics(GetOrderStatistics input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -292,7 +292,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderStatistics?> GetOrderStatisticsAsync(GetOrderStatistics input)
+        public async Task<GetOrderStatistics.Response> GetOrderStatisticsAsync(GetOrderStatistics input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -300,7 +300,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OrderInfo? GetOrder(GetOrder input)
+        public GetOrder.Response GetOrder(GetOrder input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -308,40 +308,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderInfo?> GetOrderAsync(GetOrder input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-
-        public Model.OrderInfo<T1>? GetOrder<T1>(GetOrder input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.OrderInfo<T1>?> GetOrderAsync<T1>(GetOrder input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.OrderInfo? RefundOrder(RefundOrder input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.OrderInfo?> RefundOrderAsync(RefundOrder input)
+        public async Task<GetOrder.Response> GetOrderAsync(GetOrder input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -350,7 +317,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
 
-        public Model.OrderInfo<T1>? RefundOrder<T1>(RefundOrder input)
+        public GetOrder.Response<T1> GetOrder<T1>(GetOrder input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -358,7 +325,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderInfo<T1>?> RefundOrderAsync<T1>(RefundOrder input)
+        public async Task<GetOrder.Response<T1>> GetOrderAsync<T1>(GetOrder input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -366,7 +333,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OrderPagingSlicedResult? QueryUserOrders(QueryUserOrders input)
+        public RefundOrder.Response RefundOrder(RefundOrder input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -374,23 +341,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderPagingSlicedResult?> QueryUserOrdersAsync(QueryUserOrders input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.OrderInfo? AdminCreateUserOrder(AdminCreateUserOrder input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.OrderInfo?> AdminCreateUserOrderAsync(AdminCreateUserOrder input)
+        public async Task<RefundOrder.Response> RefundOrderAsync(RefundOrder input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -399,7 +350,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
 
-        public Model.OrderInfo<T1>? AdminCreateUserOrder<T1>(AdminCreateUserOrder input)
+        public RefundOrder.Response<T1> RefundOrder<T1>(RefundOrder input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -407,7 +358,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderInfo<T1>?> AdminCreateUserOrderAsync<T1>(AdminCreateUserOrder input)
+        public async Task<RefundOrder.Response<T1>> RefundOrderAsync<T1>(RefundOrder input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -415,7 +366,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PurchasedItemCount? CountOfPurchasedItem(CountOfPurchasedItem input)
+        public QueryUserOrders.Response QueryUserOrders(QueryUserOrders input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -423,7 +374,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PurchasedItemCount?> CountOfPurchasedItemAsync(CountOfPurchasedItem input)
+        public async Task<QueryUserOrders.Response> QueryUserOrdersAsync(QueryUserOrders input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -431,7 +382,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OrderInfo? GetUserOrder(GetUserOrder input)
+        public AdminCreateUserOrder.Response AdminCreateUserOrder(AdminCreateUserOrder input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -439,7 +390,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderInfo?> GetUserOrderAsync(GetUserOrder input)
+        public async Task<AdminCreateUserOrder.Response> AdminCreateUserOrderAsync(AdminCreateUserOrder input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -448,7 +399,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
 
-        public Model.OrderInfo<T1>? GetUserOrder<T1>(GetUserOrder input)
+        public AdminCreateUserOrder.Response<T1> AdminCreateUserOrder<T1>(AdminCreateUserOrder input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -456,7 +407,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderInfo<T1>?> GetUserOrderAsync<T1>(GetUserOrder input)
+        public async Task<AdminCreateUserOrder.Response<T1>> AdminCreateUserOrderAsync<T1>(AdminCreateUserOrder input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -464,7 +415,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OrderInfo? UpdateUserOrderStatus(UpdateUserOrderStatus input)
+        public CountOfPurchasedItem.Response CountOfPurchasedItem(CountOfPurchasedItem input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -472,7 +423,23 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderInfo?> UpdateUserOrderStatusAsync(UpdateUserOrderStatus input)
+        public async Task<CountOfPurchasedItem.Response> CountOfPurchasedItemAsync(CountOfPurchasedItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetUserOrder.Response GetUserOrder(GetUserOrder input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetUserOrder.Response> GetUserOrderAsync(GetUserOrder input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -481,7 +448,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
 
-        public Model.OrderInfo<T1>? UpdateUserOrderStatus<T1>(UpdateUserOrderStatus input)
+        public GetUserOrder.Response<T1> GetUserOrder<T1>(GetUserOrder input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -489,7 +456,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderInfo<T1>?> UpdateUserOrderStatusAsync<T1>(UpdateUserOrderStatus input)
+        public async Task<GetUserOrder.Response<T1>> GetUserOrderAsync<T1>(GetUserOrder input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -497,7 +464,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OrderInfo? FulfillUserOrder(FulfillUserOrder input)
+        public UpdateUserOrderStatus.Response UpdateUserOrderStatus(UpdateUserOrderStatus input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -505,7 +472,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderInfo?> FulfillUserOrderAsync(FulfillUserOrder input)
+        public async Task<UpdateUserOrderStatus.Response> UpdateUserOrderStatusAsync(UpdateUserOrderStatus input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -514,7 +481,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
 
-        public Model.OrderInfo<T1>? FulfillUserOrder<T1>(FulfillUserOrder input)
+        public UpdateUserOrderStatus.Response<T1> UpdateUserOrderStatus<T1>(UpdateUserOrderStatus input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -522,7 +489,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderInfo<T1>?> FulfillUserOrderAsync<T1>(FulfillUserOrder input)
+        public async Task<UpdateUserOrderStatus.Response<T1>> UpdateUserOrderStatusAsync<T1>(UpdateUserOrderStatus input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -530,9 +497,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.OrderGrantInfo? GetUserOrderGrant(GetUserOrderGrant input)
+        public FulfillUserOrder.Response FulfillUserOrder(FulfillUserOrder input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -540,88 +505,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderGrantInfo?> GetUserOrderGrantAsync(GetUserOrderGrant input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-        public List<Model.OrderHistoryInfo>? GetUserOrderHistories(GetUserOrderHistories input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<List<Model.OrderHistoryInfo>?> GetUserOrderHistoriesAsync(GetUserOrderHistories input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void ProcessUserOrderNotification(ProcessUserOrderNotification input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task ProcessUserOrderNotificationAsync(ProcessUserOrderNotification input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Stream? DownloadUserOrderReceipt(DownloadUserOrderReceipt input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Stream?> DownloadUserOrderReceiptAsync(DownloadUserOrderReceipt input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.OrderPagingSlicedResult? PublicQueryUserOrders(PublicQueryUserOrders input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.OrderPagingSlicedResult?> PublicQueryUserOrdersAsync(PublicQueryUserOrders input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.OrderInfo? PublicCreateUserOrder(PublicCreateUserOrder input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.OrderInfo?> PublicCreateUserOrderAsync(PublicCreateUserOrder input)
+        public async Task<FulfillUserOrder.Response> FulfillUserOrderAsync(FulfillUserOrder input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -630,7 +514,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
 
-        public Model.OrderInfo<T1>? PublicCreateUserOrder<T1>(PublicCreateUserOrder input)
+        public FulfillUserOrder.Response<T1> FulfillUserOrder<T1>(FulfillUserOrder input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -638,7 +522,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderInfo<T1>?> PublicCreateUserOrderAsync<T1>(PublicCreateUserOrder input)
+        public async Task<FulfillUserOrder.Response<T1>> FulfillUserOrderAsync<T1>(FulfillUserOrder input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -646,7 +530,9 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OrderDiscountPreviewResponse? PublicPreviewOrderPrice(PublicPreviewOrderPrice input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetUserOrderGrant.Response GetUserOrderGrant(GetUserOrderGrant input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -654,7 +540,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderDiscountPreviewResponse?> PublicPreviewOrderPriceAsync(PublicPreviewOrderPrice input)
+        public async Task<GetUserOrderGrant.Response> GetUserOrderGrantAsync(GetUserOrderGrant input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -662,7 +548,8 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OrderInfo? PublicGetUserOrder(PublicGetUserOrder input)
+        #pragma warning restore ab_deprecated_operation
+        public GetUserOrderHistories.Response GetUserOrderHistories(GetUserOrderHistories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -670,7 +557,71 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderInfo?> PublicGetUserOrderAsync(PublicGetUserOrder input)
+        public async Task<GetUserOrderHistories.Response> GetUserOrderHistoriesAsync(GetUserOrderHistories input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public ProcessUserOrderNotification.Response ProcessUserOrderNotification(ProcessUserOrderNotification input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<ProcessUserOrderNotification.Response> ProcessUserOrderNotificationAsync(ProcessUserOrderNotification input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DownloadUserOrderReceipt.Response DownloadUserOrderReceipt(DownloadUserOrderReceipt input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DownloadUserOrderReceipt.Response> DownloadUserOrderReceiptAsync(DownloadUserOrderReceipt input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicQueryUserOrders.Response PublicQueryUserOrders(PublicQueryUserOrders input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicQueryUserOrders.Response> PublicQueryUserOrdersAsync(PublicQueryUserOrders input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicCreateUserOrder.Response PublicCreateUserOrder(PublicCreateUserOrder input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicCreateUserOrder.Response> PublicCreateUserOrderAsync(PublicCreateUserOrder input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -679,7 +630,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
 
-        public Model.OrderInfo<T1>? PublicGetUserOrder<T1>(PublicGetUserOrder input)
+        public PublicCreateUserOrder.Response<T1> PublicCreateUserOrder<T1>(PublicCreateUserOrder input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -687,7 +638,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderInfo<T1>?> PublicGetUserOrderAsync<T1>(PublicGetUserOrder input)
+        public async Task<PublicCreateUserOrder.Response<T1>> PublicCreateUserOrderAsync<T1>(PublicCreateUserOrder input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -695,7 +646,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OrderInfo? PublicCancelUserOrder(PublicCancelUserOrder input)
+        public PublicPreviewOrderPrice.Response PublicPreviewOrderPrice(PublicPreviewOrderPrice input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -703,7 +654,23 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderInfo?> PublicCancelUserOrderAsync(PublicCancelUserOrder input)
+        public async Task<PublicPreviewOrderPrice.Response> PublicPreviewOrderPriceAsync(PublicPreviewOrderPrice input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetUserOrder.Response PublicGetUserOrder(PublicGetUserOrder input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetUserOrder.Response> PublicGetUserOrderAsync(PublicGetUserOrder input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -712,7 +679,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
 
-        public Model.OrderInfo<T1>? PublicCancelUserOrder<T1>(PublicCancelUserOrder input)
+        public PublicGetUserOrder.Response<T1> PublicGetUserOrder<T1>(PublicGetUserOrder input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -720,7 +687,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderInfo<T1>?> PublicCancelUserOrderAsync<T1>(PublicCancelUserOrder input)
+        public async Task<PublicGetUserOrder.Response<T1>> PublicGetUserOrderAsync<T1>(PublicGetUserOrder input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -728,7 +695,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.OrderHistoryInfo>? PublicGetUserOrderHistories(PublicGetUserOrderHistories input)
+        public PublicCancelUserOrder.Response PublicCancelUserOrder(PublicCancelUserOrder input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -736,7 +703,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.OrderHistoryInfo>?> PublicGetUserOrderHistoriesAsync(PublicGetUserOrderHistories input)
+        public async Task<PublicCancelUserOrder.Response> PublicCancelUserOrderAsync(PublicCancelUserOrder input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -744,7 +711,24 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Stream? PublicDownloadUserOrderReceipt(PublicDownloadUserOrderReceipt input)
+
+        public PublicCancelUserOrder.Response<T1> PublicCancelUserOrder<T1>(PublicCancelUserOrder input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicCancelUserOrder.Response<T1>> PublicCancelUserOrderAsync<T1>(PublicCancelUserOrder input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetUserOrderHistories.Response PublicGetUserOrderHistories(PublicGetUserOrderHistories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -752,7 +736,23 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Stream?> PublicDownloadUserOrderReceiptAsync(PublicDownloadUserOrderReceipt input)
+        public async Task<PublicGetUserOrderHistories.Response> PublicGetUserOrderHistoriesAsync(PublicGetUserOrderHistories input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicDownloadUserOrderReceipt.Response PublicDownloadUserOrderReceipt(PublicDownloadUserOrderReceipt input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicDownloadUserOrderReceipt.Response> PublicDownloadUserOrderReceiptAsync(PublicDownloadUserOrderReceipt input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

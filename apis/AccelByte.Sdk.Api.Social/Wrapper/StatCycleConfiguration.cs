@@ -179,7 +179,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         }
         #endregion
 
-        public Model.StatCyclePagingSlicedResult? GetStatCycles(GetStatCycles input)
+        public GetStatCycles.Response GetStatCycles(GetStatCycles input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -187,7 +187,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StatCyclePagingSlicedResult?> GetStatCyclesAsync(GetStatCycles input)
+        public async Task<GetStatCycles.Response> GetStatCyclesAsync(GetStatCycles input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -195,7 +195,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StatCycleInfo? CreateStatCycle(CreateStatCycle input)
+        public CreateStatCycle.Response CreateStatCycle(CreateStatCycle input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -203,7 +203,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StatCycleInfo?> CreateStatCycleAsync(CreateStatCycle input)
+        public async Task<CreateStatCycle.Response> CreateStatCycleAsync(CreateStatCycle input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -211,7 +211,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.BulkStatCycleResult? BulkGetStatCycle(BulkGetStatCycle input)
+        public BulkGetStatCycle.Response BulkGetStatCycle(BulkGetStatCycle input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -219,7 +219,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.BulkStatCycleResult?> BulkGetStatCycleAsync(BulkGetStatCycle input)
+        public async Task<BulkGetStatCycle.Response> BulkGetStatCycleAsync(BulkGetStatCycle input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -227,7 +227,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Stream? ExportStatCycle(ExportStatCycle input)
+        public ExportStatCycle.Response ExportStatCycle(ExportStatCycle input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -235,7 +235,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Stream?> ExportStatCycleAsync(ExportStatCycle input)
+        public async Task<ExportStatCycle.Response> ExportStatCycleAsync(ExportStatCycle input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -243,7 +243,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StatImportInfo? ImportStatCycle(ImportStatCycle input)
+        public ImportStatCycle.Response ImportStatCycle(ImportStatCycle input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -251,7 +251,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StatImportInfo?> ImportStatCycleAsync(ImportStatCycle input)
+        public async Task<ImportStatCycle.Response> ImportStatCycleAsync(ImportStatCycle input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -259,7 +259,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StatCycleInfo? GetStatCycle(GetStatCycle input)
+        public GetStatCycle.Response GetStatCycle(GetStatCycle input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -267,7 +267,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StatCycleInfo?> GetStatCycleAsync(GetStatCycle input)
+        public async Task<GetStatCycle.Response> GetStatCycleAsync(GetStatCycle input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -275,7 +275,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StatCycleInfo? UpdateStatCycle(UpdateStatCycle input)
+        public UpdateStatCycle.Response UpdateStatCycle(UpdateStatCycle input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -283,7 +283,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StatCycleInfo?> UpdateStatCycleAsync(UpdateStatCycle input)
+        public async Task<UpdateStatCycle.Response> UpdateStatCycleAsync(UpdateStatCycle input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -291,23 +291,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteStatCycle(DeleteStatCycle input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteStatCycleAsync(DeleteStatCycle input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public List<Model.BulkStatCycleOperationResult>? BulkAddStats(BulkAddStats input)
+        public DeleteStatCycle.Response DeleteStatCycle(DeleteStatCycle input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -315,7 +299,23 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.BulkStatCycleOperationResult>?> BulkAddStatsAsync(BulkAddStats input)
+        public async Task<DeleteStatCycle.Response> DeleteStatCycleAsync(DeleteStatCycle input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public BulkAddStats.Response BulkAddStats(BulkAddStats input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<BulkAddStats.Response> BulkAddStatsAsync(BulkAddStats input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -324,7 +324,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.Payload);
         }
 
-        public List<Model.BulkStatCycleOperationResult<T1>>? BulkAddStats<T1>(BulkAddStats input)
+        public BulkAddStats.Response<T1> BulkAddStats<T1>(BulkAddStats input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -332,7 +332,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.BulkStatCycleOperationResult<T1>>?> BulkAddStatsAsync<T1>(BulkAddStats input)
+        public async Task<BulkAddStats.Response<T1>> BulkAddStatsAsync<T1>(BulkAddStats input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -340,7 +340,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StatCycleInfo? StopStatCycle(StopStatCycle input)
+        public StopStatCycle.Response StopStatCycle(StopStatCycle input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -348,7 +348,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StatCycleInfo?> StopStatCycleAsync(StopStatCycle input)
+        public async Task<StopStatCycle.Response> StopStatCycleAsync(StopStatCycle input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -356,7 +356,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StatCyclePagingSlicedResult? GetStatCycles1(GetStatCycles1 input)
+        public GetStatCycles1.Response GetStatCycles1(GetStatCycles1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -364,7 +364,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StatCyclePagingSlicedResult?> GetStatCycles1Async(GetStatCycles1 input)
+        public async Task<GetStatCycles1.Response> GetStatCycles1Async(GetStatCycles1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -372,7 +372,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.BulkStatCycleResult? BulkGetStatCycle1(BulkGetStatCycle1 input)
+        public BulkGetStatCycle1.Response BulkGetStatCycle1(BulkGetStatCycle1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -380,7 +380,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.BulkStatCycleResult?> BulkGetStatCycle1Async(BulkGetStatCycle1 input)
+        public async Task<BulkGetStatCycle1.Response> BulkGetStatCycle1Async(BulkGetStatCycle1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -388,7 +388,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StatCycleInfo? GetStatCycle1(GetStatCycle1 input)
+        public GetStatCycle1.Response GetStatCycle1(GetStatCycle1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -396,7 +396,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StatCycleInfo?> GetStatCycle1Async(GetStatCycle1 input)
+        public async Task<GetStatCycle1.Response> GetStatCycle1Async(GetStatCycle1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

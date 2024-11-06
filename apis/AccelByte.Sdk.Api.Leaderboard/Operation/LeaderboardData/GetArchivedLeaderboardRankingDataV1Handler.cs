@@ -65,16 +65,16 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             )
             {
                 GetArchivedLeaderboardRankingDataV1Handler op = new GetArchivedLeaderboardRankingDataV1Handler(this,
-                    leaderboardCode,
-                    namespace_,
-                    leaderboardCodes
+                    leaderboardCode,                    
+                    namespace_,                    
+                    leaderboardCodes                    
                 );
 
                 op.SetBaseFields<GetArchivedLeaderboardRankingDataV1HandlerBuilder>(this);
                 return op;
             }
 
-            public List<Model.ModelsArchiveLeaderboardSignedURLResponse>? Execute(
+            public GetArchivedLeaderboardRankingDataV1Handler.Response Execute(
                 string leaderboardCode,
                 string namespace_,
                 string leaderboardCodes
@@ -91,11 +91,11 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.ModelsArchiveLeaderboardSignedURLResponse>?> ExecuteAsync(
+            public async Task<GetArchivedLeaderboardRankingDataV1Handler.Response> ExecuteAsync(
                 string leaderboardCode,
                 string namespace_,
                 string leaderboardCodes
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -126,36 +126,56 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         {
             PathParams["leaderboardCode"] = leaderboardCode;
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Slug is not null) QueryParams["slug"] = builder.Slug;
             if (leaderboardCodes is not null) QueryParams["leaderboardCodes"] = leaderboardCodes;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.ModelsArchiveLeaderboardSignedURLResponse>>
+        {
+
+            public ResponseErrorResponse? Error400 { get; set; } = null;
+
+            public ResponseErrorResponse? Error401 { get; set; } = null;
+
+            public ResponseErrorResponse? Error403 { get; set; } = null;
+
+            public ResponseErrorResponse? Error404 { get; set; } = null;
+
+            public ResponseErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Leaderboard::LeaderboardData::GetArchivedLeaderboardRankingDataV1Handler";
+        }
+
+        #endregion
+
         public GetArchivedLeaderboardRankingDataV1Handler(
-            string leaderboardCode,
-            string namespace_,
-            string? slug,
-            string leaderboardCodes
+            string leaderboardCode,            
+            string namespace_,            
+            string? slug,            
+            string leaderboardCodes            
         )
         {
             PathParams["leaderboardCode"] = leaderboardCode;
             PathParams["namespace"] = namespace_;
-
+            
             if (slug is not null) QueryParams["slug"] = slug;
             if (leaderboardCodes is not null) QueryParams["leaderboardCodes"] = leaderboardCodes;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -164,28 +184,54 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.ModelsArchiveLeaderboardSignedURLResponse>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetArchivedLeaderboardRankingDataV1Handler.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetArchivedLeaderboardRankingDataV1Handler.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.ModelsArchiveLeaderboardSignedURLResponse>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelsArchiveLeaderboardSignedURLResponse>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<List<Model.ModelsArchiveLeaderboardSignedURLResponse>>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

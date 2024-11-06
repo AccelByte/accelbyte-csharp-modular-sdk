@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         }
         #endregion
 
-        public Model.ModelsRecentPlayerQueryResponse? AdminGetRecentPlayer(AdminGetRecentPlayer input)
+        public AdminGetRecentPlayer.Response AdminGetRecentPlayer(AdminGetRecentPlayer input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsRecentPlayerQueryResponse?> AdminGetRecentPlayerAsync(AdminGetRecentPlayer input)
+        public async Task<AdminGetRecentPlayer.Response> AdminGetRecentPlayerAsync(AdminGetRecentPlayer input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsRecentPlayerQueryResponse? AdminGetRecentTeamPlayer(AdminGetRecentTeamPlayer input)
+        public AdminGetRecentTeamPlayer.Response AdminGetRecentTeamPlayer(AdminGetRecentTeamPlayer input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsRecentPlayerQueryResponse?> AdminGetRecentTeamPlayerAsync(AdminGetRecentTeamPlayer input)
+        public async Task<AdminGetRecentTeamPlayer.Response> AdminGetRecentTeamPlayerAsync(AdminGetRecentTeamPlayer input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsRecentPlayerQueryResponse? PublicGetRecentPlayer(PublicGetRecentPlayer input)
+        public PublicGetRecentPlayer.Response PublicGetRecentPlayer(PublicGetRecentPlayer input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsRecentPlayerQueryResponse?> PublicGetRecentPlayerAsync(PublicGetRecentPlayer input)
+        public async Task<PublicGetRecentPlayer.Response> PublicGetRecentPlayerAsync(PublicGetRecentPlayer input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsRecentPlayerQueryResponse? PublicGetRecentTeamPlayer(PublicGetRecentTeamPlayer input)
+        public PublicGetRecentTeamPlayer.Response PublicGetRecentTeamPlayer(PublicGetRecentTeamPlayer input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -136,7 +136,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsRecentPlayerQueryResponse?> PublicGetRecentTeamPlayerAsync(PublicGetRecentTeamPlayer input)
+        public async Task<PublicGetRecentTeamPlayer.Response> PublicGetRecentTeamPlayerAsync(PublicGetRecentTeamPlayer input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

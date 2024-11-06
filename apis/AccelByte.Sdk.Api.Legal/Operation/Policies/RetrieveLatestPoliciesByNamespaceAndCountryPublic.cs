@@ -108,15 +108,15 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 RetrieveLatestPoliciesByNamespaceAndCountryPublic op = new RetrieveLatestPoliciesByNamespaceAndCountryPublic(this,
-                    countryCode,
-                    namespace_
+                    countryCode,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<RetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder>(this);
                 return op;
             }
 
-            public List<Model.RetrievePolicyPublicResponse>? Execute(
+            public RetrieveLatestPoliciesByNamespaceAndCountryPublic.Response Execute(
                 string countryCode,
                 string namespace_
             )
@@ -131,11 +131,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.RetrievePolicyPublicResponse>?> ExecuteAsync(
+            public async Task<RetrieveLatestPoliciesByNamespaceAndCountryPublic.Response> ExecuteAsync(
                 string countryCode,
                 string namespace_
             )
@@ -150,7 +150,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -163,44 +163,54 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         {
             PathParams["countryCode"] = countryCode;
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.AlwaysIncludeDefault != null) QueryParams["alwaysIncludeDefault"] = Convert.ToString(builder.AlwaysIncludeDefault)!;
             if (builder.DefaultOnEmpty != null) QueryParams["defaultOnEmpty"] = Convert.ToString(builder.DefaultOnEmpty)!;
             if (builder.PolicyType is not null) QueryParams["policyType"] = builder.PolicyType.Value;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
             if (builder.VisibleOnly != null) QueryParams["visibleOnly"] = Convert.ToString(builder.VisibleOnly)!;
+            
 
-
-
-
-
+            
+            
+            
 
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.RetrievePolicyPublicResponse>>
+        {
+
+
+            protected override string GetFullOperationId() => "Legal::Policies::RetrieveLatestPoliciesByNamespaceAndCountryPublic";
+        }
+
+        #endregion
+
         public RetrieveLatestPoliciesByNamespaceAndCountryPublic(
-            string countryCode,
-            string namespace_,
-            bool? alwaysIncludeDefault,
-            bool? defaultOnEmpty,
-            RetrieveLatestPoliciesByNamespaceAndCountryPublicPolicyType? policyType,
-            string? tags,
-            bool? visibleOnly
+            string countryCode,            
+            string namespace_,            
+            bool? alwaysIncludeDefault,            
+            bool? defaultOnEmpty,            
+            RetrieveLatestPoliciesByNamespaceAndCountryPublicPolicyType? policyType,            
+            string? tags,            
+            bool? visibleOnly            
         )
         {
             PathParams["countryCode"] = countryCode;
             PathParams["namespace"] = namespace_;
-
+            
             if (alwaysIncludeDefault != null) QueryParams["alwaysIncludeDefault"] = Convert.ToString(alwaysIncludeDefault)!;
             if (defaultOnEmpty != null) QueryParams["defaultOnEmpty"] = Convert.ToString(defaultOnEmpty)!;
             if (policyType is not null) QueryParams["policyType"] = policyType.Value;
             if (tags is not null) QueryParams["tags"] = tags;
             if (visibleOnly != null) QueryParams["visibleOnly"] = Convert.ToString(visibleOnly)!;
+            
 
-
-
-
-
+            
+            
+            
 
         }
 
@@ -208,28 +218,29 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.RetrievePolicyPublicResponse>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public RetrieveLatestPoliciesByNamespaceAndCountryPublic.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new RetrieveLatestPoliciesByNamespaceAndCountryPublic.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.RetrievePolicyPublicResponse>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<Model.RetrievePolicyPublicResponse>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrievePolicyPublicResponse>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

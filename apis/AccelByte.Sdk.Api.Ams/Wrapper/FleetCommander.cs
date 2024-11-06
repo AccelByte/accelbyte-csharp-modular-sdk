@@ -69,50 +69,50 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
         }
         #endregion
 
-        public void PortalHealthCheck(PortalHealthCheck input)
+        public PortalHealthCheck.Response PortalHealthCheck(PortalHealthCheck input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PortalHealthCheckAsync(PortalHealthCheck input)
+        public async Task<PortalHealthCheck.Response> PortalHealthCheckAsync(PortalHealthCheck input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void Func1(Func1 input)
+        public Func1.Response Func1(Func1 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task Func1Async(Func1 input)
+        public async Task<Func1.Response> Func1Async(Func1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void BasicHealthCheck(BasicHealthCheck input)
+        public BasicHealthCheck.Response BasicHealthCheck(BasicHealthCheck input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task BasicHealthCheckAsync(BasicHealthCheck input)
+        public async Task<BasicHealthCheck.Response> BasicHealthCheckAsync(BasicHealthCheck input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

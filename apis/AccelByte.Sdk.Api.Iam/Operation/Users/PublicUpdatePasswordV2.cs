@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// **Endpoint migration guide**
     /// - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/password [PUT]_**
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class PublicUpdatePasswordV2 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -60,17 +60,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicUpdatePasswordV2 op = new PublicUpdatePasswordV2(this,
-                    body,
-                    namespace_,
-                    userId
+                    body,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PublicUpdatePasswordV2Builder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public void Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicUpdatePasswordV2.Response Execute(
                 ModelUserPasswordUpdateRequest body,
                 string namespace_,
                 string userId
@@ -86,12 +86,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<PublicUpdatePasswordV2.Response> ExecuteAsync(
                 ModelUserPasswordUpdateRequest body,
                 string namespace_,
                 string userId
@@ -107,8 +107,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -122,33 +122,53 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public string Error400 { get; set; } = "";
+
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public RestErrorResponse? Error403 { get; set; } = null;
+
+            public string Error404 { get; set; } = "";
+
+            public string Error500 { get; set; } = "";
+
+
+            protected override string GetFullOperationId() => "Iam::Users::PublicUpdatePasswordV2";
+        }
+
+        #endregion
+
         public PublicUpdatePasswordV2(
-            string namespace_,
-            string userId,
-            Model.ModelUserPasswordUpdateRequest body
+            string namespace_,            
+            string userId,            
+            Model.ModelUserPasswordUpdateRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -160,17 +180,48 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicUpdatePasswordV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new PublicUpdatePasswordV2.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error400!);
+            }
+            else if (code == (HttpStatusCode)401)
+            
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error404!);
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error500!);
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

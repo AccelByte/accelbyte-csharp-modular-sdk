@@ -57,16 +57,16 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 AdminCreateContentV2 op = new AdminCreateContentV2(this,
-                    body,
-                    channelId,
-                    namespace_
+                    body,                    
+                    channelId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminCreateContentV2Builder>(this);
                 return op;
             }
 
-            public Model.ModelsCreateContentResponseV2? Execute(
+            public AdminCreateContentV2.Response Execute(
                 ModelsAdminContentRequestV2 body,
                 string channelId,
                 string namespace_
@@ -83,11 +83,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsCreateContentResponseV2?> ExecuteAsync(
+            public async Task<AdminCreateContentV2.Response> ExecuteAsync(
                 ModelsAdminContentRequestV2 body,
                 string channelId,
                 string namespace_
@@ -104,12 +104,12 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
 
-            public Model.ModelsCreateContentResponseV2<T1>? Execute<T1>(
+            public AdminCreateContentV2.Response<T1> Execute<T1>(
                 ModelsAdminContentRequestV2 body,
                 string channelId,
                 string namespace_
@@ -126,11 +126,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsCreateContentResponseV2<T1>?> ExecuteAsync<T1>(
+            public async Task<AdminCreateContentV2.Response<T1>> ExecuteAsync<T1>(
                 ModelsAdminContentRequestV2 body,
                 string channelId,
                 string namespace_
@@ -147,7 +147,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -161,33 +161,68 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         {
             PathParams["channelId"] = channelId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsCreateContentResponseV2>
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error404 { get; set; } = null;
+
+            public ResponseError? Error409 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Ugc::AdminContentV2::AdminCreateContentV2";
+        }
+
+        public class Response<T1> : ApiResponse<Model.ModelsCreateContentResponseV2<T1>>
+        {
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error404 { get; set; } = null;
+
+            public ResponseError? Error409 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Ugc::AdminContentV2::AdminCreateContentV2";
+        }
+        #endregion
+
         public AdminCreateContentV2(
-            string channelId,
-            string namespace_,
-            Model.ModelsAdminContentRequestV2 body
+            string channelId,            
+            string namespace_,            
+            Model.ModelsAdminContentRequestV2 body            
         )
         {
             PathParams["channelId"] = channelId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -199,44 +234,97 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsCreateContentResponseV2? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminCreateContentV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminCreateContentV2.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsCreateContentResponseV2>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsCreateContentResponseV2>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsCreateContentResponseV2>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)409)
+            {
+                response.Error409 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
 
-        public Model.ModelsCreateContentResponseV2<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
+        public AdminCreateContentV2.Response<T1> ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminCreateContentV2.Response<T1>()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
-            }
-            else if (code == (HttpStatusCode)201)
+                response.IsSuccess = true;
+            }            
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsCreateContentResponseV2<T1>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsCreateContentResponseV2<T1>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsCreateContentResponseV2<T1>>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
             }
-
-            var payloadString = payload.ReadToString();
-            throw new HttpResponseException(code, payloadString);
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)409)
+            {
+                response.Error409 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
+            }
+            
+            return response;
         }
     }
 

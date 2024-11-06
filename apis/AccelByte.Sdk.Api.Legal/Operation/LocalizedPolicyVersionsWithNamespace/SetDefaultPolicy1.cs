@@ -56,15 +56,15 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 SetDefaultPolicy1 op = new SetDefaultPolicy1(this,
-                    localizedPolicyVersionId,
-                    namespace_
+                    localizedPolicyVersionId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<SetDefaultPolicy1Builder>(this);
                 return op;
             }
 
-            public void Execute(
+            public SetDefaultPolicy1.Response Execute(
                 string localizedPolicyVersionId,
                 string namespace_
             )
@@ -78,12 +78,12 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<SetDefaultPolicy1.Response> ExecuteAsync(
                 string localizedPolicyVersionId,
                 string namespace_
             )
@@ -97,8 +97,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,30 +111,40 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         {
             PathParams["localizedPolicyVersionId"] = localizedPolicyVersionId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+
+            protected override string GetFullOperationId() => "Legal::LocalizedPolicyVersionsWithNamespace::SetDefaultPolicy1";
+        }
+
+        #endregion
+
         public SetDefaultPolicy1(
-            string localizedPolicyVersionId,
-            string namespace_
+            string localizedPolicyVersionId,            
+            string namespace_            
         )
         {
             PathParams["localizedPolicyVersionId"] = localizedPolicyVersionId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -143,20 +153,21 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Patch;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public SetDefaultPolicy1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)200)
+            var response = new SetDefaultPolicy1.Response()
             {
-                return;
-            }
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
 
-            var payloadString = payload.ReadToString();
 
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

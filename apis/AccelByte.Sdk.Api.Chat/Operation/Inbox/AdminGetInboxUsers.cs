@@ -88,15 +88,15 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminGetInboxUsers op = new AdminGetInboxUsers(this,
-                    inbox,
-                    namespace_
+                    inbox,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminGetInboxUsersBuilder>(this);
                 return op;
             }
 
-            public Model.ModelsGetInboxUsersResponse? Execute(
+            public AdminGetInboxUsers.Response Execute(
                 string inbox,
                 string namespace_
             )
@@ -111,11 +111,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsGetInboxUsersResponse?> ExecuteAsync(
+            public async Task<AdminGetInboxUsers.Response> ExecuteAsync(
                 string inbox,
                 string namespace_
             )
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -143,42 +143,60 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         {
             PathParams["inbox"] = inbox;
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
             if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsGetInboxUsersResponse>
+        {
+
+            public RestapiErrorResponseBody? Error400 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error401 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error403 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Chat::Inbox::AdminGetInboxUsers";
+        }
+
+        #endregion
+
         public AdminGetInboxUsers(
-            string inbox,
-            string namespace_,
-            long? limit,
-            long? offset,
-            AdminGetInboxUsersStatus? status,
-            string? userId
+            string inbox,            
+            string namespace_,            
+            long? limit,            
+            long? offset,            
+            AdminGetInboxUsersStatus? status,            
+            string? userId            
         )
         {
             PathParams["inbox"] = inbox;
             PathParams["namespace"] = namespace_;
-
+            
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (status is not null) QueryParams["status"] = status.Value;
             if (userId is not null) QueryParams["userId"] = userId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -190,25 +208,46 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsGetInboxUsersResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminGetInboxUsers.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminGetInboxUsers.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsGetInboxUsersResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGetInboxUsersResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsGetInboxUsersResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -63,15 +63,15 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 SyncNativeFriends op = new SyncNativeFriends(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<SyncNativeFriendsBuilder>(this);
                 return op;
             }
 
-            public List<Model.ModelNativeFriendSyncResponse>? Execute(
+            public SyncNativeFriends.Response Execute(
                 List<ModelNativeFriendRequest> body,
                 string namespace_
             )
@@ -86,11 +86,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.ModelNativeFriendSyncResponse>?> ExecuteAsync(
+            public async Task<SyncNativeFriends.Response> ExecuteAsync(
                 List<ModelNativeFriendRequest> body,
                 string namespace_
             )
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -117,31 +117,49 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.ModelNativeFriendSyncResponse>>
+        {
+
+            public RestapiErrorResponseV1? Error400 { get; set; } = null;
+
+            public RestapiErrorResponseV1? Error401 { get; set; } = null;
+
+            public RestapiErrorResponseV1? Error403 { get; set; } = null;
+
+            public RestapiErrorResponseV1? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Lobby::Friends::SyncNativeFriends";
+        }
+
+        #endregion
+
         public SyncNativeFriends(
-            string namespace_,
-            List<Model.ModelNativeFriendRequest> body
+            string namespace_,            
+            List<Model.ModelNativeFriendRequest> body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -153,25 +171,46 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.ModelNativeFriendSyncResponse>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public SyncNativeFriends.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new SyncNativeFriends.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.ModelNativeFriendSyncResponse>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelNativeFriendSyncResponse>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<List<Model.ModelNativeFriendSyncResponse>>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

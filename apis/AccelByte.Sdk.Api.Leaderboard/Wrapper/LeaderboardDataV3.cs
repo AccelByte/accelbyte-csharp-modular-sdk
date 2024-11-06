@@ -168,7 +168,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
         }
         #endregion
 
-        public Model.ModelsGetLeaderboardRankingResp? GetAllTimeLeaderboardRankingAdminV3(GetAllTimeLeaderboardRankingAdminV3 input)
+        public GetAllTimeLeaderboardRankingAdminV3.Response GetAllTimeLeaderboardRankingAdminV3(GetAllTimeLeaderboardRankingAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -176,7 +176,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetLeaderboardRankingResp?> GetAllTimeLeaderboardRankingAdminV3Async(GetAllTimeLeaderboardRankingAdminV3 input)
+        public async Task<GetAllTimeLeaderboardRankingAdminV3.Response> GetAllTimeLeaderboardRankingAdminV3Async(GetAllTimeLeaderboardRankingAdminV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -184,7 +184,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetLeaderboardRankingResp? GetCurrentCycleLeaderboardRankingAdminV3(GetCurrentCycleLeaderboardRankingAdminV3 input)
+        public GetCurrentCycleLeaderboardRankingAdminV3.Response GetCurrentCycleLeaderboardRankingAdminV3(GetCurrentCycleLeaderboardRankingAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -192,7 +192,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetLeaderboardRankingResp?> GetCurrentCycleLeaderboardRankingAdminV3Async(GetCurrentCycleLeaderboardRankingAdminV3 input)
+        public async Task<GetCurrentCycleLeaderboardRankingAdminV3.Response> GetCurrentCycleLeaderboardRankingAdminV3Async(GetCurrentCycleLeaderboardRankingAdminV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -200,55 +200,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteAllUserRankingByCycleIdAdminV3(DeleteAllUserRankingByCycleIdAdminV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteAllUserRankingByCycleIdAdminV3Async(DeleteAllUserRankingByCycleIdAdminV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void DeleteUserRankingByCycleIdAdminV3(DeleteUserRankingByCycleIdAdminV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteUserRankingByCycleIdAdminV3Async(DeleteUserRankingByCycleIdAdminV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void DeleteUserRankingByLeaderboardCodeAdminV3(DeleteUserRankingByLeaderboardCodeAdminV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteUserRankingByLeaderboardCodeAdminV3Async(DeleteUserRankingByLeaderboardCodeAdminV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsUserRankingResponseV3? GetUserRankingAdminV3(GetUserRankingAdminV3 input)
+        public DeleteAllUserRankingByCycleIdAdminV3.Response DeleteAllUserRankingByCycleIdAdminV3(DeleteAllUserRankingByCycleIdAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -256,7 +208,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUserRankingResponseV3?> GetUserRankingAdminV3Async(GetUserRankingAdminV3 input)
+        public async Task<DeleteAllUserRankingByCycleIdAdminV3.Response> DeleteAllUserRankingByCycleIdAdminV3Async(DeleteAllUserRankingByCycleIdAdminV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -264,39 +216,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteUserRankingAdminV3(DeleteUserRankingAdminV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteUserRankingAdminV3Async(DeleteUserRankingAdminV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void DeleteUserRankingsAdminV3(DeleteUserRankingsAdminV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteUserRankingsAdminV3Async(DeleteUserRankingsAdminV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsGetLeaderboardRankingResp? GetAllTimeLeaderboardRankingPublicV3(GetAllTimeLeaderboardRankingPublicV3 input)
+        public DeleteUserRankingByCycleIdAdminV3.Response DeleteUserRankingByCycleIdAdminV3(DeleteUserRankingByCycleIdAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -304,7 +224,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetLeaderboardRankingResp?> GetAllTimeLeaderboardRankingPublicV3Async(GetAllTimeLeaderboardRankingPublicV3 input)
+        public async Task<DeleteUserRankingByCycleIdAdminV3.Response> DeleteUserRankingByCycleIdAdminV3Async(DeleteUserRankingByCycleIdAdminV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -312,7 +232,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetLeaderboardRankingResp? GetCurrentCycleLeaderboardRankingPublicV3(GetCurrentCycleLeaderboardRankingPublicV3 input)
+        public DeleteUserRankingByLeaderboardCodeAdminV3.Response DeleteUserRankingByLeaderboardCodeAdminV3(DeleteUserRankingByLeaderboardCodeAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -320,7 +240,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetLeaderboardRankingResp?> GetCurrentCycleLeaderboardRankingPublicV3Async(GetCurrentCycleLeaderboardRankingPublicV3 input)
+        public async Task<DeleteUserRankingByLeaderboardCodeAdminV3.Response> DeleteUserRankingByLeaderboardCodeAdminV3Async(DeleteUserRankingByLeaderboardCodeAdminV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -328,7 +248,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsBulkUserRankingResponseV3? BulkGetUsersRankingPublicV3(BulkGetUsersRankingPublicV3 input)
+        public GetUserRankingAdminV3.Response GetUserRankingAdminV3(GetUserRankingAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -336,7 +256,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsBulkUserRankingResponseV3?> BulkGetUsersRankingPublicV3Async(BulkGetUsersRankingPublicV3 input)
+        public async Task<GetUserRankingAdminV3.Response> GetUserRankingAdminV3Async(GetUserRankingAdminV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -344,7 +264,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsUserRankingResponseV3? GetUserRankingPublicV3(GetUserRankingPublicV3 input)
+        public DeleteUserRankingAdminV3.Response DeleteUserRankingAdminV3(DeleteUserRankingAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -352,7 +272,87 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUserRankingResponseV3?> GetUserRankingPublicV3Async(GetUserRankingPublicV3 input)
+        public async Task<DeleteUserRankingAdminV3.Response> DeleteUserRankingAdminV3Async(DeleteUserRankingAdminV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeleteUserRankingsAdminV3.Response DeleteUserRankingsAdminV3(DeleteUserRankingsAdminV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteUserRankingsAdminV3.Response> DeleteUserRankingsAdminV3Async(DeleteUserRankingsAdminV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetAllTimeLeaderboardRankingPublicV3.Response GetAllTimeLeaderboardRankingPublicV3(GetAllTimeLeaderboardRankingPublicV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetAllTimeLeaderboardRankingPublicV3.Response> GetAllTimeLeaderboardRankingPublicV3Async(GetAllTimeLeaderboardRankingPublicV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetCurrentCycleLeaderboardRankingPublicV3.Response GetCurrentCycleLeaderboardRankingPublicV3(GetCurrentCycleLeaderboardRankingPublicV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetCurrentCycleLeaderboardRankingPublicV3.Response> GetCurrentCycleLeaderboardRankingPublicV3Async(GetCurrentCycleLeaderboardRankingPublicV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public BulkGetUsersRankingPublicV3.Response BulkGetUsersRankingPublicV3(BulkGetUsersRankingPublicV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<BulkGetUsersRankingPublicV3.Response> BulkGetUsersRankingPublicV3Async(BulkGetUsersRankingPublicV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetUserRankingPublicV3.Response GetUserRankingPublicV3(GetUserRankingPublicV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetUserRankingPublicV3.Response> GetUserRankingPublicV3Async(GetUserRankingPublicV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

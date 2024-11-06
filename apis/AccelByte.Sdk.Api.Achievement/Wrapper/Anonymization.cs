@@ -47,18 +47,18 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
         }
         #endregion
 
-        public void AdminAnonymizeUserAchievement(AdminAnonymizeUserAchievement input)
+        public AdminAnonymizeUserAchievement.Response AdminAnonymizeUserAchievement(AdminAnonymizeUserAchievement input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminAnonymizeUserAchievementAsync(AdminAnonymizeUserAchievement input)
+        public async Task<AdminAnonymizeUserAchievement.Response> AdminAnonymizeUserAchievementAsync(AdminAnonymizeUserAchievement input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

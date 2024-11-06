@@ -57,16 +57,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 SyncSubscription op = new SyncSubscription(this,
-                    id,
-                    namespace_,
-                    userId
+                    id,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<SyncSubscriptionBuilder>(this);
                 return op;
             }
 
-            public Model.ThirdPartyUserSubscriptionInfo? Execute(
+            public SyncSubscription.Response Execute(
                 string id,
                 string namespace_,
                 string userId
@@ -83,11 +83,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ThirdPartyUserSubscriptionInfo?> ExecuteAsync(
+            public async Task<SyncSubscription.Response> ExecuteAsync(
                 string id,
                 string namespace_,
                 string userId
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -119,32 +119,46 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["id"] = id;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ThirdPartyUserSubscriptionInfo>
+        {
+
+            public ErrorEntity? Error400 { get; set; } = null;
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::IAPSubscription::SyncSubscription";
+        }
+
+        #endregion
+
         public SyncSubscription(
-            string id,
-            string namespace_,
-            string userId
+            string id,            
+            string namespace_,            
+            string userId            
         )
         {
             PathParams["id"] = id;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -153,28 +167,39 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Put;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ThirdPartyUserSubscriptionInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public SyncSubscription.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new SyncSubscription.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ThirdPartyUserSubscriptionInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ThirdPartyUserSubscriptionInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ThirdPartyUserSubscriptionInfo>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

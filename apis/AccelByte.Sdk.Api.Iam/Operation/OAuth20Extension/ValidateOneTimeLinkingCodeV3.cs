@@ -55,14 +55,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 ValidateOneTimeLinkingCodeV3 op = new ValidateOneTimeLinkingCodeV3(this,
-                    oneTimeLinkCode
+                    oneTimeLinkCode                    
                 );
 
                 op.SetBaseFields<ValidateOneTimeLinkingCodeV3Builder>(this);
                 return op;
             }
 
-            public Model.OauthmodelOneTimeLinkingCodeValidationResponse? Execute(
+            public ValidateOneTimeLinkingCodeV3.Response Execute(
                 string oneTimeLinkCode
             )
             {
@@ -75,11 +75,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OauthmodelOneTimeLinkingCodeValidationResponse?> ExecuteAsync(
+            public async Task<ValidateOneTimeLinkingCodeV3.Response> ExecuteAsync(
                 string oneTimeLinkCode
             )
             {
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -102,28 +102,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string oneTimeLinkCode
         )
         {
-
-
+            
+            
             if (oneTimeLinkCode is not null) FormParams["oneTimeLinkCode"] = oneTimeLinkCode;
 
-
-
-
+            
+            
+            
 
         }
         #endregion
 
-        public ValidateOneTimeLinkingCodeV3(
-            string oneTimeLinkCode
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.OauthmodelOneTimeLinkingCodeValidationResponse>
         {
 
 
+            protected override string GetFullOperationId() => "Iam::OAuth20Extension::ValidateOneTimeLinkingCodeV3";
+        }
+
+        #endregion
+
+        public ValidateOneTimeLinkingCodeV3(
+            string oneTimeLinkCode            
+        )
+        {
+            
+            
             if (oneTimeLinkCode is not null) FormParams["oneTimeLinkCode"] = oneTimeLinkCode;
 
-
-
-
+            
+            
+            
 
         }
 
@@ -134,25 +144,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OauthmodelOneTimeLinkingCodeValidationResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public ValidateOneTimeLinkingCodeV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new ValidateOneTimeLinkingCodeV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelOneTimeLinkingCodeValidationResponse>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.OauthmodelOneTimeLinkingCodeValidationResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelOneTimeLinkingCodeValidationResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

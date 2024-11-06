@@ -122,14 +122,14 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             )
             {
                 ListTickets op = new ListTickets(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<ListTicketsBuilder>(this);
                 return op;
             }
 
-            public Model.RestapiTicketListResponse? Execute(
+            public ListTickets.Response Execute(
                 string namespace_
             )
             {
@@ -142,11 +142,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.RestapiTicketListResponse?> ExecuteAsync(
+            public async Task<ListTickets.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -159,7 +159,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -170,7 +170,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Category is not null) QueryParams["category"] = builder.Category;
             if (builder.ExtensionCategory is not null) QueryParams["extensionCategory"] = builder.ExtensionCategory;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
@@ -179,30 +179,42 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             if (builder.ReportedUserId is not null) QueryParams["reportedUserId"] = builder.ReportedUserId;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy;
             if (builder.Status is not null) QueryParams["status"] = builder.Status;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.RestapiTicketListResponse>
+        {
+
+            public RestapiErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Reporting::AdminTickets::ListTickets";
+        }
+
+        #endregion
+
         public ListTickets(
-            string namespace_,
-            string? category,
-            string? extensionCategory,
-            long? limit,
-            long? offset,
-            string? order,
-            string? reportedUserId,
-            string? sortBy,
-            string? status
+            string namespace_,            
+            string? category,            
+            string? extensionCategory,            
+            long? limit,            
+            long? offset,            
+            string? order,            
+            string? reportedUserId,            
+            string? sortBy,            
+            string? status            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (category is not null) QueryParams["category"] = category;
             if (extensionCategory is not null) QueryParams["extensionCategory"] = extensionCategory;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
@@ -211,11 +223,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             if (reportedUserId is not null) QueryParams["reportedUserId"] = reportedUserId;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy;
             if (status is not null) QueryParams["status"] = status;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -227,25 +239,31 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.RestapiTicketListResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public ListTickets.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new ListTickets.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.RestapiTicketListResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.RestapiTicketListResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)500)
             {
-                return JsonSerializer.Deserialize<Model.RestapiTicketListResponse>(payload, ResponseJsonOptions);
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

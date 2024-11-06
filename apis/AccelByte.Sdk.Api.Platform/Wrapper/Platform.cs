@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.Ownership? GetPsnEntitlementOwnership(GetPsnEntitlementOwnership input)
+        public GetPsnEntitlementOwnership.Response GetPsnEntitlementOwnership(GetPsnEntitlementOwnership input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.Ownership?> GetPsnEntitlementOwnershipAsync(GetPsnEntitlementOwnership input)
+        public async Task<GetPsnEntitlementOwnership.Response> GetPsnEntitlementOwnershipAsync(GetPsnEntitlementOwnership input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PlatformOwnership? GetXboxEntitlementOwnership(GetXboxEntitlementOwnership input)
+        public GetXboxEntitlementOwnership.Response GetXboxEntitlementOwnership(GetXboxEntitlementOwnership input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PlatformOwnership?> GetXboxEntitlementOwnershipAsync(GetXboxEntitlementOwnership input)
+        public async Task<GetXboxEntitlementOwnership.Response> GetXboxEntitlementOwnershipAsync(GetXboxEntitlementOwnership input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

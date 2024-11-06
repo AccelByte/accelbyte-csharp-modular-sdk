@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Wrapper
         }
         #endregion
 
-        public Model.ModelsListTerminatedServersResponse? ListTerminatedServers(ListTerminatedServers input)
+        public ListTerminatedServers.Response ListTerminatedServers(ListTerminatedServers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListTerminatedServersResponse?> ListTerminatedServersAsync(ListTerminatedServers input)
+        public async Task<ListTerminatedServers.Response> ListTerminatedServersAsync(ListTerminatedServers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Stream? DownloadServerLogs(DownloadServerLogs input)
+        public DownloadServerLogs.Response DownloadServerLogs(DownloadServerLogs input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Stream?> DownloadServerLogsAsync(DownloadServerLogs input)
+        public async Task<DownloadServerLogs.Response> DownloadServerLogsAsync(DownloadServerLogs input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsLogFileStatus? CheckServerLogs(CheckServerLogs input)
+        public CheckServerLogs.Response CheckServerLogs(CheckServerLogs input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsLogFileStatus?> CheckServerLogsAsync(CheckServerLogs input)
+        public async Task<CheckServerLogs.Response> CheckServerLogsAsync(CheckServerLogs input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

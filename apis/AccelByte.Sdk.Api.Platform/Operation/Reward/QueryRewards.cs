@@ -91,14 +91,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryRewards op = new QueryRewards(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<QueryRewardsBuilder>(this);
                 return op;
             }
 
-            public Model.RewardPagingSlicedResult? Execute(
+            public QueryRewards.Response Execute(
                 string namespace_
             )
             {
@@ -111,11 +111,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.RewardPagingSlicedResult?> ExecuteAsync(
+            public async Task<QueryRewards.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -139,42 +139,54 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.EventTopic is not null) QueryParams["eventTopic"] = builder.EventTopic;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy;
+            
 
-
-
+            
             CollectionFormatMap["sortBy"] = "csv";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.RewardPagingSlicedResult>
+        {
+
+            public ValidationErrorEntity? Error422 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Reward::QueryRewards";
+        }
+
+        #endregion
+
         public QueryRewards(
-            string namespace_,
-            string? eventTopic,
-            int? limit,
-            int? offset,
-            List<QueryRewardsSortBy>? sortBy
+            string namespace_,            
+            string? eventTopic,            
+            int? limit,            
+            int? offset,            
+            List<QueryRewardsSortBy>? sortBy            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (eventTopic is not null) QueryParams["eventTopic"] = eventTopic;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy;
+            
 
-
-
+            
             CollectionFormatMap["sortBy"] = "csv";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -183,28 +195,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.RewardPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public QueryRewards.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new QueryRewards.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.RewardPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.RewardPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)422)
             {
-                return JsonSerializer.Deserialize<Model.RewardPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

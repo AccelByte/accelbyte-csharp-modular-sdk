@@ -68,15 +68,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UploadKeys op = new UploadKeys(this,
-                    keyGroupId,
-                    namespace_
+                    keyGroupId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<UploadKeysBuilder>(this);
                 return op;
             }
 
-            public Model.BulkOperationResult? Execute(
+            public UploadKeys.Response Execute(
                 string keyGroupId,
                 string namespace_
             )
@@ -91,11 +91,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.BulkOperationResult?> ExecuteAsync(
+            public async Task<UploadKeys.Response> ExecuteAsync(
                 string keyGroupId,
                 string namespace_
             )
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -123,33 +123,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["keyGroupId"] = keyGroupId;
             PathParams["namespace"] = namespace_;
-
-
+            
+            
             if (builder.File is not null) FormParams["file"] = builder.File;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.BulkOperationResult>
+        {
+
+            public ErrorEntity? Error400 { get; set; } = null;
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::KeyGroup::UploadKeys";
+        }
+
+        #endregion
+
         public UploadKeys(
-            string keyGroupId,
-            string namespace_,
-            Stream? file
+            string keyGroupId,            
+            string namespace_,            
+            Stream? file            
         )
         {
             PathParams["keyGroupId"] = keyGroupId;
             PathParams["namespace"] = namespace_;
-
-
+            
+            
             if (file is not null) FormParams["file"] = file;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -161,25 +175,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "multipart/form-data" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.BulkOperationResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public UploadKeys.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new UploadKeys.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.BulkOperationResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.BulkOperationResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.BulkOperationResult>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

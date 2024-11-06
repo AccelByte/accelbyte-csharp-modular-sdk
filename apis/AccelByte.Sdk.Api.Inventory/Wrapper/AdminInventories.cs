@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
         }
         #endregion
 
-        public Model.ApimodelsListInventoryResp? AdminListInventories(AdminListInventories input)
+        public AdminListInventories.Response AdminListInventories(AdminListInventories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsListInventoryResp?> AdminListInventoriesAsync(AdminListInventories input)
+        public async Task<AdminListInventories.Response> AdminListInventoriesAsync(AdminListInventories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsInventoryResp? AdminCreateInventory(AdminCreateInventory input)
+        public AdminCreateInventory.Response AdminCreateInventory(AdminCreateInventory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -137,7 +137,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsInventoryResp?> AdminCreateInventoryAsync(AdminCreateInventory input)
+        public async Task<AdminCreateInventory.Response> AdminCreateInventoryAsync(AdminCreateInventory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -145,7 +145,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsInventoryResp? AdminGetInventory(AdminGetInventory input)
+        public AdminGetInventory.Response AdminGetInventory(AdminGetInventory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -153,7 +153,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsInventoryResp?> AdminGetInventoryAsync(AdminGetInventory input)
+        public async Task<AdminGetInventory.Response> AdminGetInventoryAsync(AdminGetInventory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -161,7 +161,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsInventoryResp? AdminUpdateInventory(AdminUpdateInventory input)
+        public AdminUpdateInventory.Response AdminUpdateInventory(AdminUpdateInventory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -169,7 +169,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsInventoryResp?> AdminUpdateInventoryAsync(AdminUpdateInventory input)
+        public async Task<AdminUpdateInventory.Response> AdminUpdateInventoryAsync(AdminUpdateInventory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -177,23 +177,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteInventory(DeleteInventory input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteInventoryAsync(DeleteInventory input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public List<Model.ApimodelsInventoryResp>? AdminUpdateUserInventoriesByInventoryCode(AdminUpdateUserInventoriesByInventoryCode input)
+        public DeleteInventory.Response DeleteInventory(DeleteInventory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -201,7 +185,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ApimodelsInventoryResp>?> AdminUpdateUserInventoriesByInventoryCodeAsync(AdminUpdateUserInventoriesByInventoryCode input)
+        public async Task<DeleteInventory.Response> DeleteInventoryAsync(DeleteInventory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -209,18 +193,34 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminPurchasable(AdminPurchasable input)
+        public AdminUpdateUserInventoriesByInventoryCode.Response AdminUpdateUserInventoriesByInventoryCode(AdminUpdateUserInventoriesByInventoryCode input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminPurchasableAsync(AdminPurchasable input)
+        public async Task<AdminUpdateUserInventoriesByInventoryCode.Response> AdminUpdateUserInventoriesByInventoryCodeAsync(AdminUpdateUserInventoriesByInventoryCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminPurchasable.Response AdminPurchasable(AdminPurchasable input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminPurchasable.Response> AdminPurchasableAsync(AdminPurchasable input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

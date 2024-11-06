@@ -157,7 +157,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         }
         #endregion
 
-        public Model.ApimodelsConfigAlertResponse? AdminGetConfigurationAlertV1(AdminGetConfigurationAlertV1 input)
+        public AdminGetConfigurationAlertV1.Response AdminGetConfigurationAlertV1(AdminGetConfigurationAlertV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -165,7 +165,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsConfigAlertResponse?> AdminGetConfigurationAlertV1Async(AdminGetConfigurationAlertV1 input)
+        public async Task<AdminGetConfigurationAlertV1.Response> AdminGetConfigurationAlertV1Async(AdminGetConfigurationAlertV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -173,7 +173,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsConfigAlertResponse? AdminUpdateConfigurationAlertV1(AdminUpdateConfigurationAlertV1 input)
+        public AdminUpdateConfigurationAlertV1.Response AdminUpdateConfigurationAlertV1(AdminUpdateConfigurationAlertV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -181,7 +181,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsConfigAlertResponse?> AdminUpdateConfigurationAlertV1Async(AdminUpdateConfigurationAlertV1 input)
+        public async Task<AdminUpdateConfigurationAlertV1.Response> AdminUpdateConfigurationAlertV1Async(AdminUpdateConfigurationAlertV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -189,7 +189,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsConfigAlertResponse? AdminCreateConfigurationAlertV1(AdminCreateConfigurationAlertV1 input)
+        public AdminCreateConfigurationAlertV1.Response AdminCreateConfigurationAlertV1(AdminCreateConfigurationAlertV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -197,7 +197,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsConfigAlertResponse?> AdminCreateConfigurationAlertV1Async(AdminCreateConfigurationAlertV1 input)
+        public async Task<AdminCreateConfigurationAlertV1.Response> AdminCreateConfigurationAlertV1Async(AdminCreateConfigurationAlertV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -205,23 +205,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteConfigurationAlertV1(AdminDeleteConfigurationAlertV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteConfigurationAlertV1Async(AdminDeleteConfigurationAlertV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApimodelsConfigurationTemplateResponse? AdminCreateConfigurationTemplateV1(AdminCreateConfigurationTemplateV1 input)
+        public AdminDeleteConfigurationAlertV1.Response AdminDeleteConfigurationAlertV1(AdminDeleteConfigurationAlertV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -229,7 +213,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsConfigurationTemplateResponse?> AdminCreateConfigurationTemplateV1Async(AdminCreateConfigurationTemplateV1 input)
+        public async Task<AdminDeleteConfigurationAlertV1.Response> AdminDeleteConfigurationAlertV1Async(AdminDeleteConfigurationAlertV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -237,24 +221,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.ApimodelsConfigurationTemplateResponse<T1>? AdminCreateConfigurationTemplateV1<T1>(AdminCreateConfigurationTemplateV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ApimodelsConfigurationTemplateResponse<T1>?> AdminCreateConfigurationTemplateV1Async<T1>(AdminCreateConfigurationTemplateV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApimodelsConfigurationTemplatesResponse? AdminGetAllConfigurationTemplatesV1(AdminGetAllConfigurationTemplatesV1 input)
+        public AdminCreateConfigurationTemplateV1.Response AdminCreateConfigurationTemplateV1(AdminCreateConfigurationTemplateV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -262,23 +229,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsConfigurationTemplatesResponse?> AdminGetAllConfigurationTemplatesV1Async(AdminGetAllConfigurationTemplatesV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApimodelsConfigurationTemplateResponse? AdminGetConfigurationTemplateV1(AdminGetConfigurationTemplateV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ApimodelsConfigurationTemplateResponse?> AdminGetConfigurationTemplateV1Async(AdminGetConfigurationTemplateV1 input)
+        public async Task<AdminCreateConfigurationTemplateV1.Response> AdminCreateConfigurationTemplateV1Async(AdminCreateConfigurationTemplateV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -287,7 +238,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.Payload);
         }
 
-        public Model.ApimodelsConfigurationTemplateResponse<T1>? AdminGetConfigurationTemplateV1<T1>(AdminGetConfigurationTemplateV1 input)
+        public AdminCreateConfigurationTemplateV1.Response<T1> AdminCreateConfigurationTemplateV1<T1>(AdminCreateConfigurationTemplateV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -295,7 +246,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsConfigurationTemplateResponse<T1>?> AdminGetConfigurationTemplateV1Async<T1>(AdminGetConfigurationTemplateV1 input)
+        public async Task<AdminCreateConfigurationTemplateV1.Response<T1>> AdminCreateConfigurationTemplateV1Async<T1>(AdminCreateConfigurationTemplateV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -303,7 +254,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsConfigurationTemplateResponse? AdminUpdateConfigurationTemplateV1(AdminUpdateConfigurationTemplateV1 input)
+        public AdminGetAllConfigurationTemplatesV1.Response AdminGetAllConfigurationTemplatesV1(AdminGetAllConfigurationTemplatesV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -311,7 +262,23 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsConfigurationTemplateResponse?> AdminUpdateConfigurationTemplateV1Async(AdminUpdateConfigurationTemplateV1 input)
+        public async Task<AdminGetAllConfigurationTemplatesV1.Response> AdminGetAllConfigurationTemplatesV1Async(AdminGetAllConfigurationTemplatesV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetConfigurationTemplateV1.Response AdminGetConfigurationTemplateV1(AdminGetConfigurationTemplateV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetConfigurationTemplateV1.Response> AdminGetConfigurationTemplateV1Async(AdminGetConfigurationTemplateV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -320,7 +287,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.Payload);
         }
 
-        public Model.ApimodelsConfigurationTemplateResponse<T1>? AdminUpdateConfigurationTemplateV1<T1>(AdminUpdateConfigurationTemplateV1 input)
+        public AdminGetConfigurationTemplateV1.Response<T1> AdminGetConfigurationTemplateV1<T1>(AdminGetConfigurationTemplateV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -328,7 +295,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsConfigurationTemplateResponse<T1>?> AdminUpdateConfigurationTemplateV1Async<T1>(AdminUpdateConfigurationTemplateV1 input)
+        public async Task<AdminGetConfigurationTemplateV1.Response<T1>> AdminGetConfigurationTemplateV1Async<T1>(AdminGetConfigurationTemplateV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -336,23 +303,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteConfigurationTemplateV1(AdminDeleteConfigurationTemplateV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteConfigurationTemplateV1Async(AdminDeleteConfigurationTemplateV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsDSMConfigRecord? AdminGetDSMCConfiguration(AdminGetDSMCConfiguration input)
+        public AdminUpdateConfigurationTemplateV1.Response AdminUpdateConfigurationTemplateV1(AdminUpdateConfigurationTemplateV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -360,7 +311,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsDSMConfigRecord?> AdminGetDSMCConfigurationAsync(AdminGetDSMCConfiguration input)
+        public async Task<AdminUpdateConfigurationTemplateV1.Response> AdminUpdateConfigurationTemplateV1Async(AdminUpdateConfigurationTemplateV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -368,7 +319,24 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsDSMConfigRecord? AdminSyncDSMCConfiguration(AdminSyncDSMCConfiguration input)
+
+        public AdminUpdateConfigurationTemplateV1.Response<T1> AdminUpdateConfigurationTemplateV1<T1>(AdminUpdateConfigurationTemplateV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminUpdateConfigurationTemplateV1.Response<T1>> AdminUpdateConfigurationTemplateV1Async<T1>(AdminUpdateConfigurationTemplateV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminDeleteConfigurationTemplateV1.Response AdminDeleteConfigurationTemplateV1(AdminDeleteConfigurationTemplateV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -376,7 +344,39 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsDSMConfigRecord?> AdminSyncDSMCConfigurationAsync(AdminSyncDSMCConfiguration input)
+        public async Task<AdminDeleteConfigurationTemplateV1.Response> AdminDeleteConfigurationTemplateV1Async(AdminDeleteConfigurationTemplateV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetDSMCConfiguration.Response AdminGetDSMCConfiguration(AdminGetDSMCConfiguration input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetDSMCConfiguration.Response> AdminGetDSMCConfigurationAsync(AdminGetDSMCConfiguration input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminSyncDSMCConfiguration.Response AdminSyncDSMCConfiguration(AdminSyncDSMCConfiguration input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminSyncDSMCConfiguration.Response> AdminSyncDSMCConfigurationAsync(AdminSyncDSMCConfiguration input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

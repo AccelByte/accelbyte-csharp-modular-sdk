@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedListStagingContentResponse? AdminListStagingContents(AdminListStagingContents input)
+        public AdminListStagingContents.Response AdminListStagingContents(AdminListStagingContents input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedListStagingContentResponse?> AdminListStagingContentsAsync(AdminListStagingContents input)
+        public async Task<AdminListStagingContents.Response> AdminListStagingContentsAsync(AdminListStagingContents input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsStagingContentResponse? AdminGetStagingContentByID(AdminGetStagingContentByID input)
+        public AdminGetStagingContentByID.Response AdminGetStagingContentByID(AdminGetStagingContentByID input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,40 +104,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsStagingContentResponse?> AdminGetStagingContentByIDAsync(AdminGetStagingContentByID input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-
-        public Model.ModelsStagingContentResponse<T1>? AdminGetStagingContentByID<T1>(AdminGetStagingContentByID input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsStagingContentResponse<T1>?> AdminGetStagingContentByIDAsync<T1>(AdminGetStagingContentByID input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsStagingContentResponse? AdminApproveStagingContent(AdminApproveStagingContent input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsStagingContentResponse?> AdminApproveStagingContentAsync(AdminApproveStagingContent input)
+        public async Task<AdminGetStagingContentByID.Response> AdminGetStagingContentByIDAsync(AdminGetStagingContentByID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -146,7 +113,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsStagingContentResponse<T1>? AdminApproveStagingContent<T1>(AdminApproveStagingContent input)
+        public AdminGetStagingContentByID.Response<T1> AdminGetStagingContentByID<T1>(AdminGetStagingContentByID input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -154,7 +121,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsStagingContentResponse<T1>?> AdminApproveStagingContentAsync<T1>(AdminApproveStagingContent input)
+        public async Task<AdminGetStagingContentByID.Response<T1>> AdminGetStagingContentByIDAsync<T1>(AdminGetStagingContentByID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -162,7 +129,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPaginatedListStagingContentResponse? AdminListUserStagingContents(AdminListUserStagingContents input)
+        public AdminApproveStagingContent.Response AdminApproveStagingContent(AdminApproveStagingContent input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -170,7 +137,40 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedListStagingContentResponse?> AdminListUserStagingContentsAsync(AdminListUserStagingContents input)
+        public async Task<AdminApproveStagingContent.Response> AdminApproveStagingContentAsync(AdminApproveStagingContent input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public AdminApproveStagingContent.Response<T1> AdminApproveStagingContent<T1>(AdminApproveStagingContent input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminApproveStagingContent.Response<T1>> AdminApproveStagingContentAsync<T1>(AdminApproveStagingContent input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminListUserStagingContents.Response AdminListUserStagingContents(AdminListUserStagingContents input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminListUserStagingContents.Response> AdminListUserStagingContentsAsync(AdminListUserStagingContents input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

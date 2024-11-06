@@ -55,14 +55,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 AnonymizeUserAgreement op = new AnonymizeUserAgreement(this,
-                    userId
+                    userId                    
                 );
 
                 op.SetBaseFields<AnonymizeUserAgreementBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public AnonymizeUserAgreement.Response Execute(
                 string userId
             )
             {
@@ -74,12 +74,12 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<AnonymizeUserAgreement.Response> ExecuteAsync(
                 string userId
             )
             {
@@ -91,8 +91,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -103,28 +103,40 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         )
         {
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Legal::Anonymization::AnonymizeUserAgreement";
+        }
+
+        #endregion
+
         public AnonymizeUserAgreement(
-            string userId
+            string userId            
         )
         {
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -136,17 +148,24 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AnonymizeUserAgreement.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new AnonymizeUserAgreement.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

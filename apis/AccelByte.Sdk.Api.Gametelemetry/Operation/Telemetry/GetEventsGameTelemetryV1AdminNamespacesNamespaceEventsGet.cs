@@ -136,14 +136,14 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             )
             {
                 GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet op = new GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder>(this);
                 return op;
             }
 
-            public Model.PagedResponseGetNamespaceEventResponse? Execute(
+            public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet.Response Execute(
                 string namespace_
             )
             {
@@ -156,11 +156,11 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.PagedResponseGetNamespaceEventResponse?> ExecuteAsync(
+            public async Task<GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -173,7 +173,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -184,7 +184,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.DeviceType is not null) QueryParams["deviceType"] = builder.DeviceType;
             if (builder.EndTime is not null) QueryParams["endTime"] = builder.EndTime;
             if (builder.EventId is not null) QueryParams["eventId"] = builder.EventId;
@@ -195,33 +195,47 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.StartTime is not null) QueryParams["startTime"] = builder.StartTime;
             if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.PagedResponseGetNamespaceEventResponse>
+        {
+
+            public BaseErrorResponse? Error400 { get; set; } = null;
+
+            public HTTPValidationError? Error422 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Gametelemetry::Telemetry::GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet";
+        }
+
+        #endregion
+
         public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet(
-            string namespace_,
-            string? deviceType,
-            string? endTime,
-            string? eventId,
-            string? eventName,
-            string? eventPayload,
-            string? flightId,
-            long? limit,
-            long? offset,
-            string? startTime,
-            string? userId
+            string namespace_,            
+            string? deviceType,            
+            string? endTime,            
+            string? eventId,            
+            string? eventName,            
+            string? eventPayload,            
+            string? flightId,            
+            long? limit,            
+            long? offset,            
+            string? startTime,            
+            string? userId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (deviceType is not null) QueryParams["deviceType"] = deviceType;
             if (endTime is not null) QueryParams["endTime"] = endTime;
             if (eventId is not null) QueryParams["eventId"] = eventId;
@@ -232,11 +246,11 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (startTime is not null) QueryParams["startTime"] = startTime;
             if (userId is not null) QueryParams["userId"] = userId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
@@ -246,28 +260,39 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.PagedResponseGetNamespaceEventResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.PagedResponseGetNamespaceEventResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.PagedResponseGetNamespaceEventResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.PagedResponseGetNamespaceEventResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)422)
+            {
+                response.Error422 = JsonSerializer.Deserialize<HTTPValidationError>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

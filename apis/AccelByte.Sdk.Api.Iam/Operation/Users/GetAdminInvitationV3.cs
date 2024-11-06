@@ -56,15 +56,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 GetAdminInvitationV3 op = new GetAdminInvitationV3(this,
-                    invitationId,
-                    namespace_
+                    invitationId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetAdminInvitationV3Builder>(this);
                 return op;
             }
 
-            public Model.ModelUserInvitationV3? Execute(
+            public GetAdminInvitationV3.Response Execute(
                 string invitationId,
                 string namespace_
             )
@@ -79,11 +79,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelUserInvitationV3?> ExecuteAsync(
+            public async Task<GetAdminInvitationV3.Response> ExecuteAsync(
                 string invitationId,
                 string namespace_
             )
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,30 +111,44 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["invitationId"] = invitationId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelUserInvitationV3>
+        {
+
+            public RestErrorResponse? Error404 { get; set; } = null;
+
+            public RestErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::Users::GetAdminInvitationV3";
+        }
+
+        #endregion
+
         public GetAdminInvitationV3(
-            string invitationId,
-            string namespace_
+            string invitationId,            
+            string namespace_            
         )
         {
             PathParams["invitationId"] = invitationId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -143,28 +157,39 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelUserInvitationV3? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetAdminInvitationV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetAdminInvitationV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelUserInvitationV3>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelUserInvitationV3>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.ModelUserInvitationV3>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedGetTypeResponse? GetType(GetType input)
+        public GetType.Response GetType(GetType input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedGetTypeResponse?> GetTypeAsync(GetType input)
+        public async Task<GetType.Response> GetTypeAsync(GetType input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

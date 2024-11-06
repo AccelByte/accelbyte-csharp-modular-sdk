@@ -223,7 +223,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.CampaignPagingSlicedResult? QueryCampaigns(QueryCampaigns input)
+        public QueryCampaigns.Response QueryCampaigns(QueryCampaigns input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -231,7 +231,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CampaignPagingSlicedResult?> QueryCampaignsAsync(QueryCampaigns input)
+        public async Task<QueryCampaigns.Response> QueryCampaignsAsync(QueryCampaigns input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -239,7 +239,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.CampaignInfo? CreateCampaign(CreateCampaign input)
+        public CreateCampaign.Response CreateCampaign(CreateCampaign input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -247,7 +247,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CampaignInfo?> CreateCampaignAsync(CreateCampaign input)
+        public async Task<CreateCampaign.Response> CreateCampaignAsync(CreateCampaign input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -255,7 +255,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.CampaignInfo? GetCampaign(GetCampaign input)
+        public GetCampaign.Response GetCampaign(GetCampaign input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -263,7 +263,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CampaignInfo?> GetCampaignAsync(GetCampaign input)
+        public async Task<GetCampaign.Response> GetCampaignAsync(GetCampaign input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -271,7 +271,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.CampaignInfo? UpdateCampaign(UpdateCampaign input)
+        public UpdateCampaign.Response UpdateCampaign(UpdateCampaign input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -279,7 +279,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CampaignInfo?> UpdateCampaignAsync(UpdateCampaign input)
+        public async Task<UpdateCampaign.Response> UpdateCampaignAsync(UpdateCampaign input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -287,23 +287,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void RenameBatch(RenameBatch input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task RenameBatchAsync(RenameBatch input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public List<Model.CampaignBatchNameInfo>? QueryCampaignBatchNames(QueryCampaignBatchNames input)
+        public RenameBatch.Response RenameBatch(RenameBatch input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -311,7 +295,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.CampaignBatchNameInfo>?> QueryCampaignBatchNamesAsync(QueryCampaignBatchNames input)
+        public async Task<RenameBatch.Response> RenameBatchAsync(RenameBatch input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -319,7 +303,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.CampaignDynamicInfo? GetCampaignDynamic(GetCampaignDynamic input)
+        public QueryCampaignBatchNames.Response QueryCampaignBatchNames(QueryCampaignBatchNames input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -327,7 +311,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CampaignDynamicInfo?> GetCampaignDynamicAsync(GetCampaignDynamic input)
+        public async Task<QueryCampaignBatchNames.Response> QueryCampaignBatchNamesAsync(QueryCampaignBatchNames input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -335,7 +319,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.CodeInfoPagingSlicedResult? QueryCodes(QueryCodes input)
+        public GetCampaignDynamic.Response GetCampaignDynamic(GetCampaignDynamic input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -343,7 +327,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CodeInfoPagingSlicedResult?> QueryCodesAsync(QueryCodes input)
+        public async Task<GetCampaignDynamic.Response> GetCampaignDynamicAsync(GetCampaignDynamic input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -351,7 +335,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.CodeCreateResult? CreateCodes(CreateCodes input)
+        public QueryCodes.Response QueryCodes(QueryCodes input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -359,7 +343,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CodeCreateResult?> CreateCodesAsync(CreateCodes input)
+        public async Task<QueryCodes.Response> QueryCodesAsync(QueryCodes input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -367,7 +351,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Stream? Download(Download input)
+        public CreateCodes.Response CreateCodes(CreateCodes input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -375,7 +359,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Stream?> DownloadAsync(Download input)
+        public async Task<CreateCodes.Response> CreateCodesAsync(CreateCodes input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -383,7 +367,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.BulkOperationResult? BulkDisableCodes(BulkDisableCodes input)
+        public Download.Response Download(Download input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -391,7 +375,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.BulkOperationResult?> BulkDisableCodesAsync(BulkDisableCodes input)
+        public async Task<Download.Response> DownloadAsync(Download input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -399,7 +383,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.BulkOperationResult? BulkEnableCodes(BulkEnableCodes input)
+        public BulkDisableCodes.Response BulkDisableCodes(BulkDisableCodes input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -407,7 +391,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.BulkOperationResult?> BulkEnableCodesAsync(BulkEnableCodes input)
+        public async Task<BulkDisableCodes.Response> BulkDisableCodesAsync(BulkDisableCodes input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -415,7 +399,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RedeemHistoryPagingSlicedResult? QueryRedeemHistory(QueryRedeemHistory input)
+        public BulkEnableCodes.Response BulkEnableCodes(BulkEnableCodes input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -423,7 +407,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RedeemHistoryPagingSlicedResult?> QueryRedeemHistoryAsync(QueryRedeemHistory input)
+        public async Task<BulkEnableCodes.Response> BulkEnableCodesAsync(BulkEnableCodes input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -431,7 +415,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.CodeInfo? GetCode(GetCode input)
+        public QueryRedeemHistory.Response QueryRedeemHistory(QueryRedeemHistory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -439,7 +423,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CodeInfo?> GetCodeAsync(GetCode input)
+        public async Task<QueryRedeemHistory.Response> QueryRedeemHistoryAsync(QueryRedeemHistory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -447,7 +431,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.CodeInfo? DisableCode(DisableCode input)
+        public GetCode.Response GetCode(GetCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -455,7 +439,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CodeInfo?> DisableCodeAsync(DisableCode input)
+        public async Task<GetCode.Response> GetCodeAsync(GetCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -463,7 +447,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.CodeInfo? EnableCode(EnableCode input)
+        public DisableCode.Response DisableCode(DisableCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -471,7 +455,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CodeInfo?> EnableCodeAsync(EnableCode input)
+        public async Task<DisableCode.Response> DisableCodeAsync(DisableCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -479,7 +463,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RedeemResult? ApplyUserRedemption(ApplyUserRedemption input)
+        public EnableCode.Response EnableCode(EnableCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -487,7 +471,23 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RedeemResult?> ApplyUserRedemptionAsync(ApplyUserRedemption input)
+        public async Task<EnableCode.Response> EnableCodeAsync(EnableCode input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public ApplyUserRedemption.Response ApplyUserRedemption(ApplyUserRedemption input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<ApplyUserRedemption.Response> ApplyUserRedemptionAsync(ApplyUserRedemption input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

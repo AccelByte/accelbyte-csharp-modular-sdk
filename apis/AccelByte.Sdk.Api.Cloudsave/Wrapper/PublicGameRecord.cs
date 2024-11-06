@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         }
         #endregion
 
-        public Model.ModelsBulkGetGameRecordResponse? GetGameRecordsBulk(GetGameRecordsBulk input)
+        public GetGameRecordsBulk.Response GetGameRecordsBulk(GetGameRecordsBulk input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsBulkGetGameRecordResponse?> GetGameRecordsBulkAsync(GetGameRecordsBulk input)
+        public async Task<GetGameRecordsBulk.Response> GetGameRecordsBulkAsync(GetGameRecordsBulk input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGameRecordResponse? GetGameRecordHandlerV1(GetGameRecordHandlerV1 input)
+        public GetGameRecordHandlerV1.Response GetGameRecordHandlerV1(GetGameRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -115,40 +115,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGameRecordResponse?> GetGameRecordHandlerV1Async(GetGameRecordHandlerV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-
-        public Model.ModelsGameRecordResponse<T1>? GetGameRecordHandlerV1<T1>(GetGameRecordHandlerV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsGameRecordResponse<T1>?> GetGameRecordHandlerV1Async<T1>(GetGameRecordHandlerV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsGameRecordResponse? PutGameRecordHandlerV1(PutGameRecordHandlerV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsGameRecordResponse?> PutGameRecordHandlerV1Async(PutGameRecordHandlerV1 input)
+        public async Task<GetGameRecordHandlerV1.Response> GetGameRecordHandlerV1Async(GetGameRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -157,7 +124,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsGameRecordResponse<T1>? PutGameRecordHandlerV1<T1>(PutGameRecordHandlerV1 input)
+        public GetGameRecordHandlerV1.Response<T1> GetGameRecordHandlerV1<T1>(GetGameRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -165,7 +132,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGameRecordResponse<T1>?> PutGameRecordHandlerV1Async<T1>(PutGameRecordHandlerV1 input)
+        public async Task<GetGameRecordHandlerV1.Response<T1>> GetGameRecordHandlerV1Async<T1>(GetGameRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -173,7 +140,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGameRecordResponse? PostGameRecordHandlerV1(PostGameRecordHandlerV1 input)
+        public PutGameRecordHandlerV1.Response PutGameRecordHandlerV1(PutGameRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -181,7 +148,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGameRecordResponse?> PostGameRecordHandlerV1Async(PostGameRecordHandlerV1 input)
+        public async Task<PutGameRecordHandlerV1.Response> PutGameRecordHandlerV1Async(PutGameRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -190,7 +157,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsGameRecordResponse<T1>? PostGameRecordHandlerV1<T1>(PostGameRecordHandlerV1 input)
+        public PutGameRecordHandlerV1.Response<T1> PutGameRecordHandlerV1<T1>(PutGameRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -198,7 +165,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGameRecordResponse<T1>?> PostGameRecordHandlerV1Async<T1>(PostGameRecordHandlerV1 input)
+        public async Task<PutGameRecordHandlerV1.Response<T1>> PutGameRecordHandlerV1Async<T1>(PutGameRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -206,18 +173,51 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteGameRecordHandlerV1(DeleteGameRecordHandlerV1 input)
+        public PostGameRecordHandlerV1.Response PostGameRecordHandlerV1(PostGameRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteGameRecordHandlerV1Async(DeleteGameRecordHandlerV1 input)
+        public async Task<PostGameRecordHandlerV1.Response> PostGameRecordHandlerV1Async(PostGameRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public PostGameRecordHandlerV1.Response<T1> PostGameRecordHandlerV1<T1>(PostGameRecordHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PostGameRecordHandlerV1.Response<T1>> PostGameRecordHandlerV1Async<T1>(PostGameRecordHandlerV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeleteGameRecordHandlerV1.Response DeleteGameRecordHandlerV1(DeleteGameRecordHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteGameRecordHandlerV1.Response> DeleteGameRecordHandlerV1Async(DeleteGameRecordHandlerV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

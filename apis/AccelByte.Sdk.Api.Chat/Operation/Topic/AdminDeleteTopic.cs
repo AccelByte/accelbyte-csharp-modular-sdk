@@ -56,15 +56,15 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminDeleteTopic op = new AdminDeleteTopic(this,
-                    namespace_,
-                    topic
+                    namespace_,                    
+                    topic                    
                 );
 
                 op.SetBaseFields<AdminDeleteTopicBuilder>(this);
                 return op;
             }
 
-            public Model.MessageActionDeleteTopicResult? Execute(
+            public AdminDeleteTopic.Response Execute(
                 string namespace_,
                 string topic
             )
@@ -79,11 +79,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.MessageActionDeleteTopicResult?> ExecuteAsync(
+            public async Task<AdminDeleteTopic.Response> ExecuteAsync(
                 string namespace_,
                 string topic
             )
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,30 +111,40 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.MessageActionDeleteTopicResult>
+        {
+
+
+            protected override string GetFullOperationId() => "Chat::Topic::AdminDeleteTopic";
+        }
+
+        #endregion
+
         public AdminDeleteTopic(
-            string namespace_,
-            string topic
+            string namespace_,            
+            string topic            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -146,25 +156,26 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.MessageActionDeleteTopicResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminDeleteTopic.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminDeleteTopic.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.MessageActionDeleteTopicResult>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.MessageActionDeleteTopicResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.MessageActionDeleteTopicResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

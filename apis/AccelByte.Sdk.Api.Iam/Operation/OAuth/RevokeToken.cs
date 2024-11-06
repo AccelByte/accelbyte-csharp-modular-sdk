@@ -30,7 +30,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ### Endpoint migration guide
     /// - **Substitute endpoint: _/v3/oauth/revoke [POST]_**
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class RevokeToken : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -61,15 +61,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 RevokeToken op = new RevokeToken(this,
-                    token
+                    token                    
                 );
 
                 op.SetBaseFields<RevokeTokenBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public void Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public RevokeToken.Response Execute(
                 string token
             )
             {
@@ -81,12 +81,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<RevokeToken.Response> ExecuteAsync(
                 string token
             )
             {
@@ -98,8 +98,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -109,29 +109,43 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string token
         )
         {
-
-
+            
+            
             if (token is not null) FormParams["token"] = token;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public RevokeToken(
-            string token
-        )
+        #region Response Part        
+        public class Response : ApiResponse
         {
 
+            public string Error400 { get; set; } = "";
 
+            public string Error401 { get; set; } = "";
+
+
+            protected override string GetFullOperationId() => "Iam::OAuth::RevokeToken";
+        }
+
+        #endregion
+
+        public RevokeToken(
+            string token            
+        )
+        {
+            
+            
             if (token is not null) FormParams["token"] = token;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -143,17 +157,30 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public RevokeToken.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)200)
+            var response = new RevokeToken.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error400!);
+            }
+            else if (code == (HttpStatusCode)401)
+            
+            {
+                response.Error401 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error401!);
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -86,17 +86,17 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             )
             {
                 AdminUpdateGoals op = new AdminUpdateGoals(this,
-                    body,
-                    challengeCode,
-                    code,
-                    namespace_
+                    body,                    
+                    challengeCode,                    
+                    code,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminUpdateGoalsBuilder>(this);
                 return op;
             }
 
-            public Model.ModelGoalResponse? Execute(
+            public AdminUpdateGoals.Response Execute(
                 ModelUpdateGoalRequest body,
                 string challengeCode,
                 string code,
@@ -115,11 +115,11 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelGoalResponse?> ExecuteAsync(
+            public async Task<AdminUpdateGoals.Response> ExecuteAsync(
                 ModelUpdateGoalRequest body,
                 string challengeCode,
                 string code,
@@ -138,7 +138,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -154,35 +154,53 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             PathParams["challengeCode"] = challengeCode;
             PathParams["code"] = code;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelGoalResponse>
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error404 { get; set; } = null;
+
+            public ResponseError? Error422 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Challenge::GoalConfiguration::AdminUpdateGoals";
+        }
+
+        #endregion
+
         public AdminUpdateGoals(
-            string challengeCode,
-            string code,
-            string namespace_,
-            Model.ModelUpdateGoalRequest body
+            string challengeCode,            
+            string code,            
+            string namespace_,            
+            Model.ModelUpdateGoalRequest body            
         )
         {
             PathParams["challengeCode"] = challengeCode;
             PathParams["code"] = code;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -194,25 +212,46 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelGoalResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminUpdateGoals.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminUpdateGoals.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelGoalResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelGoalResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelGoalResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)422)
+            {
+                response.Error422 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

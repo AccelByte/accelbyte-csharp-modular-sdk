@@ -57,15 +57,15 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             )
             {
                 AdminUpdateAssignmentPlugin op = new AdminUpdateAssignmentPlugin(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminUpdateAssignmentPluginBuilder>(this);
                 return op;
             }
 
-            public Model.ModelPluginAssignmentResponse? Execute(
+            public AdminUpdateAssignmentPlugin.Response Execute(
                 ModelPluginAssignmentRequest body,
                 string namespace_
             )
@@ -80,11 +80,11 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelPluginAssignmentResponse?> ExecuteAsync(
+            public async Task<AdminUpdateAssignmentPlugin.Response> ExecuteAsync(
                 ModelPluginAssignmentRequest body,
                 string namespace_
             )
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,31 +111,51 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelPluginAssignmentResponse>
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public IamErrorResponse? Error401 { get; set; } = null;
+
+            public IamErrorResponse? Error403 { get; set; } = null;
+
+            public IamErrorResponse? Error404 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Challenge::Plugins::AdminUpdateAssignmentPlugin";
+        }
+
+        #endregion
+
         public AdminUpdateAssignmentPlugin(
-            string namespace_,
-            Model.ModelPluginAssignmentRequest body
+            string namespace_,            
+            Model.ModelPluginAssignmentRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,25 +167,51 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelPluginAssignmentResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminUpdateAssignmentPlugin.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminUpdateAssignmentPlugin.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelPluginAssignmentResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelPluginAssignmentResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelPluginAssignmentResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

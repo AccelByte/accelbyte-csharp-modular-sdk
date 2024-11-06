@@ -67,14 +67,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 ListViews op = new ListViews(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<ListViewsBuilder>(this);
                 return op;
             }
 
-            public List<Model.ListViewInfo>? Execute(
+            public ListViews.Response Execute(
                 string namespace_
             )
             {
@@ -87,11 +87,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.ListViewInfo>?> ExecuteAsync(
+            public async Task<ListViews.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -115,31 +115,45 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.ListViewInfo>>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+            public ValidationErrorEntity? Error422 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::View::ListViews";
+        }
+
+        #endregion
+
         public ListViews(
-            string namespace_,
-            string? storeId
+            string namespace_,            
+            string? storeId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -148,28 +162,39 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.ListViewInfo>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public ListViews.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new ListViews.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.ListViewInfo>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.ListViewInfo>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<List<Model.ListViewInfo>>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)422)
+            {
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

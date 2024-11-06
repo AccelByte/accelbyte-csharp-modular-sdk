@@ -56,15 +56,15 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             )
             {
                 ImageGet op = new ImageGet(this,
-                    imageID,
-                    namespace_
+                    imageID,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<ImageGetBuilder>(this);
                 return op;
             }
 
-            public Model.ApiImageDetails? Execute(
+            public ImageGet.Response Execute(
                 string imageID,
                 string namespace_
             )
@@ -79,11 +79,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ApiImageDetails?> ExecuteAsync(
+            public async Task<ImageGet.Response> ExecuteAsync(
                 string imageID,
                 string namespace_
             )
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,30 +111,48 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         {
             PathParams["imageID"] = imageID;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ApiImageDetails>
+        {
+
+            public ResponseErrorResponse? Error401 { get; set; } = null;
+
+            public ResponseErrorResponse? Error403 { get; set; } = null;
+
+            public ResponseErrorResponse? Error404 { get; set; } = null;
+
+            public ResponseErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Ams::Images::ImageGet";
+        }
+
+        #endregion
+
         public ImageGet(
-            string imageID,
-            string namespace_
+            string imageID,            
+            string namespace_            
         )
         {
             PathParams["imageID"] = imageID;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -146,25 +164,46 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ApiImageDetails? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public ImageGet.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new ImageGet.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ApiImageDetails>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ApiImageDetails>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)401)
             {
-                return JsonSerializer.Deserialize<Model.ApiImageDetails>(payload, ResponseJsonOptions);
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

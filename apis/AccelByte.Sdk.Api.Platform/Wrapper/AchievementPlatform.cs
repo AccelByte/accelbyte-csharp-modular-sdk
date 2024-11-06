@@ -69,23 +69,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public void UnlockSteamUserAchievement(UnlockSteamUserAchievement input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task UnlockSteamUserAchievementAsync(UnlockSteamUserAchievement input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.XblUserAchievements? GetXblUserAchievements(GetXblUserAchievements input)
+        public UnlockSteamUserAchievement.Response UnlockSteamUserAchievement(UnlockSteamUserAchievement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -93,7 +77,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.XblUserAchievements?> GetXblUserAchievementsAsync(GetXblUserAchievements input)
+        public async Task<UnlockSteamUserAchievement.Response> UnlockSteamUserAchievementAsync(UnlockSteamUserAchievement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -101,18 +85,34 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void UpdateXblUserAchievement(UpdateXblUserAchievement input)
+        public GetXblUserAchievements.Response GetXblUserAchievements(GetXblUserAchievements input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task UpdateXblUserAchievementAsync(UpdateXblUserAchievement input)
+        public async Task<GetXblUserAchievements.Response> GetXblUserAchievementsAsync(GetXblUserAchievements input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public UpdateXblUserAchievement.Response UpdateXblUserAchievement(UpdateXblUserAchievement input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpdateXblUserAchievement.Response> UpdateXblUserAchievementAsync(UpdateXblUserAchievement input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

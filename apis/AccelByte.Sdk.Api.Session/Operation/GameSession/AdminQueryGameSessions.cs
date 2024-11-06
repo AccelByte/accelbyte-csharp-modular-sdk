@@ -191,14 +191,14 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 AdminQueryGameSessions op = new AdminQueryGameSessions(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminQueryGameSessionsBuilder>(this);
                 return op;
             }
 
-            public Model.ApimodelsGameSessionQueryResponse? Execute(
+            public AdminQueryGameSessions.Response Execute(
                 string namespace_
             )
             {
@@ -211,11 +211,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ApimodelsGameSessionQueryResponse?> ExecuteAsync(
+            public async Task<AdminQueryGameSessions.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -228,7 +228,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -239,7 +239,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.ConfigurationName is not null) QueryParams["configurationName"] = builder.ConfigurationName;
             if (builder.DsPodName is not null) QueryParams["dsPodName"] = builder.DsPodName;
             if (builder.FromTime is not null) QueryParams["fromTime"] = builder.FromTime;
@@ -257,39 +257,57 @@ namespace AccelByte.Sdk.Api.Session.Operation
             if (builder.Status is not null) QueryParams["status"] = builder.Status;
             if (builder.StatusV2 is not null) QueryParams["statusV2"] = builder.StatusV2;
             if (builder.ToTime is not null) QueryParams["toTime"] = builder.ToTime;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ApimodelsGameSessionQueryResponse>
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error403 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Session::GameSession::AdminQueryGameSessions";
+        }
+
+        #endregion
+
         public AdminQueryGameSessions(
-            string namespace_,
-            string? configurationName,
-            string? dsPodName,
-            string? fromTime,
-            string? gameMode,
-            string? isPersistent,
-            string? isSoftDeleted,
-            string? joinability,
-            long? limit,
-            string? matchPool,
-            string? memberID,
-            long? offset,
-            string? order,
-            string? orderBy,
-            string? sessionID,
-            string? status,
-            string? statusV2,
-            string? toTime
+            string namespace_,            
+            string? configurationName,            
+            string? dsPodName,            
+            string? fromTime,            
+            string? gameMode,            
+            string? isPersistent,            
+            string? isSoftDeleted,            
+            string? joinability,            
+            long? limit,            
+            string? matchPool,            
+            string? memberID,            
+            long? offset,            
+            string? order,            
+            string? orderBy,            
+            string? sessionID,            
+            string? status,            
+            string? statusV2,            
+            string? toTime            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (configurationName is not null) QueryParams["configurationName"] = configurationName;
             if (dsPodName is not null) QueryParams["dsPodName"] = dsPodName;
             if (fromTime is not null) QueryParams["fromTime"] = fromTime;
@@ -307,11 +325,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
             if (status is not null) QueryParams["status"] = status;
             if (statusV2 is not null) QueryParams["statusV2"] = statusV2;
             if (toTime is not null) QueryParams["toTime"] = toTime;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -323,25 +341,46 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ApimodelsGameSessionQueryResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminQueryGameSessions.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminQueryGameSessions.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ApimodelsGameSessionQueryResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsGameSessionQueryResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ApimodelsGameSessionQueryResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

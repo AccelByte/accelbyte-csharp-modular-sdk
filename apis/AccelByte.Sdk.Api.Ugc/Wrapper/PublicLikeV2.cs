@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedContentLikersResponse? PublicListContentLikeV2(PublicListContentLikeV2 input)
+        public PublicListContentLikeV2.Response PublicListContentLikeV2(PublicListContentLikeV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedContentLikersResponse?> PublicListContentLikeV2Async(PublicListContentLikeV2 input)
+        public async Task<PublicListContentLikeV2.Response> PublicListContentLikeV2Async(PublicListContentLikeV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsContentLikeResponse? UpdateContentLikeStatusV2(UpdateContentLikeStatusV2 input)
+        public UpdateContentLikeStatusV2.Response UpdateContentLikeStatusV2(UpdateContentLikeStatusV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsContentLikeResponse?> UpdateContentLikeStatusV2Async(UpdateContentLikeStatusV2 input)
+        public async Task<UpdateContentLikeStatusV2.Response> UpdateContentLikeStatusV2Async(UpdateContentLikeStatusV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

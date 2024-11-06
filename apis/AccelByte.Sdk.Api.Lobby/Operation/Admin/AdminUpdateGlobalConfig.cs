@@ -55,14 +55,14 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 AdminUpdateGlobalConfig op = new AdminUpdateGlobalConfig(this,
-                    body
+                    body                    
                 );
 
                 op.SetBaseFields<AdminUpdateGlobalConfigBuilder>(this);
                 return op;
             }
 
-            public Model.ModelGlobalConfiguration? Execute(
+            public AdminUpdateGlobalConfig.Response Execute(
                 ModelPutGlobalConfigurationRequest body
             )
             {
@@ -75,11 +75,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelGlobalConfiguration?> ExecuteAsync(
+            public async Task<AdminUpdateGlobalConfig.Response> ExecuteAsync(
                 ModelPutGlobalConfigurationRequest body
             )
             {
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -102,29 +102,43 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             ModelPutGlobalConfigurationRequest body
         )
         {
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public AdminUpdateGlobalConfig(
-            Model.ModelPutGlobalConfigurationRequest body
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelGlobalConfiguration>
         {
 
+            public RestapiErrorResponseBody? Error401 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error403 { get; set; } = null;
 
 
+            protected override string GetFullOperationId() => "Lobby::Admin::AdminUpdateGlobalConfig";
+        }
 
+        #endregion
 
+        public AdminUpdateGlobalConfig(
+            Model.ModelPutGlobalConfigurationRequest body            
+        )
+        {
+            
+            
+
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -136,25 +150,36 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelGlobalConfiguration? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminUpdateGlobalConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminUpdateGlobalConfig.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelGlobalConfiguration>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelGlobalConfiguration>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)401)
             {
-                return JsonSerializer.Deserialize<Model.ModelGlobalConfiguration>(payload, ResponseJsonOptions);
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

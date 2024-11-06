@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.TradeChainActionHistoryInfo? Commit(Commit input)
+        public Commit.Response Commit(Commit input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.TradeChainActionHistoryInfo?> CommitAsync(Commit input)
+        public async Task<Commit.Response> CommitAsync(Commit input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
 
-        public Model.TradeChainActionHistoryInfo<T1>? Commit<T1>(Commit input)
+        public Commit.Response<T1> Commit<T1>(Commit input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.TradeChainActionHistoryInfo<T1>?> CommitAsync<T1>(Commit input)
+        public async Task<Commit.Response<T1>> CommitAsync<T1>(Commit input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.TradeActionPagingSlicedResult? GetTradeHistoryByCriteria(GetTradeHistoryByCriteria input)
+        public GetTradeHistoryByCriteria.Response GetTradeHistoryByCriteria(GetTradeHistoryByCriteria input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.TradeActionPagingSlicedResult?> GetTradeHistoryByCriteriaAsync(GetTradeHistoryByCriteria input)
+        public async Task<GetTradeHistoryByCriteria.Response> GetTradeHistoryByCriteriaAsync(GetTradeHistoryByCriteria input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.TradeChainActionHistoryInfo? GetTradeHistoryByTransactionId(GetTradeHistoryByTransactionId input)
+        public GetTradeHistoryByTransactionId.Response GetTradeHistoryByTransactionId(GetTradeHistoryByTransactionId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.TradeChainActionHistoryInfo?> GetTradeHistoryByTransactionIdAsync(GetTradeHistoryByTransactionId input)
+        public async Task<GetTradeHistoryByTransactionId.Response> GetTradeHistoryByTransactionIdAsync(GetTradeHistoryByTransactionId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
 
-        public Model.TradeChainActionHistoryInfo<T1>? GetTradeHistoryByTransactionId<T1>(GetTradeHistoryByTransactionId input)
+        public GetTradeHistoryByTransactionId.Response<T1> GetTradeHistoryByTransactionId<T1>(GetTradeHistoryByTransactionId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -143,7 +143,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.TradeChainActionHistoryInfo<T1>?> GetTradeHistoryByTransactionIdAsync<T1>(GetTradeHistoryByTransactionId input)
+        public async Task<GetTradeHistoryByTransactionId.Response<T1>> GetTradeHistoryByTransactionIdAsync<T1>(GetTradeHistoryByTransactionId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(

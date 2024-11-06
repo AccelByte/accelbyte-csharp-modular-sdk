@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public List<Model.PlatformAccountClosureHistoryInfo>? GetUserPlatformAccountClosureHistories(GetUserPlatformAccountClosureHistories input)
+        public GetUserPlatformAccountClosureHistories.Response GetUserPlatformAccountClosureHistories(GetUserPlatformAccountClosureHistories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.PlatformAccountClosureHistoryInfo>?> GetUserPlatformAccountClosureHistoriesAsync(GetUserPlatformAccountClosureHistories input)
+        public async Task<GetUserPlatformAccountClosureHistories.Response> GetUserPlatformAccountClosureHistoriesAsync(GetUserPlatformAccountClosureHistories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

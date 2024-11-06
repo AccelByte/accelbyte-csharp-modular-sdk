@@ -58,34 +58,34 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-        public void LoginSSOClient(LoginSSOClient input)
+        public LoginSSOClient.Response LoginSSOClient(LoginSSOClient input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task LoginSSOClientAsync(LoginSSOClient input)
+        public async Task<LoginSSOClient.Response> LoginSSOClientAsync(LoginSSOClient input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void LogoutSSOClient(LogoutSSOClient input)
+        public LogoutSSOClient.Response LogoutSSOClient(LogoutSSOClient input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task LogoutSSOClientAsync(LogoutSSOClient input)
+        public async Task<LogoutSSOClient.Response> LogoutSSOClientAsync(LogoutSSOClient input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

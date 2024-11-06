@@ -68,16 +68,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetPaymentPublicConfig op = new GetPaymentPublicConfig(this,
-                    namespace_,
-                    paymentProvider,
-                    region
+                    namespace_,                    
+                    paymentProvider,                    
+                    region                    
                 );
 
                 op.SetBaseFields<GetPaymentPublicConfigBuilder>(this);
                 return op;
             }
 
-            public Dictionary<string, object>? Execute(
+            public GetPaymentPublicConfig.Response Execute(
                 string namespace_,
                 string paymentProvider,
                 string region
@@ -94,11 +94,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Dictionary<string, object>?> ExecuteAsync(
+            public async Task<GetPaymentPublicConfig.Response> ExecuteAsync(
                 string namespace_,
                 string paymentProvider,
                 string region
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -128,36 +128,46 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Sandbox != null) QueryParams["sandbox"] = Convert.ToString(builder.Sandbox)!;
             if (paymentProvider is not null) QueryParams["paymentProvider"] = paymentProvider.Value;
             if (region is not null) QueryParams["region"] = region;
+            
 
-
-
-
-
+            
+            
+            
 
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Dictionary<string, object>>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::PaymentStation::GetPaymentPublicConfig";
+        }
+
+        #endregion
+
         public GetPaymentPublicConfig(
-            string namespace_,
-            bool? sandbox,
-            GetPaymentPublicConfigPaymentProvider paymentProvider,
-            string region
+            string namespace_,            
+            bool? sandbox,            
+            GetPaymentPublicConfigPaymentProvider paymentProvider,            
+            string region            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (sandbox != null) QueryParams["sandbox"] = Convert.ToString(sandbox)!;
             if (paymentProvider is not null) QueryParams["paymentProvider"] = paymentProvider.Value;
             if (region is not null) QueryParams["region"] = region;
+            
 
-
-
-
-
+            
+            
+            
 
         }
 
@@ -168,25 +178,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Dictionary<string, object>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetPaymentPublicConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetPaymentPublicConfig.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

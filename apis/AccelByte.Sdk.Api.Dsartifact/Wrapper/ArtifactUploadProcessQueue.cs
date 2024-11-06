@@ -146,7 +146,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
         }
         #endregion
 
-        public Model.ModelsListNodesIPAddress? ListNodesIPAddress(ListNodesIPAddress input)
+        public ListNodesIPAddress.Response ListNodesIPAddress(ListNodesIPAddress input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -154,7 +154,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListNodesIPAddress?> ListNodesIPAddressAsync(ListNodesIPAddress input)
+        public async Task<ListNodesIPAddress.Response> ListNodesIPAddressAsync(ListNodesIPAddress input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -162,23 +162,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteNodeByID(DeleteNodeByID input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteNodeByIDAsync(DeleteNodeByID input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsListQueueResponse? ListQueue(ListQueue input)
+        public DeleteNodeByID.Response DeleteNodeByID(DeleteNodeByID input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -186,7 +170,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListQueueResponse?> ListQueueAsync(ListQueue input)
+        public async Task<DeleteNodeByID.Response> DeleteNodeByIDAsync(DeleteNodeByID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -194,7 +178,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsQueue? GetActiveQueue(GetActiveQueue input)
+        public ListQueue.Response ListQueue(ListQueue input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -202,7 +186,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsQueue?> GetActiveQueueAsync(GetActiveQueue input)
+        public async Task<ListQueue.Response> ListQueueAsync(ListQueue input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -210,71 +194,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void SetActiveQueue(SetActiveQueue input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SetActiveQueueAsync(SetActiveQueue input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void DeleteActiveQueue(DeleteActiveQueue input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteActiveQueueAsync(DeleteActiveQueue input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void ReportFailedUpload(ReportFailedUpload input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task ReportFailedUploadAsync(ReportFailedUpload input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void DeleteQueue(DeleteQueue input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteQueueAsync(DeleteQueue input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsListAllQueueResponse? ListAllActiveQueue(ListAllActiveQueue input)
+        public GetActiveQueue.Response GetActiveQueue(GetActiveQueue input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -282,7 +202,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListAllQueueResponse?> ListAllActiveQueueAsync(ListAllActiveQueue input)
+        public async Task<GetActiveQueue.Response> GetActiveQueueAsync(GetActiveQueue input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -290,7 +210,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsListAllQueueResponse? ListAllQueue(ListAllQueue input)
+        public SetActiveQueue.Response SetActiveQueue(SetActiveQueue input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -298,7 +218,87 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListAllQueueResponse?> ListAllQueueAsync(ListAllQueue input)
+        public async Task<SetActiveQueue.Response> SetActiveQueueAsync(SetActiveQueue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeleteActiveQueue.Response DeleteActiveQueue(DeleteActiveQueue input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteActiveQueue.Response> DeleteActiveQueueAsync(DeleteActiveQueue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public ReportFailedUpload.Response ReportFailedUpload(ReportFailedUpload input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<ReportFailedUpload.Response> ReportFailedUploadAsync(ReportFailedUpload input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeleteQueue.Response DeleteQueue(DeleteQueue input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteQueue.Response> DeleteQueueAsync(DeleteQueue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public ListAllActiveQueue.Response ListAllActiveQueue(ListAllActiveQueue input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<ListAllActiveQueue.Response> ListAllActiveQueueAsync(ListAllActiveQueue input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public ListAllQueue.Response ListAllQueue(ListAllQueue input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<ListAllQueue.Response> ListAllQueueAsync(ListAllQueue input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

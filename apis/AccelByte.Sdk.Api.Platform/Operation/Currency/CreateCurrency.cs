@@ -59,15 +59,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 CreateCurrency op = new CreateCurrency(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<CreateCurrencyBuilder>(this);
                 return op;
             }
 
-            public Model.CurrencyInfo? Execute(
+            public CreateCurrency.Response Execute(
                 CurrencyCreate body,
                 string namespace_
             )
@@ -82,11 +82,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.CurrencyInfo?> ExecuteAsync(
+            public async Task<CreateCurrency.Response> ExecuteAsync(
                 CurrencyCreate body,
                 string namespace_
             )
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -113,31 +113,45 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.CurrencyInfo>
+        {
+
+            public ErrorEntity? Error409 { get; set; } = null;
+
+            public ValidationErrorEntity? Error422 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Currency::CreateCurrency";
+        }
+
+        #endregion
+
         public CreateCurrency(
-            string namespace_,
-            Model.CurrencyCreate body
+            string namespace_,            
+            Model.CurrencyCreate body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -149,25 +163,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.CurrencyInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public CreateCurrency.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new CreateCurrency.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.CurrencyInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.CurrencyInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)409)
             {
-                return JsonSerializer.Deserialize<Model.CurrencyInfo>(payload, ResponseJsonOptions);
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)422)
+            {
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

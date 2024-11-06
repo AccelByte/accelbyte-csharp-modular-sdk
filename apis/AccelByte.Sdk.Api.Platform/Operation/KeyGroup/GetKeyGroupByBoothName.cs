@@ -28,7 +28,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// 
     ///   * Returns : key group info
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class GetKeyGroupByBoothName : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -60,16 +60,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetKeyGroupByBoothName op = new GetKeyGroupByBoothName(this,
-                    namespace_,
-                    boothName
+                    namespace_,                    
+                    boothName                    
                 );
 
                 op.SetBaseFields<GetKeyGroupByBoothNameBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public Model.KeyGroupInfo? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetKeyGroupByBoothName.Response Execute(
                 string namespace_,
                 string boothName
             )
@@ -84,11 +84,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.KeyGroupInfo?> ExecuteAsync(
+            public async Task<GetKeyGroupByBoothName.Response> ExecuteAsync(
                 string namespace_,
                 string boothName
             )
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -115,31 +115,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (boothName is not null) QueryParams["boothName"] = boothName;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.KeyGroupInfo>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::KeyGroup::GetKeyGroupByBoothName";
+        }
+
+        #endregion
+
         public GetKeyGroupByBoothName(
-            string namespace_,
-            string boothName
+            string namespace_,            
+            string boothName            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (boothName is not null) QueryParams["boothName"] = boothName;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -148,28 +160,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.KeyGroupInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetKeyGroupByBoothName.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetKeyGroupByBoothName.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.KeyGroupInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.KeyGroupInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.KeyGroupInfo>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

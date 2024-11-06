@@ -65,16 +65,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetUserAppEntitlementByAppId op = new GetUserAppEntitlementByAppId(this,
-                    namespace_,
-                    userId,
-                    appId
+                    namespace_,                    
+                    userId,                    
+                    appId                    
                 );
 
                 op.SetBaseFields<GetUserAppEntitlementByAppIdBuilder>(this);
                 return op;
             }
 
-            public Model.AppEntitlementInfo? Execute(
+            public GetUserAppEntitlementByAppId.Response Execute(
                 string namespace_,
                 string userId,
                 string appId
@@ -91,11 +91,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.AppEntitlementInfo?> ExecuteAsync(
+            public async Task<GetUserAppEntitlementByAppId.Response> ExecuteAsync(
                 string namespace_,
                 string userId,
                 string appId
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -126,36 +126,48 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
             if (appId is not null) QueryParams["appId"] = appId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.AppEntitlementInfo>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Entitlement::GetUserAppEntitlementByAppId";
+        }
+
+        #endregion
+
         public GetUserAppEntitlementByAppId(
-            string namespace_,
-            string userId,
-            bool? activeOnly,
-            string appId
+            string namespace_,            
+            string userId,            
+            bool? activeOnly,            
+            string appId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
             if (appId is not null) QueryParams["appId"] = appId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -164,28 +176,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.AppEntitlementInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetUserAppEntitlementByAppId.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetUserAppEntitlementByAppId.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.AppEntitlementInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.AppEntitlementInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.AppEntitlementInfo>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

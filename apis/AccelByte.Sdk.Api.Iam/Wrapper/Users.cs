@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
 
         #region Operation Builders
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public CreateUser.CreateUserBuilder CreateUserOp
         {
             get
@@ -46,7 +46,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetAdminUsersByRoleID.GetAdminUsersByRoleIDBuilder GetAdminUsersByRoleIDOp
         {
             get
@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetUserByLoginID.GetUserByLoginIDBuilder GetUserByLoginIDOp
         {
             get
@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetUserByPlatformUserID.GetUserByPlatformUserIDBuilder GetUserByPlatformUserIDOp
         {
             get
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public ForgotPassword.ForgotPasswordBuilder ForgotPasswordOp
         {
             get
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetUsersByLoginIds.GetUsersByLoginIdsBuilder GetUsersByLoginIdsOp
         {
             get
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public ResetPassword.ResetPasswordBuilder ResetPasswordOp
         {
             get
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public SearchUser.SearchUserBuilder SearchUserOp
         {
             get
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetUserByUserID.GetUserByUserIDBuilder GetUserByUserIDOp
         {
             get
@@ -142,7 +142,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public UpdateUser.UpdateUserBuilder UpdateUserOp
         {
             get
@@ -154,7 +154,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DeleteUser.DeleteUserBuilder DeleteUserOp
         {
             get
@@ -166,7 +166,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public BanUser.BanUserBuilder BanUserOp
         {
             get
@@ -178,7 +178,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetUserBanHistory.GetUserBanHistoryBuilder GetUserBanHistoryOp
         {
             get
@@ -190,7 +190,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DisableUserBan.DisableUserBanBuilder DisableUserBanOp
         {
             get
@@ -202,7 +202,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public EnableUserBan.EnableUserBanBuilder EnableUserBanOp
         {
             get
@@ -214,7 +214,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public ListCrossNamespaceAccountLink.ListCrossNamespaceAccountLinkBuilder ListCrossNamespaceAccountLinkOp
         {
             get
@@ -226,7 +226,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DisableUser.DisableUserBuilder DisableUserOp
         {
             get
@@ -238,7 +238,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public EnableUser.EnableUserBuilder EnableUserOp
         {
             get
@@ -250,7 +250,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetUserInformation.GetUserInformationBuilder GetUserInformationOp
         {
             get
@@ -262,7 +262,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DeleteUserInformation.DeleteUserInformationBuilder DeleteUserInformationOp
         {
             get
@@ -274,7 +274,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetUserLoginHistories.GetUserLoginHistoriesBuilder GetUserLoginHistoriesOp
         {
             get
@@ -286,7 +286,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public UpdatePassword.UpdatePasswordBuilder UpdatePasswordOp
         {
             get
@@ -298,7 +298,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public SaveUserPermission.SaveUserPermissionBuilder SaveUserPermissionOp
         {
             get
@@ -310,7 +310,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AddUserPermission.AddUserPermissionBuilder AddUserPermissionOp
         {
             get
@@ -322,7 +322,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DeleteUserPermission.DeleteUserPermissionBuilder DeleteUserPermissionOp
         {
             get
@@ -334,7 +334,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetUserPlatformAccounts.GetUserPlatformAccountsBuilder GetUserPlatformAccountsOp
         {
             get
@@ -346,7 +346,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetUserMapping.GetUserMappingBuilder GetUserMappingOp
         {
             get
@@ -358,7 +358,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetUserJusticePlatformAccount.GetUserJusticePlatformAccountBuilder GetUserJusticePlatformAccountOp
         {
             get
@@ -370,7 +370,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PlatformLink.PlatformLinkBuilder PlatformLinkOp
         {
             get
@@ -382,7 +382,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PlatformUnlink.PlatformUnlinkBuilder PlatformUnlinkOp
         {
             get
@@ -394,7 +394,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetPublisherUser.GetPublisherUserBuilder GetPublisherUserOp
         {
             get
@@ -406,7 +406,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public SaveUserRoles.SaveUserRolesBuilder SaveUserRolesOp
         {
             get
@@ -418,7 +418,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AddUserRole.AddUserRoleBuilder AddUserRoleOp
         {
             get
@@ -430,7 +430,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DeleteUserRole.DeleteUserRoleBuilder DeleteUserRoleOp
         {
             get
@@ -442,7 +442,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public UpgradeHeadlessAccount.UpgradeHeadlessAccountBuilder UpgradeHeadlessAccountOp
         {
             get
@@ -454,7 +454,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public UpgradeHeadlessAccountWithVerificationCode.UpgradeHeadlessAccountWithVerificationCodeBuilder UpgradeHeadlessAccountWithVerificationCodeOp
         {
             get
@@ -466,7 +466,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public UserVerification.UserVerificationBuilder UserVerificationOp
         {
             get
@@ -478,7 +478,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public SendVerificationCode.SendVerificationCodeBuilder SendVerificationCodeOp
         {
             get
@@ -490,7 +490,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminGetAgeRestrictionStatusV2.AdminGetAgeRestrictionStatusV2Builder AdminGetAgeRestrictionStatusV2Op
         {
             get
@@ -502,7 +502,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminUpdateAgeRestrictionConfigV2.AdminUpdateAgeRestrictionConfigV2Builder AdminUpdateAgeRestrictionConfigV2Op
         {
             get
@@ -514,7 +514,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetListCountryAgeRestriction.GetListCountryAgeRestrictionBuilder GetListCountryAgeRestrictionOp
         {
             get
@@ -526,7 +526,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public UpdateCountryAgeRestriction.UpdateCountryAgeRestrictionBuilder UpdateCountryAgeRestrictionOp
         {
             get
@@ -538,7 +538,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminSearchUsersV2.AdminSearchUsersV2Builder AdminSearchUsersV2Op
         {
             get
@@ -550,7 +550,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminGetUserByUserIdV2.AdminGetUserByUserIdV2Builder AdminGetUserByUserIdV2Op
         {
             get
@@ -562,7 +562,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminUpdateUserV2.AdminUpdateUserV2Builder AdminUpdateUserV2Op
         {
             get
@@ -574,7 +574,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminBanUserV2.AdminBanUserV2Builder AdminBanUserV2Op
         {
             get
@@ -586,7 +586,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminGetUserBanV2.AdminGetUserBanV2Builder AdminGetUserBanV2Op
         {
             get
@@ -598,7 +598,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminDisableUserV2.AdminDisableUserV2Builder AdminDisableUserV2Op
         {
             get
@@ -610,7 +610,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminEnableUserV2.AdminEnableUserV2Builder AdminEnableUserV2Op
         {
             get
@@ -622,7 +622,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminResetPasswordV2.AdminResetPasswordV2Builder AdminResetPasswordV2Op
         {
             get
@@ -634,7 +634,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminDeletePlatformLinkV2.AdminDeletePlatformLinkV2Builder AdminDeletePlatformLinkV2Op
         {
             get
@@ -646,7 +646,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminPutUserRolesV2.AdminPutUserRolesV2Builder AdminPutUserRolesV2Op
         {
             get
@@ -658,7 +658,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminCreateUserRolesV2.AdminCreateUserRolesV2Builder AdminCreateUserRolesV2Op
         {
             get
@@ -670,7 +670,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetCountryAgeRestriction.PublicGetCountryAgeRestrictionBuilder PublicGetCountryAgeRestrictionOp
         {
             get
@@ -682,7 +682,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicCreateUserV2.PublicCreateUserV2Builder PublicCreateUserV2Op
         {
             get
@@ -694,7 +694,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicForgotPasswordV2.PublicForgotPasswordV2Builder PublicForgotPasswordV2Op
         {
             get
@@ -706,7 +706,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicResetPasswordV2.PublicResetPasswordV2Builder PublicResetPasswordV2Op
         {
             get
@@ -718,7 +718,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetUserByUserIDV2.PublicGetUserByUserIDV2Builder PublicGetUserByUserIDV2Op
         {
             get
@@ -730,7 +730,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicUpdateUserV2.PublicUpdateUserV2Builder PublicUpdateUserV2Op
         {
             get
@@ -742,7 +742,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetUserBan.PublicGetUserBanBuilder PublicGetUserBanOp
         {
             get
@@ -754,7 +754,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicUpdatePasswordV2.PublicUpdatePasswordV2Builder PublicUpdatePasswordV2Op
         {
             get
@@ -766,7 +766,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetListJusticePlatformAccounts.GetListJusticePlatformAccountsBuilder GetListJusticePlatformAccountsOp
         {
             get
@@ -778,7 +778,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicPlatformLinkV2.PublicPlatformLinkV2Builder PublicPlatformLinkV2Op
         {
             get
@@ -790,7 +790,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicDeletePlatformLinkV2.PublicDeletePlatformLinkV2Builder PublicDeletePlatformLinkV2Op
         {
             get
@@ -1297,7 +1297,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminPlatformUnlinkV3.AdminPlatformUnlinkV3Builder AdminPlatformUnlinkV3Op
         {
             get
@@ -1331,7 +1331,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminDeleteUserLinkingHistoryByPlatformIDV3.AdminDeleteUserLinkingHistoryByPlatformIDV3Builder AdminDeleteUserLinkingHistoryByPlatformIDV3Op
         {
             get
@@ -1475,7 +1475,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicListUserIDByPlatformUserIDsV3.PublicListUserIDByPlatformUserIDsV3Builder PublicListUserIDByPlatformUserIDsV3Op
         {
             get
@@ -1718,7 +1718,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicPlatformUnlinkV3.PublicPlatformUnlinkV3Builder PublicPlatformUnlinkV3Op
         {
             get
@@ -1807,7 +1807,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetUserByUserIdV3.PublicGetUserByUserIdV3Builder PublicGetUserByUserIdV3Op
         {
             get
@@ -1997,9 +1997,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelUserCreateResponse? CreateUser(CreateUser input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public CreateUser.Response CreateUser(CreateUser input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2007,7 +2007,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserCreateResponse?> CreateUserAsync(CreateUser input)
+        public async Task<CreateUser.Response> CreateUserAsync(CreateUser input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2015,10 +2015,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelGetAdminUsersResponse? GetAdminUsersByRoleID(GetAdminUsersByRoleID input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetAdminUsersByRoleID.Response GetAdminUsersByRoleID(GetAdminUsersByRoleID input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2026,7 +2026,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetAdminUsersResponse?> GetAdminUsersByRoleIDAsync(GetAdminUsersByRoleID input)
+        public async Task<GetAdminUsersByRoleID.Response> GetAdminUsersByRoleIDAsync(GetAdminUsersByRoleID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2034,10 +2034,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelPublicUserResponse? GetUserByLoginID(GetUserByLoginID input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetUserByLoginID.Response GetUserByLoginID(GetUserByLoginID input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2045,7 +2045,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelPublicUserResponse?> GetUserByLoginIDAsync(GetUserByLoginID input)
+        public async Task<GetUserByLoginID.Response> GetUserByLoginIDAsync(GetUserByLoginID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2053,10 +2053,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelPublicUserResponse? GetUserByPlatformUserID(GetUserByPlatformUserID input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetUserByPlatformUserID.Response GetUserByPlatformUserID(GetUserByPlatformUserID input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2064,7 +2064,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelPublicUserResponse?> GetUserByPlatformUserIDAsync(GetUserByPlatformUserID input)
+        public async Task<GetUserByPlatformUserID.Response> GetUserByPlatformUserIDAsync(GetUserByPlatformUserID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2072,29 +2072,29 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void ForgotPassword(ForgotPassword input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public ForgotPassword.Response ForgotPassword(ForgotPassword input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task ForgotPasswordAsync(ForgotPassword input)
+        public async Task<ForgotPassword.Response> ForgotPasswordAsync(ForgotPassword input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelPublicUsersResponse? GetUsersByLoginIds(GetUsersByLoginIds input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetUsersByLoginIds.Response GetUsersByLoginIds(GetUsersByLoginIds input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2102,7 +2102,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelPublicUsersResponse?> GetUsersByLoginIdsAsync(GetUsersByLoginIds input)
+        public async Task<GetUsersByLoginIds.Response> GetUsersByLoginIdsAsync(GetUsersByLoginIds input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2110,29 +2110,29 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void ResetPassword(ResetPassword input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public ResetPassword.Response ResetPassword(ResetPassword input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task ResetPasswordAsync(ResetPassword input)
+        public async Task<ResetPassword.Response> ResetPasswordAsync(ResetPassword input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelSearchUsersResponse? SearchUser(SearchUser input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public SearchUser.Response SearchUser(SearchUser input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2140,7 +2140,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelSearchUsersResponse?> SearchUserAsync(SearchUser input)
+        public async Task<SearchUser.Response> SearchUserAsync(SearchUser input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2148,10 +2148,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelUserResponse? GetUserByUserID(GetUserByUserID input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetUserByUserID.Response GetUserByUserID(GetUserByUserID input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2159,7 +2159,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponse?> GetUserByUserIDAsync(GetUserByUserID input)
+        public async Task<GetUserByUserID.Response> GetUserByUserIDAsync(GetUserByUserID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2167,10 +2167,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelUserResponse? UpdateUser(UpdateUser input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public UpdateUser.Response UpdateUser(UpdateUser input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2178,7 +2178,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponse?> UpdateUserAsync(UpdateUser input)
+        public async Task<UpdateUser.Response> UpdateUserAsync(UpdateUser input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2186,29 +2186,29 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void DeleteUser(DeleteUser input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public DeleteUser.Response DeleteUser(DeleteUser input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteUserAsync(DeleteUser input)
+        public async Task<DeleteUser.Response> DeleteUserAsync(DeleteUser input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelUserBanResponse? BanUser(BanUser input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public BanUser.Response BanUser(BanUser input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2216,7 +2216,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserBanResponse?> BanUserAsync(BanUser input)
+        public async Task<BanUser.Response> BanUserAsync(BanUser input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2224,10 +2224,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public List<Model.ModelUserBanResponse>? GetUserBanHistory(GetUserBanHistory input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetUserBanHistory.Response GetUserBanHistory(GetUserBanHistory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2235,7 +2235,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelUserBanResponse>?> GetUserBanHistoryAsync(GetUserBanHistory input)
+        public async Task<GetUserBanHistory.Response> GetUserBanHistoryAsync(GetUserBanHistory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2243,10 +2243,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelUserBanResponse? DisableUserBan(DisableUserBan input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public DisableUserBan.Response DisableUserBan(DisableUserBan input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2254,7 +2254,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserBanResponse?> DisableUserBanAsync(DisableUserBan input)
+        public async Task<DisableUserBan.Response> DisableUserBanAsync(DisableUserBan input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2262,10 +2262,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelUserBanResponse? EnableUserBan(EnableUserBan input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public EnableUserBan.Response EnableUserBan(EnableUserBan input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2273,7 +2273,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserBanResponse?> EnableUserBanAsync(EnableUserBan input)
+        public async Task<EnableUserBan.Response> EnableUserBanAsync(EnableUserBan input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2281,67 +2281,67 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void ListCrossNamespaceAccountLink(ListCrossNamespaceAccountLink input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public ListCrossNamespaceAccountLink.Response ListCrossNamespaceAccountLink(ListCrossNamespaceAccountLink input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task ListCrossNamespaceAccountLinkAsync(ListCrossNamespaceAccountLink input)
+        public async Task<ListCrossNamespaceAccountLink.Response> ListCrossNamespaceAccountLinkAsync(ListCrossNamespaceAccountLink input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void DisableUser(DisableUser input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public DisableUser.Response DisableUser(DisableUser input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DisableUserAsync(DisableUser input)
+        public async Task<DisableUser.Response> DisableUserAsync(DisableUser input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void EnableUser(EnableUser input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public EnableUser.Response EnableUser(EnableUser input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task EnableUserAsync(EnableUser input)
+        public async Task<EnableUser.Response> EnableUserAsync(EnableUser input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelUserInformation? GetUserInformation(GetUserInformation input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetUserInformation.Response GetUserInformation(GetUserInformation input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2349,7 +2349,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserInformation?> GetUserInformationAsync(GetUserInformation input)
+        public async Task<GetUserInformation.Response> GetUserInformationAsync(GetUserInformation input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2357,29 +2357,29 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void DeleteUserInformation(DeleteUserInformation input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public DeleteUserInformation.Response DeleteUserInformation(DeleteUserInformation input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteUserInformationAsync(DeleteUserInformation input)
+        public async Task<DeleteUserInformation.Response> DeleteUserInformationAsync(DeleteUserInformation input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelLoginHistoriesResponse? GetUserLoginHistories(GetUserLoginHistories input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetUserLoginHistories.Response GetUserLoginHistories(GetUserLoginHistories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2387,7 +2387,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelLoginHistoriesResponse?> GetUserLoginHistoriesAsync(GetUserLoginHistories input)
+        public async Task<GetUserLoginHistories.Response> GetUserLoginHistoriesAsync(GetUserLoginHistories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2395,86 +2395,86 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void UpdatePassword(UpdatePassword input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public UpdatePassword.Response UpdatePassword(UpdatePassword input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task UpdatePasswordAsync(UpdatePassword input)
+        public async Task<UpdatePassword.Response> UpdatePasswordAsync(UpdatePassword input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void SaveUserPermission(SaveUserPermission input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public SaveUserPermission.Response SaveUserPermission(SaveUserPermission input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task SaveUserPermissionAsync(SaveUserPermission input)
+        public async Task<SaveUserPermission.Response> SaveUserPermissionAsync(SaveUserPermission input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void AddUserPermission(AddUserPermission input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AddUserPermission.Response AddUserPermission(AddUserPermission input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AddUserPermissionAsync(AddUserPermission input)
+        public async Task<AddUserPermission.Response> AddUserPermissionAsync(AddUserPermission input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void DeleteUserPermission(DeleteUserPermission input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public DeleteUserPermission.Response DeleteUserPermission(DeleteUserPermission input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteUserPermissionAsync(DeleteUserPermission input)
+        public async Task<DeleteUserPermission.Response> DeleteUserPermissionAsync(DeleteUserPermission input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public List<Model.AccountcommonUserLinkedPlatform>? GetUserPlatformAccounts(GetUserPlatformAccounts input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetUserPlatformAccounts.Response GetUserPlatformAccounts(GetUserPlatformAccounts input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2482,7 +2482,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.AccountcommonUserLinkedPlatform>?> GetUserPlatformAccountsAsync(GetUserPlatformAccounts input)
+        public async Task<GetUserPlatformAccounts.Response> GetUserPlatformAccountsAsync(GetUserPlatformAccounts input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2490,10 +2490,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelGetUserMapping? GetUserMapping(GetUserMapping input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetUserMapping.Response GetUserMapping(GetUserMapping input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2501,7 +2501,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetUserMapping?> GetUserMappingAsync(GetUserMapping input)
+        public async Task<GetUserMapping.Response> GetUserMappingAsync(GetUserMapping input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2509,10 +2509,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelGetUserJusticePlatformAccountResponse? GetUserJusticePlatformAccount(GetUserJusticePlatformAccount input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetUserJusticePlatformAccount.Response GetUserJusticePlatformAccount(GetUserJusticePlatformAccount input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2520,7 +2520,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetUserJusticePlatformAccountResponse?> GetUserJusticePlatformAccountAsync(GetUserJusticePlatformAccount input)
+        public async Task<GetUserJusticePlatformAccount.Response> GetUserJusticePlatformAccountAsync(GetUserJusticePlatformAccount input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2528,48 +2528,48 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void PlatformLink(PlatformLink input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PlatformLink.Response PlatformLink(PlatformLink input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PlatformLinkAsync(PlatformLink input)
+        public async Task<PlatformLink.Response> PlatformLinkAsync(PlatformLink input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void PlatformUnlink(PlatformUnlink input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PlatformUnlink.Response PlatformUnlink(PlatformUnlink input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PlatformUnlinkAsync(PlatformUnlink input)
+        public async Task<PlatformUnlink.Response> PlatformUnlinkAsync(PlatformUnlink input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelGetPublisherUserResponse? GetPublisherUser(GetPublisherUser input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetPublisherUser.Response GetPublisherUser(GetPublisherUser input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2577,7 +2577,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetPublisherUserResponse?> GetPublisherUserAsync(GetPublisherUser input)
+        public async Task<GetPublisherUser.Response> GetPublisherUserAsync(GetPublisherUser input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2585,67 +2585,67 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void SaveUserRoles(SaveUserRoles input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public SaveUserRoles.Response SaveUserRoles(SaveUserRoles input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task SaveUserRolesAsync(SaveUserRoles input)
+        public async Task<SaveUserRoles.Response> SaveUserRolesAsync(SaveUserRoles input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void AddUserRole(AddUserRole input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AddUserRole.Response AddUserRole(AddUserRole input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AddUserRoleAsync(AddUserRole input)
+        public async Task<AddUserRole.Response> AddUserRoleAsync(AddUserRole input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void DeleteUserRole(DeleteUserRole input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public DeleteUserRole.Response DeleteUserRole(DeleteUserRole input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteUserRoleAsync(DeleteUserRole input)
+        public async Task<DeleteUserRole.Response> DeleteUserRoleAsync(DeleteUserRole input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelUserResponse? UpgradeHeadlessAccount(UpgradeHeadlessAccount input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public UpgradeHeadlessAccount.Response UpgradeHeadlessAccount(UpgradeHeadlessAccount input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2653,7 +2653,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponse?> UpgradeHeadlessAccountAsync(UpgradeHeadlessAccount input)
+        public async Task<UpgradeHeadlessAccount.Response> UpgradeHeadlessAccountAsync(UpgradeHeadlessAccount input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2661,10 +2661,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelUserResponse? UpgradeHeadlessAccountWithVerificationCode(UpgradeHeadlessAccountWithVerificationCode input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public UpgradeHeadlessAccountWithVerificationCode.Response UpgradeHeadlessAccountWithVerificationCode(UpgradeHeadlessAccountWithVerificationCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2672,7 +2672,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponse?> UpgradeHeadlessAccountWithVerificationCodeAsync(UpgradeHeadlessAccountWithVerificationCode input)
+        public async Task<UpgradeHeadlessAccountWithVerificationCode.Response> UpgradeHeadlessAccountWithVerificationCodeAsync(UpgradeHeadlessAccountWithVerificationCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2680,48 +2680,48 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void UserVerification(UserVerification input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public UserVerification.Response UserVerification(UserVerification input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task UserVerificationAsync(UserVerification input)
+        public async Task<UserVerification.Response> UserVerificationAsync(UserVerification input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void SendVerificationCode(SendVerificationCode input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public SendVerificationCode.Response SendVerificationCode(SendVerificationCode input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task SendVerificationCodeAsync(SendVerificationCode input)
+        public async Task<SendVerificationCode.Response> SendVerificationCodeAsync(SendVerificationCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelAgeRestrictionResponse? AdminGetAgeRestrictionStatusV2(AdminGetAgeRestrictionStatusV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminGetAgeRestrictionStatusV2.Response AdminGetAgeRestrictionStatusV2(AdminGetAgeRestrictionStatusV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2729,7 +2729,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelAgeRestrictionResponse?> AdminGetAgeRestrictionStatusV2Async(AdminGetAgeRestrictionStatusV2 input)
+        public async Task<AdminGetAgeRestrictionStatusV2.Response> AdminGetAgeRestrictionStatusV2Async(AdminGetAgeRestrictionStatusV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2737,10 +2737,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelAgeRestrictionResponse? AdminUpdateAgeRestrictionConfigV2(AdminUpdateAgeRestrictionConfigV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminUpdateAgeRestrictionConfigV2.Response AdminUpdateAgeRestrictionConfigV2(AdminUpdateAgeRestrictionConfigV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2748,7 +2748,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelAgeRestrictionResponse?> AdminUpdateAgeRestrictionConfigV2Async(AdminUpdateAgeRestrictionConfigV2 input)
+        public async Task<AdminUpdateAgeRestrictionConfigV2.Response> AdminUpdateAgeRestrictionConfigV2Async(AdminUpdateAgeRestrictionConfigV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2756,10 +2756,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public List<Model.AccountcommonCountryAgeRestriction>? GetListCountryAgeRestriction(GetListCountryAgeRestriction input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetListCountryAgeRestriction.Response GetListCountryAgeRestriction(GetListCountryAgeRestriction input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2767,7 +2767,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.AccountcommonCountryAgeRestriction>?> GetListCountryAgeRestrictionAsync(GetListCountryAgeRestriction input)
+        public async Task<GetListCountryAgeRestriction.Response> GetListCountryAgeRestrictionAsync(GetListCountryAgeRestriction input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2775,10 +2775,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelCountry? UpdateCountryAgeRestriction(UpdateCountryAgeRestriction input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public UpdateCountryAgeRestriction.Response UpdateCountryAgeRestriction(UpdateCountryAgeRestriction input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2786,7 +2786,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelCountry?> UpdateCountryAgeRestrictionAsync(UpdateCountryAgeRestriction input)
+        public async Task<UpdateCountryAgeRestriction.Response> UpdateCountryAgeRestrictionAsync(UpdateCountryAgeRestriction input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2794,10 +2794,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelSearchUsersByPlatformIDResponse? AdminSearchUsersV2(AdminSearchUsersV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminSearchUsersV2.Response AdminSearchUsersV2(AdminSearchUsersV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2805,7 +2805,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelSearchUsersByPlatformIDResponse?> AdminSearchUsersV2Async(AdminSearchUsersV2 input)
+        public async Task<AdminSearchUsersV2.Response> AdminSearchUsersV2Async(AdminSearchUsersV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2813,10 +2813,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelUserResponse? AdminGetUserByUserIdV2(AdminGetUserByUserIdV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminGetUserByUserIdV2.Response AdminGetUserByUserIdV2(AdminGetUserByUserIdV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2824,7 +2824,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponse?> AdminGetUserByUserIdV2Async(AdminGetUserByUserIdV2 input)
+        public async Task<AdminGetUserByUserIdV2.Response> AdminGetUserByUserIdV2Async(AdminGetUserByUserIdV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2832,10 +2832,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelUserResponse? AdminUpdateUserV2(AdminUpdateUserV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminUpdateUserV2.Response AdminUpdateUserV2(AdminUpdateUserV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2843,7 +2843,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponse?> AdminUpdateUserV2Async(AdminUpdateUserV2 input)
+        public async Task<AdminUpdateUserV2.Response> AdminUpdateUserV2Async(AdminUpdateUserV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2851,10 +2851,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelUserBanResponse? AdminBanUserV2(AdminBanUserV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminBanUserV2.Response AdminBanUserV2(AdminBanUserV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2862,7 +2862,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserBanResponse?> AdminBanUserV2Async(AdminBanUserV2 input)
+        public async Task<AdminBanUserV2.Response> AdminBanUserV2Async(AdminBanUserV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2870,10 +2870,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public List<Model.ModelUserBanResponse>? AdminGetUserBanV2(AdminGetUserBanV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminGetUserBanV2.Response AdminGetUserBanV2(AdminGetUserBanV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -2881,7 +2881,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelUserBanResponse>?> AdminGetUserBanV2Async(AdminGetUserBanV2 input)
+        public async Task<AdminGetUserBanV2.Response> AdminGetUserBanV2Async(AdminGetUserBanV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -2889,124 +2889,124 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void AdminDisableUserV2(AdminDisableUserV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminDisableUserV2.Response AdminDisableUserV2(AdminDisableUserV2 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDisableUserV2Async(AdminDisableUserV2 input)
+        public async Task<AdminDisableUserV2.Response> AdminDisableUserV2Async(AdminDisableUserV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void AdminEnableUserV2(AdminEnableUserV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminEnableUserV2.Response AdminEnableUserV2(AdminEnableUserV2 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminEnableUserV2Async(AdminEnableUserV2 input)
+        public async Task<AdminEnableUserV2.Response> AdminEnableUserV2Async(AdminEnableUserV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void AdminResetPasswordV2(AdminResetPasswordV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminResetPasswordV2.Response AdminResetPasswordV2(AdminResetPasswordV2 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminResetPasswordV2Async(AdminResetPasswordV2 input)
+        public async Task<AdminResetPasswordV2.Response> AdminResetPasswordV2Async(AdminResetPasswordV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void AdminDeletePlatformLinkV2(AdminDeletePlatformLinkV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminDeletePlatformLinkV2.Response AdminDeletePlatformLinkV2(AdminDeletePlatformLinkV2 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeletePlatformLinkV2Async(AdminDeletePlatformLinkV2 input)
+        public async Task<AdminDeletePlatformLinkV2.Response> AdminDeletePlatformLinkV2Async(AdminDeletePlatformLinkV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void AdminPutUserRolesV2(AdminPutUserRolesV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminPutUserRolesV2.Response AdminPutUserRolesV2(AdminPutUserRolesV2 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminPutUserRolesV2Async(AdminPutUserRolesV2 input)
+        public async Task<AdminPutUserRolesV2.Response> AdminPutUserRolesV2Async(AdminPutUserRolesV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void AdminCreateUserRolesV2(AdminCreateUserRolesV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminCreateUserRolesV2.Response AdminCreateUserRolesV2(AdminCreateUserRolesV2 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminCreateUserRolesV2Async(AdminCreateUserRolesV2 input)
+        public async Task<AdminCreateUserRolesV2.Response> AdminCreateUserRolesV2Async(AdminCreateUserRolesV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.AccountcommonCountry? PublicGetCountryAgeRestriction(PublicGetCountryAgeRestriction input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicGetCountryAgeRestriction.Response PublicGetCountryAgeRestriction(PublicGetCountryAgeRestriction input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3014,7 +3014,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountcommonCountry?> PublicGetCountryAgeRestrictionAsync(PublicGetCountryAgeRestriction input)
+        public async Task<PublicGetCountryAgeRestriction.Response> PublicGetCountryAgeRestrictionAsync(PublicGetCountryAgeRestriction input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3022,10 +3022,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelUserCreateResponse? PublicCreateUserV2(PublicCreateUserV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicCreateUserV2.Response PublicCreateUserV2(PublicCreateUserV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3033,7 +3033,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserCreateResponse?> PublicCreateUserV2Async(PublicCreateUserV2 input)
+        public async Task<PublicCreateUserV2.Response> PublicCreateUserV2Async(PublicCreateUserV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3041,48 +3041,48 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void PublicForgotPasswordV2(PublicForgotPasswordV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicForgotPasswordV2.Response PublicForgotPasswordV2(PublicForgotPasswordV2 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicForgotPasswordV2Async(PublicForgotPasswordV2 input)
+        public async Task<PublicForgotPasswordV2.Response> PublicForgotPasswordV2Async(PublicForgotPasswordV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void PublicResetPasswordV2(PublicResetPasswordV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicResetPasswordV2.Response PublicResetPasswordV2(PublicResetPasswordV2 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicResetPasswordV2Async(PublicResetPasswordV2 input)
+        public async Task<PublicResetPasswordV2.Response> PublicResetPasswordV2Async(PublicResetPasswordV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelUserResponse? PublicGetUserByUserIDV2(PublicGetUserByUserIDV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicGetUserByUserIDV2.Response PublicGetUserByUserIDV2(PublicGetUserByUserIDV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3090,7 +3090,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponse?> PublicGetUserByUserIDV2Async(PublicGetUserByUserIDV2 input)
+        public async Task<PublicGetUserByUserIDV2.Response> PublicGetUserByUserIDV2Async(PublicGetUserByUserIDV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3098,10 +3098,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public List<Model.ModelUserResponse>? PublicUpdateUserV2(PublicUpdateUserV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicUpdateUserV2.Response PublicUpdateUserV2(PublicUpdateUserV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3109,7 +3109,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelUserResponse>?> PublicUpdateUserV2Async(PublicUpdateUserV2 input)
+        public async Task<PublicUpdateUserV2.Response> PublicUpdateUserV2Async(PublicUpdateUserV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3117,10 +3117,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public List<Model.ModelUserBanResponse>? PublicGetUserBan(PublicGetUserBan input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicGetUserBan.Response PublicGetUserBan(PublicGetUserBan input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3128,7 +3128,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelUserBanResponse>?> PublicGetUserBanAsync(PublicGetUserBan input)
+        public async Task<PublicGetUserBan.Response> PublicGetUserBanAsync(PublicGetUserBan input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3136,29 +3136,29 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void PublicUpdatePasswordV2(PublicUpdatePasswordV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicUpdatePasswordV2.Response PublicUpdatePasswordV2(PublicUpdatePasswordV2 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicUpdatePasswordV2Async(PublicUpdatePasswordV2 input)
+        public async Task<PublicUpdatePasswordV2.Response> PublicUpdatePasswordV2Async(PublicUpdatePasswordV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public List<Model.ModelGetUserMapping>? GetListJusticePlatformAccounts(GetListJusticePlatformAccounts input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetListJusticePlatformAccounts.Response GetListJusticePlatformAccounts(GetListJusticePlatformAccounts input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3166,7 +3166,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelGetUserMapping>?> GetListJusticePlatformAccountsAsync(GetListJusticePlatformAccounts input)
+        public async Task<GetListJusticePlatformAccounts.Response> GetListJusticePlatformAccountsAsync(GetListJusticePlatformAccounts input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3174,46 +3174,46 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void PublicPlatformLinkV2(PublicPlatformLinkV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicPlatformLinkV2.Response PublicPlatformLinkV2(PublicPlatformLinkV2 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicPlatformLinkV2Async(PublicPlatformLinkV2 input)
+        public async Task<PublicPlatformLinkV2.Response> PublicPlatformLinkV2Async(PublicPlatformLinkV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void PublicDeletePlatformLinkV2(PublicDeletePlatformLinkV2 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicDeletePlatformLinkV2.Response PublicDeletePlatformLinkV2(PublicDeletePlatformLinkV2 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicDeletePlatformLinkV2Async(PublicDeletePlatformLinkV2 input)
+        public async Task<PublicDeletePlatformLinkV2.Response> PublicDeletePlatformLinkV2Async(PublicDeletePlatformLinkV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public Model.ModelGetUsersResponseWithPaginationV3? ListAdminsV3(ListAdminsV3 input)
+        #pragma warning restore ab_deprecated_operation
+        public ListAdminsV3.Response ListAdminsV3(ListAdminsV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3221,7 +3221,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetUsersResponseWithPaginationV3?> ListAdminsV3Async(ListAdminsV3 input)
+        public async Task<ListAdminsV3.Response> ListAdminsV3Async(ListAdminsV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3229,7 +3229,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelAgeRestrictionResponseV3? AdminGetAgeRestrictionStatusV3(AdminGetAgeRestrictionStatusV3 input)
+        public AdminGetAgeRestrictionStatusV3.Response AdminGetAgeRestrictionStatusV3(AdminGetAgeRestrictionStatusV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3237,7 +3237,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelAgeRestrictionResponseV3?> AdminGetAgeRestrictionStatusV3Async(AdminGetAgeRestrictionStatusV3 input)
+        public async Task<AdminGetAgeRestrictionStatusV3.Response> AdminGetAgeRestrictionStatusV3Async(AdminGetAgeRestrictionStatusV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3245,7 +3245,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelAgeRestrictionResponseV3? AdminUpdateAgeRestrictionConfigV3(AdminUpdateAgeRestrictionConfigV3 input)
+        public AdminUpdateAgeRestrictionConfigV3.Response AdminUpdateAgeRestrictionConfigV3(AdminUpdateAgeRestrictionConfigV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3253,7 +3253,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelAgeRestrictionResponseV3?> AdminUpdateAgeRestrictionConfigV3Async(AdminUpdateAgeRestrictionConfigV3 input)
+        public async Task<AdminUpdateAgeRestrictionConfigV3.Response> AdminUpdateAgeRestrictionConfigV3Async(AdminUpdateAgeRestrictionConfigV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3261,7 +3261,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelCountryV3Response>? AdminGetListCountryAgeRestrictionV3(AdminGetListCountryAgeRestrictionV3 input)
+        public AdminGetListCountryAgeRestrictionV3.Response AdminGetListCountryAgeRestrictionV3(AdminGetListCountryAgeRestrictionV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3269,7 +3269,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelCountryV3Response>?> AdminGetListCountryAgeRestrictionV3Async(AdminGetListCountryAgeRestrictionV3 input)
+        public async Task<AdminGetListCountryAgeRestrictionV3.Response> AdminGetListCountryAgeRestrictionV3Async(AdminGetListCountryAgeRestrictionV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3277,7 +3277,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelCountryV3Response? AdminUpdateCountryAgeRestrictionV3(AdminUpdateCountryAgeRestrictionV3 input)
+        public AdminUpdateCountryAgeRestrictionV3.Response AdminUpdateCountryAgeRestrictionV3(AdminUpdateCountryAgeRestrictionV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3285,7 +3285,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelCountryV3Response?> AdminUpdateCountryAgeRestrictionV3Async(AdminUpdateCountryAgeRestrictionV3 input)
+        public async Task<AdminUpdateCountryAgeRestrictionV3.Response> AdminUpdateCountryAgeRestrictionV3Async(AdminUpdateCountryAgeRestrictionV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3293,7 +3293,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AccountcommonUserPlatforms? AdminListUserIDByPlatformUserIDsV3(AdminListUserIDByPlatformUserIDsV3 input)
+        public AdminListUserIDByPlatformUserIDsV3.Response AdminListUserIDByPlatformUserIDsV3(AdminListUserIDByPlatformUserIDsV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3301,7 +3301,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountcommonUserPlatforms?> AdminListUserIDByPlatformUserIDsV3Async(AdminListUserIDByPlatformUserIDsV3 input)
+        public async Task<AdminListUserIDByPlatformUserIDsV3.Response> AdminListUserIDByPlatformUserIDsV3Async(AdminListUserIDByPlatformUserIDsV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3309,7 +3309,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserResponseV3? AdminGetUserByPlatformUserIDV3(AdminGetUserByPlatformUserIDV3 input)
+        public AdminGetUserByPlatformUserIDV3.Response AdminGetUserByPlatformUserIDV3(AdminGetUserByPlatformUserIDV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3317,7 +3317,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponseV3?> AdminGetUserByPlatformUserIDV3Async(AdminGetUserByPlatformUserIDV3 input)
+        public async Task<AdminGetUserByPlatformUserIDV3.Response> AdminGetUserByPlatformUserIDV3Async(AdminGetUserByPlatformUserIDV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3325,7 +3325,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelGetUsersResponseWithPaginationV3? GetAdminUsersByRoleIdV3(GetAdminUsersByRoleIdV3 input)
+        public GetAdminUsersByRoleIdV3.Response GetAdminUsersByRoleIdV3(GetAdminUsersByRoleIdV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3333,7 +3333,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetUsersResponseWithPaginationV3?> GetAdminUsersByRoleIdV3Async(GetAdminUsersByRoleIdV3 input)
+        public async Task<GetAdminUsersByRoleIdV3.Response> GetAdminUsersByRoleIdV3Async(GetAdminUsersByRoleIdV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3341,7 +3341,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserResponseV3? AdminGetUserByEmailAddressV3(AdminGetUserByEmailAddressV3 input)
+        public AdminGetUserByEmailAddressV3.Response AdminGetUserByEmailAddressV3(AdminGetUserByEmailAddressV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3349,7 +3349,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponseV3?> AdminGetUserByEmailAddressV3Async(AdminGetUserByEmailAddressV3 input)
+        public async Task<AdminGetUserByEmailAddressV3.Response> AdminGetUserByEmailAddressV3Async(AdminGetUserByEmailAddressV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3357,23 +3357,23 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminBulkUpdateUsersV3(AdminBulkUpdateUsersV3 input)
+        public AdminBulkUpdateUsersV3.Response AdminBulkUpdateUsersV3(AdminBulkUpdateUsersV3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminBulkUpdateUsersV3Async(AdminBulkUpdateUsersV3 input)
+        public async Task<AdminBulkUpdateUsersV3.Response> AdminBulkUpdateUsersV3Async(AdminBulkUpdateUsersV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelGetUserBanV3Response? AdminGetBulkUserBanV3(AdminGetBulkUserBanV3 input)
+        public AdminGetBulkUserBanV3.Response AdminGetBulkUserBanV3(AdminGetBulkUserBanV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3381,7 +3381,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetUserBanV3Response?> AdminGetBulkUserBanV3Async(AdminGetBulkUserBanV3 input)
+        public async Task<AdminGetBulkUserBanV3.Response> AdminGetBulkUserBanV3Async(AdminGetBulkUserBanV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3389,7 +3389,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelListUserInformationResult? AdminListUserIDByUserIDsV3(AdminListUserIDByUserIDsV3 input)
+        public AdminListUserIDByUserIDsV3.Response AdminListUserIDByUserIDsV3(AdminListUserIDByUserIDsV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3397,7 +3397,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelListUserInformationResult?> AdminListUserIDByUserIDsV3Async(AdminListUserIDByUserIDsV3 input)
+        public async Task<AdminListUserIDByUserIDsV3.Response> AdminListUserIDByUserIDsV3Async(AdminListUserIDByUserIDsV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3405,7 +3405,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelListBulkUserPlatformsResponse? AdminBulkGetUsersPlatform(AdminBulkGetUsersPlatform input)
+        public AdminBulkGetUsersPlatform.Response AdminBulkGetUsersPlatform(AdminBulkGetUsersPlatform input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3413,7 +3413,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelListBulkUserPlatformsResponse?> AdminBulkGetUsersPlatformAsync(AdminBulkGetUsersPlatform input)
+        public async Task<AdminBulkGetUsersPlatform.Response> AdminBulkGetUsersPlatformAsync(AdminBulkGetUsersPlatform input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3421,7 +3421,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelInviteUserResponseV3? AdminInviteUserV3(AdminInviteUserV3 input)
+        public AdminInviteUserV3.Response AdminInviteUserV3(AdminInviteUserV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3429,7 +3429,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelInviteUserResponseV3?> AdminInviteUserV3Async(AdminInviteUserV3 input)
+        public async Task<AdminInviteUserV3.Response> AdminInviteUserV3Async(AdminInviteUserV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3437,7 +3437,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelLinkingHistoryResponseWithPaginationV3? AdminQueryThirdPlatformLinkHistoryV3(AdminQueryThirdPlatformLinkHistoryV3 input)
+        public AdminQueryThirdPlatformLinkHistoryV3.Response AdminQueryThirdPlatformLinkHistoryV3(AdminQueryThirdPlatformLinkHistoryV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3445,7 +3445,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelLinkingHistoryResponseWithPaginationV3?> AdminQueryThirdPlatformLinkHistoryV3Async(AdminQueryThirdPlatformLinkHistoryV3 input)
+        public async Task<AdminQueryThirdPlatformLinkHistoryV3.Response> AdminQueryThirdPlatformLinkHistoryV3Async(AdminQueryThirdPlatformLinkHistoryV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3453,7 +3453,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AccountcommonListUsersWithPlatformAccountsResponse? AdminListUsersV3(AdminListUsersV3 input)
+        public AdminListUsersV3.Response AdminListUsersV3(AdminListUsersV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3461,7 +3461,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountcommonListUsersWithPlatformAccountsResponse?> AdminListUsersV3Async(AdminListUsersV3 input)
+        public async Task<AdminListUsersV3.Response> AdminListUsersV3Async(AdminListUsersV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3469,7 +3469,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelSearchUsersResponseWithPaginationV3? AdminSearchUserV3(AdminSearchUserV3 input)
+        public AdminSearchUserV3.Response AdminSearchUserV3(AdminSearchUserV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3477,7 +3477,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelSearchUsersResponseWithPaginationV3?> AdminSearchUserV3Async(AdminSearchUserV3 input)
+        public async Task<AdminSearchUserV3.Response> AdminSearchUserV3Async(AdminSearchUserV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3485,7 +3485,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelListUserResponseV3? AdminGetBulkUserByEmailAddressV3(AdminGetBulkUserByEmailAddressV3 input)
+        public AdminGetBulkUserByEmailAddressV3.Response AdminGetBulkUserByEmailAddressV3(AdminGetBulkUserByEmailAddressV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3493,7 +3493,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelListUserResponseV3?> AdminGetBulkUserByEmailAddressV3Async(AdminGetBulkUserByEmailAddressV3 input)
+        public async Task<AdminGetBulkUserByEmailAddressV3.Response> AdminGetBulkUserByEmailAddressV3Async(AdminGetBulkUserByEmailAddressV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3501,7 +3501,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserResponseV3? AdminGetUserByUserIdV3(AdminGetUserByUserIdV3 input)
+        public AdminGetUserByUserIdV3.Response AdminGetUserByUserIdV3(AdminGetUserByUserIdV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3509,7 +3509,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponseV3?> AdminGetUserByUserIdV3Async(AdminGetUserByUserIdV3 input)
+        public async Task<AdminGetUserByUserIdV3.Response> AdminGetUserByUserIdV3Async(AdminGetUserByUserIdV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3517,7 +3517,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserResponseV3? AdminUpdateUserV3(AdminUpdateUserV3 input)
+        public AdminUpdateUserV3.Response AdminUpdateUserV3(AdminUpdateUserV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3525,7 +3525,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponseV3?> AdminUpdateUserV3Async(AdminUpdateUserV3 input)
+        public async Task<AdminUpdateUserV3.Response> AdminUpdateUserV3Async(AdminUpdateUserV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3533,7 +3533,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelGetUserBanV3Response? AdminGetUserBanV3(AdminGetUserBanV3 input)
+        public AdminGetUserBanV3.Response AdminGetUserBanV3(AdminGetUserBanV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3541,7 +3541,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetUserBanV3Response?> AdminGetUserBanV3Async(AdminGetUserBanV3 input)
+        public async Task<AdminGetUserBanV3.Response> AdminGetUserBanV3Async(AdminGetUserBanV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3549,7 +3549,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserBanResponseV3? AdminBanUserV3(AdminBanUserV3 input)
+        public AdminBanUserV3.Response AdminBanUserV3(AdminBanUserV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3557,7 +3557,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserBanResponseV3?> AdminBanUserV3Async(AdminBanUserV3 input)
+        public async Task<AdminBanUserV3.Response> AdminBanUserV3Async(AdminBanUserV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3565,7 +3565,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelGetUserBanSummaryV3? AdminGetUserBanSummaryV3(AdminGetUserBanSummaryV3 input)
+        public AdminGetUserBanSummaryV3.Response AdminGetUserBanSummaryV3(AdminGetUserBanSummaryV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3573,7 +3573,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetUserBanSummaryV3?> AdminGetUserBanSummaryV3Async(AdminGetUserBanSummaryV3 input)
+        public async Task<AdminGetUserBanSummaryV3.Response> AdminGetUserBanSummaryV3Async(AdminGetUserBanSummaryV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3581,7 +3581,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserBanResponseV3? AdminUpdateUserBanV3(AdminUpdateUserBanV3 input)
+        public AdminUpdateUserBanV3.Response AdminUpdateUserBanV3(AdminUpdateUserBanV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3589,7 +3589,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserBanResponseV3?> AdminUpdateUserBanV3Async(AdminUpdateUserBanV3 input)
+        public async Task<AdminUpdateUserBanV3.Response> AdminUpdateUserBanV3Async(AdminUpdateUserBanV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3597,39 +3597,39 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminSendVerificationCodeV3(AdminSendVerificationCodeV3 input)
+        public AdminSendVerificationCodeV3.Response AdminSendVerificationCodeV3(AdminSendVerificationCodeV3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminSendVerificationCodeV3Async(AdminSendVerificationCodeV3 input)
+        public async Task<AdminSendVerificationCodeV3.Response> AdminSendVerificationCodeV3Async(AdminSendVerificationCodeV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminVerifyAccountV3(AdminVerifyAccountV3 input)
+        public AdminVerifyAccountV3.Response AdminVerifyAccountV3(AdminVerifyAccountV3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminVerifyAccountV3Async(AdminVerifyAccountV3 input)
+        public async Task<AdminVerifyAccountV3.Response> AdminVerifyAccountV3Async(AdminVerifyAccountV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelVerificationCodeResponse? GetUserVerificationCode(GetUserVerificationCode input)
+        public GetUserVerificationCode.Response GetUserVerificationCode(GetUserVerificationCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3637,7 +3637,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelVerificationCodeResponse?> GetUserVerificationCodeAsync(GetUserVerificationCode input)
+        public async Task<GetUserVerificationCode.Response> GetUserVerificationCodeAsync(GetUserVerificationCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3645,7 +3645,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserDeletionStatusResponse? AdminGetUserDeletionStatusV3(AdminGetUserDeletionStatusV3 input)
+        public AdminGetUserDeletionStatusV3.Response AdminGetUserDeletionStatusV3(AdminGetUserDeletionStatusV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3653,7 +3653,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserDeletionStatusResponse?> AdminGetUserDeletionStatusV3Async(AdminGetUserDeletionStatusV3 input)
+        public async Task<AdminGetUserDeletionStatusV3.Response> AdminGetUserDeletionStatusV3Async(AdminGetUserDeletionStatusV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3661,23 +3661,23 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminUpdateUserDeletionStatusV3(AdminUpdateUserDeletionStatusV3 input)
+        public AdminUpdateUserDeletionStatusV3.Response AdminUpdateUserDeletionStatusV3(AdminUpdateUserDeletionStatusV3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminUpdateUserDeletionStatusV3Async(AdminUpdateUserDeletionStatusV3 input)
+        public async Task<AdminUpdateUserDeletionStatusV3.Response> AdminUpdateUserDeletionStatusV3Async(AdminUpdateUserDeletionStatusV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AccountcommonDistinctPlatformResponseV3? AdminListUserAllPlatformAccountsDistinctV3(AdminListUserAllPlatformAccountsDistinctV3 input)
+        public AdminListUserAllPlatformAccountsDistinctV3.Response AdminListUserAllPlatformAccountsDistinctV3(AdminListUserAllPlatformAccountsDistinctV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3685,7 +3685,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountcommonDistinctPlatformResponseV3?> AdminListUserAllPlatformAccountsDistinctV3Async(AdminListUserAllPlatformAccountsDistinctV3 input)
+        public async Task<AdminListUserAllPlatformAccountsDistinctV3.Response> AdminListUserAllPlatformAccountsDistinctV3Async(AdminListUserAllPlatformAccountsDistinctV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3693,7 +3693,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserResponseV3? AdminUpgradeHeadlessAccountV3(AdminUpgradeHeadlessAccountV3 input)
+        public AdminUpgradeHeadlessAccountV3.Response AdminUpgradeHeadlessAccountV3(AdminUpgradeHeadlessAccountV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3701,7 +3701,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponseV3?> AdminUpgradeHeadlessAccountV3Async(AdminUpgradeHeadlessAccountV3 input)
+        public async Task<AdminUpgradeHeadlessAccountV3.Response> AdminUpgradeHeadlessAccountV3Async(AdminUpgradeHeadlessAccountV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3709,23 +3709,23 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteUserInformationV3(AdminDeleteUserInformationV3 input)
+        public AdminDeleteUserInformationV3.Response AdminDeleteUserInformationV3(AdminDeleteUserInformationV3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteUserInformationV3Async(AdminDeleteUserInformationV3 input)
+        public async Task<AdminDeleteUserInformationV3.Response> AdminDeleteUserInformationV3Async(AdminDeleteUserInformationV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelLoginHistoriesResponse? AdminGetUserLoginHistoriesV3(AdminGetUserLoginHistoriesV3 input)
+        public AdminGetUserLoginHistoriesV3.Response AdminGetUserLoginHistoriesV3(AdminGetUserLoginHistoriesV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3733,7 +3733,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelLoginHistoriesResponse?> AdminGetUserLoginHistoriesV3Async(AdminGetUserLoginHistoriesV3 input)
+        public async Task<AdminGetUserLoginHistoriesV3.Response> AdminGetUserLoginHistoriesV3Async(AdminGetUserLoginHistoriesV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3741,87 +3741,87 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminResetPasswordV3(AdminResetPasswordV3 input)
+        public AdminResetPasswordV3.Response AdminResetPasswordV3(AdminResetPasswordV3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminResetPasswordV3Async(AdminResetPasswordV3 input)
+        public async Task<AdminResetPasswordV3.Response> AdminResetPasswordV3Async(AdminResetPasswordV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminUpdateUserPermissionV3(AdminUpdateUserPermissionV3 input)
+        public AdminUpdateUserPermissionV3.Response AdminUpdateUserPermissionV3(AdminUpdateUserPermissionV3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminUpdateUserPermissionV3Async(AdminUpdateUserPermissionV3 input)
+        public async Task<AdminUpdateUserPermissionV3.Response> AdminUpdateUserPermissionV3Async(AdminUpdateUserPermissionV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminAddUserPermissionsV3(AdminAddUserPermissionsV3 input)
+        public AdminAddUserPermissionsV3.Response AdminAddUserPermissionsV3(AdminAddUserPermissionsV3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminAddUserPermissionsV3Async(AdminAddUserPermissionsV3 input)
+        public async Task<AdminAddUserPermissionsV3.Response> AdminAddUserPermissionsV3Async(AdminAddUserPermissionsV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteUserPermissionBulkV3(AdminDeleteUserPermissionBulkV3 input)
+        public AdminDeleteUserPermissionBulkV3.Response AdminDeleteUserPermissionBulkV3(AdminDeleteUserPermissionBulkV3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteUserPermissionBulkV3Async(AdminDeleteUserPermissionBulkV3 input)
+        public async Task<AdminDeleteUserPermissionBulkV3.Response> AdminDeleteUserPermissionBulkV3Async(AdminDeleteUserPermissionBulkV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteUserPermissionV3(AdminDeleteUserPermissionV3 input)
+        public AdminDeleteUserPermissionV3.Response AdminDeleteUserPermissionV3(AdminDeleteUserPermissionV3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteUserPermissionV3Async(AdminDeleteUserPermissionV3 input)
+        public async Task<AdminDeleteUserPermissionV3.Response> AdminDeleteUserPermissionV3Async(AdminDeleteUserPermissionV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AccountcommonUserLinkedPlatformsResponseV3? AdminGetUserPlatformAccountsV3(AdminGetUserPlatformAccountsV3 input)
+        public AdminGetUserPlatformAccountsV3.Response AdminGetUserPlatformAccountsV3(AdminGetUserPlatformAccountsV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3829,7 +3829,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountcommonUserLinkedPlatformsResponseV3?> AdminGetUserPlatformAccountsV3Async(AdminGetUserPlatformAccountsV3 input)
+        public async Task<AdminGetUserPlatformAccountsV3.Response> AdminGetUserPlatformAccountsV3Async(AdminGetUserPlatformAccountsV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3837,7 +3837,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AccountcommonDistinctPlatformResponseV3? AdminListAllDistinctPlatformAccountsV3(AdminListAllDistinctPlatformAccountsV3 input)
+        public AdminListAllDistinctPlatformAccountsV3.Response AdminListAllDistinctPlatformAccountsV3(AdminListAllDistinctPlatformAccountsV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3845,7 +3845,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountcommonDistinctPlatformResponseV3?> AdminListAllDistinctPlatformAccountsV3Async(AdminListAllDistinctPlatformAccountsV3 input)
+        public async Task<AdminListAllDistinctPlatformAccountsV3.Response> AdminListAllDistinctPlatformAccountsV3Async(AdminListAllDistinctPlatformAccountsV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3853,7 +3853,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelGetUserMapping>? AdminGetListJusticePlatformAccounts(AdminGetListJusticePlatformAccounts input)
+        public AdminGetListJusticePlatformAccounts.Response AdminGetListJusticePlatformAccounts(AdminGetListJusticePlatformAccounts input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3861,7 +3861,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelGetUserMapping>?> AdminGetListJusticePlatformAccountsAsync(AdminGetListJusticePlatformAccounts input)
+        public async Task<AdminGetListJusticePlatformAccounts.Response> AdminGetListJusticePlatformAccountsAsync(AdminGetListJusticePlatformAccounts input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3869,7 +3869,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelGetUserMappingV3? AdminGetUserMapping(AdminGetUserMapping input)
+        public AdminGetUserMapping.Response AdminGetUserMapping(AdminGetUserMapping input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3877,7 +3877,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetUserMappingV3?> AdminGetUserMappingAsync(AdminGetUserMapping input)
+        public async Task<AdminGetUserMapping.Response> AdminGetUserMappingAsync(AdminGetUserMapping input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3885,7 +3885,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelCreateJusticeUserResponse? AdminCreateJusticeUser(AdminCreateJusticeUser input)
+        public AdminCreateJusticeUser.Response AdminCreateJusticeUser(AdminCreateJusticeUser input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3893,7 +3893,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelCreateJusticeUserResponse?> AdminCreateJusticeUserAsync(AdminCreateJusticeUser input)
+        public async Task<AdminCreateJusticeUser.Response> AdminCreateJusticeUserAsync(AdminCreateJusticeUser input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3901,23 +3901,23 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminLinkPlatformAccount(AdminLinkPlatformAccount input)
+        public AdminLinkPlatformAccount.Response AdminLinkPlatformAccount(AdminLinkPlatformAccount input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminLinkPlatformAccountAsync(AdminLinkPlatformAccount input)
+        public async Task<AdminLinkPlatformAccount.Response> AdminLinkPlatformAccountAsync(AdminLinkPlatformAccount input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserPlatformLinkHistories? AdminGetUserLinkHistoriesV3(AdminGetUserLinkHistoriesV3 input)
+        public AdminGetUserLinkHistoriesV3.Response AdminGetUserLinkHistoriesV3(AdminGetUserLinkHistoriesV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -3925,7 +3925,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserPlatformLinkHistories?> AdminGetUserLinkHistoriesV3Async(AdminGetUserLinkHistoriesV3 input)
+        public async Task<AdminGetUserLinkHistoriesV3.Response> AdminGetUserLinkHistoriesV3Async(AdminGetUserLinkHistoriesV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -3933,93 +3933,93 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void AdminPlatformUnlinkV3(AdminPlatformUnlinkV3 input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminPlatformUnlinkV3.Response AdminPlatformUnlinkV3(AdminPlatformUnlinkV3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminPlatformUnlinkV3Async(AdminPlatformUnlinkV3 input)
+        public async Task<AdminPlatformUnlinkV3.Response> AdminPlatformUnlinkV3Async(AdminPlatformUnlinkV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public void AdminPlatformUnlinkAllV3(AdminPlatformUnlinkAllV3 input)
+        #pragma warning restore ab_deprecated_operation
+        public AdminPlatformUnlinkAllV3.Response AdminPlatformUnlinkAllV3(AdminPlatformUnlinkAllV3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminPlatformUnlinkAllV3Async(AdminPlatformUnlinkAllV3 input)
+        public async Task<AdminPlatformUnlinkAllV3.Response> AdminPlatformUnlinkAllV3Async(AdminPlatformUnlinkAllV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminPlatformLinkV3(AdminPlatformLinkV3 input)
+        public AdminPlatformLinkV3.Response AdminPlatformLinkV3(AdminPlatformLinkV3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminPlatformLinkV3Async(AdminPlatformLinkV3 input)
+        public async Task<AdminPlatformLinkV3.Response> AdminPlatformLinkV3Async(AdminPlatformLinkV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void AdminDeleteUserLinkingHistoryByPlatformIDV3(AdminDeleteUserLinkingHistoryByPlatformIDV3 input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminDeleteUserLinkingHistoryByPlatformIDV3.Response AdminDeleteUserLinkingHistoryByPlatformIDV3(AdminDeleteUserLinkingHistoryByPlatformIDV3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteUserLinkingHistoryByPlatformIDV3Async(AdminDeleteUserLinkingHistoryByPlatformIDV3 input)
+        public async Task<AdminDeleteUserLinkingHistoryByPlatformIDV3.Response> AdminDeleteUserLinkingHistoryByPlatformIDV3Async(AdminDeleteUserLinkingHistoryByPlatformIDV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public void AdminDeleteUserLinkingRestrictionByPlatformIDV3(AdminDeleteUserLinkingRestrictionByPlatformIDV3 input)
+        #pragma warning restore ab_deprecated_operation
+        public AdminDeleteUserLinkingRestrictionByPlatformIDV3.Response AdminDeleteUserLinkingRestrictionByPlatformIDV3(AdminDeleteUserLinkingRestrictionByPlatformIDV3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteUserLinkingRestrictionByPlatformIDV3Async(AdminDeleteUserLinkingRestrictionByPlatformIDV3 input)
+        public async Task<AdminDeleteUserLinkingRestrictionByPlatformIDV3.Response> AdminDeleteUserLinkingRestrictionByPlatformIDV3Async(AdminDeleteUserLinkingRestrictionByPlatformIDV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelTokenThirdPartyLinkStatusResponse? AdminGetThirdPartyPlatformTokenLinkStatusV3(AdminGetThirdPartyPlatformTokenLinkStatusV3 input)
+        public AdminGetThirdPartyPlatformTokenLinkStatusV3.Response AdminGetThirdPartyPlatformTokenLinkStatusV3(AdminGetThirdPartyPlatformTokenLinkStatusV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4027,7 +4027,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelTokenThirdPartyLinkStatusResponse?> AdminGetThirdPartyPlatformTokenLinkStatusV3Async(AdminGetThirdPartyPlatformTokenLinkStatusV3 input)
+        public async Task<AdminGetThirdPartyPlatformTokenLinkStatusV3.Response> AdminGetThirdPartyPlatformTokenLinkStatusV3Async(AdminGetThirdPartyPlatformTokenLinkStatusV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4035,7 +4035,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserPlatformMetadata? AdminGetUserSinglePlatformAccount(AdminGetUserSinglePlatformAccount input)
+        public AdminGetUserSinglePlatformAccount.Response AdminGetUserSinglePlatformAccount(AdminGetUserSinglePlatformAccount input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4043,7 +4043,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserPlatformMetadata?> AdminGetUserSinglePlatformAccountAsync(AdminGetUserSinglePlatformAccount input)
+        public async Task<AdminGetUserSinglePlatformAccount.Response> AdminGetUserSinglePlatformAccountAsync(AdminGetUserSinglePlatformAccount input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4052,7 +4052,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelUserPlatformMetadata<T1>? AdminGetUserSinglePlatformAccount<T1>(AdminGetUserSinglePlatformAccount input)
+        public AdminGetUserSinglePlatformAccount.Response<T1> AdminGetUserSinglePlatformAccount<T1>(AdminGetUserSinglePlatformAccount input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -4060,7 +4060,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserPlatformMetadata<T1>?> AdminGetUserSinglePlatformAccountAsync<T1>(AdminGetUserSinglePlatformAccount input)
+        public async Task<AdminGetUserSinglePlatformAccount.Response<T1>> AdminGetUserSinglePlatformAccountAsync<T1>(AdminGetUserSinglePlatformAccount input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -4068,119 +4068,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteUserRolesV3(AdminDeleteUserRolesV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteUserRolesV3Async(AdminDeleteUserRolesV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminSaveUserRoleV3(AdminSaveUserRoleV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminSaveUserRoleV3Async(AdminSaveUserRoleV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminAddUserRoleV3(AdminAddUserRoleV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminAddUserRoleV3Async(AdminAddUserRoleV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminDeleteUserRoleV3(AdminDeleteUserRoleV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteUserRoleV3Async(AdminDeleteUserRoleV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminUpdateUserStatusV3(AdminUpdateUserStatusV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminUpdateUserStatusV3Async(AdminUpdateUserStatusV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminTrustlyUpdateUserIdentity(AdminTrustlyUpdateUserIdentity input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminTrustlyUpdateUserIdentityAsync(AdminTrustlyUpdateUserIdentity input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminVerifyUserWithoutVerificationCodeV3(AdminVerifyUserWithoutVerificationCodeV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminVerifyUserWithoutVerificationCodeV3Async(AdminVerifyUserWithoutVerificationCodeV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelUserResponseV3? AdminGetMyUserV3(AdminGetMyUserV3 input)
+        public AdminDeleteUserRolesV3.Response AdminDeleteUserRolesV3(AdminDeleteUserRolesV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4188,7 +4076,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponseV3?> AdminGetMyUserV3Async(AdminGetMyUserV3 input)
+        public async Task<AdminDeleteUserRolesV3.Response> AdminDeleteUserRolesV3Async(AdminDeleteUserRolesV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4196,7 +4084,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelCountryV3Response? PublicGetCountryAgeRestrictionV3(PublicGetCountryAgeRestrictionV3 input)
+        public AdminSaveUserRoleV3.Response AdminSaveUserRoleV3(AdminSaveUserRoleV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4204,7 +4092,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelCountryV3Response?> PublicGetCountryAgeRestrictionV3Async(PublicGetCountryAgeRestrictionV3 input)
+        public async Task<AdminSaveUserRoleV3.Response> AdminSaveUserRoleV3Async(AdminSaveUserRoleV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4212,9 +4100,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.AccountcommonUserPlatforms? PublicListUserIDByPlatformUserIDsV3(PublicListUserIDByPlatformUserIDsV3 input)
+        public AdminAddUserRoleV3.Response AdminAddUserRoleV3(AdminAddUserRoleV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4222,7 +4108,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountcommonUserPlatforms?> PublicListUserIDByPlatformUserIDsV3Async(PublicListUserIDByPlatformUserIDsV3 input)
+        public async Task<AdminAddUserRoleV3.Response> AdminAddUserRoleV3Async(AdminAddUserRoleV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4230,8 +4116,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public Model.ModelUserResponseV3? PublicGetUserByPlatformUserIDV3(PublicGetUserByPlatformUserIDV3 input)
+        public AdminDeleteUserRoleV3.Response AdminDeleteUserRoleV3(AdminDeleteUserRoleV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4239,7 +4124,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponseV3?> PublicGetUserByPlatformUserIDV3Async(PublicGetUserByPlatformUserIDV3 input)
+        public async Task<AdminDeleteUserRoleV3.Response> AdminDeleteUserRoleV3Async(AdminDeleteUserRoleV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4247,7 +4132,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelLinkRequest? PublicGetAsyncStatus(PublicGetAsyncStatus input)
+        public AdminUpdateUserStatusV3.Response AdminUpdateUserStatusV3(AdminUpdateUserStatusV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4255,7 +4140,122 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelLinkRequest?> PublicGetAsyncStatusAsync(PublicGetAsyncStatus input)
+        public async Task<AdminUpdateUserStatusV3.Response> AdminUpdateUserStatusV3Async(AdminUpdateUserStatusV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminTrustlyUpdateUserIdentity.Response AdminTrustlyUpdateUserIdentity(AdminTrustlyUpdateUserIdentity input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminTrustlyUpdateUserIdentity.Response> AdminTrustlyUpdateUserIdentityAsync(AdminTrustlyUpdateUserIdentity input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminVerifyUserWithoutVerificationCodeV3.Response AdminVerifyUserWithoutVerificationCodeV3(AdminVerifyUserWithoutVerificationCodeV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminVerifyUserWithoutVerificationCodeV3.Response> AdminVerifyUserWithoutVerificationCodeV3Async(AdminVerifyUserWithoutVerificationCodeV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetMyUserV3.Response AdminGetMyUserV3(AdminGetMyUserV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetMyUserV3.Response> AdminGetMyUserV3Async(AdminGetMyUserV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetCountryAgeRestrictionV3.Response PublicGetCountryAgeRestrictionV3(PublicGetCountryAgeRestrictionV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetCountryAgeRestrictionV3.Response> PublicGetCountryAgeRestrictionV3Async(PublicGetCountryAgeRestrictionV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicListUserIDByPlatformUserIDsV3.Response PublicListUserIDByPlatformUserIDsV3(PublicListUserIDByPlatformUserIDsV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicListUserIDByPlatformUserIDsV3.Response> PublicListUserIDByPlatformUserIDsV3Async(PublicListUserIDByPlatformUserIDsV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning restore ab_deprecated_operation
+        public PublicGetUserByPlatformUserIDV3.Response PublicGetUserByPlatformUserIDV3(PublicGetUserByPlatformUserIDV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetUserByPlatformUserIDV3.Response> PublicGetUserByPlatformUserIDV3Async(PublicGetUserByPlatformUserIDV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetAsyncStatus.Response PublicGetAsyncStatus(PublicGetAsyncStatus input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetAsyncStatus.Response> PublicGetAsyncStatusAsync(PublicGetAsyncStatus input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4264,7 +4264,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelLinkRequest<T1>? PublicGetAsyncStatus<T1>(PublicGetAsyncStatus input)
+        public PublicGetAsyncStatus.Response<T1> PublicGetAsyncStatus<T1>(PublicGetAsyncStatus input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -4272,7 +4272,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelLinkRequest<T1>?> PublicGetAsyncStatusAsync<T1>(PublicGetAsyncStatus input)
+        public async Task<PublicGetAsyncStatus.Response<T1>> PublicGetAsyncStatusAsync<T1>(PublicGetAsyncStatus input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -4280,7 +4280,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelPublicUserInformationResponseV3? PublicSearchUserV3(PublicSearchUserV3 input)
+        public PublicSearchUserV3.Response PublicSearchUserV3(PublicSearchUserV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4288,7 +4288,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelPublicUserInformationResponseV3?> PublicSearchUserV3Async(PublicSearchUserV3 input)
+        public async Task<PublicSearchUserV3.Response> PublicSearchUserV3Async(PublicSearchUserV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4296,7 +4296,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserCreateResponseV3? PublicCreateUserV3(PublicCreateUserV3 input)
+        public PublicCreateUserV3.Response PublicCreateUserV3(PublicCreateUserV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4304,7 +4304,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserCreateResponseV3?> PublicCreateUserV3Async(PublicCreateUserV3 input)
+        public async Task<PublicCreateUserV3.Response> PublicCreateUserV3Async(PublicCreateUserV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4312,23 +4312,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void CheckUserAvailability(CheckUserAvailability input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task CheckUserAvailabilityAsync(CheckUserAvailability input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelListBulkUserResponse? PublicBulkGetUsers(PublicBulkGetUsers input)
+        public CheckUserAvailability.Response CheckUserAvailability(CheckUserAvailability input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4336,7 +4320,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelListBulkUserResponse?> PublicBulkGetUsersAsync(PublicBulkGetUsers input)
+        public async Task<CheckUserAvailability.Response> CheckUserAvailabilityAsync(CheckUserAvailability input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4344,55 +4328,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicSendRegistrationCode(PublicSendRegistrationCode input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicSendRegistrationCodeAsync(PublicSendRegistrationCode input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void PublicVerifyRegistrationCode(PublicVerifyRegistrationCode input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicVerifyRegistrationCodeAsync(PublicVerifyRegistrationCode input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void PublicForgotPasswordV3(PublicForgotPasswordV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicForgotPasswordV3Async(PublicForgotPasswordV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelUserInputValidationResponse? PublicValidateUserInput(PublicValidateUserInput input)
+        public PublicBulkGetUsers.Response PublicBulkGetUsers(PublicBulkGetUsers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4400,7 +4336,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserInputValidationResponse?> PublicValidateUserInputAsync(PublicValidateUserInput input)
+        public async Task<PublicBulkGetUsers.Response> PublicBulkGetUsersAsync(PublicBulkGetUsers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4408,7 +4344,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserInvitationV3? GetAdminInvitationV3(GetAdminInvitationV3 input)
+        public PublicSendRegistrationCode.Response PublicSendRegistrationCode(PublicSendRegistrationCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4416,7 +4352,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserInvitationV3?> GetAdminInvitationV3Async(GetAdminInvitationV3 input)
+        public async Task<PublicSendRegistrationCode.Response> PublicSendRegistrationCodeAsync(PublicSendRegistrationCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4424,7 +4360,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserCreateResponseV3? CreateUserFromInvitationV3(CreateUserFromInvitationV3 input)
+        public PublicVerifyRegistrationCode.Response PublicVerifyRegistrationCode(PublicVerifyRegistrationCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4432,7 +4368,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserCreateResponseV3?> CreateUserFromInvitationV3Async(CreateUserFromInvitationV3 input)
+        public async Task<PublicVerifyRegistrationCode.Response> PublicVerifyRegistrationCodeAsync(PublicVerifyRegistrationCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4440,7 +4376,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserResponseV3? UpdateUserV3(UpdateUserV3 input)
+        public PublicForgotPasswordV3.Response PublicForgotPasswordV3(PublicForgotPasswordV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4448,7 +4384,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponseV3?> UpdateUserV3Async(UpdateUserV3 input)
+        public async Task<PublicForgotPasswordV3.Response> PublicForgotPasswordV3Async(PublicForgotPasswordV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4456,7 +4392,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserResponseV3? PublicPartialUpdateUserV3(PublicPartialUpdateUserV3 input)
+        public PublicValidateUserInput.Response PublicValidateUserInput(PublicValidateUserInput input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4464,7 +4400,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponseV3?> PublicPartialUpdateUserV3Async(PublicPartialUpdateUserV3 input)
+        public async Task<PublicValidateUserInput.Response> PublicValidateUserInputAsync(PublicValidateUserInput input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4472,39 +4408,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicSendVerificationCodeV3(PublicSendVerificationCodeV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicSendVerificationCodeV3Async(PublicSendVerificationCodeV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void PublicUserVerificationV3(PublicUserVerificationV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicUserVerificationV3Async(PublicUserVerificationV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelUserResponseV3? PublicUpgradeHeadlessAccountV3(PublicUpgradeHeadlessAccountV3 input)
+        public GetAdminInvitationV3.Response GetAdminInvitationV3(GetAdminInvitationV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4512,7 +4416,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponseV3?> PublicUpgradeHeadlessAccountV3Async(PublicUpgradeHeadlessAccountV3 input)
+        public async Task<GetAdminInvitationV3.Response> GetAdminInvitationV3Async(GetAdminInvitationV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4520,7 +4424,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserResponseV3? PublicVerifyHeadlessAccountV3(PublicVerifyHeadlessAccountV3 input)
+        public CreateUserFromInvitationV3.Response CreateUserFromInvitationV3(CreateUserFromInvitationV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4528,7 +4432,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponseV3?> PublicVerifyHeadlessAccountV3Async(PublicVerifyHeadlessAccountV3 input)
+        public async Task<CreateUserFromInvitationV3.Response> CreateUserFromInvitationV3Async(CreateUserFromInvitationV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4536,23 +4440,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicUpdatePasswordV3(PublicUpdatePasswordV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicUpdatePasswordV3Async(PublicUpdatePasswordV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelCreateJusticeUserResponse? PublicCreateJusticeUser(PublicCreateJusticeUser input)
+        public UpdateUserV3.Response UpdateUserV3(UpdateUserV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4560,7 +4448,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelCreateJusticeUserResponse?> PublicCreateJusticeUserAsync(PublicCreateJusticeUser input)
+        public async Task<UpdateUserV3.Response> UpdateUserV3Async(UpdateUserV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4568,74 +4456,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicPlatformLinkV3(PublicPlatformLinkV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicPlatformLinkV3Async(PublicPlatformLinkV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void PublicPlatformUnlinkV3(PublicPlatformUnlinkV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicPlatformUnlinkV3Async(PublicPlatformUnlinkV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-        public void PublicPlatformUnlinkAllV3(PublicPlatformUnlinkAllV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicPlatformUnlinkAllV3Async(PublicPlatformUnlinkAllV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void PublicForcePlatformLinkV3(PublicForcePlatformLinkV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicForcePlatformLinkV3Async(PublicForcePlatformLinkV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelWebLinkingResponse? PublicWebLinkPlatform(PublicWebLinkPlatform input)
+        public PublicPartialUpdateUserV3.Response PublicPartialUpdateUserV3(PublicPartialUpdateUserV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4643,7 +4464,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelWebLinkingResponse?> PublicWebLinkPlatformAsync(PublicWebLinkPlatform input)
+        public async Task<PublicPartialUpdateUserV3.Response> PublicPartialUpdateUserV3Async(PublicPartialUpdateUserV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4651,7 +4472,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public string PublicWebLinkPlatformEstablish(PublicWebLinkPlatformEstablish input)
+        public PublicSendVerificationCodeV3.Response PublicSendVerificationCodeV3(PublicSendVerificationCodeV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4659,7 +4480,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<string> PublicWebLinkPlatformEstablishAsync(PublicWebLinkPlatformEstablish input)
+        public async Task<PublicSendVerificationCodeV3.Response> PublicSendVerificationCodeV3Async(PublicSendVerificationCodeV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4667,7 +4488,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelLinkRequest? PublicProcessWebLinkPlatformV3(PublicProcessWebLinkPlatformV3 input)
+        public PublicUserVerificationV3.Response PublicUserVerificationV3(PublicUserVerificationV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4675,7 +4496,186 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelLinkRequest?> PublicProcessWebLinkPlatformV3Async(PublicProcessWebLinkPlatformV3 input)
+        public async Task<PublicUserVerificationV3.Response> PublicUserVerificationV3Async(PublicUserVerificationV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicUpgradeHeadlessAccountV3.Response PublicUpgradeHeadlessAccountV3(PublicUpgradeHeadlessAccountV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicUpgradeHeadlessAccountV3.Response> PublicUpgradeHeadlessAccountV3Async(PublicUpgradeHeadlessAccountV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicVerifyHeadlessAccountV3.Response PublicVerifyHeadlessAccountV3(PublicVerifyHeadlessAccountV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicVerifyHeadlessAccountV3.Response> PublicVerifyHeadlessAccountV3Async(PublicVerifyHeadlessAccountV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicUpdatePasswordV3.Response PublicUpdatePasswordV3(PublicUpdatePasswordV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicUpdatePasswordV3.Response> PublicUpdatePasswordV3Async(PublicUpdatePasswordV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicCreateJusticeUser.Response PublicCreateJusticeUser(PublicCreateJusticeUser input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicCreateJusticeUser.Response> PublicCreateJusticeUserAsync(PublicCreateJusticeUser input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicPlatformLinkV3.Response PublicPlatformLinkV3(PublicPlatformLinkV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicPlatformLinkV3.Response> PublicPlatformLinkV3Async(PublicPlatformLinkV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicPlatformUnlinkV3.Response PublicPlatformUnlinkV3(PublicPlatformUnlinkV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicPlatformUnlinkV3.Response> PublicPlatformUnlinkV3Async(PublicPlatformUnlinkV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning restore ab_deprecated_operation
+        public PublicPlatformUnlinkAllV3.Response PublicPlatformUnlinkAllV3(PublicPlatformUnlinkAllV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicPlatformUnlinkAllV3.Response> PublicPlatformUnlinkAllV3Async(PublicPlatformUnlinkAllV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicForcePlatformLinkV3.Response PublicForcePlatformLinkV3(PublicForcePlatformLinkV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicForcePlatformLinkV3.Response> PublicForcePlatformLinkV3Async(PublicForcePlatformLinkV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicWebLinkPlatform.Response PublicWebLinkPlatform(PublicWebLinkPlatform input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicWebLinkPlatform.Response> PublicWebLinkPlatformAsync(PublicWebLinkPlatform input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicWebLinkPlatformEstablish.Response PublicWebLinkPlatformEstablish(PublicWebLinkPlatformEstablish input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicWebLinkPlatformEstablish.Response> PublicWebLinkPlatformEstablishAsync(PublicWebLinkPlatformEstablish input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicProcessWebLinkPlatformV3.Response PublicProcessWebLinkPlatformV3(PublicProcessWebLinkPlatformV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicProcessWebLinkPlatformV3.Response> PublicProcessWebLinkPlatformV3Async(PublicProcessWebLinkPlatformV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4684,7 +4684,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelLinkRequest<T1>? PublicProcessWebLinkPlatformV3<T1>(PublicProcessWebLinkPlatformV3 input)
+        public PublicProcessWebLinkPlatformV3.Response<T1> PublicProcessWebLinkPlatformV3<T1>(PublicProcessWebLinkPlatformV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -4692,7 +4692,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelLinkRequest<T1>?> PublicProcessWebLinkPlatformV3Async<T1>(PublicProcessWebLinkPlatformV3 input)
+        public async Task<PublicProcessWebLinkPlatformV3.Response<T1>> PublicProcessWebLinkPlatformV3Async<T1>(PublicProcessWebLinkPlatformV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -4700,7 +4700,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUsersPlatformInfosResponse? PublicGetUsersPlatformInfosV3(PublicGetUsersPlatformInfosV3 input)
+        public PublicGetUsersPlatformInfosV3.Response PublicGetUsersPlatformInfosV3(PublicGetUsersPlatformInfosV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4708,7 +4708,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUsersPlatformInfosResponse?> PublicGetUsersPlatformInfosV3Async(PublicGetUsersPlatformInfosV3 input)
+        public async Task<PublicGetUsersPlatformInfosV3.Response> PublicGetUsersPlatformInfosV3Async(PublicGetUsersPlatformInfosV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4716,25 +4716,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void ResetPasswordV3(ResetPasswordV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task ResetPasswordV3Async(ResetPasswordV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelPublicUserResponseV3? PublicGetUserByUserIdV3(PublicGetUserByUserIdV3 input)
+        public ResetPasswordV3.Response ResetPasswordV3(ResetPasswordV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4742,7 +4724,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelPublicUserResponseV3?> PublicGetUserByUserIdV3Async(PublicGetUserByUserIdV3 input)
+        public async Task<ResetPasswordV3.Response> ResetPasswordV3Async(ResetPasswordV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4750,8 +4732,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public Model.ModelGetUserBanV3Response? PublicGetUserBanHistoryV3(PublicGetUserBanHistoryV3 input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicGetUserByUserIdV3.Response PublicGetUserByUserIdV3(PublicGetUserByUserIdV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4759,7 +4742,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetUserBanV3Response?> PublicGetUserBanHistoryV3Async(PublicGetUserBanHistoryV3 input)
+        public async Task<PublicGetUserByUserIdV3.Response> PublicGetUserByUserIdV3Async(PublicGetUserByUserIdV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4767,7 +4750,8 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AccountcommonDistinctPlatformResponseV3? PublicListUserAllPlatformAccountsDistinctV3(PublicListUserAllPlatformAccountsDistinctV3 input)
+        #pragma warning restore ab_deprecated_operation
+        public PublicGetUserBanHistoryV3.Response PublicGetUserBanHistoryV3(PublicGetUserBanHistoryV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4775,7 +4759,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountcommonDistinctPlatformResponseV3?> PublicListUserAllPlatformAccountsDistinctV3Async(PublicListUserAllPlatformAccountsDistinctV3 input)
+        public async Task<PublicGetUserBanHistoryV3.Response> PublicGetUserBanHistoryV3Async(PublicGetUserBanHistoryV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4783,7 +4767,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AccountcommonUserInformationV3? PublicGetUserInformationV3(PublicGetUserInformationV3 input)
+        public PublicListUserAllPlatformAccountsDistinctV3.Response PublicListUserAllPlatformAccountsDistinctV3(PublicListUserAllPlatformAccountsDistinctV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4791,7 +4775,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountcommonUserInformationV3?> PublicGetUserInformationV3Async(PublicGetUserInformationV3 input)
+        public async Task<PublicListUserAllPlatformAccountsDistinctV3.Response> PublicListUserAllPlatformAccountsDistinctV3Async(PublicListUserAllPlatformAccountsDistinctV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4799,7 +4783,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelLoginHistoriesResponse? PublicGetUserLoginHistoriesV3(PublicGetUserLoginHistoriesV3 input)
+        public PublicGetUserInformationV3.Response PublicGetUserInformationV3(PublicGetUserInformationV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4807,7 +4791,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelLoginHistoriesResponse?> PublicGetUserLoginHistoriesV3Async(PublicGetUserLoginHistoriesV3 input)
+        public async Task<PublicGetUserInformationV3.Response> PublicGetUserInformationV3Async(PublicGetUserInformationV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4815,7 +4799,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AccountcommonUserLinkedPlatformsResponseV3? PublicGetUserPlatformAccountsV3(PublicGetUserPlatformAccountsV3 input)
+        public PublicGetUserLoginHistoriesV3.Response PublicGetUserLoginHistoriesV3(PublicGetUserLoginHistoriesV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4823,7 +4807,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountcommonUserLinkedPlatformsResponseV3?> PublicGetUserPlatformAccountsV3Async(PublicGetUserPlatformAccountsV3 input)
+        public async Task<PublicGetUserLoginHistoriesV3.Response> PublicGetUserLoginHistoriesV3Async(PublicGetUserLoginHistoriesV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4831,7 +4815,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelGetUserMappingV3>? PublicListJusticePlatformAccountsV3(PublicListJusticePlatformAccountsV3 input)
+        public PublicGetUserPlatformAccountsV3.Response PublicGetUserPlatformAccountsV3(PublicGetUserPlatformAccountsV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4839,7 +4823,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelGetUserMappingV3>?> PublicListJusticePlatformAccountsV3Async(PublicListJusticePlatformAccountsV3 input)
+        public async Task<PublicGetUserPlatformAccountsV3.Response> PublicGetUserPlatformAccountsV3Async(PublicGetUserPlatformAccountsV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4847,39 +4831,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicLinkPlatformAccount(PublicLinkPlatformAccount input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicLinkPlatformAccountAsync(PublicLinkPlatformAccount input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void PublicForceLinkPlatformWithProgression(PublicForceLinkPlatformWithProgression input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicForceLinkPlatformWithProgressionAsync(PublicForceLinkPlatformWithProgression input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelGetPublisherUserResponse? PublicGetPublisherUserV3(PublicGetPublisherUserV3 input)
+        public PublicListJusticePlatformAccountsV3.Response PublicListJusticePlatformAccountsV3(PublicListJusticePlatformAccountsV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4887,7 +4839,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetPublisherUserResponse?> PublicGetPublisherUserV3Async(PublicGetPublisherUserV3 input)
+        public async Task<PublicListJusticePlatformAccountsV3.Response> PublicListJusticePlatformAccountsV3Async(PublicListJusticePlatformAccountsV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4895,23 +4847,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicValidateUserByUserIDAndPasswordV3(PublicValidateUserByUserIDAndPasswordV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicValidateUserByUserIDAndPasswordV3Async(PublicValidateUserByUserIDAndPasswordV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelUserResponseV3? PublicGetMyUserV3(PublicGetMyUserV3 input)
+        public PublicLinkPlatformAccount.Response PublicLinkPlatformAccount(PublicLinkPlatformAccount input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4919,7 +4855,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponseV3?> PublicGetMyUserV3Async(PublicGetMyUserV3 input)
+        public async Task<PublicLinkPlatformAccount.Response> PublicLinkPlatformAccountAsync(PublicLinkPlatformAccount input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4927,7 +4863,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelGetLinkHeadlessAccountConflictResponse? PublicGetLinkHeadlessAccountToMyAccountConflictV3(PublicGetLinkHeadlessAccountToMyAccountConflictV3 input)
+        public PublicForceLinkPlatformWithProgression.Response PublicForceLinkPlatformWithProgression(PublicForceLinkPlatformWithProgression input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4935,7 +4871,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetLinkHeadlessAccountConflictResponse?> PublicGetLinkHeadlessAccountToMyAccountConflictV3Async(PublicGetLinkHeadlessAccountToMyAccountConflictV3 input)
+        public async Task<PublicForceLinkPlatformWithProgression.Response> PublicForceLinkPlatformWithProgressionAsync(PublicForceLinkPlatformWithProgression input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4943,23 +4879,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void LinkHeadlessAccountToMyAccountV3(LinkHeadlessAccountToMyAccountV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task LinkHeadlessAccountToMyAccountV3Async(LinkHeadlessAccountToMyAccountV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelUserProfileUpdateAllowStatus? PublicGetMyProfileAllowUpdateStatusV3(PublicGetMyProfileAllowUpdateStatusV3 input)
+        public PublicGetPublisherUserV3.Response PublicGetPublisherUserV3(PublicGetPublisherUserV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4967,7 +4887,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserProfileUpdateAllowStatus?> PublicGetMyProfileAllowUpdateStatusV3Async(PublicGetMyProfileAllowUpdateStatusV3 input)
+        public async Task<PublicGetPublisherUserV3.Response> PublicGetPublisherUserV3Async(PublicGetPublisherUserV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -4975,23 +4895,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicSendVerificationLinkV3(PublicSendVerificationLinkV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicSendVerificationLinkV3Async(PublicSendVerificationLinkV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public string PublicVerifyUserByLinkV3(PublicVerifyUserByLinkV3 input)
+        public PublicValidateUserByUserIDAndPasswordV3.Response PublicValidateUserByUserIDAndPasswordV3(PublicValidateUserByUserIDAndPasswordV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -4999,7 +4903,103 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<string> PublicVerifyUserByLinkV3Async(PublicVerifyUserByLinkV3 input)
+        public async Task<PublicValidateUserByUserIDAndPasswordV3.Response> PublicValidateUserByUserIDAndPasswordV3Async(PublicValidateUserByUserIDAndPasswordV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetMyUserV3.Response PublicGetMyUserV3(PublicGetMyUserV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetMyUserV3.Response> PublicGetMyUserV3Async(PublicGetMyUserV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetLinkHeadlessAccountToMyAccountConflictV3.Response PublicGetLinkHeadlessAccountToMyAccountConflictV3(PublicGetLinkHeadlessAccountToMyAccountConflictV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetLinkHeadlessAccountToMyAccountConflictV3.Response> PublicGetLinkHeadlessAccountToMyAccountConflictV3Async(PublicGetLinkHeadlessAccountToMyAccountConflictV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public LinkHeadlessAccountToMyAccountV3.Response LinkHeadlessAccountToMyAccountV3(LinkHeadlessAccountToMyAccountV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<LinkHeadlessAccountToMyAccountV3.Response> LinkHeadlessAccountToMyAccountV3Async(LinkHeadlessAccountToMyAccountV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetMyProfileAllowUpdateStatusV3.Response PublicGetMyProfileAllowUpdateStatusV3(PublicGetMyProfileAllowUpdateStatusV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetMyProfileAllowUpdateStatusV3.Response> PublicGetMyProfileAllowUpdateStatusV3Async(PublicGetMyProfileAllowUpdateStatusV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicSendVerificationLinkV3.Response PublicSendVerificationLinkV3(PublicSendVerificationLinkV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicSendVerificationLinkV3.Response> PublicSendVerificationLinkV3Async(PublicSendVerificationLinkV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicVerifyUserByLinkV3.Response PublicVerifyUserByLinkV3(PublicVerifyUserByLinkV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicVerifyUserByLinkV3.Response> PublicVerifyUserByLinkV3Async(PublicVerifyUserByLinkV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

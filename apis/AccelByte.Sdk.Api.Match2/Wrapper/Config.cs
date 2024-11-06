@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
         }
         #endregion
 
-        public Model.LogconfigConfiguration? AdminGetLogConfig(AdminGetLogConfig input)
+        public AdminGetLogConfig.Response AdminGetLogConfig(AdminGetLogConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.LogconfigConfiguration?> AdminGetLogConfigAsync(AdminGetLogConfig input)
+        public async Task<AdminGetLogConfig.Response> AdminGetLogConfigAsync(AdminGetLogConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.LogconfigConfiguration? AdminPatchUpdateLogConfig(AdminPatchUpdateLogConfig input)
+        public AdminPatchUpdateLogConfig.Response AdminPatchUpdateLogConfig(AdminPatchUpdateLogConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.LogconfigConfiguration?> AdminPatchUpdateLogConfigAsync(AdminPatchUpdateLogConfig input)
+        public async Task<AdminPatchUpdateLogConfig.Response> AdminPatchUpdateLogConfigAsync(AdminPatchUpdateLogConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiNamespaceConfigList? AdminGetAllConfigV1(AdminGetAllConfigV1 input)
+        public AdminGetAllConfigV1.Response AdminGetAllConfigV1(AdminGetAllConfigV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiNamespaceConfigList?> AdminGetAllConfigV1Async(AdminGetAllConfigV1 input)
+        public async Task<AdminGetAllConfigV1.Response> AdminGetAllConfigV1Async(AdminGetAllConfigV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ConfigmodelsNamespaceConfig? AdminGetConfigV1(AdminGetConfigV1 input)
+        public AdminGetConfigV1.Response AdminGetConfigV1(AdminGetConfigV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -147,7 +147,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ConfigmodelsNamespaceConfig?> AdminGetConfigV1Async(AdminGetConfigV1 input)
+        public async Task<AdminGetConfigV1.Response> AdminGetConfigV1Async(AdminGetConfigV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -155,7 +155,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ConfigmodelsNamespaceConfig? AdminPatchConfigV1(AdminPatchConfigV1 input)
+        public AdminPatchConfigV1.Response AdminPatchConfigV1(AdminPatchConfigV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -163,7 +163,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ConfigmodelsNamespaceConfig?> AdminPatchConfigV1Async(AdminPatchConfigV1 input)
+        public async Task<AdminPatchConfigV1.Response> AdminPatchConfigV1Async(AdminPatchConfigV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

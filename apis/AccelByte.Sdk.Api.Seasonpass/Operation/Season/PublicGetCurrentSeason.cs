@@ -67,14 +67,14 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             )
             {
                 PublicGetCurrentSeason op = new PublicGetCurrentSeason(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicGetCurrentSeasonBuilder>(this);
                 return op;
             }
 
-            public Model.LocalizedSeasonInfo? Execute(
+            public PublicGetCurrentSeason.Response Execute(
                 string namespace_
             )
             {
@@ -87,11 +87,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.LocalizedSeasonInfo?> ExecuteAsync(
+            public async Task<PublicGetCurrentSeason.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -115,30 +115,44 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Language is not null) QueryParams["language"] = builder.Language;
+            
 
-
-
-
-
+            
+            
+            
 
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.LocalizedSeasonInfo>
+        {
+
+            public ErrorEntity? Error400 { get; set; } = null;
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Seasonpass::Season::PublicGetCurrentSeason";
+        }
+
+        #endregion
+
         public PublicGetCurrentSeason(
-            string namespace_,
-            string? language
+            string namespace_,            
+            string? language            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (language is not null) QueryParams["language"] = language;
+            
 
-
-
-
-
+            
+            
+            
 
         }
 
@@ -146,28 +160,39 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.LocalizedSeasonInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicGetCurrentSeason.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicGetCurrentSeason.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.LocalizedSeasonInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.LocalizedSeasonInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.LocalizedSeasonInfo>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

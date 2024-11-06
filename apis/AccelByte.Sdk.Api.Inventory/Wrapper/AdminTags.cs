@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
         }
         #endregion
 
-        public Model.ApimodelsListTagsResp? AdminListTags(AdminListTags input)
+        public AdminListTags.Response AdminListTags(AdminListTags input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsListTagsResp?> AdminListTagsAsync(AdminListTags input)
+        public async Task<AdminListTags.Response> AdminListTagsAsync(AdminListTags input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsCreateTagResp? AdminCreateTag(AdminCreateTag input)
+        public AdminCreateTag.Response AdminCreateTag(AdminCreateTag input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsCreateTagResp?> AdminCreateTagAsync(AdminCreateTag input)
+        public async Task<AdminCreateTag.Response> AdminCreateTagAsync(AdminCreateTag input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -101,18 +101,18 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteTag(AdminDeleteTag input)
+        public AdminDeleteTag.Response AdminDeleteTag(AdminDeleteTag input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteTagAsync(AdminDeleteTag input)
+        public async Task<AdminDeleteTag.Response> AdminDeleteTagAsync(AdminDeleteTag input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

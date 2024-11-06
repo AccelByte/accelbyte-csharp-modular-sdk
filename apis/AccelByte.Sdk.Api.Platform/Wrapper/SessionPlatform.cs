@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Dictionary<string, object>? RegisterXblSessions(RegisterXblSessions input)
+        public RegisterXblSessions.Response RegisterXblSessions(RegisterXblSessions input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Dictionary<string, object>?> RegisterXblSessionsAsync(RegisterXblSessions input)
+        public async Task<RegisterXblSessions.Response> RegisterXblSessionsAsync(RegisterXblSessions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

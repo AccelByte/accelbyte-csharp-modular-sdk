@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedGetConfigsResponse? AdminGetConfigs(AdminGetConfigs input)
+        public AdminGetConfigs.Response AdminGetConfigs(AdminGetConfigs input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedGetConfigsResponse?> AdminGetConfigsAsync(AdminGetConfigs input)
+        public async Task<AdminGetConfigs.Response> AdminGetConfigsAsync(AdminGetConfigs input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,18 +74,18 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminUpdateConfig(AdminUpdateConfig input)
+        public AdminUpdateConfig.Response AdminUpdateConfig(AdminUpdateConfig input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminUpdateConfigAsync(AdminUpdateConfig input)
+        public async Task<AdminUpdateConfig.Response> AdminUpdateConfigAsync(AdminUpdateConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

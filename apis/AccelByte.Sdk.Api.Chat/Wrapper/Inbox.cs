@@ -179,7 +179,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
         }
         #endregion
 
-        public List<Model.ModelsGetInboxCategoriesResponseItem>? AdminGetInboxCategories(AdminGetInboxCategories input)
+        public AdminGetInboxCategories.Response AdminGetInboxCategories(AdminGetInboxCategories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -187,7 +187,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsGetInboxCategoriesResponseItem>?> AdminGetInboxCategoriesAsync(AdminGetInboxCategories input)
+        public async Task<AdminGetInboxCategories.Response> AdminGetInboxCategoriesAsync(AdminGetInboxCategories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -196,7 +196,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.Payload);
         }
 
-        public List<Model.ModelsGetInboxCategoriesResponseItem<T1>>? AdminGetInboxCategories<T1>(AdminGetInboxCategories input)
+        public AdminGetInboxCategories.Response<T1> AdminGetInboxCategories<T1>(AdminGetInboxCategories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -204,7 +204,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsGetInboxCategoriesResponseItem<T1>>?> AdminGetInboxCategoriesAsync<T1>(AdminGetInboxCategories input)
+        public async Task<AdminGetInboxCategories.Response<T1>> AdminGetInboxCategoriesAsync<T1>(AdminGetInboxCategories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -212,7 +212,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsAddInboxCategoryResponse? AdminAddInboxCategory(AdminAddInboxCategory input)
+        public AdminAddInboxCategory.Response AdminAddInboxCategory(AdminAddInboxCategory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -220,7 +220,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsAddInboxCategoryResponse?> AdminAddInboxCategoryAsync(AdminAddInboxCategory input)
+        public async Task<AdminAddInboxCategory.Response> AdminAddInboxCategoryAsync(AdminAddInboxCategory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -229,7 +229,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsAddInboxCategoryResponse<T1>? AdminAddInboxCategory<T1>(AdminAddInboxCategory input)
+        public AdminAddInboxCategory.Response<T1> AdminAddInboxCategory<T1>(AdminAddInboxCategory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -237,7 +237,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsAddInboxCategoryResponse<T1>?> AdminAddInboxCategoryAsync<T1>(AdminAddInboxCategory input)
+        public async Task<AdminAddInboxCategory.Response<T1>> AdminAddInboxCategoryAsync<T1>(AdminAddInboxCategory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -245,39 +245,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteInboxCategory(AdminDeleteInboxCategory input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteInboxCategoryAsync(AdminDeleteInboxCategory input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminUpdateInboxCategory(AdminUpdateInboxCategory input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminUpdateInboxCategoryAsync(AdminUpdateInboxCategory input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsJSONSchemaType? AdminGetCategorySchema(AdminGetCategorySchema input)
+        public AdminDeleteInboxCategory.Response AdminDeleteInboxCategory(AdminDeleteInboxCategory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -285,7 +253,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsJSONSchemaType?> AdminGetCategorySchemaAsync(AdminGetCategorySchema input)
+        public async Task<AdminDeleteInboxCategory.Response> AdminDeleteInboxCategoryAsync(AdminDeleteInboxCategory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -293,23 +261,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteInboxMessage(AdminDeleteInboxMessage input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteInboxMessageAsync(AdminDeleteInboxMessage input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsGetInboxMessagesResponse? AdminGetInboxMessages(AdminGetInboxMessages input)
+        public AdminUpdateInboxCategory.Response AdminUpdateInboxCategory(AdminUpdateInboxCategory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -317,7 +269,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetInboxMessagesResponse?> AdminGetInboxMessagesAsync(AdminGetInboxMessages input)
+        public async Task<AdminUpdateInboxCategory.Response> AdminUpdateInboxCategoryAsync(AdminUpdateInboxCategory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -325,7 +277,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsSaveInboxMessageResponse? AdminSaveInboxMessage(AdminSaveInboxMessage input)
+        public AdminGetCategorySchema.Response AdminGetCategorySchema(AdminGetCategorySchema input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -333,7 +285,55 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsSaveInboxMessageResponse?> AdminSaveInboxMessageAsync(AdminSaveInboxMessage input)
+        public async Task<AdminGetCategorySchema.Response> AdminGetCategorySchemaAsync(AdminGetCategorySchema input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminDeleteInboxMessage.Response AdminDeleteInboxMessage(AdminDeleteInboxMessage input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminDeleteInboxMessage.Response> AdminDeleteInboxMessageAsync(AdminDeleteInboxMessage input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetInboxMessages.Response AdminGetInboxMessages(AdminGetInboxMessages input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetInboxMessages.Response> AdminGetInboxMessagesAsync(AdminGetInboxMessages input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminSaveInboxMessage.Response AdminSaveInboxMessage(AdminSaveInboxMessage input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminSaveInboxMessage.Response> AdminSaveInboxMessageAsync(AdminSaveInboxMessage input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -342,7 +342,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsSaveInboxMessageResponse<T1>? AdminSaveInboxMessage<T1>(AdminSaveInboxMessage input)
+        public AdminSaveInboxMessage.Response<T1> AdminSaveInboxMessage<T1>(AdminSaveInboxMessage input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -350,7 +350,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsSaveInboxMessageResponse<T1>?> AdminSaveInboxMessageAsync<T1>(AdminSaveInboxMessage input)
+        public async Task<AdminSaveInboxMessage.Response<T1>> AdminSaveInboxMessageAsync<T1>(AdminSaveInboxMessage input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -358,7 +358,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsUnsendInboxMessageResponse? AdminUnsendInboxMessage(AdminUnsendInboxMessage input)
+        public AdminUnsendInboxMessage.Response AdminUnsendInboxMessage(AdminUnsendInboxMessage input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -366,7 +366,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUnsendInboxMessageResponse?> AdminUnsendInboxMessageAsync(AdminUnsendInboxMessage input)
+        public async Task<AdminUnsendInboxMessage.Response> AdminUnsendInboxMessageAsync(AdminUnsendInboxMessage input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -374,7 +374,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetInboxUsersResponse? AdminGetInboxUsers(AdminGetInboxUsers input)
+        public AdminGetInboxUsers.Response AdminGetInboxUsers(AdminGetInboxUsers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -382,7 +382,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetInboxUsersResponse?> AdminGetInboxUsersAsync(AdminGetInboxUsers input)
+        public async Task<AdminGetInboxUsers.Response> AdminGetInboxUsersAsync(AdminGetInboxUsers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -390,23 +390,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminUpdateInboxMessage(AdminUpdateInboxMessage input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminUpdateInboxMessageAsync(AdminUpdateInboxMessage input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsSendInboxMessageResponse? AdminSendInboxMessage(AdminSendInboxMessage input)
+        public AdminUpdateInboxMessage.Response AdminUpdateInboxMessage(AdminUpdateInboxMessage input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -414,7 +398,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsSendInboxMessageResponse?> AdminSendInboxMessageAsync(AdminSendInboxMessage input)
+        public async Task<AdminUpdateInboxMessage.Response> AdminUpdateInboxMessageAsync(AdminUpdateInboxMessage input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -422,7 +406,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetInboxStatsResponse? AdminGetInboxStats(AdminGetInboxStats input)
+        public AdminSendInboxMessage.Response AdminSendInboxMessage(AdminSendInboxMessage input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -430,7 +414,23 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetInboxStatsResponse?> AdminGetInboxStatsAsync(AdminGetInboxStats input)
+        public async Task<AdminSendInboxMessage.Response> AdminSendInboxMessageAsync(AdminSendInboxMessage input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetInboxStats.Response AdminGetInboxStats(AdminGetInboxStats input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetInboxStats.Response> AdminGetInboxStatsAsync(AdminGetInboxStats input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

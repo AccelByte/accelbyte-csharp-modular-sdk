@@ -60,7 +60,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                 return op;
             }
 
-            public List<string>? Execute(
+            public ListProviders.Response Execute(
             )
             {
                 ListProviders op = Build(
@@ -71,11 +71,11 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<string>?> ExecuteAsync(
+            public async Task<ListProviders.Response> ExecuteAsync(
             )
             {
                 ListProviders op = Build(
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -95,26 +95,36 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         private ListProviders(ListProvidersBuilder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public ListProviders(
-        )
+        #region Response Part        
+        public class Response : ApiResponse<List<string>>
         {
 
 
+            protected override string GetFullOperationId() => "Dsmc::Public::ListProviders";
+        }
 
+        #endregion
 
+        public ListProviders(
+        )
+        {
+            
+            
 
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -126,25 +136,26 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<string>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public ListProviders.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new ListProviders.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

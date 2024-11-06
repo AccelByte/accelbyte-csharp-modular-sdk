@@ -575,7 +575,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.AppleIAPConfigInfo? GetAppleIAPConfig(GetAppleIAPConfig input)
+        public GetAppleIAPConfig.Response GetAppleIAPConfig(GetAppleIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -583,7 +583,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AppleIAPConfigInfo?> GetAppleIAPConfigAsync(GetAppleIAPConfig input)
+        public async Task<GetAppleIAPConfig.Response> GetAppleIAPConfigAsync(GetAppleIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -591,7 +591,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AppleIAPConfigInfo? UpdateAppleIAPConfig(UpdateAppleIAPConfig input)
+        public UpdateAppleIAPConfig.Response UpdateAppleIAPConfig(UpdateAppleIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -599,7 +599,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AppleIAPConfigInfo?> UpdateAppleIAPConfigAsync(UpdateAppleIAPConfig input)
+        public async Task<UpdateAppleIAPConfig.Response> UpdateAppleIAPConfigAsync(UpdateAppleIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -607,23 +607,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteAppleIAPConfig(DeleteAppleIAPConfig input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteAppleIAPConfigAsync(DeleteAppleIAPConfig input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.AppleIAPConfigInfo? UpdateAppleP8File(UpdateAppleP8File input)
+        public DeleteAppleIAPConfig.Response DeleteAppleIAPConfig(DeleteAppleIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -631,7 +615,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AppleIAPConfigInfo?> UpdateAppleP8FileAsync(UpdateAppleP8File input)
+        public async Task<DeleteAppleIAPConfig.Response> DeleteAppleIAPConfigAsync(DeleteAppleIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -639,7 +623,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EpicGamesIAPConfigInfo? GetEpicGamesIAPConfig(GetEpicGamesIAPConfig input)
+        public UpdateAppleP8File.Response UpdateAppleP8File(UpdateAppleP8File input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -647,7 +631,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EpicGamesIAPConfigInfo?> GetEpicGamesIAPConfigAsync(GetEpicGamesIAPConfig input)
+        public async Task<UpdateAppleP8File.Response> UpdateAppleP8FileAsync(UpdateAppleP8File input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -655,7 +639,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.EpicGamesIAPConfigInfo? UpdateEpicGamesIAPConfig(UpdateEpicGamesIAPConfig input)
+        public GetEpicGamesIAPConfig.Response GetEpicGamesIAPConfig(GetEpicGamesIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -663,7 +647,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.EpicGamesIAPConfigInfo?> UpdateEpicGamesIAPConfigAsync(UpdateEpicGamesIAPConfig input)
+        public async Task<GetEpicGamesIAPConfig.Response> GetEpicGamesIAPConfigAsync(GetEpicGamesIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -671,23 +655,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteEpicGamesIAPConfig(DeleteEpicGamesIAPConfig input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteEpicGamesIAPConfigAsync(DeleteEpicGamesIAPConfig input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.GoogleIAPConfigInfo? GetGoogleIAPConfig(GetGoogleIAPConfig input)
+        public UpdateEpicGamesIAPConfig.Response UpdateEpicGamesIAPConfig(UpdateEpicGamesIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -695,7 +663,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.GoogleIAPConfigInfo?> GetGoogleIAPConfigAsync(GetGoogleIAPConfig input)
+        public async Task<UpdateEpicGamesIAPConfig.Response> UpdateEpicGamesIAPConfigAsync(UpdateEpicGamesIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -703,7 +671,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.GoogleIAPConfigInfo? UpdateGoogleIAPConfig(UpdateGoogleIAPConfig input)
+        public DeleteEpicGamesIAPConfig.Response DeleteEpicGamesIAPConfig(DeleteEpicGamesIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -711,7 +679,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.GoogleIAPConfigInfo?> UpdateGoogleIAPConfigAsync(UpdateGoogleIAPConfig input)
+        public async Task<DeleteEpicGamesIAPConfig.Response> DeleteEpicGamesIAPConfigAsync(DeleteEpicGamesIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -719,23 +687,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteGoogleIAPConfig(DeleteGoogleIAPConfig input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteGoogleIAPConfigAsync(DeleteGoogleIAPConfig input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.GoogleIAPConfigInfo? UpdateGoogleP12File(UpdateGoogleP12File input)
+        public GetGoogleIAPConfig.Response GetGoogleIAPConfig(GetGoogleIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -743,7 +695,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.GoogleIAPConfigInfo?> UpdateGoogleP12FileAsync(UpdateGoogleP12File input)
+        public async Task<GetGoogleIAPConfig.Response> GetGoogleIAPConfigAsync(GetGoogleIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -751,7 +703,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.IAPItemConfigInfo? GetIAPItemConfig(GetIAPItemConfig input)
+        public UpdateGoogleIAPConfig.Response UpdateGoogleIAPConfig(UpdateGoogleIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -759,7 +711,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.IAPItemConfigInfo?> GetIAPItemConfigAsync(GetIAPItemConfig input)
+        public async Task<UpdateGoogleIAPConfig.Response> UpdateGoogleIAPConfigAsync(UpdateGoogleIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -767,7 +719,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.IAPItemConfigInfo? UpdateIAPItemConfig(UpdateIAPItemConfig input)
+        public DeleteGoogleIAPConfig.Response DeleteGoogleIAPConfig(DeleteGoogleIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -775,7 +727,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.IAPItemConfigInfo?> UpdateIAPItemConfigAsync(UpdateIAPItemConfig input)
+        public async Task<DeleteGoogleIAPConfig.Response> DeleteGoogleIAPConfigAsync(DeleteGoogleIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -783,23 +735,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteIAPItemConfig(DeleteIAPItemConfig input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteIAPItemConfigAsync(DeleteIAPItemConfig input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.OculusIAPConfigInfo? GetOculusIAPConfig(GetOculusIAPConfig input)
+        public UpdateGoogleP12File.Response UpdateGoogleP12File(UpdateGoogleP12File input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -807,7 +743,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OculusIAPConfigInfo?> GetOculusIAPConfigAsync(GetOculusIAPConfig input)
+        public async Task<UpdateGoogleP12File.Response> UpdateGoogleP12FileAsync(UpdateGoogleP12File input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -815,7 +751,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OculusIAPConfigInfo? UpdateOculusIAPConfig(UpdateOculusIAPConfig input)
+        public GetIAPItemConfig.Response GetIAPItemConfig(GetIAPItemConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -823,7 +759,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OculusIAPConfigInfo?> UpdateOculusIAPConfigAsync(UpdateOculusIAPConfig input)
+        public async Task<GetIAPItemConfig.Response> GetIAPItemConfigAsync(GetIAPItemConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -831,23 +767,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteOculusIAPConfig(DeleteOculusIAPConfig input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteOculusIAPConfigAsync(DeleteOculusIAPConfig input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.PlayStationIAPConfigInfo? GetPlayStationIAPConfig(GetPlayStationIAPConfig input)
+        public UpdateIAPItemConfig.Response UpdateIAPItemConfig(UpdateIAPItemConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -855,7 +775,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PlayStationIAPConfigInfo?> GetPlayStationIAPConfigAsync(GetPlayStationIAPConfig input)
+        public async Task<UpdateIAPItemConfig.Response> UpdateIAPItemConfigAsync(UpdateIAPItemConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -863,7 +783,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PlayStationIAPConfigInfo? UpdatePlaystationIAPConfig(UpdatePlaystationIAPConfig input)
+        public DeleteIAPItemConfig.Response DeleteIAPItemConfig(DeleteIAPItemConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -871,7 +791,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PlayStationIAPConfigInfo?> UpdatePlaystationIAPConfigAsync(UpdatePlaystationIAPConfig input)
+        public async Task<DeleteIAPItemConfig.Response> DeleteIAPItemConfigAsync(DeleteIAPItemConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -879,23 +799,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeletePlaystationIAPConfig(DeletePlaystationIAPConfig input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeletePlaystationIAPConfigAsync(DeletePlaystationIAPConfig input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.TestResult? ValidateExistedPlaystationIAPConfig(ValidateExistedPlaystationIAPConfig input)
+        public GetOculusIAPConfig.Response GetOculusIAPConfig(GetOculusIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -903,7 +807,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.TestResult?> ValidateExistedPlaystationIAPConfigAsync(ValidateExistedPlaystationIAPConfig input)
+        public async Task<GetOculusIAPConfig.Response> GetOculusIAPConfigAsync(GetOculusIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -911,7 +815,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.TestResult? ValidatePlaystationIAPConfig(ValidatePlaystationIAPConfig input)
+        public UpdateOculusIAPConfig.Response UpdateOculusIAPConfig(UpdateOculusIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -919,7 +823,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.TestResult?> ValidatePlaystationIAPConfigAsync(ValidatePlaystationIAPConfig input)
+        public async Task<UpdateOculusIAPConfig.Response> UpdateOculusIAPConfigAsync(UpdateOculusIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -927,7 +831,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.SteamIAPConfig? GetSteamIAPConfig(GetSteamIAPConfig input)
+        public DeleteOculusIAPConfig.Response DeleteOculusIAPConfig(DeleteOculusIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -935,7 +839,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SteamIAPConfig?> GetSteamIAPConfigAsync(GetSteamIAPConfig input)
+        public async Task<DeleteOculusIAPConfig.Response> DeleteOculusIAPConfigAsync(DeleteOculusIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -943,7 +847,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.SteamIAPConfigInfo? UpdateSteamIAPConfig(UpdateSteamIAPConfig input)
+        public GetPlayStationIAPConfig.Response GetPlayStationIAPConfig(GetPlayStationIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -951,7 +855,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SteamIAPConfigInfo?> UpdateSteamIAPConfigAsync(UpdateSteamIAPConfig input)
+        public async Task<GetPlayStationIAPConfig.Response> GetPlayStationIAPConfigAsync(GetPlayStationIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -959,23 +863,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteSteamIAPConfig(DeleteSteamIAPConfig input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteSteamIAPConfigAsync(DeleteSteamIAPConfig input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.TwitchIAPConfigInfo? GetTwitchIAPConfig(GetTwitchIAPConfig input)
+        public UpdatePlaystationIAPConfig.Response UpdatePlaystationIAPConfig(UpdatePlaystationIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -983,7 +871,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.TwitchIAPConfigInfo?> GetTwitchIAPConfigAsync(GetTwitchIAPConfig input)
+        public async Task<UpdatePlaystationIAPConfig.Response> UpdatePlaystationIAPConfigAsync(UpdatePlaystationIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -991,7 +879,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.TwitchIAPConfigInfo? UpdateTwitchIAPConfig(UpdateTwitchIAPConfig input)
+        public DeletePlaystationIAPConfig.Response DeletePlaystationIAPConfig(DeletePlaystationIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -999,7 +887,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.TwitchIAPConfigInfo?> UpdateTwitchIAPConfigAsync(UpdateTwitchIAPConfig input)
+        public async Task<DeletePlaystationIAPConfig.Response> DeletePlaystationIAPConfigAsync(DeletePlaystationIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1007,23 +895,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteTwitchIAPConfig(DeleteTwitchIAPConfig input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteTwitchIAPConfigAsync(DeleteTwitchIAPConfig input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.XblIAPConfigInfo? GetXblIAPConfig(GetXblIAPConfig input)
+        public ValidateExistedPlaystationIAPConfig.Response ValidateExistedPlaystationIAPConfig(ValidateExistedPlaystationIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1031,7 +903,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.XblIAPConfigInfo?> GetXblIAPConfigAsync(GetXblIAPConfig input)
+        public async Task<ValidateExistedPlaystationIAPConfig.Response> ValidateExistedPlaystationIAPConfigAsync(ValidateExistedPlaystationIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1039,7 +911,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.XblIAPConfigInfo? UpdateXblIAPConfig(UpdateXblIAPConfig input)
+        public ValidatePlaystationIAPConfig.Response ValidatePlaystationIAPConfig(ValidatePlaystationIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1047,7 +919,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.XblIAPConfigInfo?> UpdateXblIAPConfigAsync(UpdateXblIAPConfig input)
+        public async Task<ValidatePlaystationIAPConfig.Response> ValidatePlaystationIAPConfigAsync(ValidatePlaystationIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1055,23 +927,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteXblAPConfig(DeleteXblAPConfig input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteXblAPConfigAsync(DeleteXblAPConfig input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.XblIAPConfigInfo? UpdateXblBPCertFile(UpdateXblBPCertFile input)
+        public GetSteamIAPConfig.Response GetSteamIAPConfig(GetSteamIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1079,7 +935,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.XblIAPConfigInfo?> UpdateXblBPCertFileAsync(UpdateXblBPCertFile input)
+        public async Task<GetSteamIAPConfig.Response> GetSteamIAPConfigAsync(GetSteamIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1087,7 +943,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.IAPOrderPagingSlicedResult? QueryUserIAPOrders(QueryUserIAPOrders input)
+        public UpdateSteamIAPConfig.Response UpdateSteamIAPConfig(UpdateSteamIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1095,7 +951,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.IAPOrderPagingSlicedResult?> QueryUserIAPOrdersAsync(QueryUserIAPOrders input)
+        public async Task<UpdateSteamIAPConfig.Response> UpdateSteamIAPConfigAsync(UpdateSteamIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1103,7 +959,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.IAPOrderPagingSlicedResult? QueryAllUserIAPOrders(QueryAllUserIAPOrders input)
+        public DeleteSteamIAPConfig.Response DeleteSteamIAPConfig(DeleteSteamIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1111,7 +967,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.IAPOrderPagingSlicedResult?> QueryAllUserIAPOrdersAsync(QueryAllUserIAPOrders input)
+        public async Task<DeleteSteamIAPConfig.Response> DeleteSteamIAPConfigAsync(DeleteSteamIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1119,7 +975,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.IAPConsumeHistoryPagingSlicedResult? QueryUserIAPConsumeHistory(QueryUserIAPConsumeHistory input)
+        public GetTwitchIAPConfig.Response GetTwitchIAPConfig(GetTwitchIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1127,7 +983,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.IAPConsumeHistoryPagingSlicedResult?> QueryUserIAPConsumeHistoryAsync(QueryUserIAPConsumeHistory input)
+        public async Task<GetTwitchIAPConfig.Response> GetTwitchIAPConfigAsync(GetTwitchIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1135,23 +991,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void MockFulfillIAPItem(MockFulfillIAPItem input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task MockFulfillIAPItemAsync(MockFulfillIAPItem input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.AppleIAPConfigVersionInfo? GetAppleConfigVersion(GetAppleConfigVersion input)
+        public UpdateTwitchIAPConfig.Response UpdateTwitchIAPConfig(UpdateTwitchIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1159,7 +999,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AppleIAPConfigVersionInfo?> GetAppleConfigVersionAsync(GetAppleConfigVersion input)
+        public async Task<UpdateTwitchIAPConfig.Response> UpdateTwitchIAPConfigAsync(UpdateTwitchIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1167,7 +1007,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.IAPItemMappingInfo? GetIAPItemMapping(GetIAPItemMapping input)
+        public DeleteTwitchIAPConfig.Response DeleteTwitchIAPConfig(DeleteTwitchIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1175,7 +1015,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.IAPItemMappingInfo?> GetIAPItemMappingAsync(GetIAPItemMapping input)
+        public async Task<DeleteTwitchIAPConfig.Response> DeleteTwitchIAPConfigAsync(DeleteTwitchIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1183,7 +1023,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.TwitchSyncResult>? SyncTwitchDropsEntitlement(SyncTwitchDropsEntitlement input)
+        public GetXblIAPConfig.Response GetXblIAPConfig(GetXblIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1191,7 +1031,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.TwitchSyncResult>?> SyncTwitchDropsEntitlementAsync(SyncTwitchDropsEntitlement input)
+        public async Task<GetXblIAPConfig.Response> GetXblIAPConfigAsync(GetXblIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1199,23 +1039,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicFulfillAppleIAPItem(PublicFulfillAppleIAPItem input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicFulfillAppleIAPItemAsync(PublicFulfillAppleIAPItem input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public List<Model.EpicGamesReconcileResult>? SyncEpicGamesInventory(SyncEpicGamesInventory input)
+        public UpdateXblIAPConfig.Response UpdateXblIAPConfig(UpdateXblIAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1223,7 +1047,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.EpicGamesReconcileResult>?> SyncEpicGamesInventoryAsync(SyncEpicGamesInventory input)
+        public async Task<UpdateXblIAPConfig.Response> UpdateXblIAPConfigAsync(UpdateXblIAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1231,7 +1055,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.GoogleReceiptResolveResult? PublicFulfillGoogleIAPItem(PublicFulfillGoogleIAPItem input)
+        public DeleteXblAPConfig.Response DeleteXblAPConfig(DeleteXblAPConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1239,7 +1063,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.GoogleReceiptResolveResult?> PublicFulfillGoogleIAPItemAsync(PublicFulfillGoogleIAPItem input)
+        public async Task<DeleteXblAPConfig.Response> DeleteXblAPConfigAsync(DeleteXblAPConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1247,7 +1071,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.OculusReconcileResult>? SyncOculusConsumableEntitlements(SyncOculusConsumableEntitlements input)
+        public UpdateXblBPCertFile.Response UpdateXblBPCertFile(UpdateXblBPCertFile input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1255,7 +1079,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.OculusReconcileResult>?> SyncOculusConsumableEntitlementsAsync(SyncOculusConsumableEntitlements input)
+        public async Task<UpdateXblBPCertFile.Response> UpdateXblBPCertFileAsync(UpdateXblBPCertFile input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1263,7 +1087,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.PlayStationReconcileResult>? PublicReconcilePlayStationStore(PublicReconcilePlayStationStore input)
+        public QueryUserIAPOrders.Response QueryUserIAPOrders(QueryUserIAPOrders input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1271,7 +1095,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.PlayStationReconcileResult>?> PublicReconcilePlayStationStoreAsync(PublicReconcilePlayStationStore input)
+        public async Task<QueryUserIAPOrders.Response> QueryUserIAPOrdersAsync(QueryUserIAPOrders input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1279,7 +1103,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.PlayStationReconcileResult>? PublicReconcilePlayStationStoreWithMultipleServiceLabels(PublicReconcilePlayStationStoreWithMultipleServiceLabels input)
+        public QueryAllUserIAPOrders.Response QueryAllUserIAPOrders(QueryAllUserIAPOrders input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1287,7 +1111,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.PlayStationReconcileResult>?> PublicReconcilePlayStationStoreWithMultipleServiceLabelsAsync(PublicReconcilePlayStationStoreWithMultipleServiceLabels input)
+        public async Task<QueryAllUserIAPOrders.Response> QueryAllUserIAPOrdersAsync(QueryAllUserIAPOrders input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1295,39 +1119,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void SyncSteamInventory(SyncSteamInventory input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SyncSteamInventoryAsync(SyncSteamInventory input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void SyncTwitchDropsEntitlement1(SyncTwitchDropsEntitlement1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SyncTwitchDropsEntitlement1Async(SyncTwitchDropsEntitlement1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public List<Model.XblReconcileResult>? SyncXboxInventory(SyncXboxInventory input)
+        public QueryUserIAPConsumeHistory.Response QueryUserIAPConsumeHistory(QueryUserIAPConsumeHistory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1335,7 +1127,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.XblReconcileResult>?> SyncXboxInventoryAsync(SyncXboxInventory input)
+        public async Task<QueryUserIAPConsumeHistory.Response> QueryUserIAPConsumeHistoryAsync(QueryUserIAPConsumeHistory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1343,18 +1135,226 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void V2PublicFulfillAppleIAPItem(V2PublicFulfillAppleIAPItem input)
+        public MockFulfillIAPItem.Response MockFulfillIAPItem(MockFulfillIAPItem input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task V2PublicFulfillAppleIAPItemAsync(V2PublicFulfillAppleIAPItem input)
+        public async Task<MockFulfillIAPItem.Response> MockFulfillIAPItemAsync(MockFulfillIAPItem input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetAppleConfigVersion.Response GetAppleConfigVersion(GetAppleConfigVersion input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetAppleConfigVersion.Response> GetAppleConfigVersionAsync(GetAppleConfigVersion input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetIAPItemMapping.Response GetIAPItemMapping(GetIAPItemMapping input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetIAPItemMapping.Response> GetIAPItemMappingAsync(GetIAPItemMapping input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public SyncTwitchDropsEntitlement.Response SyncTwitchDropsEntitlement(SyncTwitchDropsEntitlement input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<SyncTwitchDropsEntitlement.Response> SyncTwitchDropsEntitlementAsync(SyncTwitchDropsEntitlement input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicFulfillAppleIAPItem.Response PublicFulfillAppleIAPItem(PublicFulfillAppleIAPItem input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicFulfillAppleIAPItem.Response> PublicFulfillAppleIAPItemAsync(PublicFulfillAppleIAPItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public SyncEpicGamesInventory.Response SyncEpicGamesInventory(SyncEpicGamesInventory input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<SyncEpicGamesInventory.Response> SyncEpicGamesInventoryAsync(SyncEpicGamesInventory input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicFulfillGoogleIAPItem.Response PublicFulfillGoogleIAPItem(PublicFulfillGoogleIAPItem input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicFulfillGoogleIAPItem.Response> PublicFulfillGoogleIAPItemAsync(PublicFulfillGoogleIAPItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public SyncOculusConsumableEntitlements.Response SyncOculusConsumableEntitlements(SyncOculusConsumableEntitlements input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<SyncOculusConsumableEntitlements.Response> SyncOculusConsumableEntitlementsAsync(SyncOculusConsumableEntitlements input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicReconcilePlayStationStore.Response PublicReconcilePlayStationStore(PublicReconcilePlayStationStore input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicReconcilePlayStationStore.Response> PublicReconcilePlayStationStoreAsync(PublicReconcilePlayStationStore input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicReconcilePlayStationStoreWithMultipleServiceLabels.Response PublicReconcilePlayStationStoreWithMultipleServiceLabels(PublicReconcilePlayStationStoreWithMultipleServiceLabels input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicReconcilePlayStationStoreWithMultipleServiceLabels.Response> PublicReconcilePlayStationStoreWithMultipleServiceLabelsAsync(PublicReconcilePlayStationStoreWithMultipleServiceLabels input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public SyncSteamInventory.Response SyncSteamInventory(SyncSteamInventory input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<SyncSteamInventory.Response> SyncSteamInventoryAsync(SyncSteamInventory input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public SyncTwitchDropsEntitlement1.Response SyncTwitchDropsEntitlement1(SyncTwitchDropsEntitlement1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<SyncTwitchDropsEntitlement1.Response> SyncTwitchDropsEntitlement1Async(SyncTwitchDropsEntitlement1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public SyncXboxInventory.Response SyncXboxInventory(SyncXboxInventory input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<SyncXboxInventory.Response> SyncXboxInventoryAsync(SyncXboxInventory input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public V2PublicFulfillAppleIAPItem.Response V2PublicFulfillAppleIAPItem(V2PublicFulfillAppleIAPItem input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<V2PublicFulfillAppleIAPItem.Response> V2PublicFulfillAppleIAPItemAsync(V2PublicFulfillAppleIAPItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

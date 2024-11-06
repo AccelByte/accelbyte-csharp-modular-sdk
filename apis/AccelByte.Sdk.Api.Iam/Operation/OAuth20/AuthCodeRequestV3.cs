@@ -98,15 +98,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AuthCodeRequestV3 op = new AuthCodeRequestV3(this,
-                    platformId,
-                    requestId
+                    platformId,                    
+                    requestId                    
                 );
 
                 op.SetBaseFields<AuthCodeRequestV3Builder>(this);
                 return op;
             }
 
-            public string Execute(
+            public AuthCodeRequestV3.Response Execute(
                 string platformId,
                 string requestId
             )
@@ -121,11 +121,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<string> ExecuteAsync(
+            public async Task<AuthCodeRequestV3.Response> ExecuteAsync(
                 string platformId,
                 string requestId
             )
@@ -140,7 +140,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -152,38 +152,50 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["platformId"] = platformId;
-
+            
             if (builder.ClientId is not null) QueryParams["client_id"] = builder.ClientId;
             if (builder.RedirectUri is not null) QueryParams["redirect_uri"] = builder.RedirectUri;
             if (requestId is not null) QueryParams["request_id"] = requestId;
+            
 
-
-
-
-
+            
+            
+            
             LocationQuery = "code";
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<string>
+        {
+
+            public string Error302 { get; set; } = "";
+
+
+            protected override string GetFullOperationId() => "Iam::OAuth20::AuthCodeRequestV3";
+        }
+
+        #endregion
+
         public AuthCodeRequestV3(
-            string platformId,
-            string? clientId,
-            string? redirectUri,
-            string requestId
+            string platformId,            
+            string? clientId,            
+            string? redirectUri,            
+            string requestId            
         )
         {
             PathParams["platformId"] = platformId;
-
+            
             if (clientId is not null) QueryParams["client_id"] = clientId;
             if (redirectUri is not null) QueryParams["redirect_uri"] = redirectUri;
             if (requestId is not null) QueryParams["request_id"] = requestId;
+            
 
-
-
-
-
+            
+            
+            
             LocationQuery = "code";
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
@@ -196,17 +208,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public string ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AuthCodeRequestV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            var payloadString = payload.ReadToString();
+            var response = new AuthCodeRequestV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
 
             if (code == (HttpStatusCode)302)
             {
-                return payloadString;
+                response.Data = payload.ReadToString();
+                response.IsSuccess = true;
             }
 
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

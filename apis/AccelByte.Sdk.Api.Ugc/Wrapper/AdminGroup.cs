@@ -179,7 +179,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedGroupResponse? SingleAdminGetAllGroups(SingleAdminGetAllGroups input)
+        public SingleAdminGetAllGroups.Response SingleAdminGetAllGroups(SingleAdminGetAllGroups input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -187,7 +187,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedGroupResponse?> SingleAdminGetAllGroupsAsync(SingleAdminGetAllGroups input)
+        public async Task<SingleAdminGetAllGroups.Response> SingleAdminGetAllGroupsAsync(SingleAdminGetAllGroups input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -195,7 +195,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCreateGroupResponse? AdminCreateGroup(AdminCreateGroup input)
+        public AdminCreateGroup.Response AdminCreateGroup(AdminCreateGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -203,7 +203,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateGroupResponse?> AdminCreateGroupAsync(AdminCreateGroup input)
+        public async Task<AdminCreateGroup.Response> AdminCreateGroupAsync(AdminCreateGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -211,7 +211,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCreateGroupResponse? SingleAdminGetGroup(SingleAdminGetGroup input)
+        public SingleAdminGetGroup.Response SingleAdminGetGroup(SingleAdminGetGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -219,7 +219,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateGroupResponse?> SingleAdminGetGroupAsync(SingleAdminGetGroup input)
+        public async Task<SingleAdminGetGroup.Response> SingleAdminGetGroupAsync(SingleAdminGetGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -227,7 +227,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCreateGroupResponse? SingleAdminUpdateGroup(SingleAdminUpdateGroup input)
+        public SingleAdminUpdateGroup.Response SingleAdminUpdateGroup(SingleAdminUpdateGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -235,7 +235,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateGroupResponse?> SingleAdminUpdateGroupAsync(SingleAdminUpdateGroup input)
+        public async Task<SingleAdminUpdateGroup.Response> SingleAdminUpdateGroupAsync(SingleAdminUpdateGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -243,23 +243,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void SingleAdminDeleteGroup(SingleAdminDeleteGroup input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SingleAdminDeleteGroupAsync(SingleAdminDeleteGroup input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsPaginatedContentDownloadResponse? SingleAdminGetGroupContents(SingleAdminGetGroupContents input)
+        public SingleAdminDeleteGroup.Response SingleAdminDeleteGroup(SingleAdminDeleteGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -267,7 +251,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedContentDownloadResponse?> SingleAdminGetGroupContentsAsync(SingleAdminGetGroupContents input)
+        public async Task<SingleAdminDeleteGroup.Response> SingleAdminDeleteGroupAsync(SingleAdminDeleteGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -275,7 +259,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPaginatedGroupResponse? AdminGetAllGroups(AdminGetAllGroups input)
+        public SingleAdminGetGroupContents.Response SingleAdminGetGroupContents(SingleAdminGetGroupContents input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -283,7 +267,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedGroupResponse?> AdminGetAllGroupsAsync(AdminGetAllGroups input)
+        public async Task<SingleAdminGetGroupContents.Response> SingleAdminGetGroupContentsAsync(SingleAdminGetGroupContents input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -291,7 +275,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCreateGroupResponse? AdminGetGroup(AdminGetGroup input)
+        public AdminGetAllGroups.Response AdminGetAllGroups(AdminGetAllGroups input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -299,7 +283,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateGroupResponse?> AdminGetGroupAsync(AdminGetGroup input)
+        public async Task<AdminGetAllGroups.Response> AdminGetAllGroupsAsync(AdminGetAllGroups input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -307,7 +291,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCreateGroupResponse? AdminUpdateGroup(AdminUpdateGroup input)
+        public AdminGetGroup.Response AdminGetGroup(AdminGetGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -315,7 +299,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateGroupResponse?> AdminUpdateGroupAsync(AdminUpdateGroup input)
+        public async Task<AdminGetGroup.Response> AdminGetGroupAsync(AdminGetGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -323,23 +307,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteGroup(AdminDeleteGroup input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteGroupAsync(AdminDeleteGroup input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsPaginatedContentDownloadResponse? AdminGetGroupContents(AdminGetGroupContents input)
+        public AdminUpdateGroup.Response AdminUpdateGroup(AdminUpdateGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -347,7 +315,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedContentDownloadResponse?> AdminGetGroupContentsAsync(AdminGetGroupContents input)
+        public async Task<AdminUpdateGroup.Response> AdminUpdateGroupAsync(AdminUpdateGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -355,7 +323,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPaginatedContentDownloadResponseV2? AdminGetOfficialGroupContentsV2(AdminGetOfficialGroupContentsV2 input)
+        public AdminDeleteGroup.Response AdminDeleteGroup(AdminDeleteGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -363,7 +331,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedContentDownloadResponseV2?> AdminGetOfficialGroupContentsV2Async(AdminGetOfficialGroupContentsV2 input)
+        public async Task<AdminDeleteGroup.Response> AdminDeleteGroupAsync(AdminDeleteGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -371,7 +339,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPaginatedContentDownloadResponseV2? AdminGetUserGroupContentsV2(AdminGetUserGroupContentsV2 input)
+        public AdminGetGroupContents.Response AdminGetGroupContents(AdminGetGroupContents input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -379,7 +347,39 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedContentDownloadResponseV2?> AdminGetUserGroupContentsV2Async(AdminGetUserGroupContentsV2 input)
+        public async Task<AdminGetGroupContents.Response> AdminGetGroupContentsAsync(AdminGetGroupContents input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetOfficialGroupContentsV2.Response AdminGetOfficialGroupContentsV2(AdminGetOfficialGroupContentsV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetOfficialGroupContentsV2.Response> AdminGetOfficialGroupContentsV2Async(AdminGetOfficialGroupContentsV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetUserGroupContentsV2.Response AdminGetUserGroupContentsV2(AdminGetUserGroupContentsV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetUserGroupContentsV2.Response> AdminGetUserGroupContentsV2Async(AdminGetUserGroupContentsV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

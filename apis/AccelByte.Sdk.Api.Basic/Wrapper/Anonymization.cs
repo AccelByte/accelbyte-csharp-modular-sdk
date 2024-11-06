@@ -47,18 +47,18 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
         }
         #endregion
 
-        public void AnonymizeUserProfile(AnonymizeUserProfile input)
+        public AnonymizeUserProfile.Response AnonymizeUserProfile(AnonymizeUserProfile input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AnonymizeUserProfileAsync(AnonymizeUserProfile input)
+        public async Task<AnonymizeUserProfile.Response> AnonymizeUserProfileAsync(AnonymizeUserProfile input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

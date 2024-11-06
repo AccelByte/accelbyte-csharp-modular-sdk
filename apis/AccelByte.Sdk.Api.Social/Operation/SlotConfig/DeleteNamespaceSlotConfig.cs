@@ -31,7 +31,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// Deletes a namespace slot configuration, the configuration will be default after delete.
     /// Other detail info:
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class DeleteNamespaceSlotConfig : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -62,15 +62,15 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 DeleteNamespaceSlotConfig op = new DeleteNamespaceSlotConfig(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<DeleteNamespaceSlotConfigBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public void Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public DeleteNamespaceSlotConfig.Response Execute(
                 string namespace_
             )
             {
@@ -82,12 +82,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<DeleteNamespaceSlotConfig.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -99,8 +99,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,28 +111,38 @@ namespace AccelByte.Sdk.Api.Social.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+
+            protected override string GetFullOperationId() => "Social::SlotConfig::DeleteNamespaceSlotConfig";
+        }
+
+        #endregion
+
         public DeleteNamespaceSlotConfig(
-            string namespace_
+            string namespace_            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -141,20 +151,21 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public override List<string> Produces => new() {  };
+        
+        public DeleteNamespaceSlotConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new DeleteNamespaceSlotConfig.Response()
             {
-                return;
-            }
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
 
-            var payloadString = payload.ReadToString();
 
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

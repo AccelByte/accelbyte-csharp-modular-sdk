@@ -58,23 +58,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
         }
         #endregion
 
-        public void DownloadServerArtifacts(DownloadServerArtifacts input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DownloadServerArtifactsAsync(DownloadServerArtifacts input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsArtifactFileStatus? CheckServerArtifact(CheckServerArtifact input)
+        public DownloadServerArtifacts.Response DownloadServerArtifacts(DownloadServerArtifacts input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +66,23 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsArtifactFileStatus?> CheckServerArtifactAsync(CheckServerArtifact input)
+        public async Task<DownloadServerArtifacts.Response> DownloadServerArtifactsAsync(DownloadServerArtifacts input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public CheckServerArtifact.Response CheckServerArtifact(CheckServerArtifact input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<CheckServerArtifact.Response> CheckServerArtifactAsync(CheckServerArtifact input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

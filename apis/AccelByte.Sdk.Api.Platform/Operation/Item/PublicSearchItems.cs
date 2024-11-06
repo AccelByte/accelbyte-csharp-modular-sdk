@@ -111,16 +111,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicSearchItems op = new PublicSearchItems(this,
-                    namespace_,
-                    keyword,
-                    language
+                    namespace_,                    
+                    keyword,                    
+                    language                    
                 );
 
                 op.SetBaseFields<PublicSearchItemsBuilder>(this);
                 return op;
             }
 
-            public Model.ItemPagingSlicedResult? Execute(
+            public PublicSearchItems.Response Execute(
                 string namespace_,
                 string keyword,
                 string language
@@ -137,11 +137,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ItemPagingSlicedResult?> ExecuteAsync(
+            public async Task<PublicSearchItems.Response> ExecuteAsync(
                 string namespace_,
                 string keyword,
                 string language
@@ -158,7 +158,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -171,7 +171,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.AutoCalcEstimatedPrice != null) QueryParams["autoCalcEstimatedPrice"] = Convert.ToString(builder.AutoCalcEstimatedPrice)!;
             if (builder.ItemType is not null) QueryParams["itemType"] = builder.ItemType.Value;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
@@ -180,30 +180,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
             if (keyword is not null) QueryParams["keyword"] = keyword;
             if (language is not null) QueryParams["language"] = language;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ItemPagingSlicedResult>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Item::PublicSearchItems";
+        }
+
+        #endregion
+
         public PublicSearchItems(
-            string namespace_,
-            bool? autoCalcEstimatedPrice,
-            PublicSearchItemsItemType? itemType,
-            int? limit,
-            int? offset,
-            string? region,
-            string? storeId,
-            string keyword,
-            string language
+            string namespace_,            
+            bool? autoCalcEstimatedPrice,            
+            PublicSearchItemsItemType? itemType,            
+            int? limit,            
+            int? offset,            
+            string? region,            
+            string? storeId,            
+            string keyword,            
+            string language            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (autoCalcEstimatedPrice != null) QueryParams["autoCalcEstimatedPrice"] = Convert.ToString(autoCalcEstimatedPrice)!;
             if (itemType is not null) QueryParams["itemType"] = itemType.Value;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
@@ -212,11 +224,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (storeId is not null) QueryParams["storeId"] = storeId;
             if (keyword is not null) QueryParams["keyword"] = keyword;
             if (language is not null) QueryParams["language"] = language;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -225,28 +237,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ItemPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicSearchItems.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicSearchItems.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ItemPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ItemPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.ItemPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

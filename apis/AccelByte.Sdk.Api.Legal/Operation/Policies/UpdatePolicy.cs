@@ -63,14 +63,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 UpdatePolicy op = new UpdatePolicy(this,
-                    policyId
+                    policyId                    
                 );
 
                 op.SetBaseFields<UpdatePolicyBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public UpdatePolicy.Response Execute(
                 string policyId
             )
             {
@@ -82,12 +82,12 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<UpdatePolicy.Response> ExecuteAsync(
                 string policyId
             )
             {
@@ -99,8 +99,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,31 +111,43 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         )
         {
             PathParams["policyId"] = policyId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = builder.Body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public ErrorEntity? Error400 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Legal::Policies::UpdatePolicy";
+        }
+
+        #endregion
+
         public UpdatePolicy(
-            string policyId,
-            Model.UpdatePolicyRequest body
+            string policyId,            
+            Model.UpdatePolicyRequest body            
         )
         {
             PathParams["policyId"] = policyId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,17 +159,24 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public UpdatePolicy.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)200)
+            var response = new UpdatePolicy.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

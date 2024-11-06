@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         }
         #endregion
 
-        public Model.ModelsPlatformCredentials? AdminGetPlatformCredentials(AdminGetPlatformCredentials input)
+        public AdminGetPlatformCredentials.Response AdminGetPlatformCredentials(AdminGetPlatformCredentials input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPlatformCredentials?> AdminGetPlatformCredentialsAsync(AdminGetPlatformCredentials input)
+        public async Task<AdminGetPlatformCredentials.Response> AdminGetPlatformCredentialsAsync(AdminGetPlatformCredentials input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPlatformCredentials? AdminUpdatePlatformCredentials(AdminUpdatePlatformCredentials input)
+        public AdminUpdatePlatformCredentials.Response AdminUpdatePlatformCredentials(AdminUpdatePlatformCredentials input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPlatformCredentials?> AdminUpdatePlatformCredentialsAsync(AdminUpdatePlatformCredentials input)
+        public async Task<AdminUpdatePlatformCredentials.Response> AdminUpdatePlatformCredentialsAsync(AdminUpdatePlatformCredentials input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -101,18 +101,18 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeletePlatformCredentials(AdminDeletePlatformCredentials input)
+        public AdminDeletePlatformCredentials.Response AdminDeletePlatformCredentials(AdminDeletePlatformCredentials input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeletePlatformCredentialsAsync(AdminDeletePlatformCredentials input)
+        public async Task<AdminDeletePlatformCredentials.Response> AdminDeletePlatformCredentialsAsync(AdminDeletePlatformCredentials input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

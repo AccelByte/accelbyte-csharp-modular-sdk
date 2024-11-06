@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
         }
         #endregion
 
-        public Model.ConfigInfo? CreateConfig(CreateConfig input)
+        public CreateConfig.Response CreateConfig(CreateConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ConfigInfo?> CreateConfigAsync(CreateConfig input)
+        public async Task<CreateConfig.Response> CreateConfigAsync(CreateConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ConfigInfo? GetConfig(GetConfig input)
+        public GetConfig.Response GetConfig(GetConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ConfigInfo?> GetConfigAsync(GetConfig input)
+        public async Task<GetConfig.Response> GetConfigAsync(GetConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -123,23 +123,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteConfig(DeleteConfig input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteConfigAsync(DeleteConfig input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ConfigInfo? UpdateConfig(UpdateConfig input)
+        public DeleteConfig.Response DeleteConfig(DeleteConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -147,7 +131,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ConfigInfo?> UpdateConfigAsync(UpdateConfig input)
+        public async Task<DeleteConfig.Response> DeleteConfigAsync(DeleteConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -155,7 +139,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ConfigInfo? GetPublisherConfig(GetPublisherConfig input)
+        public UpdateConfig.Response UpdateConfig(UpdateConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -163,7 +147,23 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ConfigInfo?> GetPublisherConfigAsync(GetPublisherConfig input)
+        public async Task<UpdateConfig.Response> UpdateConfigAsync(UpdateConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetPublisherConfig.Response GetPublisherConfig(GetPublisherConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetPublisherConfig.Response> GetPublisherConfigAsync(GetPublisherConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

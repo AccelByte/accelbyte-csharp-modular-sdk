@@ -57,16 +57,16 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             )
             {
                 UpdateSession op = new UpdateSession(this,
-                    body,
-                    namespace_,
-                    sessionID
+                    body,                    
+                    namespace_,                    
+                    sessionID                    
                 );
 
                 op.SetBaseFields<UpdateSessionBuilder>(this);
                 return op;
             }
 
-            public Model.ModelsSessionResponse? Execute(
+            public UpdateSession.Response Execute(
                 ModelsUpdateSessionRequest body,
                 string namespace_,
                 string sessionID
@@ -83,11 +83,11 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsSessionResponse?> ExecuteAsync(
+            public async Task<UpdateSession.Response> ExecuteAsync(
                 ModelsUpdateSessionRequest body,
                 string namespace_,
                 string sessionID
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -118,33 +118,49 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["sessionID"] = sessionID;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsSessionResponse>
+        {
+
+            public RestapiErrorResponseV2? Error400 { get; set; } = null;
+
+            public RestapiErrorResponseV2? Error404 { get; set; } = null;
+
+            public RestapiErrorResponseV2? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Sessionbrowser::Session::UpdateSession";
+        }
+
+        #endregion
+
         public UpdateSession(
-            string namespace_,
-            string sessionID,
-            Model.ModelsUpdateSessionRequest body
+            string namespace_,            
+            string sessionID,            
+            Model.ModelsUpdateSessionRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["sessionID"] = sessionID;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,25 +172,41 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsSessionResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public UpdateSession.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new UpdateSession.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsSessionResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsSessionResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsSessionResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV2>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV2>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV2>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

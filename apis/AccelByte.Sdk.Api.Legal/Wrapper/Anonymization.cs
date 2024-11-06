@@ -47,18 +47,18 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
         #endregion
 
-        public void AnonymizeUserAgreement(AnonymizeUserAgreement input)
+        public AnonymizeUserAgreement.Response AnonymizeUserAgreement(AnonymizeUserAgreement input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AnonymizeUserAgreementAsync(AnonymizeUserAgreement input)
+        public async Task<AnonymizeUserAgreement.Response> AnonymizeUserAgreementAsync(AnonymizeUserAgreement input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

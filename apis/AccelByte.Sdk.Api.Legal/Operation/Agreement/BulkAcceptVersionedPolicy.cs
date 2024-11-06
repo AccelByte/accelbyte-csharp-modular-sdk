@@ -68,7 +68,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 return op;
             }
 
-            public Model.AcceptAgreementResponse? Execute(
+            public BulkAcceptVersionedPolicy.Response Execute(
             )
             {
                 BulkAcceptVersionedPolicy op = Build(
@@ -79,11 +79,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.AcceptAgreementResponse?> ExecuteAsync(
+            public async Task<BulkAcceptVersionedPolicy.Response> ExecuteAsync(
             )
             {
                 BulkAcceptVersionedPolicy op = Build(
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -103,29 +103,41 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         private BulkAcceptVersionedPolicy(BulkAcceptVersionedPolicyBuilder builder
         )
         {
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = builder.Body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public BulkAcceptVersionedPolicy(
-            List<Model.AcceptAgreementRequest> body
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.AcceptAgreementResponse>
         {
 
+            public ErrorEntity? Error400 { get; set; } = null;
 
 
+            protected override string GetFullOperationId() => "Legal::Agreement::BulkAcceptVersionedPolicy";
+        }
 
+        #endregion
 
+        public BulkAcceptVersionedPolicy(
+            List<Model.AcceptAgreementRequest> body            
+        )
+        {
+            
+            
+
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -137,25 +149,31 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.AcceptAgreementResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public BulkAcceptVersionedPolicy.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new BulkAcceptVersionedPolicy.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.AcceptAgreementResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.AcceptAgreementResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.AcceptAgreementResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

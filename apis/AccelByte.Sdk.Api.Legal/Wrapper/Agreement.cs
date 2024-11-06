@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public IndirectBulkAcceptVersionedPolicyV2.IndirectBulkAcceptVersionedPolicyV2Builder IndirectBulkAcceptVersionedPolicyV2Op
         {
             get
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public IndirectBulkAcceptVersionedPolicy1.IndirectBulkAcceptVersionedPolicy1Builder IndirectBulkAcceptVersionedPolicy1Op
         {
             get
@@ -137,23 +137,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
         #endregion
 
-        public void ChangePreferenceConsent(ChangePreferenceConsent input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task ChangePreferenceConsentAsync(ChangePreferenceConsent input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public List<Model.RetrieveAcceptedAgreementResponse>? RetrieveAcceptedAgreements(RetrieveAcceptedAgreements input)
+        public ChangePreferenceConsent.Response ChangePreferenceConsent(ChangePreferenceConsent input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -161,7 +145,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.RetrieveAcceptedAgreementResponse>?> RetrieveAcceptedAgreementsAsync(RetrieveAcceptedAgreements input)
+        public async Task<ChangePreferenceConsent.Response> ChangePreferenceConsentAsync(ChangePreferenceConsent input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -169,7 +153,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PagedRetrieveUserAcceptedAgreementResponse? RetrieveAllUsersByPolicyVersion(RetrieveAllUsersByPolicyVersion input)
+        public RetrieveAcceptedAgreements.Response RetrieveAcceptedAgreements(RetrieveAcceptedAgreements input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -177,7 +161,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PagedRetrieveUserAcceptedAgreementResponse?> RetrieveAllUsersByPolicyVersionAsync(RetrieveAllUsersByPolicyVersion input)
+        public async Task<RetrieveAcceptedAgreements.Response> RetrieveAcceptedAgreementsAsync(RetrieveAcceptedAgreements input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -185,39 +169,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void ChangePreferenceConsent1(ChangePreferenceConsent1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task ChangePreferenceConsent1Async(ChangePreferenceConsent1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AcceptVersionedPolicy(AcceptVersionedPolicy input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AcceptVersionedPolicyAsync(AcceptVersionedPolicy input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public List<Model.RetrieveAcceptedAgreementResponse>? RetrieveAgreementsPublic(RetrieveAgreementsPublic input)
+        public RetrieveAllUsersByPolicyVersion.Response RetrieveAllUsersByPolicyVersion(RetrieveAllUsersByPolicyVersion input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -225,7 +177,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.RetrieveAcceptedAgreementResponse>?> RetrieveAgreementsPublicAsync(RetrieveAgreementsPublic input)
+        public async Task<RetrieveAllUsersByPolicyVersion.Response> RetrieveAllUsersByPolicyVersionAsync(RetrieveAllUsersByPolicyVersion input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -233,7 +185,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AcceptAgreementResponse? BulkAcceptVersionedPolicy(BulkAcceptVersionedPolicy input)
+        public ChangePreferenceConsent1.Response ChangePreferenceConsent1(ChangePreferenceConsent1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -241,7 +193,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AcceptAgreementResponse?> BulkAcceptVersionedPolicyAsync(BulkAcceptVersionedPolicy input)
+        public async Task<ChangePreferenceConsent1.Response> ChangePreferenceConsent1Async(ChangePreferenceConsent1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -249,9 +201,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.AcceptAgreementResponse? IndirectBulkAcceptVersionedPolicyV2(IndirectBulkAcceptVersionedPolicyV2 input)
+        public AcceptVersionedPolicy.Response AcceptVersionedPolicy(AcceptVersionedPolicy input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -259,7 +209,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AcceptAgreementResponse?> IndirectBulkAcceptVersionedPolicyV2Async(IndirectBulkAcceptVersionedPolicyV2 input)
+        public async Task<AcceptVersionedPolicy.Response> AcceptVersionedPolicyAsync(AcceptVersionedPolicy input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -267,10 +217,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.AcceptAgreementResponse? IndirectBulkAcceptVersionedPolicy1(IndirectBulkAcceptVersionedPolicy1 input)
+        public RetrieveAgreementsPublic.Response RetrieveAgreementsPublic(RetrieveAgreementsPublic input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -278,7 +225,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AcceptAgreementResponse?> IndirectBulkAcceptVersionedPolicy1Async(IndirectBulkAcceptVersionedPolicy1 input)
+        public async Task<RetrieveAgreementsPublic.Response> RetrieveAgreementsPublicAsync(RetrieveAgreementsPublic input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -286,6 +233,59 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        public BulkAcceptVersionedPolicy.Response BulkAcceptVersionedPolicy(BulkAcceptVersionedPolicy input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<BulkAcceptVersionedPolicy.Response> BulkAcceptVersionedPolicyAsync(BulkAcceptVersionedPolicy input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public IndirectBulkAcceptVersionedPolicyV2.Response IndirectBulkAcceptVersionedPolicyV2(IndirectBulkAcceptVersionedPolicyV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<IndirectBulkAcceptVersionedPolicyV2.Response> IndirectBulkAcceptVersionedPolicyV2Async(IndirectBulkAcceptVersionedPolicyV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public IndirectBulkAcceptVersionedPolicy1.Response IndirectBulkAcceptVersionedPolicy1(IndirectBulkAcceptVersionedPolicy1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<IndirectBulkAcceptVersionedPolicy1.Response> IndirectBulkAcceptVersionedPolicy1Async(IndirectBulkAcceptVersionedPolicy1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning restore ab_deprecated_operation
     }
 }

@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
         }
         #endregion
 
-        public Model.ApimodelsListItemTypesResp? AdminListItemTypes(AdminListItemTypes input)
+        public AdminListItemTypes.Response AdminListItemTypes(AdminListItemTypes input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsListItemTypesResp?> AdminListItemTypesAsync(AdminListItemTypes input)
+        public async Task<AdminListItemTypes.Response> AdminListItemTypesAsync(AdminListItemTypes input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsCreateItemTypeResp? AdminCreateItemType(AdminCreateItemType input)
+        public AdminCreateItemType.Response AdminCreateItemType(AdminCreateItemType input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsCreateItemTypeResp?> AdminCreateItemTypeAsync(AdminCreateItemType input)
+        public async Task<AdminCreateItemType.Response> AdminCreateItemTypeAsync(AdminCreateItemType input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -101,18 +101,18 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteItemType(AdminDeleteItemType input)
+        public AdminDeleteItemType.Response AdminDeleteItemType(AdminDeleteItemType input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteItemTypeAsync(AdminDeleteItemType input)
+        public async Task<AdminDeleteItemType.Response> AdminDeleteItemTypeAsync(AdminDeleteItemType input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

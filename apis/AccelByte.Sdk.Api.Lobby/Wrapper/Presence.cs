@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         }
         #endregion
 
-        public Model.HandlersGetUsersPresenceResponse? UsersPresenceHandlerV1(UsersPresenceHandlerV1 input)
+        public UsersPresenceHandlerV1.Response UsersPresenceHandlerV1(UsersPresenceHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.HandlersGetUsersPresenceResponse?> UsersPresenceHandlerV1Async(UsersPresenceHandlerV1 input)
+        public async Task<UsersPresenceHandlerV1.Response> UsersPresenceHandlerV1Async(UsersPresenceHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.HandlersGetUsersPresenceResponse? UsersPresenceHandlerV2(UsersPresenceHandlerV2 input)
+        public UsersPresenceHandlerV2.Response UsersPresenceHandlerV2(UsersPresenceHandlerV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.HandlersGetUsersPresenceResponse?> UsersPresenceHandlerV2Async(UsersPresenceHandlerV2 input)
+        public async Task<UsersPresenceHandlerV2.Response> UsersPresenceHandlerV2Async(UsersPresenceHandlerV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

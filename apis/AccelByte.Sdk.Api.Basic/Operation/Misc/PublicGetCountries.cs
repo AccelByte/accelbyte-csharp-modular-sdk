@@ -28,7 +28,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
     /// 
     ///   * Returns : country code list
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class PublicGetCountries : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -67,15 +67,15 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 PublicGetCountries op = new PublicGetCountries(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicGetCountriesBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public List<Model.CountryObject>? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicGetCountries.Response Execute(
                 string namespace_
             )
             {
@@ -88,11 +88,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.CountryObject>?> ExecuteAsync(
+            public async Task<PublicGetCountries.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -116,30 +116,42 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Lang is not null) QueryParams["lang"] = builder.Lang;
+            
 
-
-
-
-
+            
+            
+            
 
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.CountryObject>>
+        {
+
+            public ValidationErrorEntity? Error400 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Basic::Misc::PublicGetCountries";
+        }
+
+        #endregion
+
         public PublicGetCountries(
-            string namespace_,
-            string? lang
+            string namespace_,            
+            string? lang            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (lang is not null) QueryParams["lang"] = lang;
+            
 
-
-
-
-
+            
+            
+            
 
         }
 
@@ -147,28 +159,34 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.CountryObject>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicGetCountries.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicGetCountries.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.CountryObject>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.CountryObject>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<List<Model.CountryObject>>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

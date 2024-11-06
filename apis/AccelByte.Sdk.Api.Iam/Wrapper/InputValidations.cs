@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-        public Model.ModelInputValidationsResponse? AdminGetInputValidations(AdminGetInputValidations input)
+        public AdminGetInputValidations.Response AdminGetInputValidations(AdminGetInputValidations input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelInputValidationsResponse?> AdminGetInputValidationsAsync(AdminGetInputValidations input)
+        public async Task<AdminGetInputValidations.Response> AdminGetInputValidationsAsync(AdminGetInputValidations input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -107,39 +107,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminUpdateInputValidations(AdminUpdateInputValidations input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminUpdateInputValidationsAsync(AdminUpdateInputValidations input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminResetInputValidations(AdminResetInputValidations input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminResetInputValidationsAsync(AdminResetInputValidations input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelInputValidationsPublicResponse? PublicGetInputValidations(PublicGetInputValidations input)
+        public AdminUpdateInputValidations.Response AdminUpdateInputValidations(AdminUpdateInputValidations input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -147,7 +115,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelInputValidationsPublicResponse?> PublicGetInputValidationsAsync(PublicGetInputValidations input)
+        public async Task<AdminUpdateInputValidations.Response> AdminUpdateInputValidationsAsync(AdminUpdateInputValidations input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -155,7 +123,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelInputValidationConfigVersion? PublicGetInputValidationByField(PublicGetInputValidationByField input)
+        public AdminResetInputValidations.Response AdminResetInputValidations(AdminResetInputValidations input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -163,7 +131,39 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelInputValidationConfigVersion?> PublicGetInputValidationByFieldAsync(PublicGetInputValidationByField input)
+        public async Task<AdminResetInputValidations.Response> AdminResetInputValidationsAsync(AdminResetInputValidations input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetInputValidations.Response PublicGetInputValidations(PublicGetInputValidations input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetInputValidations.Response> PublicGetInputValidationsAsync(PublicGetInputValidations input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetInputValidationByField.Response PublicGetInputValidationByField(PublicGetInputValidationByField input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetInputValidationByField.Response> PublicGetInputValidationByFieldAsync(PublicGetInputValidationByField input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

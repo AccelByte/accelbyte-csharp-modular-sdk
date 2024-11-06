@@ -267,7 +267,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
         }
         #endregion
 
-        public List<Model.ModelsArchiveLeaderboardSignedURLResponse>? AdminGetArchivedLeaderboardRankingDataV1Handler(AdminGetArchivedLeaderboardRankingDataV1Handler input)
+        public AdminGetArchivedLeaderboardRankingDataV1Handler.Response AdminGetArchivedLeaderboardRankingDataV1Handler(AdminGetArchivedLeaderboardRankingDataV1Handler input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -275,7 +275,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsArchiveLeaderboardSignedURLResponse>?> AdminGetArchivedLeaderboardRankingDataV1HandlerAsync(AdminGetArchivedLeaderboardRankingDataV1Handler input)
+        public async Task<AdminGetArchivedLeaderboardRankingDataV1Handler.Response> AdminGetArchivedLeaderboardRankingDataV1HandlerAsync(AdminGetArchivedLeaderboardRankingDataV1Handler input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -283,23 +283,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void CreateArchivedLeaderboardRankingDataV1Handler(CreateArchivedLeaderboardRankingDataV1Handler input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task CreateArchivedLeaderboardRankingDataV1HandlerAsync(CreateArchivedLeaderboardRankingDataV1Handler input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsGetLeaderboardRankingResp? GetAllTimeLeaderboardRankingAdminV1(GetAllTimeLeaderboardRankingAdminV1 input)
+        public CreateArchivedLeaderboardRankingDataV1Handler.Response CreateArchivedLeaderboardRankingDataV1Handler(CreateArchivedLeaderboardRankingDataV1Handler input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -307,7 +291,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetLeaderboardRankingResp?> GetAllTimeLeaderboardRankingAdminV1Async(GetAllTimeLeaderboardRankingAdminV1 input)
+        public async Task<CreateArchivedLeaderboardRankingDataV1Handler.Response> CreateArchivedLeaderboardRankingDataV1HandlerAsync(CreateArchivedLeaderboardRankingDataV1Handler input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -315,7 +299,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetLeaderboardRankingResp? GetCurrentMonthLeaderboardRankingAdminV1(GetCurrentMonthLeaderboardRankingAdminV1 input)
+        public GetAllTimeLeaderboardRankingAdminV1.Response GetAllTimeLeaderboardRankingAdminV1(GetAllTimeLeaderboardRankingAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -323,7 +307,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetLeaderboardRankingResp?> GetCurrentMonthLeaderboardRankingAdminV1Async(GetCurrentMonthLeaderboardRankingAdminV1 input)
+        public async Task<GetAllTimeLeaderboardRankingAdminV1.Response> GetAllTimeLeaderboardRankingAdminV1Async(GetAllTimeLeaderboardRankingAdminV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -331,23 +315,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteUserRankingByLeaderboardCodeAdminV1(DeleteUserRankingByLeaderboardCodeAdminV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteUserRankingByLeaderboardCodeAdminV1Async(DeleteUserRankingByLeaderboardCodeAdminV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsGetLeaderboardRankingResp? GetCurrentSeasonLeaderboardRankingAdminV1(GetCurrentSeasonLeaderboardRankingAdminV1 input)
+        public GetCurrentMonthLeaderboardRankingAdminV1.Response GetCurrentMonthLeaderboardRankingAdminV1(GetCurrentMonthLeaderboardRankingAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -355,7 +323,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetLeaderboardRankingResp?> GetCurrentSeasonLeaderboardRankingAdminV1Async(GetCurrentSeasonLeaderboardRankingAdminV1 input)
+        public async Task<GetCurrentMonthLeaderboardRankingAdminV1.Response> GetCurrentMonthLeaderboardRankingAdminV1Async(GetCurrentMonthLeaderboardRankingAdminV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -363,7 +331,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetLeaderboardRankingResp? GetTodayLeaderboardRankingAdminV1(GetTodayLeaderboardRankingAdminV1 input)
+        public DeleteUserRankingByLeaderboardCodeAdminV1.Response DeleteUserRankingByLeaderboardCodeAdminV1(DeleteUserRankingByLeaderboardCodeAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -371,7 +339,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetLeaderboardRankingResp?> GetTodayLeaderboardRankingAdminV1Async(GetTodayLeaderboardRankingAdminV1 input)
+        public async Task<DeleteUserRankingByLeaderboardCodeAdminV1.Response> DeleteUserRankingByLeaderboardCodeAdminV1Async(DeleteUserRankingByLeaderboardCodeAdminV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -379,7 +347,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsUserRankingResponse? GetUserRankingAdminV1(GetUserRankingAdminV1 input)
+        public GetCurrentSeasonLeaderboardRankingAdminV1.Response GetCurrentSeasonLeaderboardRankingAdminV1(GetCurrentSeasonLeaderboardRankingAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -387,7 +355,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUserRankingResponse?> GetUserRankingAdminV1Async(GetUserRankingAdminV1 input)
+        public async Task<GetCurrentSeasonLeaderboardRankingAdminV1.Response> GetCurrentSeasonLeaderboardRankingAdminV1Async(GetCurrentSeasonLeaderboardRankingAdminV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -395,7 +363,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsUpdateUserPointAdminV1Response? UpdateUserPointAdminV1(UpdateUserPointAdminV1 input)
+        public GetTodayLeaderboardRankingAdminV1.Response GetTodayLeaderboardRankingAdminV1(GetTodayLeaderboardRankingAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -403,7 +371,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUpdateUserPointAdminV1Response?> UpdateUserPointAdminV1Async(UpdateUserPointAdminV1 input)
+        public async Task<GetTodayLeaderboardRankingAdminV1.Response> GetTodayLeaderboardRankingAdminV1Async(GetTodayLeaderboardRankingAdminV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -411,23 +379,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteUserRankingAdminV1(DeleteUserRankingAdminV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteUserRankingAdminV1Async(DeleteUserRankingAdminV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsGetLeaderboardRankingResp? GetCurrentWeekLeaderboardRankingAdminV1(GetCurrentWeekLeaderboardRankingAdminV1 input)
+        public GetUserRankingAdminV1.Response GetUserRankingAdminV1(GetUserRankingAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -435,7 +387,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetLeaderboardRankingResp?> GetCurrentWeekLeaderboardRankingAdminV1Async(GetCurrentWeekLeaderboardRankingAdminV1 input)
+        public async Task<GetUserRankingAdminV1.Response> GetUserRankingAdminV1Async(GetUserRankingAdminV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -443,23 +395,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteUserRankingsAdminV1(DeleteUserRankingsAdminV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteUserRankingsAdminV1Async(DeleteUserRankingsAdminV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsGetLeaderboardRankingResp? GetAllTimeLeaderboardRankingPublicV1(GetAllTimeLeaderboardRankingPublicV1 input)
+        public UpdateUserPointAdminV1.Response UpdateUserPointAdminV1(UpdateUserPointAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -467,7 +403,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetLeaderboardRankingResp?> GetAllTimeLeaderboardRankingPublicV1Async(GetAllTimeLeaderboardRankingPublicV1 input)
+        public async Task<UpdateUserPointAdminV1.Response> UpdateUserPointAdminV1Async(UpdateUserPointAdminV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -475,7 +411,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelsArchiveLeaderboardSignedURLResponse>? GetArchivedLeaderboardRankingDataV1Handler(GetArchivedLeaderboardRankingDataV1Handler input)
+        public DeleteUserRankingAdminV1.Response DeleteUserRankingAdminV1(DeleteUserRankingAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -483,7 +419,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsArchiveLeaderboardSignedURLResponse>?> GetArchivedLeaderboardRankingDataV1HandlerAsync(GetArchivedLeaderboardRankingDataV1Handler input)
+        public async Task<DeleteUserRankingAdminV1.Response> DeleteUserRankingAdminV1Async(DeleteUserRankingAdminV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -491,7 +427,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetLeaderboardRankingResp? GetCurrentMonthLeaderboardRankingPublicV1(GetCurrentMonthLeaderboardRankingPublicV1 input)
+        public GetCurrentWeekLeaderboardRankingAdminV1.Response GetCurrentWeekLeaderboardRankingAdminV1(GetCurrentWeekLeaderboardRankingAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -499,7 +435,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetLeaderboardRankingResp?> GetCurrentMonthLeaderboardRankingPublicV1Async(GetCurrentMonthLeaderboardRankingPublicV1 input)
+        public async Task<GetCurrentWeekLeaderboardRankingAdminV1.Response> GetCurrentWeekLeaderboardRankingAdminV1Async(GetCurrentWeekLeaderboardRankingAdminV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -507,7 +443,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetLeaderboardRankingResp? GetCurrentSeasonLeaderboardRankingPublicV1(GetCurrentSeasonLeaderboardRankingPublicV1 input)
+        public DeleteUserRankingsAdminV1.Response DeleteUserRankingsAdminV1(DeleteUserRankingsAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -515,7 +451,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetLeaderboardRankingResp?> GetCurrentSeasonLeaderboardRankingPublicV1Async(GetCurrentSeasonLeaderboardRankingPublicV1 input)
+        public async Task<DeleteUserRankingsAdminV1.Response> DeleteUserRankingsAdminV1Async(DeleteUserRankingsAdminV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -523,7 +459,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetLeaderboardRankingResp? GetTodayLeaderboardRankingPublicV1(GetTodayLeaderboardRankingPublicV1 input)
+        public GetAllTimeLeaderboardRankingPublicV1.Response GetAllTimeLeaderboardRankingPublicV1(GetAllTimeLeaderboardRankingPublicV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -531,7 +467,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetLeaderboardRankingResp?> GetTodayLeaderboardRankingPublicV1Async(GetTodayLeaderboardRankingPublicV1 input)
+        public async Task<GetAllTimeLeaderboardRankingPublicV1.Response> GetAllTimeLeaderboardRankingPublicV1Async(GetAllTimeLeaderboardRankingPublicV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -539,7 +475,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsUserRankingResponse? GetUserRankingPublicV1(GetUserRankingPublicV1 input)
+        public GetArchivedLeaderboardRankingDataV1Handler.Response GetArchivedLeaderboardRankingDataV1Handler(GetArchivedLeaderboardRankingDataV1Handler input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -547,7 +483,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUserRankingResponse?> GetUserRankingPublicV1Async(GetUserRankingPublicV1 input)
+        public async Task<GetArchivedLeaderboardRankingDataV1Handler.Response> GetArchivedLeaderboardRankingDataV1HandlerAsync(GetArchivedLeaderboardRankingDataV1Handler input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -555,23 +491,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteUserRankingPublicV1(DeleteUserRankingPublicV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteUserRankingPublicV1Async(DeleteUserRankingPublicV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsGetLeaderboardRankingResp? GetCurrentWeekLeaderboardRankingPublicV1(GetCurrentWeekLeaderboardRankingPublicV1 input)
+        public GetCurrentMonthLeaderboardRankingPublicV1.Response GetCurrentMonthLeaderboardRankingPublicV1(GetCurrentMonthLeaderboardRankingPublicV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -579,7 +499,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetLeaderboardRankingResp?> GetCurrentWeekLeaderboardRankingPublicV1Async(GetCurrentWeekLeaderboardRankingPublicV1 input)
+        public async Task<GetCurrentMonthLeaderboardRankingPublicV1.Response> GetCurrentMonthLeaderboardRankingPublicV1Async(GetCurrentMonthLeaderboardRankingPublicV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -587,7 +507,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.V2GetPublicLeaderboardRankingResponse? GetAllTimeLeaderboardRankingPublicV2(GetAllTimeLeaderboardRankingPublicV2 input)
+        public GetCurrentSeasonLeaderboardRankingPublicV1.Response GetCurrentSeasonLeaderboardRankingPublicV1(GetCurrentSeasonLeaderboardRankingPublicV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -595,7 +515,87 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.V2GetPublicLeaderboardRankingResponse?> GetAllTimeLeaderboardRankingPublicV2Async(GetAllTimeLeaderboardRankingPublicV2 input)
+        public async Task<GetCurrentSeasonLeaderboardRankingPublicV1.Response> GetCurrentSeasonLeaderboardRankingPublicV1Async(GetCurrentSeasonLeaderboardRankingPublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetTodayLeaderboardRankingPublicV1.Response GetTodayLeaderboardRankingPublicV1(GetTodayLeaderboardRankingPublicV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetTodayLeaderboardRankingPublicV1.Response> GetTodayLeaderboardRankingPublicV1Async(GetTodayLeaderboardRankingPublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetUserRankingPublicV1.Response GetUserRankingPublicV1(GetUserRankingPublicV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetUserRankingPublicV1.Response> GetUserRankingPublicV1Async(GetUserRankingPublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeleteUserRankingPublicV1.Response DeleteUserRankingPublicV1(DeleteUserRankingPublicV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteUserRankingPublicV1.Response> DeleteUserRankingPublicV1Async(DeleteUserRankingPublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetCurrentWeekLeaderboardRankingPublicV1.Response GetCurrentWeekLeaderboardRankingPublicV1(GetCurrentWeekLeaderboardRankingPublicV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetCurrentWeekLeaderboardRankingPublicV1.Response> GetCurrentWeekLeaderboardRankingPublicV1Async(GetCurrentWeekLeaderboardRankingPublicV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetAllTimeLeaderboardRankingPublicV2.Response GetAllTimeLeaderboardRankingPublicV2(GetAllTimeLeaderboardRankingPublicV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetAllTimeLeaderboardRankingPublicV2.Response> GetAllTimeLeaderboardRankingPublicV2Async(GetAllTimeLeaderboardRankingPublicV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -135,146 +135,146 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public void AnonymizeCampaign(AnonymizeCampaign input)
+        public AnonymizeCampaign.Response AnonymizeCampaign(AnonymizeCampaign input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AnonymizeCampaignAsync(AnonymizeCampaign input)
+        public async Task<AnonymizeCampaign.Response> AnonymizeCampaignAsync(AnonymizeCampaign input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AnonymizeEntitlement(AnonymizeEntitlement input)
+        public AnonymizeEntitlement.Response AnonymizeEntitlement(AnonymizeEntitlement input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AnonymizeEntitlementAsync(AnonymizeEntitlement input)
+        public async Task<AnonymizeEntitlement.Response> AnonymizeEntitlementAsync(AnonymizeEntitlement input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AnonymizeFulfillment(AnonymizeFulfillment input)
+        public AnonymizeFulfillment.Response AnonymizeFulfillment(AnonymizeFulfillment input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AnonymizeFulfillmentAsync(AnonymizeFulfillment input)
+        public async Task<AnonymizeFulfillment.Response> AnonymizeFulfillmentAsync(AnonymizeFulfillment input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AnonymizeIntegration(AnonymizeIntegration input)
+        public AnonymizeIntegration.Response AnonymizeIntegration(AnonymizeIntegration input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AnonymizeIntegrationAsync(AnonymizeIntegration input)
+        public async Task<AnonymizeIntegration.Response> AnonymizeIntegrationAsync(AnonymizeIntegration input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AnonymizeOrder(AnonymizeOrder input)
+        public AnonymizeOrder.Response AnonymizeOrder(AnonymizeOrder input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AnonymizeOrderAsync(AnonymizeOrder input)
+        public async Task<AnonymizeOrder.Response> AnonymizeOrderAsync(AnonymizeOrder input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AnonymizePayment(AnonymizePayment input)
+        public AnonymizePayment.Response AnonymizePayment(AnonymizePayment input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AnonymizePaymentAsync(AnonymizePayment input)
+        public async Task<AnonymizePayment.Response> AnonymizePaymentAsync(AnonymizePayment input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AnonymizeRevocation(AnonymizeRevocation input)
+        public AnonymizeRevocation.Response AnonymizeRevocation(AnonymizeRevocation input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AnonymizeRevocationAsync(AnonymizeRevocation input)
+        public async Task<AnonymizeRevocation.Response> AnonymizeRevocationAsync(AnonymizeRevocation input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AnonymizeSubscription(AnonymizeSubscription input)
+        public AnonymizeSubscription.Response AnonymizeSubscription(AnonymizeSubscription input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AnonymizeSubscriptionAsync(AnonymizeSubscription input)
+        public async Task<AnonymizeSubscription.Response> AnonymizeSubscriptionAsync(AnonymizeSubscription input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AnonymizeWallet(AnonymizeWallet input)
+        public AnonymizeWallet.Response AnonymizeWallet(AnonymizeWallet input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AnonymizeWalletAsync(AnonymizeWallet input)
+        public async Task<AnonymizeWallet.Response> AnonymizeWalletAsync(AnonymizeWallet input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

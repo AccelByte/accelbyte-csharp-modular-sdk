@@ -83,15 +83,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 ListKeys op = new ListKeys(this,
-                    keyGroupId,
-                    namespace_
+                    keyGroupId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<ListKeysBuilder>(this);
                 return op;
             }
 
-            public Model.KeyPagingSliceResult? Execute(
+            public ListKeys.Response Execute(
                 string keyGroupId,
                 string namespace_
             )
@@ -106,11 +106,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.KeyPagingSliceResult?> ExecuteAsync(
+            public async Task<ListKeys.Response> ExecuteAsync(
                 string keyGroupId,
                 string namespace_
             )
@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -138,39 +138,49 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["keyGroupId"] = keyGroupId;
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.KeyPagingSliceResult>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::KeyGroup::ListKeys";
+        }
+
+        #endregion
+
         public ListKeys(
-            string keyGroupId,
-            string namespace_,
-            int? limit,
-            int? offset,
-            ListKeysStatus? status
+            string keyGroupId,            
+            string namespace_,            
+            int? limit,            
+            int? offset,            
+            ListKeysStatus? status            
         )
         {
             PathParams["keyGroupId"] = keyGroupId;
             PathParams["namespace"] = namespace_;
-
+            
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (status is not null) QueryParams["status"] = status.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -179,28 +189,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.KeyPagingSliceResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public ListKeys.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new ListKeys.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.KeyPagingSliceResult>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.KeyPagingSliceResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.KeyPagingSliceResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

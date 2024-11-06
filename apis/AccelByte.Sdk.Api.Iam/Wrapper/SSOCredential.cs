@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-        public List<Model.ModelSSOPlatformCredentialResponse>? RetrieveAllSSOLoginPlatformCredentialV3(RetrieveAllSSOLoginPlatformCredentialV3 input)
+        public RetrieveAllSSOLoginPlatformCredentialV3.Response RetrieveAllSSOLoginPlatformCredentialV3(RetrieveAllSSOLoginPlatformCredentialV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelSSOPlatformCredentialResponse>?> RetrieveAllSSOLoginPlatformCredentialV3Async(RetrieveAllSSOLoginPlatformCredentialV3 input)
+        public async Task<RetrieveAllSSOLoginPlatformCredentialV3.Response> RetrieveAllSSOLoginPlatformCredentialV3Async(RetrieveAllSSOLoginPlatformCredentialV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelSSOPlatformCredentialResponse? RetrieveSSOLoginPlatformCredential(RetrieveSSOLoginPlatformCredential input)
+        public RetrieveSSOLoginPlatformCredential.Response RetrieveSSOLoginPlatformCredential(RetrieveSSOLoginPlatformCredential input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelSSOPlatformCredentialResponse?> RetrieveSSOLoginPlatformCredentialAsync(RetrieveSSOLoginPlatformCredential input)
+        public async Task<RetrieveSSOLoginPlatformCredential.Response> RetrieveSSOLoginPlatformCredentialAsync(RetrieveSSOLoginPlatformCredential input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelSSOPlatformCredentialResponse? AddSSOLoginPlatformCredential(AddSSOLoginPlatformCredential input)
+        public AddSSOLoginPlatformCredential.Response AddSSOLoginPlatformCredential(AddSSOLoginPlatformCredential input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelSSOPlatformCredentialResponse?> AddSSOLoginPlatformCredentialAsync(AddSSOLoginPlatformCredential input)
+        public async Task<AddSSOLoginPlatformCredential.Response> AddSSOLoginPlatformCredentialAsync(AddSSOLoginPlatformCredential input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -139,23 +139,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteSSOLoginPlatformCredentialV3(DeleteSSOLoginPlatformCredentialV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteSSOLoginPlatformCredentialV3Async(DeleteSSOLoginPlatformCredentialV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelSSOPlatformCredentialResponse? UpdateSSOPlatformCredential(UpdateSSOPlatformCredential input)
+        public DeleteSSOLoginPlatformCredentialV3.Response DeleteSSOLoginPlatformCredentialV3(DeleteSSOLoginPlatformCredentialV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -163,7 +147,23 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelSSOPlatformCredentialResponse?> UpdateSSOPlatformCredentialAsync(UpdateSSOPlatformCredential input)
+        public async Task<DeleteSSOLoginPlatformCredentialV3.Response> DeleteSSOLoginPlatformCredentialV3Async(DeleteSSOLoginPlatformCredentialV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public UpdateSSOPlatformCredential.Response UpdateSSOPlatformCredential(UpdateSSOPlatformCredential input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpdateSSOPlatformCredential.Response> UpdateSSOPlatformCredentialAsync(UpdateSSOPlatformCredential input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

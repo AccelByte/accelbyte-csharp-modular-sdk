@@ -77,14 +77,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 DownloadCategories op = new DownloadCategories(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<DownloadCategoriesBuilder>(this);
                 return op;
             }
 
-            public List<Model.HierarchicalCategoryInfo>? Execute(
+            public DownloadCategories.Response Execute(
                 string namespace_
             )
             {
@@ -97,11 +97,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.HierarchicalCategoryInfo>?> ExecuteAsync(
+            public async Task<DownloadCategories.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -125,33 +125,45 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Language is not null) QueryParams["language"] = builder.Language;
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
+            
 
-
-
-
-
+            
+            
+            
 
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.HierarchicalCategoryInfo>>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Category::DownloadCategories";
+        }
+
+        #endregion
+
         public DownloadCategories(
-            string namespace_,
-            string? language,
-            string? storeId
+            string namespace_,            
+            string? language,            
+            string? storeId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (language is not null) QueryParams["language"] = language;
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
-
-
+            
+            
+            
 
         }
 
@@ -159,28 +171,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.HierarchicalCategoryInfo>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public DownloadCategories.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new DownloadCategories.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.HierarchicalCategoryInfo>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.HierarchicalCategoryInfo>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<List<Model.HierarchicalCategoryInfo>>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

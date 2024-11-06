@@ -36,7 +36,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ### Endpoint migration guide
     /// - **Substitute endpoint: _/iam/v3/oauth/platforms/{platformId}/token [POST]_**
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class PlatformTokenRequestHandler : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -92,16 +92,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PlatformTokenRequestHandler op = new PlatformTokenRequestHandler(this,
-                    namespace_,
-                    platformId
+                    namespace_,                    
+                    platformId                    
                 );
 
                 op.SetBaseFields<PlatformTokenRequestHandlerBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public Model.OauthmodelTokenResponse? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PlatformTokenRequestHandler.Response Execute(
                 string namespace_,
                 string platformId
             )
@@ -116,11 +116,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OauthmodelTokenResponse?> ExecuteAsync(
+            public async Task<PlatformTokenRequestHandler.Response> ExecuteAsync(
                 string namespace_,
                 string platformId
             )
@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -148,39 +148,53 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
-
-
+            
+            
             if (builder.DeviceId is not null) FormParams["device_id"] = builder.DeviceId;
             if (builder.MacAddress is not null) FormParams["macAddress"] = builder.MacAddress;
             if (builder.PlatformToken is not null) FormParams["platform_token"] = builder.PlatformToken;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.OauthmodelTokenResponse>
+        {
+
+            public OauthmodelErrorResponse? Error400 { get; set; } = null;
+
+            public OauthmodelErrorResponse? Error401 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::OAuth::PlatformTokenRequestHandler";
+        }
+
+        #endregion
+
         public PlatformTokenRequestHandler(
-            string namespace_,
-            string platformId,
-            string? deviceId,
-            string? macAddress,
-            string? platformToken
+            string namespace_,            
+            string platformId,            
+            string? deviceId,            
+            string? macAddress,            
+            string? platformToken            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
-
-
+            
+            
             if (deviceId is not null) FormParams["device_id"] = deviceId;
             if (macAddress is not null) FormParams["macAddress"] = macAddress;
             if (platformToken is not null) FormParams["platform_token"] = platformToken;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -192,25 +206,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OauthmodelTokenResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PlatformTokenRequestHandler.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PlatformTokenRequestHandler.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

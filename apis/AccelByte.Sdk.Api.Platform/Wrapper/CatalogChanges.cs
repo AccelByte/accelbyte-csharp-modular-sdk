@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.CatalogChangePagingResult? QueryChanges(QueryChanges input)
+        public QueryChanges.Response QueryChanges(QueryChanges input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -143,7 +143,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CatalogChangePagingResult?> QueryChangesAsync(QueryChanges input)
+        public async Task<QueryChanges.Response> QueryChangesAsync(QueryChanges input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -151,7 +151,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StoreInfo? PublishAll(PublishAll input)
+        public PublishAll.Response PublishAll(PublishAll input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -159,7 +159,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StoreInfo?> PublishAllAsync(PublishAll input)
+        public async Task<PublishAll.Response> PublishAllAsync(PublishAll input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -167,7 +167,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StoreInfo? PublishSelected(PublishSelected input)
+        public PublishSelected.Response PublishSelected(PublishSelected input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -175,7 +175,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StoreInfo?> PublishSelectedAsync(PublishSelected input)
+        public async Task<PublishSelected.Response> PublishSelectedAsync(PublishSelected input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -183,39 +183,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void SelectAllRecords(SelectAllRecords input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SelectAllRecordsAsync(SelectAllRecords input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void SelectAllRecordsByCriteria(SelectAllRecordsByCriteria input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SelectAllRecordsByCriteriaAsync(SelectAllRecordsByCriteria input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.CatalogChangeStatistics? GetStatistic(GetStatistic input)
+        public SelectAllRecords.Response SelectAllRecords(SelectAllRecords input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -223,7 +191,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CatalogChangeStatistics?> GetStatisticAsync(GetStatistic input)
+        public async Task<SelectAllRecords.Response> SelectAllRecordsAsync(SelectAllRecords input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -231,50 +199,82 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void UnselectAllRecords(UnselectAllRecords input)
+        public SelectAllRecordsByCriteria.Response SelectAllRecordsByCriteria(SelectAllRecordsByCriteria input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task UnselectAllRecordsAsync(UnselectAllRecords input)
+        public async Task<SelectAllRecordsByCriteria.Response> SelectAllRecordsByCriteriaAsync(SelectAllRecordsByCriteria input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void SelectRecord(SelectRecord input)
+        public GetStatistic.Response GetStatistic(GetStatistic input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task SelectRecordAsync(SelectRecord input)
+        public async Task<GetStatistic.Response> GetStatisticAsync(GetStatistic input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void UnselectRecord(UnselectRecord input)
+        public UnselectAllRecords.Response UnselectAllRecords(UnselectAllRecords input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task UnselectRecordAsync(UnselectRecord input)
+        public async Task<UnselectAllRecords.Response> UnselectAllRecordsAsync(UnselectAllRecords input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public SelectRecord.Response SelectRecord(SelectRecord input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<SelectRecord.Response> SelectRecordAsync(SelectRecord input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public UnselectRecord.Response UnselectRecord(UnselectRecord input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UnselectRecord.Response> UnselectRecordAsync(UnselectRecord input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

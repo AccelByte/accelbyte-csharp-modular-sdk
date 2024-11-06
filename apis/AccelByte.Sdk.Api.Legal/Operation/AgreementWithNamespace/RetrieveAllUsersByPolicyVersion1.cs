@@ -88,15 +88,15 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 RetrieveAllUsersByPolicyVersion1 op = new RetrieveAllUsersByPolicyVersion1(this,
-                    namespace_,
-                    policyVersionId
+                    namespace_,                    
+                    policyVersionId                    
                 );
 
                 op.SetBaseFields<RetrieveAllUsersByPolicyVersion1Builder>(this);
                 return op;
             }
 
-            public Model.PagedRetrieveUserAcceptedAgreementResponse? Execute(
+            public RetrieveAllUsersByPolicyVersion1.Response Execute(
                 string namespace_,
                 string policyVersionId
             )
@@ -111,11 +111,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.PagedRetrieveUserAcceptedAgreementResponse?> ExecuteAsync(
+            public async Task<RetrieveAllUsersByPolicyVersion1.Response> ExecuteAsync(
                 string namespace_,
                 string policyVersionId
             )
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -142,43 +142,55 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.ConvertGameUserId != null) QueryParams["convertGameUserId"] = Convert.ToString(builder.ConvertGameUserId)!;
             if (builder.Keyword is not null) QueryParams["keyword"] = builder.Keyword;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (policyVersionId is not null) QueryParams["policyVersionId"] = policyVersionId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.PagedRetrieveUserAcceptedAgreementResponse>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Legal::AgreementWithNamespace::RetrieveAllUsersByPolicyVersion1";
+        }
+
+        #endregion
+
         public RetrieveAllUsersByPolicyVersion1(
-            string namespace_,
-            bool? convertGameUserId,
-            string? keyword,
-            int? limit,
-            int? offset,
-            string policyVersionId
+            string namespace_,            
+            bool? convertGameUserId,            
+            string? keyword,            
+            int? limit,            
+            int? offset,            
+            string policyVersionId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (convertGameUserId != null) QueryParams["convertGameUserId"] = Convert.ToString(convertGameUserId)!;
             if (keyword is not null) QueryParams["keyword"] = keyword;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (policyVersionId is not null) QueryParams["policyVersionId"] = policyVersionId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -187,28 +199,34 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.PagedRetrieveUserAcceptedAgreementResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public RetrieveAllUsersByPolicyVersion1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new RetrieveAllUsersByPolicyVersion1.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.PagedRetrieveUserAcceptedAgreementResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.PagedRetrieveUserAcceptedAgreementResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.PagedRetrieveUserAcceptedAgreementResponse>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

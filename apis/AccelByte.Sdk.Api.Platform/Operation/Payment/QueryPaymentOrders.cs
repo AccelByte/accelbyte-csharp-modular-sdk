@@ -98,14 +98,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryPaymentOrders op = new QueryPaymentOrders(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<QueryPaymentOrdersBuilder>(this);
                 return op;
             }
 
-            public Model.PaymentOrderPagingSlicedResult? Execute(
+            public QueryPaymentOrders.Response Execute(
                 string namespace_
             )
             {
@@ -118,11 +118,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.PaymentOrderPagingSlicedResult?> ExecuteAsync(
+            public async Task<QueryPaymentOrders.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -146,43 +146,53 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Channel is not null) QueryParams["channel"] = builder.Channel.Value;
             if (builder.ExtTxId is not null) QueryParams["extTxId"] = builder.ExtTxId;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.PaymentOrderPagingSlicedResult>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Payment::QueryPaymentOrders";
+        }
+
+        #endregion
+
         public QueryPaymentOrders(
-            string namespace_,
-            QueryPaymentOrdersChannel? channel,
-            string? extTxId,
-            int? limit,
-            int? offset,
-            QueryPaymentOrdersStatus? status
+            string namespace_,            
+            QueryPaymentOrdersChannel? channel,            
+            string? extTxId,            
+            int? limit,            
+            int? offset,            
+            QueryPaymentOrdersStatus? status            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (channel is not null) QueryParams["channel"] = channel.Value;
             if (extTxId is not null) QueryParams["extTxId"] = extTxId;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (status is not null) QueryParams["status"] = status.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -191,28 +201,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.PaymentOrderPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public QueryPaymentOrders.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new QueryPaymentOrders.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.PaymentOrderPagingSlicedResult>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.PaymentOrderPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.PaymentOrderPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -101,14 +101,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             )
             {
                 ListImagesClient op = new ListImagesClient(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<ListImagesClientBuilder>(this);
                 return op;
             }
 
-            public Model.ModelsListImageResponse? Execute(
+            public ListImagesClient.Response Execute(
                 string namespace_
             )
             {
@@ -121,11 +121,11 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsListImageResponse?> ExecuteAsync(
+            public async Task<ListImagesClient.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -138,7 +138,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -149,43 +149,59 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Count != null) QueryParams["count"] = Convert.ToString(builder.Count)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Q is not null) QueryParams["q"] = builder.Q;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy.Value;
             if (builder.SortDirection is not null) QueryParams["sortDirection"] = builder.SortDirection.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsListImageResponse>
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Dsmc::ImageConfig::ListImagesClient";
+        }
+
+        #endregion
+
         public ListImagesClient(
-            string namespace_,
-            long? count,
-            long? offset,
-            string? q,
-            ListImagesClientSortBy? sortBy,
-            ListImagesClientSortDirection? sortDirection
+            string namespace_,            
+            long? count,            
+            long? offset,            
+            string? q,            
+            ListImagesClientSortBy? sortBy,            
+            ListImagesClientSortDirection? sortDirection            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (count != null) QueryParams["count"] = Convert.ToString(count)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (q is not null) QueryParams["q"] = q;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy.Value;
             if (sortDirection is not null) QueryParams["sortDirection"] = sortDirection.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -197,25 +213,41 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsListImageResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public ListImagesClient.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new ListImagesClient.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsListImageResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsListImageResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsListImageResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedContentDownloadResponse? GetFollowedContent(GetFollowedContent input)
+        public GetFollowedContent.Response GetFollowedContent(GetFollowedContent input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedContentDownloadResponse?> GetFollowedContentAsync(GetFollowedContent input)
+        public async Task<GetFollowedContent.Response> GetFollowedContentAsync(GetFollowedContent input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPaginatedCreatorOverviewResponse? GetFollowedUsers(GetFollowedUsers input)
+        public GetFollowedUsers.Response GetFollowedUsers(GetFollowedUsers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedCreatorOverviewResponse?> GetFollowedUsersAsync(GetFollowedUsers input)
+        public async Task<GetFollowedUsers.Response> GetFollowedUsersAsync(GetFollowedUsers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsUserFollowResponse? UpdateUserFollowStatus(UpdateUserFollowStatus input)
+        public UpdateUserFollowStatus.Response UpdateUserFollowStatus(UpdateUserFollowStatus input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUserFollowResponse?> UpdateUserFollowStatusAsync(UpdateUserFollowStatus input)
+        public async Task<UpdateUserFollowStatus.Response> UpdateUserFollowStatusAsync(UpdateUserFollowStatus input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPaginatedCreatorOverviewResponse? GetPublicFollowers(GetPublicFollowers input)
+        public GetPublicFollowers.Response GetPublicFollowers(GetPublicFollowers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -147,7 +147,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedCreatorOverviewResponse?> GetPublicFollowersAsync(GetPublicFollowers input)
+        public async Task<GetPublicFollowers.Response> GetPublicFollowersAsync(GetPublicFollowers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -155,7 +155,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPaginatedCreatorOverviewResponse? GetPublicFollowing(GetPublicFollowing input)
+        public GetPublicFollowing.Response GetPublicFollowing(GetPublicFollowing input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -163,7 +163,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedCreatorOverviewResponse?> GetPublicFollowingAsync(GetPublicFollowing input)
+        public async Task<GetPublicFollowing.Response> GetPublicFollowingAsync(GetPublicFollowing input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

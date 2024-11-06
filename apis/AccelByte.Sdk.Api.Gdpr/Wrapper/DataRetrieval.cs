@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         }
         #endregion
 
-        public Model.ModelsListPersonalDataResponse? AdminGetListPersonalDataRequest(AdminGetListPersonalDataRequest input)
+        public AdminGetListPersonalDataRequest.Response AdminGetListPersonalDataRequest(AdminGetListPersonalDataRequest input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -143,7 +143,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListPersonalDataResponse?> AdminGetListPersonalDataRequestAsync(AdminGetListPersonalDataRequest input)
+        public async Task<AdminGetListPersonalDataRequest.Response> AdminGetListPersonalDataRequestAsync(AdminGetListPersonalDataRequest input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -151,7 +151,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsUserPersonalDataResponse? AdminGetUserPersonalDataRequests(AdminGetUserPersonalDataRequests input)
+        public AdminGetUserPersonalDataRequests.Response AdminGetUserPersonalDataRequests(AdminGetUserPersonalDataRequests input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -159,7 +159,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUserPersonalDataResponse?> AdminGetUserPersonalDataRequestsAsync(AdminGetUserPersonalDataRequests input)
+        public async Task<AdminGetUserPersonalDataRequests.Response> AdminGetUserPersonalDataRequestsAsync(AdminGetUserPersonalDataRequests input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -167,7 +167,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsDataRetrievalResponse? AdminRequestDataRetrieval(AdminRequestDataRetrieval input)
+        public AdminRequestDataRetrieval.Response AdminRequestDataRetrieval(AdminRequestDataRetrieval input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -175,7 +175,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsDataRetrievalResponse?> AdminRequestDataRetrievalAsync(AdminRequestDataRetrieval input)
+        public async Task<AdminRequestDataRetrieval.Response> AdminRequestDataRetrievalAsync(AdminRequestDataRetrieval input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -183,23 +183,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminCancelUserPersonalDataRequest(AdminCancelUserPersonalDataRequest input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminCancelUserPersonalDataRequestAsync(AdminCancelUserPersonalDataRequest input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsUserDataURL? AdminGeneratePersonalDataURL(AdminGeneratePersonalDataURL input)
+        public AdminCancelUserPersonalDataRequest.Response AdminCancelUserPersonalDataRequest(AdminCancelUserPersonalDataRequest input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -207,7 +191,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUserDataURL?> AdminGeneratePersonalDataURLAsync(AdminGeneratePersonalDataURL input)
+        public async Task<AdminCancelUserPersonalDataRequest.Response> AdminCancelUserPersonalDataRequestAsync(AdminCancelUserPersonalDataRequest input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -215,7 +199,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsUserPersonalDataResponse? PublicGetUserPersonalDataRequests(PublicGetUserPersonalDataRequests input)
+        public AdminGeneratePersonalDataURL.Response AdminGeneratePersonalDataURL(AdminGeneratePersonalDataURL input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -223,7 +207,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUserPersonalDataResponse?> PublicGetUserPersonalDataRequestsAsync(PublicGetUserPersonalDataRequests input)
+        public async Task<AdminGeneratePersonalDataURL.Response> AdminGeneratePersonalDataURLAsync(AdminGeneratePersonalDataURL input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -231,7 +215,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsDataRetrievalResponse? PublicRequestDataRetrieval(PublicRequestDataRetrieval input)
+        public PublicGetUserPersonalDataRequests.Response PublicGetUserPersonalDataRequests(PublicGetUserPersonalDataRequests input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -239,7 +223,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsDataRetrievalResponse?> PublicRequestDataRetrievalAsync(PublicRequestDataRetrieval input)
+        public async Task<PublicGetUserPersonalDataRequests.Response> PublicGetUserPersonalDataRequestsAsync(PublicGetUserPersonalDataRequests input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -247,23 +231,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicCancelUserPersonalDataRequest(PublicCancelUserPersonalDataRequest input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicCancelUserPersonalDataRequestAsync(PublicCancelUserPersonalDataRequest input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsUserDataURL? PublicGeneratePersonalDataURL(PublicGeneratePersonalDataURL input)
+        public PublicRequestDataRetrieval.Response PublicRequestDataRetrieval(PublicRequestDataRetrieval input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -271,7 +239,39 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUserDataURL?> PublicGeneratePersonalDataURLAsync(PublicGeneratePersonalDataURL input)
+        public async Task<PublicRequestDataRetrieval.Response> PublicRequestDataRetrievalAsync(PublicRequestDataRetrieval input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicCancelUserPersonalDataRequest.Response PublicCancelUserPersonalDataRequest(PublicCancelUserPersonalDataRequest input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicCancelUserPersonalDataRequest.Response> PublicCancelUserPersonalDataRequestAsync(PublicCancelUserPersonalDataRequest input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGeneratePersonalDataURL.Response PublicGeneratePersonalDataURL(PublicGeneratePersonalDataURL input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGeneratePersonalDataURL.Response> PublicGeneratePersonalDataURLAsync(PublicGeneratePersonalDataURL input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

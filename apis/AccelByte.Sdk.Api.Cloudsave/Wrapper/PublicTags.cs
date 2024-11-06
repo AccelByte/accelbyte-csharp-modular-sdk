@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         }
         #endregion
 
-        public Model.ModelsListTagsResponse? PublicListTagsHandlerV1(PublicListTagsHandlerV1 input)
+        public PublicListTagsHandlerV1.Response PublicListTagsHandlerV1(PublicListTagsHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListTagsResponse?> PublicListTagsHandlerV1Async(PublicListTagsHandlerV1 input)
+        public async Task<PublicListTagsHandlerV1.Response> PublicListTagsHandlerV1Async(PublicListTagsHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

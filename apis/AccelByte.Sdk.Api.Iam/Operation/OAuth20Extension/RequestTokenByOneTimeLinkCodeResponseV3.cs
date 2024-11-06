@@ -78,15 +78,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 RequestTokenByOneTimeLinkCodeResponseV3 op = new RequestTokenByOneTimeLinkCodeResponseV3(this,
-                    clientId,
-                    oneTimeLinkCode
+                    clientId,                    
+                    oneTimeLinkCode                    
                 );
 
                 op.SetBaseFields<RequestTokenByOneTimeLinkCodeResponseV3Builder>(this);
                 return op;
             }
 
-            public Model.OauthmodelTokenResponseV3? Execute(
+            public RequestTokenByOneTimeLinkCodeResponseV3.Response Execute(
                 string clientId,
                 string oneTimeLinkCode
             )
@@ -101,11 +101,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OauthmodelTokenResponseV3?> ExecuteAsync(
+            public async Task<RequestTokenByOneTimeLinkCodeResponseV3.Response> ExecuteAsync(
                 string clientId,
                 string oneTimeLinkCode
             )
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -131,37 +131,47 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string oneTimeLinkCode
         )
         {
-
-
+            
+            
             if (builder.AdditionalData is not null) FormParams["additionalData"] = builder.AdditionalData;
             if (builder.IsTransient != null) FormParams["isTransient"] = Convert.ToString(builder.IsTransient)!;
             if (clientId is not null) FormParams["client_id"] = clientId;
             if (oneTimeLinkCode is not null) FormParams["oneTimeLinkCode"] = oneTimeLinkCode;
 
-
-
-
+            
+            
+            
 
         }
         #endregion
 
-        public RequestTokenByOneTimeLinkCodeResponseV3(
-            string? additionalData,
-            bool? isTransient,
-            string clientId,
-            string oneTimeLinkCode
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.OauthmodelTokenResponseV3>
         {
 
 
+            protected override string GetFullOperationId() => "Iam::OAuth20Extension::RequestTokenByOneTimeLinkCodeResponseV3";
+        }
+
+        #endregion
+
+        public RequestTokenByOneTimeLinkCodeResponseV3(
+            string? additionalData,            
+            bool? isTransient,            
+            string clientId,            
+            string oneTimeLinkCode            
+        )
+        {
+            
+            
             if (additionalData is not null) FormParams["additionalData"] = additionalData;
             if (isTransient != null) FormParams["isTransient"] = Convert.ToString(isTransient)!;
             if (clientId is not null) FormParams["client_id"] = clientId;
             if (oneTimeLinkCode is not null) FormParams["oneTimeLinkCode"] = oneTimeLinkCode;
 
-
-
-
+            
+            
+            
 
         }
 
@@ -172,25 +182,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OauthmodelTokenResponseV3? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public RequestTokenByOneTimeLinkCodeResponseV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new RequestTokenByOneTimeLinkCodeResponseV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

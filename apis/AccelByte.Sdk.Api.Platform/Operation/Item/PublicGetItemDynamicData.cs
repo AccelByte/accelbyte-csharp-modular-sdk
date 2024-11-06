@@ -59,15 +59,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicGetItemDynamicData op = new PublicGetItemDynamicData(this,
-                    itemId,
-                    namespace_
+                    itemId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicGetItemDynamicDataBuilder>(this);
                 return op;
             }
 
-            public Model.ItemDynamicDataInfo? Execute(
+            public PublicGetItemDynamicData.Response Execute(
                 string itemId,
                 string namespace_
             )
@@ -82,11 +82,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ItemDynamicDataInfo?> ExecuteAsync(
+            public async Task<PublicGetItemDynamicData.Response> ExecuteAsync(
                 string itemId,
                 string namespace_
             )
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -114,30 +114,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ItemDynamicDataInfo>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Item::PublicGetItemDynamicData";
+        }
+
+        #endregion
+
         public PublicGetItemDynamicData(
-            string itemId,
-            string namespace_
+            string itemId,            
+            string namespace_            
         )
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -146,28 +158,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ItemDynamicDataInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicGetItemDynamicData.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicGetItemDynamicData.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ItemDynamicDataInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ItemDynamicDataInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.ItemDynamicDataInfo>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -146,7 +146,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         }
         #endregion
 
-        public List<Model.GameProfileHeader>? GetUserProfiles(GetUserProfiles input)
+        public GetUserProfiles.Response GetUserProfiles(GetUserProfiles input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -154,7 +154,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.GameProfileHeader>?> GetUserProfilesAsync(GetUserProfiles input)
+        public async Task<GetUserProfiles.Response> GetUserProfilesAsync(GetUserProfiles input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -162,7 +162,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.GameProfileInfo? GetProfile(GetProfile input)
+        public GetProfile.Response GetProfile(GetProfile input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -170,7 +170,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.GameProfileInfo?> GetProfileAsync(GetProfile input)
+        public async Task<GetProfile.Response> GetProfileAsync(GetProfile input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -178,7 +178,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.UserGameProfiles>? PublicGetUserGameProfiles(PublicGetUserGameProfiles input)
+        public PublicGetUserGameProfiles.Response PublicGetUserGameProfiles(PublicGetUserGameProfiles input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -186,7 +186,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.UserGameProfiles>?> PublicGetUserGameProfilesAsync(PublicGetUserGameProfiles input)
+        public async Task<PublicGetUserGameProfiles.Response> PublicGetUserGameProfilesAsync(PublicGetUserGameProfiles input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -194,7 +194,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.GameProfileHeader>? PublicGetUserProfiles(PublicGetUserProfiles input)
+        public PublicGetUserProfiles.Response PublicGetUserProfiles(PublicGetUserProfiles input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -202,7 +202,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.GameProfileHeader>?> PublicGetUserProfilesAsync(PublicGetUserProfiles input)
+        public async Task<PublicGetUserProfiles.Response> PublicGetUserProfilesAsync(PublicGetUserProfiles input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -210,23 +210,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicCreateProfile(PublicCreateProfile input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicCreateProfileAsync(PublicCreateProfile input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.GameProfileInfo? PublicGetProfile(PublicGetProfile input)
+        public PublicCreateProfile.Response PublicCreateProfile(PublicCreateProfile input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -234,7 +218,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.GameProfileInfo?> PublicGetProfileAsync(PublicGetProfile input)
+        public async Task<PublicCreateProfile.Response> PublicCreateProfileAsync(PublicCreateProfile input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -242,7 +226,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.GameProfileInfo? PublicUpdateProfile(PublicUpdateProfile input)
+        public PublicGetProfile.Response PublicGetProfile(PublicGetProfile input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -250,7 +234,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.GameProfileInfo?> PublicUpdateProfileAsync(PublicUpdateProfile input)
+        public async Task<PublicGetProfile.Response> PublicGetProfileAsync(PublicGetProfile input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -258,23 +242,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicDeleteProfile(PublicDeleteProfile input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicDeleteProfileAsync(PublicDeleteProfile input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.Attribute? PublicGetProfileAttribute(PublicGetProfileAttribute input)
+        public PublicUpdateProfile.Response PublicUpdateProfile(PublicUpdateProfile input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -282,7 +250,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.Attribute?> PublicGetProfileAttributeAsync(PublicGetProfileAttribute input)
+        public async Task<PublicUpdateProfile.Response> PublicUpdateProfileAsync(PublicUpdateProfile input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -290,7 +258,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.GameProfileInfo? PublicUpdateAttribute(PublicUpdateAttribute input)
+        public PublicDeleteProfile.Response PublicDeleteProfile(PublicDeleteProfile input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -298,7 +266,39 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.GameProfileInfo?> PublicUpdateAttributeAsync(PublicUpdateAttribute input)
+        public async Task<PublicDeleteProfile.Response> PublicDeleteProfileAsync(PublicDeleteProfile input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetProfileAttribute.Response PublicGetProfileAttribute(PublicGetProfileAttribute input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetProfileAttribute.Response> PublicGetProfileAttributeAsync(PublicGetProfileAttribute input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicUpdateAttribute.Response PublicUpdateAttribute(PublicUpdateAttribute input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicUpdateAttribute.Response> PublicUpdateAttributeAsync(PublicUpdateAttribute input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

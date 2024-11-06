@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
         }
         #endregion
 
-        public Model.ApiDSHistoryList? FleetServerHistory(FleetServerHistory input)
+        public FleetServerHistory.Response FleetServerHistory(FleetServerHistory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiDSHistoryList?> FleetServerHistoryAsync(FleetServerHistory input)
+        public async Task<FleetServerHistory.Response> FleetServerHistoryAsync(FleetServerHistory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiFleetServerInfoResponse? FleetServerInfo(FleetServerInfo input)
+        public FleetServerInfo.Response FleetServerInfo(FleetServerInfo input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiFleetServerInfoResponse?> FleetServerInfoAsync(FleetServerInfo input)
+        public async Task<FleetServerInfo.Response> FleetServerInfoAsync(FleetServerInfo input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiFleetServerConnectionInfoResponse? FleetServerConnectionInfo(FleetServerConnectionInfo input)
+        public FleetServerConnectionInfo.Response FleetServerConnectionInfo(FleetServerConnectionInfo input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiFleetServerConnectionInfoResponse?> FleetServerConnectionInfoAsync(FleetServerConnectionInfo input)
+        public async Task<FleetServerConnectionInfo.Response> FleetServerConnectionInfoAsync(FleetServerConnectionInfo input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiFleetServerHistoryResponse? ServerHistory(ServerHistory input)
+        public ServerHistory.Response ServerHistory(ServerHistory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -136,7 +136,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiFleetServerHistoryResponse?> ServerHistoryAsync(ServerHistory input)
+        public async Task<ServerHistory.Response> ServerHistoryAsync(ServerHistory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

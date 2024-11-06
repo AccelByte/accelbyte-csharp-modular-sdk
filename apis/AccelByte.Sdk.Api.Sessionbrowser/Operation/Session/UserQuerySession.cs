@@ -128,15 +128,15 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             )
             {
                 UserQuerySession op = new UserQuerySession(this,
-                    namespace_,
-                    sessionType
+                    namespace_,                    
+                    sessionType                    
                 );
 
                 op.SetBaseFields<UserQuerySessionBuilder>(this);
                 return op;
             }
 
-            public Model.ModelsSessionQueryResponse? Execute(
+            public UserQuerySession.Response Execute(
                 string namespace_,
                 string sessionType
             )
@@ -151,11 +151,11 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsSessionQueryResponse?> ExecuteAsync(
+            public async Task<UserQuerySession.Response> ExecuteAsync(
                 string namespace_,
                 string sessionType
             )
@@ -170,7 +170,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -182,7 +182,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.GameMode is not null) QueryParams["game_mode"] = builder.GameMode;
             if (builder.GameVersion is not null) QueryParams["game_version"] = builder.GameVersion;
             if (builder.Joinable is not null) QueryParams["joinable"] = builder.Joinable;
@@ -193,32 +193,46 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             if (builder.ServerStatus is not null) QueryParams["server_status"] = builder.ServerStatus;
             if (builder.UserId is not null) QueryParams["user_id"] = builder.UserId;
             if (sessionType is not null) QueryParams["session_type"] = sessionType;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsSessionQueryResponse>
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Sessionbrowser::Session::UserQuerySession";
+        }
+
+        #endregion
+
         public UserQuerySession(
-            string namespace_,
-            string? gameMode,
-            string? gameVersion,
-            string? joinable,
-            long? limit,
-            string? matchExist,
-            string? matchId,
-            long? offset,
-            string? serverStatus,
-            string? userId,
-            string sessionType
+            string namespace_,            
+            string? gameMode,            
+            string? gameVersion,            
+            string? joinable,            
+            long? limit,            
+            string? matchExist,            
+            string? matchId,            
+            long? offset,            
+            string? serverStatus,            
+            string? userId,            
+            string sessionType            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (gameMode is not null) QueryParams["game_mode"] = gameMode;
             if (gameVersion is not null) QueryParams["game_version"] = gameVersion;
             if (joinable is not null) QueryParams["joinable"] = joinable;
@@ -229,11 +243,11 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             if (serverStatus is not null) QueryParams["server_status"] = serverStatus;
             if (userId is not null) QueryParams["user_id"] = userId;
             if (sessionType is not null) QueryParams["session_type"] = sessionType;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -245,25 +259,36 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsSessionQueryResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public UserQuerySession.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new UserQuerySession.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsSessionQueryResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsSessionQueryResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsSessionQueryResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

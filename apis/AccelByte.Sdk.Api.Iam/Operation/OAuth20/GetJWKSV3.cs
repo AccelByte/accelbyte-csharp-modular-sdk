@@ -67,7 +67,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
-            public Model.OauthcommonJWKSet? Execute(
+            public GetJWKSV3.Response Execute(
             )
             {
                 GetJWKSV3 op = Build(
@@ -78,11 +78,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OauthcommonJWKSet?> ExecuteAsync(
+            public async Task<GetJWKSV3.Response> ExecuteAsync(
             )
             {
                 GetJWKSV3 op = Build(
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -102,26 +102,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         private GetJWKSV3(GetJWKSV3Builder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public GetJWKSV3(
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.OauthcommonJWKSet>
         {
 
 
+            protected override string GetFullOperationId() => "Iam::OAuth20::GetJWKSV3";
+        }
 
+        #endregion
 
+        public GetJWKSV3(
+        )
+        {
+            
+            
 
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -133,25 +143,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OauthcommonJWKSet? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetJWKSV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetJWKSV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OauthcommonJWKSet>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.OauthcommonJWKSet>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OauthcommonJWKSet>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

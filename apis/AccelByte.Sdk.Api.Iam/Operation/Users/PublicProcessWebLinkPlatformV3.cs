@@ -79,16 +79,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicProcessWebLinkPlatformV3 op = new PublicProcessWebLinkPlatformV3(this,
-                    state,
-                    namespace_,
-                    platformId
+                    state,                    
+                    namespace_,                    
+                    platformId                    
                 );
 
                 op.SetBaseFields<PublicProcessWebLinkPlatformV3Builder>(this);
                 return op;
             }
 
-            public Model.ModelLinkRequest? Execute(
+            public PublicProcessWebLinkPlatformV3.Response Execute(
                 string state,
                 string namespace_,
                 string platformId
@@ -105,11 +105,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelLinkRequest?> ExecuteAsync(
+            public async Task<PublicProcessWebLinkPlatformV3.Response> ExecuteAsync(
                 string state,
                 string namespace_,
                 string platformId
@@ -126,12 +126,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
 
-            public Model.ModelLinkRequest<T1>? Execute<T1>(
+            public PublicProcessWebLinkPlatformV3.Response<T1> Execute<T1>(
                 string state,
                 string namespace_,
                 string platformId
@@ -148,11 +148,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelLinkRequest<T1>?> ExecuteAsync<T1>(
+            public async Task<PublicProcessWebLinkPlatformV3.Response<T1>> ExecuteAsync<T1>(
                 string state,
                 string namespace_,
                 string platformId
@@ -169,7 +169,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -183,36 +183,55 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
-
-
+            
+            
             if (builder.Code is not null) FormParams["code"] = builder.Code;
             if (state is not null) FormParams["state"] = state;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelLinkRequest>
+        {
+
+            public RestErrorResponse? Error400 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::Users::PublicProcessWebLinkPlatformV3";
+        }
+
+        public class Response<T1> : ApiResponse<Model.ModelLinkRequest<T1>>
+        {
+            public RestErrorResponse? Error400 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::Users::PublicProcessWebLinkPlatformV3";
+        }
+        #endregion
+
         public PublicProcessWebLinkPlatformV3(
-            string namespace_,
-            string platformId,
-            string? code,
-            string state
+            string namespace_,            
+            string platformId,            
+            string? code,            
+            string state            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
-
-
+            
+            
             if (code is not null) FormParams["code"] = code;
             if (state is not null) FormParams["state"] = state;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -224,44 +243,57 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelLinkRequest? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicProcessWebLinkPlatformV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicProcessWebLinkPlatformV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelLinkRequest>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelLinkRequest>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelLinkRequest>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
 
-        public Model.ModelLinkRequest<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
+        public PublicProcessWebLinkPlatformV3.Response<T1> ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicProcessWebLinkPlatformV3.Response<T1>()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
-            }
-            else if (code == (HttpStatusCode)201)
+                response.IsSuccess = true;
+            }            
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelLinkRequest<T1>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelLinkRequest<T1>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelLinkRequest<T1>>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
             }
-
-            var payloadString = payload.ReadToString();
-            throw new HttpResponseException(code, payloadString);
+            
+            return response;
         }
     }
 

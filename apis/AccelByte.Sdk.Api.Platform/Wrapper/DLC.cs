@@ -212,7 +212,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.DLCItemConfigInfo? GetDLCItemConfig(GetDLCItemConfig input)
+        public GetDLCItemConfig.Response GetDLCItemConfig(GetDLCItemConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -220,7 +220,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.DLCItemConfigInfo?> GetDLCItemConfigAsync(GetDLCItemConfig input)
+        public async Task<GetDLCItemConfig.Response> GetDLCItemConfigAsync(GetDLCItemConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -228,7 +228,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.DLCItemConfigInfo? UpdateDLCItemConfig(UpdateDLCItemConfig input)
+        public UpdateDLCItemConfig.Response UpdateDLCItemConfig(UpdateDLCItemConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -236,7 +236,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.DLCItemConfigInfo?> UpdateDLCItemConfigAsync(UpdateDLCItemConfig input)
+        public async Task<UpdateDLCItemConfig.Response> UpdateDLCItemConfigAsync(UpdateDLCItemConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -244,23 +244,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteDLCItemConfig(DeleteDLCItemConfig input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteDLCItemConfigAsync(DeleteDLCItemConfig input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.PlatformDLCConfigInfo? GetPlatformDLCConfig(GetPlatformDLCConfig input)
+        public DeleteDLCItemConfig.Response DeleteDLCItemConfig(DeleteDLCItemConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -268,7 +252,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PlatformDLCConfigInfo?> GetPlatformDLCConfigAsync(GetPlatformDLCConfig input)
+        public async Task<DeleteDLCItemConfig.Response> DeleteDLCItemConfigAsync(DeleteDLCItemConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -276,7 +260,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PlatformDLCConfigInfo? UpdatePlatformDLCConfig(UpdatePlatformDLCConfig input)
+        public GetPlatformDLCConfig.Response GetPlatformDLCConfig(GetPlatformDLCConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -284,7 +268,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PlatformDLCConfigInfo?> UpdatePlatformDLCConfigAsync(UpdatePlatformDLCConfig input)
+        public async Task<GetPlatformDLCConfig.Response> GetPlatformDLCConfigAsync(GetPlatformDLCConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -292,23 +276,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeletePlatformDLCConfig(DeletePlatformDLCConfig input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeletePlatformDLCConfigAsync(DeletePlatformDLCConfig input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.UserDLC? GetUserDLCByPlatform(GetUserDLCByPlatform input)
+        public UpdatePlatformDLCConfig.Response UpdatePlatformDLCConfig(UpdatePlatformDLCConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -316,7 +284,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserDLC?> GetUserDLCByPlatformAsync(GetUserDLCByPlatform input)
+        public async Task<UpdatePlatformDLCConfig.Response> UpdatePlatformDLCConfigAsync(UpdatePlatformDLCConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -324,7 +292,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.UserDLCRecord>? GetUserDLC(GetUserDLC input)
+        public DeletePlatformDLCConfig.Response DeletePlatformDLCConfig(DeletePlatformDLCConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -332,7 +300,39 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.UserDLCRecord>?> GetUserDLCAsync(GetUserDLC input)
+        public async Task<DeletePlatformDLCConfig.Response> DeletePlatformDLCConfigAsync(DeletePlatformDLCConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetUserDLCByPlatform.Response GetUserDLCByPlatform(GetUserDLCByPlatform input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetUserDLCByPlatform.Response> GetUserDLCByPlatformAsync(GetUserDLCByPlatform input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetUserDLC.Response GetUserDLC(GetUserDLC input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetUserDLC.Response> GetUserDLCAsync(GetUserDLC input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -341,7 +341,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
 
-        public List<Model.UserDLCRecord<T1>>? GetUserDLC<T1>(GetUserDLC input)
+        public GetUserDLC.Response<T1> GetUserDLC<T1>(GetUserDLC input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -349,7 +349,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.UserDLCRecord<T1>>?> GetUserDLCAsync<T1>(GetUserDLC input)
+        public async Task<GetUserDLC.Response<T1>> GetUserDLCAsync<T1>(GetUserDLC input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -357,7 +357,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.DLCConfigRewardShortInfo? GeDLCDurableRewardShortMap(GeDLCDurableRewardShortMap input)
+        public GeDLCDurableRewardShortMap.Response GeDLCDurableRewardShortMap(GeDLCDurableRewardShortMap input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -365,7 +365,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.DLCConfigRewardShortInfo?> GeDLCDurableRewardShortMapAsync(GeDLCDurableRewardShortMap input)
+        public async Task<GeDLCDurableRewardShortMap.Response> GeDLCDurableRewardShortMapAsync(GeDLCDurableRewardShortMap input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -373,103 +373,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void SyncEpicGameDLC(SyncEpicGameDLC input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SyncEpicGameDLCAsync(SyncEpicGameDLC input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void SyncOculusDLC(SyncOculusDLC input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SyncOculusDLCAsync(SyncOculusDLC input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void PublicSyncPsnDlcInventory(PublicSyncPsnDlcInventory input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicSyncPsnDlcInventoryAsync(PublicSyncPsnDlcInventory input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void PublicSyncPsnDlcInventoryWithMultipleServiceLabels(PublicSyncPsnDlcInventoryWithMultipleServiceLabels input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicSyncPsnDlcInventoryWithMultipleServiceLabelsAsync(PublicSyncPsnDlcInventoryWithMultipleServiceLabels input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void SyncSteamDLC(SyncSteamDLC input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SyncSteamDLCAsync(SyncSteamDLC input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void SyncXboxDLC(SyncXboxDLC input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SyncXboxDLCAsync(SyncXboxDLC input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.SimpleUserDLCRewardContentsResponse? PublicGetMyDLCContent(PublicGetMyDLCContent input)
+        public SyncEpicGameDLC.Response SyncEpicGameDLC(SyncEpicGameDLC input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -477,7 +381,103 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SimpleUserDLCRewardContentsResponse?> PublicGetMyDLCContentAsync(PublicGetMyDLCContent input)
+        public async Task<SyncEpicGameDLC.Response> SyncEpicGameDLCAsync(SyncEpicGameDLC input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public SyncOculusDLC.Response SyncOculusDLC(SyncOculusDLC input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<SyncOculusDLC.Response> SyncOculusDLCAsync(SyncOculusDLC input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicSyncPsnDlcInventory.Response PublicSyncPsnDlcInventory(PublicSyncPsnDlcInventory input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicSyncPsnDlcInventory.Response> PublicSyncPsnDlcInventoryAsync(PublicSyncPsnDlcInventory input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicSyncPsnDlcInventoryWithMultipleServiceLabels.Response PublicSyncPsnDlcInventoryWithMultipleServiceLabels(PublicSyncPsnDlcInventoryWithMultipleServiceLabels input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicSyncPsnDlcInventoryWithMultipleServiceLabels.Response> PublicSyncPsnDlcInventoryWithMultipleServiceLabelsAsync(PublicSyncPsnDlcInventoryWithMultipleServiceLabels input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public SyncSteamDLC.Response SyncSteamDLC(SyncSteamDLC input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<SyncSteamDLC.Response> SyncSteamDLCAsync(SyncSteamDLC input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public SyncXboxDLC.Response SyncXboxDLC(SyncXboxDLC input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<SyncXboxDLC.Response> SyncXboxDLCAsync(SyncXboxDLC input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetMyDLCContent.Response PublicGetMyDLCContent(PublicGetMyDLCContent input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetMyDLCContent.Response> PublicGetMyDLCContentAsync(PublicGetMyDLCContent input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

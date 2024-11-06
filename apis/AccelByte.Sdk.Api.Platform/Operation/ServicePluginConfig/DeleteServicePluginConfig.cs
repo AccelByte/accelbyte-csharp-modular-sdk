@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     ///
     /// Delete service plugin config
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class DeleteServicePluginConfig : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -56,15 +56,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 DeleteServicePluginConfig op = new DeleteServicePluginConfig(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<DeleteServicePluginConfigBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public void Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public DeleteServicePluginConfig.Response Execute(
                 string namespace_
             )
             {
@@ -76,12 +76,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<DeleteServicePluginConfig.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -93,8 +93,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -105,28 +105,38 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::ServicePluginConfig::DeleteServicePluginConfig";
+        }
+
+        #endregion
+
         public DeleteServicePluginConfig(
-            string namespace_
+            string namespace_            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -135,20 +145,21 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public DeleteServicePluginConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new DeleteServicePluginConfig.Response()
             {
-                return;
-            }
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
 
-            var payloadString = payload.ReadToString();
 
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

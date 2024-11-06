@@ -56,15 +56,15 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             )
             {
                 GetTicketDetail op = new GetTicketDetail(this,
-                    namespace_,
-                    ticketId
+                    namespace_,                    
+                    ticketId                    
                 );
 
                 op.SetBaseFields<GetTicketDetailBuilder>(this);
                 return op;
             }
 
-            public Model.RestapiTicketResponse? Execute(
+            public GetTicketDetail.Response Execute(
                 string namespace_,
                 string ticketId
             )
@@ -79,11 +79,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.RestapiTicketResponse?> ExecuteAsync(
+            public async Task<GetTicketDetail.Response> ExecuteAsync(
                 string namespace_,
                 string ticketId
             )
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,30 +111,44 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["ticketId"] = ticketId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.RestapiTicketResponse>
+        {
+
+            public RestapiErrorResponse? Error404 { get; set; } = null;
+
+            public RestapiErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Reporting::AdminTickets::GetTicketDetail";
+        }
+
+        #endregion
+
         public GetTicketDetail(
-            string namespace_,
-            string ticketId
+            string namespace_,            
+            string ticketId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["ticketId"] = ticketId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -146,25 +160,36 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.RestapiTicketResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetTicketDetail.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetTicketDetail.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.RestapiTicketResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.RestapiTicketResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.RestapiTicketResponse>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

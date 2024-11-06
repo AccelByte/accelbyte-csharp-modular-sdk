@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ### Endpoint migration guide
     /// - **Substitute endpoint: _/iam/v3/oauth/jwks [GET]_**
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class GetJWKS : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -74,8 +74,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public Model.OauthcommonJWKSet? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetJWKS.Response Execute(
             )
             {
                 GetJWKS op = Build(
@@ -86,11 +86,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OauthcommonJWKSet?> ExecuteAsync(
+            public async Task<GetJWKS.Response> ExecuteAsync(
             )
             {
                 GetJWKS op = Build(
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -110,26 +110,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         private GetJWKS(GetJWKSBuilder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public GetJWKS(
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.OauthcommonJWKSet>
         {
 
 
+            protected override string GetFullOperationId() => "Iam::OAuth::GetJWKS";
+        }
 
+        #endregion
 
+        public GetJWKS(
+        )
+        {
+            
+            
 
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -141,25 +151,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OauthcommonJWKSet? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetJWKS.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetJWKS.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OauthcommonJWKSet>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.OauthcommonJWKSet>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OauthcommonJWKSet>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

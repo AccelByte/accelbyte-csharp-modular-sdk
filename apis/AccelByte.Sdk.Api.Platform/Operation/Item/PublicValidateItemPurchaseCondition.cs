@@ -56,15 +56,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicValidateItemPurchaseCondition op = new PublicValidateItemPurchaseCondition(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicValidateItemPurchaseConditionBuilder>(this);
                 return op;
             }
 
-            public List<Model.ItemPurchaseConditionValidateResult>? Execute(
+            public PublicValidateItemPurchaseCondition.Response Execute(
                 ItemPurchaseConditionValidateRequest body,
                 string namespace_
             )
@@ -79,11 +79,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.ItemPurchaseConditionValidateResult>?> ExecuteAsync(
+            public async Task<PublicValidateItemPurchaseCondition.Response> ExecuteAsync(
                 ItemPurchaseConditionValidateRequest body,
                 string namespace_
             )
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -110,31 +110,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.ItemPurchaseConditionValidateResult>>
+        {
+
+            public ValidationErrorEntity? Error422 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Item::PublicValidateItemPurchaseCondition";
+        }
+
+        #endregion
+
         public PublicValidateItemPurchaseCondition(
-            string namespace_,
-            Model.ItemPurchaseConditionValidateRequest body
+            string namespace_,            
+            Model.ItemPurchaseConditionValidateRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -146,25 +158,31 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.ItemPurchaseConditionValidateResult>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicValidateItemPurchaseCondition.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicValidateItemPurchaseCondition.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.ItemPurchaseConditionValidateResult>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.ItemPurchaseConditionValidateResult>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)422)
             {
-                return JsonSerializer.Deserialize<List<Model.ItemPurchaseConditionValidateResult>>(payload, ResponseJsonOptions);
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

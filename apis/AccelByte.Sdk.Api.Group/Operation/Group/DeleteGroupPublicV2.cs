@@ -62,15 +62,15 @@ namespace AccelByte.Sdk.Api.Group.Operation
             )
             {
                 DeleteGroupPublicV2 op = new DeleteGroupPublicV2(this,
-                    groupId,
-                    namespace_
+                    groupId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<DeleteGroupPublicV2Builder>(this);
                 return op;
             }
 
-            public void Execute(
+            public DeleteGroupPublicV2.Response Execute(
                 string groupId,
                 string namespace_
             )
@@ -84,12 +84,12 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<DeleteGroupPublicV2.Response> ExecuteAsync(
                 string groupId,
                 string namespace_
             )
@@ -103,8 +103,8 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -117,30 +117,50 @@ namespace AccelByte.Sdk.Api.Group.Operation
         {
             PathParams["groupId"] = groupId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public ResponseErrorResponse? Error400 { get; set; } = null;
+
+            public ResponseErrorResponse? Error401 { get; set; } = null;
+
+            public ResponseErrorResponse? Error403 { get; set; } = null;
+
+            public ResponseErrorResponse? Error404 { get; set; } = null;
+
+            public ResponseErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Group::Group::DeleteGroupPublicV2";
+        }
+
+        #endregion
+
         public DeleteGroupPublicV2(
-            string groupId,
-            string namespace_
+            string groupId,            
+            string namespace_            
         )
         {
             PathParams["groupId"] = groupId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -149,20 +169,51 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public DeleteGroupPublicV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new DeleteGroupPublicV2.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            
+            {
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         }
         #endregion
 
-        public Model.DtoPlatformAccountClosureClientResponse? AdminGetPlatformAccountClosureClient(AdminGetPlatformAccountClosureClient input)
+        public AdminGetPlatformAccountClosureClient.Response AdminGetPlatformAccountClosureClient(AdminGetPlatformAccountClosureClient input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.DtoPlatformAccountClosureClientResponse?> AdminGetPlatformAccountClosureClientAsync(AdminGetPlatformAccountClosureClient input)
+        public async Task<AdminGetPlatformAccountClosureClient.Response> AdminGetPlatformAccountClosureClientAsync(AdminGetPlatformAccountClosureClient input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -85,34 +85,34 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminUpdatePlatformAccountClosureClient(AdminUpdatePlatformAccountClosureClient input)
+        public AdminUpdatePlatformAccountClosureClient.Response AdminUpdatePlatformAccountClosureClient(AdminUpdatePlatformAccountClosureClient input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminUpdatePlatformAccountClosureClientAsync(AdminUpdatePlatformAccountClosureClient input)
+        public async Task<AdminUpdatePlatformAccountClosureClient.Response> AdminUpdatePlatformAccountClosureClientAsync(AdminUpdatePlatformAccountClosureClient input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeletePlatformAccountClosureClient(AdminDeletePlatformAccountClosureClient input)
+        public AdminDeletePlatformAccountClosureClient.Response AdminDeletePlatformAccountClosureClient(AdminDeletePlatformAccountClosureClient input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeletePlatformAccountClosureClientAsync(AdminDeletePlatformAccountClosureClient input)
+        public async Task<AdminDeletePlatformAccountClosureClient.Response> AdminDeletePlatformAccountClosureClientAsync(AdminDeletePlatformAccountClosureClient input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

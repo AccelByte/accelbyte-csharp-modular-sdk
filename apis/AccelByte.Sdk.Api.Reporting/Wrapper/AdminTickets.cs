@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
         }
         #endregion
 
-        public Model.RestapiTicketListResponse? ListTickets(ListTickets input)
+        public ListTickets.Response ListTickets(ListTickets input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiTicketListResponse?> ListTicketsAsync(ListTickets input)
+        public async Task<ListTickets.Response> ListTicketsAsync(ListTickets input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RestapiTicketStatisticResponse? TicketStatistic(TicketStatistic input)
+        public TicketStatistic.Response TicketStatistic(TicketStatistic input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiTicketStatisticResponse?> TicketStatisticAsync(TicketStatistic input)
+        public async Task<TicketStatistic.Response> TicketStatisticAsync(TicketStatistic input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RestapiTicketResponse? GetTicketDetail(GetTicketDetail input)
+        public GetTicketDetail.Response GetTicketDetail(GetTicketDetail input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -142,7 +142,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiTicketResponse?> GetTicketDetailAsync(GetTicketDetail input)
+        public async Task<GetTicketDetail.Response> GetTicketDetailAsync(GetTicketDetail input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -150,23 +150,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteTicket(DeleteTicket input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteTicketAsync(DeleteTicket input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.RestapiReportListResponse? GetReportsByTicket(GetReportsByTicket input)
+        public DeleteTicket.Response DeleteTicket(DeleteTicket input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -174,7 +158,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiReportListResponse?> GetReportsByTicketAsync(GetReportsByTicket input)
+        public async Task<DeleteTicket.Response> DeleteTicketAsync(DeleteTicket input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -182,7 +166,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RestapiTicketResponse? UpdateTicketResolutions(UpdateTicketResolutions input)
+        public GetReportsByTicket.Response GetReportsByTicket(GetReportsByTicket input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -190,7 +174,23 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiTicketResponse?> UpdateTicketResolutionsAsync(UpdateTicketResolutions input)
+        public async Task<GetReportsByTicket.Response> GetReportsByTicketAsync(GetReportsByTicket input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public UpdateTicketResolutions.Response UpdateTicketResolutions(UpdateTicketResolutions input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpdateTicketResolutions.Response> UpdateTicketResolutionsAsync(UpdateTicketResolutions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

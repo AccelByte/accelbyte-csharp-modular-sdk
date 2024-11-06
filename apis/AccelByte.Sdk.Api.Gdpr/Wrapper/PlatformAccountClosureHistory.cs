@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         }
         #endregion
 
-        public Model.DtoUserPlatformAccountClosureHistoriesResponse? AdminGetUserPlatformAccountClosureHistories(AdminGetUserPlatformAccountClosureHistories input)
+        public AdminGetUserPlatformAccountClosureHistories.Response AdminGetUserPlatformAccountClosureHistories(AdminGetUserPlatformAccountClosureHistories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.DtoUserPlatformAccountClosureHistoriesResponse?> AdminGetUserPlatformAccountClosureHistoriesAsync(AdminGetUserPlatformAccountClosureHistories input)
+        public async Task<AdminGetUserPlatformAccountClosureHistories.Response> AdminGetUserPlatformAccountClosureHistoriesAsync(AdminGetUserPlatformAccountClosureHistories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

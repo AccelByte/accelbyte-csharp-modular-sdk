@@ -68,16 +68,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 CheckUserAvailability op = new CheckUserAvailability(this,
-                    namespace_,
-                    field,
-                    query
+                    namespace_,                    
+                    field,                    
+                    query                    
                 );
 
                 op.SetBaseFields<CheckUserAvailabilityBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public CheckUserAvailability.Response Execute(
                 string namespace_,
                 string field,
                 string query
@@ -93,12 +93,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<CheckUserAvailability.Response> ExecuteAsync(
                 string namespace_,
                 string field,
                 string query
@@ -114,8 +114,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -128,34 +128,50 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (field is not null) QueryParams["field"] = field;
             if (query is not null) QueryParams["query"] = query;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public RestErrorResponse? Error400 { get; set; } = null;
+
+            public string Error404 { get; set; } = "";
+
+            public RestErrorResponse? Error422 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::Users::CheckUserAvailability";
+        }
+
+        #endregion
+
         public CheckUserAvailability(
-            string namespace_,
-            string field,
-            string query
+            string namespace_,            
+            string field,            
+            string query            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (field is not null) QueryParams["field"] = field;
             if (query is not null) QueryParams["query"] = query;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -164,20 +180,39 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public CheckUserAvailability.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new CheckUserAvailability.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error404!);
+            }
+            else if (code == (HttpStatusCode)422)
+            
+            {
+                response.Error422 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

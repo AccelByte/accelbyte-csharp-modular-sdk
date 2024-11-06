@@ -56,15 +56,15 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             )
             {
                 DeleteMatchFunction op = new DeleteMatchFunction(this,
-                    name,
-                    namespace_
+                    name,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<DeleteMatchFunctionBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public DeleteMatchFunction.Response Execute(
                 string name,
                 string namespace_
             )
@@ -78,12 +78,12 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<DeleteMatchFunction.Response> ExecuteAsync(
                 string name,
                 string namespace_
             )
@@ -97,8 +97,8 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,30 +111,48 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         {
             PathParams["name"] = name;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error403 { get; set; } = null;
+
+            public ResponseError? Error404 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Match2::MatchFunctions::DeleteMatchFunction";
+        }
+
+        #endregion
+
         public DeleteMatchFunction(
-            string name,
-            string namespace_
+            string name,            
+            string namespace_            
         )
         {
             PathParams["name"] = name;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -146,17 +164,42 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public DeleteMatchFunction.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)200)
+            var response = new DeleteMatchFunction.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)401)
+            
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            
+            {
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

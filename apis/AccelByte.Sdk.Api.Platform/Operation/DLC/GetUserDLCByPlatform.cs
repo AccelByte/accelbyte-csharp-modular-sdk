@@ -60,16 +60,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetUserDLCByPlatform op = new GetUserDLCByPlatform(this,
-                    namespace_,
-                    userId,
-                    type
+                    namespace_,                    
+                    userId,                    
+                    type                    
                 );
 
                 op.SetBaseFields<GetUserDLCByPlatformBuilder>(this);
                 return op;
             }
 
-            public Model.UserDLC? Execute(
+            public GetUserDLCByPlatform.Response Execute(
                 string namespace_,
                 string userId,
                 string type
@@ -86,11 +86,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.UserDLC?> ExecuteAsync(
+            public async Task<GetUserDLCByPlatform.Response> ExecuteAsync(
                 string namespace_,
                 string userId,
                 string type
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -121,33 +121,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (type is not null) QueryParams["type"] = type.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.UserDLC>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::DLC::GetUserDLCByPlatform";
+        }
+
+        #endregion
+
         public GetUserDLCByPlatform(
-            string namespace_,
-            string userId,
-            GetUserDLCByPlatformType type
+            string namespace_,            
+            string userId,            
+            GetUserDLCByPlatformType type            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (type is not null) QueryParams["type"] = type.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,28 +166,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.UserDLC? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetUserDLCByPlatform.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetUserDLCByPlatform.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.UserDLC>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.UserDLC>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.UserDLC>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

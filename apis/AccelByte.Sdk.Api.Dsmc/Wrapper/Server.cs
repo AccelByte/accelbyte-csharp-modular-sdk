@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         }
         #endregion
 
-        public Model.ModelsListServerResponse? ListServerClient(ListServerClient input)
+        public ListServerClient.Response ListServerClient(ListServerClient input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -143,7 +143,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListServerResponse?> ListServerClientAsync(ListServerClient input)
+        public async Task<ListServerClient.Response> ListServerClientAsync(ListServerClient input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -151,7 +151,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsDetailedCountServerResponse? CountServerDetailedClient(CountServerDetailedClient input)
+        public CountServerDetailedClient.Response CountServerDetailedClient(CountServerDetailedClient input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -159,7 +159,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsDetailedCountServerResponse?> CountServerDetailedClientAsync(CountServerDetailedClient input)
+        public async Task<CountServerDetailedClient.Response> CountServerDetailedClientAsync(CountServerDetailedClient input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -167,39 +167,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void ServerHeartbeat(ServerHeartbeat input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task ServerHeartbeatAsync(ServerHeartbeat input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void DeregisterLocalServer(DeregisterLocalServer input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeregisterLocalServerAsync(DeregisterLocalServer input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsServer? RegisterLocalServer(RegisterLocalServer input)
+        public ServerHeartbeat.Response ServerHeartbeat(ServerHeartbeat input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -207,7 +175,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsServer?> RegisterLocalServerAsync(RegisterLocalServer input)
+        public async Task<ServerHeartbeat.Response> ServerHeartbeatAsync(ServerHeartbeat input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -215,7 +183,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsServer? RegisterServer(RegisterServer input)
+        public DeregisterLocalServer.Response DeregisterLocalServer(DeregisterLocalServer input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -223,7 +191,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsServer?> RegisterServerAsync(RegisterServer input)
+        public async Task<DeregisterLocalServer.Response> DeregisterLocalServerAsync(DeregisterLocalServer input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -231,23 +199,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void ShutdownServer(ShutdownServer input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task ShutdownServerAsync(ShutdownServer input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsServerDeploymentConfigSessionTimeoutResponse? GetServerSessionTimeout(GetServerSessionTimeout input)
+        public RegisterLocalServer.Response RegisterLocalServer(RegisterLocalServer input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -255,7 +207,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsServerDeploymentConfigSessionTimeoutResponse?> GetServerSessionTimeoutAsync(GetServerSessionTimeout input)
+        public async Task<RegisterLocalServer.Response> RegisterLocalServerAsync(RegisterLocalServer input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -263,7 +215,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsServerSessionResponse? GetServerSession(GetServerSession input)
+        public RegisterServer.Response RegisterServer(RegisterServer input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -271,7 +223,55 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsServerSessionResponse?> GetServerSessionAsync(GetServerSession input)
+        public async Task<RegisterServer.Response> RegisterServerAsync(RegisterServer input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public ShutdownServer.Response ShutdownServer(ShutdownServer input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<ShutdownServer.Response> ShutdownServerAsync(ShutdownServer input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetServerSessionTimeout.Response GetServerSessionTimeout(GetServerSessionTimeout input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetServerSessionTimeout.Response> GetServerSessionTimeoutAsync(GetServerSessionTimeout input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetServerSession.Response GetServerSession(GetServerSession input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetServerSession.Response> GetServerSessionAsync(GetServerSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

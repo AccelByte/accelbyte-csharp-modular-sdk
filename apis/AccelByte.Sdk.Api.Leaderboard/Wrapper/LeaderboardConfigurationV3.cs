@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
         }
         #endregion
 
-        public Model.ModelsGetAllLeaderboardConfigsRespV3? GetLeaderboardConfigurationsAdminV3(GetLeaderboardConfigurationsAdminV3 input)
+        public GetLeaderboardConfigurationsAdminV3.Response GetLeaderboardConfigurationsAdminV3(GetLeaderboardConfigurationsAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -143,7 +143,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetAllLeaderboardConfigsRespV3?> GetLeaderboardConfigurationsAdminV3Async(GetLeaderboardConfigurationsAdminV3 input)
+        public async Task<GetLeaderboardConfigurationsAdminV3.Response> GetLeaderboardConfigurationsAdminV3Async(GetLeaderboardConfigurationsAdminV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -151,7 +151,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetLeaderboardConfigRespV3? CreateLeaderboardConfigurationAdminV3(CreateLeaderboardConfigurationAdminV3 input)
+        public CreateLeaderboardConfigurationAdminV3.Response CreateLeaderboardConfigurationAdminV3(CreateLeaderboardConfigurationAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -159,7 +159,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetLeaderboardConfigRespV3?> CreateLeaderboardConfigurationAdminV3Async(CreateLeaderboardConfigurationAdminV3 input)
+        public async Task<CreateLeaderboardConfigurationAdminV3.Response> CreateLeaderboardConfigurationAdminV3Async(CreateLeaderboardConfigurationAdminV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -167,7 +167,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsDeleteBulkLeaderboardsResp? DeleteBulkLeaderboardConfigurationAdminV3(DeleteBulkLeaderboardConfigurationAdminV3 input)
+        public DeleteBulkLeaderboardConfigurationAdminV3.Response DeleteBulkLeaderboardConfigurationAdminV3(DeleteBulkLeaderboardConfigurationAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -175,7 +175,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsDeleteBulkLeaderboardsResp?> DeleteBulkLeaderboardConfigurationAdminV3Async(DeleteBulkLeaderboardConfigurationAdminV3 input)
+        public async Task<DeleteBulkLeaderboardConfigurationAdminV3.Response> DeleteBulkLeaderboardConfigurationAdminV3Async(DeleteBulkLeaderboardConfigurationAdminV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -183,7 +183,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetLeaderboardConfigRespV3? GetLeaderboardConfigurationAdminV3(GetLeaderboardConfigurationAdminV3 input)
+        public GetLeaderboardConfigurationAdminV3.Response GetLeaderboardConfigurationAdminV3(GetLeaderboardConfigurationAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -191,7 +191,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetLeaderboardConfigRespV3?> GetLeaderboardConfigurationAdminV3Async(GetLeaderboardConfigurationAdminV3 input)
+        public async Task<GetLeaderboardConfigurationAdminV3.Response> GetLeaderboardConfigurationAdminV3Async(GetLeaderboardConfigurationAdminV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -199,7 +199,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetLeaderboardConfigRespV3? UpdateLeaderboardConfigurationAdminV3(UpdateLeaderboardConfigurationAdminV3 input)
+        public UpdateLeaderboardConfigurationAdminV3.Response UpdateLeaderboardConfigurationAdminV3(UpdateLeaderboardConfigurationAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -207,7 +207,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetLeaderboardConfigRespV3?> UpdateLeaderboardConfigurationAdminV3Async(UpdateLeaderboardConfigurationAdminV3 input)
+        public async Task<UpdateLeaderboardConfigurationAdminV3.Response> UpdateLeaderboardConfigurationAdminV3Async(UpdateLeaderboardConfigurationAdminV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -215,39 +215,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteLeaderboardConfigurationAdminV3(DeleteLeaderboardConfigurationAdminV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteLeaderboardConfigurationAdminV3Async(DeleteLeaderboardConfigurationAdminV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void HardDeleteLeaderboardAdminV3(HardDeleteLeaderboardAdminV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task HardDeleteLeaderboardAdminV3Async(HardDeleteLeaderboardAdminV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsGetAllLeaderboardConfigsPublicRespV3? GetLeaderboardConfigurationsPublicV3(GetLeaderboardConfigurationsPublicV3 input)
+        public DeleteLeaderboardConfigurationAdminV3.Response DeleteLeaderboardConfigurationAdminV3(DeleteLeaderboardConfigurationAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -255,7 +223,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetAllLeaderboardConfigsPublicRespV3?> GetLeaderboardConfigurationsPublicV3Async(GetLeaderboardConfigurationsPublicV3 input)
+        public async Task<DeleteLeaderboardConfigurationAdminV3.Response> DeleteLeaderboardConfigurationAdminV3Async(DeleteLeaderboardConfigurationAdminV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -263,7 +231,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetLeaderboardConfigPublicRespV3? GetLeaderboardConfigurationPublicV3(GetLeaderboardConfigurationPublicV3 input)
+        public HardDeleteLeaderboardAdminV3.Response HardDeleteLeaderboardAdminV3(HardDeleteLeaderboardAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -271,7 +239,39 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetLeaderboardConfigPublicRespV3?> GetLeaderboardConfigurationPublicV3Async(GetLeaderboardConfigurationPublicV3 input)
+        public async Task<HardDeleteLeaderboardAdminV3.Response> HardDeleteLeaderboardAdminV3Async(HardDeleteLeaderboardAdminV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetLeaderboardConfigurationsPublicV3.Response GetLeaderboardConfigurationsPublicV3(GetLeaderboardConfigurationsPublicV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetLeaderboardConfigurationsPublicV3.Response> GetLeaderboardConfigurationsPublicV3Async(GetLeaderboardConfigurationsPublicV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetLeaderboardConfigurationPublicV3.Response GetLeaderboardConfigurationPublicV3(GetLeaderboardConfigurationPublicV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetLeaderboardConfigurationPublicV3.Response> GetLeaderboardConfigurationPublicV3Async(GetLeaderboardConfigurationPublicV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

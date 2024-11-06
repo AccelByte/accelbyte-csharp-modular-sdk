@@ -60,7 +60,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
-            public List<Model.FulfillmentScriptInfo>? Execute(
+            public ListFulfillmentScripts.Response Execute(
             )
             {
                 ListFulfillmentScripts op = Build(
@@ -71,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.FulfillmentScriptInfo>?> ExecuteAsync(
+            public async Task<ListFulfillmentScripts.Response> ExecuteAsync(
             )
             {
                 ListFulfillmentScripts op = Build(
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -95,26 +95,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         private ListFulfillmentScripts(ListFulfillmentScriptsBuilder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public ListFulfillmentScripts(
-        )
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.FulfillmentScriptInfo>>
         {
 
 
+            protected override string GetFullOperationId() => "Platform::FulfillmentScript::ListFulfillmentScripts";
+        }
 
+        #endregion
 
+        public ListFulfillmentScripts(
+        )
+        {
+            
+            
 
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -123,28 +133,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { };
-
-        public List<Model.FulfillmentScriptInfo>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public override List<string> Produces => new() {  };
+        
+        public ListFulfillmentScripts.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new ListFulfillmentScripts.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.FulfillmentScriptInfo>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<Model.FulfillmentScriptInfo>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.FulfillmentScriptInfo>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

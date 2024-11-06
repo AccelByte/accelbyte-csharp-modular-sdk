@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
 
         #region Operation Builders
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetClients.GetClientsBuilder GetClientsOp
         {
             get
@@ -46,7 +46,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public CreateClient.CreateClientBuilder CreateClientOp
         {
             get
@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetClient.GetClientBuilder GetClientOp
         {
             get
@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public UpdateClient.UpdateClientBuilder UpdateClientOp
         {
             get
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DeleteClient.DeleteClientBuilder DeleteClientOp
         {
             get
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public UpdateClientPermission.UpdateClientPermissionBuilder UpdateClientPermissionOp
         {
             get
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AddClientPermission.AddClientPermissionBuilder AddClientPermissionOp
         {
             get
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DeleteClientPermission.DeleteClientPermissionBuilder DeleteClientPermissionOp
         {
             get
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public UpdateClientSecret.UpdateClientSecretBuilder UpdateClientSecretOp
         {
             get
@@ -142,7 +142,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetClientsbyNamespace.GetClientsbyNamespaceBuilder GetClientsbyNamespaceOp
         {
             get
@@ -154,7 +154,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public CreateClientByNamespace.CreateClientByNamespaceBuilder CreateClientByNamespaceOp
         {
             get
@@ -166,7 +166,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DeleteClientByNamespace.DeleteClientByNamespaceBuilder DeleteClientByNamespaceOp
         {
             get
@@ -290,9 +290,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public List<Model.ClientmodelClientResponse>? GetClients(GetClients input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetClients.Response GetClients(GetClients input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -300,7 +300,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ClientmodelClientResponse>?> GetClientsAsync(GetClients input)
+        public async Task<GetClients.Response> GetClientsAsync(GetClients input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -308,10 +308,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ClientmodelClientCreationResponse? CreateClient(CreateClient input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public CreateClient.Response CreateClient(CreateClient input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -319,7 +319,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ClientmodelClientCreationResponse?> CreateClientAsync(CreateClient input)
+        public async Task<CreateClient.Response> CreateClientAsync(CreateClient input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -327,10 +327,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ClientmodelClientResponse? GetClient(GetClient input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetClient.Response GetClient(GetClient input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -338,7 +338,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ClientmodelClientResponse?> GetClientAsync(GetClient input)
+        public async Task<GetClient.Response> GetClientAsync(GetClient input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -346,10 +346,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ClientmodelClientResponse? UpdateClient(UpdateClient input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public UpdateClient.Response UpdateClient(UpdateClient input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -357,7 +357,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ClientmodelClientResponse?> UpdateClientAsync(UpdateClient input)
+        public async Task<UpdateClient.Response> UpdateClientAsync(UpdateClient input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -365,105 +365,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void DeleteClient(DeleteClient input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteClientAsync(DeleteClient input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void UpdateClientPermission(UpdateClientPermission input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task UpdateClientPermissionAsync(UpdateClientPermission input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void AddClientPermission(AddClientPermission input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AddClientPermissionAsync(AddClientPermission input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void DeleteClientPermission(DeleteClientPermission input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteClientPermissionAsync(DeleteClientPermission input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void UpdateClientSecret(UpdateClientSecret input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task UpdateClientSecretAsync(UpdateClientSecret input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public List<Model.ClientmodelClientResponse>? GetClientsbyNamespace(GetClientsbyNamespace input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public DeleteClient.Response DeleteClient(DeleteClient input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -471,7 +376,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ClientmodelClientResponse>?> GetClientsbyNamespaceAsync(GetClientsbyNamespace input)
+        public async Task<DeleteClient.Response> DeleteClientAsync(DeleteClient input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -479,10 +384,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ClientmodelClientCreationResponse? CreateClientByNamespace(CreateClientByNamespace input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public UpdateClientPermission.Response UpdateClientPermission(UpdateClientPermission input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -490,7 +395,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ClientmodelClientCreationResponse?> CreateClientByNamespaceAsync(CreateClientByNamespace input)
+        public async Task<UpdateClientPermission.Response> UpdateClientPermissionAsync(UpdateClientPermission input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -498,27 +403,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void DeleteClientByNamespace(DeleteClientByNamespace input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteClientByNamespaceAsync(DeleteClientByNamespace input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-        public Model.ClientmodelClientsV3Response? AdminGetClientsByNamespaceV3(AdminGetClientsByNamespaceV3 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AddClientPermission.Response AddClientPermission(AddClientPermission input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -526,7 +414,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ClientmodelClientsV3Response?> AdminGetClientsByNamespaceV3Async(AdminGetClientsByNamespaceV3 input)
+        public async Task<AddClientPermission.Response> AddClientPermissionAsync(AddClientPermission input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -534,23 +422,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminBulkUpdateClientsV3(AdminBulkUpdateClientsV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminBulkUpdateClientsV3Async(AdminBulkUpdateClientsV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ClientmodelClientV3Response? AdminCreateClientV3(AdminCreateClientV3 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public DeleteClientPermission.Response DeleteClientPermission(DeleteClientPermission input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -558,7 +433,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ClientmodelClientV3Response?> AdminCreateClientV3Async(AdminCreateClientV3 input)
+        public async Task<DeleteClientPermission.Response> DeleteClientPermissionAsync(DeleteClientPermission input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -566,7 +441,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ClientmodelClientV3Response? AdminGetClientsbyNamespacebyIDV3(AdminGetClientsbyNamespacebyIDV3 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public UpdateClientSecret.Response UpdateClientSecret(UpdateClientSecret input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -574,7 +452,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ClientmodelClientV3Response?> AdminGetClientsbyNamespacebyIDV3Async(AdminGetClientsbyNamespacebyIDV3 input)
+        public async Task<UpdateClientSecret.Response> UpdateClientSecretAsync(UpdateClientSecret input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -582,23 +460,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteClientV3(AdminDeleteClientV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteClientV3Async(AdminDeleteClientV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ClientmodelClientV3Response? AdminUpdateClientV3(AdminUpdateClientV3 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetClientsbyNamespace.Response GetClientsbyNamespace(GetClientsbyNamespace input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -606,7 +471,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ClientmodelClientV3Response?> AdminUpdateClientV3Async(AdminUpdateClientV3 input)
+        public async Task<GetClientsbyNamespace.Response> GetClientsbyNamespaceAsync(GetClientsbyNamespace input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -614,66 +479,201 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminUpdateClientPermissionV3(AdminUpdateClientPermissionV3 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public CreateClientByNamespace.Response CreateClientByNamespace(CreateClientByNamespace input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminUpdateClientPermissionV3Async(AdminUpdateClientPermissionV3 input)
+        public async Task<CreateClientByNamespace.Response> CreateClientByNamespaceAsync(CreateClientByNamespace input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminAddClientPermissionsV3(AdminAddClientPermissionsV3 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public DeleteClientByNamespace.Response DeleteClientByNamespace(DeleteClientByNamespace input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminAddClientPermissionsV3Async(AdminAddClientPermissionsV3 input)
+        public async Task<DeleteClientByNamespace.Response> DeleteClientByNamespaceAsync(DeleteClientByNamespace input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteClientPermissionV3(AdminDeleteClientPermissionV3 input)
+        #pragma warning restore ab_deprecated_operation
+        public AdminGetClientsByNamespaceV3.Response AdminGetClientsByNamespaceV3(AdminGetClientsByNamespaceV3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteClientPermissionV3Async(AdminDeleteClientPermissionV3 input)
+        public async Task<AdminGetClientsByNamespaceV3.Response> AdminGetClientsByNamespaceV3Async(AdminGetClientsByNamespaceV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminUpdateClientSecretV3(AdminUpdateClientSecretV3 input)
+        public AdminBulkUpdateClientsV3.Response AdminBulkUpdateClientsV3(AdminBulkUpdateClientsV3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminUpdateClientSecretV3Async(AdminUpdateClientSecretV3 input)
+        public async Task<AdminBulkUpdateClientsV3.Response> AdminBulkUpdateClientsV3Async(AdminBulkUpdateClientsV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminCreateClientV3.Response AdminCreateClientV3(AdminCreateClientV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminCreateClientV3.Response> AdminCreateClientV3Async(AdminCreateClientV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetClientsbyNamespacebyIDV3.Response AdminGetClientsbyNamespacebyIDV3(AdminGetClientsbyNamespacebyIDV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetClientsbyNamespacebyIDV3.Response> AdminGetClientsbyNamespacebyIDV3Async(AdminGetClientsbyNamespacebyIDV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminDeleteClientV3.Response AdminDeleteClientV3(AdminDeleteClientV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminDeleteClientV3.Response> AdminDeleteClientV3Async(AdminDeleteClientV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminUpdateClientV3.Response AdminUpdateClientV3(AdminUpdateClientV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminUpdateClientV3.Response> AdminUpdateClientV3Async(AdminUpdateClientV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminUpdateClientPermissionV3.Response AdminUpdateClientPermissionV3(AdminUpdateClientPermissionV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminUpdateClientPermissionV3.Response> AdminUpdateClientPermissionV3Async(AdminUpdateClientPermissionV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminAddClientPermissionsV3.Response AdminAddClientPermissionsV3(AdminAddClientPermissionsV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminAddClientPermissionsV3.Response> AdminAddClientPermissionsV3Async(AdminAddClientPermissionsV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminDeleteClientPermissionV3.Response AdminDeleteClientPermissionV3(AdminDeleteClientPermissionV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminDeleteClientPermissionV3.Response> AdminDeleteClientPermissionV3Async(AdminDeleteClientPermissionV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminUpdateClientSecretV3.Response AdminUpdateClientSecretV3(AdminUpdateClientSecretV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminUpdateClientSecretV3.Response> AdminUpdateClientSecretV3Async(AdminUpdateClientSecretV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

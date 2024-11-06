@@ -58,15 +58,15 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             )
             {
                 DeleteGameBinaryRecordTTLConfig op = new DeleteGameBinaryRecordTTLConfig(this,
-                    key,
-                    namespace_
+                    key,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<DeleteGameBinaryRecordTTLConfigBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public DeleteGameBinaryRecordTTLConfig.Response Execute(
                 string key,
                 string namespace_
             )
@@ -80,12 +80,12 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<DeleteGameBinaryRecordTTLConfig.Response> ExecuteAsync(
                 string key,
                 string namespace_
             )
@@ -99,8 +99,8 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -113,30 +113,50 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         {
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public ModelsResponseError? Error400 { get; set; } = null;
+
+            public ModelsResponseError? Error401 { get; set; } = null;
+
+            public ModelsResponseError? Error403 { get; set; } = null;
+
+            public ModelsResponseError? Error404 { get; set; } = null;
+
+            public ModelsResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Cloudsave::TTLConfig::DeleteGameBinaryRecordTTLConfig";
+        }
+
+        #endregion
+
         public DeleteGameBinaryRecordTTLConfig(
-            string key,
-            string namespace_
+            string key,            
+            string namespace_            
         )
         {
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -148,17 +168,48 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public DeleteGameBinaryRecordTTLConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new DeleteGameBinaryRecordTTLConfig.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            
+            {
+                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            
+            {
+                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

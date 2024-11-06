@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
         }
         #endregion
 
-        public Model.ApiDevelopmentServerConfigurationListResponse? DevelopmentServerConfigurationList(DevelopmentServerConfigurationList input)
+        public DevelopmentServerConfigurationList.Response DevelopmentServerConfigurationList(DevelopmentServerConfigurationList input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiDevelopmentServerConfigurationListResponse?> DevelopmentServerConfigurationListAsync(DevelopmentServerConfigurationList input)
+        public async Task<DevelopmentServerConfigurationList.Response> DevelopmentServerConfigurationListAsync(DevelopmentServerConfigurationList input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiDevelopmentServerConfigurationCreateResponse? DevelopmentServerConfigurationCreate(DevelopmentServerConfigurationCreate input)
+        public DevelopmentServerConfigurationCreate.Response DevelopmentServerConfigurationCreate(DevelopmentServerConfigurationCreate input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiDevelopmentServerConfigurationCreateResponse?> DevelopmentServerConfigurationCreateAsync(DevelopmentServerConfigurationCreate input)
+        public async Task<DevelopmentServerConfigurationCreate.Response> DevelopmentServerConfigurationCreateAsync(DevelopmentServerConfigurationCreate input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiDevelopmentServerConfigurationGetResponse? DevelopmentServerConfigurationGet(DevelopmentServerConfigurationGet input)
+        public DevelopmentServerConfigurationGet.Response DevelopmentServerConfigurationGet(DevelopmentServerConfigurationGet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiDevelopmentServerConfigurationGetResponse?> DevelopmentServerConfigurationGetAsync(DevelopmentServerConfigurationGet input)
+        public async Task<DevelopmentServerConfigurationGet.Response> DevelopmentServerConfigurationGetAsync(DevelopmentServerConfigurationGet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,18 +128,18 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DevelopmentServerConfigurationDelete(DevelopmentServerConfigurationDelete input)
+        public DevelopmentServerConfigurationDelete.Response DevelopmentServerConfigurationDelete(DevelopmentServerConfigurationDelete input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DevelopmentServerConfigurationDeleteAsync(DevelopmentServerConfigurationDelete input)
+        public async Task<DevelopmentServerConfigurationDelete.Response> DevelopmentServerConfigurationDeleteAsync(DevelopmentServerConfigurationDelete input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

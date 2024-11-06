@@ -79,16 +79,16 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             )
             {
                 AdminBulkSaveItem op = new AdminBulkSaveItem(this,
-                    body,
-                    namespace_,
-                    userId
+                    body,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<AdminBulkSaveItemBuilder>(this);
                 return op;
             }
 
-            public List<Model.ApimodelsBulkSaveItemResp>? Execute(
+            public AdminBulkSaveItem.Response Execute(
                 List<ApimodelsSaveItemReq> body,
                 string namespace_,
                 string userId
@@ -105,11 +105,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.ApimodelsBulkSaveItemResp>?> ExecuteAsync(
+            public async Task<AdminBulkSaveItem.Response> ExecuteAsync(
                 List<ApimodelsSaveItemReq> body,
                 string namespace_,
                 string userId
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -140,33 +140,55 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.ApimodelsBulkSaveItemResp>>
+        {
+
+            public ApimodelsErrorResponse? Error400 { get; set; } = null;
+
+            public ApimodelsErrorResponse? Error401 { get; set; } = null;
+
+            public ApimodelsErrorResponse? Error403 { get; set; } = null;
+
+            public ApimodelsErrorResponse? Error404 { get; set; } = null;
+
+            public ApimodelsErrorResponse? Error422 { get; set; } = null;
+
+            public ApimodelsErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Inventory::AdminItems::AdminBulkSaveItem";
+        }
+
+        #endregion
+
         public AdminBulkSaveItem(
-            string namespace_,
-            string userId,
-            List<Model.ApimodelsSaveItemReq> body
+            string namespace_,            
+            string userId,            
+            List<Model.ApimodelsSaveItemReq> body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -178,25 +200,56 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.ApimodelsBulkSaveItemResp>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminBulkSaveItem.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminBulkSaveItem.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.ApimodelsBulkSaveItemResp>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.ApimodelsBulkSaveItemResp>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<List<Model.ApimodelsBulkSaveItemResp>>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)422)
+            {
+                response.Error422 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

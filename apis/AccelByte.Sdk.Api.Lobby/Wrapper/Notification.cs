@@ -344,71 +344,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         }
         #endregion
 
-        public void SendMultipleUsersFreeformNotificationV1Admin(SendMultipleUsersFreeformNotificationV1Admin input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SendMultipleUsersFreeformNotificationV1AdminAsync(SendMultipleUsersFreeformNotificationV1Admin input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void SendUsersFreeformNotificationV1Admin(SendUsersFreeformNotificationV1Admin input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SendUsersFreeformNotificationV1AdminAsync(SendUsersFreeformNotificationV1Admin input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void SendPartyFreeformNotificationV1Admin(SendPartyFreeformNotificationV1Admin input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SendPartyFreeformNotificationV1AdminAsync(SendPartyFreeformNotificationV1Admin input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void SendPartyTemplatedNotificationV1Admin(SendPartyTemplatedNotificationV1Admin input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SendPartyTemplatedNotificationV1AdminAsync(SendPartyTemplatedNotificationV1Admin input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public List<Model.ModelNotificationTemplateResponse>? GetAllNotificationTemplatesV1Admin(GetAllNotificationTemplatesV1Admin input)
+        public SendMultipleUsersFreeformNotificationV1Admin.Response SendMultipleUsersFreeformNotificationV1Admin(SendMultipleUsersFreeformNotificationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -416,7 +352,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelNotificationTemplateResponse>?> GetAllNotificationTemplatesV1AdminAsync(GetAllNotificationTemplatesV1Admin input)
+        public async Task<SendMultipleUsersFreeformNotificationV1Admin.Response> SendMultipleUsersFreeformNotificationV1AdminAsync(SendMultipleUsersFreeformNotificationV1Admin input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -424,39 +360,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void CreateNotificationTemplateV1Admin(CreateNotificationTemplateV1Admin input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task CreateNotificationTemplateV1AdminAsync(CreateNotificationTemplateV1Admin input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void SendUsersTemplatedNotificationV1Admin(SendUsersTemplatedNotificationV1Admin input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SendUsersTemplatedNotificationV1AdminAsync(SendUsersTemplatedNotificationV1Admin input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelGetAllNotificationTemplateSlugResp? GetTemplateSlugLocalizationsTemplateV1Admin(GetTemplateSlugLocalizationsTemplateV1Admin input)
+        public SendUsersFreeformNotificationV1Admin.Response SendUsersFreeformNotificationV1Admin(SendUsersFreeformNotificationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -464,7 +368,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetAllNotificationTemplateSlugResp?> GetTemplateSlugLocalizationsTemplateV1AdminAsync(GetTemplateSlugLocalizationsTemplateV1Admin input)
+        public async Task<SendUsersFreeformNotificationV1Admin.Response> SendUsersFreeformNotificationV1AdminAsync(SendUsersFreeformNotificationV1Admin input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -472,23 +376,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteNotificationTemplateSlugV1Admin(DeleteNotificationTemplateSlugV1Admin input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteNotificationTemplateSlugV1AdminAsync(DeleteNotificationTemplateSlugV1Admin input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelLocalization? GetSingleTemplateLocalizationV1Admin(GetSingleTemplateLocalizationV1Admin input)
+        public SendPartyFreeformNotificationV1Admin.Response SendPartyFreeformNotificationV1Admin(SendPartyFreeformNotificationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -496,7 +384,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelLocalization?> GetSingleTemplateLocalizationV1AdminAsync(GetSingleTemplateLocalizationV1Admin input)
+        public async Task<SendPartyFreeformNotificationV1Admin.Response> SendPartyFreeformNotificationV1AdminAsync(SendPartyFreeformNotificationV1Admin input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -504,55 +392,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void UpdateTemplateLocalizationV1Admin(UpdateTemplateLocalizationV1Admin input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task UpdateTemplateLocalizationV1AdminAsync(UpdateTemplateLocalizationV1Admin input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void DeleteTemplateLocalizationV1Admin(DeleteTemplateLocalizationV1Admin input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteTemplateLocalizationV1AdminAsync(DeleteTemplateLocalizationV1Admin input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void PublishTemplateLocalizationV1Admin(PublishTemplateLocalizationV1Admin input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublishTemplateLocalizationV1AdminAsync(PublishTemplateLocalizationV1Admin input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelGetAllNotificationTopicsResponse? GetAllNotificationTopicsV1Admin(GetAllNotificationTopicsV1Admin input)
+        public SendPartyTemplatedNotificationV1Admin.Response SendPartyTemplatedNotificationV1Admin(SendPartyTemplatedNotificationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -560,7 +400,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetAllNotificationTopicsResponse?> GetAllNotificationTopicsV1AdminAsync(GetAllNotificationTopicsV1Admin input)
+        public async Task<SendPartyTemplatedNotificationV1Admin.Response> SendPartyTemplatedNotificationV1AdminAsync(SendPartyTemplatedNotificationV1Admin input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -568,23 +408,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void CreateNotificationTopicV1Admin(CreateNotificationTopicV1Admin input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task CreateNotificationTopicV1AdminAsync(CreateNotificationTopicV1Admin input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelNotificationTopicResponseV1? GetNotificationTopicV1Admin(GetNotificationTopicV1Admin input)
+        public GetAllNotificationTemplatesV1Admin.Response GetAllNotificationTemplatesV1Admin(GetAllNotificationTemplatesV1Admin input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -592,7 +416,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelNotificationTopicResponseV1?> GetNotificationTopicV1AdminAsync(GetNotificationTopicV1Admin input)
+        public async Task<GetAllNotificationTemplatesV1Admin.Response> GetAllNotificationTemplatesV1AdminAsync(GetAllNotificationTemplatesV1Admin input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -600,71 +424,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void UpdateNotificationTopicV1Admin(UpdateNotificationTopicV1Admin input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task UpdateNotificationTopicV1AdminAsync(UpdateNotificationTopicV1Admin input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void DeleteNotificationTopicV1Admin(DeleteNotificationTopicV1Admin input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteNotificationTopicV1AdminAsync(DeleteNotificationTopicV1Admin input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void SendSpecificUserFreeformNotificationV1Admin(SendSpecificUserFreeformNotificationV1Admin input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SendSpecificUserFreeformNotificationV1AdminAsync(SendSpecificUserFreeformNotificationV1Admin input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void SendSpecificUserTemplatedNotificationV1Admin(SendSpecificUserTemplatedNotificationV1Admin input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SendSpecificUserTemplatedNotificationV1AdminAsync(SendSpecificUserTemplatedNotificationV1Admin input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelNotificationResponse? GetMyNotifications(GetMyNotifications input)
+        public CreateNotificationTemplateV1Admin.Response CreateNotificationTemplateV1Admin(CreateNotificationTemplateV1Admin input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -672,7 +432,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelNotificationResponse?> GetMyNotificationsAsync(GetMyNotifications input)
+        public async Task<CreateNotificationTemplateV1Admin.Response> CreateNotificationTemplateV1AdminAsync(CreateNotificationTemplateV1Admin input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -680,7 +440,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelTopicByNamespacesResponse? GetTopicByNamespace(GetTopicByNamespace input)
+        public SendUsersTemplatedNotificationV1Admin.Response SendUsersTemplatedNotificationV1Admin(SendUsersTemplatedNotificationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -688,7 +448,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelTopicByNamespacesResponse?> GetTopicByNamespaceAsync(GetTopicByNamespace input)
+        public async Task<SendUsersTemplatedNotificationV1Admin.Response> SendUsersTemplatedNotificationV1AdminAsync(SendUsersTemplatedNotificationV1Admin input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -696,23 +456,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void CreateTopic(CreateTopic input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task CreateTopicAsync(CreateTopic input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelNotificationTopicResponse? GetTopicByTopicName(GetTopicByTopicName input)
+        public GetTemplateSlugLocalizationsTemplateV1Admin.Response GetTemplateSlugLocalizationsTemplateV1Admin(GetTemplateSlugLocalizationsTemplateV1Admin input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -720,7 +464,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelNotificationTopicResponse?> GetTopicByTopicNameAsync(GetTopicByTopicName input)
+        public async Task<GetTemplateSlugLocalizationsTemplateV1Admin.Response> GetTemplateSlugLocalizationsTemplateV1AdminAsync(GetTemplateSlugLocalizationsTemplateV1Admin input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -728,66 +472,322 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void UpdateTopicByTopicName(UpdateTopicByTopicName input)
+        public DeleteNotificationTemplateSlugV1Admin.Response DeleteNotificationTemplateSlugV1Admin(DeleteNotificationTemplateSlugV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task UpdateTopicByTopicNameAsync(UpdateTopicByTopicName input)
+        public async Task<DeleteNotificationTemplateSlugV1Admin.Response> DeleteNotificationTemplateSlugV1AdminAsync(DeleteNotificationTemplateSlugV1Admin input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteTopicByTopicName(DeleteTopicByTopicName input)
+        public GetSingleTemplateLocalizationV1Admin.Response GetSingleTemplateLocalizationV1Admin(GetSingleTemplateLocalizationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteTopicByTopicNameAsync(DeleteTopicByTopicName input)
+        public async Task<GetSingleTemplateLocalizationV1Admin.Response> GetSingleTemplateLocalizationV1AdminAsync(GetSingleTemplateLocalizationV1Admin input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void FreeFormNotificationByUserID(FreeFormNotificationByUserID input)
+        public UpdateTemplateLocalizationV1Admin.Response UpdateTemplateLocalizationV1Admin(UpdateTemplateLocalizationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task FreeFormNotificationByUserIDAsync(FreeFormNotificationByUserID input)
+        public async Task<UpdateTemplateLocalizationV1Admin.Response> UpdateTemplateLocalizationV1AdminAsync(UpdateTemplateLocalizationV1Admin input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void NotificationWithTemplateByUserID(NotificationWithTemplateByUserID input)
+        public DeleteTemplateLocalizationV1Admin.Response DeleteTemplateLocalizationV1Admin(DeleteTemplateLocalizationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task NotificationWithTemplateByUserIDAsync(NotificationWithTemplateByUserID input)
+        public async Task<DeleteTemplateLocalizationV1Admin.Response> DeleteTemplateLocalizationV1AdminAsync(DeleteTemplateLocalizationV1Admin input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublishTemplateLocalizationV1Admin.Response PublishTemplateLocalizationV1Admin(PublishTemplateLocalizationV1Admin input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublishTemplateLocalizationV1Admin.Response> PublishTemplateLocalizationV1AdminAsync(PublishTemplateLocalizationV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetAllNotificationTopicsV1Admin.Response GetAllNotificationTopicsV1Admin(GetAllNotificationTopicsV1Admin input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetAllNotificationTopicsV1Admin.Response> GetAllNotificationTopicsV1AdminAsync(GetAllNotificationTopicsV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public CreateNotificationTopicV1Admin.Response CreateNotificationTopicV1Admin(CreateNotificationTopicV1Admin input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<CreateNotificationTopicV1Admin.Response> CreateNotificationTopicV1AdminAsync(CreateNotificationTopicV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetNotificationTopicV1Admin.Response GetNotificationTopicV1Admin(GetNotificationTopicV1Admin input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetNotificationTopicV1Admin.Response> GetNotificationTopicV1AdminAsync(GetNotificationTopicV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public UpdateNotificationTopicV1Admin.Response UpdateNotificationTopicV1Admin(UpdateNotificationTopicV1Admin input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpdateNotificationTopicV1Admin.Response> UpdateNotificationTopicV1AdminAsync(UpdateNotificationTopicV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeleteNotificationTopicV1Admin.Response DeleteNotificationTopicV1Admin(DeleteNotificationTopicV1Admin input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteNotificationTopicV1Admin.Response> DeleteNotificationTopicV1AdminAsync(DeleteNotificationTopicV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public SendSpecificUserFreeformNotificationV1Admin.Response SendSpecificUserFreeformNotificationV1Admin(SendSpecificUserFreeformNotificationV1Admin input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<SendSpecificUserFreeformNotificationV1Admin.Response> SendSpecificUserFreeformNotificationV1AdminAsync(SendSpecificUserFreeformNotificationV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public SendSpecificUserTemplatedNotificationV1Admin.Response SendSpecificUserTemplatedNotificationV1Admin(SendSpecificUserTemplatedNotificationV1Admin input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<SendSpecificUserTemplatedNotificationV1Admin.Response> SendSpecificUserTemplatedNotificationV1AdminAsync(SendSpecificUserTemplatedNotificationV1Admin input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetMyNotifications.Response GetMyNotifications(GetMyNotifications input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetMyNotifications.Response> GetMyNotificationsAsync(GetMyNotifications input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetTopicByNamespace.Response GetTopicByNamespace(GetTopicByNamespace input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetTopicByNamespace.Response> GetTopicByNamespaceAsync(GetTopicByNamespace input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public CreateTopic.Response CreateTopic(CreateTopic input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<CreateTopic.Response> CreateTopicAsync(CreateTopic input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetTopicByTopicName.Response GetTopicByTopicName(GetTopicByTopicName input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetTopicByTopicName.Response> GetTopicByTopicNameAsync(GetTopicByTopicName input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public UpdateTopicByTopicName.Response UpdateTopicByTopicName(UpdateTopicByTopicName input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpdateTopicByTopicName.Response> UpdateTopicByTopicNameAsync(UpdateTopicByTopicName input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeleteTopicByTopicName.Response DeleteTopicByTopicName(DeleteTopicByTopicName input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteTopicByTopicName.Response> DeleteTopicByTopicNameAsync(DeleteTopicByTopicName input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public FreeFormNotificationByUserID.Response FreeFormNotificationByUserID(FreeFormNotificationByUserID input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<FreeFormNotificationByUserID.Response> FreeFormNotificationByUserIDAsync(FreeFormNotificationByUserID input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public NotificationWithTemplateByUserID.Response NotificationWithTemplateByUserID(NotificationWithTemplateByUserID input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<NotificationWithTemplateByUserID.Response> NotificationWithTemplateByUserIDAsync(NotificationWithTemplateByUserID input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

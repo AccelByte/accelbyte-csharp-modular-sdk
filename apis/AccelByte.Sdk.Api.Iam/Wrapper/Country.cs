@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-        public List<Model.ModelCountryResponse>? AdminGetCountryListV3(AdminGetCountryListV3 input)
+        public AdminGetCountryListV3.Response AdminGetCountryListV3(AdminGetCountryListV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelCountryResponse>?> AdminGetCountryListV3Async(AdminGetCountryListV3 input)
+        public async Task<AdminGetCountryListV3.Response> AdminGetCountryListV3Async(AdminGetCountryListV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelCountryBlacklistResponse? AdminGetCountryBlacklistV3(AdminGetCountryBlacklistV3 input)
+        public AdminGetCountryBlacklistV3.Response AdminGetCountryBlacklistV3(AdminGetCountryBlacklistV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelCountryBlacklistResponse?> AdminGetCountryBlacklistV3Async(AdminGetCountryBlacklistV3 input)
+        public async Task<AdminGetCountryBlacklistV3.Response> AdminGetCountryBlacklistV3Async(AdminGetCountryBlacklistV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -112,23 +112,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminAddCountryBlacklistV3(AdminAddCountryBlacklistV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminAddCountryBlacklistV3Async(AdminAddCountryBlacklistV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public List<Model.ModelCountryResponse>? PublicGetCountryListV3(PublicGetCountryListV3 input)
+        public AdminAddCountryBlacklistV3.Response AdminAddCountryBlacklistV3(AdminAddCountryBlacklistV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -136,7 +120,23 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelCountryResponse>?> PublicGetCountryListV3Async(PublicGetCountryListV3 input)
+        public async Task<AdminAddCountryBlacklistV3.Response> AdminAddCountryBlacklistV3Async(AdminAddCountryBlacklistV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetCountryListV3.Response PublicGetCountryListV3(PublicGetCountryListV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetCountryListV3.Response> PublicGetCountryListV3Async(PublicGetCountryListV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

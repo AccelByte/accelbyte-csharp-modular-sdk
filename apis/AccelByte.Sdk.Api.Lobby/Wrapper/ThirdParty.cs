@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         }
         #endregion
 
-        public Model.ModelsGetConfigResponse? AdminGetThirdPartyConfig(AdminGetThirdPartyConfig input)
+        public AdminGetThirdPartyConfig.Response AdminGetThirdPartyConfig(AdminGetThirdPartyConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetConfigResponse?> AdminGetThirdPartyConfigAsync(AdminGetThirdPartyConfig input)
+        public async Task<AdminGetThirdPartyConfig.Response> AdminGetThirdPartyConfigAsync(AdminGetThirdPartyConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsUpdateConfigResponse? AdminUpdateThirdPartyConfig(AdminUpdateThirdPartyConfig input)
+        public AdminUpdateThirdPartyConfig.Response AdminUpdateThirdPartyConfig(AdminUpdateThirdPartyConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUpdateConfigResponse?> AdminUpdateThirdPartyConfigAsync(AdminUpdateThirdPartyConfig input)
+        public async Task<AdminUpdateThirdPartyConfig.Response> AdminUpdateThirdPartyConfigAsync(AdminUpdateThirdPartyConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCreateConfigResponse? AdminCreateThirdPartyConfig(AdminCreateThirdPartyConfig input)
+        public AdminCreateThirdPartyConfig.Response AdminCreateThirdPartyConfig(AdminCreateThirdPartyConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateConfigResponse?> AdminCreateThirdPartyConfigAsync(AdminCreateThirdPartyConfig input)
+        public async Task<AdminCreateThirdPartyConfig.Response> AdminCreateThirdPartyConfigAsync(AdminCreateThirdPartyConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public string? AdminDeleteThirdPartyConfig(AdminDeleteThirdPartyConfig input)
+        public AdminDeleteThirdPartyConfig.Response AdminDeleteThirdPartyConfig(AdminDeleteThirdPartyConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -136,7 +136,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<string?> AdminDeleteThirdPartyConfigAsync(AdminDeleteThirdPartyConfig input)
+        public async Task<AdminDeleteThirdPartyConfig.Response> AdminDeleteThirdPartyConfigAsync(AdminDeleteThirdPartyConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

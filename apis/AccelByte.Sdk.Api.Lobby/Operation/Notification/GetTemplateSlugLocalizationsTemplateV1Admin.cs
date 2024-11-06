@@ -82,15 +82,15 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 GetTemplateSlugLocalizationsTemplateV1Admin op = new GetTemplateSlugLocalizationsTemplateV1Admin(this,
-                    namespace_,
-                    templateSlug
+                    namespace_,                    
+                    templateSlug                    
                 );
 
                 op.SetBaseFields<GetTemplateSlugLocalizationsTemplateV1AdminBuilder>(this);
                 return op;
             }
 
-            public Model.ModelGetAllNotificationTemplateSlugResp? Execute(
+            public GetTemplateSlugLocalizationsTemplateV1Admin.Response Execute(
                 string namespace_,
                 string templateSlug
             )
@@ -105,11 +105,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelGetAllNotificationTemplateSlugResp?> ExecuteAsync(
+            public async Task<GetTemplateSlugLocalizationsTemplateV1Admin.Response> ExecuteAsync(
                 string namespace_,
                 string templateSlug
             )
@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -137,39 +137,57 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["templateSlug"] = templateSlug;
-
+            
             if (builder.After is not null) QueryParams["after"] = builder.After;
             if (builder.Before is not null) QueryParams["before"] = builder.Before;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelGetAllNotificationTemplateSlugResp>
+        {
+
+            public RestapiErrorResponseV1? Error400 { get; set; } = null;
+
+            public RestapiErrorResponseV1? Error401 { get; set; } = null;
+
+            public RestapiErrorResponseV1? Error403 { get; set; } = null;
+
+            public RestapiErrorResponseV1? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Lobby::Notification::GetTemplateSlugLocalizationsTemplateV1Admin";
+        }
+
+        #endregion
+
         public GetTemplateSlugLocalizationsTemplateV1Admin(
-            string namespace_,
-            string templateSlug,
-            string? after,
-            string? before,
-            long? limit
+            string namespace_,            
+            string templateSlug,            
+            string? after,            
+            string? before,            
+            long? limit            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["templateSlug"] = templateSlug;
-
+            
             if (after is not null) QueryParams["after"] = after;
             if (before is not null) QueryParams["before"] = before;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -181,25 +199,46 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelGetAllNotificationTemplateSlugResp? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetTemplateSlugLocalizationsTemplateV1Admin.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetTemplateSlugLocalizationsTemplateV1Admin.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelGetAllNotificationTemplateSlugResp>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelGetAllNotificationTemplateSlugResp>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelGetAllNotificationTemplateSlugResp>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

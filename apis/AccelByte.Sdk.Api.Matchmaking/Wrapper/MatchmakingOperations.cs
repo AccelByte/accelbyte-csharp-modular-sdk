@@ -80,39 +80,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
         }
         #endregion
 
-        public void GetHealthcheckInfo(GetHealthcheckInfo input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task GetHealthcheckInfoAsync(GetHealthcheckInfo input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void HandlerV3Healthz(HandlerV3Healthz input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task HandlerV3HealthzAsync(HandlerV3Healthz input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public List<Model.LogAppMessageDeclaration>? PublicGetMessages(PublicGetMessages input)
+        public GetHealthcheckInfo.Response GetHealthcheckInfo(GetHealthcheckInfo input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +88,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.LogAppMessageDeclaration>?> PublicGetMessagesAsync(PublicGetMessages input)
+        public async Task<GetHealthcheckInfo.Response> GetHealthcheckInfoAsync(GetHealthcheckInfo input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,18 +96,50 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void VersionCheckHandler(VersionCheckHandler input)
+        public HandlerV3Healthz.Response HandlerV3Healthz(HandlerV3Healthz input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task VersionCheckHandlerAsync(VersionCheckHandler input)
+        public async Task<HandlerV3Healthz.Response> HandlerV3HealthzAsync(HandlerV3Healthz input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetMessages.Response PublicGetMessages(PublicGetMessages input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetMessages.Response> PublicGetMessagesAsync(PublicGetMessages input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public VersionCheckHandler.Response VersionCheckHandler(VersionCheckHandler input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<VersionCheckHandler.Response> VersionCheckHandlerAsync(VersionCheckHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

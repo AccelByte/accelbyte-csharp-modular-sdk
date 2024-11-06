@@ -59,16 +59,16 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             )
             {
                 GetUserRankingAdminV3 op = new GetUserRankingAdminV3(this,
-                    leaderboardCode,
-                    namespace_,
-                    userId
+                    leaderboardCode,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<GetUserRankingAdminV3Builder>(this);
                 return op;
             }
 
-            public Model.ModelsUserRankingResponseV3? Execute(
+            public GetUserRankingAdminV3.Response Execute(
                 string leaderboardCode,
                 string namespace_,
                 string userId
@@ -85,11 +85,11 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsUserRankingResponseV3?> ExecuteAsync(
+            public async Task<GetUserRankingAdminV3.Response> ExecuteAsync(
                 string leaderboardCode,
                 string namespace_,
                 string userId
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -121,32 +121,50 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             PathParams["leaderboardCode"] = leaderboardCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsUserRankingResponseV3>
+        {
+
+            public ResponseErrorResponse? Error401 { get; set; } = null;
+
+            public ResponseErrorResponse? Error403 { get; set; } = null;
+
+            public ResponseErrorResponse? Error404 { get; set; } = null;
+
+            public ResponseErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Leaderboard::LeaderboardDataV3::GetUserRankingAdminV3";
+        }
+
+        #endregion
+
         public GetUserRankingAdminV3(
-            string leaderboardCode,
-            string namespace_,
-            string userId
+            string leaderboardCode,            
+            string namespace_,            
+            string userId            
         )
         {
             PathParams["leaderboardCode"] = leaderboardCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -155,28 +173,49 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsUserRankingResponseV3? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetUserRankingAdminV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetUserRankingAdminV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsUserRankingResponseV3>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsUserRankingResponseV3>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)401)
             {
-                return JsonSerializer.Deserialize<Model.ModelsUserRankingResponseV3>(payload, ResponseJsonOptions);
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

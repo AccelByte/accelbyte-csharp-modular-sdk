@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
         }
         #endregion
 
-        public Model.ApiListRuleSetsResponse? RuleSetList(RuleSetList input)
+        public RuleSetList.Response RuleSetList(RuleSetList input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiListRuleSetsResponse?> RuleSetListAsync(RuleSetList input)
+        public async Task<RuleSetList.Response> RuleSetListAsync(RuleSetList input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -107,23 +107,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void CreateRuleSet(CreateRuleSet input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task CreateRuleSetAsync(CreateRuleSet input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApiRuleSetPayload? RuleSetDetails(RuleSetDetails input)
+        public CreateRuleSet.Response CreateRuleSet(CreateRuleSet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -131,7 +115,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiRuleSetPayload?> RuleSetDetailsAsync(RuleSetDetails input)
+        public async Task<CreateRuleSet.Response> CreateRuleSetAsync(CreateRuleSet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -139,24 +123,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.ApiRuleSetPayload<T1>? RuleSetDetails<T1>(RuleSetDetails input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ApiRuleSetPayload<T1>?> RuleSetDetailsAsync<T1>(RuleSetDetails input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApiRuleSetPayload? UpdateRuleSet(UpdateRuleSet input)
+        public RuleSetDetails.Response RuleSetDetails(RuleSetDetails input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -164,7 +131,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiRuleSetPayload?> UpdateRuleSetAsync(UpdateRuleSet input)
+        public async Task<RuleSetDetails.Response> RuleSetDetailsAsync(RuleSetDetails input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -173,7 +140,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.Payload);
         }
 
-        public Model.ApiRuleSetPayload<T1>? UpdateRuleSet<T1>(UpdateRuleSet input)
+        public RuleSetDetails.Response<T1> RuleSetDetails<T1>(RuleSetDetails input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -181,7 +148,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiRuleSetPayload<T1>?> UpdateRuleSetAsync<T1>(UpdateRuleSet input)
+        public async Task<RuleSetDetails.Response<T1>> RuleSetDetailsAsync<T1>(RuleSetDetails input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -189,18 +156,51 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteRuleSet(DeleteRuleSet input)
+        public UpdateRuleSet.Response UpdateRuleSet(UpdateRuleSet input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteRuleSetAsync(DeleteRuleSet input)
+        public async Task<UpdateRuleSet.Response> UpdateRuleSetAsync(UpdateRuleSet input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public UpdateRuleSet.Response<T1> UpdateRuleSet<T1>(UpdateRuleSet input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpdateRuleSet.Response<T1>> UpdateRuleSetAsync<T1>(UpdateRuleSet input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeleteRuleSet.Response DeleteRuleSet(DeleteRuleSet input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteRuleSet.Response> DeleteRuleSetAsync(DeleteRuleSet input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

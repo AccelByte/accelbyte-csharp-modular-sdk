@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
         }
         #endregion
 
-        public Model.RestapiConfigResponse? Get(Get input)
+        public Get.Response Get(Get input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiConfigResponse?> GetAsync(Get input)
+        public async Task<Get.Response> GetAsync(Get input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RestapiConfigResponse? Upsert(Upsert input)
+        public Upsert.Response Upsert(Upsert input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiConfigResponse?> UpsertAsync(Upsert input)
+        public async Task<Upsert.Response> UpsertAsync(Upsert input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

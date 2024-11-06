@@ -83,18 +83,18 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             )
             {
                 QueryDetailTickMatchPool op = new QueryDetailTickMatchPool(this,
-                    namespace_,
-                    podName,
-                    poolName,
-                    endDate,
-                    startDate
+                    namespace_,                    
+                    podName,                    
+                    poolName,                    
+                    endDate,                    
+                    startDate                    
                 );
 
                 op.SetBaseFields<QueryDetailTickMatchPoolBuilder>(this);
                 return op;
             }
 
-            public Model.ApimodelsXRayMatchPoolPodTickQueryResponse? Execute(
+            public QueryDetailTickMatchPool.Response Execute(
                 string namespace_,
                 string podName,
                 string poolName,
@@ -115,11 +115,11 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ApimodelsXRayMatchPoolPodTickQueryResponse?> ExecuteAsync(
+            public async Task<QueryDetailTickMatchPool.Response> ExecuteAsync(
                 string namespace_,
                 string podName,
                 string poolName,
@@ -140,7 +140,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -157,47 +157,67 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             PathParams["namespace"] = namespace_;
             PathParams["podName"] = podName;
             PathParams["poolName"] = poolName;
-
+            
             if (builder.All != null) QueryParams["all"] = Convert.ToString(builder.All)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (endDate is not null) QueryParams["endDate"] = endDate;
             if (startDate is not null) QueryParams["startDate"] = startDate;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ApimodelsXRayMatchPoolPodTickQueryResponse>
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error403 { get; set; } = null;
+
+            public ResponseError? Error404 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Sessionhistory::XRay::QueryDetailTickMatchPool";
+        }
+
+        #endregion
+
         public QueryDetailTickMatchPool(
-            string namespace_,
-            string podName,
-            string poolName,
-            bool? all,
-            long? limit,
-            long? offset,
-            string endDate,
-            string startDate
+            string namespace_,            
+            string podName,            
+            string poolName,            
+            bool? all,            
+            long? limit,            
+            long? offset,            
+            string endDate,            
+            string startDate            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["podName"] = podName;
             PathParams["poolName"] = poolName;
-
+            
             if (all != null) QueryParams["all"] = Convert.ToString(all)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (endDate is not null) QueryParams["endDate"] = endDate;
             if (startDate is not null) QueryParams["startDate"] = startDate;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -209,25 +229,51 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ApimodelsXRayMatchPoolPodTickQueryResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public QueryDetailTickMatchPool.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new QueryDetailTickMatchPool.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ApimodelsXRayMatchPoolPodTickQueryResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsXRayMatchPoolPodTickQueryResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ApimodelsXRayMatchPoolPodTickQueryResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

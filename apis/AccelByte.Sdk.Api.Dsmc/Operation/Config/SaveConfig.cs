@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
     /// }
     /// ```
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class SaveConfig : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -129,15 +129,15 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             )
             {
                 SaveConfig op = new SaveConfig(this,
-                    body
+                    body                    
                 );
 
                 op.SetBaseFields<SaveConfigBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public void Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public SaveConfig.Response Execute(
                 ModelsDSMConfigRecord body
             )
             {
@@ -149,12 +149,12 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<SaveConfig.Response> ExecuteAsync(
                 ModelsDSMConfigRecord body
             )
             {
@@ -166,8 +166,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -177,29 +177,45 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             ModelsDSMConfigRecord body
         )
         {
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public SaveConfig(
-            Model.ModelsDSMConfigRecord body
-        )
+        #region Response Part        
+        public class Response : ApiResponse
         {
 
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
 
 
+            protected override string GetFullOperationId() => "Dsmc::Config::SaveConfig";
+        }
 
+        #endregion
 
+        public SaveConfig(
+            Model.ModelsDSMConfigRecord body            
+        )
+        {
+            
+            
+
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -211,17 +227,36 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public SaveConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new SaveConfig.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

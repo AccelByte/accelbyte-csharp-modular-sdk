@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedGlobalAchievementResponse? AdminListGlobalAchievements(AdminListGlobalAchievements input)
+        public AdminListGlobalAchievements.Response AdminListGlobalAchievements(AdminListGlobalAchievements input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -132,7 +132,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedGlobalAchievementResponse?> AdminListGlobalAchievementsAsync(AdminListGlobalAchievements input)
+        public async Task<AdminListGlobalAchievements.Response> AdminListGlobalAchievementsAsync(AdminListGlobalAchievements input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -140,7 +140,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPaginatedContributorResponse? AdminListGlobalAchievementContributors(AdminListGlobalAchievementContributors input)
+        public AdminListGlobalAchievementContributors.Response AdminListGlobalAchievementContributors(AdminListGlobalAchievementContributors input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedContributorResponse?> AdminListGlobalAchievementContributorsAsync(AdminListGlobalAchievementContributors input)
+        public async Task<AdminListGlobalAchievementContributors.Response> AdminListGlobalAchievementContributorsAsync(AdminListGlobalAchievementContributors input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -156,23 +156,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void ResetGlobalAchievement(ResetGlobalAchievement input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task ResetGlobalAchievementAsync(ResetGlobalAchievement input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsPaginatedUserContributionResponse? AdminListUserContributions(AdminListUserContributions input)
+        public ResetGlobalAchievement.Response ResetGlobalAchievement(ResetGlobalAchievement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -180,7 +164,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedUserContributionResponse?> AdminListUserContributionsAsync(AdminListUserContributions input)
+        public async Task<ResetGlobalAchievement.Response> ResetGlobalAchievementAsync(ResetGlobalAchievement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -188,7 +172,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPaginatedGlobalAchievementResponse? PublicListGlobalAchievements(PublicListGlobalAchievements input)
+        public AdminListUserContributions.Response AdminListUserContributions(AdminListUserContributions input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -196,7 +180,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedGlobalAchievementResponse?> PublicListGlobalAchievementsAsync(PublicListGlobalAchievements input)
+        public async Task<AdminListUserContributions.Response> AdminListUserContributionsAsync(AdminListUserContributions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -204,7 +188,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPaginatedContributorResponse? ListGlobalAchievementContributors(ListGlobalAchievementContributors input)
+        public PublicListGlobalAchievements.Response PublicListGlobalAchievements(PublicListGlobalAchievements input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -212,7 +196,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedContributorResponse?> ListGlobalAchievementContributorsAsync(ListGlobalAchievementContributors input)
+        public async Task<PublicListGlobalAchievements.Response> PublicListGlobalAchievementsAsync(PublicListGlobalAchievements input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -220,7 +204,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPaginatedUserContributionResponse? ListUserContributions(ListUserContributions input)
+        public ListGlobalAchievementContributors.Response ListGlobalAchievementContributors(ListGlobalAchievementContributors input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -228,7 +212,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedUserContributionResponse?> ListUserContributionsAsync(ListUserContributions input)
+        public async Task<ListGlobalAchievementContributors.Response> ListGlobalAchievementContributorsAsync(ListGlobalAchievementContributors input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -236,18 +220,34 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void ClaimGlobalAchievementReward(ClaimGlobalAchievementReward input)
+        public ListUserContributions.Response ListUserContributions(ListUserContributions input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task ClaimGlobalAchievementRewardAsync(ClaimGlobalAchievementReward input)
+        public async Task<ListUserContributions.Response> ListUserContributionsAsync(ListUserContributions input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public ClaimGlobalAchievementReward.Response ClaimGlobalAchievementReward(ClaimGlobalAchievementReward input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<ClaimGlobalAchievementReward.Response> ClaimGlobalAchievementRewardAsync(ClaimGlobalAchievementReward input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

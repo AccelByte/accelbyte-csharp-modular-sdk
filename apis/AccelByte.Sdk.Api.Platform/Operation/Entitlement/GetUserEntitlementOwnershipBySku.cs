@@ -73,16 +73,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetUserEntitlementOwnershipBySku op = new GetUserEntitlementOwnershipBySku(this,
-                    namespace_,
-                    userId,
-                    sku
+                    namespace_,                    
+                    userId,                    
+                    sku                    
                 );
 
                 op.SetBaseFields<GetUserEntitlementOwnershipBySkuBuilder>(this);
                 return op;
             }
 
-            public Model.TimedOwnership? Execute(
+            public GetUserEntitlementOwnershipBySku.Response Execute(
                 string namespace_,
                 string userId,
                 string sku
@@ -99,11 +99,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.TimedOwnership?> ExecuteAsync(
+            public async Task<GetUserEntitlementOwnershipBySku.Response> ExecuteAsync(
                 string namespace_,
                 string userId,
                 string sku
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -134,39 +134,49 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.EntitlementClazz is not null) QueryParams["entitlementClazz"] = builder.EntitlementClazz.Value;
             if (builder.Platform is not null) QueryParams["platform"] = builder.Platform;
             if (sku is not null) QueryParams["sku"] = sku;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.TimedOwnership>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Entitlement::GetUserEntitlementOwnershipBySku";
+        }
+
+        #endregion
+
         public GetUserEntitlementOwnershipBySku(
-            string namespace_,
-            string userId,
-            GetUserEntitlementOwnershipBySkuEntitlementClazz? entitlementClazz,
-            string? platform,
-            string sku
+            string namespace_,            
+            string userId,            
+            GetUserEntitlementOwnershipBySkuEntitlementClazz? entitlementClazz,            
+            string? platform,            
+            string sku            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (entitlementClazz is not null) QueryParams["entitlementClazz"] = entitlementClazz.Value;
             if (platform is not null) QueryParams["platform"] = platform;
             if (sku is not null) QueryParams["sku"] = sku;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -175,28 +185,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.TimedOwnership? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetUserEntitlementOwnershipBySku.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetUserEntitlementOwnershipBySku.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.TimedOwnership>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.TimedOwnership>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.TimedOwnership>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

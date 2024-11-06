@@ -107,14 +107,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QuerySections op = new QuerySections(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<QuerySectionsBuilder>(this);
                 return op;
             }
 
-            public Model.SectionPagingSlicedResult? Execute(
+            public QuerySections.Response Execute(
                 string namespace_
             )
             {
@@ -127,11 +127,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.SectionPagingSlicedResult?> ExecuteAsync(
+            public async Task<QuerySections.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -144,7 +144,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -155,46 +155,60 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.End is not null) QueryParams["end"] = builder.End;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Start is not null) QueryParams["start"] = builder.Start;
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
             if (builder.ViewId is not null) QueryParams["viewId"] = builder.ViewId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.SectionPagingSlicedResult>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+            public ValidationErrorEntity? Error422 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Section::QuerySections";
+        }
+
+        #endregion
+
         public QuerySections(
-            string namespace_,
-            string? end,
-            int? limit,
-            int? offset,
-            string? start,
-            string? storeId,
-            string? viewId
+            string namespace_,            
+            string? end,            
+            int? limit,            
+            int? offset,            
+            string? start,            
+            string? storeId,            
+            string? viewId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (end is not null) QueryParams["end"] = end;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (start is not null) QueryParams["start"] = start;
             if (storeId is not null) QueryParams["storeId"] = storeId;
             if (viewId is not null) QueryParams["viewId"] = viewId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -203,28 +217,39 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.SectionPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public QuerySections.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new QuerySections.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.SectionPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.SectionPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.SectionPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)422)
+            {
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Stream? DownloadInvoiceDetails(DownloadInvoiceDetails input)
+        public DownloadInvoiceDetails.Response DownloadInvoiceDetails(DownloadInvoiceDetails input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Stream?> DownloadInvoiceDetailsAsync(DownloadInvoiceDetails input)
+        public async Task<DownloadInvoiceDetails.Response> DownloadInvoiceDetailsAsync(DownloadInvoiceDetails input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.InvoiceSummary? GenerateInvoiceSummary(GenerateInvoiceSummary input)
+        public GenerateInvoiceSummary.Response GenerateInvoiceSummary(GenerateInvoiceSummary input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.InvoiceSummary?> GenerateInvoiceSummaryAsync(GenerateInvoiceSummary input)
+        public async Task<GenerateInvoiceSummary.Response> GenerateInvoiceSummaryAsync(GenerateInvoiceSummary input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

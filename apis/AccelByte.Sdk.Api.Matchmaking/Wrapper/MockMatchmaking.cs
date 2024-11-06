@@ -113,23 +113,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
         }
         #endregion
 
-        public void CleanAllMocks(CleanAllMocks input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task CleanAllMocksAsync(CleanAllMocks input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsGetMockMatchesResponse? GetAllMockMatches(GetAllMockMatches input)
+        public CleanAllMocks.Response CleanAllMocks(CleanAllMocks input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -137,7 +121,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetMockMatchesResponse?> GetAllMockMatchesAsync(GetAllMockMatches input)
+        public async Task<CleanAllMocks.Response> CleanAllMocksAsync(CleanAllMocks input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -145,7 +129,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetMockMatchesResponse? GetMockMatchesByTimestamp(GetMockMatchesByTimestamp input)
+        public GetAllMockMatches.Response GetAllMockMatches(GetAllMockMatches input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -153,7 +137,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetMockMatchesResponse?> GetMockMatchesByTimestampAsync(GetMockMatchesByTimestamp input)
+        public async Task<GetAllMockMatches.Response> GetAllMockMatchesAsync(GetAllMockMatches input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -161,7 +145,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetMockTicketsResponse? GetAllMockTickets(GetAllMockTickets input)
+        public GetMockMatchesByTimestamp.Response GetMockMatchesByTimestamp(GetMockMatchesByTimestamp input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -169,7 +153,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetMockTicketsResponse?> GetAllMockTicketsAsync(GetAllMockTickets input)
+        public async Task<GetMockMatchesByTimestamp.Response> GetMockMatchesByTimestampAsync(GetMockMatchesByTimestamp input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -177,7 +161,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelsMockTicket>? CreateMockTickets(CreateMockTickets input)
+        public GetAllMockTickets.Response GetAllMockTickets(GetAllMockTickets input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -185,7 +169,23 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsMockTicket>?> CreateMockTicketsAsync(CreateMockTickets input)
+        public async Task<GetAllMockTickets.Response> GetAllMockTicketsAsync(GetAllMockTickets input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public CreateMockTickets.Response CreateMockTickets(CreateMockTickets input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<CreateMockTickets.Response> CreateMockTicketsAsync(CreateMockTickets input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -194,7 +194,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.Payload);
         }
 
-        public List<Model.ModelsMockTicket<T1, T2>>? CreateMockTickets<T1, T2>(CreateMockTickets input)
+        public CreateMockTickets.Response<T1, T2> CreateMockTickets<T1, T2>(CreateMockTickets input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -202,7 +202,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsMockTicket<T1, T2>>?> CreateMockTicketsAsync<T1, T2>(CreateMockTickets input)
+        public async Task<CreateMockTickets.Response<T1, T2>> CreateMockTicketsAsync<T1, T2>(CreateMockTickets input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -210,23 +210,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void BulkCreateMockTickets(BulkCreateMockTickets input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task BulkCreateMockTicketsAsync(BulkCreateMockTickets input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsGetMockTicketsResponse? GetMockTicketsByTimestamp(GetMockTicketsByTimestamp input)
+        public BulkCreateMockTickets.Response BulkCreateMockTickets(BulkCreateMockTickets input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -234,7 +218,23 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetMockTicketsResponse?> GetMockTicketsByTimestampAsync(GetMockTicketsByTimestamp input)
+        public async Task<BulkCreateMockTickets.Response> BulkCreateMockTicketsAsync(BulkCreateMockTickets input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetMockTicketsByTimestamp.Response GetMockTicketsByTimestamp(GetMockTicketsByTimestamp input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetMockTicketsByTimestamp.Response> GetMockTicketsByTimestampAsync(GetMockTicketsByTimestamp input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

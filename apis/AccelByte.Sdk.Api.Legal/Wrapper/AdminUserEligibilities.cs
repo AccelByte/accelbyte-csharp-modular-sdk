@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
         #endregion
 
-        public Model.RetrieveUserEligibilitiesIndirectResponse? AdminRetrieveEligibilities(AdminRetrieveEligibilities input)
+        public AdminRetrieveEligibilities.Response AdminRetrieveEligibilities(AdminRetrieveEligibilities input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RetrieveUserEligibilitiesIndirectResponse?> AdminRetrieveEligibilitiesAsync(AdminRetrieveEligibilities input)
+        public async Task<AdminRetrieveEligibilities.Response> AdminRetrieveEligibilitiesAsync(AdminRetrieveEligibilities input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

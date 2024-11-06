@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public ImportStore.ImportStoreBuilder ImportStoreOp
         {
             get
@@ -211,7 +211,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public ExportStore.ExportStoreBuilder ExportStoreOp
         {
             get
@@ -280,7 +280,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.CatalogConfigInfo? GetCatalogConfig(GetCatalogConfig input)
+        public GetCatalogConfig.Response GetCatalogConfig(GetCatalogConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -288,7 +288,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CatalogConfigInfo?> GetCatalogConfigAsync(GetCatalogConfig input)
+        public async Task<GetCatalogConfig.Response> GetCatalogConfigAsync(GetCatalogConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -296,7 +296,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.CatalogConfigInfo? UpdateCatalogConfig(UpdateCatalogConfig input)
+        public UpdateCatalogConfig.Response UpdateCatalogConfig(UpdateCatalogConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -304,7 +304,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CatalogConfigInfo?> UpdateCatalogConfigAsync(UpdateCatalogConfig input)
+        public async Task<UpdateCatalogConfig.Response> UpdateCatalogConfigAsync(UpdateCatalogConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -312,7 +312,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.StoreInfo>? ListStores(ListStores input)
+        public ListStores.Response ListStores(ListStores input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -320,7 +320,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.StoreInfo>?> ListStoresAsync(ListStores input)
+        public async Task<ListStores.Response> ListStoresAsync(ListStores input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -328,7 +328,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StoreInfo? CreateStore(CreateStore input)
+        public CreateStore.Response CreateStore(CreateStore input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -336,7 +336,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StoreInfo?> CreateStoreAsync(CreateStore input)
+        public async Task<CreateStore.Response> CreateStoreAsync(CreateStore input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -344,7 +344,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.CatalogDefinitionInfo>? GetCatalogDefinition(GetCatalogDefinition input)
+        public GetCatalogDefinition.Response GetCatalogDefinition(GetCatalogDefinition input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -352,7 +352,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.CatalogDefinitionInfo>?> GetCatalogDefinitionAsync(GetCatalogDefinition input)
+        public async Task<GetCatalogDefinition.Response> GetCatalogDefinitionAsync(GetCatalogDefinition input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -360,7 +360,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Stream? DownloadCSVTemplates(DownloadCSVTemplates input)
+        public DownloadCSVTemplates.Response DownloadCSVTemplates(DownloadCSVTemplates input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -368,7 +368,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Stream?> DownloadCSVTemplatesAsync(DownloadCSVTemplates input)
+        public async Task<DownloadCSVTemplates.Response> DownloadCSVTemplatesAsync(DownloadCSVTemplates input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -376,7 +376,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Stream? ExportStoreByCSV(ExportStoreByCSV input)
+        public ExportStoreByCSV.Response ExportStoreByCSV(ExportStoreByCSV input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -384,7 +384,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Stream?> ExportStoreByCSVAsync(ExportStoreByCSV input)
+        public async Task<ExportStoreByCSV.Response> ExportStoreByCSVAsync(ExportStoreByCSV input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -392,9 +392,9 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.StoreInfo? ImportStore(ImportStore input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public ImportStore.Response ImportStore(ImportStore input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -402,7 +402,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StoreInfo?> ImportStoreAsync(ImportStore input)
+        public async Task<ImportStore.Response> ImportStoreAsync(ImportStore input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -410,8 +410,8 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public Model.StoreInfo? GetPublishedStore(GetPublishedStore input)
+        #pragma warning restore ab_deprecated_operation
+        public GetPublishedStore.Response GetPublishedStore(GetPublishedStore input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -419,7 +419,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StoreInfo?> GetPublishedStoreAsync(GetPublishedStore input)
+        public async Task<GetPublishedStore.Response> GetPublishedStoreAsync(GetPublishedStore input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -427,7 +427,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StoreInfo? DeletePublishedStore(DeletePublishedStore input)
+        public DeletePublishedStore.Response DeletePublishedStore(DeletePublishedStore input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -435,7 +435,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StoreInfo?> DeletePublishedStoreAsync(DeletePublishedStore input)
+        public async Task<DeletePublishedStore.Response> DeletePublishedStoreAsync(DeletePublishedStore input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -443,7 +443,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StoreBackupInfo? GetPublishedStoreBackup(GetPublishedStoreBackup input)
+        public GetPublishedStoreBackup.Response GetPublishedStoreBackup(GetPublishedStoreBackup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -451,7 +451,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StoreBackupInfo?> GetPublishedStoreBackupAsync(GetPublishedStoreBackup input)
+        public async Task<GetPublishedStoreBackup.Response> GetPublishedStoreBackupAsync(GetPublishedStoreBackup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -459,7 +459,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StoreInfo? RollbackPublishedStore(RollbackPublishedStore input)
+        public RollbackPublishedStore.Response RollbackPublishedStore(RollbackPublishedStore input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -467,7 +467,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StoreInfo?> RollbackPublishedStoreAsync(RollbackPublishedStore input)
+        public async Task<RollbackPublishedStore.Response> RollbackPublishedStoreAsync(RollbackPublishedStore input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -475,7 +475,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StoreInfo? GetStore(GetStore input)
+        public GetStore.Response GetStore(GetStore input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -483,7 +483,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StoreInfo?> GetStoreAsync(GetStore input)
+        public async Task<GetStore.Response> GetStoreAsync(GetStore input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -491,7 +491,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StoreInfo? UpdateStore(UpdateStore input)
+        public UpdateStore.Response UpdateStore(UpdateStore input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -499,7 +499,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StoreInfo?> UpdateStoreAsync(UpdateStore input)
+        public async Task<UpdateStore.Response> UpdateStoreAsync(UpdateStore input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -507,7 +507,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StoreInfo? DeleteStore(DeleteStore input)
+        public DeleteStore.Response DeleteStore(DeleteStore input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -515,7 +515,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StoreInfo?> DeleteStoreAsync(DeleteStore input)
+        public async Task<DeleteStore.Response> DeleteStoreAsync(DeleteStore input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -523,7 +523,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StoreInfo? CloneStore(CloneStore input)
+        public CloneStore.Response CloneStore(CloneStore input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -531,7 +531,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StoreInfo?> CloneStoreAsync(CloneStore input)
+        public async Task<CloneStore.Response> CloneStoreAsync(CloneStore input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -539,9 +539,9 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Stream? ExportStore(ExportStore input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public ExportStore.Response ExportStore(ExportStore input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -549,7 +549,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Stream?> ExportStoreAsync(ExportStore input)
+        public async Task<ExportStore.Response> ExportStoreAsync(ExportStore input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -557,8 +557,8 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public Model.ImportStoreHistoryPagingResult? QueryImportHistory(QueryImportHistory input)
+        #pragma warning restore ab_deprecated_operation
+        public QueryImportHistory.Response QueryImportHistory(QueryImportHistory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -566,7 +566,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ImportStoreHistoryPagingResult?> QueryImportHistoryAsync(QueryImportHistory input)
+        public async Task<QueryImportHistory.Response> QueryImportHistoryAsync(QueryImportHistory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -574,7 +574,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ImportStoreResult? ImportStoreByCSV(ImportStoreByCSV input)
+        public ImportStoreByCSV.Response ImportStoreByCSV(ImportStoreByCSV input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -582,7 +582,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ImportStoreResult?> ImportStoreByCSVAsync(ImportStoreByCSV input)
+        public async Task<ImportStoreByCSV.Response> ImportStoreByCSVAsync(ImportStoreByCSV input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -590,7 +590,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.StoreInfo>? PublicListStores(PublicListStores input)
+        public PublicListStores.Response PublicListStores(PublicListStores input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -598,7 +598,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.StoreInfo>?> PublicListStoresAsync(PublicListStores input)
+        public async Task<PublicListStores.Response> PublicListStoresAsync(PublicListStores input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -606,7 +606,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ImportStoreResult? ImportStore1(ImportStore1 input)
+        public ImportStore1.Response ImportStore1(ImportStore1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -614,7 +614,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ImportStoreResult?> ImportStore1Async(ImportStore1 input)
+        public async Task<ImportStore1.Response> ImportStore1Async(ImportStore1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -622,7 +622,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Stream? ExportStore1(ExportStore1 input)
+        public ExportStore1.Response ExportStore1(ExportStore1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -630,7 +630,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Stream?> ExportStore1Async(ExportStore1 input)
+        public async Task<ExportStore1.Response> ExportStore1Async(ExportStore1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

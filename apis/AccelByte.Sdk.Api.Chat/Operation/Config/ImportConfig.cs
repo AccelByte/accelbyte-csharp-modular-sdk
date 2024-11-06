@@ -65,14 +65,14 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 ImportConfig op = new ImportConfig(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<ImportConfigBuilder>(this);
                 return op;
             }
 
-            public Model.ModelsImportConfigResponse? Execute(
+            public ImportConfig.Response Execute(
                 string namespace_
             )
             {
@@ -85,11 +85,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsImportConfigResponse?> ExecuteAsync(
+            public async Task<ImportConfig.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -113,31 +113,47 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
-
+            
+            
             if (builder.File is not null) FormParams["file"] = builder.File;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsImportConfigResponse>
+        {
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error403 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Chat::Config::ImportConfig";
+        }
+
+        #endregion
+
         public ImportConfig(
-            string namespace_,
-            Stream? file
+            string namespace_,            
+            Stream? file            
         )
         {
             PathParams["namespace"] = namespace_;
-
-
+            
+            
             if (file is not null) FormParams["file"] = file;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -149,25 +165,41 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "multipart/form-data" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsImportConfigResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public ImportConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new ImportConfig.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsImportConfigResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsImportConfigResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)401)
             {
-                return JsonSerializer.Deserialize<Model.ModelsImportConfigResponse>(payload, ResponseJsonOptions);
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         }
         #endregion
 
-        public List<Model.ModelNativeUserBlockResponse>? SyncNativeBlockedUser(SyncNativeBlockedUser input)
+        public SyncNativeBlockedUser.Response SyncNativeBlockedUser(SyncNativeBlockedUser input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelNativeUserBlockResponse>?> SyncNativeBlockedUserAsync(SyncNativeBlockedUser input)
+        public async Task<SyncNativeBlockedUser.Response> SyncNativeBlockedUserAsync(SyncNativeBlockedUser input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

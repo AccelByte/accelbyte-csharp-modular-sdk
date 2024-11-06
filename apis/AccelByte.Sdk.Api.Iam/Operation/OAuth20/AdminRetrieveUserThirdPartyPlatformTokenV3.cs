@@ -83,16 +83,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminRetrieveUserThirdPartyPlatformTokenV3 op = new AdminRetrieveUserThirdPartyPlatformTokenV3(this,
-                    namespace_,
-                    platformId,
-                    userId
+                    namespace_,                    
+                    platformId,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<AdminRetrieveUserThirdPartyPlatformTokenV3Builder>(this);
                 return op;
             }
 
-            public Model.OauthmodelTokenThirdPartyResponse? Execute(
+            public AdminRetrieveUserThirdPartyPlatformTokenV3.Response Execute(
                 string namespace_,
                 string platformId,
                 string userId
@@ -109,11 +109,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OauthmodelTokenThirdPartyResponse?> ExecuteAsync(
+            public async Task<AdminRetrieveUserThirdPartyPlatformTokenV3.Response> ExecuteAsync(
                 string namespace_,
                 string platformId,
                 string userId
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -145,35 +145,51 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
             PathParams["userId"] = userId;
-
+            
             if (builder.PlatformUserId is not null) QueryParams["platformUserId"] = builder.PlatformUserId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.OauthmodelTokenThirdPartyResponse>
+        {
+
+            public OauthmodelErrorResponse? Error401 { get; set; } = null;
+
+            public OauthmodelErrorResponse? Error403 { get; set; } = null;
+
+            public OauthmodelErrorResponse? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::OAuth20::AdminRetrieveUserThirdPartyPlatformTokenV3";
+        }
+
+        #endregion
+
         public AdminRetrieveUserThirdPartyPlatformTokenV3(
-            string namespace_,
-            string platformId,
-            string userId,
-            string? platformUserId
+            string namespace_,            
+            string platformId,            
+            string userId,            
+            string? platformUserId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
             PathParams["userId"] = userId;
-
+            
             if (platformUserId is not null) QueryParams["platformUserId"] = platformUserId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -185,25 +201,41 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OauthmodelTokenThirdPartyResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminRetrieveUserThirdPartyPlatformTokenV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminRetrieveUserThirdPartyPlatformTokenV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenThirdPartyResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenThirdPartyResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)401)
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenThirdPartyResponse>(payload, ResponseJsonOptions);
+                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -58,34 +58,34 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         }
         #endregion
 
-        public void DeleteGameBinaryRecordTTLConfig(DeleteGameBinaryRecordTTLConfig input)
+        public DeleteGameBinaryRecordTTLConfig.Response DeleteGameBinaryRecordTTLConfig(DeleteGameBinaryRecordTTLConfig input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteGameBinaryRecordTTLConfigAsync(DeleteGameBinaryRecordTTLConfig input)
+        public async Task<DeleteGameBinaryRecordTTLConfig.Response> DeleteGameBinaryRecordTTLConfigAsync(DeleteGameBinaryRecordTTLConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteGameRecordTTLConfig(DeleteGameRecordTTLConfig input)
+        public DeleteGameRecordTTLConfig.Response DeleteGameRecordTTLConfig(DeleteGameRecordTTLConfig input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteGameRecordTTLConfigAsync(DeleteGameRecordTTLConfig input)
+        public async Task<DeleteGameRecordTTLConfig.Response> DeleteGameRecordTTLConfigAsync(DeleteGameRecordTTLConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

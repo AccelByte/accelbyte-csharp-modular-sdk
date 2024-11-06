@@ -63,16 +63,16 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             )
             {
                 GetAllPodConfig op = new GetAllPodConfig(this,
-                    namespace_,
-                    count,
-                    offset
+                    namespace_,                    
+                    count,                    
+                    offset                    
                 );
 
                 op.SetBaseFields<GetAllPodConfigBuilder>(this);
                 return op;
             }
 
-            public Model.ModelsListPodConfigResponse? Execute(
+            public GetAllPodConfig.Response Execute(
                 string namespace_,
                 long count,
                 long offset
@@ -89,11 +89,11 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsListPodConfigResponse?> ExecuteAsync(
+            public async Task<GetAllPodConfig.Response> ExecuteAsync(
                 string namespace_,
                 long count,
                 long offset
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -123,38 +123,54 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
-
+            
+            
             QueryParams["count"] = Convert.ToString(count)!;
-
+            
             QueryParams["offset"] = Convert.ToString(offset)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsListPodConfigResponse>
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Dsmc::PodConfig::GetAllPodConfig";
+        }
+
+        #endregion
+
         public GetAllPodConfig(
-            string namespace_,
-            long count,
-            long offset
+            string namespace_,            
+            long count,            
+            long offset            
         )
         {
             PathParams["namespace"] = namespace_;
-
-
+            
+            
             QueryParams["count"] = Convert.ToString(count)!;
-
+            
             QueryParams["offset"] = Convert.ToString(offset)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -166,25 +182,41 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsListPodConfigResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetAllPodConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetAllPodConfig.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsListPodConfigResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsListPodConfigResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsListPodConfigResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

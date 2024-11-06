@@ -60,7 +60,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 return op;
             }
 
-            public List<string>? Execute(
+            public RetrieveCountryListWithPolicies.Response Execute(
             )
             {
                 RetrieveCountryListWithPolicies op = Build(
@@ -71,11 +71,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<string>?> ExecuteAsync(
+            public async Task<RetrieveCountryListWithPolicies.Response> ExecuteAsync(
             )
             {
                 RetrieveCountryListWithPolicies op = Build(
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -95,25 +95,35 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         private RetrieveCountryListWithPolicies(RetrieveCountryListWithPoliciesBuilder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
         }
+        #endregion
+
+        #region Response Part        
+        public class Response : ApiResponse<List<string>>
+        {
+
+
+            protected override string GetFullOperationId() => "Legal::Policies::RetrieveCountryListWithPolicies";
+        }
+
         #endregion
 
         public RetrieveCountryListWithPolicies(
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
         }
 
@@ -121,28 +131,29 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<string>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public RetrieveCountryListWithPolicies.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new RetrieveCountryListWithPolicies.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
         }
         #endregion
 
-        public Model.ApiImageList? ImageList(ImageList input)
+        public ImageList.Response ImageList(ImageList input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiImageList?> ImageListAsync(ImageList input)
+        public async Task<ImageList.Response> ImageListAsync(ImageList input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiImageStorage? ImagesStorage(ImagesStorage input)
+        public ImagesStorage.Response ImagesStorage(ImagesStorage input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiImageStorage?> ImagesStorageAsync(ImagesStorage input)
+        public async Task<ImagesStorage.Response> ImagesStorageAsync(ImagesStorage input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiImageDetails? ImageGet(ImageGet input)
+        public ImageGet.Response ImageGet(ImageGet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -142,7 +142,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiImageDetails?> ImageGetAsync(ImageGet input)
+        public async Task<ImageGet.Response> ImageGetAsync(ImageGet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -150,23 +150,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void ImageMarkForDeletion(ImageMarkForDeletion input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task ImageMarkForDeletionAsync(ImageMarkForDeletion input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApiImageDetails? ImagePatch(ImagePatch input)
+        public ImageMarkForDeletion.Response ImageMarkForDeletion(ImageMarkForDeletion input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -174,7 +158,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiImageDetails?> ImagePatchAsync(ImagePatch input)
+        public async Task<ImageMarkForDeletion.Response> ImageMarkForDeletionAsync(ImageMarkForDeletion input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -182,18 +166,34 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void ImageUnmarkForDeletion(ImageUnmarkForDeletion input)
+        public ImagePatch.Response ImagePatch(ImagePatch input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task ImageUnmarkForDeletionAsync(ImageUnmarkForDeletion input)
+        public async Task<ImagePatch.Response> ImagePatchAsync(ImagePatch input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public ImageUnmarkForDeletion.Response ImageUnmarkForDeletion(ImageUnmarkForDeletion input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<ImageUnmarkForDeletion.Response> ImageUnmarkForDeletionAsync(ImageUnmarkForDeletion input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

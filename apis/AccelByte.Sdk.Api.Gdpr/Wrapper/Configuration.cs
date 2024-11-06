@@ -146,7 +146,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         }
         #endregion
 
-        public List<string>? GetAdminEmailConfiguration(GetAdminEmailConfiguration input)
+        public GetAdminEmailConfiguration.Response GetAdminEmailConfiguration(GetAdminEmailConfiguration input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -154,7 +154,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<string>?> GetAdminEmailConfigurationAsync(GetAdminEmailConfiguration input)
+        public async Task<GetAdminEmailConfiguration.Response> GetAdminEmailConfigurationAsync(GetAdminEmailConfiguration input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -162,55 +162,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void UpdateAdminEmailConfiguration(UpdateAdminEmailConfiguration input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task UpdateAdminEmailConfigurationAsync(UpdateAdminEmailConfiguration input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void SaveAdminEmailConfiguration(SaveAdminEmailConfiguration input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SaveAdminEmailConfigurationAsync(SaveAdminEmailConfiguration input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void DeleteAdminEmailConfiguration(DeleteAdminEmailConfiguration input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteAdminEmailConfigurationAsync(DeleteAdminEmailConfiguration input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.DtoServicesConfigurationResponse? AdminGetServicesConfiguration(AdminGetServicesConfiguration input)
+        public UpdateAdminEmailConfiguration.Response UpdateAdminEmailConfiguration(UpdateAdminEmailConfiguration input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -218,7 +170,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.DtoServicesConfigurationResponse?> AdminGetServicesConfigurationAsync(AdminGetServicesConfiguration input)
+        public async Task<UpdateAdminEmailConfiguration.Response> UpdateAdminEmailConfigurationAsync(UpdateAdminEmailConfiguration input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -226,7 +178,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.DtoServiceConfigurationUpdateRequest? AdminUpdateServicesConfiguration(AdminUpdateServicesConfiguration input)
+        public SaveAdminEmailConfiguration.Response SaveAdminEmailConfiguration(SaveAdminEmailConfiguration input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -234,7 +186,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.DtoServiceConfigurationUpdateRequest?> AdminUpdateServicesConfigurationAsync(AdminUpdateServicesConfiguration input)
+        public async Task<SaveAdminEmailConfiguration.Response> SaveAdminEmailConfigurationAsync(SaveAdminEmailConfiguration input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -242,23 +194,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminResetServicesConfiguration(AdminResetServicesConfiguration input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminResetServicesConfigurationAsync(AdminResetServicesConfiguration input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.DtoServicesConfigurationResponse? AdminGetPlatformAccountClosureServicesConfiguration(AdminGetPlatformAccountClosureServicesConfiguration input)
+        public DeleteAdminEmailConfiguration.Response DeleteAdminEmailConfiguration(DeleteAdminEmailConfiguration input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -266,7 +202,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.DtoServicesConfigurationResponse?> AdminGetPlatformAccountClosureServicesConfigurationAsync(AdminGetPlatformAccountClosureServicesConfiguration input)
+        public async Task<DeleteAdminEmailConfiguration.Response> DeleteAdminEmailConfigurationAsync(DeleteAdminEmailConfiguration input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -274,7 +210,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.DtoServiceConfigurationUpdateRequest? AdminUpdatePlatformAccountClosureServicesConfiguration(AdminUpdatePlatformAccountClosureServicesConfiguration input)
+        public AdminGetServicesConfiguration.Response AdminGetServicesConfiguration(AdminGetServicesConfiguration input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -282,7 +218,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.DtoServiceConfigurationUpdateRequest?> AdminUpdatePlatformAccountClosureServicesConfigurationAsync(AdminUpdatePlatformAccountClosureServicesConfiguration input)
+        public async Task<AdminGetServicesConfiguration.Response> AdminGetServicesConfigurationAsync(AdminGetServicesConfiguration input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -290,18 +226,82 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminResetPlatformAccountClosureServicesConfiguration(AdminResetPlatformAccountClosureServicesConfiguration input)
+        public AdminUpdateServicesConfiguration.Response AdminUpdateServicesConfiguration(AdminUpdateServicesConfiguration input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminResetPlatformAccountClosureServicesConfigurationAsync(AdminResetPlatformAccountClosureServicesConfiguration input)
+        public async Task<AdminUpdateServicesConfiguration.Response> AdminUpdateServicesConfigurationAsync(AdminUpdateServicesConfiguration input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminResetServicesConfiguration.Response AdminResetServicesConfiguration(AdminResetServicesConfiguration input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminResetServicesConfiguration.Response> AdminResetServicesConfigurationAsync(AdminResetServicesConfiguration input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetPlatformAccountClosureServicesConfiguration.Response AdminGetPlatformAccountClosureServicesConfiguration(AdminGetPlatformAccountClosureServicesConfiguration input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetPlatformAccountClosureServicesConfiguration.Response> AdminGetPlatformAccountClosureServicesConfigurationAsync(AdminGetPlatformAccountClosureServicesConfiguration input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminUpdatePlatformAccountClosureServicesConfiguration.Response AdminUpdatePlatformAccountClosureServicesConfiguration(AdminUpdatePlatformAccountClosureServicesConfiguration input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminUpdatePlatformAccountClosureServicesConfiguration.Response> AdminUpdatePlatformAccountClosureServicesConfigurationAsync(AdminUpdatePlatformAccountClosureServicesConfiguration input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminResetPlatformAccountClosureServicesConfiguration.Response AdminResetPlatformAccountClosureServicesConfiguration(AdminResetPlatformAccountClosureServicesConfiguration input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminResetPlatformAccountClosureServicesConfiguration.Response> AdminResetPlatformAccountClosureServicesConfigurationAsync(AdminResetPlatformAccountClosureServicesConfiguration input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

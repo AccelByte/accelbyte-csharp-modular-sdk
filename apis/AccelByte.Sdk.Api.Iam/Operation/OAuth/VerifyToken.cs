@@ -30,7 +30,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// - **Note: difference in V3 response:**
     /// 1. format differenceï¼Pascal case => Camel case): permissions field from Action => action, Resource => resource
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class VerifyToken : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -61,15 +61,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 VerifyToken op = new VerifyToken(this,
-                    token
+                    token                    
                 );
 
                 op.SetBaseFields<VerifyTokenBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public Model.OauthmodelTokenResponse? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public VerifyToken.Response Execute(
                 string token
             )
             {
@@ -82,11 +82,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OauthmodelTokenResponse?> ExecuteAsync(
+            public async Task<VerifyToken.Response> ExecuteAsync(
                 string token
             )
             {
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -109,29 +109,41 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string token
         )
         {
-
-
+            
+            
             if (token is not null) FormParams["token"] = token;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
         #endregion
 
-        public VerifyToken(
-            string token
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.OauthmodelTokenResponse>
         {
 
+            public string Error400 { get; set; } = "";
 
+
+            protected override string GetFullOperationId() => "Iam::OAuth::VerifyToken";
+        }
+
+        #endregion
+
+        public VerifyToken(
+            string token            
+        )
+        {
+            
+            
             if (token is not null) FormParams["token"] = token;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -143,25 +155,31 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OauthmodelTokenResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public VerifyToken.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new VerifyToken.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenResponse>(payload, ResponseJsonOptions);
+                response.Error400 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error400!);
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

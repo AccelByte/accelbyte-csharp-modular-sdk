@@ -98,14 +98,14 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             )
             {
                 ListReports op = new ListReports(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<ListReportsBuilder>(this);
                 return op;
             }
 
-            public Model.RestapiReportListResponse? Execute(
+            public ListReports.Response Execute(
                 string namespace_
             )
             {
@@ -118,11 +118,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.RestapiReportListResponse?> ExecuteAsync(
+            public async Task<ListReports.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -146,43 +146,55 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Category is not null) QueryParams["category"] = builder.Category;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.ReportedUserId is not null) QueryParams["reportedUserId"] = builder.ReportedUserId;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.RestapiReportListResponse>
+        {
+
+            public RestapiErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Reporting::AdminReports::ListReports";
+        }
+
+        #endregion
+
         public ListReports(
-            string namespace_,
-            string? category,
-            long? limit,
-            long? offset,
-            string? reportedUserId,
-            string? sortBy
+            string namespace_,            
+            string? category,            
+            long? limit,            
+            long? offset,            
+            string? reportedUserId,            
+            string? sortBy            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (category is not null) QueryParams["category"] = category;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (reportedUserId is not null) QueryParams["reportedUserId"] = reportedUserId;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -194,25 +206,31 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.RestapiReportListResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public ListReports.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new ListReports.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.RestapiReportListResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.RestapiReportListResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)500)
             {
-                return JsonSerializer.Deserialize<Model.RestapiReportListResponse>(payload, ResponseJsonOptions);
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

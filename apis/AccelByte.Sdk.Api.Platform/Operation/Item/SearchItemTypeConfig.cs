@@ -67,14 +67,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 SearchItemTypeConfig op = new SearchItemTypeConfig(this,
-                    itemType
+                    itemType                    
                 );
 
                 op.SetBaseFields<SearchItemTypeConfigBuilder>(this);
                 return op;
             }
 
-            public Model.ItemTypeConfigInfo? Execute(
+            public SearchItemTypeConfig.Response Execute(
                 string itemType
             )
             {
@@ -87,11 +87,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ItemTypeConfigInfo?> ExecuteAsync(
+            public async Task<SearchItemTypeConfig.Response> ExecuteAsync(
                 string itemType
             )
             {
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -114,32 +114,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             SearchItemTypeConfigItemType itemType
         )
         {
-
+            
             if (builder.Clazz is not null) QueryParams["clazz"] = builder.Clazz;
             if (itemType is not null) QueryParams["itemType"] = itemType.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public SearchItemTypeConfig(
-            string? clazz,
-            SearchItemTypeConfigItemType itemType
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.ItemTypeConfigInfo>
         {
 
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Item::SearchItemTypeConfig";
+        }
+
+        #endregion
+
+        public SearchItemTypeConfig(
+            string? clazz,            
+            SearchItemTypeConfigItemType itemType            
+        )
+        {
+            
             if (clazz is not null) QueryParams["clazz"] = clazz;
             if (itemType is not null) QueryParams["itemType"] = itemType.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -148,28 +160,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ItemTypeConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public SearchItemTypeConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new SearchItemTypeConfig.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ItemTypeConfigInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ItemTypeConfigInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.ItemTypeConfigInfo>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

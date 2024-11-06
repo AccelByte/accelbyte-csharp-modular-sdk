@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
         #endregion
 
-        public List<Model.RetrieveUserEligibilitiesResponse>? RetrieveEligibilitiesPublic(RetrieveEligibilitiesPublic input)
+        public RetrieveEligibilitiesPublic.Response RetrieveEligibilitiesPublic(RetrieveEligibilitiesPublic input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.RetrieveUserEligibilitiesResponse>?> RetrieveEligibilitiesPublicAsync(RetrieveEligibilitiesPublic input)
+        public async Task<RetrieveEligibilitiesPublic.Response> RetrieveEligibilitiesPublicAsync(RetrieveEligibilitiesPublic input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RetrieveUserEligibilitiesIndirectResponse? RetrieveEligibilitiesPublicIndirect(RetrieveEligibilitiesPublicIndirect input)
+        public RetrieveEligibilitiesPublicIndirect.Response RetrieveEligibilitiesPublicIndirect(RetrieveEligibilitiesPublicIndirect input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RetrieveUserEligibilitiesIndirectResponse?> RetrieveEligibilitiesPublicIndirectAsync(RetrieveEligibilitiesPublicIndirect input)
+        public async Task<RetrieveEligibilitiesPublicIndirect.Response> RetrieveEligibilitiesPublicIndirectAsync(RetrieveEligibilitiesPublicIndirect input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

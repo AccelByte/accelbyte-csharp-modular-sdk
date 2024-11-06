@@ -99,15 +99,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicPlatformUnlinkAllV3 op = new PublicPlatformUnlinkAllV3(this,
-                    namespace_,
-                    platformId
+                    namespace_,                    
+                    platformId                    
                 );
 
                 op.SetBaseFields<PublicPlatformUnlinkAllV3Builder>(this);
                 return op;
             }
 
-            public void Execute(
+            public PublicPlatformUnlinkAllV3.Response Execute(
                 string namespace_,
                 string platformId
             )
@@ -121,12 +121,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<PublicPlatformUnlinkAllV3.Response> ExecuteAsync(
                 string namespace_,
                 string platformId
             )
@@ -140,8 +140,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -154,30 +154,48 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public RestErrorResponse? Error400 { get; set; } = null;
+
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public RestErrorResponse? Error404 { get; set; } = null;
+
+            public RestErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::Users::PublicPlatformUnlinkAllV3";
+        }
+
+        #endregion
+
         public PublicPlatformUnlinkAllV3(
-            string namespace_,
-            string platformId
+            string namespace_,            
+            string platformId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -189,17 +207,42 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicPlatformUnlinkAllV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new PublicPlatformUnlinkAllV3.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

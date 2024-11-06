@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.NotificationPagingSlicedResult? QueryThirdPartyNotifications(QueryThirdPartyNotifications input)
+        public QueryThirdPartyNotifications.Response QueryThirdPartyNotifications(QueryThirdPartyNotifications input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.NotificationPagingSlicedResult?> QueryThirdPartyNotificationsAsync(QueryThirdPartyNotifications input)
+        public async Task<QueryThirdPartyNotifications.Response> QueryThirdPartyNotificationsAsync(QueryThirdPartyNotifications input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -75,15 +75,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UpdatePlatformDLCConfig op = new UpdatePlatformDLCConfig(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<UpdatePlatformDLCConfigBuilder>(this);
                 return op;
             }
 
-            public Model.PlatformDLCConfigInfo? Execute(
+            public UpdatePlatformDLCConfig.Response Execute(
                 PlatformDLCConfigUpdate body,
                 string namespace_
             )
@@ -98,11 +98,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.PlatformDLCConfigInfo?> ExecuteAsync(
+            public async Task<UpdatePlatformDLCConfig.Response> ExecuteAsync(
                 PlatformDLCConfigUpdate body,
                 string namespace_
             )
@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -129,31 +129,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.PlatformDLCConfigInfo>
+        {
+
+            public ValidationErrorEntity? Error422 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::DLC::UpdatePlatformDLCConfig";
+        }
+
+        #endregion
+
         public UpdatePlatformDLCConfig(
-            string namespace_,
-            Model.PlatformDLCConfigUpdate body
+            string namespace_,            
+            Model.PlatformDLCConfigUpdate body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -165,25 +177,31 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.PlatformDLCConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public UpdatePlatformDLCConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new UpdatePlatformDLCConfig.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.PlatformDLCConfigInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.PlatformDLCConfigInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)422)
             {
-                return JsonSerializer.Deserialize<Model.PlatformDLCConfigInfo>(payload, ResponseJsonOptions);
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

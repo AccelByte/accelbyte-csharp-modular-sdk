@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         }
         #endregion
 
-        public Model.GlobalStatItemPagingSlicedResult? GetGlobalStatItems(GetGlobalStatItems input)
+        public GetGlobalStatItems.Response GetGlobalStatItems(GetGlobalStatItems input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.GlobalStatItemPagingSlicedResult?> GetGlobalStatItemsAsync(GetGlobalStatItems input)
+        public async Task<GetGlobalStatItems.Response> GetGlobalStatItemsAsync(GetGlobalStatItems input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.GlobalStatItemInfo? GetGlobalStatItemByStatCode(GetGlobalStatItemByStatCode input)
+        public GetGlobalStatItemByStatCode.Response GetGlobalStatItemByStatCode(GetGlobalStatItemByStatCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.GlobalStatItemInfo?> GetGlobalStatItemByStatCodeAsync(GetGlobalStatItemByStatCode input)
+        public async Task<GetGlobalStatItemByStatCode.Response> GetGlobalStatItemByStatCodeAsync(GetGlobalStatItemByStatCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.GlobalStatItemPagingSlicedResult? GetGlobalStatItems1(GetGlobalStatItems1 input)
+        public GetGlobalStatItems1.Response GetGlobalStatItems1(GetGlobalStatItems1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.GlobalStatItemPagingSlicedResult?> GetGlobalStatItems1Async(GetGlobalStatItems1 input)
+        public async Task<GetGlobalStatItems1.Response> GetGlobalStatItems1Async(GetGlobalStatItems1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.GlobalStatItemInfo? GetGlobalStatItemByStatCode1(GetGlobalStatItemByStatCode1 input)
+        public GetGlobalStatItemByStatCode1.Response GetGlobalStatItemByStatCode1(GetGlobalStatItemByStatCode1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -136,7 +136,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.GlobalStatItemInfo?> GetGlobalStatItemByStatCode1Async(GetGlobalStatItemByStatCode1 input)
+        public async Task<GetGlobalStatItemByStatCode1.Response> GetGlobalStatItemByStatCode1Async(GetGlobalStatItemByStatCode1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

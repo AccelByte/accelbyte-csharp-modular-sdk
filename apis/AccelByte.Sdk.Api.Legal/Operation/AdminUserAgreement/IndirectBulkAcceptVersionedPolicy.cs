@@ -74,17 +74,17 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 IndirectBulkAcceptVersionedPolicy op = new IndirectBulkAcceptVersionedPolicy(this,
-                    namespace_,
-                    userId,
-                    clientId,
-                    countryCode
+                    namespace_,                    
+                    userId,                    
+                    clientId,                    
+                    countryCode                    
                 );
 
                 op.SetBaseFields<IndirectBulkAcceptVersionedPolicyBuilder>(this);
                 return op;
             }
 
-            public Model.AcceptAgreementResponse? Execute(
+            public IndirectBulkAcceptVersionedPolicy.Response Execute(
                 string namespace_,
                 string userId,
                 string clientId,
@@ -103,11 +103,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.AcceptAgreementResponse?> ExecuteAsync(
+            public async Task<IndirectBulkAcceptVersionedPolicy.Response> ExecuteAsync(
                 string namespace_,
                 string userId,
                 string clientId,
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -141,42 +141,52 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.PublisherUserId is not null) QueryParams["publisherUserId"] = builder.PublisherUserId;
             if (clientId is not null) QueryParams["clientId"] = clientId;
             if (countryCode is not null) QueryParams["countryCode"] = countryCode;
+            
 
-
-
-
+            
+            
             BodyParams = builder.Body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.AcceptAgreementResponse>
+        {
+
+
+            protected override string GetFullOperationId() => "Legal::AdminUserAgreement::IndirectBulkAcceptVersionedPolicy";
+        }
+
+        #endregion
+
         public IndirectBulkAcceptVersionedPolicy(
-            string namespace_,
-            string userId,
-            string? publisherUserId,
-            string clientId,
-            string countryCode,
-            List<Model.AcceptAgreementRequest> body
+            string namespace_,            
+            string userId,            
+            string? publisherUserId,            
+            string clientId,            
+            string countryCode,            
+            List<Model.AcceptAgreementRequest> body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (publisherUserId is not null) QueryParams["publisherUserId"] = publisherUserId;
             if (clientId is not null) QueryParams["clientId"] = clientId;
             if (countryCode is not null) QueryParams["countryCode"] = countryCode;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -188,25 +198,26 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.AcceptAgreementResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public IndirectBulkAcceptVersionedPolicy.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new IndirectBulkAcceptVersionedPolicy.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.AcceptAgreementResponse>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.AcceptAgreementResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.AcceptAgreementResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

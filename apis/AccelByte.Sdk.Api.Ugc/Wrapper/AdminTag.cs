@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedGetTagResponse? AdminGetTag(AdminGetTag input)
+        public AdminGetTag.Response AdminGetTag(AdminGetTag input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedGetTagResponse?> AdminGetTagAsync(AdminGetTag input)
+        public async Task<AdminGetTag.Response> AdminGetTagAsync(AdminGetTag input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCreateTagResponse? AdminCreateTag(AdminCreateTag input)
+        public AdminCreateTag.Response AdminCreateTag(AdminCreateTag input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateTagResponse?> AdminCreateTagAsync(AdminCreateTag input)
+        public async Task<AdminCreateTag.Response> AdminCreateTagAsync(AdminCreateTag input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCreateTagResponse? AdminUpdateTag(AdminUpdateTag input)
+        public AdminUpdateTag.Response AdminUpdateTag(AdminUpdateTag input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateTagResponse?> AdminUpdateTagAsync(AdminUpdateTag input)
+        public async Task<AdminUpdateTag.Response> AdminUpdateTagAsync(AdminUpdateTag input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,18 +128,18 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteTag(AdminDeleteTag input)
+        public AdminDeleteTag.Response AdminDeleteTag(AdminDeleteTag input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteTagAsync(AdminDeleteTag input)
+        public async Task<AdminDeleteTag.Response> AdminDeleteTagAsync(AdminDeleteTag input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

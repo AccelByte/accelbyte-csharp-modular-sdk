@@ -143,14 +143,14 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 GetLikedContent op = new GetLikedContent(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetLikedContentBuilder>(this);
                 return op;
             }
 
-            public Model.ModelsPaginatedContentDownloadResponse? Execute(
+            public GetLikedContent.Response Execute(
                 string namespace_
             )
             {
@@ -163,11 +163,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsPaginatedContentDownloadResponse?> ExecuteAsync(
+            public async Task<GetLikedContent.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -180,7 +180,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -191,7 +191,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Isofficial != null) QueryParams["isofficial"] = Convert.ToString(builder.Isofficial)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Name is not null) QueryParams["name"] = builder.Name;
@@ -201,32 +201,48 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             if (builder.Subtype is not null) QueryParams["subtype"] = builder.Subtype;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
             if (builder.Type is not null) QueryParams["type"] = builder.Type;
+            
 
-
-
+            
             CollectionFormatMap["tags"] = "csv";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsPaginatedContentDownloadResponse>
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Ugc::PublicLikeLegacy::GetLikedContent";
+        }
+
+        #endregion
+
         public GetLikedContent(
-            string namespace_,
-            bool? isofficial,
-            long? limit,
-            string? name,
-            long? offset,
-            string? orderby,
-            string? sortby,
-            string? subtype,
-            List<string>? tags,
-            string? type
+            string namespace_,            
+            bool? isofficial,            
+            long? limit,            
+            string? name,            
+            long? offset,            
+            string? orderby,            
+            string? sortby,            
+            string? subtype,            
+            List<string>? tags,            
+            string? type            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (isofficial != null) QueryParams["isofficial"] = Convert.ToString(isofficial)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (name is not null) QueryParams["name"] = name;
@@ -236,12 +252,12 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             if (subtype is not null) QueryParams["subtype"] = subtype;
             if (tags is not null) QueryParams["tags"] = tags;
             if (type is not null) QueryParams["type"] = type;
+            
 
-
-
+            
             CollectionFormatMap["tags"] = "csv";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -250,28 +266,44 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { "application/json", "application/octet-stream" };
+        public override List<string> Consumes => new() { "application/json","application/octet-stream" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsPaginatedContentDownloadResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetLikedContent.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetLikedContent.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsPaginatedContentDownloadResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedContentDownloadResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsPaginatedContentDownloadResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

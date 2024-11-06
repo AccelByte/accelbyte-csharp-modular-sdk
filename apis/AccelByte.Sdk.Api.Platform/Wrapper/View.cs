@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public List<Model.ListViewInfo>? ListViews(ListViews input)
+        public ListViews.Response ListViews(ListViews input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ListViewInfo>?> ListViewsAsync(ListViews input)
+        public async Task<ListViews.Response> ListViewsAsync(ListViews input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FullViewInfo? CreateView(CreateView input)
+        public CreateView.Response CreateView(CreateView input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FullViewInfo?> CreateViewAsync(CreateView input)
+        public async Task<CreateView.Response> CreateViewAsync(CreateView input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FullViewInfo? GetView(GetView input)
+        public GetView.Response GetView(GetView input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -142,7 +142,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FullViewInfo?> GetViewAsync(GetView input)
+        public async Task<GetView.Response> GetViewAsync(GetView input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -150,7 +150,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FullViewInfo? UpdateView(UpdateView input)
+        public UpdateView.Response UpdateView(UpdateView input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -158,7 +158,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FullViewInfo?> UpdateViewAsync(UpdateView input)
+        public async Task<UpdateView.Response> UpdateViewAsync(UpdateView input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -166,23 +166,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteView(DeleteView input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteViewAsync(DeleteView input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public List<Model.ViewInfo>? PublicListViews(PublicListViews input)
+        public DeleteView.Response DeleteView(DeleteView input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -190,7 +174,23 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ViewInfo>?> PublicListViewsAsync(PublicListViews input)
+        public async Task<DeleteView.Response> DeleteViewAsync(DeleteView input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicListViews.Response PublicListViews(PublicListViews input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicListViews.Response> PublicListViewsAsync(PublicListViews input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -199,7 +199,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
 
-        public List<Model.ViewInfo<T1>>? PublicListViews<T1>(PublicListViews input)
+        public PublicListViews.Response<T1> PublicListViews<T1>(PublicListViews input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -207,7 +207,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ViewInfo<T1>>?> PublicListViewsAsync<T1>(PublicListViews input)
+        public async Task<PublicListViews.Response<T1>> PublicListViewsAsync<T1>(PublicListViews input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(

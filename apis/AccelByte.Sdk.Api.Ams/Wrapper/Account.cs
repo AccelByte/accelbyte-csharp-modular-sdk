@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
         }
         #endregion
 
-        public Model.ApiAccountResponse? AdminAccountGet(AdminAccountGet input)
+        public AdminAccountGet.Response AdminAccountGet(AdminAccountGet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiAccountResponse?> AdminAccountGetAsync(AdminAccountGet input)
+        public async Task<AdminAccountGet.Response> AdminAccountGetAsync(AdminAccountGet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiAccountCreateResponse? AdminAccountCreate(AdminAccountCreate input)
+        public AdminAccountCreate.Response AdminAccountCreate(AdminAccountCreate input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiAccountCreateResponse?> AdminAccountCreateAsync(AdminAccountCreate input)
+        public async Task<AdminAccountCreate.Response> AdminAccountCreateAsync(AdminAccountCreate input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiAccountLinkTokenResponse? AdminAccountLinkTokenGet(AdminAccountLinkTokenGet input)
+        public AdminAccountLinkTokenGet.Response AdminAccountLinkTokenGet(AdminAccountLinkTokenGet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiAccountLinkTokenResponse?> AdminAccountLinkTokenGetAsync(AdminAccountLinkTokenGet input)
+        public async Task<AdminAccountLinkTokenGet.Response> AdminAccountLinkTokenGetAsync(AdminAccountLinkTokenGet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiAccountLinkResponse? AdminAccountLinkTokenPost(AdminAccountLinkTokenPost input)
+        public AdminAccountLinkTokenPost.Response AdminAccountLinkTokenPost(AdminAccountLinkTokenPost input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -147,7 +147,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiAccountLinkResponse?> AdminAccountLinkTokenPostAsync(AdminAccountLinkTokenPost input)
+        public async Task<AdminAccountLinkTokenPost.Response> AdminAccountLinkTokenPostAsync(AdminAccountLinkTokenPost input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -155,7 +155,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiAccountResponse? AccountGet(AccountGet input)
+        public AccountGet.Response AccountGet(AccountGet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -163,7 +163,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiAccountResponse?> AccountGetAsync(AccountGet input)
+        public async Task<AccountGet.Response> AccountGetAsync(AccountGet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

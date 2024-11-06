@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             )
             {
                 ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost op = new ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost(this,
-                    body
+                    body                    
 
                 );
 
@@ -114,41 +114,41 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
                 return op;
             }
 
-            public void Execute(
+            public ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost.Response Execute(
                 List<TelemetryBody> body
 
             )
             {
                 ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost op = Build(
                     body
-
+                    
                 );
 
                 if (_Sdk == null)
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost.Response> ExecuteAsync(
                 List<TelemetryBody> body
 
             )
             {
                 ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost op = Build(
                     body
-
+                    
                 );
 
                 if (_Sdk == null)
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -156,34 +156,50 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
         private ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost(ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder builder,
             List<TelemetryBody> body
-
+            
         )
         {
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public BaseErrorResponse? Error422 { get; set; } = null;
+
+            public BaseErrorResponse? Error500 { get; set; } = null;
+
+            public BaseErrorResponse? Error507 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Gametelemetry::GametelemetryOperations::ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost";
+        }
+
+        #endregion
+
         public ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost(
-            List<Model.TelemetryBody> body,
+            List<Model.TelemetryBody> body,            
             string accessToken
         )
         {
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
@@ -196,17 +212,36 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)422)
+            
+            {
+                response.Error422 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)507)
+            
+            {
+                response.Error507 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error507!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -60,7 +60,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             )
             {
                 ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet op = new ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet(this,
-                    steamId
+                    steamId                    
 
                 );
 
@@ -68,14 +68,14 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
                 return op;
             }
 
-            public Model.PlayTimeResponse? Execute(
+            public ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet.Response Execute(
                 string steamId
 
             )
             {
                 ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet op = Build(
                     steamId
-
+                    
                 );
 
                 if (_Sdk == null)
@@ -83,18 +83,18 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.PlayTimeResponse?> ExecuteAsync(
+            public async Task<ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet.Response> ExecuteAsync(
                 string steamId
 
             )
             {
                 ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet op = Build(
                     steamId
-
+                    
                 );
 
                 if (_Sdk == null)
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -110,34 +110,50 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
         private ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet(ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGetBuilder builder,
             string steamId
-
+            
         )
         {
             PathParams["steamId"] = steamId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.PlayTimeResponse>
+        {
+
+            public BaseErrorResponse? Error404 { get; set; } = null;
+
+            public BaseErrorResponse? Error422 { get; set; } = null;
+
+            public BaseErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Gametelemetry::GametelemetryOperations::ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet";
+        }
+
+        #endregion
+
         public ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet(
-            string steamId,
+            string steamId,            
             string accessToken
         )
         {
             PathParams["steamId"] = steamId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
@@ -147,28 +163,44 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.PlayTimeResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.PlayTimeResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.PlayTimeResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.PlayTimeResponse>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)422)
+            {
+                response.Error422 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

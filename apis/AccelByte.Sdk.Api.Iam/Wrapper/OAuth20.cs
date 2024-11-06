@@ -212,7 +212,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-        public Model.OauthmodelTokenThirdPartyResponse? AdminRetrieveUserThirdPartyPlatformTokenV3(AdminRetrieveUserThirdPartyPlatformTokenV3 input)
+        public AdminRetrieveUserThirdPartyPlatformTokenV3.Response AdminRetrieveUserThirdPartyPlatformTokenV3(AdminRetrieveUserThirdPartyPlatformTokenV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -220,7 +220,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OauthmodelTokenThirdPartyResponse?> AdminRetrieveUserThirdPartyPlatformTokenV3Async(AdminRetrieveUserThirdPartyPlatformTokenV3 input)
+        public async Task<AdminRetrieveUserThirdPartyPlatformTokenV3.Response> AdminRetrieveUserThirdPartyPlatformTokenV3Async(AdminRetrieveUserThirdPartyPlatformTokenV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -228,23 +228,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void RevokeUserV3(RevokeUserV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task RevokeUserV3Async(RevokeUserV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public string AuthorizeV3(AuthorizeV3 input)
+        public RevokeUserV3.Response RevokeUserV3(RevokeUserV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -252,7 +236,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<string> AuthorizeV3Async(AuthorizeV3 input)
+        public async Task<RevokeUserV3.Response> RevokeUserV3Async(RevokeUserV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -260,7 +244,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OauthmodelTokenIntrospectResponse? TokenIntrospectionV3(TokenIntrospectionV3 input)
+        public AuthorizeV3.Response AuthorizeV3(AuthorizeV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -268,7 +252,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OauthmodelTokenIntrospectResponse?> TokenIntrospectionV3Async(TokenIntrospectionV3 input)
+        public async Task<AuthorizeV3.Response> AuthorizeV3Async(AuthorizeV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -276,7 +260,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OauthcommonJWKSet? GetJWKSV3(GetJWKSV3 input)
+        public TokenIntrospectionV3.Response TokenIntrospectionV3(TokenIntrospectionV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -284,7 +268,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OauthcommonJWKSet?> GetJWKSV3Async(GetJWKSV3 input)
+        public async Task<TokenIntrospectionV3.Response> TokenIntrospectionV3Async(TokenIntrospectionV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -292,39 +276,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void SendMFAAuthenticationCode(SendMFAAuthenticationCode input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SendMFAAuthenticationCodeAsync(SendMFAAuthenticationCode input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void Change2faMethod(Change2faMethod input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task Change2faMethodAsync(Change2faMethod input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.OauthmodelTokenResponseV3? Verify2faCode(Verify2faCode input)
+        public GetJWKSV3.Response GetJWKSV3(GetJWKSV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -332,7 +284,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OauthmodelTokenResponseV3?> Verify2faCodeAsync(Verify2faCode input)
+        public async Task<GetJWKSV3.Response> GetJWKSV3Async(GetJWKSV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -340,7 +292,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OauthmodelTokenThirdPartyResponse? RetrieveUserThirdPartyPlatformTokenV3(RetrieveUserThirdPartyPlatformTokenV3 input)
+        public SendMFAAuthenticationCode.Response SendMFAAuthenticationCode(SendMFAAuthenticationCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -348,7 +300,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OauthmodelTokenThirdPartyResponse?> RetrieveUserThirdPartyPlatformTokenV3Async(RetrieveUserThirdPartyPlatformTokenV3 input)
+        public async Task<SendMFAAuthenticationCode.Response> SendMFAAuthenticationCodeAsync(SendMFAAuthenticationCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -356,7 +308,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public string AuthCodeRequestV3(AuthCodeRequestV3 input)
+        public Change2faMethod.Response Change2faMethod(Change2faMethod input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -364,7 +316,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<string> AuthCodeRequestV3Async(AuthCodeRequestV3 input)
+        public async Task<Change2faMethod.Response> Change2faMethodAsync(Change2faMethod input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -372,7 +324,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OauthmodelTokenResponse? PlatformTokenGrantV3(PlatformTokenGrantV3 input)
+        public Verify2faCode.Response Verify2faCode(Verify2faCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -380,7 +332,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OauthmodelTokenResponse?> PlatformTokenGrantV3Async(PlatformTokenGrantV3 input)
+        public async Task<Verify2faCode.Response> Verify2faCodeAsync(Verify2faCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -388,7 +340,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OauthapiRevocationList? GetRevocationListV3(GetRevocationListV3 input)
+        public RetrieveUserThirdPartyPlatformTokenV3.Response RetrieveUserThirdPartyPlatformTokenV3(RetrieveUserThirdPartyPlatformTokenV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -396,7 +348,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OauthapiRevocationList?> GetRevocationListV3Async(GetRevocationListV3 input)
+        public async Task<RetrieveUserThirdPartyPlatformTokenV3.Response> RetrieveUserThirdPartyPlatformTokenV3Async(RetrieveUserThirdPartyPlatformTokenV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -404,23 +356,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void TokenRevocationV3(TokenRevocationV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task TokenRevocationV3Async(TokenRevocationV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.OauthmodelTokenResponseV3? SimultaneousLoginV3(SimultaneousLoginV3 input)
+        public AuthCodeRequestV3.Response AuthCodeRequestV3(AuthCodeRequestV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -428,7 +364,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OauthmodelTokenResponseV3?> SimultaneousLoginV3Async(SimultaneousLoginV3 input)
+        public async Task<AuthCodeRequestV3.Response> AuthCodeRequestV3Async(AuthCodeRequestV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -436,7 +372,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OauthmodelTokenWithDeviceCookieResponseV3? TokenGrantV3(TokenGrantV3 input)
+        public PlatformTokenGrantV3.Response PlatformTokenGrantV3(PlatformTokenGrantV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -444,7 +380,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OauthmodelTokenWithDeviceCookieResponseV3?> TokenGrantV3Async(TokenGrantV3 input)
+        public async Task<PlatformTokenGrantV3.Response> PlatformTokenGrantV3Async(PlatformTokenGrantV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -452,7 +388,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OauthmodelTokenResponseV3? VerifyTokenV3(VerifyTokenV3 input)
+        public GetRevocationListV3.Response GetRevocationListV3(GetRevocationListV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -460,7 +396,71 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OauthmodelTokenResponseV3?> VerifyTokenV3Async(VerifyTokenV3 input)
+        public async Task<GetRevocationListV3.Response> GetRevocationListV3Async(GetRevocationListV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public TokenRevocationV3.Response TokenRevocationV3(TokenRevocationV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<TokenRevocationV3.Response> TokenRevocationV3Async(TokenRevocationV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public SimultaneousLoginV3.Response SimultaneousLoginV3(SimultaneousLoginV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<SimultaneousLoginV3.Response> SimultaneousLoginV3Async(SimultaneousLoginV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public TokenGrantV3.Response TokenGrantV3(TokenGrantV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<TokenGrantV3.Response> TokenGrantV3Async(TokenGrantV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public VerifyTokenV3.Response VerifyTokenV3(VerifyTokenV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<VerifyTokenV3.Response> VerifyTokenV3Async(VerifyTokenV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

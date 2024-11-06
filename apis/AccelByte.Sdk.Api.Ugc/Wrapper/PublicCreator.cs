@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedCreatorOverviewResponse? PublicSearchCreator(PublicSearchCreator input)
+        public PublicSearchCreator.Response PublicSearchCreator(PublicSearchCreator input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedCreatorOverviewResponse?> PublicSearchCreatorAsync(PublicSearchCreator input)
+        public async Task<PublicSearchCreator.Response> PublicSearchCreatorAsync(PublicSearchCreator input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCreatorResponse? PublicGetCreator(PublicGetCreator input)
+        public PublicGetCreator.Response PublicGetCreator(PublicGetCreator input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreatorResponse?> PublicGetCreatorAsync(PublicGetCreator input)
+        public async Task<PublicGetCreator.Response> PublicGetCreatorAsync(PublicGetCreator input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

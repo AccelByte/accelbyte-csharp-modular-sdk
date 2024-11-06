@@ -78,16 +78,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicWebLinkPlatformEstablish op = new PublicWebLinkPlatformEstablish(this,
-                    namespace_,
-                    platformId,
-                    state
+                    namespace_,                    
+                    platformId,                    
+                    state                    
                 );
 
                 op.SetBaseFields<PublicWebLinkPlatformEstablishBuilder>(this);
                 return op;
             }
 
-            public string Execute(
+            public PublicWebLinkPlatformEstablish.Response Execute(
                 string namespace_,
                 string platformId,
                 string state
@@ -104,11 +104,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<string> ExecuteAsync(
+            public async Task<PublicWebLinkPlatformEstablish.Response> ExecuteAsync(
                 string namespace_,
                 string platformId,
                 string state
@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -139,37 +139,49 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
-
+            
             if (builder.Code is not null) QueryParams["code"] = builder.Code;
             if (state is not null) QueryParams["state"] = state;
+            
 
-
-
-
-
+            
+            
+            
             LocationQuery = "PLACEHOLDER";
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<string>
+        {
+
+            public string Error302 { get; set; } = "";
+
+
+            protected override string GetFullOperationId() => "Iam::Users::PublicWebLinkPlatformEstablish";
+        }
+
+        #endregion
+
         public PublicWebLinkPlatformEstablish(
-            string namespace_,
-            string platformId,
-            string? code,
-            string state
+            string namespace_,            
+            string platformId,            
+            string? code,            
+            string state            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
-
+            
             if (code is not null) QueryParams["code"] = code;
             if (state is not null) QueryParams["state"] = state;
+            
 
-
-
-
-
+            
+            
+            
             LocationQuery = "PLACEHOLDER";
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
@@ -179,20 +191,25 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public string ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicWebLinkPlatformEstablish.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            var payloadString = payload.ReadToString();
+            var response = new PublicWebLinkPlatformEstablish.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
 
             if (code == (HttpStatusCode)302)
             {
-                return payloadString;
+                response.Data = payload.ReadToString();
+                response.IsSuccess = true;
             }
 
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

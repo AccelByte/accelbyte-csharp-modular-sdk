@@ -75,14 +75,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetBulkItemIdBySkus op = new GetBulkItemIdBySkus(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetBulkItemIdBySkusBuilder>(this);
                 return op;
             }
 
-            public List<Model.ItemId>? Execute(
+            public GetBulkItemIdBySkus.Response Execute(
                 string namespace_
             )
             {
@@ -95,11 +95,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.ItemId>?> ExecuteAsync(
+            public async Task<GetBulkItemIdBySkus.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -123,36 +123,46 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Sku is not null) QueryParams["sku"] = builder.Sku;
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
+            
 
-
-
+            
             CollectionFormatMap["sku"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.ItemId>>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Item::GetBulkItemIdBySkus";
+        }
+
+        #endregion
+
         public GetBulkItemIdBySkus(
-            string namespace_,
-            List<string>? sku,
-            string? storeId
+            string namespace_,            
+            List<string>? sku,            
+            string? storeId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (sku is not null) QueryParams["sku"] = sku;
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
+            
             CollectionFormatMap["sku"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -161,28 +171,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.ItemId>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetBulkItemIdBySkus.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetBulkItemIdBySkus.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.ItemId>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<Model.ItemId>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.ItemId>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

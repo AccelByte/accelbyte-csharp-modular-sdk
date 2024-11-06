@@ -99,14 +99,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetTradeHistoryByCriteria op = new GetTradeHistoryByCriteria(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetTradeHistoryByCriteriaBuilder>(this);
                 return op;
             }
 
-            public Model.TradeActionPagingSlicedResult? Execute(
+            public GetTradeHistoryByCriteria.Response Execute(
                 string namespace_
             )
             {
@@ -119,11 +119,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.TradeActionPagingSlicedResult?> ExecuteAsync(
+            public async Task<GetTradeHistoryByCriteria.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -136,7 +136,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -147,43 +147,53 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
             if (builder.Type is not null) QueryParams["type"] = builder.Type;
             if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.TradeActionPagingSlicedResult>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::TradeAction::GetTradeHistoryByCriteria";
+        }
+
+        #endregion
+
         public GetTradeHistoryByCriteria(
-            string namespace_,
-            int? limit,
-            int? offset,
-            GetTradeHistoryByCriteriaStatus? status,
-            string? type,
-            string? userId
+            string namespace_,            
+            int? limit,            
+            int? offset,            
+            GetTradeHistoryByCriteriaStatus? status,            
+            string? type,            
+            string? userId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (status is not null) QueryParams["status"] = status.Value;
             if (type is not null) QueryParams["type"] = type;
             if (userId is not null) QueryParams["userId"] = userId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -192,28 +202,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.TradeActionPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetTradeHistoryByCriteria.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetTradeHistoryByCriteria.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.TradeActionPagingSlicedResult>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.TradeActionPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.TradeActionPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

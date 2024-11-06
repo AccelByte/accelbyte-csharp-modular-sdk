@@ -57,15 +57,15 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 PublicGetContentBulk op = new PublicGetContentBulk(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicGetContentBulkBuilder>(this);
                 return op;
             }
 
-            public List<Model.ModelsContentDownloadResponse>? Execute(
+            public PublicGetContentBulk.Response Execute(
                 ModelsPublicGetContentBulkRequest body,
                 string namespace_
             )
@@ -80,11 +80,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.ModelsContentDownloadResponse>?> ExecuteAsync(
+            public async Task<PublicGetContentBulk.Response> ExecuteAsync(
                 ModelsPublicGetContentBulkRequest body,
                 string namespace_
             )
@@ -99,12 +99,12 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
 
-            public List<Model.ModelsContentDownloadResponse<T1>>? Execute<T1>(
+            public PublicGetContentBulk.Response<T1> Execute<T1>(
                 ModelsPublicGetContentBulkRequest body,
                 string namespace_
             )
@@ -119,11 +119,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.ModelsContentDownloadResponse<T1>>?> ExecuteAsync<T1>(
+            public async Task<PublicGetContentBulk.Response<T1>> ExecuteAsync<T1>(
                 ModelsPublicGetContentBulkRequest body,
                 string namespace_
             )
@@ -138,7 +138,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -150,31 +150,58 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.ModelsContentDownloadResponse>>
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Ugc::PublicContentLegacy::PublicGetContentBulk";
+        }
+
+        public class Response<T1> : ApiResponse<List<Model.ModelsContentDownloadResponse<T1>>>
+        {
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Ugc::PublicContentLegacy::PublicGetContentBulk";
+        }
+        #endregion
+
         public PublicGetContentBulk(
-            string namespace_,
-            Model.ModelsPublicGetContentBulkRequest body
+            string namespace_,            
+            Model.ModelsPublicGetContentBulkRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -183,47 +210,80 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { "application/json", "application/octet-stream" };
+        public override List<string> Consumes => new() { "application/json","application/octet-stream" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.ModelsContentDownloadResponse>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicGetContentBulk.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicGetContentBulk.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.ModelsContentDownloadResponse>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelsContentDownloadResponse>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<List<Model.ModelsContentDownloadResponse>>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
 
-        public List<Model.ModelsContentDownloadResponse<T1>>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
+        public PublicGetContentBulk.Response<T1> ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicGetContentBulk.Response<T1>()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
-            }
-            else if (code == (HttpStatusCode)201)
+                response.IsSuccess = true;
+            }            
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.ModelsContentDownloadResponse<T1>>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelsContentDownloadResponse<T1>>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<List<Model.ModelsContentDownloadResponse<T1>>>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
             }
-
-            var payloadString = payload.ReadToString();
-            throw new HttpResponseException(code, payloadString);
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
+            }
+            
+            return response;
         }
     }
 

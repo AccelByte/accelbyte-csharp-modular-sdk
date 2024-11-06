@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                 return op;
             }
 
-            public void Execute(
+            public VersionCheckHandler.Response Execute(
             )
             {
                 VersionCheckHandler op = Build(
@@ -68,12 +68,12 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<VersionCheckHandler.Response> ExecuteAsync(
             )
             {
                 VersionCheckHandler op = Build(
@@ -83,8 +83,8 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -93,26 +93,36 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         private VersionCheckHandler(VersionCheckHandlerBuilder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public VersionCheckHandler(
-        )
+        #region Response Part        
+        public class Response : ApiResponse
         {
 
 
+            protected override string GetFullOperationId() => "Match2::Operations::VersionCheckHandler";
+        }
 
+        #endregion
 
+        public VersionCheckHandler(
+        )
+        {
+            
+            
 
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -121,20 +131,21 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public override List<string> Produces => new() {  };
+        
+        public VersionCheckHandler.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)200)
+            var response = new VersionCheckHandler.Response()
             {
-                return;
-            }
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
 
-            var payloadString = payload.ReadToString();
 
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

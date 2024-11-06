@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
         }
         #endregion
 
-        public Model.ModelsGetHiddenUserResponse? GetHiddenUsersV2(GetHiddenUsersV2 input)
+        public GetHiddenUsersV2.Response GetHiddenUsersV2(GetHiddenUsersV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetHiddenUserResponse?> GetHiddenUsersV2Async(GetHiddenUsersV2 input)
+        public async Task<GetHiddenUsersV2.Response> GetHiddenUsersV2Async(GetHiddenUsersV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetUserVisibilityResponse? GetUserVisibilityStatusV2(GetUserVisibilityStatusV2 input)
+        public GetUserVisibilityStatusV2.Response GetUserVisibilityStatusV2(GetUserVisibilityStatusV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetUserVisibilityResponse?> GetUserVisibilityStatusV2Async(GetUserVisibilityStatusV2 input)
+        public async Task<GetUserVisibilityStatusV2.Response> GetUserVisibilityStatusV2Async(GetUserVisibilityStatusV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetUserVisibilityResponse? SetUserLeaderboardVisibilityStatusV2(SetUserLeaderboardVisibilityStatusV2 input)
+        public SetUserLeaderboardVisibilityStatusV2.Response SetUserLeaderboardVisibilityStatusV2(SetUserLeaderboardVisibilityStatusV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetUserVisibilityResponse?> SetUserLeaderboardVisibilityStatusV2Async(SetUserLeaderboardVisibilityStatusV2 input)
+        public async Task<SetUserLeaderboardVisibilityStatusV2.Response> SetUserLeaderboardVisibilityStatusV2Async(SetUserLeaderboardVisibilityStatusV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetUserVisibilityResponse? SetUserVisibilityStatusV2(SetUserVisibilityStatusV2 input)
+        public SetUserVisibilityStatusV2.Response SetUserVisibilityStatusV2(SetUserVisibilityStatusV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -136,7 +136,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetUserVisibilityResponse?> SetUserVisibilityStatusV2Async(SetUserVisibilityStatusV2 input)
+        public async Task<SetUserVisibilityStatusV2.Response> SetUserVisibilityStatusV2Async(SetUserVisibilityStatusV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

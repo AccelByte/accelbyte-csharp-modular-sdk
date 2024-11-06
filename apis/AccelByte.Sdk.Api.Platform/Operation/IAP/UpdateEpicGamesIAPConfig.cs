@@ -57,15 +57,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UpdateEpicGamesIAPConfig op = new UpdateEpicGamesIAPConfig(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<UpdateEpicGamesIAPConfigBuilder>(this);
                 return op;
             }
 
-            public Model.EpicGamesIAPConfigInfo? Execute(
+            public UpdateEpicGamesIAPConfig.Response Execute(
                 EpicGamesIAPConfigRequest body,
                 string namespace_
             )
@@ -80,11 +80,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.EpicGamesIAPConfigInfo?> ExecuteAsync(
+            public async Task<UpdateEpicGamesIAPConfig.Response> ExecuteAsync(
                 EpicGamesIAPConfigRequest body,
                 string namespace_
             )
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,31 +111,41 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.EpicGamesIAPConfigInfo>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::IAP::UpdateEpicGamesIAPConfig";
+        }
+
+        #endregion
+
         public UpdateEpicGamesIAPConfig(
-            string namespace_,
-            Model.EpicGamesIAPConfigRequest body
+            string namespace_,            
+            Model.EpicGamesIAPConfigRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,25 +157,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.EpicGamesIAPConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public UpdateEpicGamesIAPConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new UpdateEpicGamesIAPConfig.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.EpicGamesIAPConfigInfo>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.EpicGamesIAPConfigInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.EpicGamesIAPConfigInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

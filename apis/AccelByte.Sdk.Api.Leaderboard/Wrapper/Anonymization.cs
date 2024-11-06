@@ -47,18 +47,18 @@ namespace AccelByte.Sdk.Api.Leaderboard.Wrapper
         }
         #endregion
 
-        public void AdminAnonymizeUserLeaderboardAdminV1(AdminAnonymizeUserLeaderboardAdminV1 input)
+        public AdminAnonymizeUserLeaderboardAdminV1.Response AdminAnonymizeUserLeaderboardAdminV1(AdminAnonymizeUserLeaderboardAdminV1 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminAnonymizeUserLeaderboardAdminV1Async(AdminAnonymizeUserLeaderboardAdminV1 input)
+        public async Task<AdminAnonymizeUserLeaderboardAdminV1.Response> AdminAnonymizeUserLeaderboardAdminV1Async(AdminAnonymizeUserLeaderboardAdminV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

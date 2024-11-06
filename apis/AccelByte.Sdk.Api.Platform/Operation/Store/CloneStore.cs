@@ -68,15 +68,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 CloneStore op = new CloneStore(this,
-                    namespace_,
-                    storeId
+                    namespace_,                    
+                    storeId                    
                 );
 
                 op.SetBaseFields<CloneStoreBuilder>(this);
                 return op;
             }
 
-            public Model.StoreInfo? Execute(
+            public CloneStore.Response Execute(
                 string namespace_,
                 string storeId
             )
@@ -91,11 +91,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.StoreInfo?> ExecuteAsync(
+            public async Task<CloneStore.Response> ExecuteAsync(
                 string namespace_,
                 string storeId
             )
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -123,33 +123,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["storeId"] = storeId;
-
+            
             if (builder.TargetStoreId is not null) QueryParams["targetStoreId"] = builder.TargetStoreId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.StoreInfo>
+        {
+
+            public ErrorEntity? Error400 { get; set; } = null;
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Store::CloneStore";
+        }
+
+        #endregion
+
         public CloneStore(
-            string namespace_,
-            string storeId,
-            string? targetStoreId
+            string namespace_,            
+            string storeId,            
+            string? targetStoreId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["storeId"] = storeId;
-
+            
             if (targetStoreId is not null) QueryParams["targetStoreId"] = targetStoreId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -161,25 +175,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.StoreInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public CloneStore.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new CloneStore.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.StoreInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.StoreInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.StoreInfo>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

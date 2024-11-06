@@ -68,14 +68,14 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 GetGameNamespaces op = new GetGameNamespaces(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetGameNamespacesBuilder>(this);
                 return op;
             }
 
-            public List<Model.NamespaceInfo>? Execute(
+            public GetGameNamespaces.Response Execute(
                 string namespace_
             )
             {
@@ -88,11 +88,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.NamespaceInfo>?> ExecuteAsync(
+            public async Task<GetGameNamespaces.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -116,31 +116,45 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.NamespaceInfo>>
+        {
+
+            public ErrorEntity? Error401 { get; set; } = null;
+
+            public ErrorEntity? Error403 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Basic::Namespace::GetGameNamespaces";
+        }
+
+        #endregion
+
         public GetGameNamespaces(
-            string namespace_,
-            bool? activeOnly
+            string namespace_,            
+            bool? activeOnly            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -149,28 +163,39 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.NamespaceInfo>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetGameNamespaces.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetGameNamespaces.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.NamespaceInfo>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.NamespaceInfo>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)401)
             {
-                return JsonSerializer.Deserialize<List<Model.NamespaceInfo>>(payload, ResponseJsonOptions);
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -95,14 +95,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminGetBannedDevicesV4 op = new AdminGetBannedDevicesV4(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminGetBannedDevicesV4Builder>(this);
                 return op;
             }
 
-            public Model.ModelDeviceBannedResponseV4? Execute(
+            public AdminGetBannedDevicesV4.Response Execute(
                 string namespace_
             )
             {
@@ -115,11 +115,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelDeviceBannedResponseV4?> ExecuteAsync(
+            public async Task<AdminGetBannedDevicesV4.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -132,7 +132,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -143,43 +143,59 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.DeviceType is not null) QueryParams["deviceType"] = builder.DeviceType;
             if (builder.EndDate is not null) QueryParams["endDate"] = builder.EndDate;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.StartDate is not null) QueryParams["startDate"] = builder.StartDate;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelDeviceBannedResponseV4>
+        {
+
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public RestErrorResponse? Error403 { get; set; } = null;
+
+            public RestErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::DevicesV4::AdminGetBannedDevicesV4";
+        }
+
+        #endregion
+
         public AdminGetBannedDevicesV4(
-            string namespace_,
-            string? deviceType,
-            string? endDate,
-            long? limit,
-            long? offset,
-            string? startDate
+            string namespace_,            
+            string? deviceType,            
+            string? endDate,            
+            long? limit,            
+            long? offset,            
+            string? startDate            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (deviceType is not null) QueryParams["deviceType"] = deviceType;
             if (endDate is not null) QueryParams["endDate"] = endDate;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (startDate is not null) QueryParams["startDate"] = startDate;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -191,25 +207,41 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelDeviceBannedResponseV4? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminGetBannedDevicesV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminGetBannedDevicesV4.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelDeviceBannedResponseV4>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelDeviceBannedResponseV4>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)401)
             {
-                return JsonSerializer.Deserialize<Model.ModelDeviceBannedResponseV4>(payload, ResponseJsonOptions);
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

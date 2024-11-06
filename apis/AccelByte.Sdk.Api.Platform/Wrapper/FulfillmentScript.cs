@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public List<Model.FulfillmentScriptInfo>? ListFulfillmentScripts(ListFulfillmentScripts input)
+        public ListFulfillmentScripts.Response ListFulfillmentScripts(ListFulfillmentScripts input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.FulfillmentScriptInfo>?> ListFulfillmentScriptsAsync(ListFulfillmentScripts input)
+        public async Task<ListFulfillmentScripts.Response> ListFulfillmentScriptsAsync(ListFulfillmentScripts input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FulfillmentScriptInfo? GetFulfillmentScript(GetFulfillmentScript input)
+        public GetFulfillmentScript.Response GetFulfillmentScript(GetFulfillmentScript input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FulfillmentScriptInfo?> GetFulfillmentScriptAsync(GetFulfillmentScript input)
+        public async Task<GetFulfillmentScript.Response> GetFulfillmentScriptAsync(GetFulfillmentScript input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FulfillmentScriptInfo? CreateFulfillmentScript(CreateFulfillmentScript input)
+        public CreateFulfillmentScript.Response CreateFulfillmentScript(CreateFulfillmentScript input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FulfillmentScriptInfo?> CreateFulfillmentScriptAsync(CreateFulfillmentScript input)
+        public async Task<CreateFulfillmentScript.Response> CreateFulfillmentScriptAsync(CreateFulfillmentScript input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -139,23 +139,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteFulfillmentScript(DeleteFulfillmentScript input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteFulfillmentScriptAsync(DeleteFulfillmentScript input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.FulfillmentScriptInfo? UpdateFulfillmentScript(UpdateFulfillmentScript input)
+        public DeleteFulfillmentScript.Response DeleteFulfillmentScript(DeleteFulfillmentScript input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -163,7 +147,23 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FulfillmentScriptInfo?> UpdateFulfillmentScriptAsync(UpdateFulfillmentScript input)
+        public async Task<DeleteFulfillmentScript.Response> DeleteFulfillmentScriptAsync(DeleteFulfillmentScript input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public UpdateFulfillmentScript.Response UpdateFulfillmentScript(UpdateFulfillmentScript input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpdateFulfillmentScript.Response> UpdateFulfillmentScriptAsync(UpdateFulfillmentScript input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

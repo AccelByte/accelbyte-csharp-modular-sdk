@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public List<Model.CurrencyInfo>? ListCurrencies(ListCurrencies input)
+        public ListCurrencies.Response ListCurrencies(ListCurrencies input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.CurrencyInfo>?> ListCurrenciesAsync(ListCurrencies input)
+        public async Task<ListCurrencies.Response> ListCurrenciesAsync(ListCurrencies input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.CurrencyInfo? CreateCurrency(CreateCurrency input)
+        public CreateCurrency.Response CreateCurrency(CreateCurrency input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -137,7 +137,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CurrencyInfo?> CreateCurrencyAsync(CreateCurrency input)
+        public async Task<CreateCurrency.Response> CreateCurrencyAsync(CreateCurrency input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -145,7 +145,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.CurrencyInfo? UpdateCurrency(UpdateCurrency input)
+        public UpdateCurrency.Response UpdateCurrency(UpdateCurrency input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -153,7 +153,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CurrencyInfo?> UpdateCurrencyAsync(UpdateCurrency input)
+        public async Task<UpdateCurrency.Response> UpdateCurrencyAsync(UpdateCurrency input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -161,7 +161,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.CurrencyInfo? DeleteCurrency(DeleteCurrency input)
+        public DeleteCurrency.Response DeleteCurrency(DeleteCurrency input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -169,7 +169,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CurrencyInfo?> DeleteCurrencyAsync(DeleteCurrency input)
+        public async Task<DeleteCurrency.Response> DeleteCurrencyAsync(DeleteCurrency input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -177,7 +177,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.CurrencyConfig? GetCurrencyConfig(GetCurrencyConfig input)
+        public GetCurrencyConfig.Response GetCurrencyConfig(GetCurrencyConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -185,7 +185,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CurrencyConfig?> GetCurrencyConfigAsync(GetCurrencyConfig input)
+        public async Task<GetCurrencyConfig.Response> GetCurrencyConfigAsync(GetCurrencyConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -193,7 +193,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.CurrencySummary? GetCurrencySummary(GetCurrencySummary input)
+        public GetCurrencySummary.Response GetCurrencySummary(GetCurrencySummary input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -201,7 +201,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CurrencySummary?> GetCurrencySummaryAsync(GetCurrencySummary input)
+        public async Task<GetCurrencySummary.Response> GetCurrencySummaryAsync(GetCurrencySummary input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -209,7 +209,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.CurrencyInfo>? PublicListCurrencies(PublicListCurrencies input)
+        public PublicListCurrencies.Response PublicListCurrencies(PublicListCurrencies input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -217,7 +217,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.CurrencyInfo>?> PublicListCurrenciesAsync(PublicListCurrencies input)
+        public async Task<PublicListCurrencies.Response> PublicListCurrenciesAsync(PublicListCurrencies input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

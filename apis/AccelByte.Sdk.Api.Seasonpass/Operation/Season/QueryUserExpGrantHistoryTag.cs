@@ -69,15 +69,15 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             )
             {
                 QueryUserExpGrantHistoryTag op = new QueryUserExpGrantHistoryTag(this,
-                    namespace_,
-                    userId
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<QueryUserExpGrantHistoryTagBuilder>(this);
                 return op;
             }
 
-            public Model.ReasonTagsResult? Execute(
+            public QueryUserExpGrantHistoryTag.Response Execute(
                 string namespace_,
                 string userId
             )
@@ -92,11 +92,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ReasonTagsResult?> ExecuteAsync(
+            public async Task<QueryUserExpGrantHistoryTag.Response> ExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -124,33 +124,45 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.SeasonId is not null) QueryParams["seasonId"] = builder.SeasonId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ReasonTagsResult>
+        {
+
+            public ErrorEntity? Error400 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Seasonpass::Season::QueryUserExpGrantHistoryTag";
+        }
+
+        #endregion
+
         public QueryUserExpGrantHistoryTag(
-            string namespace_,
-            string userId,
-            string? seasonId
+            string namespace_,            
+            string userId,            
+            string? seasonId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (seasonId is not null) QueryParams["seasonId"] = seasonId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -159,28 +171,34 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ReasonTagsResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public QueryUserExpGrantHistoryTag.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new QueryUserExpGrantHistoryTag.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ReasonTagsResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ReasonTagsResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ReasonTagsResult>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

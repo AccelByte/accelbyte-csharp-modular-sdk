@@ -66,15 +66,15 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             )
             {
                 CreateModerationRule op = new CreateModerationRule(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<CreateModerationRuleBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public CreateModerationRule.Response Execute(
                 RestapiModerationRuleRequest body,
                 string namespace_
             )
@@ -88,12 +88,12 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<CreateModerationRule.Response> ExecuteAsync(
                 RestapiModerationRuleRequest body,
                 string namespace_
             )
@@ -107,8 +107,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -120,31 +120,47 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public RestapiErrorResponse? Error400 { get; set; } = null;
+
+            public RestapiErrorResponse? Error409 { get; set; } = null;
+
+            public RestapiErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Reporting::AdminModerationRule::CreateModerationRule";
+        }
+
+        #endregion
+
         public CreateModerationRule(
-            string namespace_,
-            Model.RestapiModerationRuleRequest body
+            string namespace_,            
+            Model.RestapiModerationRuleRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,17 +172,36 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public CreateModerationRule.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)201)
+            var response = new CreateModerationRule.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)409)
+            
+            {
+                response.Error409 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

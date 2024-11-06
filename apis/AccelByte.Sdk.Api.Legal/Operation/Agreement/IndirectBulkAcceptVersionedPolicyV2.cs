@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
     ///
     /// Accepts many legal policy versions all at once. Supply with localized version policy id, version policy id, policy id, userId, namespace, country code and client id to accept an agreement. This endpoint used by APIGateway during new user registration.
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class IndirectBulkAcceptVersionedPolicyV2 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -67,18 +67,18 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 IndirectBulkAcceptVersionedPolicyV2 op = new IndirectBulkAcceptVersionedPolicyV2(this,
-                    clientId,
-                    countryCode,
-                    namespace_,
-                    userId
+                    clientId,                    
+                    countryCode,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<IndirectBulkAcceptVersionedPolicyV2Builder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public Model.AcceptAgreementResponse? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public IndirectBulkAcceptVersionedPolicyV2.Response Execute(
                 string clientId,
                 string countryCode,
                 string namespace_,
@@ -97,11 +97,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.AcceptAgreementResponse?> ExecuteAsync(
+            public async Task<IndirectBulkAcceptVersionedPolicyV2.Response> ExecuteAsync(
                 string clientId,
                 string countryCode,
                 string namespace_,
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -137,37 +137,47 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             PathParams["countryCode"] = countryCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = builder.Body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.AcceptAgreementResponse>
+        {
+
+
+            protected override string GetFullOperationId() => "Legal::Agreement::IndirectBulkAcceptVersionedPolicyV2";
+        }
+
+        #endregion
+
         public IndirectBulkAcceptVersionedPolicyV2(
-            string clientId,
-            string countryCode,
-            string namespace_,
-            string userId,
-            List<Model.AcceptAgreementRequest> body
+            string clientId,            
+            string countryCode,            
+            string namespace_,            
+            string userId,            
+            List<Model.AcceptAgreementRequest> body            
         )
         {
             PathParams["clientId"] = clientId;
             PathParams["countryCode"] = countryCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -179,25 +189,26 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.AcceptAgreementResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public IndirectBulkAcceptVersionedPolicyV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new IndirectBulkAcceptVersionedPolicyV2.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.AcceptAgreementResponse>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.AcceptAgreementResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.AcceptAgreementResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -179,7 +179,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public List<Model.FullCategoryInfo>? GetRootCategories(GetRootCategories input)
+        public GetRootCategories.Response GetRootCategories(GetRootCategories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -187,7 +187,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.FullCategoryInfo>?> GetRootCategoriesAsync(GetRootCategories input)
+        public async Task<GetRootCategories.Response> GetRootCategoriesAsync(GetRootCategories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -195,7 +195,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FullCategoryInfo? CreateCategory(CreateCategory input)
+        public CreateCategory.Response CreateCategory(CreateCategory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -203,7 +203,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FullCategoryInfo?> CreateCategoryAsync(CreateCategory input)
+        public async Task<CreateCategory.Response> CreateCategoryAsync(CreateCategory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -211,7 +211,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.BasicCategoryInfo>? ListCategoriesBasic(ListCategoriesBasic input)
+        public ListCategoriesBasic.Response ListCategoriesBasic(ListCategoriesBasic input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -219,7 +219,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.BasicCategoryInfo>?> ListCategoriesBasicAsync(ListCategoriesBasic input)
+        public async Task<ListCategoriesBasic.Response> ListCategoriesBasicAsync(ListCategoriesBasic input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -227,7 +227,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FullCategoryInfo? GetCategory(GetCategory input)
+        public GetCategory.Response GetCategory(GetCategory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -235,7 +235,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FullCategoryInfo?> GetCategoryAsync(GetCategory input)
+        public async Task<GetCategory.Response> GetCategoryAsync(GetCategory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -243,7 +243,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FullCategoryInfo? UpdateCategory(UpdateCategory input)
+        public UpdateCategory.Response UpdateCategory(UpdateCategory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -251,7 +251,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FullCategoryInfo?> UpdateCategoryAsync(UpdateCategory input)
+        public async Task<UpdateCategory.Response> UpdateCategoryAsync(UpdateCategory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -259,7 +259,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FullCategoryInfo? DeleteCategory(DeleteCategory input)
+        public DeleteCategory.Response DeleteCategory(DeleteCategory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -267,7 +267,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FullCategoryInfo?> DeleteCategoryAsync(DeleteCategory input)
+        public async Task<DeleteCategory.Response> DeleteCategoryAsync(DeleteCategory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -275,7 +275,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.FullCategoryInfo>? GetChildCategories(GetChildCategories input)
+        public GetChildCategories.Response GetChildCategories(GetChildCategories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -283,7 +283,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.FullCategoryInfo>?> GetChildCategoriesAsync(GetChildCategories input)
+        public async Task<GetChildCategories.Response> GetChildCategoriesAsync(GetChildCategories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -291,7 +291,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.FullCategoryInfo>? GetDescendantCategories(GetDescendantCategories input)
+        public GetDescendantCategories.Response GetDescendantCategories(GetDescendantCategories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -299,7 +299,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.FullCategoryInfo>?> GetDescendantCategoriesAsync(GetDescendantCategories input)
+        public async Task<GetDescendantCategories.Response> GetDescendantCategoriesAsync(GetDescendantCategories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -307,7 +307,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.CategoryInfo>? PublicGetRootCategories(PublicGetRootCategories input)
+        public PublicGetRootCategories.Response PublicGetRootCategories(PublicGetRootCategories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -315,7 +315,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.CategoryInfo>?> PublicGetRootCategoriesAsync(PublicGetRootCategories input)
+        public async Task<PublicGetRootCategories.Response> PublicGetRootCategoriesAsync(PublicGetRootCategories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -323,7 +323,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.HierarchicalCategoryInfo>? DownloadCategories(DownloadCategories input)
+        public DownloadCategories.Response DownloadCategories(DownloadCategories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -331,7 +331,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.HierarchicalCategoryInfo>?> DownloadCategoriesAsync(DownloadCategories input)
+        public async Task<DownloadCategories.Response> DownloadCategoriesAsync(DownloadCategories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -339,7 +339,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.CategoryInfo? PublicGetCategory(PublicGetCategory input)
+        public PublicGetCategory.Response PublicGetCategory(PublicGetCategory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -347,7 +347,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CategoryInfo?> PublicGetCategoryAsync(PublicGetCategory input)
+        public async Task<PublicGetCategory.Response> PublicGetCategoryAsync(PublicGetCategory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -355,7 +355,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.CategoryInfo>? PublicGetChildCategories(PublicGetChildCategories input)
+        public PublicGetChildCategories.Response PublicGetChildCategories(PublicGetChildCategories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -363,7 +363,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.CategoryInfo>?> PublicGetChildCategoriesAsync(PublicGetChildCategories input)
+        public async Task<PublicGetChildCategories.Response> PublicGetChildCategoriesAsync(PublicGetChildCategories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -371,7 +371,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.CategoryInfo>? PublicGetDescendantCategories(PublicGetDescendantCategories input)
+        public PublicGetDescendantCategories.Response PublicGetDescendantCategories(PublicGetDescendantCategories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -379,7 +379,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.CategoryInfo>?> PublicGetDescendantCategoriesAsync(PublicGetDescendantCategories input)
+        public async Task<PublicGetDescendantCategories.Response> PublicGetDescendantCategoriesAsync(PublicGetDescendantCategories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

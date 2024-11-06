@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 return op;
             }
 
-            public void Execute(
+            public HandlerV3Healthz.Response Execute(
             )
             {
                 HandlerV3Healthz op = Build(
@@ -68,12 +68,12 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<HandlerV3Healthz.Response> ExecuteAsync(
             )
             {
                 HandlerV3Healthz op = Build(
@@ -83,8 +83,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -93,26 +93,36 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         private HandlerV3Healthz(HandlerV3HealthzBuilder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public HandlerV3Healthz(
-        )
+        #region Response Part        
+        public class Response : ApiResponse
         {
 
 
+            protected override string GetFullOperationId() => "Matchmaking::MatchmakingOperations::HandlerV3Healthz";
+        }
 
+        #endregion
 
+        public HandlerV3Healthz(
+        )
+        {
+            
+            
 
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -121,20 +131,21 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public HandlerV3Healthz.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)200)
+            var response = new HandlerV3Healthz.Response()
             {
-                return;
-            }
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
 
-            var payloadString = payload.ReadToString();
 
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

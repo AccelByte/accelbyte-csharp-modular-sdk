@@ -30,7 +30,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// The endpoint upgrades a headless account by linking the headless account with the email address and the password. By upgrading the headless account into a full account, the user could use the email address and password for using Justice IAM.
     /// The endpoint is a shortcut for upgrading a headless account and verifying the email address in one call. In order to get a verification code for the endpoint, please check the send verification code endpoint.
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class UpgradeHeadlessAccountWithVerificationCode : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -63,17 +63,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 UpgradeHeadlessAccountWithVerificationCode op = new UpgradeHeadlessAccountWithVerificationCode(this,
-                    body,
-                    namespace_,
-                    userId
+                    body,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<UpgradeHeadlessAccountWithVerificationCodeBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public Model.ModelUserResponse? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public UpgradeHeadlessAccountWithVerificationCode.Response Execute(
                 ModelUpgradeHeadlessAccountWithVerificationCodeRequest body,
                 string namespace_,
                 string userId
@@ -90,11 +90,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelUserResponse?> ExecuteAsync(
+            public async Task<UpgradeHeadlessAccountWithVerificationCode.Response> ExecuteAsync(
                 ModelUpgradeHeadlessAccountWithVerificationCodeRequest body,
                 string namespace_,
                 string userId
@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -125,33 +125,51 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelUserResponse>
+        {
+
+            public RestErrorResponse? Error400 { get; set; } = null;
+
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public RestErrorResponse? Error403 { get; set; } = null;
+
+            public string Error409 { get; set; } = "";
+
+
+            protected override string GetFullOperationId() => "Iam::Users::UpgradeHeadlessAccountWithVerificationCode";
+        }
+
+        #endregion
+
         public UpgradeHeadlessAccountWithVerificationCode(
-            string namespace_,
-            string userId,
-            Model.ModelUpgradeHeadlessAccountWithVerificationCodeRequest body
+            string namespace_,            
+            string userId,            
+            Model.ModelUpgradeHeadlessAccountWithVerificationCodeRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -163,25 +181,46 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelUserResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public UpgradeHeadlessAccountWithVerificationCode.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new UpgradeHeadlessAccountWithVerificationCode.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelUserResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelUserResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelUserResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)409)
+            {
+                response.Error409 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error409!);
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         }
         #endregion
 
-        public Model.ApimodelsGlobalConfigurationResponse? AdminListGlobalConfiguration(AdminListGlobalConfiguration input)
+        public AdminListGlobalConfiguration.Response AdminListGlobalConfiguration(AdminListGlobalConfiguration input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGlobalConfigurationResponse?> AdminListGlobalConfigurationAsync(AdminListGlobalConfiguration input)
+        public async Task<AdminListGlobalConfiguration.Response> AdminListGlobalConfigurationAsync(AdminListGlobalConfiguration input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsGlobalConfigurationResponse? AdminUpdateGlobalConfiguration(AdminUpdateGlobalConfiguration input)
+        public AdminUpdateGlobalConfiguration.Response AdminUpdateGlobalConfiguration(AdminUpdateGlobalConfiguration input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGlobalConfigurationResponse?> AdminUpdateGlobalConfigurationAsync(AdminUpdateGlobalConfiguration input)
+        public async Task<AdminUpdateGlobalConfiguration.Response> AdminUpdateGlobalConfigurationAsync(AdminUpdateGlobalConfiguration input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public string? AdminDeleteGlobalConfiguration(AdminDeleteGlobalConfiguration input)
+        public AdminDeleteGlobalConfiguration.Response AdminDeleteGlobalConfiguration(AdminDeleteGlobalConfiguration input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<string?> AdminDeleteGlobalConfigurationAsync(AdminDeleteGlobalConfiguration input)
+        public async Task<AdminDeleteGlobalConfiguration.Response> AdminDeleteGlobalConfigurationAsync(AdminDeleteGlobalConfiguration input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

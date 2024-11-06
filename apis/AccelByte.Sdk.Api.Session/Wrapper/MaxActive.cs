@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         }
         #endregion
 
-        public Model.ModelsMemberActiveSession? AdminGetMemberActiveSession(AdminGetMemberActiveSession input)
+        public AdminGetMemberActiveSession.Response AdminGetMemberActiveSession(AdminGetMemberActiveSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsMemberActiveSession?> AdminGetMemberActiveSessionAsync(AdminGetMemberActiveSession input)
+        public async Task<AdminGetMemberActiveSession.Response> AdminGetMemberActiveSessionAsync(AdminGetMemberActiveSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,18 +74,18 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminReconcileMaxActiveSession(AdminReconcileMaxActiveSession input)
+        public AdminReconcileMaxActiveSession.Response AdminReconcileMaxActiveSession(AdminReconcileMaxActiveSession input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminReconcileMaxActiveSessionAsync(AdminReconcileMaxActiveSession input)
+        public async Task<AdminReconcileMaxActiveSession.Response> AdminReconcileMaxActiveSessionAsync(AdminReconcileMaxActiveSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

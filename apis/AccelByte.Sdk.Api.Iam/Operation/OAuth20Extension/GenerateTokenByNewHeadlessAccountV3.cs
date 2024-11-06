@@ -73,14 +73,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 GenerateTokenByNewHeadlessAccountV3 op = new GenerateTokenByNewHeadlessAccountV3(this,
-                    linkingToken
+                    linkingToken                    
                 );
 
                 op.SetBaseFields<GenerateTokenByNewHeadlessAccountV3Builder>(this);
                 return op;
             }
 
-            public Model.OauthmodelTokenResponseV3? Execute(
+            public GenerateTokenByNewHeadlessAccountV3.Response Execute(
                 string linkingToken
             )
             {
@@ -93,11 +93,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OauthmodelTokenResponseV3?> ExecuteAsync(
+            public async Task<GenerateTokenByNewHeadlessAccountV3.Response> ExecuteAsync(
                 string linkingToken
             )
             {
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -120,35 +120,51 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string linkingToken
         )
         {
-
-
+            
+            
             if (builder.AdditionalData is not null) FormParams["additionalData"] = builder.AdditionalData;
             if (builder.ExtendExp != null) FormParams["extend_exp"] = Convert.ToString(builder.ExtendExp)!;
             if (linkingToken is not null) FormParams["linkingToken"] = linkingToken;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
         #endregion
 
-        public GenerateTokenByNewHeadlessAccountV3(
-            string? additionalData,
-            bool? extendExp,
-            string linkingToken
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.OauthmodelTokenResponseV3>
         {
 
+            public RestErrorResponse? Error400 { get; set; } = null;
 
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public RestErrorResponse? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::OAuth20Extension::GenerateTokenByNewHeadlessAccountV3";
+        }
+
+        #endregion
+
+        public GenerateTokenByNewHeadlessAccountV3(
+            string? additionalData,            
+            bool? extendExp,            
+            string linkingToken            
+        )
+        {
+            
+            
             if (additionalData is not null) FormParams["additionalData"] = additionalData;
             if (extendExp != null) FormParams["extend_exp"] = Convert.ToString(extendExp)!;
             if (linkingToken is not null) FormParams["linkingToken"] = linkingToken;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -160,25 +176,41 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OauthmodelTokenResponseV3? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GenerateTokenByNewHeadlessAccountV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GenerateTokenByNewHeadlessAccountV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

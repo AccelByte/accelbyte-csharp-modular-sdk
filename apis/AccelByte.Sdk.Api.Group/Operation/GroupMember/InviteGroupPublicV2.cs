@@ -77,16 +77,16 @@ namespace AccelByte.Sdk.Api.Group.Operation
             )
             {
                 InviteGroupPublicV2 op = new InviteGroupPublicV2(this,
-                    groupId,
-                    namespace_,
-                    userId
+                    groupId,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<InviteGroupPublicV2Builder>(this);
                 return op;
             }
 
-            public Model.ModelsUserInvitationResponseV1? Execute(
+            public InviteGroupPublicV2.Response Execute(
                 string groupId,
                 string namespace_,
                 string userId
@@ -103,11 +103,11 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsUserInvitationResponseV1?> ExecuteAsync(
+            public async Task<InviteGroupPublicV2.Response> ExecuteAsync(
                 string groupId,
                 string namespace_,
                 string userId
@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -139,32 +139,54 @@ namespace AccelByte.Sdk.Api.Group.Operation
             PathParams["groupId"] = groupId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsUserInvitationResponseV1>
+        {
+
+            public ResponseErrorResponse? Error400 { get; set; } = null;
+
+            public ResponseErrorResponse? Error401 { get; set; } = null;
+
+            public ResponseErrorResponse? Error403 { get; set; } = null;
+
+            public ResponseErrorResponse? Error404 { get; set; } = null;
+
+            public ResponseErrorResponse? Error409 { get; set; } = null;
+
+            public ResponseErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Group::GroupMember::InviteGroupPublicV2";
+        }
+
+        #endregion
+
         public InviteGroupPublicV2(
-            string groupId,
-            string namespace_,
-            string userId
+            string groupId,            
+            string namespace_,            
+            string userId            
         )
         {
             PathParams["groupId"] = groupId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -173,28 +195,59 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsUserInvitationResponseV1? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public InviteGroupPublicV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new InviteGroupPublicV2.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsUserInvitationResponseV1>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsUserInvitationResponseV1>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsUserInvitationResponseV1>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)409)
+            {
+                response.Error409 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -55,14 +55,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 VerifyTokenV3 op = new VerifyTokenV3(this,
-                    token
+                    token                    
                 );
 
                 op.SetBaseFields<VerifyTokenV3Builder>(this);
                 return op;
             }
 
-            public Model.OauthmodelTokenResponseV3? Execute(
+            public VerifyTokenV3.Response Execute(
                 string token
             )
             {
@@ -75,11 +75,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OauthmodelTokenResponseV3?> ExecuteAsync(
+            public async Task<VerifyTokenV3.Response> ExecuteAsync(
                 string token
             )
             {
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -102,29 +102,41 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string token
         )
         {
-
-
+            
+            
             if (token is not null) FormParams["token"] = token;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
         #endregion
 
-        public VerifyTokenV3(
-            string token
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.OauthmodelTokenResponseV3>
         {
 
+            public string Error400 { get; set; } = "";
 
+
+            protected override string GetFullOperationId() => "Iam::OAuth20::VerifyTokenV3";
+        }
+
+        #endregion
+
+        public VerifyTokenV3(
+            string token            
+        )
+        {
+            
+            
             if (token is not null) FormParams["token"] = token;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -136,25 +148,31 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OauthmodelTokenResponseV3? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public VerifyTokenV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new VerifyTokenV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Error400 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error400!);
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

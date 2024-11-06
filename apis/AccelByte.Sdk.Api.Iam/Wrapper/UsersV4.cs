@@ -254,7 +254,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminGetMyBackupCodesV4.AdminGetMyBackupCodesV4Builder AdminGetMyBackupCodesV4Op
         {
             get
@@ -266,7 +266,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminGenerateMyBackupCodesV4.AdminGenerateMyBackupCodesV4Builder AdminGenerateMyBackupCodesV4Op
         {
             get
@@ -289,7 +289,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminDownloadMyBackupCodesV4.AdminDownloadMyBackupCodesV4Builder AdminDownloadMyBackupCodesV4Op
         {
             get
@@ -301,7 +301,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminEnableMyBackupCodesV4.AdminEnableMyBackupCodesV4Builder AdminEnableMyBackupCodesV4Op
         {
             get
@@ -423,7 +423,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminGetMyMFAStatusV4.AdminGetMyMFAStatusV4Builder AdminGetMyMFAStatusV4Op
         {
             get
@@ -435,7 +435,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminInviteUserV4.AdminInviteUserV4Builder AdminInviteUserV4Op
         {
             get
@@ -568,7 +568,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetMyBackupCodesV4.PublicGetMyBackupCodesV4Builder PublicGetMyBackupCodesV4Op
         {
             get
@@ -580,7 +580,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGenerateMyBackupCodesV4.PublicGenerateMyBackupCodesV4Builder PublicGenerateMyBackupCodesV4Op
         {
             get
@@ -603,7 +603,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicDownloadMyBackupCodesV4.PublicDownloadMyBackupCodesV4Builder PublicDownloadMyBackupCodesV4Op
         {
             get
@@ -615,7 +615,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicEnableMyBackupCodesV4.PublicEnableMyBackupCodesV4Builder PublicEnableMyBackupCodesV4Op
         {
             get
@@ -748,7 +748,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetMyMFAStatusV4.PublicGetMyMFAStatusV4Builder PublicGetMyMFAStatusV4Op
         {
             get
@@ -784,7 +784,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-        public Model.ModelListInvitationHistoriesV4Response? AdminListInvitationHistoriesV4(AdminListInvitationHistoriesV4 input)
+        public AdminListInvitationHistoriesV4.Response AdminListInvitationHistoriesV4(AdminListInvitationHistoriesV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -792,7 +792,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelListInvitationHistoriesV4Response?> AdminListInvitationHistoriesV4Async(AdminListInvitationHistoriesV4 input)
+        public async Task<AdminListInvitationHistoriesV4.Response> AdminListInvitationHistoriesV4Async(AdminListInvitationHistoriesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -800,7 +800,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelInvitationHistoryResponse? AdminGetNamespaceInvitationHistoryV4(AdminGetNamespaceInvitationHistoryV4 input)
+        public AdminGetNamespaceInvitationHistoryV4.Response AdminGetNamespaceInvitationHistoryV4(AdminGetNamespaceInvitationHistoryV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -808,7 +808,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelInvitationHistoryResponse?> AdminGetNamespaceInvitationHistoryV4Async(AdminGetNamespaceInvitationHistoryV4 input)
+        public async Task<AdminGetNamespaceInvitationHistoryV4.Response> AdminGetNamespaceInvitationHistoryV4Async(AdminGetNamespaceInvitationHistoryV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -816,7 +816,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelNamespaceInvitationHistoryUserV4Response? AdminGetNamespaceUserInvitationHistoryV4(AdminGetNamespaceUserInvitationHistoryV4 input)
+        public AdminGetNamespaceUserInvitationHistoryV4.Response AdminGetNamespaceUserInvitationHistoryV4(AdminGetNamespaceUserInvitationHistoryV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -824,7 +824,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelNamespaceInvitationHistoryUserV4Response?> AdminGetNamespaceUserInvitationHistoryV4Async(AdminGetNamespaceUserInvitationHistoryV4 input)
+        public async Task<AdminGetNamespaceUserInvitationHistoryV4.Response> AdminGetNamespaceUserInvitationHistoryV4Async(AdminGetNamespaceUserInvitationHistoryV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -832,7 +832,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AccountCreateTestUsersResponseV4? AdminCreateTestUsersV4(AdminCreateTestUsersV4 input)
+        public AdminCreateTestUsersV4.Response AdminCreateTestUsersV4(AdminCreateTestUsersV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -840,7 +840,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountCreateTestUsersResponseV4?> AdminCreateTestUsersV4Async(AdminCreateTestUsersV4 input)
+        public async Task<AdminCreateTestUsersV4.Response> AdminCreateTestUsersV4Async(AdminCreateTestUsersV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -848,7 +848,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AccountCreateUserResponseV4? AdminCreateUserV4(AdminCreateUserV4 input)
+        public AdminCreateUserV4.Response AdminCreateUserV4(AdminCreateUserV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -856,7 +856,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountCreateUserResponseV4?> AdminCreateUserV4Async(AdminCreateUserV4 input)
+        public async Task<AdminCreateUserV4.Response> AdminCreateUserV4Async(AdminCreateUserV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -864,23 +864,23 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminBulkUpdateUserAccountTypeV4(AdminBulkUpdateUserAccountTypeV4 input)
+        public AdminBulkUpdateUserAccountTypeV4.Response AdminBulkUpdateUserAccountTypeV4(AdminBulkUpdateUserAccountTypeV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminBulkUpdateUserAccountTypeV4Async(AdminBulkUpdateUserAccountTypeV4 input)
+        public async Task<AdminBulkUpdateUserAccountTypeV4.Response> AdminBulkUpdateUserAccountTypeV4Async(AdminBulkUpdateUserAccountTypeV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelListValidUserIDResponseV4? AdminBulkCheckValidUserIDV4(AdminBulkCheckValidUserIDV4 input)
+        public AdminBulkCheckValidUserIDV4.Response AdminBulkCheckValidUserIDV4(AdminBulkCheckValidUserIDV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -888,7 +888,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelListValidUserIDResponseV4?> AdminBulkCheckValidUserIDV4Async(AdminBulkCheckValidUserIDV4 input)
+        public async Task<AdminBulkCheckValidUserIDV4.Response> AdminBulkCheckValidUserIDV4Async(AdminBulkCheckValidUserIDV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -896,7 +896,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserResponseV3? AdminUpdateUserV4(AdminUpdateUserV4 input)
+        public AdminUpdateUserV4.Response AdminUpdateUserV4(AdminUpdateUserV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -904,7 +904,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponseV3?> AdminUpdateUserV4Async(AdminUpdateUserV4 input)
+        public async Task<AdminUpdateUserV4.Response> AdminUpdateUserV4Async(AdminUpdateUserV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -912,39 +912,39 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminUpdateUserEmailAddressV4(AdminUpdateUserEmailAddressV4 input)
+        public AdminUpdateUserEmailAddressV4.Response AdminUpdateUserEmailAddressV4(AdminUpdateUserEmailAddressV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminUpdateUserEmailAddressV4Async(AdminUpdateUserEmailAddressV4 input)
+        public async Task<AdminUpdateUserEmailAddressV4.Response> AdminUpdateUserEmailAddressV4Async(AdminUpdateUserEmailAddressV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDisableUserMFAV4(AdminDisableUserMFAV4 input)
+        public AdminDisableUserMFAV4.Response AdminDisableUserMFAV4(AdminDisableUserMFAV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDisableUserMFAV4Async(AdminDisableUserMFAV4 input)
+        public async Task<AdminDisableUserMFAV4.Response> AdminDisableUserMFAV4Async(AdminDisableUserMFAV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserMFAStatusResponseV4? AdminGetUserMFAStatusV4(AdminGetUserMFAStatusV4 input)
+        public AdminGetUserMFAStatusV4.Response AdminGetUserMFAStatusV4(AdminGetUserMFAStatusV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -952,7 +952,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserMFAStatusResponseV4?> AdminGetUserMFAStatusV4Async(AdminGetUserMFAStatusV4 input)
+        public async Task<AdminGetUserMFAStatusV4.Response> AdminGetUserMFAStatusV4Async(AdminGetUserMFAStatusV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -960,7 +960,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelListUserRolesV4Response? AdminListUserRolesV4(AdminListUserRolesV4 input)
+        public AdminListUserRolesV4.Response AdminListUserRolesV4(AdminListUserRolesV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -968,7 +968,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelListUserRolesV4Response?> AdminListUserRolesV4Async(AdminListUserRolesV4 input)
+        public async Task<AdminListUserRolesV4.Response> AdminListUserRolesV4Async(AdminListUserRolesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -976,7 +976,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelListUserRolesV4Response? AdminUpdateUserRoleV4(AdminUpdateUserRoleV4 input)
+        public AdminUpdateUserRoleV4.Response AdminUpdateUserRoleV4(AdminUpdateUserRoleV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -984,7 +984,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelListUserRolesV4Response?> AdminUpdateUserRoleV4Async(AdminUpdateUserRoleV4 input)
+        public async Task<AdminUpdateUserRoleV4.Response> AdminUpdateUserRoleV4Async(AdminUpdateUserRoleV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -992,7 +992,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelListUserRolesV4Response? AdminAddUserRoleV4(AdminAddUserRoleV4 input)
+        public AdminAddUserRoleV4.Response AdminAddUserRoleV4(AdminAddUserRoleV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1000,7 +1000,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelListUserRolesV4Response?> AdminAddUserRoleV4Async(AdminAddUserRoleV4 input)
+        public async Task<AdminAddUserRoleV4.Response> AdminAddUserRoleV4Async(AdminAddUserRoleV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1008,23 +1008,23 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminRemoveUserRoleV4(AdminRemoveUserRoleV4 input)
+        public AdminRemoveUserRoleV4.Response AdminRemoveUserRoleV4(AdminRemoveUserRoleV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminRemoveUserRoleV4Async(AdminRemoveUserRoleV4 input)
+        public async Task<AdminRemoveUserRoleV4.Response> AdminRemoveUserRoleV4Async(AdminRemoveUserRoleV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelInviteUserResponseV3? AdminInviteUserNewV4(AdminInviteUserNewV4 input)
+        public AdminInviteUserNewV4.Response AdminInviteUserNewV4(AdminInviteUserNewV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1032,7 +1032,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelInviteUserResponseV3?> AdminInviteUserNewV4Async(AdminInviteUserNewV4 input)
+        public async Task<AdminInviteUserNewV4.Response> AdminInviteUserNewV4Async(AdminInviteUserNewV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1040,7 +1040,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserResponseV3? AdminUpdateMyUserV4(AdminUpdateMyUserV4 input)
+        public AdminUpdateMyUserV4.Response AdminUpdateMyUserV4(AdminUpdateMyUserV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1048,7 +1048,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponseV3?> AdminUpdateMyUserV4Async(AdminUpdateMyUserV4 input)
+        public async Task<AdminUpdateMyUserV4.Response> AdminUpdateMyUserV4Async(AdminUpdateMyUserV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1056,39 +1056,39 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDisableMyAuthenticatorV4(AdminDisableMyAuthenticatorV4 input)
+        public AdminDisableMyAuthenticatorV4.Response AdminDisableMyAuthenticatorV4(AdminDisableMyAuthenticatorV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDisableMyAuthenticatorV4Async(AdminDisableMyAuthenticatorV4 input)
+        public async Task<AdminDisableMyAuthenticatorV4.Response> AdminDisableMyAuthenticatorV4Async(AdminDisableMyAuthenticatorV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminEnableMyAuthenticatorV4(AdminEnableMyAuthenticatorV4 input)
+        public AdminEnableMyAuthenticatorV4.Response AdminEnableMyAuthenticatorV4(AdminEnableMyAuthenticatorV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminEnableMyAuthenticatorV4Async(AdminEnableMyAuthenticatorV4 input)
+        public async Task<AdminEnableMyAuthenticatorV4.Response> AdminEnableMyAuthenticatorV4Async(AdminEnableMyAuthenticatorV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelAuthenticatorKeyResponseV4? AdminGenerateMyAuthenticatorKeyV4(AdminGenerateMyAuthenticatorKeyV4 input)
+        public AdminGenerateMyAuthenticatorKeyV4.Response AdminGenerateMyAuthenticatorKeyV4(AdminGenerateMyAuthenticatorKeyV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1096,7 +1096,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelAuthenticatorKeyResponseV4?> AdminGenerateMyAuthenticatorKeyV4Async(AdminGenerateMyAuthenticatorKeyV4 input)
+        public async Task<AdminGenerateMyAuthenticatorKeyV4.Response> AdminGenerateMyAuthenticatorKeyV4Async(AdminGenerateMyAuthenticatorKeyV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1104,9 +1104,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelBackupCodesResponseV4? AdminGetMyBackupCodesV4(AdminGetMyBackupCodesV4 input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminGetMyBackupCodesV4.Response AdminGetMyBackupCodesV4(AdminGetMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1114,7 +1114,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelBackupCodesResponseV4?> AdminGetMyBackupCodesV4Async(AdminGetMyBackupCodesV4 input)
+        public async Task<AdminGetMyBackupCodesV4.Response> AdminGetMyBackupCodesV4Async(AdminGetMyBackupCodesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1122,10 +1122,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelBackupCodesResponseV4? AdminGenerateMyBackupCodesV4(AdminGenerateMyBackupCodesV4 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminGenerateMyBackupCodesV4.Response AdminGenerateMyBackupCodesV4(AdminGenerateMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1133,7 +1133,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelBackupCodesResponseV4?> AdminGenerateMyBackupCodesV4Async(AdminGenerateMyBackupCodesV4 input)
+        public async Task<AdminGenerateMyBackupCodesV4.Response> AdminGenerateMyBackupCodesV4Async(AdminGenerateMyBackupCodesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1141,26 +1141,26 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public void AdminDisableMyBackupCodesV4(AdminDisableMyBackupCodesV4 input)
+        #pragma warning restore ab_deprecated_operation
+        public AdminDisableMyBackupCodesV4.Response AdminDisableMyBackupCodesV4(AdminDisableMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDisableMyBackupCodesV4Async(AdminDisableMyBackupCodesV4 input)
+        public async Task<AdminDisableMyBackupCodesV4.Response> AdminDisableMyBackupCodesV4Async(AdminDisableMyBackupCodesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Stream? AdminDownloadMyBackupCodesV4(AdminDownloadMyBackupCodesV4 input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminDownloadMyBackupCodesV4.Response AdminDownloadMyBackupCodesV4(AdminDownloadMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1168,7 +1168,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Stream?> AdminDownloadMyBackupCodesV4Async(AdminDownloadMyBackupCodesV4 input)
+        public async Task<AdminDownloadMyBackupCodesV4.Response> AdminDownloadMyBackupCodesV4Async(AdminDownloadMyBackupCodesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1176,10 +1176,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelBackupCodesResponseV4? AdminEnableMyBackupCodesV4(AdminEnableMyBackupCodesV4 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminEnableMyBackupCodesV4.Response AdminEnableMyBackupCodesV4(AdminEnableMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1187,7 +1187,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelBackupCodesResponseV4?> AdminEnableMyBackupCodesV4Async(AdminEnableMyBackupCodesV4 input)
+        public async Task<AdminEnableMyBackupCodesV4.Response> AdminEnableMyBackupCodesV4Async(AdminEnableMyBackupCodesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1195,56 +1195,56 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public void AdminGetBackupCodesV4(AdminGetBackupCodesV4 input)
+        #pragma warning restore ab_deprecated_operation
+        public AdminGetBackupCodesV4.Response AdminGetBackupCodesV4(AdminGetBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminGetBackupCodesV4Async(AdminGetBackupCodesV4 input)
+        public async Task<AdminGetBackupCodesV4.Response> AdminGetBackupCodesV4Async(AdminGetBackupCodesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminGenerateBackupCodesV4(AdminGenerateBackupCodesV4 input)
+        public AdminGenerateBackupCodesV4.Response AdminGenerateBackupCodesV4(AdminGenerateBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminGenerateBackupCodesV4Async(AdminGenerateBackupCodesV4 input)
+        public async Task<AdminGenerateBackupCodesV4.Response> AdminGenerateBackupCodesV4Async(AdminGenerateBackupCodesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminEnableBackupCodesV4(AdminEnableBackupCodesV4 input)
+        public AdminEnableBackupCodesV4.Response AdminEnableBackupCodesV4(AdminEnableBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminEnableBackupCodesV4Async(AdminEnableBackupCodesV4 input)
+        public async Task<AdminEnableBackupCodesV4.Response> AdminEnableBackupCodesV4Async(AdminEnableBackupCodesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserMFATokenResponseV4? AdminChallengeMyMFAV4(AdminChallengeMyMFAV4 input)
+        public AdminChallengeMyMFAV4.Response AdminChallengeMyMFAV4(AdminChallengeMyMFAV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1252,7 +1252,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserMFATokenResponseV4?> AdminChallengeMyMFAV4Async(AdminChallengeMyMFAV4 input)
+        public async Task<AdminChallengeMyMFAV4.Response> AdminChallengeMyMFAV4Async(AdminChallengeMyMFAV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1260,55 +1260,55 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminSendMyMFAEmailCodeV4(AdminSendMyMFAEmailCodeV4 input)
+        public AdminSendMyMFAEmailCodeV4.Response AdminSendMyMFAEmailCodeV4(AdminSendMyMFAEmailCodeV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminSendMyMFAEmailCodeV4Async(AdminSendMyMFAEmailCodeV4 input)
+        public async Task<AdminSendMyMFAEmailCodeV4.Response> AdminSendMyMFAEmailCodeV4Async(AdminSendMyMFAEmailCodeV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDisableMyEmailV4(AdminDisableMyEmailV4 input)
+        public AdminDisableMyEmailV4.Response AdminDisableMyEmailV4(AdminDisableMyEmailV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDisableMyEmailV4Async(AdminDisableMyEmailV4 input)
+        public async Task<AdminDisableMyEmailV4.Response> AdminDisableMyEmailV4Async(AdminDisableMyEmailV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminEnableMyEmailV4(AdminEnableMyEmailV4 input)
+        public AdminEnableMyEmailV4.Response AdminEnableMyEmailV4(AdminEnableMyEmailV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminEnableMyEmailV4Async(AdminEnableMyEmailV4 input)
+        public async Task<AdminEnableMyEmailV4.Response> AdminEnableMyEmailV4Async(AdminEnableMyEmailV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelEnabledFactorsResponseV4? AdminGetMyEnabledFactorsV4(AdminGetMyEnabledFactorsV4 input)
+        public AdminGetMyEnabledFactorsV4.Response AdminGetMyEnabledFactorsV4(AdminGetMyEnabledFactorsV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1316,7 +1316,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelEnabledFactorsResponseV4?> AdminGetMyEnabledFactorsV4Async(AdminGetMyEnabledFactorsV4 input)
+        public async Task<AdminGetMyEnabledFactorsV4.Response> AdminGetMyEnabledFactorsV4Async(AdminGetMyEnabledFactorsV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1324,23 +1324,23 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminMakeFactorMyDefaultV4(AdminMakeFactorMyDefaultV4 input)
+        public AdminMakeFactorMyDefaultV4.Response AdminMakeFactorMyDefaultV4(AdminMakeFactorMyDefaultV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminMakeFactorMyDefaultV4Async(AdminMakeFactorMyDefaultV4 input)
+        public async Task<AdminMakeFactorMyDefaultV4.Response> AdminMakeFactorMyDefaultV4Async(AdminMakeFactorMyDefaultV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserMFAStatusResponseV4? AdminGetMyOwnMFAStatusV4(AdminGetMyOwnMFAStatusV4 input)
+        public AdminGetMyOwnMFAStatusV4.Response AdminGetMyOwnMFAStatusV4(AdminGetMyOwnMFAStatusV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1348,7 +1348,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserMFAStatusResponseV4?> AdminGetMyOwnMFAStatusV4Async(AdminGetMyOwnMFAStatusV4 input)
+        public async Task<AdminGetMyOwnMFAStatusV4.Response> AdminGetMyOwnMFAStatusV4Async(AdminGetMyOwnMFAStatusV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1356,9 +1356,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelUserMFAStatusResponseV4? AdminGetMyMFAStatusV4(AdminGetMyMFAStatusV4 input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminGetMyMFAStatusV4.Response AdminGetMyMFAStatusV4(AdminGetMyMFAStatusV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1366,7 +1366,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserMFAStatusResponseV4?> AdminGetMyMFAStatusV4Async(AdminGetMyMFAStatusV4 input)
+        public async Task<AdminGetMyMFAStatusV4.Response> AdminGetMyMFAStatusV4Async(AdminGetMyMFAStatusV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1374,10 +1374,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelInviteUserResponseV3? AdminInviteUserV4(AdminInviteUserV4 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminInviteUserV4.Response AdminInviteUserV4(AdminInviteUserV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1385,7 +1385,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelInviteUserResponseV3?> AdminInviteUserV4Async(AdminInviteUserV4 input)
+        public async Task<AdminInviteUserV4.Response> AdminInviteUserV4Async(AdminInviteUserV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1393,8 +1393,8 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public Model.AccountcommonUserPlatforms? PublicListUserIDByPlatformUserIDsV4(PublicListUserIDByPlatformUserIDsV4 input)
+        #pragma warning restore ab_deprecated_operation
+        public PublicListUserIDByPlatformUserIDsV4.Response PublicListUserIDByPlatformUserIDsV4(PublicListUserIDByPlatformUserIDsV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1402,7 +1402,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountcommonUserPlatforms?> PublicListUserIDByPlatformUserIDsV4Async(PublicListUserIDByPlatformUserIDsV4 input)
+        public async Task<PublicListUserIDByPlatformUserIDsV4.Response> PublicListUserIDByPlatformUserIDsV4Async(PublicListUserIDByPlatformUserIDsV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1410,7 +1410,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AccountCreateUserResponseV4? PublicCreateTestUserV4(PublicCreateTestUserV4 input)
+        public PublicCreateTestUserV4.Response PublicCreateTestUserV4(PublicCreateTestUserV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1418,7 +1418,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountCreateUserResponseV4?> PublicCreateTestUserV4Async(PublicCreateTestUserV4 input)
+        public async Task<PublicCreateTestUserV4.Response> PublicCreateTestUserV4Async(PublicCreateTestUserV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1426,7 +1426,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AccountCreateUserResponseV4? PublicCreateUserV4(PublicCreateUserV4 input)
+        public PublicCreateUserV4.Response PublicCreateUserV4(PublicCreateUserV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1434,7 +1434,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountCreateUserResponseV4?> PublicCreateUserV4Async(PublicCreateUserV4 input)
+        public async Task<PublicCreateUserV4.Response> PublicCreateUserV4Async(PublicCreateUserV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1442,7 +1442,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AccountCreateUserResponseV4? CreateUserFromInvitationV4(CreateUserFromInvitationV4 input)
+        public CreateUserFromInvitationV4.Response CreateUserFromInvitationV4(CreateUserFromInvitationV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1450,7 +1450,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountCreateUserResponseV4?> CreateUserFromInvitationV4Async(CreateUserFromInvitationV4 input)
+        public async Task<CreateUserFromInvitationV4.Response> CreateUserFromInvitationV4Async(CreateUserFromInvitationV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1458,7 +1458,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserResponseV3? PublicUpdateUserV4(PublicUpdateUserV4 input)
+        public PublicUpdateUserV4.Response PublicUpdateUserV4(PublicUpdateUserV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1466,7 +1466,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserResponseV3?> PublicUpdateUserV4Async(PublicUpdateUserV4 input)
+        public async Task<PublicUpdateUserV4.Response> PublicUpdateUserV4Async(PublicUpdateUserV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1474,23 +1474,23 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicUpdateUserEmailAddressV4(PublicUpdateUserEmailAddressV4 input)
+        public PublicUpdateUserEmailAddressV4.Response PublicUpdateUserEmailAddressV4(PublicUpdateUserEmailAddressV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicUpdateUserEmailAddressV4Async(PublicUpdateUserEmailAddressV4 input)
+        public async Task<PublicUpdateUserEmailAddressV4.Response> PublicUpdateUserEmailAddressV4Async(PublicUpdateUserEmailAddressV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AccountUserResponseV4? PublicUpgradeHeadlessAccountWithVerificationCodeV4(PublicUpgradeHeadlessAccountWithVerificationCodeV4 input)
+        public PublicUpgradeHeadlessAccountWithVerificationCodeV4.Response PublicUpgradeHeadlessAccountWithVerificationCodeV4(PublicUpgradeHeadlessAccountWithVerificationCodeV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1498,7 +1498,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountUserResponseV4?> PublicUpgradeHeadlessAccountWithVerificationCodeV4Async(PublicUpgradeHeadlessAccountWithVerificationCodeV4 input)
+        public async Task<PublicUpgradeHeadlessAccountWithVerificationCodeV4.Response> PublicUpgradeHeadlessAccountWithVerificationCodeV4Async(PublicUpgradeHeadlessAccountWithVerificationCodeV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1506,7 +1506,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AccountUserResponseV4? PublicUpgradeHeadlessAccountV4(PublicUpgradeHeadlessAccountV4 input)
+        public PublicUpgradeHeadlessAccountV4.Response PublicUpgradeHeadlessAccountV4(PublicUpgradeHeadlessAccountV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1514,7 +1514,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountUserResponseV4?> PublicUpgradeHeadlessAccountV4Async(PublicUpgradeHeadlessAccountV4 input)
+        public async Task<PublicUpgradeHeadlessAccountV4.Response> PublicUpgradeHeadlessAccountV4Async(PublicUpgradeHeadlessAccountV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1522,39 +1522,39 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicDisableMyAuthenticatorV4(PublicDisableMyAuthenticatorV4 input)
+        public PublicDisableMyAuthenticatorV4.Response PublicDisableMyAuthenticatorV4(PublicDisableMyAuthenticatorV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicDisableMyAuthenticatorV4Async(PublicDisableMyAuthenticatorV4 input)
+        public async Task<PublicDisableMyAuthenticatorV4.Response> PublicDisableMyAuthenticatorV4Async(PublicDisableMyAuthenticatorV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicEnableMyAuthenticatorV4(PublicEnableMyAuthenticatorV4 input)
+        public PublicEnableMyAuthenticatorV4.Response PublicEnableMyAuthenticatorV4(PublicEnableMyAuthenticatorV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicEnableMyAuthenticatorV4Async(PublicEnableMyAuthenticatorV4 input)
+        public async Task<PublicEnableMyAuthenticatorV4.Response> PublicEnableMyAuthenticatorV4Async(PublicEnableMyAuthenticatorV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelAuthenticatorKeyResponseV4? PublicGenerateMyAuthenticatorKeyV4(PublicGenerateMyAuthenticatorKeyV4 input)
+        public PublicGenerateMyAuthenticatorKeyV4.Response PublicGenerateMyAuthenticatorKeyV4(PublicGenerateMyAuthenticatorKeyV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1562,7 +1562,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelAuthenticatorKeyResponseV4?> PublicGenerateMyAuthenticatorKeyV4Async(PublicGenerateMyAuthenticatorKeyV4 input)
+        public async Task<PublicGenerateMyAuthenticatorKeyV4.Response> PublicGenerateMyAuthenticatorKeyV4Async(PublicGenerateMyAuthenticatorKeyV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1570,9 +1570,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelBackupCodesResponseV4? PublicGetMyBackupCodesV4(PublicGetMyBackupCodesV4 input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicGetMyBackupCodesV4.Response PublicGetMyBackupCodesV4(PublicGetMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1580,7 +1580,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelBackupCodesResponseV4?> PublicGetMyBackupCodesV4Async(PublicGetMyBackupCodesV4 input)
+        public async Task<PublicGetMyBackupCodesV4.Response> PublicGetMyBackupCodesV4Async(PublicGetMyBackupCodesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1588,10 +1588,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelBackupCodesResponseV4? PublicGenerateMyBackupCodesV4(PublicGenerateMyBackupCodesV4 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicGenerateMyBackupCodesV4.Response PublicGenerateMyBackupCodesV4(PublicGenerateMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1599,7 +1599,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelBackupCodesResponseV4?> PublicGenerateMyBackupCodesV4Async(PublicGenerateMyBackupCodesV4 input)
+        public async Task<PublicGenerateMyBackupCodesV4.Response> PublicGenerateMyBackupCodesV4Async(PublicGenerateMyBackupCodesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1607,26 +1607,26 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public void PublicDisableMyBackupCodesV4(PublicDisableMyBackupCodesV4 input)
+        #pragma warning restore ab_deprecated_operation
+        public PublicDisableMyBackupCodesV4.Response PublicDisableMyBackupCodesV4(PublicDisableMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicDisableMyBackupCodesV4Async(PublicDisableMyBackupCodesV4 input)
+        public async Task<PublicDisableMyBackupCodesV4.Response> PublicDisableMyBackupCodesV4Async(PublicDisableMyBackupCodesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Stream? PublicDownloadMyBackupCodesV4(PublicDownloadMyBackupCodesV4 input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicDownloadMyBackupCodesV4.Response PublicDownloadMyBackupCodesV4(PublicDownloadMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1634,7 +1634,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Stream?> PublicDownloadMyBackupCodesV4Async(PublicDownloadMyBackupCodesV4 input)
+        public async Task<PublicDownloadMyBackupCodesV4.Response> PublicDownloadMyBackupCodesV4Async(PublicDownloadMyBackupCodesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1642,10 +1642,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelBackupCodesResponseV4? PublicEnableMyBackupCodesV4(PublicEnableMyBackupCodesV4 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicEnableMyBackupCodesV4.Response PublicEnableMyBackupCodesV4(PublicEnableMyBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1653,7 +1653,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelBackupCodesResponseV4?> PublicEnableMyBackupCodesV4Async(PublicEnableMyBackupCodesV4 input)
+        public async Task<PublicEnableMyBackupCodesV4.Response> PublicEnableMyBackupCodesV4Async(PublicEnableMyBackupCodesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1661,56 +1661,56 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public void PublicGetBackupCodesV4(PublicGetBackupCodesV4 input)
+        #pragma warning restore ab_deprecated_operation
+        public PublicGetBackupCodesV4.Response PublicGetBackupCodesV4(PublicGetBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicGetBackupCodesV4Async(PublicGetBackupCodesV4 input)
+        public async Task<PublicGetBackupCodesV4.Response> PublicGetBackupCodesV4Async(PublicGetBackupCodesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicGenerateBackupCodesV4(PublicGenerateBackupCodesV4 input)
+        public PublicGenerateBackupCodesV4.Response PublicGenerateBackupCodesV4(PublicGenerateBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicGenerateBackupCodesV4Async(PublicGenerateBackupCodesV4 input)
+        public async Task<PublicGenerateBackupCodesV4.Response> PublicGenerateBackupCodesV4Async(PublicGenerateBackupCodesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicEnableBackupCodesV4(PublicEnableBackupCodesV4 input)
+        public PublicEnableBackupCodesV4.Response PublicEnableBackupCodesV4(PublicEnableBackupCodesV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicEnableBackupCodesV4Async(PublicEnableBackupCodesV4 input)
+        public async Task<PublicEnableBackupCodesV4.Response> PublicEnableBackupCodesV4Async(PublicEnableBackupCodesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserMFATokenResponseV4? PublicChallengeMyMFAV4(PublicChallengeMyMFAV4 input)
+        public PublicChallengeMyMFAV4.Response PublicChallengeMyMFAV4(PublicChallengeMyMFAV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1718,7 +1718,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserMFATokenResponseV4?> PublicChallengeMyMFAV4Async(PublicChallengeMyMFAV4 input)
+        public async Task<PublicChallengeMyMFAV4.Response> PublicChallengeMyMFAV4Async(PublicChallengeMyMFAV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1726,71 +1726,71 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicRemoveTrustedDeviceV4(PublicRemoveTrustedDeviceV4 input)
+        public PublicRemoveTrustedDeviceV4.Response PublicRemoveTrustedDeviceV4(PublicRemoveTrustedDeviceV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicRemoveTrustedDeviceV4Async(PublicRemoveTrustedDeviceV4 input)
+        public async Task<PublicRemoveTrustedDeviceV4.Response> PublicRemoveTrustedDeviceV4Async(PublicRemoveTrustedDeviceV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicSendMyMFAEmailCodeV4(PublicSendMyMFAEmailCodeV4 input)
+        public PublicSendMyMFAEmailCodeV4.Response PublicSendMyMFAEmailCodeV4(PublicSendMyMFAEmailCodeV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicSendMyMFAEmailCodeV4Async(PublicSendMyMFAEmailCodeV4 input)
+        public async Task<PublicSendMyMFAEmailCodeV4.Response> PublicSendMyMFAEmailCodeV4Async(PublicSendMyMFAEmailCodeV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicDisableMyEmailV4(PublicDisableMyEmailV4 input)
+        public PublicDisableMyEmailV4.Response PublicDisableMyEmailV4(PublicDisableMyEmailV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicDisableMyEmailV4Async(PublicDisableMyEmailV4 input)
+        public async Task<PublicDisableMyEmailV4.Response> PublicDisableMyEmailV4Async(PublicDisableMyEmailV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicEnableMyEmailV4(PublicEnableMyEmailV4 input)
+        public PublicEnableMyEmailV4.Response PublicEnableMyEmailV4(PublicEnableMyEmailV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicEnableMyEmailV4Async(PublicEnableMyEmailV4 input)
+        public async Task<PublicEnableMyEmailV4.Response> PublicEnableMyEmailV4Async(PublicEnableMyEmailV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelEnabledFactorsResponseV4? PublicGetMyEnabledFactorsV4(PublicGetMyEnabledFactorsV4 input)
+        public PublicGetMyEnabledFactorsV4.Response PublicGetMyEnabledFactorsV4(PublicGetMyEnabledFactorsV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1798,7 +1798,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelEnabledFactorsResponseV4?> PublicGetMyEnabledFactorsV4Async(PublicGetMyEnabledFactorsV4 input)
+        public async Task<PublicGetMyEnabledFactorsV4.Response> PublicGetMyEnabledFactorsV4Async(PublicGetMyEnabledFactorsV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1806,23 +1806,23 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicMakeFactorMyDefaultV4(PublicMakeFactorMyDefaultV4 input)
+        public PublicMakeFactorMyDefaultV4.Response PublicMakeFactorMyDefaultV4(PublicMakeFactorMyDefaultV4 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicMakeFactorMyDefaultV4Async(PublicMakeFactorMyDefaultV4 input)
+        public async Task<PublicMakeFactorMyDefaultV4.Response> PublicMakeFactorMyDefaultV4Async(PublicMakeFactorMyDefaultV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserMFAStatusResponseV4? PublicGetMyOwnMFAStatusV4(PublicGetMyOwnMFAStatusV4 input)
+        public PublicGetMyOwnMFAStatusV4.Response PublicGetMyOwnMFAStatusV4(PublicGetMyOwnMFAStatusV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1830,7 +1830,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserMFAStatusResponseV4?> PublicGetMyOwnMFAStatusV4Async(PublicGetMyOwnMFAStatusV4 input)
+        public async Task<PublicGetMyOwnMFAStatusV4.Response> PublicGetMyOwnMFAStatusV4Async(PublicGetMyOwnMFAStatusV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1838,9 +1838,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelUserMFAStatusResponseV4? PublicGetMyMFAStatusV4(PublicGetMyMFAStatusV4 input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicGetMyMFAStatusV4.Response PublicGetMyMFAStatusV4(PublicGetMyMFAStatusV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1848,7 +1848,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserMFAStatusResponseV4?> PublicGetMyMFAStatusV4Async(PublicGetMyMFAStatusV4 input)
+        public async Task<PublicGetMyMFAStatusV4.Response> PublicGetMyMFAStatusV4Async(PublicGetMyMFAStatusV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1856,8 +1856,8 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public Model.ModelUserPublicInfoResponseV4? PublicGetUserPublicInfoByUserIdV4(PublicGetUserPublicInfoByUserIdV4 input)
+        #pragma warning restore ab_deprecated_operation
+        public PublicGetUserPublicInfoByUserIdV4.Response PublicGetUserPublicInfoByUserIdV4(PublicGetUserPublicInfoByUserIdV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1865,7 +1865,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserPublicInfoResponseV4?> PublicGetUserPublicInfoByUserIdV4Async(PublicGetUserPublicInfoByUserIdV4 input)
+        public async Task<PublicGetUserPublicInfoByUserIdV4.Response> PublicGetUserPublicInfoByUserIdV4Async(PublicGetUserPublicInfoByUserIdV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1873,7 +1873,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelInviteUserResponseV3? PublicInviteUserV4(PublicInviteUserV4 input)
+        public PublicInviteUserV4.Response PublicInviteUserV4(PublicInviteUserV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1881,7 +1881,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelInviteUserResponseV3?> PublicInviteUserV4Async(PublicInviteUserV4 input)
+        public async Task<PublicInviteUserV4.Response> PublicInviteUserV4Async(PublicInviteUserV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

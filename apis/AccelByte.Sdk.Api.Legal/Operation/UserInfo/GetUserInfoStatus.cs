@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 return op;
             }
 
-            public List<Model.RetrieveUserInfoCacheStatusResponse>? Execute(
+            public GetUserInfoStatus.Response Execute(
             )
             {
                 GetUserInfoStatus op = Build(
@@ -81,11 +81,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.RetrieveUserInfoCacheStatusResponse>?> ExecuteAsync(
+            public async Task<GetUserInfoStatus.Response> ExecuteAsync(
             )
             {
                 GetUserInfoStatus op = Build(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -105,29 +105,39 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         private GetUserInfoStatus(GetUserInfoStatusBuilder builder
         )
         {
-
+            
             if (builder.Namespaces is not null) QueryParams["namespaces"] = builder.Namespaces;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public GetUserInfoStatus(
-            string? namespaces
-        )
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.RetrieveUserInfoCacheStatusResponse>>
         {
 
+
+            protected override string GetFullOperationId() => "Legal::UserInfo::GetUserInfoStatus";
+        }
+
+        #endregion
+
+        public GetUserInfoStatus(
+            string? namespaces            
+        )
+        {
+            
             if (namespaces is not null) QueryParams["namespaces"] = namespaces;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -136,28 +146,29 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.RetrieveUserInfoCacheStatusResponse>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetUserInfoStatus.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetUserInfoStatus.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.RetrieveUserInfoCacheStatusResponse>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<Model.RetrieveUserInfoCacheStatusResponse>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveUserInfoCacheStatusResponse>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

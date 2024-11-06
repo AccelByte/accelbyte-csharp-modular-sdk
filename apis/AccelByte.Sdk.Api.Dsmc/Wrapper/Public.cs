@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         }
         #endregion
 
-        public Model.ModelsDefaultProvider? GetDefaultProvider(GetDefaultProvider input)
+        public GetDefaultProvider.Response GetDefaultProvider(GetDefaultProvider input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsDefaultProvider?> GetDefaultProviderAsync(GetDefaultProvider input)
+        public async Task<GetDefaultProvider.Response> GetDefaultProviderAsync(GetDefaultProvider input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<string>? ListProviders(ListProviders input)
+        public ListProviders.Response ListProviders(ListProviders input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<string>?> ListProvidersAsync(ListProviders input)
+        public async Task<ListProviders.Response> ListProvidersAsync(ListProviders input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<string>? ListProvidersByRegion(ListProvidersByRegion input)
+        public ListProvidersByRegion.Response ListProvidersByRegion(ListProvidersByRegion input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<string>?> ListProvidersByRegionAsync(ListProvidersByRegion input)
+        public async Task<ListProvidersByRegion.Response> ListProvidersByRegionAsync(ListProvidersByRegion input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

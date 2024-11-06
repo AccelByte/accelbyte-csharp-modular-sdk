@@ -71,15 +71,15 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 UpdateCountryGroup op = new UpdateCountryGroup(this,
-                    countryGroupCode,
-                    namespace_
+                    countryGroupCode,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<UpdateCountryGroupBuilder>(this);
                 return op;
             }
 
-            public Model.CountryGroupObject? Execute(
+            public UpdateCountryGroup.Response Execute(
                 string countryGroupCode,
                 string namespace_
             )
@@ -94,11 +94,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.CountryGroupObject?> ExecuteAsync(
+            public async Task<UpdateCountryGroup.Response> ExecuteAsync(
                 string countryGroupCode,
                 string namespace_
             )
@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -126,33 +126,51 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         {
             PathParams["countryGroupCode"] = countryGroupCode;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = builder.Body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.CountryGroupObject>
+        {
+
+            public ValidationErrorEntity? Error400 { get; set; } = null;
+
+            public ErrorEntity? Error401 { get; set; } = null;
+
+            public ErrorEntity? Error403 { get; set; } = null;
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Basic::Misc::UpdateCountryGroup";
+        }
+
+        #endregion
+
         public UpdateCountryGroup(
-            string countryGroupCode,
-            string namespace_,
-            Model.UpdateCountryGroupRequest body
+            string countryGroupCode,            
+            string namespace_,            
+            Model.UpdateCountryGroupRequest body            
         )
         {
             PathParams["countryGroupCode"] = countryGroupCode;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -164,25 +182,46 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.CountryGroupObject? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public UpdateCountryGroup.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new UpdateCountryGroup.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.CountryGroupObject>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.CountryGroupObject>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.CountryGroupObject>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

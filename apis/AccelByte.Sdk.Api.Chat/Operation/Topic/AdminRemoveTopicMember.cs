@@ -57,16 +57,16 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminRemoveTopicMember op = new AdminRemoveTopicMember(this,
-                    namespace_,
-                    topic,
-                    userId
+                    namespace_,                    
+                    topic,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<AdminRemoveTopicMemberBuilder>(this);
                 return op;
             }
 
-            public Model.MessageActionAddUserToTopicResult? Execute(
+            public AdminRemoveTopicMember.Response Execute(
                 string namespace_,
                 string topic,
                 string userId
@@ -83,11 +83,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.MessageActionAddUserToTopicResult?> ExecuteAsync(
+            public async Task<AdminRemoveTopicMember.Response> ExecuteAsync(
                 string namespace_,
                 string topic,
                 string userId
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -119,32 +119,42 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.MessageActionAddUserToTopicResult>
+        {
+
+
+            protected override string GetFullOperationId() => "Chat::Topic::AdminRemoveTopicMember";
+        }
+
+        #endregion
+
         public AdminRemoveTopicMember(
-            string namespace_,
-            string topic,
-            string userId
+            string namespace_,            
+            string topic,            
+            string userId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,25 +166,26 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.MessageActionAddUserToTopicResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminRemoveTopicMember.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminRemoveTopicMember.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.MessageActionAddUserToTopicResult>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.MessageActionAddUserToTopicResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.MessageActionAddUserToTopicResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

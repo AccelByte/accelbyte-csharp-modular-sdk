@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
 
         #region Operation Builders
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetPaymentCustomization.GetPaymentCustomizationBuilder GetPaymentCustomizationOp
         {
             get
@@ -147,9 +147,9 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.Customization? GetPaymentCustomization(GetPaymentCustomization input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetPaymentCustomization.Response GetPaymentCustomization(GetPaymentCustomization input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -157,7 +157,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.Customization?> GetPaymentCustomizationAsync(GetPaymentCustomization input)
+        public async Task<GetPaymentCustomization.Response> GetPaymentCustomizationAsync(GetPaymentCustomization input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -165,8 +165,8 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public Model.PaymentUrl? PublicGetPaymentUrl(PublicGetPaymentUrl input)
+        #pragma warning restore ab_deprecated_operation
+        public PublicGetPaymentUrl.Response PublicGetPaymentUrl(PublicGetPaymentUrl input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -174,7 +174,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PaymentUrl?> PublicGetPaymentUrlAsync(PublicGetPaymentUrl input)
+        public async Task<PublicGetPaymentUrl.Response> PublicGetPaymentUrlAsync(PublicGetPaymentUrl input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -182,7 +182,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.PaymentMethod>? PublicGetPaymentMethods(PublicGetPaymentMethods input)
+        public PublicGetPaymentMethods.Response PublicGetPaymentMethods(PublicGetPaymentMethods input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -190,7 +190,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.PaymentMethod>?> PublicGetPaymentMethodsAsync(PublicGetPaymentMethods input)
+        public async Task<PublicGetPaymentMethods.Response> PublicGetPaymentMethodsAsync(PublicGetPaymentMethods input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -198,7 +198,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PaymentOrderDetails? PublicGetUnpaidPaymentOrder(PublicGetUnpaidPaymentOrder input)
+        public PublicGetUnpaidPaymentOrder.Response PublicGetUnpaidPaymentOrder(PublicGetUnpaidPaymentOrder input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -206,7 +206,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PaymentOrderDetails?> PublicGetUnpaidPaymentOrderAsync(PublicGetUnpaidPaymentOrder input)
+        public async Task<PublicGetUnpaidPaymentOrder.Response> PublicGetUnpaidPaymentOrderAsync(PublicGetUnpaidPaymentOrder input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -214,7 +214,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PaymentProcessResult? Pay(Pay input)
+        public Pay.Response Pay(Pay input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -222,7 +222,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PaymentProcessResult?> PayAsync(Pay input)
+        public async Task<Pay.Response> PayAsync(Pay input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -230,7 +230,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PaymentOrderPaidResult? PublicCheckPaymentOrderPaidStatus(PublicCheckPaymentOrderPaidStatus input)
+        public PublicCheckPaymentOrderPaidStatus.Response PublicCheckPaymentOrderPaidStatus(PublicCheckPaymentOrderPaidStatus input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -238,7 +238,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PaymentOrderPaidResult?> PublicCheckPaymentOrderPaidStatusAsync(PublicCheckPaymentOrderPaidStatus input)
+        public async Task<PublicCheckPaymentOrderPaidStatus.Response> PublicCheckPaymentOrderPaidStatusAsync(PublicCheckPaymentOrderPaidStatus input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -246,7 +246,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Dictionary<string, object>? GetPaymentPublicConfig(GetPaymentPublicConfig input)
+        public GetPaymentPublicConfig.Response GetPaymentPublicConfig(GetPaymentPublicConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -254,7 +254,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Dictionary<string, object>?> GetPaymentPublicConfigAsync(GetPaymentPublicConfig input)
+        public async Task<GetPaymentPublicConfig.Response> GetPaymentPublicConfigAsync(GetPaymentPublicConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -262,7 +262,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.BinarySchema? PublicGetQRCode(PublicGetQRCode input)
+        public PublicGetQRCode.Response PublicGetQRCode(PublicGetQRCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -270,7 +270,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.BinarySchema?> PublicGetQRCodeAsync(PublicGetQRCode input)
+        public async Task<PublicGetQRCode.Response> PublicGetQRCodeAsync(PublicGetQRCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -278,23 +278,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicNormalizePaymentReturnUrl(PublicNormalizePaymentReturnUrl input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicNormalizePaymentReturnUrlAsync(PublicNormalizePaymentReturnUrl input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.TaxResult? GetPaymentTaxValue(GetPaymentTaxValue input)
+        public PublicNormalizePaymentReturnUrl.Response PublicNormalizePaymentReturnUrl(PublicNormalizePaymentReturnUrl input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -302,7 +286,23 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.TaxResult?> GetPaymentTaxValueAsync(GetPaymentTaxValue input)
+        public async Task<PublicNormalizePaymentReturnUrl.Response> PublicNormalizePaymentReturnUrlAsync(PublicNormalizePaymentReturnUrl input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetPaymentTaxValue.Response GetPaymentTaxValue(GetPaymentTaxValue input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetPaymentTaxValue.Response> GetPaymentTaxValueAsync(GetPaymentTaxValue input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

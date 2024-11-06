@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedGetTypeResponse? AdminGetType(AdminGetType input)
+        public AdminGetType.Response AdminGetType(AdminGetType input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedGetTypeResponse?> AdminGetTypeAsync(AdminGetType input)
+        public async Task<AdminGetType.Response> AdminGetTypeAsync(AdminGetType input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCreateTypeResponse? AdminCreateType(AdminCreateType input)
+        public AdminCreateType.Response AdminCreateType(AdminCreateType input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateTypeResponse?> AdminCreateTypeAsync(AdminCreateType input)
+        public async Task<AdminCreateType.Response> AdminCreateTypeAsync(AdminCreateType input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCreateTypeResponse? AdminUpdateType(AdminUpdateType input)
+        public AdminUpdateType.Response AdminUpdateType(AdminUpdateType input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateTypeResponse?> AdminUpdateTypeAsync(AdminUpdateType input)
+        public async Task<AdminUpdateType.Response> AdminUpdateTypeAsync(AdminUpdateType input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,18 +128,18 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteType(AdminDeleteType input)
+        public AdminDeleteType.Response AdminDeleteType(AdminDeleteType input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteTypeAsync(AdminDeleteType input)
+        public async Task<AdminDeleteType.Response> AdminDeleteTypeAsync(AdminDeleteType input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

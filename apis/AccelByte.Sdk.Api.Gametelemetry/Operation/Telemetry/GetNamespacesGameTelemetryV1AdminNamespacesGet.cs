@@ -61,7 +61,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
                 return op;
             }
 
-            public Model.ListBaseResponseStr? Execute(
+            public GetNamespacesGameTelemetryV1AdminNamespacesGet.Response Execute(
             )
             {
                 GetNamespacesGameTelemetryV1AdminNamespacesGet op = Build(
@@ -72,11 +72,11 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ListBaseResponseStr?> ExecuteAsync(
+            public async Task<GetNamespacesGameTelemetryV1AdminNamespacesGet.Response> ExecuteAsync(
             )
             {
                 GetNamespacesGameTelemetryV1AdminNamespacesGet op = Build(
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -96,27 +96,39 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         private GetNamespacesGameTelemetryV1AdminNamespacesGet(GetNamespacesGameTelemetryV1AdminNamespacesGetBuilder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ListBaseResponseStr>
+        {
+
+            public BaseErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Gametelemetry::Telemetry::GetNamespacesGameTelemetryV1AdminNamespacesGet";
+        }
+
+        #endregion
+
         public GetNamespacesGameTelemetryV1AdminNamespacesGet(
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
@@ -126,28 +138,34 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ListBaseResponseStr? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetNamespacesGameTelemetryV1AdminNamespacesGet.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetNamespacesGameTelemetryV1AdminNamespacesGet.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ListBaseResponseStr>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ListBaseResponseStr>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)500)
             {
-                return JsonSerializer.Deserialize<Model.ListBaseResponseStr>(payload, ResponseJsonOptions);
+                response.Error500 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

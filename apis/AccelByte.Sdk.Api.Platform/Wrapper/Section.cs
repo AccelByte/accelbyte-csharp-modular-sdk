@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.SectionPagingSlicedResult? QuerySections(QuerySections input)
+        public QuerySections.Response QuerySections(QuerySections input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SectionPagingSlicedResult?> QuerySectionsAsync(QuerySections input)
+        public async Task<QuerySections.Response> QuerySectionsAsync(QuerySections input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FullSectionInfo? CreateSection(CreateSection input)
+        public CreateSection.Response CreateSection(CreateSection input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -137,56 +137,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FullSectionInfo?> CreateSectionAsync(CreateSection input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-
-        public Model.FullSectionInfo<T1>? CreateSection<T1>(CreateSection input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.FullSectionInfo<T1>?> CreateSectionAsync<T1>(CreateSection input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void PurgeExpiredSection(PurgeExpiredSection input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PurgeExpiredSectionAsync(PurgeExpiredSection input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.FullSectionInfo? GetSection(GetSection input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.FullSectionInfo?> GetSectionAsync(GetSection input)
+        public async Task<CreateSection.Response> CreateSectionAsync(CreateSection input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -195,7 +146,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
 
-        public Model.FullSectionInfo<T1>? GetSection<T1>(GetSection input)
+        public CreateSection.Response<T1> CreateSection<T1>(CreateSection input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -203,7 +154,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FullSectionInfo<T1>?> GetSectionAsync<T1>(GetSection input)
+        public async Task<CreateSection.Response<T1>> CreateSectionAsync<T1>(CreateSection input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -211,7 +162,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.FullSectionInfo? UpdateSection(UpdateSection input)
+        public PurgeExpiredSection.Response PurgeExpiredSection(PurgeExpiredSection input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -219,7 +170,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.FullSectionInfo?> UpdateSectionAsync(UpdateSection input)
+        public async Task<PurgeExpiredSection.Response> PurgeExpiredSectionAsync(PurgeExpiredSection input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -227,40 +178,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.FullSectionInfo<T1>? UpdateSection<T1>(UpdateSection input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.FullSectionInfo<T1>?> UpdateSectionAsync<T1>(UpdateSection input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void DeleteSection(DeleteSection input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteSectionAsync(DeleteSection input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public List<Model.SectionInfo>? PublicListActiveSections(PublicListActiveSections input)
+        public GetSection.Response GetSection(GetSection input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -268,7 +186,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.SectionInfo>?> PublicListActiveSectionsAsync(PublicListActiveSections input)
+        public async Task<GetSection.Response> GetSectionAsync(GetSection input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -277,7 +195,89 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
 
-        public List<Model.SectionInfo<T1, T2>>? PublicListActiveSections<T1, T2>(PublicListActiveSections input)
+        public GetSection.Response<T1> GetSection<T1>(GetSection input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetSection.Response<T1>> GetSectionAsync<T1>(GetSection input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public UpdateSection.Response UpdateSection(UpdateSection input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpdateSection.Response> UpdateSectionAsync(UpdateSection input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public UpdateSection.Response<T1> UpdateSection<T1>(UpdateSection input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpdateSection.Response<T1>> UpdateSectionAsync<T1>(UpdateSection input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeleteSection.Response DeleteSection(DeleteSection input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteSection.Response> DeleteSectionAsync(DeleteSection input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicListActiveSections.Response PublicListActiveSections(PublicListActiveSections input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicListActiveSections.Response> PublicListActiveSectionsAsync(PublicListActiveSections input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public PublicListActiveSections.Response<T1, T2> PublicListActiveSections<T1, T2>(PublicListActiveSections input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -285,7 +285,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.SectionInfo<T1, T2>>?> PublicListActiveSectionsAsync<T1, T2>(PublicListActiveSections input)
+        public async Task<PublicListActiveSections.Response<T1, T2>> PublicListActiveSectionsAsync<T1, T2>(PublicListActiveSections input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(

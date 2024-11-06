@@ -63,14 +63,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UpdateFulfillmentScript op = new UpdateFulfillmentScript(this,
-                    id
+                    id                    
                 );
 
                 op.SetBaseFields<UpdateFulfillmentScriptBuilder>(this);
                 return op;
             }
 
-            public Model.FulfillmentScriptInfo? Execute(
+            public UpdateFulfillmentScript.Response Execute(
                 string id
             )
             {
@@ -83,11 +83,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.FulfillmentScriptInfo?> ExecuteAsync(
+            public async Task<UpdateFulfillmentScript.Response> ExecuteAsync(
                 string id
             )
             {
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,31 +111,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["id"] = id;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = builder.Body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.FulfillmentScriptInfo>
+        {
+
+            public ErrorEntity? Error400 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::FulfillmentScript::UpdateFulfillmentScript";
+        }
+
+        #endregion
+
         public UpdateFulfillmentScript(
-            string id,
-            Model.FulfillmentScriptUpdate body
+            string id,            
+            Model.FulfillmentScriptUpdate body            
         )
         {
             PathParams["id"] = id;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -146,26 +158,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { };
-
-        public Model.FulfillmentScriptInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public override List<string> Produces => new() {  };
+        
+        public UpdateFulfillmentScript.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new UpdateFulfillmentScript.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.FulfillmentScriptInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.FulfillmentScriptInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.FulfillmentScriptInfo>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         }
         #endregion
 
-        public Model.ModelsListGameRecordKeysResponse? ListGameRecordsHandlerV1(ListGameRecordsHandlerV1 input)
+        public ListGameRecordsHandlerV1.Response ListGameRecordsHandlerV1(ListGameRecordsHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListGameRecordKeysResponse?> ListGameRecordsHandlerV1Async(ListGameRecordsHandlerV1 input)
+        public async Task<ListGameRecordsHandlerV1.Response> ListGameRecordsHandlerV1Async(ListGameRecordsHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGameRecordAdminResponse? AdminGetGameRecordHandlerV1(AdminGetGameRecordHandlerV1 input)
+        public AdminGetGameRecordHandlerV1.Response AdminGetGameRecordHandlerV1(AdminGetGameRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -115,40 +115,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGameRecordAdminResponse?> AdminGetGameRecordHandlerV1Async(AdminGetGameRecordHandlerV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-
-        public Model.ModelsGameRecordAdminResponse<T1>? AdminGetGameRecordHandlerV1<T1>(AdminGetGameRecordHandlerV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsGameRecordAdminResponse<T1>?> AdminGetGameRecordHandlerV1Async<T1>(AdminGetGameRecordHandlerV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsGameRecordAdminResponse? AdminPutGameRecordHandlerV1(AdminPutGameRecordHandlerV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsGameRecordAdminResponse?> AdminPutGameRecordHandlerV1Async(AdminPutGameRecordHandlerV1 input)
+        public async Task<AdminGetGameRecordHandlerV1.Response> AdminGetGameRecordHandlerV1Async(AdminGetGameRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -157,7 +124,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsGameRecordAdminResponse<T1>? AdminPutGameRecordHandlerV1<T1>(AdminPutGameRecordHandlerV1 input)
+        public AdminGetGameRecordHandlerV1.Response<T1> AdminGetGameRecordHandlerV1<T1>(AdminGetGameRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -165,7 +132,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGameRecordAdminResponse<T1>?> AdminPutGameRecordHandlerV1Async<T1>(AdminPutGameRecordHandlerV1 input)
+        public async Task<AdminGetGameRecordHandlerV1.Response<T1>> AdminGetGameRecordHandlerV1Async<T1>(AdminGetGameRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -173,7 +140,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGameRecordAdminResponse? AdminPostGameRecordHandlerV1(AdminPostGameRecordHandlerV1 input)
+        public AdminPutGameRecordHandlerV1.Response AdminPutGameRecordHandlerV1(AdminPutGameRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -181,7 +148,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGameRecordAdminResponse?> AdminPostGameRecordHandlerV1Async(AdminPostGameRecordHandlerV1 input)
+        public async Task<AdminPutGameRecordHandlerV1.Response> AdminPutGameRecordHandlerV1Async(AdminPutGameRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -190,7 +157,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsGameRecordAdminResponse<T1>? AdminPostGameRecordHandlerV1<T1>(AdminPostGameRecordHandlerV1 input)
+        public AdminPutGameRecordHandlerV1.Response<T1> AdminPutGameRecordHandlerV1<T1>(AdminPutGameRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -198,7 +165,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGameRecordAdminResponse<T1>?> AdminPostGameRecordHandlerV1Async<T1>(AdminPostGameRecordHandlerV1 input)
+        public async Task<AdminPutGameRecordHandlerV1.Response<T1>> AdminPutGameRecordHandlerV1Async<T1>(AdminPutGameRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -206,18 +173,51 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteGameRecordHandlerV1(AdminDeleteGameRecordHandlerV1 input)
+        public AdminPostGameRecordHandlerV1.Response AdminPostGameRecordHandlerV1(AdminPostGameRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteGameRecordHandlerV1Async(AdminDeleteGameRecordHandlerV1 input)
+        public async Task<AdminPostGameRecordHandlerV1.Response> AdminPostGameRecordHandlerV1Async(AdminPostGameRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public AdminPostGameRecordHandlerV1.Response<T1> AdminPostGameRecordHandlerV1<T1>(AdminPostGameRecordHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminPostGameRecordHandlerV1.Response<T1>> AdminPostGameRecordHandlerV1Async<T1>(AdminPostGameRecordHandlerV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminDeleteGameRecordHandlerV1.Response AdminDeleteGameRecordHandlerV1(AdminDeleteGameRecordHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminDeleteGameRecordHandlerV1.Response> AdminDeleteGameRecordHandlerV1Async(AdminDeleteGameRecordHandlerV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

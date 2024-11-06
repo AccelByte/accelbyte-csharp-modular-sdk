@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         }
         #endregion
 
-        public Model.ModelsPluginResponse? GetPluginConfig(GetPluginConfig input)
+        public GetPluginConfig.Response GetPluginConfig(GetPluginConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPluginResponse?> GetPluginConfigAsync(GetPluginConfig input)
+        public async Task<GetPluginConfig.Response> GetPluginConfigAsync(GetPluginConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPluginResponse? CreatePluginConfig(CreatePluginConfig input)
+        public CreatePluginConfig.Response CreatePluginConfig(CreatePluginConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPluginResponse?> CreatePluginConfigAsync(CreatePluginConfig input)
+        public async Task<CreatePluginConfig.Response> CreatePluginConfigAsync(CreatePluginConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -112,23 +112,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeletePluginConfig(DeletePluginConfig input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeletePluginConfigAsync(DeletePluginConfig input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsPluginResponse? UpdatePluginConfig(UpdatePluginConfig input)
+        public DeletePluginConfig.Response DeletePluginConfig(DeletePluginConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -136,7 +120,23 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPluginResponse?> UpdatePluginConfigAsync(UpdatePluginConfig input)
+        public async Task<DeletePluginConfig.Response> DeletePluginConfigAsync(DeletePluginConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public UpdatePluginConfig.Response UpdatePluginConfig(UpdatePluginConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpdatePluginConfig.Response> UpdatePluginConfigAsync(UpdatePluginConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

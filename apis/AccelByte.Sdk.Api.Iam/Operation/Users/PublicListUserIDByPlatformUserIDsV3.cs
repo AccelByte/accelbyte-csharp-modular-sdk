@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// Note:
     /// **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class PublicListUserIDByPlatformUserIDsV3 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -104,17 +104,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicListUserIDByPlatformUserIDsV3 op = new PublicListUserIDByPlatformUserIDsV3(this,
-                    body,
-                    namespace_,
-                    platformId
+                    body,                    
+                    namespace_,                    
+                    platformId                    
                 );
 
                 op.SetBaseFields<PublicListUserIDByPlatformUserIDsV3Builder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public Model.AccountcommonUserPlatforms? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicListUserIDByPlatformUserIDsV3.Response Execute(
                 ModelPlatformUserIDRequest body,
                 string namespace_,
                 string platformId
@@ -131,11 +131,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.AccountcommonUserPlatforms?> ExecuteAsync(
+            public async Task<PublicListUserIDByPlatformUserIDsV3.Response> ExecuteAsync(
                 ModelPlatformUserIDRequest body,
                 string namespace_,
                 string platformId
@@ -152,7 +152,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -166,39 +166,57 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
-
+            
             if (builder.RawPID != null) QueryParams["rawPID"] = Convert.ToString(builder.RawPID)!;
             if (builder.RawPUID != null) QueryParams["rawPUID"] = Convert.ToString(builder.RawPUID)!;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.AccountcommonUserPlatforms>
+        {
+
+            public RestErrorResponse? Error400 { get; set; } = null;
+
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public RestErrorResponse? Error403 { get; set; } = null;
+
+            public RestErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::Users::PublicListUserIDByPlatformUserIDsV3";
+        }
+
+        #endregion
+
         public PublicListUserIDByPlatformUserIDsV3(
-            string namespace_,
-            string platformId,
-            bool? rawPID,
-            bool? rawPUID,
-            Model.ModelPlatformUserIDRequest body
+            string namespace_,            
+            string platformId,            
+            bool? rawPID,            
+            bool? rawPUID,            
+            Model.ModelPlatformUserIDRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
-
+            
             if (rawPID != null) QueryParams["rawPID"] = Convert.ToString(rawPID)!;
             if (rawPUID != null) QueryParams["rawPUID"] = Convert.ToString(rawPUID)!;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -210,25 +228,46 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.AccountcommonUserPlatforms? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicListUserIDByPlatformUserIDsV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicListUserIDByPlatformUserIDsV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.AccountcommonUserPlatforms>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.AccountcommonUserPlatforms>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.AccountcommonUserPlatforms>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

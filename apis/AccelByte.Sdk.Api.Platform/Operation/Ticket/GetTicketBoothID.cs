@@ -59,15 +59,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetTicketBoothID op = new GetTicketBoothID(this,
-                    boothName,
-                    namespace_
+                    boothName,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetTicketBoothIDBuilder>(this);
                 return op;
             }
 
-            public Model.TicketBoothID? Execute(
+            public GetTicketBoothID.Response Execute(
                 string boothName,
                 string namespace_
             )
@@ -82,11 +82,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.TicketBoothID?> ExecuteAsync(
+            public async Task<GetTicketBoothID.Response> ExecuteAsync(
                 string boothName,
                 string namespace_
             )
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -114,30 +114,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["boothName"] = boothName;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.TicketBoothID>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Ticket::GetTicketBoothID";
+        }
+
+        #endregion
+
         public GetTicketBoothID(
-            string boothName,
-            string namespace_
+            string boothName,            
+            string namespace_            
         )
         {
             PathParams["boothName"] = boothName;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -146,28 +158,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.TicketBoothID? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetTicketBoothID.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetTicketBoothID.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.TicketBoothID>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.TicketBoothID>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.TicketBoothID>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         }
         #endregion
 
-        public Model.ApimodelsNativeSessionPagingResponse? AdminGetListNativeSession(AdminGetListNativeSession input)
+        public AdminGetListNativeSession.Response AdminGetListNativeSession(AdminGetListNativeSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsNativeSessionPagingResponse?> AdminGetListNativeSessionAsync(AdminGetListNativeSession input)
+        public async Task<AdminGetListNativeSession.Response> AdminGetListNativeSessionAsync(AdminGetListNativeSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

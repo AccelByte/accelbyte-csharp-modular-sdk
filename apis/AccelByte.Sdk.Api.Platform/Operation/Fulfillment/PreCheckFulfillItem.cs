@@ -60,16 +60,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PreCheckFulfillItem op = new PreCheckFulfillItem(this,
-                    body,
-                    namespace_,
-                    userId
+                    body,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PreCheckFulfillItemBuilder>(this);
                 return op;
             }
 
-            public List<Model.FulfillmentItem>? Execute(
+            public PreCheckFulfillItem.Response Execute(
                 PreCheckFulfillmentRequest body,
                 string namespace_,
                 string userId
@@ -86,11 +86,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.FulfillmentItem>?> ExecuteAsync(
+            public async Task<PreCheckFulfillItem.Response> ExecuteAsync(
                 PreCheckFulfillmentRequest body,
                 string namespace_,
                 string userId
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -121,33 +121,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.FulfillmentItem>>
+        {
+
+            public ErrorEntity? Error400 { get; set; } = null;
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Fulfillment::PreCheckFulfillItem";
+        }
+
+        #endregion
+
         public PreCheckFulfillItem(
-            string namespace_,
-            string userId,
-            Model.PreCheckFulfillmentRequest body
+            string namespace_,            
+            string userId,            
+            Model.PreCheckFulfillmentRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -159,25 +173,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.FulfillmentItem>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PreCheckFulfillItem.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PreCheckFulfillItem.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.FulfillmentItem>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.FulfillmentItem>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<List<Model.FulfillmentItem>>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

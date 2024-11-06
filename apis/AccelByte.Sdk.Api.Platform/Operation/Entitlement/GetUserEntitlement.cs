@@ -61,16 +61,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetUserEntitlement op = new GetUserEntitlement(this,
-                    entitlementId,
-                    namespace_,
-                    userId
+                    entitlementId,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<GetUserEntitlementBuilder>(this);
                 return op;
             }
 
-            public Model.EntitlementInfo? Execute(
+            public GetUserEntitlement.Response Execute(
                 string entitlementId,
                 string namespace_,
                 string userId
@@ -87,11 +87,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.EntitlementInfo?> ExecuteAsync(
+            public async Task<GetUserEntitlement.Response> ExecuteAsync(
                 string entitlementId,
                 string namespace_,
                 string userId
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -123,32 +123,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["entitlementId"] = entitlementId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.EntitlementInfo>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Entitlement::GetUserEntitlement";
+        }
+
+        #endregion
+
         public GetUserEntitlement(
-            string entitlementId,
-            string namespace_,
-            string userId
+            string entitlementId,            
+            string namespace_,            
+            string userId            
         )
         {
             PathParams["entitlementId"] = entitlementId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -157,28 +169,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.EntitlementInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetUserEntitlement.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetUserEntitlement.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.EntitlementInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.EntitlementInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.EntitlementInfo>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.IAPClawbackPagingSlicedResult? QueryIAPClawbackHistory(QueryIAPClawbackHistory input)
+        public QueryIAPClawbackHistory.Response QueryIAPClawbackHistory(QueryIAPClawbackHistory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.IAPClawbackPagingSlicedResult?> QueryIAPClawbackHistoryAsync(QueryIAPClawbackHistory input)
+        public async Task<QueryIAPClawbackHistory.Response> QueryIAPClawbackHistoryAsync(QueryIAPClawbackHistory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ClawbackInfo? MockPlayStationStreamEvent(MockPlayStationStreamEvent input)
+        public MockPlayStationStreamEvent.Response MockPlayStationStreamEvent(MockPlayStationStreamEvent input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ClawbackInfo?> MockPlayStationStreamEventAsync(MockPlayStationStreamEvent input)
+        public async Task<MockPlayStationStreamEvent.Response> MockPlayStationStreamEventAsync(MockPlayStationStreamEvent input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
 
-        public Model.ClawbackInfo<T1, T2>? MockPlayStationStreamEvent<T1, T2>(MockPlayStationStreamEvent input)
+        public MockPlayStationStreamEvent.Response<T1, T2> MockPlayStationStreamEvent<T1, T2>(MockPlayStationStreamEvent input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ClawbackInfo<T1, T2>?> MockPlayStationStreamEventAsync<T1, T2>(MockPlayStationStreamEvent input)
+        public async Task<MockPlayStationStreamEvent.Response<T1, T2>> MockPlayStationStreamEventAsync<T1, T2>(MockPlayStationStreamEvent input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(

@@ -55,14 +55,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 RetrievePolicies op = new RetrievePolicies(this,
-                    countryCode
+                    countryCode                    
                 );
 
                 op.SetBaseFields<RetrievePoliciesBuilder>(this);
                 return op;
             }
 
-            public List<Model.RetrievePolicyResponse>? Execute(
+            public RetrievePolicies.Response Execute(
                 string countryCode
             )
             {
@@ -75,11 +75,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.RetrievePolicyResponse>?> ExecuteAsync(
+            public async Task<RetrievePolicies.Response> ExecuteAsync(
                 string countryCode
             )
             {
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -103,28 +103,38 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         )
         {
             PathParams["countryCode"] = countryCode;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.RetrievePolicyResponse>>
+        {
+
+
+            protected override string GetFullOperationId() => "Legal::Policies::RetrievePolicies";
+        }
+
+        #endregion
+
         public RetrievePolicies(
-            string countryCode
+            string countryCode            
         )
         {
             PathParams["countryCode"] = countryCode;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -133,28 +143,29 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.RetrievePolicyResponse>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public RetrievePolicies.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new RetrievePolicies.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.RetrievePolicyResponse>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<Model.RetrievePolicyResponse>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrievePolicyResponse>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

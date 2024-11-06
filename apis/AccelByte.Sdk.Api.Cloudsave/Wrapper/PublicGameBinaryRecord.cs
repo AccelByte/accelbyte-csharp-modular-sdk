@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         }
         #endregion
 
-        public Model.ModelsListGameBinaryRecordsResponse? ListGameBinaryRecordsV1(ListGameBinaryRecordsV1 input)
+        public ListGameBinaryRecordsV1.Response ListGameBinaryRecordsV1(ListGameBinaryRecordsV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListGameBinaryRecordsResponse?> ListGameBinaryRecordsV1Async(ListGameBinaryRecordsV1 input)
+        public async Task<ListGameBinaryRecordsV1.Response> ListGameBinaryRecordsV1Async(ListGameBinaryRecordsV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsUploadBinaryRecordResponse? PostGameBinaryRecordV1(PostGameBinaryRecordV1 input)
+        public PostGameBinaryRecordV1.Response PostGameBinaryRecordV1(PostGameBinaryRecordV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -137,7 +137,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUploadBinaryRecordResponse?> PostGameBinaryRecordV1Async(PostGameBinaryRecordV1 input)
+        public async Task<PostGameBinaryRecordV1.Response> PostGameBinaryRecordV1Async(PostGameBinaryRecordV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -145,7 +145,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsBulkGetGameBinaryRecordResponse? BulkGetGameBinaryRecordV1(BulkGetGameBinaryRecordV1 input)
+        public BulkGetGameBinaryRecordV1.Response BulkGetGameBinaryRecordV1(BulkGetGameBinaryRecordV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -153,7 +153,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsBulkGetGameBinaryRecordResponse?> BulkGetGameBinaryRecordV1Async(BulkGetGameBinaryRecordV1 input)
+        public async Task<BulkGetGameBinaryRecordV1.Response> BulkGetGameBinaryRecordV1Async(BulkGetGameBinaryRecordV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -161,7 +161,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGameBinaryRecordResponse? GetGameBinaryRecordV1(GetGameBinaryRecordV1 input)
+        public GetGameBinaryRecordV1.Response GetGameBinaryRecordV1(GetGameBinaryRecordV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -169,7 +169,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGameBinaryRecordResponse?> GetGameBinaryRecordV1Async(GetGameBinaryRecordV1 input)
+        public async Task<GetGameBinaryRecordV1.Response> GetGameBinaryRecordV1Async(GetGameBinaryRecordV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -177,7 +177,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGameBinaryRecordResponse? PutGameBinaryRecordV1(PutGameBinaryRecordV1 input)
+        public PutGameBinaryRecordV1.Response PutGameBinaryRecordV1(PutGameBinaryRecordV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -185,7 +185,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGameBinaryRecordResponse?> PutGameBinaryRecordV1Async(PutGameBinaryRecordV1 input)
+        public async Task<PutGameBinaryRecordV1.Response> PutGameBinaryRecordV1Async(PutGameBinaryRecordV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -193,23 +193,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteGameBinaryRecordV1(DeleteGameBinaryRecordV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteGameBinaryRecordV1Async(DeleteGameBinaryRecordV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsUploadBinaryRecordResponse? PostGameBinaryPresignedURLV1(PostGameBinaryPresignedURLV1 input)
+        public DeleteGameBinaryRecordV1.Response DeleteGameBinaryRecordV1(DeleteGameBinaryRecordV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -217,7 +201,23 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUploadBinaryRecordResponse?> PostGameBinaryPresignedURLV1Async(PostGameBinaryPresignedURLV1 input)
+        public async Task<DeleteGameBinaryRecordV1.Response> DeleteGameBinaryRecordV1Async(DeleteGameBinaryRecordV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PostGameBinaryPresignedURLV1.Response PostGameBinaryPresignedURLV1(PostGameBinaryPresignedURLV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PostGameBinaryPresignedURLV1.Response> PostGameBinaryPresignedURLV1Async(PostGameBinaryPresignedURLV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

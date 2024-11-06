@@ -146,7 +146,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedAchievementResponse? AdminListAchievements(AdminListAchievements input)
+        public AdminListAchievements.Response AdminListAchievements(AdminListAchievements input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -154,7 +154,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedAchievementResponse?> AdminListAchievementsAsync(AdminListAchievements input)
+        public async Task<AdminListAchievements.Response> AdminListAchievementsAsync(AdminListAchievements input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -162,7 +162,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsAchievementResponse? AdminCreateNewAchievement(AdminCreateNewAchievement input)
+        public AdminCreateNewAchievement.Response AdminCreateNewAchievement(AdminCreateNewAchievement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -170,72 +170,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsAchievementResponse?> AdminCreateNewAchievementAsync(AdminCreateNewAchievement input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-
-        public Model.ModelsAchievementResponse<T1>? AdminCreateNewAchievement<T1>(AdminCreateNewAchievement input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsAchievementResponse<T1>?> AdminCreateNewAchievementAsync<T1>(AdminCreateNewAchievement input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Stream? ExportAchievements(ExportAchievements input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Stream?> ExportAchievementsAsync(ExportAchievements input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ServiceImportConfigResponse? ImportAchievements(ImportAchievements input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ServiceImportConfigResponse?> ImportAchievementsAsync(ImportAchievements input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsAchievementResponse? AdminGetAchievement(AdminGetAchievement input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsAchievementResponse?> AdminGetAchievementAsync(AdminGetAchievement input)
+        public async Task<AdminCreateNewAchievement.Response> AdminCreateNewAchievementAsync(AdminCreateNewAchievement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -244,7 +179,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsAchievementResponse<T1>? AdminGetAchievement<T1>(AdminGetAchievement input)
+        public AdminCreateNewAchievement.Response<T1> AdminCreateNewAchievement<T1>(AdminCreateNewAchievement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -252,7 +187,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsAchievementResponse<T1>?> AdminGetAchievementAsync<T1>(AdminGetAchievement input)
+        public async Task<AdminCreateNewAchievement.Response<T1>> AdminCreateNewAchievementAsync<T1>(AdminCreateNewAchievement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -260,7 +195,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsAchievementResponse? AdminUpdateAchievement(AdminUpdateAchievement input)
+        public ExportAchievements.Response ExportAchievements(ExportAchievements input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -268,7 +203,39 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsAchievementResponse?> AdminUpdateAchievementAsync(AdminUpdateAchievement input)
+        public async Task<ExportAchievements.Response> ExportAchievementsAsync(ExportAchievements input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public ImportAchievements.Response ImportAchievements(ImportAchievements input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<ImportAchievements.Response> ImportAchievementsAsync(ImportAchievements input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetAchievement.Response AdminGetAchievement(AdminGetAchievement input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetAchievement.Response> AdminGetAchievementAsync(AdminGetAchievement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -277,7 +244,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsAchievementResponse<T1>? AdminUpdateAchievement<T1>(AdminUpdateAchievement input)
+        public AdminGetAchievement.Response<T1> AdminGetAchievement<T1>(AdminGetAchievement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -285,7 +252,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsAchievementResponse<T1>?> AdminUpdateAchievementAsync<T1>(AdminUpdateAchievement input)
+        public async Task<AdminGetAchievement.Response<T1>> AdminGetAchievementAsync<T1>(AdminGetAchievement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -293,39 +260,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteAchievement(AdminDeleteAchievement input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteAchievementAsync(AdminDeleteAchievement input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminUpdateAchievementListOrder(AdminUpdateAchievementListOrder input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminUpdateAchievementListOrderAsync(AdminUpdateAchievementListOrder input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsPublicAchievementsResponse? PublicListAchievements(PublicListAchievements input)
+        public AdminUpdateAchievement.Response AdminUpdateAchievement(AdminUpdateAchievement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -333,23 +268,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPublicAchievementsResponse?> PublicListAchievementsAsync(PublicListAchievements input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsPublicAchievementResponse? PublicGetAchievement(PublicGetAchievement input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsPublicAchievementResponse?> PublicGetAchievementAsync(PublicGetAchievement input)
+        public async Task<AdminUpdateAchievement.Response> AdminUpdateAchievementAsync(AdminUpdateAchievement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -358,7 +277,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsPublicAchievementResponse<T1>? PublicGetAchievement<T1>(PublicGetAchievement input)
+        public AdminUpdateAchievement.Response<T1> AdminUpdateAchievement<T1>(AdminUpdateAchievement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -366,7 +285,88 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPublicAchievementResponse<T1>?> PublicGetAchievementAsync<T1>(PublicGetAchievement input)
+        public async Task<AdminUpdateAchievement.Response<T1>> AdminUpdateAchievementAsync<T1>(AdminUpdateAchievement input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminDeleteAchievement.Response AdminDeleteAchievement(AdminDeleteAchievement input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminDeleteAchievement.Response> AdminDeleteAchievementAsync(AdminDeleteAchievement input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminUpdateAchievementListOrder.Response AdminUpdateAchievementListOrder(AdminUpdateAchievementListOrder input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminUpdateAchievementListOrder.Response> AdminUpdateAchievementListOrderAsync(AdminUpdateAchievementListOrder input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicListAchievements.Response PublicListAchievements(PublicListAchievements input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicListAchievements.Response> PublicListAchievementsAsync(PublicListAchievements input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetAchievement.Response PublicGetAchievement(PublicGetAchievement input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetAchievement.Response> PublicGetAchievementAsync(PublicGetAchievement input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public PublicGetAchievement.Response<T1> PublicGetAchievement<T1>(PublicGetAchievement input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetAchievement.Response<T1>> PublicGetAchievementAsync<T1>(PublicGetAchievement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(

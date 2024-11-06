@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public CreateContentDirect.CreateContentDirectBuilder CreateContentDirectOp
         {
             get
@@ -167,7 +167,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public UpdateContentDirect.UpdateContentDirectBuilder UpdateContentDirectOp
         {
             get
@@ -247,7 +247,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedContentDownloadResponse? SearchChannelSpecificContent(SearchChannelSpecificContent input)
+        public SearchChannelSpecificContent.Response SearchChannelSpecificContent(SearchChannelSpecificContent input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -255,7 +255,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedContentDownloadResponse?> SearchChannelSpecificContentAsync(SearchChannelSpecificContent input)
+        public async Task<SearchChannelSpecificContent.Response> SearchChannelSpecificContentAsync(SearchChannelSpecificContent input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -263,7 +263,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPaginatedContentDownloadResponse? PublicSearchContent(PublicSearchContent input)
+        public PublicSearchContent.Response PublicSearchContent(PublicSearchContent input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -271,7 +271,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedContentDownloadResponse?> PublicSearchContentAsync(PublicSearchContent input)
+        public async Task<PublicSearchContent.Response> PublicSearchContentAsync(PublicSearchContent input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -279,7 +279,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelsContentDownloadResponse>? PublicGetContentBulk(PublicGetContentBulk input)
+        public PublicGetContentBulk.Response PublicGetContentBulk(PublicGetContentBulk input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -287,40 +287,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsContentDownloadResponse>?> PublicGetContentBulkAsync(PublicGetContentBulk input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-
-        public List<Model.ModelsContentDownloadResponse<T1>>? PublicGetContentBulk<T1>(PublicGetContentBulk input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<List<Model.ModelsContentDownloadResponse<T1>>?> PublicGetContentBulkAsync<T1>(PublicGetContentBulk input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public List<Model.ModelsContentDownloadResponse>? PublicGetContentBulkByShareCodes(PublicGetContentBulkByShareCodes input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<List<Model.ModelsContentDownloadResponse>?> PublicGetContentBulkByShareCodesAsync(PublicGetContentBulkByShareCodes input)
+        public async Task<PublicGetContentBulk.Response> PublicGetContentBulkAsync(PublicGetContentBulk input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -329,7 +296,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.Payload);
         }
 
-        public List<Model.ModelsContentDownloadResponse<T1>>? PublicGetContentBulkByShareCodes<T1>(PublicGetContentBulkByShareCodes input)
+        public PublicGetContentBulk.Response<T1> PublicGetContentBulk<T1>(PublicGetContentBulk input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -337,7 +304,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsContentDownloadResponse<T1>>?> PublicGetContentBulkByShareCodesAsync<T1>(PublicGetContentBulkByShareCodes input)
+        public async Task<PublicGetContentBulk.Response<T1>> PublicGetContentBulkAsync<T1>(PublicGetContentBulk input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -345,7 +312,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsContentDownloadResponse? PublicDownloadContentByShareCode(PublicDownloadContentByShareCode input)
+        public PublicGetContentBulkByShareCodes.Response PublicGetContentBulkByShareCodes(PublicGetContentBulkByShareCodes input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -353,7 +320,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsContentDownloadResponse?> PublicDownloadContentByShareCodeAsync(PublicDownloadContentByShareCode input)
+        public async Task<PublicGetContentBulkByShareCodes.Response> PublicGetContentBulkByShareCodesAsync(PublicGetContentBulkByShareCodes input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -362,7 +329,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsContentDownloadResponse<T1>? PublicDownloadContentByShareCode<T1>(PublicDownloadContentByShareCode input)
+        public PublicGetContentBulkByShareCodes.Response<T1> PublicGetContentBulkByShareCodes<T1>(PublicGetContentBulkByShareCodes input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -370,7 +337,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsContentDownloadResponse<T1>?> PublicDownloadContentByShareCodeAsync<T1>(PublicDownloadContentByShareCode input)
+        public async Task<PublicGetContentBulkByShareCodes.Response<T1>> PublicGetContentBulkByShareCodesAsync<T1>(PublicGetContentBulkByShareCodes input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -378,7 +345,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsContentDownloadResponse? PublicDownloadContentByContentID(PublicDownloadContentByContentID input)
+        public PublicDownloadContentByShareCode.Response PublicDownloadContentByShareCode(PublicDownloadContentByShareCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -386,7 +353,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsContentDownloadResponse?> PublicDownloadContentByContentIDAsync(PublicDownloadContentByContentID input)
+        public async Task<PublicDownloadContentByShareCode.Response> PublicDownloadContentByShareCodeAsync(PublicDownloadContentByShareCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -395,7 +362,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsContentDownloadResponse<T1>? PublicDownloadContentByContentID<T1>(PublicDownloadContentByContentID input)
+        public PublicDownloadContentByShareCode.Response<T1> PublicDownloadContentByShareCode<T1>(PublicDownloadContentByShareCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -403,7 +370,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsContentDownloadResponse<T1>?> PublicDownloadContentByContentIDAsync<T1>(PublicDownloadContentByContentID input)
+        public async Task<PublicDownloadContentByShareCode.Response<T1>> PublicDownloadContentByShareCodeAsync<T1>(PublicDownloadContentByShareCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -411,7 +378,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetContentPreviewResponse? PublicDownloadContentPreview(PublicDownloadContentPreview input)
+        public PublicDownloadContentByContentID.Response PublicDownloadContentByContentID(PublicDownloadContentByContentID input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -419,25 +386,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetContentPreviewResponse?> PublicDownloadContentPreviewAsync(PublicDownloadContentPreview input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelsCreateContentResponse? CreateContentDirect(CreateContentDirect input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsCreateContentResponse?> CreateContentDirectAsync(CreateContentDirect input)
+        public async Task<PublicDownloadContentByContentID.Response> PublicDownloadContentByContentIDAsync(PublicDownloadContentByContentID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -446,7 +395,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsCreateContentResponse<T1>? CreateContentDirect<T1>(CreateContentDirect input)
+        public PublicDownloadContentByContentID.Response<T1> PublicDownloadContentByContentID<T1>(PublicDownloadContentByContentID input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -454,7 +403,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateContentResponse<T1>?> CreateContentDirectAsync<T1>(CreateContentDirect input)
+        public async Task<PublicDownloadContentByContentID.Response<T1>> PublicDownloadContentByContentIDAsync<T1>(PublicDownloadContentByContentID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -462,8 +411,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public Model.ModelsCreateContentResponse? CreateContentS3(CreateContentS3 input)
+        public PublicDownloadContentPreview.Response PublicDownloadContentPreview(PublicDownloadContentPreview input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -471,7 +419,25 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateContentResponse?> CreateContentS3Async(CreateContentS3 input)
+        public async Task<PublicDownloadContentPreview.Response> PublicDownloadContentPreviewAsync(PublicDownloadContentPreview input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public CreateContentDirect.Response CreateContentDirect(CreateContentDirect input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<CreateContentDirect.Response> CreateContentDirectAsync(CreateContentDirect input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -480,7 +446,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsCreateContentResponse<T1>? CreateContentS3<T1>(CreateContentS3 input)
+        public CreateContentDirect.Response<T1> CreateContentDirect<T1>(CreateContentDirect input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -488,7 +454,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateContentResponse<T1>?> CreateContentS3Async<T1>(CreateContentS3 input)
+        public async Task<CreateContentDirect.Response<T1>> CreateContentDirectAsync<T1>(CreateContentDirect input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -496,7 +462,8 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCreateContentResponse? PublicUpdateContentByShareCode(PublicUpdateContentByShareCode input)
+        #pragma warning restore ab_deprecated_operation
+        public CreateContentS3.Response CreateContentS3(CreateContentS3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -504,7 +471,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateContentResponse?> PublicUpdateContentByShareCodeAsync(PublicUpdateContentByShareCode input)
+        public async Task<CreateContentS3.Response> CreateContentS3Async(CreateContentS3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -513,7 +480,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsCreateContentResponse<T1>? PublicUpdateContentByShareCode<T1>(PublicUpdateContentByShareCode input)
+        public CreateContentS3.Response<T1> CreateContentS3<T1>(CreateContentS3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -521,7 +488,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateContentResponse<T1>?> PublicUpdateContentByShareCodeAsync<T1>(PublicUpdateContentByShareCode input)
+        public async Task<CreateContentS3.Response<T1>> CreateContentS3Async<T1>(CreateContentS3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -529,7 +496,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCreateContentResponse? UpdateContentS3(UpdateContentS3 input)
+        public PublicUpdateContentByShareCode.Response PublicUpdateContentByShareCode(PublicUpdateContentByShareCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -537,7 +504,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateContentResponse?> UpdateContentS3Async(UpdateContentS3 input)
+        public async Task<PublicUpdateContentByShareCode.Response> PublicUpdateContentByShareCodeAsync(PublicUpdateContentByShareCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -546,7 +513,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsCreateContentResponse<T1>? UpdateContentS3<T1>(UpdateContentS3 input)
+        public PublicUpdateContentByShareCode.Response<T1> PublicUpdateContentByShareCode<T1>(PublicUpdateContentByShareCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -554,7 +521,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateContentResponse<T1>?> UpdateContentS3Async<T1>(UpdateContentS3 input)
+        public async Task<PublicUpdateContentByShareCode.Response<T1>> PublicUpdateContentByShareCodeAsync<T1>(PublicUpdateContentByShareCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -562,25 +529,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicDeleteContentByShareCode(PublicDeleteContentByShareCode input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicDeleteContentByShareCodeAsync(PublicDeleteContentByShareCode input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelsCreateContentResponse? UpdateContentDirect(UpdateContentDirect input)
+        public UpdateContentS3.Response UpdateContentS3(UpdateContentS3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -588,7 +537,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateContentResponse?> UpdateContentDirectAsync(UpdateContentDirect input)
+        public async Task<UpdateContentS3.Response> UpdateContentS3Async(UpdateContentS3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -597,7 +546,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsCreateContentResponse<T1>? UpdateContentDirect<T1>(UpdateContentDirect input)
+        public UpdateContentS3.Response<T1> UpdateContentS3<T1>(UpdateContentS3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -605,7 +554,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateContentResponse<T1>?> UpdateContentDirectAsync<T1>(UpdateContentDirect input)
+        public async Task<UpdateContentS3.Response<T1>> UpdateContentS3Async<T1>(UpdateContentS3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -613,24 +562,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public void DeleteContent(DeleteContent input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteContentAsync(DeleteContent input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsCreateContentResponse? UpdateContentShareCode(UpdateContentShareCode input)
+        public PublicDeleteContentByShareCode.Response PublicDeleteContentByShareCode(PublicDeleteContentByShareCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -638,7 +570,25 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateContentResponse?> UpdateContentShareCodeAsync(UpdateContentShareCode input)
+        public async Task<PublicDeleteContentByShareCode.Response> PublicDeleteContentByShareCodeAsync(PublicDeleteContentByShareCode input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public UpdateContentDirect.Response UpdateContentDirect(UpdateContentDirect input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpdateContentDirect.Response> UpdateContentDirectAsync(UpdateContentDirect input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -647,7 +597,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsCreateContentResponse<T1>? UpdateContentShareCode<T1>(UpdateContentShareCode input)
+        public UpdateContentDirect.Response<T1> UpdateContentDirect<T1>(UpdateContentDirect input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -655,7 +605,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateContentResponse<T1>?> UpdateContentShareCodeAsync<T1>(UpdateContentShareCode input)
+        public async Task<UpdateContentDirect.Response<T1>> UpdateContentDirectAsync<T1>(UpdateContentDirect input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -663,7 +613,8 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPaginatedContentDownloadResponse? PublicGetUserContent(PublicGetUserContent input)
+        #pragma warning restore ab_deprecated_operation
+        public DeleteContent.Response DeleteContent(DeleteContent input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -671,7 +622,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedContentDownloadResponse?> PublicGetUserContentAsync(PublicGetUserContent input)
+        public async Task<DeleteContent.Response> DeleteContentAsync(DeleteContent input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -679,7 +630,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsUpdateScreenshotResponse? UpdateScreenshots(UpdateScreenshots input)
+        public UpdateContentShareCode.Response UpdateContentShareCode(UpdateContentShareCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -687,7 +638,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUpdateScreenshotResponse?> UpdateScreenshotsAsync(UpdateScreenshots input)
+        public async Task<UpdateContentShareCode.Response> UpdateContentShareCodeAsync(UpdateContentShareCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -695,7 +646,24 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCreateScreenshotResponse? UploadContentScreenshot(UploadContentScreenshot input)
+
+        public UpdateContentShareCode.Response<T1> UpdateContentShareCode<T1>(UpdateContentShareCode input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpdateContentShareCode.Response<T1>> UpdateContentShareCodeAsync<T1>(UpdateContentShareCode input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetUserContent.Response PublicGetUserContent(PublicGetUserContent input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -703,7 +671,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateScreenshotResponse?> UploadContentScreenshotAsync(UploadContentScreenshot input)
+        public async Task<PublicGetUserContent.Response> PublicGetUserContentAsync(PublicGetUserContent input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -711,18 +679,50 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteContentScreenshot(DeleteContentScreenshot input)
+        public UpdateScreenshots.Response UpdateScreenshots(UpdateScreenshots input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteContentScreenshotAsync(DeleteContentScreenshot input)
+        public async Task<UpdateScreenshots.Response> UpdateScreenshotsAsync(UpdateScreenshots input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public UploadContentScreenshot.Response UploadContentScreenshot(UploadContentScreenshot input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UploadContentScreenshot.Response> UploadContentScreenshotAsync(UploadContentScreenshot input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeleteContentScreenshot.Response DeleteContentScreenshot(DeleteContentScreenshot input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteContentScreenshot.Response> DeleteContentScreenshotAsync(DeleteContentScreenshot input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

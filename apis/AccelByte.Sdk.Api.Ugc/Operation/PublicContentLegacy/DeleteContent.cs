@@ -58,17 +58,17 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 DeleteContent op = new DeleteContent(this,
-                    channelId,
-                    contentId,
-                    namespace_,
-                    userId
+                    channelId,                    
+                    contentId,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<DeleteContentBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public DeleteContent.Response Execute(
                 string channelId,
                 string contentId,
                 string namespace_,
@@ -86,12 +86,12 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<DeleteContent.Response> ExecuteAsync(
                 string channelId,
                 string contentId,
                 string namespace_,
@@ -109,8 +109,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -127,34 +127,50 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["contentId"] = contentId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error404 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Ugc::PublicContentLegacy::DeleteContent";
+        }
+
+        #endregion
+
         public DeleteContent(
-            string channelId,
-            string contentId,
-            string namespace_,
-            string userId
+            string channelId,            
+            string contentId,            
+            string namespace_,            
+            string userId            
         )
         {
             PathParams["channelId"] = channelId;
             PathParams["contentId"] = contentId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -163,20 +179,39 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { "application/json", "application/octet-stream" };
+        public override List<string> Consumes => new() { "application/json","application/octet-stream" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public DeleteContent.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new DeleteContent.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)401)
+            
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

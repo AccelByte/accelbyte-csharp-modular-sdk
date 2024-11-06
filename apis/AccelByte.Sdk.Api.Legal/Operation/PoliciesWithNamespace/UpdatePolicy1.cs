@@ -64,15 +64,15 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 UpdatePolicy1 op = new UpdatePolicy1(this,
-                    namespace_,
-                    policyId
+                    namespace_,                    
+                    policyId                    
                 );
 
                 op.SetBaseFields<UpdatePolicy1Builder>(this);
                 return op;
             }
 
-            public void Execute(
+            public UpdatePolicy1.Response Execute(
                 string namespace_,
                 string policyId
             )
@@ -86,12 +86,12 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<UpdatePolicy1.Response> ExecuteAsync(
                 string namespace_,
                 string policyId
             )
@@ -105,8 +105,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -119,33 +119,45 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["policyId"] = policyId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = builder.Body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public ErrorEntity? Error400 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Legal::PoliciesWithNamespace::UpdatePolicy1";
+        }
+
+        #endregion
+
         public UpdatePolicy1(
-            string namespace_,
-            string policyId,
-            Model.UpdatePolicyRequest body
+            string namespace_,            
+            string policyId,            
+            Model.UpdatePolicyRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["policyId"] = policyId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -157,17 +169,24 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public UpdatePolicy1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)200)
+            var response = new UpdatePolicy1.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

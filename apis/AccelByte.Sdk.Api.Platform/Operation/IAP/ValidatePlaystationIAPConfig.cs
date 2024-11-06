@@ -57,15 +57,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 ValidatePlaystationIAPConfig op = new ValidatePlaystationIAPConfig(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<ValidatePlaystationIAPConfigBuilder>(this);
                 return op;
             }
 
-            public Model.TestResult? Execute(
+            public ValidatePlaystationIAPConfig.Response Execute(
                 PlaystationIAPConfigRequest body,
                 string namespace_
             )
@@ -80,11 +80,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.TestResult?> ExecuteAsync(
+            public async Task<ValidatePlaystationIAPConfig.Response> ExecuteAsync(
                 PlaystationIAPConfigRequest body,
                 string namespace_
             )
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,31 +111,41 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.TestResult>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::IAP::ValidatePlaystationIAPConfig";
+        }
+
+        #endregion
+
         public ValidatePlaystationIAPConfig(
-            string namespace_,
-            Model.PlaystationIAPConfigRequest body
+            string namespace_,            
+            Model.PlaystationIAPConfigRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,25 +157,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.TestResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public ValidatePlaystationIAPConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new ValidatePlaystationIAPConfig.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

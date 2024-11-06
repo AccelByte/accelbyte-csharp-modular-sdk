@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
         }
         #endregion
 
-        public Model.ApiArtifactListResponse? ArtifactGet(ArtifactGet input)
+        public ArtifactGet.Response ArtifactGet(ArtifactGet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiArtifactListResponse?> ArtifactGetAsync(ArtifactGet input)
+        public async Task<ArtifactGet.Response> ArtifactGetAsync(ArtifactGet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -129,23 +129,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void ArtifactBulkDelete(ArtifactBulkDelete input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task ArtifactBulkDeleteAsync(ArtifactBulkDelete input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApiArtifactUsageResponse? ArtifactUsageGet(ArtifactUsageGet input)
+        public ArtifactBulkDelete.Response ArtifactBulkDelete(ArtifactBulkDelete input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -153,7 +137,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiArtifactUsageResponse?> ArtifactUsageGetAsync(ArtifactUsageGet input)
+        public async Task<ArtifactBulkDelete.Response> ArtifactBulkDeleteAsync(ArtifactBulkDelete input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -161,23 +145,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void ArtifactDelete(ArtifactDelete input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task ArtifactDeleteAsync(ArtifactDelete input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ApiArtifactURLResponse? ArtifactGetURL(ArtifactGetURL input)
+        public ArtifactUsageGet.Response ArtifactUsageGet(ArtifactUsageGet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -185,7 +153,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiArtifactURLResponse?> ArtifactGetURLAsync(ArtifactGetURL input)
+        public async Task<ArtifactUsageGet.Response> ArtifactUsageGetAsync(ArtifactUsageGet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -193,7 +161,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiFleetArtifactsSampleRules? FleetArtifactSamplingRulesGet(FleetArtifactSamplingRulesGet input)
+        public ArtifactDelete.Response ArtifactDelete(ArtifactDelete input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -201,7 +169,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiFleetArtifactsSampleRules?> FleetArtifactSamplingRulesGetAsync(FleetArtifactSamplingRulesGet input)
+        public async Task<ArtifactDelete.Response> ArtifactDeleteAsync(ArtifactDelete input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -209,7 +177,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiFleetArtifactsSampleRules? FleetArtifactSamplingRulesSet(FleetArtifactSamplingRulesSet input)
+        public ArtifactGetURL.Response ArtifactGetURL(ArtifactGetURL input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -217,7 +185,39 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiFleetArtifactsSampleRules?> FleetArtifactSamplingRulesSetAsync(FleetArtifactSamplingRulesSet input)
+        public async Task<ArtifactGetURL.Response> ArtifactGetURLAsync(ArtifactGetURL input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public FleetArtifactSamplingRulesGet.Response FleetArtifactSamplingRulesGet(FleetArtifactSamplingRulesGet input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<FleetArtifactSamplingRulesGet.Response> FleetArtifactSamplingRulesGetAsync(FleetArtifactSamplingRulesGet input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public FleetArtifactSamplingRulesSet.Response FleetArtifactSamplingRulesSet(FleetArtifactSamplingRulesSet input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<FleetArtifactSamplingRulesSet.Response> FleetArtifactSamplingRulesSetAsync(FleetArtifactSamplingRulesSet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -58,16 +58,16 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 SendSpecificUserFreeformNotificationV1Admin op = new SendSpecificUserFreeformNotificationV1Admin(this,
-                    body,
-                    namespace_,
-                    userId
+                    body,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<SendSpecificUserFreeformNotificationV1AdminBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public SendSpecificUserFreeformNotificationV1Admin.Response Execute(
                 ModelFreeFormNotificationRequestV1 body,
                 string namespace_,
                 string userId
@@ -83,12 +83,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<SendSpecificUserFreeformNotificationV1Admin.Response> ExecuteAsync(
                 ModelFreeFormNotificationRequestV1 body,
                 string namespace_,
                 string userId
@@ -104,8 +104,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -119,33 +119,51 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public RestapiErrorResponseV1? Error400 { get; set; } = null;
+
+            public RestapiErrorResponseV1? Error401 { get; set; } = null;
+
+            public RestapiErrorResponseV1? Error403 { get; set; } = null;
+
+            public RestapiErrorResponseV1? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Lobby::Notification::SendSpecificUserFreeformNotificationV1Admin";
+        }
+
+        #endregion
+
         public SendSpecificUserFreeformNotificationV1Admin(
-            string namespace_,
-            string userId,
-            Model.ModelFreeFormNotificationRequestV1 body
+            string namespace_,            
+            string userId,            
+            Model.ModelFreeFormNotificationRequestV1 body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -157,17 +175,42 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public SendSpecificUserFreeformNotificationV1Admin.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new SendSpecificUserFreeformNotificationV1Admin.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

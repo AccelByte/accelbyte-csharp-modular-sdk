@@ -102,23 +102,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
         }
         #endregion
 
-        public void CreateModerationRule(CreateModerationRule input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task CreateModerationRuleAsync(CreateModerationRule input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.RestapiModerationRuleResponse? UpdateModerationRule(UpdateModerationRule input)
+        public CreateModerationRule.Response CreateModerationRule(CreateModerationRule input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -126,7 +110,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiModerationRuleResponse?> UpdateModerationRuleAsync(UpdateModerationRule input)
+        public async Task<CreateModerationRule.Response> CreateModerationRuleAsync(CreateModerationRule input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -134,39 +118,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteModerationRule(DeleteModerationRule input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteModerationRuleAsync(DeleteModerationRule input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void UpdateModerationRuleStatus(UpdateModerationRuleStatus input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task UpdateModerationRuleStatusAsync(UpdateModerationRuleStatus input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.RestapiModerationRulesList? GetModerationRules(GetModerationRules input)
+        public UpdateModerationRule.Response UpdateModerationRule(UpdateModerationRule input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -174,7 +126,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiModerationRulesList?> GetModerationRulesAsync(GetModerationRules input)
+        public async Task<UpdateModerationRule.Response> UpdateModerationRuleAsync(UpdateModerationRule input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -182,7 +134,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RestapiModerationRuleResponse? GetModerationRuleDetails(GetModerationRuleDetails input)
+        public DeleteModerationRule.Response DeleteModerationRule(DeleteModerationRule input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -190,7 +142,55 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiModerationRuleResponse?> GetModerationRuleDetailsAsync(GetModerationRuleDetails input)
+        public async Task<DeleteModerationRule.Response> DeleteModerationRuleAsync(DeleteModerationRule input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public UpdateModerationRuleStatus.Response UpdateModerationRuleStatus(UpdateModerationRuleStatus input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpdateModerationRuleStatus.Response> UpdateModerationRuleStatusAsync(UpdateModerationRuleStatus input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetModerationRules.Response GetModerationRules(GetModerationRules input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetModerationRules.Response> GetModerationRulesAsync(GetModerationRules input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetModerationRuleDetails.Response GetModerationRuleDetails(GetModerationRuleDetails input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetModerationRuleDetails.Response> GetModerationRuleDetailsAsync(GetModerationRuleDetails input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         }
         #endregion
 
-        public Model.ModelsListTagsResponse? AdminListTagsHandlerV1(AdminListTagsHandlerV1 input)
+        public AdminListTagsHandlerV1.Response AdminListTagsHandlerV1(AdminListTagsHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListTagsResponse?> AdminListTagsHandlerV1Async(AdminListTagsHandlerV1 input)
+        public async Task<AdminListTagsHandlerV1.Response> AdminListTagsHandlerV1Async(AdminListTagsHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -85,34 +85,34 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminPostTagHandlerV1(AdminPostTagHandlerV1 input)
+        public AdminPostTagHandlerV1.Response AdminPostTagHandlerV1(AdminPostTagHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminPostTagHandlerV1Async(AdminPostTagHandlerV1 input)
+        public async Task<AdminPostTagHandlerV1.Response> AdminPostTagHandlerV1Async(AdminPostTagHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteTagHandlerV1(AdminDeleteTagHandlerV1 input)
+        public AdminDeleteTagHandlerV1.Response AdminDeleteTagHandlerV1(AdminDeleteTagHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteTagHandlerV1Async(AdminDeleteTagHandlerV1 input)
+        public async Task<AdminDeleteTagHandlerV1.Response> AdminDeleteTagHandlerV1Async(AdminDeleteTagHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

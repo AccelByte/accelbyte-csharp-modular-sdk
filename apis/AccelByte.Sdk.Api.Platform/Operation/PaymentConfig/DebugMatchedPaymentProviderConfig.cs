@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
-            public Model.PaymentProviderConfigInfo? Execute(
+            public DebugMatchedPaymentProviderConfig.Response Execute(
             )
             {
                 DebugMatchedPaymentProviderConfig op = Build(
@@ -90,11 +90,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.PaymentProviderConfigInfo?> ExecuteAsync(
+            public async Task<DebugMatchedPaymentProviderConfig.Response> ExecuteAsync(
             )
             {
                 DebugMatchedPaymentProviderConfig op = Build(
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -114,32 +114,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         private DebugMatchedPaymentProviderConfig(DebugMatchedPaymentProviderConfigBuilder builder
         )
         {
-
+            
             if (builder.Namespace is not null) QueryParams["namespace"] = builder.Namespace;
             if (builder.Region is not null) QueryParams["region"] = builder.Region;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public DebugMatchedPaymentProviderConfig(
-            string? namespace_,
-            string? region
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.PaymentProviderConfigInfo>
         {
 
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::PaymentConfig::DebugMatchedPaymentProviderConfig";
+        }
+
+        #endregion
+
+        public DebugMatchedPaymentProviderConfig(
+            string? namespace_,            
+            string? region            
+        )
+        {
+            
             if (namespace_ is not null) QueryParams["namespace"] = namespace_;
             if (region is not null) QueryParams["region"] = region;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -148,28 +160,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.PaymentProviderConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public DebugMatchedPaymentProviderConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new DebugMatchedPaymentProviderConfig.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.PaymentProviderConfigInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.PaymentProviderConfigInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.PaymentProviderConfigInfo>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

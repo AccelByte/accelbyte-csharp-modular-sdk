@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         }
         #endregion
 
-        public Model.DtoListFinishedDataDeletion? S2SGetListFinishedAccountDeletionRequest(S2SGetListFinishedAccountDeletionRequest input)
+        public S2SGetListFinishedAccountDeletionRequest.Response S2SGetListFinishedAccountDeletionRequest(S2SGetListFinishedAccountDeletionRequest input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.DtoListFinishedDataDeletion?> S2SGetListFinishedAccountDeletionRequestAsync(S2SGetListFinishedAccountDeletionRequest input)
+        public async Task<S2SGetListFinishedAccountDeletionRequest.Response> S2SGetListFinishedAccountDeletionRequestAsync(S2SGetListFinishedAccountDeletionRequest input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsS2SRequestDeleteResponse? S2SSubmitUserAccountDeletionRequest(S2SSubmitUserAccountDeletionRequest input)
+        public S2SSubmitUserAccountDeletionRequest.Response S2SSubmitUserAccountDeletionRequest(S2SSubmitUserAccountDeletionRequest input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsS2SRequestDeleteResponse?> S2SSubmitUserAccountDeletionRequestAsync(S2SSubmitUserAccountDeletionRequest input)
+        public async Task<S2SSubmitUserAccountDeletionRequest.Response> S2SSubmitUserAccountDeletionRequestAsync(S2SSubmitUserAccountDeletionRequest input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -61,15 +61,15 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
             )
             {
                 SetActiveQueue op = new SetActiveQueue(this,
-                    nodeIP,
-                    podName
+                    nodeIP,                    
+                    podName                    
                 );
 
                 op.SetBaseFields<SetActiveQueueBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public SetActiveQueue.Response Execute(
                 string nodeIP,
                 string podName
             )
@@ -83,12 +83,12 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<SetActiveQueue.Response> ExecuteAsync(
                 string nodeIP,
                 string podName
             )
@@ -102,8 +102,8 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -114,32 +114,48 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
             string podName
         )
         {
-
+            
             if (nodeIP is not null) QueryParams["nodeIP"] = nodeIP;
             if (podName is not null) QueryParams["podName"] = podName;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public SetActiveQueue(
-            string nodeIP,
-            string podName
-        )
+        #region Response Part        
+        public class Response : ApiResponse
         {
 
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Dsartifact::ArtifactUploadProcessQueue::SetActiveQueue";
+        }
+
+        #endregion
+
+        public SetActiveQueue(
+            string nodeIP,            
+            string podName            
+        )
+        {
+            
             if (nodeIP is not null) QueryParams["nodeIP"] = nodeIP;
             if (podName is not null) QueryParams["podName"] = podName;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -150,18 +166,37 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json", "text/x-log" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public override List<string> Produces => new() { "application/json","text/x-log" };
+        
+        public SetActiveQueue.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new SetActiveQueue.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

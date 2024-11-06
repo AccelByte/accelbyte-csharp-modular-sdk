@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
         }
         #endregion
 
-        public Model.RestapiReportListResponse? ListReports(ListReports input)
+        public ListReports.Response ListReports(ListReports input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiReportListResponse?> ListReportsAsync(ListReports input)
+        public async Task<ListReports.Response> ListReportsAsync(ListReports input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RestapiSubmitReportResponse? AdminSubmitReport(AdminSubmitReport input)
+        public AdminSubmitReport.Response AdminSubmitReport(AdminSubmitReport input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiSubmitReportResponse?> AdminSubmitReportAsync(AdminSubmitReport input)
+        public async Task<AdminSubmitReport.Response> AdminSubmitReportAsync(AdminSubmitReport input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

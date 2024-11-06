@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Wrapper
         }
         #endregion
 
-        public Stream? BatchDownloadServerLogs(BatchDownloadServerLogs input)
+        public BatchDownloadServerLogs.Response BatchDownloadServerLogs(BatchDownloadServerLogs input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Stream?> BatchDownloadServerLogsAsync(BatchDownloadServerLogs input)
+        public async Task<BatchDownloadServerLogs.Response> BatchDownloadServerLogsAsync(BatchDownloadServerLogs input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsListTerminatedServersResponse? ListMetadataServers(ListMetadataServers input)
+        public ListMetadataServers.Response ListMetadataServers(ListMetadataServers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListTerminatedServersResponse?> ListMetadataServersAsync(ListMetadataServers input)
+        public async Task<ListMetadataServers.Response> ListMetadataServersAsync(ListMetadataServers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsListTerminatedServersResponse? ListAllTerminatedServers(ListAllTerminatedServers input)
+        public ListAllTerminatedServers.Response ListAllTerminatedServers(ListAllTerminatedServers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListTerminatedServersResponse?> ListAllTerminatedServersAsync(ListAllTerminatedServers input)
+        public async Task<ListAllTerminatedServers.Response> ListAllTerminatedServersAsync(ListAllTerminatedServers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

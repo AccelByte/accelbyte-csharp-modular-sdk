@@ -56,7 +56,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetKeyGroupByBoothName.GetKeyGroupByBoothNameBuilder GetKeyGroupByBoothNameOp
         {
             get
@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.KeyGroupPagingSlicedResult? QueryKeyGroups(QueryKeyGroups input)
+        public QueryKeyGroups.Response QueryKeyGroups(QueryKeyGroups input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -133,7 +133,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.KeyGroupPagingSlicedResult?> QueryKeyGroupsAsync(QueryKeyGroups input)
+        public async Task<QueryKeyGroups.Response> QueryKeyGroupsAsync(QueryKeyGroups input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -141,7 +141,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.KeyGroupInfo? CreateKeyGroup(CreateKeyGroup input)
+        public CreateKeyGroup.Response CreateKeyGroup(CreateKeyGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -149,7 +149,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.KeyGroupInfo?> CreateKeyGroupAsync(CreateKeyGroup input)
+        public async Task<CreateKeyGroup.Response> CreateKeyGroupAsync(CreateKeyGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -157,9 +157,9 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.KeyGroupInfo? GetKeyGroupByBoothName(GetKeyGroupByBoothName input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetKeyGroupByBoothName.Response GetKeyGroupByBoothName(GetKeyGroupByBoothName input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -167,7 +167,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.KeyGroupInfo?> GetKeyGroupByBoothNameAsync(GetKeyGroupByBoothName input)
+        public async Task<GetKeyGroupByBoothName.Response> GetKeyGroupByBoothNameAsync(GetKeyGroupByBoothName input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -175,8 +175,8 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public Model.KeyGroupInfo? GetKeyGroup(GetKeyGroup input)
+        #pragma warning restore ab_deprecated_operation
+        public GetKeyGroup.Response GetKeyGroup(GetKeyGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -184,7 +184,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.KeyGroupInfo?> GetKeyGroupAsync(GetKeyGroup input)
+        public async Task<GetKeyGroup.Response> GetKeyGroupAsync(GetKeyGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -192,7 +192,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.KeyGroupInfo? UpdateKeyGroup(UpdateKeyGroup input)
+        public UpdateKeyGroup.Response UpdateKeyGroup(UpdateKeyGroup input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -200,7 +200,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.KeyGroupInfo?> UpdateKeyGroupAsync(UpdateKeyGroup input)
+        public async Task<UpdateKeyGroup.Response> UpdateKeyGroupAsync(UpdateKeyGroup input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -208,7 +208,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.KeyGroupDynamicInfo? GetKeyGroupDynamic(GetKeyGroupDynamic input)
+        public GetKeyGroupDynamic.Response GetKeyGroupDynamic(GetKeyGroupDynamic input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -216,7 +216,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.KeyGroupDynamicInfo?> GetKeyGroupDynamicAsync(GetKeyGroupDynamic input)
+        public async Task<GetKeyGroupDynamic.Response> GetKeyGroupDynamicAsync(GetKeyGroupDynamic input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -224,7 +224,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.KeyPagingSliceResult? ListKeys(ListKeys input)
+        public ListKeys.Response ListKeys(ListKeys input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -232,7 +232,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.KeyPagingSliceResult?> ListKeysAsync(ListKeys input)
+        public async Task<ListKeys.Response> ListKeysAsync(ListKeys input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -240,7 +240,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.BulkOperationResult? UploadKeys(UploadKeys input)
+        public UploadKeys.Response UploadKeys(UploadKeys input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -248,7 +248,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.BulkOperationResult?> UploadKeysAsync(UploadKeys input)
+        public async Task<UploadKeys.Response> UploadKeysAsync(UploadKeys input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -146,7 +146,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         }
         #endregion
 
-        public Model.StatPagingSlicedResult? GetStats(GetStats input)
+        public GetStats.Response GetStats(GetStats input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -154,7 +154,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StatPagingSlicedResult?> GetStatsAsync(GetStats input)
+        public async Task<GetStats.Response> GetStatsAsync(GetStats input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -162,7 +162,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StatInfo? CreateStat(CreateStat input)
+        public CreateStat.Response CreateStat(CreateStat input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -170,7 +170,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StatInfo?> CreateStatAsync(CreateStat input)
+        public async Task<CreateStat.Response> CreateStatAsync(CreateStat input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -178,7 +178,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Stream? ExportStats(ExportStats input)
+        public ExportStats.Response ExportStats(ExportStats input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -186,7 +186,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Stream?> ExportStatsAsync(ExportStats input)
+        public async Task<ExportStats.Response> ExportStatsAsync(ExportStats input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -194,7 +194,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StatImportInfo? ImportStats(ImportStats input)
+        public ImportStats.Response ImportStats(ImportStats input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -202,7 +202,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StatImportInfo?> ImportStatsAsync(ImportStats input)
+        public async Task<ImportStats.Response> ImportStatsAsync(ImportStats input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -210,7 +210,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StatPagingSlicedResult? QueryStats(QueryStats input)
+        public QueryStats.Response QueryStats(QueryStats input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -218,7 +218,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StatPagingSlicedResult?> QueryStatsAsync(QueryStats input)
+        public async Task<QueryStats.Response> QueryStatsAsync(QueryStats input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -226,7 +226,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.StatInfo? GetStat(GetStat input)
+        public GetStat.Response GetStat(GetStat input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -234,7 +234,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StatInfo?> GetStatAsync(GetStat input)
+        public async Task<GetStat.Response> GetStatAsync(GetStat input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -242,23 +242,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteStat(DeleteStat input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteStatAsync(DeleteStat input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.StatInfo? UpdateStat(UpdateStat input)
+        public DeleteStat.Response DeleteStat(DeleteStat input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -266,7 +250,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StatInfo?> UpdateStatAsync(UpdateStat input)
+        public async Task<DeleteStat.Response> DeleteStatAsync(DeleteStat input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -274,23 +258,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteTiedStat(DeleteTiedStat input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteTiedStatAsync(DeleteTiedStat input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.StatInfo? CreateStat1(CreateStat1 input)
+        public UpdateStat.Response UpdateStat(UpdateStat input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -298,7 +266,39 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.StatInfo?> CreateStat1Async(CreateStat1 input)
+        public async Task<UpdateStat.Response> UpdateStatAsync(UpdateStat input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeleteTiedStat.Response DeleteTiedStat(DeleteTiedStat input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteTiedStat.Response> DeleteTiedStatAsync(DeleteTiedStat input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public CreateStat1.Response CreateStat1(CreateStat1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<CreateStat1.Response> CreateStat1Async(CreateStat1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

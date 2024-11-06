@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-        public Model.OauthmodelTokenResponseV3? AuthenticationWithPlatformLinkV4(AuthenticationWithPlatformLinkV4 input)
+        public AuthenticationWithPlatformLinkV4.Response AuthenticationWithPlatformLinkV4(AuthenticationWithPlatformLinkV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OauthmodelTokenResponseV3?> AuthenticationWithPlatformLinkV4Async(AuthenticationWithPlatformLinkV4 input)
+        public async Task<AuthenticationWithPlatformLinkV4.Response> AuthenticationWithPlatformLinkV4Async(AuthenticationWithPlatformLinkV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OauthmodelTokenResponseV3? GenerateTokenByNewHeadlessAccountV4(GenerateTokenByNewHeadlessAccountV4 input)
+        public GenerateTokenByNewHeadlessAccountV4.Response GenerateTokenByNewHeadlessAccountV4(GenerateTokenByNewHeadlessAccountV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -137,7 +137,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OauthmodelTokenResponseV3?> GenerateTokenByNewHeadlessAccountV4Async(GenerateTokenByNewHeadlessAccountV4 input)
+        public async Task<GenerateTokenByNewHeadlessAccountV4.Response> GenerateTokenByNewHeadlessAccountV4Async(GenerateTokenByNewHeadlessAccountV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -145,7 +145,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OauthmodelTokenResponseV3? Verify2faCodeV4(Verify2faCodeV4 input)
+        public Verify2faCodeV4.Response Verify2faCodeV4(Verify2faCodeV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -153,7 +153,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OauthmodelTokenResponseV3?> Verify2faCodeV4Async(Verify2faCodeV4 input)
+        public async Task<Verify2faCodeV4.Response> Verify2faCodeV4Async(Verify2faCodeV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -161,7 +161,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OauthmodelTokenResponseV3? PlatformTokenGrantV4(PlatformTokenGrantV4 input)
+        public PlatformTokenGrantV4.Response PlatformTokenGrantV4(PlatformTokenGrantV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -169,7 +169,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OauthmodelTokenResponseV3?> PlatformTokenGrantV4Async(PlatformTokenGrantV4 input)
+        public async Task<PlatformTokenGrantV4.Response> PlatformTokenGrantV4Async(PlatformTokenGrantV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -177,7 +177,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OauthmodelTokenResponseV3? SimultaneousLoginV4(SimultaneousLoginV4 input)
+        public SimultaneousLoginV4.Response SimultaneousLoginV4(SimultaneousLoginV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -185,7 +185,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OauthmodelTokenResponseV3?> SimultaneousLoginV4Async(SimultaneousLoginV4 input)
+        public async Task<SimultaneousLoginV4.Response> SimultaneousLoginV4Async(SimultaneousLoginV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -193,7 +193,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OauthmodelTokenWithDeviceCookieResponseV3? TokenGrantV4(TokenGrantV4 input)
+        public TokenGrantV4.Response TokenGrantV4(TokenGrantV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -201,7 +201,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OauthmodelTokenWithDeviceCookieResponseV3?> TokenGrantV4Async(TokenGrantV4 input)
+        public async Task<TokenGrantV4.Response> TokenGrantV4Async(TokenGrantV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -209,7 +209,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.OauthmodelTokenResponseV3? RequestTargetTokenResponseV4(RequestTargetTokenResponseV4 input)
+        public RequestTargetTokenResponseV4.Response RequestTargetTokenResponseV4(RequestTargetTokenResponseV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -217,7 +217,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OauthmodelTokenResponseV3?> RequestTargetTokenResponseV4Async(RequestTargetTokenResponseV4 input)
+        public async Task<RequestTargetTokenResponseV4.Response> RequestTargetTokenResponseV4Async(RequestTargetTokenResponseV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

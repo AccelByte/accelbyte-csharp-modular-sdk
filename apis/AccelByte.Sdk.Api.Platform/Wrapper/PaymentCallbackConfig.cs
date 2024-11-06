@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.PaymentCallbackConfigInfo? GetPaymentCallbackConfig(GetPaymentCallbackConfig input)
+        public GetPaymentCallbackConfig.Response GetPaymentCallbackConfig(GetPaymentCallbackConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PaymentCallbackConfigInfo?> GetPaymentCallbackConfigAsync(GetPaymentCallbackConfig input)
+        public async Task<GetPaymentCallbackConfig.Response> GetPaymentCallbackConfigAsync(GetPaymentCallbackConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PaymentCallbackConfigInfo? UpdatePaymentCallbackConfig(UpdatePaymentCallbackConfig input)
+        public UpdatePaymentCallbackConfig.Response UpdatePaymentCallbackConfig(UpdatePaymentCallbackConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PaymentCallbackConfigInfo?> UpdatePaymentCallbackConfigAsync(UpdatePaymentCallbackConfig input)
+        public async Task<UpdatePaymentCallbackConfig.Response> UpdatePaymentCallbackConfigAsync(UpdatePaymentCallbackConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

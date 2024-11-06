@@ -65,14 +65,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 RequestTargetTokenResponseV3 op = new RequestTargetTokenResponseV3(this,
-                    code
+                    code                    
                 );
 
                 op.SetBaseFields<RequestTargetTokenResponseV3Builder>(this);
                 return op;
             }
 
-            public Model.OauthmodelTokenResponseV3? Execute(
+            public RequestTargetTokenResponseV3.Response Execute(
                 string code
             )
             {
@@ -85,11 +85,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OauthmodelTokenResponseV3?> ExecuteAsync(
+            public async Task<RequestTargetTokenResponseV3.Response> ExecuteAsync(
                 string code
             )
             {
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -112,32 +112,42 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string code
         )
         {
-
-
+            
+            
             if (builder.AdditionalData is not null) FormParams["additionalData"] = builder.AdditionalData;
             if (code is not null) FormParams["code"] = code;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
         #endregion
 
-        public RequestTargetTokenResponseV3(
-            string? additionalData,
-            string code
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.OauthmodelTokenResponseV3>
         {
 
 
+            protected override string GetFullOperationId() => "Iam::OAuth20Extension::RequestTargetTokenResponseV3";
+        }
+
+        #endregion
+
+        public RequestTargetTokenResponseV3(
+            string? additionalData,            
+            string code            
+        )
+        {
+            
+            
             if (additionalData is not null) FormParams["additionalData"] = additionalData;
             if (code is not null) FormParams["code"] = code;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -149,25 +159,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OauthmodelTokenResponseV3? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public RequestTargetTokenResponseV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new RequestTargetTokenResponseV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

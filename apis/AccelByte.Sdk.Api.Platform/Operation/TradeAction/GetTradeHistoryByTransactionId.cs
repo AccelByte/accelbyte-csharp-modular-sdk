@@ -60,15 +60,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetTradeHistoryByTransactionId op = new GetTradeHistoryByTransactionId(this,
-                    namespace_,
-                    transactionId
+                    namespace_,                    
+                    transactionId                    
                 );
 
                 op.SetBaseFields<GetTradeHistoryByTransactionIdBuilder>(this);
                 return op;
             }
 
-            public Model.TradeChainActionHistoryInfo? Execute(
+            public GetTradeHistoryByTransactionId.Response Execute(
                 string namespace_,
                 string transactionId
             )
@@ -83,11 +83,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.TradeChainActionHistoryInfo?> ExecuteAsync(
+            public async Task<GetTradeHistoryByTransactionId.Response> ExecuteAsync(
                 string namespace_,
                 string transactionId
             )
@@ -102,12 +102,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
 
-            public Model.TradeChainActionHistoryInfo<T1>? Execute<T1>(
+            public GetTradeHistoryByTransactionId.Response<T1> Execute<T1>(
                 string namespace_,
                 string transactionId
             )
@@ -122,11 +122,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.TradeChainActionHistoryInfo<T1>?> ExecuteAsync<T1>(
+            public async Task<GetTradeHistoryByTransactionId.Response<T1>> ExecuteAsync<T1>(
                 string namespace_,
                 string transactionId
             )
@@ -141,7 +141,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -154,30 +154,45 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["transactionId"] = transactionId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.TradeChainActionHistoryInfo>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::TradeAction::GetTradeHistoryByTransactionId";
+        }
+
+        public class Response<T1> : ApiResponse<Model.TradeChainActionHistoryInfo<T1>>
+        {
+
+            protected override string GetFullOperationId() => "Platform::TradeAction::GetTradeHistoryByTransactionId";
+        }
+        #endregion
+
         public GetTradeHistoryByTransactionId(
-            string namespace_,
-            string transactionId
+            string namespace_,            
+            string transactionId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["transactionId"] = transactionId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -186,47 +201,50 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.TradeChainActionHistoryInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetTradeHistoryByTransactionId.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetTradeHistoryByTransactionId.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.TradeChainActionHistoryInfo>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.TradeChainActionHistoryInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.TradeChainActionHistoryInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
 
-        public Model.TradeChainActionHistoryInfo<T1>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
+        public GetTradeHistoryByTransactionId.Response<T1> ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetTradeHistoryByTransactionId.Response<T1>()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
-            }
-            else if (code == (HttpStatusCode)201)
+                response.IsSuccess = true;
+            }            
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.TradeChainActionHistoryInfo<T1>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.TradeChainActionHistoryInfo<T1>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.TradeChainActionHistoryInfo<T1>>(payload, ResponseJsonOptions);
-            }
-
-            var payloadString = payload.ReadToString();
-            throw new HttpResponseException(code, payloadString);
+            
+            return response;
         }
     }
 

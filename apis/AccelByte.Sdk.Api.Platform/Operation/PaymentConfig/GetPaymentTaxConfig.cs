@@ -63,7 +63,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
-            public Model.PaymentTaxConfigInfo? Execute(
+            public GetPaymentTaxConfig.Response Execute(
             )
             {
                 GetPaymentTaxConfig op = Build(
@@ -74,11 +74,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.PaymentTaxConfigInfo?> ExecuteAsync(
+            public async Task<GetPaymentTaxConfig.Response> ExecuteAsync(
             )
             {
                 GetPaymentTaxConfig op = Build(
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -98,26 +98,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         private GetPaymentTaxConfig(GetPaymentTaxConfigBuilder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public GetPaymentTaxConfig(
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.PaymentTaxConfigInfo>
         {
 
 
+            protected override string GetFullOperationId() => "Platform::PaymentConfig::GetPaymentTaxConfig";
+        }
 
+        #endregion
 
+        public GetPaymentTaxConfig(
+        )
+        {
+            
+            
 
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -126,28 +136,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.PaymentTaxConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetPaymentTaxConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetPaymentTaxConfig.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.PaymentTaxConfigInfo>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.PaymentTaxConfigInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.PaymentTaxConfigInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

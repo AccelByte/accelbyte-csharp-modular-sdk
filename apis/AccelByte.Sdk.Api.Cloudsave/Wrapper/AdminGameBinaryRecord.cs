@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         }
         #endregion
 
-        public Model.ModelsListGameBinaryRecordsAdminResponse? AdminListGameBinaryRecordsV1(AdminListGameBinaryRecordsV1 input)
+        public AdminListGameBinaryRecordsV1.Response AdminListGameBinaryRecordsV1(AdminListGameBinaryRecordsV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListGameBinaryRecordsAdminResponse?> AdminListGameBinaryRecordsV1Async(AdminListGameBinaryRecordsV1 input)
+        public async Task<AdminListGameBinaryRecordsV1.Response> AdminListGameBinaryRecordsV1Async(AdminListGameBinaryRecordsV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsUploadBinaryRecordResponse? AdminPostGameBinaryRecordV1(AdminPostGameBinaryRecordV1 input)
+        public AdminPostGameBinaryRecordV1.Response AdminPostGameBinaryRecordV1(AdminPostGameBinaryRecordV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -137,7 +137,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUploadBinaryRecordResponse?> AdminPostGameBinaryRecordV1Async(AdminPostGameBinaryRecordV1 input)
+        public async Task<AdminPostGameBinaryRecordV1.Response> AdminPostGameBinaryRecordV1Async(AdminPostGameBinaryRecordV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -145,7 +145,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGameBinaryRecordAdminResponse? AdminGetGameBinaryRecordV1(AdminGetGameBinaryRecordV1 input)
+        public AdminGetGameBinaryRecordV1.Response AdminGetGameBinaryRecordV1(AdminGetGameBinaryRecordV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -153,7 +153,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGameBinaryRecordAdminResponse?> AdminGetGameBinaryRecordV1Async(AdminGetGameBinaryRecordV1 input)
+        public async Task<AdminGetGameBinaryRecordV1.Response> AdminGetGameBinaryRecordV1Async(AdminGetGameBinaryRecordV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -161,7 +161,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGameBinaryRecordAdminResponse? AdminPutGameBinaryRecordV1(AdminPutGameBinaryRecordV1 input)
+        public AdminPutGameBinaryRecordV1.Response AdminPutGameBinaryRecordV1(AdminPutGameBinaryRecordV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -169,7 +169,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGameBinaryRecordAdminResponse?> AdminPutGameBinaryRecordV1Async(AdminPutGameBinaryRecordV1 input)
+        public async Task<AdminPutGameBinaryRecordV1.Response> AdminPutGameBinaryRecordV1Async(AdminPutGameBinaryRecordV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -177,23 +177,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteGameBinaryRecordV1(AdminDeleteGameBinaryRecordV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteGameBinaryRecordV1Async(AdminDeleteGameBinaryRecordV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsGameBinaryRecordAdminResponse? AdminPutGameBinaryRecorMetadataV1(AdminPutGameBinaryRecorMetadataV1 input)
+        public AdminDeleteGameBinaryRecordV1.Response AdminDeleteGameBinaryRecordV1(AdminDeleteGameBinaryRecordV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -201,7 +185,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGameBinaryRecordAdminResponse?> AdminPutGameBinaryRecorMetadataV1Async(AdminPutGameBinaryRecorMetadataV1 input)
+        public async Task<AdminDeleteGameBinaryRecordV1.Response> AdminDeleteGameBinaryRecordV1Async(AdminDeleteGameBinaryRecordV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -209,7 +193,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsUploadBinaryRecordResponse? AdminPostGameBinaryPresignedURLV1(AdminPostGameBinaryPresignedURLV1 input)
+        public AdminPutGameBinaryRecorMetadataV1.Response AdminPutGameBinaryRecorMetadataV1(AdminPutGameBinaryRecorMetadataV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -217,7 +201,23 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUploadBinaryRecordResponse?> AdminPostGameBinaryPresignedURLV1Async(AdminPostGameBinaryPresignedURLV1 input)
+        public async Task<AdminPutGameBinaryRecorMetadataV1.Response> AdminPutGameBinaryRecorMetadataV1Async(AdminPutGameBinaryRecorMetadataV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminPostGameBinaryPresignedURLV1.Response AdminPostGameBinaryPresignedURLV1(AdminPostGameBinaryPresignedURLV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminPostGameBinaryPresignedURLV1.Response> AdminPostGameBinaryPresignedURLV1Async(AdminPostGameBinaryPresignedURLV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

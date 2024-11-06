@@ -32,7 +32,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// Other detail info:
     ///         *  Returns : updated slot
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class PublicUpdateUserNamespaceSlotMetadata : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -73,17 +73,17 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 PublicUpdateUserNamespaceSlotMetadata op = new PublicUpdateUserNamespaceSlotMetadata(this,
-                    namespace_,
-                    slotId,
-                    userId
+                    namespace_,                    
+                    slotId,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PublicUpdateUserNamespaceSlotMetadataBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public Model.SlotInfo? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicUpdateUserNamespaceSlotMetadata.Response Execute(
                 string namespace_,
                 string slotId,
                 string userId
@@ -100,11 +100,11 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.SlotInfo?> ExecuteAsync(
+            public async Task<PublicUpdateUserNamespaceSlotMetadata.Response> ExecuteAsync(
                 string namespace_,
                 string slotId,
                 string userId
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -136,35 +136,47 @@ namespace AccelByte.Sdk.Api.Social.Operation
             PathParams["namespace"] = namespace_;
             PathParams["slotId"] = slotId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = builder.Body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.SlotInfo>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Social::Slot::PublicUpdateUserNamespaceSlotMetadata";
+        }
+
+        #endregion
+
         public PublicUpdateUserNamespaceSlotMetadata(
-            string namespace_,
-            string slotId,
-            string userId,
-            Model.SlotMetadataUpdate body
+            string namespace_,            
+            string slotId,            
+            string userId,            
+            Model.SlotMetadataUpdate body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["slotId"] = slotId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -176,25 +188,31 @@ namespace AccelByte.Sdk.Api.Social.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.SlotInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicUpdateUserNamespaceSlotMetadata.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicUpdateUserNamespaceSlotMetadata.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.SlotInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.SlotInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.SlotInfo>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

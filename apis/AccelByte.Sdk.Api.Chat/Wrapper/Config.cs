@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
         }
         #endregion
 
-        public Model.ModelsConfigList? AdminGetAllConfigV1(AdminGetAllConfigV1 input)
+        public AdminGetAllConfigV1.Response AdminGetAllConfigV1(AdminGetAllConfigV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -132,7 +132,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsConfigList?> AdminGetAllConfigV1Async(AdminGetAllConfigV1 input)
+        public async Task<AdminGetAllConfigV1.Response> AdminGetAllConfigV1Async(AdminGetAllConfigV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -140,7 +140,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.LogconfigConfiguration? AdminGetLogConfig(AdminGetLogConfig input)
+        public AdminGetLogConfig.Response AdminGetLogConfig(AdminGetLogConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.LogconfigConfiguration?> AdminGetLogConfigAsync(AdminGetLogConfig input)
+        public async Task<AdminGetLogConfig.Response> AdminGetLogConfigAsync(AdminGetLogConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -156,7 +156,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.LogconfigConfiguration? AdminPatchUpdateLogConfig(AdminPatchUpdateLogConfig input)
+        public AdminPatchUpdateLogConfig.Response AdminPatchUpdateLogConfig(AdminPatchUpdateLogConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -164,7 +164,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.LogconfigConfiguration?> AdminPatchUpdateLogConfigAsync(AdminPatchUpdateLogConfig input)
+        public async Task<AdminPatchUpdateLogConfig.Response> AdminPatchUpdateLogConfigAsync(AdminPatchUpdateLogConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -172,7 +172,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsConfigResponse? AdminGetConfigV1(AdminGetConfigV1 input)
+        public AdminGetConfigV1.Response AdminGetConfigV1(AdminGetConfigV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -180,7 +180,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsConfigResponse?> AdminGetConfigV1Async(AdminGetConfigV1 input)
+        public async Task<AdminGetConfigV1.Response> AdminGetConfigV1Async(AdminGetConfigV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -188,7 +188,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsConfigResponse? AdminUpdateConfigV1(AdminUpdateConfigV1 input)
+        public AdminUpdateConfigV1.Response AdminUpdateConfigV1(AdminUpdateConfigV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -196,7 +196,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsConfigResponse?> AdminUpdateConfigV1Async(AdminUpdateConfigV1 input)
+        public async Task<AdminUpdateConfigV1.Response> AdminUpdateConfigV1Async(AdminUpdateConfigV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -204,7 +204,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelsConfigExport>? ExportConfig(ExportConfig input)
+        public ExportConfig.Response ExportConfig(ExportConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -212,7 +212,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsConfigExport>?> ExportConfigAsync(ExportConfig input)
+        public async Task<ExportConfig.Response> ExportConfigAsync(ExportConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -220,7 +220,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsImportConfigResponse? ImportConfig(ImportConfig input)
+        public ImportConfig.Response ImportConfig(ImportConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -228,7 +228,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsImportConfigResponse?> ImportConfigAsync(ImportConfig input)
+        public async Task<ImportConfig.Response> ImportConfigAsync(ImportConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -236,7 +236,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPublicConfigResponse? PublicGetConfigV1(PublicGetConfigV1 input)
+        public PublicGetConfigV1.Response PublicGetConfigV1(PublicGetConfigV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -244,7 +244,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPublicConfigResponse?> PublicGetConfigV1Async(PublicGetConfigV1 input)
+        public async Task<PublicGetConfigV1.Response> PublicGetConfigV1Async(PublicGetConfigV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

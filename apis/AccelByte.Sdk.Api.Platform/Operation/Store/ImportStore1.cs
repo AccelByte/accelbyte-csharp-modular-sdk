@@ -79,14 +79,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 ImportStore1 op = new ImportStore1(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<ImportStore1Builder>(this);
                 return op;
             }
 
-            public Model.ImportStoreResult? Execute(
+            public ImportStore1.Response Execute(
                 string namespace_
             )
             {
@@ -99,11 +99,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ImportStoreResult?> ExecuteAsync(
+            public async Task<ImportStore1.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -127,37 +127,51 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
             if (builder.StrictMode != null) QueryParams["strictMode"] = Convert.ToString(builder.StrictMode)!;
-
+            
             if (builder.File is not null) FormParams["file"] = builder.File;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ImportStoreResult>
+        {
+
+            public ErrorEntity? Error400 { get; set; } = null;
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Store::ImportStore1";
+        }
+
+        #endregion
+
         public ImportStore1(
-            string namespace_,
-            string? storeId,
-            bool? strictMode,
-            Stream? file
+            string namespace_,            
+            string? storeId,            
+            bool? strictMode,            
+            Stream? file            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (storeId is not null) QueryParams["storeId"] = storeId;
             if (strictMode != null) QueryParams["strictMode"] = Convert.ToString(strictMode)!;
-
+            
             if (file is not null) FormParams["file"] = file;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -169,25 +183,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "multipart/form-data" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ImportStoreResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public ImportStore1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new ImportStore1.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ImportStoreResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ImportStoreResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ImportStoreResult>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

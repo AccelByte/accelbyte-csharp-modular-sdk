@@ -69,23 +69,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         }
         #endregion
 
-        public void PutGameRecordConcurrentHandlerV1(PutGameRecordConcurrentHandlerV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PutGameRecordConcurrentHandlerV1Async(PutGameRecordConcurrentHandlerV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsPlayerRecordConcurrentUpdateResponse? PutPlayerRecordConcurrentHandlerV1(PutPlayerRecordConcurrentHandlerV1 input)
+        public PutGameRecordConcurrentHandlerV1.Response PutGameRecordConcurrentHandlerV1(PutGameRecordConcurrentHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -93,7 +77,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPlayerRecordConcurrentUpdateResponse?> PutPlayerRecordConcurrentHandlerV1Async(PutPlayerRecordConcurrentHandlerV1 input)
+        public async Task<PutGameRecordConcurrentHandlerV1.Response> PutGameRecordConcurrentHandlerV1Async(PutGameRecordConcurrentHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -101,7 +85,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPlayerRecordConcurrentUpdateResponse? PutPlayerPublicRecordConcurrentHandlerV1(PutPlayerPublicRecordConcurrentHandlerV1 input)
+        public PutPlayerRecordConcurrentHandlerV1.Response PutPlayerRecordConcurrentHandlerV1(PutPlayerRecordConcurrentHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -109,7 +93,23 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPlayerRecordConcurrentUpdateResponse?> PutPlayerPublicRecordConcurrentHandlerV1Async(PutPlayerPublicRecordConcurrentHandlerV1 input)
+        public async Task<PutPlayerRecordConcurrentHandlerV1.Response> PutPlayerRecordConcurrentHandlerV1Async(PutPlayerRecordConcurrentHandlerV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PutPlayerPublicRecordConcurrentHandlerV1.Response PutPlayerPublicRecordConcurrentHandlerV1(PutPlayerPublicRecordConcurrentHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PutPlayerPublicRecordConcurrentHandlerV1.Response> PutPlayerPublicRecordConcurrentHandlerV1Async(PutPlayerPublicRecordConcurrentHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

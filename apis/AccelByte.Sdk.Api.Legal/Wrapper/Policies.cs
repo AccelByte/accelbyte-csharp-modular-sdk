@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
         #endregion
 
-        public List<Model.RetrievePolicyResponse>? RetrievePolicies(RetrievePolicies input)
+        public RetrievePolicies.Response RetrievePolicies(RetrievePolicies input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.RetrievePolicyResponse>?> RetrievePoliciesAsync(RetrievePolicies input)
+        public async Task<RetrievePolicies.Response> RetrievePoliciesAsync(RetrievePolicies input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -129,39 +129,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void UpdatePolicy(UpdatePolicy input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task UpdatePolicyAsync(UpdatePolicy input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void SetDefaultPolicy2(SetDefaultPolicy2 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SetDefaultPolicy2Async(SetDefaultPolicy2 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public List<string>? RetrieveCountryListWithPolicies(RetrieveCountryListWithPolicies input)
+        public UpdatePolicy.Response UpdatePolicy(UpdatePolicy input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -169,7 +137,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<string>?> RetrieveCountryListWithPoliciesAsync(RetrieveCountryListWithPolicies input)
+        public async Task<UpdatePolicy.Response> UpdatePolicyAsync(UpdatePolicy input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -177,7 +145,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.RetrievePolicyPublicResponse>? RetrieveLatestPolicies(RetrieveLatestPolicies input)
+        public SetDefaultPolicy2.Response SetDefaultPolicy2(SetDefaultPolicy2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -185,7 +153,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.RetrievePolicyPublicResponse>?> RetrieveLatestPoliciesAsync(RetrieveLatestPolicies input)
+        public async Task<SetDefaultPolicy2.Response> SetDefaultPolicy2Async(SetDefaultPolicy2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -193,7 +161,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.RetrievePolicyPublicResponse>? RetrieveLatestPoliciesPublic(RetrieveLatestPoliciesPublic input)
+        public RetrieveCountryListWithPolicies.Response RetrieveCountryListWithPolicies(RetrieveCountryListWithPolicies input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -201,7 +169,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.RetrievePolicyPublicResponse>?> RetrieveLatestPoliciesPublicAsync(RetrieveLatestPoliciesPublic input)
+        public async Task<RetrieveCountryListWithPolicies.Response> RetrieveCountryListWithPoliciesAsync(RetrieveCountryListWithPolicies input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -209,7 +177,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.RetrievePolicyPublicResponse>? RetrieveLatestPoliciesByNamespaceAndCountryPublic(RetrieveLatestPoliciesByNamespaceAndCountryPublic input)
+        public RetrieveLatestPolicies.Response RetrieveLatestPolicies(RetrieveLatestPolicies input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -217,7 +185,39 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.RetrievePolicyPublicResponse>?> RetrieveLatestPoliciesByNamespaceAndCountryPublicAsync(RetrieveLatestPoliciesByNamespaceAndCountryPublic input)
+        public async Task<RetrieveLatestPolicies.Response> RetrieveLatestPoliciesAsync(RetrieveLatestPolicies input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public RetrieveLatestPoliciesPublic.Response RetrieveLatestPoliciesPublic(RetrieveLatestPoliciesPublic input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<RetrieveLatestPoliciesPublic.Response> RetrieveLatestPoliciesPublicAsync(RetrieveLatestPoliciesPublic input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public RetrieveLatestPoliciesByNamespaceAndCountryPublic.Response RetrieveLatestPoliciesByNamespaceAndCountryPublic(RetrieveLatestPoliciesByNamespaceAndCountryPublic input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<RetrieveLatestPoliciesByNamespaceAndCountryPublic.Response> RetrieveLatestPoliciesByNamespaceAndCountryPublicAsync(RetrieveLatestPoliciesByNamespaceAndCountryPublic input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

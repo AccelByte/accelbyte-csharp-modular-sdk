@@ -57,16 +57,16 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminSendChat op = new AdminSendChat(this,
-                    body,
-                    namespace_,
-                    topic
+                    body,                    
+                    namespace_,                    
+                    topic                    
                 );
 
                 op.SetBaseFields<AdminSendChatBuilder>(this);
                 return op;
             }
 
-            public List<Model.ModelsChatMessageResponse>? Execute(
+            public AdminSendChat.Response Execute(
                 ApiSendChatParams body,
                 string namespace_,
                 string topic
@@ -83,11 +83,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.ModelsChatMessageResponse>?> ExecuteAsync(
+            public async Task<AdminSendChat.Response> ExecuteAsync(
                 ApiSendChatParams body,
                 string namespace_,
                 string topic
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -118,33 +118,51 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.ModelsChatMessageResponse>>
+        {
+
+            public RestapiErrorResponseBody? Error400 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error401 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error403 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Chat::Topic::AdminSendChat";
+        }
+
+        #endregion
+
         public AdminSendChat(
-            string namespace_,
-            string topic,
-            Model.ApiSendChatParams body
+            string namespace_,            
+            string topic,            
+            Model.ApiSendChatParams body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,25 +174,46 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.ModelsChatMessageResponse>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminSendChat.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminSendChat.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.ModelsChatMessageResponse>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelsChatMessageResponse>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<List<Model.ModelsChatMessageResponse>>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

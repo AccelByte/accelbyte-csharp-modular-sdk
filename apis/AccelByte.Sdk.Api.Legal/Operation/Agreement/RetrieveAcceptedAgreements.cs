@@ -55,14 +55,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 RetrieveAcceptedAgreements op = new RetrieveAcceptedAgreements(this,
-                    userId
+                    userId                    
                 );
 
                 op.SetBaseFields<RetrieveAcceptedAgreementsBuilder>(this);
                 return op;
             }
 
-            public List<Model.RetrieveAcceptedAgreementResponse>? Execute(
+            public RetrieveAcceptedAgreements.Response Execute(
                 string userId
             )
             {
@@ -75,11 +75,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.RetrieveAcceptedAgreementResponse>?> ExecuteAsync(
+            public async Task<RetrieveAcceptedAgreements.Response> ExecuteAsync(
                 string userId
             )
             {
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -103,28 +103,38 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         )
         {
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.RetrieveAcceptedAgreementResponse>>
+        {
+
+
+            protected override string GetFullOperationId() => "Legal::Agreement::RetrieveAcceptedAgreements";
+        }
+
+        #endregion
+
         public RetrieveAcceptedAgreements(
-            string userId
+            string userId            
         )
         {
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -133,28 +143,29 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.RetrieveAcceptedAgreementResponse>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public RetrieveAcceptedAgreements.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new RetrieveAcceptedAgreements.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.RetrieveAcceptedAgreementResponse>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<Model.RetrieveAcceptedAgreementResponse>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveAcceptedAgreementResponse>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

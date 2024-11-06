@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
         }
         #endregion
 
-        public Model.RestapiSubmitReportResponse? SubmitReport(SubmitReport input)
+        public SubmitReport.Response SubmitReport(SubmitReport input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiSubmitReportResponse?> SubmitReportAsync(SubmitReport input)
+        public async Task<SubmitReport.Response> SubmitReportAsync(SubmitReport input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

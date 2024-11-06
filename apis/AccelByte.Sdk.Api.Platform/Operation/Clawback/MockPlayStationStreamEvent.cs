@@ -63,14 +63,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 MockPlayStationStreamEvent op = new MockPlayStationStreamEvent(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<MockPlayStationStreamEventBuilder>(this);
                 return op;
             }
 
-            public Model.ClawbackInfo? Execute(
+            public MockPlayStationStreamEvent.Response Execute(
                 string namespace_
             )
             {
@@ -83,11 +83,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ClawbackInfo?> ExecuteAsync(
+            public async Task<MockPlayStationStreamEvent.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -100,12 +100,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
 
-            public Model.ClawbackInfo<T1, T2>? Execute<T1, T2>(
+            public MockPlayStationStreamEvent.Response<T1, T2> Execute<T1, T2>(
                 string namespace_
             )
             {
@@ -118,11 +118,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1, T2>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ClawbackInfo<T1, T2>?> ExecuteAsync<T1, T2>(
+            public async Task<MockPlayStationStreamEvent.Response<T1, T2>> ExecuteAsync<T1, T2>(
                 string namespace_
             )
             {
@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1, T2>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -146,31 +146,46 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = builder.Body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ClawbackInfo>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Clawback::MockPlayStationStreamEvent";
+        }
+
+        public class Response<T1, T2> : ApiResponse<Model.ClawbackInfo<T1, T2>>
+        {
+
+            protected override string GetFullOperationId() => "Platform::Clawback::MockPlayStationStreamEvent";
+        }
+        #endregion
+
         public MockPlayStationStreamEvent(
-            string namespace_,
-            Model.StreamEvent body
+            string namespace_,            
+            Model.StreamEvent body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -182,44 +197,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ClawbackInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public MockPlayStationStreamEvent.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new MockPlayStationStreamEvent.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ClawbackInfo>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.ClawbackInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ClawbackInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
 
-        public Model.ClawbackInfo<T1, T2>? ParseResponse<T1, T2>(HttpStatusCode code, string contentType, Stream payload)
+        public MockPlayStationStreamEvent.Response<T1, T2> ParseResponse<T1, T2>(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new MockPlayStationStreamEvent.Response<T1, T2>()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
-            }
-            else if (code == (HttpStatusCode)201)
+                response.IsSuccess = true;
+            }            
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ClawbackInfo<T1, T2>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ClawbackInfo<T1, T2>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.ClawbackInfo<T1, T2>>(payload, ResponseJsonOptions);
-            }
-
-            var payloadString = payload.ReadToString();
-            throw new HttpResponseException(code, payloadString);
+            
+            return response;
         }
     }
 

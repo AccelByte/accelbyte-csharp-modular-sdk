@@ -57,14 +57,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 CreateItemTypeConfig op = new CreateItemTypeConfig(this,
-                    body
+                    body                    
                 );
 
                 op.SetBaseFields<CreateItemTypeConfigBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public CreateItemTypeConfig.Response Execute(
                 ItemTypeConfigCreate body
             )
             {
@@ -76,12 +76,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<CreateItemTypeConfig.Response> ExecuteAsync(
                 ItemTypeConfigCreate body
             )
             {
@@ -93,8 +93,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -104,29 +104,45 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             ItemTypeConfigCreate body
         )
         {
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public CreateItemTypeConfig(
-            Model.ItemTypeConfigCreate body
-        )
+        #region Response Part        
+        public class Response : ApiResponse
         {
 
+            public ErrorEntity? Error400 { get; set; } = null;
+
+            public ErrorEntity? Error409 { get; set; } = null;
+
+            public ValidationErrorEntity? Error422 { get; set; } = null;
 
 
+            protected override string GetFullOperationId() => "Platform::Item::CreateItemTypeConfig";
+        }
 
+        #endregion
 
+        public CreateItemTypeConfig(
+            Model.ItemTypeConfigCreate body            
+        )
+        {
+            
+            
+
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -138,17 +154,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public CreateItemTypeConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)201)
+            var response = new CreateItemTypeConfig.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)409)
+            
+            {
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)422)
+            
+            {
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

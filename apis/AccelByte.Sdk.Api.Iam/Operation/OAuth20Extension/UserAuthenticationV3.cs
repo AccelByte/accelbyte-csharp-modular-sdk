@@ -91,16 +91,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 UserAuthenticationV3 op = new UserAuthenticationV3(this,
-                    password,
-                    requestId,
-                    userName
+                    password,                    
+                    requestId,                    
+                    userName                    
                 );
 
                 op.SetBaseFields<UserAuthenticationV3Builder>(this);
                 return op;
             }
 
-            public string Execute(
+            public UserAuthenticationV3.Response Execute(
                 string password,
                 string requestId,
                 string userName
@@ -117,11 +117,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<string> ExecuteAsync(
+            public async Task<UserAuthenticationV3.Response> ExecuteAsync(
                 string password,
                 string requestId,
                 string userName
@@ -138,7 +138,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -150,8 +150,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string userName
         )
         {
-
-
+            
+            
             if (builder.ClientId is not null) FormParams["client_id"] = builder.ClientId;
             if (builder.ExtendExp != null) FormParams["extend_exp"] = Convert.ToString(builder.ExtendExp)!;
             if (builder.RedirectUri is not null) FormParams["redirect_uri"] = builder.RedirectUri;
@@ -159,26 +159,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (requestId is not null) FormParams["request_id"] = requestId;
             if (userName is not null) FormParams["user_name"] = userName;
 
-
-
-
+            
+            
+            
             LocationQuery = "code";
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
         #endregion
 
-        public UserAuthenticationV3(
-            string? clientId,
-            bool? extendExp,
-            string? redirectUri,
-            string password,
-            string requestId,
-            string userName
-        )
+        #region Response Part        
+        public class Response : ApiResponse<string>
         {
 
+            public string Error302 { get; set; } = "";
 
+
+            protected override string GetFullOperationId() => "Iam::OAuth20Extension::UserAuthenticationV3";
+        }
+
+        #endregion
+
+        public UserAuthenticationV3(
+            string? clientId,            
+            bool? extendExp,            
+            string? redirectUri,            
+            string password,            
+            string requestId,            
+            string userName            
+        )
+        {
+            
+            
             if (clientId is not null) FormParams["client_id"] = clientId;
             if (extendExp != null) FormParams["extend_exp"] = Convert.ToString(extendExp)!;
             if (redirectUri is not null) FormParams["redirect_uri"] = redirectUri;
@@ -186,9 +198,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (requestId is not null) FormParams["request_id"] = requestId;
             if (userName is not null) FormParams["user_name"] = userName;
 
-
-
-
+            
+            
+            
             LocationQuery = "code";
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
@@ -201,17 +213,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public string ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public UserAuthenticationV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            var payloadString = payload.ReadToString();
+            var response = new UserAuthenticationV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
 
             if (code == (HttpStatusCode)302)
             {
-                return payloadString;
+                response.Data = payload.ReadToString();
+                response.IsSuccess = true;
             }
 
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

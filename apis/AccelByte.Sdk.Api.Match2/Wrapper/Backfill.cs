@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
         }
         #endregion
 
-        public Model.ApiBackfillCreateResponse? CreateBackfill(CreateBackfill input)
+        public CreateBackfill.Response CreateBackfill(CreateBackfill input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiBackfillCreateResponse?> CreateBackfillAsync(CreateBackfill input)
+        public async Task<CreateBackfill.Response> CreateBackfillAsync(CreateBackfill input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiBackfillProposalResponse? GetBackfillProposal(GetBackfillProposal input)
+        public GetBackfillProposal.Response GetBackfillProposal(GetBackfillProposal input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiBackfillProposalResponse?> GetBackfillProposalAsync(GetBackfillProposal input)
+        public async Task<GetBackfillProposal.Response> GetBackfillProposalAsync(GetBackfillProposal input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiBackfillGetResponse? GetBackfill(GetBackfill input)
+        public GetBackfill.Response GetBackfill(GetBackfill input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -142,7 +142,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiBackfillGetResponse?> GetBackfillAsync(GetBackfill input)
+        public async Task<GetBackfill.Response> GetBackfillAsync(GetBackfill input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -150,23 +150,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteBackfill(DeleteBackfill input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteBackfillAsync(DeleteBackfill input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsGameSession? AcceptBackfill(AcceptBackfill input)
+        public DeleteBackfill.Response DeleteBackfill(DeleteBackfill input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -174,7 +158,23 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGameSession?> AcceptBackfillAsync(AcceptBackfill input)
+        public async Task<DeleteBackfill.Response> DeleteBackfillAsync(DeleteBackfill input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AcceptBackfill.Response AcceptBackfill(AcceptBackfill input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AcceptBackfill.Response> AcceptBackfillAsync(AcceptBackfill input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -183,7 +183,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsGameSession<T1>? AcceptBackfill<T1>(AcceptBackfill input)
+        public AcceptBackfill.Response<T1> AcceptBackfill<T1>(AcceptBackfill input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -191,7 +191,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGameSession<T1>?> AcceptBackfillAsync<T1>(AcceptBackfill input)
+        public async Task<AcceptBackfill.Response<T1>> AcceptBackfillAsync<T1>(AcceptBackfill input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -199,18 +199,18 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void RejectBackfill(RejectBackfill input)
+        public RejectBackfill.Response RejectBackfill(RejectBackfill input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task RejectBackfillAsync(RejectBackfill input)
+        public async Task<RejectBackfill.Response> RejectBackfillAsync(RejectBackfill input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

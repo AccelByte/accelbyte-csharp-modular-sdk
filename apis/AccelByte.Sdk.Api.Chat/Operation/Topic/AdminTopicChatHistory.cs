@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
     ///
     /// Get chat history in a namespace.
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class AdminTopicChatHistory : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -129,16 +129,16 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminTopicChatHistory op = new AdminTopicChatHistory(this,
-                    namespace_,
-                    topic
+                    namespace_,                    
+                    topic                    
                 );
 
                 op.SetBaseFields<AdminTopicChatHistoryBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public Model.ModelsChatMessageWithPaginationResponse? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminTopicChatHistory.Response Execute(
                 string namespace_,
                 string topic
             )
@@ -153,11 +153,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsChatMessageWithPaginationResponse?> ExecuteAsync(
+            public async Task<AdminTopicChatHistory.Response> ExecuteAsync(
                 string namespace_,
                 string topic
             )
@@ -172,7 +172,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -185,7 +185,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
-
+            
             if (builder.EndCreatedAt != null) QueryParams["endCreatedAt"] = Convert.ToString(builder.EndCreatedAt)!;
             if (builder.Keyword is not null) QueryParams["keyword"] = builder.Keyword;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
@@ -195,33 +195,51 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             if (builder.ShardId is not null) QueryParams["shardId"] = builder.ShardId;
             if (builder.StartCreatedAt != null) QueryParams["startCreatedAt"] = Convert.ToString(builder.StartCreatedAt)!;
             if (builder.Unfiltered != null) QueryParams["unfiltered"] = Convert.ToString(builder.Unfiltered)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsChatMessageWithPaginationResponse>
+        {
+
+            public RestapiErrorResponseBody? Error400 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error401 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error403 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Chat::Topic::AdminTopicChatHistory";
+        }
+
+        #endregion
+
         public AdminTopicChatHistory(
-            string namespace_,
-            string topic,
-            long? endCreatedAt,
-            string? keyword,
-            long? limit,
-            long? offset,
-            string? order,
-            string? senderUserId,
-            string? shardId,
-            long? startCreatedAt,
-            bool? unfiltered
+            string namespace_,            
+            string topic,            
+            long? endCreatedAt,            
+            string? keyword,            
+            long? limit,            
+            long? offset,            
+            string? order,            
+            string? senderUserId,            
+            string? shardId,            
+            long? startCreatedAt,            
+            bool? unfiltered            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
-
+            
             if (endCreatedAt != null) QueryParams["endCreatedAt"] = Convert.ToString(endCreatedAt)!;
             if (keyword is not null) QueryParams["keyword"] = keyword;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
@@ -231,11 +249,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             if (shardId is not null) QueryParams["shardId"] = shardId;
             if (startCreatedAt != null) QueryParams["startCreatedAt"] = Convert.ToString(startCreatedAt)!;
             if (unfiltered != null) QueryParams["unfiltered"] = Convert.ToString(unfiltered)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -247,25 +265,46 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsChatMessageWithPaginationResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminTopicChatHistory.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminTopicChatHistory.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsChatMessageWithPaginationResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsChatMessageWithPaginationResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsChatMessageWithPaginationResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

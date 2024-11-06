@@ -179,7 +179,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         }
         #endregion
 
-        public Model.ModelsBulkGetPlayerRecordResponse? BulkGetPlayerPublicRecordHandlerV1(BulkGetPlayerPublicRecordHandlerV1 input)
+        public BulkGetPlayerPublicRecordHandlerV1.Response BulkGetPlayerPublicRecordHandlerV1(BulkGetPlayerPublicRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -187,7 +187,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsBulkGetPlayerRecordResponse?> BulkGetPlayerPublicRecordHandlerV1Async(BulkGetPlayerPublicRecordHandlerV1 input)
+        public async Task<BulkGetPlayerPublicRecordHandlerV1.Response> BulkGetPlayerPublicRecordHandlerV1Async(BulkGetPlayerPublicRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -195,7 +195,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsListPlayerRecordKeysResponse? RetrievePlayerRecords(RetrievePlayerRecords input)
+        public RetrievePlayerRecords.Response RetrievePlayerRecords(RetrievePlayerRecords input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -203,7 +203,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListPlayerRecordKeysResponse?> RetrievePlayerRecordsAsync(RetrievePlayerRecords input)
+        public async Task<RetrievePlayerRecords.Response> RetrievePlayerRecordsAsync(RetrievePlayerRecords input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -211,7 +211,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsBulkGetPlayerRecordResponse? GetPlayerRecordsBulkHandlerV1(GetPlayerRecordsBulkHandlerV1 input)
+        public GetPlayerRecordsBulkHandlerV1.Response GetPlayerRecordsBulkHandlerV1(GetPlayerRecordsBulkHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -219,7 +219,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsBulkGetPlayerRecordResponse?> GetPlayerRecordsBulkHandlerV1Async(GetPlayerRecordsBulkHandlerV1 input)
+        public async Task<GetPlayerRecordsBulkHandlerV1.Response> GetPlayerRecordsBulkHandlerV1Async(GetPlayerRecordsBulkHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -227,23 +227,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicDeletePlayerPublicRecordHandlerV1(PublicDeletePlayerPublicRecordHandlerV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicDeletePlayerPublicRecordHandlerV1Async(PublicDeletePlayerPublicRecordHandlerV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsListPlayerRecordKeysResponse? GetOtherPlayerPublicRecordKeyHandlerV1(GetOtherPlayerPublicRecordKeyHandlerV1 input)
+        public PublicDeletePlayerPublicRecordHandlerV1.Response PublicDeletePlayerPublicRecordHandlerV1(PublicDeletePlayerPublicRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -251,7 +235,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListPlayerRecordKeysResponse?> GetOtherPlayerPublicRecordKeyHandlerV1Async(GetOtherPlayerPublicRecordKeyHandlerV1 input)
+        public async Task<PublicDeletePlayerPublicRecordHandlerV1.Response> PublicDeletePlayerPublicRecordHandlerV1Async(PublicDeletePlayerPublicRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -259,7 +243,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsBulkGetPlayerRecordResponse? GetOtherPlayerPublicRecordHandlerV1(GetOtherPlayerPublicRecordHandlerV1 input)
+        public GetOtherPlayerPublicRecordKeyHandlerV1.Response GetOtherPlayerPublicRecordKeyHandlerV1(GetOtherPlayerPublicRecordKeyHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -267,7 +251,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsBulkGetPlayerRecordResponse?> GetOtherPlayerPublicRecordHandlerV1Async(GetOtherPlayerPublicRecordHandlerV1 input)
+        public async Task<GetOtherPlayerPublicRecordKeyHandlerV1.Response> GetOtherPlayerPublicRecordKeyHandlerV1Async(GetOtherPlayerPublicRecordKeyHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -275,7 +259,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPlayerRecordResponse? GetPlayerRecordHandlerV1(GetPlayerRecordHandlerV1 input)
+        public GetOtherPlayerPublicRecordHandlerV1.Response GetOtherPlayerPublicRecordHandlerV1(GetOtherPlayerPublicRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -283,7 +267,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPlayerRecordResponse?> GetPlayerRecordHandlerV1Async(GetPlayerRecordHandlerV1 input)
+        public async Task<GetOtherPlayerPublicRecordHandlerV1.Response> GetOtherPlayerPublicRecordHandlerV1Async(GetOtherPlayerPublicRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -291,24 +275,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.ModelsPlayerRecordResponse<T1>? GetPlayerRecordHandlerV1<T1>(GetPlayerRecordHandlerV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsPlayerRecordResponse<T1>?> GetPlayerRecordHandlerV1Async<T1>(GetPlayerRecordHandlerV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsPlayerRecordResponse? PutPlayerRecordHandlerV1(PutPlayerRecordHandlerV1 input)
+        public GetPlayerRecordHandlerV1.Response GetPlayerRecordHandlerV1(GetPlayerRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -316,7 +283,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPlayerRecordResponse?> PutPlayerRecordHandlerV1Async(PutPlayerRecordHandlerV1 input)
+        public async Task<GetPlayerRecordHandlerV1.Response> GetPlayerRecordHandlerV1Async(GetPlayerRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -325,7 +292,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsPlayerRecordResponse<T1>? PutPlayerRecordHandlerV1<T1>(PutPlayerRecordHandlerV1 input)
+        public GetPlayerRecordHandlerV1.Response<T1> GetPlayerRecordHandlerV1<T1>(GetPlayerRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -333,7 +300,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPlayerRecordResponse<T1>?> PutPlayerRecordHandlerV1Async<T1>(PutPlayerRecordHandlerV1 input)
+        public async Task<GetPlayerRecordHandlerV1.Response<T1>> GetPlayerRecordHandlerV1Async<T1>(GetPlayerRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -341,7 +308,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPlayerRecordResponse? PostPlayerRecordHandlerV1(PostPlayerRecordHandlerV1 input)
+        public PutPlayerRecordHandlerV1.Response PutPlayerRecordHandlerV1(PutPlayerRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -349,56 +316,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPlayerRecordResponse?> PostPlayerRecordHandlerV1Async(PostPlayerRecordHandlerV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-
-        public Model.ModelsPlayerRecordResponse<T1>? PostPlayerRecordHandlerV1<T1>(PostPlayerRecordHandlerV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsPlayerRecordResponse<T1>?> PostPlayerRecordHandlerV1Async<T1>(PostPlayerRecordHandlerV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void DeletePlayerRecordHandlerV1(DeletePlayerRecordHandlerV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeletePlayerRecordHandlerV1Async(DeletePlayerRecordHandlerV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsPlayerRecordResponse? GetPlayerPublicRecordHandlerV1(GetPlayerPublicRecordHandlerV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsPlayerRecordResponse?> GetPlayerPublicRecordHandlerV1Async(GetPlayerPublicRecordHandlerV1 input)
+        public async Task<PutPlayerRecordHandlerV1.Response> PutPlayerRecordHandlerV1Async(PutPlayerRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -407,7 +325,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsPlayerRecordResponse<T1>? GetPlayerPublicRecordHandlerV1<T1>(GetPlayerPublicRecordHandlerV1 input)
+        public PutPlayerRecordHandlerV1.Response<T1> PutPlayerRecordHandlerV1<T1>(PutPlayerRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -415,7 +333,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPlayerRecordResponse<T1>?> GetPlayerPublicRecordHandlerV1Async<T1>(GetPlayerPublicRecordHandlerV1 input)
+        public async Task<PutPlayerRecordHandlerV1.Response<T1>> PutPlayerRecordHandlerV1Async<T1>(PutPlayerRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -423,7 +341,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPlayerRecordResponse? PutPlayerPublicRecordHandlerV1(PutPlayerPublicRecordHandlerV1 input)
+        public PostPlayerRecordHandlerV1.Response PostPlayerRecordHandlerV1(PostPlayerRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -431,40 +349,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPlayerRecordResponse?> PutPlayerPublicRecordHandlerV1Async(PutPlayerPublicRecordHandlerV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-
-        public Model.ModelsPlayerRecordResponse<T1>? PutPlayerPublicRecordHandlerV1<T1>(PutPlayerPublicRecordHandlerV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsPlayerRecordResponse<T1>?> PutPlayerPublicRecordHandlerV1Async<T1>(PutPlayerPublicRecordHandlerV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsPlayerRecordResponse? PostPlayerPublicRecordHandlerV1(PostPlayerPublicRecordHandlerV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsPlayerRecordResponse?> PostPlayerPublicRecordHandlerV1Async(PostPlayerPublicRecordHandlerV1 input)
+        public async Task<PostPlayerRecordHandlerV1.Response> PostPlayerRecordHandlerV1Async(PostPlayerRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -473,7 +358,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsPlayerRecordResponse<T1>? PostPlayerPublicRecordHandlerV1<T1>(PostPlayerPublicRecordHandlerV1 input)
+        public PostPlayerRecordHandlerV1.Response<T1> PostPlayerRecordHandlerV1<T1>(PostPlayerRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -481,7 +366,122 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPlayerRecordResponse<T1>?> PostPlayerPublicRecordHandlerV1Async<T1>(PostPlayerPublicRecordHandlerV1 input)
+        public async Task<PostPlayerRecordHandlerV1.Response<T1>> PostPlayerRecordHandlerV1Async<T1>(PostPlayerRecordHandlerV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeletePlayerRecordHandlerV1.Response DeletePlayerRecordHandlerV1(DeletePlayerRecordHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeletePlayerRecordHandlerV1.Response> DeletePlayerRecordHandlerV1Async(DeletePlayerRecordHandlerV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetPlayerPublicRecordHandlerV1.Response GetPlayerPublicRecordHandlerV1(GetPlayerPublicRecordHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetPlayerPublicRecordHandlerV1.Response> GetPlayerPublicRecordHandlerV1Async(GetPlayerPublicRecordHandlerV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public GetPlayerPublicRecordHandlerV1.Response<T1> GetPlayerPublicRecordHandlerV1<T1>(GetPlayerPublicRecordHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetPlayerPublicRecordHandlerV1.Response<T1>> GetPlayerPublicRecordHandlerV1Async<T1>(GetPlayerPublicRecordHandlerV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PutPlayerPublicRecordHandlerV1.Response PutPlayerPublicRecordHandlerV1(PutPlayerPublicRecordHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PutPlayerPublicRecordHandlerV1.Response> PutPlayerPublicRecordHandlerV1Async(PutPlayerPublicRecordHandlerV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public PutPlayerPublicRecordHandlerV1.Response<T1> PutPlayerPublicRecordHandlerV1<T1>(PutPlayerPublicRecordHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PutPlayerPublicRecordHandlerV1.Response<T1>> PutPlayerPublicRecordHandlerV1Async<T1>(PutPlayerPublicRecordHandlerV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PostPlayerPublicRecordHandlerV1.Response PostPlayerPublicRecordHandlerV1(PostPlayerPublicRecordHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PostPlayerPublicRecordHandlerV1.Response> PostPlayerPublicRecordHandlerV1Async(PostPlayerPublicRecordHandlerV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public PostPlayerPublicRecordHandlerV1.Response<T1> PostPlayerPublicRecordHandlerV1<T1>(PostPlayerPublicRecordHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PostPlayerPublicRecordHandlerV1.Response<T1>> PostPlayerPublicRecordHandlerV1Async<T1>(PostPlayerPublicRecordHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(

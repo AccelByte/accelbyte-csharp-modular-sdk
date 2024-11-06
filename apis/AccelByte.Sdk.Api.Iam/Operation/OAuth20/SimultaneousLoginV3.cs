@@ -97,15 +97,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 SimultaneousLoginV3 op = new SimultaneousLoginV3(this,
-                    nativePlatform,
-                    nativePlatformTicket
+                    nativePlatform,                    
+                    nativePlatformTicket                    
                 );
 
                 op.SetBaseFields<SimultaneousLoginV3Builder>(this);
                 return op;
             }
 
-            public Model.OauthmodelTokenResponseV3? Execute(
+            public SimultaneousLoginV3.Response Execute(
                 string nativePlatform,
                 string nativePlatformTicket
             )
@@ -120,11 +120,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OauthmodelTokenResponseV3?> ExecuteAsync(
+            public async Task<SimultaneousLoginV3.Response> ExecuteAsync(
                 string nativePlatform,
                 string nativePlatformTicket
             )
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -150,38 +150,56 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string nativePlatformTicket
         )
         {
-
-
+            
+            
             if (builder.SimultaneousPlatform is not null) FormParams["simultaneousPlatform"] = builder.SimultaneousPlatform;
             if (builder.SimultaneousTicket is not null) FormParams["simultaneousTicket"] = builder.SimultaneousTicket;
             if (nativePlatform is not null) FormParams["nativePlatform"] = nativePlatform.Value;
             if (nativePlatformTicket is not null) FormParams["nativePlatformTicket"] = nativePlatformTicket;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public SimultaneousLoginV3(
-            string? simultaneousPlatform,
-            string? simultaneousTicket,
-            SimultaneousLoginV3NativePlatform nativePlatform,
-            string nativePlatformTicket
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.OauthmodelTokenResponseV3>
         {
 
+            public RestErrorResponse? Error400 { get; set; } = null;
 
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public RestErrorResponse? Error409 { get; set; } = null;
+
+            public RestErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::OAuth20::SimultaneousLoginV3";
+        }
+
+        #endregion
+
+        public SimultaneousLoginV3(
+            string? simultaneousPlatform,            
+            string? simultaneousTicket,            
+            SimultaneousLoginV3NativePlatform nativePlatform,            
+            string nativePlatformTicket            
+        )
+        {
+            
+            
             if (simultaneousPlatform is not null) FormParams["simultaneousPlatform"] = simultaneousPlatform;
             if (simultaneousTicket is not null) FormParams["simultaneousTicket"] = simultaneousTicket;
             if (nativePlatform is not null) FormParams["nativePlatform"] = nativePlatform.Value;
             if (nativePlatformTicket is not null) FormParams["nativePlatformTicket"] = nativePlatformTicket;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -193,25 +211,46 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OauthmodelTokenResponseV3? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public SimultaneousLoginV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new SimultaneousLoginV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)409)
+            {
+                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

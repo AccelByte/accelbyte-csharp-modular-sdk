@@ -58,16 +58,16 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 AdminReconcileMaxActiveSession op = new AdminReconcileMaxActiveSession(this,
-                    body,
-                    name,
-                    namespace_
+                    body,                    
+                    name,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminReconcileMaxActiveSessionBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public AdminReconcileMaxActiveSession.Response Execute(
                 ModelsRequestReconcileMaxActiveSession body,
                 string name,
                 string namespace_
@@ -83,12 +83,12 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<AdminReconcileMaxActiveSession.Response> ExecuteAsync(
                 ModelsRequestReconcileMaxActiveSession body,
                 string name,
                 string namespace_
@@ -104,8 +104,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -119,33 +119,49 @@ namespace AccelByte.Sdk.Api.Session.Operation
         {
             PathParams["name"] = name;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Session::MaxActive::AdminReconcileMaxActiveSession";
+        }
+
+        #endregion
+
         public AdminReconcileMaxActiveSession(
-            string name,
-            string namespace_,
-            Model.ModelsRequestReconcileMaxActiveSession body
+            string name,            
+            string namespace_,            
+            Model.ModelsRequestReconcileMaxActiveSession body            
         )
         {
             PathParams["name"] = name;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -157,17 +173,36 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminReconcileMaxActiveSession.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)200)
+            var response = new AdminReconcileMaxActiveSession.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

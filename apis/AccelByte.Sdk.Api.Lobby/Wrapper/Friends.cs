@@ -245,7 +245,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         }
         #endregion
 
-        public List<Model.ModelGetUserFriendsResponse>? GetUserFriendsUpdated(GetUserFriendsUpdated input)
+        public GetUserFriendsUpdated.Response GetUserFriendsUpdated(GetUserFriendsUpdated input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -253,7 +253,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelGetUserFriendsResponse>?> GetUserFriendsUpdatedAsync(GetUserFriendsUpdated input)
+        public async Task<GetUserFriendsUpdated.Response> GetUserFriendsUpdatedAsync(GetUserFriendsUpdated input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -261,7 +261,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelGetUserIncomingFriendsResponse>? GetUserIncomingFriends(GetUserIncomingFriends input)
+        public GetUserIncomingFriends.Response GetUserIncomingFriends(GetUserIncomingFriends input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -269,7 +269,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelGetUserIncomingFriendsResponse>?> GetUserIncomingFriendsAsync(GetUserIncomingFriends input)
+        public async Task<GetUserIncomingFriends.Response> GetUserIncomingFriendsAsync(GetUserIncomingFriends input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -277,7 +277,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelLoadIncomingFriendsWithTimeResponse>? GetUserIncomingFriendsWithTime(GetUserIncomingFriendsWithTime input)
+        public GetUserIncomingFriendsWithTime.Response GetUserIncomingFriendsWithTime(GetUserIncomingFriendsWithTime input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -285,7 +285,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelLoadIncomingFriendsWithTimeResponse>?> GetUserIncomingFriendsWithTimeAsync(GetUserIncomingFriendsWithTime input)
+        public async Task<GetUserIncomingFriendsWithTime.Response> GetUserIncomingFriendsWithTimeAsync(GetUserIncomingFriendsWithTime input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -293,7 +293,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelGetUserOutgoingFriendsResponse>? GetUserOutgoingFriends(GetUserOutgoingFriends input)
+        public GetUserOutgoingFriends.Response GetUserOutgoingFriends(GetUserOutgoingFriends input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -301,7 +301,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelGetUserOutgoingFriendsResponse>?> GetUserOutgoingFriendsAsync(GetUserOutgoingFriends input)
+        public async Task<GetUserOutgoingFriends.Response> GetUserOutgoingFriendsAsync(GetUserOutgoingFriends input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -309,7 +309,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelLoadOutgoingFriendsWithTimeResponse>? GetUserOutgoingFriendsWithTime(GetUserOutgoingFriendsWithTime input)
+        public GetUserOutgoingFriendsWithTime.Response GetUserOutgoingFriendsWithTime(GetUserOutgoingFriendsWithTime input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -317,7 +317,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelLoadOutgoingFriendsWithTimeResponse>?> GetUserOutgoingFriendsWithTimeAsync(GetUserOutgoingFriendsWithTime input)
+        public async Task<GetUserOutgoingFriendsWithTime.Response> GetUserOutgoingFriendsWithTimeAsync(GetUserOutgoingFriendsWithTime input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -325,7 +325,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelListBulkUserPlatformsResponse? GetUserFriendsWithPlatform(GetUserFriendsWithPlatform input)
+        public GetUserFriendsWithPlatform.Response GetUserFriendsWithPlatform(GetUserFriendsWithPlatform input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -333,7 +333,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelListBulkUserPlatformsResponse?> GetUserFriendsWithPlatformAsync(GetUserFriendsWithPlatform input)
+        public async Task<GetUserFriendsWithPlatform.Response> GetUserFriendsWithPlatformAsync(GetUserFriendsWithPlatform input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -341,71 +341,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void UserRequestFriend(UserRequestFriend input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task UserRequestFriendAsync(UserRequestFriend input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void UserAcceptFriendRequest(UserAcceptFriendRequest input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task UserAcceptFriendRequestAsync(UserAcceptFriendRequest input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void UserCancelFriendRequest(UserCancelFriendRequest input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task UserCancelFriendRequestAsync(UserCancelFriendRequest input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void UserRejectFriendRequest(UserRejectFriendRequest input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task UserRejectFriendRequestAsync(UserRejectFriendRequest input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelUserGetFriendshipStatusResponse? UserGetFriendshipStatus(UserGetFriendshipStatus input)
+        public UserRequestFriend.Response UserRequestFriend(UserRequestFriend input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -413,7 +349,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserGetFriendshipStatusResponse?> UserGetFriendshipStatusAsync(UserGetFriendshipStatus input)
+        public async Task<UserRequestFriend.Response> UserRequestFriendAsync(UserRequestFriend input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -421,39 +357,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void UserUnfriendRequest(UserUnfriendRequest input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task UserUnfriendRequestAsync(UserUnfriendRequest input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AddFriendsWithoutConfirmation(AddFriendsWithoutConfirmation input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AddFriendsWithoutConfirmationAsync(AddFriendsWithoutConfirmation input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelBulkFriendsResponse? BulkDeleteFriends(BulkDeleteFriends input)
+        public UserAcceptFriendRequest.Response UserAcceptFriendRequest(UserAcceptFriendRequest input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -461,7 +365,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelBulkFriendsResponse?> BulkDeleteFriendsAsync(BulkDeleteFriends input)
+        public async Task<UserAcceptFriendRequest.Response> UserAcceptFriendRequestAsync(UserAcceptFriendRequest input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -469,7 +373,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelNativeFriendSyncResponse>? SyncNativeFriends(SyncNativeFriends input)
+        public UserCancelFriendRequest.Response UserCancelFriendRequest(UserCancelFriendRequest input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -477,7 +381,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelNativeFriendSyncResponse>?> SyncNativeFriendsAsync(SyncNativeFriends input)
+        public async Task<UserCancelFriendRequest.Response> UserCancelFriendRequestAsync(UserCancelFriendRequest input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -485,7 +389,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelGetFriendsResponse? GetListOfFriends(GetListOfFriends input)
+        public UserRejectFriendRequest.Response UserRejectFriendRequest(UserRejectFriendRequest input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -493,7 +397,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetFriendsResponse?> GetListOfFriendsAsync(GetListOfFriends input)
+        public async Task<UserRejectFriendRequest.Response> UserRejectFriendRequestAsync(UserRejectFriendRequest input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -501,7 +405,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelLoadIncomingFriendsWithTimeResponse? GetIncomingFriendRequests(GetIncomingFriendRequests input)
+        public UserGetFriendshipStatus.Response UserGetFriendshipStatus(UserGetFriendshipStatus input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -509,7 +413,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelLoadIncomingFriendsWithTimeResponse?> GetIncomingFriendRequestsAsync(GetIncomingFriendRequests input)
+        public async Task<UserGetFriendshipStatus.Response> UserGetFriendshipStatusAsync(UserGetFriendshipStatus input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -517,7 +421,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelFriendshipConnectionResponse? AdminListFriendsOfFriends(AdminListFriendsOfFriends input)
+        public UserUnfriendRequest.Response UserUnfriendRequest(UserUnfriendRequest input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -525,7 +429,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelFriendshipConnectionResponse?> AdminListFriendsOfFriendsAsync(AdminListFriendsOfFriends input)
+        public async Task<UserUnfriendRequest.Response> UserUnfriendRequestAsync(UserUnfriendRequest input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -533,7 +437,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelLoadOutgoingFriendsWithTimeResponse? GetOutgoingFriendRequests(GetOutgoingFriendRequests input)
+        public AddFriendsWithoutConfirmation.Response AddFriendsWithoutConfirmation(AddFriendsWithoutConfirmation input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -541,7 +445,103 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelLoadOutgoingFriendsWithTimeResponse?> GetOutgoingFriendRequestsAsync(GetOutgoingFriendRequests input)
+        public async Task<AddFriendsWithoutConfirmation.Response> AddFriendsWithoutConfirmationAsync(AddFriendsWithoutConfirmation input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public BulkDeleteFriends.Response BulkDeleteFriends(BulkDeleteFriends input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<BulkDeleteFriends.Response> BulkDeleteFriendsAsync(BulkDeleteFriends input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public SyncNativeFriends.Response SyncNativeFriends(SyncNativeFriends input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<SyncNativeFriends.Response> SyncNativeFriendsAsync(SyncNativeFriends input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetListOfFriends.Response GetListOfFriends(GetListOfFriends input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetListOfFriends.Response> GetListOfFriendsAsync(GetListOfFriends input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetIncomingFriendRequests.Response GetIncomingFriendRequests(GetIncomingFriendRequests input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetIncomingFriendRequests.Response> GetIncomingFriendRequestsAsync(GetIncomingFriendRequests input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminListFriendsOfFriends.Response AdminListFriendsOfFriends(AdminListFriendsOfFriends input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminListFriendsOfFriends.Response> AdminListFriendsOfFriendsAsync(AdminListFriendsOfFriends input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetOutgoingFriendRequests.Response GetOutgoingFriendRequests(GetOutgoingFriendRequests input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetOutgoingFriendRequests.Response> GetOutgoingFriendRequestsAsync(GetOutgoingFriendRequests input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

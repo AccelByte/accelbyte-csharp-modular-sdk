@@ -57,16 +57,16 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 GetLocalizationTemplate op = new GetLocalizationTemplate(this,
-                    namespace_,
-                    templateLanguage,
-                    templateSlug
+                    namespace_,                    
+                    templateLanguage,                    
+                    templateSlug                    
                 );
 
                 op.SetBaseFields<GetLocalizationTemplateBuilder>(this);
                 return op;
             }
 
-            public Model.ModelTemplateLocalization? Execute(
+            public GetLocalizationTemplate.Response Execute(
                 string namespace_,
                 string templateLanguage,
                 string templateSlug
@@ -83,11 +83,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelTemplateLocalization?> ExecuteAsync(
+            public async Task<GetLocalizationTemplate.Response> ExecuteAsync(
                 string namespace_,
                 string templateLanguage,
                 string templateSlug
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -119,32 +119,50 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             PathParams["namespace"] = namespace_;
             PathParams["templateLanguage"] = templateLanguage;
             PathParams["templateSlug"] = templateSlug;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelTemplateLocalization>
+        {
+
+            public RestapiErrorResponseBody? Error400 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error401 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error403 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Lobby::Admin::GetLocalizationTemplate";
+        }
+
+        #endregion
+
         public GetLocalizationTemplate(
-            string namespace_,
-            string templateLanguage,
-            string templateSlug
+            string namespace_,            
+            string templateLanguage,            
+            string templateSlug            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["templateLanguage"] = templateLanguage;
             PathParams["templateSlug"] = templateSlug;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,25 +174,46 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelTemplateLocalization? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetLocalizationTemplate.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetLocalizationTemplate.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelTemplateLocalization>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelTemplateLocalization>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelTemplateLocalization>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

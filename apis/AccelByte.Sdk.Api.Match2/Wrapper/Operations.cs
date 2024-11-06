@@ -69,50 +69,50 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
         }
         #endregion
 
-        public void GetHealthcheckInfo(GetHealthcheckInfo input)
+        public GetHealthcheckInfo.Response GetHealthcheckInfo(GetHealthcheckInfo input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task GetHealthcheckInfoAsync(GetHealthcheckInfo input)
+        public async Task<GetHealthcheckInfo.Response> GetHealthcheckInfoAsync(GetHealthcheckInfo input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void GetHealthcheckInfoV1(GetHealthcheckInfoV1 input)
+        public GetHealthcheckInfoV1.Response GetHealthcheckInfoV1(GetHealthcheckInfoV1 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task GetHealthcheckInfoV1Async(GetHealthcheckInfoV1 input)
+        public async Task<GetHealthcheckInfoV1.Response> GetHealthcheckInfoV1Async(GetHealthcheckInfoV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void VersionCheckHandler(VersionCheckHandler input)
+        public VersionCheckHandler.Response VersionCheckHandler(VersionCheckHandler input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task VersionCheckHandlerAsync(VersionCheckHandler input)
+        public async Task<VersionCheckHandler.Response> VersionCheckHandlerAsync(VersionCheckHandler input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

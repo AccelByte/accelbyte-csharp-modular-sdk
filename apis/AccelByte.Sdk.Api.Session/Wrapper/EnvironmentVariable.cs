@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         }
         #endregion
 
-        public Model.ApimodelsEnvironmentVariableListResponse? AdminListEnvironmentVariables(AdminListEnvironmentVariables input)
+        public AdminListEnvironmentVariables.Response AdminListEnvironmentVariables(AdminListEnvironmentVariables input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsEnvironmentVariableListResponse?> AdminListEnvironmentVariablesAsync(AdminListEnvironmentVariables input)
+        public async Task<AdminListEnvironmentVariables.Response> AdminListEnvironmentVariablesAsync(AdminListEnvironmentVariables input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

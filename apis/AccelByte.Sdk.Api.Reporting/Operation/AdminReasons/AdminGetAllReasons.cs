@@ -55,14 +55,14 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             )
             {
                 AdminGetAllReasons op = new AdminGetAllReasons(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminGetAllReasonsBuilder>(this);
                 return op;
             }
 
-            public Model.RestapiAdminAllReasonsResponse? Execute(
+            public AdminGetAllReasons.Response Execute(
                 string namespace_
             )
             {
@@ -75,11 +75,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.RestapiAdminAllReasonsResponse?> ExecuteAsync(
+            public async Task<AdminGetAllReasons.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -103,28 +103,40 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.RestapiAdminAllReasonsResponse>
+        {
+
+            public RestapiErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Reporting::AdminReasons::AdminGetAllReasons";
+        }
+
+        #endregion
+
         public AdminGetAllReasons(
-            string namespace_
+            string namespace_            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -136,25 +148,31 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.RestapiAdminAllReasonsResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminGetAllReasons.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminGetAllReasons.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.RestapiAdminAllReasonsResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.RestapiAdminAllReasonsResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)500)
             {
-                return JsonSerializer.Deserialize<Model.RestapiAdminAllReasonsResponse>(payload, ResponseJsonOptions);
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

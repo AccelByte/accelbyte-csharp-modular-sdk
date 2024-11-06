@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
         }
         #endregion
 
-        public Model.ApimodelsItemResp? PublicConsumeMyItem(PublicConsumeMyItem input)
+        public PublicConsumeMyItem.Response PublicConsumeMyItem(PublicConsumeMyItem input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsItemResp?> PublicConsumeMyItemAsync(PublicConsumeMyItem input)
+        public async Task<PublicConsumeMyItem.Response> PublicConsumeMyItemAsync(PublicConsumeMyItem input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.Payload);
         }
 
-        public Model.ApimodelsItemResp<T1, T2, T3>? PublicConsumeMyItem<T1, T2, T3>(PublicConsumeMyItem input)
+        public PublicConsumeMyItem.Response<T1, T2, T3> PublicConsumeMyItem<T1, T2, T3>(PublicConsumeMyItem input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2, T3>(
@@ -127,7 +127,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsItemResp<T1, T2, T3>?> PublicConsumeMyItemAsync<T1, T2, T3>(PublicConsumeMyItem input)
+        public async Task<PublicConsumeMyItem.Response<T1, T2, T3>> PublicConsumeMyItemAsync<T1, T2, T3>(PublicConsumeMyItem input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2, T3>(
@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsListItemResp? PublicListItems(PublicListItems input)
+        public PublicListItems.Response PublicListItems(PublicListItems input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -143,7 +143,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsListItemResp?> PublicListItemsAsync(PublicListItems input)
+        public async Task<PublicListItems.Response> PublicListItemsAsync(PublicListItems input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -151,7 +151,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ApimodelsUpdateItemResp>? PublicBulkUpdateMyItems(PublicBulkUpdateMyItems input)
+        public PublicBulkUpdateMyItems.Response PublicBulkUpdateMyItems(PublicBulkUpdateMyItems input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -159,7 +159,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ApimodelsUpdateItemResp>?> PublicBulkUpdateMyItemsAsync(PublicBulkUpdateMyItems input)
+        public async Task<PublicBulkUpdateMyItems.Response> PublicBulkUpdateMyItemsAsync(PublicBulkUpdateMyItems input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -167,7 +167,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ApimodelsUpdateItemResp>? PublicBulkRemoveMyItems(PublicBulkRemoveMyItems input)
+        public PublicBulkRemoveMyItems.Response PublicBulkRemoveMyItems(PublicBulkRemoveMyItems input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -175,7 +175,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ApimodelsUpdateItemResp>?> PublicBulkRemoveMyItemsAsync(PublicBulkRemoveMyItems input)
+        public async Task<PublicBulkRemoveMyItems.Response> PublicBulkRemoveMyItemsAsync(PublicBulkRemoveMyItems input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -183,7 +183,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsMoveItemsResp? PublicMoveMyItems(PublicMoveMyItems input)
+        public PublicMoveMyItems.Response PublicMoveMyItems(PublicMoveMyItems input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -191,7 +191,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsMoveItemsResp?> PublicMoveMyItemsAsync(PublicMoveMyItems input)
+        public async Task<PublicMoveMyItems.Response> PublicMoveMyItemsAsync(PublicMoveMyItems input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -199,7 +199,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsItemResp? PublicGetItem(PublicGetItem input)
+        public PublicGetItem.Response PublicGetItem(PublicGetItem input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -207,7 +207,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsItemResp?> PublicGetItemAsync(PublicGetItem input)
+        public async Task<PublicGetItem.Response> PublicGetItemAsync(PublicGetItem input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -216,7 +216,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.Payload);
         }
 
-        public Model.ApimodelsItemResp<T1, T2, T3>? PublicGetItem<T1, T2, T3>(PublicGetItem input)
+        public PublicGetItem.Response<T1, T2, T3> PublicGetItem<T1, T2, T3>(PublicGetItem input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2, T3>(
@@ -224,7 +224,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsItemResp<T1, T2, T3>?> PublicGetItemAsync<T1, T2, T3>(PublicGetItem input)
+        public async Task<PublicGetItem.Response<T1, T2, T3>> PublicGetItemAsync<T1, T2, T3>(PublicGetItem input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2, T3>(

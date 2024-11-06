@@ -72,15 +72,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetUserEntitlementOwnershipByItemIds op = new GetUserEntitlementOwnershipByItemIds(this,
-                    namespace_,
-                    userId
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<GetUserEntitlementOwnershipByItemIdsBuilder>(this);
                 return op;
             }
 
-            public List<Model.EntitlementOwnership>? Execute(
+            public GetUserEntitlementOwnershipByItemIds.Response Execute(
                 string namespace_,
                 string userId
             )
@@ -95,11 +95,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.EntitlementOwnership>?> ExecuteAsync(
+            public async Task<GetUserEntitlementOwnershipByItemIds.Response> ExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -127,38 +127,48 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.Ids is not null) QueryParams["ids"] = builder.Ids;
             if (builder.Platform is not null) QueryParams["platform"] = builder.Platform;
+            
 
-
-
+            
             CollectionFormatMap["ids"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.EntitlementOwnership>>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Entitlement::GetUserEntitlementOwnershipByItemIds";
+        }
+
+        #endregion
+
         public GetUserEntitlementOwnershipByItemIds(
-            string namespace_,
-            string userId,
-            List<string>? ids,
-            string? platform
+            string namespace_,            
+            string userId,            
+            List<string>? ids,            
+            string? platform            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (ids is not null) QueryParams["ids"] = ids;
             if (platform is not null) QueryParams["platform"] = platform;
+            
 
-
-
+            
             CollectionFormatMap["ids"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -167,28 +177,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.EntitlementOwnership>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetUserEntitlementOwnershipByItemIds.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetUserEntitlementOwnershipByItemIds.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.EntitlementOwnership>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<Model.EntitlementOwnership>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.EntitlementOwnership>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

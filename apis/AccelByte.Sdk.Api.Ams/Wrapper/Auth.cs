@@ -47,18 +47,18 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
         }
         #endregion
 
-        public void AuthCheck(AuthCheck input)
+        public AuthCheck.Response AuthCheck(AuthCheck input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AuthCheckAsync(AuthCheck input)
+        public async Task<AuthCheck.Response> AuthCheckAsync(AuthCheck input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

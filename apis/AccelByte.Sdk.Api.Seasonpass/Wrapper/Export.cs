@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
         }
         #endregion
 
-        public Stream? ExportSeason(ExportSeason input)
+        public ExportSeason.Response ExportSeason(ExportSeason input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Stream?> ExportSeasonAsync(ExportSeason input)
+        public async Task<ExportSeason.Response> ExportSeasonAsync(ExportSeason input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

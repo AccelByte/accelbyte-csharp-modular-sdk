@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-        public string PlatformAuthenticateSAMLV3Handler(PlatformAuthenticateSAMLV3Handler input)
+        public PlatformAuthenticateSAMLV3Handler.Response PlatformAuthenticateSAMLV3Handler(PlatformAuthenticateSAMLV3Handler input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<string> PlatformAuthenticateSAMLV3HandlerAsync(PlatformAuthenticateSAMLV3Handler input)
+        public async Task<PlatformAuthenticateSAMLV3Handler.Response> PlatformAuthenticateSAMLV3HandlerAsync(PlatformAuthenticateSAMLV3Handler input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

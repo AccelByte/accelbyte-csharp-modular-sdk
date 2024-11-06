@@ -61,14 +61,14 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
             )
             {
                 Heartbeat op = new Heartbeat(this,
-                    body
+                    body                    
                 );
 
                 op.SetBaseFields<HeartbeatBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public Heartbeat.Response Execute(
                 ModelsHeartbeatRequest body
             )
             {
@@ -80,12 +80,12 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<Heartbeat.Response> ExecuteAsync(
                 ModelsHeartbeatRequest body
             )
             {
@@ -97,8 +97,8 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -108,29 +108,43 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
             ModelsHeartbeatRequest body
         )
         {
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public Heartbeat(
-            Model.ModelsHeartbeatRequest body
-        )
+        #region Response Part        
+        public class Response : ApiResponse
         {
 
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
 
 
+            protected override string GetFullOperationId() => "Qosm::Server::Heartbeat";
+        }
 
+        #endregion
 
+        public Heartbeat(
+            Model.ModelsHeartbeatRequest body            
+        )
+        {
+            
+            
+
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -142,17 +156,30 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public Heartbeat.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new Heartbeat.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

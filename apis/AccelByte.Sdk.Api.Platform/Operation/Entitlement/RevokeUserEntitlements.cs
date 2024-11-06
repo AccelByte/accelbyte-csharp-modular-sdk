@@ -60,16 +60,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 RevokeUserEntitlements op = new RevokeUserEntitlements(this,
-                    namespace_,
-                    userId,
-                    entitlementIds
+                    namespace_,                    
+                    userId,                    
+                    entitlementIds                    
                 );
 
                 op.SetBaseFields<RevokeUserEntitlementsBuilder>(this);
                 return op;
             }
 
-            public Model.BulkOperationResult? Execute(
+            public RevokeUserEntitlements.Response Execute(
                 string namespace_,
                 string userId,
                 string entitlementIds
@@ -86,11 +86,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.BulkOperationResult?> ExecuteAsync(
+            public async Task<RevokeUserEntitlements.Response> ExecuteAsync(
                 string namespace_,
                 string userId,
                 string entitlementIds
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -121,33 +121,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (entitlementIds is not null) QueryParams["entitlementIds"] = entitlementIds;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.BulkOperationResult>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Entitlement::RevokeUserEntitlements";
+        }
+
+        #endregion
+
         public RevokeUserEntitlements(
-            string namespace_,
-            string userId,
-            string entitlementIds
+            string namespace_,            
+            string userId,            
+            string entitlementIds            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (entitlementIds is not null) QueryParams["entitlementIds"] = entitlementIds;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,28 +166,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Put;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.BulkOperationResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public RevokeUserEntitlements.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new RevokeUserEntitlements.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.BulkOperationResult>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.BulkOperationResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.BulkOperationResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

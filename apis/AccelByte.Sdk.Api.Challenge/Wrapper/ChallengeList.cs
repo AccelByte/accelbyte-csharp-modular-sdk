@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
         }
         #endregion
 
-        public Model.ModelListChallengeResponse? GetChallenges(GetChallenges input)
+        public GetChallenges.Response GetChallenges(GetChallenges input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelListChallengeResponse?> GetChallengesAsync(GetChallenges input)
+        public async Task<GetChallenges.Response> GetChallengesAsync(GetChallenges input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelGetGoalsResponse? PublicGetScheduledGoals(PublicGetScheduledGoals input)
+        public PublicGetScheduledGoals.Response PublicGetScheduledGoals(PublicGetScheduledGoals input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetGoalsResponse?> PublicGetScheduledGoalsAsync(PublicGetScheduledGoals input)
+        public async Task<PublicGetScheduledGoals.Response> PublicGetScheduledGoalsAsync(PublicGetScheduledGoals input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

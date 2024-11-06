@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
         }
         #endregion
 
-        public Model.DtoListFinishedDataRequests? S2SGetListFinishedPersonalDataRequest(S2SGetListFinishedPersonalDataRequest input)
+        public S2SGetListFinishedPersonalDataRequest.Response S2SGetListFinishedPersonalDataRequest(S2SGetListFinishedPersonalDataRequest input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.DtoListFinishedDataRequests?> S2SGetListFinishedPersonalDataRequestAsync(S2SGetListFinishedPersonalDataRequest input)
+        public async Task<S2SGetListFinishedPersonalDataRequest.Response> S2SGetListFinishedPersonalDataRequestAsync(S2SGetListFinishedPersonalDataRequest input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsS2SDataRetrievalResponse? S2SRequestDataRetrieval(S2SRequestDataRetrieval input)
+        public S2SRequestDataRetrieval.Response S2SRequestDataRetrieval(S2SRequestDataRetrieval input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsS2SDataRetrievalResponse?> S2SRequestDataRetrievalAsync(S2SRequestDataRetrieval input)
+        public async Task<S2SRequestDataRetrieval.Response> S2SRequestDataRetrievalAsync(S2SRequestDataRetrieval input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsS2SUserDataURL? S2SGeneratePersonalDataURL(S2SGeneratePersonalDataURL input)
+        public S2SGeneratePersonalDataURL.Response S2SGeneratePersonalDataURL(S2SGeneratePersonalDataURL input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsS2SUserDataURL?> S2SGeneratePersonalDataURLAsync(S2SGeneratePersonalDataURL input)
+        public async Task<S2SGeneratePersonalDataURL.Response> S2SGeneratePersonalDataURLAsync(S2SGeneratePersonalDataURL input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

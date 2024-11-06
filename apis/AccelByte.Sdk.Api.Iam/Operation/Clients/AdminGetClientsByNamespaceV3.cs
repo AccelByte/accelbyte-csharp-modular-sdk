@@ -103,14 +103,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminGetClientsByNamespaceV3 op = new AdminGetClientsByNamespaceV3(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminGetClientsByNamespaceV3Builder>(this);
                 return op;
             }
 
-            public Model.ClientmodelClientsV3Response? Execute(
+            public AdminGetClientsByNamespaceV3.Response Execute(
                 string namespace_
             )
             {
@@ -123,11 +123,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ClientmodelClientsV3Response?> ExecuteAsync(
+            public async Task<AdminGetClientsByNamespaceV3.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -140,7 +140,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -151,46 +151,62 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.ClientId is not null) QueryParams["clientId"] = builder.ClientId;
             if (builder.ClientName is not null) QueryParams["clientName"] = builder.ClientName;
             if (builder.ClientType is not null) QueryParams["clientType"] = builder.ClientType;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.SkipLoginQueue != null) QueryParams["skipLoginQueue"] = Convert.ToString(builder.SkipLoginQueue)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ClientmodelClientsV3Response>
+        {
+
+            public RestErrorResponse? Error400 { get; set; } = null;
+
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public RestErrorResponse? Error403 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::Clients::AdminGetClientsByNamespaceV3";
+        }
+
+        #endregion
+
         public AdminGetClientsByNamespaceV3(
-            string namespace_,
-            string? clientId,
-            string? clientName,
-            string? clientType,
-            long? limit,
-            long? offset,
-            bool? skipLoginQueue
+            string namespace_,            
+            string? clientId,            
+            string? clientName,            
+            string? clientType,            
+            long? limit,            
+            long? offset,            
+            bool? skipLoginQueue            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (clientId is not null) QueryParams["clientId"] = clientId;
             if (clientName is not null) QueryParams["clientName"] = clientName;
             if (clientType is not null) QueryParams["clientType"] = clientType;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (skipLoginQueue != null) QueryParams["skipLoginQueue"] = Convert.ToString(skipLoginQueue)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -199,28 +215,44 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ClientmodelClientsV3Response? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminGetClientsByNamespaceV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminGetClientsByNamespaceV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ClientmodelClientsV3Response>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ClientmodelClientsV3Response>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ClientmodelClientsV3Response>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

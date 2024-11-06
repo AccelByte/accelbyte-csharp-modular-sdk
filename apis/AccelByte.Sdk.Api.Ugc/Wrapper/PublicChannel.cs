@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedGetChannelResponse? GetChannels(GetChannels input)
+        public GetChannels.Response GetChannels(GetChannels input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedGetChannelResponse?> GetChannelsAsync(GetChannels input)
+        public async Task<GetChannels.Response> GetChannelsAsync(GetChannels input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsChannelResponse? PublicCreateChannel(PublicCreateChannel input)
+        public PublicCreateChannel.Response PublicCreateChannel(PublicCreateChannel input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsChannelResponse?> PublicCreateChannelAsync(PublicCreateChannel input)
+        public async Task<PublicCreateChannel.Response> PublicCreateChannelAsync(PublicCreateChannel input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsChannelResponse? UpdateChannel(UpdateChannel input)
+        public UpdateChannel.Response UpdateChannel(UpdateChannel input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsChannelResponse?> UpdateChannelAsync(UpdateChannel input)
+        public async Task<UpdateChannel.Response> UpdateChannelAsync(UpdateChannel input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,18 +128,18 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteChannel(DeleteChannel input)
+        public DeleteChannel.Response DeleteChannel(DeleteChannel input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteChannelAsync(DeleteChannel input)
+        public async Task<DeleteChannel.Response> DeleteChannelAsync(DeleteChannel input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

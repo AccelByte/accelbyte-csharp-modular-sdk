@@ -77,15 +77,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 RequestTokenExchangeCodeV3 op = new RequestTokenExchangeCodeV3(this,
-                    clientId,
-                    namespace_
+                    clientId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<RequestTokenExchangeCodeV3Builder>(this);
                 return op;
             }
 
-            public Model.OauthmodelTargetTokenCodeResponse? Execute(
+            public RequestTokenExchangeCodeV3.Response Execute(
                 string clientId,
                 string namespace_
             )
@@ -100,11 +100,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OauthmodelTargetTokenCodeResponse?> ExecuteAsync(
+            public async Task<RequestTokenExchangeCodeV3.Response> ExecuteAsync(
                 string clientId,
                 string namespace_
             )
@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -131,37 +131,47 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.CodeChallenge is not null) QueryParams["code_challenge"] = builder.CodeChallenge;
             if (builder.CodeChallengeMethod is not null) QueryParams["code_challenge_method"] = builder.CodeChallengeMethod.Value;
-
+            
             if (clientId is not null) FormParams["client_id"] = clientId;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.OauthmodelTargetTokenCodeResponse>
+        {
+
+
+            protected override string GetFullOperationId() => "Iam::OAuth20Extension::RequestTokenExchangeCodeV3";
+        }
+
+        #endregion
+
         public RequestTokenExchangeCodeV3(
-            string namespace_,
-            string? codeChallenge,
-            RequestTokenExchangeCodeV3CodeChallengeMethod? codeChallengeMethod,
-            string clientId
+            string namespace_,            
+            string? codeChallenge,            
+            RequestTokenExchangeCodeV3CodeChallengeMethod? codeChallengeMethod,            
+            string clientId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (codeChallenge is not null) QueryParams["code_challenge"] = codeChallenge;
             if (codeChallengeMethod is not null) QueryParams["code_challenge_method"] = codeChallengeMethod.Value;
-
+            
             if (clientId is not null) FormParams["client_id"] = clientId;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -173,25 +183,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OauthmodelTargetTokenCodeResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public RequestTokenExchangeCodeV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new RequestTokenExchangeCodeV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTargetTokenCodeResponse>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.OauthmodelTargetTokenCodeResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTargetTokenCodeResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

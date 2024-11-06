@@ -69,17 +69,17 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 PublicUpdateInsertSessionStorage op = new PublicUpdateInsertSessionStorage(this,
-                    body,
-                    namespace_,
-                    sessionId,
-                    userId
+                    body,                    
+                    namespace_,                    
+                    sessionId,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PublicUpdateInsertSessionStorageBuilder>(this);
                 return op;
             }
 
-            public Dictionary<string, object>? Execute(
+            public PublicUpdateInsertSessionStorage.Response Execute(
                 Dictionary<string, object> body,
                 string namespace_,
                 string sessionId,
@@ -98,11 +98,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Dictionary<string, object>?> ExecuteAsync(
+            public async Task<PublicUpdateInsertSessionStorage.Response> ExecuteAsync(
                 Dictionary<string, object> body,
                 string namespace_,
                 string sessionId,
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -137,35 +137,55 @@ namespace AccelByte.Sdk.Api.Session.Operation
             PathParams["namespace"] = namespace_;
             PathParams["sessionId"] = sessionId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Dictionary<string, object>>
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error403 { get; set; } = null;
+
+            public ResponseError? Error404 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Session::SessionStorage::PublicUpdateInsertSessionStorage";
+        }
+
+        #endregion
+
         public PublicUpdateInsertSessionStorage(
-            string namespace_,
-            string sessionId,
-            string userId,
-            Dictionary<string, object> body
+            string namespace_,            
+            string sessionId,            
+            string userId,            
+            Dictionary<string, object> body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["sessionId"] = sessionId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -177,25 +197,51 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Dictionary<string, object>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicUpdateInsertSessionStorage.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicUpdateInsertSessionStorage.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

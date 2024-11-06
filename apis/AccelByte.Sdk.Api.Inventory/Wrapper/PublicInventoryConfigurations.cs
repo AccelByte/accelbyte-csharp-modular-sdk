@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
         }
         #endregion
 
-        public Model.ApimodelsListInventoryConfigurationsResp? PublicListInventoryConfigurations(PublicListInventoryConfigurations input)
+        public PublicListInventoryConfigurations.Response PublicListInventoryConfigurations(PublicListInventoryConfigurations input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Inventory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsListInventoryConfigurationsResp?> PublicListInventoryConfigurationsAsync(PublicListInventoryConfigurations input)
+        public async Task<PublicListInventoryConfigurations.Response> PublicListInventoryConfigurationsAsync(PublicListInventoryConfigurations input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

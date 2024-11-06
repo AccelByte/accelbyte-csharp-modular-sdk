@@ -57,14 +57,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 TokenIntrospectionV3 op = new TokenIntrospectionV3(this,
-                    token
+                    token                    
                 );
 
                 op.SetBaseFields<TokenIntrospectionV3Builder>(this);
                 return op;
             }
 
-            public Model.OauthmodelTokenIntrospectResponse? Execute(
+            public TokenIntrospectionV3.Response Execute(
                 string token
             )
             {
@@ -77,11 +77,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OauthmodelTokenIntrospectResponse?> ExecuteAsync(
+            public async Task<TokenIntrospectionV3.Response> ExecuteAsync(
                 string token
             )
             {
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -104,30 +104,44 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string token
         )
         {
-
-
+            
+            
             if (token is not null) FormParams["token"] = token;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
         #endregion
 
-        public TokenIntrospectionV3(
-            string token
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.OauthmodelTokenIntrospectResponse>
         {
 
+            public OauthmodelErrorResponse? Error400 { get; set; } = null;
 
+            public OauthmodelErrorResponse? Error401 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::OAuth20::TokenIntrospectionV3";
+        }
+
+        #endregion
+
+        public TokenIntrospectionV3(
+            string token            
+        )
+        {
+            
+            
             if (token is not null) FormParams["token"] = token;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
@@ -140,25 +154,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OauthmodelTokenIntrospectResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public TokenIntrospectionV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new TokenIntrospectionV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenIntrospectResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenIntrospectResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenIntrospectResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -84,15 +84,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetUserDLC op = new GetUserDLC(this,
-                    namespace_,
-                    userId
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<GetUserDLCBuilder>(this);
                 return op;
             }
 
-            public List<Model.UserDLCRecord>? Execute(
+            public GetUserDLC.Response Execute(
                 string namespace_,
                 string userId
             )
@@ -107,11 +107,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.UserDLCRecord>?> ExecuteAsync(
+            public async Task<GetUserDLC.Response> ExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -126,12 +126,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
 
-            public List<Model.UserDLCRecord<T1>>? Execute<T1>(
+            public GetUserDLC.Response<T1> Execute<T1>(
                 string namespace_,
                 string userId
             )
@@ -146,11 +146,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.UserDLCRecord<T1>>?> ExecuteAsync<T1>(
+            public async Task<GetUserDLC.Response<T1>> ExecuteAsync<T1>(
                 string namespace_,
                 string userId
             )
@@ -165,7 +165,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -178,39 +178,54 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.IncludeAllNamespaces != null) QueryParams["includeAllNamespaces"] = Convert.ToString(builder.IncludeAllNamespaces)!;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
             if (builder.Type is not null) QueryParams["type"] = builder.Type.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.UserDLCRecord>>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::DLC::GetUserDLC";
+        }
+
+        public class Response<T1> : ApiResponse<List<Model.UserDLCRecord<T1>>>
+        {
+
+            protected override string GetFullOperationId() => "Platform::DLC::GetUserDLC";
+        }
+        #endregion
+
         public GetUserDLC(
-            string namespace_,
-            string userId,
-            bool? includeAllNamespaces,
-            GetUserDLCStatus? status,
-            GetUserDLCType? type
+            string namespace_,            
+            string userId,            
+            bool? includeAllNamespaces,            
+            GetUserDLCStatus? status,            
+            GetUserDLCType? type            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (includeAllNamespaces != null) QueryParams["includeAllNamespaces"] = Convert.ToString(includeAllNamespaces)!;
             if (status is not null) QueryParams["status"] = status.Value;
             if (type is not null) QueryParams["type"] = type.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -219,47 +234,50 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.UserDLCRecord>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetUserDLC.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetUserDLC.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.UserDLCRecord>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<Model.UserDLCRecord>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.UserDLCRecord>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
 
-        public List<Model.UserDLCRecord<T1>>? ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
+        public GetUserDLC.Response<T1> ParseResponse<T1>(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetUserDLC.Response<T1>()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
-            }
-            else if (code == (HttpStatusCode)201)
+                response.IsSuccess = true;
+            }            
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.UserDLCRecord<T1>>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.UserDLCRecord<T1>>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<Model.UserDLCRecord<T1>>>(payload, ResponseJsonOptions);
-            }
-
-            var payloadString = payload.ReadToString();
-            throw new HttpResponseException(code, payloadString);
+            
+            return response;
         }
     }
 

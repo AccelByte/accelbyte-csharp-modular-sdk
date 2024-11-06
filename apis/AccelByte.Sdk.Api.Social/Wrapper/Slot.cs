@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         }
 
         #region Operation Builders
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetUserNamespaceSlots.GetUserNamespaceSlotsBuilder GetUserNamespaceSlotsOp
         {
             get
@@ -46,7 +46,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetSlotData.GetSlotDataBuilder GetSlotDataOp
         {
             get
@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetUserNamespaceSlots.PublicGetUserNamespaceSlotsBuilder PublicGetUserNamespaceSlotsOp
         {
             get
@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicCreateUserNamespaceSlot.PublicCreateUserNamespaceSlotBuilder PublicCreateUserNamespaceSlotOp
         {
             get
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetSlotData.PublicGetSlotDataBuilder PublicGetSlotDataOp
         {
             get
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicUpdateUserNamespaceSlot.PublicUpdateUserNamespaceSlotBuilder PublicUpdateUserNamespaceSlotOp
         {
             get
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicDeleteUserNamespaceSlot.PublicDeleteUserNamespaceSlotBuilder PublicDeleteUserNamespaceSlotOp
         {
             get
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicUpdateUserNamespaceSlotMetadata.PublicUpdateUserNamespaceSlotMetadataBuilder PublicUpdateUserNamespaceSlotMetadataOp
         {
             get
@@ -132,9 +132,9 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         }
         #endregion
 
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public List<Model.SlotInfo>? GetUserNamespaceSlots(GetUserNamespaceSlots input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetUserNamespaceSlots.Response GetUserNamespaceSlots(GetUserNamespaceSlots input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -142,7 +142,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.SlotInfo>?> GetUserNamespaceSlotsAsync(GetUserNamespaceSlots input)
+        public async Task<GetUserNamespaceSlots.Response> GetUserNamespaceSlotsAsync(GetUserNamespaceSlots input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -150,10 +150,10 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public byte[]? GetSlotData(GetSlotData input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetSlotData.Response GetSlotData(GetSlotData input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -161,7 +161,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<byte[]?> GetSlotDataAsync(GetSlotData input)
+        public async Task<GetSlotData.Response> GetSlotDataAsync(GetSlotData input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -169,10 +169,10 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public List<Model.SlotInfo>? PublicGetUserNamespaceSlots(PublicGetUserNamespaceSlots input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicGetUserNamespaceSlots.Response PublicGetUserNamespaceSlots(PublicGetUserNamespaceSlots input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -180,7 +180,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.SlotInfo>?> PublicGetUserNamespaceSlotsAsync(PublicGetUserNamespaceSlots input)
+        public async Task<PublicGetUserNamespaceSlots.Response> PublicGetUserNamespaceSlotsAsync(PublicGetUserNamespaceSlots input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -188,29 +188,10 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void PublicCreateUserNamespaceSlot(PublicCreateUserNamespaceSlot input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicCreateUserNamespaceSlotAsync(PublicCreateUserNamespaceSlot input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public byte[]? PublicGetSlotData(PublicGetSlotData input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicCreateUserNamespaceSlot.Response PublicCreateUserNamespaceSlot(PublicCreateUserNamespaceSlot input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -218,7 +199,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<byte[]?> PublicGetSlotDataAsync(PublicGetSlotData input)
+        public async Task<PublicCreateUserNamespaceSlot.Response> PublicCreateUserNamespaceSlotAsync(PublicCreateUserNamespaceSlot input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -226,10 +207,10 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.SlotInfo? PublicUpdateUserNamespaceSlot(PublicUpdateUserNamespaceSlot input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicGetSlotData.Response PublicGetSlotData(PublicGetSlotData input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -237,7 +218,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SlotInfo?> PublicUpdateUserNamespaceSlotAsync(PublicUpdateUserNamespaceSlot input)
+        public async Task<PublicGetSlotData.Response> PublicGetSlotDataAsync(PublicGetSlotData input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -245,29 +226,10 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void PublicDeleteUserNamespaceSlot(PublicDeleteUserNamespaceSlot input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicDeleteUserNamespaceSlotAsync(PublicDeleteUserNamespaceSlot input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.SlotInfo? PublicUpdateUserNamespaceSlotMetadata(PublicUpdateUserNamespaceSlotMetadata input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicUpdateUserNamespaceSlot.Response PublicUpdateUserNamespaceSlot(PublicUpdateUserNamespaceSlot input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -275,7 +237,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SlotInfo?> PublicUpdateUserNamespaceSlotMetadataAsync(PublicUpdateUserNamespaceSlotMetadata input)
+        public async Task<PublicUpdateUserNamespaceSlot.Response> PublicUpdateUserNamespaceSlotAsync(PublicUpdateUserNamespaceSlot input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -283,6 +245,44 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicDeleteUserNamespaceSlot.Response PublicDeleteUserNamespaceSlot(PublicDeleteUserNamespaceSlot input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicDeleteUserNamespaceSlot.Response> PublicDeleteUserNamespaceSlotAsync(PublicDeleteUserNamespaceSlot input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public PublicUpdateUserNamespaceSlotMetadata.Response PublicUpdateUserNamespaceSlotMetadata(PublicUpdateUserNamespaceSlotMetadata input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicUpdateUserNamespaceSlotMetadata.Response> PublicUpdateUserNamespaceSlotMetadataAsync(PublicUpdateUserNamespaceSlotMetadata input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning restore ab_deprecated_operation
     }
 }

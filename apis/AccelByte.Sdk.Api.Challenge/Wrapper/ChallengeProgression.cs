@@ -91,23 +91,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
         }
         #endregion
 
-        public void AdminEvaluateProgress(AdminEvaluateProgress input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminEvaluateProgressAsync(AdminEvaluateProgress input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelUserProgressionResponse? AdminGetUserProgression(AdminGetUserProgression input)
+        public AdminEvaluateProgress.Response AdminEvaluateProgress(AdminEvaluateProgress input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -115,7 +99,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserProgressionResponse?> AdminGetUserProgressionAsync(AdminGetUserProgression input)
+        public async Task<AdminEvaluateProgress.Response> AdminEvaluateProgressAsync(AdminEvaluateProgress input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -123,23 +107,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void EvaluateMyProgress(EvaluateMyProgress input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task EvaluateMyProgressAsync(EvaluateMyProgress input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelUserProgressionResponse? PublicGetUserProgression(PublicGetUserProgression input)
+        public AdminGetUserProgression.Response AdminGetUserProgression(AdminGetUserProgression input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -147,7 +115,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserProgressionResponse?> PublicGetUserProgressionAsync(PublicGetUserProgression input)
+        public async Task<AdminGetUserProgression.Response> AdminGetUserProgressionAsync(AdminGetUserProgression input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -155,7 +123,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelUserProgressionResponse? PublicGetPastUserProgression(PublicGetPastUserProgression input)
+        public EvaluateMyProgress.Response EvaluateMyProgress(EvaluateMyProgress input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -163,7 +131,39 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelUserProgressionResponse?> PublicGetPastUserProgressionAsync(PublicGetPastUserProgression input)
+        public async Task<EvaluateMyProgress.Response> EvaluateMyProgressAsync(EvaluateMyProgress input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetUserProgression.Response PublicGetUserProgression(PublicGetUserProgression input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetUserProgression.Response> PublicGetUserProgressionAsync(PublicGetUserProgression input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetPastUserProgression.Response PublicGetPastUserProgression(PublicGetPastUserProgression input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetPastUserProgression.Response> PublicGetPastUserProgressionAsync(PublicGetPastUserProgression input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

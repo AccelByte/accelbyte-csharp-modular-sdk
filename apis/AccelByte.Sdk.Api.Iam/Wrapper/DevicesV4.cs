@@ -133,7 +133,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminDecryptDeviceV4.AdminDecryptDeviceV4Builder AdminDecryptDeviceV4Op
         {
             get
@@ -169,7 +169,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-        public Model.ModelDevicesResponseV4? AdminGetDevicesByUserV4(AdminGetDevicesByUserV4 input)
+        public AdminGetDevicesByUserV4.Response AdminGetDevicesByUserV4(AdminGetDevicesByUserV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -177,7 +177,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelDevicesResponseV4?> AdminGetDevicesByUserV4Async(AdminGetDevicesByUserV4 input)
+        public async Task<AdminGetDevicesByUserV4.Response> AdminGetDevicesByUserV4Async(AdminGetDevicesByUserV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -185,7 +185,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelDeviceBannedResponseV4? AdminGetBannedDevicesV4(AdminGetBannedDevicesV4 input)
+        public AdminGetBannedDevicesV4.Response AdminGetBannedDevicesV4(AdminGetBannedDevicesV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -193,7 +193,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelDeviceBannedResponseV4?> AdminGetBannedDevicesV4Async(AdminGetBannedDevicesV4 input)
+        public async Task<AdminGetBannedDevicesV4.Response> AdminGetBannedDevicesV4Async(AdminGetBannedDevicesV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -201,7 +201,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelDeviceBansResponseV4? AdminGetUserDeviceBansV4(AdminGetUserDeviceBansV4 input)
+        public AdminGetUserDeviceBansV4.Response AdminGetUserDeviceBansV4(AdminGetUserDeviceBansV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -209,7 +209,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelDeviceBansResponseV4?> AdminGetUserDeviceBansV4Async(AdminGetUserDeviceBansV4 input)
+        public async Task<AdminGetUserDeviceBansV4.Response> AdminGetUserDeviceBansV4Async(AdminGetUserDeviceBansV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -217,23 +217,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminBanDeviceV4(AdminBanDeviceV4 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminBanDeviceV4Async(AdminBanDeviceV4 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelDeviceBanResponseV4? AdminGetDeviceBanV4(AdminGetDeviceBanV4 input)
+        public AdminBanDeviceV4.Response AdminBanDeviceV4(AdminBanDeviceV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -241,7 +225,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelDeviceBanResponseV4?> AdminGetDeviceBanV4Async(AdminGetDeviceBanV4 input)
+        public async Task<AdminBanDeviceV4.Response> AdminBanDeviceV4Async(AdminBanDeviceV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -249,39 +233,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminUpdateDeviceBanV4(AdminUpdateDeviceBanV4 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminUpdateDeviceBanV4Async(AdminUpdateDeviceBanV4 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminGenerateReportV4(AdminGenerateReportV4 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminGenerateReportV4Async(AdminGenerateReportV4 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelDeviceTypesResponseV4? AdminGetDeviceTypesV4(AdminGetDeviceTypesV4 input)
+        public AdminGetDeviceBanV4.Response AdminGetDeviceBanV4(AdminGetDeviceBanV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -289,7 +241,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelDeviceTypesResponseV4?> AdminGetDeviceTypesV4Async(AdminGetDeviceTypesV4 input)
+        public async Task<AdminGetDeviceBanV4.Response> AdminGetDeviceBanV4Async(AdminGetDeviceBanV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -297,7 +249,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelDeviceBansResponseV4? AdminGetDeviceBansV4(AdminGetDeviceBansV4 input)
+        public AdminUpdateDeviceBanV4.Response AdminUpdateDeviceBanV4(AdminUpdateDeviceBanV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -305,7 +257,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelDeviceBansResponseV4?> AdminGetDeviceBansV4Async(AdminGetDeviceBansV4 input)
+        public async Task<AdminUpdateDeviceBanV4.Response> AdminUpdateDeviceBanV4Async(AdminUpdateDeviceBanV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -313,9 +265,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelDeviceIDDecryptResponseV4? AdminDecryptDeviceV4(AdminDecryptDeviceV4 input)
+        public AdminGenerateReportV4.Response AdminGenerateReportV4(AdminGenerateReportV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -323,7 +273,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelDeviceIDDecryptResponseV4?> AdminDecryptDeviceV4Async(AdminDecryptDeviceV4 input)
+        public async Task<AdminGenerateReportV4.Response> AdminGenerateReportV4Async(AdminGenerateReportV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -331,24 +281,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public void AdminUnbanDeviceV4(AdminUnbanDeviceV4 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminUnbanDeviceV4Async(AdminUnbanDeviceV4 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelDeviceUsersResponseV4? AdminGetUsersByDeviceV4(AdminGetUsersByDeviceV4 input)
+        public AdminGetDeviceTypesV4.Response AdminGetDeviceTypesV4(AdminGetDeviceTypesV4 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -356,7 +289,74 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelDeviceUsersResponseV4?> AdminGetUsersByDeviceV4Async(AdminGetUsersByDeviceV4 input)
+        public async Task<AdminGetDeviceTypesV4.Response> AdminGetDeviceTypesV4Async(AdminGetDeviceTypesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetDeviceBansV4.Response AdminGetDeviceBansV4(AdminGetDeviceBansV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetDeviceBansV4.Response> AdminGetDeviceBansV4Async(AdminGetDeviceBansV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminDecryptDeviceV4.Response AdminDecryptDeviceV4(AdminDecryptDeviceV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminDecryptDeviceV4.Response> AdminDecryptDeviceV4Async(AdminDecryptDeviceV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning restore ab_deprecated_operation
+        public AdminUnbanDeviceV4.Response AdminUnbanDeviceV4(AdminUnbanDeviceV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminUnbanDeviceV4.Response> AdminUnbanDeviceV4Async(AdminUnbanDeviceV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetUsersByDeviceV4.Response AdminGetUsersByDeviceV4(AdminGetUsersByDeviceV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetUsersByDeviceV4.Response> AdminGetUsersByDeviceV4Async(AdminGetUsersByDeviceV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

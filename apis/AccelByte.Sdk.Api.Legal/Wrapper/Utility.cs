@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
         #endregion
 
-        public Model.LegalReadinessStatusResponse? CheckReadiness(CheckReadiness input)
+        public CheckReadiness.Response CheckReadiness(CheckReadiness input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.LegalReadinessStatusResponse?> CheckReadinessAsync(CheckReadiness input)
+        public async Task<CheckReadiness.Response> CheckReadinessAsync(CheckReadiness input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

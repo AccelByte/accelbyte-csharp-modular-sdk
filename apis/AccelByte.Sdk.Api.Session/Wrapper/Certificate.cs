@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         }
         #endregion
 
-        public Model.ModelsPlatformCredentials? HandleUploadXboxPFXCertificate(HandleUploadXboxPFXCertificate input)
+        public HandleUploadXboxPFXCertificate.Response HandleUploadXboxPFXCertificate(HandleUploadXboxPFXCertificate input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPlatformCredentials?> HandleUploadXboxPFXCertificateAsync(HandleUploadXboxPFXCertificate input)
+        public async Task<HandleUploadXboxPFXCertificate.Response> HandleUploadXboxPFXCertificateAsync(HandleUploadXboxPFXCertificate input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedGetTagResponse? GetTag(GetTag input)
+        public GetTag.Response GetTag(GetTag input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedGetTagResponse?> GetTagAsync(GetTag input)
+        public async Task<GetTag.Response> GetTagAsync(GetTag input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

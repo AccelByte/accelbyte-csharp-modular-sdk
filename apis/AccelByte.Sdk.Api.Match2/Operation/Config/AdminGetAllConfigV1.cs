@@ -60,7 +60,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                 return op;
             }
 
-            public Model.ApiNamespaceConfigList? Execute(
+            public AdminGetAllConfigV1.Response Execute(
             )
             {
                 AdminGetAllConfigV1 op = Build(
@@ -71,11 +71,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ApiNamespaceConfigList?> ExecuteAsync(
+            public async Task<AdminGetAllConfigV1.Response> ExecuteAsync(
             )
             {
                 AdminGetAllConfigV1 op = Build(
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -95,26 +95,42 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         private AdminGetAllConfigV1(AdminGetAllConfigV1Builder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ApiNamespaceConfigList>
+        {
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error403 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Match2::Config::AdminGetAllConfigV1";
+        }
+
+        #endregion
+
         public AdminGetAllConfigV1(
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -126,25 +142,41 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ApiNamespaceConfigList? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminGetAllConfigV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminGetAllConfigV1.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ApiNamespaceConfigList>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ApiNamespaceConfigList>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)401)
             {
-                return JsonSerializer.Deserialize<Model.ApiNamespaceConfigList>(payload, ResponseJsonOptions);
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

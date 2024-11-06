@@ -333,7 +333,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
         }
         #endregion
 
-        public Model.UserProfileInfo? GetUserProfileInfoByPublicId(GetUserProfileInfoByPublicId input)
+        public GetUserProfileInfoByPublicId.Response GetUserProfileInfoByPublicId(GetUserProfileInfoByPublicId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -341,7 +341,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfileInfo?> GetUserProfileInfoByPublicIdAsync(GetUserProfileInfoByPublicId input)
+        public async Task<GetUserProfileInfoByPublicId.Response> GetUserProfileInfoByPublicIdAsync(GetUserProfileInfoByPublicId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -350,7 +350,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.Payload);
         }
 
-        public Model.UserProfileInfo<T1>? GetUserProfileInfoByPublicId<T1>(GetUserProfileInfoByPublicId input)
+        public GetUserProfileInfoByPublicId.Response<T1> GetUserProfileInfoByPublicId<T1>(GetUserProfileInfoByPublicId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -358,7 +358,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfileInfo<T1>?> GetUserProfileInfoByPublicIdAsync<T1>(GetUserProfileInfoByPublicId input)
+        public async Task<GetUserProfileInfoByPublicId.Response<T1>> GetUserProfileInfoByPublicIdAsync<T1>(GetUserProfileInfoByPublicId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -366,7 +366,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.UserProfilePublicInfo>? AdminGetUserProfilePublicInfoByIds(AdminGetUserProfilePublicInfoByIds input)
+        public AdminGetUserProfilePublicInfoByIds.Response AdminGetUserProfilePublicInfoByIds(AdminGetUserProfilePublicInfoByIds input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -374,40 +374,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.UserProfilePublicInfo>?> AdminGetUserProfilePublicInfoByIdsAsync(AdminGetUserProfilePublicInfoByIds input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-
-        public List<Model.UserProfilePublicInfo<T1>>? AdminGetUserProfilePublicInfoByIds<T1>(AdminGetUserProfilePublicInfoByIds input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<List<Model.UserProfilePublicInfo<T1>>?> AdminGetUserProfilePublicInfoByIdsAsync<T1>(AdminGetUserProfilePublicInfoByIds input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.UserProfilePrivateInfo? GetUserProfileInfo(GetUserProfileInfo input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.UserProfilePrivateInfo?> GetUserProfileInfoAsync(GetUserProfileInfo input)
+        public async Task<AdminGetUserProfilePublicInfoByIds.Response> AdminGetUserProfilePublicInfoByIdsAsync(AdminGetUserProfilePublicInfoByIds input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -416,7 +383,40 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.Payload);
         }
 
-        public Model.UserProfilePrivateInfo<T1, T2>? GetUserProfileInfo<T1, T2>(GetUserProfileInfo input)
+        public AdminGetUserProfilePublicInfoByIds.Response<T1> AdminGetUserProfilePublicInfoByIds<T1>(AdminGetUserProfilePublicInfoByIds input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetUserProfilePublicInfoByIds.Response<T1>> AdminGetUserProfilePublicInfoByIdsAsync<T1>(AdminGetUserProfilePublicInfoByIds input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetUserProfileInfo.Response GetUserProfileInfo(GetUserProfileInfo input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetUserProfileInfo.Response> GetUserProfileInfoAsync(GetUserProfileInfo input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public GetUserProfileInfo.Response<T1, T2> GetUserProfileInfo<T1, T2>(GetUserProfileInfo input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -424,7 +424,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfilePrivateInfo<T1, T2>?> GetUserProfileInfoAsync<T1, T2>(GetUserProfileInfo input)
+        public async Task<GetUserProfileInfo.Response<T1, T2>> GetUserProfileInfoAsync<T1, T2>(GetUserProfileInfo input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -432,7 +432,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.UserProfilePrivateInfo? UpdateUserProfile(UpdateUserProfile input)
+        public UpdateUserProfile.Response UpdateUserProfile(UpdateUserProfile input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -440,7 +440,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfilePrivateInfo?> UpdateUserProfileAsync(UpdateUserProfile input)
+        public async Task<UpdateUserProfile.Response> UpdateUserProfileAsync(UpdateUserProfile input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -449,7 +449,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.Payload);
         }
 
-        public Model.UserProfilePrivateInfo<T1, T2>? UpdateUserProfile<T1, T2>(UpdateUserProfile input)
+        public UpdateUserProfile.Response<T1, T2> UpdateUserProfile<T1, T2>(UpdateUserProfile input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -457,7 +457,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfilePrivateInfo<T1, T2>?> UpdateUserProfileAsync<T1, T2>(UpdateUserProfile input)
+        public async Task<UpdateUserProfile.Response<T1, T2>> UpdateUserProfileAsync<T1, T2>(UpdateUserProfile input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -465,7 +465,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.UserProfilePrivateInfo? DeleteUserProfile(DeleteUserProfile input)
+        public DeleteUserProfile.Response DeleteUserProfile(DeleteUserProfile input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -473,7 +473,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfilePrivateInfo?> DeleteUserProfileAsync(DeleteUserProfile input)
+        public async Task<DeleteUserProfile.Response> DeleteUserProfileAsync(DeleteUserProfile input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -482,7 +482,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.Payload);
         }
 
-        public Model.UserProfilePrivateInfo<T1, T2>? DeleteUserProfile<T1, T2>(DeleteUserProfile input)
+        public DeleteUserProfile.Response<T1, T2> DeleteUserProfile<T1, T2>(DeleteUserProfile input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -490,7 +490,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfilePrivateInfo<T1, T2>?> DeleteUserProfileAsync<T1, T2>(DeleteUserProfile input)
+        public async Task<DeleteUserProfile.Response<T1, T2>> DeleteUserProfileAsync<T1, T2>(DeleteUserProfile input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -498,7 +498,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Dictionary<string, object>? GetCustomAttributesInfo(GetCustomAttributesInfo input)
+        public GetCustomAttributesInfo.Response GetCustomAttributesInfo(GetCustomAttributesInfo input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -506,7 +506,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Dictionary<string, object>?> GetCustomAttributesInfoAsync(GetCustomAttributesInfo input)
+        public async Task<GetCustomAttributesInfo.Response> GetCustomAttributesInfoAsync(GetCustomAttributesInfo input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -514,7 +514,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Dictionary<string, object>? UpdateCustomAttributesPartially(UpdateCustomAttributesPartially input)
+        public UpdateCustomAttributesPartially.Response UpdateCustomAttributesPartially(UpdateCustomAttributesPartially input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -522,7 +522,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Dictionary<string, object>?> UpdateCustomAttributesPartiallyAsync(UpdateCustomAttributesPartially input)
+        public async Task<UpdateCustomAttributesPartially.Response> UpdateCustomAttributesPartiallyAsync(UpdateCustomAttributesPartially input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -530,7 +530,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Dictionary<string, object>? GetPrivateCustomAttributesInfo(GetPrivateCustomAttributesInfo input)
+        public GetPrivateCustomAttributesInfo.Response GetPrivateCustomAttributesInfo(GetPrivateCustomAttributesInfo input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -538,7 +538,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Dictionary<string, object>?> GetPrivateCustomAttributesInfoAsync(GetPrivateCustomAttributesInfo input)
+        public async Task<GetPrivateCustomAttributesInfo.Response> GetPrivateCustomAttributesInfoAsync(GetPrivateCustomAttributesInfo input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -546,7 +546,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Dictionary<string, object>? UpdatePrivateCustomAttributesPartially(UpdatePrivateCustomAttributesPartially input)
+        public UpdatePrivateCustomAttributesPartially.Response UpdatePrivateCustomAttributesPartially(UpdatePrivateCustomAttributesPartially input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -554,7 +554,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Dictionary<string, object>?> UpdatePrivateCustomAttributesPartiallyAsync(UpdatePrivateCustomAttributesPartially input)
+        public async Task<UpdatePrivateCustomAttributesPartially.Response> UpdatePrivateCustomAttributesPartiallyAsync(UpdatePrivateCustomAttributesPartially input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -562,7 +562,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.UserProfilePrivateInfo? UpdateUserProfileStatus(UpdateUserProfileStatus input)
+        public UpdateUserProfileStatus.Response UpdateUserProfileStatus(UpdateUserProfileStatus input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -570,7 +570,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfilePrivateInfo?> UpdateUserProfileStatusAsync(UpdateUserProfileStatus input)
+        public async Task<UpdateUserProfileStatus.Response> UpdateUserProfileStatusAsync(UpdateUserProfileStatus input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -579,7 +579,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.Payload);
         }
 
-        public Model.UserProfilePrivateInfo<T1, T2>? UpdateUserProfileStatus<T1, T2>(UpdateUserProfileStatus input)
+        public UpdateUserProfileStatus.Response<T1, T2> UpdateUserProfileStatus<T1, T2>(UpdateUserProfileStatus input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -587,7 +587,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfilePrivateInfo<T1, T2>?> UpdateUserProfileStatusAsync<T1, T2>(UpdateUserProfileStatus input)
+        public async Task<UpdateUserProfileStatus.Response<T1, T2>> UpdateUserProfileStatusAsync<T1, T2>(UpdateUserProfileStatus input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -595,7 +595,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.UserProfilePublicInfo>? PublicGetUserProfilePublicInfoByIds(PublicGetUserProfilePublicInfoByIds input)
+        public PublicGetUserProfilePublicInfoByIds.Response PublicGetUserProfilePublicInfoByIds(PublicGetUserProfilePublicInfoByIds input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -603,7 +603,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.UserProfilePublicInfo>?> PublicGetUserProfilePublicInfoByIdsAsync(PublicGetUserProfilePublicInfoByIds input)
+        public async Task<PublicGetUserProfilePublicInfoByIds.Response> PublicGetUserProfilePublicInfoByIdsAsync(PublicGetUserProfilePublicInfoByIds input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -612,7 +612,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.Payload);
         }
 
-        public List<Model.UserProfilePublicInfo<T1>>? PublicGetUserProfilePublicInfoByIds<T1>(PublicGetUserProfilePublicInfoByIds input)
+        public PublicGetUserProfilePublicInfoByIds.Response<T1> PublicGetUserProfilePublicInfoByIds<T1>(PublicGetUserProfilePublicInfoByIds input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -620,7 +620,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.UserProfilePublicInfo<T1>>?> PublicGetUserProfilePublicInfoByIdsAsync<T1>(PublicGetUserProfilePublicInfoByIds input)
+        public async Task<PublicGetUserProfilePublicInfoByIds.Response<T1>> PublicGetUserProfilePublicInfoByIdsAsync<T1>(PublicGetUserProfilePublicInfoByIds input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -628,7 +628,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.UserProfilePublicInfo>? PublicBulkGetUserProfilePublicInfo(PublicBulkGetUserProfilePublicInfo input)
+        public PublicBulkGetUserProfilePublicInfo.Response PublicBulkGetUserProfilePublicInfo(PublicBulkGetUserProfilePublicInfo input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -636,40 +636,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.UserProfilePublicInfo>?> PublicBulkGetUserProfilePublicInfoAsync(PublicBulkGetUserProfilePublicInfo input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-
-        public List<Model.UserProfilePublicInfo<T1>>? PublicBulkGetUserProfilePublicInfo<T1>(PublicBulkGetUserProfilePublicInfo input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<List<Model.UserProfilePublicInfo<T1>>?> PublicBulkGetUserProfilePublicInfoAsync<T1>(PublicBulkGetUserProfilePublicInfo input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.UserProfilePublicInfo? PublicGetUserProfileInfoByPublicId(PublicGetUserProfileInfoByPublicId input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.UserProfilePublicInfo?> PublicGetUserProfileInfoByPublicIdAsync(PublicGetUserProfileInfoByPublicId input)
+        public async Task<PublicBulkGetUserProfilePublicInfo.Response> PublicBulkGetUserProfilePublicInfoAsync(PublicBulkGetUserProfilePublicInfo input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -678,7 +645,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.Payload);
         }
 
-        public Model.UserProfilePublicInfo<T1>? PublicGetUserProfileInfoByPublicId<T1>(PublicGetUserProfileInfoByPublicId input)
+        public PublicBulkGetUserProfilePublicInfo.Response<T1> PublicBulkGetUserProfilePublicInfo<T1>(PublicBulkGetUserProfilePublicInfo input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -686,7 +653,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfilePublicInfo<T1>?> PublicGetUserProfileInfoByPublicIdAsync<T1>(PublicGetUserProfileInfoByPublicId input)
+        public async Task<PublicBulkGetUserProfilePublicInfo.Response<T1>> PublicBulkGetUserProfilePublicInfoAsync<T1>(PublicBulkGetUserProfilePublicInfo input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -694,7 +661,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.UserProfilePrivateInfo? GetMyProfileInfo(GetMyProfileInfo input)
+        public PublicGetUserProfileInfoByPublicId.Response PublicGetUserProfileInfoByPublicId(PublicGetUserProfileInfoByPublicId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -702,7 +669,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfilePrivateInfo?> GetMyProfileInfoAsync(GetMyProfileInfo input)
+        public async Task<PublicGetUserProfileInfoByPublicId.Response> PublicGetUserProfileInfoByPublicIdAsync(PublicGetUserProfileInfoByPublicId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -711,7 +678,40 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.Payload);
         }
 
-        public Model.UserProfilePrivateInfo<T1, T2>? GetMyProfileInfo<T1, T2>(GetMyProfileInfo input)
+        public PublicGetUserProfileInfoByPublicId.Response<T1> PublicGetUserProfileInfoByPublicId<T1>(PublicGetUserProfileInfoByPublicId input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetUserProfileInfoByPublicId.Response<T1>> PublicGetUserProfileInfoByPublicIdAsync<T1>(PublicGetUserProfileInfoByPublicId input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetMyProfileInfo.Response GetMyProfileInfo(GetMyProfileInfo input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetMyProfileInfo.Response> GetMyProfileInfoAsync(GetMyProfileInfo input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public GetMyProfileInfo.Response<T1, T2> GetMyProfileInfo<T1, T2>(GetMyProfileInfo input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -719,7 +719,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfilePrivateInfo<T1, T2>?> GetMyProfileInfoAsync<T1, T2>(GetMyProfileInfo input)
+        public async Task<GetMyProfileInfo.Response<T1, T2>> GetMyProfileInfoAsync<T1, T2>(GetMyProfileInfo input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -727,7 +727,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.UserProfilePrivateInfo? UpdateMyProfile(UpdateMyProfile input)
+        public UpdateMyProfile.Response UpdateMyProfile(UpdateMyProfile input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -735,7 +735,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfilePrivateInfo?> UpdateMyProfileAsync(UpdateMyProfile input)
+        public async Task<UpdateMyProfile.Response> UpdateMyProfileAsync(UpdateMyProfile input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -744,7 +744,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.Payload);
         }
 
-        public Model.UserProfilePrivateInfo<T1, T2>? UpdateMyProfile<T1, T2>(UpdateMyProfile input)
+        public UpdateMyProfile.Response<T1, T2> UpdateMyProfile<T1, T2>(UpdateMyProfile input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -752,7 +752,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfilePrivateInfo<T1, T2>?> UpdateMyProfileAsync<T1, T2>(UpdateMyProfile input)
+        public async Task<UpdateMyProfile.Response<T1, T2>> UpdateMyProfileAsync<T1, T2>(UpdateMyProfile input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -760,7 +760,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.UserProfilePrivateInfo? CreateMyProfile(CreateMyProfile input)
+        public CreateMyProfile.Response CreateMyProfile(CreateMyProfile input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -768,7 +768,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfilePrivateInfo?> CreateMyProfileAsync(CreateMyProfile input)
+        public async Task<CreateMyProfile.Response> CreateMyProfileAsync(CreateMyProfile input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -777,7 +777,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.Payload);
         }
 
-        public Model.UserProfilePrivateInfo<T1, T2>? CreateMyProfile<T1, T2>(CreateMyProfile input)
+        public CreateMyProfile.Response<T1, T2> CreateMyProfile<T1, T2>(CreateMyProfile input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1, T2>(
@@ -785,7 +785,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfilePrivateInfo<T1, T2>?> CreateMyProfileAsync<T1, T2>(CreateMyProfile input)
+        public async Task<CreateMyProfile.Response<T1, T2>> CreateMyProfileAsync<T1, T2>(CreateMyProfile input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(
@@ -793,7 +793,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Dictionary<string, object>? GetMyPrivateCustomAttributesInfo(GetMyPrivateCustomAttributesInfo input)
+        public GetMyPrivateCustomAttributesInfo.Response GetMyPrivateCustomAttributesInfo(GetMyPrivateCustomAttributesInfo input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -801,7 +801,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Dictionary<string, object>?> GetMyPrivateCustomAttributesInfoAsync(GetMyPrivateCustomAttributesInfo input)
+        public async Task<GetMyPrivateCustomAttributesInfo.Response> GetMyPrivateCustomAttributesInfoAsync(GetMyPrivateCustomAttributesInfo input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -809,7 +809,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Dictionary<string, object>? UpdateMyPrivateCustomAttributesPartially(UpdateMyPrivateCustomAttributesPartially input)
+        public UpdateMyPrivateCustomAttributesPartially.Response UpdateMyPrivateCustomAttributesPartially(UpdateMyPrivateCustomAttributesPartially input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -817,7 +817,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Dictionary<string, object>?> UpdateMyPrivateCustomAttributesPartiallyAsync(UpdateMyPrivateCustomAttributesPartially input)
+        public async Task<UpdateMyPrivateCustomAttributesPartially.Response> UpdateMyPrivateCustomAttributesPartiallyAsync(UpdateMyPrivateCustomAttributesPartially input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -825,7 +825,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.UserZipCode? GetMyZipCode(GetMyZipCode input)
+        public GetMyZipCode.Response GetMyZipCode(GetMyZipCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -833,7 +833,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserZipCode?> GetMyZipCodeAsync(GetMyZipCode input)
+        public async Task<GetMyZipCode.Response> GetMyZipCodeAsync(GetMyZipCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -841,7 +841,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.UserZipCode? UpdateMyZipCode(UpdateMyZipCode input)
+        public UpdateMyZipCode.Response UpdateMyZipCode(UpdateMyZipCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -849,7 +849,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserZipCode?> UpdateMyZipCodeAsync(UpdateMyZipCode input)
+        public async Task<UpdateMyZipCode.Response> UpdateMyZipCodeAsync(UpdateMyZipCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -857,7 +857,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.UserProfileInfo? PublicGetUserProfileInfo(PublicGetUserProfileInfo input)
+        public PublicGetUserProfileInfo.Response PublicGetUserProfileInfo(PublicGetUserProfileInfo input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -865,40 +865,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfileInfo?> PublicGetUserProfileInfoAsync(PublicGetUserProfileInfo input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-
-        public Model.UserProfileInfo<T1>? PublicGetUserProfileInfo<T1>(PublicGetUserProfileInfo input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.UserProfileInfo<T1>?> PublicGetUserProfileInfoAsync<T1>(PublicGetUserProfileInfo input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.UserProfileInfo? PublicUpdateUserProfile(PublicUpdateUserProfile input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.UserProfileInfo?> PublicUpdateUserProfileAsync(PublicUpdateUserProfile input)
+        public async Task<PublicGetUserProfileInfo.Response> PublicGetUserProfileInfoAsync(PublicGetUserProfileInfo input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -907,7 +874,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.Payload);
         }
 
-        public Model.UserProfileInfo<T1>? PublicUpdateUserProfile<T1>(PublicUpdateUserProfile input)
+        public PublicGetUserProfileInfo.Response<T1> PublicGetUserProfileInfo<T1>(PublicGetUserProfileInfo input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -915,7 +882,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfileInfo<T1>?> PublicUpdateUserProfileAsync<T1>(PublicUpdateUserProfile input)
+        public async Task<PublicGetUserProfileInfo.Response<T1>> PublicGetUserProfileInfoAsync<T1>(PublicGetUserProfileInfo input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -923,7 +890,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.UserProfileInfo? PublicCreateUserProfile(PublicCreateUserProfile input)
+        public PublicUpdateUserProfile.Response PublicUpdateUserProfile(PublicUpdateUserProfile input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -931,7 +898,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfileInfo?> PublicCreateUserProfileAsync(PublicCreateUserProfile input)
+        public async Task<PublicUpdateUserProfile.Response> PublicUpdateUserProfileAsync(PublicUpdateUserProfile input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -940,7 +907,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.Payload);
         }
 
-        public Model.UserProfileInfo<T1>? PublicCreateUserProfile<T1>(PublicCreateUserProfile input)
+        public PublicUpdateUserProfile.Response<T1> PublicUpdateUserProfile<T1>(PublicUpdateUserProfile input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -948,7 +915,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfileInfo<T1>?> PublicCreateUserProfileAsync<T1>(PublicCreateUserProfile input)
+        public async Task<PublicUpdateUserProfile.Response<T1>> PublicUpdateUserProfileAsync<T1>(PublicUpdateUserProfile input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -956,7 +923,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Dictionary<string, object>? PublicGetCustomAttributesInfo(PublicGetCustomAttributesInfo input)
+        public PublicCreateUserProfile.Response PublicCreateUserProfile(PublicCreateUserProfile input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -964,39 +931,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Dictionary<string, object>?> PublicGetCustomAttributesInfoAsync(PublicGetCustomAttributesInfo input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Dictionary<string, object>? PublicUpdateCustomAttributesPartially(PublicUpdateCustomAttributesPartially input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Dictionary<string, object>?> PublicUpdateCustomAttributesPartiallyAsync(PublicUpdateCustomAttributesPartially input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.UserProfilePublicInfo? PublicGetUserProfilePublicInfo(PublicGetUserProfilePublicInfo input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.UserProfilePublicInfo?> PublicGetUserProfilePublicInfoAsync(PublicGetUserProfilePublicInfo input)
+        public async Task<PublicCreateUserProfile.Response> PublicCreateUserProfileAsync(PublicCreateUserProfile input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1005,7 +940,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.Payload);
         }
 
-        public Model.UserProfilePublicInfo<T1>? PublicGetUserProfilePublicInfo<T1>(PublicGetUserProfilePublicInfo input)
+        public PublicCreateUserProfile.Response<T1> PublicCreateUserProfile<T1>(PublicCreateUserProfile input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -1013,7 +948,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfilePublicInfo<T1>?> PublicGetUserProfilePublicInfoAsync<T1>(PublicGetUserProfilePublicInfo input)
+        public async Task<PublicCreateUserProfile.Response<T1>> PublicCreateUserProfileAsync<T1>(PublicCreateUserProfile input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -1021,7 +956,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.UserProfileInfo? PublicUpdateUserProfileStatus(PublicUpdateUserProfileStatus input)
+        public PublicGetCustomAttributesInfo.Response PublicGetCustomAttributesInfo(PublicGetCustomAttributesInfo input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1029,7 +964,39 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfileInfo?> PublicUpdateUserProfileStatusAsync(PublicUpdateUserProfileStatus input)
+        public async Task<PublicGetCustomAttributesInfo.Response> PublicGetCustomAttributesInfoAsync(PublicGetCustomAttributesInfo input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicUpdateCustomAttributesPartially.Response PublicUpdateCustomAttributesPartially(PublicUpdateCustomAttributesPartially input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicUpdateCustomAttributesPartially.Response> PublicUpdateCustomAttributesPartiallyAsync(PublicUpdateCustomAttributesPartially input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetUserProfilePublicInfo.Response PublicGetUserProfilePublicInfo(PublicGetUserProfilePublicInfo input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetUserProfilePublicInfo.Response> PublicGetUserProfilePublicInfoAsync(PublicGetUserProfilePublicInfo input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1038,7 +1005,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.Payload);
         }
 
-        public Model.UserProfileInfo<T1>? PublicUpdateUserProfileStatus<T1>(PublicUpdateUserProfileStatus input)
+        public PublicGetUserProfilePublicInfo.Response<T1> PublicGetUserProfilePublicInfo<T1>(PublicGetUserProfilePublicInfo input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -1046,7 +1013,40 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UserProfileInfo<T1>?> PublicUpdateUserProfileStatusAsync<T1>(PublicUpdateUserProfileStatus input)
+        public async Task<PublicGetUserProfilePublicInfo.Response<T1>> PublicGetUserProfilePublicInfoAsync<T1>(PublicGetUserProfilePublicInfo input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicUpdateUserProfileStatus.Response PublicUpdateUserProfileStatus(PublicUpdateUserProfileStatus input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicUpdateUserProfileStatus.Response> PublicUpdateUserProfileStatusAsync(PublicUpdateUserProfileStatus input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public PublicUpdateUserProfileStatus.Response<T1> PublicUpdateUserProfileStatus<T1>(PublicUpdateUserProfileStatus input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicUpdateUserProfileStatus.Response<T1>> PublicUpdateUserProfileStatusAsync<T1>(PublicUpdateUserProfileStatus input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(

@@ -75,15 +75,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetCode op = new GetCode(this,
-                    code,
-                    namespace_
+                    code,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetCodeBuilder>(this);
                 return op;
             }
 
-            public Model.CodeInfo? Execute(
+            public GetCode.Response Execute(
                 string code,
                 string namespace_
             )
@@ -98,11 +98,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.CodeInfo?> ExecuteAsync(
+            public async Task<GetCode.Response> ExecuteAsync(
                 string code,
                 string namespace_
             )
@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -130,36 +130,50 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["code"] = code;
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Redeemable != null) QueryParams["redeemable"] = Convert.ToString(builder.Redeemable)!;
             if (builder.WithBatchName != null) QueryParams["withBatchName"] = Convert.ToString(builder.WithBatchName)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.CodeInfo>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+            public ErrorEntity? Error409 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Campaign::GetCode";
+        }
+
+        #endregion
+
         public GetCode(
-            string code,
-            string namespace_,
-            bool? redeemable,
-            bool? withBatchName
+            string code,            
+            string namespace_,            
+            bool? redeemable,            
+            bool? withBatchName            
         )
         {
             PathParams["code"] = code;
             PathParams["namespace"] = namespace_;
-
+            
             if (redeemable != null) QueryParams["redeemable"] = Convert.ToString(redeemable)!;
             if (withBatchName != null) QueryParams["withBatchName"] = Convert.ToString(withBatchName)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -168,28 +182,39 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.CodeInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetCode.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetCode.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.CodeInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.CodeInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.CodeInfo>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)409)
+            {
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

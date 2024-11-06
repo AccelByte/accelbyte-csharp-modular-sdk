@@ -278,7 +278,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
         }
         #endregion
 
-        public Model.ApimodelsXRayMatchPoolQueryResponse? QueryXrayMatchPool(QueryXrayMatchPool input)
+        public QueryXrayMatchPool.Response QueryXrayMatchPool(QueryXrayMatchPool input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -286,7 +286,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayMatchPoolQueryResponse?> QueryXrayMatchPoolAsync(QueryXrayMatchPool input)
+        public async Task<QueryXrayMatchPool.Response> QueryXrayMatchPoolAsync(QueryXrayMatchPool input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -294,7 +294,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayMatchPoolPodTickQueryResponse? QueryDetailTickMatchPool(QueryDetailTickMatchPool input)
+        public QueryDetailTickMatchPool.Response QueryDetailTickMatchPool(QueryDetailTickMatchPool input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -302,7 +302,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayMatchPoolPodTickQueryResponse?> QueryDetailTickMatchPoolAsync(QueryDetailTickMatchPool input)
+        public async Task<QueryDetailTickMatchPool.Response> QueryDetailTickMatchPoolAsync(QueryDetailTickMatchPool input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -310,7 +310,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayMatchPoolPodTickMatchResponse? QueryDetailTickMatchPoolMatches(QueryDetailTickMatchPoolMatches input)
+        public QueryDetailTickMatchPoolMatches.Response QueryDetailTickMatchPoolMatches(QueryDetailTickMatchPoolMatches input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -318,7 +318,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayMatchPoolPodTickMatchResponse?> QueryDetailTickMatchPoolMatchesAsync(QueryDetailTickMatchPoolMatches input)
+        public async Task<QueryDetailTickMatchPoolMatches.Response> QueryDetailTickMatchPoolMatchesAsync(QueryDetailTickMatchPoolMatches input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -326,7 +326,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayMatchPoolPodTickTicketResponse? QueryDetailTickMatchPoolTicket(QueryDetailTickMatchPoolTicket input)
+        public QueryDetailTickMatchPoolTicket.Response QueryDetailTickMatchPoolTicket(QueryDetailTickMatchPoolTicket input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -334,7 +334,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayMatchPoolPodTickTicketResponse?> QueryDetailTickMatchPoolTicketAsync(QueryDetailTickMatchPoolTicket input)
+        public async Task<QueryDetailTickMatchPoolTicket.Response> QueryDetailTickMatchPoolTicketAsync(QueryDetailTickMatchPoolTicket input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -342,7 +342,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayMatchHistorQueryResponse? QueryMatchHistories(QueryMatchHistories input)
+        public QueryMatchHistories.Response QueryMatchHistories(QueryMatchHistories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -350,7 +350,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayMatchHistorQueryResponse?> QueryMatchHistoriesAsync(QueryMatchHistories input)
+        public async Task<QueryMatchHistories.Response> QueryMatchHistoriesAsync(QueryMatchHistories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -358,7 +358,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayMatchTicketHistoryQueryResponse? QueryMatchTicketHistories(QueryMatchTicketHistories input)
+        public QueryMatchTicketHistories.Response QueryMatchTicketHistories(QueryMatchTicketHistories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -366,7 +366,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayMatchTicketHistoryQueryResponse?> QueryMatchTicketHistoriesAsync(QueryMatchTicketHistories input)
+        public async Task<QueryMatchTicketHistories.Response> QueryMatchTicketHistoriesAsync(QueryMatchTicketHistories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -374,7 +374,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayMatchesQueryResponse? QueryXrayMatch(QueryXrayMatch input)
+        public QueryXrayMatch.Response QueryXrayMatch(QueryXrayMatch input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -382,7 +382,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayMatchesQueryResponse?> QueryXrayMatchAsync(QueryXrayMatch input)
+        public async Task<QueryXrayMatch.Response> QueryXrayMatchAsync(QueryXrayMatch input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -390,7 +390,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayAcquiringDsQueryResponse? QueryAcquiringDS(QueryAcquiringDS input)
+        public QueryAcquiringDS.Response QueryAcquiringDS(QueryAcquiringDS input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -398,7 +398,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayAcquiringDsQueryResponse?> QueryAcquiringDSAsync(QueryAcquiringDS input)
+        public async Task<QueryAcquiringDS.Response> QueryAcquiringDSAsync(QueryAcquiringDS input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -406,7 +406,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayAcquiringDsWaitTimeQueryResponse? QueryAcquiringDSWaitTimeAvg(QueryAcquiringDSWaitTimeAvg input)
+        public QueryAcquiringDSWaitTimeAvg.Response QueryAcquiringDSWaitTimeAvg(QueryAcquiringDSWaitTimeAvg input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -414,7 +414,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayAcquiringDsWaitTimeQueryResponse?> QueryAcquiringDSWaitTimeAvgAsync(QueryAcquiringDSWaitTimeAvg input)
+        public async Task<QueryAcquiringDSWaitTimeAvg.Response> QueryAcquiringDSWaitTimeAvgAsync(QueryAcquiringDSWaitTimeAvg input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -422,7 +422,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayMatchLengthDurationQueryResponse? QueryMatchLengthDurationpAvg(QueryMatchLengthDurationpAvg input)
+        public QueryMatchLengthDurationpAvg.Response QueryMatchLengthDurationpAvg(QueryMatchLengthDurationpAvg input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -430,7 +430,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayMatchLengthDurationQueryResponse?> QueryMatchLengthDurationpAvgAsync(QueryMatchLengthDurationpAvg input)
+        public async Task<QueryMatchLengthDurationpAvg.Response> QueryMatchLengthDurationpAvgAsync(QueryMatchLengthDurationpAvg input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -438,7 +438,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayMatchLengthDurationQueryResponse? QueryMatchLengthDurationp99(QueryMatchLengthDurationp99 input)
+        public QueryMatchLengthDurationp99.Response QueryMatchLengthDurationp99(QueryMatchLengthDurationp99 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -446,7 +446,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayMatchLengthDurationQueryResponse?> QueryMatchLengthDurationp99Async(QueryMatchLengthDurationp99 input)
+        public async Task<QueryMatchLengthDurationp99.Response> QueryMatchLengthDurationp99Async(QueryMatchLengthDurationp99 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -454,7 +454,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayTotalActiveSessionQueryResponse? QueryTotalActiveSession(QueryTotalActiveSession input)
+        public QueryTotalActiveSession.Response QueryTotalActiveSession(QueryTotalActiveSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -462,7 +462,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayTotalActiveSessionQueryResponse?> QueryTotalActiveSessionAsync(QueryTotalActiveSession input)
+        public async Task<QueryTotalActiveSession.Response> QueryTotalActiveSessionAsync(QueryTotalActiveSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -470,7 +470,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayMatchMatchmakingQueryResponse? QueryTotalMatchmakingMatch(QueryTotalMatchmakingMatch input)
+        public QueryTotalMatchmakingMatch.Response QueryTotalMatchmakingMatch(QueryTotalMatchmakingMatch input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -478,7 +478,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayMatchMatchmakingQueryResponse?> QueryTotalMatchmakingMatchAsync(QueryTotalMatchmakingMatch input)
+        public async Task<QueryTotalMatchmakingMatch.Response> QueryTotalMatchmakingMatchAsync(QueryTotalMatchmakingMatch input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -486,7 +486,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayTotalPlayerPersessionAVGQueryResponse? QueryTotalPlayerPersession(QueryTotalPlayerPersession input)
+        public QueryTotalPlayerPersession.Response QueryTotalPlayerPersession(QueryTotalPlayerPersession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -494,7 +494,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayTotalPlayerPersessionAVGQueryResponse?> QueryTotalPlayerPersessionAsync(QueryTotalPlayerPersession input)
+        public async Task<QueryTotalPlayerPersession.Response> QueryTotalPlayerPersessionAsync(QueryTotalPlayerPersession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -502,7 +502,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayCanceledMatchmakingTicketQueryResponse? QueryTotalMatchmakingCanceled(QueryTotalMatchmakingCanceled input)
+        public QueryTotalMatchmakingCanceled.Response QueryTotalMatchmakingCanceled(QueryTotalMatchmakingCanceled input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -510,7 +510,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayCanceledMatchmakingTicketQueryResponse?> QueryTotalMatchmakingCanceledAsync(QueryTotalMatchmakingCanceled input)
+        public async Task<QueryTotalMatchmakingCanceled.Response> QueryTotalMatchmakingCanceledAsync(QueryTotalMatchmakingCanceled input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -518,7 +518,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayCreatedMatchmakingTicketQueryResponse? QueryTotalMatchmakingCreated(QueryTotalMatchmakingCreated input)
+        public QueryTotalMatchmakingCreated.Response QueryTotalMatchmakingCreated(QueryTotalMatchmakingCreated input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -526,7 +526,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayCreatedMatchmakingTicketQueryResponse?> QueryTotalMatchmakingCreatedAsync(QueryTotalMatchmakingCreated input)
+        public async Task<QueryTotalMatchmakingCreated.Response> QueryTotalMatchmakingCreatedAsync(QueryTotalMatchmakingCreated input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -534,7 +534,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayExpiredMatchmakingTicketQueryResponse? QueryTotalMatchmakingExpired(QueryTotalMatchmakingExpired input)
+        public QueryTotalMatchmakingExpired.Response QueryTotalMatchmakingExpired(QueryTotalMatchmakingExpired input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -542,7 +542,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayExpiredMatchmakingTicketQueryResponse?> QueryTotalMatchmakingExpiredAsync(QueryTotalMatchmakingExpired input)
+        public async Task<QueryTotalMatchmakingExpired.Response> QueryTotalMatchmakingExpiredAsync(QueryTotalMatchmakingExpired input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -550,7 +550,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayMatchMatchmakingTicketQueryResponse? QueryTotalMatchmakingMatchTicket(QueryTotalMatchmakingMatchTicket input)
+        public QueryTotalMatchmakingMatchTicket.Response QueryTotalMatchmakingMatchTicket(QueryTotalMatchmakingMatchTicket input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -558,7 +558,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayMatchMatchmakingTicketQueryResponse?> QueryTotalMatchmakingMatchTicketAsync(QueryTotalMatchmakingMatchTicket input)
+        public async Task<QueryTotalMatchmakingMatchTicket.Response> QueryTotalMatchmakingMatchTicketAsync(QueryTotalMatchmakingMatchTicket input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -566,7 +566,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayTicketObservabilityResponse? CreateXrayTicketObservability(CreateXrayTicketObservability input)
+        public CreateXrayTicketObservability.Response CreateXrayTicketObservability(CreateXrayTicketObservability input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -574,7 +574,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayTicketObservabilityResponse?> CreateXrayTicketObservabilityAsync(CreateXrayTicketObservability input)
+        public async Task<CreateXrayTicketObservability.Response> CreateXrayTicketObservabilityAsync(CreateXrayTicketObservability input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -582,7 +582,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayBulkTicketObservabilityResponse? CreateXrayBulkTicketObservability(CreateXrayBulkTicketObservability input)
+        public CreateXrayBulkTicketObservability.Response CreateXrayBulkTicketObservability(CreateXrayBulkTicketObservability input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -590,7 +590,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayBulkTicketObservabilityResponse?> CreateXrayBulkTicketObservabilityAsync(CreateXrayBulkTicketObservability input)
+        public async Task<CreateXrayBulkTicketObservability.Response> CreateXrayBulkTicketObservabilityAsync(CreateXrayBulkTicketObservability input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -598,7 +598,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayTicketQueryResponse? QueryXrayTimelineByTicketID(QueryXrayTimelineByTicketID input)
+        public QueryXrayTimelineByTicketID.Response QueryXrayTimelineByTicketID(QueryXrayTimelineByTicketID input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -606,7 +606,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayTicketQueryResponse?> QueryXrayTimelineByTicketIDAsync(QueryXrayTimelineByTicketID input)
+        public async Task<QueryXrayTimelineByTicketID.Response> QueryXrayTimelineByTicketIDAsync(QueryXrayTimelineByTicketID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -614,7 +614,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsXRayTicketQueryResponse? QueryXrayTimelineByUserID(QueryXrayTimelineByUserID input)
+        public QueryXrayTimelineByUserID.Response QueryXrayTimelineByUserID(QueryXrayTimelineByUserID input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -622,7 +622,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsXRayTicketQueryResponse?> QueryXrayTimelineByUserIDAsync(QueryXrayTimelineByUserID input)
+        public async Task<QueryXrayTimelineByUserID.Response> QueryXrayTimelineByUserIDAsync(QueryXrayTimelineByUserID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

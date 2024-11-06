@@ -72,14 +72,14 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             )
             {
                 AdminListReasonGroups op = new AdminListReasonGroups(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminListReasonGroupsBuilder>(this);
                 return op;
             }
 
-            public Model.RestapiReasonGroupListResponse? Execute(
+            public AdminListReasonGroups.Response Execute(
                 string namespace_
             )
             {
@@ -92,11 +92,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.RestapiReasonGroupListResponse?> ExecuteAsync(
+            public async Task<AdminListReasonGroups.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -120,34 +120,46 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.RestapiReasonGroupListResponse>
+        {
+
+            public RestapiErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Reporting::AdminReasons::AdminListReasonGroups";
+        }
+
+        #endregion
+
         public AdminListReasonGroups(
-            string namespace_,
-            long? limit,
-            long? offset
+            string namespace_,            
+            long? limit,            
+            long? offset            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -159,25 +171,31 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.RestapiReasonGroupListResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminListReasonGroups.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminListReasonGroups.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.RestapiReasonGroupListResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.RestapiReasonGroupListResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)500)
             {
-                return JsonSerializer.Deserialize<Model.RestapiReasonGroupListResponse>(payload, ResponseJsonOptions);
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

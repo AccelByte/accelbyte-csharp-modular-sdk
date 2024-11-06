@@ -60,16 +60,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 RevokeItems op = new RevokeItems(this,
-                    namespace_,
-                    transactionId,
-                    userId
+                    namespace_,                    
+                    transactionId,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<RevokeItemsBuilder>(this);
                 return op;
             }
 
-            public Model.RevokeFulfillmentV2Result? Execute(
+            public RevokeItems.Response Execute(
                 string namespace_,
                 string transactionId,
                 string userId
@@ -86,11 +86,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.RevokeFulfillmentV2Result?> ExecuteAsync(
+            public async Task<RevokeItems.Response> ExecuteAsync(
                 string namespace_,
                 string transactionId,
                 string userId
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -122,32 +122,46 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["namespace"] = namespace_;
             PathParams["transactionId"] = transactionId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.RevokeFulfillmentV2Result>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+            public RevokeFulfillmentV2Result? Error409 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Fulfillment::RevokeItems";
+        }
+
+        #endregion
+
         public RevokeItems(
-            string namespace_,
-            string transactionId,
-            string userId
+            string namespace_,            
+            string transactionId,            
+            string userId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["transactionId"] = transactionId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -159,25 +173,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.RevokeFulfillmentV2Result? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public RevokeItems.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new RevokeItems.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.RevokeFulfillmentV2Result>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.RevokeFulfillmentV2Result>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.RevokeFulfillmentV2Result>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)409)
+            {
+                response.Error409 = JsonSerializer.Deserialize<RevokeFulfillmentV2Result>(payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

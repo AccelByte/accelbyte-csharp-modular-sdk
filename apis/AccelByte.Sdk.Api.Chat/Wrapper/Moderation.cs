@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
         }
         #endregion
 
-        public Model.ModelsChatSnapshots? AdminGetChatSnapshot(AdminGetChatSnapshot input)
+        public AdminGetChatSnapshot.Response AdminGetChatSnapshot(AdminGetChatSnapshot input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsChatSnapshots?> AdminGetChatSnapshotAsync(AdminGetChatSnapshot input)
+        public async Task<AdminGetChatSnapshot.Response> AdminGetChatSnapshotAsync(AdminGetChatSnapshot input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -85,23 +85,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteChatSnapshot(AdminDeleteChatSnapshot input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteChatSnapshotAsync(AdminDeleteChatSnapshot input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsChatSnapshots? PublicGetChatSnapshot(PublicGetChatSnapshot input)
+        public AdminDeleteChatSnapshot.Response AdminDeleteChatSnapshot(AdminDeleteChatSnapshot input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -109,7 +93,23 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsChatSnapshots?> PublicGetChatSnapshotAsync(PublicGetChatSnapshot input)
+        public async Task<AdminDeleteChatSnapshot.Response> AdminDeleteChatSnapshotAsync(AdminDeleteChatSnapshot input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetChatSnapshot.Response PublicGetChatSnapshot(PublicGetChatSnapshot input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetChatSnapshot.Response> PublicGetChatSnapshotAsync(PublicGetChatSnapshot input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -57,16 +57,16 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 AdminUpdateType op = new AdminUpdateType(this,
-                    body,
-                    namespace_,
-                    typeId
+                    body,                    
+                    namespace_,                    
+                    typeId                    
                 );
 
                 op.SetBaseFields<AdminUpdateTypeBuilder>(this);
                 return op;
             }
 
-            public Model.ModelsCreateTypeResponse? Execute(
+            public AdminUpdateType.Response Execute(
                 ModelsCreateTypeRequest body,
                 string namespace_,
                 string typeId
@@ -83,11 +83,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsCreateTypeResponse?> ExecuteAsync(
+            public async Task<AdminUpdateType.Response> ExecuteAsync(
                 ModelsCreateTypeRequest body,
                 string namespace_,
                 string typeId
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -118,33 +118,53 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["typeId"] = typeId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsCreateTypeResponse>
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error404 { get; set; } = null;
+
+            public ResponseError? Error409 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Ugc::AdminType::AdminUpdateType";
+        }
+
+        #endregion
+
         public AdminUpdateType(
-            string namespace_,
-            string typeId,
-            Model.ModelsCreateTypeRequest body
+            string namespace_,            
+            string typeId,            
+            Model.ModelsCreateTypeRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["typeId"] = typeId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,25 +176,51 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsCreateTypeResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminUpdateType.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminUpdateType.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsCreateTypeResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsCreateTypeResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsCreateTypeResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)409)
+            {
+                response.Error409 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

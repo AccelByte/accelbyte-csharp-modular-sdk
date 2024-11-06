@@ -265,7 +265,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public SearchSessions.SearchSessionsBuilder SearchSessionsOp
         {
             get
@@ -277,7 +277,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetSessionHistoryDetailed.GetSessionHistoryDetailedBuilder GetSessionHistoryDetailedOp
         {
             get
@@ -311,7 +311,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public SearchSessionsV2.SearchSessionsV2Builder SearchSessionsV2Op
         {
             get
@@ -325,7 +325,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
         }
         #endregion
 
-        public Model.ModelsGetChannelsResponse? GetAllChannelsHandler(GetAllChannelsHandler input)
+        public GetAllChannelsHandler.Response GetAllChannelsHandler(GetAllChannelsHandler input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -333,7 +333,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetChannelsResponse?> GetAllChannelsHandlerAsync(GetAllChannelsHandler input)
+        public async Task<GetAllChannelsHandler.Response> GetAllChannelsHandlerAsync(GetAllChannelsHandler input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -341,7 +341,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCreateChannelResponse? CreateChannelHandler(CreateChannelHandler input)
+        public CreateChannelHandler.Response CreateChannelHandler(CreateChannelHandler input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -349,7 +349,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCreateChannelResponse?> CreateChannelHandlerAsync(CreateChannelHandler input)
+        public async Task<CreateChannelHandler.Response> CreateChannelHandlerAsync(CreateChannelHandler input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -357,7 +357,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsTicketMetricResultRecord? GetMatchPoolMetric(GetMatchPoolMetric input)
+        public GetMatchPoolMetric.Response GetMatchPoolMetric(GetMatchPoolMetric input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -365,7 +365,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsTicketMetricResultRecord?> GetMatchPoolMetricAsync(GetMatchPoolMetric input)
+        public async Task<GetMatchPoolMetric.Response> GetMatchPoolMetricAsync(GetMatchPoolMetric input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -373,23 +373,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteChannelHandler(DeleteChannelHandler input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteChannelHandlerAsync(DeleteChannelHandler input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsMatchResultResponse? StoreMatchResults(StoreMatchResults input)
+        public DeleteChannelHandler.Response DeleteChannelHandler(DeleteChannelHandler input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -397,7 +381,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsMatchResultResponse?> StoreMatchResultsAsync(StoreMatchResults input)
+        public async Task<DeleteChannelHandler.Response> DeleteChannelHandlerAsync(DeleteChannelHandler input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -405,7 +389,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsRebalanceResponse? Rebalance(Rebalance input)
+        public StoreMatchResults.Response StoreMatchResults(StoreMatchResults input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -413,7 +397,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsRebalanceResponse?> RebalanceAsync(Rebalance input)
+        public async Task<StoreMatchResults.Response> StoreMatchResultsAsync(StoreMatchResults input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -421,39 +405,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void QueueSessionHandler(QueueSessionHandler input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task QueueSessionHandlerAsync(QueueSessionHandler input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void DequeueSessionHandler(DequeueSessionHandler input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DequeueSessionHandlerAsync(DequeueSessionHandler input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsMatchmakingResult? QuerySessionHandler(QuerySessionHandler input)
+        public Rebalance.Response Rebalance(Rebalance input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -461,7 +413,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsMatchmakingResult?> QuerySessionHandlerAsync(QuerySessionHandler input)
+        public async Task<Rebalance.Response> RebalanceAsync(Rebalance input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -469,24 +421,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-
-        public Model.ModelsMatchmakingResult<T1>? QuerySessionHandler<T1>(QuerySessionHandler input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsMatchmakingResult<T1>?> QuerySessionHandlerAsync<T1>(QuerySessionHandler input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse<T1>(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Dictionary<string, List<Model.ModelsMatchingParty>>? GetAllPartyInAllChannel(GetAllPartyInAllChannel input)
+        public QueueSessionHandler.Response QueueSessionHandler(QueueSessionHandler input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -494,7 +429,39 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Dictionary<string, List<Model.ModelsMatchingParty>>?> GetAllPartyInAllChannelAsync(GetAllPartyInAllChannel input)
+        public async Task<QueueSessionHandler.Response> QueueSessionHandlerAsync(QueueSessionHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DequeueSessionHandler.Response DequeueSessionHandler(DequeueSessionHandler input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DequeueSessionHandler.Response> DequeueSessionHandlerAsync(DequeueSessionHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public QuerySessionHandler.Response QuerySessionHandler(QuerySessionHandler input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<QuerySessionHandler.Response> QuerySessionHandlerAsync(QuerySessionHandler input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -503,7 +470,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.Payload);
         }
 
-        public Dictionary<string, List<Model.ModelsMatchingParty<T1>>>? GetAllPartyInAllChannel<T1>(GetAllPartyInAllChannel input)
+        public QuerySessionHandler.Response<T1> QuerySessionHandler<T1>(QuerySessionHandler input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -511,7 +478,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Dictionary<string, List<Model.ModelsMatchingParty<T1>>>?> GetAllPartyInAllChannelAsync<T1>(GetAllPartyInAllChannel input)
+        public async Task<QuerySessionHandler.Response<T1>> QuerySessionHandlerAsync<T1>(QuerySessionHandler input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -519,7 +486,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelsMatchmakingResult>? BulkGetSessions(BulkGetSessions input)
+        public GetAllPartyInAllChannel.Response GetAllPartyInAllChannel(GetAllPartyInAllChannel input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -527,7 +494,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsMatchmakingResult>?> BulkGetSessionsAsync(BulkGetSessions input)
+        public async Task<GetAllPartyInAllChannel.Response> GetAllPartyInAllChannelAsync(GetAllPartyInAllChannel input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -536,7 +503,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.Payload);
         }
 
-        public List<Model.ModelsMatchmakingResult<T1>>? BulkGetSessions<T1>(BulkGetSessions input)
+        public GetAllPartyInAllChannel.Response<T1> GetAllPartyInAllChannel<T1>(GetAllPartyInAllChannel input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -544,7 +511,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsMatchmakingResult<T1>>?> BulkGetSessionsAsync<T1>(BulkGetSessions input)
+        public async Task<GetAllPartyInAllChannel.Response<T1>> GetAllPartyInAllChannelAsync<T1>(GetAllPartyInAllChannel input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -552,7 +519,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Stream? ExportChannels(ExportChannels input)
+        public BulkGetSessions.Response BulkGetSessions(BulkGetSessions input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -560,71 +527,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Stream?> ExportChannelsAsync(ExportChannels input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsImportConfigResponse? ImportChannels(ImportChannels input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsImportConfigResponse?> ImportChannelsAsync(ImportChannels input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsChannelV1? GetSingleMatchmakingChannel(GetSingleMatchmakingChannel input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<Model.ModelsChannelV1?> GetSingleMatchmakingChannelAsync(GetSingleMatchmakingChannel input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void UpdateMatchmakingChannel(UpdateMatchmakingChannel input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task UpdateMatchmakingChannelAsync(UpdateMatchmakingChannel input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public List<Model.ModelsMatchingParty>? GetAllPartyInChannel(GetAllPartyInChannel input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<List<Model.ModelsMatchingParty>?> GetAllPartyInChannelAsync(GetAllPartyInChannel input)
+        public async Task<BulkGetSessions.Response> BulkGetSessionsAsync(BulkGetSessions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -633,7 +536,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.Payload);
         }
 
-        public List<Model.ModelsMatchingParty<T1>>? GetAllPartyInChannel<T1>(GetAllPartyInChannel input)
+        public BulkGetSessions.Response<T1> BulkGetSessions<T1>(BulkGetSessions input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -641,7 +544,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsMatchingParty<T1>>?> GetAllPartyInChannelAsync<T1>(GetAllPartyInChannel input)
+        public async Task<BulkGetSessions.Response<T1>> BulkGetSessionsAsync<T1>(BulkGetSessions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -649,7 +552,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelsMatchmakingResult>? GetAllSessionsInChannel(GetAllSessionsInChannel input)
+        public ExportChannels.Response ExportChannels(ExportChannels input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -657,7 +560,71 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsMatchmakingResult>?> GetAllSessionsInChannelAsync(GetAllSessionsInChannel input)
+        public async Task<ExportChannels.Response> ExportChannelsAsync(ExportChannels input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public ImportChannels.Response ImportChannels(ImportChannels input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<ImportChannels.Response> ImportChannelsAsync(ImportChannels input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetSingleMatchmakingChannel.Response GetSingleMatchmakingChannel(GetSingleMatchmakingChannel input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetSingleMatchmakingChannel.Response> GetSingleMatchmakingChannelAsync(GetSingleMatchmakingChannel input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public UpdateMatchmakingChannel.Response UpdateMatchmakingChannel(UpdateMatchmakingChannel input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpdateMatchmakingChannel.Response> UpdateMatchmakingChannelAsync(UpdateMatchmakingChannel input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetAllPartyInChannel.Response GetAllPartyInChannel(GetAllPartyInChannel input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetAllPartyInChannel.Response> GetAllPartyInChannelAsync(GetAllPartyInChannel input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -666,7 +633,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.Payload);
         }
 
-        public List<Model.ModelsMatchmakingResult<T1>>? GetAllSessionsInChannel<T1>(GetAllSessionsInChannel input)
+        public GetAllPartyInChannel.Response<T1> GetAllPartyInChannel<T1>(GetAllPartyInChannel input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -674,7 +641,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsMatchmakingResult<T1>>?> GetAllSessionsInChannelAsync<T1>(GetAllSessionsInChannel input)
+        public async Task<GetAllPartyInChannel.Response<T1>> GetAllPartyInChannelAsync<T1>(GetAllPartyInChannel input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -682,55 +649,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AddUserIntoSessionInChannel(AddUserIntoSessionInChannel input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AddUserIntoSessionInChannelAsync(AddUserIntoSessionInChannel input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void DeleteSessionInChannel(DeleteSessionInChannel input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteSessionInChannelAsync(DeleteSessionInChannel input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void DeleteUserFromSessionInChannel(DeleteUserFromSessionInChannel input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteUserFromSessionInChannelAsync(DeleteUserFromSessionInChannel input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsStatResumeResponse? GetStatData(GetStatData input)
+        public GetAllSessionsInChannel.Response GetAllSessionsInChannel(GetAllSessionsInChannel input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -738,7 +657,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsStatResumeResponse?> GetStatDataAsync(GetStatData input)
+        public async Task<GetAllSessionsInChannel.Response> GetAllSessionsInChannelAsync(GetAllSessionsInChannel input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -746,9 +665,24 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ServiceGetSessionHistorySearchResponse? SearchSessions(SearchSessions input)
+
+        public GetAllSessionsInChannel.Response<T1> GetAllSessionsInChannel<T1>(GetAllSessionsInChannel input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetAllSessionsInChannel.Response<T1>> GetAllSessionsInChannelAsync<T1>(GetAllSessionsInChannel input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AddUserIntoSessionInChannel.Response AddUserIntoSessionInChannel(AddUserIntoSessionInChannel input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -756,7 +690,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ServiceGetSessionHistorySearchResponse?> SearchSessionsAsync(SearchSessions input)
+        public async Task<AddUserIntoSessionInChannel.Response> AddUserIntoSessionInChannelAsync(AddUserIntoSessionInChannel input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -764,10 +698,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public List<Model.ServiceGetSessionHistoryDetailedResponseItem>? GetSessionHistoryDetailed(GetSessionHistoryDetailed input)
+        public DeleteSessionInChannel.Response DeleteSessionInChannel(DeleteSessionInChannel input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -775,7 +706,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ServiceGetSessionHistoryDetailedResponseItem>?> GetSessionHistoryDetailedAsync(GetSessionHistoryDetailed input)
+        public async Task<DeleteSessionInChannel.Response> DeleteSessionInChannelAsync(DeleteSessionInChannel input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -783,8 +714,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public List<Model.ModelsChannelV1>? PublicGetAllMatchmakingChannel(PublicGetAllMatchmakingChannel input)
+        public DeleteUserFromSessionInChannel.Response DeleteUserFromSessionInChannel(DeleteUserFromSessionInChannel input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -792,7 +722,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsChannelV1>?> PublicGetAllMatchmakingChannelAsync(PublicGetAllMatchmakingChannel input)
+        public async Task<DeleteUserFromSessionInChannel.Response> DeleteUserFromSessionInChannelAsync(DeleteUserFromSessionInChannel input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -800,7 +730,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsChannelV1? PublicGetSingleMatchmakingChannel(PublicGetSingleMatchmakingChannel input)
+        public GetStatData.Response GetStatData(GetStatData input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -808,7 +738,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsChannelV1?> PublicGetSingleMatchmakingChannelAsync(PublicGetSingleMatchmakingChannel input)
+        public async Task<GetStatData.Response> GetStatDataAsync(GetStatData input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -816,9 +746,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ServiceGetSessionHistorySearchResponseV2? SearchSessionsV2(SearchSessionsV2 input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public SearchSessions.Response SearchSessions(SearchSessions input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -826,7 +756,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ServiceGetSessionHistorySearchResponseV2?> SearchSessionsV2Async(SearchSessionsV2 input)
+        public async Task<SearchSessions.Response> SearchSessionsAsync(SearchSessions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -834,6 +764,76 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetSessionHistoryDetailed.Response GetSessionHistoryDetailed(GetSessionHistoryDetailed input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetSessionHistoryDetailed.Response> GetSessionHistoryDetailedAsync(GetSessionHistoryDetailed input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning restore ab_deprecated_operation
+        public PublicGetAllMatchmakingChannel.Response PublicGetAllMatchmakingChannel(PublicGetAllMatchmakingChannel input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetAllMatchmakingChannel.Response> PublicGetAllMatchmakingChannelAsync(PublicGetAllMatchmakingChannel input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetSingleMatchmakingChannel.Response PublicGetSingleMatchmakingChannel(PublicGetSingleMatchmakingChannel input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetSingleMatchmakingChannel.Response> PublicGetSingleMatchmakingChannelAsync(PublicGetSingleMatchmakingChannel input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public SearchSessionsV2.Response SearchSessionsV2(SearchSessionsV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<SearchSessionsV2.Response> SearchSessionsV2Async(SearchSessionsV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning restore ab_deprecated_operation
     }
 }

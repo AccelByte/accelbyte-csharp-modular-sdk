@@ -33,7 +33,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// 
     ///   *  Returns : updated namespace slot config
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class UpdateNamespaceSlotConfig : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -72,15 +72,15 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 UpdateNamespaceSlotConfig op = new UpdateNamespaceSlotConfig(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<UpdateNamespaceSlotConfigBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public Model.NamespaceSlotConfigInfo? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public UpdateNamespaceSlotConfig.Response Execute(
                 string namespace_
             )
             {
@@ -93,11 +93,11 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.NamespaceSlotConfigInfo?> ExecuteAsync(
+            public async Task<UpdateNamespaceSlotConfig.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -121,31 +121,41 @@ namespace AccelByte.Sdk.Api.Social.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = builder.Body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.NamespaceSlotConfigInfo>
+        {
+
+
+            protected override string GetFullOperationId() => "Social::SlotConfig::UpdateNamespaceSlotConfig";
+        }
+
+        #endregion
+
         public UpdateNamespaceSlotConfig(
-            string namespace_,
-            Model.SlotConfigUpdate body
+            string namespace_,            
+            Model.SlotConfigUpdate body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -157,25 +167,26 @@ namespace AccelByte.Sdk.Api.Social.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.NamespaceSlotConfigInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public UpdateNamespaceSlotConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new UpdateNamespaceSlotConfig.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.NamespaceSlotConfigInfo>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.NamespaceSlotConfigInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.NamespaceSlotConfigInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

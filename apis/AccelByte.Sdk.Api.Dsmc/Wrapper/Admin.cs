@@ -212,7 +212,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
         }
         #endregion
 
-        public Model.ModelsWorkerConfig? GetWorkerConfig(GetWorkerConfig input)
+        public GetWorkerConfig.Response GetWorkerConfig(GetWorkerConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -220,7 +220,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsWorkerConfig?> GetWorkerConfigAsync(GetWorkerConfig input)
+        public async Task<GetWorkerConfig.Response> GetWorkerConfigAsync(GetWorkerConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -228,23 +228,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void UpdateWorkerConfig(UpdateWorkerConfig input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task UpdateWorkerConfigAsync(UpdateWorkerConfig input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsWorkerConfig? CreateWorkerConfig(CreateWorkerConfig input)
+        public UpdateWorkerConfig.Response UpdateWorkerConfig(UpdateWorkerConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -252,7 +236,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsWorkerConfig?> CreateWorkerConfigAsync(CreateWorkerConfig input)
+        public async Task<UpdateWorkerConfig.Response> UpdateWorkerConfigAsync(UpdateWorkerConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -260,7 +244,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsAddBufferResponse? AddBuffer(AddBuffer input)
+        public CreateWorkerConfig.Response CreateWorkerConfig(CreateWorkerConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -268,7 +252,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsAddBufferResponse?> AddBufferAsync(AddBuffer input)
+        public async Task<CreateWorkerConfig.Response> CreateWorkerConfigAsync(CreateWorkerConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -276,7 +260,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsListServerResponse? ListServer(ListServer input)
+        public AddBuffer.Response AddBuffer(AddBuffer input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -284,7 +268,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListServerResponse?> ListServerAsync(ListServer input)
+        public async Task<AddBuffer.Response> AddBufferAsync(AddBuffer input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -292,7 +276,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCountServerResponse? CountServer(CountServer input)
+        public ListServer.Response ListServer(ListServer input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -300,7 +284,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCountServerResponse?> CountServerAsync(CountServer input)
+        public async Task<ListServer.Response> ListServerAsync(ListServer input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -308,7 +292,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsDetailedCountServerResponse? CountServerDetailed(CountServerDetailed input)
+        public CountServer.Response CountServer(CountServer input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -316,7 +300,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsDetailedCountServerResponse?> CountServerDetailedAsync(CountServerDetailed input)
+        public async Task<CountServer.Response> CountServerAsync(CountServer input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -324,7 +308,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsListServerResponse? ListLocalServer(ListLocalServer input)
+        public CountServerDetailed.Response CountServerDetailed(CountServerDetailed input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -332,7 +316,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListServerResponse?> ListLocalServerAsync(ListLocalServer input)
+        public async Task<CountServerDetailed.Response> CountServerDetailedAsync(CountServerDetailed input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -340,23 +324,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteLocalServer(DeleteLocalServer input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteLocalServerAsync(DeleteLocalServer input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsServerDetailsResponse? GetServer(GetServer input)
+        public ListLocalServer.Response ListLocalServer(ListLocalServer input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -364,7 +332,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsServerDetailsResponse?> GetServerAsync(GetServer input)
+        public async Task<ListLocalServer.Response> ListLocalServerAsync(ListLocalServer input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -372,23 +340,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteServer(DeleteServer input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteServerAsync(DeleteServer input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsListSessionResponse? ListSession(ListSession input)
+        public DeleteLocalServer.Response DeleteLocalServer(DeleteLocalServer input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -396,7 +348,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListSessionResponse?> ListSessionAsync(ListSession input)
+        public async Task<DeleteLocalServer.Response> DeleteLocalServerAsync(DeleteLocalServer input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -404,7 +356,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCountSessionResponse? CountSession(CountSession input)
+        public GetServer.Response GetServer(GetServer input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -412,7 +364,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCountSessionResponse?> CountSessionAsync(CountSession input)
+        public async Task<GetServer.Response> GetServerAsync(GetServer input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -420,50 +372,98 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteSession(DeleteSession input)
+        public DeleteServer.Response DeleteServer(DeleteServer input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteSessionAsync(DeleteSession input)
+        public async Task<DeleteServer.Response> DeleteServerAsync(DeleteServer input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void RunGhostCleanerRequestHandler(RunGhostCleanerRequestHandler input)
+        public ListSession.Response ListSession(ListSession input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task RunGhostCleanerRequestHandlerAsync(RunGhostCleanerRequestHandler input)
+        public async Task<ListSession.Response> ListSessionAsync(ListSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void RunZombieCleanerRequestHandler(RunZombieCleanerRequestHandler input)
+        public CountSession.Response CountSession(CountSession input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task RunZombieCleanerRequestHandlerAsync(RunZombieCleanerRequestHandler input)
+        public async Task<CountSession.Response> CountSessionAsync(CountSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeleteSession.Response DeleteSession(DeleteSession input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteSession.Response> DeleteSessionAsync(DeleteSession input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public RunGhostCleanerRequestHandler.Response RunGhostCleanerRequestHandler(RunGhostCleanerRequestHandler input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<RunGhostCleanerRequestHandler.Response> RunGhostCleanerRequestHandlerAsync(RunGhostCleanerRequestHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public RunZombieCleanerRequestHandler.Response RunZombieCleanerRequestHandler(RunZombieCleanerRequestHandler input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<RunZombieCleanerRequestHandler.Response> RunZombieCleanerRequestHandlerAsync(RunZombieCleanerRequestHandler input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

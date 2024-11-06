@@ -69,50 +69,50 @@ namespace AccelByte.Sdk.Api.Qosm.Wrapper
         }
         #endregion
 
-        public void UpdateServerConfig(UpdateServerConfig input)
+        public UpdateServerConfig.Response UpdateServerConfig(UpdateServerConfig input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task UpdateServerConfigAsync(UpdateServerConfig input)
+        public async Task<UpdateServerConfig.Response> UpdateServerConfigAsync(UpdateServerConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteServer(DeleteServer input)
+        public DeleteServer.Response DeleteServer(DeleteServer input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteServerAsync(DeleteServer input)
+        public async Task<DeleteServer.Response> DeleteServerAsync(DeleteServer input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public void SetServerAlias(SetServerAlias input)
+        public SetServerAlias.Response SetServerAlias(SetServerAlias input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task SetServerAliasAsync(SetServerAlias input)
+        public async Task<SetServerAlias.Response> SetServerAliasAsync(SetServerAlias input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

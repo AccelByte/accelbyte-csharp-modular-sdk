@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public Model.ModelsAddDownloadCountResponse? PublicAddDownloadCountV2(PublicAddDownloadCountV2 input)
+        public PublicAddDownloadCountV2.Response PublicAddDownloadCountV2(PublicAddDownloadCountV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsAddDownloadCountResponse?> PublicAddDownloadCountV2Async(PublicAddDownloadCountV2 input)
+        public async Task<PublicAddDownloadCountV2.Response> PublicAddDownloadCountV2Async(PublicAddDownloadCountV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPaginatedContentDownloaderResponse? PublicListContentDownloaderV2(PublicListContentDownloaderV2 input)
+        public PublicListContentDownloaderV2.Response PublicListContentDownloaderV2(PublicListContentDownloaderV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedContentDownloaderResponse?> PublicListContentDownloaderV2Async(PublicListContentDownloaderV2 input)
+        public async Task<PublicListContentDownloaderV2.Response> PublicListContentDownloaderV2Async(PublicListContentDownloaderV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

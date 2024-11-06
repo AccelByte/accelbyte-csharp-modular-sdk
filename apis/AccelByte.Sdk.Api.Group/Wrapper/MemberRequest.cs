@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
         }
         #endregion
 
-        public Model.ModelsGetMemberRequestsListResponseV1? GetGroupJoinRequestPublicV1(GetGroupJoinRequestPublicV1 input)
+        public GetGroupJoinRequestPublicV1.Response GetGroupJoinRequestPublicV1(GetGroupJoinRequestPublicV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetMemberRequestsListResponseV1?> GetGroupJoinRequestPublicV1Async(GetGroupJoinRequestPublicV1 input)
+        public async Task<GetGroupJoinRequestPublicV1.Response> GetGroupJoinRequestPublicV1Async(GetGroupJoinRequestPublicV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetMemberRequestsListResponseV1? GetGroupInvitationRequestPublicV1(GetGroupInvitationRequestPublicV1 input)
+        public GetGroupInvitationRequestPublicV1.Response GetGroupInvitationRequestPublicV1(GetGroupInvitationRequestPublicV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetMemberRequestsListResponseV1?> GetGroupInvitationRequestPublicV1Async(GetGroupInvitationRequestPublicV1 input)
+        public async Task<GetGroupInvitationRequestPublicV1.Response> GetGroupInvitationRequestPublicV1Async(GetGroupInvitationRequestPublicV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetMemberRequestsListResponseV1? GetGroupInviteRequestPublicV2(GetGroupInviteRequestPublicV2 input)
+        public GetGroupInviteRequestPublicV2.Response GetGroupInviteRequestPublicV2(GetGroupInviteRequestPublicV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetMemberRequestsListResponseV1?> GetGroupInviteRequestPublicV2Async(GetGroupInviteRequestPublicV2 input)
+        public async Task<GetGroupInviteRequestPublicV2.Response> GetGroupInviteRequestPublicV2Async(GetGroupInviteRequestPublicV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetMemberRequestsListResponseV1? GetGroupJoinRequestPublicV2(GetGroupJoinRequestPublicV2 input)
+        public GetGroupJoinRequestPublicV2.Response GetGroupJoinRequestPublicV2(GetGroupJoinRequestPublicV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -147,7 +147,7 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetMemberRequestsListResponseV1?> GetGroupJoinRequestPublicV2Async(GetGroupJoinRequestPublicV2 input)
+        public async Task<GetGroupJoinRequestPublicV2.Response> GetGroupJoinRequestPublicV2Async(GetGroupJoinRequestPublicV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -155,7 +155,7 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetMemberRequestsListResponseV1? GetMyGroupJoinRequestV2(GetMyGroupJoinRequestV2 input)
+        public GetMyGroupJoinRequestV2.Response GetMyGroupJoinRequestV2(GetMyGroupJoinRequestV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -163,7 +163,7 @@ namespace AccelByte.Sdk.Api.Group.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetMemberRequestsListResponseV1?> GetMyGroupJoinRequestV2Async(GetMyGroupJoinRequestV2 input)
+        public async Task<GetMyGroupJoinRequestV2.Response> GetMyGroupJoinRequestV2Async(GetMyGroupJoinRequestV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

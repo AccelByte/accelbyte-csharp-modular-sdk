@@ -79,14 +79,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicExistsAnyMyActiveEntitlement op = new PublicExistsAnyMyActiveEntitlement(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicExistsAnyMyActiveEntitlementBuilder>(this);
                 return op;
             }
 
-            public Model.Ownership? Execute(
+            public PublicExistsAnyMyActiveEntitlement.Response Execute(
                 string namespace_
             )
             {
@@ -99,11 +99,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.Ownership?> ExecuteAsync(
+            public async Task<PublicExistsAnyMyActiveEntitlement.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -127,43 +127,53 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.AppIds is not null) QueryParams["appIds"] = builder.AppIds;
             if (builder.ItemIds is not null) QueryParams["itemIds"] = builder.ItemIds;
             if (builder.Skus is not null) QueryParams["skus"] = builder.Skus;
+            
 
-
-
+            
             CollectionFormatMap["appIds"] = "multi";
             CollectionFormatMap["itemIds"] = "multi";
             CollectionFormatMap["skus"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.Ownership>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Entitlement::PublicExistsAnyMyActiveEntitlement";
+        }
+
+        #endregion
+
         public PublicExistsAnyMyActiveEntitlement(
-            string namespace_,
-            List<string>? appIds,
-            List<string>? itemIds,
-            List<string>? skus
+            string namespace_,            
+            List<string>? appIds,            
+            List<string>? itemIds,            
+            List<string>? skus            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (appIds is not null) QueryParams["appIds"] = appIds;
             if (itemIds is not null) QueryParams["itemIds"] = itemIds;
             if (skus is not null) QueryParams["skus"] = skus;
+            
 
-
-
+            
             CollectionFormatMap["appIds"] = "multi";
             CollectionFormatMap["itemIds"] = "multi";
             CollectionFormatMap["skus"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -172,28 +182,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.Ownership? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicExistsAnyMyActiveEntitlement.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicExistsAnyMyActiveEntitlement.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.Ownership>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.Ownership>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.Ownership>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

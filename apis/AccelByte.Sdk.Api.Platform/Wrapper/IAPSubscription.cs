@@ -157,7 +157,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.ThirdPartyUserSubscriptionPagingSlicedResult? QueryThirdPartySubscription(QueryThirdPartySubscription input)
+        public QueryThirdPartySubscription.Response QueryThirdPartySubscription(QueryThirdPartySubscription input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -165,7 +165,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ThirdPartyUserSubscriptionPagingSlicedResult?> QueryThirdPartySubscriptionAsync(QueryThirdPartySubscription input)
+        public async Task<QueryThirdPartySubscription.Response> QueryThirdPartySubscriptionAsync(QueryThirdPartySubscription input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -173,7 +173,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ThirdPartyUserSubscriptionPagingSlicedResult? QueryUserThirdPartySubscription(QueryUserThirdPartySubscription input)
+        public QueryUserThirdPartySubscription.Response QueryUserThirdPartySubscription(QueryUserThirdPartySubscription input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -181,7 +181,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ThirdPartyUserSubscriptionPagingSlicedResult?> QueryUserThirdPartySubscriptionAsync(QueryUserThirdPartySubscription input)
+        public async Task<QueryUserThirdPartySubscription.Response> QueryUserThirdPartySubscriptionAsync(QueryUserThirdPartySubscription input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -189,7 +189,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ThirdPartySubscriptionOwnership? GetThirdPartyPlatformSubscriptionOwnershipByGroupId(GetThirdPartyPlatformSubscriptionOwnershipByGroupId input)
+        public GetThirdPartyPlatformSubscriptionOwnershipByGroupId.Response GetThirdPartyPlatformSubscriptionOwnershipByGroupId(GetThirdPartyPlatformSubscriptionOwnershipByGroupId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -197,7 +197,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ThirdPartySubscriptionOwnership?> GetThirdPartyPlatformSubscriptionOwnershipByGroupIdAsync(GetThirdPartyPlatformSubscriptionOwnershipByGroupId input)
+        public async Task<GetThirdPartyPlatformSubscriptionOwnershipByGroupId.Response> GetThirdPartyPlatformSubscriptionOwnershipByGroupIdAsync(GetThirdPartyPlatformSubscriptionOwnershipByGroupId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -205,7 +205,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ThirdPartySubscriptionOwnership? GetThirdPartyPlatformSubscriptionOwnershipByProductId(GetThirdPartyPlatformSubscriptionOwnershipByProductId input)
+        public GetThirdPartyPlatformSubscriptionOwnershipByProductId.Response GetThirdPartyPlatformSubscriptionOwnershipByProductId(GetThirdPartyPlatformSubscriptionOwnershipByProductId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -213,7 +213,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ThirdPartySubscriptionOwnership?> GetThirdPartyPlatformSubscriptionOwnershipByProductIdAsync(GetThirdPartyPlatformSubscriptionOwnershipByProductId input)
+        public async Task<GetThirdPartyPlatformSubscriptionOwnershipByProductId.Response> GetThirdPartyPlatformSubscriptionOwnershipByProductIdAsync(GetThirdPartyPlatformSubscriptionOwnershipByProductId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -221,7 +221,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ThirdPartySubscriptionTransactionPagingSlicedResult? QueryUserThirdPartySubscriptionTransactions(QueryUserThirdPartySubscriptionTransactions input)
+        public QueryUserThirdPartySubscriptionTransactions.Response QueryUserThirdPartySubscriptionTransactions(QueryUserThirdPartySubscriptionTransactions input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -229,7 +229,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ThirdPartySubscriptionTransactionPagingSlicedResult?> QueryUserThirdPartySubscriptionTransactionsAsync(QueryUserThirdPartySubscriptionTransactions input)
+        public async Task<QueryUserThirdPartySubscriptionTransactions.Response> QueryUserThirdPartySubscriptionTransactionsAsync(QueryUserThirdPartySubscriptionTransactions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -237,7 +237,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ThirdPartySubscriptionTransactionInfo? GetThirdPartySubscriptionDetails(GetThirdPartySubscriptionDetails input)
+        public GetThirdPartySubscriptionDetails.Response GetThirdPartySubscriptionDetails(GetThirdPartySubscriptionDetails input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -245,7 +245,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ThirdPartySubscriptionTransactionInfo?> GetThirdPartySubscriptionDetailsAsync(GetThirdPartySubscriptionDetails input)
+        public async Task<GetThirdPartySubscriptionDetails.Response> GetThirdPartySubscriptionDetailsAsync(GetThirdPartySubscriptionDetails input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -253,7 +253,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ThirdPartySubscriptionTransactionHistoryPagingSlicedResult? GetSubscriptionHistory(GetSubscriptionHistory input)
+        public GetSubscriptionHistory.Response GetSubscriptionHistory(GetSubscriptionHistory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -261,7 +261,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ThirdPartySubscriptionTransactionHistoryPagingSlicedResult?> GetSubscriptionHistoryAsync(GetSubscriptionHistory input)
+        public async Task<GetSubscriptionHistory.Response> GetSubscriptionHistoryAsync(GetSubscriptionHistory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -269,7 +269,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ThirdPartySubscriptionTransactionInfo? SyncSubscriptionTransaction(SyncSubscriptionTransaction input)
+        public SyncSubscriptionTransaction.Response SyncSubscriptionTransaction(SyncSubscriptionTransaction input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -277,7 +277,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ThirdPartySubscriptionTransactionInfo?> SyncSubscriptionTransactionAsync(SyncSubscriptionTransaction input)
+        public async Task<SyncSubscriptionTransaction.Response> SyncSubscriptionTransactionAsync(SyncSubscriptionTransaction input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -285,7 +285,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ThirdPartyUserSubscriptionInfo? GetThirdPartyUserSubscriptionDetails(GetThirdPartyUserSubscriptionDetails input)
+        public GetThirdPartyUserSubscriptionDetails.Response GetThirdPartyUserSubscriptionDetails(GetThirdPartyUserSubscriptionDetails input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -293,7 +293,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ThirdPartyUserSubscriptionInfo?> GetThirdPartyUserSubscriptionDetailsAsync(GetThirdPartyUserSubscriptionDetails input)
+        public async Task<GetThirdPartyUserSubscriptionDetails.Response> GetThirdPartyUserSubscriptionDetailsAsync(GetThirdPartyUserSubscriptionDetails input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -301,7 +301,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ThirdPartyUserSubscriptionInfo? SyncSubscription(SyncSubscription input)
+        public SyncSubscription.Response SyncSubscription(SyncSubscription input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -309,7 +309,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ThirdPartyUserSubscriptionInfo?> SyncSubscriptionAsync(SyncSubscription input)
+        public async Task<SyncSubscription.Response> SyncSubscriptionAsync(SyncSubscription input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -317,7 +317,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ThirdPartyUserSubscriptionPagingSlicedResult? PublicQueryUserThirdPartySubscription(PublicQueryUserThirdPartySubscription input)
+        public PublicQueryUserThirdPartySubscription.Response PublicQueryUserThirdPartySubscription(PublicQueryUserThirdPartySubscription input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -325,7 +325,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ThirdPartyUserSubscriptionPagingSlicedResult?> PublicQueryUserThirdPartySubscriptionAsync(PublicQueryUserThirdPartySubscription input)
+        public async Task<PublicQueryUserThirdPartySubscription.Response> PublicQueryUserThirdPartySubscriptionAsync(PublicQueryUserThirdPartySubscription input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

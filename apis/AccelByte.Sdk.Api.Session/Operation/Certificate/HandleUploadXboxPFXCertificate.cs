@@ -66,17 +66,17 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 HandleUploadXboxPFXCertificate op = new HandleUploadXboxPFXCertificate(this,
-                    certname,
-                    file,
-                    password,
-                    namespace_
+                    certname,                    
+                    file,                    
+                    password,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<HandleUploadXboxPFXCertificateBuilder>(this);
                 return op;
             }
 
-            public Model.ModelsPlatformCredentials? Execute(
+            public HandleUploadXboxPFXCertificate.Response Execute(
                 string certname,
                 Stream file,
                 string password,
@@ -95,11 +95,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsPlatformCredentials?> ExecuteAsync(
+            public async Task<HandleUploadXboxPFXCertificate.Response> ExecuteAsync(
                 string certname,
                 Stream file,
                 string password,
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -132,40 +132,60 @@ namespace AccelByte.Sdk.Api.Session.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
-
+            
+            
             if (builder.Description is not null) FormParams["description"] = builder.Description;
             if (certname is not null) FormParams["certname"] = certname;
             if (file is not null) FormParams["file"] = file;
             if (password is not null) FormParams["password"] = password;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsPlatformCredentials>
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error403 { get; set; } = null;
+
+            public ResponseError? Error404 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Session::Certificate::HandleUploadXboxPFXCertificate";
+        }
+
+        #endregion
+
         public HandleUploadXboxPFXCertificate(
-            string namespace_,
-            string? description,
-            string certname,
-            Stream file,
-            string password
+            string namespace_,            
+            string? description,            
+            string certname,            
+            Stream file,            
+            string password            
         )
         {
             PathParams["namespace"] = namespace_;
-
-
+            
+            
             if (description is not null) FormParams["description"] = description;
             if (certname is not null) FormParams["certname"] = certname;
             if (file is not null) FormParams["file"] = file;
             if (password is not null) FormParams["password"] = password;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -177,25 +197,51 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "multipart/form-data" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsPlatformCredentials? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public HandleUploadXboxPFXCertificate.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new HandleUploadXboxPFXCertificate.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsPlatformCredentials>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPlatformCredentials>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsPlatformCredentials>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

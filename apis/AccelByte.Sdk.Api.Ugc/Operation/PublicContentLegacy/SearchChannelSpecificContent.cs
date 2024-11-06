@@ -172,15 +172,15 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 SearchChannelSpecificContent op = new SearchChannelSpecificContent(this,
-                    channelId,
-                    namespace_
+                    channelId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<SearchChannelSpecificContentBuilder>(this);
                 return op;
             }
 
-            public Model.ModelsPaginatedContentDownloadResponse? Execute(
+            public SearchChannelSpecificContent.Response Execute(
                 string channelId,
                 string namespace_
             )
@@ -195,11 +195,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsPaginatedContentDownloadResponse?> ExecuteAsync(
+            public async Task<SearchChannelSpecificContent.Response> ExecuteAsync(
                 string channelId,
                 string namespace_
             )
@@ -214,7 +214,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -227,7 +227,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         {
             PathParams["channelId"] = channelId;
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Creator is not null) QueryParams["creator"] = builder.Creator;
             if (builder.Ishidden is not null) QueryParams["ishidden"] = builder.Ishidden;
             if (builder.Isofficial is not null) QueryParams["isofficial"] = builder.Isofficial;
@@ -240,37 +240,53 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
             if (builder.Type is not null) QueryParams["type"] = builder.Type;
             if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
+            
 
-
-
+            
             CollectionFormatMap["tags"] = "csv";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsPaginatedContentDownloadResponse>
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Ugc::PublicContentLegacy::SearchChannelSpecificContent";
+        }
+
+        #endregion
+
         public SearchChannelSpecificContent(
-            string channelId,
-            string namespace_,
-            string? creator,
-            string? ishidden,
-            string? isofficial,
-            long? limit,
-            string? name,
-            long? offset,
-            string? orderby,
-            string? sortby,
-            string? subtype,
-            List<string>? tags,
-            string? type,
-            string? userId
+            string channelId,            
+            string namespace_,            
+            string? creator,            
+            string? ishidden,            
+            string? isofficial,            
+            long? limit,            
+            string? name,            
+            long? offset,            
+            string? orderby,            
+            string? sortby,            
+            string? subtype,            
+            List<string>? tags,            
+            string? type,            
+            string? userId            
         )
         {
             PathParams["channelId"] = channelId;
             PathParams["namespace"] = namespace_;
-
+            
             if (creator is not null) QueryParams["creator"] = creator;
             if (ishidden is not null) QueryParams["ishidden"] = ishidden;
             if (isofficial is not null) QueryParams["isofficial"] = isofficial;
@@ -283,12 +299,12 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             if (tags is not null) QueryParams["tags"] = tags;
             if (type is not null) QueryParams["type"] = type;
             if (userId is not null) QueryParams["userId"] = userId;
+            
 
-
-
+            
             CollectionFormatMap["tags"] = "csv";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -297,28 +313,44 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { "application/json", "application/octet-stream" };
+        public override List<string> Consumes => new() { "application/json","application/octet-stream" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsPaginatedContentDownloadResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public SearchChannelSpecificContent.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new SearchChannelSpecificContent.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsPaginatedContentDownloadResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedContentDownloadResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsPaginatedContentDownloadResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

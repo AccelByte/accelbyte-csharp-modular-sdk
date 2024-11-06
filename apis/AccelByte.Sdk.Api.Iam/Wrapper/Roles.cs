@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
 
         #region Operation Builders
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetRoles.GetRolesBuilder GetRolesOp
         {
             get
@@ -46,7 +46,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public CreateRole.CreateRoleBuilder CreateRoleOp
         {
             get
@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetRole.GetRoleBuilder GetRoleOp
         {
             get
@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public UpdateRole.UpdateRoleBuilder UpdateRoleOp
         {
             get
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DeleteRole.DeleteRoleBuilder DeleteRoleOp
         {
             get
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetRoleAdminStatus.GetRoleAdminStatusBuilder GetRoleAdminStatusOp
         {
             get
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public SetRoleAsAdmin.SetRoleAsAdminBuilder SetRoleAsAdminOp
         {
             get
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public RemoveRoleAdmin.RemoveRoleAdminBuilder RemoveRoleAdminOp
         {
             get
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetRoleManagers.GetRoleManagersBuilder GetRoleManagersOp
         {
             get
@@ -142,7 +142,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AddRoleManagers.AddRoleManagersBuilder AddRoleManagersOp
         {
             get
@@ -154,7 +154,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public RemoveRoleManagers.RemoveRoleManagersBuilder RemoveRoleManagersOp
         {
             get
@@ -166,7 +166,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetRoleMembers.GetRoleMembersBuilder GetRoleMembersOp
         {
             get
@@ -178,7 +178,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AddRoleMembers.AddRoleMembersBuilder AddRoleMembersOp
         {
             get
@@ -190,7 +190,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public RemoveRoleMembers.RemoveRoleMembersBuilder RemoveRoleMembersOp
         {
             get
@@ -202,7 +202,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public UpdateRolePermissions.UpdateRolePermissionsBuilder UpdateRolePermissionsOp
         {
             get
@@ -214,7 +214,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AddRolePermission.AddRolePermissionBuilder AddRolePermissionOp
         {
             get
@@ -226,7 +226,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DeleteRolePermission.DeleteRolePermissionBuilder DeleteRolePermissionOp
         {
             get
@@ -381,7 +381,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminRemoveRoleMembersV3.AdminRemoveRoleMembersV3Builder AdminRemoveRoleMembersV3Op
         {
             get
@@ -582,9 +582,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public List<Model.ModelRoleResponseWithManagers>? GetRoles(GetRoles input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetRoles.Response GetRoles(GetRoles input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -592,7 +592,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelRoleResponseWithManagers>?> GetRolesAsync(GetRoles input)
+        public async Task<GetRoles.Response> GetRolesAsync(GetRoles input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -600,10 +600,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.AccountcommonRole? CreateRole(CreateRole input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public CreateRole.Response CreateRole(CreateRole input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -611,7 +611,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountcommonRole?> CreateRoleAsync(CreateRole input)
+        public async Task<CreateRole.Response> CreateRoleAsync(CreateRole input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -619,10 +619,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelRoleResponse? GetRole(GetRole input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetRole.Response GetRole(GetRole input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -630,7 +630,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleResponse?> GetRoleAsync(GetRole input)
+        public async Task<GetRole.Response> GetRoleAsync(GetRole input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -638,10 +638,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelRoleResponse? UpdateRole(UpdateRole input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public UpdateRole.Response UpdateRole(UpdateRole input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -649,7 +649,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleResponse?> UpdateRoleAsync(UpdateRole input)
+        public async Task<UpdateRole.Response> UpdateRoleAsync(UpdateRole input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -657,29 +657,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void DeleteRole(DeleteRole input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteRoleAsync(DeleteRole input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelRoleAdminStatusResponse? GetRoleAdminStatus(GetRoleAdminStatus input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public DeleteRole.Response DeleteRole(DeleteRole input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -687,7 +668,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleAdminStatusResponse?> GetRoleAdminStatusAsync(GetRoleAdminStatus input)
+        public async Task<DeleteRole.Response> DeleteRoleAsync(DeleteRole input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -695,48 +676,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void SetRoleAsAdmin(SetRoleAsAdmin input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task SetRoleAsAdminAsync(SetRoleAsAdmin input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void RemoveRoleAdmin(RemoveRoleAdmin input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task RemoveRoleAdminAsync(RemoveRoleAdmin input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelRoleManagersResponse? GetRoleManagers(GetRoleManagers input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetRoleAdminStatus.Response GetRoleAdminStatus(GetRoleAdminStatus input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -744,7 +687,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleManagersResponse?> GetRoleManagersAsync(GetRoleManagers input)
+        public async Task<GetRoleAdminStatus.Response> GetRoleAdminStatusAsync(GetRoleAdminStatus input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -752,48 +695,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void AddRoleManagers(AddRoleManagers input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AddRoleManagersAsync(AddRoleManagers input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void RemoveRoleManagers(RemoveRoleManagers input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task RemoveRoleManagersAsync(RemoveRoleManagers input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelRoleMembersResponse? GetRoleMembers(GetRoleMembers input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public SetRoleAsAdmin.Response SetRoleAsAdmin(SetRoleAsAdmin input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -801,7 +706,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleMembersResponse?> GetRoleMembersAsync(GetRoleMembers input)
+        public async Task<SetRoleAsAdmin.Response> SetRoleAsAdminAsync(SetRoleAsAdmin input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -809,103 +714,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void AddRoleMembers(AddRoleMembers input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AddRoleMembersAsync(AddRoleMembers input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void RemoveRoleMembers(RemoveRoleMembers input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task RemoveRoleMembersAsync(RemoveRoleMembers input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void UpdateRolePermissions(UpdateRolePermissions input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task UpdateRolePermissionsAsync(UpdateRolePermissions input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void AddRolePermission(AddRolePermission input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AddRolePermissionAsync(AddRolePermission input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void DeleteRolePermission(DeleteRolePermission input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteRolePermissionAsync(DeleteRolePermission input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-        public Model.ModelRoleResponseWithManagersAndPaginationV3? AdminGetRolesV3(AdminGetRolesV3 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public RemoveRoleAdmin.Response RemoveRoleAdmin(RemoveRoleAdmin input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -913,7 +725,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleResponseWithManagersAndPaginationV3?> AdminGetRolesV3Async(AdminGetRolesV3 input)
+        public async Task<RemoveRoleAdmin.Response> RemoveRoleAdminAsync(RemoveRoleAdmin input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -921,7 +733,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.AccountcommonRoleV3? AdminCreateRoleV3(AdminCreateRoleV3 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetRoleManagers.Response GetRoleManagers(GetRoleManagers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -929,7 +744,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AccountcommonRoleV3?> AdminCreateRoleV3Async(AdminCreateRoleV3 input)
+        public async Task<GetRoleManagers.Response> GetRoleManagersAsync(GetRoleManagers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -937,7 +752,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelRoleResponseV3? AdminGetRoleV3(AdminGetRoleV3 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AddRoleManagers.Response AddRoleManagers(AddRoleManagers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -945,7 +763,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleResponseV3?> AdminGetRoleV3Async(AdminGetRoleV3 input)
+        public async Task<AddRoleManagers.Response> AddRoleManagersAsync(AddRoleManagers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -953,23 +771,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteRoleV3(AdminDeleteRoleV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteRoleV3Async(AdminDeleteRoleV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelRoleResponseV3? AdminUpdateRoleV3(AdminUpdateRoleV3 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public RemoveRoleManagers.Response RemoveRoleManagers(RemoveRoleManagers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -977,7 +782,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleResponseV3?> AdminUpdateRoleV3Async(AdminUpdateRoleV3 input)
+        public async Task<RemoveRoleManagers.Response> RemoveRoleManagersAsync(RemoveRoleManagers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -985,7 +790,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelRoleAdminStatusResponseV3? AdminGetRoleAdminStatusV3(AdminGetRoleAdminStatusV3 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetRoleMembers.Response GetRoleMembers(GetRoleMembers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -993,7 +801,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleAdminStatusResponseV3?> AdminGetRoleAdminStatusV3Async(AdminGetRoleAdminStatusV3 input)
+        public async Task<GetRoleMembers.Response> GetRoleMembersAsync(GetRoleMembers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1001,39 +809,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminUpdateAdminRoleStatusV3(AdminUpdateAdminRoleStatusV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminUpdateAdminRoleStatusV3Async(AdminUpdateAdminRoleStatusV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminRemoveRoleAdminV3(AdminRemoveRoleAdminV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminRemoveRoleAdminV3Async(AdminRemoveRoleAdminV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelRoleManagersResponsesV3? AdminGetRoleManagersV3(AdminGetRoleManagersV3 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AddRoleMembers.Response AddRoleMembers(AddRoleMembers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1041,7 +820,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleManagersResponsesV3?> AdminGetRoleManagersV3Async(AdminGetRoleManagersV3 input)
+        public async Task<AddRoleMembers.Response> AddRoleMembersAsync(AddRoleMembers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1049,39 +828,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminAddRoleManagersV3(AdminAddRoleManagersV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminAddRoleManagersV3Async(AdminAddRoleManagersV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminRemoveRoleManagersV3(AdminRemoveRoleManagersV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminRemoveRoleManagersV3Async(AdminRemoveRoleManagersV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelRoleMembersResponseV3? AdminGetRoleMembersV3(AdminGetRoleMembersV3 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public RemoveRoleMembers.Response RemoveRoleMembers(RemoveRoleMembers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1089,7 +839,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleMembersResponseV3?> AdminGetRoleMembersV3Async(AdminGetRoleMembersV3 input)
+        public async Task<RemoveRoleMembers.Response> RemoveRoleMembersAsync(RemoveRoleMembers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1097,106 +847,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminAddRoleMembersV3(AdminAddRoleMembersV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminAddRoleMembersV3Async(AdminAddRoleMembersV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void AdminRemoveRoleMembersV3(AdminRemoveRoleMembersV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminRemoveRoleMembersV3Async(AdminRemoveRoleMembersV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-        public void AdminUpdateRolePermissionsV3(AdminUpdateRolePermissionsV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminUpdateRolePermissionsV3Async(AdminUpdateRolePermissionsV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminAddRolePermissionsV3(AdminAddRolePermissionsV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminAddRolePermissionsV3Async(AdminAddRolePermissionsV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminDeleteRolePermissionsV3(AdminDeleteRolePermissionsV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteRolePermissionsV3Async(AdminDeleteRolePermissionsV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminDeleteRolePermissionV3(AdminDeleteRolePermissionV3 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteRolePermissionV3Async(AdminDeleteRolePermissionV3 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelRoleNamesResponseV3? PublicGetRolesV3(PublicGetRolesV3 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public UpdateRolePermissions.Response UpdateRolePermissions(UpdateRolePermissions input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1204,7 +858,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleNamesResponseV3?> PublicGetRolesV3Async(PublicGetRolesV3 input)
+        public async Task<UpdateRolePermissions.Response> UpdateRolePermissionsAsync(UpdateRolePermissions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1212,7 +866,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelRoleResponse? PublicGetRoleV3(PublicGetRoleV3 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AddRolePermission.Response AddRolePermission(AddRolePermission input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1220,7 +877,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleResponse?> PublicGetRoleV3Async(PublicGetRoleV3 input)
+        public async Task<AddRolePermission.Response> AddRolePermissionAsync(AddRolePermission input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1228,7 +885,10 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelListRoleV4Response? AdminGetRolesV4(AdminGetRolesV4 input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public DeleteRolePermission.Response DeleteRolePermission(DeleteRolePermission input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1236,7 +896,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelListRoleV4Response?> AdminGetRolesV4Async(AdminGetRolesV4 input)
+        public async Task<DeleteRolePermission.Response> DeleteRolePermissionAsync(DeleteRolePermission input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1244,7 +904,8 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelRoleV4Response? AdminCreateRoleV4(AdminCreateRoleV4 input)
+        #pragma warning restore ab_deprecated_operation
+        public AdminGetRolesV3.Response AdminGetRolesV3(AdminGetRolesV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1252,7 +913,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleV4Response?> AdminCreateRoleV4Async(AdminCreateRoleV4 input)
+        public async Task<AdminGetRolesV3.Response> AdminGetRolesV3Async(AdminGetRolesV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1260,7 +921,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelRoleV4Response? AdminGetRoleV4(AdminGetRoleV4 input)
+        public AdminCreateRoleV3.Response AdminCreateRoleV3(AdminCreateRoleV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1268,7 +929,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleV4Response?> AdminGetRoleV4Async(AdminGetRoleV4 input)
+        public async Task<AdminCreateRoleV3.Response> AdminCreateRoleV3Async(AdminCreateRoleV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1276,23 +937,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteRoleV4(AdminDeleteRoleV4 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteRoleV4Async(AdminDeleteRoleV4 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelRoleV4Response? AdminUpdateRoleV4(AdminUpdateRoleV4 input)
+        public AdminGetRoleV3.Response AdminGetRoleV3(AdminGetRoleV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1300,7 +945,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleV4Response?> AdminUpdateRoleV4Async(AdminUpdateRoleV4 input)
+        public async Task<AdminGetRoleV3.Response> AdminGetRoleV3Async(AdminGetRoleV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1308,7 +953,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelRoleV4Response? AdminUpdateRolePermissionsV4(AdminUpdateRolePermissionsV4 input)
+        public AdminDeleteRoleV3.Response AdminDeleteRoleV3(AdminDeleteRoleV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1316,7 +961,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleV4Response?> AdminUpdateRolePermissionsV4Async(AdminUpdateRolePermissionsV4 input)
+        public async Task<AdminDeleteRoleV3.Response> AdminDeleteRoleV3Async(AdminDeleteRoleV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1324,7 +969,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelRoleV4Response? AdminAddRolePermissionsV4(AdminAddRolePermissionsV4 input)
+        public AdminUpdateRoleV3.Response AdminUpdateRoleV3(AdminUpdateRoleV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1332,7 +977,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleV4Response?> AdminAddRolePermissionsV4Async(AdminAddRolePermissionsV4 input)
+        public async Task<AdminUpdateRoleV3.Response> AdminUpdateRoleV3Async(AdminUpdateRoleV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1340,23 +985,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteRolePermissionsV4(AdminDeleteRolePermissionsV4 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteRolePermissionsV4Async(AdminDeleteRolePermissionsV4 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelListAssignedUsersV4Response? AdminListAssignedUsersV4(AdminListAssignedUsersV4 input)
+        public AdminGetRoleAdminStatusV3.Response AdminGetRoleAdminStatusV3(AdminGetRoleAdminStatusV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1364,7 +993,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelListAssignedUsersV4Response?> AdminListAssignedUsersV4Async(AdminListAssignedUsersV4 input)
+        public async Task<AdminGetRoleAdminStatusV3.Response> AdminGetRoleAdminStatusV3Async(AdminGetRoleAdminStatusV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1372,7 +1001,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelAssignedUserV4Response? AdminAssignUserToRoleV4(AdminAssignUserToRoleV4 input)
+        public AdminUpdateAdminRoleStatusV3.Response AdminUpdateAdminRoleStatusV3(AdminUpdateAdminRoleStatusV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1380,7 +1009,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelAssignedUserV4Response?> AdminAssignUserToRoleV4Async(AdminAssignUserToRoleV4 input)
+        public async Task<AdminUpdateAdminRoleStatusV3.Response> AdminUpdateAdminRoleStatusV3Async(AdminUpdateAdminRoleStatusV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1388,18 +1017,389 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminRevokeUserFromRoleV4(AdminRevokeUserFromRoleV4 input)
+        public AdminRemoveRoleAdminV3.Response AdminRemoveRoleAdminV3(AdminRemoveRoleAdminV3 input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminRevokeUserFromRoleV4Async(AdminRevokeUserFromRoleV4 input)
+        public async Task<AdminRemoveRoleAdminV3.Response> AdminRemoveRoleAdminV3Async(AdminRemoveRoleAdminV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetRoleManagersV3.Response AdminGetRoleManagersV3(AdminGetRoleManagersV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetRoleManagersV3.Response> AdminGetRoleManagersV3Async(AdminGetRoleManagersV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminAddRoleManagersV3.Response AdminAddRoleManagersV3(AdminAddRoleManagersV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminAddRoleManagersV3.Response> AdminAddRoleManagersV3Async(AdminAddRoleManagersV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminRemoveRoleManagersV3.Response AdminRemoveRoleManagersV3(AdminRemoveRoleManagersV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminRemoveRoleManagersV3.Response> AdminRemoveRoleManagersV3Async(AdminRemoveRoleManagersV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetRoleMembersV3.Response AdminGetRoleMembersV3(AdminGetRoleMembersV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetRoleMembersV3.Response> AdminGetRoleMembersV3Async(AdminGetRoleMembersV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminAddRoleMembersV3.Response AdminAddRoleMembersV3(AdminAddRoleMembersV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminAddRoleMembersV3.Response> AdminAddRoleMembersV3Async(AdminAddRoleMembersV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminRemoveRoleMembersV3.Response AdminRemoveRoleMembersV3(AdminRemoveRoleMembersV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminRemoveRoleMembersV3.Response> AdminRemoveRoleMembersV3Async(AdminRemoveRoleMembersV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning restore ab_deprecated_operation
+        public AdminUpdateRolePermissionsV3.Response AdminUpdateRolePermissionsV3(AdminUpdateRolePermissionsV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminUpdateRolePermissionsV3.Response> AdminUpdateRolePermissionsV3Async(AdminUpdateRolePermissionsV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminAddRolePermissionsV3.Response AdminAddRolePermissionsV3(AdminAddRolePermissionsV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminAddRolePermissionsV3.Response> AdminAddRolePermissionsV3Async(AdminAddRolePermissionsV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminDeleteRolePermissionsV3.Response AdminDeleteRolePermissionsV3(AdminDeleteRolePermissionsV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminDeleteRolePermissionsV3.Response> AdminDeleteRolePermissionsV3Async(AdminDeleteRolePermissionsV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminDeleteRolePermissionV3.Response AdminDeleteRolePermissionV3(AdminDeleteRolePermissionV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminDeleteRolePermissionV3.Response> AdminDeleteRolePermissionV3Async(AdminDeleteRolePermissionV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetRolesV3.Response PublicGetRolesV3(PublicGetRolesV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetRolesV3.Response> PublicGetRolesV3Async(PublicGetRolesV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetRoleV3.Response PublicGetRoleV3(PublicGetRoleV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetRoleV3.Response> PublicGetRoleV3Async(PublicGetRoleV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetRolesV4.Response AdminGetRolesV4(AdminGetRolesV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetRolesV4.Response> AdminGetRolesV4Async(AdminGetRolesV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminCreateRoleV4.Response AdminCreateRoleV4(AdminCreateRoleV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminCreateRoleV4.Response> AdminCreateRoleV4Async(AdminCreateRoleV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetRoleV4.Response AdminGetRoleV4(AdminGetRoleV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetRoleV4.Response> AdminGetRoleV4Async(AdminGetRoleV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminDeleteRoleV4.Response AdminDeleteRoleV4(AdminDeleteRoleV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminDeleteRoleV4.Response> AdminDeleteRoleV4Async(AdminDeleteRoleV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminUpdateRoleV4.Response AdminUpdateRoleV4(AdminUpdateRoleV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminUpdateRoleV4.Response> AdminUpdateRoleV4Async(AdminUpdateRoleV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminUpdateRolePermissionsV4.Response AdminUpdateRolePermissionsV4(AdminUpdateRolePermissionsV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminUpdateRolePermissionsV4.Response> AdminUpdateRolePermissionsV4Async(AdminUpdateRolePermissionsV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminAddRolePermissionsV4.Response AdminAddRolePermissionsV4(AdminAddRolePermissionsV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminAddRolePermissionsV4.Response> AdminAddRolePermissionsV4Async(AdminAddRolePermissionsV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminDeleteRolePermissionsV4.Response AdminDeleteRolePermissionsV4(AdminDeleteRolePermissionsV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminDeleteRolePermissionsV4.Response> AdminDeleteRolePermissionsV4Async(AdminDeleteRolePermissionsV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminListAssignedUsersV4.Response AdminListAssignedUsersV4(AdminListAssignedUsersV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminListAssignedUsersV4.Response> AdminListAssignedUsersV4Async(AdminListAssignedUsersV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminAssignUserToRoleV4.Response AdminAssignUserToRoleV4(AdminAssignUserToRoleV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminAssignUserToRoleV4.Response> AdminAssignUserToRoleV4Async(AdminAssignUserToRoleV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminRevokeUserFromRoleV4.Response AdminRevokeUserFromRoleV4(AdminRevokeUserFromRoleV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminRevokeUserFromRoleV4.Response> AdminRevokeUserFromRoleV4Async(AdminRevokeUserFromRoleV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

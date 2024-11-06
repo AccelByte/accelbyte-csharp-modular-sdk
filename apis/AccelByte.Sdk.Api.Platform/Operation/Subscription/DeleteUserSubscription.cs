@@ -57,16 +57,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 DeleteUserSubscription op = new DeleteUserSubscription(this,
-                    namespace_,
-                    subscriptionId,
-                    userId
+                    namespace_,                    
+                    subscriptionId,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<DeleteUserSubscriptionBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public DeleteUserSubscription.Response Execute(
                 string namespace_,
                 string subscriptionId,
                 string userId
@@ -82,12 +82,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<DeleteUserSubscription.Response> ExecuteAsync(
                 string namespace_,
                 string subscriptionId,
                 string userId
@@ -103,8 +103,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -119,32 +119,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["namespace"] = namespace_;
             PathParams["subscriptionId"] = subscriptionId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Subscription::DeleteUserSubscription";
+        }
+
+        #endregion
+
         public DeleteUserSubscription(
-            string namespace_,
-            string subscriptionId,
-            string userId
+            string namespace_,            
+            string subscriptionId,            
+            string userId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["subscriptionId"] = subscriptionId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,17 +166,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public DeleteUserSubscription.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new DeleteUserSubscription.Response()
             {
-                return;
-            }
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
 
-            var payloadString = payload.ReadToString();
 
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

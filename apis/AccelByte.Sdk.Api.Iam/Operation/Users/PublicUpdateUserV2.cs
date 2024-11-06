@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// This Endpoint support update user based on given data. **Single request can update single field or multi fields.**
     /// Supported field {Country, DisplayName, LanguageTag}
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class PublicUpdateUserV2 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -68,17 +68,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicUpdateUserV2 op = new PublicUpdateUserV2(this,
-                    body,
-                    namespace_,
-                    userId
+                    body,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PublicUpdateUserV2Builder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public List<Model.ModelUserResponse>? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicUpdateUserV2.Response Execute(
                 ModelUserUpdateRequest body,
                 string namespace_,
                 string userId
@@ -95,11 +95,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.ModelUserResponse>?> ExecuteAsync(
+            public async Task<PublicUpdateUserV2.Response> ExecuteAsync(
                 ModelUserUpdateRequest body,
                 string namespace_,
                 string userId
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -130,33 +130,53 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.ModelUserResponse>>
+        {
+
+            public string Error400 { get; set; } = "";
+
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public string Error404 { get; set; } = "";
+
+            public string Error409 { get; set; } = "";
+
+            public string Error500 { get; set; } = "";
+
+
+            protected override string GetFullOperationId() => "Iam::Users::PublicUpdateUserV2";
+        }
+
+        #endregion
+
         public PublicUpdateUserV2(
-            string namespace_,
-            string userId,
-            Model.ModelUserUpdateRequest body
+            string namespace_,            
+            string userId,            
+            Model.ModelUserUpdateRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -168,25 +188,51 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.ModelUserResponse>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicUpdateUserV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicUpdateUserV2.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.ModelUserResponse>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelUserResponse>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<List<Model.ModelUserResponse>>(payload, ResponseJsonOptions);
+                response.Error400 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error400!);
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error404!);
+            }
+            else if (code == (HttpStatusCode)409)
+            {
+                response.Error409 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error409!);
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error500!);
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

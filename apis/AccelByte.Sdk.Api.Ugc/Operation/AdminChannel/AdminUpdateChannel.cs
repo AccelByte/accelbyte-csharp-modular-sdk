@@ -58,17 +58,17 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 AdminUpdateChannel op = new AdminUpdateChannel(this,
-                    body,
-                    channelId,
-                    namespace_,
-                    userId
+                    body,                    
+                    channelId,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<AdminUpdateChannelBuilder>(this);
                 return op;
             }
 
-            public Model.ModelsChannelResponse? Execute(
+            public AdminUpdateChannel.Response Execute(
                 ModelsUpdateChannelRequest body,
                 string channelId,
                 string namespace_,
@@ -87,11 +87,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsChannelResponse?> ExecuteAsync(
+            public async Task<AdminUpdateChannel.Response> ExecuteAsync(
                 ModelsUpdateChannelRequest body,
                 string channelId,
                 string namespace_,
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -126,35 +126,53 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["channelId"] = channelId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsChannelResponse>
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error404 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Ugc::AdminChannel::AdminUpdateChannel";
+        }
+
+        #endregion
+
         public AdminUpdateChannel(
-            string channelId,
-            string namespace_,
-            string userId,
-            Model.ModelsUpdateChannelRequest body
+            string channelId,            
+            string namespace_,            
+            string userId,            
+            Model.ModelsUpdateChannelRequest body            
         )
         {
             PathParams["channelId"] = channelId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -166,25 +184,46 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsChannelResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminUpdateChannel.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminUpdateChannel.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsChannelResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsChannelResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsChannelResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

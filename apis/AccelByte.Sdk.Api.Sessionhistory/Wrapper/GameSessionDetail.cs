@@ -146,7 +146,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
         }
         #endregion
 
-        public Model.ApimodelsGameSessionDetailQueryResponse? AdminQueryGameSessionDetail(AdminQueryGameSessionDetail input)
+        public AdminQueryGameSessionDetail.Response AdminQueryGameSessionDetail(AdminQueryGameSessionDetail input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -154,7 +154,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionDetailQueryResponse?> AdminQueryGameSessionDetailAsync(AdminQueryGameSessionDetail input)
+        public async Task<AdminQueryGameSessionDetail.Response> AdminQueryGameSessionDetailAsync(AdminQueryGameSessionDetail input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -162,7 +162,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsGameSessionDetail? GetGameSessionDetail(GetGameSessionDetail input)
+        public GetGameSessionDetail.Response GetGameSessionDetail(GetGameSessionDetail input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -170,7 +170,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionDetail?> GetGameSessionDetailAsync(GetGameSessionDetail input)
+        public async Task<GetGameSessionDetail.Response> GetGameSessionDetailAsync(GetGameSessionDetail input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -178,7 +178,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsMatchmakingDetailQueryResponse? AdminQueryMatchmakingDetail(AdminQueryMatchmakingDetail input)
+        public AdminQueryMatchmakingDetail.Response AdminQueryMatchmakingDetail(AdminQueryMatchmakingDetail input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -186,7 +186,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsMatchmakingDetailQueryResponse?> AdminQueryMatchmakingDetailAsync(AdminQueryMatchmakingDetail input)
+        public async Task<AdminQueryMatchmakingDetail.Response> AdminQueryMatchmakingDetailAsync(AdminQueryMatchmakingDetail input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -194,7 +194,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsMatchmakingDetail? AdminGetMatchmakingDetailBySessionID(AdminGetMatchmakingDetailBySessionID input)
+        public AdminGetMatchmakingDetailBySessionID.Response AdminGetMatchmakingDetailBySessionID(AdminGetMatchmakingDetailBySessionID input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -202,7 +202,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsMatchmakingDetail?> AdminGetMatchmakingDetailBySessionIDAsync(AdminGetMatchmakingDetailBySessionID input)
+        public async Task<AdminGetMatchmakingDetailBySessionID.Response> AdminGetMatchmakingDetailBySessionIDAsync(AdminGetMatchmakingDetailBySessionID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -210,7 +210,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsMatchmakingDetail? AdminGetMatchmakingDetailByTicketID(AdminGetMatchmakingDetailByTicketID input)
+        public AdminGetMatchmakingDetailByTicketID.Response AdminGetMatchmakingDetailByTicketID(AdminGetMatchmakingDetailByTicketID input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -218,7 +218,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsMatchmakingDetail?> AdminGetMatchmakingDetailByTicketIDAsync(AdminGetMatchmakingDetailByTicketID input)
+        public async Task<AdminGetMatchmakingDetailByTicketID.Response> AdminGetMatchmakingDetailByTicketIDAsync(AdminGetMatchmakingDetailByTicketID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -226,7 +226,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsPartyDetailQueryResponse? AdminQueryPartyDetail(AdminQueryPartyDetail input)
+        public AdminQueryPartyDetail.Response AdminQueryPartyDetail(AdminQueryPartyDetail input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -234,7 +234,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsPartyDetailQueryResponse?> AdminQueryPartyDetailAsync(AdminQueryPartyDetail input)
+        public async Task<AdminQueryPartyDetail.Response> AdminQueryPartyDetailAsync(AdminQueryPartyDetail input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -242,7 +242,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsPartyDetail? GetPartyDetail(GetPartyDetail input)
+        public GetPartyDetail.Response GetPartyDetail(GetPartyDetail input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -250,7 +250,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsPartyDetail?> GetPartyDetailAsync(GetPartyDetail input)
+        public async Task<GetPartyDetail.Response> GetPartyDetailAsync(GetPartyDetail input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -258,7 +258,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsTicketDetailQueryResponse? AdminQueryTicketDetail(AdminQueryTicketDetail input)
+        public AdminQueryTicketDetail.Response AdminQueryTicketDetail(AdminQueryTicketDetail input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -266,7 +266,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsTicketDetailQueryResponse?> AdminQueryTicketDetailAsync(AdminQueryTicketDetail input)
+        public async Task<AdminQueryTicketDetail.Response> AdminQueryTicketDetailAsync(AdminQueryTicketDetail input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -274,7 +274,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsTicketObservabilityDetail? AdminTicketDetailGetByTicketID(AdminTicketDetailGetByTicketID input)
+        public AdminTicketDetailGetByTicketID.Response AdminTicketDetailGetByTicketID(AdminTicketDetailGetByTicketID input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -282,7 +282,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsTicketObservabilityDetail?> AdminTicketDetailGetByTicketIDAsync(AdminTicketDetailGetByTicketID input)
+        public async Task<AdminTicketDetailGetByTicketID.Response> AdminTicketDetailGetByTicketIDAsync(AdminTicketDetailGetByTicketID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -290,7 +290,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApimodelsGameSessionDetailQueryResponse? PublicQueryGameSessionMe(PublicQueryGameSessionMe input)
+        public PublicQueryGameSessionMe.Response PublicQueryGameSessionMe(PublicQueryGameSessionMe input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -298,7 +298,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApimodelsGameSessionDetailQueryResponse?> PublicQueryGameSessionMeAsync(PublicQueryGameSessionMe input)
+        public async Task<PublicQueryGameSessionMe.Response> PublicQueryGameSessionMeAsync(PublicQueryGameSessionMe input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

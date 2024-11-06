@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-        public Model.ModelLoginAllowlistResponse? AdminGetLoginAllowlistV3(AdminGetLoginAllowlistV3 input)
+        public AdminGetLoginAllowlistV3.Response AdminGetLoginAllowlistV3(AdminGetLoginAllowlistV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelLoginAllowlistResponse?> AdminGetLoginAllowlistV3Async(AdminGetLoginAllowlistV3 input)
+        public async Task<AdminGetLoginAllowlistV3.Response> AdminGetLoginAllowlistV3Async(AdminGetLoginAllowlistV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelLoginAllowlistResponse? AdminUpdateLoginAllowlistV3(AdminUpdateLoginAllowlistV3 input)
+        public AdminUpdateLoginAllowlistV3.Response AdminUpdateLoginAllowlistV3(AdminUpdateLoginAllowlistV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelLoginAllowlistResponse?> AdminUpdateLoginAllowlistV3Async(AdminUpdateLoginAllowlistV3 input)
+        public async Task<AdminUpdateLoginAllowlistV3.Response> AdminUpdateLoginAllowlistV3Async(AdminUpdateLoginAllowlistV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

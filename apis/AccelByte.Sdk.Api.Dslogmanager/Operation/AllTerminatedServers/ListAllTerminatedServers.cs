@@ -184,7 +184,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
                 return op;
             }
 
-            public Model.ModelsListTerminatedServersResponse? Execute(
+            public ListAllTerminatedServers.Response Execute(
             )
             {
                 ListAllTerminatedServers op = Build(
@@ -195,11 +195,11 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsListTerminatedServersResponse?> ExecuteAsync(
+            public async Task<ListAllTerminatedServers.Response> ExecuteAsync(
             )
             {
                 ListAllTerminatedServers op = Build(
@@ -210,7 +210,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -219,7 +219,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
         private ListAllTerminatedServers(ListAllTerminatedServersBuilder builder
         )
         {
-
+            
             if (builder.Deployment is not null) QueryParams["deployment"] = builder.Deployment;
             if (builder.EndDate is not null) QueryParams["end_date"] = builder.EndDate;
             if (builder.GameMode is not null) QueryParams["game_mode"] = builder.GameMode;
@@ -235,35 +235,51 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
             if (builder.StartDate is not null) QueryParams["start_date"] = builder.StartDate;
             if (builder.Status is not null) QueryParams["status"] = builder.Status;
             if (builder.UserId is not null) QueryParams["user_id"] = builder.UserId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public ListAllTerminatedServers(
-            string? deployment,
-            string? endDate,
-            string? gameMode,
-            long? limit,
-            string? namespace_,
-            string? next,
-            string? partyId,
-            string? podName,
-            string? previous,
-            string? provider,
-            string? region,
-            string? sessionId,
-            string? startDate,
-            string? status,
-            string? userId
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsListTerminatedServersResponse>
         {
 
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Dslogmanager::AllTerminatedServers::ListAllTerminatedServers";
+        }
+
+        #endregion
+
+        public ListAllTerminatedServers(
+            string? deployment,            
+            string? endDate,            
+            string? gameMode,            
+            long? limit,            
+            string? namespace_,            
+            string? next,            
+            string? partyId,            
+            string? podName,            
+            string? previous,            
+            string? provider,            
+            string? region,            
+            string? sessionId,            
+            string? startDate,            
+            string? status,            
+            string? userId            
+        )
+        {
+            
             if (deployment is not null) QueryParams["deployment"] = deployment;
             if (endDate is not null) QueryParams["end_date"] = endDate;
             if (gameMode is not null) QueryParams["game_mode"] = gameMode;
@@ -279,11 +295,11 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
             if (startDate is not null) QueryParams["start_date"] = startDate;
             if (status is not null) QueryParams["status"] = status;
             if (userId is not null) QueryParams["user_id"] = userId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -295,25 +311,41 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsListTerminatedServersResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public ListAllTerminatedServers.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new ListAllTerminatedServers.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsListTerminatedServersResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsListTerminatedServersResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsListTerminatedServersResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

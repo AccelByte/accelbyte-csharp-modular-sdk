@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
         }
         #endregion
 
-        public Model.ApiMatchTicketResponse? CreateMatchTicket(CreateMatchTicket input)
+        public CreateMatchTicket.Response CreateMatchTicket(CreateMatchTicket input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiMatchTicketResponse?> CreateMatchTicketAsync(CreateMatchTicket input)
+        public async Task<CreateMatchTicket.Response> CreateMatchTicketAsync(CreateMatchTicket input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiMatchTicketStatuses? GetMyMatchTickets(GetMyMatchTickets input)
+        public GetMyMatchTickets.Response GetMyMatchTickets(GetMyMatchTickets input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiMatchTicketStatuses?> GetMyMatchTicketsAsync(GetMyMatchTickets input)
+        public async Task<GetMyMatchTickets.Response> GetMyMatchTicketsAsync(GetMyMatchTickets input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiMatchTicketStatus? MatchTicketDetails(MatchTicketDetails input)
+        public MatchTicketDetails.Response MatchTicketDetails(MatchTicketDetails input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiMatchTicketStatus?> MatchTicketDetailsAsync(MatchTicketDetails input)
+        public async Task<MatchTicketDetails.Response> MatchTicketDetailsAsync(MatchTicketDetails input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,18 +128,18 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteMatchTicket(DeleteMatchTicket input)
+        public DeleteMatchTicket.Response DeleteMatchTicket(DeleteMatchTicket input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task DeleteMatchTicketAsync(DeleteMatchTicket input)
+        public async Task<DeleteMatchTicket.Response> DeleteMatchTicketAsync(DeleteMatchTicket input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

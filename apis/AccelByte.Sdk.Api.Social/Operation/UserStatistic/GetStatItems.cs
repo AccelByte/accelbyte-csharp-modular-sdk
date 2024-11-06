@@ -82,15 +82,15 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 GetStatItems op = new GetStatItems(this,
-                    namespace_,
-                    statCode
+                    namespace_,                    
+                    statCode                    
                 );
 
                 op.SetBaseFields<GetStatItemsBuilder>(this);
                 return op;
             }
 
-            public Model.StatItemValuePagingSlicedResult? Execute(
+            public GetStatItems.Response Execute(
                 string namespace_,
                 string statCode
             )
@@ -105,11 +105,11 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.StatItemValuePagingSlicedResult?> ExecuteAsync(
+            public async Task<GetStatItems.Response> ExecuteAsync(
                 string namespace_,
                 string statCode
             )
@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -137,39 +137,55 @@ namespace AccelByte.Sdk.Api.Social.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["statCode"] = statCode;
-
+            
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.StatItemValuePagingSlicedResult>
+        {
+
+            public ErrorEntity? Error401 { get; set; } = null;
+
+            public ErrorEntity? Error403 { get; set; } = null;
+
+            public ErrorEntity? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Social::UserStatistic::GetStatItems";
+        }
+
+        #endregion
+
         public GetStatItems(
-            string namespace_,
-            string statCode,
-            int? limit,
-            int? offset,
-            string? sortBy
+            string namespace_,            
+            string statCode,            
+            int? limit,            
+            int? offset,            
+            string? sortBy            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["statCode"] = statCode;
-
+            
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -178,28 +194,44 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.StatItemValuePagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetStatItems.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetStatItems.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.StatItemValuePagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.StatItemValuePagingSlicedResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)401)
             {
-                return JsonSerializer.Deserialize<Model.StatItemValuePagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

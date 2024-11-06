@@ -207,14 +207,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PlatformTokenGrantV4 op = new PlatformTokenGrantV4(this,
-                    platformId
+                    platformId                    
                 );
 
                 op.SetBaseFields<PlatformTokenGrantV4Builder>(this);
                 return op;
             }
 
-            public Model.OauthmodelTokenResponseV3? Execute(
+            public PlatformTokenGrantV4.Response Execute(
                 string platformId
             )
             {
@@ -227,11 +227,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OauthmodelTokenResponseV3?> ExecuteAsync(
+            public async Task<PlatformTokenGrantV4.Response> ExecuteAsync(
                 string platformId
             )
             {
@@ -244,7 +244,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -255,10 +255,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["platformId"] = platformId;
-
+            
             if (builder.CodeChallenge is not null) QueryParams["code_challenge"] = builder.CodeChallenge;
             if (builder.CodeChallengeMethod is not null) QueryParams["code_challenge_method"] = builder.CodeChallengeMethod.Value;
-
+            
             if (builder.AdditionalData is not null) FormParams["additionalData"] = builder.AdditionalData;
             if (builder.ClientId is not null) FormParams["client_id"] = builder.ClientId;
             if (builder.CreateHeadless != null) FormParams["createHeadless"] = Convert.ToString(builder.CreateHeadless)!;
@@ -268,33 +268,51 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (builder.ServiceLabel != null) FormParams["serviceLabel"] = Convert.ToString(builder.ServiceLabel)!;
             if (builder.SkipSetCookie != null) FormParams["skipSetCookie"] = Convert.ToString(builder.SkipSetCookie)!;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.OauthmodelTokenResponseV3>
+        {
+
+            public OauthmodelErrorResponse? Error400 { get; set; } = null;
+
+            public OauthmodelErrorResponse? Error401 { get; set; } = null;
+
+            public OauthmodelErrorResponse? Error403 { get; set; } = null;
+
+            public OauthmodelErrorResponse? Error503 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::OAuth20V4::PlatformTokenGrantV4";
+        }
+
+        #endregion
+
         public PlatformTokenGrantV4(
-            string platformId,
-            string? codeChallenge,
-            PlatformTokenGrantV4CodeChallengeMethod? codeChallengeMethod,
-            string? additionalData,
-            string? clientId,
-            bool? createHeadless,
-            string? deviceId,
-            string? macAddress,
-            string? platformToken,
-            double? serviceLabel,
-            bool? skipSetCookie
+            string platformId,            
+            string? codeChallenge,            
+            PlatformTokenGrantV4CodeChallengeMethod? codeChallengeMethod,            
+            string? additionalData,            
+            string? clientId,            
+            bool? createHeadless,            
+            string? deviceId,            
+            string? macAddress,            
+            string? platformToken,            
+            double? serviceLabel,            
+            bool? skipSetCookie            
         )
         {
             PathParams["platformId"] = platformId;
-
+            
             if (codeChallenge is not null) QueryParams["code_challenge"] = codeChallenge;
             if (codeChallengeMethod is not null) QueryParams["code_challenge_method"] = codeChallengeMethod.Value;
-
+            
             if (additionalData is not null) FormParams["additionalData"] = additionalData;
             if (clientId is not null) FormParams["client_id"] = clientId;
             if (createHeadless != null) FormParams["createHeadless"] = Convert.ToString(createHeadless)!;
@@ -304,9 +322,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (serviceLabel != null) FormParams["serviceLabel"] = Convert.ToString(serviceLabel)!;
             if (skipSetCookie != null) FormParams["skipSetCookie"] = Convert.ToString(skipSetCookie)!;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -318,25 +336,46 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OauthmodelTokenResponseV3? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PlatformTokenGrantV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PlatformTokenGrantV4.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)503)
+            {
+                response.Error503 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error503!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

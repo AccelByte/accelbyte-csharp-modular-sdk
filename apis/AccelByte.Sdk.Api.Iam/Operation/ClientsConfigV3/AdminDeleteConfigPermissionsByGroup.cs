@@ -63,14 +63,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminDeleteConfigPermissionsByGroup op = new AdminDeleteConfigPermissionsByGroup(this,
-                    body
+                    body                    
                 );
 
                 op.SetBaseFields<AdminDeleteConfigPermissionsByGroupBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public AdminDeleteConfigPermissionsByGroup.Response Execute(
                 ClientmodelPermissionSetDeleteGroupRequest body
             )
             {
@@ -82,12 +82,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<AdminDeleteConfigPermissionsByGroup.Response> ExecuteAsync(
                 ClientmodelPermissionSetDeleteGroupRequest body
             )
             {
@@ -99,8 +99,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -110,32 +110,46 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             ClientmodelPermissionSetDeleteGroupRequest body
         )
         {
-
+            
             if (builder.ForceDelete != null) QueryParams["forceDelete"] = Convert.ToString(builder.ForceDelete)!;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public AdminDeleteConfigPermissionsByGroup(
-            bool? forceDelete,
-            Model.ClientmodelPermissionSetDeleteGroupRequest body
-        )
+        #region Response Part        
+        public class Response : ApiResponse
         {
 
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public RestErrorResponse? Error403 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::ClientsConfigV3::AdminDeleteConfigPermissionsByGroup";
+        }
+
+        #endregion
+
+        public AdminDeleteConfigPermissionsByGroup(
+            bool? forceDelete,            
+            Model.ClientmodelPermissionSetDeleteGroupRequest body            
+        )
+        {
+            
             if (forceDelete != null) QueryParams["forceDelete"] = Convert.ToString(forceDelete)!;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,17 +161,30 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminDeleteConfigPermissionsByGroup.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new AdminDeleteConfigPermissionsByGroup.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)401)
+            
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -60,7 +60,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
                 return op;
             }
 
-            public List<Model.LogAppMessageDeclaration>? Execute(
+            public PublicGetMessages.Response Execute(
             )
             {
                 PublicGetMessages op = Build(
@@ -71,11 +71,11 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.LogAppMessageDeclaration>?> ExecuteAsync(
+            public async Task<PublicGetMessages.Response> ExecuteAsync(
             )
             {
                 PublicGetMessages op = Build(
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -95,26 +95,38 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         private PublicGetMessages(PublicGetMessagesBuilder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.LogAppMessageDeclaration>>
+        {
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Dsmc::DsmcOperations::PublicGetMessages";
+        }
+
+        #endregion
+
         public PublicGetMessages(
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -126,25 +138,31 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.LogAppMessageDeclaration>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicGetMessages.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicGetMessages.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.LogAppMessageDeclaration>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.LogAppMessageDeclaration>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)500)
             {
-                return JsonSerializer.Deserialize<List<Model.LogAppMessageDeclaration>>(payload, ResponseJsonOptions);
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

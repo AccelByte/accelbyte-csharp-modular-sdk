@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
         #endregion
 
-        public Model.UpdatePolicyVersionResponse? UpdatePolicyVersion1(UpdatePolicyVersion1 input)
+        public UpdatePolicyVersion1.Response UpdatePolicyVersion1(UpdatePolicyVersion1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.UpdatePolicyVersionResponse?> UpdatePolicyVersion1Async(UpdatePolicyVersion1 input)
+        public async Task<UpdatePolicyVersion1.Response> UpdatePolicyVersion1Async(UpdatePolicyVersion1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,23 +96,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublishPolicyVersion1(PublishPolicyVersion1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublishPolicyVersion1Async(PublishPolicyVersion1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public List<Model.RetrievePolicyVersionResponse>? RetrieveSinglePolicyVersion1(RetrieveSinglePolicyVersion1 input)
+        public PublishPolicyVersion1.Response PublishPolicyVersion1(PublishPolicyVersion1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +104,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.RetrievePolicyVersionResponse>?> RetrieveSinglePolicyVersion1Async(RetrieveSinglePolicyVersion1 input)
+        public async Task<PublishPolicyVersion1.Response> PublishPolicyVersion1Async(PublishPolicyVersion1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,7 +112,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.CreatePolicyVersionResponse? CreatePolicyVersion1(CreatePolicyVersion1 input)
+        public RetrieveSinglePolicyVersion1.Response RetrieveSinglePolicyVersion1(RetrieveSinglePolicyVersion1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -136,7 +120,23 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.CreatePolicyVersionResponse?> CreatePolicyVersion1Async(CreatePolicyVersion1 input)
+        public async Task<RetrieveSinglePolicyVersion1.Response> RetrieveSinglePolicyVersion1Async(RetrieveSinglePolicyVersion1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public CreatePolicyVersion1.Response CreatePolicyVersion1(CreatePolicyVersion1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<CreatePolicyVersion1.Response> CreatePolicyVersion1Async(CreatePolicyVersion1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

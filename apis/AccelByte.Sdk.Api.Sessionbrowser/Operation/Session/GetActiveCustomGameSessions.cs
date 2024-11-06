@@ -87,14 +87,14 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             )
             {
                 GetActiveCustomGameSessions op = new GetActiveCustomGameSessions(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetActiveCustomGameSessionsBuilder>(this);
                 return op;
             }
 
-            public Model.ModelsActiveCustomGameResponse? Execute(
+            public GetActiveCustomGameSessions.Response Execute(
                 string namespace_
             )
             {
@@ -107,11 +107,11 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelsActiveCustomGameResponse?> ExecuteAsync(
+            public async Task<GetActiveCustomGameSessions.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -135,40 +135,54 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.ServerRegion is not null) QueryParams["server_region"] = builder.ServerRegion;
             if (builder.SessionId is not null) QueryParams["session_id"] = builder.SessionId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelsActiveCustomGameResponse>
+        {
+
+            public RestapiErrorResponseV2? Error400 { get; set; } = null;
+
+            public RestapiErrorResponseV2? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Sessionbrowser::Session::GetActiveCustomGameSessions";
+        }
+
+        #endregion
+
         public GetActiveCustomGameSessions(
-            string namespace_,
-            long? limit,
-            long? offset,
-            string? serverRegion,
-            string? sessionId
+            string namespace_,            
+            long? limit,            
+            long? offset,            
+            string? serverRegion,            
+            string? sessionId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (serverRegion is not null) QueryParams["server_region"] = serverRegion;
             if (sessionId is not null) QueryParams["session_id"] = sessionId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -177,28 +191,39 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelsActiveCustomGameResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetActiveCustomGameSessions.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetActiveCustomGameSessions.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelsActiveCustomGameResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsActiveCustomGameResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelsActiveCustomGameResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV2>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV2>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

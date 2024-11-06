@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-        public Model.ClientmodelListClientPermissionSet? AdminListClientAvailablePermissions(AdminListClientAvailablePermissions input)
+        public AdminListClientAvailablePermissions.Response AdminListClientAvailablePermissions(AdminListClientAvailablePermissions input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ClientmodelListClientPermissionSet?> AdminListClientAvailablePermissionsAsync(AdminListClientAvailablePermissions input)
+        public async Task<AdminListClientAvailablePermissions.Response> AdminListClientAvailablePermissionsAsync(AdminListClientAvailablePermissions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,39 +96,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminUpdateAvailablePermissionsByModule(AdminUpdateAvailablePermissionsByModule input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminUpdateAvailablePermissionsByModuleAsync(AdminUpdateAvailablePermissionsByModule input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminDeleteConfigPermissionsByGroup(AdminDeleteConfigPermissionsByGroup input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteConfigPermissionsByGroupAsync(AdminDeleteConfigPermissionsByGroup input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ClientmodelListTemplatesResponse? AdminListClientTemplates(AdminListClientTemplates input)
+        public AdminUpdateAvailablePermissionsByModule.Response AdminUpdateAvailablePermissionsByModule(AdminUpdateAvailablePermissionsByModule input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -136,7 +104,39 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ClientmodelListTemplatesResponse?> AdminListClientTemplatesAsync(AdminListClientTemplates input)
+        public async Task<AdminUpdateAvailablePermissionsByModule.Response> AdminUpdateAvailablePermissionsByModuleAsync(AdminUpdateAvailablePermissionsByModule input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminDeleteConfigPermissionsByGroup.Response AdminDeleteConfigPermissionsByGroup(AdminDeleteConfigPermissionsByGroup input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminDeleteConfigPermissionsByGroup.Response> AdminDeleteConfigPermissionsByGroupAsync(AdminDeleteConfigPermissionsByGroup input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminListClientTemplates.Response AdminListClientTemplates(AdminListClientTemplates input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminListClientTemplates.Response> AdminListClientTemplatesAsync(AdminListClientTemplates input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

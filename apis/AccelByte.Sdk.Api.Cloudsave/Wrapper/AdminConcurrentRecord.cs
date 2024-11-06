@@ -91,39 +91,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
         }
         #endregion
 
-        public void AdminPutAdminGameRecordConcurrentHandlerV1(AdminPutAdminGameRecordConcurrentHandlerV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminPutAdminGameRecordConcurrentHandlerV1Async(AdminPutAdminGameRecordConcurrentHandlerV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminPutGameRecordConcurrentHandlerV1(AdminPutGameRecordConcurrentHandlerV1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminPutGameRecordConcurrentHandlerV1Async(AdminPutGameRecordConcurrentHandlerV1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsPlayerRecordConcurrentUpdateResponse? AdminPutAdminPlayerRecordConcurrentHandlerV1(AdminPutAdminPlayerRecordConcurrentHandlerV1 input)
+        public AdminPutAdminGameRecordConcurrentHandlerV1.Response AdminPutAdminGameRecordConcurrentHandlerV1(AdminPutAdminGameRecordConcurrentHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -131,7 +99,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPlayerRecordConcurrentUpdateResponse?> AdminPutAdminPlayerRecordConcurrentHandlerV1Async(AdminPutAdminPlayerRecordConcurrentHandlerV1 input)
+        public async Task<AdminPutAdminGameRecordConcurrentHandlerV1.Response> AdminPutAdminGameRecordConcurrentHandlerV1Async(AdminPutAdminGameRecordConcurrentHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -139,7 +107,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPlayerRecordConcurrentUpdateResponse? AdminPutPlayerRecordConcurrentHandlerV1(AdminPutPlayerRecordConcurrentHandlerV1 input)
+        public AdminPutGameRecordConcurrentHandlerV1.Response AdminPutGameRecordConcurrentHandlerV1(AdminPutGameRecordConcurrentHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -147,7 +115,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPlayerRecordConcurrentUpdateResponse?> AdminPutPlayerRecordConcurrentHandlerV1Async(AdminPutPlayerRecordConcurrentHandlerV1 input)
+        public async Task<AdminPutGameRecordConcurrentHandlerV1.Response> AdminPutGameRecordConcurrentHandlerV1Async(AdminPutGameRecordConcurrentHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -155,7 +123,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPlayerRecordConcurrentUpdateResponse? AdminPutPlayerPublicRecordConcurrentHandlerV1(AdminPutPlayerPublicRecordConcurrentHandlerV1 input)
+        public AdminPutAdminPlayerRecordConcurrentHandlerV1.Response AdminPutAdminPlayerRecordConcurrentHandlerV1(AdminPutAdminPlayerRecordConcurrentHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -163,7 +131,39 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPlayerRecordConcurrentUpdateResponse?> AdminPutPlayerPublicRecordConcurrentHandlerV1Async(AdminPutPlayerPublicRecordConcurrentHandlerV1 input)
+        public async Task<AdminPutAdminPlayerRecordConcurrentHandlerV1.Response> AdminPutAdminPlayerRecordConcurrentHandlerV1Async(AdminPutAdminPlayerRecordConcurrentHandlerV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminPutPlayerRecordConcurrentHandlerV1.Response AdminPutPlayerRecordConcurrentHandlerV1(AdminPutPlayerRecordConcurrentHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminPutPlayerRecordConcurrentHandlerV1.Response> AdminPutPlayerRecordConcurrentHandlerV1Async(AdminPutPlayerRecordConcurrentHandlerV1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminPutPlayerPublicRecordConcurrentHandlerV1.Response AdminPutPlayerPublicRecordConcurrentHandlerV1(AdminPutPlayerPublicRecordConcurrentHandlerV1 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminPutPlayerPublicRecordConcurrentHandlerV1.Response> AdminPutPlayerPublicRecordConcurrentHandlerV1Async(AdminPutPlayerPublicRecordConcurrentHandlerV1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

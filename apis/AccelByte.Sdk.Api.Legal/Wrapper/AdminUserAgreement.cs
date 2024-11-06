@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
         #endregion
 
-        public Model.AcceptAgreementResponse? IndirectBulkAcceptVersionedPolicy(IndirectBulkAcceptVersionedPolicy input)
+        public IndirectBulkAcceptVersionedPolicy.Response IndirectBulkAcceptVersionedPolicy(IndirectBulkAcceptVersionedPolicy input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.AcceptAgreementResponse?> IndirectBulkAcceptVersionedPolicyAsync(IndirectBulkAcceptVersionedPolicy input)
+        public async Task<IndirectBulkAcceptVersionedPolicy.Response> IndirectBulkAcceptVersionedPolicyAsync(IndirectBulkAcceptVersionedPolicy input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

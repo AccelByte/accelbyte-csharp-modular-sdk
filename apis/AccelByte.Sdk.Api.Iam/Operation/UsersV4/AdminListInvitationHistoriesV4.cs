@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
-            public Model.ModelListInvitationHistoriesV4Response? Execute(
+            public AdminListInvitationHistoriesV4.Response Execute(
             )
             {
                 AdminListInvitationHistoriesV4 op = Build(
@@ -100,11 +100,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelListInvitationHistoriesV4Response?> ExecuteAsync(
+            public async Task<AdminListInvitationHistoriesV4.Response> ExecuteAsync(
             )
             {
                 AdminListInvitationHistoriesV4 op = Build(
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -124,35 +124,55 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         private AdminListInvitationHistoriesV4(AdminListInvitationHistoriesV4Builder builder
         )
         {
-
+            
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Namespace is not null) QueryParams["namespace"] = builder.Namespace;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public AdminListInvitationHistoriesV4(
-            long? limit,
-            string? namespace_,
-            long? offset
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelListInvitationHistoriesV4Response>
         {
 
+            public RestErrorResponse? Error400 { get; set; } = null;
+
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public RestErrorResponse? Error403 { get; set; } = null;
+
+            public RestErrorResponse? Error500 { get; set; } = null;
+
+            public RestErrorResponse? Error501 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::UsersV4::AdminListInvitationHistoriesV4";
+        }
+
+        #endregion
+
+        public AdminListInvitationHistoriesV4(
+            long? limit,            
+            string? namespace_,            
+            long? offset            
+        )
+        {
+            
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (namespace_ is not null) QueryParams["namespace"] = namespace_;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -161,28 +181,54 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelListInvitationHistoriesV4Response? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminListInvitationHistoriesV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminListInvitationHistoriesV4.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelListInvitationHistoriesV4Response>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelListInvitationHistoriesV4Response>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelListInvitationHistoriesV4Response>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)501)
+            {
+                response.Error501 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error501!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

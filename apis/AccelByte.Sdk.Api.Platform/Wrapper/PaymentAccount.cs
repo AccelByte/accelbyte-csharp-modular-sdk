@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public List<Model.PaymentAccount>? PublicGetPaymentAccounts(PublicGetPaymentAccounts input)
+        public PublicGetPaymentAccounts.Response PublicGetPaymentAccounts(PublicGetPaymentAccounts input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.PaymentAccount>?> PublicGetPaymentAccountsAsync(PublicGetPaymentAccounts input)
+        public async Task<PublicGetPaymentAccounts.Response> PublicGetPaymentAccountsAsync(PublicGetPaymentAccounts input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,18 +74,18 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicDeletePaymentAccount(PublicDeletePaymentAccount input)
+        public PublicDeletePaymentAccount.Response PublicDeletePaymentAccount(PublicDeletePaymentAccount input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicDeletePaymentAccountAsync(PublicDeletePaymentAccount input)
+        public async Task<PublicDeletePaymentAccount.Response> PublicDeletePaymentAccountAsync(PublicDeletePaymentAccount input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

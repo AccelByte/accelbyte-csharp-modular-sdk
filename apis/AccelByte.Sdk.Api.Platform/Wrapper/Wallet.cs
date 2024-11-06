@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public CheckWallet.CheckWalletBuilder CheckWalletOp
         {
             get
@@ -156,7 +156,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetUserWallet.GetUserWalletBuilder GetUserWalletOp
         {
             get
@@ -168,7 +168,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DebitUserWallet.DebitUserWalletBuilder DebitUserWalletOp
         {
             get
@@ -180,7 +180,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DisableUserWallet.DisableUserWalletBuilder DisableUserWalletOp
         {
             get
@@ -192,7 +192,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public EnableUserWallet.EnableUserWalletBuilder EnableUserWalletOp
         {
             get
@@ -204,7 +204,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public ListUserWalletTransactions.ListUserWalletTransactionsBuilder ListUserWalletTransactionsOp
         {
             get
@@ -216,7 +216,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public QueryWallets.QueryWalletsBuilder QueryWalletsOp
         {
             get
@@ -250,7 +250,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetWallet.GetWalletBuilder GetWalletOp
         {
             get
@@ -297,7 +297,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.PlatformWalletConfigInfo? GetPlatformWalletConfig(GetPlatformWalletConfig input)
+        public GetPlatformWalletConfig.Response GetPlatformWalletConfig(GetPlatformWalletConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -305,7 +305,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PlatformWalletConfigInfo?> GetPlatformWalletConfigAsync(GetPlatformWalletConfig input)
+        public async Task<GetPlatformWalletConfig.Response> GetPlatformWalletConfigAsync(GetPlatformWalletConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -313,7 +313,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PlatformWalletConfigInfo? UpdatePlatformWalletConfig(UpdatePlatformWalletConfig input)
+        public UpdatePlatformWalletConfig.Response UpdatePlatformWalletConfig(UpdatePlatformWalletConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -321,7 +321,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PlatformWalletConfigInfo?> UpdatePlatformWalletConfigAsync(UpdatePlatformWalletConfig input)
+        public async Task<UpdatePlatformWalletConfig.Response> UpdatePlatformWalletConfigAsync(UpdatePlatformWalletConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -329,7 +329,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PlatformWalletConfigInfo? ResetPlatformWalletConfig(ResetPlatformWalletConfig input)
+        public ResetPlatformWalletConfig.Response ResetPlatformWalletConfig(ResetPlatformWalletConfig input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -337,7 +337,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PlatformWalletConfigInfo?> ResetPlatformWalletConfigAsync(ResetPlatformWalletConfig input)
+        public async Task<ResetPlatformWalletConfig.Response> ResetPlatformWalletConfigAsync(ResetPlatformWalletConfig input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -345,7 +345,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.CurrencyWallet>? QueryUserCurrencyWallets(QueryUserCurrencyWallets input)
+        public QueryUserCurrencyWallets.Response QueryUserCurrencyWallets(QueryUserCurrencyWallets input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -353,7 +353,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.CurrencyWallet>?> QueryUserCurrencyWalletsAsync(QueryUserCurrencyWallets input)
+        public async Task<QueryUserCurrencyWallets.Response> QueryUserCurrencyWalletsAsync(QueryUserCurrencyWallets input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -361,7 +361,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.WalletInfo? DebitUserWalletByCurrencyCode(DebitUserWalletByCurrencyCode input)
+        public DebitUserWalletByCurrencyCode.Response DebitUserWalletByCurrencyCode(DebitUserWalletByCurrencyCode input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -369,7 +369,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.WalletInfo?> DebitUserWalletByCurrencyCodeAsync(DebitUserWalletByCurrencyCode input)
+        public async Task<DebitUserWalletByCurrencyCode.Response> DebitUserWalletByCurrencyCodeAsync(DebitUserWalletByCurrencyCode input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -377,7 +377,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.WalletTransactionPagingSlicedResult? ListUserCurrencyTransactions(ListUserCurrencyTransactions input)
+        public ListUserCurrencyTransactions.Response ListUserCurrencyTransactions(ListUserCurrencyTransactions input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -385,7 +385,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.WalletTransactionPagingSlicedResult?> ListUserCurrencyTransactionsAsync(ListUserCurrencyTransactions input)
+        public async Task<ListUserCurrencyTransactions.Response> ListUserCurrencyTransactionsAsync(ListUserCurrencyTransactions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -393,42 +393,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void CheckBalance(CheckBalance input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task CheckBalanceAsync(CheckBalance input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void CheckWallet(CheckWallet input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task CheckWalletAsync(CheckWallet input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-        public Model.WalletInfo? CreditUserWallet(CreditUserWallet input)
+        public CheckBalance.Response CheckBalance(CheckBalance input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -436,7 +401,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.WalletInfo?> CreditUserWalletAsync(CreditUserWallet input)
+        public async Task<CheckBalance.Response> CheckBalanceAsync(CheckBalance input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -444,7 +409,9 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PlatformWallet? DebitByWalletPlatform(DebitByWalletPlatform input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public CheckWallet.Response CheckWallet(CheckWallet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -452,7 +419,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PlatformWallet?> DebitByWalletPlatformAsync(DebitByWalletPlatform input)
+        public async Task<CheckWallet.Response> CheckWalletAsync(CheckWallet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -460,7 +427,8 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PlatformWallet? PayWithUserWallet(PayWithUserWallet input)
+        #pragma warning restore ab_deprecated_operation
+        public CreditUserWallet.Response CreditUserWallet(CreditUserWallet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -468,7 +436,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PlatformWallet?> PayWithUserWalletAsync(PayWithUserWallet input)
+        public async Task<CreditUserWallet.Response> CreditUserWalletAsync(CreditUserWallet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -476,9 +444,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.WalletInfo? GetUserWallet(GetUserWallet input)
+        public DebitByWalletPlatform.Response DebitByWalletPlatform(DebitByWalletPlatform input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -486,7 +452,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.WalletInfo?> GetUserWalletAsync(GetUserWallet input)
+        public async Task<DebitByWalletPlatform.Response> DebitByWalletPlatformAsync(DebitByWalletPlatform input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -494,10 +460,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.WalletInfo? DebitUserWallet(DebitUserWallet input)
+        public PayWithUserWallet.Response PayWithUserWallet(PayWithUserWallet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -505,7 +468,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.WalletInfo?> DebitUserWalletAsync(DebitUserWallet input)
+        public async Task<PayWithUserWallet.Response> PayWithUserWalletAsync(PayWithUserWallet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -513,48 +476,9 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void DisableUserWallet(DisableUserWallet input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DisableUserWalletAsync(DisableUserWallet input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public void EnableUserWallet(EnableUserWallet input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task EnableUserWalletAsync(EnableUserWallet input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.DetailedWalletTransactionPagingSlicedResult? ListUserWalletTransactions(ListUserWalletTransactions input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetUserWallet.Response GetUserWallet(GetUserWallet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -562,7 +486,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.DetailedWalletTransactionPagingSlicedResult?> ListUserWalletTransactionsAsync(ListUserWalletTransactions input)
+        public async Task<GetUserWallet.Response> GetUserWalletAsync(GetUserWallet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -570,10 +494,10 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.WalletPagingSlicedResult? QueryWallets(QueryWallets input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public DebitUserWallet.Response DebitUserWallet(DebitUserWallet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -581,7 +505,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.WalletPagingSlicedResult?> QueryWalletsAsync(QueryWallets input)
+        public async Task<DebitUserWallet.Response> DebitUserWalletAsync(DebitUserWallet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -589,8 +513,10 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public Model.BulkCreditResult? BulkCredit(BulkCredit input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public DisableUserWallet.Response DisableUserWallet(DisableUserWallet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -598,7 +524,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.BulkCreditResult?> BulkCreditAsync(BulkCredit input)
+        public async Task<DisableUserWallet.Response> DisableUserWalletAsync(DisableUserWallet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -606,7 +532,10 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.BulkDebitResult? BulkDebit(BulkDebit input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public EnableUserWallet.Response EnableUserWallet(EnableUserWallet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -614,7 +543,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.BulkDebitResult?> BulkDebitAsync(BulkDebit input)
+        public async Task<EnableUserWallet.Response> EnableUserWalletAsync(EnableUserWallet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -622,9 +551,10 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.WalletInfo? GetWallet(GetWallet input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public ListUserWalletTransactions.Response ListUserWalletTransactions(ListUserWalletTransactions input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -632,7 +562,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.WalletInfo?> GetWalletAsync(GetWallet input)
+        public async Task<ListUserWalletTransactions.Response> ListUserWalletTransactionsAsync(ListUserWalletTransactions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -640,8 +570,10 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public Model.PlatformWallet? PublicGetMyWallet(PublicGetMyWallet input)
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public QueryWallets.Response QueryWallets(QueryWallets input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -649,7 +581,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PlatformWallet?> PublicGetMyWalletAsync(PublicGetMyWallet input)
+        public async Task<QueryWallets.Response> QueryWalletsAsync(QueryWallets input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -657,7 +589,8 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PlatformWallet? PublicGetWallet(PublicGetWallet input)
+        #pragma warning restore ab_deprecated_operation
+        public BulkCredit.Response BulkCredit(BulkCredit input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -665,7 +598,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PlatformWallet?> PublicGetWalletAsync(PublicGetWallet input)
+        public async Task<BulkCredit.Response> BulkCreditAsync(BulkCredit input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -673,7 +606,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.WalletTransactionPagingSlicedResult? PublicListUserWalletTransactions(PublicListUserWalletTransactions input)
+        public BulkDebit.Response BulkDebit(BulkDebit input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -681,7 +614,74 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.WalletTransactionPagingSlicedResult?> PublicListUserWalletTransactionsAsync(PublicListUserWalletTransactions input)
+        public async Task<BulkDebit.Response> BulkDebitAsync(BulkDebit input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public GetWallet.Response GetWallet(GetWallet input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetWallet.Response> GetWalletAsync(GetWallet input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        #pragma warning restore ab_deprecated_operation
+        public PublicGetMyWallet.Response PublicGetMyWallet(PublicGetMyWallet input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetMyWallet.Response> PublicGetMyWalletAsync(PublicGetMyWallet input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetWallet.Response PublicGetWallet(PublicGetWallet input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetWallet.Response> PublicGetWalletAsync(PublicGetWallet input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicListUserWalletTransactions.Response PublicListUserWalletTransactions(PublicListUserWalletTransactions input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicListUserWalletTransactions.Response> PublicListUserWalletTransactionsAsync(PublicListUserWalletTransactions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

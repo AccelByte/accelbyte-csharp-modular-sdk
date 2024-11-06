@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.OrderSyncResult? SyncOrders(SyncOrders input)
+        public SyncOrders.Response SyncOrders(SyncOrders input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.OrderSyncResult?> SyncOrdersAsync(SyncOrders input)
+        public async Task<SyncOrders.Response> SyncOrdersAsync(SyncOrders input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

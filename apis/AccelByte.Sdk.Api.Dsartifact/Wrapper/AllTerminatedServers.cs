@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
         }
         #endregion
 
-        public Model.ModelsListTerminatedServersResponse? ListTerminatedServers(ListTerminatedServers input)
+        public ListTerminatedServers.Response ListTerminatedServers(ListTerminatedServers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsListTerminatedServersResponse?> ListTerminatedServersAsync(ListTerminatedServers input)
+        public async Task<ListTerminatedServers.Response> ListTerminatedServersAsync(ListTerminatedServers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

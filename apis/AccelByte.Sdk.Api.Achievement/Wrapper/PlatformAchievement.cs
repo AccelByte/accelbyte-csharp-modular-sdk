@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
         }
         #endregion
 
-        public Model.ModelsBulkCreatePSNEventResponse? BulkCreatePSNEvent(BulkCreatePSNEvent input)
+        public BulkCreatePSNEvent.Response BulkCreatePSNEvent(BulkCreatePSNEvent input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsBulkCreatePSNEventResponse?> BulkCreatePSNEventAsync(BulkCreatePSNEvent input)
+        public async Task<BulkCreatePSNEvent.Response> BulkCreatePSNEventAsync(BulkCreatePSNEvent input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

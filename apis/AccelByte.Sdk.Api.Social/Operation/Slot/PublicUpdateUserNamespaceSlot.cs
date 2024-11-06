@@ -32,7 +32,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// Other detail info:
     ///         *  Returns : updated slot
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class PublicUpdateUserNamespaceSlot : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -105,17 +105,17 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 PublicUpdateUserNamespaceSlot op = new PublicUpdateUserNamespaceSlot(this,
-                    namespace_,
-                    slotId,
-                    userId
+                    namespace_,                    
+                    slotId,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PublicUpdateUserNamespaceSlotBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public Model.SlotInfo? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicUpdateUserNamespaceSlot.Response Execute(
                 string namespace_,
                 string slotId,
                 string userId
@@ -132,11 +132,11 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.SlotInfo?> ExecuteAsync(
+            public async Task<PublicUpdateUserNamespaceSlot.Response> ExecuteAsync(
                 string namespace_,
                 string slotId,
                 string userId
@@ -153,7 +153,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -168,49 +168,63 @@ namespace AccelByte.Sdk.Api.Social.Operation
             PathParams["namespace"] = namespace_;
             PathParams["slotId"] = slotId;
             PathParams["userId"] = userId;
-
+            
             if (builder.Label is not null) QueryParams["label"] = builder.Label;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
-
+            
             if (builder.Checksum is not null) FormParams["checksum"] = builder.Checksum;
             if (builder.CustomAttribute is not null) FormParams["customAttribute"] = builder.CustomAttribute;
             if (builder.File is not null) FormParams["file"] = builder.File;
 
-
+            
             CollectionFormatMap["tags"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.SlotInfo>
+        {
+
+            public ErrorEntity? Error400 { get; set; } = null;
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Social::Slot::PublicUpdateUserNamespaceSlot";
+        }
+
+        #endregion
+
         public PublicUpdateUserNamespaceSlot(
-            string namespace_,
-            string slotId,
-            string userId,
-            string? label,
-            List<string>? tags,
-            string? checksum,
-            string? customAttribute,
-            Stream? file
+            string namespace_,            
+            string slotId,            
+            string userId,            
+            string? label,            
+            List<string>? tags,            
+            string? checksum,            
+            string? customAttribute,            
+            Stream? file            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["slotId"] = slotId;
             PathParams["userId"] = userId;
-
+            
             if (label is not null) QueryParams["label"] = label;
             if (tags is not null) QueryParams["tags"] = tags;
-
+            
             if (checksum is not null) FormParams["checksum"] = checksum;
             if (customAttribute is not null) FormParams["customAttribute"] = customAttribute;
             if (file is not null) FormParams["file"] = file;
 
-
+            
             CollectionFormatMap["tags"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -222,25 +236,36 @@ namespace AccelByte.Sdk.Api.Social.Operation
         public override List<string> Consumes => new() { "multipart/form-data" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.SlotInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicUpdateUserNamespaceSlot.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicUpdateUserNamespaceSlot.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.SlotInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.SlotInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.SlotInfo>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

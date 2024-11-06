@@ -60,15 +60,15 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             )
             {
                 AdminDeleteTag op = new AdminDeleteTag(this,
-                    namespace_,
-                    tagName
+                    namespace_,                    
+                    tagName                    
                 );
 
                 op.SetBaseFields<AdminDeleteTagBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public AdminDeleteTag.Response Execute(
                 string namespace_,
                 string tagName
             )
@@ -82,12 +82,12 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<AdminDeleteTag.Response> ExecuteAsync(
                 string namespace_,
                 string tagName
             )
@@ -101,8 +101,8 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -115,30 +115,44 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["tagName"] = tagName;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public ApimodelsErrorResponse? Error404 { get; set; } = null;
+
+            public ApimodelsErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Inventory::AdminTags::AdminDeleteTag";
+        }
+
+        #endregion
+
         public AdminDeleteTag(
-            string namespace_,
-            string tagName
+            string namespace_,            
+            string tagName            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["tagName"] = tagName;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,20 +161,33 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminDeleteTag.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new AdminDeleteTag.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

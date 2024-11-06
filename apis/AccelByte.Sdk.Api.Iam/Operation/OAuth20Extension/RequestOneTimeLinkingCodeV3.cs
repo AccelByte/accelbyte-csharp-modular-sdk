@@ -80,14 +80,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 RequestOneTimeLinkingCodeV3 op = new RequestOneTimeLinkingCodeV3(this,
-                    platformId
+                    platformId                    
                 );
 
                 op.SetBaseFields<RequestOneTimeLinkingCodeV3Builder>(this);
                 return op;
             }
 
-            public Model.OauthmodelOneTimeLinkingCodeResponse? Execute(
+            public RequestOneTimeLinkingCodeV3.Response Execute(
                 string platformId
             )
             {
@@ -100,11 +100,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OauthmodelOneTimeLinkingCodeResponse?> ExecuteAsync(
+            public async Task<RequestOneTimeLinkingCodeV3.Response> ExecuteAsync(
                 string platformId
             )
             {
@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -127,29 +127,39 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string platformId
         )
         {
-
-
+            
+            
             if (platformId is not null) FormParams["platformId"] = platformId;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public RequestOneTimeLinkingCodeV3(
-            string platformId
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.OauthmodelOneTimeLinkingCodeResponse>
         {
 
 
+            protected override string GetFullOperationId() => "Iam::OAuth20Extension::RequestOneTimeLinkingCodeV3";
+        }
+
+        #endregion
+
+        public RequestOneTimeLinkingCodeV3(
+            string platformId            
+        )
+        {
+            
+            
             if (platformId is not null) FormParams["platformId"] = platformId;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -161,25 +171,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OauthmodelOneTimeLinkingCodeResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public RequestOneTimeLinkingCodeV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new RequestOneTimeLinkingCodeV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OauthmodelOneTimeLinkingCodeResponse>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.OauthmodelOneTimeLinkingCodeResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelOneTimeLinkingCodeResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -55,14 +55,14 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             )
             {
                 AdminCreateExtensionCategory op = new AdminCreateExtensionCategory(this,
-                    body
+                    body                    
                 );
 
                 op.SetBaseFields<AdminCreateExtensionCategoryBuilder>(this);
                 return op;
             }
 
-            public Model.RestapiExtensionCategoryApiResponse? Execute(
+            public AdminCreateExtensionCategory.Response Execute(
                 RestapiExtensionCategoryApiRequest body
             )
             {
@@ -75,11 +75,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.RestapiExtensionCategoryApiResponse?> ExecuteAsync(
+            public async Task<AdminCreateExtensionCategory.Response> ExecuteAsync(
                 RestapiExtensionCategoryApiRequest body
             )
             {
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -102,29 +102,43 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             RestapiExtensionCategoryApiRequest body
         )
         {
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public AdminCreateExtensionCategory(
-            Model.RestapiExtensionCategoryApiRequest body
-        )
+        #region Response Part        
+        public class Response : ApiResponse<Model.RestapiExtensionCategoryApiResponse>
         {
 
+            public RestapiErrorResponse? Error400 { get; set; } = null;
+
+            public RestapiErrorResponse? Error500 { get; set; } = null;
 
 
+            protected override string GetFullOperationId() => "Reporting::AdminExtensionCategoriesAndAutoModerationActions::AdminCreateExtensionCategory";
+        }
 
+        #endregion
 
+        public AdminCreateExtensionCategory(
+            Model.RestapiExtensionCategoryApiRequest body            
+        )
+        {
+            
+            
+
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -136,25 +150,36 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.RestapiExtensionCategoryApiResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminCreateExtensionCategory.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminCreateExtensionCategory.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.RestapiExtensionCategoryApiResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.RestapiExtensionCategoryApiResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.RestapiExtensionCategoryApiResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

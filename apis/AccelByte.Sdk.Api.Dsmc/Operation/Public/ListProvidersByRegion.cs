@@ -55,14 +55,14 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             )
             {
                 ListProvidersByRegion op = new ListProvidersByRegion(this,
-                    region
+                    region                    
                 );
 
                 op.SetBaseFields<ListProvidersByRegionBuilder>(this);
                 return op;
             }
 
-            public List<string>? Execute(
+            public ListProvidersByRegion.Response Execute(
                 string region
             )
             {
@@ -75,11 +75,11 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<string>?> ExecuteAsync(
+            public async Task<ListProvidersByRegion.Response> ExecuteAsync(
                 string region
             )
             {
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -103,28 +103,38 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         )
         {
             PathParams["region"] = region;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<string>>
+        {
+
+
+            protected override string GetFullOperationId() => "Dsmc::Public::ListProvidersByRegion";
+        }
+
+        #endregion
+
         public ListProvidersByRegion(
-            string region
+            string region            
         )
         {
             PathParams["region"] = region;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -136,25 +146,26 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<string>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public ListProvidersByRegion.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new ListProvidersByRegion.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

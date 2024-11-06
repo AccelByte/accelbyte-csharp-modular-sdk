@@ -84,15 +84,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminGetUserLoginHistoriesV3 op = new AdminGetUserLoginHistoriesV3(this,
-                    namespace_,
-                    userId
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<AdminGetUserLoginHistoriesV3Builder>(this);
                 return op;
             }
 
-            public Model.ModelLoginHistoriesResponse? Execute(
+            public AdminGetUserLoginHistoriesV3.Response Execute(
                 string namespace_,
                 string userId
             )
@@ -107,11 +107,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelLoginHistoriesResponse?> ExecuteAsync(
+            public async Task<AdminGetUserLoginHistoriesV3.Response> ExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -139,39 +139,55 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.After != null) QueryParams["after"] = Convert.ToString(builder.After)!;
             if (builder.Before != null) QueryParams["before"] = Convert.ToString(builder.Before)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelLoginHistoriesResponse>
+        {
+
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public RestErrorResponse? Error403 { get; set; } = null;
+
+            public string Error404 { get; set; } = "";
+
+
+            protected override string GetFullOperationId() => "Iam::Users::AdminGetUserLoginHistoriesV3";
+        }
+
+        #endregion
+
         public AdminGetUserLoginHistoriesV3(
-            string namespace_,
-            string userId,
-            double? after,
-            double? before,
-            long? limit
+            string namespace_,            
+            string userId,            
+            double? after,            
+            double? before,            
+            long? limit            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (after != null) QueryParams["after"] = Convert.ToString(after)!;
             if (before != null) QueryParams["before"] = Convert.ToString(before)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -180,28 +196,44 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelLoginHistoriesResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminGetUserLoginHistoriesV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new AdminGetUserLoginHistoriesV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelLoginHistoriesResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelLoginHistoriesResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)401)
             {
-                return JsonSerializer.Deserialize<Model.ModelLoginHistoriesResponse>(payload, ResponseJsonOptions);
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error404!);
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

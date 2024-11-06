@@ -61,15 +61,15 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
             )
             {
                 SetServerAlias op = new SetServerAlias(this,
-                    body,
-                    region
+                    body,                    
+                    region                    
                 );
 
                 op.SetBaseFields<SetServerAliasBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public SetServerAlias.Response Execute(
                 ModelsSetAliasRequest body,
                 string region
             )
@@ -83,12 +83,12 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<SetServerAlias.Response> ExecuteAsync(
                 ModelsSetAliasRequest body,
                 string region
             )
@@ -102,8 +102,8 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -115,31 +115,47 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
         )
         {
             PathParams["region"] = region;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error404 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Qosm::Admin::SetServerAlias";
+        }
+
+        #endregion
+
         public SetServerAlias(
-            string region,
-            Model.ModelsSetAliasRequest body
+            string region,            
+            Model.ModelsSetAliasRequest body            
         )
         {
             PathParams["region"] = region;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -151,17 +167,36 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public SetServerAlias.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new SetServerAlias.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

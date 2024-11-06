@@ -63,19 +63,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 DownloadInvoiceDetails op = new DownloadInvoiceDetails(this,
-                    namespace_,
-                    endTime,
-                    feature,
-                    itemId,
-                    itemType,
-                    startTime
+                    namespace_,                    
+                    endTime,                    
+                    feature,                    
+                    itemId,                    
+                    itemType,                    
+                    startTime                    
                 );
 
                 op.SetBaseFields<DownloadInvoiceDetailsBuilder>(this);
                 return op;
             }
 
-            public Stream? Execute(
+            public DownloadInvoiceDetails.Response Execute(
                 string namespace_,
                 string endTime,
                 string feature,
@@ -98,11 +98,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Stream?> ExecuteAsync(
+            public async Task<DownloadInvoiceDetails.Response> ExecuteAsync(
                 string namespace_,
                 string endTime,
                 string feature,
@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -141,43 +141,53 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (endTime is not null) QueryParams["endTime"] = endTime;
             if (feature is not null) QueryParams["feature"] = feature;
             if (itemId is not null) QueryParams["itemId"] = itemId;
             if (itemType is not null) QueryParams["itemType"] = itemType.Value;
             if (startTime is not null) QueryParams["startTime"] = startTime;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Stream>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Invoice::DownloadInvoiceDetails";
+        }
+
+        #endregion
+
         public DownloadInvoiceDetails(
-            string namespace_,
-            string endTime,
-            string feature,
-            string itemId,
-            DownloadInvoiceDetailsItemType itemType,
-            string startTime
+            string namespace_,            
+            string endTime,            
+            string feature,            
+            string itemId,            
+            DownloadInvoiceDetailsItemType itemType,            
+            string startTime            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (endTime is not null) QueryParams["endTime"] = endTime;
             if (feature is not null) QueryParams["feature"] = feature;
             if (itemId is not null) QueryParams["itemId"] = itemId;
             if (itemType is not null) QueryParams["itemType"] = itemType.Value;
             if (startTime is not null) QueryParams["startTime"] = startTime;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -186,28 +196,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "text/csv" };
-
-        public Stream? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public DownloadInvoiceDetails.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new DownloadInvoiceDetails.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return payload;
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return payload;
+                response.Data = payload;
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

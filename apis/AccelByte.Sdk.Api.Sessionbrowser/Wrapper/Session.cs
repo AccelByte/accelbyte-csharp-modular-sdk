@@ -256,7 +256,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
         }
         #endregion
 
-        public Model.ModelsSessionQueryResponse? AdminQuerySession(AdminQuerySession input)
+        public AdminQuerySession.Response AdminQuerySession(AdminQuerySession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -264,7 +264,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsSessionQueryResponse?> AdminQuerySessionAsync(AdminQuerySession input)
+        public async Task<AdminQuerySession.Response> AdminQuerySessionAsync(AdminQuerySession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -272,7 +272,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsCountActiveSessionResponse? GetTotalActiveSession(GetTotalActiveSession input)
+        public GetTotalActiveSession.Response GetTotalActiveSession(GetTotalActiveSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -280,7 +280,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsCountActiveSessionResponse?> GetTotalActiveSessionAsync(GetTotalActiveSession input)
+        public async Task<GetTotalActiveSession.Response> GetTotalActiveSessionAsync(GetTotalActiveSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -288,7 +288,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsActiveCustomGameResponse? GetActiveCustomGameSessions(GetActiveCustomGameSessions input)
+        public GetActiveCustomGameSessions.Response GetActiveCustomGameSessions(GetActiveCustomGameSessions input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -296,7 +296,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsActiveCustomGameResponse?> GetActiveCustomGameSessionsAsync(GetActiveCustomGameSessions input)
+        public async Task<GetActiveCustomGameSessions.Response> GetActiveCustomGameSessionsAsync(GetActiveCustomGameSessions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -304,7 +304,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsActiveMatchmakingGameResponse? GetActiveMatchmakingGameSessions(GetActiveMatchmakingGameSessions input)
+        public GetActiveMatchmakingGameSessions.Response GetActiveMatchmakingGameSessions(GetActiveMatchmakingGameSessions input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -312,7 +312,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsActiveMatchmakingGameResponse?> GetActiveMatchmakingGameSessionsAsync(GetActiveMatchmakingGameSessions input)
+        public async Task<GetActiveMatchmakingGameSessions.Response> GetActiveMatchmakingGameSessionsAsync(GetActiveMatchmakingGameSessions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -320,7 +320,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsAdminSessionResponse? AdminGetSession(AdminGetSession input)
+        public AdminGetSession.Response AdminGetSession(AdminGetSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -328,7 +328,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsAdminSessionResponse?> AdminGetSessionAsync(AdminGetSession input)
+        public async Task<AdminGetSession.Response> AdminGetSessionAsync(AdminGetSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -336,7 +336,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsAdminSessionResponse? AdminDeleteSession(AdminDeleteSession input)
+        public AdminDeleteSession.Response AdminDeleteSession(AdminDeleteSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -344,7 +344,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsAdminSessionResponse?> AdminDeleteSessionAsync(AdminDeleteSession input)
+        public async Task<AdminDeleteSession.Response> AdminDeleteSessionAsync(AdminDeleteSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -352,7 +352,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsGetSessionHistorySearchResponseV2? AdminSearchSessionsV2(AdminSearchSessionsV2 input)
+        public AdminSearchSessionsV2.Response AdminSearchSessionsV2(AdminSearchSessionsV2 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -360,7 +360,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsGetSessionHistorySearchResponseV2?> AdminSearchSessionsV2Async(AdminSearchSessionsV2 input)
+        public async Task<AdminSearchSessionsV2.Response> AdminSearchSessionsV2Async(AdminSearchSessionsV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -368,7 +368,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelsGetSessionHistoryDetailedResponseItem>? GetSessionHistoryDetailed(GetSessionHistoryDetailed input)
+        public GetSessionHistoryDetailed.Response GetSessionHistoryDetailed(GetSessionHistoryDetailed input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -376,7 +376,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsGetSessionHistoryDetailedResponseItem>?> GetSessionHistoryDetailedAsync(GetSessionHistoryDetailed input)
+        public async Task<GetSessionHistoryDetailed.Response> GetSessionHistoryDetailedAsync(GetSessionHistoryDetailed input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -384,7 +384,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsSessionQueryResponse? UserQuerySession(UserQuerySession input)
+        public UserQuerySession.Response UserQuerySession(UserQuerySession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -392,7 +392,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsSessionQueryResponse?> UserQuerySessionAsync(UserQuerySession input)
+        public async Task<UserQuerySession.Response> UserQuerySessionAsync(UserQuerySession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -400,7 +400,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsSessionResponse? CreateSession(CreateSession input)
+        public CreateSession.Response CreateSession(CreateSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -408,7 +408,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsSessionResponse?> CreateSessionAsync(CreateSession input)
+        public async Task<CreateSession.Response> CreateSessionAsync(CreateSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -416,7 +416,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsSessionByUserIDsResponse? GetSessionByUserIDs(GetSessionByUserIDs input)
+        public GetSessionByUserIDs.Response GetSessionByUserIDs(GetSessionByUserIDs input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -424,7 +424,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsSessionByUserIDsResponse?> GetSessionByUserIDsAsync(GetSessionByUserIDs input)
+        public async Task<GetSessionByUserIDs.Response> GetSessionByUserIDsAsync(GetSessionByUserIDs input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -432,7 +432,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsSessionResponse? GetSession(GetSession input)
+        public GetSession.Response GetSession(GetSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -440,7 +440,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsSessionResponse?> GetSessionAsync(GetSession input)
+        public async Task<GetSession.Response> GetSessionAsync(GetSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -448,7 +448,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsSessionResponse? UpdateSession(UpdateSession input)
+        public UpdateSession.Response UpdateSession(UpdateSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -456,7 +456,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsSessionResponse?> UpdateSessionAsync(UpdateSession input)
+        public async Task<UpdateSession.Response> UpdateSessionAsync(UpdateSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -464,7 +464,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsSessionResponse? DeleteSession(DeleteSession input)
+        public DeleteSession.Response DeleteSession(DeleteSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -472,7 +472,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsSessionResponse?> DeleteSessionAsync(DeleteSession input)
+        public async Task<DeleteSession.Response> DeleteSessionAsync(DeleteSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -480,7 +480,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsSessionResponse? JoinSession(JoinSession input)
+        public JoinSession.Response JoinSession(JoinSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -488,7 +488,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsSessionResponse?> JoinSessionAsync(JoinSession input)
+        public async Task<JoinSession.Response> JoinSessionAsync(JoinSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -496,7 +496,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsSessionResponse? DeleteSessionLocalDS(DeleteSessionLocalDS input)
+        public DeleteSessionLocalDS.Response DeleteSessionLocalDS(DeleteSessionLocalDS input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -504,7 +504,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsSessionResponse?> DeleteSessionLocalDSAsync(DeleteSessionLocalDS input)
+        public async Task<DeleteSessionLocalDS.Response> DeleteSessionLocalDSAsync(DeleteSessionLocalDS input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -512,7 +512,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsAddPlayerResponse? AddPlayerToSession(AddPlayerToSession input)
+        public AddPlayerToSession.Response AddPlayerToSession(AddPlayerToSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -520,7 +520,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsAddPlayerResponse?> AddPlayerToSessionAsync(AddPlayerToSession input)
+        public async Task<AddPlayerToSession.Response> AddPlayerToSessionAsync(AddPlayerToSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -528,7 +528,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsAddPlayerResponse? RemovePlayerFromSession(RemovePlayerFromSession input)
+        public RemovePlayerFromSession.Response RemovePlayerFromSession(RemovePlayerFromSession input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -536,7 +536,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsAddPlayerResponse?> RemovePlayerFromSessionAsync(RemovePlayerFromSession input)
+        public async Task<RemovePlayerFromSession.Response> RemovePlayerFromSessionAsync(RemovePlayerFromSession input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -544,7 +544,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsSessionResponse? UpdateSettings(UpdateSettings input)
+        public UpdateSettings.Response UpdateSettings(UpdateSettings input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -552,7 +552,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsSessionResponse?> UpdateSettingsAsync(UpdateSettings input)
+        public async Task<UpdateSettings.Response> UpdateSettingsAsync(UpdateSettings input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -560,7 +560,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsRecentPlayerQueryResponse? GetRecentPlayer(GetRecentPlayer input)
+        public GetRecentPlayer.Response GetRecentPlayer(GetRecentPlayer input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -568,7 +568,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsRecentPlayerQueryResponse?> GetRecentPlayerAsync(GetRecentPlayer input)
+        public async Task<GetRecentPlayer.Response> GetRecentPlayerAsync(GetRecentPlayer input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

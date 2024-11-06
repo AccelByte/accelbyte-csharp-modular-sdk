@@ -245,7 +245,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.SubscriptionPagingSlicedResult? QuerySubscriptions(QuerySubscriptions input)
+        public QuerySubscriptions.Response QuerySubscriptions(QuerySubscriptions input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -253,7 +253,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SubscriptionPagingSlicedResult?> QuerySubscriptionsAsync(QuerySubscriptions input)
+        public async Task<QuerySubscriptions.Response> QuerySubscriptionsAsync(QuerySubscriptions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -261,7 +261,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RecurringChargeResult? RecurringChargeSubscription(RecurringChargeSubscription input)
+        public RecurringChargeSubscription.Response RecurringChargeSubscription(RecurringChargeSubscription input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -269,7 +269,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RecurringChargeResult?> RecurringChargeSubscriptionAsync(RecurringChargeSubscription input)
+        public async Task<RecurringChargeSubscription.Response> RecurringChargeSubscriptionAsync(RecurringChargeSubscription input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -277,7 +277,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.SubscriptionPagingSlicedResult? QueryUserSubscriptions(QueryUserSubscriptions input)
+        public QueryUserSubscriptions.Response QueryUserSubscriptions(QueryUserSubscriptions input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -285,7 +285,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SubscriptionPagingSlicedResult?> QueryUserSubscriptionsAsync(QueryUserSubscriptions input)
+        public async Task<QueryUserSubscriptions.Response> QueryUserSubscriptionsAsync(QueryUserSubscriptions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -293,7 +293,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.SubscriptionActivityPagingSlicedResult? GetUserSubscriptionActivities(GetUserSubscriptionActivities input)
+        public GetUserSubscriptionActivities.Response GetUserSubscriptionActivities(GetUserSubscriptionActivities input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -301,7 +301,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SubscriptionActivityPagingSlicedResult?> GetUserSubscriptionActivitiesAsync(GetUserSubscriptionActivities input)
+        public async Task<GetUserSubscriptionActivities.Response> GetUserSubscriptionActivitiesAsync(GetUserSubscriptionActivities input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -309,7 +309,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.SubscriptionInfo? PlatformSubscribeSubscription(PlatformSubscribeSubscription input)
+        public PlatformSubscribeSubscription.Response PlatformSubscribeSubscription(PlatformSubscribeSubscription input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -317,7 +317,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SubscriptionInfo?> PlatformSubscribeSubscriptionAsync(PlatformSubscribeSubscription input)
+        public async Task<PlatformSubscribeSubscription.Response> PlatformSubscribeSubscriptionAsync(PlatformSubscribeSubscription input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -325,7 +325,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.Subscribable? CheckUserSubscriptionSubscribableByItemId(CheckUserSubscriptionSubscribableByItemId input)
+        public CheckUserSubscriptionSubscribableByItemId.Response CheckUserSubscriptionSubscribableByItemId(CheckUserSubscriptionSubscribableByItemId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -333,7 +333,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.Subscribable?> CheckUserSubscriptionSubscribableByItemIdAsync(CheckUserSubscriptionSubscribableByItemId input)
+        public async Task<CheckUserSubscriptionSubscribableByItemId.Response> CheckUserSubscriptionSubscribableByItemIdAsync(CheckUserSubscriptionSubscribableByItemId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -341,7 +341,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.SubscriptionInfo? GetUserSubscription(GetUserSubscription input)
+        public GetUserSubscription.Response GetUserSubscription(GetUserSubscription input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -349,7 +349,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SubscriptionInfo?> GetUserSubscriptionAsync(GetUserSubscription input)
+        public async Task<GetUserSubscription.Response> GetUserSubscriptionAsync(GetUserSubscription input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -357,23 +357,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void DeleteUserSubscription(DeleteUserSubscription input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task DeleteUserSubscriptionAsync(DeleteUserSubscription input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.SubscriptionInfo? CancelSubscription(CancelSubscription input)
+        public DeleteUserSubscription.Response DeleteUserSubscription(DeleteUserSubscription input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -381,7 +365,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SubscriptionInfo?> CancelSubscriptionAsync(CancelSubscription input)
+        public async Task<DeleteUserSubscription.Response> DeleteUserSubscriptionAsync(DeleteUserSubscription input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -389,7 +373,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.SubscriptionInfo? GrantDaysToSubscription(GrantDaysToSubscription input)
+        public CancelSubscription.Response CancelSubscription(CancelSubscription input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -397,7 +381,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SubscriptionInfo?> GrantDaysToSubscriptionAsync(GrantDaysToSubscription input)
+        public async Task<CancelSubscription.Response> CancelSubscriptionAsync(CancelSubscription input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -405,7 +389,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.BillingHistoryPagingSlicedResult? GetUserSubscriptionBillingHistories(GetUserSubscriptionBillingHistories input)
+        public GrantDaysToSubscription.Response GrantDaysToSubscription(GrantDaysToSubscription input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -413,7 +397,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.BillingHistoryPagingSlicedResult?> GetUserSubscriptionBillingHistoriesAsync(GetUserSubscriptionBillingHistories input)
+        public async Task<GrantDaysToSubscription.Response> GrantDaysToSubscriptionAsync(GrantDaysToSubscription input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -421,23 +405,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void ProcessUserSubscriptionNotification(ProcessUserSubscriptionNotification input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task ProcessUserSubscriptionNotificationAsync(ProcessUserSubscriptionNotification input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.SubscriptionPagingSlicedResult? PublicQueryUserSubscriptions(PublicQueryUserSubscriptions input)
+        public GetUserSubscriptionBillingHistories.Response GetUserSubscriptionBillingHistories(GetUserSubscriptionBillingHistories input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -445,7 +413,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SubscriptionPagingSlicedResult?> PublicQueryUserSubscriptionsAsync(PublicQueryUserSubscriptions input)
+        public async Task<GetUserSubscriptionBillingHistories.Response> GetUserSubscriptionBillingHistoriesAsync(GetUserSubscriptionBillingHistories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -453,23 +421,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicSubscribeSubscription(PublicSubscribeSubscription input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicSubscribeSubscriptionAsync(PublicSubscribeSubscription input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.Subscribable? PublicCheckUserSubscriptionSubscribableByItemId(PublicCheckUserSubscriptionSubscribableByItemId input)
+        public ProcessUserSubscriptionNotification.Response ProcessUserSubscriptionNotification(ProcessUserSubscriptionNotification input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -477,7 +429,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.Subscribable?> PublicCheckUserSubscriptionSubscribableByItemIdAsync(PublicCheckUserSubscriptionSubscribableByItemId input)
+        public async Task<ProcessUserSubscriptionNotification.Response> ProcessUserSubscriptionNotificationAsync(ProcessUserSubscriptionNotification input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -485,7 +437,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.SubscriptionInfo? PublicGetUserSubscription(PublicGetUserSubscription input)
+        public PublicQueryUserSubscriptions.Response PublicQueryUserSubscriptions(PublicQueryUserSubscriptions input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -493,7 +445,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SubscriptionInfo?> PublicGetUserSubscriptionAsync(PublicGetUserSubscription input)
+        public async Task<PublicQueryUserSubscriptions.Response> PublicQueryUserSubscriptionsAsync(PublicQueryUserSubscriptions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -501,7 +453,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.SubscriptionInfo? PublicChangeSubscriptionBillingAccount(PublicChangeSubscriptionBillingAccount input)
+        public PublicSubscribeSubscription.Response PublicSubscribeSubscription(PublicSubscribeSubscription input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -509,7 +461,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SubscriptionInfo?> PublicChangeSubscriptionBillingAccountAsync(PublicChangeSubscriptionBillingAccount input)
+        public async Task<PublicSubscribeSubscription.Response> PublicSubscribeSubscriptionAsync(PublicSubscribeSubscription input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -517,7 +469,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.SubscriptionInfo? PublicCancelSubscription(PublicCancelSubscription input)
+        public PublicCheckUserSubscriptionSubscribableByItemId.Response PublicCheckUserSubscriptionSubscribableByItemId(PublicCheckUserSubscriptionSubscribableByItemId input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -525,7 +477,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.SubscriptionInfo?> PublicCancelSubscriptionAsync(PublicCancelSubscription input)
+        public async Task<PublicCheckUserSubscriptionSubscribableByItemId.Response> PublicCheckUserSubscriptionSubscribableByItemIdAsync(PublicCheckUserSubscriptionSubscribableByItemId input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -533,7 +485,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.BillingHistoryPagingSlicedResult? PublicGetUserSubscriptionBillingHistories(PublicGetUserSubscriptionBillingHistories input)
+        public PublicGetUserSubscription.Response PublicGetUserSubscription(PublicGetUserSubscription input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -541,7 +493,55 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.BillingHistoryPagingSlicedResult?> PublicGetUserSubscriptionBillingHistoriesAsync(PublicGetUserSubscriptionBillingHistories input)
+        public async Task<PublicGetUserSubscription.Response> PublicGetUserSubscriptionAsync(PublicGetUserSubscription input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicChangeSubscriptionBillingAccount.Response PublicChangeSubscriptionBillingAccount(PublicChangeSubscriptionBillingAccount input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicChangeSubscriptionBillingAccount.Response> PublicChangeSubscriptionBillingAccountAsync(PublicChangeSubscriptionBillingAccount input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicCancelSubscription.Response PublicCancelSubscription(PublicCancelSubscription input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicCancelSubscription.Response> PublicCancelSubscriptionAsync(PublicCancelSubscription input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetUserSubscriptionBillingHistories.Response PublicGetUserSubscriptionBillingHistories(PublicGetUserSubscriptionBillingHistories input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetUserSubscriptionBillingHistories.Response> PublicGetUserSubscriptionBillingHistoriesAsync(PublicGetUserSubscriptionBillingHistories input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

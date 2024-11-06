@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public Model.ModelsAddDownloadCountResponse? AddDownloadCount(AddDownloadCount input)
+        public AddDownloadCount.Response AddDownloadCount(AddDownloadCount input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsAddDownloadCountResponse?> AddDownloadCountAsync(AddDownloadCount input)
+        public async Task<AddDownloadCount.Response> AddDownloadCountAsync(AddDownloadCount input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
         }
         #endregion
 
-        public Model.RestapiActionListApiResponse? AdminFindActionList(AdminFindActionList input)
+        public AdminFindActionList.Response AdminFindActionList(AdminFindActionList input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiActionListApiResponse?> AdminFindActionListAsync(AdminFindActionList input)
+        public async Task<AdminFindActionList.Response> AdminFindActionListAsync(AdminFindActionList input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RestapiActionApiResponse? AdminCreateModAction(AdminCreateModAction input)
+        public AdminCreateModAction.Response AdminCreateModAction(AdminCreateModAction input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiActionApiResponse?> AdminCreateModActionAsync(AdminCreateModAction input)
+        public async Task<AdminCreateModAction.Response> AdminCreateModActionAsync(AdminCreateModAction input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RestapiExtensionCategoryListApiResponse? AdminFindExtensionCategoryList(AdminFindExtensionCategoryList input)
+        public AdminFindExtensionCategoryList.Response AdminFindExtensionCategoryList(AdminFindExtensionCategoryList input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiExtensionCategoryListApiResponse?> AdminFindExtensionCategoryListAsync(AdminFindExtensionCategoryList input)
+        public async Task<AdminFindExtensionCategoryList.Response> AdminFindExtensionCategoryListAsync(AdminFindExtensionCategoryList input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RestapiExtensionCategoryApiResponse? AdminCreateExtensionCategory(AdminCreateExtensionCategory input)
+        public AdminCreateExtensionCategory.Response AdminCreateExtensionCategory(AdminCreateExtensionCategory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -136,7 +136,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiExtensionCategoryApiResponse?> AdminCreateExtensionCategoryAsync(AdminCreateExtensionCategory input)
+        public async Task<AdminCreateExtensionCategory.Response> AdminCreateExtensionCategoryAsync(AdminCreateExtensionCategory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

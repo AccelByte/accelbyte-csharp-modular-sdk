@@ -112,15 +112,15 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             )
             {
                 FleetServerHistory op = new FleetServerHistory(this,
-                    fleetID,
-                    namespace_
+                    fleetID,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<FleetServerHistoryBuilder>(this);
                 return op;
             }
 
-            public Model.ApiDSHistoryList? Execute(
+            public FleetServerHistory.Response Execute(
                 string fleetID,
                 string namespace_
             )
@@ -135,11 +135,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ApiDSHistoryList?> ExecuteAsync(
+            public async Task<FleetServerHistory.Response> ExecuteAsync(
                 string fleetID,
                 string namespace_
             )
@@ -154,7 +154,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -167,7 +167,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         {
             PathParams["fleetID"] = fleetID;
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Count != null) QueryParams["count"] = Convert.ToString(builder.Count)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Reason is not null) QueryParams["reason"] = builder.Reason;
@@ -175,31 +175,49 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             if (builder.ServerId is not null) QueryParams["serverId"] = builder.ServerId;
             if (builder.SortDirection is not null) QueryParams["sortDirection"] = builder.SortDirection;
             if (builder.Status is not null) QueryParams["status"] = builder.Status;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ApiDSHistoryList>
+        {
+
+            public ResponseErrorResponse? Error400 { get; set; } = null;
+
+            public ResponseErrorResponse? Error401 { get; set; } = null;
+
+            public ResponseErrorResponse? Error403 { get; set; } = null;
+
+            public ResponseErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Ams::Servers::FleetServerHistory";
+        }
+
+        #endregion
+
         public FleetServerHistory(
-            string fleetID,
-            string namespace_,
-            long? count,
-            long? offset,
-            string? reason,
-            string? region,
-            string? serverId,
-            string? sortDirection,
-            string? status
+            string fleetID,            
+            string namespace_,            
+            long? count,            
+            long? offset,            
+            string? reason,            
+            string? region,            
+            string? serverId,            
+            string? sortDirection,            
+            string? status            
         )
         {
             PathParams["fleetID"] = fleetID;
             PathParams["namespace"] = namespace_;
-
+            
             if (count != null) QueryParams["count"] = Convert.ToString(count)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (reason is not null) QueryParams["reason"] = reason;
@@ -207,11 +225,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             if (serverId is not null) QueryParams["serverId"] = serverId;
             if (sortDirection is not null) QueryParams["sortDirection"] = sortDirection;
             if (status is not null) QueryParams["status"] = status;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -223,25 +241,46 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ApiDSHistoryList? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public FleetServerHistory.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new FleetServerHistory.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ApiDSHistoryList>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ApiDSHistoryList>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ApiDSHistoryList>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

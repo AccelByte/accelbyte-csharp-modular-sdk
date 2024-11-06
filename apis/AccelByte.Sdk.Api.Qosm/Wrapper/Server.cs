@@ -47,18 +47,18 @@ namespace AccelByte.Sdk.Api.Qosm.Wrapper
         }
         #endregion
 
-        public void Heartbeat(Heartbeat input)
+        public Heartbeat.Response Heartbeat(Heartbeat input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task HeartbeatAsync(Heartbeat input)
+        public async Task<Heartbeat.Response> HeartbeatAsync(Heartbeat input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

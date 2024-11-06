@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Wrapper
         }
         #endregion
 
-        public Model.ListBaseResponseStr? GetNamespacesGameTelemetryV1AdminNamespacesGet(GetNamespacesGameTelemetryV1AdminNamespacesGet input)
+        public GetNamespacesGameTelemetryV1AdminNamespacesGet.Response GetNamespacesGameTelemetryV1AdminNamespacesGet(GetNamespacesGameTelemetryV1AdminNamespacesGet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ListBaseResponseStr?> GetNamespacesGameTelemetryV1AdminNamespacesGetAsync(GetNamespacesGameTelemetryV1AdminNamespacesGet input)
+        public async Task<GetNamespacesGameTelemetryV1AdminNamespacesGet.Response> GetNamespacesGameTelemetryV1AdminNamespacesGetAsync(GetNamespacesGameTelemetryV1AdminNamespacesGet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PagedResponseGetNamespaceEventResponse? GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet(GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet input)
+        public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet.Response GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet(GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PagedResponseGetNamespaceEventResponse?> GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetAsync(GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet input)
+        public async Task<GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet.Response> GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetAsync(GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

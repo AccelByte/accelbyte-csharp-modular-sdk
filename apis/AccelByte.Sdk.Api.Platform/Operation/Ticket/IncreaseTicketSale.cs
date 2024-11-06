@@ -60,16 +60,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 IncreaseTicketSale op = new IncreaseTicketSale(this,
-                    body,
-                    boothName,
-                    namespace_
+                    body,                    
+                    boothName,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<IncreaseTicketSaleBuilder>(this);
                 return op;
             }
 
-            public Model.TicketSaleIncrementResult? Execute(
+            public IncreaseTicketSale.Response Execute(
                 TicketSaleIncrementRequest body,
                 string boothName,
                 string namespace_
@@ -86,11 +86,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.TicketSaleIncrementResult?> ExecuteAsync(
+            public async Task<IncreaseTicketSale.Response> ExecuteAsync(
                 TicketSaleIncrementRequest body,
                 string boothName,
                 string namespace_
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -121,33 +121,47 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["boothName"] = boothName;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.TicketSaleIncrementResult>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+            public ValidationErrorEntity? Error422 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Ticket::IncreaseTicketSale";
+        }
+
+        #endregion
+
         public IncreaseTicketSale(
-            string boothName,
-            string namespace_,
-            Model.TicketSaleIncrementRequest body
+            string boothName,            
+            string namespace_,            
+            Model.TicketSaleIncrementRequest body            
         )
         {
             PathParams["boothName"] = boothName;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -159,25 +173,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.TicketSaleIncrementResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public IncreaseTicketSale.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new IncreaseTicketSale.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.TicketSaleIncrementResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.TicketSaleIncrementResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.TicketSaleIncrementResult>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)422)
+            {
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -76,15 +76,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetApp op = new GetApp(this,
-                    itemId,
-                    namespace_
+                    itemId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetAppBuilder>(this);
                 return op;
             }
 
-            public Model.FullAppInfo? Execute(
+            public GetApp.Response Execute(
                 string itemId,
                 string namespace_
             )
@@ -99,11 +99,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.FullAppInfo?> ExecuteAsync(
+            public async Task<GetApp.Response> ExecuteAsync(
                 string itemId,
                 string namespace_
             )
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -131,36 +131,46 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.FullAppInfo>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Item::GetApp";
+        }
+
+        #endregion
+
         public GetApp(
-            string itemId,
-            string namespace_,
-            bool? activeOnly,
-            string? storeId
+            string itemId,            
+            string namespace_,            
+            bool? activeOnly,            
+            string? storeId            
         )
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-
+            
             if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -169,28 +179,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.FullAppInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetApp.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetApp.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.FullAppInfo>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.FullAppInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.FullAppInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

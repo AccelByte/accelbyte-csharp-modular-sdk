@@ -166,7 +166,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminTopicChatHistory.AdminTopicChatHistoryBuilder AdminTopicChatHistoryOp
         {
             get
@@ -367,7 +367,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
         }
         #endregion
 
-        public Model.ModelsMessageResultWithAttributes? AdminFilterChatMessage(AdminFilterChatMessage input)
+        public AdminFilterChatMessage.Response AdminFilterChatMessage(AdminFilterChatMessage input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -375,7 +375,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsMessageResultWithAttributes?> AdminFilterChatMessageAsync(AdminFilterChatMessage input)
+        public async Task<AdminFilterChatMessage.Response> AdminFilterChatMessageAsync(AdminFilterChatMessage input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -384,7 +384,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.Payload);
         }
 
-        public Model.ModelsMessageResultWithAttributes<T1>? AdminFilterChatMessage<T1>(AdminFilterChatMessage input)
+        public AdminFilterChatMessage.Response<T1> AdminFilterChatMessage<T1>(AdminFilterChatMessage input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse<T1>(
@@ -392,7 +392,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsMessageResultWithAttributes<T1>?> AdminFilterChatMessageAsync<T1>(AdminFilterChatMessage input)
+        public async Task<AdminFilterChatMessage.Response<T1>> AdminFilterChatMessageAsync<T1>(AdminFilterChatMessage input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
@@ -400,7 +400,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsChatMessageWithPaginationResponse? AdminChatHistory(AdminChatHistory input)
+        public AdminChatHistory.Response AdminChatHistory(AdminChatHistory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -408,7 +408,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsChatMessageWithPaginationResponse?> AdminChatHistoryAsync(AdminChatHistory input)
+        public async Task<AdminChatHistory.Response> AdminChatHistoryAsync(AdminChatHistory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -416,7 +416,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiCreateTopicResponse? AdminCreateNamespaceTopic(AdminCreateNamespaceTopic input)
+        public AdminCreateNamespaceTopic.Response AdminCreateNamespaceTopic(AdminCreateNamespaceTopic input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -424,7 +424,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiCreateTopicResponse?> AdminCreateNamespaceTopicAsync(AdminCreateNamespaceTopic input)
+        public async Task<AdminCreateNamespaceTopic.Response> AdminCreateNamespaceTopicAsync(AdminCreateNamespaceTopic input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -432,7 +432,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelsTopicResponse>? AdminTopicList(AdminTopicList input)
+        public AdminTopicList.Response AdminTopicList(AdminTopicList input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -440,7 +440,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsTopicResponse>?> AdminTopicListAsync(AdminTopicList input)
+        public async Task<AdminTopicList.Response> AdminTopicListAsync(AdminTopicList input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -448,7 +448,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiCreateTopicResponse? AdminCreateTopic(AdminCreateTopic input)
+        public AdminCreateTopic.Response AdminCreateTopic(AdminCreateTopic input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -456,7 +456,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiCreateTopicResponse?> AdminCreateTopicAsync(AdminCreateTopic input)
+        public async Task<AdminCreateTopic.Response> AdminCreateTopicAsync(AdminCreateTopic input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -464,7 +464,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsChannelTopicWithPaginationResponse? AdminChannelTopicList(AdminChannelTopicList input)
+        public AdminChannelTopicList.Response AdminChannelTopicList(AdminChannelTopicList input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -472,7 +472,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsChannelTopicWithPaginationResponse?> AdminChannelTopicListAsync(AdminChannelTopicList input)
+        public async Task<AdminChannelTopicList.Response> AdminChannelTopicListAsync(AdminChannelTopicList input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -480,7 +480,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsChannelTopicSummaryResponse? AdminChannelTopicSummary(AdminChannelTopicSummary input)
+        public AdminChannelTopicSummary.Response AdminChannelTopicSummary(AdminChannelTopicSummary input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -488,7 +488,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsChannelTopicSummaryResponse?> AdminChannelTopicSummaryAsync(AdminChannelTopicSummary input)
+        public async Task<AdminChannelTopicSummary.Response> AdminChannelTopicSummaryAsync(AdminChannelTopicSummary input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -496,7 +496,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsTopicLogWithPaginationResponse? AdminQueryTopicLog(AdminQueryTopicLog input)
+        public AdminQueryTopicLog.Response AdminQueryTopicLog(AdminQueryTopicLog input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -504,7 +504,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsTopicLogWithPaginationResponse?> AdminQueryTopicLogAsync(AdminQueryTopicLog input)
+        public async Task<AdminQueryTopicLog.Response> AdminQueryTopicLogAsync(AdminQueryTopicLog input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -512,7 +512,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ApiCreateTopicResponse? AdminUpdateTopic(AdminUpdateTopic input)
+        public AdminUpdateTopic.Response AdminUpdateTopic(AdminUpdateTopic input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -520,7 +520,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ApiCreateTopicResponse?> AdminUpdateTopicAsync(AdminUpdateTopic input)
+        public async Task<AdminUpdateTopic.Response> AdminUpdateTopicAsync(AdminUpdateTopic input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -528,7 +528,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.MessageActionDeleteTopicResult? AdminDeleteTopic(AdminDeleteTopic input)
+        public AdminDeleteTopic.Response AdminDeleteTopic(AdminDeleteTopic input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -536,7 +536,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.MessageActionDeleteTopicResult?> AdminDeleteTopicAsync(AdminDeleteTopic input)
+        public async Task<AdminDeleteTopic.Response> AdminDeleteTopicAsync(AdminDeleteTopic input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -544,7 +544,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsBanTopicMemberResult? AdminBanTopicMembers(AdminBanTopicMembers input)
+        public AdminBanTopicMembers.Response AdminBanTopicMembers(AdminBanTopicMembers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -552,7 +552,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsBanTopicMemberResult?> AdminBanTopicMembersAsync(AdminBanTopicMembers input)
+        public async Task<AdminBanTopicMembers.Response> AdminBanTopicMembersAsync(AdminBanTopicMembers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -560,7 +560,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsChannelTopicResponse? AdminChannelTopicInfo(AdminChannelTopicInfo input)
+        public AdminChannelTopicInfo.Response AdminChannelTopicInfo(AdminChannelTopicInfo input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -568,7 +568,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsChannelTopicResponse?> AdminChannelTopicInfoAsync(AdminChannelTopicInfo input)
+        public async Task<AdminChannelTopicInfo.Response> AdminChannelTopicInfoAsync(AdminChannelTopicInfo input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -576,9 +576,9 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-        public Model.ModelsChatMessageWithPaginationResponse? AdminTopicChatHistory(AdminTopicChatHistory input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminTopicChatHistory.Response AdminTopicChatHistory(AdminTopicChatHistory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -586,7 +586,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsChatMessageWithPaginationResponse?> AdminTopicChatHistoryAsync(AdminTopicChatHistory input)
+        public async Task<AdminTopicChatHistory.Response> AdminTopicChatHistoryAsync(AdminTopicChatHistory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -594,8 +594,8 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-        public List<Model.ModelsChatMessageResponse>? AdminSendChat(AdminSendChat input)
+        #pragma warning restore ab_deprecated_operation
+        public AdminSendChat.Response AdminSendChat(AdminSendChat input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -603,7 +603,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsChatMessageResponse>?> AdminSendChatAsync(AdminSendChat input)
+        public async Task<AdminSendChat.Response> AdminSendChatAsync(AdminSendChat input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -611,23 +611,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteChat(AdminDeleteChat input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminDeleteChatAsync(AdminDeleteChat input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsTopicMemberWithPaginationResponse? AdminTopicMembers(AdminTopicMembers input)
+        public AdminDeleteChat.Response AdminDeleteChat(AdminDeleteChat input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -635,7 +619,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsTopicMemberWithPaginationResponse?> AdminTopicMembersAsync(AdminTopicMembers input)
+        public async Task<AdminDeleteChat.Response> AdminDeleteChatAsync(AdminDeleteChat input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -643,7 +627,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<string>? AdminTopicShards(AdminTopicShards input)
+        public AdminTopicMembers.Response AdminTopicMembers(AdminTopicMembers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -651,7 +635,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<string>?> AdminTopicShardsAsync(AdminTopicShards input)
+        public async Task<AdminTopicMembers.Response> AdminTopicMembersAsync(AdminTopicMembers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -659,7 +643,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsUnbanTopicMemberResult? AdminUnbanTopicMembers(AdminUnbanTopicMembers input)
+        public AdminTopicShards.Response AdminTopicShards(AdminTopicShards input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -667,7 +651,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsUnbanTopicMemberResult?> AdminUnbanTopicMembersAsync(AdminUnbanTopicMembers input)
+        public async Task<AdminTopicShards.Response> AdminTopicShardsAsync(AdminTopicShards input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -675,7 +659,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.MessageActionAddUserToTopicResult? AdminAddTopicMember(AdminAddTopicMember input)
+        public AdminUnbanTopicMembers.Response AdminUnbanTopicMembers(AdminUnbanTopicMembers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -683,7 +667,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.MessageActionAddUserToTopicResult?> AdminAddTopicMemberAsync(AdminAddTopicMember input)
+        public async Task<AdminUnbanTopicMembers.Response> AdminUnbanTopicMembersAsync(AdminUnbanTopicMembers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -691,7 +675,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.MessageActionAddUserToTopicResult? AdminRemoveTopicMember(AdminRemoveTopicMember input)
+        public AdminAddTopicMember.Response AdminAddTopicMember(AdminAddTopicMember input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -699,7 +683,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.MessageActionAddUserToTopicResult?> AdminRemoveTopicMemberAsync(AdminRemoveTopicMember input)
+        public async Task<AdminAddTopicMember.Response> AdminAddTopicMemberAsync(AdminAddTopicMember input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -707,7 +691,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelsTopicInfo>? AdminQueryTopic(AdminQueryTopic input)
+        public AdminRemoveTopicMember.Response AdminRemoveTopicMember(AdminRemoveTopicMember input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -715,7 +699,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsTopicInfo>?> AdminQueryTopicAsync(AdminQueryTopic input)
+        public async Task<AdminRemoveTopicMember.Response> AdminRemoveTopicMemberAsync(AdminRemoveTopicMember input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -723,7 +707,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsTopicLogWithPaginationResponse? AdminQueryUsersTopic(AdminQueryUsersTopic input)
+        public AdminQueryTopic.Response AdminQueryTopic(AdminQueryTopic input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -731,7 +715,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsTopicLogWithPaginationResponse?> AdminQueryUsersTopicAsync(AdminQueryUsersTopic input)
+        public async Task<AdminQueryTopic.Response> AdminQueryTopicAsync(AdminQueryTopic input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -739,7 +723,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ApiMutedTopicResponse>? PublicGetMutedTopics(PublicGetMutedTopics input)
+        public AdminQueryUsersTopic.Response AdminQueryUsersTopic(AdminQueryUsersTopic input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -747,7 +731,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ApiMutedTopicResponse>?> PublicGetMutedTopicsAsync(PublicGetMutedTopics input)
+        public async Task<AdminQueryUsersTopic.Response> AdminQueryUsersTopicAsync(AdminQueryUsersTopic input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -755,7 +739,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelsChatMessageResponse>? PublicTopicList(PublicTopicList input)
+        public PublicGetMutedTopics.Response PublicGetMutedTopics(PublicGetMutedTopics input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -763,7 +747,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsChatMessageResponse>?> PublicTopicListAsync(PublicTopicList input)
+        public async Task<PublicGetMutedTopics.Response> PublicGetMutedTopicsAsync(PublicGetMutedTopics input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -771,7 +755,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsPublicBanTopicMembersResponse? PublicBanTopicMembers(PublicBanTopicMembers input)
+        public PublicTopicList.Response PublicTopicList(PublicTopicList input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -779,7 +763,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPublicBanTopicMembersResponse?> PublicBanTopicMembersAsync(PublicBanTopicMembers input)
+        public async Task<PublicTopicList.Response> PublicTopicListAsync(PublicTopicList input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -787,7 +771,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.ModelsChatMessageResponse>? PublicChatHistory(PublicChatHistory input)
+        public PublicBanTopicMembers.Response PublicBanTopicMembers(PublicBanTopicMembers input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -795,7 +779,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.ModelsChatMessageResponse>?> PublicChatHistoryAsync(PublicChatHistory input)
+        public async Task<PublicBanTopicMembers.Response> PublicBanTopicMembersAsync(PublicBanTopicMembers input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -803,39 +787,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicDeleteChat(PublicDeleteChat input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicDeleteChatAsync(PublicDeleteChat input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void PublicMuteUser(PublicMuteUser input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task PublicMuteUserAsync(PublicMuteUser input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsPublicUnbanTopicMembersResponse? PublicUnbanTopicMembers(PublicUnbanTopicMembers input)
+        public PublicChatHistory.Response PublicChatHistory(PublicChatHistory input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -843,7 +795,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPublicUnbanTopicMembersResponse?> PublicUnbanTopicMembersAsync(PublicUnbanTopicMembers input)
+        public async Task<PublicChatHistory.Response> PublicChatHistoryAsync(PublicChatHistory input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -851,18 +803,66 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicUnmuteUser(PublicUnmuteUser input)
+        public PublicDeleteChat.Response PublicDeleteChat(PublicDeleteChat input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicUnmuteUserAsync(PublicUnmuteUser input)
+        public async Task<PublicDeleteChat.Response> PublicDeleteChatAsync(PublicDeleteChat input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicMuteUser.Response PublicMuteUser(PublicMuteUser input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicMuteUser.Response> PublicMuteUserAsync(PublicMuteUser input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicUnbanTopicMembers.Response PublicUnbanTopicMembers(PublicUnbanTopicMembers input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicUnbanTopicMembers.Response> PublicUnbanTopicMembersAsync(PublicUnbanTopicMembers input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicUnmuteUser.Response PublicUnmuteUser(PublicUnmuteUser input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicUnmuteUser.Response> PublicUnmuteUserAsync(PublicUnmuteUser input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

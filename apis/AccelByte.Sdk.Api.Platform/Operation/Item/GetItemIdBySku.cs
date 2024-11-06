@@ -76,15 +76,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetItemIdBySku op = new GetItemIdBySku(this,
-                    namespace_,
-                    sku
+                    namespace_,                    
+                    sku                    
                 );
 
                 op.SetBaseFields<GetItemIdBySkuBuilder>(this);
                 return op;
             }
 
-            public Model.ItemId? Execute(
+            public GetItemIdBySku.Response Execute(
                 string namespace_,
                 string sku
             )
@@ -99,11 +99,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ItemId?> ExecuteAsync(
+            public async Task<GetItemIdBySku.Response> ExecuteAsync(
                 string namespace_,
                 string sku
             )
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -130,37 +130,49 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
             if (sku is not null) QueryParams["sku"] = sku;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ItemId>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Item::GetItemIdBySku";
+        }
+
+        #endregion
+
         public GetItemIdBySku(
-            string namespace_,
-            bool? activeOnly,
-            string? storeId,
-            string sku
+            string namespace_,            
+            bool? activeOnly,            
+            string? storeId,            
+            string sku            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
             if (storeId is not null) QueryParams["storeId"] = storeId;
             if (sku is not null) QueryParams["sku"] = sku;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -169,28 +181,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ItemId? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetItemIdBySku.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetItemIdBySku.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ItemId>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ItemId>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.ItemId>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

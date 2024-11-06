@@ -63,14 +63,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 UpdateLocalizedPolicyVersion op = new UpdateLocalizedPolicyVersion(this,
-                    localizedPolicyVersionId
+                    localizedPolicyVersionId                    
                 );
 
                 op.SetBaseFields<UpdateLocalizedPolicyVersionBuilder>(this);
                 return op;
             }
 
-            public Model.UpdateLocalizedPolicyVersionResponse? Execute(
+            public UpdateLocalizedPolicyVersion.Response Execute(
                 string localizedPolicyVersionId
             )
             {
@@ -83,11 +83,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.UpdateLocalizedPolicyVersionResponse?> ExecuteAsync(
+            public async Task<UpdateLocalizedPolicyVersion.Response> ExecuteAsync(
                 string localizedPolicyVersionId
             )
             {
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,31 +111,43 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         )
         {
             PathParams["localizedPolicyVersionId"] = localizedPolicyVersionId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = builder.Body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.UpdateLocalizedPolicyVersionResponse>
+        {
+
+            public ErrorEntity? Error400 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Legal::LocalizedPolicyVersions::UpdateLocalizedPolicyVersion";
+        }
+
+        #endregion
+
         public UpdateLocalizedPolicyVersion(
-            string localizedPolicyVersionId,
-            Model.UpdateLocalizedPolicyVersionRequest body
+            string localizedPolicyVersionId,            
+            Model.UpdateLocalizedPolicyVersionRequest body            
         )
         {
             PathParams["localizedPolicyVersionId"] = localizedPolicyVersionId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,25 +159,31 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.UpdateLocalizedPolicyVersionResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public UpdateLocalizedPolicyVersion.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new UpdateLocalizedPolicyVersion.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.UpdateLocalizedPolicyVersionResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.UpdateLocalizedPolicyVersionResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.UpdateLocalizedPolicyVersionResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

@@ -151,14 +151,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicSearchUserV3 op = new PublicSearchUserV3(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicSearchUserV3Builder>(this);
                 return op;
             }
 
-            public Model.ModelPublicUserInformationResponseV3? Execute(
+            public PublicSearchUserV3.Response Execute(
                 string namespace_
             )
             {
@@ -171,11 +171,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelPublicUserInformationResponseV3?> ExecuteAsync(
+            public async Task<PublicSearchUserV3.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -188,7 +188,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -199,46 +199,66 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.By is not null) QueryParams["by"] = builder.By;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.PlatformBy is not null) QueryParams["platformBy"] = builder.PlatformBy;
             if (builder.PlatformId is not null) QueryParams["platformId"] = builder.PlatformId;
             if (builder.Query is not null) QueryParams["query"] = builder.Query;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelPublicUserInformationResponseV3>
+        {
+
+            public RestErrorResponse? Error400 { get; set; } = null;
+
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public RestErrorResponse? Error404 { get; set; } = null;
+
+            public RestErrorResponse? Error429 { get; set; } = null;
+
+            public RestErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::Users::PublicSearchUserV3";
+        }
+
+        #endregion
+
         public PublicSearchUserV3(
-            string namespace_,
-            string? by,
-            long? limit,
-            long? offset,
-            string? platformBy,
-            string? platformId,
-            string? query
+            string namespace_,            
+            string? by,            
+            long? limit,            
+            long? offset,            
+            string? platformBy,            
+            string? platformId,            
+            string? query            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (by is not null) QueryParams["by"] = by;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (platformBy is not null) QueryParams["platformBy"] = platformBy;
             if (platformId is not null) QueryParams["platformId"] = platformId;
             if (query is not null) QueryParams["query"] = query;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -247,28 +267,54 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelPublicUserInformationResponseV3? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicSearchUserV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicSearchUserV3.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelPublicUserInformationResponseV3>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelPublicUserInformationResponseV3>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelPublicUserInformationResponseV3>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)429)
+            {
+                response.Error429 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error429!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

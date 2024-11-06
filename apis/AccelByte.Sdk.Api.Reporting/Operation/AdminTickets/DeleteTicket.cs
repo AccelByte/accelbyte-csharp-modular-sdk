@@ -56,15 +56,15 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             )
             {
                 DeleteTicket op = new DeleteTicket(this,
-                    namespace_,
-                    ticketId
+                    namespace_,                    
+                    ticketId                    
                 );
 
                 op.SetBaseFields<DeleteTicketBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public DeleteTicket.Response Execute(
                 string namespace_,
                 string ticketId
             )
@@ -78,12 +78,12 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<DeleteTicket.Response> ExecuteAsync(
                 string namespace_,
                 string ticketId
             )
@@ -97,8 +97,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,30 +111,44 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["ticketId"] = ticketId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse
+        {
+
+            public RestapiErrorResponse? Error404 { get; set; } = null;
+
+            public RestapiErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Reporting::AdminTickets::DeleteTicket";
+        }
+
+        #endregion
+
         public DeleteTicket(
-            string namespace_,
-            string ticketId
+            string namespace_,            
+            string ticketId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["ticketId"] = ticketId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -146,17 +160,30 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public DeleteTicket.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new DeleteTicket.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)404)
+            
+            {
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

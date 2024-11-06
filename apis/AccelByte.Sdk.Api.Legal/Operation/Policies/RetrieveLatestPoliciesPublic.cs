@@ -107,14 +107,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 RetrieveLatestPoliciesPublic op = new RetrieveLatestPoliciesPublic(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<RetrieveLatestPoliciesPublicBuilder>(this);
                 return op;
             }
 
-            public List<Model.RetrievePolicyPublicResponse>? Execute(
+            public RetrieveLatestPoliciesPublic.Response Execute(
                 string namespace_
             )
             {
@@ -127,11 +127,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.RetrievePolicyPublicResponse>?> ExecuteAsync(
+            public async Task<RetrieveLatestPoliciesPublic.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -144,7 +144,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -155,43 +155,55 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.AlwaysIncludeDefault != null) QueryParams["alwaysIncludeDefault"] = Convert.ToString(builder.AlwaysIncludeDefault)!;
             if (builder.DefaultOnEmpty != null) QueryParams["defaultOnEmpty"] = Convert.ToString(builder.DefaultOnEmpty)!;
             if (builder.PolicyType is not null) QueryParams["policyType"] = builder.PolicyType.Value;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
             if (builder.VisibleOnly != null) QueryParams["visibleOnly"] = Convert.ToString(builder.VisibleOnly)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.RetrievePolicyPublicResponse>>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Legal::Policies::RetrieveLatestPoliciesPublic";
+        }
+
+        #endregion
+
         public RetrieveLatestPoliciesPublic(
-            string namespace_,
-            bool? alwaysIncludeDefault,
-            bool? defaultOnEmpty,
-            RetrieveLatestPoliciesPublicPolicyType? policyType,
-            string? tags,
-            bool? visibleOnly
+            string namespace_,            
+            bool? alwaysIncludeDefault,            
+            bool? defaultOnEmpty,            
+            RetrieveLatestPoliciesPublicPolicyType? policyType,            
+            string? tags,            
+            bool? visibleOnly            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (alwaysIncludeDefault != null) QueryParams["alwaysIncludeDefault"] = Convert.ToString(alwaysIncludeDefault)!;
             if (defaultOnEmpty != null) QueryParams["defaultOnEmpty"] = Convert.ToString(defaultOnEmpty)!;
             if (policyType is not null) QueryParams["policyType"] = policyType.Value;
             if (tags is not null) QueryParams["tags"] = tags;
             if (visibleOnly != null) QueryParams["visibleOnly"] = Convert.ToString(visibleOnly)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -200,28 +212,34 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.RetrievePolicyPublicResponse>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public RetrieveLatestPoliciesPublic.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new RetrieveLatestPoliciesPublic.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.RetrievePolicyPublicResponse>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrievePolicyPublicResponse>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<List<Model.RetrievePolicyPublicResponse>>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

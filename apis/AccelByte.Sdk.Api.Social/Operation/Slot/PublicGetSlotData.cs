@@ -32,7 +32,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// Other detail info:
     ///         *  Returns : slot data
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class PublicGetSlotData : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -65,17 +65,17 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 PublicGetSlotData op = new PublicGetSlotData(this,
-                    namespace_,
-                    slotId,
-                    userId
+                    namespace_,                    
+                    slotId,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PublicGetSlotDataBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public byte[]? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicGetSlotData.Response Execute(
                 string namespace_,
                 string slotId,
                 string userId
@@ -92,11 +92,11 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<byte[]?> ExecuteAsync(
+            public async Task<PublicGetSlotData.Response> ExecuteAsync(
                 string namespace_,
                 string slotId,
                 string userId
@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -128,32 +128,44 @@ namespace AccelByte.Sdk.Api.Social.Operation
             PathParams["namespace"] = namespace_;
             PathParams["slotId"] = slotId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<byte[]>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Social::Slot::PublicGetSlotData";
+        }
+
+        #endregion
+
         public PublicGetSlotData(
-            string namespace_,
-            string slotId,
-            string userId
+            string namespace_,            
+            string slotId,            
+            string userId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["slotId"] = slotId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -162,22 +174,29 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/octet-stream" };
-
-        public byte[]? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublicGetSlotData.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublicGetSlotData.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)201)
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
                     payload.CopyTo(ms);
-                    return ms.ToArray();
+                    response.Data = ms.ToArray();
+                    response.IsSuccess = true;
                 }
             }
             else if (code == (HttpStatusCode)200)
@@ -185,13 +204,17 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 using (MemoryStream ms = new MemoryStream())
                 {
                     payload.CopyTo(ms);
-                    return ms.ToArray();
+                    response.Data = ms.ToArray();
+                    response.IsSuccess = true;
                 }
             }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

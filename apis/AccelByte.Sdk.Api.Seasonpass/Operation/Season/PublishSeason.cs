@@ -60,15 +60,15 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             )
             {
                 PublishSeason op = new PublishSeason(this,
-                    namespace_,
-                    seasonId
+                    namespace_,                    
+                    seasonId                    
                 );
 
                 op.SetBaseFields<PublishSeasonBuilder>(this);
                 return op;
             }
 
-            public Model.SeasonInfo? Execute(
+            public PublishSeason.Response Execute(
                 string namespace_,
                 string seasonId
             )
@@ -83,11 +83,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.SeasonInfo?> ExecuteAsync(
+            public async Task<PublishSeason.Response> ExecuteAsync(
                 string namespace_,
                 string seasonId
             )
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -115,30 +115,46 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["seasonId"] = seasonId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.SeasonInfo>
+        {
+
+            public ErrorEntity? Error400 { get; set; } = null;
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+            public ErrorEntity? Error409 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Seasonpass::Season::PublishSeason";
+        }
+
+        #endregion
+
         public PublishSeason(
-            string namespace_,
-            string seasonId
+            string namespace_,            
+            string seasonId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["seasonId"] = seasonId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -150,25 +166,41 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.SeasonInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public PublishSeason.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new PublishSeason.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.SeasonInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.SeasonInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.SeasonInfo>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)409)
+            {
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

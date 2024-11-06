@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// Notes : this endpoint only accept admin role. Admin Role is role which have admin status and members.
     /// Use endpoint [GET] /roles/{roleId}/admin to check the role status
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class GetAdminUsersByRoleID : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -97,15 +97,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 GetAdminUsersByRoleID op = new GetAdminUsersByRoleID(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetAdminUsersByRoleIDBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public Model.ModelGetAdminUsersResponse? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetAdminUsersByRoleID.Response Execute(
                 string namespace_
             )
             {
@@ -118,11 +118,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.ModelGetAdminUsersResponse?> ExecuteAsync(
+            public async Task<GetAdminUsersByRoleID.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -146,40 +146,60 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.After != null) QueryParams["after"] = Convert.ToString(builder.After)!;
             if (builder.Before != null) QueryParams["before"] = Convert.ToString(builder.Before)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.RoleId is not null) QueryParams["roleId"] = builder.RoleId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.ModelGetAdminUsersResponse>
+        {
+
+            public RestErrorResponse? Error400 { get; set; } = null;
+
+            public RestErrorResponse? Error401 { get; set; } = null;
+
+            public RestErrorResponse? Error403 { get; set; } = null;
+
+            public string Error404 { get; set; } = "";
+
+            public string Error500 { get; set; } = "";
+
+
+            protected override string GetFullOperationId() => "Iam::Users::GetAdminUsersByRoleID";
+        }
+
+        #endregion
+
         public GetAdminUsersByRoleID(
-            string namespace_,
-            long? after,
-            long? before,
-            long? limit,
-            string? roleId
+            string namespace_,            
+            long? after,            
+            long? before,            
+            long? limit,            
+            string? roleId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (after != null) QueryParams["after"] = Convert.ToString(after)!;
             if (before != null) QueryParams["before"] = Convert.ToString(before)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (roleId is not null) QueryParams["roleId"] = roleId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -191,25 +211,51 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.ModelGetAdminUsersResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetAdminUsersByRoleID.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetAdminUsersByRoleID.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.ModelGetAdminUsersResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelGetAdminUsersResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.ModelGetAdminUsersResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error404!);
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = payload.ReadToString();
+                response.Error = new ApiError("-1", response.Error500!);
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

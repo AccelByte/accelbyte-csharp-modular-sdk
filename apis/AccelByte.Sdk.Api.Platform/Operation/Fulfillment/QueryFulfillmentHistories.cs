@@ -90,14 +90,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryFulfillmentHistories op = new QueryFulfillmentHistories(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<QueryFulfillmentHistoriesBuilder>(this);
                 return op;
             }
 
-            public Model.FulfillmentHistoryPagingSlicedResult? Execute(
+            public QueryFulfillmentHistories.Response Execute(
                 string namespace_
             )
             {
@@ -110,11 +110,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.FulfillmentHistoryPagingSlicedResult?> ExecuteAsync(
+            public async Task<QueryFulfillmentHistories.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -127,7 +127,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -138,40 +138,50 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
             if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.FulfillmentHistoryPagingSlicedResult>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Fulfillment::QueryFulfillmentHistories";
+        }
+
+        #endregion
+
         public QueryFulfillmentHistories(
-            string namespace_,
-            int? limit,
-            int? offset,
-            QueryFulfillmentHistoriesStatus? status,
-            string? userId
+            string namespace_,            
+            int? limit,            
+            int? offset,            
+            QueryFulfillmentHistoriesStatus? status,            
+            string? userId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (status is not null) QueryParams["status"] = status.Value;
             if (userId is not null) QueryParams["userId"] = userId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -180,28 +190,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.FulfillmentHistoryPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public QueryFulfillmentHistories.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new QueryFulfillmentHistories.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.FulfillmentHistoryPagingSlicedResult>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.FulfillmentHistoryPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.FulfillmentHistoryPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

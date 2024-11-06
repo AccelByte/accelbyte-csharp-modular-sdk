@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-        public Model.ModelRoleOverrideResponse? AdminGetRoleOverrideConfigV3(AdminGetRoleOverrideConfigV3 input)
+        public AdminGetRoleOverrideConfigV3.Response AdminGetRoleOverrideConfigV3(AdminGetRoleOverrideConfigV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleOverrideResponse?> AdminGetRoleOverrideConfigV3Async(AdminGetRoleOverrideConfigV3 input)
+        public async Task<AdminGetRoleOverrideConfigV3.Response> AdminGetRoleOverrideConfigV3Async(AdminGetRoleOverrideConfigV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelRoleOverrideResponse? AdminUpdateRoleOverrideConfigV3(AdminUpdateRoleOverrideConfigV3 input)
+        public AdminUpdateRoleOverrideConfigV3.Response AdminUpdateRoleOverrideConfigV3(AdminUpdateRoleOverrideConfigV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleOverrideResponse?> AdminUpdateRoleOverrideConfigV3Async(AdminUpdateRoleOverrideConfigV3 input)
+        public async Task<AdminUpdateRoleOverrideConfigV3.Response> AdminUpdateRoleOverrideConfigV3Async(AdminUpdateRoleOverrideConfigV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelRoleOverrideSourceResponse? AdminGetRoleSourceV3(AdminGetRoleSourceV3 input)
+        public AdminGetRoleSourceV3.Response AdminGetRoleSourceV3(AdminGetRoleSourceV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleOverrideSourceResponse?> AdminGetRoleSourceV3Async(AdminGetRoleSourceV3 input)
+        public async Task<AdminGetRoleSourceV3.Response> AdminGetRoleSourceV3Async(AdminGetRoleSourceV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelRoleOverrideResponse? AdminChangeRoleOverrideConfigStatusV3(AdminChangeRoleOverrideConfigStatusV3 input)
+        public AdminChangeRoleOverrideConfigStatusV3.Response AdminChangeRoleOverrideConfigStatusV3(AdminChangeRoleOverrideConfigStatusV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -147,7 +147,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRoleOverrideResponse?> AdminChangeRoleOverrideConfigStatusV3Async(AdminChangeRoleOverrideConfigStatusV3 input)
+        public async Task<AdminChangeRoleOverrideConfigStatusV3.Response> AdminChangeRoleOverrideConfigStatusV3Async(AdminChangeRoleOverrideConfigStatusV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -155,7 +155,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelRolePermissionResponseV3? AdminGetRoleNamespacePermissionV3(AdminGetRoleNamespacePermissionV3 input)
+        public AdminGetRoleNamespacePermissionV3.Response AdminGetRoleNamespacePermissionV3(AdminGetRoleNamespacePermissionV3 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -163,7 +163,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelRolePermissionResponseV3?> AdminGetRoleNamespacePermissionV3Async(AdminGetRoleNamespacePermissionV3 input)
+        public async Task<AdminGetRoleNamespacePermissionV3.Response> AdminGetRoleNamespacePermissionV3Async(AdminGetRoleNamespacePermissionV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -49,7 +49,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
     /// 
     /// if party_id value empty/null, field will not show in response body.
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class GetSessionHistoryDetailed : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -81,16 +81,16 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
             )
             {
                 GetSessionHistoryDetailed op = new GetSessionHistoryDetailed(this,
-                    matchID,
-                    namespace_
+                    matchID,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetSessionHistoryDetailedBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public List<Model.ServiceGetSessionHistoryDetailedResponseItem>? Execute(
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetSessionHistoryDetailed.Response Execute(
                 string matchID,
                 string namespace_
             )
@@ -105,11 +105,11 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.ServiceGetSessionHistoryDetailedResponseItem>?> ExecuteAsync(
+            public async Task<GetSessionHistoryDetailed.Response> ExecuteAsync(
                 string matchID,
                 string namespace_
             )
@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -137,30 +137,50 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         {
             PathParams["matchID"] = matchID;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.ServiceGetSessionHistoryDetailedResponseItem>>
+        {
+
+            public ResponseErrorV1? Error400 { get; set; } = null;
+
+            public ResponseErrorV1? Error401 { get; set; } = null;
+
+            public ResponseErrorV1? Error403 { get; set; } = null;
+
+            public ResponseErrorV1? Error404 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Matchmaking::Matchmaking::GetSessionHistoryDetailed";
+        }
+
+        #endregion
+
         public GetSessionHistoryDetailed(
-            string matchID,
-            string namespace_
+            string matchID,            
+            string namespace_            
         )
         {
             PathParams["matchID"] = matchID;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -172,25 +192,51 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.ServiceGetSessionHistoryDetailedResponseItem>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetSessionHistoryDetailed.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetSessionHistoryDetailed.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.ServiceGetSessionHistoryDetailedResponseItem>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.ServiceGetSessionHistoryDetailedResponseItem>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<List<Model.ServiceGetSessionHistoryDetailedResponseItem>>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorV1>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorV1>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorV1>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorV1>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

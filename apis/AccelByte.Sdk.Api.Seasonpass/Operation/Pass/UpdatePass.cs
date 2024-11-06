@@ -69,16 +69,16 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             )
             {
                 UpdatePass op = new UpdatePass(this,
-                    code,
-                    namespace_,
-                    seasonId
+                    code,                    
+                    namespace_,                    
+                    seasonId                    
                 );
 
                 op.SetBaseFields<UpdatePassBuilder>(this);
                 return op;
             }
 
-            public Model.PassInfo? Execute(
+            public UpdatePass.Response Execute(
                 string code,
                 string namespace_,
                 string seasonId
@@ -95,11 +95,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.PassInfo?> ExecuteAsync(
+            public async Task<UpdatePass.Response> ExecuteAsync(
                 string code,
                 string namespace_,
                 string seasonId
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -131,35 +131,53 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             PathParams["code"] = code;
             PathParams["namespace"] = namespace_;
             PathParams["seasonId"] = seasonId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = builder.Body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.PassInfo>
+        {
+
+            public ErrorEntity? Error400 { get; set; } = null;
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+            public ErrorEntity? Error409 { get; set; } = null;
+
+            public ValidationErrorEntity? Error422 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Seasonpass::Pass::UpdatePass";
+        }
+
+        #endregion
+
         public UpdatePass(
-            string code,
-            string namespace_,
-            string seasonId,
-            Model.PassUpdate body
+            string code,            
+            string namespace_,            
+            string seasonId,            
+            Model.PassUpdate body            
         )
         {
             PathParams["code"] = code;
             PathParams["namespace"] = namespace_;
             PathParams["seasonId"] = seasonId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -171,25 +189,46 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.PassInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public UpdatePass.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new UpdatePass.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.PassInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.PassInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.PassInfo>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)409)
+            {
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)422)
+            {
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

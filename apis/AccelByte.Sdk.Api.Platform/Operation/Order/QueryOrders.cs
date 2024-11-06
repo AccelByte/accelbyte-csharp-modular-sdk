@@ -122,14 +122,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryOrders op = new QueryOrders(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<QueryOrdersBuilder>(this);
                 return op;
             }
 
-            public Model.OrderPagingResult? Execute(
+            public QueryOrders.Response Execute(
                 string namespace_
             )
             {
@@ -142,11 +142,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.OrderPagingResult?> ExecuteAsync(
+            public async Task<QueryOrders.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -159,7 +159,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -170,7 +170,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.EndTime is not null) QueryParams["endTime"] = builder.EndTime;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
@@ -179,31 +179,43 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (builder.StartTime is not null) QueryParams["startTime"] = builder.StartTime;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
             if (builder.WithTotal != null) QueryParams["withTotal"] = Convert.ToString(builder.WithTotal)!;
+            
 
-
-
+            
             CollectionFormatMap["orderNos"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.OrderPagingResult>
+        {
+
+            public ValidationErrorEntity? Error422 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Order::QueryOrders";
+        }
+
+        #endregion
+
         public QueryOrders(
-            string namespace_,
-            string? endTime,
-            int? limit,
-            int? offset,
-            List<string>? orderNos,
-            string? sortBy,
-            string? startTime,
-            QueryOrdersStatus? status,
-            bool? withTotal
+            string namespace_,            
+            string? endTime,            
+            int? limit,            
+            int? offset,            
+            List<string>? orderNos,            
+            string? sortBy,            
+            string? startTime,            
+            QueryOrdersStatus? status,            
+            bool? withTotal            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (endTime is not null) QueryParams["endTime"] = endTime;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
@@ -212,12 +224,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (startTime is not null) QueryParams["startTime"] = startTime;
             if (status is not null) QueryParams["status"] = status.Value;
             if (withTotal != null) QueryParams["withTotal"] = Convert.ToString(withTotal)!;
+            
 
-
-
+            
             CollectionFormatMap["orderNos"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -226,28 +238,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.OrderPagingResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public QueryOrders.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new QueryOrders.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.OrderPagingResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.OrderPagingResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)422)
             {
-                return JsonSerializer.Deserialize<Model.OrderPagingResult>(payload, ResponseJsonOptions);
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

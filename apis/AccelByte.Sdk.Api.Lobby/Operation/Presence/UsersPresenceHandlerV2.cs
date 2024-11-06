@@ -64,15 +64,15 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 UsersPresenceHandlerV2 op = new UsersPresenceHandlerV2(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<UsersPresenceHandlerV2Builder>(this);
                 return op;
             }
 
-            public Model.HandlersGetUsersPresenceResponse? Execute(
+            public UsersPresenceHandlerV2.Response Execute(
                 ModelRequestUserPresence body,
                 string namespace_
             )
@@ -87,11 +87,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.HandlersGetUsersPresenceResponse?> ExecuteAsync(
+            public async Task<UsersPresenceHandlerV2.Response> ExecuteAsync(
                 ModelRequestUserPresence body,
                 string namespace_
             )
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -118,34 +118,50 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.CountOnly != null) QueryParams["countOnly"] = Convert.ToString(builder.CountOnly)!;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.HandlersGetUsersPresenceResponse>
+        {
+
+            public RestapiErrorResponseBody? Error400 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error401 { get; set; } = null;
+
+            public RestapiErrorResponseBody? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Lobby::Presence::UsersPresenceHandlerV2";
+        }
+
+        #endregion
+
         public UsersPresenceHandlerV2(
-            string namespace_,
-            bool? countOnly,
-            Model.ModelRequestUserPresence body
+            string namespace_,            
+            bool? countOnly,            
+            Model.ModelRequestUserPresence body            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (countOnly != null) QueryParams["countOnly"] = Convert.ToString(countOnly)!;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -157,25 +173,41 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.HandlersGetUsersPresenceResponse? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public UsersPresenceHandlerV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new UsersPresenceHandlerV2.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.HandlersGetUsersPresenceResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.HandlersGetUsersPresenceResponse>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<Model.HandlersGetUsersPresenceResponse>(payload, ResponseJsonOptions);
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

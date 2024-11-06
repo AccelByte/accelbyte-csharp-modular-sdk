@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public Model.PaymentOrderCreateResult? CreatePaymentOrderByDedicated(CreatePaymentOrderByDedicated input)
+        public CreatePaymentOrderByDedicated.Response CreatePaymentOrderByDedicated(CreatePaymentOrderByDedicated input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PaymentOrderCreateResult?> CreatePaymentOrderByDedicatedAsync(CreatePaymentOrderByDedicated input)
+        public async Task<CreatePaymentOrderByDedicated.Response> CreatePaymentOrderByDedicatedAsync(CreatePaymentOrderByDedicated input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PaymentOrderRefundResult? RefundPaymentOrderByDedicated(RefundPaymentOrderByDedicated input)
+        public RefundPaymentOrderByDedicated.Response RefundPaymentOrderByDedicated(RefundPaymentOrderByDedicated input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PaymentOrderRefundResult?> RefundPaymentOrderByDedicatedAsync(RefundPaymentOrderByDedicated input)
+        public async Task<RefundPaymentOrderByDedicated.Response> RefundPaymentOrderByDedicatedAsync(RefundPaymentOrderByDedicated input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.PaymentOrderSyncResult? SyncPaymentOrders(SyncPaymentOrders input)
+        public SyncPaymentOrders.Response SyncPaymentOrders(SyncPaymentOrders input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.PaymentOrderSyncResult?> SyncPaymentOrdersAsync(SyncPaymentOrders input)
+        public async Task<SyncPaymentOrders.Response> SyncPaymentOrdersAsync(SyncPaymentOrders input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

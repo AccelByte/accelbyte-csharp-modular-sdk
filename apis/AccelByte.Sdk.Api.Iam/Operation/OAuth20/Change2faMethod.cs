@@ -61,15 +61,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 Change2faMethod op = new Change2faMethod(this,
-                    factor,
-                    mfaToken
+                    factor,                    
+                    mfaToken                    
                 );
 
                 op.SetBaseFields<Change2faMethodBuilder>(this);
                 return op;
             }
 
-            public void Execute(
+            public Change2faMethod.Response Execute(
                 string factor,
                 string mfaToken
             )
@@ -83,12 +83,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = _Sdk.RunRequest(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task ExecuteAsync(
+            public async Task<Change2faMethod.Response> ExecuteAsync(
                 string factor,
                 string mfaToken
             )
@@ -102,8 +102,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     throw IncompleteComponentException.NoSdkObject;
 
                 var response = await _Sdk.RunRequestAsync(op);
-                op.ParseResponse(
-                    response.Code,
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -114,32 +114,48 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string mfaToken
         )
         {
-
-
+            
+            
             if (factor is not null) FormParams["factor"] = factor;
             if (mfaToken is not null) FormParams["mfaToken"] = mfaToken;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public Change2faMethod(
-            string factor,
-            string mfaToken
-        )
+        #region Response Part        
+        public class Response : ApiResponse
         {
 
+            public RestErrorResponse? Error400 { get; set; } = null;
 
+            public RestErrorResponse? Error429 { get; set; } = null;
+
+            public RestErrorResponse? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Iam::OAuth20::Change2faMethod";
+        }
+
+        #endregion
+
+        public Change2faMethod(
+            string factor,            
+            string mfaToken            
+        )
+        {
+            
+            
             if (factor is not null) FormParams["factor"] = factor;
             if (mfaToken is not null) FormParams["mfaToken"] = mfaToken;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -151,17 +167,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public void ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public Change2faMethod.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            if (code == (HttpStatusCode)204)
+            var response = new Change2faMethod.Response()
             {
-                return;
+                StatusCode = code,
+                ContentType = contentType,
+                IsSuccess = true
+            };
+
+            if (code == (HttpStatusCode)400)
+            
+            {
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)429)
+            
+            {
+                response.Error429 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error429!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            
+            {
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

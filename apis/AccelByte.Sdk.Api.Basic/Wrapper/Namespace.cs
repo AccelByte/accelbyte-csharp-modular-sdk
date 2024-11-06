@@ -179,7 +179,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
         }
         #endregion
 
-        public List<Model.NamespaceInfo>? GetNamespaces(GetNamespaces input)
+        public GetNamespaces.Response GetNamespaces(GetNamespaces input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -187,7 +187,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.NamespaceInfo>?> GetNamespacesAsync(GetNamespaces input)
+        public async Task<GetNamespaces.Response> GetNamespacesAsync(GetNamespaces input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -195,7 +195,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.NamespaceInfo? CreateNamespace(CreateNamespace input)
+        public CreateNamespace.Response CreateNamespace(CreateNamespace input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -203,7 +203,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.NamespaceInfo?> CreateNamespaceAsync(CreateNamespace input)
+        public async Task<CreateNamespace.Response> CreateNamespaceAsync(CreateNamespace input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -211,7 +211,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.NamespaceInfo? GetNamespace(GetNamespace input)
+        public GetNamespace.Response GetNamespace(GetNamespace input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -219,7 +219,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.NamespaceInfo?> GetNamespaceAsync(GetNamespace input)
+        public async Task<GetNamespace.Response> GetNamespaceAsync(GetNamespace input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -227,7 +227,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.NamespaceInfo? DeleteNamespace(DeleteNamespace input)
+        public DeleteNamespace.Response DeleteNamespace(DeleteNamespace input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -235,7 +235,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.NamespaceInfo?> DeleteNamespaceAsync(DeleteNamespace input)
+        public async Task<DeleteNamespace.Response> DeleteNamespaceAsync(DeleteNamespace input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -243,7 +243,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.NamespaceInfo? UpdateNamespace(UpdateNamespace input)
+        public UpdateNamespace.Response UpdateNamespace(UpdateNamespace input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -251,7 +251,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.NamespaceInfo?> UpdateNamespaceAsync(UpdateNamespace input)
+        public async Task<UpdateNamespace.Response> UpdateNamespaceAsync(UpdateNamespace input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -259,7 +259,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.NamespaceInfo>? GetChildNamespaces(GetChildNamespaces input)
+        public GetChildNamespaces.Response GetChildNamespaces(GetChildNamespaces input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -267,7 +267,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.NamespaceInfo>?> GetChildNamespacesAsync(GetChildNamespaces input)
+        public async Task<GetChildNamespaces.Response> GetChildNamespacesAsync(GetChildNamespaces input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -275,7 +275,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.NamespaceContext? GetNamespaceContext(GetNamespaceContext input)
+        public GetNamespaceContext.Response GetNamespaceContext(GetNamespaceContext input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -283,7 +283,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.NamespaceContext?> GetNamespaceContextAsync(GetNamespaceContext input)
+        public async Task<GetNamespaceContext.Response> GetNamespaceContextAsync(GetNamespaceContext input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -291,7 +291,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.NamespaceInfo>? GetGameNamespaces(GetGameNamespaces input)
+        public GetGameNamespaces.Response GetGameNamespaces(GetGameNamespaces input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -299,7 +299,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.NamespaceInfo>?> GetGameNamespacesAsync(GetGameNamespaces input)
+        public async Task<GetGameNamespaces.Response> GetGameNamespacesAsync(GetGameNamespaces input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -307,7 +307,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.NamespacePublisherInfo? GetNamespacePublisher(GetNamespacePublisher input)
+        public GetNamespacePublisher.Response GetNamespacePublisher(GetNamespacePublisher input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -315,7 +315,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.NamespacePublisherInfo?> GetNamespacePublisherAsync(GetNamespacePublisher input)
+        public async Task<GetNamespacePublisher.Response> GetNamespacePublisherAsync(GetNamespacePublisher input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -323,7 +323,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.NamespaceInfo? ChangeNamespaceStatus(ChangeNamespaceStatus input)
+        public ChangeNamespaceStatus.Response ChangeNamespaceStatus(ChangeNamespaceStatus input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -331,7 +331,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.NamespaceInfo?> ChangeNamespaceStatusAsync(ChangeNamespaceStatus input)
+        public async Task<ChangeNamespaceStatus.Response> ChangeNamespaceStatusAsync(ChangeNamespaceStatus input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -339,7 +339,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public List<Model.NamespaceInfo>? PublicGetNamespaces(PublicGetNamespaces input)
+        public PublicGetNamespaces.Response PublicGetNamespaces(PublicGetNamespaces input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -347,7 +347,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<List<Model.NamespaceInfo>?> PublicGetNamespacesAsync(PublicGetNamespaces input)
+        public async Task<PublicGetNamespaces.Response> PublicGetNamespacesAsync(PublicGetNamespaces input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -355,7 +355,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.NamespaceSimpleInfo? GetNamespace1(GetNamespace1 input)
+        public GetNamespace1.Response GetNamespace1(GetNamespace1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -363,7 +363,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.NamespaceSimpleInfo?> GetNamespace1Async(GetNamespace1 input)
+        public async Task<GetNamespace1.Response> GetNamespace1Async(GetNamespace1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -371,7 +371,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.NamespacePublisherInfo? PublicGetNamespacePublisher(PublicGetNamespacePublisher input)
+        public PublicGetNamespacePublisher.Response PublicGetNamespacePublisher(PublicGetNamespacePublisher input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -379,7 +379,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.NamespacePublisherInfo?> PublicGetNamespacePublisherAsync(PublicGetNamespacePublisher input)
+        public async Task<PublicGetNamespacePublisher.Response> PublicGetNamespacePublisherAsync(PublicGetNamespacePublisher input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

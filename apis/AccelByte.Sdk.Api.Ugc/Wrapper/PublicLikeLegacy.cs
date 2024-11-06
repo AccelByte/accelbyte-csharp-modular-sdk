@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedContentDownloadResponse? GetLikedContent(GetLikedContent input)
+        public GetLikedContent.Response GetLikedContent(GetLikedContent input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedContentDownloadResponse?> GetLikedContentAsync(GetLikedContent input)
+        public async Task<GetLikedContent.Response> GetLikedContentAsync(GetLikedContent input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelsContentLikeResponse? UpdateContentLikeStatus(UpdateContentLikeStatus input)
+        public UpdateContentLikeStatus.Response UpdateContentLikeStatus(UpdateContentLikeStatus input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsContentLikeResponse?> UpdateContentLikeStatusAsync(UpdateContentLikeStatus input)
+        public async Task<UpdateContentLikeStatus.Response> UpdateContentLikeStatusAsync(UpdateContentLikeStatus input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

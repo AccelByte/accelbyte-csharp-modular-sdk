@@ -81,16 +81,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetEstimatedPrice op = new GetEstimatedPrice(this,
-                    namespace_,
-                    itemIds,
-                    userId
+                    namespace_,                    
+                    itemIds,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<GetEstimatedPriceBuilder>(this);
                 return op;
             }
 
-            public Model.EstimatedPriceInfo? Execute(
+            public GetEstimatedPrice.Response Execute(
                 string namespace_,
                 string itemIds,
                 string userId
@@ -107,11 +107,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.EstimatedPriceInfo?> ExecuteAsync(
+            public async Task<GetEstimatedPrice.Response> ExecuteAsync(
                 string namespace_,
                 string itemIds,
                 string userId
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -141,43 +141,55 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Platform is not null) QueryParams["platform"] = builder.Platform;
             if (builder.Region is not null) QueryParams["region"] = builder.Region;
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
             if (itemIds is not null) QueryParams["itemIds"] = itemIds;
             if (userId is not null) QueryParams["userId"] = userId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.EstimatedPriceInfo>
+        {
+
+            public ErrorEntity? Error404 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "Platform::Item::GetEstimatedPrice";
+        }
+
+        #endregion
+
         public GetEstimatedPrice(
-            string namespace_,
-            string? platform,
-            string? region,
-            string? storeId,
-            string itemIds,
-            string userId
+            string namespace_,            
+            string? platform,            
+            string? region,            
+            string? storeId,            
+            string itemIds,            
+            string userId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (platform is not null) QueryParams["platform"] = platform;
             if (region is not null) QueryParams["region"] = region;
             if (storeId is not null) QueryParams["storeId"] = storeId;
             if (itemIds is not null) QueryParams["itemIds"] = itemIds;
             if (userId is not null) QueryParams["userId"] = userId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -189,25 +201,31 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.EstimatedPriceInfo? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public GetEstimatedPrice.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new GetEstimatedPrice.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.EstimatedPriceInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.EstimatedPriceInfo>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)404)
             {
-                return JsonSerializer.Deserialize<Model.EstimatedPriceInfo>(payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

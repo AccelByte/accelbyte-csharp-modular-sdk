@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
         }
         #endregion
 
-        public Model.ModelGetGoalsResponse? AdminGetGoals(AdminGetGoals input)
+        public AdminGetGoals.Response AdminGetGoals(AdminGetGoals input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGetGoalsResponse?> AdminGetGoalsAsync(AdminGetGoals input)
+        public async Task<AdminGetGoals.Response> AdminGetGoalsAsync(AdminGetGoals input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelGoalResponse? AdminCreateGoal(AdminCreateGoal input)
+        public AdminCreateGoal.Response AdminCreateGoal(AdminCreateGoal input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGoalResponse?> AdminCreateGoalAsync(AdminCreateGoal input)
+        public async Task<AdminCreateGoal.Response> AdminCreateGoalAsync(AdminCreateGoal input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelGoalResponse? AdminGetGoal(AdminGetGoal input)
+        public AdminGetGoal.Response AdminGetGoal(AdminGetGoal input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGoalResponse?> AdminGetGoalAsync(AdminGetGoal input)
+        public async Task<AdminGetGoal.Response> AdminGetGoalAsync(AdminGetGoal input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.ModelGoalResponse? AdminUpdateGoals(AdminUpdateGoals input)
+        public AdminUpdateGoals.Response AdminUpdateGoals(AdminUpdateGoals input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -147,7 +147,7 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelGoalResponse?> AdminUpdateGoalsAsync(AdminUpdateGoals input)
+        public async Task<AdminUpdateGoals.Response> AdminUpdateGoalsAsync(AdminUpdateGoals input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -155,18 +155,18 @@ namespace AccelByte.Sdk.Api.Challenge.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminDeleteGoal(AdminDeleteGoal input)
+        public AdminDeleteGoal.Response AdminDeleteGoal(AdminDeleteGoal input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task AdminDeleteGoalAsync(AdminDeleteGoal input)
+        public async Task<AdminDeleteGoal.Response> AdminDeleteGoalAsync(AdminDeleteGoal input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

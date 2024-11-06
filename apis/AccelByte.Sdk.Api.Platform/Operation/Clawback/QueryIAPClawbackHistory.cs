@@ -122,14 +122,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryIAPClawbackHistory op = new QueryIAPClawbackHistory(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<QueryIAPClawbackHistoryBuilder>(this);
                 return op;
             }
 
-            public Model.IAPClawbackPagingSlicedResult? Execute(
+            public QueryIAPClawbackHistory.Response Execute(
                 string namespace_
             )
             {
@@ -142,11 +142,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Model.IAPClawbackPagingSlicedResult?> ExecuteAsync(
+            public async Task<QueryIAPClawbackHistory.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -159,7 +159,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -170,7 +170,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.EndTime is not null) QueryParams["endTime"] = builder.EndTime;
             if (builder.EventType is not null) QueryParams["eventType"] = builder.EventType.Value;
             if (builder.ExternalOrderId is not null) QueryParams["externalOrderId"] = builder.ExternalOrderId;
@@ -179,30 +179,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (builder.StartTime is not null) QueryParams["startTime"] = builder.StartTime;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
             if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
+        #region Response Part        
+        public class Response : ApiResponse<Model.IAPClawbackPagingSlicedResult>
+        {
+
+
+            protected override string GetFullOperationId() => "Platform::Clawback::QueryIAPClawbackHistory";
+        }
+
+        #endregion
+
         public QueryIAPClawbackHistory(
-            string namespace_,
-            string? endTime,
-            QueryIAPClawbackHistoryEventType? eventType,
-            string? externalOrderId,
-            int? limit,
-            int? offset,
-            string? startTime,
-            QueryIAPClawbackHistoryStatus? status,
-            string? userId
+            string namespace_,            
+            string? endTime,            
+            QueryIAPClawbackHistoryEventType? eventType,            
+            string? externalOrderId,            
+            int? limit,            
+            int? offset,            
+            string? startTime,            
+            QueryIAPClawbackHistoryStatus? status,            
+            string? userId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (endTime is not null) QueryParams["endTime"] = endTime;
             if (eventType is not null) QueryParams["eventType"] = eventType.Value;
             if (externalOrderId is not null) QueryParams["externalOrderId"] = externalOrderId;
@@ -211,11 +221,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (startTime is not null) QueryParams["startTime"] = startTime;
             if (status is not null) QueryParams["status"] = status.Value;
             if (userId is not null) QueryParams["userId"] = userId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -224,28 +234,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public Model.IAPClawbackPagingSlicedResult? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public QueryIAPClawbackHistory.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new QueryIAPClawbackHistory.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<Model.IAPClawbackPagingSlicedResult>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<Model.IAPClawbackPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.IAPClawbackPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

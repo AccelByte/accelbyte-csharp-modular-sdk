@@ -68,7 +68,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 return op;
             }
 
-            public List<Model.RetrieveBasePolicyResponse>? Execute(
+            public RetrieveAllLegalPolicies.Response Execute(
             )
             {
                 RetrieveAllLegalPolicies op = Build(
@@ -79,11 +79,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<List<Model.RetrieveBasePolicyResponse>?> ExecuteAsync(
+            public async Task<RetrieveAllLegalPolicies.Response> ExecuteAsync(
             )
             {
                 RetrieveAllLegalPolicies op = Build(
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -103,29 +103,39 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         private RetrieveAllLegalPolicies(RetrieveAllLegalPoliciesBuilder builder
         )
         {
-
+            
             if (builder.VisibleOnly != null) QueryParams["visibleOnly"] = Convert.ToString(builder.VisibleOnly)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
-        public RetrieveAllLegalPolicies(
-            bool? visibleOnly
-        )
+        #region Response Part        
+        public class Response : ApiResponse<List<Model.RetrieveBasePolicyResponse>>
         {
 
+
+            protected override string GetFullOperationId() => "Legal::BaseLegalPolicies::RetrieveAllLegalPolicies";
+        }
+
+        #endregion
+
+        public RetrieveAllLegalPolicies(
+            bool? visibleOnly            
+        )
+        {
+            
             if (visibleOnly != null) QueryParams["visibleOnly"] = Convert.ToString(visibleOnly)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -134,28 +144,29 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public List<Model.RetrieveBasePolicyResponse>? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public RetrieveAllLegalPolicies.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new RetrieveAllLegalPolicies.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<List<Model.RetrieveBasePolicyResponse>>(payload, ResponseJsonOptions);
-            }
-            else if (code == (HttpStatusCode)200)
-            {
-                return JsonSerializer.Deserialize<List<Model.RetrieveBasePolicyResponse>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveBasePolicyResponse>>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
 
-            var payloadString = payload.ReadToString();
-
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 

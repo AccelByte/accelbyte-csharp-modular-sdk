@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
         }
         #endregion
 
-        public Model.ModelsPaginatedUserAchievementResponse? AdminListUserAchievements(AdminListUserAchievements input)
+        public AdminListUserAchievements.Response AdminListUserAchievements(AdminListUserAchievements input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedUserAchievementResponse?> AdminListUserAchievementsAsync(AdminListUserAchievements input)
+        public async Task<AdminListUserAchievements.Response> AdminListUserAchievementsAsync(AdminListUserAchievements input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -107,39 +107,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void AdminResetAchievement(AdminResetAchievement input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminResetAchievementAsync(AdminResetAchievement input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public void AdminUnlockAchievement(AdminUnlockAchievement input)
-        {
-            var response = _sdk.RunRequest(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task AdminUnlockAchievementAsync(AdminUnlockAchievement input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public Model.ModelsPaginatedUserAchievementResponse? PublicListUserAchievements(PublicListUserAchievements input)
+        public AdminResetAchievement.Response AdminResetAchievement(AdminResetAchievement input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -147,7 +115,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.ModelsPaginatedUserAchievementResponse?> PublicListUserAchievementsAsync(PublicListUserAchievements input)
+        public async Task<AdminResetAchievement.Response> AdminResetAchievementAsync(AdminResetAchievement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -155,18 +123,50 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public void PublicUnlockAchievement(PublicUnlockAchievement input)
+        public AdminUnlockAchievement.Response AdminUnlockAchievement(AdminUnlockAchievement input)
         {
             var response = _sdk.RunRequest(input);
-            input.ParseResponse(
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);
         }
-        public async Task PublicUnlockAchievementAsync(PublicUnlockAchievement input)
+        public async Task<AdminUnlockAchievement.Response> AdminUnlockAchievementAsync(AdminUnlockAchievement input)
         {
             var response = await _sdk.RunRequestAsync(input);
-            input.ParseResponse(
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicListUserAchievements.Response PublicListUserAchievements(PublicListUserAchievements input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicListUserAchievements.Response> PublicListUserAchievementsAsync(PublicListUserAchievements input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicUnlockAchievement.Response PublicUnlockAchievement(PublicUnlockAchievement input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicUnlockAchievement.Response> PublicUnlockAchievementAsync(PublicUnlockAchievement input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
         }
         #endregion
 
-        public Model.RestapiReasonGroupListResponse? PublicListReasonGroups(PublicListReasonGroups input)
+        public PublicListReasonGroups.Response PublicListReasonGroups(PublicListReasonGroups input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiReasonGroupListResponse?> PublicListReasonGroupsAsync(PublicListReasonGroups input)
+        public async Task<PublicListReasonGroups.Response> PublicListReasonGroupsAsync(PublicListReasonGroups input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -74,7 +74,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public Model.RestapiPublicReasonListResponse? PublicGetReasons(PublicGetReasons input)
+        public PublicGetReasons.Response PublicGetReasons(PublicGetReasons input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Reporting.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<Model.RestapiPublicReasonListResponse?> PublicGetReasonsAsync(PublicGetReasons input)
+        public async Task<PublicGetReasons.Response> PublicGetReasonsAsync(PublicGetReasons input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
