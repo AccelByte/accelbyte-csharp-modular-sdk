@@ -123,8 +123,9 @@ namespace AccelByte.Sdk.Core
             }
 
             var authorizeV3Response = sdk.GetIamApi().OAuth20.AuthorizeV3(authorizeV3);
+            authorizeV3Response.ThrowExceptionIfError();
 
-            var authorizeV3Query = HttpUtility.ParseQueryString(new Uri(authorizeV3Response).Query);
+            var authorizeV3Query = HttpUtility.ParseQueryString(new Uri(authorizeV3Response.Data!).Query);
             var requestId = authorizeV3Query[authorizeV3.LocationQuery] ??
                     throw new Exception($"Not getting the expected value from backend (key: {authorizeV3.LocationQuery})"); ;
 
@@ -132,8 +133,9 @@ namespace AccelByte.Sdk.Core
                 .SetClientId(clientId)
                 .Build(password, requestId, username);
             var userAuthenticationResponse = sdk.GetIamApi().OAuth20Extension.UserAuthenticationV3(userAuthenticationV3);
+            userAuthenticationResponse.ThrowExceptionIfError();
 
-            authorizeV3Query = HttpUtility.ParseQueryString(new Uri(userAuthenticationResponse).Query);
+            authorizeV3Query = HttpUtility.ParseQueryString(new Uri(userAuthenticationResponse.Data!).Query);
             var code = authorizeV3Query[userAuthenticationV3.LocationQuery] ??
                     throw new Exception($"Not getting the expected value from backend (key: {userAuthenticationV3.LocationQuery})"); ;
 
@@ -141,14 +143,13 @@ namespace AccelByte.Sdk.Core
                 .SetClientId(clientId)
                 .SetCode(code)
                 .SetCodeVerifier(codeVerifier)
-                .Execute("authorization_code")
-                ?? throw new Exception($"TokenGrantV3 returned null");
-
-            var tokenResponse = new AuthTokenResponse(token);
+                .Execute("authorization_code");
+            var resultToken = token.Ok();
+            var tokenResponse = new AuthTokenResponse(resultToken);
 
             sdk.Configuration.TokenRepository.StoreToken(LoginType.User, tokenResponse);
-            if ((sdk.Configuration.Credential != null) && (token.UserId != null))
-                sdk.Configuration.Credential.UserId = token.UserId;
+            if ((sdk.Configuration.Credential != null) && (resultToken.UserId != null))
+                sdk.Configuration.Credential.UserId = resultToken.UserId;
 
             onTokenReceived?.Invoke(tokenResponse);
             actObj?.Invoke(LoginType.User, AuthActionType.Login, sdk.Configuration.TokenRepository.TokenData, sdk);
@@ -208,8 +209,9 @@ namespace AccelByte.Sdk.Core
             }
 
             var authorizeV3Response = await sdk.GetIamApi().OAuth20.AuthorizeV3Async(authorizeV3);
+            authorizeV3Response.ThrowExceptionIfError();
 
-            var authorizeV3Query = HttpUtility.ParseQueryString(new Uri(authorizeV3Response).Query);
+            var authorizeV3Query = HttpUtility.ParseQueryString(new Uri(authorizeV3Response.Data!).Query);
             var requestId = authorizeV3Query[authorizeV3.LocationQuery] ??
                     throw new Exception($"Not getting the expected value from backend (key: {authorizeV3.LocationQuery})"); ;
 
@@ -217,8 +219,9 @@ namespace AccelByte.Sdk.Core
                 .SetClientId(clientId)
                 .Build(password, requestId, username);
             var userAuthenticationResponse = await sdk.GetIamApi().OAuth20Extension.UserAuthenticationV3Async(userAuthenticationV3);
+            userAuthenticationResponse.ThrowExceptionIfError();
 
-            authorizeV3Query = HttpUtility.ParseQueryString(new Uri(userAuthenticationResponse).Query);
+            authorizeV3Query = HttpUtility.ParseQueryString(new Uri(userAuthenticationResponse.Data!).Query);
             var code = authorizeV3Query[userAuthenticationV3.LocationQuery] ??
                     throw new Exception($"Not getting the expected value from backend (key: {userAuthenticationV3.LocationQuery})"); ;
 
@@ -226,14 +229,13 @@ namespace AccelByte.Sdk.Core
                 .SetClientId(clientId)
                 .SetCode(code)
                 .SetCodeVerifier(codeVerifier)
-                .ExecuteAsync("authorization_code")
-                ?? throw new Exception($"TokenGrantV3 returned null");
-
-            var tokenResponse = new AuthTokenResponse(token);
+                .ExecuteAsync("authorization_code");
+            var resultToken = token.Ok();
+            var tokenResponse = new AuthTokenResponse(resultToken);
 
             sdk.Configuration.TokenRepository.StoreToken(LoginType.User, tokenResponse);
-            if ((sdk.Configuration.Credential != null) && (token.UserId != null))
-                sdk.Configuration.Credential.UserId = token.UserId;
+            if ((sdk.Configuration.Credential != null) && (resultToken.UserId != null))
+                sdk.Configuration.Credential.UserId = resultToken.UserId;
 
             onTokenReceived?.Invoke(tokenResponse);
             actObj?.Invoke(LoginType.User, AuthActionType.Login, sdk.Configuration.TokenRepository.TokenData, sdk);
@@ -302,9 +304,9 @@ namespace AccelByte.Sdk.Core
             else
                 sdk.Configuration.TokenRepository.RemoveToken();
 
-            var token = sdk.GetIamApi().OAuth20.TokenGrantV3Op.Execute("client_credentials")
-                ?? throw new Exception($"TokenGrantV3 returned null");
-            var tokenResponse = new AuthTokenResponse(token);
+            var token = sdk.GetIamApi().OAuth20.TokenGrantV3Op.Execute("client_credentials");
+            var resultToken = token.Ok();
+            var tokenResponse = new AuthTokenResponse(resultToken);
 
             sdk.Configuration.TokenRepository.StoreToken(LoginType.Client, tokenResponse);
             onTokenReceived?.Invoke(tokenResponse);
@@ -331,10 +333,9 @@ namespace AccelByte.Sdk.Core
             else
                 sdk.Configuration.TokenRepository.RemoveToken();
 
-            var token = await sdk.GetIamApi().OAuth20.TokenGrantV3Op
-                .ExecuteAsync("client_credentials")
-                ?? throw new Exception($"TokenGrantV3 returned null");
-            var tokenResponse = new AuthTokenResponse(token);
+            var token = await sdk.GetIamApi().OAuth20.TokenGrantV3Op.ExecuteAsync("client_credentials");
+            var resultToken = token.Ok();
+            var tokenResponse = new AuthTokenResponse(resultToken);
 
             sdk.Configuration.TokenRepository.StoreToken(LoginType.Client, tokenResponse);
             onTokenReceived?.Invoke(tokenResponse);
@@ -373,9 +374,9 @@ namespace AccelByte.Sdk.Core
 
             var token = sdk.GetIamApi().OAuth20.PlatformTokenGrantV3Op
                 .SetPlatformToken(platformToken)
-                .Execute(platformId)
-                ?? throw new Exception($"PlatformTokenGrantV3 returned null");
-            var tokenResponse = new AuthTokenResponse(token);
+                .Execute(platformId);
+            var resultToken = token.Ok();
+            var tokenResponse = new AuthTokenResponse(resultToken);
 
             sdk.Configuration.TokenRepository.StoreToken(LoginType.Platform, tokenResponse);
             onTokenReceived?.Invoke(tokenResponse);
@@ -410,9 +411,9 @@ namespace AccelByte.Sdk.Core
 
             var token = await sdk.GetIamApi().OAuth20.PlatformTokenGrantV3Op
                 .SetPlatformToken(platformToken)
-                .ExecuteAsync(platformId)
-                ?? throw new Exception($"PlatformTokenGrantV3 returned null");
-            var tokenResponse = new AuthTokenResponse(token);
+                .ExecuteAsync(platformId);
+            var resultToken = token.Ok();
+            var tokenResponse = new AuthTokenResponse(resultToken);
 
             sdk.Configuration.TokenRepository.StoreToken(LoginType.Platform, tokenResponse);
             onTokenReceived?.Invoke(tokenResponse);
@@ -431,9 +432,9 @@ namespace AccelByte.Sdk.Core
         {
             var token = sdk.GetIamApi().OAuth20.TokenGrantV3Op
                 .SetRefreshToken(refreshToken)
-                .Execute("refresh_token")
-                ?? throw new Exception("TokenGrantV3 for RefreshToken returned null");
-            var tokenResponse = new AuthTokenResponse(token);
+                .Execute("refresh_token");
+            var resultToken = token.Ok();
+            var tokenResponse = new AuthTokenResponse(resultToken);
 
             sdk.Configuration.TokenRepository.UpdateToken(tokenResponse);
             onTokenReceived?.Invoke(tokenResponse);
@@ -454,9 +455,9 @@ namespace AccelByte.Sdk.Core
         {
             var token = await sdk.GetIamApi().OAuth20.TokenGrantV3Op
                 .SetRefreshToken(refreshToken)
-                .ExecuteAsync("refresh_token")
-                ?? throw new Exception("TokenGrantV3 for RefreshToken returned null");
-            var tokenResponse = new AuthTokenResponse(token);
+                .ExecuteAsync("refresh_token");
+            var resultToken = token.Ok();
+            var tokenResponse = new AuthTokenResponse(resultToken);
 
             sdk.Configuration.TokenRepository.UpdateToken(tokenResponse);
             onTokenReceived?.Invoke(tokenResponse);

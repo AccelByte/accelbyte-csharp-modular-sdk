@@ -20,9 +20,7 @@ namespace AccelByte.Sdk.Authentication
     {
         private Func<IAccelByteSdk, string, List<LocalPermissionItem>> _FetchFunction = ((sdk, roleId) =>
         {
-            var response = sdk.GetIamApi().Roles.AdminGetRoleV4Op.Execute(roleId);
-            if (response == null)
-                throw new Exception("Null response from Iam::Roles::AdminGetRoleV4Op");
+            var response = sdk.GetIamApi().Roles.AdminGetRoleV4Op.Execute(roleId).Ok();
 
             List<LocalPermissionItem> permissions = new List<LocalPermissionItem>();
             foreach (var item in response.Permissions!)
@@ -40,11 +38,10 @@ namespace AccelByte.Sdk.Authentication
         private Func<IAccelByteSdk, string, Task<List<LocalPermissionItem>>> _FetchFunctionAsync = (async (sdk, roleId) =>
         {
             var response = await sdk.GetIamApi().Roles.AdminGetRoleV4Op.ExecuteAsync(roleId);
-            if (response == null)
-                throw new Exception("Null response from Iam::Roles::AdminGetRoleV4Op");
+            var responseData = response.Ok();
 
             List<LocalPermissionItem> permissions = new List<LocalPermissionItem>();
-            foreach (var item in response.Permissions!)
+            foreach (var item in responseData.Permissions!)
             {
                 permissions.Add(new LocalPermissionItem()
                 {
@@ -58,9 +55,7 @@ namespace AccelByte.Sdk.Authentication
 
         private Func<IAccelByteSdk, string, LocalNamespaceContext> _NamespaceFetchFunction = ((sdk, aNamespace) =>
         {
-            var response = sdk.GetBasicApi().Namespace.GetNamespaceContextOp.Execute(aNamespace);
-            if (response == null)
-                throw new Exception("Null response from Basic::Namespace::GetNamespaceContextOp");
+            var response = sdk.GetBasicApi().Namespace.GetNamespaceContextOp.Execute(aNamespace).Ok();
 
             var context = new LocalNamespaceContext();
             if (response.Namespace != null)
@@ -86,14 +81,13 @@ namespace AccelByte.Sdk.Authentication
         private Func<IAccelByteSdk, string, Task<LocalNamespaceContext>> _NamespaceFetchFunctionAsync = (async (sdk, aNamespace) =>
         {
             var response = await sdk.GetBasicApi().Namespace.GetNamespaceContextOp.ExecuteAsync(aNamespace);
-            if (response == null)
-                throw new Exception("Null response from Basic::Namespace::GetNamespaceContextOp");
+            var responseData = response.Ok();
 
             var context = new LocalNamespaceContext();
-            if (response.Namespace != null)
-                context.Namespace = response.Namespace;
+            if (responseData.Namespace != null)
+                context.Namespace = responseData.Namespace;
 
-            string sourceType = response.Type!.Value;
+            string sourceType = responseData.Type!.Value;
             if (sourceType == NamespaceContextType.Publisher.Value)
                 context.Type = NamespaceType.Publisher;
             else if (sourceType == NamespaceContextType.Studio.Value)
@@ -101,11 +95,11 @@ namespace AccelByte.Sdk.Authentication
             else if (sourceType == NamespaceContextType.Game.Value)
                 context.Type = NamespaceType.Game;
 
-            if (response.PublisherNamespace != null)
-                context.PublisherNamespace = response.PublisherNamespace;
+            if (responseData.PublisherNamespace != null)
+                context.PublisherNamespace = responseData.PublisherNamespace;
 
-            if (response.StudioNamespace != null)
-                context.StudioNamespace = response.StudioNamespace;
+            if (responseData.StudioNamespace != null)
+                context.StudioNamespace = responseData.StudioNamespace;
 
             return context;
         });
@@ -114,8 +108,10 @@ namespace AccelByte.Sdk.Authentication
         {
             try
             {
-                OauthmodelTokenResponseV3? response = sdk.GetIamApi().OAuth20.VerifyTokenV3Op.Execute(accessToken);
-                if (response == null)
+                var response = sdk.GetIamApi().OAuth20.VerifyTokenV3Op.Execute(accessToken);
+                response.ThrowExceptionIfError();
+
+                if (response.Data == null)
                     throw new Exception("Server did not response to token validation request");
                 return true;
             }
@@ -129,8 +125,10 @@ namespace AccelByte.Sdk.Authentication
         {
             try
             {
-                OauthmodelTokenResponseV3? response = await sdk.GetIamApi().OAuth20.VerifyTokenV3Op.ExecuteAsync(accessToken);
-                if (response == null)
+                var response = await sdk.GetIamApi().OAuth20.VerifyTokenV3Op.ExecuteAsync(accessToken);
+                response.ThrowExceptionIfError();
+
+                if (response.Data == null)
                     throw new Exception("Server did not response to token validation request");
                 return true;
             }
@@ -144,14 +142,16 @@ namespace AccelByte.Sdk.Authentication
         {
             try
             {
-                OauthmodelTokenResponseV3? response = sdk.GetIamApi().OAuth20.VerifyTokenV3Op.Execute(accessToken);
-                if (response == null)
+                var response = sdk.GetIamApi().OAuth20.VerifyTokenV3Op.Execute(accessToken);
+                response.ThrowExceptionIfError();
+
+                if (response.Data == null)
                     throw new Exception("Server did not response to token validation request");
 
                 bool foundMatchingPermission = false;
-                if ((response.Permissions != null) && (response.Permissions.Count > 0))
+                if ((response.Data.Permissions != null) && (response.Data.Permissions.Count > 0))
                 {
-                    foreach (var p in response.Permissions)
+                    foreach (var p in response.Data.Permissions)
                     {
                         if ((p.Resource != null) && (p.Action != null))
                         {
@@ -169,9 +169,9 @@ namespace AccelByte.Sdk.Authentication
 
                 if (!foundMatchingPermission)
                 {
-                    if ((response.NamespaceRoles != null) && (response.NamespaceRoles.Count > 0))
+                    if ((response.Data.NamespaceRoles != null) && (response.Data.NamespaceRoles.Count > 0))
                     {
-                        foreach (var r in response.NamespaceRoles)
+                        foreach (var r in response.Data.NamespaceRoles)
                         {
                             if (r.RoleId == null)
                                 continue;
@@ -207,14 +207,16 @@ namespace AccelByte.Sdk.Authentication
         {
             try
             {
-                OauthmodelTokenResponseV3? response = await sdk.GetIamApi().OAuth20.VerifyTokenV3Op.ExecuteAsync(accessToken);
-                if (response == null)
+                var response = await sdk.GetIamApi().OAuth20.VerifyTokenV3Op.ExecuteAsync(accessToken);
+                response.ThrowExceptionIfError();
+
+                if (response.Data == null)
                     throw new Exception("Server did not response to token validation request");
 
                 bool foundMatchingPermission = false;
-                if ((response.Permissions != null) && (response.Permissions.Count > 0))
+                if ((response.Data.Permissions != null) && (response.Data.Permissions.Count > 0))
                 {
-                    foreach (var p in response.Permissions)
+                    foreach (var p in response.Data.Permissions)
                     {
                         if ((p.Resource != null) && (p.Action != null))
                         {
@@ -232,9 +234,9 @@ namespace AccelByte.Sdk.Authentication
 
                 if (!foundMatchingPermission)
                 {
-                    if ((response.NamespaceRoles != null) && (response.NamespaceRoles.Count > 0))
+                    if ((response.Data.NamespaceRoles != null) && (response.Data.NamespaceRoles.Count > 0))
                     {
-                        foreach (var r in response.NamespaceRoles)
+                        foreach (var r in response.Data.NamespaceRoles)
                         {
                             if (r.RoleId == null)
                                 continue;
@@ -270,8 +272,10 @@ namespace AccelByte.Sdk.Authentication
         {
             try
             {
-                OauthmodelTokenResponseV3? response = sdk.GetIamApi().OAuth20.VerifyTokenV3Op.Execute(accessToken);
-                if (response == null)
+                var response = sdk.GetIamApi().OAuth20.VerifyTokenV3Op.Execute(accessToken);
+                response.ThrowExceptionIfError();
+
+                if (response.Data == null)
                     throw new Exception("Server did not response to token validation request");
 
                 Dictionary<string, string> pParams = new Dictionary<string, string>();
@@ -284,9 +288,9 @@ namespace AccelByte.Sdk.Authentication
                     pParams.Add("userId", userId);
 
                 bool foundMatchingPermission = false;
-                if ((response.Permissions != null) && (response.Permissions.Count > 0))
+                if ((response.Data.Permissions != null) && (response.Data.Permissions.Count > 0))
                 {
-                    foreach (var p in response.Permissions)
+                    foreach (var p in response.Data.Permissions)
                     {
                         if ((p.Resource != null) && (p.Action != null))
                         {
@@ -308,9 +312,9 @@ namespace AccelByte.Sdk.Authentication
 
                 if (!foundMatchingPermission)
                 {
-                    if ((response.NamespaceRoles != null) && (response.NamespaceRoles.Count > 0))
+                    if ((response.Data.NamespaceRoles != null) && (response.Data.NamespaceRoles.Count > 0))
                     {
-                        foreach (var r in response.NamespaceRoles)
+                        foreach (var r in response.Data.NamespaceRoles)
                         {
                             if (r.RoleId == null)
                                 continue;
@@ -350,8 +354,10 @@ namespace AccelByte.Sdk.Authentication
         {
             try
             {
-                OauthmodelTokenResponseV3? response = await sdk.GetIamApi().OAuth20.VerifyTokenV3Op.ExecuteAsync(accessToken);
-                if (response == null)
+                var response = await sdk.GetIamApi().OAuth20.VerifyTokenV3Op.ExecuteAsync(accessToken);
+                response.ThrowExceptionIfError();
+
+                if (response.Data == null)
                     throw new Exception("Server did not response to token validation request");
 
                 Dictionary<string, string> pParams = new Dictionary<string, string>();
@@ -364,9 +370,9 @@ namespace AccelByte.Sdk.Authentication
                     pParams.Add("userId", userId);
 
                 bool foundMatchingPermission = false;
-                if ((response.Permissions != null) && (response.Permissions.Count > 0))
+                if ((response.Data.Permissions != null) && (response.Data.Permissions.Count > 0))
                 {
-                    foreach (var p in response.Permissions)
+                    foreach (var p in response.Data.Permissions)
                     {
                         if ((p.Resource != null) && (p.Action != null))
                         {
@@ -388,9 +394,9 @@ namespace AccelByte.Sdk.Authentication
 
                 if (!foundMatchingPermission)
                 {
-                    if ((response.NamespaceRoles != null) && (response.NamespaceRoles.Count > 0))
+                    if ((response.Data.NamespaceRoles != null) && (response.Data.NamespaceRoles.Count > 0))
                     {
-                        foreach (var r in response.NamespaceRoles)
+                        foreach (var r in response.Data.NamespaceRoles)
                         {
                             if (r.RoleId == null)
                                 continue;
