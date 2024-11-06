@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsartifact.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
 {
-    [SdkConsoleCommand("dsartifact", "listterminatedservers")]
-    public class ListTerminatedServersCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("dsartifact","listterminatedservers")]
+    public class ListTerminatedServersCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Dsartifact"; } }
+        public string ServiceName{ get { return "Dsartifact"; } }
 
-        public string OperationName { get { return "ListTerminatedServers"; } }
+        public string OperationName{ get { return "ListTerminatedServers"; } }
 
         [SdkCommandArgument("deployment")]
         public string? Deployment { get; set; }
@@ -65,7 +65,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Dsartifact.Wrapper.AllTerminatedServers wrapper = new AccelByte.Sdk.Api.Dsartifact.Wrapper.AllTerminatedServers(_SDK);
 
@@ -101,11 +101,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
             );
 
 
-            AccelByte.Sdk.Api.Dsartifact.Model.ModelsListTerminatedServersResponse? response = wrapper.ListTerminatedServers(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.ListTerminatedServers(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

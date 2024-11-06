@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ugc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
 {
-    [SdkConsoleCommand("ugc", "publicdeletecontentv2")]
-    public class PublicDeleteContentV2Command : ISdkConsoleCommand
+    [SdkConsoleCommand("ugc","publicdeletecontentv2")]
+    public class PublicDeleteContentV2Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Ugc"; } }
+        public string ServiceName{ get { return "Ugc"; } }
 
-        public string OperationName { get { return "PublicDeleteContentV2"; } }
+        public string OperationName{ get { return "PublicDeleteContentV2"; } }
 
         [SdkCommandArgument("channelId")]
         public string ChannelId { get; set; } = String.Empty;
@@ -44,7 +44,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Ugc.Wrapper.PublicContentV2 wrapper = new AccelByte.Sdk.Api.Ugc.Wrapper.PublicContentV2(_SDK);
 
@@ -62,8 +62,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
             );
 
 
-            wrapper.PublicDeleteContentV2(operation);
-            return String.Empty;
+            var response = wrapper.PublicDeleteContentV2(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

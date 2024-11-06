@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Reporting.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
 {
-    [SdkConsoleCommand("reporting", "adminsubmitreport")]
-    public class AdminSubmitReportCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("reporting","adminsubmitreport")]
+    public class AdminSubmitReportCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Reporting"; } }
+        public string ServiceName{ get { return "Reporting"; } }
 
-        public string OperationName { get { return "AdminSubmitReport"; } }
+        public string OperationName{ get { return "AdminSubmitReport"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Reporting.Wrapper.AdminReports wrapper = new AccelByte.Sdk.Api.Reporting.Wrapper.AdminReports(_SDK);
 
@@ -54,11 +54,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
             );
 
 
-            AccelByte.Sdk.Api.Reporting.Model.RestapiSubmitReportResponse? response = wrapper.AdminSubmitReport(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.AdminSubmitReport(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

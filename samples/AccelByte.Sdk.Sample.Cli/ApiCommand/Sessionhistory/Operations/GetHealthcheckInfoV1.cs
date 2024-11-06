@@ -18,21 +18,21 @@ using AccelByte.Sdk.Api.Sessionhistory.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionhistory
 {
-    [SdkConsoleCommand("sessionhistory", "gethealthcheckinfov1")]
-    public class GetHealthcheckInfoV1Command : ISdkConsoleCommand
+    [SdkConsoleCommand("sessionhistory","gethealthcheckinfov1")]
+    public class GetHealthcheckInfoV1Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Sessionhistory"; } }
+        public string ServiceName{ get { return "Sessionhistory"; } }
 
-        public string OperationName { get { return "GetHealthcheckInfoV1"; } }
+        public string OperationName{ get { return "GetHealthcheckInfoV1"; } }
 
         public GetHealthcheckInfoV1Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Sessionhistory.Wrapper.Operations wrapper = new AccelByte.Sdk.Api.Sessionhistory.Wrapper.Operations(_SDK);
 
@@ -46,8 +46,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionhistory
             );
 
 
-            wrapper.GetHealthcheckInfoV1(operation);
-            return String.Empty;
+            var response = wrapper.GetHealthcheckInfoV1(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

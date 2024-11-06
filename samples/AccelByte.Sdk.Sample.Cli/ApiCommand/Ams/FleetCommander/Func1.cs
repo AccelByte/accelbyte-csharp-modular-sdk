@@ -18,21 +18,21 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 {
-    [SdkConsoleCommand("ams", "func1")]
-    public class Func1Command : ISdkConsoleCommand
+    [SdkConsoleCommand("ams","func1")]
+    public class Func1Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Ams"; } }
+        public string ServiceName{ get { return "Ams"; } }
 
-        public string OperationName { get { return "Func1"; } }
+        public string OperationName{ get { return "Func1"; } }
 
         public Func1Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Ams.Wrapper.FleetCommander wrapper = new AccelByte.Sdk.Api.Ams.Wrapper.FleetCommander(_SDK);
 
@@ -46,8 +46,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
             );
 
 
-            wrapper.Func1(operation);
-            return String.Empty;
+            var response = wrapper.Func1(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

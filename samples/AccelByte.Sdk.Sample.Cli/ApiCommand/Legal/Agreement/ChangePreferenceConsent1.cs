@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal", "changepreferenceconsent1")]
-    public class ChangePreferenceConsent1Command : ISdkConsoleCommand
+    [SdkConsoleCommand("legal","changepreferenceconsent1")]
+    public class ChangePreferenceConsent1Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Legal"; } }
+        public string ServiceName{ get { return "Legal"; } }
 
-        public string OperationName { get { return "ChangePreferenceConsent1"; } }
+        public string OperationName{ get { return "ChangePreferenceConsent1"; } }
 
         [SdkCommandData("body")]
         public List<AcceptAgreementRequest> Body { get; set; } = new List<AcceptAgreementRequest>();
@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Legal.Wrapper.Agreement wrapper = new AccelByte.Sdk.Api.Legal.Wrapper.Agreement(_SDK);
 
@@ -51,8 +51,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
             );
 
 
-            wrapper.ChangePreferenceConsent1(operation);
-            return String.Empty;
+            var response = wrapper.ChangePreferenceConsent1(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

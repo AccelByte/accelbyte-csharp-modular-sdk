@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Session.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 {
-    [SdkConsoleCommand("session", "adminupdateglobalconfiguration")]
-    public class AdminUpdateGlobalConfigurationCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("session","adminupdateglobalconfiguration")]
+    public class AdminUpdateGlobalConfigurationCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Session"; } }
+        public string ServiceName{ get { return "Session"; } }
 
-        public string OperationName { get { return "AdminUpdateGlobalConfiguration"; } }
+        public string OperationName{ get { return "AdminUpdateGlobalConfiguration"; } }
 
         [SdkCommandData("body")]
         public ApimodelsPutGlobalConfigurationRequest Body { get; set; } = new ApimodelsPutGlobalConfigurationRequest();
@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Session.Wrapper.GlobalConfiguration wrapper = new AccelByte.Sdk.Api.Session.Wrapper.GlobalConfiguration(_SDK);
 
@@ -50,11 +50,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
             );
 
 
-            AccelByte.Sdk.Api.Session.Model.ApimodelsGlobalConfigurationResponse? response = wrapper.AdminUpdateGlobalConfiguration(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.AdminUpdateGlobalConfiguration(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

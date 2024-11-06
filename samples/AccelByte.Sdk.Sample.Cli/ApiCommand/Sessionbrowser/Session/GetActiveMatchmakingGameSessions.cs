@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Sessionbrowser.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionbrowser
 {
-    [SdkConsoleCommand("sessionbrowser", "getactivematchmakinggamesessions")]
-    public class GetActiveMatchmakingGameSessionsCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("sessionbrowser","getactivematchmakinggamesessions")]
+    public class GetActiveMatchmakingGameSessionsCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Sessionbrowser"; } }
+        public string ServiceName{ get { return "Sessionbrowser"; } }
 
-        public string OperationName { get { return "GetActiveMatchmakingGameSessions"; } }
+        public string OperationName{ get { return "GetActiveMatchmakingGameSessions"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -50,7 +50,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionbrowser
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Sessionbrowser.Wrapper.Session wrapper = new AccelByte.Sdk.Api.Sessionbrowser.Wrapper.Session(_SDK);
 
@@ -75,11 +75,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionbrowser
             );
 
 
-            AccelByte.Sdk.Api.Sessionbrowser.Model.ModelsActiveMatchmakingGameResponse? response = wrapper.GetActiveMatchmakingGameSessions(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.GetActiveMatchmakingGameSessions(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

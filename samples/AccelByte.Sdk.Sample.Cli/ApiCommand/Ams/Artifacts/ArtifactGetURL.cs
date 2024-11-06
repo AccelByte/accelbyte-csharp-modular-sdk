@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 {
-    [SdkConsoleCommand("ams", "artifactgeturl")]
-    public class ArtifactGetURLCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("ams","artifactgeturl")]
+    public class ArtifactGetURLCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Ams"; } }
+        public string ServiceName{ get { return "Ams"; } }
 
-        public string OperationName { get { return "ArtifactGetURL"; } }
+        public string OperationName{ get { return "ArtifactGetURL"; } }
 
         [SdkCommandArgument("artifactID")]
         public string ArtifactID { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Ams.Wrapper.Artifacts wrapper = new AccelByte.Sdk.Api.Ams.Wrapper.Artifacts(_SDK);
 
@@ -54,11 +54,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
             );
 
 
-            AccelByte.Sdk.Api.Ams.Model.ApiArtifactURLResponse? response = wrapper.ArtifactGetURL(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.ArtifactGetURL(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Matchmaking.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
 {
-    [SdkConsoleCommand("matchmaking", "cleanallmocks")]
-    public class CleanAllMocksCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("matchmaking","cleanallmocks")]
+    public class CleanAllMocksCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Matchmaking"; } }
+        public string ServiceName{ get { return "Matchmaking"; } }
 
-        public string OperationName { get { return "CleanAllMocks"; } }
+        public string OperationName{ get { return "CleanAllMocks"; } }
 
         [SdkCommandArgument("channelName")]
         public string ChannelName { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Matchmaking.Wrapper.MockMatchmaking wrapper = new AccelByte.Sdk.Api.Matchmaking.Wrapper.MockMatchmaking(_SDK);
 
@@ -54,8 +54,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
             );
 
 
-            wrapper.CleanAllMocks(operation);
-            return String.Empty;
+            var response = wrapper.CleanAllMocks(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

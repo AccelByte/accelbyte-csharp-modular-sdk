@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform", "publicdeletepaymentaccount")]
-    public class PublicDeletePaymentAccountCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("platform","publicdeletepaymentaccount")]
+    public class PublicDeletePaymentAccountCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Platform"; } }
+        public string ServiceName{ get { return "Platform"; } }
 
-        public string OperationName { get { return "PublicDeletePaymentAccount"; } }
+        public string OperationName{ get { return "PublicDeletePaymentAccount"; } }
 
         [SdkCommandArgument("id")]
         public string Id { get; set; } = String.Empty;
@@ -44,7 +44,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Platform.Wrapper.PaymentAccount wrapper = new AccelByte.Sdk.Api.Platform.Wrapper.PaymentAccount(_SDK);
 
@@ -62,8 +62,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
             );
 
 
-            wrapper.PublicDeletePaymentAccount(operation);
-            return String.Empty;
+            var response = wrapper.PublicDeletePaymentAccount(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

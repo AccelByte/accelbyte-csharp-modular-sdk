@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Reporting.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
 {
-    [SdkConsoleCommand("reporting", "adminfindextensioncategorylist")]
-    public class AdminFindExtensionCategoryListCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("reporting","adminfindextensioncategorylist")]
+    public class AdminFindExtensionCategoryListCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Reporting"; } }
+        public string ServiceName{ get { return "Reporting"; } }
 
-        public string OperationName { get { return "AdminFindExtensionCategoryList"; } }
+        public string OperationName{ get { return "AdminFindExtensionCategoryList"; } }
 
         [SdkCommandArgument("order")]
         public string? Order { get; set; }
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Reporting.Wrapper.AdminExtensionCategoriesAndAutoModerationActions wrapper = new AccelByte.Sdk.Api.Reporting.Wrapper.AdminExtensionCategoriesAndAutoModerationActions(_SDK);
 
@@ -56,11 +56,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
             );
 
 
-            AccelByte.Sdk.Api.Reporting.Model.RestapiExtensionCategoryListApiResponse? response = wrapper.AdminFindExtensionCategoryList(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.AdminFindExtensionCategoryList(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

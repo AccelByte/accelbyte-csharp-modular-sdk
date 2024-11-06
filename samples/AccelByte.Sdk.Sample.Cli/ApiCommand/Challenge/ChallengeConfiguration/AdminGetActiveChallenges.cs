@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Challenge.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
 {
-    [SdkConsoleCommand("challenge", "admingetactivechallenges")]
-    public class AdminGetActiveChallengesCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("challenge","admingetactivechallenges")]
+    public class AdminGetActiveChallengesCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Challenge"; } }
+        public string ServiceName{ get { return "Challenge"; } }
 
-        public string OperationName { get { return "AdminGetActiveChallenges"; } }
+        public string OperationName{ get { return "AdminGetActiveChallenges"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -44,7 +44,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Challenge.Wrapper.ChallengeConfiguration wrapper = new AccelByte.Sdk.Api.Challenge.Wrapper.ChallengeConfiguration(_SDK);
 
@@ -64,11 +64,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
             );
 
 
-            AccelByte.Sdk.Api.Challenge.Model.ModelListChallengeResponse? response = wrapper.AdminGetActiveChallenges(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.AdminGetActiveChallenges(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "admindeleteuserlinkingrestrictionbyplatformidv3")]
-    public class AdminDeleteUserLinkingRestrictionByPlatformIDV3Command : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","admindeleteuserlinkingrestrictionbyplatformidv3")]
+    public class AdminDeleteUserLinkingRestrictionByPlatformIDV3Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "AdminDeleteUserLinkingRestrictionByPlatformIDV3"; } }
+        public string OperationName{ get { return "AdminDeleteUserLinkingRestrictionByPlatformIDV3"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -41,7 +41,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Iam.Wrapper.Users wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.Users(_SDK);
 
@@ -58,8 +58,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             );
 
 
-            wrapper.AdminDeleteUserLinkingRestrictionByPlatformIDV3(operation);
-            return String.Empty;
+            var response = wrapper.AdminDeleteUserLinkingRestrictionByPlatformIDV3(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

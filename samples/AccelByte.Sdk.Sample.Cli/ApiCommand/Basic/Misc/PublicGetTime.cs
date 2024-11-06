@@ -18,21 +18,21 @@ using AccelByte.Sdk.Api.Basic.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
 {
-    [SdkConsoleCommand("basic", "publicgettime")]
-    public class PublicGetTimeCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("basic","publicgettime")]
+    public class PublicGetTimeCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Basic"; } }
+        public string ServiceName{ get { return "Basic"; } }
 
-        public string OperationName { get { return "PublicGetTime"; } }
+        public string OperationName{ get { return "PublicGetTime"; } }
 
         public PublicGetTimeCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Basic.Wrapper.Misc wrapper = new AccelByte.Sdk.Api.Basic.Wrapper.Misc(_SDK);
 
@@ -46,11 +46,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
             );
 
 
-            AccelByte.Sdk.Api.Basic.Model.RetrieveTimeResponse? response = wrapper.PublicGetTime(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.PublicGetTime(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

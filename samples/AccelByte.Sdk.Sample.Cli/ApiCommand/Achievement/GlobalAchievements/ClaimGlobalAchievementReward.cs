@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Achievement.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
 {
-    [SdkConsoleCommand("achievement", "claimglobalachievementreward")]
-    public class ClaimGlobalAchievementRewardCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("achievement","claimglobalachievementreward")]
+    public class ClaimGlobalAchievementRewardCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Achievement"; } }
+        public string ServiceName{ get { return "Achievement"; } }
 
-        public string OperationName { get { return "ClaimGlobalAchievementReward"; } }
+        public string OperationName{ get { return "ClaimGlobalAchievementReward"; } }
 
         [SdkCommandArgument("achievementCode")]
         public string AchievementCode { get; set; } = String.Empty;
@@ -41,7 +41,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Achievement.Wrapper.GlobalAchievements wrapper = new AccelByte.Sdk.Api.Achievement.Wrapper.GlobalAchievements(_SDK);
 
@@ -58,8 +58,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
             );
 
 
-            wrapper.ClaimGlobalAchievementReward(operation);
-            return String.Empty;
+            var response = wrapper.ClaimGlobalAchievementReward(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

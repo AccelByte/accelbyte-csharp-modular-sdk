@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "admingeneratereportv4")]
-    public class AdminGenerateReportV4Command : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","admingeneratereportv4")]
+    public class AdminGenerateReportV4Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "AdminGenerateReportV4"; } }
+        public string OperationName{ get { return "AdminGenerateReportV4"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -44,7 +44,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Iam.Wrapper.DevicesV4 wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.DevicesV4(_SDK);
 
@@ -64,8 +64,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             );
 
 
-            wrapper.AdminGenerateReportV4(operation);
-            return String.Empty;
+            var response = wrapper.AdminGenerateReportV4(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

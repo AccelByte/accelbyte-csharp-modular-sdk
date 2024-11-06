@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Chat.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Chat
 {
-    [SdkConsoleCommand("chat", "admindeletechat")]
-    public class AdminDeleteChatCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("chat","admindeletechat")]
+    public class AdminDeleteChatCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Chat"; } }
+        public string ServiceName{ get { return "Chat"; } }
 
-        public string OperationName { get { return "AdminDeleteChat"; } }
+        public string OperationName{ get { return "AdminDeleteChat"; } }
 
         [SdkCommandArgument("chatId")]
         public string ChatId { get; set; } = String.Empty;
@@ -41,7 +41,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Chat
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Chat.Wrapper.Topic wrapper = new AccelByte.Sdk.Api.Chat.Wrapper.Topic(_SDK);
 
@@ -58,8 +58,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Chat
             );
 
 
-            wrapper.AdminDeleteChat(operation);
-            return String.Empty;
+            var response = wrapper.AdminDeleteChat(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

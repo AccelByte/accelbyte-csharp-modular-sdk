@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsartifact.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
 {
-    [SdkConsoleCommand("dsartifact", "downloadserverartifacts")]
-    public class DownloadServerArtifactsCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("dsartifact","downloadserverartifacts")]
+    public class DownloadServerArtifactsCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Dsartifact"; } }
+        public string ServiceName{ get { return "Dsartifact"; } }
 
-        public string OperationName { get { return "DownloadServerArtifacts"; } }
+        public string OperationName{ get { return "DownloadServerArtifacts"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Dsartifact.Wrapper.DownloadServerArtifact wrapper = new AccelByte.Sdk.Api.Dsartifact.Wrapper.DownloadServerArtifact(_SDK);
 
@@ -54,8 +54,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
             );
 
 
-            wrapper.DownloadServerArtifacts(operation);
-            return String.Empty;
+            var response = wrapper.DownloadServerArtifacts(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

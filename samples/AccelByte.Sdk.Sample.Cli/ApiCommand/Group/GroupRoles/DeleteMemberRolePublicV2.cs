@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Group.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
 {
-    [SdkConsoleCommand("group", "deletememberrolepublicv2")]
-    public class DeleteMemberRolePublicV2Command : ISdkConsoleCommand
+    [SdkConsoleCommand("group","deletememberrolepublicv2")]
+    public class DeleteMemberRolePublicV2Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Group"; } }
+        public string ServiceName{ get { return "Group"; } }
 
-        public string OperationName { get { return "DeleteMemberRolePublicV2"; } }
+        public string OperationName{ get { return "DeleteMemberRolePublicV2"; } }
 
         [SdkCommandArgument("groupId")]
         public string GroupId { get; set; } = String.Empty;
@@ -44,7 +44,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Group.Wrapper.GroupRoles wrapper = new AccelByte.Sdk.Api.Group.Wrapper.GroupRoles(_SDK);
 
@@ -62,8 +62,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
             );
 
 
-            wrapper.DeleteMemberRolePublicV2(operation);
-            return String.Empty;
+            var response = wrapper.DeleteMemberRolePublicV2(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

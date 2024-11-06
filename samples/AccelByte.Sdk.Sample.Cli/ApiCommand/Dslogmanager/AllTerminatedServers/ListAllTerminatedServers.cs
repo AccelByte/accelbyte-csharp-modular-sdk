@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dslogmanager.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dslogmanager
 {
-    [SdkConsoleCommand("dslogmanager", "listallterminatedservers")]
-    public class ListAllTerminatedServersCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("dslogmanager","listallterminatedservers")]
+    public class ListAllTerminatedServersCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Dslogmanager"; } }
+        public string ServiceName{ get { return "Dslogmanager"; } }
 
-        public string OperationName { get { return "ListAllTerminatedServers"; } }
+        public string OperationName{ get { return "ListAllTerminatedServers"; } }
 
         [SdkCommandArgument("deployment")]
         public string? Deployment { get; set; }
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dslogmanager
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Dslogmanager.Wrapper.AllTerminatedServers wrapper = new AccelByte.Sdk.Api.Dslogmanager.Wrapper.AllTerminatedServers(_SDK);
 
@@ -121,11 +121,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dslogmanager
             );
 
 
-            AccelByte.Sdk.Api.Dslogmanager.Model.ModelsListTerminatedServersResponse? response = wrapper.ListAllTerminatedServers(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.ListAllTerminatedServers(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

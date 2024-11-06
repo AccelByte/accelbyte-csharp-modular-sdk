@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Sessionbrowser.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionbrowser
 {
-    [SdkConsoleCommand("sessionbrowser", "getsessionhistorydetailed")]
-    public class GetSessionHistoryDetailedCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("sessionbrowser","getsessionhistorydetailed")]
+    public class GetSessionHistoryDetailedCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Sessionbrowser"; } }
+        public string ServiceName{ get { return "Sessionbrowser"; } }
 
-        public string OperationName { get { return "GetSessionHistoryDetailed"; } }
+        public string OperationName{ get { return "GetSessionHistoryDetailed"; } }
 
         [SdkCommandArgument("matchID")]
         public string MatchID { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionbrowser
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Sessionbrowser.Wrapper.Session wrapper = new AccelByte.Sdk.Api.Sessionbrowser.Wrapper.Session(_SDK);
 
@@ -54,11 +54,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionbrowser
             );
 
 
-            List<AccelByte.Sdk.Api.Sessionbrowser.Model.ModelsGetSessionHistoryDetailedResponseItem>? response = wrapper.GetSessionHistoryDetailed(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.GetSessionHistoryDetailed(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

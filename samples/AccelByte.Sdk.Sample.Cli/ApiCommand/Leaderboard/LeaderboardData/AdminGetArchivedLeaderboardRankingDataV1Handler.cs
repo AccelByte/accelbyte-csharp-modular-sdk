@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Leaderboard.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
 {
-    [SdkConsoleCommand("leaderboard", "admingetarchivedleaderboardrankingdatav1handler")]
-    public class AdminGetArchivedLeaderboardRankingDataV1HandlerCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("leaderboard","admingetarchivedleaderboardrankingdatav1handler")]
+    public class AdminGetArchivedLeaderboardRankingDataV1HandlerCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Leaderboard"; } }
+        public string ServiceName{ get { return "Leaderboard"; } }
 
-        public string OperationName { get { return "AdminGetArchivedLeaderboardRankingDataV1Handler"; } }
+        public string OperationName{ get { return "AdminGetArchivedLeaderboardRankingDataV1Handler"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -41,7 +41,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Leaderboard.Wrapper.LeaderboardData wrapper = new AccelByte.Sdk.Api.Leaderboard.Wrapper.LeaderboardData(_SDK);
 
@@ -59,11 +59,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
             );
 
 
-            List<AccelByte.Sdk.Api.Leaderboard.Model.ModelsArchiveLeaderboardSignedURLResponse>? response = wrapper.AdminGetArchivedLeaderboardRankingDataV1Handler(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.AdminGetArchivedLeaderboardRankingDataV1Handler(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "updateclient")]
-    public class UpdateClientCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","updateclient")]
+    public class UpdateClientCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "UpdateClient"; } }
+        public string OperationName{ get { return "UpdateClient"; } }
 
         [SdkCommandArgument("clientId")]
         public string ClientId { get; set; } = String.Empty;
@@ -38,11 +38,11 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Iam.Wrapper.Clients wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.Clients(_SDK);
 
-#pragma warning disable ab_deprecated_operation
+            #pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Iam.Operation.UpdateClient.Builder;
 
 
@@ -54,15 +54,22 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
                 ClientId
             );
 
-#pragma warning restore ab_deprecated_operation
+            #pragma warning restore ab_deprecated_operation
 
-#pragma warning disable ab_deprecated_operation_wrapper
-            AccelByte.Sdk.Api.Iam.Model.ClientmodelClientResponse? response = wrapper.UpdateClient(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
-#pragma warning restore ab_deprecated_operation_wrapper
+            #pragma warning disable ab_deprecated_operation_wrapper
+            var response = wrapper.UpdateClient(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
+            #pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

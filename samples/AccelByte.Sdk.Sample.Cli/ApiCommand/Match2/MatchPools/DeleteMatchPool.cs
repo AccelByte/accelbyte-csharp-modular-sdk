@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Match2.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Match2
 {
-    [SdkConsoleCommand("match2", "deletematchpool")]
-    public class DeleteMatchPoolCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("match2","deletematchpool")]
+    public class DeleteMatchPoolCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Match2"; } }
+        public string ServiceName{ get { return "Match2"; } }
 
-        public string OperationName { get { return "DeleteMatchPool"; } }
+        public string OperationName{ get { return "DeleteMatchPool"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Match2
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Match2.Wrapper.MatchPools wrapper = new AccelByte.Sdk.Api.Match2.Wrapper.MatchPools(_SDK);
 
@@ -54,8 +54,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Match2
             );
 
 
-            wrapper.DeleteMatchPool(operation);
-            return String.Empty;
+            var response = wrapper.DeleteMatchPool(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

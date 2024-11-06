@@ -18,21 +18,21 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "publicgetmyprofileallowupdatestatusv3")]
-    public class PublicGetMyProfileAllowUpdateStatusV3Command : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","publicgetmyprofileallowupdatestatusv3")]
+    public class PublicGetMyProfileAllowUpdateStatusV3Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "PublicGetMyProfileAllowUpdateStatusV3"; } }
+        public string OperationName{ get { return "PublicGetMyProfileAllowUpdateStatusV3"; } }
 
         public PublicGetMyProfileAllowUpdateStatusV3Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Iam.Wrapper.Users wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.Users(_SDK);
 
@@ -46,11 +46,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             );
 
 
-            AccelByte.Sdk.Api.Iam.Model.ModelUserProfileUpdateAllowStatus? response = wrapper.PublicGetMyProfileAllowUpdateStatusV3(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.PublicGetMyProfileAllowUpdateStatusV3(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

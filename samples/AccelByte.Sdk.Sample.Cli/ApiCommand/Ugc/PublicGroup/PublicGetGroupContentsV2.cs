@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ugc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
 {
-    [SdkConsoleCommand("ugc", "publicgetgroupcontentsv2")]
-    public class PublicGetGroupContentsV2Command : ISdkConsoleCommand
+    [SdkConsoleCommand("ugc","publicgetgroupcontentsv2")]
+    public class PublicGetGroupContentsV2Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Ugc"; } }
+        public string ServiceName{ get { return "Ugc"; } }
 
-        public string OperationName { get { return "PublicGetGroupContentsV2"; } }
+        public string OperationName{ get { return "PublicGetGroupContentsV2"; } }
 
         [SdkCommandArgument("groupId")]
         public string GroupId { get; set; } = String.Empty;
@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Ugc.Wrapper.PublicGroup wrapper = new AccelByte.Sdk.Api.Ugc.Wrapper.PublicGroup(_SDK);
 
@@ -68,11 +68,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
             );
 
 
-            AccelByte.Sdk.Api.Ugc.Model.ModelsPaginatedContentDownloadResponseV2? response = wrapper.PublicGetGroupContentsV2(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.PublicGetGroupContentsV2(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Leaderboard.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
 {
-    [SdkConsoleCommand("leaderboard", "getleaderboardconfigurationspublicv3")]
-    public class GetLeaderboardConfigurationsPublicV3Command : ISdkConsoleCommand
+    [SdkConsoleCommand("leaderboard","getleaderboardconfigurationspublicv3")]
+    public class GetLeaderboardConfigurationsPublicV3Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Leaderboard"; } }
+        public string ServiceName{ get { return "Leaderboard"; } }
 
-        public string OperationName { get { return "GetLeaderboardConfigurationsPublicV3"; } }
+        public string OperationName{ get { return "GetLeaderboardConfigurationsPublicV3"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -44,7 +44,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Leaderboard.Wrapper.LeaderboardConfigurationV3 wrapper = new AccelByte.Sdk.Api.Leaderboard.Wrapper.LeaderboardConfigurationV3(_SDK);
 
@@ -65,11 +65,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
             );
 
 
-            AccelByte.Sdk.Api.Leaderboard.Model.ModelsGetAllLeaderboardConfigsPublicRespV3? response = wrapper.GetLeaderboardConfigurationsPublicV3(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.GetLeaderboardConfigurationsPublicV3(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

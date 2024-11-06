@@ -18,21 +18,21 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 {
-    [SdkConsoleCommand("ams", "uploadurlget")]
-    public class UploadURLGetCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("ams","uploadurlget")]
+    public class UploadURLGetCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Ams"; } }
+        public string ServiceName{ get { return "Ams"; } }
 
-        public string OperationName { get { return "UploadURLGet"; } }
+        public string OperationName{ get { return "UploadURLGet"; } }
 
         public UploadURLGetCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Ams.Wrapper.AMSInfo wrapper = new AccelByte.Sdk.Api.Ams.Wrapper.AMSInfo(_SDK);
 
@@ -46,8 +46,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
             );
 
 
-            wrapper.UploadURLGet(operation);
-            return String.Empty;
+            var response = wrapper.UploadURLGet(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

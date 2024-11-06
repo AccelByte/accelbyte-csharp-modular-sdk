@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Achievement.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
 {
-    [SdkConsoleCommand("achievement", "exportachievements")]
-    public class ExportAchievementsCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("achievement","exportachievements")]
+    public class ExportAchievementsCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Achievement"; } }
+        public string ServiceName{ get { return "Achievement"; } }
 
-        public string OperationName { get { return "ExportAchievements"; } }
+        public string OperationName{ get { return "ExportAchievements"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Achievement.Wrapper.Achievements wrapper = new AccelByte.Sdk.Api.Achievement.Wrapper.Achievements(_SDK);
 
@@ -55,11 +55,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
             );
 
 
-            Stream? response = wrapper.ExportAchievements(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return response.ReadToString();
+            var response = wrapper.ExportAchievements(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(response.Data.ReadToString());
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

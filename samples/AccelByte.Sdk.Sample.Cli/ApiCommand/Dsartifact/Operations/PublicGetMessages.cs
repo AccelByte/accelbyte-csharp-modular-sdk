@@ -18,21 +18,21 @@ using AccelByte.Sdk.Api.Dsartifact.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
 {
-    [SdkConsoleCommand("dsartifact", "publicgetmessages")]
-    public class PublicGetMessagesCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("dsartifact","publicgetmessages")]
+    public class PublicGetMessagesCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Dsartifact"; } }
+        public string ServiceName{ get { return "Dsartifact"; } }
 
-        public string OperationName { get { return "PublicGetMessages"; } }
+        public string OperationName{ get { return "PublicGetMessages"; } }
 
         public PublicGetMessagesCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Dsartifact.Wrapper.Operations wrapper = new AccelByte.Sdk.Api.Dsartifact.Wrapper.Operations(_SDK);
 
@@ -46,11 +46,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
             );
 
 
-            List<AccelByte.Sdk.Api.Dsartifact.Model.LogAppMessageDeclaration>? response = wrapper.PublicGetMessages(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.PublicGetMessages(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

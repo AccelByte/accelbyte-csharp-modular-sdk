@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Group.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
 {
-    [SdkConsoleCommand("group", "deletegroupconfigurationv1")]
-    public class DeleteGroupConfigurationV1Command : ISdkConsoleCommand
+    [SdkConsoleCommand("group","deletegroupconfigurationv1")]
+    public class DeleteGroupConfigurationV1Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Group"; } }
+        public string ServiceName{ get { return "Group"; } }
 
-        public string OperationName { get { return "DeleteGroupConfigurationV1"; } }
+        public string OperationName{ get { return "DeleteGroupConfigurationV1"; } }
 
         [SdkCommandArgument("configurationCode")]
         public string ConfigurationCode { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Group.Wrapper.Configuration wrapper = new AccelByte.Sdk.Api.Group.Wrapper.Configuration(_SDK);
 
@@ -54,8 +54,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
             );
 
 
-            wrapper.DeleteGroupConfigurationV1(operation);
-            return String.Empty;
+            var response = wrapper.DeleteGroupConfigurationV1(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

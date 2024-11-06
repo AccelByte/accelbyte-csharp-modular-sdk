@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby", "getallnotificationtemplatesv1admin")]
-    public class GetAllNotificationTemplatesV1AdminCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("lobby","getallnotificationtemplatesv1admin")]
+    public class GetAllNotificationTemplatesV1AdminCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Lobby"; } }
+        public string ServiceName{ get { return "Lobby"; } }
 
-        public string OperationName { get { return "GetAllNotificationTemplatesV1Admin"; } }
+        public string OperationName{ get { return "GetAllNotificationTemplatesV1Admin"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Lobby.Wrapper.Notification wrapper = new AccelByte.Sdk.Api.Lobby.Wrapper.Notification(_SDK);
 
@@ -50,11 +50,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
             );
 
 
-            List<AccelByte.Sdk.Api.Lobby.Model.ModelNotificationTemplateResponse>? response = wrapper.GetAllNotificationTemplatesV1Admin(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.GetAllNotificationTemplatesV1Admin(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

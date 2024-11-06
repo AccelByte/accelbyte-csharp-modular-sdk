@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ugc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
 {
-    [SdkConsoleCommand("ugc", "admindeleteallusergroup")]
-    public class AdminDeleteAllUserGroupCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("ugc","admindeleteallusergroup")]
+    public class AdminDeleteAllUserGroupCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Ugc"; } }
+        public string ServiceName{ get { return "Ugc"; } }
 
-        public string OperationName { get { return "AdminDeleteAllUserGroup"; } }
+        public string OperationName{ get { return "AdminDeleteAllUserGroup"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Ugc.Wrapper.Anonymization wrapper = new AccelByte.Sdk.Api.Ugc.Wrapper.Anonymization(_SDK);
 
@@ -54,8 +54,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
             );
 
 
-            wrapper.AdminDeleteAllUserGroup(operation);
-            return String.Empty;
+            var response = wrapper.AdminDeleteAllUserGroup(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

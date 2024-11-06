@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Reporting.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
 {
-    [SdkConsoleCommand("reporting", "listreports")]
-    public class ListReportsCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("reporting","listreports")]
+    public class ListReportsCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Reporting"; } }
+        public string ServiceName{ get { return "Reporting"; } }
 
-        public string OperationName { get { return "ListReports"; } }
+        public string OperationName{ get { return "ListReports"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -50,7 +50,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Reporting.Wrapper.AdminReports wrapper = new AccelByte.Sdk.Api.Reporting.Wrapper.AdminReports(_SDK);
 
@@ -75,11 +75,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
             );
 
 
-            AccelByte.Sdk.Api.Reporting.Model.RestapiReportListResponse? response = wrapper.ListReports(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.ListReports(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Inventory.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
 {
-    [SdkConsoleCommand("inventory", "admindeletetag")]
-    public class AdminDeleteTagCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("inventory","admindeletetag")]
+    public class AdminDeleteTagCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Inventory"; } }
+        public string ServiceName{ get { return "Inventory"; } }
 
-        public string OperationName { get { return "AdminDeleteTag"; } }
+        public string OperationName{ get { return "AdminDeleteTag"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Inventory.Wrapper.AdminTags wrapper = new AccelByte.Sdk.Api.Inventory.Wrapper.AdminTags(_SDK);
 
@@ -54,8 +54,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
             );
 
 
-            wrapper.AdminDeleteTag(operation);
-            return String.Empty;
+            var response = wrapper.AdminDeleteTag(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

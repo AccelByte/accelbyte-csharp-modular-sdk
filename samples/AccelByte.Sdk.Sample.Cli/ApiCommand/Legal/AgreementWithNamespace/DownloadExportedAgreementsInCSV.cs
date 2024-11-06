@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal", "downloadexportedagreementsincsv")]
-    public class DownloadExportedAgreementsInCSVCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("legal","downloadexportedagreementsincsv")]
+    public class DownloadExportedAgreementsInCSVCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Legal"; } }
+        public string ServiceName{ get { return "Legal"; } }
 
-        public string OperationName { get { return "DownloadExportedAgreementsInCSV"; } }
+        public string OperationName{ get { return "DownloadExportedAgreementsInCSV"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Legal.Wrapper.AgreementWithNamespace wrapper = new AccelByte.Sdk.Api.Legal.Wrapper.AgreementWithNamespace(_SDK);
 
@@ -54,11 +54,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
             );
 
 
-            AccelByte.Sdk.Api.Legal.Model.DownloadExportedAgreementsInCSVResponse? response = wrapper.DownloadExportedAgreementsInCSV(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.DownloadExportedAgreementsInCSV(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

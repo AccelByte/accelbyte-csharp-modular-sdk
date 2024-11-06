@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Challenge.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
 {
-    [SdkConsoleCommand("challenge", "admindeleteassignmentplugin")]
-    public class AdminDeleteAssignmentPluginCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("challenge","admindeleteassignmentplugin")]
+    public class AdminDeleteAssignmentPluginCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Challenge"; } }
+        public string ServiceName{ get { return "Challenge"; } }
 
-        public string OperationName { get { return "AdminDeleteAssignmentPlugin"; } }
+        public string OperationName{ get { return "AdminDeleteAssignmentPlugin"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Challenge.Wrapper.Plugins wrapper = new AccelByte.Sdk.Api.Challenge.Wrapper.Plugins(_SDK);
 
@@ -50,8 +50,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
             );
 
 
-            wrapper.AdminDeleteAssignmentPlugin(operation);
-            return String.Empty;
+            var response = wrapper.AdminDeleteAssignmentPlugin(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

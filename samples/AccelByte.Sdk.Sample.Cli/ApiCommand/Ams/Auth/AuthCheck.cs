@@ -18,21 +18,21 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 {
-    [SdkConsoleCommand("ams", "authcheck")]
-    public class AuthCheckCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("ams","authcheck")]
+    public class AuthCheckCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Ams"; } }
+        public string ServiceName{ get { return "Ams"; } }
 
-        public string OperationName { get { return "AuthCheck"; } }
+        public string OperationName{ get { return "AuthCheck"; } }
 
         public AuthCheckCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Ams.Wrapper.Auth wrapper = new AccelByte.Sdk.Api.Ams.Wrapper.Auth(_SDK);
 
@@ -46,8 +46,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
             );
 
 
-            wrapper.AuthCheck(operation);
-            return String.Empty;
+            var response = wrapper.AuthCheck(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

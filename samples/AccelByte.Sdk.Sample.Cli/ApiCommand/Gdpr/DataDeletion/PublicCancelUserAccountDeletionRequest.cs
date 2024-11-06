@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Gdpr.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
 {
-    [SdkConsoleCommand("gdpr", "publiccanceluseraccountdeletionrequest")]
-    public class PublicCancelUserAccountDeletionRequestCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("gdpr","publiccanceluseraccountdeletionrequest")]
+    public class PublicCancelUserAccountDeletionRequestCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Gdpr"; } }
+        public string ServiceName{ get { return "Gdpr"; } }
 
-        public string OperationName { get { return "PublicCancelUserAccountDeletionRequest"; } }
+        public string OperationName{ get { return "PublicCancelUserAccountDeletionRequest"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Gdpr.Wrapper.DataDeletion wrapper = new AccelByte.Sdk.Api.Gdpr.Wrapper.DataDeletion(_SDK);
 
@@ -54,8 +54,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
             );
 
 
-            wrapper.PublicCancelUserAccountDeletionRequest(operation);
-            return String.Empty;
+            var response = wrapper.PublicCancelUserAccountDeletionRequest(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "publicverifyuserbylinkv3")]
-    public class PublicVerifyUserByLinkV3Command : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","publicverifyuserbylinkv3")]
+    public class PublicVerifyUserByLinkV3Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "PublicVerifyUserByLinkV3"; } }
+        public string OperationName{ get { return "PublicVerifyUserByLinkV3"; } }
 
         [SdkCommandArgument("code")]
         public string? Code { get; set; }
@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Iam.Wrapper.Users wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.Users(_SDK);
 
@@ -51,10 +51,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             );
 
 
-            string? response = wrapper.PublicVerifyUserByLinkV3(operation);
-            if (response == null)
-                return "No response from server.";
-            return response!;
+            var response = wrapper.PublicVerifyUserByLinkV3(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(response.Data);
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

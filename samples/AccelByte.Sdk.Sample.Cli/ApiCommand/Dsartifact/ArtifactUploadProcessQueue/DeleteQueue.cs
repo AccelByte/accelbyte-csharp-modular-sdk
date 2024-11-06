@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsartifact.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
 {
-    [SdkConsoleCommand("dsartifact", "deletequeue")]
-    public class DeleteQueueCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("dsartifact","deletequeue")]
+    public class DeleteQueueCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Dsartifact"; } }
+        public string ServiceName{ get { return "Dsartifact"; } }
 
-        public string OperationName { get { return "DeleteQueue"; } }
+        public string OperationName{ get { return "DeleteQueue"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -41,7 +41,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Dsartifact.Wrapper.ArtifactUploadProcessQueue wrapper = new AccelByte.Sdk.Api.Dsartifact.Wrapper.ArtifactUploadProcessQueue(_SDK);
 
@@ -58,8 +58,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
             );
 
 
-            wrapper.DeleteQueue(operation);
-            return String.Empty;
+            var response = wrapper.DeleteQueue(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

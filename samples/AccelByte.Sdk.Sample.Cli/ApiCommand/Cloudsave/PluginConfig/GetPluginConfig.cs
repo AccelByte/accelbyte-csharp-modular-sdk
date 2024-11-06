@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Cloudsave.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
 {
-    [SdkConsoleCommand("cloudsave", "getpluginconfig")]
-    public class GetPluginConfigCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("cloudsave","getpluginconfig")]
+    public class GetPluginConfigCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Cloudsave"; } }
+        public string ServiceName{ get { return "Cloudsave"; } }
 
-        public string OperationName { get { return "GetPluginConfig"; } }
+        public string OperationName{ get { return "GetPluginConfig"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Cloudsave.Wrapper.PluginConfig wrapper = new AccelByte.Sdk.Api.Cloudsave.Wrapper.PluginConfig(_SDK);
 
@@ -50,11 +50,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
             );
 
 
-            AccelByte.Sdk.Api.Cloudsave.Model.ModelsPluginResponse? response = wrapper.GetPluginConfig(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.GetPluginConfig(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

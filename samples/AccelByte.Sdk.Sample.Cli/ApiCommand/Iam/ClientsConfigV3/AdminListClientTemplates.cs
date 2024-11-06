@@ -18,21 +18,21 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "adminlistclienttemplates")]
-    public class AdminListClientTemplatesCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","adminlistclienttemplates")]
+    public class AdminListClientTemplatesCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "AdminListClientTemplates"; } }
+        public string OperationName{ get { return "AdminListClientTemplates"; } }
 
         public AdminListClientTemplatesCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Iam.Wrapper.ClientsConfigV3 wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.ClientsConfigV3(_SDK);
 
@@ -46,11 +46,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             );
 
 
-            AccelByte.Sdk.Api.Iam.Model.ClientmodelListTemplatesResponse? response = wrapper.AdminListClientTemplates(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.AdminListClientTemplates(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

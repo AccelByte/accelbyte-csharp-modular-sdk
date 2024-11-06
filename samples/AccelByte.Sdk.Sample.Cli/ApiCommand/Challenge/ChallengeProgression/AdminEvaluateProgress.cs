@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Challenge.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
 {
-    [SdkConsoleCommand("challenge", "adminevaluateprogress")]
-    public class AdminEvaluateProgressCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("challenge","adminevaluateprogress")]
+    public class AdminEvaluateProgressCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Challenge"; } }
+        public string ServiceName{ get { return "Challenge"; } }
 
-        public string OperationName { get { return "AdminEvaluateProgress"; } }
+        public string OperationName{ get { return "AdminEvaluateProgress"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Challenge.Wrapper.ChallengeProgression wrapper = new AccelByte.Sdk.Api.Challenge.Wrapper.ChallengeProgression(_SDK);
 
@@ -54,8 +54,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
             );
 
 
-            wrapper.AdminEvaluateProgress(operation);
-            return String.Empty;
+            var response = wrapper.AdminEvaluateProgress(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

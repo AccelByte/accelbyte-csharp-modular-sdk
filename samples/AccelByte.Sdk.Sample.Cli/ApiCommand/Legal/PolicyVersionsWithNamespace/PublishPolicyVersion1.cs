@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal", "publishpolicyversion1")]
-    public class PublishPolicyVersion1Command : ISdkConsoleCommand
+    [SdkConsoleCommand("legal","publishpolicyversion1")]
+    public class PublishPolicyVersion1Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Legal"; } }
+        public string ServiceName{ get { return "Legal"; } }
 
-        public string OperationName { get { return "PublishPolicyVersion1"; } }
+        public string OperationName{ get { return "PublishPolicyVersion1"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -41,7 +41,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Legal.Wrapper.PolicyVersionsWithNamespace wrapper = new AccelByte.Sdk.Api.Legal.Wrapper.PolicyVersionsWithNamespace(_SDK);
 
@@ -59,8 +59,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
             );
 
 
-            wrapper.PublishPolicyVersion1(operation);
-            return String.Empty;
+            var response = wrapper.PublishPolicyVersion1(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

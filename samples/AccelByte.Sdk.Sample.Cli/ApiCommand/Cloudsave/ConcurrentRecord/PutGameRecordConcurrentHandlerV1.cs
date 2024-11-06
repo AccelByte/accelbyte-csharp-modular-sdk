@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Cloudsave.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
 {
-    [SdkConsoleCommand("cloudsave", "putgamerecordconcurrenthandlerv1")]
-    public class PutGameRecordConcurrentHandlerV1Command : ISdkConsoleCommand
+    [SdkConsoleCommand("cloudsave","putgamerecordconcurrenthandlerv1")]
+    public class PutGameRecordConcurrentHandlerV1Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Cloudsave"; } }
+        public string ServiceName{ get { return "Cloudsave"; } }
 
-        public string OperationName { get { return "PutGameRecordConcurrentHandlerV1"; } }
+        public string OperationName{ get { return "PutGameRecordConcurrentHandlerV1"; } }
 
         [SdkCommandArgument("key")]
         public string Key { get; set; } = String.Empty;
@@ -41,7 +41,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Cloudsave.Wrapper.ConcurrentRecord wrapper = new AccelByte.Sdk.Api.Cloudsave.Wrapper.ConcurrentRecord(_SDK);
 
@@ -58,8 +58,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
             );
 
 
-            wrapper.PutGameRecordConcurrentHandlerV1(operation);
-            return String.Empty;
+            var response = wrapper.PutGameRecordConcurrentHandlerV1(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

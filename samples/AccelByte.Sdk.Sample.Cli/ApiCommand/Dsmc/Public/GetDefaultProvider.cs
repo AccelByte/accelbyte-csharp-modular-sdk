@@ -18,21 +18,21 @@ using AccelByte.Sdk.Api.Dsmc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
 {
-    [SdkConsoleCommand("dsmc", "getdefaultprovider")]
-    public class GetDefaultProviderCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("dsmc","getdefaultprovider")]
+    public class GetDefaultProviderCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Dsmc"; } }
+        public string ServiceName{ get { return "Dsmc"; } }
 
-        public string OperationName { get { return "GetDefaultProvider"; } }
+        public string OperationName{ get { return "GetDefaultProvider"; } }
 
         public GetDefaultProviderCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Dsmc.Wrapper.Public wrapper = new AccelByte.Sdk.Api.Dsmc.Wrapper.Public(_SDK);
 
@@ -46,11 +46,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
             );
 
 
-            AccelByte.Sdk.Api.Dsmc.Model.ModelsDefaultProvider? response = wrapper.GetDefaultProvider(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.GetDefaultProvider(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "adminlistclientavailablepermissions")]
-    public class AdminListClientAvailablePermissionsCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","adminlistclientavailablepermissions")]
+    public class AdminListClientAvailablePermissionsCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "AdminListClientAvailablePermissions"; } }
+        public string OperationName{ get { return "AdminListClientAvailablePermissions"; } }
 
         [SdkCommandArgument("excludePermissions")]
         public bool? ExcludePermissions { get; set; }
@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Iam.Wrapper.ClientsConfigV3 wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.ClientsConfigV3(_SDK);
 
@@ -51,11 +51,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             );
 
 
-            AccelByte.Sdk.Api.Iam.Model.ClientmodelListClientPermissionSet? response = wrapper.AdminListClientAvailablePermissions(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.AdminListClientAvailablePermissions(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

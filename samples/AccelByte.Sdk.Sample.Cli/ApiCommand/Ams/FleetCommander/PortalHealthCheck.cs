@@ -18,21 +18,21 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 {
-    [SdkConsoleCommand("ams", "portalhealthcheck")]
-    public class PortalHealthCheckCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("ams","portalhealthcheck")]
+    public class PortalHealthCheckCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Ams"; } }
+        public string ServiceName{ get { return "Ams"; } }
 
-        public string OperationName { get { return "PortalHealthCheck"; } }
+        public string OperationName{ get { return "PortalHealthCheck"; } }
 
         public PortalHealthCheckCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Ams.Wrapper.FleetCommander wrapper = new AccelByte.Sdk.Api.Ams.Wrapper.FleetCommander(_SDK);
 
@@ -46,8 +46,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
             );
 
 
-            wrapper.PortalHealthCheck(operation);
-            return String.Empty;
+            var response = wrapper.PortalHealthCheck(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

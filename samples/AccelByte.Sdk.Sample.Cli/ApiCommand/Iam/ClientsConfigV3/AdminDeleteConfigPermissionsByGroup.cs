@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "admindeleteconfigpermissionsbygroup")]
-    public class AdminDeleteConfigPermissionsByGroupCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","admindeleteconfigpermissionsbygroup")]
+    public class AdminDeleteConfigPermissionsByGroupCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "AdminDeleteConfigPermissionsByGroup"; } }
+        public string OperationName{ get { return "AdminDeleteConfigPermissionsByGroup"; } }
 
         [SdkCommandArgument("forceDelete")]
         public bool? ForceDelete { get; set; }
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Iam.Wrapper.ClientsConfigV3 wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.ClientsConfigV3(_SDK);
 
@@ -55,8 +55,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             );
 
 
-            wrapper.AdminDeleteConfigPermissionsByGroup(operation);
-            return String.Empty;
+            var response = wrapper.AdminDeleteConfigPermissionsByGroup(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

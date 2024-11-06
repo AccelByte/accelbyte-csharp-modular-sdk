@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "addrolepermission")]
-    public class AddRolePermissionCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","addrolepermission")]
+    public class AddRolePermissionCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "AddRolePermission"; } }
+        public string OperationName{ get { return "AddRolePermission"; } }
 
         [SdkCommandArgument("action")]
         public long Action { get; set; } = 0;
@@ -44,11 +44,11 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Iam.Wrapper.Roles wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.Roles(_SDK);
 
-#pragma warning disable ab_deprecated_operation
+            #pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Iam.Operation.AddRolePermission.Builder;
 
 
@@ -62,12 +62,17 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
                 RoleId
             );
 
-#pragma warning restore ab_deprecated_operation
+            #pragma warning restore ab_deprecated_operation
 
-#pragma warning disable ab_deprecated_operation_wrapper
-            wrapper.AddRolePermission(operation);
-            return String.Empty;
-#pragma warning restore ab_deprecated_operation_wrapper
+            #pragma warning disable ab_deprecated_operation_wrapper
+            var response = wrapper.AddRolePermission(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
+            #pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

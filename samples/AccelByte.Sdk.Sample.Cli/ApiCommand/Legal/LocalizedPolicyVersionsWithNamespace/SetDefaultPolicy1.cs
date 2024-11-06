@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal", "setdefaultpolicy1")]
-    public class SetDefaultPolicy1Command : ISdkConsoleCommand
+    [SdkConsoleCommand("legal","setdefaultpolicy1")]
+    public class SetDefaultPolicy1Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Legal"; } }
+        public string ServiceName{ get { return "Legal"; } }
 
-        public string OperationName { get { return "SetDefaultPolicy1"; } }
+        public string OperationName{ get { return "SetDefaultPolicy1"; } }
 
         [SdkCommandArgument("localizedPolicyVersionId")]
         public string LocalizedPolicyVersionId { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Legal.Wrapper.LocalizedPolicyVersionsWithNamespace wrapper = new AccelByte.Sdk.Api.Legal.Wrapper.LocalizedPolicyVersionsWithNamespace(_SDK);
 
@@ -54,8 +54,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
             );
 
 
-            wrapper.SetDefaultPolicy1(operation);
-            return String.Empty;
+            var response = wrapper.SetDefaultPolicy1(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

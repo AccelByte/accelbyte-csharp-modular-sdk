@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsartifact.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
 {
-    [SdkConsoleCommand("dsartifact", "listqueue")]
-    public class ListQueueCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("dsartifact","listqueue")]
+    public class ListQueueCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Dsartifact"; } }
+        public string ServiceName{ get { return "Dsartifact"; } }
 
-        public string OperationName { get { return "ListQueue"; } }
+        public string OperationName{ get { return "ListQueue"; } }
 
         [SdkCommandArgument("limit")]
         public long? Limit { get; set; }
@@ -44,7 +44,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Dsartifact.Wrapper.ArtifactUploadProcessQueue wrapper = new AccelByte.Sdk.Api.Dsartifact.Wrapper.ArtifactUploadProcessQueue(_SDK);
 
@@ -65,11 +65,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
             );
 
 
-            AccelByte.Sdk.Api.Dsartifact.Model.ModelsListQueueResponse? response = wrapper.ListQueue(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.ListQueue(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

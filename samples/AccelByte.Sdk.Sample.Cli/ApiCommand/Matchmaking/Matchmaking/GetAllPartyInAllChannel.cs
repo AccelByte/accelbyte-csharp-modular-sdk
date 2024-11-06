@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Matchmaking.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
 {
-    [SdkConsoleCommand("matchmaking", "getallpartyinallchannel")]
-    public class GetAllPartyInAllChannelCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("matchmaking","getallpartyinallchannel")]
+    public class GetAllPartyInAllChannelCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Matchmaking"; } }
+        public string ServiceName{ get { return "Matchmaking"; } }
 
-        public string OperationName { get { return "GetAllPartyInAllChannel"; } }
+        public string OperationName{ get { return "GetAllPartyInAllChannel"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Matchmaking.Wrapper.Matchmaking wrapper = new AccelByte.Sdk.Api.Matchmaking.Wrapper.Matchmaking(_SDK);
 
@@ -50,11 +50,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
             );
 
 
-            Dictionary<string, List<AccelByte.Sdk.Api.Matchmaking.Model.ModelsMatchingParty>>? response = wrapper.GetAllPartyInAllChannel(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.GetAllPartyInAllChannel(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

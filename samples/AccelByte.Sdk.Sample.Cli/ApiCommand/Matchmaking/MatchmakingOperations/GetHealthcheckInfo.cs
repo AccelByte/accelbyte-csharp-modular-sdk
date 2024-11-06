@@ -18,21 +18,21 @@ using AccelByte.Sdk.Api.Matchmaking.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
 {
-    [SdkConsoleCommand("matchmaking", "gethealthcheckinfo")]
-    public class GetHealthcheckInfoCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("matchmaking","gethealthcheckinfo")]
+    public class GetHealthcheckInfoCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Matchmaking"; } }
+        public string ServiceName{ get { return "Matchmaking"; } }
 
-        public string OperationName { get { return "GetHealthcheckInfo"; } }
+        public string OperationName{ get { return "GetHealthcheckInfo"; } }
 
         public GetHealthcheckInfoCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Matchmaking.Wrapper.MatchmakingOperations wrapper = new AccelByte.Sdk.Api.Matchmaking.Wrapper.MatchmakingOperations(_SDK);
 
@@ -46,8 +46,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
             );
 
 
-            wrapper.GetHealthcheckInfo(operation);
-            return String.Empty;
+            var response = wrapper.GetHealthcheckInfo(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

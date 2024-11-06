@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Match2.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Match2
 {
-    [SdkConsoleCommand("match2", "updatematchfunction")]
-    public class UpdateMatchFunctionCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("match2","updatematchfunction")]
+    public class UpdateMatchFunctionCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Match2"; } }
+        public string ServiceName{ get { return "Match2"; } }
 
-        public string OperationName { get { return "UpdateMatchFunction"; } }
+        public string OperationName{ get { return "UpdateMatchFunction"; } }
 
         [SdkCommandArgument("name")]
         public string Name { get; set; } = String.Empty;
@@ -41,7 +41,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Match2
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Match2.Wrapper.MatchFunctions wrapper = new AccelByte.Sdk.Api.Match2.Wrapper.MatchFunctions(_SDK);
 
@@ -58,11 +58,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Match2
             );
 
 
-            AccelByte.Sdk.Api.Match2.Model.ApiMatchFunctionConfig? response = wrapper.UpdateMatchFunction(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.UpdateMatchFunction(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

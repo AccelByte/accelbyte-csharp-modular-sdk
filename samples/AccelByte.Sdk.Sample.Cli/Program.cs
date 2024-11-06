@@ -118,8 +118,14 @@ namespace AccelByte.Sdk.Sample.Cli
                     }
                     else
                     {
-                        string response = cmd.Run();
-                        Console.WriteLine("Response:\n{0}", response);
+                        CommandResult result = cmd.Run();
+                        if (result.IsSuccess)
+                            Console.WriteLine("Response:\n{0}", result.Result);
+                        else
+                        {
+                            Console.WriteLine("Error: \n{0}", result.Result);
+                            return 2;
+                        }
                     }
                 }
 

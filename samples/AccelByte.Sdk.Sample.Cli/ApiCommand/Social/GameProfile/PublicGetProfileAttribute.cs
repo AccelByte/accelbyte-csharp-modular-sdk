@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Social.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
 {
-    [SdkConsoleCommand("social", "publicgetprofileattribute")]
-    public class PublicGetProfileAttributeCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("social","publicgetprofileattribute")]
+    public class PublicGetProfileAttributeCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Social"; } }
+        public string ServiceName{ get { return "Social"; } }
 
-        public string OperationName { get { return "PublicGetProfileAttribute"; } }
+        public string OperationName{ get { return "PublicGetProfileAttribute"; } }
 
         [SdkCommandArgument("attributeName")]
         public string AttributeName { get; set; } = String.Empty;
@@ -44,7 +44,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Social.Wrapper.GameProfile wrapper = new AccelByte.Sdk.Api.Social.Wrapper.GameProfile(_SDK);
 
@@ -62,11 +62,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
             );
 
 
-            AccelByte.Sdk.Api.Social.Model.Attribute? response = wrapper.PublicGetProfileAttribute(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.PublicGetProfileAttribute(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Matchmaking.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
 {
-    [SdkConsoleCommand("matchmaking", "adduserintosessioninchannel")]
-    public class AddUserIntoSessionInChannelCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("matchmaking","adduserintosessioninchannel")]
+    public class AddUserIntoSessionInChannelCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Matchmaking"; } }
+        public string ServiceName{ get { return "Matchmaking"; } }
 
-        public string OperationName { get { return "AddUserIntoSessionInChannel"; } }
+        public string OperationName{ get { return "AddUserIntoSessionInChannel"; } }
 
         [SdkCommandArgument("channelName")]
         public string ChannelName { get; set; } = String.Empty;
@@ -44,7 +44,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Matchmaking.Wrapper.Matchmaking wrapper = new AccelByte.Sdk.Api.Matchmaking.Wrapper.Matchmaking(_SDK);
 
@@ -62,8 +62,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
             );
 
 
-            wrapper.AddUserIntoSessionInChannel(operation);
-            return String.Empty;
+            var response = wrapper.AddUserIntoSessionInChannel(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

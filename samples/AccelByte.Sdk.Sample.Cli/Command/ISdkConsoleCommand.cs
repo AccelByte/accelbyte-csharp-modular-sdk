@@ -16,6 +16,6 @@ namespace AccelByte.Sdk.Sample.Cli.Command
 
         string OperationName { get; }
 
-        string Run();
+        CommandResult Run();
     }
 }

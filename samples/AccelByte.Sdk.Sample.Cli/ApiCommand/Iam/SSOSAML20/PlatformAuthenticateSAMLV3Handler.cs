@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "platformauthenticatesamlv3handler")]
-    public class PlatformAuthenticateSAMLV3HandlerCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","platformauthenticatesamlv3handler")]
+    public class PlatformAuthenticateSAMLV3HandlerCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "PlatformAuthenticateSAMLV3Handler"; } }
+        public string OperationName{ get { return "PlatformAuthenticateSAMLV3Handler"; } }
 
         [SdkCommandArgument("platformId")]
         public string PlatformId { get; set; } = String.Empty;
@@ -44,7 +44,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Iam.Wrapper.SSOSAML20 wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.SSOSAML20(_SDK);
 
@@ -64,10 +64,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             );
 
 
-            string? response = wrapper.PlatformAuthenticateSAMLV3Handler(operation);
-            if (response == null)
-                return "No response from server.";
-            return response!;
+            var response = wrapper.PlatformAuthenticateSAMLV3Handler(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(response.Data);
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

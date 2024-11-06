@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Gdpr.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
 {
-    [SdkConsoleCommand("gdpr", "admindeleteplatformaccountclosureclient")]
-    public class AdminDeletePlatformAccountClosureClientCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("gdpr","admindeleteplatformaccountclosureclient")]
+    public class AdminDeletePlatformAccountClosureClientCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Gdpr"; } }
+        public string ServiceName{ get { return "Gdpr"; } }
 
-        public string OperationName { get { return "AdminDeletePlatformAccountClosureClient"; } }
+        public string OperationName{ get { return "AdminDeletePlatformAccountClosureClient"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Gdpr.Wrapper.PlatformAccountClosureClient wrapper = new AccelByte.Sdk.Api.Gdpr.Wrapper.PlatformAccountClosureClient(_SDK);
 
@@ -54,8 +54,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
             );
 
 
-            wrapper.AdminDeletePlatformAccountClosureClient(operation);
-            return String.Empty;
+            var response = wrapper.AdminDeletePlatformAccountClosureClient(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

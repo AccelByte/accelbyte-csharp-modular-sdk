@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 {
-    [SdkConsoleCommand("ams", "developmentserverconfigurationdelete")]
-    public class DevelopmentServerConfigurationDeleteCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("ams","developmentserverconfigurationdelete")]
+    public class DevelopmentServerConfigurationDeleteCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Ams"; } }
+        public string ServiceName{ get { return "Ams"; } }
 
-        public string OperationName { get { return "DevelopmentServerConfigurationDelete"; } }
+        public string OperationName{ get { return "DevelopmentServerConfigurationDelete"; } }
 
         [SdkCommandArgument("developmentServerConfigID")]
         public string DevelopmentServerConfigID { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Ams.Wrapper.Development wrapper = new AccelByte.Sdk.Api.Ams.Wrapper.Development(_SDK);
 
@@ -54,8 +54,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
             );
 
 
-            wrapper.DevelopmentServerConfigurationDelete(operation);
-            return String.Empty;
+            var response = wrapper.DevelopmentServerConfigurationDelete(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

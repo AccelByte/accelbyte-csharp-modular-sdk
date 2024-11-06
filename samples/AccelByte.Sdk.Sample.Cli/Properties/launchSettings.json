@@ -1,8 +1,41 @@
 {
   "profiles": {
-    "Default": {
-      "commandName": "Project",      
-      "environmentVariables": {}
-    }    
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    },
+    "LOGIN": {
+      "commandName": "Project",
+      "commandLineArgs": "--op login --lt user --user user --pass user",
+      "environmentVariables": {
+        "AB_BASE_URL": "http://127.0.0.1:8080",
+        "AB_CLIENT_ID": "admin",
+        "AB_CLIENT_SECRET": "admin",
+        "AB_NAMESPACE": "test",
+        "AB_APP_NAME": "UnitTest"
+      }
+    },
+    "IMPORT": {
+      "commandName": "Project",
+      "commandLineArgs": "--sn platform --op ImportStoreByCSV --namespace test --storeId \"JPwrfsKjRadEXa0Y\" --upload category \"D:\\u.txt\" --upload display \"D:\\u.txt\" --upload item \"D:\\u.txt\" --notes \"g9rNdyYhrs5zQhss\" --upload section \"D:\\u.txt\"",
+      "environmentVariables": {
+        "AB_BASE_URL": "http://127.0.0.1:8080",
+        "AB_CLIENT_ID": "admin",
+        "AB_CLIENT_SECRET": "admin",
+        "AB_NAMESPACE": "test",
+        "AB_APP_NAME": "UnitTest"
+      }
+    },
+    "IMPORT2": {
+      "commandName": "Project",
+      "commandLineArgs": "--sn platform --op ImportStoreByCSV --namespace test --storeId \"JPwrfsKjRadEXa0Y\" --notes \"g9rNdyYhrs5zQhss\" --upload \"D:\\u.txt\"",
+      "environmentVariables": {
+        "AB_BASE_URL": "http://127.0.0.1:8080",
+        "AB_CLIENT_ID": "admin",
+        "AB_CLIENT_SECRET": "admin",
+        "AB_NAMESPACE": "test",
+        "AB_APP_NAME": "UnitTest"
+      }
+    }
   }
 }

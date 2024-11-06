@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Social.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
 {
-    [SdkConsoleCommand("social", "updatenamespaceslotconfig")]
-    public class UpdateNamespaceSlotConfigCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("social","updatenamespaceslotconfig")]
+    public class UpdateNamespaceSlotConfigCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Social"; } }
+        public string ServiceName{ get { return "Social"; } }
 
-        public string OperationName { get { return "UpdateNamespaceSlotConfig"; } }
+        public string OperationName{ get { return "UpdateNamespaceSlotConfig"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -38,11 +38,11 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Social.Wrapper.SlotConfig wrapper = new AccelByte.Sdk.Api.Social.Wrapper.SlotConfig(_SDK);
 
-#pragma warning disable ab_deprecated_operation
+            #pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Social.Operation.UpdateNamespaceSlotConfig.Builder;
 
 
@@ -55,15 +55,22 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
                 Namespace
             );
 
-#pragma warning restore ab_deprecated_operation
+            #pragma warning restore ab_deprecated_operation
 
-#pragma warning disable ab_deprecated_operation_wrapper
-            AccelByte.Sdk.Api.Social.Model.NamespaceSlotConfigInfo? response = wrapper.UpdateNamespaceSlotConfig(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
-#pragma warning restore ab_deprecated_operation_wrapper
+            #pragma warning disable ab_deprecated_operation_wrapper
+            var response = wrapper.UpdateNamespaceSlotConfig(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
+            #pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

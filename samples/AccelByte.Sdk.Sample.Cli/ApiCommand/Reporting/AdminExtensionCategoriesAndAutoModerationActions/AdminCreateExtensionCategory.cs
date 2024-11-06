@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Reporting.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
 {
-    [SdkConsoleCommand("reporting", "admincreateextensioncategory")]
-    public class AdminCreateExtensionCategoryCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("reporting","admincreateextensioncategory")]
+    public class AdminCreateExtensionCategoryCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Reporting"; } }
+        public string ServiceName{ get { return "Reporting"; } }
 
-        public string OperationName { get { return "AdminCreateExtensionCategory"; } }
+        public string OperationName{ get { return "AdminCreateExtensionCategory"; } }
 
         [SdkCommandData("body")]
         public RestapiExtensionCategoryApiRequest Body { get; set; } = new RestapiExtensionCategoryApiRequest();
@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Reporting.Wrapper.AdminExtensionCategoriesAndAutoModerationActions wrapper = new AccelByte.Sdk.Api.Reporting.Wrapper.AdminExtensionCategoriesAndAutoModerationActions(_SDK);
 
@@ -50,11 +50,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
             );
 
 
-            AccelByte.Sdk.Api.Reporting.Model.RestapiExtensionCategoryApiResponse? response = wrapper.AdminCreateExtensionCategory(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.AdminCreateExtensionCategory(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

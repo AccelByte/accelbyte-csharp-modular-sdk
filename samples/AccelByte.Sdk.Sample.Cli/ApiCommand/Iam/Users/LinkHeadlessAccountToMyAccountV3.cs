@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "linkheadlessaccounttomyaccountv3")]
-    public class LinkHeadlessAccountToMyAccountV3Command : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","linkheadlessaccounttomyaccountv3")]
+    public class LinkHeadlessAccountToMyAccountV3Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "LinkHeadlessAccountToMyAccountV3"; } }
+        public string OperationName{ get { return "LinkHeadlessAccountToMyAccountV3"; } }
 
         [SdkCommandData("body")]
         public ModelLinkHeadlessAccountRequest Body { get; set; } = new ModelLinkHeadlessAccountRequest();
@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Iam.Wrapper.Users wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.Users(_SDK);
 
@@ -50,8 +50,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             );
 
 
-            wrapper.LinkHeadlessAccountToMyAccountV3(operation);
-            return String.Empty;
+            var response = wrapper.LinkHeadlessAccountToMyAccountV3(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "admindisablemybackupcodesv4")]
-    public class AdminDisableMyBackupCodesV4Command : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","admindisablemybackupcodesv4")]
+    public class AdminDisableMyBackupCodesV4Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "AdminDisableMyBackupCodesV4"; } }
+        public string OperationName{ get { return "AdminDisableMyBackupCodesV4"; } }
 
         [SdkCommandData("body")]
         public ModelDisableMFARequest Body { get; set; } = new ModelDisableMFARequest();
@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Iam.Wrapper.UsersV4 wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.UsersV4(_SDK);
 
@@ -50,8 +50,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             );
 
 
-            wrapper.AdminDisableMyBackupCodesV4(operation);
-            return String.Empty;
+            var response = wrapper.AdminDisableMyBackupCodesV4(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

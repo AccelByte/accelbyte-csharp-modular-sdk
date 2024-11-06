@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal", "syncuserinfo")]
-    public class SyncUserInfoCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("legal","syncuserinfo")]
+    public class SyncUserInfoCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Legal"; } }
+        public string ServiceName{ get { return "Legal"; } }
 
-        public string OperationName { get { return "SyncUserInfo"; } }
+        public string OperationName{ get { return "SyncUserInfo"; } }
 
         [SdkCommandArgument("namespace_")]
         public string Namespace { get; set; } = String.Empty;
@@ -35,11 +35,11 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Legal.Wrapper.UserInfo wrapper = new AccelByte.Sdk.Api.Legal.Wrapper.UserInfo(_SDK);
 
-#pragma warning disable ab_deprecated_operation
+            #pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Legal.Operation.SyncUserInfo.Builder;
 
 
@@ -50,12 +50,17 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
                 Namespace
             );
 
-#pragma warning restore ab_deprecated_operation
+            #pragma warning restore ab_deprecated_operation
 
-#pragma warning disable ab_deprecated_operation_wrapper
-            wrapper.SyncUserInfo(operation);
-            return String.Empty;
-#pragma warning restore ab_deprecated_operation_wrapper
+            #pragma warning disable ab_deprecated_operation_wrapper
+            var response = wrapper.SyncUserInfo(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
+            #pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

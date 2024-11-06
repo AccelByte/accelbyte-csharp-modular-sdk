@@ -18,21 +18,21 @@ using AccelByte.Sdk.Api.Gdpr.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
 {
-    [SdkConsoleCommand("gdpr", "publicgetmyaccountdeletionstatus")]
-    public class PublicGetMyAccountDeletionStatusCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("gdpr","publicgetmyaccountdeletionstatus")]
+    public class PublicGetMyAccountDeletionStatusCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Gdpr"; } }
+        public string ServiceName{ get { return "Gdpr"; } }
 
-        public string OperationName { get { return "PublicGetMyAccountDeletionStatus"; } }
+        public string OperationName{ get { return "PublicGetMyAccountDeletionStatus"; } }
 
         public PublicGetMyAccountDeletionStatusCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Gdpr.Wrapper.DataDeletion wrapper = new AccelByte.Sdk.Api.Gdpr.Wrapper.DataDeletion(_SDK);
 
@@ -46,11 +46,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
             );
 
 
-            AccelByte.Sdk.Api.Gdpr.Model.ModelsDeletionStatus? response = wrapper.PublicGetMyAccountDeletionStatus(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.PublicGetMyAccountDeletionStatus(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

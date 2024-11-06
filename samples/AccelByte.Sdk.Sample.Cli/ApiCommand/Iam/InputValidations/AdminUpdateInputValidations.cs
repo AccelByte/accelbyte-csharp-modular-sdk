@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "adminupdateinputvalidations")]
-    public class AdminUpdateInputValidationsCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","adminupdateinputvalidations")]
+    public class AdminUpdateInputValidationsCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "AdminUpdateInputValidations"; } }
+        public string OperationName{ get { return "AdminUpdateInputValidations"; } }
 
         [SdkCommandData("body")]
         public List<ModelInputValidationUpdatePayload> Body { get; set; } = new List<ModelInputValidationUpdatePayload>();
@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Iam.Wrapper.InputValidations wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.InputValidations(_SDK);
 
@@ -50,8 +50,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             );
 
 
-            wrapper.AdminUpdateInputValidations(operation);
-            return String.Empty;
+            var response = wrapper.AdminUpdateInputValidations(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Group.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
 {
-    [SdkConsoleCommand("group", "getsinglememberroleadminv1")]
-    public class GetSingleMemberRoleAdminV1Command : ISdkConsoleCommand
+    [SdkConsoleCommand("group","getsinglememberroleadminv1")]
+    public class GetSingleMemberRoleAdminV1Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Group"; } }
+        public string ServiceName{ get { return "Group"; } }
 
-        public string OperationName { get { return "GetSingleMemberRoleAdminV1"; } }
+        public string OperationName{ get { return "GetSingleMemberRoleAdminV1"; } }
 
         [SdkCommandArgument("memberRoleId")]
         public string MemberRoleId { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Group.Wrapper.GroupRoles wrapper = new AccelByte.Sdk.Api.Group.Wrapper.GroupRoles(_SDK);
 
@@ -54,11 +54,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
             );
 
 
-            AccelByte.Sdk.Api.Group.Model.ModelsMemberRoleResponseV1? response = wrapper.GetSingleMemberRoleAdminV1(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.GetSingleMemberRoleAdminV1(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

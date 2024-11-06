@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Leaderboard.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
 {
-    [SdkConsoleCommand("leaderboard", "deleteuserrankingbycycleidadminv3")]
-    public class DeleteUserRankingByCycleIdAdminV3Command : ISdkConsoleCommand
+    [SdkConsoleCommand("leaderboard","deleteuserrankingbycycleidadminv3")]
+    public class DeleteUserRankingByCycleIdAdminV3Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Leaderboard"; } }
+        public string ServiceName{ get { return "Leaderboard"; } }
 
-        public string OperationName { get { return "DeleteUserRankingByCycleIdAdminV3"; } }
+        public string OperationName{ get { return "DeleteUserRankingByCycleIdAdminV3"; } }
 
         [SdkCommandArgument("cycleId")]
         public string CycleId { get; set; } = String.Empty;
@@ -44,7 +44,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Leaderboard.Wrapper.LeaderboardDataV3 wrapper = new AccelByte.Sdk.Api.Leaderboard.Wrapper.LeaderboardDataV3(_SDK);
 
@@ -62,8 +62,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
             );
 
 
-            wrapper.DeleteUserRankingByCycleIdAdminV3(operation);
-            return String.Empty;
+            var response = wrapper.DeleteUserRankingByCycleIdAdminV3(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

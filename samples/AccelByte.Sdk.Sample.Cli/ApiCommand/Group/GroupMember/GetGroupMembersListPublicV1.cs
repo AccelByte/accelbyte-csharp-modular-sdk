@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Group.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
 {
-    [SdkConsoleCommand("group", "getgroupmemberslistpublicv1")]
-    public class GetGroupMembersListPublicV1Command : ISdkConsoleCommand
+    [SdkConsoleCommand("group","getgroupmemberslistpublicv1")]
+    public class GetGroupMembersListPublicV1Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Group"; } }
+        public string ServiceName{ get { return "Group"; } }
 
-        public string OperationName { get { return "GetGroupMembersListPublicV1"; } }
+        public string OperationName{ get { return "GetGroupMembersListPublicV1"; } }
 
         [SdkCommandArgument("groupId")]
         public string GroupId { get; set; } = String.Empty;
@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Group.Wrapper.GroupMember wrapper = new AccelByte.Sdk.Api.Group.Wrapper.GroupMember(_SDK);
 
@@ -69,11 +69,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
             );
 
 
-            AccelByte.Sdk.Api.Group.Model.ModelsGetGroupMemberListResponseV1? response = wrapper.GetGroupMembersListPublicV1(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.GetGroupMembersListPublicV1(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

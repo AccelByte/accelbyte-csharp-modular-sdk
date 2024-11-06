@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dslogmanager.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dslogmanager
 {
-    [SdkConsoleCommand("dslogmanager", "batchdownloadserverlogs")]
-    public class BatchDownloadServerLogsCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("dslogmanager","batchdownloadserverlogs")]
+    public class BatchDownloadServerLogsCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Dslogmanager"; } }
+        public string ServiceName{ get { return "Dslogmanager"; } }
 
-        public string OperationName { get { return "BatchDownloadServerLogs"; } }
+        public string OperationName{ get { return "BatchDownloadServerLogs"; } }
 
         [SdkCommandData("body")]
         public ModelsBatchDownloadLogsRequest Body { get; set; } = new ModelsBatchDownloadLogsRequest();
@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dslogmanager
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Dslogmanager.Wrapper.AllTerminatedServers wrapper = new AccelByte.Sdk.Api.Dslogmanager.Wrapper.AllTerminatedServers(_SDK);
 
@@ -50,11 +50,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dslogmanager
             );
 
 
-            Stream? response = wrapper.BatchDownloadServerLogs(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return response.ReadToString();
+            var response = wrapper.BatchDownloadServerLogs(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(response.Data.ReadToString());
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

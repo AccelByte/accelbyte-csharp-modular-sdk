@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Session.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 {
-    [SdkConsoleCommand("session", "handleuploadxboxpfxcertificate")]
-    public class HandleUploadXboxPFXCertificateCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("session","handleuploadxboxpfxcertificate")]
+    public class HandleUploadXboxPFXCertificateCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Session"; } }
+        public string ServiceName{ get { return "Session"; } }
 
-        public string OperationName { get { return "HandleUploadXboxPFXCertificate"; } }
+        public string OperationName{ get { return "HandleUploadXboxPFXCertificate"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Session.Wrapper.Certificate wrapper = new AccelByte.Sdk.Api.Session.Wrapper.Certificate(_SDK);
 
@@ -67,11 +67,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
             );
 
 
-            AccelByte.Sdk.Api.Session.Model.ModelsPlatformCredentials? response = wrapper.HandleUploadXboxPFXCertificate(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.HandleUploadXboxPFXCertificate(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

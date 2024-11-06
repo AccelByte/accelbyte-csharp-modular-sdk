@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Inventory.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
 {
-    [SdkConsoleCommand("inventory", "publicbulkupdatemyitems")]
-    public class PublicBulkUpdateMyItemsCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("inventory","publicbulkupdatemyitems")]
+    public class PublicBulkUpdateMyItemsCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Inventory"; } }
+        public string ServiceName{ get { return "Inventory"; } }
 
-        public string OperationName { get { return "PublicBulkUpdateMyItems"; } }
+        public string OperationName{ get { return "PublicBulkUpdateMyItems"; } }
 
         [SdkCommandArgument("inventoryId")]
         public string InventoryId { get; set; } = String.Empty;
@@ -41,7 +41,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Inventory.Wrapper.PublicItems wrapper = new AccelByte.Sdk.Api.Inventory.Wrapper.PublicItems(_SDK);
 
@@ -58,11 +58,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
             );
 
 
-            List<AccelByte.Sdk.Api.Inventory.Model.ApimodelsUpdateItemResp>? response = wrapper.PublicBulkUpdateMyItems(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.PublicBulkUpdateMyItems(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Cloudsave.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
 {
-    [SdkConsoleCommand("cloudsave", "admindeleteadminplayerrecordv1")]
-    public class AdminDeleteAdminPlayerRecordV1Command : ISdkConsoleCommand
+    [SdkConsoleCommand("cloudsave","admindeleteadminplayerrecordv1")]
+    public class AdminDeleteAdminPlayerRecordV1Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Cloudsave"; } }
+        public string ServiceName{ get { return "Cloudsave"; } }
 
-        public string OperationName { get { return "AdminDeleteAdminPlayerRecordV1"; } }
+        public string OperationName{ get { return "AdminDeleteAdminPlayerRecordV1"; } }
 
         [SdkCommandArgument("key")]
         public string Key { get; set; } = String.Empty;
@@ -41,7 +41,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Cloudsave.Wrapper.AdminRecord wrapper = new AccelByte.Sdk.Api.Cloudsave.Wrapper.AdminRecord(_SDK);
 
@@ -58,8 +58,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
             );
 
 
-            wrapper.AdminDeleteAdminPlayerRecordV1(operation);
-            return String.Empty;
+            var response = wrapper.AdminDeleteAdminPlayerRecordV1(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

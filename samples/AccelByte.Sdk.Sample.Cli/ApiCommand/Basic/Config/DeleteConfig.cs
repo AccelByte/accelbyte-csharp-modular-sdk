@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Basic.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
 {
-    [SdkConsoleCommand("basic", "deleteconfig")]
-    public class DeleteConfigCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("basic","deleteconfig")]
+    public class DeleteConfigCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Basic"; } }
+        public string ServiceName{ get { return "Basic"; } }
 
-        public string OperationName { get { return "DeleteConfig"; } }
+        public string OperationName{ get { return "DeleteConfig"; } }
 
         [SdkCommandArgument("configKey")]
         public string ConfigKey { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Basic.Wrapper.Config wrapper = new AccelByte.Sdk.Api.Basic.Wrapper.Config(_SDK);
 
@@ -54,8 +54,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
             );
 
 
-            wrapper.DeleteConfig(operation);
-            return String.Empty;
+            var response = wrapper.DeleteConfig(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

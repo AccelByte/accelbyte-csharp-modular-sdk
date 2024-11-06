@@ -18,21 +18,21 @@ using AccelByte.Sdk.Api.Gametelemetry.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gametelemetry
 {
-    [SdkConsoleCommand("gametelemetry", "getnamespacesgametelemetryv1adminnamespacesget")]
-    public class GetNamespacesGameTelemetryV1AdminNamespacesGetCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("gametelemetry","getnamespacesgametelemetryv1adminnamespacesget")]
+    public class GetNamespacesGameTelemetryV1AdminNamespacesGetCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Gametelemetry"; } }
+        public string ServiceName{ get { return "Gametelemetry"; } }
 
-        public string OperationName { get { return "GetNamespacesGameTelemetryV1AdminNamespacesGet"; } }
+        public string OperationName{ get { return "GetNamespacesGameTelemetryV1AdminNamespacesGet"; } }
 
         public GetNamespacesGameTelemetryV1AdminNamespacesGetCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Gametelemetry.Wrapper.Telemetry wrapper = new AccelByte.Sdk.Api.Gametelemetry.Wrapper.Telemetry(_SDK);
 
@@ -46,11 +46,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gametelemetry
             );
 
 
-            AccelByte.Sdk.Api.Gametelemetry.Model.ListBaseResponseStr? response = wrapper.GetNamespacesGameTelemetryV1AdminNamespacesGet(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.GetNamespacesGameTelemetryV1AdminNamespacesGet(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

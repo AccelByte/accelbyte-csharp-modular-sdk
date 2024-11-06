@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Inventory.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
 {
-    [SdkConsoleCommand("inventory", "adminupdateuserinventoriesbyinventorycode")]
-    public class AdminUpdateUserInventoriesByInventoryCodeCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("inventory","adminupdateuserinventoriesbyinventorycode")]
+    public class AdminUpdateUserInventoriesByInventoryCodeCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Inventory"; } }
+        public string ServiceName{ get { return "Inventory"; } }
 
-        public string OperationName { get { return "AdminUpdateUserInventoriesByInventoryCode"; } }
+        public string OperationName{ get { return "AdminUpdateUserInventoriesByInventoryCode"; } }
 
         [SdkCommandArgument("inventoryConfigurationCode")]
         public string InventoryConfigurationCode { get; set; } = String.Empty;
@@ -44,7 +44,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Inventory.Wrapper.AdminInventories wrapper = new AccelByte.Sdk.Api.Inventory.Wrapper.AdminInventories(_SDK);
 
@@ -62,11 +62,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
             );
 
 
-            List<AccelByte.Sdk.Api.Inventory.Model.ApimodelsInventoryResp>? response = wrapper.AdminUpdateUserInventoriesByInventoryCode(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.AdminUpdateUserInventoriesByInventoryCode(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Inventory.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
 {
-    [SdkConsoleCommand("inventory", "admindeleteinventoryconfiguration")]
-    public class AdminDeleteInventoryConfigurationCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("inventory","admindeleteinventoryconfiguration")]
+    public class AdminDeleteInventoryConfigurationCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Inventory"; } }
+        public string ServiceName{ get { return "Inventory"; } }
 
-        public string OperationName { get { return "AdminDeleteInventoryConfiguration"; } }
+        public string OperationName{ get { return "AdminDeleteInventoryConfiguration"; } }
 
         [SdkCommandArgument("inventoryConfigurationId")]
         public string InventoryConfigurationId { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Inventory.Wrapper.AdminInventoryConfigurations wrapper = new AccelByte.Sdk.Api.Inventory.Wrapper.AdminInventoryConfigurations(_SDK);
 
@@ -54,8 +54,13 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
             );
 
 
-            wrapper.AdminDeleteInventoryConfiguration(operation);
-            return String.Empty;
+            var response = wrapper.AdminDeleteInventoryConfiguration(operation);
+            if (response.IsSuccess)
+                return CommandResult.Success("");
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }

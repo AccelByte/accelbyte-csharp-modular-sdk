@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Sessionhistory.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionhistory
 {
-    [SdkConsoleCommand("sessionhistory", "queryxraymatch")]
-    public class QueryXrayMatchCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("sessionhistory","queryxraymatch")]
+    public class QueryXrayMatchCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Sessionhistory"; } }
+        public string ServiceName{ get { return "Sessionhistory"; } }
 
-        public string OperationName { get { return "QueryXrayMatch"; } }
+        public string OperationName{ get { return "QueryXrayMatch"; } }
 
         [SdkCommandArgument("matchId")]
         public string MatchId { get; set; } = String.Empty;
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionhistory
             _SDK = sdk;
         }
 
-        public string Run()
+        public CommandResult Run()
         {
             AccelByte.Sdk.Api.Sessionhistory.Wrapper.XRay wrapper = new AccelByte.Sdk.Api.Sessionhistory.Wrapper.XRay(_SDK);
 
@@ -54,11 +54,18 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionhistory
             );
 
 
-            AccelByte.Sdk.Api.Sessionhistory.Model.ApimodelsXRayMatchesQueryResponse? response = wrapper.QueryXrayMatch(operation);
-            if (response == null)
-                return "No response from server.";
-
-            return SdkHelper.SerializeToJson(response);
+            var response = wrapper.QueryXrayMatch(operation);
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
+                else
+                    return CommandResult.Fail("-","response data is null.");
+            }   
+            else if (response.Error != null)
+                return CommandResult.Fail(response.Error.Code, response.Error.Message);
+            else
+                return CommandResult.Fail("-", "Valid error message unavailable");
         }
     }
 }
