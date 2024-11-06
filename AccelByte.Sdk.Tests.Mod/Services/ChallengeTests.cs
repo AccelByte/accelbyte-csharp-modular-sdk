@@ -48,41 +48,31 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     GoalsVisibility = ModelCreateChallengeRequestGoalsVisibility.SHOWALL,
                     Rotation = ModelCreateChallengeRequestRotation.DAILY,
                     StartDate = DateTime.Now.AddDays(1)
-                }, _Sdk.Namespace);
+                }, _Sdk.Namespace)
+                .Ok();
             #endregion
-            Assert.IsNotNull(newChallenge);
-            if (newChallenge != null)
-            {
-                Assert.AreEqual(challengeName, newChallenge.Name);
-            }
+            Assert.AreEqual(challengeName, newChallenge.Name);
 
             try
             {
                 #region Get challenge
                 var challengeData = _Sdk.GetChallengeApi().ChallengeConfiguration.AdminGetChallengeOp
-                    .Execute(challengeCode, _Sdk.Namespace);
+                    .Execute(challengeCode, _Sdk.Namespace).Ok();
                 #endregion
-                Assert.IsNotNull(challengeData);
-                if (challengeData != null)
-                {
-                    Assert.AreEqual(challengeName, challengeData.Name);
-                }
+                Assert.AreEqual(challengeName, challengeData.Name);
 
                 #region Update a challenge
                 var updatedChallenge = _Sdk.GetChallengeApi().ChallengeConfiguration.AdminUpdateChallengeOp
                     .Execute(new ModelUpdateChallengeRequest()
                     {
                         Name = $"{challengeName} UPDATED"
-                    }, challengeCode, _Sdk.Namespace);
+                    }, challengeCode, _Sdk.Namespace)
+                    .Ok();
                 #endregion
-                Assert.IsNotNull(updatedChallenge);
-                if (updatedChallenge != null)
-                {
-                    Assert.AreEqual($"{challengeName} UPDATED", updatedChallenge.Name);
-                }
+                Assert.AreEqual($"{challengeName} UPDATED", updatedChallenge.Name);
 
                 #region Create a goal
-                var newGoal = _Sdk.GetChallengeApi().GoalConfiguration.AdminCreateGoalOp
+                var newGoalResp = _Sdk.GetChallengeApi().GoalConfiguration.AdminCreateGoalOp
                     .Execute(new ModelCreateGoalRequest()
                     {
                         Code = goalCode,
@@ -112,12 +102,13 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                         }
                     }, challengeCode, _Sdk.Namespace);
                 #endregion
-                Assert.IsNotNull(newGoal);
+                Assert.IsTrue(newGoalResp.IsSuccess);
 
                 #region Delete a goal
-                _Sdk.GetChallengeApi().GoalConfiguration.AdminDeleteGoalOp
+                var delResp = _Sdk.GetChallengeApi().GoalConfiguration.AdminDeleteGoalOp
                     .Execute(challengeCode, goalCode, _Sdk.Namespace);
                 #endregion
+                Assert.IsTrue(delResp.IsSuccess);
             }
             finally
             {

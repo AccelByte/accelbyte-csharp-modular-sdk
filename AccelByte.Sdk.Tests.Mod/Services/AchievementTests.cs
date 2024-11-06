@@ -68,10 +68,9 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 Tags = new List<string>() { "sdk", "test", "csharp" }
             };
 
-            ModelsAchievementResponse? cResp = _Sdk.GetAchievementApi().Achievements.AdminCreateNewAchievementOp
-                .Execute(newAchievement, _Sdk.Namespace);
+            ModelsAchievementResponse cResp = _Sdk.GetAchievementApi().Achievements.AdminCreateNewAchievementOp
+                .Execute(newAchievement, _Sdk.Namespace).Ok();
             #endregion
-            Assert.IsNotNull(cResp);
             Assert.AreEqual(cResp?.AchievementCode!, achievement_code);
 
             #region Updating achievement
@@ -89,39 +88,39 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 }
             };
 
-            ModelsAchievementResponse? uResp = _Sdk.GetAchievementApi().Achievements.AdminUpdateAchievementOp
-                .Execute(updateAchievement, achievement_code, _Sdk.Namespace);
+            ModelsAchievementResponse uResp = _Sdk.GetAchievementApi().Achievements.AdminUpdateAchievementOp
+                .Execute(updateAchievement, achievement_code, _Sdk.Namespace).Ok();
             #endregion
-            Assert.IsNotNull(uResp);
             Assert.AreEqual(uResp?.GoalValue!, 2000.0);
 
             #region Retrieve achievement by code
-            ModelsAchievementResponse? rResp = _Sdk.GetAchievementApi().Achievements.AdminGetAchievementOp
-                .Execute(achievement_code, _Sdk.Namespace);
-            Assert.IsNotNull(rResp);
+            ModelsAchievementResponse rResp = _Sdk.GetAchievementApi().Achievements.AdminGetAchievementOp
+                .Execute(achievement_code, _Sdk.Namespace).Ok();
             #endregion
             Assert.AreEqual(rResp?.GoalValue!, 2000.0);
             Assert.AreEqual(rResp?.Name!["en"], achievement_name);
 
             #region Get all achievements
-            ModelsPaginatedAchievementResponse? gaResp = _Sdk.GetAchievementApi().Achievements.AdminListAchievementsOp
+            ModelsPaginatedAchievementResponse gaResp = _Sdk.GetAchievementApi().Achievements.AdminListAchievementsOp
                 .SetLimit(100)
                 .SetOffset(0)
-                .Execute(_Sdk.Namespace);
+                .Execute(_Sdk.Namespace)
+                .Ok();
             #endregion
-            Assert.IsNotNull(gaResp);
             Assert.Greater(gaResp?.Data?.Count, 0);
 
             #region Delete an achievement
-            _Sdk.GetAchievementApi().Achievements.AdminDeleteAchievementOp.Execute(achievement_code, _Sdk.Namespace);
+            _Sdk.GetAchievementApi().Achievements.AdminDeleteAchievementOp
+                .Execute(achievement_code, _Sdk.Namespace)
+                .Ok();
             #endregion
 
             //Finally, recheck if the data is truly deleted.
-            HttpResponseException? hrx = Assert.Throws<HttpResponseException>(() =>
+            Exception? hrx = Assert.Throws<Exception>(() =>
             {
                 DisableRetry();
-                ModelsAchievementResponse? dResp = _Sdk.GetAchievementApi().Achievements.AdminGetAchievementOp
-                    .Execute(achievement_code, _Sdk.Namespace);
+                _ = _Sdk.GetAchievementApi().Achievements.AdminGetAchievementOp
+                    .Execute(achievement_code, _Sdk.Namespace).Ok();
             });
         }
 
@@ -183,9 +182,9 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 Tags = new List<string>() { "sdk", "test", "csharp" }
             };
 
-            ModelsAchievementResponse? cResp = await sdk.GetAchievementApi().Achievements.AdminCreateNewAchievementOp
+            var createResponse = await sdk.GetAchievementApi().Achievements.AdminCreateNewAchievementOp
                 .ExecuteAsync(newAchievement, sdk.Namespace);
-            Assert.IsNotNull(cResp);
+            ModelsAchievementResponse cResp = createResponse.Ok();
             Assert.AreEqual(cResp?.AchievementCode!, achievement_code);
 
             ModelsAchievementUpdateRequest updateAchievement = new ModelsAchievementUpdateRequest()
@@ -202,32 +201,33 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 }
             };
 
-            ModelsAchievementResponse? uResp = await sdk.GetAchievementApi().Achievements.AdminUpdateAchievementOp
+            var updateResponse = await sdk.GetAchievementApi().Achievements.AdminUpdateAchievementOp
                 .ExecuteAsync(updateAchievement, achievement_code, sdk.Namespace);
-            Assert.IsNotNull(uResp);
+            ModelsAchievementResponse uResp = updateResponse.Ok();
             Assert.AreEqual(uResp?.GoalValue!, 2000.0);
 
-            ModelsAchievementResponse? rResp = await sdk.GetAchievementApi().Achievements.AdminGetAchievementOp
+            var getResponse = await sdk.GetAchievementApi().Achievements.AdminGetAchievementOp
                 .ExecuteAsync(achievement_code, sdk.Namespace);
-            Assert.IsNotNull(rResp);
+            ModelsAchievementResponse rResp = getResponse.Ok();
             Assert.AreEqual(rResp?.GoalValue!, 2000.0);
             Assert.AreEqual(rResp?.Name!["en"], achievement_name);
 
-            ModelsPaginatedAchievementResponse? gaResp = await sdk.GetAchievementApi().Achievements.AdminListAchievementsOp
+            var listResponse = await sdk.GetAchievementApi().Achievements.AdminListAchievementsOp
                 .SetLimit(100)
                 .SetOffset(0)
                 .ExecuteAsync(sdk.Namespace);
-            Assert.IsNotNull(gaResp);
+            ModelsPaginatedAchievementResponse gaResp = listResponse.Ok();
             Assert.Greater(gaResp?.Data?.Count, 0);
 
             await sdk.GetAchievementApi().Achievements.AdminDeleteAchievementOp
                 .ExecuteAsync(achievement_code, sdk.Namespace);
 
-            HttpResponseException? hrx = Assert.Throws<HttpResponseException>(() =>
+            Exception? hrx = Assert.Throws<Exception>(() =>
             {
                 retryPolicy.RetryOnException = false;
                 sdk.GetAchievementApi().Achievements.AdminGetAchievementOp
-                    .Execute(achievement_code, sdk.Namespace);
+                    .Execute(achievement_code, sdk.Namespace)
+                    .Ok();
             });
         }
     }

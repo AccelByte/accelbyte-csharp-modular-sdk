@@ -43,7 +43,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                             {"foo", "bar"}
                         }
                     }
-                });
+                })
+                .Ok();
             #endregion
 
             DisableRetry();
@@ -51,9 +52,10 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             try
             {
                 _Sdk.GetGametelemetryApi().GametelemetryOperations.ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePutOp
-                    .Execute(playTime, steamId);
+                    .Execute(playTime, steamId)
+                    .Ok();
             }
-            catch (HttpResponseException e)
+            catch (Exception e)
             {
                 if (e.Message.ToLower().Contains("user not found"))
                 {
@@ -63,15 +65,12 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #endregion
 
             #region Get steam's playtime
-            PlayTimeResponse? resGet = _Sdk.GetGametelemetryApi().GametelemetryOperations
+            PlayTimeResponse resGet = _Sdk.GetGametelemetryApi().GametelemetryOperations
                 .ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGetOp
-                .Execute(steamId);
+                .Execute(steamId)
+                .Ok();
             #endregion
-            Assert.IsNotNull(resGet);
-            if (resGet != null)
-            {
-                Assert.Equals(playTime, resGet.TotalPlaytime!);
-            }
+            Assert.Equals(playTime, resGet.TotalPlaytime!);
         }
     }
 }

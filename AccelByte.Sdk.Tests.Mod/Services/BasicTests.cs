@@ -11,6 +11,7 @@ using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Core.Net.Http;
 using AccelByte.Sdk.Api.Basic.Model;
+using AccelByte.Sdk.Api.Basic;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -27,56 +28,49 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (_Sdk == null)
                 return;
 
-            try
+            DisableRetry();
+
+            //Get user's own profile info, will throw an exception if profile does not exists which is expected.
+            var check = _Sdk.GetBasicApi().UserProfile.GetMyProfileInfoOp
+                .Execute(_Sdk.Namespace);
+            if (check.IsSuccess)
             {
-                DisableRetry();
+                //But if the profile do actually exists, just delete it.
 
-                //Get user's own profile info, will throw an exception if profile does not exists which is expected.
-                UserProfilePrivateInfo? check = _Sdk.GetBasicApi().UserProfile.GetMyProfileInfoOp
-                    .Execute(_Sdk.Namespace);
-
-                if (check != null)
-                {
-                    //But if the profile do actually exists, just delete it.
-                    UserProfilePrivateInfo? checkDel = _Sdk.GetBasicApi().UserProfile.DeleteUserProfileOp
-                        .Execute(_Sdk.Namespace, check.UserId!);
-                    Assert.IsNotNull(checkDel);
-                }
+                var profileData = check.Ok();
+                _Sdk.GetBasicApi().UserProfile.DeleteUserProfileOp
+                    .Execute(_Sdk.Namespace, profileData.UserId!);
             }
-            catch (HttpResponseException x)
+            else
             {
-                ErrorEntity? error =
-                    System.Text.Json.JsonSerializer.Deserialize<ErrorEntity>(x.Message);
-                if (error == null)
-                    throw new Exception("Response is null");
-
-                if (error.ErrorCode != 11440)
-                    Assert.Fail("Unexpected error response from Basic::GetMyProfileInfoOp.");
+                //if the error is not profile not found, then fail
+                if (check.Error != BasicErrors.Error11440)
+                    Assert.Fail(check.Error.Message);
             }
 
             #region Create user's own profile info
             UserProfilePrivateCreate createProfile = new UserProfilePrivateCreate()
             {
                 FirstName = "Integration Test",
-                LastName = "CSharp Server SDK",
+                LastName = "CSharp Extend SDK",
                 DateOfBirth = DateTime.ParseExact("2022-01-01", "yyyy-MM-dd", CultureInfo.InvariantCulture),
                 Language = "en"
             };
 
-            UserProfilePrivateInfo? cInfo = _Sdk.GetBasicApi().UserProfile.CreateMyProfileOp
+            UserProfilePrivateInfo cInfo = _Sdk.GetBasicApi().UserProfile.CreateMyProfileOp
                 .SetBody(createProfile)
-                .Execute(_Sdk.Namespace);
+                .Execute(_Sdk.Namespace)
+                .Ok();
             #endregion
-            Assert.IsNotNull(cInfo);
-            Assert.AreEqual(cInfo?.FirstName, "Integration Test");
+            Assert.AreEqual(cInfo.FirstName, "Integration Test");
 
             #region Get user's own profile info
-            UserProfilePrivateInfo? ownResp = _Sdk.GetBasicApi().UserProfile.GetMyProfileInfoOp
-                .Execute(_Sdk.Namespace);
+            UserProfilePrivateInfo ownResp = _Sdk.GetBasicApi().UserProfile.GetMyProfileInfoOp
+                .Execute(_Sdk.Namespace)
+                .Ok();
             #endregion
-            Assert.IsNotNull(ownResp);
-            Assert.AreEqual(ownResp?.LastName!, "CSharp Server SDK");
-            string userId = ownResp?.UserId!;
+            Assert.AreEqual(ownResp.LastName!, "CSharp Extend SDK");
+            string userId = ownResp.UserId!;
 
             #region Update user's own profile info
             UserProfileUpdate updateProfile = new UserProfileUpdate()
@@ -84,18 +78,18 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 TimeZone = "Asia/Jakarta"
             };
 
-            UserProfilePrivateInfo? updResp = _Sdk.GetBasicApi().UserProfile.UpdateMyProfileOp
+            UserProfilePrivateInfo updResp = _Sdk.GetBasicApi().UserProfile.UpdateMyProfileOp
                 .SetBody(updateProfile)
-                .Execute(_Sdk.Namespace);
+                .Execute(_Sdk.Namespace)
+                .Ok();
             #endregion
-            Assert.IsNotNull(updResp);
-            Assert.AreEqual(updResp?.TimeZone, "Asia/Jakarta");
+            Assert.AreEqual(updResp.TimeZone, "Asia/Jakarta");
 
             #region Delete user's own profile info
-            UserProfilePrivateInfo? delResp = _Sdk.GetBasicApi().UserProfile.DeleteUserProfileOp
+            var delResp = _Sdk.GetBasicApi().UserProfile.DeleteUserProfileOp
                 .Execute(_Sdk.Namespace, userId);
             #endregion
-            Assert.IsNotNull(delResp);
+            Assert.IsTrue(delResp.IsSuccess);
         }
     }
 }

@@ -35,11 +35,12 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             ModelFreeFormNotificationRequest notifBody = new ModelFreeFormNotificationRequest()
             {
                 Topic = "csharp_sdk_test",
-                Message = "This is integration test for CSharp Server SDK."
+                Message = "This is integration test for CSharp Extend SDK."
             };
 
             _Sdk.GetLobbyApi().Admin.FreeFormNotificationOp
-                .Execute(notifBody, _Sdk.Namespace);
+                .Execute(notifBody, _Sdk.Namespace)
+                .Ok();
             #endregion
         }
 
@@ -77,11 +78,11 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             while (checkRetryCount < maxCheckRetry)
             {
                 userPresence = _Sdk.GetLobbyApi().Presence.UsersPresenceHandlerV1Op
-                .Execute(_Sdk.Namespace, currentUserId);
-                Assert.IsNotNull(userPresence);
+                    .Execute(_Sdk.Namespace, currentUserId)
+                    .Ok();
 
                 string userStatus = "";
-                if ((userPresence != null) && (userPresence.Data != null) && (userPresence.Data.Count > 0))
+                if ((userPresence.Data != null) && (userPresence.Data.Count > 0))
                     userStatus = userPresence.Data[0].Availability!;
                 if (userStatus == LOBBY_PRESENCE_ONLINE)
                     break;
@@ -110,11 +111,11 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             while (checkRetryCount < maxCheckRetry)
             {
                 userPresence = _Sdk.GetLobbyApi().Presence.UsersPresenceHandlerV1Op
-                    .Execute(_Sdk.Namespace, currentUserId);
-                Assert.IsNotNull(userPresence);
+                    .Execute(_Sdk.Namespace, currentUserId)
+                    .Ok();
 
                 string userStatus = "";
-                if ((userPresence != null) && (userPresence.Data != null) && (userPresence.Data.Count > 0))
+                if ((userPresence.Data != null) && (userPresence.Data.Count > 0))
                     userStatus = userPresence.Data[0].Availability!;
                 if (userStatus == LOBBY_PRESENCE_OFFLINE)
                     break;

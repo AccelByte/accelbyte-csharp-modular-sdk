@@ -30,20 +30,20 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             var response = _Sdk.GetSessionhistoryApi().GameSessionDetail.AdminQueryGameSessionDetailOp
                 .SetOffset(0)
                 .SetLimit(20)
-                .Execute(_Sdk.Namespace);
+                .Execute(_Sdk.Namespace)
+                .Ok();
             #endregion
-            Assert.IsNotNull(response);
-            if ((response != null) && (response.Data != null))
+            if (response.Data != null)
                 Assert.GreaterOrEqual(response.Data.Count, 0);
 
             #region Get all matchmaking history
             var mResponse = _Sdk.GetSessionhistoryApi().GameSessionDetail.AdminQueryMatchmakingDetailOp
                 .SetOffset(0)
                 .SetLimit(20)
-                .Execute(_Sdk.Namespace);
+                .Execute(_Sdk.Namespace)
+                .Ok();
             #endregion
-            Assert.IsNotNull(mResponse);
-            if ((mResponse != null) && (mResponse.Data != null))
+            if (mResponse.Data != null)
                 Assert.GreaterOrEqual(mResponse.Data.Count, 0);
 
             ResetPolicy();

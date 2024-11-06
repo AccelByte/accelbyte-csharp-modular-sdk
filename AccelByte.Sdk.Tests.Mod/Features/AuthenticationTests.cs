@@ -54,9 +54,9 @@ namespace AccelByte.Sdk.Tests.Mod.Features
                 if (!sdk.LoginUser())
                     throw new Exception("Login failed");
 
-                List<RetrieveAcceptedAgreementResponse>? response = sdk.GetLegalApi()
-                    .Agreement.RetrieveAgreementsPublicOp.Execute();
-                Assert.IsNotNull(response);
+                _ = sdk.GetLegalApi()
+                    .Agreement.RetrieveAgreementsPublicOp.Execute()
+                    .Ok();
 
                 loopCounter++;
 
@@ -98,9 +98,10 @@ namespace AccelByte.Sdk.Tests.Mod.Features
                 if (!sdk.LoginClient())
                     throw new Exception("Login failed");
 
-                var response = sdk.GetAchievementApi()
-                    .GlobalAchievements.PublicListGlobalAchievementsOp.Execute(sdk.Namespace);
-                Assert.IsNotNull(response);
+                _ = sdk.GetAchievementApi()
+                    .GlobalAchievements.PublicListGlobalAchievementsOp
+                    .Execute(sdk.Namespace)
+                    .Ok();
 
                 loopCounter++;
 

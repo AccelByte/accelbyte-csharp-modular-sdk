@@ -28,14 +28,12 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             DisableRetry();
 
-            ApiAMSRegionsResponse? regions = _Sdk.GetAmsApi().AMSInfo.InfoRegionsOp
-                .Execute(_Sdk.Namespace);
-            Assert.IsNotNull(regions);
+            ApiAMSRegionsResponse regions = _Sdk.GetAmsApi().AMSInfo.InfoRegionsOp
+                .Execute(_Sdk.Namespace).Ok();
             Assert.GreaterOrEqual(regions!.Regions!.Count, 1);
 
-            ApiAvailableInstanceTypesResponse? instances = _Sdk.GetAmsApi().AMSInfo.InfoSupportedInstancesOp
-                .Execute(_Sdk.Namespace);
-            Assert.IsNotNull(instances);
+            ApiAvailableInstanceTypesResponse instances = _Sdk.GetAmsApi().AMSInfo.InfoSupportedInstancesOp
+                .Execute(_Sdk.Namespace).Ok();
             Assert.GreaterOrEqual(instances!.AvailableInstanceTypes!.Count, 1);
 
             ResetPolicy();

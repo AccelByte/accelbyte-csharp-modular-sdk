@@ -28,15 +28,16 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             DisableRetry();
 
-            string stat_code = "csharpserversdkteststat" + Guid.NewGuid().ToString().Substring(0, 6);
+            string stat_code = "csharpextendsdkteststat" + Guid.NewGuid().ToString().Substring(0, 6);
             string leaderboard_code = "csharpsdklbtest" + Guid.NewGuid().ToString().Substring(0, 6);
             string start_time = DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd'T'HH:mm:ss.ffK");
+            string leaderboard_name = "CSharp Extend SDK Leaderboard Test";
 
             // Create a stat code first
             StatCreate createStat = new StatCreate()
             {
-                Name = "CSharp Server SDK Test Stat",
-                Description = "CSharp server sdk integration test.",
+                Name = "CSharp Extend SDK Test Stat",
+                Description = "CSharp Extend sdk integration test.",
                 StatCode = stat_code,
                 SetBy = "SERVER",
                 Minimum = 0.0,
@@ -44,21 +45,20 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 DefaultValue = 50.0,
                 IncrementOnly = true,
                 SetAsGlobal = false,
-                Tags = new List<string>() { "csharp", "server_sdk", "test" }
+                Tags = new List<string>() { "csharp", "extend_sdk", "test" }
             };
 
-            StatInfo? cStat = _Sdk.GetSocialApi().StatConfiguration.CreateStatOp
+            StatInfo cStat = _Sdk.GetSocialApi().StatConfiguration.CreateStatOp
                 .SetBody(createStat)
-                .Execute(_Sdk.Namespace);
-            Assert.IsNotNull(cStat);
-            if (cStat != null)
-                Assert.AreEqual("CSharp Server SDK Test Stat", cStat.Name);
+                .Execute(_Sdk.Namespace)
+                .Ok();
+            Assert.AreEqual("CSharp Extend SDK Test Stat", cStat.Name);
 
             #region Create a leaderboard
             ModelsLeaderboardConfigReq newLeaderboard = new ModelsLeaderboardConfigReq()
             {
                 LeaderboardCode = leaderboard_code,
-                Name = "CSharp SDK Leaderboard Test",
+                Name = leaderboard_name,
                 StatCode = stat_code,
                 SeasonPeriod = 36,
                 Descending = false,
@@ -79,52 +79,51 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 }
             };
 
-            ModelsLeaderboardConfigReq? cLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardConfiguration.CreateLeaderboardConfigurationAdminV1Op
-                .Execute(newLeaderboard, _Sdk.Namespace);
+            ModelsLeaderboardConfigReq cLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardConfiguration.CreateLeaderboardConfigurationAdminV1Op
+                .Execute(newLeaderboard, _Sdk.Namespace)
+                .Ok();
             #endregion
-            Assert.IsNotNull(cLeaderboard);
-            if (cLeaderboard != null)
-                Assert.AreEqual("CSharp SDK Leaderboard Test", cLeaderboard.Name!);
+            Assert.AreEqual(leaderboard_name, cLeaderboard.Name!);
 
             #region Get a leaderboard
-            ModelsGetLeaderboardConfigResp? gLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardConfiguration.GetLeaderboardConfigurationAdminV1Op
-                .Execute(leaderboard_code, _Sdk.Namespace);
+            ModelsGetLeaderboardConfigResp gLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardConfiguration.GetLeaderboardConfigurationAdminV1Op
+                .Execute(leaderboard_code, _Sdk.Namespace)
+                .Ok();
             #endregion
-            Assert.IsNotNull(gLeaderboard);
-            if (gLeaderboard != null)
-                Assert.AreEqual("CSharp SDK Leaderboard Test", gLeaderboard.Name!);
+            Assert.AreEqual(leaderboard_name, gLeaderboard.Name!);
 
             #region Update a leaderboard
             ModelsUpdateLeaderboardConfigReq updateLeaderboard = new ModelsUpdateLeaderboardConfigReq()
             {
-                Name = "CSharp SDK Leaderboard Test",
+                Name = leaderboard_name,
                 StatCode = stat_code,
                 StartTime = start_time,
                 SeasonPeriod = 40
             };
 
-            ModelsGetLeaderboardConfigResp? uLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardConfiguration.UpdateLeaderboardConfigurationAdminV1Op
-                .Execute(updateLeaderboard, leaderboard_code, _Sdk.Namespace);
+            ModelsGetLeaderboardConfigResp uLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardConfiguration.UpdateLeaderboardConfigurationAdminV1Op
+                .Execute(updateLeaderboard, leaderboard_code, _Sdk.Namespace)
+                .Ok();
             #endregion
-            Assert.IsNotNull(uLeaderboard);
-            if (uLeaderboard != null)
-                Assert.AreEqual(40, uLeaderboard.SeasonPeriod!);
+            Assert.AreEqual(40, uLeaderboard.SeasonPeriod!);
 
             #region Delete a leaderboard
             _Sdk.GetLeaderboardApi().LeaderboardConfiguration.DeleteLeaderboardConfigurationAdminV1Op
-                .Execute(leaderboard_code, _Sdk.Namespace);
+                .Execute(leaderboard_code, _Sdk.Namespace)
+                .Ok();
             #endregion
 
             //Finally, recheck if the data is truly deleted.
             DisableRetry();
-            ModelsGetLeaderboardConfigResp? dcLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardConfiguration.GetLeaderboardConfigurationAdminV1Op
-                .Execute(leaderboard_code, _Sdk.Namespace);
-            Assert.IsNotNull(dcLeaderboard);
-            Assert.IsTrue(dcLeaderboard!.IsDeleted!);
+            ModelsGetLeaderboardConfigResp dcLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardConfiguration.GetLeaderboardConfigurationAdminV1Op
+                .Execute(leaderboard_code, _Sdk.Namespace)
+                .Ok();
+            Assert.IsTrue(dcLeaderboard.IsDeleted!);
 
             //Last, delete the stat code
             _Sdk.GetSocialApi().StatConfiguration.DeleteStatOp
-                .Execute(_Sdk.Namespace, stat_code);
+                .Execute(_Sdk.Namespace, stat_code)
+                .Ok();
 
             ResetPolicy();
         }

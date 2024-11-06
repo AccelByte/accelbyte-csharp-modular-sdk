@@ -26,8 +26,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (_Sdk == null)
                 return;
 
-            string tag_name = "csharp_server_sdk_test";
-            string tag_name_u = "csharp_server_sdk_test_update";
+            string tag_name = "csharp_extend_sdk_test";
+            string tag_name_u = "csharp_extend_sdk_test_update";
             string tag_id = String.Empty;
 
             #region Create a tag
@@ -35,21 +35,19 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             {
                 Tag = tag_name
             };
-            ModelsCreateTagResponse? cTag = _Sdk.GetUgcApi().AdminTag.AdminCreateTagOp
-                .Execute(createTag, _Sdk.Namespace);
+            ModelsCreateTagResponse cTag = _Sdk.GetUgcApi().AdminTag.AdminCreateTagOp
+                .Execute(createTag, _Sdk.Namespace)
+                .Ok();
             #endregion
-            Assert.IsNotNull(cTag);
-            if (cTag != null)
-            {
-                Assert.AreEqual(tag_name, cTag.Tag);
-                tag_id = cTag.Id!;
-            }
+            Assert.AreEqual(tag_name, cTag.Tag);
+            tag_id = cTag.Id!;
 
             #region Get tags
-            ModelsPaginatedGetTagResponse? gTag = _Sdk.GetUgcApi().AdminTag.AdminGetTagOp
+            ModelsPaginatedGetTagResponse gTag = _Sdk.GetUgcApi().AdminTag.AdminGetTagOp
                 .SetOffset(0)
                 .SetLimit(10)
-                .Execute(_Sdk.Namespace);
+                .Execute(_Sdk.Namespace)
+                .Ok();
             #endregion
             Assert.IsNotNull(gTag);
 
@@ -58,16 +56,16 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             {
                 Tag = tag_name_u
             };
-            ModelsCreateTagResponse? uTag = _Sdk.GetUgcApi().AdminTag.AdminUpdateTagOp
-                .Execute(updateTag, _Sdk.Namespace, tag_id);
+            ModelsCreateTagResponse uTag = _Sdk.GetUgcApi().AdminTag.AdminUpdateTagOp
+                .Execute(updateTag, _Sdk.Namespace, tag_id)
+                .Ok();
             #endregion
-            Assert.IsNotNull(uTag);
-            if (uTag != null)
-                Assert.AreEqual(tag_name_u, uTag.Tag);
+            Assert.AreEqual(tag_name_u, uTag.Tag);
 
             #region Delete a tag
             _Sdk.GetUgcApi().AdminTag.AdminDeleteTagOp
-                .Execute(_Sdk.Namespace, tag_id);
+                .Execute(_Sdk.Namespace, tag_id)
+                .Ok();
             #endregion
         }
     }

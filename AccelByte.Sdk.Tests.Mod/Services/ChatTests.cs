@@ -41,22 +41,18 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 {
                     Word = profanityWord,
                     WordType = "PROFANITY"
-                }, _Sdk.Namespace);
+                }, _Sdk.Namespace).Ok();
             #endregion
-            Assert.IsNotNull(createResult);
-            if (createResult != null)
-                Assert.AreEqual(profanityWord, createResult.Word);
+            Assert.AreEqual(profanityWord, createResult.Word);
 
             #region Query profanity word
             var queryResults = _Sdk.GetChatApi().Profanity.AdminProfanityQueryOp
                 .SetIncludeChildren(false)
                 .SetWordType("PROFANITY")
                 .SetStartWith(profanityWord)
-                .Execute(_Sdk.Namespace);
+                .Execute(_Sdk.Namespace)
+                .Ok();
             #endregion
-            Assert.IsNotNull(queryResults);
-            if (queryResults == null)
-                throw new Exception("NULL query result.");
 
             Assert.IsNotNull(queryResults.Data);
             if (queryResults.Data == null)
@@ -70,18 +66,20 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             string editProfanityWord = $"xsdk{random.GenerateRandomAlphabet(4)}";
             #region Update profanity word
-            var updateResult = _Sdk.GetChatApi().Profanity.AdminProfanityUpdateOp
+            var updateResponse = _Sdk.GetChatApi().Profanity.AdminProfanityUpdateOp
                 .Execute(new ModelsDictionaryUpdateRequest()
                 {
                     WordType = "PROFANITY",
                     Word = editProfanityWord
                 }, word.Id!, _Sdk.Namespace);
-            Assert.IsNotNull(updateResult);
             #endregion
+            updateResponse.ThrowExceptionIfError();
+            Assert.IsTrue(updateResponse.IsSuccess);
 
             #region Delete profanity word
-            _Sdk.GetChatApi().Profanity.AdminProfanityDeleteOp
+            var delResponse = _Sdk.GetChatApi().Profanity.AdminProfanityDeleteOp
                 .Execute(word.Id!, _Sdk.Namespace);
+            delResponse.ThrowExceptionIfError();
             #endregion
         }
 
@@ -108,14 +106,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     ExpiresIn = 3600000000,
                     Name = inboxName
 
-                }, _Sdk.Namespace);
+                }, _Sdk.Namespace).Ok();
             #endregion
-            Assert.IsNotNull(insertResult);
             Assert.AreEqual(inboxName, insertResult!.Name);
 
             #region Get chat inbox categories
             var getResult = _Sdk.GetChatApi().Inbox.AdminGetInboxCategoriesOp
-                .Execute(_Sdk.Namespace);
+                .Execute(_Sdk.Namespace)
+                .Ok();
             #endregion
             Assert.IsNotNull(getResult);
             if (getResult != null)
@@ -139,12 +137,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .Execute(new ModelsUpdateInboxCategoryRequest()
                 {
                     ExpiresIn = 1800000000
-                }, inboxName, _Sdk.Namespace);
+                }, inboxName, _Sdk.Namespace)
+                .Ok();
             #endregion
 
             #region Delete chat inbox category
             _Sdk.GetChatApi().Inbox.AdminDeleteInboxCategoryOp
-                .Execute(inboxName, _Sdk.Namespace);
+                .Execute(inboxName, _Sdk.Namespace)
+                .Ok();
             #endregion
         }
     }

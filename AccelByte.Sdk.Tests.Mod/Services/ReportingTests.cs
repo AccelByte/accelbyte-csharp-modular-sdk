@@ -47,43 +47,39 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 Title = title,
             };
 
-            RestapiAdminReasonResponse? cReason = _Sdk.GetReportingApi().AdminReasons.CreateReasonOp
-                .Execute(createReason, _Sdk.Namespace);
-            Assert.IsNotNull(cReason);
-            if (cReason != null)
-            {
-                Assert.IsNotNull(cReason.Id);
-                if (cReason.Id != null)
-                    reasonId = cReason.Id;
-
-                Assert.AreEqual(title, cReason.Title);
-            }
+            RestapiAdminReasonResponse cReason = _Sdk.GetReportingApi().AdminReasons.CreateReasonOp
+                .Execute(createReason, _Sdk.Namespace)
+                .Ok();
             #endregion
 
+            Assert.IsNotNull(cReason.Id);
+            if (cReason.Id != null)
+                reasonId = cReason.Id;
+
+            Assert.AreEqual(title, cReason.Title);
             Assert.True(reasonId != String.Empty);
 
             #region Get single Reason
-            RestapiAdminReasonResponse? cReason2 = _Sdk.GetReportingApi().AdminReasons.AdminGetReasonOp
-                .Execute(_Sdk.Namespace, reasonId);
-            Assert.IsNotNull(cReason2);
-            if (cReason2 != null)
-            {
-                Assert.IsNotNull(cReason2.Id);
-                Assert.AreEqual(title, cReason2.Title);
-            }
+            RestapiAdminReasonResponse cReason2 = _Sdk.GetReportingApi().AdminReasons.AdminGetReasonOp
+                .Execute(_Sdk.Namespace, reasonId)
+                .Ok();
             #endregion
+            Assert.IsNotNull(cReason2.Id);
+            Assert.AreEqual(title, cReason2.Title);
 
             #region Delete a Reporting
             _Sdk.GetReportingApi().AdminReasons.DeleteReasonOp
-                .Execute(_Sdk.Namespace, reasonId);
+                .Execute(_Sdk.Namespace, reasonId)
+                .Ok();
             #endregion
 
             //Finally, recheck if the data is truly deleted.
-            HttpResponseException? hrx = Assert.Throws<HttpResponseException>(() =>
+            Exception? hrx = Assert.Throws<Exception>(() =>
             {
                 DisableRetry();
-                RestapiAdminReasonResponse? cReason3 = _Sdk.GetReportingApi().AdminReasons.AdminGetReasonOp
-                    .Execute(_Sdk.Namespace, reasonId);
+                _ = _Sdk.GetReportingApi().AdminReasons.AdminGetReasonOp
+                    .Execute(_Sdk.Namespace, reasonId)
+                    .Ok();
             });
         }
     }

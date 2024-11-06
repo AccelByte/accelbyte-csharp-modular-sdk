@@ -113,7 +113,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             };
 
             _Sdk.GetMatch2Api().RuleSets.CreateRuleSetOp
-                .Execute(cRuleSetBody, _Sdk.Namespace);
+                .Execute(cRuleSetBody, _Sdk.Namespace)
+                .Ok();
             #endregion
 
             #region Create a match pool
@@ -128,18 +129,21 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             };
 
             _Sdk.GetMatch2Api().MatchPools.CreateMatchPoolOp
-                .Execute(createPoolBody, _Sdk.Namespace);
+                .Execute(createPoolBody, _Sdk.Namespace)
+                .Ok();
             #endregion
 
             #region List match pools
-            ApiListMatchPoolsResponse? poolList = _Sdk.GetMatch2Api().MatchPools.MatchPoolListOp
-                .Execute(_Sdk.Namespace);
+            ApiListMatchPoolsResponse poolList = _Sdk.GetMatch2Api().MatchPools.MatchPoolListOp
+                .Execute(_Sdk.Namespace)
+                .Ok();
             #endregion
             Assert.IsNotNull(poolList);
 
             #region Get match pool detail
-            ApiMatchPool? matchPool = _Sdk.GetMatch2Api().MatchPools.MatchPoolDetailsOp
-                .Execute(_Sdk.Namespace, poolName);
+            ApiMatchPool matchPool = _Sdk.GetMatch2Api().MatchPools.MatchPoolDetailsOp
+                .Execute(_Sdk.Namespace, poolName)
+                .Ok();
             #endregion
             Assert.IsNotNull(matchPool);
 
@@ -159,10 +163,10 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 };
 
                 string partyId = String.Empty;
-                ApimodelsPartySessionResponse? partyResponse = sdk.GetSessionApi().Party.PublicCreatePartyOp
-                    .Execute(partyRequest, sdk.Namespace);
-                if (partyResponse != null)
-                    partyId = partyResponse.Id!;
+                ApimodelsPartySessionResponse partyResponse = sdk.GetSessionApi().Party.PublicCreatePartyOp
+                    .Execute(partyRequest, sdk.Namespace)
+                    .Ok();
+                partyId = partyResponse.Id!;
 
                 #region User create a match ticket
                 ApiMatchTicketRequest ticketRequest = new ApiMatchTicketRequest()
@@ -171,35 +175,40 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     SessionID = partyId
                 };
 
-                ApiMatchTicketResponse? nTicketResponse = sdk.GetMatch2Api().MatchTickets.CreateMatchTicketOp
-                    .Execute(ticketRequest, sdk.Namespace);
+                ApiMatchTicketResponse nTicketResponse = sdk.GetMatch2Api().MatchTickets.CreateMatchTicketOp
+                    .Execute(ticketRequest, sdk.Namespace)
+                    .Ok();
                 #endregion
-                Assert.IsNotNull(nTicketResponse);
-                string ticketId = nTicketResponse!.MatchTicketID!;
+                string ticketId = nTicketResponse.MatchTicketID!;
 
                 #region User delete a match ticket
                 sdk.GetMatch2Api().MatchTickets.DeleteMatchTicketOp
-                    .Execute(sdk.Namespace, ticketId);
+                    .Execute(sdk.Namespace, ticketId)
+                    .Ok();
                 #endregion
 
                 sdk.GetSessionApi().Party.PublicPartyLeaveOp
-                    .Execute(sdk.Namespace, partyId);
+                    .Execute(sdk.Namespace, partyId)
+                    .Ok();
             });
 
             player1.Logout();
 
             #region Delete a match pool
             _Sdk.GetMatch2Api().MatchPools.DeleteMatchPoolOp
-                .Execute(_Sdk.Namespace, poolName);
+                .Execute(_Sdk.Namespace, poolName)
+                .Ok();
             #endregion
 
             #region Delete a match rule set
             _Sdk.GetMatch2Api().RuleSets.DeleteRuleSetOp
-                .Execute(_Sdk.Namespace, rulesetName);
+                .Execute(_Sdk.Namespace, rulesetName)
+                .Ok();
             #endregion
 
             _Sdk.GetSessionApi().ConfigurationTemplate.AdminDeleteConfigurationTemplateV1Op
-                .Execute(cfgTemplateName, _Sdk.Namespace);
+                .Execute(cfgTemplateName, _Sdk.Namespace)
+                .Ok();
 
             ResetPolicy();
         }
@@ -212,8 +221,9 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 return;
 
             #region List match functions
-            ApiListMatchFunctionsResponse? response = _Sdk.GetMatch2Api().MatchFunctions.MatchFunctionListOp
-                .Execute(_Sdk.Namespace);
+            ApiListMatchFunctionsResponse response = _Sdk.GetMatch2Api().MatchFunctions.MatchFunctionListOp
+                .Execute(_Sdk.Namespace)
+                .Ok();
             #endregion
             Assert.IsNotNull(response);
         }

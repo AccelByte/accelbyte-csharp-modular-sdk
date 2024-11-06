@@ -54,9 +54,9 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             };
 
             _ConfigInventory = _Sdk.GetInventoryApi().AdminInventoryConfigurations.AdminCreateInventoryConfigurationOp
-                .Execute(cInventoryConfigBody, _Sdk.Namespace);
+                .Execute(cInventoryConfigBody, _Sdk.Namespace)
+                .Ok();
             #endregion
-            Assert.IsNotNull(_ConfigInventory);
 
             #region Create an inventory
             string userId = _Sdk.Configuration.Credential!.UserId;
@@ -67,18 +67,18 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             };
 
             string inventoryId = "";
-            ApimodelsInventoryResp? cInventory = _Sdk.GetInventoryApi().AdminInventories.AdminCreateInventoryOp
-                .Execute(cInventoryBody, _Sdk.Namespace);
+            ApimodelsInventoryResp cInventory = _Sdk.GetInventoryApi().AdminInventories.AdminCreateInventoryOp
+                .Execute(cInventoryBody, _Sdk.Namespace)
+                .Ok();
             #endregion
-            Assert.IsNotNull(cInventory);
-            if (cInventory != null && cInventory.Id != null)
+            if (cInventory.Id != null)
                 inventoryId = cInventory.Id;
 
             #region Get an inventory
-            ApimodelsInventoryResp? gInventory = _Sdk.GetInventoryApi().AdminInventories.AdminGetInventoryOp
-                .Execute(inventoryId, _Sdk.Namespace);
+            ApimodelsInventoryResp gInventory = _Sdk.GetInventoryApi().AdminInventories.AdminGetInventoryOp
+                .Execute(inventoryId, _Sdk.Namespace)
+                .Ok();
             #endregion
-            Assert.IsNotNull(gInventory);
 
             #region Update an inventory
             var uInventoryBody = new ApimodelsUpdateInventoryReq()
@@ -86,10 +86,10 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 IncMaxSlots = 2,
             };
 
-            ApimodelsInventoryResp? uInventory = _Sdk.GetInventoryApi().AdminInventories.AdminUpdateInventoryOp
-                .Execute(uInventoryBody, inventoryId, _Sdk.Namespace);
+            ApimodelsInventoryResp uInventory = _Sdk.GetInventoryApi().AdminInventories.AdminUpdateInventoryOp
+                .Execute(uInventoryBody, inventoryId, _Sdk.Namespace)
+                .Ok();
             #endregion
-            Assert.IsNotNull(uInventory);
 
             #region Delete an inventory
             var dInventoryBody = new ApimodelsDeleteInventoryReq()
@@ -97,7 +97,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 Message = "delete",
             };
             _Sdk.GetInventoryApi().AdminInventories.DeleteInventoryOp
-                .Execute(dInventoryBody, inventoryId, _Sdk.Namespace);
+                .Execute(dInventoryBody, inventoryId, _Sdk.Namespace)
+                .Ok();
             #endregion
         }
 
@@ -110,7 +111,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             // Clean up Inventory configuration
             _Sdk.GetInventoryApi().AdminInventoryConfigurations.AdminDeleteInventoryConfigurationOp
-                .Execute(_ConfigInventory.Id!, _Sdk.Namespace);
+                .Execute(_ConfigInventory.Id!, _Sdk.Namespace)
+                .Ok();
         }
     }
 }

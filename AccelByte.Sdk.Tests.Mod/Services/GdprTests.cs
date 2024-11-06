@@ -39,23 +39,27 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .Execute(new List<string>
                 {
                     firstEmailToTest
-                }, _Sdk.Namespace);
+                }, _Sdk.Namespace)
+                .Ok();
             #endregion
 
             #region Get e-mail configuration
             List<string>? emails = _Sdk.GetGdprApi().Configuration.GetAdminEmailConfigurationOp
-                .Execute(_Sdk.Namespace);
+                .Execute(_Sdk.Namespace)
+                .Ok();
             #endregion
             Assert.IsNotNull(emails);
 
             #region Update e-mail configuration
             _Sdk.GetGdprApi().Configuration.UpdateAdminEmailConfigurationOp
-                .Execute(new List<string>() { anotherEmailToTest }, _Sdk.Namespace);
+                .Execute(new List<string>() { anotherEmailToTest }, _Sdk.Namespace)
+                .Ok();
             #endregion
 
             #region Delete e-mail configuration
             _Sdk.GetGdprApi().Configuration.DeleteAdminEmailConfigurationOp
-                .Execute(_Sdk.Namespace, new List<string>() { anotherEmailToTest });
+                .Execute(_Sdk.Namespace, new List<string>() { anotherEmailToTest })
+                .Ok();
             #endregion
         }
     }

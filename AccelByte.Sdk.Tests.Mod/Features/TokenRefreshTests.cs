@@ -44,10 +44,9 @@ namespace AccelByte.Sdk.Tests.Mod.Features
             sdk.LoginUser(true);
 
             //First request, valid token
-            List<RetrieveAcceptedAgreementResponse>? aggrs1 = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublic(
+            _ = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublic(
                 RetrieveAgreementsPublic
-                .Builder.Build());
-            Assert.IsNotNull(aggrs1);
+                .Builder.Build()).Ok();
 
             //Force token expire
             if (sdk.Configuration.TokenRepository is RefreshableTokenRepository)
@@ -60,10 +59,9 @@ namespace AccelByte.Sdk.Tests.Mod.Features
             }
 
             //Second request, expired token, try to do refresh
-            List<RetrieveAcceptedAgreementResponse>? aggrs2 = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublic(
+            _ = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublic(
                 RetrieveAgreementsPublic
-                .Builder.Build());
-            Assert.IsNotNull(aggrs2);
+                .Builder.Build()).Ok();
 
             sdk.Logout();
         }
@@ -82,9 +80,9 @@ namespace AccelByte.Sdk.Tests.Mod.Features
             sdk.LoginClient(true);
 
             //First request, valid token
-            ModelsPublicAchievementsResponse? achResp1 = sdk.GetAchievementApi().Achievements.PublicListAchievementsOp
-                .Execute(sdk.Namespace, "en");
-            Assert.IsNotNull(achResp1);
+            _ = sdk.GetAchievementApi().Achievements.PublicListAchievementsOp
+                .Execute(sdk.Namespace, "en")
+                .Ok();
 
             //Force token expire
             if (sdk.Configuration.TokenRepository is RefreshableTokenRepository)
@@ -97,9 +95,9 @@ namespace AccelByte.Sdk.Tests.Mod.Features
             }
 
             //Second request, expired token, try to do refresh
-            ModelsPublicAchievementsResponse? achResp2 = sdk.GetAchievementApi().Achievements.PublicListAchievementsOp
-                .Execute(sdk.Namespace, "en");
-            Assert.IsNotNull(achResp2);
+            _ = sdk.GetAchievementApi().Achievements.PublicListAchievementsOp
+                .Execute(sdk.Namespace, "en")
+                .Ok();
 
             sdk.Logout();
         }
@@ -155,10 +153,10 @@ namespace AccelByte.Sdk.Tests.Mod.Features
             Thread.Sleep(5000);
 
             //force token to be refreshed by calling any op
-            ModelsPublicAchievementsResponse? achResp = sdk.GetAchievementApi().Achievements
+            _ = sdk.GetAchievementApi().Achievements
                 .PublicListAchievementsOp
-                    .Execute(sdk.Namespace, "en");
-            Assert.IsNotNull(achResp);
+                .Execute(sdk.Namespace, "en")
+                .Ok();
 
             //wait for any ws response
             Thread.Sleep(2000);

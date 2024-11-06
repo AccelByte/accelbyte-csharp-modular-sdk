@@ -25,10 +25,10 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (_Sdk == null)
                 return;
 
-            ModelsListTerminatedServersResponse? tsResp = _Sdk.GetDslogmanagerApi().TerminatedServers.ListTerminatedServersOp
+            _ = _Sdk.GetDslogmanagerApi().TerminatedServers.ListTerminatedServersOp
                 .SetLimit(10)
-                .Execute(_Sdk.Namespace);
-            Assert.IsNotNull(tsResp);
+                .Execute(_Sdk.Namespace)
+                .Ok();
         }
     }
 }

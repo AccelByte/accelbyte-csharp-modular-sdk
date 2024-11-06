@@ -32,9 +32,9 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 return;
             }
 
-            ModelsListServerResponse? serverResp = _Sdk.GetDsmcApi().Admin.ListLocalServerOp
-                .Execute(_Sdk.Namespace);
-            Assert.IsNotNull(serverResp);
+            _ = _Sdk.GetDsmcApi().Admin.ListLocalServerOp
+                .Execute(_Sdk.Namespace)
+                .Ok();
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             string game_mode = "GAME_MODE";
             string party_id = "PARTY_ID";
             string party_user_id = _Sdk.Configuration.Credential!.UserId;
-            string session_id = String.Empty;
+            string session_id;
 
             //Create a session
             Api.Sessionbrowser.Model.ModelsCreateSessionRequest createSession = new Api.Sessionbrowser.Model.ModelsCreateSessionRequest()
@@ -77,14 +77,12 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 }
             };
 
-            Api.Sessionbrowser.Model.ModelsSessionResponse? cResp = _Sdk.GetSessionbrowserApi().Session.CreateSessionOp
-                .Execute(createSession, _Sdk.Namespace);
-            Assert.IsNotNull(cResp);
-            if (cResp != null)
-            {
-                Assert.AreEqual(usernameToTest, cResp.Username!);
-                session_id = cResp.SessionId!;
-            }
+            Api.Sessionbrowser.Model.ModelsSessionResponse cResp = _Sdk.GetSessionbrowserApi().Session.CreateSessionOp
+                .Execute(createSession, _Sdk.Namespace)
+                .Ok();
+
+            Assert.AreEqual(usernameToTest, cResp.Username!);
+            session_id = cResp.SessionId!;
 
             ModelsCreateSessionRequest sessionRequest = new ModelsCreateSessionRequest()
             {
@@ -119,12 +117,13 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 Namespace = _Sdk.Namespace,
             };
 
-            ModelsSessionResponse? csResp = _Sdk.GetDsmcApi().Session.CreateSessionOp
-                .Execute(sessionRequest, _Sdk.Namespace);
-            Assert.IsNotNull(csResp);
+            _ = _Sdk.GetDsmcApi().Session.CreateSessionOp
+                .Execute(sessionRequest, _Sdk.Namespace)
+                .Ok();
 
-            csResp = _Sdk.GetDsmcApi().Session.GetSessionOp.Execute(_Sdk.Namespace, session_id);
-            Assert.IsNotNull(csResp);
+            _ = _Sdk.GetDsmcApi().Session.GetSessionOp
+                .Execute(_Sdk.Namespace, session_id)
+                .Ok();
 
             //Waiting for the server to be ready
             Thread.Sleep(5000);
@@ -133,13 +132,17 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             {
                 SessionId = session_id
             };
-            _Sdk.GetDsmcApi().Session.ClaimServerOp.Execute(claimServer, _Sdk.Namespace);
+            _Sdk.GetDsmcApi().Session.ClaimServerOp
+                .Execute(claimServer, _Sdk.Namespace)
+                .Ok();
 
-            _Sdk.GetDsmcApi().Admin.DeleteSessionOp.Execute(_Sdk.Namespace, session_id);
+            _Sdk.GetDsmcApi().Admin.DeleteSessionOp
+                .Execute(_Sdk.Namespace, session_id)
+                .Ok();
 
-            Api.Sessionbrowser.Model.ModelsSessionResponse? delResp = _Sdk.GetSessionbrowserApi().Session.DeleteSessionOp
-                .Execute(_Sdk.Namespace, session_id);
-            Assert.IsNotNull(delResp);
+            _ = _Sdk.GetSessionbrowserApi().Session.DeleteSessionOp
+                .Execute(_Sdk.Namespace, session_id).
+                Ok();
 
             Assert.True(true);
         }

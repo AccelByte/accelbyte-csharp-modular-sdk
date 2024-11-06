@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             CheckAndClearStores(_Sdk);
 
-            string nameSeason = "CSharpServerSDKTestSeason";
+            string nameSeason = "CSharpExtendSDKTestSeason";
             DateTime? startTime = new DateTime();
             DateTime? endTime = new DateTime().AddDays(2);
             string defaultDraftStoreId = String.Empty;
@@ -44,21 +44,18 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             StoreCreate createStore = new StoreCreate()
             {
                 Title = "CSharp SDK Store Test",
-                Description = "Description for CSharp Server SDK store service integration test.",
+                Description = "Description for CSharp Extend SDK store service integration test.",
                 DefaultLanguage = "en",
                 DefaultRegion = "US",
                 SupportedLanguages = new List<string>() { "en", "id" },
                 SupportedRegions = new List<string>() { "US", "ID" }
             };
 
-            StoreInfo? cStoreForSeason = _Sdk.GetPlatformApi().Store.CreateStoreOp
-                .Execute(createStore, _Sdk.Namespace);
-
-            if (cStoreForSeason != null)
-            {
-                // Use the new created storeId
-                defaultDraftStoreId = cStoreForSeason!.StoreId!;
-            }
+            StoreInfo cStoreForSeason = _Sdk.GetPlatformApi().Store.CreateStoreOp
+                .Execute(createStore, _Sdk.Namespace)
+                .Ok();
+            // Use the new created storeId
+            defaultDraftStoreId = cStoreForSeason!.StoreId!;
 
             // Create a store category in platform
             string categoryPath = "/" + Guid.NewGuid().ToString().Replace("-", "");
@@ -70,12 +67,13 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     { "en", categoryPath }
                 }
             };
-            FullCategoryInfo? cCategoryForSeason = _Sdk.GetPlatformApi().Category.CreateCategoryOp
-                .Execute(cCategory, _Sdk.Namespace, defaultDraftStoreId);
+            _ = _Sdk.GetPlatformApi().Category.CreateCategoryOp
+                .Execute(cCategory, _Sdk.Namespace, defaultDraftStoreId)
+                .Ok();
 
             // Create an item tier in platform
-            Int32 price = 1000;
-            String itemName = "Item_SEASON_Tier1";
+            int price = 1000;
+            string itemName = "Item_SEASON_Tier1";
             Dictionary<string, List<RegionDataItemDTO>> regionData = new Dictionary<string, List<RegionDataItemDTO>>();
             regionData.Add("US", new List<RegionDataItemDTO>()
             {
@@ -104,14 +102,11 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 SeasonType = ItemCreateSeasonType.TIER
             };
 
-            FullItemInfo? cItemForSeason = _Sdk.GetPlatformApi().Item.CreateItemOp
-                .Execute(createItemStore, _Sdk.Namespace, defaultDraftStoreId);
-
-            if (cItemForSeason != null)
-            {
-                // Use the new created tier's itemId
-                defaultTierItemId = cItemForSeason!.ItemId!;
-            }
+            FullItemInfo cItemForSeason = _Sdk.GetPlatformApi().Item.CreateItemOp
+                .Execute(createItemStore, _Sdk.Namespace, defaultDraftStoreId)
+                .Ok();
+            // Use the new created tier's itemId
+            defaultTierItemId = cItemForSeason!.ItemId!;
 
             #region Create a season
             Dictionary<string, Api.Seasonpass.Model.Localization> sLocalizations = new Dictionary<string, Api.Seasonpass.Model.Localization>()
@@ -134,9 +129,10 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 Localizations = sLocalizations
             };
 
-            SeasonInfo? cSeason = _Sdk.GetSeasonpassApi().Season.CreateSeasonOp
+            SeasonInfo cSeason = _Sdk.GetSeasonpassApi().Season.CreateSeasonOp
                 .SetBody(cSeasonBody)
-                .Execute(_Sdk.Namespace);
+                .Execute(_Sdk.Namespace)
+                .Ok();
             #endregion
             Assert.IsNotNull(cSeason);
 
@@ -147,8 +143,9 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             }
 
             #region Get a season
-            SeasonInfo? gSeason = _Sdk.GetSeasonpassApi().Season.GetSeasonOp
-                .Execute(_Sdk.Namespace, cSeasonId);
+            SeasonInfo gSeason = _Sdk.GetSeasonpassApi().Season.GetSeasonOp
+                .Execute(_Sdk.Namespace, cSeasonId)
+                .Ok();
             #endregion
             Assert.IsNotNull(gSeason);
 
@@ -164,15 +161,17 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 Localizations = sLocalizations
             };
 
-            SeasonInfo? uSeason = _Sdk.GetSeasonpassApi().Season.UpdateSeasonOp
+            SeasonInfo uSeason = _Sdk.GetSeasonpassApi().Season.UpdateSeasonOp
                 .SetBody(uSeasonBody)
-                .Execute(_Sdk.Namespace, cSeasonId);
+                .Execute(_Sdk.Namespace, cSeasonId)
+                .Ok();
             #endregion
             Assert.IsNotNull(uSeason);
 
             // Delete a season
             _Sdk.GetSeasonpassApi().Season.DeleteSeasonOp
-            .Execute(_Sdk.Namespace, cSeasonId);
+                .Execute(_Sdk.Namespace, cSeasonId)
+                .Ok();
         }
 
         [TearDown]

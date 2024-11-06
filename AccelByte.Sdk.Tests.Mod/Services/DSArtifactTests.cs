@@ -28,10 +28,10 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (_Sdk == null)
                 return;
 
-            ModelsListAllQueueResponse? response = _Sdk.GetDsartifactApi().ArtifactUploadProcessQueue.ListAllQueueOp
+            _ = _Sdk.GetDsartifactApi().ArtifactUploadProcessQueue.ListAllQueueOp
                 .SetLimit(20)
-                .Execute(_Sdk.Namespace);
-            Assert.IsNotNull(response);
+                .Execute(_Sdk.Namespace)
+                .Ok();
         }
 
         [Test]
@@ -41,10 +41,10 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (_Sdk == null)
                 return;
 
-            ModelsListTerminatedServersResponse? response = _Sdk.GetDsartifactApi().AllTerminatedServers.ListTerminatedServersOp
+            _ = _Sdk.GetDsartifactApi().AllTerminatedServers.ListTerminatedServersOp
                 .SetLimit(20)
-                .Execute();
-            Assert.IsNotNull(response);
+                .Execute()
+                .Ok();
         }
     }
 }

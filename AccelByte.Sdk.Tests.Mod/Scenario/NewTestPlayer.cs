@@ -42,6 +42,13 @@ namespace AccelByte.Sdk.Tests.Mod.Scenario
             return new String(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
+        public static string GenerateRandomAlphabet(int length)
+        {
+            Random random = new Random();
+            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            return new String(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
         /// <summary>
         /// Create an ITestPlayer object by creating a new user via IAM.
         /// </summary>
@@ -54,7 +61,7 @@ namespace AccelByte.Sdk.Tests.Mod.Scenario
 
             Random random = new Random();
 
-            _UserName = ("csharpsdk_" + random.GenerateRandomId(8));
+            _UserName = ("csharpsdk_" + random.GenerateRandomId(4));
             string user_password = random.GenerateRandomPassword(10);
             string user_email = $"{_UserName}@dummy.com";
 
@@ -63,16 +70,16 @@ namespace AccelByte.Sdk.Tests.Mod.Scenario
                 AuthType = "EMAILPASSWD",
                 EmailAddress = user_email,
                 Password = user_password,
-                DisplayName = $"Server SDK Test Player {GenerateRandomNumber(3)}",
+                DisplayName = $"SDK_{GenerateRandomAlphabet(8)}".ToLower(),
                 Username = _UserName,
                 Country = "ID",
                 DateOfBirth = "1995-01-10"
             };
 
-            AccountCreateUserResponseV4? cuResp = sdkClient.GetIamApi().UsersV4.PublicCreateUserV4Op
-                .Execute(newUser, sdkClient.Namespace);
-            if (cuResp != null)
-                UserId = cuResp.UserId!;
+            AccountCreateUserResponseV4 cuResp = sdkClient.GetIamApi().UsersV4.PublicCreateUserV4Op
+                .Execute(newUser, sdkClient.Namespace)
+                .Ok();
+            UserId = cuResp.UserId!;
 
             _TokenRepo = new DefaultTokenRepository();
             _Sdk = AccelByteSdk.Builder
@@ -90,7 +97,11 @@ namespace AccelByte.Sdk.Tests.Mod.Scenario
         {
             _Sdk.Logout();
             if (_DeleteOnLogout)
-                _SdkClient.GetIamApi().Users.AdminDeleteUserInformationV3Op.Execute(_SdkClient.Namespace, UserId);
+            {
+                _SdkClient.GetIamApi().Users.AdminDeleteUserInformationV3Op
+                    .Execute(_SdkClient.Namespace, UserId)
+                    .Ok();
+            }   
         }
 
         public void Run(Action<IAccelByteSdk, ITestPlayer> action)

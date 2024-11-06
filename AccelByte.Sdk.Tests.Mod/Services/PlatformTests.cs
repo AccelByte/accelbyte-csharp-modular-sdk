@@ -35,46 +35,43 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             StoreCreate createStore = new StoreCreate()
             {
                 Title = "CSharp SDK Store Test",
-                Description = "Description for CSharp Server SDK store service integration test.",
+                Description = "Description for CSharp Extend SDK store service integration test.",
                 DefaultLanguage = "en",
                 DefaultRegion = "US",
                 SupportedLanguages = new List<string>() { "en", "id" },
                 SupportedRegions = new List<string>() { "US", "ID" }
             };
 
-            StoreInfo? cStore = _Sdk.GetPlatformApi().Store.CreateStoreOp
-                .Execute(createStore, _Sdk.Namespace);
+            StoreInfo cStore = _Sdk.GetPlatformApi().Store.CreateStoreOp
+                .Execute(createStore, _Sdk.Namespace)
+                .Ok();
             #endregion
-            Assert.IsNotNull(cStore);
-            if (cStore != null)
-            {
-                Assert.AreEqual("CSharp SDK Store Test", cStore.Title);
-                store_id = cStore.StoreId!;
-            }
+            Assert.AreEqual("CSharp SDK Store Test", cStore.Title);
+            store_id = cStore.StoreId!;
 
             #region Get a store
-            StoreInfo? gStore = _Sdk.GetPlatformApi().Store.GetStoreOp
-                .Execute(_Sdk.Namespace, store_id);
+            StoreInfo gStore = _Sdk.GetPlatformApi().Store.GetStoreOp
+                .Execute(_Sdk.Namespace, store_id)
+                .Ok();
             #endregion
-            Assert.IsNotNull(gStore);
-            if (gStore != null)
-                Assert.AreEqual("CSharp SDK Store Test", gStore.Title);
+            Assert.AreEqual("CSharp SDK Store Test", gStore.Title);
+
 
             #region Update a store
             StoreUpdate updateStore = new StoreUpdate()
             {
                 Description = "Updated description."
             };
-            StoreInfo? cStoreUpdate = _Sdk.GetPlatformApi().Store.UpdateStoreOp
-                .Execute(updateStore, _Sdk.Namespace, store_id);
+            StoreInfo cStoreUpdate = _Sdk.GetPlatformApi().Store.UpdateStoreOp
+                .Execute(updateStore, _Sdk.Namespace, store_id)
+                .Ok();
             #endregion
-            Assert.IsNotNull(cStoreUpdate);
-            if (cStoreUpdate != null)
-                Assert.AreEqual("Updated description.", cStoreUpdate.Description);
+            Assert.AreEqual("Updated description.", cStoreUpdate.Description);
 
             #region Delete a store
-            StoreInfo? dStore = _Sdk.GetPlatformApi().Store.DeleteStoreOp
-                .Execute(_Sdk.Namespace, store_id);
+            StoreInfo dStore = _Sdk.GetPlatformApi().Store.DeleteStoreOp
+                .Execute(_Sdk.Namespace, store_id)
+                .Ok();
             #endregion
             Assert.IsNotNull(dStore);
         }
@@ -101,20 +98,18 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             };
 
             DisableRetry();
-            StoreInfo? cStore = _Sdk.GetPlatformApi().Store.CreateStoreOp
-                .Execute(createStore, _Sdk.Namespace);
-            Assert.IsNotNull(cStore);
-            if (cStore != null)
-            {
-                Assert.AreEqual("CSharp SDK Store Test", cStore.Title);
-                store_id = cStore.StoreId!;
-            }
+            StoreInfo cStore = _Sdk.GetPlatformApi().Store.CreateStoreOp
+                .Execute(createStore, _Sdk.Namespace)
+                .Ok();
+            Assert.AreEqual("CSharp SDK Store Test", cStore.Title);
+            store_id = cStore.StoreId!;
 
             #region Export a store
             ExportStoreRequest xRequest = new ExportStoreRequest();
-            Stream? stream = _Sdk.GetPlatformApi().Store.ExportStore1Op
+            Stream stream = _Sdk.GetPlatformApi().Store.ExportStore1Op
                 .SetBody(xRequest)
-                .Execute(_Sdk.Namespace, store_id);
+                .Execute(_Sdk.Namespace, store_id)
+                .Ok();
             #endregion
             if (stream == null)
             {
@@ -126,17 +121,18 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             DisableRetry();
             #region Import store
-            ImportStoreResult? result = _Sdk.GetPlatformApi().Store.ImportStore1Op
+            ImportStoreResult result = _Sdk.GetPlatformApi().Store.ImportStore1Op
                 .SetFile(uploadStream)
                 .SetStoreId(store_id)
-                .Execute(_Sdk.Namespace);
+                .Execute(_Sdk.Namespace)
+                .Ok();
             #endregion
             Assert.IsNotNull(result);
 
             //Delete draft store
-            StoreInfo? dStoreAgain = _Sdk.GetPlatformApi().Store.DeleteStoreOp
-                .Execute(_Sdk.Namespace, store_id);
-            Assert.IsNotNull(dStoreAgain);
+            _ = _Sdk.GetPlatformApi().Store.DeleteStoreOp
+                .Execute(_Sdk.Namespace, store_id)
+                .Ok();
         }
     }
 }

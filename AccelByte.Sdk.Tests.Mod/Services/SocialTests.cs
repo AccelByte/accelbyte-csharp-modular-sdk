@@ -49,21 +49,19 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 Tags = new List<string>() { "csharp", "server_sdk", "test" }
             };
 
-            StatInfo? cStat = _Sdk.GetSocialApi().StatConfiguration.CreateStatOp
+            StatInfo cStat = _Sdk.GetSocialApi().StatConfiguration.CreateStatOp
                 .SetBody(createStat)
-                .Execute(_Sdk.Namespace);
+                .Execute(_Sdk.Namespace)
+                .Ok();
             #endregion
-            Assert.IsNotNull(cStat);
-            if (cStat != null)
-                Assert.AreEqual("CSharp Server SDK Test Stat", cStat.Name);
+            Assert.AreEqual("CSharp Server SDK Test Stat", cStat.Name);
 
             #region Get a stat
-            StatInfo? gStat = _Sdk.GetSocialApi().StatConfiguration.GetStatOp
-                .Execute(_Sdk.Namespace, stat_code);
+            StatInfo gStat = _Sdk.GetSocialApi().StatConfiguration.GetStatOp
+                .Execute(_Sdk.Namespace, stat_code)
+                .Ok();
             #endregion
-            Assert.IsNotNull(gStat);
-            if (gStat != null)
-                Assert.AreEqual("CSharp Server SDK Test Stat", gStat.Name);
+            Assert.AreEqual("CSharp Server SDK Test Stat", gStat.Name);
 
             #region Update a stat
             StatUpdate updateStat = new StatUpdate()
@@ -71,17 +69,17 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 Description = "Updated description."
             };
 
-            StatInfo? uStat = _Sdk.GetSocialApi().StatConfiguration.UpdateStatOp
+            StatInfo uStat = _Sdk.GetSocialApi().StatConfiguration.UpdateStatOp
                 .SetBody(updateStat)
-                .Execute(_Sdk.Namespace, stat_code);
+                .Execute(_Sdk.Namespace, stat_code)
+                .Ok();
             #endregion
-            Assert.IsNotNull(uStat);
-            if (uStat != null)
-                Assert.AreEqual("Updated description.", uStat.Description);
+            Assert.AreEqual("Updated description.", uStat.Description);
 
             #region Delete a stat
             _Sdk.GetSocialApi().StatConfiguration.DeleteStatOp
-                .Execute(_Sdk.Namespace, stat_code);
+                .Execute(_Sdk.Namespace, stat_code)
+                .Ok();
             #endregion
         }
     }

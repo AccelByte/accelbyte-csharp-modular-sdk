@@ -44,8 +44,9 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 Assert.AreEqual(LoginType.Client, _Sdk.Configuration.TokenRepository.LoginType);
             }
 
-            ModelsListServerResponse? aggrs = _Sdk.GetQosmApi().Public.ListServerOp.Execute();
-            Assert.IsNotNull(aggrs);
+            _ = _Sdk.GetQosmApi().Public.ListServerOp
+                .Execute()
+                .Ok();
         }
 
         [Test]
@@ -73,9 +74,11 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 Assert.AreEqual(LoginType.Client, _Sdk.Configuration.TokenRepository.LoginType);
             }
 
-            ModelsListServerResponse? listServers = _Sdk.GetQosmApi().Public.ListServerOp.Execute();
+            ModelsListServerResponse listServers = _Sdk.GetQosmApi().Public.ListServerOp
+                .Execute()
+                .Ok();
 
-            var servers = listServers?.Servers!;
+            var servers = listServers.Servers!;
             string? respIp = string.Empty;
             string? respRegion = string.Empty;
             int? respPort = 0;
@@ -99,7 +102,9 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 Port = respPort,
             };
 
-            _Sdk.GetQosmApi().Server.HeartbeatOp.Execute(createHeartbeat);
+            _Sdk.GetQosmApi().Server.HeartbeatOp
+                .Execute(createHeartbeat)
+                .Ok();
         }
     }
 }
