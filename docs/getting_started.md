@@ -82,9 +82,9 @@ namespace AccelByteExample
 
             try
             {
-                List<RetrieveAcceptedAgreementResponse>? response = sdk.GetLegal().Agreement.RetrieveAgreementsPublicOp.Execute();
-                if (response == null)
-                    throw new Exception("Response is null");
+                List<RetrieveAcceptedAgreementResponse> response = sdk.GetLegal().Agreement.RetrieveAgreementsPublicOp
+                    .Execute()
+                    .Ok(); //this method will check the response and throw an exception if there is any error returned from service
 
                 foreach (var aggreement in response)
                     Console.WriteLine(aggreement.PolicyName);

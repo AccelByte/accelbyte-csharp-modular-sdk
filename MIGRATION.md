@@ -49,6 +49,20 @@ In monolithic version, default token validator is assigned by default. Now you w
 ## Custom Operation
 `Consumes` and `Produces` property is now using `List<string>` instead of string array. Also `Security` property is removed in favor of `Securities` field.
 
+## Call Response
+Different from monolithic version, each operation call will return a response object that contains both response data (if any) and possible error. Use `Ok` method in response object to get get similar behavior as monolithic version. This method also checks whether the response data is null or not. If it is null, it will throw an exception.
+For example:
+```csharp
+// Monolithic version
+List<RetrieveAcceptedAgreementResponse>? response = sdk.GetLegal().Agreement.RetrieveAgreementsPublicOp
+    .Execute();
+
+// Modular version
+List<RetrieveAcceptedAgreementResponse> response = sdk.GetLegal().Agreement.RetrieveAgreementsPublicOp
+    .Execute()
+    .Ok();
+```
+
 # Compatibility Library (Compat Project)
 
 `AccelByte.Sdk.Compat` library provides classes as adapter to monolithic version. `AccelByte.Sdk.Compat` provides `AccelByteSDK` object that has monolithic version of fluent interface access. Also it provides `Helper` class in `AccelByte.Sdk.Core.Util` that map to each respective extension method.

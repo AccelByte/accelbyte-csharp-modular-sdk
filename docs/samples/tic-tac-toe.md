@@ -421,11 +421,11 @@ Both Local server and AWS Lambda function use the same code for tic tac toe logi
 ```csharp
 public string ValidateAuthToken(string authToken)
 {
-	OauthmodelTokenResponseV3? oauthToken = _Sdk.Iam.OAuth20.VerifyTokenV3Op
+	OauthmodelTokenResponseV3 oauthToken = _Sdk.Iam.OAuth20.VerifyTokenV3Op
 		.SetPreferredSecurityMethod(Operation.SECURITY_BASIC)
-		.Execute(authToken);
-	if (oauthToken == null)
-		throw new Exception("NULL oauthToken");
+		.Execute(authToken)
+		.Ok();
+	
 	return oauthToken.UserId!;
 }
 ```
@@ -434,11 +434,11 @@ public string ValidateAuthToken(string authToken)
 ```csharp
 public string GetUsername(string userId)
 {
-	ModelPublicUserResponseV3? userInfo =
+	ModelPublicUserResponseV3 userInfo =
 		_Sdk.Iam.Users.PublicGetUserByUserIdV3Op
-		.Execute(_Sdk.Namespace, userId);
-	if (userInfo == null)
-		throw new Exception("NULL userInfo");
+		.Execute(_Sdk.Namespace, userId)
+		.Ok();
+	
 	return userInfo.UserName!;
 }
 ```
@@ -454,7 +454,8 @@ public void SendNotificationToUser(string userId, string topic, object payload)
 	};
 
 	_Sdk.Lobby.Notification.FreeFormNotificationByUserIDOp
-		.Execute(notifBody, _Sdk.Namespace, userId);
+		.Execute(notifBody, _Sdk.Namespace, userId)
+		.Ok();
 }
 ```
 

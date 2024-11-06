@@ -130,28 +130,38 @@ if (!login)
     Console.WriteLine("Login failed");
 }
 
+
+// Make a call to getMyProfileInfo endpoint
+var response = sdk.GetBasicApi().UserProfile.GetMyProfileInfoOp.Execute(sdk.Namespace);
+if (response.IsSuccess && response.Data != null)
+{
+    UserProfilePrivateInfo profileData = response.Data;
+        
+    // do something with user profile data
+    Console.WriteLine(response.UserId);
+}
+else
+{
+    //if call failed, get the error
+    var error = response.Error;
+    // do someting with call error.
+}
+
+/*
 try
 {
-    // Make a call to getMyProfileInfo endpoint
-    UserProfilePrivateInfo? response = sdk.GetBasicApi().UserProfile.GetMyProfileInfoOp.Execute(sdk.Namespace);
-
-    /*
+    // Or, use Ok() method to do use default error checking and get the response data directly
+    // Ok() method will throw an exception if there is any error or if the data is null.
+    UserProfilePrivateInfo profileData = sdk.GetBasicApi().UserProfile.GetMyProfileInfoOp.Execute(sdk.Namespace).Ok();
     
-    // If you need to modify operation object, first you can build the operation object
-    GetMyProfileInfo operation = sdk.GetBasicApi().UserProfile.GetMyProfileInfoOp
-        .Build(sdk.Namespace);
-
-    // then
-    UserProfilePrivateInfo? response = sdk.GetBasicApi().UserProfile.GetMyProfileInfo(operation);
-
-    */
-
-    Console.WriteLine(response.UserId); // Success response
+    // do something with user profile data
+    Console.WriteLine(response.UserId);
 }
 catch (HttpResponseException e)
 {
     Console.WriteLine(e.Message);
 }
+*/
 ```
 
 ## Logout
@@ -162,6 +172,49 @@ if (!logout)
     // Logout failed
 }
 ```
+
+## Working with Call Response
+Every operation in C# Modular SDK will returns a response object. Use this object to do check whether the call is success or not, get the response data or error object.
+
+- `IsSuccess` property will be `true` if the call is success, otherwise `false`.
+- `Data` property contains response data from service. This property is **optional** depending whether the endpoint has response or not.
+- `Error` property contains error object if call failed, otherwise null.
+
+Known errors are available in `<ServiceName>Errors` static class. E.g `BasicErrors`, `IamErrors`, and so on.
+```csharp
+var response = sdk.GetBasicApi().UserProfile.GetMyProfileInfoOp.Execute(sdk.Namespace);
+if (response.IsSuccess)
+{
+    // do something with response.Data
+}
+else
+{
+    // do something with response.Error
+
+    // get error code
+    string errorCode = response.Error.Code;
+
+    // get error message
+    string errorMessage = response.Error.Message;
+
+    // or throw an exception
+    response.Error.ThrowException();
+
+    // compare to known error to handle more specific error
+    if (response.Error == BasicErrors.Error11440)
+    {
+        //do something if user profile not found.
+    }
+}
+```
+
+Use `Ok()` method as a shorthand to do default error and null checking in response object. This method will return response data directly if the endpoint has response.
+```csharp
+UserProfilePrivateInfo profileData = sdk.GetBasicApi().UserProfile.GetMyProfileInfoOp
+    .Execute(sdk.Namespace)
+    .Ok();
+```
+
 
 ## Enable HTTP Logging
 To enable http logging feature, build the sdk with `EnableLog()`.

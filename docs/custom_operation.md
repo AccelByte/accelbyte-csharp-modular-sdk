@@ -35,7 +35,7 @@ Our example endpoint has this output
   }
 }
 ```
-We need to create model classes that reflect the output.
+We need to create model classes that reflect the output and error response
 ```csharp
 using System;
 using System.Collections.Generic;
@@ -74,11 +74,29 @@ namespace SdkCustomization.CustomOperation
         [JsonPropertyName("paging")]
         public Pagination? Paging { get; set; }
     }
+
+    public class ResponseError
+    {
+        [JsonPropertyName("errorCode")]
+        public int? ErrorCode { get; set; }
+
+        [JsonPropertyName("errorMessage")]
+        public string? ErrorMessage { get; set; }
+
+        public ApiError TranslateToApiError()
+        {
+            return new ApiError(
+                ErrorCode != null ? ErrorCode.Value.ToString() : "",
+                ErrorMessage != null ? ErrorMessage.ToString() : ""
+            );
+        }
+    }
 }
 ```
 
 ## Create an Operation Class
-You can create an operation class following this example. This operation class already include operation builder class.
+You can create an operation class following this example. This operation class already include operation builder class and response class.
+
 ```csharp
 using System;
 using System.Collections.Generic;
@@ -150,9 +168,11 @@ namespace SdkCustomization.CustomOp
                 op.ResponseJsonOptions = ResponseJsonOptions;
 
                 return op;
-            }
+            }            
 
-            public MyCustomResponseModel? Execute(string namespace_)
+            public MyCustomOperation.Response Execute(
+                string namespace_
+            )
             {
                 MyCustomOperation op = Build(
                     namespace_
@@ -163,7 +183,25 @@ namespace SdkCustomization.CustomOp
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
+                    response.ContentType,
+                    response.Payload);
+            }
+
+            public async Task<MyCustomOperation.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                MyCustomOperation op = Build(
+                    namespace_
+                );
+
+                if (_Sdk == null)
+                    throw IncompleteComponentException.NoSdkObject;
+
+                var response = await _Sdk.RunRequestAsync(op);
+                return op.ParseResponse(
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -189,6 +227,24 @@ namespace SdkCustomization.CustomOp
             //or use SECURITY_BASIC for endpoint that only need basic auth using client id and secret._
             Securities.Add(SECURITY_BEARER);
         }
+        #endregion
+
+        #region Response Part        
+        public class Response : ApiResponse<MyCustomResponseModel>
+        {
+
+            public ResponseError? Error400 { get; set; } = null;
+
+            public ResponseError? Error401 { get; set; } = null;
+
+            public ResponseError? Error404 { get; set; } = null;
+
+            public ResponseError? Error500 { get; set; } = null;
+
+
+            protected override string GetFullOperationId() => "SdkCustomization::CustomOp::MyCustomOperation";
+        }
+
         #endregion
 
         //Use existing endpoint only for this sample.
@@ -221,23 +277,45 @@ namespace SdkCustomization.CustomOp
             Securities.Add(SECURITY_BEARER);
         }
 
-        public MyCustomResponseModel? ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public MyCustomOperation.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
+            var response = new MyCustomOperation.Response()
+            {
+                StatusCode = code,
+                ContentType = contentType
+            };
+
             if (code == (HttpStatusCode)204)
             {
-                return null;
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)201)
+            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                return JsonSerializer.Deserialize<MyCustomResponseModel>(payload);
+                response.Data = JsonSerializer.Deserialize<MyCustomResponseModel>(payload, ResponseJsonOptions);
+                response.IsSuccess = true;
             }
-            else if (code == (HttpStatusCode)200)
+            else if (code == (HttpStatusCode)400)
             {
-                return JsonSerializer.Deserialize<MyCustomResponseModel>(payload);
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)500)
+            {
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error500!.TranslateToApiError();
             }
 
-            var payloadString = payload.ReadToString();
-            throw new HttpResponseException(code, payloadString);
+            return response;
         }
     }
 }
@@ -340,7 +418,7 @@ AccelByteSDK sdk = AccelByteSDK.Builder
     .Build();
 
 var response = sdk.GetMyCustomApi().MyCustomWrapper.MyCustomOperationOp
-    .Execute(sdk.Namespace);
+    .Execute(sdk.Namespace).Ok();
 ```
 
 ## Testing
@@ -384,9 +462,9 @@ namespace SdkCustomization.Test1
             if (_Sdk == null)
                 return;
 
-            MyCustomResponseModel? response = _Sdk.GetMyCustomApi().MyCustomWrapper.MyCustomOperationOp
-                .Execute(_Sdk.Namespace);
-            Assert.IsNotNull(response);
+            MyCustomResponseModel response = _Sdk.GetMyCustomApi().MyCustomWrapper.MyCustomOperationOp
+                .Execute(_Sdk.Namespace).Ok();
+            
 
             //You can fill with your test logic after the response is received.
         }
