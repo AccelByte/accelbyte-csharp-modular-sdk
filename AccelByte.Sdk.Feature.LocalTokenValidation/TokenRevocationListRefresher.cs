@@ -39,10 +39,11 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
             var revList = sdk.GetIamApi().OAuth20.GetRevocationListV3Op
                 .SetPreferredSecurityMethod(Operation.SECURITY_BASIC)
                 .Execute();
-            if (revList == null)
+            revList.ThrowExceptionIfError();
+            if (revList.Data == null)
                 throw new Exception("Could not get revocation list.");
 
-            return revList;
+            return revList.Data;
         }
 
         public TokenRevocationListRefresher(int refreshInterval)

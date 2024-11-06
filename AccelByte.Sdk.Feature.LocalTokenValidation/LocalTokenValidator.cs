@@ -24,9 +24,7 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
     {
         private Func<IAccelByteSdk, string, List<LocalPermissionItem>> _FetchFunction = ((sdk, roleId) =>
         {
-            var response = sdk.GetIamApi().Roles.AdminGetRoleV4Op.Execute(roleId);
-            if (response == null)
-                throw new Exception("Null response from Iam::Roles::AdminGetRoleV4Op");
+            var response = sdk.GetIamApi().Roles.AdminGetRoleV4Op.Execute(roleId).Ok();
 
             List<LocalPermissionItem> permissions = new List<LocalPermissionItem>();
             foreach (var item in response.Permissions!)
@@ -44,11 +42,10 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
         private Func<IAccelByteSdk, string, Task<List<LocalPermissionItem>>> _FetchFunctionAsync = (async (sdk, roleId) =>
         {
             var response = await sdk.GetIamApi().Roles.AdminGetRoleV4Op.ExecuteAsync(roleId);
-            if (response == null)
-                throw new Exception("Null response from Iam::Roles::AdminGetRoleV4Op");
+            var responseData = response.Ok();
 
             List<LocalPermissionItem> permissions = new List<LocalPermissionItem>();
-            foreach (var item in response.Permissions!)
+            foreach (var item in responseData.Permissions!)
             {
                 permissions.Add(new LocalPermissionItem()
                 {
@@ -62,9 +59,7 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
 
         private Func<IAccelByteSdk, string, LocalNamespaceContext> _NamespaceFetchFunction = ((sdk, aNamespace) =>
         {
-            var response = sdk.GetBasicApi().Namespace.GetNamespaceContextOp.Execute(aNamespace);
-            if (response == null)
-                throw new Exception("Null response from Basic::Namespace::GetNamespaceContextOp");
+            var response = sdk.GetBasicApi().Namespace.GetNamespaceContextOp.Execute(aNamespace).Ok();            
 
             var context = new LocalNamespaceContext();
             if (response.Namespace != null)
@@ -90,14 +85,13 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
         private Func<IAccelByteSdk, string, Task<LocalNamespaceContext>> _NamespaceFetchFunctionAsync = (async (sdk, aNamespace) =>
         {
             var response = await sdk.GetBasicApi().Namespace.GetNamespaceContextOp.ExecuteAsync(aNamespace);
-            if (response == null)
-                throw new Exception("Null response from Basic::Namespace::GetNamespaceContextOp");
+            var responseData = response.Ok();
 
             var context = new LocalNamespaceContext();
-            if (response.Namespace != null)
-                context.Namespace = response.Namespace;
+            if (responseData.Namespace != null)
+                context.Namespace = responseData.Namespace;
 
-            string sourceType = response.Type!.Value;
+            string sourceType = responseData.Type!.Value;
             if (sourceType == NamespaceContextType.Publisher.Value)
                 context.Type = NamespaceType.Publisher;
             else if (sourceType == NamespaceContextType.Studio.Value)
@@ -105,21 +99,20 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
             else if (sourceType == NamespaceContextType.Game.Value)
                 context.Type = NamespaceType.Game;
 
-            if (response.PublisherNamespace != null)
-                context.PublisherNamespace = response.PublisherNamespace;
+            if (responseData.PublisherNamespace != null)
+                context.PublisherNamespace = responseData.PublisherNamespace;
 
-            if (response.StudioNamespace != null)
-                context.StudioNamespace = response.StudioNamespace;
+            if (responseData.StudioNamespace != null)
+                context.StudioNamespace = responseData.StudioNamespace;
 
             return context;
         });
 
         protected static void FetchJWKS(IAccelByteSdk sdk)
         {
-            OauthcommonJWKSet? tempResp = sdk.GetIamApi().OAuth20.GetJWKSV3Op
+            OauthcommonJWKSet tempResp = sdk.GetIamApi().OAuth20.GetJWKSV3Op
                 .SetPreferredSecurityMethod(Operation.SECURITY_BASIC)
-                .Execute()
-                ?? throw new Exception("Get JWKS response is NULL");
+                .Execute().Ok();
 
             JsonWebKeySets keys = new JsonWebKeySets(tempResp);
             sdk.LocalData[JsonWebKeySets.DATA_KEY] = keys;
@@ -127,10 +120,10 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
 
         protected static async Task FetchJWKSAsync(IAccelByteSdk sdk)
         {
-            OauthcommonJWKSet? tempResp = await sdk.GetIamApi().OAuth20.GetJWKSV3Op
+            var temp = await sdk.GetIamApi().OAuth20.GetJWKSV3Op
                 .SetPreferredSecurityMethod(Operation.SECURITY_BASIC)
-                .ExecuteAsync()
-                ?? throw new Exception("Get JWKS response is NULL");
+                .ExecuteAsync();
+            OauthcommonJWKSet tempResp = temp.Ok();
 
             JsonWebKeySets keys = new JsonWebKeySets(tempResp);
             sdk.LocalData[JsonWebKeySets.DATA_KEY] = keys;
