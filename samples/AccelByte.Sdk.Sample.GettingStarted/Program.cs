@@ -33,9 +33,7 @@ namespace AccelByte.Sdk.Sample.GettingStarted
 
             try
             {
-                List<RetrieveAcceptedAgreementResponse>? response = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublicOp.Execute();
-                if (response == null)
-                    throw new Exception("Response is null");
+                List<RetrieveAcceptedAgreementResponse>? response = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublicOp.Execute().Ok();                
 
                 foreach (var aggreement in response)
                     Console.WriteLine(aggreement.PolicyName);

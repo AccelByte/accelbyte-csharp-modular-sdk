@@ -85,10 +85,12 @@ namespace AccelByte.Sdk.Sample.AsyncOperation
             Random rand = new Random();
             string aCode = $"cs{rand.GenerateRandomId(6)}";
             var newAchievement = CreateAchievementData(aCode);
-            ModelsAchievementResponse? cResp = await sdk.GetAchievementApi().Achievements.AdminCreateNewAchievementOp
+            var response = await sdk.GetAchievementApi().Achievements.AdminCreateNewAchievementOp
                 .ExecuteAsync(newAchievement, sdk.Namespace);
-            if (cResp != null)
-                return cResp;
+            response.ThrowExceptionIfError();
+
+            if (response.Data != null)
+                return response.Data;
             else
                 throw new Exception("NULL response!");
         }
@@ -106,10 +108,11 @@ namespace AccelByte.Sdk.Sample.AsyncOperation
 
                 //Create achievement
                 var newAchievement = CreateAchievementData(aCode);
-                ModelsAchievementResponse? cResp = sdk.GetAchievementApi().Achievements.AdminCreateNewAchievementOp
+                var response = sdk.GetAchievementApi().Achievements.AdminCreateNewAchievementOp
                     .Execute(newAchievement, sdk.Namespace);
-                if (cResp != null)
-                    achievementCodes.Add(cResp.AchievementCode!);
+                response.ThrowExceptionIfError();
+                if (response.Data != null)
+                    achievementCodes.Add(response.Data.AchievementCode!);
 
                 //Delete achievement
                 sdk.GetAchievementApi().Achievements.AdminDeleteAchievementOp
@@ -138,10 +141,11 @@ namespace AccelByte.Sdk.Sample.AsyncOperation
 
                 //Create achievement
                 var newAchievement = CreateAchievementData(aCode);
-                ModelsAchievementResponse? cResp = await sdk.GetAchievementApi().Achievements.AdminCreateNewAchievementOp
+                var response = await sdk.GetAchievementApi().Achievements.AdminCreateNewAchievementOp
                     .ExecuteAsync(newAchievement, sdk.Namespace);
-                if (cResp != null)
-                    achievementCodes.Add(cResp.AchievementCode!);
+                response.ThrowExceptionIfError();
+                if (response.Data != null)
+                    achievementCodes.Add(response.Data.AchievementCode!);
 
                 //Delete achievement
                 await sdk.GetAchievementApi().Achievements.AdminDeleteAchievementOp
