@@ -131,12 +131,11 @@ public class Functions
 
         StatConfiguration wStatConfig = new StatConfiguration(_Sdk);
 
-        StatPagingSlicedResult? result = wStatConfig.GetStats(GetStats.Builder
+        StatPagingSlicedResult result = wStatConfig.GetStats(GetStats.Builder
             .SetOffset(0)
             .SetLimit(10)
-            .Build(_Sdk.Namespace));
-        if (result == null)
-            throw new Exception("Null response from API");
+            .Build(_Sdk.Namespace))
+            .Ok();
 
         return CreateResponseAndLogout(result);
     }
@@ -152,9 +151,10 @@ public class Functions
             if (input == null)
                 throw new Exception("Input is null");
 
-            StatItemIncResult? incResult = wUserStatistic.IncUserStatItemValue(IncUserStatItemValue.Builder
+            StatItemIncResult incResult = wUserStatistic.IncUserStatItemValue(IncUserStatItemValue.Builder
                 .SetBody(input)
-                .Build(_Sdk.Namespace, _ActiveStatCode, user_id));
+                .Build(_Sdk.Namespace, _ActiveStatCode, user_id))
+                .Ok();
 
             return incResult;
         });
@@ -167,11 +167,12 @@ public class Functions
         {
             UserStatistic wUserStatistic = new UserStatistic(_Sdk);
 
-            UserStatItemPagingSlicedResult? result = wUserStatistic.GetUserStatItems(GetUserStatItems.Builder
+            UserStatItemPagingSlicedResult result = wUserStatistic.GetUserStatItems(GetUserStatItems.Builder
                 .SetLimit(10)
                 .SetOffset(0)
                 .SetStatCodes(_ActiveStatCode)
-                .Build(_Sdk.Namespace, user_id));
+                .Build(_Sdk.Namespace, user_id))
+                .Ok();
 
             return result;
         });

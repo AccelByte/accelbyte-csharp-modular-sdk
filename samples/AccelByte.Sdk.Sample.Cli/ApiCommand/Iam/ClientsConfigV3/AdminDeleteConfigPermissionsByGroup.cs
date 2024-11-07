@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             var response = wrapper.AdminDeleteConfigPermissionsByGroup(operation);
             if (response.IsSuccess)
                 return CommandResult.Success("");
-            else if (response.Error != null)
+            else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
                 return CommandResult.Fail("-", "Valid error message unavailable");

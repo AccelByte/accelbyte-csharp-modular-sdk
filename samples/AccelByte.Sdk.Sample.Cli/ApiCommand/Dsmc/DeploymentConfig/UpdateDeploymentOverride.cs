@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
                 else
                     return CommandResult.Fail("-","response data is null.");
             }   
-            else if (response.Error != null)
+            else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
                 return CommandResult.Fail("-", "Valid error message unavailable");
