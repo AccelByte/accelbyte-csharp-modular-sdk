@@ -8,8 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
-using System.IdentityModel.Tokens.Jwt;
 
+#if NET6_0
+using System.IdentityModel.Tokens.Jwt;
+#elif NET8_0_OR_GREATER
+using Microsoft.IdentityModel.JsonWebTokens;
+#endif
 using Microsoft.IdentityModel.Tokens;
 
 using AccelByte.Sdk.Core;
@@ -129,6 +133,7 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
             sdk.LocalData[JsonWebKeySets.DATA_KEY] = keys;
         }
 
+#if NET6_0
         protected static void InternalReadToken(string accessToken, out JwtSecurityToken rawJwt)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -136,7 +141,17 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
                 throw new Exception("Invalid access token format.");
             rawJwt = tokenHandler.ReadJwtToken(accessToken);
         }
+#elif NET8_0_OR_GREATER
+        protected static JsonWebToken InternalReadToken(string accessToken)
+        {
+            var tokenHandler = new JsonWebTokenHandler();
+            if (!tokenHandler.CanReadToken(accessToken))
+                throw new Exception("Invalid access token format.");
+            return tokenHandler.ReadJsonWebToken(accessToken);
+        }
+#endif
 
+#if NET6_0
         protected static void InternalValidateToken(IAccelByteSdk sdk, string accessToken, out JwtSecurityToken rawJwt)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -262,12 +277,152 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
 
             return rawJwt;
         }
+#elif NET8_0_OR_GREATER
+        protected static JsonWebToken InternalValidateToken(IAccelByteSdk sdk, string accessToken)
+        {
+            var tokenHandler = new JsonWebTokenHandler();
+            if (!tokenHandler.CanReadToken(accessToken))
+                throw new Exception("Invalid access token format.");
+
+            TokenRevocationData? tokenData = sdk.LocalData.GetData<TokenRevocationData>(TokenRevocationData.DATA_KEY);
+            if (tokenData != null)
+            {
+                bool isRevoked = tokenData.IsTokenRevoked(accessToken);
+                if (isRevoked)
+                    throw new Exception("Access token is revoked.");
+            }
+
+            var token = tokenHandler.ReadJsonWebToken(accessToken);
+            string keyId = token.Kid.Trim().ToLower();
+            if (keyId == "")
+                throw new Exception("empty 'kid' value in jwt header.");
+
+            JsonWebKeySets? keySets = sdk.LocalData.GetData<JsonWebKeySets>(JsonWebKeySets.DATA_KEY);
+            if (keySets == null)
+            {
+                FetchJWKS(sdk);
+                keySets = sdk.LocalData.GetData<JsonWebKeySets>(JsonWebKeySets.DATA_KEY);
+                if (keySets == null)
+                    throw new Exception("Could not fetch JWKS");
+            }
+
+            if (!keySets.ContainsKey(keyId))
+            {
+                FetchJWKS(sdk);
+                keySets = sdk.LocalData.GetData<JsonWebKeySets>(JsonWebKeySets.DATA_KEY);
+                if (keySets == null)
+                    throw new Exception("Could not fetch JWKS");
+
+                if (!keySets.ContainsKey(keyId))
+                    throw new Exception("No matching JWK set for this token");
+            }
+
+            OauthcommonJWKKey key = keySets[keyId];
+
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+            rsa.ImportParameters(
+              new RSAParameters()
+              {
+                  Modulus = (key.N != null ? key.N.DecodeBase64Url() : new byte[] { }),
+                  Exponent = (key.E != null ? key.E.DecodeBase64Url() : new byte[] { })
+              });
+
+            var validationResult = tokenHandler.ValidateTokenAsync(accessToken, new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new RsaSecurityKey(rsa),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero
+            }).Result;
+
+            if (validationResult == null)
+                throw new Exception("Token validation returns null.");
+
+            if (validationResult.IsValid)
+                return token;
+            else
+                throw validationResult.Exception;
+        }
+
+        protected static async Task<JsonWebToken> InternalValidateTokenAsync(IAccelByteSdk sdk, string accessToken)
+        {
+            var tokenHandler = new JsonWebTokenHandler();
+            if (!tokenHandler.CanReadToken(accessToken))
+                throw new Exception("Invalid access token format.");
+
+            TokenRevocationData? tokenData = sdk.LocalData.GetData<TokenRevocationData>(TokenRevocationData.DATA_KEY);
+            if (tokenData != null)
+            {
+                bool isRevoked = tokenData.IsTokenRevoked(accessToken);
+                if (isRevoked)
+                    throw new Exception("Access token is revoked.");
+            }
+
+            var rawJwt = tokenHandler.ReadJsonWebToken(accessToken);
+            if (rawJwt.TryGetHeaderValue("kid", out string kidValue))
+                throw new Exception("missing 'kid' value in jwt header.");
+            string keyId = kidValue.ToString().ToLower();
+            if (keyId == "")
+                throw new Exception("empty 'kid' value in jwt header.");
+
+            JsonWebKeySets? keySets = sdk.LocalData.GetData<JsonWebKeySets>(JsonWebKeySets.DATA_KEY);
+            if (keySets == null)
+            {
+                await FetchJWKSAsync(sdk);
+                keySets = sdk.LocalData.GetData<JsonWebKeySets>(JsonWebKeySets.DATA_KEY);
+                if (keySets == null)
+                    throw new Exception("Could not fetch JWKS");
+            }
+
+            if (!keySets.ContainsKey(keyId))
+            {
+                await FetchJWKSAsync(sdk);
+                keySets = sdk.LocalData.GetData<JsonWebKeySets>(JsonWebKeySets.DATA_KEY);
+                if (keySets == null)
+                    throw new Exception("Could not fetch JWKS");
+
+                if (!keySets.ContainsKey(keyId))
+                    throw new Exception("No matching JWK set for this token");
+            }
+
+            OauthcommonJWKKey key = keySets[keyId];
+
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+            rsa.ImportParameters(
+              new RSAParameters()
+              {
+                  Modulus = (key.N != null ? key.N.DecodeBase64Url() : new byte[] { }),
+                  Exponent = (key.E != null ? key.E.DecodeBase64Url() : new byte[] { })
+              });
+
+            var validationResult = await tokenHandler.ValidateTokenAsync(accessToken, new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new RsaSecurityKey(rsa),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero
+            });
+
+            if (validationResult.IsValid)
+                return rawJwt;
+            else
+                throw validationResult.Exception;
+        }
+#endif
 
         public bool Validate(IAccelByteSdk sdk, string accessToken)
         {
             try
             {
+#if NET6_0
                 InternalValidateToken(sdk, accessToken, out JwtSecurityToken rawJwt);
+#elif NET8_0_OR_GREATER
+                _ = InternalValidateToken(sdk, accessToken);
+#endif
                 return true;
             }
             catch
@@ -280,8 +435,13 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
         {
             try
             {
+#if NET6_0
                 InternalValidateToken(sdk, accessToken, out JwtSecurityToken rawJwt);
                 AccessTokenPayload payload = AccessTokenPayload.FromToken(rawJwt);
+#elif NET8_0_OR_GREATER
+                var jsonWebToken = InternalValidateToken(sdk, accessToken);
+                AccessTokenPayload payload = AccessTokenPayload.FromToken(jsonWebToken);
+#endif
 
                 bool foundMatchingPermission = false;
                 if ((payload.Permissions != null) && (payload.Permissions.Count > 0))
@@ -339,8 +499,13 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
         {
             try
             {
+#if NET6_0
                 InternalValidateToken(sdk, accessToken, out JwtSecurityToken rawJwt);
                 AccessTokenPayload payload = AccessTokenPayload.FromToken(rawJwt);
+#elif NET8_0_OR_GREATER
+                var jsonWebToken = InternalValidateToken(sdk, accessToken);
+                AccessTokenPayload payload = AccessTokenPayload.FromToken(jsonWebToken);
+#endif
 
                 Dictionary<string, string> pParams = new Dictionary<string, string>();
                 if (aNamespace != null)
@@ -428,7 +593,7 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
         {
             try
             {
-                JwtSecurityToken rawJwt = await InternalValidateTokenAsync(sdk, accessToken);
+                var rawJwt = await InternalValidateTokenAsync(sdk, accessToken);
                 AccessTokenPayload payload = AccessTokenPayload.FromToken(rawJwt);
 
                 bool foundMatchingPermission = false;
@@ -487,7 +652,7 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
         {
             try
             {
-                JwtSecurityToken rawJwt = await InternalValidateTokenAsync(sdk, accessToken);
+                var rawJwt = await InternalValidateTokenAsync(sdk, accessToken);
                 AccessTokenPayload payload = AccessTokenPayload.FromToken(rawJwt);
 
                 Dictionary<string, string> pParams = new Dictionary<string, string>();
@@ -561,6 +726,7 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
 
         public AccessTokenPayload? ParseAccessToken(IAccelByteSdk sdk, string accessToken, bool validateFirst)
         {
+#if NET6_0
             JwtSecurityToken rawJwt;
             try
             {
@@ -573,8 +739,22 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
             {
                 return null;
             }
-
             return AccessTokenPayload.FromToken(rawJwt);
+#elif NET8_0_OR_GREATER
+            try
+            {
+                JsonWebToken jwt;
+                if (validateFirst)
+                    jwt = InternalValidateToken(sdk, accessToken);
+                else
+                    jwt = InternalReadToken(accessToken);
+                return AccessTokenPayload.FromToken(jwt);
+            }
+            catch
+            {
+                return null;
+            }
+#endif
         }
     }
 }

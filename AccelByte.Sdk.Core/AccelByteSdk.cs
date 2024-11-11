@@ -3,6 +3,7 @@
 // and restrictions contact your company contract manager.
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -16,7 +17,7 @@ namespace AccelByte.Sdk.Core
     {
         public static IAccelByteSdkBuilder<AccelByteSdk> Builder { get => new AccelByteSdkBuilder<AccelByteSdk>(); }
 
-        private readonly Dictionary<string, ISdkApi> _ApiObjects = new();
+        private readonly ConcurrentDictionary<string, ISdkApi> _ApiObjects = new();
 
         private readonly List<ISdkService> _Services = new();
 

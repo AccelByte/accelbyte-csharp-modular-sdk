@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2023-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -8,7 +8,11 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+#if NET6_0
 using System.IdentityModel.Tokens.Jwt;
+#elif NET8_0_OR_GREATER
+using Microsoft.IdentityModel.JsonWebTokens;
+#endif
 
 namespace AccelByte.Sdk.Feature.LocalTokenValidation
 {
@@ -111,6 +115,7 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
         [JsonPropertyName("union_namespace")]
         public string? UnionNamespace { get; set; } = null;
 
+#if NET6_0
         public static AccessTokenPayload FromToken(JwtSecurityToken token)
         {
             string snPayload = (token.RawPayload.Length % 4 == 0 ? token.RawPayload : token.RawPayload + "====".Substring(token.RawPayload.Length % 4));
@@ -125,5 +130,21 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
                 throw new Exception("Could not deserialize access token payload.");
             return obj;
         }
+#elif NET8_0_OR_GREATER
+        public static AccessTokenPayload FromToken(JsonWebToken token)
+        {
+            string snPayload = (token.EncodedPayload.Length % 4 == 0 ? token.EncodedPayload : token.EncodedPayload + "====".Substring(token.EncodedPayload.Length % 4));
+            string payload = Encoding.UTF8.GetString(Convert.FromBase64String(snPayload));
+            AccessTokenPayload? obj = JsonSerializer.Deserialize<AccessTokenPayload>(payload, new JsonSerializerOptions()
+            {
+                AllowTrailingCommas = true,
+                ReadCommentHandling = JsonCommentHandling.Skip
+            });
+
+            if (obj == null)
+                throw new Exception("Could not deserialize access token payload.");
+            return obj;
+        }
+#endif
     }
 }

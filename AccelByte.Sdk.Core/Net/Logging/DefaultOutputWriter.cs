@@ -13,6 +13,8 @@ namespace AccelByte.Sdk.Core.Net.Logging
     {
         private string _FilePath = String.Empty;
 
+        private object _FileLock = new object();
+
         public DefaultOutputWriter(string filePath)
         {
             _FilePath = filePath;
@@ -45,7 +47,10 @@ namespace AccelByte.Sdk.Core.Net.Logging
             WriteStringDictionary(keyValues, sb, "");
             sb.AppendLine();
 
-            File.AppendAllText(_FilePath, sb.ToString());
+            lock (_FileLock)
+            {
+                File.AppendAllText(_FilePath, sb.ToString());
+            }            
         }
     }
 }
