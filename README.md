@@ -14,7 +14,7 @@ This SDK was generated from AGS OpenAPI spec files included in the [spec](spec) 
 
 ## Setup
 
-This SDK requires .NET 6.0 SDK to be installed.
+This SDK requires .NET 8.0 SDK to be installed.
 
 ## Usage
 
