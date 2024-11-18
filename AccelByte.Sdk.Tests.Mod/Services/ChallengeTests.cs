@@ -14,6 +14,7 @@ using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Core.Net.Http;
 using AccelByte.Sdk.Api.Challenge.Model;
+using AccelByte.Sdk.Tests.Mod.Scenario;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -22,6 +23,28 @@ namespace AccelByte.Sdk.Tests.Mod.Services
     public class ChallengeTests : BaseServiceTests
     {
         public ChallengeTests() : base(false) { }
+
+        [Test]
+        public void UserRewardTests()
+        {
+            Assert.IsNotNull(_Sdk);
+            if (_Sdk == null)
+                return;
+
+            ITestPlayer player1 = new NewTestPlayer(_Sdk, true);
+            player1.Run((sdk, player) =>
+            {
+                #region Get user rewards
+                var userRewards = sdk.GetChallengeApi().PlayerReward.PublicGetUserRewardsOp
+                    .SetOffset(0)
+                    .SetLimit(10)
+                    .Execute(sdk.Namespace)
+                    .Ok();
+                #endregion
+                Assert.IsNotNull(userRewards);
+            });
+            player1.Logout();
+        }
 
         [Test]
         public void ChallengeAndGoalTests()

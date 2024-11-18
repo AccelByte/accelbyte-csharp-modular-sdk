@@ -9,6 +9,7 @@ using NUnit.Framework;
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Api.Gdpr.Model;
+using AccelByte.Sdk.Tests.Mod.Scenario;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -61,6 +62,39 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .Execute(_Sdk.Namespace, new List<string>() { anotherEmailToTest })
                 .Ok();
             #endregion
+        }
+
+        [Test]
+        public void PersonalDataTests()
+        {
+            Assert.IsNotNull(_Sdk);
+            if (_Sdk == null)
+                return;
+
+            if (IsUsingAGSStarter())
+            {
+                Assert.Inconclusive("Test does not apply to AGS Starter environment.");
+                return;
+            }
+
+            ITestPlayer player1 = new NewTestPlayer(_Sdk, true);
+            try
+            {
+                string userId = player1.UserId;
+
+                #region Get user personal data request
+                var pdRequest = _Sdk.GetGdprApi().DataRetrieval.AdminGetUserPersonalDataRequestsOp
+                    .SetOffset(0)
+                    .SetLimit(10)
+                    .Execute(_Sdk.Namespace, userId)
+                    .Ok();
+                #endregion
+                Assert.IsNotNull(pdRequest);
+            }
+            finally
+            {
+                player1.Logout();
+            }
         }
     }
 }

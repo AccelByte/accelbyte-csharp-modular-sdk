@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using NUnit.Framework;
 
 using AccelByte.Sdk.Core;
@@ -133,6 +134,38 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             _ = _Sdk.GetPlatformApi().Store.DeleteStoreOp
                 .Execute(_Sdk.Namespace, store_id)
                 .Ok();
+        }
+
+        [Test]
+        public void RewardExportImportTests()
+        {
+            Assert.IsNotNull(_Sdk);
+            if (_Sdk == null)
+                return;
+
+            DisableRetry();
+
+            #region Export reward
+            var exportStream = _Sdk.GetPlatformApi().Reward.ExportRewardsOp
+                .Execute(_Sdk.Namespace)
+                .Ok();
+            #endregion
+            Assert.IsNotNull(exportStream);
+            if (exportStream != null)
+            {
+                string exportedData = exportStream.ReadToString();
+
+                MemoryStream dataStream = new MemoryStream(Encoding.UTF8.GetBytes(exportedData));
+
+                #region Import reward
+                _Sdk.GetPlatformApi().Reward.ImportRewardsOp
+                    .SetFile(dataStream)
+                    .Execute(_Sdk.Namespace, true)
+                    .Ok();
+                #endregion
+            }
+
+            ResetPolicy();
         }
     }
 }

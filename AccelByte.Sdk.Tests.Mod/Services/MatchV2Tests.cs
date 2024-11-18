@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -116,6 +116,13 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .Execute(cRuleSetBody, _Sdk.Namespace)
                 .Ok();
             #endregion
+
+            #region Get ruleset details
+            var rulesetPayload = _Sdk.GetMatch2Api().RuleSets.RuleSetDetailsOp
+                .Execute(_Sdk.Namespace, rulesetName)
+                .Ok();
+            #endregion
+            Assert.IsNotNull(rulesetPayload);
 
             #region Create a match pool
             ApiMatchPool createPoolBody = new ApiMatchPool()

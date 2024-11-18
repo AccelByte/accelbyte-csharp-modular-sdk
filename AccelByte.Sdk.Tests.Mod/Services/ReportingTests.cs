@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -11,6 +11,7 @@ using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Core.Net.Http;
 
 using AccelByte.Sdk.Api.Reporting.Model;
+using AccelByte.Sdk.Tests.Mod.Scenario;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -34,7 +35,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             }
 
             Random random = new Random();
-            string title = random.GenerateRandomId(32);
+
+            string reasonTitle = random.GenerateRandomId(32);
             string reasonId = "";
 
             Api.Reporting.Wrapper.AdminReasons wAdminReasons = new Api.Reporting.Wrapper.AdminReasons(_Sdk);
@@ -42,9 +44,9 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Create a Reason
             RestapiCreateReasonRequest createReason = new RestapiCreateReasonRequest()
             {
-                Description = title,
+                Description = reasonTitle,
                 GroupIds = new List<string>(),
-                Title = title,
+                Title = reasonTitle,
             };
 
             RestapiAdminReasonResponse cReason = _Sdk.GetReportingApi().AdminReasons.CreateReasonOp
@@ -56,7 +58,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (cReason.Id != null)
                 reasonId = cReason.Id;
 
-            Assert.AreEqual(title, cReason.Title);
+            Assert.AreEqual(reasonTitle, cReason.Title);
             Assert.True(reasonId != String.Empty);
 
             #region Get single Reason
@@ -65,9 +67,33 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .Ok();
             #endregion
             Assert.IsNotNull(cReason2.Id);
-            Assert.AreEqual(title, cReason2.Title);
+            Assert.AreEqual(reasonTitle, cReason2.Title);
 
-            #region Delete a Reporting
+            ITestPlayer player1 = new NewTestPlayer(_Sdk, true);
+            try
+            {
+                #region Submit report
+                var reportResponse = _Sdk.GetReportingApi().PublicReports.SubmitReportOp
+                .Execute(new RestapiSubmitReportRequest()
+                {
+                    UserId = player1.UserId,
+                    Category = RestapiSubmitReportRequestCategory.UGC,
+                    Reason = reasonTitle,
+                    AdditionalInfo = [],
+                    Comment = reasonTitle,
+                    ExtensionCategory = "UGC",
+                    ObjectId = Guid.NewGuid().ToString().Replace("-", ""),
+                    ObjectType = "file"
+                }, _Sdk.Namespace);
+                #endregion
+                Assert.IsNotNull(reportResponse);
+            }
+            finally
+            {
+                player1.Logout();
+            }
+
+            #region Delete a reason
             _Sdk.GetReportingApi().AdminReasons.DeleteReasonOp
                 .Execute(_Sdk.Namespace, reasonId)
                 .Ok();

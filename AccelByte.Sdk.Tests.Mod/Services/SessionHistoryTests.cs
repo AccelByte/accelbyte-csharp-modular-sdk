@@ -46,6 +46,25 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (mResponse.Data != null)
                 Assert.GreaterOrEqual(mResponse.Data.Count, 0);
 
+            #region Query party details
+            var partyDetails = _Sdk.GetSessionhistoryApi().GameSessionDetail.AdminQueryPartyDetailOp
+                .SetOffset(0)
+                .SetLimit(50)
+                .Execute(_Sdk.Namespace)
+                .Ok();
+            #endregion
+            Assert.IsNotNull(partyDetails);
+
+            string startDate = DateTime.Now.AddDays(-2).ToString("u").Replace(" ", "T");
+            string endDate = DateTime.Now.ToString("u").Replace(" ", "T");
+
+            #region Query total matchmaking match
+            var mmData = _Sdk.GetSessionhistoryApi().XRay.QueryTotalMatchmakingMatchOp
+                .Execute(_Sdk.Namespace, endDate, startDate)
+                .Ok();
+            #endregion
+            Assert.IsNotNull(mmData);
+
             ResetPolicy();
         }
     }

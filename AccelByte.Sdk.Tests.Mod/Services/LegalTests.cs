@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -153,6 +153,13 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             _Sdk.GetLegalApi().Agreement.ChangePreferenceConsentOp
                 .SetBody(aggreementRequests)
                 .Execute(_Sdk.Namespace, userId)
+                .Ok();
+            #endregion
+
+            #region Bulk accept policy
+            _Sdk.GetLegalApi().Agreement.BulkAcceptVersionedPolicyOp
+                .SetBody(aggreementRequests)
+                .Execute()
                 .Ok();
             #endregion
         }

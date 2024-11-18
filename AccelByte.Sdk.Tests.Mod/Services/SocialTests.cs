@@ -1,8 +1,10 @@
-﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
 using System;
+using System.IO;
+using System.Text;
 using System.Collections.Generic;
 using NUnit.Framework;
 
@@ -81,6 +83,115 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .Execute(_Sdk.Namespace, stat_code)
                 .Ok();
             #endregion
+        }
+
+        [Test]
+        public void ExportImportStatTests()
+        {
+            Assert.IsNotNull(_Sdk);
+            if (_Sdk == null)
+                return;
+
+            if (IsUsingAGSStarter())
+            {
+                Assert.Inconclusive("Test does not apply to AGS Starter environment.");
+                return;
+            }
+
+            Random random = new Random();
+            string stat_code = $"csharpsdktest-{random.GenerateRandomAlphabet(4).ToLower()}";
+
+            #region Create stat config
+            var newStat = _Sdk.GetSocialApi().StatConfiguration.CreateStatOp
+                .SetBody(new StatCreate()
+                {
+                    Name = "CSharp Extend SDK Test Stat",
+                    Description = "CSharp Extend Sdk integration test.",
+                    StatCode = stat_code,
+                    SetBy = "SERVER",
+                    Minimum = 0.0,
+                    Maximum = 100.0,
+                    DefaultValue = 50.0,
+                    IncrementOnly = true,
+                    SetAsGlobal = false,
+                    IsPublic = false,
+                    Tags = new List<string>() { "csharp", "extend_sdk", "test" }
+                })
+                .Execute(_Sdk.Namespace)
+                .Ok();
+            #endregion
+            Assert.IsNotNull(newStat);
+
+            #region Get Stats
+            var statData = _Sdk.GetSocialApi().StatConfiguration.GetStatsOp
+                .SetOffset(0)
+                .SetLimit(50)
+                .SetIsGlobal(false)
+                .SetIsPublic(false)
+                .Execute(_Sdk.Namespace)
+                .Ok();
+            #endregion
+
+            bool isFound = false;
+            if (statData.Data != null && statData.Data.Count > 0)
+            {
+                foreach (var statItem in statData.Data)
+                {
+                    if (statItem.StatCode! == stat_code)
+                    {
+                        isFound = true;
+                        break;
+                    }
+                }
+            }
+            Assert.IsTrue(isFound);
+
+            #region Export stat config
+            var exportStream = _Sdk.GetSocialApi().StatConfiguration.ExportStatsOp
+                .Execute(_Sdk.Namespace)
+                .Ok();
+            #endregion
+
+            string exportStr = exportStream.ReadToString();
+
+            //delete first
+            #region Delete a stat config
+            _Sdk.GetSocialApi().StatConfiguration.DeleteStatOp
+                .Execute(_Sdk.Namespace, stat_code);
+            #endregion
+
+            MemoryStream importStream = new MemoryStream(Encoding.UTF8.GetBytes(exportStr));
+            var importStatus = _Sdk.GetSocialApi().StatConfiguration.ImportStatsOp
+                .SetFile(importStream)
+                .SetReplaceExisting(true)
+                .Execute(_Sdk.Namespace)
+                .Ok();
+            Assert.IsNotNull(importStatus);
+
+            #region Query Stats
+            statData = _Sdk.GetSocialApi().StatConfiguration.QueryStatsOp
+                .Execute(_Sdk.Namespace, "csharp")
+                .Ok();
+            #endregion
+
+            isFound = false;
+            if (statData.Data != null && statData.Data.Count > 0)
+            {
+                foreach (var statItem in statData.Data)
+                {
+                    if (statItem.StatCode! == stat_code)
+                    {
+                        isFound = true;
+                        break;
+                    }
+                }
+            }
+            Assert.IsTrue(isFound);
+
+            //delete again
+            _Sdk.GetSocialApi().StatConfiguration.DeleteStatOp
+                .Execute(_Sdk.Namespace, stat_code)
+                .Ok();
         }
     }
 }

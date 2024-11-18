@@ -42,6 +42,13 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .Execute(notifBody, _Sdk.Namespace)
                 .Ok();
             #endregion
+
+            #region Export config
+            var exportStream = _Sdk.GetLobbyApi().Config.AdminExportConfigV1Op
+                .Execute(_Sdk.Namespace)
+                .Ok();
+            #endregion
+            Assert.IsNotNull(exportStream);
         }
 
         [Test]

@@ -213,6 +213,31 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 #endregion
             });
 
+            // Create another new game session
+            string newGameSessionId = "";
+            _Player1.Run((sdk, player) =>
+            {
+                var newGSResponse = sdk.GetSessionApi().GameSession.CreateGameSessionOp
+                    .Execute(new ApimodelsCreateGameSessionRequest()
+                    {
+                        ConfigurationName = cfgTemplateName,
+                    }, sdk.Namespace)
+                    .Ok();
+                Assert.IsNotNull(newGSResponse);
+                if (newGSResponse != null)
+                    newGameSessionId = newGSResponse.Id!;
+            });
+
+            #region Admin delete bulk game session
+            var deleteResponse = _Sdk.GetSessionApi().GameSession.AdminDeleteBulkGameSessionsOp
+                .Execute(new ApimodelsDeleteBulkGameSessionRequest()
+                {
+                    Ids = [newGameSessionId]
+                }, _Sdk.Namespace)
+                .Ok();
+            #endregion
+            Assert.IsNotNull(deleteResponse);
+
             _Sdk.GetSessionApi().ConfigurationTemplate.AdminDeleteConfigurationTemplateV1Op
                 .Execute(cfgTemplateName, _Sdk.Namespace)
                 .Ok();
@@ -339,6 +364,15 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             List<string> userIds = partyData.Members!.Select(item => item.Id!).ToList();
             Assert.Contains(_Player1.UserId, userIds);
             Assert.Contains(_Player2.UserId, userIds);
+
+            #region Admin query parties
+            var adminPartyData = _Sdk.GetSessionApi().Party.AdminQueryPartiesOp
+                .SetOffset(0)
+                .SetLimit(10)
+                .Execute(_Sdk.Namespace)
+                .Ok();
+            #endregion
+            Assert.IsNotNull(adminPartyData);
 
             _Player2.Run((sdk, player) =>
             {
