@@ -18,7 +18,7 @@ pipeline {
     stage('Coverity') {
       agent {
         docker {
-          image 'mcr.microsoft.com/dotnet/sdk:6.0.417-1-bookworm-slim'
+          image 'mcr.microsoft.com/dotnet/sdk:8.0'
           args '-u root:root -v cov-analysis:/opt'
           reuseNode true
         }
