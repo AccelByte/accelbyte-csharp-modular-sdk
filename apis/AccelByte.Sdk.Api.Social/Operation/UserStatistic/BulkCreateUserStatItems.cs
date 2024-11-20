@@ -37,8 +37,6 @@ namespace AccelByte.Sdk.Api.Social.Operation
         {
 
 
-            public List<Model.BulkStatItemCreate>? Body { get; set; }
-
 
 
 
@@ -51,21 +49,17 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            public BulkCreateUserStatItemsBuilder SetBody(List<Model.BulkStatItemCreate> _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public BulkCreateUserStatItems Build(
+                List<BulkStatItemCreate> body,
                 string namespace_,
                 string userId
             )
             {
                 BulkCreateUserStatItems op = new BulkCreateUserStatItems(this,
+                    body,                    
                     namespace_,                    
                     userId                    
                 );
@@ -75,11 +69,13 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
 
             public BulkCreateUserStatItems.Response Execute(
+                List<BulkStatItemCreate> body,
                 string namespace_,
                 string userId
             )
             {
                 BulkCreateUserStatItems op = Build(
+                    body,
                     namespace_,
                     userId
                 );
@@ -94,11 +90,13 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.Payload);
             }
             public async Task<BulkCreateUserStatItems.Response> ExecuteAsync(
+                List<BulkStatItemCreate> body,
                 string namespace_,
                 string userId
             )
             {
                 BulkCreateUserStatItems op = Build(
+                    body,
                     namespace_,
                     userId
                 );
@@ -114,11 +112,13 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
 
             public BulkCreateUserStatItems.Response<T1> Execute<T1>(
+                List<BulkStatItemCreate> body,
                 string namespace_,
                 string userId
             )
             {
                 BulkCreateUserStatItems op = Build(
+                    body,
                     namespace_,
                     userId
                 );
@@ -133,11 +133,13 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.Payload);
             }
             public async Task<BulkCreateUserStatItems.Response<T1>> ExecuteAsync<T1>(
+                List<BulkStatItemCreate> body,
                 string namespace_,
                 string userId
             )
             {
                 BulkCreateUserStatItems op = Build(
+                    body,
                     namespace_,
                     userId
                 );
@@ -154,6 +156,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
         }
 
         private BulkCreateUserStatItems(BulkCreateUserStatItemsBuilder builder,
+            List<BulkStatItemCreate> body,
             string namespace_,
             string userId
         )
@@ -165,7 +168,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
             
             
-            BodyParams = builder.Body;
+            BodyParams = body;
             
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);

@@ -47,8 +47,6 @@ namespace AccelByte.Sdk.Api.Social.Operation
         {
 
 
-            public Model.StatCycleCreate? Body { get; set; }
-
 
 
 
@@ -61,20 +59,16 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            public CreateStatCycleBuilder SetBody(Model.StatCycleCreate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public CreateStatCycle Build(
+                StatCycleCreate body,
                 string namespace_
             )
             {
                 CreateStatCycle op = new CreateStatCycle(this,
+                    body,                    
                     namespace_                    
                 );
 
@@ -83,10 +77,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
 
             public CreateStatCycle.Response Execute(
+                StatCycleCreate body,
                 string namespace_
             )
             {
                 CreateStatCycle op = Build(
+                    body,
                     namespace_
                 );
 
@@ -100,10 +96,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.Payload);
             }
             public async Task<CreateStatCycle.Response> ExecuteAsync(
+                StatCycleCreate body,
                 string namespace_
             )
             {
                 CreateStatCycle op = Build(
+                    body,
                     namespace_
                 );
 
@@ -119,6 +117,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
         }
 
         private CreateStatCycle(CreateStatCycleBuilder builder,
+            StatCycleCreate body,
             string namespace_
         )
         {
@@ -128,7 +127,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
             
             
-            BodyParams = builder.Body;
+            BodyParams = body;
             
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);

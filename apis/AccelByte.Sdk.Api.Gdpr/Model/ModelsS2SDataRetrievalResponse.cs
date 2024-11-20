@@ -18,6 +18,9 @@ namespace AccelByte.Sdk.Api.Gdpr.Model
         [JsonPropertyName("requestDate")]
         public DateTime? RequestDate { get; set; }
 
+        [JsonPropertyName("requestId")]
+        public string? RequestId { get; set; }
+
         [JsonPropertyName("userId")]
         public string? UserId { get; set; }
 

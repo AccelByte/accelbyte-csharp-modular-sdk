@@ -17,7 +17,6 @@ namespace AccelByte.Sdk.Api.Session.Model
         public Dictionary<string, object>? Attributes { get; set; }
 
         [JsonPropertyName("code")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Code { get; set; }
 
         [JsonPropertyName("configuration")]
@@ -70,7 +69,6 @@ namespace AccelByte.Sdk.Api.Session.Model
         public T1? Attributes { get; set; }
 
         [JsonPropertyName("code")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Code { get; set; }
 
         [JsonPropertyName("configuration")]

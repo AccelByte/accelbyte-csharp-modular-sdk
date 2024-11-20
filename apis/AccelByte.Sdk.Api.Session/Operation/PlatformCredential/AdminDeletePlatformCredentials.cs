@@ -153,7 +153,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { "application/json" };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
         

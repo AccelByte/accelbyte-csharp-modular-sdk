@@ -41,7 +41,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
             public long? Offset { get; set; }
 
-            public string? SortBy { get; set; }
+            public ListGlobalAchievementContributorsSortBy? SortBy { get; set; }
 
 
 
@@ -67,7 +67,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                 return this;
             }
 
-            public ListGlobalAchievementContributorsBuilder SetSortBy(string _sortBy)
+            public ListGlobalAchievementContributorsBuilder SetSortBy(ListGlobalAchievementContributorsSortBy _sortBy)
             {
                 SortBy = _sortBy;
                 return this;
@@ -141,7 +141,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
-            if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy;
+            if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy.Value;
             
 
             
@@ -173,7 +173,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             string namespace_,            
             long? limit,            
             long? offset,            
-            string? sortBy            
+            ListGlobalAchievementContributorsSortBy? sortBy            
         )
         {
             PathParams["achievementCode"] = achievementCode;
@@ -181,7 +181,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
-            if (sortBy is not null) QueryParams["sortBy"] = sortBy;
+            if (sortBy is not null) QueryParams["sortBy"] = sortBy.Value;
             
 
             
@@ -233,6 +233,30 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
 
             return response;
+        }
+    }
+
+    public class ListGlobalAchievementContributorsSortBy : StringEnum<ListGlobalAchievementContributorsSortBy>
+    {
+        public static readonly ListGlobalAchievementContributorsSortBy ContributedValue
+            = new ListGlobalAchievementContributorsSortBy("contributedValue");
+
+        public static readonly ListGlobalAchievementContributorsSortBy ContributedValueasc
+            = new ListGlobalAchievementContributorsSortBy("contributedValue:asc");
+
+        public static readonly ListGlobalAchievementContributorsSortBy ContributedValuedesc
+            = new ListGlobalAchievementContributorsSortBy("contributedValue:desc");
+
+
+        public static implicit operator ListGlobalAchievementContributorsSortBy(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ListGlobalAchievementContributorsSortBy(string enumValue)
+            : base(enumValue)
+        {
+
         }
     }
 

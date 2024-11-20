@@ -34,6 +34,17 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
 
         #region Operation Builders
+        public DeletePolicy.DeletePolicyBuilder DeletePolicyOp
+        {
+            get
+            {
+                var opBuilder = new Operation.DeletePolicy.DeletePolicyBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public UpdatePolicy1.UpdatePolicy1Builder UpdatePolicy1Op
         {
             get
@@ -58,6 +69,22 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
         #endregion
 
+        public DeletePolicy.Response DeletePolicy(DeletePolicy input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeletePolicy.Response> DeletePolicyAsync(DeletePolicy input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public UpdatePolicy1.Response UpdatePolicy1(UpdatePolicy1 input)
         {
             var response = _sdk.RunRequest(input);

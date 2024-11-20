@@ -50,7 +50,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     /// "allowInviteNonConnectedUser",
     /// "keepPresenceActivityOnDisconnect",
     /// "maxDSWaitTime",
-    /// "maxFriendsLimit"
+    /// "maxFriendsLimit",
+    /// "requestMetadataMaxSize"
     /// ],
     /// "properties": {
     /// "allowInviteNonConnectedUser": {
@@ -125,6 +126,10 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     /// "readyConsentTimeout": {
     /// "type": "integer",
     /// "format": "int64"
+    /// },
+    /// "requestMetadataMaxSize": {
+    /// "type": "integer",
+    /// "format": "int32"
     /// },
     /// "unregisterDelay": {
     /// "type": "integer",

@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Legal.Model
 {
@@ -19,6 +21,15 @@ namespace AccelByte.Sdk.Api.Legal.Model
         [JsonPropertyName("affectedCountries")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? AffectedCountries { get; set; }
+
+        [JsonPropertyName("countryGroupName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? CountryGroupName { get; set; }
+
+        [JsonPropertyName("countryType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public CreateBasePolicyResponseCountryType? CountryType { get; set; }
 
         [JsonPropertyName("createdAt")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -66,4 +77,25 @@ namespace AccelByte.Sdk.Api.Legal.Model
     }
 
 
+
+    public class CreateBasePolicyResponseCountryType : StringEnum<CreateBasePolicyResponseCountryType>
+    {
+        public static readonly CreateBasePolicyResponseCountryType COUNTRY
+            = new CreateBasePolicyResponseCountryType("COUNTRY");
+
+        public static readonly CreateBasePolicyResponseCountryType COUNTRYGROUP
+            = new CreateBasePolicyResponseCountryType("COUNTRY_GROUP");
+
+
+        public static implicit operator CreateBasePolicyResponseCountryType(string value)
+        {
+            return NewValue(value);
+        }
+
+        public CreateBasePolicyResponseCountryType(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

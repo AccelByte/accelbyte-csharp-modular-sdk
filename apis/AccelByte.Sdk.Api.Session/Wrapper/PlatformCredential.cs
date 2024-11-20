@@ -67,6 +67,28 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     return opBuilder;
             }
         }
+        public AdminDeletePlatformCredentialsByPlatformId.AdminDeletePlatformCredentialsByPlatformIdBuilder AdminDeletePlatformCredentialsByPlatformIdOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminDeletePlatformCredentialsByPlatformId.AdminDeletePlatformCredentialsByPlatformIdBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public AdminSyncPlatformCredentials.AdminSyncPlatformCredentialsBuilder AdminSyncPlatformCredentialsOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminSyncPlatformCredentials.AdminSyncPlatformCredentialsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         #endregion
 
         public AdminGetPlatformCredentials.Response AdminGetPlatformCredentials(AdminGetPlatformCredentials input)
@@ -110,6 +132,38 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.Payload);
         }
         public async Task<AdminDeletePlatformCredentials.Response> AdminDeletePlatformCredentialsAsync(AdminDeletePlatformCredentials input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminDeletePlatformCredentialsByPlatformId.Response AdminDeletePlatformCredentialsByPlatformId(AdminDeletePlatformCredentialsByPlatformId input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminDeletePlatformCredentialsByPlatformId.Response> AdminDeletePlatformCredentialsByPlatformIdAsync(AdminDeletePlatformCredentialsByPlatformId input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminSyncPlatformCredentials.Response AdminSyncPlatformCredentials(AdminSyncPlatformCredentials input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminSyncPlatformCredentials.Response> AdminSyncPlatformCredentialsAsync(AdminSyncPlatformCredentials input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

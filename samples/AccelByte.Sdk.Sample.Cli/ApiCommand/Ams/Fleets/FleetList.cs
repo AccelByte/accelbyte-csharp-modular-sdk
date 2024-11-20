@@ -30,6 +30,15 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
+        [SdkCommandArgument("active")]
+        public bool? Active { get; set; }
+
+        [SdkCommandArgument("name")]
+        public string? Name { get; set; }
+
+        [SdkCommandArgument("region")]
+        public string? Region { get; set; }
+
         public FleetListCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -41,6 +50,12 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 
             var opBuilder = AccelByte.Sdk.Api.Ams.Operation.FleetList.Builder;
 
+            if (Active != null)
+                opBuilder.SetActive((bool)Active);
+            if (Name != null)
+                opBuilder.SetName((string)Name);
+            if (Region != null)
+                opBuilder.SetRegion((string)Region);
 
 
 

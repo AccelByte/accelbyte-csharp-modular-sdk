@@ -28,17 +28,6 @@ namespace AccelByte.Sdk.Api.Cloudsave
         }
         private Wrapper.AdminRecord? _AdminRecord = null;
 
-        public Wrapper.AdminGameBinaryRecord AdminGameBinaryRecord
-        {
-            get
-            {
-                if (_AdminGameBinaryRecord == null)
-                    _AdminGameBinaryRecord = new Wrapper.AdminGameBinaryRecord(_Sdk, _CustomBasePath);
-                return _AdminGameBinaryRecord;
-            }
-        }
-        private Wrapper.AdminGameBinaryRecord? _AdminGameBinaryRecord = null;
-
         public Wrapper.TTLConfig TTLConfig
         {
             get
@@ -49,6 +38,17 @@ namespace AccelByte.Sdk.Api.Cloudsave
             }
         }
         private Wrapper.TTLConfig? _TTLConfig = null;
+
+        public Wrapper.AdminGameBinaryRecord AdminGameBinaryRecord
+        {
+            get
+            {
+                if (_AdminGameBinaryRecord == null)
+                    _AdminGameBinaryRecord = new Wrapper.AdminGameBinaryRecord(_Sdk, _CustomBasePath);
+                return _AdminGameBinaryRecord;
+            }
+        }
+        private Wrapper.AdminGameBinaryRecord? _AdminGameBinaryRecord = null;
 
         public Wrapper.AdminConcurrentRecord AdminConcurrentRecord
         {

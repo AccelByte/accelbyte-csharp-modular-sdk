@@ -39,8 +39,6 @@ namespace AccelByte.Sdk.Api.Social.Operation
         {
 
 
-            public List<Model.BulkUserStatItemReset>? Body { get; set; }
-
 
 
 
@@ -53,20 +51,16 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            public BulkResetUserStatItem2Builder SetBody(List<Model.BulkUserStatItemReset> _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public BulkResetUserStatItem2 Build(
+                List<BulkUserStatItemReset> body,
                 string namespace_
             )
             {
                 BulkResetUserStatItem2 op = new BulkResetUserStatItem2(this,
+                    body,                    
                     namespace_                    
                 );
 
@@ -75,10 +69,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
 
             public BulkResetUserStatItem2.Response Execute(
+                List<BulkUserStatItemReset> body,
                 string namespace_
             )
             {
                 BulkResetUserStatItem2 op = Build(
+                    body,
                     namespace_
                 );
 
@@ -92,10 +88,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.Payload);
             }
             public async Task<BulkResetUserStatItem2.Response> ExecuteAsync(
+                List<BulkUserStatItemReset> body,
                 string namespace_
             )
             {
                 BulkResetUserStatItem2 op = Build(
+                    body,
                     namespace_
                 );
 
@@ -110,10 +108,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
 
             public BulkResetUserStatItem2.Response<T1> Execute<T1>(
+                List<BulkUserStatItemReset> body,
                 string namespace_
             )
             {
                 BulkResetUserStatItem2 op = Build(
+                    body,
                     namespace_
                 );
 
@@ -127,10 +127,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.Payload);
             }
             public async Task<BulkResetUserStatItem2.Response<T1>> ExecuteAsync<T1>(
+                List<BulkUserStatItemReset> body,
                 string namespace_
             )
             {
                 BulkResetUserStatItem2 op = Build(
+                    body,
                     namespace_
                 );
 
@@ -146,6 +148,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
         }
 
         private BulkResetUserStatItem2(BulkResetUserStatItem2Builder builder,
+            List<BulkUserStatItemReset> body,
             string namespace_
         )
         {
@@ -155,7 +158,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
             
             
-            BodyParams = builder.Body;
+            BodyParams = body;
             
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);

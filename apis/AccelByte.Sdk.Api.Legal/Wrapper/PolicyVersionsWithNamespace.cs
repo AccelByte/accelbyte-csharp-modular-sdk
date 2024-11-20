@@ -34,6 +34,17 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
 
         #region Operation Builders
+        public DeletePolicyVersion.DeletePolicyVersionBuilder DeletePolicyVersionOp
+        {
+            get
+            {
+                var opBuilder = new Operation.DeletePolicyVersion.DeletePolicyVersionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public UpdatePolicyVersion1.UpdatePolicyVersion1Builder UpdatePolicyVersion1Op
         {
             get
@@ -50,6 +61,17 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
             get
             {
                 var opBuilder = new Operation.PublishPolicyVersion1.PublishPolicyVersion1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public UnpublishPolicyVersion.UnpublishPolicyVersionBuilder UnpublishPolicyVersionOp
+        {
+            get
+            {
+                var opBuilder = new Operation.UnpublishPolicyVersion.UnpublishPolicyVersionBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -80,6 +102,22 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
         #endregion
 
+        public DeletePolicyVersion.Response DeletePolicyVersion(DeletePolicyVersion input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeletePolicyVersion.Response> DeletePolicyVersionAsync(DeletePolicyVersion input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public UpdatePolicyVersion1.Response UpdatePolicyVersion1(UpdatePolicyVersion1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -105,6 +143,22 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.Payload);
         }
         public async Task<PublishPolicyVersion1.Response> PublishPolicyVersion1Async(PublishPolicyVersion1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public UnpublishPolicyVersion.Response UnpublishPolicyVersion(UnpublishPolicyVersion input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UnpublishPolicyVersion.Response> UnpublishPolicyVersionAsync(UnpublishPolicyVersion input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

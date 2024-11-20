@@ -7,13 +7,16 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Group.Model
 {
     public class ModelsRule : AccelByte.Sdk.Core.Model
     {
         [JsonPropertyName("allowedAction")]
-        public string? AllowedAction { get; set; }
+        [JsonStringEnum]
+        public ModelsRuleAllowedAction? AllowedAction { get; set; }
 
         [JsonPropertyName("ruleDetail")]
         public List<ModelsRuleInformation>? RuleDetail { get; set; }
@@ -21,4 +24,25 @@ namespace AccelByte.Sdk.Api.Group.Model
     }
 
 
+
+    public class ModelsRuleAllowedAction : StringEnum<ModelsRuleAllowedAction>
+    {
+        public static readonly ModelsRuleAllowedAction CreateGroup
+            = new ModelsRuleAllowedAction("createGroup");
+
+        public static readonly ModelsRuleAllowedAction JoinGroup
+            = new ModelsRuleAllowedAction("joinGroup");
+
+
+        public static implicit operator ModelsRuleAllowedAction(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ModelsRuleAllowedAction(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

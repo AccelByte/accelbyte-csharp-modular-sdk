@@ -40,8 +40,6 @@ namespace AccelByte.Sdk.Api.Social.Operation
         {
 
 
-            public Model.StatUpdate? Body { get; set; }
-
 
 
 
@@ -54,21 +52,17 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            public UpdateStatBuilder SetBody(Model.StatUpdate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public UpdateStat Build(
+                StatUpdate body,
                 string namespace_,
                 string statCode
             )
             {
                 UpdateStat op = new UpdateStat(this,
+                    body,                    
                     namespace_,                    
                     statCode                    
                 );
@@ -78,11 +72,13 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
 
             public UpdateStat.Response Execute(
+                StatUpdate body,
                 string namespace_,
                 string statCode
             )
             {
                 UpdateStat op = Build(
+                    body,
                     namespace_,
                     statCode
                 );
@@ -97,11 +93,13 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.Payload);
             }
             public async Task<UpdateStat.Response> ExecuteAsync(
+                StatUpdate body,
                 string namespace_,
                 string statCode
             )
             {
                 UpdateStat op = Build(
+                    body,
                     namespace_,
                     statCode
                 );
@@ -118,6 +116,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
         }
 
         private UpdateStat(UpdateStatBuilder builder,
+            StatUpdate body,
             string namespace_,
             string statCode
         )
@@ -129,7 +128,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
             
             
-            BodyParams = builder.Body;
+            BodyParams = body;
             
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
@@ -147,6 +146,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
             public ErrorEntity? Error403 { get; set; } = null;
 
             public ErrorEntity? Error404 { get; set; } = null;
+
+            public ValidationErrorEntity? Error422 { get; set; } = null;
 
             public ErrorEntity? Error500 { get; set; } = null;
 
@@ -219,6 +220,11 @@ namespace AccelByte.Sdk.Api.Social.Operation
             {
                 response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)422)
+            {
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {

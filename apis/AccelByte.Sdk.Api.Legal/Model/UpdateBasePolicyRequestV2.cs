@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Legal.Model
 {
@@ -23,6 +25,15 @@ namespace AccelByte.Sdk.Api.Legal.Model
         [JsonPropertyName("basePolicyName")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? BasePolicyName { get; set; }
+
+        [JsonPropertyName("countryGroupName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? CountryGroupName { get; set; }
+
+        [JsonPropertyName("countryType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public UpdateBasePolicyRequestV2CountryType? CountryType { get; set; }
 
         [JsonPropertyName("description")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -43,4 +54,25 @@ namespace AccelByte.Sdk.Api.Legal.Model
     }
 
 
+
+    public class UpdateBasePolicyRequestV2CountryType : StringEnum<UpdateBasePolicyRequestV2CountryType>
+    {
+        public static readonly UpdateBasePolicyRequestV2CountryType COUNTRY
+            = new UpdateBasePolicyRequestV2CountryType("COUNTRY");
+
+        public static readonly UpdateBasePolicyRequestV2CountryType COUNTRYGROUP
+            = new UpdateBasePolicyRequestV2CountryType("COUNTRY_GROUP");
+
+
+        public static implicit operator UpdateBasePolicyRequestV2CountryType(string value)
+        {
+            return NewValue(value);
+        }
+
+        public UpdateBasePolicyRequestV2CountryType(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

@@ -198,6 +198,7 @@
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements` | POST | GrantUserEntitlement | [GrantUserEntitlement](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/GrantUserEntitlement.cs) | [GrantUserEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GrantUserEntitlement.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/byAppId` | GET | GetUserAppEntitlementByAppId | [GetUserAppEntitlementByAppId](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/GetUserAppEntitlementByAppId.cs) | [GetUserAppEntitlementByAppId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GetUserAppEntitlementByAppId.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/byAppType` | GET | QueryUserEntitlementsByAppType | [QueryUserEntitlementsByAppType](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/QueryUserEntitlementsByAppType.cs) | [QueryUserEntitlementsByAppType](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/QueryUserEntitlementsByAppType.cs) |
+| `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/byIds` | GET | GetUserEntitlementsByIds | [GetUserEntitlementsByIds](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/GetUserEntitlementsByIds.cs) | [GetUserEntitlementsByIds](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GetUserEntitlementsByIds.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/byItemId` | GET | GetUserEntitlementByItemId | [GetUserEntitlementByItemId](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/GetUserEntitlementByItemId.cs) | [GetUserEntitlementByItemId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GetUserEntitlementByItemId.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/byItemIds` | GET | GetUserActiveEntitlementsByItemIds | [GetUserActiveEntitlementsByItemIds](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/GetUserActiveEntitlementsByItemIds.cs) | [GetUserActiveEntitlementsByItemIds](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GetUserActiveEntitlementsByItemIds.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/bySku` | GET | GetUserEntitlementBySku | [GetUserEntitlementBySku](../../apis/AccelByte.Sdk.Api.Platform/Operation/Entitlement/GetUserEntitlementBySku.cs) | [GetUserEntitlementBySku](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Entitlement/GetUserEntitlementBySku.cs) |
@@ -263,6 +264,7 @@
 |---|---|---|---|---|
 | `/platform/admin/namespaces/{namespace}/iap/clawback/histories` | GET | QueryIAPClawbackHistory | [QueryIAPClawbackHistory](../../apis/AccelByte.Sdk.Api.Platform/Operation/Clawback/QueryIAPClawbackHistory.cs) | [QueryIAPClawbackHistory](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Clawback/QueryIAPClawbackHistory.cs) |
 | `/platform/admin/namespaces/{namespace}/iap/clawback/playstation/mock` | POST | MockPlayStationStreamEvent | [MockPlayStationStreamEvent](../../apis/AccelByte.Sdk.Api.Platform/Operation/Clawback/MockPlayStationStreamEvent.cs) | [MockPlayStationStreamEvent](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Clawback/MockPlayStationStreamEvent.cs) |
+| `/platform/admin/namespaces/{namespace}/iap/clawback/xbl/mock` | POST | MockXblClawbackEvent | [MockXblClawbackEvent](../../apis/AccelByte.Sdk.Api.Platform/Operation/Clawback/MockXblClawbackEvent.cs) | [MockXblClawbackEvent](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Clawback/MockXblClawbackEvent.cs) |
 
 ### IAP Wrapper:  [IAP](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/IAP.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -299,6 +301,7 @@
 | `/platform/admin/namespaces/{namespace}/iap/config/xbl` | PUT | UpdateXblIAPConfig | [UpdateXblIAPConfig](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/UpdateXblIAPConfig.cs) | [UpdateXblIAPConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/UpdateXblIAPConfig.cs) |
 | `/platform/admin/namespaces/{namespace}/iap/config/xbl` | DELETE | DeleteXblAPConfig | [DeleteXblAPConfig](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/DeleteXblAPConfig.cs) | [DeleteXblAPConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/DeleteXblAPConfig.cs) |
 | `/platform/admin/namespaces/{namespace}/iap/config/xbl/cert` | PUT | UpdateXblBPCertFile | [UpdateXblBPCertFile](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/UpdateXblBPCertFile.cs) | [UpdateXblBPCertFile](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/UpdateXblBPCertFile.cs) |
+| `/platform/admin/namespaces/{namespace}/iap/{iapOrderNo}/consumedetails` | GET | GetIAPOrderConsumeDetails | [GetIAPOrderConsumeDetails](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/GetIAPOrderConsumeDetails.cs) | [GetIAPOrderConsumeDetails](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/GetIAPOrderConsumeDetails.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/iap` | GET | QueryUserIAPOrders | [QueryUserIAPOrders](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/QueryUserIAPOrders.cs) | [QueryUserIAPOrders](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/QueryUserIAPOrders.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/iap/all` | GET | QueryAllUserIAPOrders | [QueryAllUserIAPOrders](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/QueryAllUserIAPOrders.cs) | [QueryAllUserIAPOrders](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/QueryAllUserIAPOrders.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/iap/consume/history` | GET | QueryUserIAPConsumeHistory | [QueryUserIAPConsumeHistory](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/QueryUserIAPConsumeHistory.cs) | [QueryUserIAPConsumeHistory](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/QueryUserIAPConsumeHistory.cs) |
@@ -685,6 +688,7 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 | `/platform/admin/namespaces/{namespace}/iap/clawback/playstation/mock` | POST | MockPlayStationStreamEvent | [MockPlayStationStreamEvent](../../apis/AccelByte.Sdk.Api.Platform/Operation/Clawback/MockPlayStationStreamEvent.cs) | [MockPlayStationStreamEvent](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Clawback/MockPlayStationStreamEvent.cs) |
+| `/platform/admin/namespaces/{namespace}/iap/clawback/xbl/mock` | POST | MockXblClawbackEvent | [MockXblClawbackEvent](../../apis/AccelByte.Sdk.Api.Platform/Operation/Clawback/MockXblClawbackEvent.cs) | [MockXblClawbackEvent](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Clawback/MockXblClawbackEvent.cs) |
 
 ### IAP Wrapper:  [IAP](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/IAP.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -993,6 +997,7 @@
 | `IAPItemEntry` | [IAPItemEntry](../../apis/AccelByte.Sdk.Api.Platform/Model/IAPItemEntry.cs) |
 | `IAPItemFlatEntry` | [IAPItemFlatEntry](../../apis/AccelByte.Sdk.Api.Platform/Model/IAPItemFlatEntry.cs) |
 | `IAPItemMappingInfo` | [IAPItemMappingInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/IAPItemMappingInfo.cs) |
+| `IAPOrderConsumeDetailInfo` | [IAPOrderConsumeDetailInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/IAPOrderConsumeDetailInfo.cs) |
 | `IAPOrderInfo` | [IAPOrderInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/IAPOrderInfo.cs) |
 | `IAPOrderPagingSlicedResult` | [IAPOrderPagingSlicedResult](../../apis/AccelByte.Sdk.Api.Platform/Model/IAPOrderPagingSlicedResult.cs) |
 | `Image` | [Image](../../apis/AccelByte.Sdk.Api.Platform/Model/Image.cs) |
@@ -1258,6 +1263,9 @@
 | `WxPayConfigInfo` | [WxPayConfigInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/WxPayConfigInfo.cs) |
 | `WxPayConfigRequest` | [WxPayConfigRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/WxPayConfigRequest.cs) |
 | `XblAchievementUpdateRequest` | [XblAchievementUpdateRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/XblAchievementUpdateRequest.cs) |
+| `XblClawbackContractV2` | [XblClawbackContractV2](../../apis/AccelByte.Sdk.Api.Platform/Model/XblClawbackContractV2.cs) |
+| `XblClawbackEvent` | [XblClawbackEvent](../../apis/AccelByte.Sdk.Api.Platform/Model/XblClawbackEvent.cs) |
+| `XblClawbackEventSubscriptionData` | [XblClawbackEventSubscriptionData](../../apis/AccelByte.Sdk.Api.Platform/Model/XblClawbackEventSubscriptionData.cs) |
 | `XblDLCSyncRequest` | [XblDLCSyncRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/XblDLCSyncRequest.cs) |
 | `XblEntitlementOwnershipRequest` | [XblEntitlementOwnershipRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/XblEntitlementOwnershipRequest.cs) |
 | `XblIAPConfigInfo` | [XblIAPConfigInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/XblIAPConfigInfo.cs) |

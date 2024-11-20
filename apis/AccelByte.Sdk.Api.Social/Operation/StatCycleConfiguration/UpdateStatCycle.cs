@@ -37,8 +37,6 @@ namespace AccelByte.Sdk.Api.Social.Operation
         {
 
 
-            public Model.StatCycleUpdate? Body { get; set; }
-
 
 
 
@@ -51,21 +49,17 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            public UpdateStatCycleBuilder SetBody(Model.StatCycleUpdate _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public UpdateStatCycle Build(
+                StatCycleUpdate body,
                 string cycleId,
                 string namespace_
             )
             {
                 UpdateStatCycle op = new UpdateStatCycle(this,
+                    body,                    
                     cycleId,                    
                     namespace_                    
                 );
@@ -75,11 +69,13 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
 
             public UpdateStatCycle.Response Execute(
+                StatCycleUpdate body,
                 string cycleId,
                 string namespace_
             )
             {
                 UpdateStatCycle op = Build(
+                    body,
                     cycleId,
                     namespace_
                 );
@@ -94,11 +90,13 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.Payload);
             }
             public async Task<UpdateStatCycle.Response> ExecuteAsync(
+                StatCycleUpdate body,
                 string cycleId,
                 string namespace_
             )
             {
                 UpdateStatCycle op = Build(
+                    body,
                     cycleId,
                     namespace_
                 );
@@ -115,6 +113,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
         }
 
         private UpdateStatCycle(UpdateStatCycleBuilder builder,
+            StatCycleUpdate body,
             string cycleId,
             string namespace_
         )
@@ -126,7 +125,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
             
             
-            BodyParams = builder.Body;
+            BodyParams = body;
             
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);

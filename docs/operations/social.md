@@ -216,6 +216,8 @@
 | `BulkUserStatItemInc` | [BulkUserStatItemInc](../../apis/AccelByte.Sdk.Api.Social/Model/BulkUserStatItemInc.cs) |
 | `BulkUserStatItemReset` | [BulkUserStatItemReset](../../apis/AccelByte.Sdk.Api.Social/Model/BulkUserStatItemReset.cs) |
 | `BulkUserStatItemUpdate` | [BulkUserStatItemUpdate](../../apis/AccelByte.Sdk.Api.Social/Model/BulkUserStatItemUpdate.cs) |
+| `CycleOverride` | [CycleOverride](../../apis/AccelByte.Sdk.Api.Social/Model/CycleOverride.cs) |
+| `CycleOverrideRequest` | [CycleOverrideRequest](../../apis/AccelByte.Sdk.Api.Social/Model/CycleOverrideRequest.cs) |
 | `ErrorEntity` | [ErrorEntity](../../apis/AccelByte.Sdk.Api.Social/Model/ErrorEntity.cs) |
 | `FieldValidationError` | [FieldValidationError](../../apis/AccelByte.Sdk.Api.Social/Model/FieldValidationError.cs) |
 | `GameProfileHeader` | [GameProfileHeader](../../apis/AccelByte.Sdk.Api.Social/Model/GameProfileHeader.cs) |

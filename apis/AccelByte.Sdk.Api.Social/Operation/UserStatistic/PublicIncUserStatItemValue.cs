@@ -37,8 +37,6 @@ namespace AccelByte.Sdk.Api.Social.Operation
         {
 
 
-            public Model.StatItemInc? Body { get; set; }
-
 
 
 
@@ -51,22 +49,18 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            public PublicIncUserStatItemValueBuilder SetBody(Model.StatItemInc _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public PublicIncUserStatItemValue Build(
+                StatItemInc body,
                 string namespace_,
                 string statCode,
                 string userId
             )
             {
                 PublicIncUserStatItemValue op = new PublicIncUserStatItemValue(this,
+                    body,                    
                     namespace_,                    
                     statCode,                    
                     userId                    
@@ -77,12 +71,14 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
 
             public PublicIncUserStatItemValue.Response Execute(
+                StatItemInc body,
                 string namespace_,
                 string statCode,
                 string userId
             )
             {
                 PublicIncUserStatItemValue op = Build(
+                    body,
                     namespace_,
                     statCode,
                     userId
@@ -98,12 +94,14 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.Payload);
             }
             public async Task<PublicIncUserStatItemValue.Response> ExecuteAsync(
+                StatItemInc body,
                 string namespace_,
                 string statCode,
                 string userId
             )
             {
                 PublicIncUserStatItemValue op = Build(
+                    body,
                     namespace_,
                     statCode,
                     userId
@@ -121,6 +119,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
         }
 
         private PublicIncUserStatItemValue(PublicIncUserStatItemValueBuilder builder,
+            StatItemInc body,
             string namespace_,
             string statCode,
             string userId
@@ -134,7 +133,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
             
             
-            BodyParams = builder.Body;
+            BodyParams = body;
             
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);

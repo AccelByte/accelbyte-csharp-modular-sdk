@@ -34,11 +34,12 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         }
 
         #region Operation Builders
-        public HandleUploadXboxPFXCertificate.HandleUploadXboxPFXCertificateBuilder HandleUploadXboxPFXCertificateOp
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminUploadXBoxCertificate.AdminUploadXBoxCertificateBuilder AdminUploadXBoxCertificateOp
         {
             get
             {
-                var opBuilder = new Operation.HandleUploadXboxPFXCertificate.HandleUploadXboxPFXCertificateBuilder(_sdk);
+                var opBuilder = new Operation.AdminUploadXBoxCertificate.AdminUploadXBoxCertificateBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -47,7 +48,9 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         }
         #endregion
 
-        public HandleUploadXboxPFXCertificate.Response HandleUploadXboxPFXCertificate(HandleUploadXboxPFXCertificate input)
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        public AdminUploadXBoxCertificate.Response AdminUploadXBoxCertificate(AdminUploadXBoxCertificate input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +58,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<HandleUploadXboxPFXCertificate.Response> HandleUploadXboxPFXCertificateAsync(HandleUploadXboxPFXCertificate input)
+        public async Task<AdminUploadXBoxCertificate.Response> AdminUploadXBoxCertificateAsync(AdminUploadXBoxCertificate input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -63,5 +66,6 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        #pragma warning restore ab_deprecated_operation
     }
 }

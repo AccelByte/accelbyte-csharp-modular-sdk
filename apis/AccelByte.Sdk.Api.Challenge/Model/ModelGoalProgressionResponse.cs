@@ -33,6 +33,10 @@ namespace AccelByte.Sdk.Api.Challenge.Model
         [JsonStringEnum]
         public ModelGoalProgressionResponseStatus? Status { get; set; }
 
+        [JsonPropertyName("toClaimRewards")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<ModelClaimableUserReward>? ToClaimRewards { get; set; }
+
     }
 
 

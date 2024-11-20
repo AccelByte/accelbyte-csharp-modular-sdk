@@ -67,6 +67,17 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     return opBuilder;
             }
         }
+        public DeleteBasePolicy.DeleteBasePolicyBuilder DeleteBasePolicyOp
+        {
+            get
+            {
+                var opBuilder = new Operation.DeleteBasePolicy.DeleteBasePolicyBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public PartialUpdatePolicy1.PartialUpdatePolicy1Builder PartialUpdatePolicy1Op
         {
             get
@@ -83,6 +94,28 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
             get
             {
                 var opBuilder = new Operation.RetrievePolicyCountry1.RetrievePolicyCountry1Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public RetrieveAllPoliciesFromBasePolicy.RetrieveAllPoliciesFromBasePolicyBuilder RetrieveAllPoliciesFromBasePolicyOp
+        {
+            get
+            {
+                var opBuilder = new Operation.RetrieveAllPoliciesFromBasePolicy.RetrieveAllPoliciesFromBasePolicyBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public CreatePolicyUnderBasePolicy.CreatePolicyUnderBasePolicyBuilder CreatePolicyUnderBasePolicyOp
+        {
+            get
+            {
+                var opBuilder = new Operation.CreatePolicyUnderBasePolicy.CreatePolicyUnderBasePolicyBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -150,6 +183,22 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public DeleteBasePolicy.Response DeleteBasePolicy(DeleteBasePolicy input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteBasePolicy.Response> DeleteBasePolicyAsync(DeleteBasePolicy input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public PartialUpdatePolicy1.Response PartialUpdatePolicy1(PartialUpdatePolicy1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -175,6 +224,38 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.Payload);
         }
         public async Task<RetrievePolicyCountry1.Response> RetrievePolicyCountry1Async(RetrievePolicyCountry1 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public RetrieveAllPoliciesFromBasePolicy.Response RetrieveAllPoliciesFromBasePolicy(RetrieveAllPoliciesFromBasePolicy input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<RetrieveAllPoliciesFromBasePolicy.Response> RetrieveAllPoliciesFromBasePolicyAsync(RetrieveAllPoliciesFromBasePolicy input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public CreatePolicyUnderBasePolicy.Response CreatePolicyUnderBasePolicy(CreatePolicyUnderBasePolicy input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<CreatePolicyUnderBasePolicy.Response> CreatePolicyUnderBasePolicyAsync(CreatePolicyUnderBasePolicy input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

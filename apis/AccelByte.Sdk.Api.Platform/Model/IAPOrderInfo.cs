@@ -105,6 +105,12 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public static readonly IAPOrderInfoStatus FULFILLED
             = new IAPOrderInfoStatus("FULFILLED");
 
+        public static readonly IAPOrderInfoStatus PARTIALREVOKED
+            = new IAPOrderInfoStatus("PARTIAL_REVOKED");
+
+        public static readonly IAPOrderInfoStatus REVOKED
+            = new IAPOrderInfoStatus("REVOKED");
+
         public static readonly IAPOrderInfoStatus VERIFIED
             = new IAPOrderInfoStatus("VERIFIED");
 

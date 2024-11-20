@@ -106,6 +106,7 @@
 | `model.ClaimUserRewardsReq` | [ModelClaimUserRewardsReq](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelClaimUserRewardsReq.cs) |
 | `model.ClaimUsersRewardsRequest` | [ModelClaimUsersRewardsRequest](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelClaimUsersRewardsRequest.cs) |
 | `model.ClaimUsersRewardsResponse` | [ModelClaimUsersRewardsResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelClaimUsersRewardsResponse.cs) |
+| `model.ClaimableUserReward` | [ModelClaimableUserReward](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelClaimableUserReward.cs) |
 | `model.CreateChallengeRequest` | [ModelCreateChallengeRequest](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelCreateChallengeRequest.cs) |
 | `model.CreateGoalRequest` | [ModelCreateGoalRequest](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelCreateGoalRequest.cs) |
 | `model.EvaluatePlayerProgressionRequest` | [ModelEvaluatePlayerProgressionRequest](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelEvaluatePlayerProgressionRequest.cs) |

@@ -35,8 +35,6 @@ namespace AccelByte.Sdk.Api.Social.Operation
         {
 
 
-            public Model.BulkCycleStatsAdd? Body { get; set; }
-
 
 
 
@@ -49,21 +47,17 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            public BulkAddStatsBuilder SetBody(Model.BulkCycleStatsAdd _body)
-            {
-                Body = _body;
-                return this;
-            }
-
 
 
 
             public BulkAddStats Build(
+                BulkCycleStatsAdd body,
                 string cycleId,
                 string namespace_
             )
             {
                 BulkAddStats op = new BulkAddStats(this,
+                    body,                    
                     cycleId,                    
                     namespace_                    
                 );
@@ -73,11 +67,13 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
 
             public BulkAddStats.Response Execute(
+                BulkCycleStatsAdd body,
                 string cycleId,
                 string namespace_
             )
             {
                 BulkAddStats op = Build(
+                    body,
                     cycleId,
                     namespace_
                 );
@@ -92,11 +88,13 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.Payload);
             }
             public async Task<BulkAddStats.Response> ExecuteAsync(
+                BulkCycleStatsAdd body,
                 string cycleId,
                 string namespace_
             )
             {
                 BulkAddStats op = Build(
+                    body,
                     cycleId,
                     namespace_
                 );
@@ -112,11 +110,13 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
 
             public BulkAddStats.Response<T1> Execute<T1>(
+                BulkCycleStatsAdd body,
                 string cycleId,
                 string namespace_
             )
             {
                 BulkAddStats op = Build(
+                    body,
                     cycleId,
                     namespace_
                 );
@@ -131,11 +131,13 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.Payload);
             }
             public async Task<BulkAddStats.Response<T1>> ExecuteAsync<T1>(
+                BulkCycleStatsAdd body,
                 string cycleId,
                 string namespace_
             )
             {
                 BulkAddStats op = Build(
+                    body,
                     cycleId,
                     namespace_
                 );
@@ -152,6 +154,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
         }
 
         private BulkAddStats(BulkAddStatsBuilder builder,
+            BulkCycleStatsAdd body,
             string cycleId,
             string namespace_
         )
@@ -163,7 +166,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
             
             
-            BodyParams = builder.Body;
+            BodyParams = body;
             
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);

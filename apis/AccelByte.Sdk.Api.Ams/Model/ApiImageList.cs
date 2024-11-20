@@ -15,6 +15,9 @@ namespace AccelByte.Sdk.Api.Ams.Model
         [JsonPropertyName("images")]
         public List<ApiImageListItem>? Images { get; set; }
 
+        [JsonPropertyName("paging")]
+        public ApiPagingInfo? Paging { get; set; }
+
     }
 
 

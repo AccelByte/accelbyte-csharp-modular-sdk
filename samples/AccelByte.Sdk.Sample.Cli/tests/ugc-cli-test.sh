@@ -56,14 +56,14 @@ $CLI_EXE \
     --sn ugc \
     --op SingleAdminGetChannel \
     --namespace $AB_NAMESPACE \
-    --limit '92' \
-    --offset '12' \
+    --limit '39' \
+    --offset '57' \
     > test.out 2>&1
 eval_tap $? 2 'SingleAdminGetChannel' test.out
 
 #- 3 AdminCreateChannel
 # body param: body
-echo '{"id": "UWJs6J2e", "name": "eRZ9Zt23"}' > $TEMP_JSON_INPUT
+echo '{"id": "V8KOvgu1", "name": "IEghPulB"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminCreateChannel \
@@ -74,11 +74,11 @@ eval_tap $? 3 'AdminCreateChannel' test.out
 
 #- 4 SingleAdminUpdateChannel
 # body param: body
-echo '{"name": "7lqkAujn"}' > $TEMP_JSON_INPUT
+echo '{"name": "8hLgTERo"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op SingleAdminUpdateChannel \
-    --channelId 'HsMOS26G' \
+    --channelId 'iEs0UhUd' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -88,7 +88,7 @@ eval_tap $? 4 'SingleAdminUpdateChannel' test.out
 $CLI_EXE \
     --sn ugc \
     --op SingleAdminDeleteChannel \
-    --channelId '2AsJgqIg' \
+    --channelId 'Vmcw7sFo' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 5 'SingleAdminDeleteChannel' test.out
@@ -98,11 +98,11 @@ eval_tap 0 6 'AdminUploadContentDirect # SKIP deprecated' test.out
 
 #- 7 AdminUploadContentS3
 # body param: body
-echo '{"contentType": "0AC60zCu", "customAttributes": {"glLxNKlP": {}, "7mGgnCgJ": {}, "B82FbR60": {}}, "fileExtension": "VdleFrPa", "name": "UjtlAgbN", "preview": "7Wp6vSRP", "previewMetadata": {"previewContentType": "xZtugTDX", "previewFileExtension": "acuJ9UKh"}, "shareCode": "XDtNyx1T", "subType": "IuPo6aj8", "tags": ["wNuKIMsr", "jkmEb8y4", "3wbO6c6A"], "type": "wxSXaVuI"}' > $TEMP_JSON_INPUT
+echo '{"contentType": "9gm2Y4b7", "customAttributes": {"sjZZbeY3": {}, "NcEZaj43": {}, "32I6aqcN": {}}, "fileExtension": "iwr72ySZ", "name": "GVS3PugG", "preview": "o7nLlWDQ", "previewMetadata": {"previewContentType": "PJpAeXHc", "previewFileExtension": "phhQ4hDi"}, "shareCode": "TTdgy54j", "subType": "sAsSf4DE", "tags": ["hQeDGO3C", "FhrFOdAf", "tqBbvFsD"], "type": "LBNa1GNf"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminUploadContentS3 \
-    --channelId 'K1iCnxxE' \
+    --channelId 'ianYuFkQ' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -110,12 +110,12 @@ eval_tap $? 7 'AdminUploadContentS3' test.out
 
 #- 8 SingleAdminUpdateContentS3
 # body param: body
-echo '{"contentType": "DPbUMQMZ", "customAttributes": {"zzMH5eJi": {}, "yuFWWENh": {}, "utSnzSnG": {}}, "fileExtension": "705ErtvG", "name": "yQRnoTz0", "payload": "9KSNfDbb", "preview": "ILBTyIp3", "previewMetadata": {"previewContentType": "6YQG2nji", "previewFileExtension": "0wifcbxB"}, "shareCode": "Khb3jEcH", "subType": "6yV9uhhJ", "tags": ["93c8jSDZ", "TO7mRPqE", "eqXUjsgp"], "type": "gnT1kouX", "updateContentFile": true}' > $TEMP_JSON_INPUT
+echo '{"contentType": "oYukh9hO", "customAttributes": {"cUDVtXD2": {}, "4XSMdUIm": {}, "un04qLC0": {}}, "fileExtension": "94Z2gFvv", "name": "hJ85Brum", "payload": "SFu5ikVg", "preview": "81trQGkS", "previewMetadata": {"previewContentType": "SFpzmCWU", "previewFileExtension": "2MiC2yRH"}, "shareCode": "MkQvQtkk", "subType": "w028b96c", "tags": ["ZjJihnmq", "2ED9IKC7", "hbOi05da"], "type": "8vPwM3Ua", "updateContentFile": false}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op SingleAdminUpdateContentS3 \
-    --channelId 'VmcfBNo9' \
-    --contentId 'FswPliiT' \
+    --channelId 'poTIEeZO' \
+    --contentId 'DvQDWfyO' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -125,20 +125,20 @@ eval_tap $? 8 'SingleAdminUpdateContentS3' test.out
 $CLI_EXE \
     --sn ugc \
     --op AdminSearchChannelSpecificContent \
-    --channelId 'iNs3OgHW' \
+    --channelId 'FsPSFGSA' \
     --namespace $AB_NAMESPACE \
-    --creator '39gAvrD3' \
-    --ishidden 'kqOKWsFF' \
-    --isofficial 'DjQ69oR1' \
-    --limit '73' \
-    --name '6DsuNHRQ' \
-    --offset '65' \
-    --orderby '71jUIdgO' \
-    --sortby '9RiXXwrz' \
-    --subtype 'Tf62dicY' \
-    --tags '["wUi9JITn", "HF7P36SB", "obcmpYFM"]' \
-    --type 'Q4VnrHXv' \
-    --userId 'NfYQ9zsM' \
+    --creator 'SbwLR3ej' \
+    --ishidden 'YcwjCM4A' \
+    --isofficial 'uhlR7ebT' \
+    --limit '62' \
+    --name 'x2A7mE1N' \
+    --offset '86' \
+    --orderby 'IZUhzlFc' \
+    --sortby 'G1rlQrwS' \
+    --subtype '8jYdpXd2' \
+    --tags '["1SVnxeEM", "IPesFJK8", "cJvJcS9b"]' \
+    --type 'AzYnulgt' \
+    --userId 'jVyDXYmh' \
     > test.out 2>&1
 eval_tap $? 9 'AdminSearchChannelSpecificContent' test.out
 
@@ -149,8 +149,8 @@ eval_tap 0 10 'SingleAdminUpdateContentDirect # SKIP deprecated' test.out
 $CLI_EXE \
     --sn ugc \
     --op SingleAdminDeleteContent \
-    --channelId '46coRhuV' \
-    --contentId 'reCJTgF0' \
+    --channelId 'Bnup9Szf' \
+    --contentId 'uhUwzYmU' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 11 'SingleAdminDeleteContent' test.out
@@ -160,14 +160,14 @@ $CLI_EXE \
     --sn ugc \
     --op SingleAdminGetContent \
     --namespace $AB_NAMESPACE \
-    --limit '42' \
-    --offset '31' \
+    --limit '59' \
+    --offset '51' \
     > test.out 2>&1
 eval_tap $? 12 'SingleAdminGetContent' test.out
 
 #- 13 AdminGetContentBulk
 # body param: body
-echo '{"contentIds": ["9rk2d80G", "uAMMLPPx", "pfV0AJPL"]}' > $TEMP_JSON_INPUT
+echo '{"contentIds": ["W8DGZrrd", "WGhJcAZV", "Buq3qY53"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminGetContentBulk \
@@ -181,24 +181,24 @@ $CLI_EXE \
     --sn ugc \
     --op AdminSearchContent \
     --namespace $AB_NAMESPACE \
-    --creator '1TEh43MS' \
-    --ishidden 'qybxlBDn' \
-    --isofficial 'R2jCKf0Q' \
-    --limit '48' \
-    --name 'QzfzBZYG' \
-    --offset '10' \
-    --orderby '9ZfgFylu' \
-    --sortby 'XUDbVkxH' \
-    --subtype 'NLpwegIh' \
-    --tags '["LkiFZtAe", "Z9RZ7qE6", "GwrjYxTi"]' \
-    --type 'fmGGEWhJ' \
-    --userId '6EkBwlMi' \
+    --creator '57sQEGPX' \
+    --ishidden 'CBOoUvQz' \
+    --isofficial '4sJfhTKo' \
+    --limit '76' \
+    --name 'mi3yxnJQ' \
+    --offset '3' \
+    --orderby 'Q2qll988' \
+    --sortby 'RqYtKy02' \
+    --subtype 'kWOhL6iC' \
+    --tags '["ibWiFamg", "xyzuhyi5", "SzEYL4mN"]' \
+    --type 'ORFJRpUJ' \
+    --userId 'Dayr4r2G' \
     > test.out 2>&1
 eval_tap $? 14 'AdminSearchContent' test.out
 
 #- 15 AdminGetContentBulkByShareCodes
 # body param: body
-echo '{"shareCodes": ["9ZEY2OOH", "B7jyeSlE", "deNaOufz"]}' > $TEMP_JSON_INPUT
+echo '{"shareCodes": ["o9XLkrmE", "uDlrE2G3", "dFgBm2PK"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminGetContentBulkByShareCodes \
@@ -212,7 +212,7 @@ $CLI_EXE \
     --sn ugc \
     --op AdminGetUserContentByShareCode \
     --namespace $AB_NAMESPACE \
-    --shareCode 'aVS3H4j7' \
+    --shareCode '9Rx4xQ7d' \
     > test.out 2>&1
 eval_tap $? 16 'AdminGetUserContentByShareCode' test.out
 
@@ -220,7 +220,7 @@ eval_tap $? 16 'AdminGetUserContentByShareCode' test.out
 $CLI_EXE \
     --sn ugc \
     --op AdminGetSpecificContent \
-    --contentId 'HP0f5Bds' \
+    --contentId 'UDVpypAK' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 17 'AdminGetSpecificContent' test.out
@@ -229,7 +229,7 @@ eval_tap $? 17 'AdminGetSpecificContent' test.out
 $CLI_EXE \
     --sn ugc \
     --op AdminDownloadContentPreview \
-    --contentId 'eFs7CWkM' \
+    --contentId 'EFQrzKvr' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 18 'AdminDownloadContentPreview' test.out
@@ -238,19 +238,19 @@ eval_tap $? 18 'AdminDownloadContentPreview' test.out
 $CLI_EXE \
     --sn ugc \
     --op RollbackContentVersion \
-    --contentId 'OACIs88p' \
+    --contentId '53UuoHGE' \
     --namespace $AB_NAMESPACE \
-    --versionId 'Eg6M0iF4' \
+    --versionId 'tusDBbaB' \
     > test.out 2>&1
 eval_tap $? 19 'RollbackContentVersion' test.out
 
 #- 20 AdminUpdateScreenshots
 # body param: body
-echo '{"screenshots": [{"description": "isodDc2M", "screenshotId": "73snvNrW"}, {"description": "JH11wPqs", "screenshotId": "nsIWkDm6"}, {"description": "vfFwIIiQ", "screenshotId": "vTEMsDU7"}]}' > $TEMP_JSON_INPUT
+echo '{"screenshots": [{"description": "sHlab6kR", "screenshotId": "BBzdYmCW"}, {"description": "nNZBtvck", "screenshotId": "yisA7Cb2"}, {"description": "LuLzHl0E", "screenshotId": "M0HxHpwk"}]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminUpdateScreenshots \
-    --contentId 'pGHfWHXY' \
+    --contentId 'WN3Tj6Ee' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -258,11 +258,11 @@ eval_tap $? 20 'AdminUpdateScreenshots' test.out
 
 #- 21 AdminUploadContentScreenshot
 # body param: body
-echo '{"screenshots": [{"contentType": "pPKJDvjw", "description": "JJ6Jk5SE", "fileExtension": "png"}, {"contentType": "A3cEuP3Q", "description": "NnYKX7kW", "fileExtension": "bmp"}, {"contentType": "WHAneA6g", "description": "r84bwCoO", "fileExtension": "png"}]}' > $TEMP_JSON_INPUT
+echo '{"screenshots": [{"contentType": "0L6800M2", "description": "5Jya0mcT", "fileExtension": "jfif"}, {"contentType": "no02faXh", "description": "mObz3yiH", "fileExtension": "bmp"}, {"contentType": "ajTwmNfc", "description": "gjk4yDTn", "fileExtension": "jpeg"}]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminUploadContentScreenshot \
-    --contentId 'an85DzGZ' \
+    --contentId '6QLSIZVL' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -272,9 +272,9 @@ eval_tap $? 21 'AdminUploadContentScreenshot' test.out
 $CLI_EXE \
     --sn ugc \
     --op AdminDeleteContentScreenshot \
-    --contentId '8htfYOJQ' \
+    --contentId 'Ibna7x2A' \
     --namespace $AB_NAMESPACE \
-    --screenshotId 'olqrwIOj' \
+    --screenshotId 'jw5tryFM' \
     > test.out 2>&1
 eval_tap $? 22 'AdminDeleteContentScreenshot' test.out
 
@@ -282,7 +282,7 @@ eval_tap $? 22 'AdminDeleteContentScreenshot' test.out
 $CLI_EXE \
     --sn ugc \
     --op ListContentVersions \
-    --contentId 'j7QZ4XQm' \
+    --contentId 'Q7Nm7EEX' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 23 'ListContentVersions' test.out
@@ -292,14 +292,14 @@ $CLI_EXE \
     --sn ugc \
     --op SingleAdminGetAllGroups \
     --namespace $AB_NAMESPACE \
-    --limit '45' \
-    --offset '41' \
+    --limit '94' \
+    --offset '2' \
     > test.out 2>&1
 eval_tap $? 24 'SingleAdminGetAllGroups' test.out
 
 #- 25 AdminCreateGroup
 # body param: body
-echo '{"contents": ["uYINUsnt", "LJObakvt", "TzPKqEbS"], "name": "7noOIayo"}' > $TEMP_JSON_INPUT
+echo '{"contents": ["cGTZn9t3", "3OeHzjsW", "BLpmfo1U"], "name": "af88llCW"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminCreateGroup \
@@ -312,18 +312,18 @@ eval_tap $? 25 'AdminCreateGroup' test.out
 $CLI_EXE \
     --sn ugc \
     --op SingleAdminGetGroup \
-    --groupId 'VjTMeMH0' \
+    --groupId 'qFLFtjWN' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 26 'SingleAdminGetGroup' test.out
 
 #- 27 SingleAdminUpdateGroup
 # body param: body
-echo '{"contents": ["ItBjMEZ0", "85AcW2VD", "Lo5DQnBs"], "name": "2eSWmLnL"}' > $TEMP_JSON_INPUT
+echo '{"contents": ["aDEo9l1S", "lF2CRetT", "o74bJXOE"], "name": "bzl8SOsp"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op SingleAdminUpdateGroup \
-    --groupId 'kNkpta1N' \
+    --groupId 'wIv5lfSd' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -333,7 +333,7 @@ eval_tap $? 27 'SingleAdminUpdateGroup' test.out
 $CLI_EXE \
     --sn ugc \
     --op SingleAdminDeleteGroup \
-    --groupId 'bGQYejUr' \
+    --groupId 'yawm52mA' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 28 'SingleAdminDeleteGroup' test.out
@@ -342,10 +342,10 @@ eval_tap $? 28 'SingleAdminDeleteGroup' test.out
 $CLI_EXE \
     --sn ugc \
     --op SingleAdminGetGroupContents \
-    --groupId 'AZ1yA9R3' \
+    --groupId '4uQRpQ2H' \
     --namespace $AB_NAMESPACE \
-    --limit '22' \
-    --offset '70' \
+    --limit '26' \
+    --offset '1' \
     > test.out 2>&1
 eval_tap $? 29 'SingleAdminGetGroupContents' test.out
 
@@ -354,14 +354,14 @@ $CLI_EXE \
     --sn ugc \
     --op AdminGetTag \
     --namespace $AB_NAMESPACE \
-    --limit '12' \
-    --offset '1' \
+    --limit '22' \
+    --offset '96' \
     > test.out 2>&1
 eval_tap $? 30 'AdminGetTag' test.out
 
 #- 31 AdminCreateTag
 # body param: body
-echo '{"tag": "oFhcJCiz"}' > $TEMP_JSON_INPUT
+echo '{"tag": "c7RT9Hlw"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminCreateTag \
@@ -372,12 +372,12 @@ eval_tap $? 31 'AdminCreateTag' test.out
 
 #- 32 AdminUpdateTag
 # body param: body
-echo '{"tag": "hEivigZf"}' > $TEMP_JSON_INPUT
+echo '{"tag": "ld119t6y"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminUpdateTag \
     --namespace $AB_NAMESPACE \
-    --tagId 'n1cmJSoH' \
+    --tagId 'rKv790YO' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 32 'AdminUpdateTag' test.out
@@ -387,7 +387,7 @@ $CLI_EXE \
     --sn ugc \
     --op AdminDeleteTag \
     --namespace $AB_NAMESPACE \
-    --tagId 'uLAs1RPZ' \
+    --tagId '186DOHIa' \
     > test.out 2>&1
 eval_tap $? 33 'AdminDeleteTag' test.out
 
@@ -396,14 +396,14 @@ $CLI_EXE \
     --sn ugc \
     --op AdminGetType \
     --namespace $AB_NAMESPACE \
-    --limit '66' \
-    --offset '30' \
+    --limit '37' \
+    --offset '98' \
     > test.out 2>&1
 eval_tap $? 34 'AdminGetType' test.out
 
 #- 35 AdminCreateType
 # body param: body
-echo '{"subtype": ["bpA9i3Qn", "9AklSqgW", "aVOPwRqE"], "type": "4N5unop8"}' > $TEMP_JSON_INPUT
+echo '{"subtype": ["849hh1XQ", "X5guOJY7", "E5cRI6h4"], "type": "btZe0Ctf"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminCreateType \
@@ -414,12 +414,12 @@ eval_tap $? 35 'AdminCreateType' test.out
 
 #- 36 AdminUpdateType
 # body param: body
-echo '{"subtype": ["ihuRfTaY", "gqPhRUNC", "ScQwjolV"], "type": "QTA6XsU7"}' > $TEMP_JSON_INPUT
+echo '{"subtype": ["F55WBj7l", "3t0oC3FW", "7xbQyz1m"], "type": "pk4tgubB"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminUpdateType \
     --namespace $AB_NAMESPACE \
-    --typeId 'oO3JLNLH' \
+    --typeId 'jMVS7Oaf' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 36 'AdminUpdateType' test.out
@@ -429,7 +429,7 @@ $CLI_EXE \
     --sn ugc \
     --op AdminDeleteType \
     --namespace $AB_NAMESPACE \
-    --typeId 'zuO1gQNL' \
+    --typeId 'MhFyF7fE' \
     > test.out 2>&1
 eval_tap $? 37 'AdminDeleteType' test.out
 
@@ -438,10 +438,10 @@ $CLI_EXE \
     --sn ugc \
     --op AdminGetChannel \
     --namespace $AB_NAMESPACE \
-    --userId 'InlVtbGP' \
-    --limit '72' \
-    --name 'VvtKAxUo' \
-    --offset '54' \
+    --userId 'fEysJJqq' \
+    --limit '75' \
+    --name 'SsXdOgP2' \
+    --offset '70' \
     > test.out 2>&1
 eval_tap $? 38 'AdminGetChannel' test.out
 
@@ -450,19 +450,19 @@ $CLI_EXE \
     --sn ugc \
     --op AdminDeleteAllUserChannels \
     --namespace $AB_NAMESPACE \
-    --userId 'GQQsGb46' \
+    --userId 'KpmINOZw' \
     > test.out 2>&1
 eval_tap $? 39 'AdminDeleteAllUserChannels' test.out
 
 #- 40 AdminUpdateChannel
 # body param: body
-echo '{"name": "f0tLdb9I"}' > $TEMP_JSON_INPUT
+echo '{"name": "L8ofaPNr"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminUpdateChannel \
-    --channelId 'vOcvpYqw' \
+    --channelId 'HhtIDw6e' \
     --namespace $AB_NAMESPACE \
-    --userId 'bAtNVxxg' \
+    --userId 'JWb9Pui5' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 40 'AdminUpdateChannel' test.out
@@ -471,36 +471,36 @@ eval_tap $? 40 'AdminUpdateChannel' test.out
 $CLI_EXE \
     --sn ugc \
     --op AdminDeleteChannel \
-    --channelId 'Y38xsIvl' \
+    --channelId 'ldikTBHx' \
     --namespace $AB_NAMESPACE \
-    --userId 'mqF5eCu6' \
+    --userId '08fBPyfY' \
     > test.out 2>&1
 eval_tap $? 41 'AdminDeleteChannel' test.out
 
 #- 42 AdminUpdateContentS3ByShareCode
 # body param: body
-echo '{"contentType": "XoQsQY8i", "customAttributes": {"w3wG6Sqa": {}, "0NfhfTgz": {}, "0jFPpsMk": {}}, "fileExtension": "9qoqwg8g", "name": "8j28AWaA", "payload": "CwvTfT1O", "preview": "B8EK9bUr", "previewMetadata": {"previewContentType": "IToJVTns", "previewFileExtension": "QuTU9jdi"}, "shareCode": "rOMh5dCd", "subType": "iu821hCK", "tags": ["esbGoAqw", "SagvXRUy", "vCW9yLox"], "type": "RfYVy2xK", "updateContentFile": true}' > $TEMP_JSON_INPUT
+echo '{"contentType": "2yEnQA8S", "customAttributes": {"AQMi17vU": {}, "ppfk27Md": {}, "nH4SEUnq": {}}, "fileExtension": "wurLjsiS", "name": "irLQR0kY", "payload": "OfVJqDjV", "preview": "XUf36nO4", "previewMetadata": {"previewContentType": "zQ167P8L", "previewFileExtension": "YUVGvBdb"}, "shareCode": "D6YZO7MM", "subType": "YhZ51ftq", "tags": ["Y966YlCa", "jsDg102M", "AqEjJeHC"], "type": "sDMsRuCw", "updateContentFile": true}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminUpdateContentS3ByShareCode \
-    --channelId '44RCp8n7' \
+    --channelId 'q6qmfTpI' \
     --namespace $AB_NAMESPACE \
-    --shareCode 'bVxf8GQD' \
-    --userId 'N5OSY3xX' \
+    --shareCode 'qGJsRqz5' \
+    --userId 'QkYkueNj' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 42 'AdminUpdateContentS3ByShareCode' test.out
 
 #- 43 AdminUpdateContentS3
 # body param: body
-echo '{"contentType": "U8dDCF20", "customAttributes": {"b73fr1vX": {}, "U6duoZt2": {}, "o5TAakfo": {}}, "fileExtension": "bIyoDw7m", "name": "d4NNCvFh", "payload": "GoE52cRQ", "preview": "Wnfq9ixk", "previewMetadata": {"previewContentType": "621FrYfy", "previewFileExtension": "nH1FPyv0"}, "shareCode": "HV06iGm9", "subType": "DP36HXzO", "tags": ["3iFnvMhO", "DhjVGFp8", "pSUS3xw0"], "type": "VdqPdUGn", "updateContentFile": true}' > $TEMP_JSON_INPUT
+echo '{"contentType": "zxwBce7w", "customAttributes": {"YWPVBjrv": {}, "0QcM46Mn": {}, "g2GW4Aiq": {}}, "fileExtension": "w7C1bvru", "name": "CTmk364Y", "payload": "otPixKXH", "preview": "iI5KbxLg", "previewMetadata": {"previewContentType": "SVXvn6uR", "previewFileExtension": "fh2eDD28"}, "shareCode": "GWKEIDPB", "subType": "AwUkjfgS", "tags": ["znCBf5g7", "NBmbZfaT", "vNAvJWVQ"], "type": "mUl0dK69", "updateContentFile": true}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminUpdateContentS3 \
-    --channelId 'BUHjCIHA' \
-    --contentId 'EpdX3eZJ' \
+    --channelId 'JeIEj5rE' \
+    --contentId 'eJSfOWOS' \
     --namespace $AB_NAMESPACE \
-    --userId 'A5UjpYo2' \
+    --userId 'OQZgDxrf' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 43 'AdminUpdateContentS3' test.out
@@ -509,10 +509,10 @@ eval_tap $? 43 'AdminUpdateContentS3' test.out
 $CLI_EXE \
     --sn ugc \
     --op DeleteContentByShareCode \
-    --channelId 'jT3eMld9' \
+    --channelId 'pG9ovieB' \
     --namespace $AB_NAMESPACE \
-    --shareCode 'lZUwDHAu' \
-    --userId 'vUDSCjPQ' \
+    --shareCode 'p6E5WR44' \
+    --userId '9KwpKQjx' \
     > test.out 2>&1
 eval_tap $? 44 'DeleteContentByShareCode' test.out
 
@@ -523,10 +523,10 @@ eval_tap 0 45 'AdminUpdateContentDirect # SKIP deprecated' test.out
 $CLI_EXE \
     --sn ugc \
     --op AdminDeleteContent \
-    --channelId 'k2JRscYg' \
-    --contentId 'DYW0dj6h' \
+    --channelId 'EDU1qr8G' \
+    --contentId 'Zoaw94ZW' \
     --namespace $AB_NAMESPACE \
-    --userId 'emenD4IU' \
+    --userId 'V5XBVF1W' \
     > test.out 2>&1
 eval_tap $? 46 'AdminDeleteContent' test.out
 
@@ -535,9 +535,9 @@ $CLI_EXE \
     --sn ugc \
     --op AdminGetContent \
     --namespace $AB_NAMESPACE \
-    --userId '0UauhIi3' \
-    --limit '48' \
-    --offset '33' \
+    --userId 'PgaLyckk' \
+    --limit '53' \
+    --offset '84' \
     > test.out 2>&1
 eval_tap $? 47 'AdminGetContent' test.out
 
@@ -546,19 +546,19 @@ $CLI_EXE \
     --sn ugc \
     --op AdminDeleteAllUserContents \
     --namespace $AB_NAMESPACE \
-    --userId 'WVyVO7MC' \
+    --userId 'oxf118Xd' \
     > test.out 2>&1
 eval_tap $? 48 'AdminDeleteAllUserContents' test.out
 
 #- 49 AdminHideUserContent
 # body param: body
-echo '{"isHidden": false}' > $TEMP_JSON_INPUT
+echo '{"isHidden": true}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminHideUserContent \
-    --contentId 'DkW8zdth' \
+    --contentId 'bHR1nO2O' \
     --namespace $AB_NAMESPACE \
-    --userId 'le9cD0Ey' \
+    --userId 'jDFCZtgS' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 49 'AdminHideUserContent' test.out
@@ -568,9 +568,9 @@ $CLI_EXE \
     --sn ugc \
     --op AdminGetAllGroups \
     --namespace $AB_NAMESPACE \
-    --userId 'aqqsi4JQ' \
-    --limit '14' \
-    --offset '15' \
+    --userId 'QUars2TL' \
+    --limit '74' \
+    --offset '11' \
     > test.out 2>&1
 eval_tap $? 50 'AdminGetAllGroups' test.out
 
@@ -579,7 +579,7 @@ $CLI_EXE \
     --sn ugc \
     --op AdminDeleteAllUserGroup \
     --namespace $AB_NAMESPACE \
-    --userId 'u73QWxMi' \
+    --userId 'nTGWuMqD' \
     > test.out 2>&1
 eval_tap $? 51 'AdminDeleteAllUserGroup' test.out
 
@@ -587,21 +587,21 @@ eval_tap $? 51 'AdminDeleteAllUserGroup' test.out
 $CLI_EXE \
     --sn ugc \
     --op AdminGetGroup \
-    --groupId 'nF9hDDFL' \
+    --groupId '0vsfgJxm' \
     --namespace $AB_NAMESPACE \
-    --userId 'MMwI4mto' \
+    --userId '14TUfuwu' \
     > test.out 2>&1
 eval_tap $? 52 'AdminGetGroup' test.out
 
 #- 53 AdminUpdateGroup
 # body param: body
-echo '{"contents": ["urdMfVUt", "VqTo7clT", "feAoxVcY"], "name": "xZoNUwRn"}' > $TEMP_JSON_INPUT
+echo '{"contents": ["0gU8YWeI", "oicYt67H", "nq9FDHEq"], "name": "sL3qJTwO"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminUpdateGroup \
-    --groupId 'yOY16pe5' \
+    --groupId 'T83taCwD' \
     --namespace $AB_NAMESPACE \
-    --userId 'cBg5z8r8' \
+    --userId 'hv18Xbtq' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 53 'AdminUpdateGroup' test.out
@@ -610,9 +610,9 @@ eval_tap $? 53 'AdminUpdateGroup' test.out
 $CLI_EXE \
     --sn ugc \
     --op AdminDeleteGroup \
-    --groupId 'SC9nh7VM' \
+    --groupId '0p6kKhIk' \
     --namespace $AB_NAMESPACE \
-    --userId '6IonIhw9' \
+    --userId 'In3abfKU' \
     > test.out 2>&1
 eval_tap $? 54 'AdminDeleteGroup' test.out
 
@@ -620,11 +620,11 @@ eval_tap $? 54 'AdminDeleteGroup' test.out
 $CLI_EXE \
     --sn ugc \
     --op AdminGetGroupContents \
-    --groupId 'LZoY7K34' \
+    --groupId 'GdzZgZVN' \
     --namespace $AB_NAMESPACE \
-    --userId 'HUBRy2sh' \
-    --limit '18' \
-    --offset '37' \
+    --userId 'G7z2lruD' \
+    --limit '93' \
+    --offset '54' \
     > test.out 2>&1
 eval_tap $? 55 'AdminGetGroupContents' test.out
 
@@ -633,7 +633,7 @@ $CLI_EXE \
     --sn ugc \
     --op AdminDeleteAllUserStates \
     --namespace $AB_NAMESPACE \
-    --userId '4uaOhCVu' \
+    --userId 'lUvkEXWg' \
     > test.out 2>&1
 eval_tap $? 56 'AdminDeleteAllUserStates' test.out
 
@@ -641,20 +641,20 @@ eval_tap $? 56 'AdminDeleteAllUserStates' test.out
 $CLI_EXE \
     --sn ugc \
     --op SearchChannelSpecificContent \
-    --channelId 'PkhjVXfZ' \
+    --channelId 'We7PCfcJ' \
     --namespace $AB_NAMESPACE \
-    --creator '5PK1juXC' \
-    --ishidden 'zxZlXCeQ' \
-    --isofficial 'Javdth8O' \
-    --limit '86' \
-    --name 'S6G1rHlM' \
-    --offset '38' \
-    --orderby 'PKOhL6YI' \
-    --sortby 'BbrEUgJJ' \
-    --subtype 'W3EGNJSE' \
-    --tags '["nCPHZMfn", "G3qzZjsn", "agBzfmqc"]' \
-    --type 'QIFcP4OG' \
-    --userId 'CTUvRRZr' \
+    --creator 'VFmwYnWA' \
+    --ishidden 'HDWrQWDt' \
+    --isofficial 'OiNJOGIK' \
+    --limit '90' \
+    --name 'CadBdHwP' \
+    --offset '2' \
+    --orderby 'Z8ASh6po' \
+    --sortby 'eq5dSYUp' \
+    --subtype '0fObOqUJ' \
+    --tags '["JtJHJB4B", "yE4XqhyL", "nb6tzYbu"]' \
+    --type 'o9MtzolP' \
+    --userId 'SytZXAOD' \
     > test.out 2>&1
 eval_tap $? 57 'SearchChannelSpecificContent' test.out
 
@@ -663,24 +663,24 @@ $CLI_EXE \
     --sn ugc \
     --op PublicSearchContent \
     --namespace $AB_NAMESPACE \
-    --creator 'hbWa5C6n' \
-    --ishidden 'hWLodwZV' \
-    --isofficial 'OBolw32Q' \
-    --limit '23' \
-    --name 'EOy1aiRj' \
-    --offset '58' \
-    --orderby 'P2veAnWO' \
-    --sortby '6MIDpJZU' \
-    --subtype 'ZzxuDXL7' \
-    --tags '["VpclFhx9", "WPLCLT1i", "lEwZ7ORO"]' \
-    --type 'CSmMIiW9' \
-    --userId 'y1mWnCeo' \
+    --creator 'hG8YfaQN' \
+    --ishidden 'tNVHTdem' \
+    --isofficial 'GADjUlKa' \
+    --limit '55' \
+    --name 'amOFWSw7' \
+    --offset '62' \
+    --orderby 'Uxc5RpKC' \
+    --sortby 'mok4K7H0' \
+    --subtype 'uRa7r3bP' \
+    --tags '["CgEULTH4", "Z0NRr4Zf", "yuMePhCi"]' \
+    --type 'SnSgvOzM' \
+    --userId '7kOjuxek' \
     > test.out 2>&1
 eval_tap $? 58 'PublicSearchContent' test.out
 
 #- 59 PublicGetContentBulk
 # body param: body
-echo '{"contentIds": ["z3x90i41", "SNSfawpx", "9HJqnygs"]}' > $TEMP_JSON_INPUT
+echo '{"contentIds": ["xTu93UiW", "UV8RILA5", "u9wt5RtV"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op PublicGetContentBulk \
@@ -694,8 +694,8 @@ $CLI_EXE \
     --sn ugc \
     --op GetFollowedContent \
     --namespace $AB_NAMESPACE \
-    --limit '30' \
-    --offset '53' \
+    --limit '60' \
+    --offset '66' \
     > test.out 2>&1
 eval_tap $? 60 'GetFollowedContent' test.out
 
@@ -704,21 +704,21 @@ $CLI_EXE \
     --sn ugc \
     --op GetLikedContent \
     --namespace $AB_NAMESPACE \
-    --isofficial 'true' \
-    --limit '84' \
-    --name 'V8xkVbgF' \
-    --offset '27' \
-    --orderby 'SiZ1XMdo' \
-    --sortby 'Ad9tgxhc' \
-    --subtype 'I0Azl3kN' \
-    --tags '["yHXionHD", "oGgf7V0x", "kYNA5GOh"]' \
-    --type 'r4OsqKA1' \
+    --isofficial 'false' \
+    --limit '23' \
+    --name 'ra8mpScu' \
+    --offset '23' \
+    --orderby 'pOV8BdNF' \
+    --sortby 'lHvXboUX' \
+    --subtype 'G3dazK9P' \
+    --tags '["oFYU4MO4", "LO5Ho7un", "Xks7AW8H"]' \
+    --type 'U7i2TKJy' \
     > test.out 2>&1
 eval_tap $? 61 'GetLikedContent' test.out
 
 #- 62 PublicGetContentBulkByShareCodes
 # body param: body
-echo '{"shareCodes": ["HcGQsI7q", "uiGmqPFw", "4HE84fJS"]}' > $TEMP_JSON_INPUT
+echo '{"shareCodes": ["rZl1SB6r", "FsNNMxhu", "StQuAISS"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op PublicGetContentBulkByShareCodes \
@@ -732,7 +732,7 @@ $CLI_EXE \
     --sn ugc \
     --op PublicDownloadContentByShareCode \
     --namespace $AB_NAMESPACE \
-    --shareCode 'iHg7z8fg' \
+    --shareCode 'n08z3TlO' \
     > test.out 2>&1
 eval_tap $? 63 'PublicDownloadContentByShareCode' test.out
 
@@ -740,7 +740,7 @@ eval_tap $? 63 'PublicDownloadContentByShareCode' test.out
 $CLI_EXE \
     --sn ugc \
     --op PublicDownloadContentByContentID \
-    --contentId 'y2G935i4' \
+    --contentId 'QOZZSQeb' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 64 'PublicDownloadContentByContentID' test.out
@@ -749,18 +749,18 @@ eval_tap $? 64 'PublicDownloadContentByContentID' test.out
 $CLI_EXE \
     --sn ugc \
     --op AddDownloadCount \
-    --contentId 'UjCmPff7' \
+    --contentId 'io5DxGaf' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 65 'AddDownloadCount' test.out
 
 #- 66 UpdateContentLikeStatus
 # body param: body
-echo '{"likeStatus": true}' > $TEMP_JSON_INPUT
+echo '{"likeStatus": false}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op UpdateContentLikeStatus \
-    --contentId 'Hv65cpVe' \
+    --contentId 'qeXAWH2o' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -770,7 +770,7 @@ eval_tap $? 66 'UpdateContentLikeStatus' test.out
 $CLI_EXE \
     --sn ugc \
     --op PublicDownloadContentPreview \
-    --contentId 'WTWipU0R' \
+    --contentId 'KrW5HUdd' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 67 'PublicDownloadContentPreview' test.out
@@ -780,7 +780,7 @@ $CLI_EXE \
     --sn ugc \
     --op GetTag \
     --namespace $AB_NAMESPACE \
-    --limit '83' \
+    --limit '3' \
     --offset '97' \
     > test.out 2>&1
 eval_tap $? 68 'GetTag' test.out
@@ -790,8 +790,8 @@ $CLI_EXE \
     --sn ugc \
     --op GetType \
     --namespace $AB_NAMESPACE \
-    --limit '99' \
-    --offset '29' \
+    --limit '9' \
+    --offset '22' \
     > test.out 2>&1
 eval_tap $? 69 'GetType' test.out
 
@@ -800,10 +800,10 @@ $CLI_EXE \
     --sn ugc \
     --op PublicSearchCreator \
     --namespace $AB_NAMESPACE \
-    --limit '24' \
-    --offset '20' \
-    --orderby 'bV7t4pgS' \
-    --sortby 'MvKJk1Qe' \
+    --limit '4' \
+    --offset '0' \
+    --orderby 'Dwds3Z15' \
+    --sortby 'KbvsS2Wb' \
     > test.out 2>&1
 eval_tap $? 70 'PublicSearchCreator' test.out
 
@@ -812,8 +812,8 @@ $CLI_EXE \
     --sn ugc \
     --op GetFollowedUsers \
     --namespace $AB_NAMESPACE \
-    --limit '28' \
-    --offset '83' \
+    --limit '73' \
+    --offset '31' \
     > test.out 2>&1
 eval_tap $? 71 'GetFollowedUsers' test.out
 
@@ -822,7 +822,7 @@ $CLI_EXE \
     --sn ugc \
     --op PublicGetCreator \
     --namespace $AB_NAMESPACE \
-    --userId 'OsjqPgZ1' \
+    --userId 'fscfyIii' \
     > test.out 2>&1
 eval_tap $? 72 'PublicGetCreator' test.out
 
@@ -831,21 +831,21 @@ $CLI_EXE \
     --sn ugc \
     --op GetChannels \
     --namespace $AB_NAMESPACE \
-    --userId 'Po8Cjr6H' \
-    --limit '36' \
-    --name '2ltbX963' \
-    --offset '70' \
+    --userId 'P2mOr3hC' \
+    --limit '42' \
+    --name 'jJ85EXmf' \
+    --offset '92' \
     > test.out 2>&1
 eval_tap $? 73 'GetChannels' test.out
 
 #- 74 PublicCreateChannel
 # body param: body
-echo '{"name": "YT7aiPlX"}' > $TEMP_JSON_INPUT
+echo '{"name": "DBcEjomH"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op PublicCreateChannel \
     --namespace $AB_NAMESPACE \
-    --userId 'YPjvlfc8' \
+    --userId 'LiH2rQXf' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 74 'PublicCreateChannel' test.out
@@ -855,19 +855,19 @@ $CLI_EXE \
     --sn ugc \
     --op DeleteAllUserChannel \
     --namespace $AB_NAMESPACE \
-    --userId '59RugM3F' \
+    --userId 'YzyuOwUo' \
     > test.out 2>&1
 eval_tap $? 75 'DeleteAllUserChannel' test.out
 
 #- 76 UpdateChannel
 # body param: body
-echo '{"name": "q0Dfnz63"}' > $TEMP_JSON_INPUT
+echo '{"name": "wlIAdx8D"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op UpdateChannel \
-    --channelId 'mEAbq1YL' \
+    --channelId 'u5skUoPi' \
     --namespace $AB_NAMESPACE \
-    --userId 'ZummEJvB' \
+    --userId 'vSpHMu3p' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 76 'UpdateChannel' test.out
@@ -876,9 +876,9 @@ eval_tap $? 76 'UpdateChannel' test.out
 $CLI_EXE \
     --sn ugc \
     --op DeleteChannel \
-    --channelId 'tCY54bXS' \
+    --channelId 'RNdTNMDf' \
     --namespace $AB_NAMESPACE \
-    --userId 'VLvE2TIH' \
+    --userId '6lSHL1kw' \
     > test.out 2>&1
 eval_tap $? 77 'DeleteChannel' test.out
 
@@ -887,41 +887,41 @@ eval_tap 0 78 'CreateContentDirect # SKIP deprecated' test.out
 
 #- 79 CreateContentS3
 # body param: body
-echo '{"contentType": "6gw7AcrP", "customAttributes": {"HbKnRiBy": {}, "n7dZnPHE": {}, "1BS9NZqk": {}}, "fileExtension": "EGg0YmXA", "name": "ceNjV8d1", "preview": "abgV4WTh", "previewMetadata": {"previewContentType": "7bum2Tf8", "previewFileExtension": "xLKtoFyn"}, "subType": "ushHfUYB", "tags": ["ZhrSDuwz", "acUEoqQe", "lMaL5Nk3"], "type": "Iuc5obOi"}' > $TEMP_JSON_INPUT
+echo '{"contentType": "v3ZqeRpA", "customAttributes": {"hhJk8gmr": {}, "Y6coQQgF": {}, "WOkV5JrR": {}}, "fileExtension": "6N0dQY6t", "name": "rldFaSQc", "preview": "Pglpkfdh", "previewMetadata": {"previewContentType": "5iZMHroq", "previewFileExtension": "Rg8gz8Px"}, "subType": "zhTxis3r", "tags": ["XXADQ5ew", "vFORwMMA", "xQNmyW2M"], "type": "2nN9f91y"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op CreateContentS3 \
-    --channelId 'P8kQqwyW' \
+    --channelId 'ivBS5Zy5' \
     --namespace $AB_NAMESPACE \
-    --userId '9Hhqn5rw' \
+    --userId '7zV09kX3' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 79 'CreateContentS3' test.out
 
 #- 80 PublicUpdateContentByShareCode
 # body param: body
-echo '{"contentType": "dJXF8Zll", "customAttributes": {"2n028GbP": {}, "v5ktwdXI": {}, "Qw7bPUs7": {}}, "fileExtension": "QQPkrFK1", "name": "ecThdCut", "payload": "ns42hEBr", "preview": "q1wLZoIG", "previewMetadata": {"previewContentType": "Q88SinNa", "previewFileExtension": "onqQJCIt"}, "subType": "fmoSFHfC", "tags": ["99k9S5My", "PbFUwn0F", "azfKGArP"], "type": "bdbWX4gy", "updateContentFile": true}' > $TEMP_JSON_INPUT
+echo '{"contentType": "R5gBAQwy", "customAttributes": {"hQSSM6b1": {}, "IbSdZVVv": {}, "6sscepw5": {}}, "fileExtension": "S1xF2AUF", "name": "PoIK7hI8", "payload": "OFK1ARYG", "preview": "VKG2NAs1", "previewMetadata": {"previewContentType": "69gwtGkS", "previewFileExtension": "NPujFDJz"}, "subType": "5ZRvZ5Ec", "tags": ["1u9tNbNG", "EAQEchX5", "Z2QLpJwu"], "type": "PcGlDVno", "updateContentFile": false}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op PublicUpdateContentByShareCode \
-    --channelId 'PJPOULmU' \
+    --channelId 'x0P1MeBo' \
     --namespace $AB_NAMESPACE \
-    --shareCode 'Rt95tzIM' \
-    --userId 'SyMUsfp9' \
+    --shareCode 'BihBAtlW' \
+    --userId 'h0M6oSRz' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 80 'PublicUpdateContentByShareCode' test.out
 
 #- 81 UpdateContentS3
 # body param: body
-echo '{"contentType": "QfY27uuP", "customAttributes": {"OEtwVSTP": {}, "M5i6H98r": {}, "eFMmWMr4": {}}, "fileExtension": "bSf6JJsV", "name": "vUMZh9iV", "payload": "C4WNVXVv", "preview": "lHbTooSt", "previewMetadata": {"previewContentType": "6FcoDbwM", "previewFileExtension": "LexU1vVM"}, "subType": "xhASkxeU", "tags": ["YmOAygJm", "7Nd1fZlg", "jsWCst37"], "type": "MrwwsyzT", "updateContentFile": true}' > $TEMP_JSON_INPUT
+echo '{"contentType": "WZ0cjs6a", "customAttributes": {"3OKYb1G0": {}, "khdbyhrb": {}, "U3hciNAk": {}}, "fileExtension": "Ny18HD2d", "name": "NgPiuf3N", "payload": "1jjClDkc", "preview": "w5eawXtS", "previewMetadata": {"previewContentType": "a8RARurV", "previewFileExtension": "BMgv1ThP"}, "subType": "y4Nd38UD", "tags": ["aknQ8na9", "rE2pILIU", "iXZ4a9Bd"], "type": "1TZJCdsG", "updateContentFile": true}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op UpdateContentS3 \
-    --channelId 'hV0OqUI6' \
-    --contentId 'riUqfpet' \
+    --channelId 'ySieE6wE' \
+    --contentId 'ZSXZLAsJ' \
     --namespace $AB_NAMESPACE \
-    --userId 'qgwZdwqq' \
+    --userId 'eXl5Pl6m' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 81 'UpdateContentS3' test.out
@@ -930,10 +930,10 @@ eval_tap $? 81 'UpdateContentS3' test.out
 $CLI_EXE \
     --sn ugc \
     --op PublicDeleteContentByShareCode \
-    --channelId 'ivZxD9Xl' \
+    --channelId 'eN0WTuAF' \
     --namespace $AB_NAMESPACE \
-    --shareCode 'z3jhEWYo' \
-    --userId '0michep2' \
+    --shareCode 'WvD14S8J' \
+    --userId 'WaAs4rX6' \
     > test.out 2>&1
 eval_tap $? 82 'PublicDeleteContentByShareCode' test.out
 
@@ -944,23 +944,23 @@ eval_tap 0 83 'UpdateContentDirect # SKIP deprecated' test.out
 $CLI_EXE \
     --sn ugc \
     --op DeleteContent \
-    --channelId 'LMeTipBu' \
-    --contentId '8zTaxzxr' \
+    --channelId 'wH4u8wvW' \
+    --contentId 'qPYt1dbU' \
     --namespace $AB_NAMESPACE \
-    --userId '8Nl77km6' \
+    --userId 'gUUQwjtK' \
     > test.out 2>&1
 eval_tap $? 84 'DeleteContent' test.out
 
 #- 85 UpdateContentShareCode
 # body param: body
-echo '{"shareCode": "z0tyHwUG"}' > $TEMP_JSON_INPUT
+echo '{"shareCode": "tYD8R2YQ"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op UpdateContentShareCode \
-    --channelId 'AfUmwy41' \
-    --contentId '3CiOlbdp' \
+    --channelId 'YffpEBEy' \
+    --contentId 'EEJY8idI' \
     --namespace $AB_NAMESPACE \
-    --userId 'ayC75unJ' \
+    --userId 'I8TS6KVb' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 85 'UpdateContentShareCode' test.out
@@ -970,9 +970,9 @@ $CLI_EXE \
     --sn ugc \
     --op PublicGetUserContent \
     --namespace $AB_NAMESPACE \
-    --userId 'xVifrXSc' \
-    --limit '91' \
-    --offset '15' \
+    --userId 'BhLM55dq' \
+    --limit '7' \
+    --offset '3' \
     > test.out 2>&1
 eval_tap $? 86 'PublicGetUserContent' test.out
 
@@ -981,32 +981,32 @@ $CLI_EXE \
     --sn ugc \
     --op DeleteAllUserContents \
     --namespace $AB_NAMESPACE \
-    --userId 'StYJVGGB' \
+    --userId 'Mm4hOVjN' \
     > test.out 2>&1
 eval_tap $? 87 'DeleteAllUserContents' test.out
 
 #- 88 UpdateScreenshots
 # body param: body
-echo '{"screenshots": [{"description": "20AlSULL", "screenshotId": "scojadbL"}, {"description": "w27UYdrf", "screenshotId": "EDBVv8h6"}, {"description": "dNcE45Rr", "screenshotId": "G7gxSk8B"}]}' > $TEMP_JSON_INPUT
+echo '{"screenshots": [{"description": "RZuciUZH", "screenshotId": "MpovX6Ql"}, {"description": "qJWPGTAh", "screenshotId": "WD8t43KX"}, {"description": "smJOCwTS", "screenshotId": "jB2VuLaF"}]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op UpdateScreenshots \
-    --contentId 'DybEbuvq' \
+    --contentId 'P3qamX6e' \
     --namespace $AB_NAMESPACE \
-    --userId 'XiKG7Fx8' \
+    --userId 'rY6pJiEL' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 88 'UpdateScreenshots' test.out
 
 #- 89 UploadContentScreenshot
 # body param: body
-echo '{"screenshots": [{"contentType": "SKi9jVpJ", "description": "AFSU9QHQ", "fileExtension": "bmp"}, {"contentType": "cI9UtjYQ", "description": "eynsFDrg", "fileExtension": "pjp"}, {"contentType": "KYYb9173", "description": "9tC8ZLGL", "fileExtension": "bmp"}]}' > $TEMP_JSON_INPUT
+echo '{"screenshots": [{"contentType": "XjxevTY5", "description": "OEcuZ5m8", "fileExtension": "jpeg"}, {"contentType": "vZGLyTWZ", "description": "Rj04La3T", "fileExtension": "pjp"}, {"contentType": "Mrv3OZ47", "description": "JJ6Hb1tG", "fileExtension": "jpeg"}]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op UploadContentScreenshot \
-    --contentId 'T8WaUpwM' \
+    --contentId 'S9rOLphi' \
     --namespace $AB_NAMESPACE \
-    --userId 'qBNBkUhn' \
+    --userId 'cU3bp1AV' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 89 'UploadContentScreenshot' test.out
@@ -1015,10 +1015,10 @@ eval_tap $? 89 'UploadContentScreenshot' test.out
 $CLI_EXE \
     --sn ugc \
     --op DeleteContentScreenshot \
-    --contentId 'ChkZulmI' \
+    --contentId 'kaLH93aB' \
     --namespace $AB_NAMESPACE \
-    --screenshotId '1kiFKZHb' \
-    --userId 'MiF4q8qN' \
+    --screenshotId 'sDQtvv4M' \
+    --userId 'BSN2AP6l' \
     > test.out 2>&1
 eval_tap $? 90 'DeleteContentScreenshot' test.out
 
@@ -1029,7 +1029,7 @@ $CLI_EXE \
     --sn ugc \
     --op UpdateUserFollowStatus \
     --namespace $AB_NAMESPACE \
-    --userId 'OkqMKBHB' \
+    --userId 'XFTBIwKb' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 91 'UpdateUserFollowStatus' test.out
@@ -1039,9 +1039,9 @@ $CLI_EXE \
     --sn ugc \
     --op GetPublicFollowers \
     --namespace $AB_NAMESPACE \
-    --userId 'Kk3QHOse' \
-    --limit '73' \
-    --offset '53' \
+    --userId 'kGTnAOZC' \
+    --limit '61' \
+    --offset '17' \
     > test.out 2>&1
 eval_tap $? 92 'GetPublicFollowers' test.out
 
@@ -1050,9 +1050,9 @@ $CLI_EXE \
     --sn ugc \
     --op GetPublicFollowing \
     --namespace $AB_NAMESPACE \
-    --userId 'SGsy9qLe' \
-    --limit '84' \
-    --offset '58' \
+    --userId 'FstvvdTk' \
+    --limit '96' \
+    --offset '91' \
     > test.out 2>&1
 eval_tap $? 93 'GetPublicFollowing' test.out
 
@@ -1061,20 +1061,20 @@ $CLI_EXE \
     --sn ugc \
     --op GetGroups \
     --namespace $AB_NAMESPACE \
-    --userId 'Di59MXKq' \
-    --limit '63' \
-    --offset '64' \
+    --userId 'nT3oc98y' \
+    --limit '45' \
+    --offset '18' \
     > test.out 2>&1
 eval_tap $? 94 'GetGroups' test.out
 
 #- 95 CreateGroup
 # body param: body
-echo '{"contents": ["4dqJ3pHy", "mmdWoM9F", "pcVdUtg2"], "name": "agn3dEO5"}' > $TEMP_JSON_INPUT
+echo '{"contents": ["PWufzyqM", "WOB05bJh", "08IPqjuY"], "name": "JKZ6088Z"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op CreateGroup \
     --namespace $AB_NAMESPACE \
-    --userId 'ktuR8AfO' \
+    --userId 'fcOnshrT' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 95 'CreateGroup' test.out
@@ -1084,7 +1084,7 @@ $CLI_EXE \
     --sn ugc \
     --op DeleteAllUserGroup \
     --namespace $AB_NAMESPACE \
-    --userId '6MvFwNBf' \
+    --userId 'hjVOAFB7' \
     > test.out 2>&1
 eval_tap $? 96 'DeleteAllUserGroup' test.out
 
@@ -1092,21 +1092,21 @@ eval_tap $? 96 'DeleteAllUserGroup' test.out
 $CLI_EXE \
     --sn ugc \
     --op GetGroup \
-    --groupId 'WboLXtpA' \
+    --groupId 'CAEKaHo3' \
     --namespace $AB_NAMESPACE \
-    --userId 'ewM4aA4z' \
+    --userId 'OXpUo25P' \
     > test.out 2>&1
 eval_tap $? 97 'GetGroup' test.out
 
 #- 98 UpdateGroup
 # body param: body
-echo '{"contents": ["J9ZtQqWL", "9t1y74Ra", "MO3Vbth3"], "name": "tIBSg1Ej"}' > $TEMP_JSON_INPUT
+echo '{"contents": ["gTHxitw2", "19xyGz95", "hvpZUd6F"], "name": "eqRBDe7s"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op UpdateGroup \
-    --groupId 'tKxsFlUT' \
+    --groupId 'A5Qr4wL6' \
     --namespace $AB_NAMESPACE \
-    --userId 'Dy613liV' \
+    --userId 'BL4SUD2N' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 98 'UpdateGroup' test.out
@@ -1115,9 +1115,9 @@ eval_tap $? 98 'UpdateGroup' test.out
 $CLI_EXE \
     --sn ugc \
     --op DeleteGroup \
-    --groupId 'KUPVYdwC' \
+    --groupId 'k30Gt5GP' \
     --namespace $AB_NAMESPACE \
-    --userId 'nwiUgKbm' \
+    --userId 'GyeRINx5' \
     > test.out 2>&1
 eval_tap $? 99 'DeleteGroup' test.out
 
@@ -1125,11 +1125,11 @@ eval_tap $? 99 'DeleteGroup' test.out
 $CLI_EXE \
     --sn ugc \
     --op GetGroupContent \
-    --groupId '2JPOUc7l' \
+    --groupId 'DVRpPr6x' \
     --namespace $AB_NAMESPACE \
-    --userId 'UfhzqhTX' \
-    --limit '35' \
-    --offset '56' \
+    --userId 's2SUxRrI' \
+    --limit '14' \
+    --offset '100' \
     > test.out 2>&1
 eval_tap $? 100 'GetGroupContent' test.out
 
@@ -1138,7 +1138,7 @@ $CLI_EXE \
     --sn ugc \
     --op DeleteAllUserStates \
     --namespace $AB_NAMESPACE \
-    --userId 'Cct0Xgr8' \
+    --userId 'GgGV3x9s' \
     > test.out 2>&1
 eval_tap $? 101 'DeleteAllUserStates' test.out
 
@@ -1146,22 +1146,22 @@ eval_tap $? 101 'DeleteAllUserStates' test.out
 $CLI_EXE \
     --sn ugc \
     --op AdminGetContentByChannelIDV2 \
-    --channelId 'mV53jjvh' \
+    --channelId 'V002X3Q9' \
     --namespace $AB_NAMESPACE \
-    --limit '48' \
-    --name 'vNWkDIWh' \
-    --offset '20' \
-    --sortBy 'rIdS3jUE' \
+    --limit '92' \
+    --name 'HqbYyabj' \
+    --offset '97' \
+    --sortBy 'q5vHykru' \
     > test.out 2>&1
 eval_tap $? 102 'AdminGetContentByChannelIDV2' test.out
 
 #- 103 AdminCreateContentV2
 # body param: body
-echo '{"contentType": "HajH8DIB", "customAttributes": {"TOnnU3BS": {}, "8dcy6YDv": {}, "QRgwpv71": {}}, "fileExtension": "jNwvopy3", "name": "iVGTYS8S", "shareCode": "1bI6MS7J", "subType": "USIjj4uc", "tags": ["9V3uJhkK", "0e3BX5H1", "WtqYuFNC"], "type": "7CAJMrVb"}' > $TEMP_JSON_INPUT
+echo '{"contentType": "RsDsBgGq", "customAttributes": {"OwnQDooh": {}, "YwVc1hBx": {}, "vC4322LA": {}}, "fileExtension": "yUmrRgMD", "name": "N6eQ4Yxo", "shareCode": "gvYnpfPF", "subType": "IaeJMoVY", "tags": ["Ux60paR8", "OVmS4zV6", "wmlxCeMK"], "type": "c2HaU6mc"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminCreateContentV2 \
-    --channelId 'xDXEVs5Z' \
+    --channelId 'vonShB0a' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -1171,20 +1171,20 @@ eval_tap $? 103 'AdminCreateContentV2' test.out
 $CLI_EXE \
     --sn ugc \
     --op AdminDeleteOfficialContentV2 \
-    --channelId 'lnwP8BPk' \
-    --contentId 'cbpIQhfh' \
+    --channelId 'W4fJrDSy' \
+    --contentId 'IGx0gEZn' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 104 'AdminDeleteOfficialContentV2' test.out
 
 #- 105 AdminUpdateOfficialContentV2
 # body param: body
-echo '{"customAttributes": {"YH837cVp": {}, "7Cv571BJ": {}, "lKC9lM5M": {}}, "name": "xmI5JrjA", "shareCode": "9ITV48ki", "subType": "6NwVb8h5", "tags": ["zRTekvrH", "EADmLRNX", "XRzjdOqo"], "type": "H2LX6FRJ"}' > $TEMP_JSON_INPUT
+echo '{"customAttributes": {"Hjj7PCgo": {}, "A8M8kzGY": {}, "nExgIrGB": {}}, "name": "NHi4Vu7X", "shareCode": "Zgnc0Yuu", "subType": "9FPJ0H5j", "tags": ["FP5W5zjU", "TgurW9PB", "ELHMLJNX"], "type": "WpJBiWKv"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminUpdateOfficialContentV2 \
-    --channelId 'eA4G1jWg' \
-    --contentId 'xpAGuO9K' \
+    --channelId 'OaQxJw8d' \
+    --contentId 'GQRnrhR5' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -1192,12 +1192,12 @@ eval_tap $? 105 'AdminUpdateOfficialContentV2' test.out
 
 #- 106 AdminCopyContent
 # body param: body
-echo '{"customAttributes": {"TosPby0a": {}, "tVD4VT5e": {}, "I13yFmKp": {}}, "name": "JDUKQXjz", "subType": "FcHcFmbT", "tags": ["LTnXykaR", "Iiek7q48", "KaSaZt5U"], "targetChannelId": "9HtEXH4Q", "type": "vWmuvLIu"}' > $TEMP_JSON_INPUT
+echo '{"customAttributes": {"ltPLZm4R": {}, "3yInznWb": {}, "GCxTeu8C": {}}, "name": "pXa7HfGd", "subType": "2qZgSXyq", "tags": ["ZNNgFSOA", "cWN09cx2", "Q9ADo2ZO"], "targetChannelId": "y0r3tGPx", "type": "eULxJ5uo"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminCopyContent \
-    --channelId 'EOBsl7G9' \
-    --contentId 'B4MmZEMq' \
+    --channelId 'igWq4Wzt' \
+    --contentId 'ZBjUHvva' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -1205,12 +1205,12 @@ eval_tap $? 106 'AdminCopyContent' test.out
 
 #- 107 AdminUpdateOfficialContentFileLocation
 # body param: body
-echo '{"fileExtension": "00Jb1Mxv", "fileLocation": "iE47zSlG"}' > $TEMP_JSON_INPUT
+echo '{"fileExtension": "qvKJCsxI", "fileLocation": "wc3xHuWd"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminUpdateOfficialContentFileLocation \
-    --channelId '0xapKaQK' \
-    --contentId 'VZQhgXDF' \
+    --channelId 'LROZr4E6' \
+    --contentId 'odrGoVVN' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -1218,12 +1218,12 @@ eval_tap $? 107 'AdminUpdateOfficialContentFileLocation' test.out
 
 #- 108 AdminGenerateOfficialContentUploadURLV2
 # body param: body
-echo '{"contentType": "EFnFiRfs", "fileExtension": "dtwpEyoe"}' > $TEMP_JSON_INPUT
+echo '{"contentType": "yjDUrjYX", "fileExtension": "deLdvIzX"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminGenerateOfficialContentUploadURLV2 \
-    --channelId 'NndROGZb' \
-    --contentId 'XXbdUp2u' \
+    --channelId 'XpndRj7b' \
+    --contentId 'kiaWHKG8' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -1234,18 +1234,18 @@ $CLI_EXE \
     --sn ugc \
     --op AdminGetConfigs \
     --namespace $AB_NAMESPACE \
-    --limit '93' \
-    --offset '45' \
+    --limit '80' \
+    --offset '95' \
     > test.out 2>&1
 eval_tap $? 109 'AdminGetConfigs' test.out
 
 #- 110 AdminUpdateConfig
 # body param: body
-echo '{"value": "vTNVMEZp"}' > $TEMP_JSON_INPUT
+echo '{"value": "MyoeyKUs"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminUpdateConfig \
-    --key 'TQz5svIZ' \
+    --key 'OFuByrpU' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -1257,19 +1257,19 @@ $CLI_EXE \
     --op AdminListContentV2 \
     --namespace $AB_NAMESPACE \
     --isOfficial 'false' \
-    --limit '90' \
-    --name 'YKekRMyd' \
-    --offset '9' \
-    --sortBy 'LbFVeHtn' \
-    --subType 'irWhuvNz' \
-    --tags '["TB10nZqL", "R1VrkAv7", "uR3ODOJX"]' \
-    --type 'S7BzGTKU' \
+    --limit '4' \
+    --name 'svzhIJZd' \
+    --offset '15' \
+    --sortBy '8V5L4cEt' \
+    --subType '8Kcc8g0c' \
+    --tags '["8N5EAUAg", "fC3DTXAV", "uGadKezf"]' \
+    --type 'HizIUdDO' \
     > test.out 2>&1
 eval_tap $? 111 'AdminListContentV2' test.out
 
 #- 112 AdminBulkGetContentByIDsV2
 # body param: body
-echo '{"contentIds": ["rP9MQX8b", "t64Y5GmL", "0MnKhqSf"]}' > $TEMP_JSON_INPUT
+echo '{"contentIds": ["UCPWDWFF", "2aWLIGY5", "sv61zzAk"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminBulkGetContentByIDsV2 \
@@ -1280,7 +1280,7 @@ eval_tap $? 112 'AdminBulkGetContentByIDsV2' test.out
 
 #- 113 AdminGetContentBulkByShareCodesV2
 # body param: body
-echo '{"shareCodes": ["A5z2pBTJ", "jgyqv0Az", "9UxdC5bs"]}' > $TEMP_JSON_INPUT
+echo '{"shareCodes": ["DpQxy9u2", "G3QezkFv", "wmfYzWDF"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminGetContentBulkByShareCodesV2 \
@@ -1294,7 +1294,7 @@ $CLI_EXE \
     --sn ugc \
     --op AdminGetContentByShareCodeV2 \
     --namespace $AB_NAMESPACE \
-    --shareCode 'K5h9byAF' \
+    --shareCode '06kpT1vW' \
     > test.out 2>&1
 eval_tap $? 114 'AdminGetContentByShareCodeV2' test.out
 
@@ -1302,7 +1302,7 @@ eval_tap $? 114 'AdminGetContentByShareCodeV2' test.out
 $CLI_EXE \
     --sn ugc \
     --op AdminGetContentByContentIDV2 \
-    --contentId '11OtwuBH' \
+    --contentId 'lEV2ezNp' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 115 'AdminGetContentByContentIDV2' test.out
@@ -1311,19 +1311,19 @@ eval_tap $? 115 'AdminGetContentByContentIDV2' test.out
 $CLI_EXE \
     --sn ugc \
     --op RollbackContentVersionV2 \
-    --contentId 'iibh8sLn' \
+    --contentId 'vWn1EZBj' \
     --namespace $AB_NAMESPACE \
-    --versionId 'Fh3rBn3a' \
+    --versionId '7ZMNqeNk' \
     > test.out 2>&1
 eval_tap $? 116 'RollbackContentVersionV2' test.out
 
 #- 117 AdminUpdateScreenshotsV2
 # body param: body
-echo '{"screenshots": [{"description": "cemRkqOE", "screenshotId": "SzBltrSr"}, {"description": "TN1TpUhR", "screenshotId": "KjvlN12e"}, {"description": "aR67oMlK", "screenshotId": "2Ru8la9a"}]}' > $TEMP_JSON_INPUT
+echo '{"screenshots": [{"description": "w5DB9G7n", "screenshotId": "SXbWwGnL"}, {"description": "bZWhDt1p", "screenshotId": "iLiHROXB"}, {"description": "Ua4MLwZx", "screenshotId": "HbzqWGXC"}]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminUpdateScreenshotsV2 \
-    --contentId 'dlEFN0Uk' \
+    --contentId 'Lrt0BP3D' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -1331,11 +1331,11 @@ eval_tap $? 117 'AdminUpdateScreenshotsV2' test.out
 
 #- 118 AdminUploadContentScreenshotV2
 # body param: body
-echo '{"screenshots": [{"contentType": "BtkkaaPK", "description": "cxWminIR", "fileExtension": "jpg"}, {"contentType": "5y9PMeMU", "description": "nYxvZi5D", "fileExtension": "jpg"}, {"contentType": "ysbwUoZg", "description": "D0XhzZk6", "fileExtension": "pjp"}]}' > $TEMP_JSON_INPUT
+echo '{"screenshots": [{"contentType": "GjTbjjUu", "description": "DyiiwM3F", "fileExtension": "pjp"}, {"contentType": "LSLIiEEv", "description": "bJHon8tN", "fileExtension": "bmp"}, {"contentType": "NfH6jDWv", "description": "NS1qfDE2", "fileExtension": "jpeg"}]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminUploadContentScreenshotV2 \
-    --contentId 'qFTcKGez' \
+    --contentId 'wfQ20Sx8' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -1345,9 +1345,9 @@ eval_tap $? 118 'AdminUploadContentScreenshotV2' test.out
 $CLI_EXE \
     --sn ugc \
     --op AdminDeleteContentScreenshotV2 \
-    --contentId 'JpNOrTAr' \
+    --contentId 'yOL92tSu' \
     --namespace $AB_NAMESPACE \
-    --screenshotId 'U0QJgNyu' \
+    --screenshotId 'rLSSe8Un' \
     > test.out 2>&1
 eval_tap $? 119 'AdminDeleteContentScreenshotV2' test.out
 
@@ -1355,7 +1355,7 @@ eval_tap $? 119 'AdminDeleteContentScreenshotV2' test.out
 $CLI_EXE \
     --sn ugc \
     --op ListContentVersionsV2 \
-    --contentId 'PNMJ9eFW' \
+    --contentId 'lMyy1Thv' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 120 'ListContentVersionsV2' test.out
@@ -1364,10 +1364,10 @@ eval_tap $? 120 'ListContentVersionsV2' test.out
 $CLI_EXE \
     --sn ugc \
     --op AdminGetOfficialGroupContentsV2 \
-    --groupId '5QjJE31L' \
+    --groupId '4wNHdTrw' \
     --namespace $AB_NAMESPACE \
-    --limit '60' \
-    --offset '70' \
+    --limit '17' \
+    --offset '67' \
     > test.out 2>&1
 eval_tap $? 121 'AdminGetOfficialGroupContentsV2' test.out
 
@@ -1376,10 +1376,10 @@ $CLI_EXE \
     --sn ugc \
     --op AdminListStagingContents \
     --namespace $AB_NAMESPACE \
-    --limit '44' \
-    --offset '15' \
-    --sortBy 'GRVN7w3f' \
-    --status 'I3nxQxty' \
+    --limit '15' \
+    --offset '23' \
+    --sortBy 'eHsxgB4G' \
+    --status 'QjgUtTdT' \
     > test.out 2>&1
 eval_tap $? 122 'AdminListStagingContents' test.out
 
@@ -1387,18 +1387,18 @@ eval_tap $? 122 'AdminListStagingContents' test.out
 $CLI_EXE \
     --sn ugc \
     --op AdminGetStagingContentByID \
-    --contentId 'xgzv4w1J' \
+    --contentId 'I9itqBOn' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 123 'AdminGetStagingContentByID' test.out
 
 #- 124 AdminApproveStagingContent
 # body param: body
-echo '{"approved": false, "note": "vd1q8mER"}' > $TEMP_JSON_INPUT
+echo '{"approved": false, "note": "hpXgBYm6"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminApproveStagingContent \
-    --contentId 'zmJD9JJw' \
+    --contentId '6xtL6344' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -1406,14 +1406,14 @@ eval_tap $? 124 'AdminApproveStagingContent' test.out
 
 #- 125 AdminUpdateContentByShareCodeV2
 # body param: body
-echo '{"customAttributes": {"xsRQTSow": {}, "TqD5uPRh": {}, "JZLSXOao": {}}, "name": "RJ2n93rC", "shareCode": "cq9IV9Fd", "subType": "1MlvYE7X", "tags": ["n1KdnSj1", "9FdLr6BM", "rwoNmfPE"], "type": "L4qmXbVK"}' > $TEMP_JSON_INPUT
+echo '{"customAttributes": {"QISrphgD": {}, "XCV2R5Ov": {}, "tPWJeKHu": {}}, "name": "iAbgKBso", "shareCode": "vvEvFvpa", "subType": "dtKo2RQl", "tags": ["sXSA86rv", "LYnTtvpE", "io4lCXVF"], "type": "ibzAsiPQ"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminUpdateContentByShareCodeV2 \
-    --channelId 'Rd0qY5UY' \
+    --channelId 'rl8zocNe' \
     --namespace $AB_NAMESPACE \
-    --shareCode 'y8qIcFT3' \
-    --userId 'ImZXHgGi' \
+    --shareCode 'fKeN3yvT' \
+    --userId '1rlkBV9x' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 125 'AdminUpdateContentByShareCodeV2' test.out
@@ -1422,10 +1422,10 @@ eval_tap $? 125 'AdminUpdateContentByShareCodeV2' test.out
 $CLI_EXE \
     --sn ugc \
     --op AdminDeleteContentByShareCodeV2 \
-    --channelId 'yebb8vmt' \
+    --channelId 'ILCXGrfr' \
     --namespace $AB_NAMESPACE \
-    --shareCode 'lVEjGrK4' \
-    --userId 'uclfV7Il' \
+    --shareCode 'k6M0qMyS' \
+    --userId 'Toz8ZszS' \
     > test.out 2>&1
 eval_tap $? 126 'AdminDeleteContentByShareCodeV2' test.out
 
@@ -1433,51 +1433,51 @@ eval_tap $? 126 'AdminDeleteContentByShareCodeV2' test.out
 $CLI_EXE \
     --sn ugc \
     --op AdminDeleteUserContentV2 \
-    --channelId '44G1ic7Z' \
-    --contentId 'apz9lENS' \
+    --channelId 'JcACmmSa' \
+    --contentId 'ntA02NS4' \
     --namespace $AB_NAMESPACE \
-    --userId 'Pox6G2wi' \
+    --userId 'RtB7csdk' \
     > test.out 2>&1
 eval_tap $? 127 'AdminDeleteUserContentV2' test.out
 
 #- 128 AdminUpdateUserContentV2
 # body param: body
-echo '{"customAttributes": {"MOHmW2Rv": {}, "UCJYfQe9": {}, "z3PdKDDb": {}}, "name": "AaCSDjVB", "shareCode": "hiz8R4TS", "subType": "X7CdHEKO", "tags": ["KYetM6WV", "FDZ8AsDD", "XlWxGqKo"], "type": "O87jaGFF"}' > $TEMP_JSON_INPUT
+echo '{"customAttributes": {"Uh1EaOYv": {}, "QKTOtftY": {}, "hfzlrHu2": {}}, "name": "BOSH5opM", "shareCode": "ndRrlLK8", "subType": "eCciype1", "tags": ["6HSsfn2O", "ED5GKkpN", "gCFzQ1wh"], "type": "iYI9iHLr"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminUpdateUserContentV2 \
-    --channelId 'I0lXaxk4' \
-    --contentId '6dczTsnu' \
+    --channelId 'M3w1mAi6' \
+    --contentId 'ORGeiWKC' \
     --namespace $AB_NAMESPACE \
-    --userId 'vaJxIjKL' \
+    --userId 'Y2k4xtQj' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 128 'AdminUpdateUserContentV2' test.out
 
 #- 129 AdminUpdateUserContentFileLocation
 # body param: body
-echo '{"fileExtension": "zpgqAcj9", "fileLocation": "Gy0B3jHW"}' > $TEMP_JSON_INPUT
+echo '{"fileExtension": "rbbsBJrD", "fileLocation": "nMzcEtCQ"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminUpdateUserContentFileLocation \
-    --channelId 'KuN1pJk2' \
-    --contentId 's73Vai4L' \
+    --channelId 'rIS6NH7g' \
+    --contentId 'Ja2d9Que' \
     --namespace $AB_NAMESPACE \
-    --userId 'tEsPBDb1' \
+    --userId 'ABvHhTlD' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 129 'AdminUpdateUserContentFileLocation' test.out
 
 #- 130 AdminGenerateUserContentUploadURLV2
 # body param: body
-echo '{"contentType": "RZILB0gO", "fileExtension": "JNpivWg1"}' > $TEMP_JSON_INPUT
+echo '{"contentType": "iJ2POtU8", "fileExtension": "qczS87mV"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminGenerateUserContentUploadURLV2 \
-    --channelId 'kczI7EOR' \
-    --contentId 'rvKkAWX0' \
+    --channelId 'oPrc7Qfl' \
+    --contentId 'xkQyScGG' \
     --namespace $AB_NAMESPACE \
-    --userId 'nunT9OXn' \
+    --userId 'ro0wDayw' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 130 'AdminGenerateUserContentUploadURLV2' test.out
@@ -1487,10 +1487,10 @@ $CLI_EXE \
     --sn ugc \
     --op AdminGetContentByUserIDV2 \
     --namespace $AB_NAMESPACE \
-    --userId 'MrPNlRTx' \
-    --limit '28' \
-    --offset '87' \
-    --sortBy '4qthop9v' \
+    --userId 'k3HVR8hi' \
+    --limit '50' \
+    --offset '8' \
+    --sortBy 'VzgK27IY' \
     > test.out 2>&1
 eval_tap $? 131 'AdminGetContentByUserIDV2' test.out
 
@@ -1500,9 +1500,9 @@ echo '{"isHidden": false}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op AdminUpdateContentHideStatusV2 \
-    --contentId 'N2YgJ94P' \
+    --contentId 'CAPIF3ZK' \
     --namespace $AB_NAMESPACE \
-    --userId 'dcoWYlDK' \
+    --userId 'Cx5L2EXB' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 132 'AdminUpdateContentHideStatusV2' test.out
@@ -1511,11 +1511,11 @@ eval_tap $? 132 'AdminUpdateContentHideStatusV2' test.out
 $CLI_EXE \
     --sn ugc \
     --op AdminGetUserGroupContentsV2 \
-    --groupId 'CpmG1fw7' \
+    --groupId 'PcfSc3kE' \
     --namespace $AB_NAMESPACE \
-    --userId 'O6Ly8iIu' \
-    --limit '11' \
-    --offset '79' \
+    --userId 'WAoKiiJs' \
+    --limit '96' \
+    --offset '12' \
     > test.out 2>&1
 eval_tap $? 133 'AdminGetUserGroupContentsV2' test.out
 
@@ -1524,11 +1524,11 @@ $CLI_EXE \
     --sn ugc \
     --op AdminListUserStagingContents \
     --namespace $AB_NAMESPACE \
-    --userId 'QWpDIfp4' \
-    --limit '62' \
-    --offset '14' \
-    --sortBy 'xBh1fplF' \
-    --status '2687g5nA' \
+    --userId 'fwSOTq7N' \
+    --limit '56' \
+    --offset '51' \
+    --sortBy 'ohAqbHqu' \
+    --status 'em22nw4K' \
     > test.out 2>&1
 eval_tap $? 134 'AdminListUserStagingContents' test.out
 
@@ -1536,12 +1536,12 @@ eval_tap $? 134 'AdminListUserStagingContents' test.out
 $CLI_EXE \
     --sn ugc \
     --op PublicGetContentByChannelIDV2 \
-    --channelId 'Bpcsl87b' \
+    --channelId '0jS0wv7u' \
     --namespace $AB_NAMESPACE \
-    --limit '86' \
-    --name 'RcrMGS5Q' \
-    --offset '37' \
-    --sortBy 'DmExXGx2' \
+    --limit '43' \
+    --name 'fD3UKXHl' \
+    --offset '35' \
+    --sortBy 'KmekpkYq' \
     > test.out 2>&1
 eval_tap $? 135 'PublicGetContentByChannelIDV2' test.out
 
@@ -1551,19 +1551,19 @@ $CLI_EXE \
     --op PublicListContentV2 \
     --namespace $AB_NAMESPACE \
     --isOfficial 'false' \
-    --limit '45' \
-    --name 'bStpOiGq' \
-    --offset '75' \
-    --sortBy 'VYyz47gG' \
-    --subType 'sxWFWNGs' \
-    --tags '["qGxltoO2", "mzCYHFhN", "q3U7lRyn"]' \
-    --type 'TnS2PtsF' \
+    --limit '88' \
+    --name 'AxL3vLR5' \
+    --offset '68' \
+    --sortBy 'tbryTJgE' \
+    --subType 'rcPViXdB' \
+    --tags '["d5P6u6Sh", "1FfiaTpg", "0sXIRVcV"]' \
+    --type 'JciKdQXT' \
     > test.out 2>&1
 eval_tap $? 136 'PublicListContentV2' test.out
 
 #- 137 PublicBulkGetContentByIDV2
 # body param: body
-echo '{"contentIds": ["xa7LDs55", "2KqfPMlx", "Jv8xGepa"]}' > $TEMP_JSON_INPUT
+echo '{"contentIds": ["aFi8HxMF", "Ihyo1hv5", "Lxh3Yv0a"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op PublicBulkGetContentByIDV2 \
@@ -1574,7 +1574,7 @@ eval_tap $? 137 'PublicBulkGetContentByIDV2' test.out
 
 #- 138 PublicGetContentBulkByShareCodesV2
 # body param: body
-echo '{"shareCodes": ["valnpC5Q", "VVmis6yx", "KJQfDhDZ"]}' > $TEMP_JSON_INPUT
+echo '{"shareCodes": ["F186XqvM", "Ubv2oEGI", "OjLikt8X"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op PublicGetContentBulkByShareCodesV2 \
@@ -1588,7 +1588,7 @@ $CLI_EXE \
     --sn ugc \
     --op PublicGetContentByShareCodeV2 \
     --namespace $AB_NAMESPACE \
-    --shareCode 'zfSkoAPu' \
+    --shareCode 'TJi8ZsnU' \
     > test.out 2>&1
 eval_tap $? 139 'PublicGetContentByShareCodeV2' test.out
 
@@ -1596,7 +1596,7 @@ eval_tap $? 139 'PublicGetContentByShareCodeV2' test.out
 $CLI_EXE \
     --sn ugc \
     --op PublicGetContentByIDV2 \
-    --contentId 'zHZvVz5e' \
+    --contentId 'EukxfjZR' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 140 'PublicGetContentByIDV2' test.out
@@ -1605,7 +1605,7 @@ eval_tap $? 140 'PublicGetContentByIDV2' test.out
 $CLI_EXE \
     --sn ugc \
     --op PublicAddDownloadCountV2 \
-    --contentId 'jRpVraNN' \
+    --contentId 'muyKrTCi' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 141 'PublicAddDownloadCountV2' test.out
@@ -1614,12 +1614,12 @@ eval_tap $? 141 'PublicAddDownloadCountV2' test.out
 $CLI_EXE \
     --sn ugc \
     --op PublicListContentDownloaderV2 \
-    --contentId 'RQe1TYNN' \
+    --contentId 'NxR5gBVu' \
     --namespace $AB_NAMESPACE \
-    --limit '48' \
-    --offset '69' \
-    --sortBy 'aFiKdpNw' \
-    --userId 'ntOsfDVn' \
+    --limit '11' \
+    --offset '100' \
+    --sortBy 'Q7tdK8xw' \
+    --userId 'CH5rtG5A' \
     > test.out 2>&1
 eval_tap $? 142 'PublicListContentDownloaderV2' test.out
 
@@ -1627,21 +1627,21 @@ eval_tap $? 142 'PublicListContentDownloaderV2' test.out
 $CLI_EXE \
     --sn ugc \
     --op PublicListContentLikeV2 \
-    --contentId 'UtKTqYyr' \
+    --contentId 'RPdM4aj2' \
     --namespace $AB_NAMESPACE \
-    --limit '69' \
-    --offset '32' \
-    --sortBy 'mwXQwOQc' \
+    --limit '18' \
+    --offset '87' \
+    --sortBy 'O1TkFMEh' \
     > test.out 2>&1
 eval_tap $? 143 'PublicListContentLikeV2' test.out
 
 #- 144 UpdateContentLikeStatusV2
 # body param: body
-echo '{"likeStatus": false}' > $TEMP_JSON_INPUT
+echo '{"likeStatus": true}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op UpdateContentLikeStatusV2 \
-    --contentId '4iP0cbER' \
+    --contentId 'PYNDfOvE' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -1649,27 +1649,27 @@ eval_tap $? 144 'UpdateContentLikeStatusV2' test.out
 
 #- 145 PublicCreateContentV2
 # body param: body
-echo '{"contentType": "rJ8zWamq", "customAttributes": {"fEUQw4wJ": {}, "CNhLy2ty": {}, "N6UpoN9e": {}}, "fileExtension": "xnnFoaEg", "name": "q57BrwEI", "subType": "FAQboQ4q", "tags": ["Pgrw6Cc1", "p4CUsjp3", "WkQxtdEZ"], "type": "VlRzjc3D"}' > $TEMP_JSON_INPUT
+echo '{"contentType": "zHRBzqig", "customAttributes": {"3gPVoZbX": {}, "dHFUpyMH": {}, "6dpzcVk2": {}}, "fileExtension": "Vgfpmawb", "name": "6lTJIOgE", "subType": "SShuwEEk", "tags": ["LzPV6TX0", "WwgNhWlB", "KZotIkpm"], "type": "slSVl6oo"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op PublicCreateContentV2 \
-    --channelId 'tFVONpvd' \
+    --channelId 'N1lK6dJG' \
     --namespace $AB_NAMESPACE \
-    --userId 'PXlPhWiF' \
+    --userId 'Isr09AUo' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 145 'PublicCreateContentV2' test.out
 
 #- 146 PublicUpdateContentByShareCodeV2
 # body param: body
-echo '{"customAttributes": {"rarBaYrZ": {}, "7GyC0fXE": {}, "AqaBLiKW": {}}, "name": "qbhqKOqs", "subType": "mZjEyfF1", "tags": ["1Y6hK6RL", "33YQfuE6", "v4tTvtCH"], "type": "HRbSnJYS"}' > $TEMP_JSON_INPUT
+echo '{"customAttributes": {"UR2Ykiwn": {}, "61yGgXJ7": {}, "2KYdWlCT": {}}, "name": "kIGxu7qa", "subType": "48CSP1NY", "tags": ["GjjOptWg", "woURbG81", "FMuqBlIP"], "type": "9H0vIekK"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op PublicUpdateContentByShareCodeV2 \
-    --channelId 'hxCN4y3u' \
+    --channelId 'QQFYRR0J' \
     --namespace $AB_NAMESPACE \
-    --shareCode 'cIXEJ6Pg' \
-    --userId 'KxmIw8P9' \
+    --shareCode 'wKt1YoXt' \
+    --userId 'eibQot9a' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 146 'PublicUpdateContentByShareCodeV2' test.out
@@ -1678,10 +1678,10 @@ eval_tap $? 146 'PublicUpdateContentByShareCodeV2' test.out
 $CLI_EXE \
     --sn ugc \
     --op PublicDeleteContentByShareCodeV2 \
-    --channelId 'ADViX4if' \
+    --channelId '5Ev3wYaD' \
     --namespace $AB_NAMESPACE \
-    --shareCode 'WBoDMWuG' \
-    --userId '5krqqZWn' \
+    --shareCode '4Xva9FXE' \
+    --userId 'HQ4EbZ8m' \
     > test.out 2>&1
 eval_tap $? 147 'PublicDeleteContentByShareCodeV2' test.out
 
@@ -1689,65 +1689,65 @@ eval_tap $? 147 'PublicDeleteContentByShareCodeV2' test.out
 $CLI_EXE \
     --sn ugc \
     --op PublicDeleteContentV2 \
-    --channelId 'JgvZS1Xw' \
-    --contentId 'qIJfnJXH' \
+    --channelId 'CA4YipiI' \
+    --contentId 'eOPLiln8' \
     --namespace $AB_NAMESPACE \
-    --userId 'XVNSRoDH' \
+    --userId 'ECo7EZn3' \
     > test.out 2>&1
 eval_tap $? 148 'PublicDeleteContentV2' test.out
 
 #- 149 PublicUpdateContentV2
 # body param: body
-echo '{"customAttributes": {"L3zEe5Om": {}, "kjYNQsXn": {}, "LyrNX6OL": {}}, "name": "rRfivFNW", "subType": "8p70TXhK", "tags": ["cmtFNBlK", "DussQU3A", "NOaYWtQF"], "type": "0ktdjgAu"}' > $TEMP_JSON_INPUT
+echo '{"customAttributes": {"UGgRn3Tk": {}, "np9DYEcq": {}, "rlHfqFnr": {}}, "name": "pRfOe5oK", "subType": "nUtel3NF", "tags": ["KcddU3Oz", "BIdGlHG9", "cmhTvAJT"], "type": "iClbqyZV"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op PublicUpdateContentV2 \
-    --channelId 'JsROCvCd' \
-    --contentId 'uAHbxvvF' \
+    --channelId 'bhT2cvXx' \
+    --contentId 'uOJAo5Vc' \
     --namespace $AB_NAMESPACE \
-    --userId 'eEgVVoJc' \
+    --userId 'IThMzYRU' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 149 'PublicUpdateContentV2' test.out
 
 #- 150 PublicUpdateContentFileLocation
 # body param: body
-echo '{"fileExtension": "74M7UzLH", "fileLocation": "w3Jpk9uV"}' > $TEMP_JSON_INPUT
+echo '{"fileExtension": "kpzjfyQl", "fileLocation": "VV7jgMa1"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op PublicUpdateContentFileLocation \
-    --channelId '3L9IFg0M' \
-    --contentId 'JS4GA52Y' \
+    --channelId 'qhcXsrYO' \
+    --contentId 'plm0hoCq' \
     --namespace $AB_NAMESPACE \
-    --userId 'sVXGbvME' \
+    --userId 'uqMtH3hI' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 150 'PublicUpdateContentFileLocation' test.out
 
 #- 151 UpdateContentShareCodeV2
 # body param: body
-echo '{"shareCode": "N4qD3xUD"}' > $TEMP_JSON_INPUT
+echo '{"shareCode": "bvdFeNZE"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op UpdateContentShareCodeV2 \
-    --channelId 'BGEANxZX' \
-    --contentId 'zwC1k6vR' \
+    --channelId 'FdjtKn5T' \
+    --contentId 'xy54VyuK' \
     --namespace $AB_NAMESPACE \
-    --userId 'irQBSLry' \
+    --userId 'T0GhY0x0' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 151 'UpdateContentShareCodeV2' test.out
 
 #- 152 PublicGenerateContentUploadURLV2
 # body param: body
-echo '{"contentType": "AtuXKGYS", "fileExtension": "7pEA4t0T"}' > $TEMP_JSON_INPUT
+echo '{"contentType": "7vO2V08L", "fileExtension": "6DhoP52T"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op PublicGenerateContentUploadURLV2 \
-    --channelId 'Ktu2SEuu' \
-    --contentId 'uLyYN7W7' \
+    --channelId 'xyNRlGWv' \
+    --contentId 'aSGh0sQ2' \
     --namespace $AB_NAMESPACE \
-    --userId 'vaR9MifX' \
+    --userId 'nSPnqyvD' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 152 'PublicGenerateContentUploadURLV2' test.out
@@ -1757,35 +1757,35 @@ $CLI_EXE \
     --sn ugc \
     --op PublicGetContentByUserIDV2 \
     --namespace $AB_NAMESPACE \
-    --userId 'C9Y6r9uA' \
-    --limit '6' \
-    --offset '19' \
-    --sortBy '8LX1HNZS' \
+    --userId 'F7HQrisU' \
+    --limit '20' \
+    --offset '6' \
+    --sortBy 'BpYMi8rF' \
     > test.out 2>&1
 eval_tap $? 153 'PublicGetContentByUserIDV2' test.out
 
 #- 154 UpdateScreenshotsV2
 # body param: body
-echo '{"screenshots": [{"description": "vSecC6JI", "screenshotId": "4Rhj0XHG"}, {"description": "2RTyHYoY", "screenshotId": "bkqg6Clj"}, {"description": "djjgbYdG", "screenshotId": "sOnakwIz"}]}' > $TEMP_JSON_INPUT
+echo '{"screenshots": [{"description": "IFUAQ0JA", "screenshotId": "mQEk96Ny"}, {"description": "oYBjQnNZ", "screenshotId": "nNzpzFMo"}, {"description": "E1Oppd3k", "screenshotId": "0x3l8xMX"}]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op UpdateScreenshotsV2 \
-    --contentId 'TQrx7r4m' \
+    --contentId 'GNYuf9Hu' \
     --namespace $AB_NAMESPACE \
-    --userId 'bgUCRNmd' \
+    --userId 'XKiw0jO4' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 154 'UpdateScreenshotsV2' test.out
 
 #- 155 UploadContentScreenshotV2
 # body param: body
-echo '{"screenshots": [{"contentType": "op9WsZJ5", "description": "h0al89Sl", "fileExtension": "jpeg"}, {"contentType": "YKUNkT35", "description": "mnmB8Dua", "fileExtension": "jpg"}, {"contentType": "InQiLejr", "description": "h3uBqyEk", "fileExtension": "pjp"}]}' > $TEMP_JSON_INPUT
+echo '{"screenshots": [{"contentType": "fFyma3rb", "description": "L4YjOuzP", "fileExtension": "jfif"}, {"contentType": "k36yDdIs", "description": "kFbfILUj", "fileExtension": "png"}, {"contentType": "d6JOwBiA", "description": "FxCv6c22", "fileExtension": "png"}]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op UploadContentScreenshotV2 \
-    --contentId 'FTsgwc6T' \
+    --contentId 'JklTOYNz' \
     --namespace $AB_NAMESPACE \
-    --userId '75JuqRch' \
+    --userId 'Hi0BeMGC' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 155 'UploadContentScreenshotV2' test.out
@@ -1794,10 +1794,10 @@ eval_tap $? 155 'UploadContentScreenshotV2' test.out
 $CLI_EXE \
     --sn ugc \
     --op DeleteContentScreenshotV2 \
-    --contentId 'aYLxR8Xt' \
+    --contentId '8waNwHEP' \
     --namespace $AB_NAMESPACE \
-    --screenshotId 'YmvRjJUH' \
-    --userId 'ZOr1k37b' \
+    --screenshotId 'KTXUAcZw' \
+    --userId 'wGcsbyvG' \
     > test.out 2>&1
 eval_tap $? 156 'DeleteContentScreenshotV2' test.out
 
@@ -1805,11 +1805,11 @@ eval_tap $? 156 'DeleteContentScreenshotV2' test.out
 $CLI_EXE \
     --sn ugc \
     --op PublicGetGroupContentsV2 \
-    --groupId 'llT3fM40' \
+    --groupId 'BHaHqObC' \
     --namespace $AB_NAMESPACE \
-    --userId '8uBab9PS' \
-    --limit '49' \
-    --offset '51' \
+    --userId 'l5p5zH4O' \
+    --limit '52' \
+    --offset '23' \
     > test.out 2>&1
 eval_tap $? 157 'PublicGetGroupContentsV2' test.out
 
@@ -1818,11 +1818,11 @@ $CLI_EXE \
     --sn ugc \
     --op ListUserStagingContents \
     --namespace $AB_NAMESPACE \
-    --userId 'Cc79w8iW' \
-    --limit '62' \
-    --offset '51' \
-    --sortBy 'Bq4zaZu2' \
-    --status 'Au9Oybvr' \
+    --userId 'JU8B8z4F' \
+    --limit '69' \
+    --offset '88' \
+    --sortBy 'tqRs7Ydw' \
+    --status '6aO9QXsr' \
     > test.out 2>&1
 eval_tap $? 158 'ListUserStagingContents' test.out
 
@@ -1830,21 +1830,21 @@ eval_tap $? 158 'ListUserStagingContents' test.out
 $CLI_EXE \
     --sn ugc \
     --op GetUserStagingContentByID \
-    --contentId '753pqpAL' \
+    --contentId 'rn8knBjS' \
     --namespace $AB_NAMESPACE \
-    --userId '9Uk8b0aX' \
+    --userId 'jowQtPUn' \
     > test.out 2>&1
 eval_tap $? 159 'GetUserStagingContentByID' test.out
 
 #- 160 UpdateStagingContent
 # body param: body
-echo '{"fileExtension": "WEggTMJd", "fileLocation": "PJTHUVo6"}' > $TEMP_JSON_INPUT
+echo '{"fileExtension": "UeqYdPPE", "fileLocation": "5npjNd2x"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ugc \
     --op UpdateStagingContent \
-    --contentId 'qKyt1Hpv' \
+    --contentId 'S0NkBCnT' \
     --namespace $AB_NAMESPACE \
-    --userId 'ZzAZfoUK' \
+    --userId 'qNp924wp' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 160 'UpdateStagingContent' test.out
@@ -1853,9 +1853,9 @@ eval_tap $? 160 'UpdateStagingContent' test.out
 $CLI_EXE \
     --sn ugc \
     --op DeleteUserStagingContentByID \
-    --contentId 'oY0zZhOs' \
+    --contentId 'R6G8gpFN' \
     --namespace $AB_NAMESPACE \
-    --userId 'wyj5xsVQ' \
+    --userId '9lWmJ40l' \
     > test.out 2>&1
 eval_tap $? 161 'DeleteUserStagingContentByID' test.out
 

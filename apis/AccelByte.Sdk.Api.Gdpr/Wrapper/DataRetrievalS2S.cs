@@ -45,6 +45,17 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     return opBuilder;
             }
         }
+        public S2SGetDataRequestByRequestID.S2SGetDataRequestByRequestIDBuilder S2SGetDataRequestByRequestIDOp
+        {
+            get
+            {
+                var opBuilder = new Operation.S2SGetDataRequestByRequestID.S2SGetDataRequestByRequestIDBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public S2SRequestDataRetrieval.S2SRequestDataRetrievalBuilder S2SRequestDataRetrievalOp
         {
             get
@@ -78,6 +89,22 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
                     response.Payload);
         }
         public async Task<S2SGetListFinishedPersonalDataRequest.Response> S2SGetListFinishedPersonalDataRequestAsync(S2SGetListFinishedPersonalDataRequest input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public S2SGetDataRequestByRequestID.Response S2SGetDataRequestByRequestID(S2SGetDataRequestByRequestID input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<S2SGetDataRequestByRequestID.Response> S2SGetDataRequestByRequestIDAsync(S2SGetDataRequestByRequestID input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

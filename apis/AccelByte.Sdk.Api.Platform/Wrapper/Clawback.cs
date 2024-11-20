@@ -56,6 +56,17 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
+        public MockXblClawbackEvent.MockXblClawbackEventBuilder MockXblClawbackEventOp
+        {
+            get
+            {
+                var opBuilder = new Operation.MockXblClawbackEvent.MockXblClawbackEventBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         #endregion
 
         public QueryIAPClawbackHistory.Response QueryIAPClawbackHistory(QueryIAPClawbackHistory input)
@@ -100,6 +111,39 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
         public async Task<MockPlayStationStreamEvent.Response<T1, T2>> MockPlayStationStreamEventAsync<T1, T2>(MockPlayStationStreamEvent input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public MockXblClawbackEvent.Response MockXblClawbackEvent(MockXblClawbackEvent input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<MockXblClawbackEvent.Response> MockXblClawbackEventAsync(MockXblClawbackEvent input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+
+        public MockXblClawbackEvent.Response<T1, T2> MockXblClawbackEvent<T1, T2>(MockXblClawbackEvent input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse<T1, T2>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<MockXblClawbackEvent.Response<T1, T2>> MockXblClawbackEventAsync<T1, T2>(MockXblClawbackEvent input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1, T2>(

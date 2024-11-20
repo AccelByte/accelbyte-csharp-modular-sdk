@@ -69,6 +69,7 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 | `/gdpr/s2s/namespaces/{namespace}/requests/finished` | GET | S2SGetListFinishedPersonalDataRequest | [S2SGetListFinishedPersonalDataRequest](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/DataRetrievalS2S/S2SGetListFinishedPersonalDataRequest.cs) | [S2SGetListFinishedPersonalDataRequest](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/DataRetrievalS2S/S2SGetListFinishedPersonalDataRequest.cs) |
+| `/gdpr/s2s/namespaces/{namespace}/requests/{requestId}` | GET | S2SGetDataRequestByRequestID | [S2SGetDataRequestByRequestID](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/DataRetrievalS2S/S2SGetDataRequestByRequestID.cs) | [S2SGetDataRequestByRequestID](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/DataRetrievalS2S/S2SGetDataRequestByRequestID.cs) |
 | `/gdpr/s2s/namespaces/{namespace}/users/{userId}/requests` | POST | S2SRequestDataRetrieval | [S2SRequestDataRetrieval](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/DataRetrievalS2S/S2SRequestDataRetrieval.cs) | [S2SRequestDataRetrieval](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/DataRetrievalS2S/S2SRequestDataRetrieval.cs) |
 | `/gdpr/s2s/namespaces/{namespace}/users/{userId}/requests/{requestDate}/generate` | POST | S2SGeneratePersonalDataURL | [S2SGeneratePersonalDataURL](../../apis/AccelByte.Sdk.Api.Gdpr/Operation/DataRetrievalS2S/S2SGeneratePersonalDataURL.cs) | [S2SGeneratePersonalDataURL](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Gdpr/DataRetrievalS2S/S2SGeneratePersonalDataURL.cs) |
 
@@ -119,6 +120,7 @@
 | `dto.ListFinishedDataRequests` | [DtoListFinishedDataRequests](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoListFinishedDataRequests.cs) |
 | `dto.PlatformAccountClosureClientRequest` | [DtoPlatformAccountClosureClientRequest](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoPlatformAccountClosureClientRequest.cs) |
 | `dto.PlatformAccountClosureClientResponse` | [DtoPlatformAccountClosureClientResponse](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoPlatformAccountClosureClientResponse.cs) |
+| `dto.S2SDataRequestSummary` | [DtoS2SDataRequestSummary](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoS2SDataRequestSummary.cs) |
 | `dto.ServiceConfigDTO` | [DtoServiceConfigDTO](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoServiceConfigDTO.cs) |
 | `dto.ServiceConfigurationDTO` | [DtoServiceConfigurationDTO](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoServiceConfigurationDTO.cs) |
 | `dto.ServiceConfigurationUpdateRequest` | [DtoServiceConfigurationUpdateRequest](../../apis/AccelByte.Sdk.Api.Gdpr/Model/DtoServiceConfigurationUpdateRequest.cs) |

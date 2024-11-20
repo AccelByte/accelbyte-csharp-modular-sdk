@@ -67,11 +67,11 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     return opBuilder;
             }
         }
-        public AdminAccountLinkTokenPost.AdminAccountLinkTokenPostBuilder AdminAccountLinkTokenPostOp
+        public AdminAccountLink.AdminAccountLinkBuilder AdminAccountLinkOp
         {
             get
             {
-                var opBuilder = new Operation.AdminAccountLinkTokenPost.AdminAccountLinkTokenPostBuilder(_sdk);
+                var opBuilder = new Operation.AdminAccountLink.AdminAccountLinkBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public AdminAccountLinkTokenPost.Response AdminAccountLinkTokenPost(AdminAccountLinkTokenPost input)
+        public AdminAccountLink.Response AdminAccountLink(AdminAccountLink input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -147,7 +147,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<AdminAccountLinkTokenPost.Response> AdminAccountLinkTokenPostAsync(AdminAccountLinkTokenPost input)
+        public async Task<AdminAccountLink.Response> AdminAccountLinkAsync(AdminAccountLink input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
