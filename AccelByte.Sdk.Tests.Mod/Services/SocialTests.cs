@@ -52,8 +52,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             };
 
             StatInfo cStat = _Sdk.GetSocialApi().StatConfiguration.CreateStatOp
-                .SetBody(createStat)
-                .Execute(_Sdk.Namespace)
+                .Execute(createStat, _Sdk.Namespace)
                 .Ok();
             #endregion
             Assert.AreEqual("CSharp Server SDK Test Stat", cStat.Name);
@@ -72,8 +71,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             };
 
             StatInfo uStat = _Sdk.GetSocialApi().StatConfiguration.UpdateStatOp
-                .SetBody(updateStat)
-                .Execute(_Sdk.Namespace, stat_code)
+                .Execute(updateStat, _Sdk.Namespace, stat_code)
                 .Ok();
             #endregion
             Assert.AreEqual("Updated description.", uStat.Description);
@@ -103,7 +101,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             #region Create stat config
             var newStat = _Sdk.GetSocialApi().StatConfiguration.CreateStatOp
-                .SetBody(new StatCreate()
+                .Execute(new StatCreate()
                 {
                     Name = "CSharp Extend SDK Test Stat",
                     Description = "CSharp Extend Sdk integration test.",
@@ -116,8 +114,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     SetAsGlobal = false,
                     IsPublic = false,
                     Tags = new List<string>() { "csharp", "extend_sdk", "test" }
-                })
-                .Execute(_Sdk.Namespace)
+                }, _Sdk.Namespace)
                 .Ok();
             #endregion
             Assert.IsNotNull(newStat);

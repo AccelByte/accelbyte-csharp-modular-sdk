@@ -49,8 +49,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             };
 
             StatInfo cStat = _Sdk.GetSocialApi().StatConfiguration.CreateStatOp
-                .SetBody(createStat)
-                .Execute(_Sdk.Namespace)
+                .Execute(createStat, _Sdk.Namespace)
                 .Ok();
             Assert.AreEqual("CSharp Extend SDK Test Stat", cStat.Name);
 

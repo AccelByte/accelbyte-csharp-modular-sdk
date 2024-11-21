@@ -152,8 +152,7 @@ public class Functions
                 throw new Exception("Input is null");
 
             StatItemIncResult incResult = wUserStatistic.IncUserStatItemValue(IncUserStatItemValue.Builder
-                .SetBody(input)
-                .Build(_Sdk.Namespace, _ActiveStatCode, user_id))
+                .Build(input, _Sdk.Namespace, _ActiveStatCode, user_id))
                 .Ok();
 
             return incResult;
