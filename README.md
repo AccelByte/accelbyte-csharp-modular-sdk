@@ -152,7 +152,7 @@ try
 {
     // Or, use Ok() method to do use default error checking and get the response data directly
     // Ok() method will throw an exception if there is any error or if the data is null.
-    UserProfilePrivateInfo profileData = sdk.GetBasicApi().UserProfile.GetMyProfileInfoOp.Execute(sdk.Namespace).Ok();
+    UserProfilePrivateInfo profileData = sdk.GetBasicApi().UserProfile.GetMyProfileInfoOp.Execute(sdk.Namespace).EnsureSuccess();
     
     // do something with user profile data
     Console.WriteLine(response.UserId);
@@ -208,11 +208,11 @@ else
 }
 ```
 
-Use `Ok()` method as a shorthand to do default error and null checking in response object. This method will return response data directly if the endpoint has response.
+Use `EnsureSuccess()` method as a shorthand to do default error and null checking in response object. This method will return response data directly if the endpoint has response.
 ```csharp
 UserProfilePrivateInfo profileData = sdk.GetBasicApi().UserProfile.GetMyProfileInfoOp
     .Execute(sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 
@@ -406,8 +406,9 @@ GameRecordExample myGameRecord = new GameRecordExample()
     }
 };
 
-ModelsGameRecordResponse<GameRecordExample>? response = sdk.GetCloudsaveApi().PublicGameRecord.PostGameRecordHandlerV1Op
-    .Execute<GameRecordExample>(myGameRecord, "test_record", sdk.Namespace);
+ModelsGameRecordResponse<GameRecordExample> response = sdk.GetCloudsaveApi().PublicGameRecord.PostGameRecordHandlerV1Op
+    .Execute<GameRecordExample>(myGameRecord, "test_record", sdk.Namespace)
+    .EnsureSuccess();
 ```
 The list of which endpoints that support it can be found in [here](docs/operations/)
 
@@ -428,9 +429,10 @@ C# Extend SDK enable support for FlightID transmission during Http request. By d
 -   To update flight id value for specific operation, use `UpdateFlightId` method when building the operation object.
     ```csharp
     // Make a call to getMyProfileInfo endpoint
-    UserProfilePrivateInfo? response = sdk.Basic.UserProfile.GetMyProfileInfoOp
+    UserProfilePrivateInfo response = sdk.Basic.UserProfile.GetMyProfileInfoOp
         .UpdateFlightId("<new flight id value>")
-        .Execute(sdk.Namespace);
+        .Execute(sdk.Namespace)
+        .EnsureSuccess()
     ```
 
 ## Web Socket Service

@@ -50,7 +50,7 @@ In monolithic version, default token validator is assigned by default. Now you w
 `Consumes` and `Produces` property is now using `List<string>` instead of string array. Also `Security` property is removed in favor of `Securities` field.
 
 ## Call Response
-Different from monolithic version, each operation call will return a response object that contains both response data (if any) and possible error. Use `Ok` method in response object to get get similar behavior as monolithic version. This method also checks whether the response data is null or not. If it is null, it will throw an exception.
+Different from monolithic version, each operation call will return a response object that contains both response data (if any) and possible error. Use `EnsureSuccess` method in response object to get get similar behavior as monolithic version. This method also checks whether the response data is null or not. If it is null, it will throw an exception.
 For example:
 ```csharp
 // Monolithic version
@@ -60,7 +60,7 @@ List<RetrieveAcceptedAgreementResponse>? response = sdk.GetLegal().Agreement.Ret
 // Modular version
 List<RetrieveAcceptedAgreementResponse> response = sdk.GetLegal().Agreement.RetrieveAgreementsPublicOp
     .Execute()
-    .Ok();
+    .EnsureSuccess();
 ```
 
 # Compatibility Library (Compat Project)
