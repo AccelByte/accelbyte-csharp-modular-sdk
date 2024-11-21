@@ -78,7 +78,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             };
 
             ModelsAchievementResponse cResp = _Sdk.GetAchievementApi().Achievements.AdminCreateNewAchievementOp
-                .Execute(newAchievement, _Sdk.Namespace).Ok();
+                .Execute(newAchievement, _Sdk.Namespace).EnsureSuccess();
             #endregion
             Assert.AreEqual(cResp?.AchievementCode!, achievement_code);
 
@@ -98,13 +98,13 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             };
 
             ModelsAchievementResponse uResp = _Sdk.GetAchievementApi().Achievements.AdminUpdateAchievementOp
-                .Execute(updateAchievement, achievement_code, _Sdk.Namespace).Ok();
+                .Execute(updateAchievement, achievement_code, _Sdk.Namespace).EnsureSuccess();
             #endregion
             Assert.AreEqual(uResp?.GoalValue!, 2000.0);
 
             #region Retrieve achievement by code
             ModelsAchievementResponse rResp = _Sdk.GetAchievementApi().Achievements.AdminGetAchievementOp
-                .Execute(achievement_code, _Sdk.Namespace).Ok();
+                .Execute(achievement_code, _Sdk.Namespace).EnsureSuccess();
             #endregion
             Assert.AreEqual(rResp?.GoalValue!, 2000.0);
             Assert.AreEqual(rResp?.Name!["en"], achievement_name);
@@ -114,14 +114,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .SetLimit(100)
                 .SetOffset(0)
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.Greater(gaResp?.Data?.Count, 0);
 
             #region Delete an achievement
             _Sdk.GetAchievementApi().Achievements.AdminDeleteAchievementOp
                 .Execute(achievement_code, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             //Finally, recheck if the data is truly deleted.
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             {
                 DisableRetry();
                 _ = _Sdk.GetAchievementApi().Achievements.AdminGetAchievementOp
-                    .Execute(achievement_code, _Sdk.Namespace).Ok();
+                    .Execute(achievement_code, _Sdk.Namespace).EnsureSuccess();
             });
         }
 
@@ -180,7 +180,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             ModelsAchievementResponse? cResp = _Sdk.GetAchievementApi().Achievements.AdminCreateNewAchievementOp
                 .Execute(newAchievement, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             Assert.IsNotNull(cResp);
             Assert.AreEqual(cResp?.AchievementCode!, achievement_code);
 
@@ -188,7 +188,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             {
                 var exportStream = _Sdk.GetAchievementApi().Achievements.ExportAchievementsOp
                     .Execute(_Sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
                 Assert.IsNotNull(exportStream);
                 if (exportStream != null)
                 {
@@ -206,7 +206,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             {
                 _Sdk.GetAchievementApi().Achievements.AdminDeleteAchievementOp
                     .Execute(achievement_code, _Sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
             }
         }
 
@@ -270,7 +270,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             var createResponse = await sdk.GetAchievementApi().Achievements.AdminCreateNewAchievementOp
                 .ExecuteAsync(newAchievement, sdk.Namespace);
-            ModelsAchievementResponse cResp = createResponse.Ok();
+            ModelsAchievementResponse cResp = createResponse.EnsureSuccess();
             Assert.AreEqual(cResp?.AchievementCode!, achievement_code);
 
             ModelsAchievementUpdateRequest updateAchievement = new ModelsAchievementUpdateRequest()
@@ -289,12 +289,12 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             var updateResponse = await sdk.GetAchievementApi().Achievements.AdminUpdateAchievementOp
                 .ExecuteAsync(updateAchievement, achievement_code, sdk.Namespace);
-            ModelsAchievementResponse uResp = updateResponse.Ok();
+            ModelsAchievementResponse uResp = updateResponse.EnsureSuccess();
             Assert.AreEqual(uResp?.GoalValue!, 2000.0);
 
             var getResponse = await sdk.GetAchievementApi().Achievements.AdminGetAchievementOp
                 .ExecuteAsync(achievement_code, sdk.Namespace);
-            ModelsAchievementResponse rResp = getResponse.Ok();
+            ModelsAchievementResponse rResp = getResponse.EnsureSuccess();
             Assert.AreEqual(rResp?.GoalValue!, 2000.0);
             Assert.AreEqual(rResp?.Name!["en"], achievement_name);
 
@@ -302,7 +302,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .SetLimit(100)
                 .SetOffset(0)
                 .ExecuteAsync(sdk.Namespace);
-            ModelsPaginatedAchievementResponse gaResp = listResponse.Ok();
+            ModelsPaginatedAchievementResponse gaResp = listResponse.EnsureSuccess();
             Assert.Greater(gaResp?.Data?.Count, 0);
 
             await sdk.GetAchievementApi().Achievements.AdminDeleteAchievementOp
@@ -313,7 +313,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 retryPolicy.RetryOnException = false;
                 sdk.GetAchievementApi().Achievements.AdminGetAchievementOp
                     .Execute(achievement_code, sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
             });
         }
     }

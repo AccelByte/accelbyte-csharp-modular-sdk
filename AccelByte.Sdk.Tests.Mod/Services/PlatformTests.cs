@@ -45,7 +45,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             StoreInfo cStore = _Sdk.GetPlatformApi().Store.CreateStoreOp
                 .Execute(createStore, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual("CSharp SDK Store Test", cStore.Title);
             store_id = cStore.StoreId!;
@@ -53,7 +53,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Get a store
             StoreInfo gStore = _Sdk.GetPlatformApi().Store.GetStoreOp
                 .Execute(_Sdk.Namespace, store_id)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual("CSharp SDK Store Test", gStore.Title);
 
@@ -65,14 +65,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             };
             StoreInfo cStoreUpdate = _Sdk.GetPlatformApi().Store.UpdateStoreOp
                 .Execute(updateStore, _Sdk.Namespace, store_id)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual("Updated description.", cStoreUpdate.Description);
 
             #region Delete a store
             StoreInfo dStore = _Sdk.GetPlatformApi().Store.DeleteStoreOp
                 .Execute(_Sdk.Namespace, store_id)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(dStore);
         }
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             DisableRetry();
             StoreInfo cStore = _Sdk.GetPlatformApi().Store.CreateStoreOp
                 .Execute(createStore, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             Assert.AreEqual("CSharp SDK Store Test", cStore.Title);
             store_id = cStore.StoreId!;
 
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             Stream stream = _Sdk.GetPlatformApi().Store.ExportStore1Op
                 .SetBody(xRequest)
                 .Execute(_Sdk.Namespace, store_id)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             if (stream == null)
             {
@@ -126,14 +126,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .SetFile(uploadStream)
                 .SetStoreId(store_id)
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(result);
 
             //Delete draft store
             _ = _Sdk.GetPlatformApi().Store.DeleteStoreOp
                 .Execute(_Sdk.Namespace, store_id)
-                .Ok();
+                .EnsureSuccess();
         }
 
         [Test]
@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Export reward
             var exportStream = _Sdk.GetPlatformApi().Reward.ExportRewardsOp
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(exportStream);
             if (exportStream != null)
@@ -161,7 +161,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 _Sdk.GetPlatformApi().Reward.ImportRewardsOp
                     .SetFile(dataStream)
                     .Execute(_Sdk.Namespace, true)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
             }
 

@@ -50,7 +50,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             StatInfo cStat = _Sdk.GetSocialApi().StatConfiguration.CreateStatOp
                 .Execute(createStat, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             Assert.AreEqual("CSharp Extend SDK Test Stat", cStat.Name);
 
             #region Create a leaderboard
@@ -80,14 +80,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             ModelsLeaderboardConfigReq cLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardConfiguration.CreateLeaderboardConfigurationAdminV1Op
                 .Execute(newLeaderboard, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual(leaderboard_name, cLeaderboard.Name!);
 
             #region Get a leaderboard
             ModelsGetLeaderboardConfigResp gLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardConfiguration.GetLeaderboardConfigurationAdminV1Op
                 .Execute(leaderboard_code, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual(leaderboard_name, gLeaderboard.Name!);
 
@@ -102,27 +102,27 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             ModelsGetLeaderboardConfigResp uLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardConfiguration.UpdateLeaderboardConfigurationAdminV1Op
                 .Execute(updateLeaderboard, leaderboard_code, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual(40, uLeaderboard.SeasonPeriod!);
 
             #region Delete a leaderboard
             _Sdk.GetLeaderboardApi().LeaderboardConfiguration.DeleteLeaderboardConfigurationAdminV1Op
                 .Execute(leaderboard_code, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             //Finally, recheck if the data is truly deleted.
             DisableRetry();
             ModelsGetLeaderboardConfigResp dcLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardConfiguration.GetLeaderboardConfigurationAdminV1Op
                 .Execute(leaderboard_code, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             Assert.IsTrue(dcLeaderboard.IsDeleted!);
 
             //Last, delete the stat code
             _Sdk.GetSocialApi().StatConfiguration.DeleteStatOp
                 .Execute(_Sdk.Namespace, stat_code)
-                .Ok();
+                .EnsureSuccess();
 
             ResetPolicy();
         }

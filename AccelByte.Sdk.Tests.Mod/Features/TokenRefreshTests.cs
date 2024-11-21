@@ -46,7 +46,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
             //First request, valid token
             _ = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublic(
                 RetrieveAgreementsPublic
-                .Builder.Build()).Ok();
+                .Builder.Build()).EnsureSuccess();
 
             //Force token expire
             if (sdk.Configuration.TokenRepository is RefreshableTokenRepository)
@@ -61,7 +61,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
             //Second request, expired token, try to do refresh
             _ = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublic(
                 RetrieveAgreementsPublic
-                .Builder.Build()).Ok();
+                .Builder.Build()).EnsureSuccess();
 
             sdk.Logout();
         }
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
             //First request, valid token
             _ = sdk.GetAchievementApi().Achievements.PublicListAchievementsOp
                 .Execute(sdk.Namespace, "en")
-                .Ok();
+                .EnsureSuccess();
 
             //Force token expire
             if (sdk.Configuration.TokenRepository is RefreshableTokenRepository)
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
             //Second request, expired token, try to do refresh
             _ = sdk.GetAchievementApi().Achievements.PublicListAchievementsOp
                 .Execute(sdk.Namespace, "en")
-                .Ok();
+                .EnsureSuccess();
 
             sdk.Logout();
         }
@@ -156,7 +156,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
             _ = sdk.GetAchievementApi().Achievements
                 .PublicListAchievementsOp
                 .Execute(sdk.Namespace, "en")
-                .Ok();
+                .EnsureSuccess();
 
             //wait for any ws response
             Thread.Sleep(2000);

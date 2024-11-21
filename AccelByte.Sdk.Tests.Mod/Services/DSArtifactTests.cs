@@ -31,7 +31,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             _ = _Sdk.GetDsartifactApi().ArtifactUploadProcessQueue.ListAllQueueOp
                 .SetLimit(20)
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             _ = _Sdk.GetDsartifactApi().AllTerminatedServers.ListTerminatedServersOp
                 .SetLimit(20)
                 .Execute()
-                .Ok();
+                .EnsureSuccess();
         }
     }
 }

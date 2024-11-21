@@ -41,26 +41,26 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 {
                     firstEmailToTest
                 }, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             #region Get e-mail configuration
             List<string>? emails = _Sdk.GetGdprApi().Configuration.GetAdminEmailConfigurationOp
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(emails);
 
             #region Update e-mail configuration
             _Sdk.GetGdprApi().Configuration.UpdateAdminEmailConfigurationOp
                 .Execute(new List<string>() { anotherEmailToTest }, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             #region Delete e-mail configuration
             _Sdk.GetGdprApi().Configuration.DeleteAdminEmailConfigurationOp
                 .Execute(_Sdk.Namespace, new List<string>() { anotherEmailToTest })
-                .Ok();
+                .EnsureSuccess();
             #endregion
         }
 
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     .SetOffset(0)
                     .SetLimit(10)
                     .Execute(_Sdk.Namespace, userId)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
                 Assert.IsNotNull(pdRequest);
             }

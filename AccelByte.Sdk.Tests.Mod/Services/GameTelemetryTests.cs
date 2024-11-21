@@ -44,7 +44,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                         }
                     }
                 })
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             DisableRetry();
@@ -53,7 +53,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             {
                 _Sdk.GetGametelemetryApi().GametelemetryOperations.ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePutOp
                     .Execute(playTime, steamId)
-                    .Ok();
+                    .EnsureSuccess();
             }
             catch (Exception e)
             {
@@ -68,7 +68,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             PlayTimeResponse resGet = _Sdk.GetGametelemetryApi().GametelemetryOperations
                 .ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGetOp
                 .Execute(steamId)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.Equals(playTime, resGet.TotalPlaytime!);
         }

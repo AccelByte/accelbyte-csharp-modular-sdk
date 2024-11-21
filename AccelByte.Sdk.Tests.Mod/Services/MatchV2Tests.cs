@@ -114,13 +114,13 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _Sdk.GetMatch2Api().RuleSets.CreateRuleSetOp
                 .Execute(cRuleSetBody, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             #region Get ruleset details
             var rulesetPayload = _Sdk.GetMatch2Api().RuleSets.RuleSetDetailsOp
                 .Execute(_Sdk.Namespace, rulesetName)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(rulesetPayload);
 
@@ -137,20 +137,20 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _Sdk.GetMatch2Api().MatchPools.CreateMatchPoolOp
                 .Execute(createPoolBody, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             #region List match pools
             ApiListMatchPoolsResponse poolList = _Sdk.GetMatch2Api().MatchPools.MatchPoolListOp
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(poolList);
 
             #region Get match pool detail
             ApiMatchPool matchPool = _Sdk.GetMatch2Api().MatchPools.MatchPoolDetailsOp
                 .Execute(_Sdk.Namespace, poolName)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(matchPool);
 
@@ -172,7 +172,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 string partyId = String.Empty;
                 ApimodelsPartySessionResponse partyResponse = sdk.GetSessionApi().Party.PublicCreatePartyOp
                     .Execute(partyRequest, sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
                 partyId = partyResponse.Id!;
 
                 #region User create a match ticket
@@ -184,19 +184,19 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
                 ApiMatchTicketResponse nTicketResponse = sdk.GetMatch2Api().MatchTickets.CreateMatchTicketOp
                     .Execute(ticketRequest, sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
                 string ticketId = nTicketResponse.MatchTicketID!;
 
                 #region User delete a match ticket
                 sdk.GetMatch2Api().MatchTickets.DeleteMatchTicketOp
                     .Execute(sdk.Namespace, ticketId)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
 
                 sdk.GetSessionApi().Party.PublicPartyLeaveOp
                     .Execute(sdk.Namespace, partyId)
-                    .Ok();
+                    .EnsureSuccess();
             });
 
             player1.Logout();
@@ -204,18 +204,18 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Delete a match pool
             _Sdk.GetMatch2Api().MatchPools.DeleteMatchPoolOp
                 .Execute(_Sdk.Namespace, poolName)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             #region Delete a match rule set
             _Sdk.GetMatch2Api().RuleSets.DeleteRuleSetOp
                 .Execute(_Sdk.Namespace, rulesetName)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             _Sdk.GetSessionApi().ConfigurationTemplate.AdminDeleteConfigurationTemplateV1Op
                 .Execute(cfgTemplateName, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
 
             ResetPolicy();
         }
@@ -230,7 +230,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region List match functions
             ApiListMatchFunctionsResponse response = _Sdk.GetMatch2Api().MatchFunctions.MatchFunctionListOp
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(response);
         }

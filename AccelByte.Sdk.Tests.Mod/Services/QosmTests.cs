@@ -46,7 +46,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _ = _Sdk.GetQosmApi().Public.ListServerOp
                 .Execute()
-                .Ok();
+                .EnsureSuccess();
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             ModelsListServerResponse listServers = _Sdk.GetQosmApi().Public.ListServerOp
                 .Execute()
-                .Ok();
+                .EnsureSuccess();
 
             var servers = listServers.Servers!;
             string? respIp = string.Empty;
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _Sdk.GetQosmApi().Server.HeartbeatOp
                 .Execute(createHeartbeat)
-                .Ok();
+                .EnsureSuccess();
         }
     }
 }

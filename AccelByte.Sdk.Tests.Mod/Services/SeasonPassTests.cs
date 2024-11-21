@@ -53,7 +53,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             StoreInfo cStoreForSeason = _Sdk.GetPlatformApi().Store.CreateStoreOp
                 .Execute(createStore, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             // Use the new created storeId
             defaultDraftStoreId = cStoreForSeason!.StoreId!;
 
@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             };
             _ = _Sdk.GetPlatformApi().Category.CreateCategoryOp
                 .Execute(cCategory, _Sdk.Namespace, defaultDraftStoreId)
-                .Ok();
+                .EnsureSuccess();
 
             // Create an item tier in platform
             int price = 1000;
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             FullItemInfo cItemForSeason = _Sdk.GetPlatformApi().Item.CreateItemOp
                 .Execute(createItemStore, _Sdk.Namespace, defaultDraftStoreId)
-                .Ok();
+                .EnsureSuccess();
             // Use the new created tier's itemId
             defaultTierItemId = cItemForSeason!.ItemId!;
 
@@ -132,7 +132,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             SeasonInfo cSeason = _Sdk.GetSeasonpassApi().Season.CreateSeasonOp
                 .SetBody(cSeasonBody)
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(cSeason);
 
@@ -145,7 +145,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Get a season
             SeasonInfo gSeason = _Sdk.GetSeasonpassApi().Season.GetSeasonOp
                 .Execute(_Sdk.Namespace, cSeasonId)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(gSeason);
 
@@ -164,14 +164,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             SeasonInfo uSeason = _Sdk.GetSeasonpassApi().Season.UpdateSeasonOp
                 .SetBody(uSeasonBody)
                 .Execute(_Sdk.Namespace, cSeasonId)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(uSeason);
 
             // Delete a season
             _Sdk.GetSeasonpassApi().Season.DeleteSeasonOp
                 .Execute(_Sdk.Namespace, cSeasonId)
-                .Ok();
+                .EnsureSuccess();
         }
 
         [TearDown]

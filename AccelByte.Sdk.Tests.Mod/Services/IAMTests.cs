@@ -49,14 +49,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             ModelUserCreateResponseV3 cuResp = _Sdk.GetIamApi().Users.PublicCreateUserV3Op
                 .Execute(newUser, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual(user_email, cuResp.EmailAddress);
             user_id = cuResp.UserId!;
 
             _Sdk.GetIamApi().Users.AdminDeleteUserInformationV3Op
                 .Execute(_Sdk.Namespace, user_id)
-                .Ok();
+                .EnsureSuccess();
 
             ResetPolicy();
         }
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             AccountCreateUserResponseV4 cuResp = _Sdk.GetIamApi().UsersV4.PublicCreateUserV4Op
                 .Execute(newUser, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual(user_email, cuResp.EmailAddress);
             user_id = cuResp.UserId!;
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Get user data by user id
             ModelUserResponseV3 gUser = _Sdk.GetIamApi().Users.AdminGetUserByUserIdV3Op
                 .Execute(_Sdk.Namespace, user_id)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual("CSharp Server SDK Test", gUser.DisplayName);
 
@@ -109,14 +109,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             ModelUserResponseV3 uuResp = _Sdk.GetIamApi().UsersV4.AdminUpdateUserV4Op
                 .Execute(updateUser, _Sdk.Namespace, user_id)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual("1996-01-10", uuResp.DateOfBirth?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
 
             #region Delete a user
             _Sdk.GetIamApi().Users.AdminDeleteUserInformationV3Op
                 .Execute(_Sdk.Namespace, user_id)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             //Finally, recheck if the data is truly deleted.
@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 DisableRetry();
                 _ = _Sdk.GetIamApi().Users.AdminGetUserByUserIdV3Op
                     .Execute(_Sdk.Namespace, user_id)
-                    .Ok();
+                    .EnsureSuccess();
             });
         }
     }

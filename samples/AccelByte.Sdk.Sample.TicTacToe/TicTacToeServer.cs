@@ -53,7 +53,7 @@ namespace AccelByte.Sdk.Sample.TicTacToe
         {
             OauthmodelTokenResponseV3? oauthToken = _Sdk.GetIamApi().OAuth20.VerifyTokenV3Op
                 .SetPreferredSecurityMethod(Operation.SECURITY_BASIC)
-                .Execute(authToken).Ok();
+                .Execute(authToken).EnsureSuccess();
             if (oauthToken == null)
                 throw new Exception("NULL oauthToken");
             return oauthToken.UserId!;
@@ -62,7 +62,7 @@ namespace AccelByte.Sdk.Sample.TicTacToe
         public string GetUsername(string userId)
         {
             AccountcommonUserInformationV3? userInfo = _Sdk.GetIamApi().Users.PublicGetUserInformationV3Op
-                .Execute(_Sdk.Namespace, userId).Ok();
+                .Execute(_Sdk.Namespace, userId).EnsureSuccess();
             if (userInfo == null)
                 throw new Exception("NULL userInfo");
             return userInfo.Username!;

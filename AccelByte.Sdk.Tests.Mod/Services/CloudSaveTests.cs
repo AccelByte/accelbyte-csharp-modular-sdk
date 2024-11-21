@@ -39,7 +39,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _Sdk.GetCloudsaveApi().PublicGameRecord.PostGameRecordHandlerV1Op
                 .Execute(gameRecord, "foo_bar_record", _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             Wait();
@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Get game record
             ModelsGameRecordResponse? gRecord = _Sdk.GetCloudsaveApi().PublicGameRecord.GetGameRecordHandlerV1Op
                 .Execute("foo_bar_record", _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(gRecord!.Value);
 
@@ -65,7 +65,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _Sdk.GetCloudsaveApi().PublicGameRecord.PutGameRecordHandlerV1Op
                 .Execute(updateRecord, "foo_bar_record", _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             Wait();
@@ -73,7 +73,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             //re-check updated game record
             gRecord = _Sdk.GetCloudsaveApi().PublicGameRecord.GetGameRecordHandlerV1Op
                 .Execute("foo_bar_record", _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             Assert.IsNotNull(gRecord!.Value);
 
             recValue = gRecord.Value!;
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Delete game record
             _Sdk.GetCloudsaveApi().PublicGameRecord.DeleteGameRecordHandlerV1Op
                 .Execute("foo_bar_record", _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             Wait();
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 DisableRetry();
                 gRecord = _Sdk.GetCloudsaveApi().PublicGameRecord.GetGameRecordHandlerV1Op
                     .Execute("foo_bar_record", _Sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
             });
         }
 
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _Sdk.GetCloudsaveApi().PublicPlayerRecord.PostPlayerRecordHandlerV1Op
                 .Execute(playerRecord, "foo_bar_record", _Sdk.Namespace, userId)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             Wait();
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Get player record
             ModelsPlayerRecordResponse? gRecord = _Sdk.GetCloudsaveApi().PublicPlayerRecord.GetPlayerRecordHandlerV1Op
                 .Execute("foo_bar_record", _Sdk.Namespace, userId)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(gRecord);
             Assert.IsNotNull(gRecord!.Value);
@@ -147,7 +147,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _Sdk.GetCloudsaveApi().PublicPlayerRecord.PutPlayerRecordHandlerV1Op
                 .Execute(updateRecord, "foo_bar_record", _Sdk.Namespace, userId)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             Wait();
@@ -155,7 +155,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             //re-check updated player record
             gRecord = _Sdk.GetCloudsaveApi().PublicPlayerRecord.GetPlayerRecordHandlerV1Op
                 .Execute("foo_bar_record", _Sdk.Namespace, userId)
-                .Ok();
+                .EnsureSuccess();
             Assert.IsNotNull(gRecord);
             Assert.IsNotNull(gRecord!.Value);
 
@@ -169,7 +169,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Delete player record
             _Sdk.GetCloudsaveApi().PublicPlayerRecord.DeletePlayerRecordHandlerV1Op
                 .Execute("foo_bar_record", _Sdk.Namespace, userId)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             Wait();
@@ -180,7 +180,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 DisableRetry();
                 gRecord = _Sdk.GetCloudsaveApi().PublicPlayerRecord.GetPlayerRecordHandlerV1Op
                     .Execute("foo_bar_record", _Sdk.Namespace, userId)
-                    .Ok();
+                    .EnsureSuccess();
             });
         }
 
@@ -204,7 +204,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _Sdk.GetCloudsaveApi().PublicGameRecord.PostGameRecordHandlerV1Op
                 .Execute(myGameRecord, recordKey, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
 
             Wait();
 
@@ -215,7 +215,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 })
                 .Execute<AnotherGameRecordForTest_PC>(recordKey, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
 
             Assert.IsNotNull(gameRecord.Value);
             if (gameRecord.Value != null)
@@ -226,7 +226,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _Sdk.GetCloudsaveApi().PublicGameRecord.DeleteGameRecordHandlerV1Op
                 .Execute(recordKey, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
 
             ResetPolicy();
         }
@@ -256,13 +256,13 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 })
                 .Execute(myGameRecord, recordKey, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
 
             Wait();
 
             var gameRecord = _Sdk.GetCloudsaveApi().PublicGameRecord.GetGameRecordHandlerV1Op
                 .Execute<AnotherGameRecordForTest_CC>(recordKey, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
 
             Assert.IsNotNull(gameRecord.Value);
             if (gameRecord.Value != null)
@@ -273,7 +273,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _Sdk.GetCloudsaveApi().PublicGameRecord.DeleteGameRecordHandlerV1Op
                 .Execute(recordKey, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
 
             ResetPolicy();
         }
@@ -301,7 +301,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     FileType = "bin",
                     SetBy = ModelsGameBinaryRecordCreateSetBy.CLIENT
                 }, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
 
             if (cResponse.Url != null)
             {
@@ -322,14 +322,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                             ContentType = contentType,
                             FileLocation = cResponse.FileLocation
                         }, dataKey, _Sdk.Namespace)
-                        .Ok();
+                        .EnsureSuccess();
                 }
             }
 
             //get binary record
             var sResponse = _Sdk.GetCloudsaveApi().AdminGameBinaryRecord.AdminGetGameBinaryRecordV1Op
                 .Execute(dataKey, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             if (sResponse.BinaryInfo != null && sResponse.BinaryInfo.Url != null)
             {
                 //download binary
@@ -342,7 +342,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             //download binary record
             _Sdk.GetCloudsaveApi().AdminGameBinaryRecord.AdminDeleteGameBinaryRecordV1Op
                 .Execute(dataKey, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
 
             ResetPolicy();
         }

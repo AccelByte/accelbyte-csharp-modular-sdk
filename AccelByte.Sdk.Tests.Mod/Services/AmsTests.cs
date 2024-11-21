@@ -29,7 +29,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             DisableRetry();
 
             ApiAMSRegionsResponse regions = _Sdk.GetAmsApi().AMSInfo.InfoRegionsOp
-                .Execute(_Sdk.Namespace).Ok();
+                .Execute(_Sdk.Namespace).EnsureSuccess();
             Assert.GreaterOrEqual(regions!.Regions!.Count, 1);            
 
             ResetPolicy();
@@ -52,7 +52,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             // get readily available instance type
             var instances = _Sdk.GetAmsApi().AMSInfo.InfoSupportedInstancesOp
                 .Execute(_Sdk.Namespace)
-                .Ok();            
+                .EnsureSuccess();            
             string instanceId = "";
             if (instances != null && instances.AvailableInstanceTypes != null && instances.AvailableInstanceTypes.Count > 0)
                 instanceId = instances.AvailableInstanceTypes[0].Id!;
@@ -61,7 +61,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Get images
             var imageList = _Sdk.GetAmsApi().Images.ImageListOp
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(imageList);
 
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                         ServersPerVm = 1
                     }
                 }, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             if (newFleet != null)
                 fleetId = newFleet.Id!;
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 #region Get fleet
                 var getFleet = _Sdk.GetAmsApi().Fleets.FleetGetOp
                     .Execute(fleetId, _Sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
                 if (getFleet != null)
                     Assert.AreEqual(fleetName, getFleet.Name!);
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     {
                         Name = fleetNameUpdate
                     }, fleetId, _Sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
             }
             finally
@@ -122,7 +122,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 #region Delete fleet
                 _Sdk.GetAmsApi().Fleets.FleetDeleteOp
                     .Execute(fleetId, _Sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
             }
 

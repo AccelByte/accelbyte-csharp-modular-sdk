@@ -31,7 +31,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .SetOffset(0)
                 .SetLimit(20)
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             if (response.Data != null)
                 Assert.GreaterOrEqual(response.Data.Count, 0);
@@ -41,7 +41,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .SetOffset(0)
                 .SetLimit(20)
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             if (mResponse.Data != null)
                 Assert.GreaterOrEqual(mResponse.Data.Count, 0);
@@ -51,7 +51,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .SetOffset(0)
                 .SetLimit(50)
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(partyDetails);
 
@@ -61,7 +61,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Query total matchmaking match
             var mmData = _Sdk.GetSessionhistoryApi().XRay.QueryTotalMatchmakingMatchOp
                 .Execute(_Sdk.Namespace, endDate, startDate)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(mmData);
 

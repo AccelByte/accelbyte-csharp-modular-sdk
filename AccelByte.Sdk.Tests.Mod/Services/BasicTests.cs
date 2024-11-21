@@ -37,7 +37,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             {
                 //But if the profile do actually exists, just delete it.
 
-                var profileData = check.Ok();
+                var profileData = check.EnsureSuccess();
                 _Sdk.GetBasicApi().UserProfile.DeleteUserProfileOp
                     .Execute(_Sdk.Namespace, profileData.UserId!);
             }
@@ -60,14 +60,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             UserProfilePrivateInfo cInfo = _Sdk.GetBasicApi().UserProfile.CreateMyProfileOp
                 .SetBody(createProfile)
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual(cInfo.FirstName, "Integration Test");
 
             #region Get user's own profile info
             UserProfilePrivateInfo ownResp = _Sdk.GetBasicApi().UserProfile.GetMyProfileInfoOp
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual(ownResp.LastName!, "CSharp Extend SDK");
             string userId = ownResp.UserId!;
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             UserProfilePrivateInfo updResp = _Sdk.GetBasicApi().UserProfile.UpdateMyProfileOp
                 .SetBody(updateProfile)
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual(updResp.TimeZone, "Asia/Jakarta");
 

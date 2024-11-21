@@ -41,7 +41,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 {
                     Word = profanityWord,
                     WordType = "PROFANITY"
-                }, _Sdk.Namespace).Ok();
+                }, _Sdk.Namespace).EnsureSuccess();
             #endregion
             Assert.AreEqual(profanityWord, createResult.Word);
 
@@ -51,7 +51,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .SetWordType("PROFANITY")
                 .SetStartWith(profanityWord)
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             Assert.IsNotNull(queryResults.Data);
@@ -106,14 +106,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     ExpiresIn = 3600000000,
                     Name = inboxName
 
-                }, _Sdk.Namespace).Ok();
+                }, _Sdk.Namespace).EnsureSuccess();
             #endregion
             Assert.AreEqual(inboxName, insertResult!.Name);
 
             #region Get chat inbox categories
             var getResult = _Sdk.GetChatApi().Inbox.AdminGetInboxCategoriesOp
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(getResult);
             if (getResult != null)
@@ -138,13 +138,13 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 {
                     ExpiresIn = 1800000000
                 }, inboxName, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             #region Delete chat inbox category
             _Sdk.GetChatApi().Inbox.AdminDeleteInboxCategoryOp
                 .Execute(inboxName, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
         }
     }

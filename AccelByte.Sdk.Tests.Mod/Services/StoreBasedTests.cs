@@ -23,7 +23,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             //Check whether draft store is already exists or not
             List<StoreInfo> stores = sdk.GetPlatformApi().Store.ListStoresOp
                 .Execute(sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             if (stores.Count > 0)
             {
                 foreach (var store in stores)
@@ -33,14 +33,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                         //draft store exists. delete it first.
                         sdk.GetPlatformApi().Store.DeleteStoreOp
                             .Execute(sdk.Namespace, store.StoreId!)
-                            .Ok();
+                            .EnsureSuccess();
                     }
                     else
                     {
                         //published store exists. delete it too
                         sdk.GetPlatformApi().Store.DeletePublishedStoreOp
                             .Execute(sdk.Namespace)
-                            .Ok();
+                            .EnsureSuccess();
                     }
                 }
             }

@@ -53,14 +53,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             StatInfo cStat = _Sdk.GetSocialApi().StatConfiguration.CreateStatOp
                 .Execute(createStat, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual("CSharp Server SDK Test Stat", cStat.Name);
 
             #region Get a stat
             StatInfo gStat = _Sdk.GetSocialApi().StatConfiguration.GetStatOp
                 .Execute(_Sdk.Namespace, stat_code)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual("CSharp Server SDK Test Stat", gStat.Name);
 
@@ -72,14 +72,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             StatInfo uStat = _Sdk.GetSocialApi().StatConfiguration.UpdateStatOp
                 .Execute(updateStat, _Sdk.Namespace, stat_code)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual("Updated description.", uStat.Description);
 
             #region Delete a stat
             _Sdk.GetSocialApi().StatConfiguration.DeleteStatOp
                 .Execute(_Sdk.Namespace, stat_code)
-                .Ok();
+                .EnsureSuccess();
             #endregion
         }
 
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     IsPublic = false,
                     Tags = new List<string>() { "csharp", "extend_sdk", "test" }
                 }, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(newStat);
 
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .SetIsGlobal(false)
                 .SetIsPublic(false)
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             bool isFound = false;
@@ -146,7 +146,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Export stat config
             var exportStream = _Sdk.GetSocialApi().StatConfiguration.ExportStatsOp
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             string exportStr = exportStream.ReadToString();
@@ -162,13 +162,13 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .SetFile(importStream)
                 .SetReplaceExisting(true)
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             Assert.IsNotNull(importStatus);
 
             #region Query Stats
             statData = _Sdk.GetSocialApi().StatConfiguration.QueryStatsOp
                 .Execute(_Sdk.Namespace, "csharp")
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             isFound = false;
@@ -188,7 +188,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             //delete again
             _Sdk.GetSocialApi().StatConfiguration.DeleteStatOp
                 .Execute(_Sdk.Namespace, stat_code)
-                .Ok();
+                .EnsureSuccess();
         }
     }
 }

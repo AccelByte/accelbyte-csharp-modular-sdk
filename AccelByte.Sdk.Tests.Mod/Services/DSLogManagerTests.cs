@@ -28,7 +28,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             _ = _Sdk.GetDslogmanagerApi().TerminatedServers.ListTerminatedServersOp
                 .SetLimit(10)
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
         }
     }
 }

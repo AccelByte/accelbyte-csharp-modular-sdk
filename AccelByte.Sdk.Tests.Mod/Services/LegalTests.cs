@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Get all legal policies
             List<RetrieveBasePolicyResponse>? bPolicies = _Sdk.GetLegalApi().BaseLegalPolicies.RetrieveAllLegalPoliciesOp
                 .Execute()
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             //Try to find existing policy with specified name.
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 List<RetrievePolicyTypeResponse> policyTypes = _Sdk.GetLegalApi().BaseLegalPolicies.RetrieveAllPolicyTypesOp
                     .SetOffset(0)
                     .Execute(100)
-                    .Ok();
+                    .EnsureSuccess();
 
                 foreach (RetrievePolicyTypeResponse policyType in policyTypes!)
                 {
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 CreateBasePolicyResponse bPolResp = _Sdk.GetLegalApi().BaseLegalPolicies.CreatePolicyOp
                     .SetBody(createPolicy)
                     .Execute()
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
                 targetPolicyId = bPolResp!.PolicyId!;
             }
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Get single policy by policy id
             List<RetrievePolicyVersionResponse> polVers = _Sdk.GetLegalApi().PolicyVersions.RetrieveSinglePolicyVersionOp
                 .Execute(targetPolicyId)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             if (polVers!.Count <= 0)
             {
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 CreatePolicyVersionResponse polVerResp = _Sdk.GetLegalApi().PolicyVersions.CreatePolicyVersionOp
                     .SetBody(policyVersion)
                     .Execute(targetPolicyId)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
                 targetPolicyVersionId = polVerResp!.Id!;
             }
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             List<RetrieveLocalizedPolicyVersionResponse> locPolVers = _Sdk.GetLegalApi().LocalizedPolicyVersions.RetrieveLocalizedPolicyVersionsOp
                 .Execute(targetPolicyVersionId)
-                .Ok();
+                .EnsureSuccess();
             if (locPolVers.Count <= 0)
             {
                 //No localized version available, so create one
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 CreateLocalizedPolicyVersionResponse locPolResp = _Sdk.GetLegalApi().LocalizedPolicyVersions.CreateLocalizedPolicyVersionOp
                     .SetBody(localPolicy)
                     .Execute(targetPolicyVersionId)
-                    .Ok();
+                    .EnsureSuccess();
                 targetLocalizedPolicyId = locPolResp!.Id!;
             }
             else
@@ -153,14 +153,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             _Sdk.GetLegalApi().Agreement.ChangePreferenceConsentOp
                 .SetBody(aggreementRequests)
                 .Execute(_Sdk.Namespace, userId)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             #region Bulk accept policy
             _Sdk.GetLegalApi().Agreement.BulkAcceptVersionedPolicyOp
                 .SetBody(aggreementRequests)
                 .Execute()
-                .Ok();
+                .EnsureSuccess();
             #endregion
         }
 
@@ -174,7 +174,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Get aggrements
             List<RetrieveAcceptedAgreementResponse> aggrs = _Sdk.GetLegalApi().Agreement.RetrieveAgreementsPublicOp
                 .Execute()
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             Assert.IsNotNull(aggrs);

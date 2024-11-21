@@ -78,11 +78,11 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _Sdk.GetSessionApi().ConfigurationTemplate.AdminCreateConfigurationTemplateV1Op
                 .Execute(cTemplateBody, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
 
             ApimodelsConfigurationTemplateResponse cfgTemplate = _Sdk.GetSessionApi().ConfigurationTemplate.AdminGetConfigurationTemplateV1Op
                 .Execute(cfgTemplateName, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual("P2P", cfgTemplate.Type!);
             Assert.AreEqual("OPEN", cfgTemplate.Joinability!);
@@ -99,14 +99,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             ApimodelsConfigurationTemplateResponse uptTemplate = _Sdk.GetSessionApi().ConfigurationTemplate.AdminUpdateConfigurationTemplateV1Op
                 .Execute(uTemplateBody, cfgTemplateName, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual(4, uptTemplate.MaxPlayers!);
 
             #region Delete session configuration template
             _Sdk.GetSessionApi().ConfigurationTemplate.AdminDeleteConfigurationTemplateV1Op
                 .Execute(cfgTemplateName, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             ResetPolicy();
@@ -165,7 +165,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
                 ApimodelsGameSessionResponse newGSResponse = sdk.GetSessionApi().GameSession.CreateGameSessionOp
                     .Execute(newGSRequest, sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
                 gameSessionId = newGSResponse.Id!;
             });
@@ -180,7 +180,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 #region Join a game session
                 ApimodelsGameSessionResponse p2GsJoin = sdk.GetSessionApi().GameSession.JoinGameSessionOp
                     .Execute(sdk.Namespace, gameSessionId)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
                 Assert.IsNotNull(p2GsJoin);
             });
@@ -189,7 +189,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             ApimodelsGameSessionResponse gsCheck = _Sdk.GetSessionApi().GameSession.GetGameSessionOp
                 .Execute(_Sdk.Namespace, gameSessionId)
-                .Ok();
+                .EnsureSuccess();
             Assert.AreEqual(2, gsCheck.Members!.Count);
             List<string> userIds = gsCheck.Members!.Select(item => item.Id!).ToList();
             Assert.Contains(_Player1.UserId, userIds);
@@ -200,7 +200,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 #region Leave a game session
                 sdk.GetSessionApi().GameSession.LeaveGameSessionOp
                     .Execute(sdk.Namespace, gameSessionId)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
             });
 
@@ -209,7 +209,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 #region Delete a game session
                 sdk.GetSessionApi().GameSession.DeleteGameSessionOp
                     .Execute(sdk.Namespace, gameSessionId)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
             });
 
@@ -222,7 +222,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     {
                         ConfigurationName = cfgTemplateName,
                     }, sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
                 Assert.IsNotNull(newGSResponse);
                 if (newGSResponse != null)
                     newGameSessionId = newGSResponse.Id!;
@@ -234,13 +234,13 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 {
                     Ids = [newGameSessionId]
                 }, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(deleteResponse);
 
             _Sdk.GetSessionApi().ConfigurationTemplate.AdminDeleteConfigurationTemplateV1Op
                 .Execute(cfgTemplateName, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
 
             ResetPolicy();
         }
@@ -255,7 +255,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Query game sessions
             var response = _Sdk.GetSessionApi().GameSession.PublicQueryGameSessionsByAttributesOp
                 .Execute(new Dictionary<string, object>() { }, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(response);
         }
@@ -324,7 +324,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
                 ApimodelsPartySessionResponse partyResponse = sdk.GetSessionApi().Party.PublicCreatePartyOp
                     .Execute(partyRequest, sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
                 partyId = partyResponse.Id!;
                 joinCode = partyResponse.Code!;
@@ -347,7 +347,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
                 ApimodelsPartySessionResponse joinResponse = sdk.GetSessionApi().Party.PublicPartyJoinCodeOp
                     .Execute(joinRequest, sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
                 Assert.IsNotNull(joinResponse);
             });
@@ -357,7 +357,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Get party detail
             ApimodelsPartySessionResponse partyData = _Sdk.GetSessionApi().Party.PublicGetPartyOp
                 .Execute(_Sdk.Namespace, partyId)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             
             Assert.AreEqual(2, partyData.Members!.Count);
@@ -370,7 +370,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .SetOffset(0)
                 .SetLimit(10)
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(adminPartyData);
 
@@ -379,7 +379,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 #region User leave a party
                 sdk.GetSessionApi().Party.PublicPartyLeaveOp
                     .Execute(sdk.Namespace, partyId)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
             });
 
@@ -387,7 +387,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             ApimodelsPartySessionResponse uPartyData = _Sdk.GetSessionApi().Party.PublicGetPartyOp
                 .Execute(_Sdk.Namespace, partyId)
-                .Ok();
+                .EnsureSuccess();
 
             Assert.AreEqual(2, uPartyData.Members!.Count);
 
@@ -401,7 +401,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _Sdk.GetSessionApi().ConfigurationTemplate.AdminDeleteConfigurationTemplateV1Op
                 .Execute(cfgTemplateName, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
 
             ResetPolicy();
         }

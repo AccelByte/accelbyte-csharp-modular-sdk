@@ -33,7 +33,7 @@ namespace AccelByte.Sdk.Core
                 throw new Exception($"{FullOperationId} returns unknown error with http status code {(int)StatusCode}");
         }
 
-        public void Ok()
+        public void EnsureSuccess()
         {
             ThrowExceptionIfError();
         }
@@ -43,7 +43,7 @@ namespace AccelByte.Sdk.Core
     {
         public TData? Data { get; set; } = default;
 
-        public new TData Ok()
+        public new TData EnsureSuccess()
         {
             ThrowExceptionIfError();
             if (Data == null)

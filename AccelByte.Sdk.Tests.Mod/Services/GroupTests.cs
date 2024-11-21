@@ -54,7 +54,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 //So we just have to initiate it.
                 ModelsCreateGroupConfigurationResponseV1 iConfigResp = _Sdk.GetGroupApi().Configuration.InitiateGroupConfigurationAdminV1Op
                     .Execute(_Sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
 
                 defaultAdminRoleId = iConfigResp!.GroupAdminRoleId!;
                 defaultMemberRoleId = iConfigResp!.GroupMemberRoleId!;
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     {
                         _Sdk.GetGroupApi().GroupMember.LeaveGroupPublicV2Op
                             .Execute(info.GroupId!, _Sdk.Namespace)
-                            .Ok();
+                            .EnsureSuccess();
                     }
                 }
                 else if (!groupInfoResponse.IsSuccess)
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
                 ModelsGroupResponseV1 cGroup = _Sdk.GetGroupApi().Group.CreateNewGroupPublicV1Op
                     .Execute(createGroup, _Sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
 
                 Assert.AreEqual(groupName, cGroup.GroupName);
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 #region Get single group
                 ModelsGroupResponseV1 gGroup = _Sdk.GetGroupApi().Group.GetSingleGroupPublicV1Op
                     .Execute(group_id, _Sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion                
                 Assert.AreEqual(groupName, gGroup.GroupName);
 
@@ -141,7 +141,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
                 ModelsGroupResponseV1 uGroup = _Sdk.GetGroupApi().Group.UpdateSingleGroupV1Op
                     .Execute(updateGroup, group_id, _Sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
                 Assert.AreEqual("Updated description.", uGroup.GroupDescription);
             }
@@ -152,7 +152,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     #region Delete a group
                     _Sdk.GetGroupApi().Group.DeleteGroupPublicV1Op
                         .Execute(group_id, _Sdk.Namespace)
-                        .Ok();
+                        .EnsureSuccess();
                     #endregion
 
                     Wait();
@@ -163,14 +163,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                         DisableRetry();
                         _ = _Sdk.GetGroupApi().Group.GetSingleGroupPublicV1Op
                             .Execute(group_id, _Sdk.Namespace)
-                            .Ok();
+                            .EnsureSuccess();
                     });
                 }
 
                 #region Delete group configuration
                 _Sdk.GetGroupApi().Configuration.DeleteGroupConfigurationV1Op
                     .Execute(configuration_code, _Sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
             }
         }

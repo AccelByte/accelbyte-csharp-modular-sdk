@@ -135,7 +135,7 @@ public class Functions
             .SetOffset(0)
             .SetLimit(10)
             .Build(_Sdk.Namespace))
-            .Ok();
+            .EnsureSuccess();
 
         return CreateResponseAndLogout(result);
     }
@@ -153,7 +153,7 @@ public class Functions
 
             StatItemIncResult incResult = wUserStatistic.IncUserStatItemValue(IncUserStatItemValue.Builder
                 .Build(input, _Sdk.Namespace, _ActiveStatCode, user_id))
-                .Ok();
+                .EnsureSuccess();
 
             return incResult;
         });
@@ -171,7 +171,7 @@ public class Functions
                 .SetOffset(0)
                 .SetStatCodes(_ActiveStatCode)
                 .Build(_Sdk.Namespace, user_id))
-                .Ok();
+                .EnsureSuccess();
 
             return result;
         });

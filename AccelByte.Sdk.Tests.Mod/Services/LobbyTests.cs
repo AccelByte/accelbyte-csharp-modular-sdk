@@ -40,13 +40,13 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _Sdk.GetLobbyApi().Admin.FreeFormNotificationOp
                 .Execute(notifBody, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             #region Export config
             var exportStream = _Sdk.GetLobbyApi().Config.AdminExportConfigV1Op
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(exportStream);
         }
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             {
                 userPresence = _Sdk.GetLobbyApi().Presence.UsersPresenceHandlerV1Op
                     .Execute(_Sdk.Namespace, currentUserId)
-                    .Ok();
+                    .EnsureSuccess();
 
                 string userStatus = "";
                 if ((userPresence.Data != null) && (userPresence.Data.Count > 0))
@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             {
                 userPresence = _Sdk.GetLobbyApi().Presence.UsersPresenceHandlerV1Op
                     .Execute(_Sdk.Namespace, currentUserId)
-                    .Ok();
+                    .EnsureSuccess();
 
                 string userStatus = "";
                 if ((userPresence.Data != null) && (userPresence.Data.Count > 0))

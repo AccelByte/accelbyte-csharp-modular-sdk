@@ -37,7 +37,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             };
             ModelsCreateTagResponse cTag = _Sdk.GetUgcApi().AdminTag.AdminCreateTagOp
                 .Execute(createTag, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual(tag_name, cTag.Tag);
             tag_id = cTag.Id!;
@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .SetOffset(0)
                 .SetLimit(10)
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(gTag);
 
@@ -58,14 +58,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             };
             ModelsCreateTagResponse uTag = _Sdk.GetUgcApi().AdminTag.AdminUpdateTagOp
                 .Execute(updateTag, _Sdk.Namespace, tag_id)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual(tag_name_u, uTag.Tag);
 
             #region Delete a tag
             _Sdk.GetUgcApi().AdminTag.AdminDeleteTagOp
                 .Execute(_Sdk.Namespace, tag_id)
-                .Ok();
+                .EnsureSuccess();
             #endregion
         }
     }

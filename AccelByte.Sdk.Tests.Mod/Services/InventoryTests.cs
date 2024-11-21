@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _ConfigInventory = _Sdk.GetInventoryApi().AdminInventoryConfigurations.AdminCreateInventoryConfigurationOp
                 .Execute(cInventoryConfigBody, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             #region Create an inventory
@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             string inventoryId = "";
             ApimodelsInventoryResp cInventory = _Sdk.GetInventoryApi().AdminInventories.AdminCreateInventoryOp
                 .Execute(cInventoryBody, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             if (cInventory.Id != null)
                 inventoryId = cInventory.Id;
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Get an inventory
             ApimodelsInventoryResp gInventory = _Sdk.GetInventoryApi().AdminInventories.AdminGetInventoryOp
                 .Execute(inventoryId, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             #region Update an inventory
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             ApimodelsInventoryResp uInventory = _Sdk.GetInventoryApi().AdminInventories.AdminUpdateInventoryOp
                 .Execute(uInventoryBody, inventoryId, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             #region Delete an inventory
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             };
             _Sdk.GetInventoryApi().AdminInventories.DeleteInventoryOp
                 .Execute(dInventoryBody, inventoryId, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
         }
 
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             // Clean up Inventory configuration
             _Sdk.GetInventoryApi().AdminInventoryConfigurations.AdminDeleteInventoryConfigurationOp
                 .Execute(_ConfigInventory.Id!, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
         }
     }
 }

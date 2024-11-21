@@ -28,7 +28,7 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
     {
         private Func<IAccelByteSdk, string, List<LocalPermissionItem>> _FetchFunction = ((sdk, roleId) =>
         {
-            var response = sdk.GetIamApi().Roles.AdminGetRoleV4Op.Execute(roleId).Ok();
+            var response = sdk.GetIamApi().Roles.AdminGetRoleV4Op.Execute(roleId).EnsureSuccess();
 
             List<LocalPermissionItem> permissions = new List<LocalPermissionItem>();
             foreach (var item in response.Permissions!)
@@ -46,7 +46,7 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
         private Func<IAccelByteSdk, string, Task<List<LocalPermissionItem>>> _FetchFunctionAsync = (async (sdk, roleId) =>
         {
             var response = await sdk.GetIamApi().Roles.AdminGetRoleV4Op.ExecuteAsync(roleId);
-            var responseData = response.Ok();
+            var responseData = response.EnsureSuccess();
 
             List<LocalPermissionItem> permissions = new List<LocalPermissionItem>();
             foreach (var item in responseData.Permissions!)
@@ -63,7 +63,7 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
 
         private Func<IAccelByteSdk, string, LocalNamespaceContext> _NamespaceFetchFunction = ((sdk, aNamespace) =>
         {
-            var response = sdk.GetBasicApi().Namespace.GetNamespaceContextOp.Execute(aNamespace).Ok();            
+            var response = sdk.GetBasicApi().Namespace.GetNamespaceContextOp.Execute(aNamespace).EnsureSuccess();            
 
             var context = new LocalNamespaceContext();
             if (response.Namespace != null)
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
         private Func<IAccelByteSdk, string, Task<LocalNamespaceContext>> _NamespaceFetchFunctionAsync = (async (sdk, aNamespace) =>
         {
             var response = await sdk.GetBasicApi().Namespace.GetNamespaceContextOp.ExecuteAsync(aNamespace);
-            var responseData = response.Ok();
+            var responseData = response.EnsureSuccess();
 
             var context = new LocalNamespaceContext();
             if (responseData.Namespace != null)
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
         {
             OauthcommonJWKSet tempResp = sdk.GetIamApi().OAuth20.GetJWKSV3Op
                 .SetPreferredSecurityMethod(Operation.SECURITY_BASIC)
-                .Execute().Ok();
+                .Execute().EnsureSuccess();
 
             JsonWebKeySets keys = new JsonWebKeySets(tempResp);
             sdk.LocalData[JsonWebKeySets.DATA_KEY] = keys;
@@ -127,7 +127,7 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
             var temp = await sdk.GetIamApi().OAuth20.GetJWKSV3Op
                 .SetPreferredSecurityMethod(Operation.SECURITY_BASIC)
                 .ExecuteAsync();
-            OauthcommonJWKSet tempResp = temp.Ok();
+            OauthcommonJWKSet tempResp = temp.EnsureSuccess();
 
             JsonWebKeySets keys = new JsonWebKeySets(tempResp);
             sdk.LocalData[JsonWebKeySets.DATA_KEY] = keys;

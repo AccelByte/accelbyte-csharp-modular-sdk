@@ -51,7 +51,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             RestapiAdminReasonResponse cReason = _Sdk.GetReportingApi().AdminReasons.CreateReasonOp
                 .Execute(createReason, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             Assert.IsNotNull(cReason.Id);
@@ -64,7 +64,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Get single Reason
             RestapiAdminReasonResponse cReason2 = _Sdk.GetReportingApi().AdminReasons.AdminGetReasonOp
                 .Execute(_Sdk.Namespace, reasonId)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.IsNotNull(cReason2.Id);
             Assert.AreEqual(reasonTitle, cReason2.Title);
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #region Delete a reason
             _Sdk.GetReportingApi().AdminReasons.DeleteReasonOp
                 .Execute(_Sdk.Namespace, reasonId)
-                .Ok();
+                .EnsureSuccess();
             #endregion
 
             //Finally, recheck if the data is truly deleted.
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 DisableRetry();
                 _ = _Sdk.GetReportingApi().AdminReasons.AdminGetReasonOp
                     .Execute(_Sdk.Namespace, reasonId)
-                    .Ok();
+                    .EnsureSuccess();
             });
         }
     }

@@ -78,7 +78,7 @@ namespace AccelByte.Sdk.Tests.Mod.Scenario
 
             AccountCreateUserResponseV4 cuResp = sdkClient.GetIamApi().UsersV4.PublicCreateUserV4Op
                 .Execute(newUser, sdkClient.Namespace)
-                .Ok();
+                .EnsureSuccess();
             UserId = cuResp.UserId!;
 
             _TokenRepo = new DefaultTokenRepository();
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Tests.Mod.Scenario
             {
                 _SdkClient.GetIamApi().Users.AdminDeleteUserInformationV3Op
                     .Execute(_SdkClient.Namespace, UserId)
-                    .Ok();
+                    .EnsureSuccess();
             }   
         }
 

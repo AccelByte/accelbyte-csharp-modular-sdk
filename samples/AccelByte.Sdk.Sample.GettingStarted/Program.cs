@@ -33,7 +33,7 @@ namespace AccelByte.Sdk.Sample.GettingStarted
 
             try
             {
-                List<RetrieveAcceptedAgreementResponse>? response = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublicOp.Execute().Ok();                
+                List<RetrieveAcceptedAgreementResponse>? response = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublicOp.Execute().EnsureSuccess();                
 
                 foreach (var aggreement in response)
                     Console.WriteLine(aggreement.PolicyName);

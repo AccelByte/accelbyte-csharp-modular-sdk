@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _ = _Sdk.GetDsmcApi().Admin.ListLocalServerOp
                 .Execute(_Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
         }
 
         [Test]
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             Api.Sessionbrowser.Model.ModelsSessionResponse cResp = _Sdk.GetSessionbrowserApi().Session.CreateSessionOp
                 .Execute(createSession, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
 
             Assert.AreEqual(usernameToTest, cResp.Username!);
             session_id = cResp.SessionId!;
@@ -119,11 +119,11 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             _ = _Sdk.GetDsmcApi().Session.CreateSessionOp
                 .Execute(sessionRequest, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
 
             _ = _Sdk.GetDsmcApi().Session.GetSessionOp
                 .Execute(_Sdk.Namespace, session_id)
-                .Ok();
+                .EnsureSuccess();
 
             //Waiting for the server to be ready
             Thread.Sleep(5000);
@@ -134,15 +134,15 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             };
             _Sdk.GetDsmcApi().Session.ClaimServerOp
                 .Execute(claimServer, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
 
             _Sdk.GetDsmcApi().Admin.DeleteSessionOp
                 .Execute(_Sdk.Namespace, session_id)
-                .Ok();
+                .EnsureSuccess();
 
             _ = _Sdk.GetSessionbrowserApi().Session.DeleteSessionOp
-                .Execute(_Sdk.Namespace, session_id).
-                Ok();
+                .Execute(_Sdk.Namespace, session_id)
+                .EnsureSuccess();
 
             Assert.True(true);
         }

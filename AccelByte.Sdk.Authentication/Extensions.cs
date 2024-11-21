@@ -144,7 +144,7 @@ namespace AccelByte.Sdk.Core
                 .SetCode(code)
                 .SetCodeVerifier(codeVerifier)
                 .Execute("authorization_code");
-            var resultToken = token.Ok();
+            var resultToken = token.EnsureSuccess();
             var tokenResponse = new AuthTokenResponse(resultToken);
 
             sdk.Configuration.TokenRepository.StoreToken(LoginType.User, tokenResponse);
@@ -230,7 +230,7 @@ namespace AccelByte.Sdk.Core
                 .SetCode(code)
                 .SetCodeVerifier(codeVerifier)
                 .ExecuteAsync("authorization_code");
-            var resultToken = token.Ok();
+            var resultToken = token.EnsureSuccess();
             var tokenResponse = new AuthTokenResponse(resultToken);
 
             sdk.Configuration.TokenRepository.StoreToken(LoginType.User, tokenResponse);
@@ -305,7 +305,7 @@ namespace AccelByte.Sdk.Core
                 sdk.Configuration.TokenRepository.RemoveToken();
 
             var token = sdk.GetIamApi().OAuth20.TokenGrantV3Op.Execute("client_credentials");
-            var resultToken = token.Ok();
+            var resultToken = token.EnsureSuccess();
             var tokenResponse = new AuthTokenResponse(resultToken);
 
             sdk.Configuration.TokenRepository.StoreToken(LoginType.Client, tokenResponse);
@@ -334,7 +334,7 @@ namespace AccelByte.Sdk.Core
                 sdk.Configuration.TokenRepository.RemoveToken();
 
             var token = await sdk.GetIamApi().OAuth20.TokenGrantV3Op.ExecuteAsync("client_credentials");
-            var resultToken = token.Ok();
+            var resultToken = token.EnsureSuccess();
             var tokenResponse = new AuthTokenResponse(resultToken);
 
             sdk.Configuration.TokenRepository.StoreToken(LoginType.Client, tokenResponse);
@@ -375,7 +375,7 @@ namespace AccelByte.Sdk.Core
             var token = sdk.GetIamApi().OAuth20.PlatformTokenGrantV3Op
                 .SetPlatformToken(platformToken)
                 .Execute(platformId);
-            var resultToken = token.Ok();
+            var resultToken = token.EnsureSuccess();
             var tokenResponse = new AuthTokenResponse(resultToken);
 
             sdk.Configuration.TokenRepository.StoreToken(LoginType.Platform, tokenResponse);
@@ -412,7 +412,7 @@ namespace AccelByte.Sdk.Core
             var token = await sdk.GetIamApi().OAuth20.PlatformTokenGrantV3Op
                 .SetPlatformToken(platformToken)
                 .ExecuteAsync(platformId);
-            var resultToken = token.Ok();
+            var resultToken = token.EnsureSuccess();
             var tokenResponse = new AuthTokenResponse(resultToken);
 
             sdk.Configuration.TokenRepository.StoreToken(LoginType.Platform, tokenResponse);
@@ -433,7 +433,7 @@ namespace AccelByte.Sdk.Core
             var token = sdk.GetIamApi().OAuth20.TokenGrantV3Op
                 .SetRefreshToken(refreshToken)
                 .Execute("refresh_token");
-            var resultToken = token.Ok();
+            var resultToken = token.EnsureSuccess();
             var tokenResponse = new AuthTokenResponse(resultToken);
 
             sdk.Configuration.TokenRepository.UpdateToken(tokenResponse);
@@ -456,7 +456,7 @@ namespace AccelByte.Sdk.Core
             var token = await sdk.GetIamApi().OAuth20.TokenGrantV3Op
                 .SetRefreshToken(refreshToken)
                 .ExecuteAsync("refresh_token");
-            var resultToken = token.Ok();
+            var resultToken = token.EnsureSuccess();
             var tokenResponse = new AuthTokenResponse(resultToken);
 
             sdk.Configuration.TokenRepository.UpdateToken(tokenResponse);

@@ -56,7 +56,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
 
                 _ = sdk.GetLegalApi()
                     .Agreement.RetrieveAgreementsPublicOp.Execute()
-                    .Ok();
+                    .EnsureSuccess();
 
                 loopCounter++;
 
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
                 _ = sdk.GetAchievementApi()
                     .GlobalAchievements.PublicListGlobalAchievementsOp
                     .Execute(sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
 
                 loopCounter++;
 

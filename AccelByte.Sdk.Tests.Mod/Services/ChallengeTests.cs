@@ -39,7 +39,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     .SetOffset(0)
                     .SetLimit(10)
                     .Execute(sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
                 Assert.IsNotNull(userRewards);
             });
@@ -72,7 +72,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     Rotation = ModelCreateChallengeRequestRotation.DAILY,
                     StartDate = DateTime.Now.AddDays(1)
                 }, _Sdk.Namespace)
-                .Ok();
+                .EnsureSuccess();
             #endregion
             Assert.AreEqual(challengeName, newChallenge.Name);
 
@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             {
                 #region Get challenge
                 var challengeData = _Sdk.GetChallengeApi().ChallengeConfiguration.AdminGetChallengeOp
-                    .Execute(challengeCode, _Sdk.Namespace).Ok();
+                    .Execute(challengeCode, _Sdk.Namespace).EnsureSuccess();
                 #endregion
                 Assert.AreEqual(challengeName, challengeData.Name);
 
@@ -90,7 +90,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     {
                         Name = $"{challengeName} UPDATED"
                     }, challengeCode, _Sdk.Namespace)
-                    .Ok();
+                    .EnsureSuccess();
                 #endregion
                 Assert.AreEqual($"{challengeName} UPDATED", updatedChallenge.Name);
 
