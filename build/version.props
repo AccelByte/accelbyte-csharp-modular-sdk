@@ -15,30 +15,30 @@
         <ApiAmsVersion>0.13.0</ApiAmsVersion>
         <ApiBasicVersion>0.6.0</ApiBasicVersion>
         <ApiChallengeVersion>0.9.0</ApiChallengeVersion>
-		<ApiChatVersion>0.8.0</ApiChatVersion>
+		<ApiChatVersion>0.9.0</ApiChatVersion>
         <ApiCloudsaveVersion>0.12.0</ApiCloudsaveVersion>
-        <ApiDsartifactVersion>0.1.0</ApiDsartifactVersion>
-        <ApiDslogmanagerVersion>0.4.0</ApiDslogmanagerVersion>
-        <ApiDsmcVersion>0.4.0</ApiDsmcVersion>
-        <ApiEventlogVersion>0.4.0</ApiEventlogVersion>
-        <ApiGametelemetryVersion>0.6.0</ApiGametelemetryVersion>
+        <ApiDsartifactVersion>0.2.0</ApiDsartifactVersion>
+        <ApiDslogmanagerVersion>0.5.0</ApiDslogmanagerVersion>
+        <ApiDsmcVersion>0.5.0</ApiDsmcVersion>
+        <ApiEventlogVersion>0.5.0</ApiEventlogVersion>
+        <ApiGametelemetryVersion>0.7.0</ApiGametelemetryVersion>
         <ApiGdprVersion>0.8.0</ApiGdprVersion>
         <ApiGroupVersion>0.5.0</ApiGroupVersion>
         <ApiIamVersion>0.17.0</ApiIamVersion>
         <ApiInventoryVersion>0.9.0</ApiInventoryVersion>
-        <ApiLeaderboardVersion>0.8.0</ApiLeaderboardVersion>
+        <ApiLeaderboardVersion>0.9.0</ApiLeaderboardVersion>
         <ApiLegalVersion>0.10.0</ApiLegalVersion>
         <ApiLobbyVersion>0.13.0</ApiLobbyVersion>
-        <ApiMatch2Version>0.9.0</ApiMatch2Version>
-        <ApiMatchmakingVersion>0.10.0</ApiMatchmakingVersion>
+        <ApiMatch2Version>0.10.0</ApiMatch2Version>
+        <ApiMatchmakingVersion>0.11.0</ApiMatchmakingVersion>
         <ApiPlatformVersion>0.14.0</ApiPlatformVersion>
-        <ApiQosmVersion>0.3.0</ApiQosmVersion>
-        <ApiReportingVersion>0.4.0</ApiReportingVersion>
-        <ApiSeasonpassVersion>0.5.0</ApiSeasonpassVersion>
+        <ApiQosmVersion>0.4.0</ApiQosmVersion>
+        <ApiReportingVersion>0.5.0</ApiReportingVersion>
+        <ApiSeasonpassVersion>0.6.0</ApiSeasonpassVersion>
         <ApiSessionVersion>0.15.0</ApiSessionVersion>
-        <ApiSessionbrowserVersion>0.6.0</ApiSessionbrowserVersion>
+        <ApiSessionbrowserVersion>0.7.0</ApiSessionbrowserVersion>
         <ApiSessionhistoryVersion>0.6.0</ApiSessionhistoryVersion>
         <ApiSocialVersion>0.11.0</ApiSocialVersion>
-        <ApiUgcVersion>0.9.0</ApiUgcVersion>
+        <ApiUgcVersion>0.10.0</ApiUgcVersion>
     </PropertyGroup>
 </Project>
