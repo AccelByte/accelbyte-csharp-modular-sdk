@@ -26,6 +26,7 @@
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Challenge\AccelByte.Sdk.Api.Challenge.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Chat\AccelByte.Sdk.Api.Chat.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Cloudsave\AccelByte.Sdk.Api.Cloudsave.csproj" />
+    <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Csm\AccelByte.Sdk.Api.Csm.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Dsartifact\AccelByte.Sdk.Api.Dsartifact.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Dslogmanager\AccelByte.Sdk.Api.Dslogmanager.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Dsmc\AccelByte.Sdk.Api.Dsmc.csproj" />

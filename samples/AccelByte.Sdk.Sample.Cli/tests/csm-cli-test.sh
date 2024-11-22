@@ -79,7 +79,7 @@ eval_tap 0 9 'DeleteAppImagesV1 # SKIP deprecated' test.out
 $CLI_EXE \
     --sn csm \
     --op GetAppReleaseV1 \
-    --app 'v4l3zehS' \
+    --app 'uEWVofOA' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 10 'GetAppReleaseV1' test.out
@@ -132,13 +132,13 @@ eval_tap $? 24 'PublicGetMessages' test.out
 
 #- 25 GetAppListV2
 # body param: body
-echo '{"appNames": ["ol5jcco5", "1j5ek3GP", "jwEW55NE"], "appStatuses": ["PhIK2TXc", "98CwM1yV", "YzL6cP5Y"], "fuzzyAppName": "QE2coytn", "scenario": "OknsX57F"}' > $TEMP_JSON_INPUT
+echo '{"appNames": ["zolyBedI", "Tubl6hMG", "UTGHtFdp"], "appStatuses": ["M5urEMOh", "wqv3iish", "xUGdAulG"], "fuzzyAppName": "ZK3kIMls", "scenario": "cYr5e0iw"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn csm \
     --op GetAppListV2 \
     --namespace $AB_NAMESPACE \
-    --limit '94' \
-    --offset '92' \
+    --limit '57' \
+    --offset '23' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 25 'GetAppListV2' test.out
@@ -147,18 +147,18 @@ eval_tap $? 25 'GetAppListV2' test.out
 $CLI_EXE \
     --sn csm \
     --op GetAppV2 \
-    --app 'jT0SOnVf' \
+    --app 'YYyScA3h' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 26 'GetAppV2' test.out
 
 #- 27 CreateAppV2
 # body param: body
-echo '{"autoscaling": {"targetCPUUtilizationPercent": 67}, "cpu": {"requestCPU": 0}, "description": "ycZXgJKW", "memory": {"requestMemory": 70}, "replica": {"maxReplica": 65, "minReplica": 74}, "scenario": "dkf4Vs68"}' > $TEMP_JSON_INPUT
+echo '{"autoscaling": {"targetCPUUtilizationPercent": 84}, "cpu": {"requestCPU": 15}, "description": "fjp6uJmB", "memory": {"requestMemory": 12}, "replica": {"maxReplica": 35, "minReplica": 41}, "scenario": "L9df0SHE"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn csm \
     --op CreateAppV2 \
-    --app 'nhDGKwRL' \
+    --app 'zN2GlPFB' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -168,19 +168,19 @@ eval_tap $? 27 'CreateAppV2' test.out
 $CLI_EXE \
     --sn csm \
     --op DeleteAppV2 \
-    --app 'LbsKdCC5' \
+    --app 'TfCXmeN4' \
     --namespace $AB_NAMESPACE \
-    --forced 'Th7Ow66r' \
+    --forced '3lTPU3GX' \
     > test.out 2>&1
 eval_tap $? 28 'DeleteAppV2' test.out
 
 #- 29 UpdateAppV2
 # body param: body
-echo '{"description": "XVKNyfGO"}' > $TEMP_JSON_INPUT
+echo '{"description": "kjeWoFP5"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn csm \
     --op UpdateAppV2 \
-    --app '3ZmwD5xI' \
+    --app 'd0sS1CL3' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -188,11 +188,11 @@ eval_tap $? 29 'UpdateAppV2' test.out
 
 #- 30 CreateDeploymentV2
 # body param: body
-echo '{"imageTag": "mshcBg0x"}' > $TEMP_JSON_INPUT
+echo '{"imageTag": "pO4DPK6i"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn csm \
     --op CreateDeploymentV2 \
-    --app 'i8ldOZX9' \
+    --app 'iTs8o5th' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -202,19 +202,19 @@ eval_tap $? 30 'CreateDeploymentV2' test.out
 $CLI_EXE \
     --sn csm \
     --op GetAppImageListV2 \
-    --app 'sxn7O507' \
+    --app 'CjYh5h5K' \
     --namespace $AB_NAMESPACE \
-    --cached 'zIeg1MQp' \
+    --cached 'mq9p2XEU' \
     > test.out 2>&1
 eval_tap $? 31 'GetAppImageListV2' test.out
 
 #- 32 DeleteAppImagesV2
 # body param: body
-echo '{"imageTags": ["jf8D1RUT", "HQIPplOc", "HBTMtZvE"]}' > $TEMP_JSON_INPUT
+echo '{"imageTags": ["3G6uyMCE", "y6v0kcAV", "hm5L0mzO"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn csm \
     --op DeleteAppImagesV2 \
-    --app 'KQDjcUDN' \
+    --app 'arAZSKQb' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -222,11 +222,11 @@ eval_tap $? 32 'DeleteAppImagesV2' test.out
 
 #- 33 UpdateAppResourcesV2
 # body param: body
-echo '{"autoscaling": {"targetCPUUtilizationPercent": 71}, "cpu": {"requestCPU": 60}, "memory": {"requestMemory": 63}, "replica": {"maxReplica": 97, "minReplica": 66}}' > $TEMP_JSON_INPUT
+echo '{"autoscaling": {"targetCPUUtilizationPercent": 53}, "cpu": {"requestCPU": 31}, "memory": {"requestMemory": 0}, "replica": {"maxReplica": 14, "minReplica": 80}}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn csm \
     --op UpdateAppResourcesV2 \
-    --app 'BjJvMDzW' \
+    --app 'E8IV3fmP' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -234,11 +234,11 @@ eval_tap $? 33 'UpdateAppResourcesV2' test.out
 
 #- 34 UpdateAppResourcesResourceLimitFormV2
 # body param: body
-echo '{"clientEmail": "B8rkdF51", "preferredLimitReplica": 56, "requestReason": "aF1woHun"}' > $TEMP_JSON_INPUT
+echo '{"clientEmail": "9J8d9wWn", "preferredLimitReplica": 9, "requestReason": "iQ6jdCP5"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn csm \
     --op UpdateAppResourcesResourceLimitFormV2 \
-    --app 'qZA3Bodj' \
+    --app 'JuvKyj2o' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -248,20 +248,20 @@ eval_tap $? 34 'UpdateAppResourcesResourceLimitFormV2' test.out
 $CLI_EXE \
     --sn csm \
     --op GetListOfSecretsV2 \
-    --app 'yVTxHEzH' \
+    --app '5ldmyYDf' \
     --namespace $AB_NAMESPACE \
-    --limit '12' \
-    --offset '16' \
+    --limit '37' \
+    --offset '27' \
     > test.out 2>&1
 eval_tap $? 35 'GetListOfSecretsV2' test.out
 
 #- 36 SaveSecretV2
 # body param: body
-echo '{"applyMask": false, "configName": "yKMDpfHS", "description": "xSxNl2fr", "source": "ZHwtxK3v", "value": "jvP8B9TT"}' > $TEMP_JSON_INPUT
+echo '{"applyMask": true, "configName": "jW8cU3TU", "description": "hOmP5aIm", "source": "l95DZgyu", "value": "ov4YUEe4"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn csm \
     --op SaveSecretV2 \
-    --app 'riCTOCAY' \
+    --app 'mW7LdSlx' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -269,12 +269,12 @@ eval_tap $? 36 'SaveSecretV2' test.out
 
 #- 37 UpdateSecretV2
 # body param: body
-echo '{"applyMask": true, "description": "AYyLLaIl", "value": "YWb3mwoA"}' > $TEMP_JSON_INPUT
+echo '{"applyMask": true, "description": "TuAtbaXn", "value": "PM0l1Rzz"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn csm \
     --op UpdateSecretV2 \
-    --app 'N8wt4NNX' \
-    --configId 'DxwynxgN' \
+    --app 'tW1TcsPu' \
+    --configId 'B9FKOhTg' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -284,8 +284,8 @@ eval_tap $? 37 'UpdateSecretV2' test.out
 $CLI_EXE \
     --sn csm \
     --op DeleteSecretV2 \
-    --app 'Jf7FqAlS' \
-    --configId 'JabVMxqf' \
+    --app 'tdImLNU5' \
+    --configId 'PYdrdKfT' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 38 'DeleteSecretV2' test.out
@@ -294,7 +294,7 @@ eval_tap $? 38 'DeleteSecretV2' test.out
 $CLI_EXE \
     --sn csm \
     --op StartAppV2 \
-    --app 'YXM3Iw5b' \
+    --app 'kaAmLaz1' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 39 'StartAppV2' test.out
@@ -303,7 +303,7 @@ eval_tap $? 39 'StartAppV2' test.out
 $CLI_EXE \
     --sn csm \
     --op StopAppV2 \
-    --app '2B6UZElU' \
+    --app 'Ssk1APqa' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 40 'StopAppV2' test.out
@@ -312,19 +312,19 @@ eval_tap $? 40 'StopAppV2' test.out
 $CLI_EXE \
     --sn csm \
     --op GetNotificationSubscriberListV2 \
-    --app '0FzsfFYa' \
+    --app '8MkDjTnQ' \
     --namespace $AB_NAMESPACE \
-    --notificationType 'yFOwqGMa' \
+    --notificationType 'DQh4Xa1F' \
     > test.out 2>&1
 eval_tap $? 41 'GetNotificationSubscriberListV2' test.out
 
 #- 42 BulkSaveSubscriptionAppNotificationV2
 # body param: body
-echo '{"subscribers": [{"notificationType": {"WYAU6jeM": false, "G3LNT0Z5": true, "BH125JNm": false}, "userId": "MA8F8EDE"}, {"notificationType": {"7BUoyV9t": false, "ydQMMj8Q": false, "mgd1jtk4": true}, "userId": "JyGjmZHh"}, {"notificationType": {"HskA3k6m": false, "Imtuo5Ku": false, "oAaqRYch": false}, "userId": "C9ZApTKX"}]}' > $TEMP_JSON_INPUT
+echo '{"subscribers": [{"notificationType": {"QjBVogQp": false, "Tua9TXFD": false, "P8v47oLM": true}, "userId": "DHHD1FCM"}, {"notificationType": {"Br5PD57F": false, "RYFCRrLd": false, "ZZkDh6xU": false}, "userId": "KoWQ74PF"}, {"notificationType": {"iIiFLPQG": false, "WF8HzQ8W": false, "FVOxcerK": true}, "userId": "VaXXoOmg"}]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn csm \
     --op BulkSaveSubscriptionAppNotificationV2 \
-    --app 'EvPkE5Gq' \
+    --app 'YznS961u' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -332,11 +332,11 @@ eval_tap $? 42 'BulkSaveSubscriptionAppNotificationV2' test.out
 
 #- 43 SubscribeAppNotificationV2
 # body param: body
-echo '{"notificationType": "A22OKrcx", "subscribers": [{"userId": "KntMvg7u"}, {"userId": "BGfmyVrq"}, {"userId": "oJcjiQcv"}]}' > $TEMP_JSON_INPUT
+echo '{"notificationType": "TjP462dO", "subscribers": [{"userId": "h8iTP369"}, {"userId": "bMJ6K688"}, {"userId": "H1RwXLYd"}]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn csm \
     --op SubscribeAppNotificationV2 \
-    --app 'y9VJC2v3' \
+    --app 'SUeMxeJK' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -346,18 +346,18 @@ eval_tap $? 43 'SubscribeAppNotificationV2' test.out
 $CLI_EXE \
     --sn csm \
     --op GetSubscriptionV2Handler \
-    --app 'Q3Gr4xdR' \
+    --app 'y9HUfbYg' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 44 'GetSubscriptionV2Handler' test.out
 
 #- 45 SubscribeV2Handler
 # body param: body
-echo '{"notificationType": "kr1JHDpu"}' > $TEMP_JSON_INPUT
+echo '{"notificationType": "SRwTw6cq"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn csm \
     --op SubscribeV2Handler \
-    --app 'p6mOJFq7' \
+    --app 'S7jXNGqQ' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -367,7 +367,7 @@ eval_tap $? 45 'SubscribeV2Handler' test.out
 $CLI_EXE \
     --sn csm \
     --op UnsubscribeV2Handler \
-    --app '4RnZjWyt' \
+    --app 'duTTjubW' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 46 'UnsubscribeV2Handler' test.out
@@ -376,9 +376,9 @@ eval_tap $? 46 'UnsubscribeV2Handler' test.out
 $CLI_EXE \
     --sn csm \
     --op DeleteSubscriptionAppNotificationByUserIDV2 \
-    --app 'opKPc7nU' \
+    --app '6E94oulB' \
     --namespace $AB_NAMESPACE \
-    --userId 'rGiiqyvD' \
+    --userId 'rWCishV9' \
     > test.out 2>&1
 eval_tap $? 47 'DeleteSubscriptionAppNotificationByUserIDV2' test.out
 
@@ -389,20 +389,20 @@ eval_tap 0 48 'DeleteSubscriptionAppNotificationV2 # SKIP deprecated' test.out
 $CLI_EXE \
     --sn csm \
     --op GetListOfVariablesV2 \
-    --app 'lil0iEk6' \
+    --app 'WeGNUsq3' \
     --namespace $AB_NAMESPACE \
-    --limit '62' \
-    --offset '7' \
+    --limit '18' \
+    --offset '41' \
     > test.out 2>&1
 eval_tap $? 49 'GetListOfVariablesV2' test.out
 
 #- 50 SaveVariableV2
 # body param: body
-echo '{"applyMask": true, "configName": "l48ReNvu", "description": "RxkHAvAs", "source": "I2ntAv3H", "value": "dnjdf2T4"}' > $TEMP_JSON_INPUT
+echo '{"applyMask": false, "configName": "VnwBBhiy", "description": "QTwmNYG5", "source": "pv0D8iRF", "value": "LF6UzPt4"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn csm \
     --op SaveVariableV2 \
-    --app 'O669L8pF' \
+    --app '0rha5WuH' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -410,12 +410,12 @@ eval_tap $? 50 'SaveVariableV2' test.out
 
 #- 51 UpdateVariableV2
 # body param: body
-echo '{"applyMask": true, "description": "XFyAb1F2", "value": "FyiOw2Hn"}' > $TEMP_JSON_INPUT
+echo '{"applyMask": false, "description": "2gVOl4o9", "value": "iebeBCFu"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn csm \
     --op UpdateVariableV2 \
-    --app 'Dgl6EiXA' \
-    --configId 'DuQwQU08' \
+    --app 'XRXXFeSo' \
+    --configId 'GGbgbKH8' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -425,21 +425,21 @@ eval_tap $? 51 'UpdateVariableV2' test.out
 $CLI_EXE \
     --sn csm \
     --op DeleteVariableV2 \
-    --app 'QSB3eFA4' \
-    --configId 'welwaQCo' \
+    --app 'CBS296Qc' \
+    --configId 'bsfgnVuY' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 52 'DeleteVariableV2' test.out
 
 #- 53 GetListOfDeploymentV2
 # body param: body
-echo '{"appIds": ["w9ZvZufN", "c990oQRl", "xmWYnRH1"], "deploymentIds": ["y7tgFwoF", "zkUeLq75", "MDsR3S6L"], "statuses": ["iRzKqsZG", "DnT4dTzQ", "hOl395Bo"]}' > $TEMP_JSON_INPUT
+echo '{"appIds": ["8x0oTEbH", "OlNRN3gb", "iboGXuNE"], "deploymentIds": ["T6WN3Q9e", "EbDnnezU", "evKj7xrh"], "statuses": ["E01NAyku", "VoFLwznB", "hNQJzPw4"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn csm \
     --op GetListOfDeploymentV2 \
     --namespace $AB_NAMESPACE \
-    --limit '80' \
-    --offset '16' \
+    --limit '22' \
+    --offset '61' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 53 'GetListOfDeploymentV2' test.out
@@ -448,7 +448,7 @@ eval_tap $? 53 'GetListOfDeploymentV2' test.out
 $CLI_EXE \
     --sn csm \
     --op GetDeploymentV2 \
-    --deploymentId 'OZ59raFv' \
+    --deploymentId 'pUgg9bnA' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 54 'GetDeploymentV2' test.out
@@ -457,7 +457,7 @@ eval_tap $? 54 'GetDeploymentV2' test.out
 $CLI_EXE \
     --sn csm \
     --op DeleteDeploymentV2 \
-    --deploymentId 'Wqi6INLJ' \
+    --deploymentId 'cLsCDzFN' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 55 'DeleteDeploymentV2' test.out
