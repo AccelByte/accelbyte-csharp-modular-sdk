@@ -43,7 +43,7 @@ ModelsAchievementRequest newAchievement = new ModelsAchievementRequest()
 };
 
 ModelsAchievementResponse cResp = _Sdk.GetAchievementApi().Achievements.AdminCreateNewAchievementOp
-    .Execute(newAchievement, _Sdk.Namespace).Ok();
+    .Execute(newAchievement, _Sdk.Namespace).EnsureSuccess();
 ```
 
 ### Updating achievement
@@ -64,14 +64,14 @@ ModelsAchievementUpdateRequest updateAchievement = new ModelsAchievementUpdateRe
 };
 
 ModelsAchievementResponse uResp = _Sdk.GetAchievementApi().Achievements.AdminUpdateAchievementOp
-    .Execute(updateAchievement, achievement_code, _Sdk.Namespace).Ok();
+    .Execute(updateAchievement, achievement_code, _Sdk.Namespace).EnsureSuccess();
 ```
 
 ### Retrieve achievement by code
 
 ```csharp
 ModelsAchievementResponse rResp = _Sdk.GetAchievementApi().Achievements.AdminGetAchievementOp
-    .Execute(achievement_code, _Sdk.Namespace).Ok();
+    .Execute(achievement_code, _Sdk.Namespace).EnsureSuccess();
 ```
 
 ### Get all achievements
@@ -81,7 +81,7 @@ ModelsPaginatedAchievementResponse gaResp = _Sdk.GetAchievementApi().Achievement
     .SetLimit(100)
     .SetOffset(0)
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Delete an achievement
@@ -89,7 +89,7 @@ ModelsPaginatedAchievementResponse gaResp = _Sdk.GetAchievementApi().Achievement
 ```csharp
 _Sdk.GetAchievementApi().Achievements.AdminDeleteAchievementOp
     .Execute(achievement_code, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 ## AMS
 
@@ -100,7 +100,7 @@ Source: [AmsTests.cs](../AccelByte.Sdk.Tests.Mod/Services/AmsTests.cs)
 ```csharp
 var imageList = _Sdk.GetAmsApi().Images.ImageListOp
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Create new fleet
@@ -129,7 +129,7 @@ var newFleet = _Sdk.GetAmsApi().Fleets.FleetCreateOp
             ServersPerVm = 1
         }
     }, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get fleet
@@ -137,7 +137,7 @@ var newFleet = _Sdk.GetAmsApi().Fleets.FleetCreateOp
 ```csharp
 var getFleet = _Sdk.GetAmsApi().Fleets.FleetGetOp
     .Execute(fleetId, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Update fleet data
@@ -148,7 +148,7 @@ _Sdk.GetAmsApi().Fleets.FleetUpdateOp
     {
         Name = fleetNameUpdate
     }, fleetId, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Delete fleet
@@ -156,7 +156,7 @@ _Sdk.GetAmsApi().Fleets.FleetUpdateOp
 ```csharp
 _Sdk.GetAmsApi().Fleets.FleetDeleteOp
     .Execute(fleetId, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 ## Basic
 
@@ -176,7 +176,7 @@ UserProfilePrivateCreate createProfile = new UserProfilePrivateCreate()
 UserProfilePrivateInfo cInfo = _Sdk.GetBasicApi().UserProfile.CreateMyProfileOp
     .SetBody(createProfile)
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get user's own profile info
@@ -184,7 +184,7 @@ UserProfilePrivateInfo cInfo = _Sdk.GetBasicApi().UserProfile.CreateMyProfileOp
 ```csharp
 UserProfilePrivateInfo ownResp = _Sdk.GetBasicApi().UserProfile.GetMyProfileInfoOp
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Update user's own profile info
@@ -198,7 +198,7 @@ UserProfileUpdate updateProfile = new UserProfileUpdate()
 UserProfilePrivateInfo updResp = _Sdk.GetBasicApi().UserProfile.UpdateMyProfileOp
     .SetBody(updateProfile)
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Delete user's own profile info
@@ -219,7 +219,7 @@ var createResult = _Sdk.GetChatApi().Profanity.AdminProfanityCreateOp
     {
         Word = profanityWord,
         WordType = "PROFANITY"
-    }, _Sdk.Namespace).Ok();
+    }, _Sdk.Namespace).EnsureSuccess();
 ```
 
 ### Query profanity word
@@ -230,7 +230,7 @@ var queryResults = _Sdk.GetChatApi().Profanity.AdminProfanityQueryOp
     .SetWordType("PROFANITY")
     .SetStartWith(profanityWord)
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Update profanity word
@@ -261,7 +261,7 @@ var insertResult = _Sdk.GetChatApi().Inbox.AdminAddInboxCategoryOp
         ExpiresIn = 3600000000,
         Name = inboxName
 
-    }, _Sdk.Namespace).Ok();
+    }, _Sdk.Namespace).EnsureSuccess();
 ```
 
 ### Get chat inbox categories
@@ -269,7 +269,7 @@ var insertResult = _Sdk.GetChatApi().Inbox.AdminAddInboxCategoryOp
 ```csharp
 var getResult = _Sdk.GetChatApi().Inbox.AdminGetInboxCategoriesOp
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Update chat inbox category
@@ -280,7 +280,7 @@ _Sdk.GetChatApi().Inbox.AdminUpdateInboxCategoryOp
     {
         ExpiresIn = 1800000000
     }, inboxName, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Delete chat inbox category
@@ -288,7 +288,7 @@ _Sdk.GetChatApi().Inbox.AdminUpdateInboxCategoryOp
 ```csharp
 _Sdk.GetChatApi().Inbox.AdminDeleteInboxCategoryOp
     .Execute(inboxName, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 ## CloudSave
 
@@ -306,7 +306,7 @@ ModelsGameRecordRequestForTest gameRecord = new ModelsGameRecordRequestForTest()
 
 _Sdk.GetCloudsaveApi().PublicGameRecord.PostGameRecordHandlerV1Op
     .Execute(gameRecord, "foo_bar_record", _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get game record
@@ -314,7 +314,7 @@ _Sdk.GetCloudsaveApi().PublicGameRecord.PostGameRecordHandlerV1Op
 ```csharp
 ModelsGameRecordResponse? gRecord = _Sdk.GetCloudsaveApi().PublicGameRecord.GetGameRecordHandlerV1Op
     .Execute("foo_bar_record", _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Update game record
@@ -329,7 +329,7 @@ ModelsGameRecordRequestForTest updateRecord = new ModelsGameRecordRequestForTest
 
 _Sdk.GetCloudsaveApi().PublicGameRecord.PutGameRecordHandlerV1Op
     .Execute(updateRecord, "foo_bar_record", _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Delete game record
@@ -337,7 +337,7 @@ _Sdk.GetCloudsaveApi().PublicGameRecord.PutGameRecordHandlerV1Op
 ```csharp
 _Sdk.GetCloudsaveApi().PublicGameRecord.DeleteGameRecordHandlerV1Op
     .Execute("foo_bar_record", _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Create new player record
@@ -352,7 +352,7 @@ ModelsPlayerRecordRequestForTest playerRecord = new ModelsPlayerRecordRequestFor
 
 _Sdk.GetCloudsaveApi().PublicPlayerRecord.PostPlayerRecordHandlerV1Op
     .Execute(playerRecord, "foo_bar_record", _Sdk.Namespace, userId)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get player record
@@ -360,7 +360,7 @@ _Sdk.GetCloudsaveApi().PublicPlayerRecord.PostPlayerRecordHandlerV1Op
 ```csharp
 ModelsPlayerRecordResponse? gRecord = _Sdk.GetCloudsaveApi().PublicPlayerRecord.GetPlayerRecordHandlerV1Op
     .Execute("foo_bar_record", _Sdk.Namespace, userId)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Update player record
@@ -375,7 +375,7 @@ ModelsPlayerRecordRequestForTest updateRecord = new ModelsPlayerRecordRequestFor
 
 _Sdk.GetCloudsaveApi().PublicPlayerRecord.PutPlayerRecordHandlerV1Op
     .Execute(updateRecord, "foo_bar_record", _Sdk.Namespace, userId)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Delete player record
@@ -383,7 +383,125 @@ _Sdk.GetCloudsaveApi().PublicPlayerRecord.PutPlayerRecordHandlerV1Op
 ```csharp
 _Sdk.GetCloudsaveApi().PublicPlayerRecord.DeletePlayerRecordHandlerV1Op
     .Execute("foo_bar_record", _Sdk.Namespace, userId)
-    .Ok();
+    .EnsureSuccess();
+```
+## CSM
+
+Source: [CsmTests.cs](../AccelByte.Sdk.Tests.Mod/Services/CsmTests.cs)
+
+### Create an Extend app
+
+```csharp
+var createdApp = _Sdk.GetCsmApi().AppV2.CreateAppV2Op
+    .Execute(new ApimodelCreateAppV2Request()
+    {
+        Description = "C# Extend SDK integration test app.",
+        Scenario = "function-override"
+    }, appName, _Sdk.Namespace)
+    .EnsureSuccess();
+```
+
+### Get an Extend app
+
+```csharp
+var app = _Sdk.GetCsmApi().AppV2.GetAppV2Op
+    .Execute(appName, _Sdk.Namespace)
+    .EnsureSuccess();
+```
+
+### Create new env secret entry
+
+```csharp
+var newSecret = _Sdk.GetCsmApi().ConfigurationV2.SaveSecretV2Op
+    .Execute(new ApimodelSaveConfigurationV2Request()
+    {
+        ConfigName = envSecretKey,
+        Description = "",
+        Value = envSecretValue,
+        Source = "plaintext",
+        ApplyMask = true
+    }, appName, _Sdk.Namespace)
+    .EnsureSuccess();
+```
+
+### Get list of env secrets
+
+```csharp
+var getSecrets = _Sdk.GetCsmApi().ConfigurationV2.GetListOfSecretsV2Op
+    .SetOffset(0)
+    .SetLimit(500)
+    .Execute(appName, _Sdk.Namespace)
+    .EnsureSuccess();
+```
+
+### Update env secret
+
+```csharp
+var updateSecret = _Sdk.GetCsmApi().ConfigurationV2.UpdateSecretV2Op
+    .Execute(new ApimodelUpdateConfigurationV2Request()
+    {
+        Value = envSecretValueNew
+    }, appName, secretId, _Sdk.Namespace)
+    .EnsureSuccess();
+```
+
+### Delete env secret
+
+```csharp
+_Sdk.GetCsmApi().ConfigurationV2.DeleteVariableV2Op
+    .Execute(appName, secretId, _Sdk.Namespace)
+    .EnsureSuccess();
+```
+
+### Create new env variable entry
+
+```csharp
+var newVariable = _Sdk.GetCsmApi().ConfigurationV2.SaveVariableV2Op
+    .Execute(new ApimodelSaveConfigurationV2Request()
+    {
+        ConfigName = envVariableKey,
+        Description = "",
+        Value = envVariableValue,
+        Source = "plaintext"
+    }, appName, _Sdk.Namespace)
+    .EnsureSuccess();
+```
+
+### Get list of env variables
+
+```csharp
+var getVariables = _Sdk.GetCsmApi().ConfigurationV2.GetListOfVariablesV2Op
+    .SetOffset(0)
+    .SetLimit(500)
+    .Execute(appName, _Sdk.Namespace)
+    .EnsureSuccess();
+```
+
+### Update env variable
+
+```csharp
+var updateVariable = _Sdk.GetCsmApi().ConfigurationV2.UpdateVariableV2Op
+    .Execute(new ApimodelUpdateConfigurationV2Request()
+    {
+        Value = envVariableValueNew
+    }, appName, variableId, _Sdk.Namespace)
+    .EnsureSuccess();
+```
+
+### Delete env variable
+
+```csharp
+_Sdk.GetCsmApi().ConfigurationV2.DeleteVariableV2Op
+    .Execute(appName, variableId, _Sdk.Namespace)
+    .EnsureSuccess();
+```
+
+### Delete an Extend app
+
+```csharp
+_Sdk.GetCsmApi().AppV2.DeleteAppV2Op
+    .SetForced("true")
+    .Execute(appName, _Sdk.Namespace);
 ```
 ## GameTelemetry
 
@@ -405,7 +523,7 @@ _Sdk.GetGametelemetryApi().GametelemetryOperations.ProtectedSaveEventsGameTeleme
             }
         }
     })
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Update steam's playtime
@@ -415,7 +533,7 @@ try
 {
     _Sdk.GetGametelemetryApi().GametelemetryOperations.ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePutOp
         .Execute(playTime, steamId)
-        .Ok();
+        .EnsureSuccess();
 }
 catch (Exception e)
 {
@@ -432,7 +550,7 @@ catch (Exception e)
 PlayTimeResponse resGet = _Sdk.GetGametelemetryApi().GametelemetryOperations
     .ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGetOp
     .Execute(steamId)
-    .Ok();
+    .EnsureSuccess();
 ```
 ## GDPR
 
@@ -446,7 +564,7 @@ _Sdk.GetGdprApi().Configuration.SaveAdminEmailConfigurationOp
     {
         firstEmailToTest
     }, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get e-mail configuration
@@ -454,7 +572,7 @@ _Sdk.GetGdprApi().Configuration.SaveAdminEmailConfigurationOp
 ```csharp
 List<string>? emails = _Sdk.GetGdprApi().Configuration.GetAdminEmailConfigurationOp
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Update e-mail configuration
@@ -462,7 +580,7 @@ List<string>? emails = _Sdk.GetGdprApi().Configuration.GetAdminEmailConfiguratio
 ```csharp
 _Sdk.GetGdprApi().Configuration.UpdateAdminEmailConfigurationOp
     .Execute(new List<string>() { anotherEmailToTest }, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Delete e-mail configuration
@@ -470,7 +588,7 @@ _Sdk.GetGdprApi().Configuration.UpdateAdminEmailConfigurationOp
 ```csharp
 _Sdk.GetGdprApi().Configuration.DeleteAdminEmailConfigurationOp
     .Execute(_Sdk.Namespace, new List<string>() { anotherEmailToTest })
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get user personal data request
@@ -480,7 +598,7 @@ var pdRequest = _Sdk.GetGdprApi().DataRetrieval.AdminGetUserPersonalDataRequests
     .SetOffset(0)
     .SetLimit(10)
     .Execute(_Sdk.Namespace, userId)
-    .Ok();
+    .EnsureSuccess();
 ```
 ## Group
 
@@ -518,7 +636,7 @@ ModelsPublicCreateNewGroupRequestV1 createGroup = new ModelsPublicCreateNewGroup
 
 ModelsGroupResponseV1 cGroup = _Sdk.GetGroupApi().Group.CreateNewGroupPublicV1Op
     .Execute(createGroup, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get single group
@@ -526,7 +644,7 @@ ModelsGroupResponseV1 cGroup = _Sdk.GetGroupApi().Group.CreateNewGroupPublicV1Op
 ```csharp
 ModelsGroupResponseV1 gGroup = _Sdk.GetGroupApi().Group.GetSingleGroupPublicV1Op
     .Execute(group_id, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Update a group
@@ -539,7 +657,7 @@ ModelsUpdateGroupRequestV1 updateGroup = new ModelsUpdateGroupRequestV1()
 
 ModelsGroupResponseV1 uGroup = _Sdk.GetGroupApi().Group.UpdateSingleGroupV1Op
     .Execute(updateGroup, group_id, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Delete a group
@@ -547,7 +665,7 @@ ModelsGroupResponseV1 uGroup = _Sdk.GetGroupApi().Group.UpdateSingleGroupV1Op
 ```csharp
 _Sdk.GetGroupApi().Group.DeleteGroupPublicV1Op
     .Execute(group_id, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Delete group configuration
@@ -555,7 +673,7 @@ _Sdk.GetGroupApi().Group.DeleteGroupPublicV1Op
 ```csharp
 _Sdk.GetGroupApi().Configuration.DeleteGroupConfigurationV1Op
     .Execute(configuration_code, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 ## IAM
 
@@ -576,7 +694,7 @@ ModelUserCreateRequestV3 newUser = new ModelUserCreateRequestV3()
 
 ModelUserCreateResponseV3 cuResp = _Sdk.GetIamApi().Users.PublicCreateUserV3Op
     .Execute(newUser, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Create a user
@@ -595,7 +713,7 @@ AccountCreateUserRequestV4 newUser = new AccountCreateUserRequestV4()
 
 AccountCreateUserResponseV4 cuResp = _Sdk.GetIamApi().UsersV4.PublicCreateUserV4Op
     .Execute(newUser, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get user data by user id
@@ -603,7 +721,7 @@ AccountCreateUserResponseV4 cuResp = _Sdk.GetIamApi().UsersV4.PublicCreateUserV4
 ```csharp
 ModelUserResponseV3 gUser = _Sdk.GetIamApi().Users.AdminGetUserByUserIdV3Op
     .Execute(_Sdk.Namespace, user_id)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Update a user
@@ -616,7 +734,7 @@ ModelUserUpdateRequestV3 updateUser = new ModelUserUpdateRequestV3()
 
 ModelUserResponseV3 uuResp = _Sdk.GetIamApi().UsersV4.AdminUpdateUserV4Op
     .Execute(updateUser, _Sdk.Namespace, user_id)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Delete a user
@@ -624,7 +742,7 @@ ModelUserResponseV3 uuResp = _Sdk.GetIamApi().UsersV4.AdminUpdateUserV4Op
 ```csharp
 _Sdk.GetIamApi().Users.AdminDeleteUserInformationV3Op
     .Execute(_Sdk.Namespace, user_id)
-    .Ok();
+    .EnsureSuccess();
 ```
 ## Leaderboard
 
@@ -659,7 +777,7 @@ ModelsLeaderboardConfigReq newLeaderboard = new ModelsLeaderboardConfigReq()
 
 ModelsLeaderboardConfigReq cLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardConfiguration.CreateLeaderboardConfigurationAdminV1Op
     .Execute(newLeaderboard, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get a leaderboard
@@ -667,7 +785,7 @@ ModelsLeaderboardConfigReq cLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardCo
 ```csharp
 ModelsGetLeaderboardConfigResp gLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardConfiguration.GetLeaderboardConfigurationAdminV1Op
     .Execute(leaderboard_code, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Update a leaderboard
@@ -683,7 +801,7 @@ ModelsUpdateLeaderboardConfigReq updateLeaderboard = new ModelsUpdateLeaderboard
 
 ModelsGetLeaderboardConfigResp uLeaderboard = _Sdk.GetLeaderboardApi().LeaderboardConfiguration.UpdateLeaderboardConfigurationAdminV1Op
     .Execute(updateLeaderboard, leaderboard_code, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Delete a leaderboard
@@ -691,7 +809,7 @@ ModelsGetLeaderboardConfigResp uLeaderboard = _Sdk.GetLeaderboardApi().Leaderboa
 ```csharp
 _Sdk.GetLeaderboardApi().LeaderboardConfiguration.DeleteLeaderboardConfigurationAdminV1Op
     .Execute(leaderboard_code, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 ## Legal
 
@@ -702,7 +820,7 @@ Source: [LegalTests.cs](../AccelByte.Sdk.Tests.Mod/Services/LegalTests.cs)
 ```csharp
 List<RetrieveBasePolicyResponse>? bPolicies = _Sdk.GetLegalApi().BaseLegalPolicies.RetrieveAllLegalPoliciesOp
     .Execute()
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Create a policy for marketing preference.
@@ -722,7 +840,7 @@ CreateBasePolicyRequest createPolicy = new CreateBasePolicyRequest()
 CreateBasePolicyResponse bPolResp = _Sdk.GetLegalApi().BaseLegalPolicies.CreatePolicyOp
     .SetBody(createPolicy)
     .Execute()
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get single policy by policy id
@@ -730,7 +848,7 @@ CreateBasePolicyResponse bPolResp = _Sdk.GetLegalApi().BaseLegalPolicies.CreateP
 ```csharp
 List<RetrievePolicyVersionResponse> polVers = _Sdk.GetLegalApi().PolicyVersions.RetrieveSinglePolicyVersionOp
     .Execute(targetPolicyId)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Create policy version
@@ -739,7 +857,7 @@ List<RetrievePolicyVersionResponse> polVers = _Sdk.GetLegalApi().PolicyVersions.
 CreatePolicyVersionResponse polVerResp = _Sdk.GetLegalApi().PolicyVersions.CreatePolicyVersionOp
     .SetBody(policyVersion)
     .Execute(targetPolicyId)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Accepting an aggrement policy
@@ -761,7 +879,7 @@ string userId = _Sdk.Configuration.Credential!.UserId;
 _Sdk.GetLegalApi().Agreement.ChangePreferenceConsentOp
     .SetBody(aggreementRequests)
     .Execute(_Sdk.Namespace, userId)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Bulk accept policy
@@ -770,7 +888,7 @@ _Sdk.GetLegalApi().Agreement.ChangePreferenceConsentOp
 _Sdk.GetLegalApi().Agreement.BulkAcceptVersionedPolicyOp
     .SetBody(aggreementRequests)
     .Execute()
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get aggrements
@@ -778,7 +896,7 @@ _Sdk.GetLegalApi().Agreement.BulkAcceptVersionedPolicyOp
 ```csharp
 List<RetrieveAcceptedAgreementResponse> aggrs = _Sdk.GetLegalApi().Agreement.RetrieveAgreementsPublicOp
     .Execute()
-    .Ok();
+    .EnsureSuccess();
 ```
 ## Lobby
 
@@ -795,7 +913,7 @@ ModelFreeFormNotificationRequest notifBody = new ModelFreeFormNotificationReques
 
 _Sdk.GetLobbyApi().Admin.FreeFormNotificationOp
     .Execute(notifBody, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Export config
@@ -803,7 +921,7 @@ _Sdk.GetLobbyApi().Admin.FreeFormNotificationOp
 ```csharp
 var exportStream = _Sdk.GetLobbyApi().Config.AdminExportConfigV1Op
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 ## MatchmakingV2
 
@@ -861,7 +979,7 @@ ApiRuleSetPayload cRuleSetBody = new ApiRuleSetPayload()
 
 _Sdk.GetMatch2Api().RuleSets.CreateRuleSetOp
     .Execute(cRuleSetBody, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get ruleset details
@@ -869,7 +987,7 @@ _Sdk.GetMatch2Api().RuleSets.CreateRuleSetOp
 ```csharp
 var rulesetPayload = _Sdk.GetMatch2Api().RuleSets.RuleSetDetailsOp
     .Execute(_Sdk.Namespace, rulesetName)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Create a match pool
@@ -887,7 +1005,7 @@ ApiMatchPool createPoolBody = new ApiMatchPool()
 
 _Sdk.GetMatch2Api().MatchPools.CreateMatchPoolOp
     .Execute(createPoolBody, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### List match pools
@@ -895,7 +1013,7 @@ _Sdk.GetMatch2Api().MatchPools.CreateMatchPoolOp
 ```csharp
 ApiListMatchPoolsResponse poolList = _Sdk.GetMatch2Api().MatchPools.MatchPoolListOp
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get match pool detail
@@ -903,7 +1021,7 @@ ApiListMatchPoolsResponse poolList = _Sdk.GetMatch2Api().MatchPools.MatchPoolLis
 ```csharp
 ApiMatchPool matchPool = _Sdk.GetMatch2Api().MatchPools.MatchPoolDetailsOp
     .Execute(_Sdk.Namespace, poolName)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### User create a match ticket
@@ -917,7 +1035,7 @@ ApiMatchTicketRequest ticketRequest = new ApiMatchTicketRequest()
 
 ApiMatchTicketResponse nTicketResponse = sdk.GetMatch2Api().MatchTickets.CreateMatchTicketOp
     .Execute(ticketRequest, sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### User delete a match ticket
@@ -925,7 +1043,7 @@ ApiMatchTicketResponse nTicketResponse = sdk.GetMatch2Api().MatchTickets.CreateM
 ```csharp
 sdk.GetMatch2Api().MatchTickets.DeleteMatchTicketOp
     .Execute(sdk.Namespace, ticketId)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Delete a match pool
@@ -933,7 +1051,7 @@ sdk.GetMatch2Api().MatchTickets.DeleteMatchTicketOp
 ```csharp
 _Sdk.GetMatch2Api().MatchPools.DeleteMatchPoolOp
     .Execute(_Sdk.Namespace, poolName)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Delete a match rule set
@@ -941,7 +1059,7 @@ _Sdk.GetMatch2Api().MatchPools.DeleteMatchPoolOp
 ```csharp
 _Sdk.GetMatch2Api().RuleSets.DeleteRuleSetOp
     .Execute(_Sdk.Namespace, rulesetName)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### List match functions
@@ -949,7 +1067,7 @@ _Sdk.GetMatch2Api().RuleSets.DeleteRuleSetOp
 ```csharp
 ApiListMatchFunctionsResponse response = _Sdk.GetMatch2Api().MatchFunctions.MatchFunctionListOp
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 ## Platform
 
@@ -970,7 +1088,7 @@ StoreCreate createStore = new StoreCreate()
 
 StoreInfo cStore = _Sdk.GetPlatformApi().Store.CreateStoreOp
     .Execute(createStore, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get a store
@@ -978,7 +1096,7 @@ StoreInfo cStore = _Sdk.GetPlatformApi().Store.CreateStoreOp
 ```csharp
 StoreInfo gStore = _Sdk.GetPlatformApi().Store.GetStoreOp
     .Execute(_Sdk.Namespace, store_id)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Update a store
@@ -990,7 +1108,7 @@ StoreUpdate updateStore = new StoreUpdate()
 };
 StoreInfo cStoreUpdate = _Sdk.GetPlatformApi().Store.UpdateStoreOp
     .Execute(updateStore, _Sdk.Namespace, store_id)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Delete a store
@@ -998,7 +1116,7 @@ StoreInfo cStoreUpdate = _Sdk.GetPlatformApi().Store.UpdateStoreOp
 ```csharp
 StoreInfo dStore = _Sdk.GetPlatformApi().Store.DeleteStoreOp
     .Execute(_Sdk.Namespace, store_id)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Export a store
@@ -1008,7 +1126,7 @@ ExportStoreRequest xRequest = new ExportStoreRequest();
 Stream stream = _Sdk.GetPlatformApi().Store.ExportStore1Op
     .SetBody(xRequest)
     .Execute(_Sdk.Namespace, store_id)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Import store
@@ -1018,7 +1136,7 @@ ImportStoreResult result = _Sdk.GetPlatformApi().Store.ImportStore1Op
     .SetFile(uploadStream)
     .SetStoreId(store_id)
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Export reward
@@ -1026,7 +1144,7 @@ ImportStoreResult result = _Sdk.GetPlatformApi().Store.ImportStore1Op
 ```csharp
 var exportStream = _Sdk.GetPlatformApi().Reward.ExportRewardsOp
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Import reward
@@ -1035,7 +1153,7 @@ var exportStream = _Sdk.GetPlatformApi().Reward.ExportRewardsOp
 _Sdk.GetPlatformApi().Reward.ImportRewardsOp
     .SetFile(dataStream)
     .Execute(_Sdk.Namespace, true)
-    .Ok();
+    .EnsureSuccess();
 ```
 ## Reporting
 
@@ -1053,7 +1171,7 @@ RestapiCreateReasonRequest createReason = new RestapiCreateReasonRequest()
 
 RestapiAdminReasonResponse cReason = _Sdk.GetReportingApi().AdminReasons.CreateReasonOp
     .Execute(createReason, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get single Reason
@@ -1061,7 +1179,7 @@ RestapiAdminReasonResponse cReason = _Sdk.GetReportingApi().AdminReasons.CreateR
 ```csharp
 RestapiAdminReasonResponse cReason2 = _Sdk.GetReportingApi().AdminReasons.AdminGetReasonOp
     .Execute(_Sdk.Namespace, reasonId)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Submit report
@@ -1086,7 +1204,7 @@ var reportResponse = _Sdk.GetReportingApi().PublicReports.SubmitReportOp
 ```csharp
 _Sdk.GetReportingApi().AdminReasons.DeleteReasonOp
     .Execute(_Sdk.Namespace, reasonId)
-    .Ok();
+    .EnsureSuccess();
 ```
 ## SeasonPass
 
@@ -1118,7 +1236,7 @@ SeasonCreate cSeasonBody = new SeasonCreate()
 SeasonInfo cSeason = _Sdk.GetSeasonpassApi().Season.CreateSeasonOp
     .SetBody(cSeasonBody)
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get a season
@@ -1126,7 +1244,7 @@ SeasonInfo cSeason = _Sdk.GetSeasonpassApi().Season.CreateSeasonOp
 ```csharp
 SeasonInfo gSeason = _Sdk.GetSeasonpassApi().Season.GetSeasonOp
     .Execute(_Sdk.Namespace, cSeasonId)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Update a season
@@ -1146,7 +1264,7 @@ SeasonUpdate uSeasonBody = new SeasonUpdate()
 SeasonInfo uSeason = _Sdk.GetSeasonpassApi().Season.UpdateSeasonOp
     .SetBody(uSeasonBody)
     .Execute(_Sdk.Namespace, cSeasonId)
-    .Ok();
+    .EnsureSuccess();
 ```
 ## SessionHistory
 
@@ -1159,7 +1277,7 @@ var response = _Sdk.GetSessionhistoryApi().GameSessionDetail.AdminQueryGameSessi
     .SetOffset(0)
     .SetLimit(20)
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get all matchmaking history
@@ -1169,7 +1287,7 @@ var mResponse = _Sdk.GetSessionhistoryApi().GameSessionDetail.AdminQueryMatchmak
     .SetOffset(0)
     .SetLimit(20)
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Query party details
@@ -1179,7 +1297,7 @@ var partyDetails = _Sdk.GetSessionhistoryApi().GameSessionDetail.AdminQueryParty
     .SetOffset(0)
     .SetLimit(50)
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Query total matchmaking match
@@ -1187,7 +1305,7 @@ var partyDetails = _Sdk.GetSessionhistoryApi().GameSessionDetail.AdminQueryParty
 ```csharp
 var mmData = _Sdk.GetSessionhistoryApi().XRay.QueryTotalMatchmakingMatchOp
     .Execute(_Sdk.Namespace, endDate, startDate)
-    .Ok();
+    .EnsureSuccess();
 ```
 ## Session
 
@@ -1214,11 +1332,11 @@ ApimodelsCreateConfigurationTemplateRequest cTemplateBody = new ApimodelsCreateC
 
 _Sdk.GetSessionApi().ConfigurationTemplate.AdminCreateConfigurationTemplateV1Op
     .Execute(cTemplateBody, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 
 ApimodelsConfigurationTemplateResponse cfgTemplate = _Sdk.GetSessionApi().ConfigurationTemplate.AdminGetConfigurationTemplateV1Op
     .Execute(cfgTemplateName, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Update session configuration template
@@ -1234,7 +1352,7 @@ ApimodelsUpdateConfigurationTemplateRequest uTemplateBody = new ApimodelsUpdateC
 
 ApimodelsConfigurationTemplateResponse uptTemplate = _Sdk.GetSessionApi().ConfigurationTemplate.AdminUpdateConfigurationTemplateV1Op
     .Execute(uTemplateBody, cfgTemplateName, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Delete session configuration template
@@ -1242,7 +1360,7 @@ ApimodelsConfigurationTemplateResponse uptTemplate = _Sdk.GetSessionApi().Config
 ```csharp
 _Sdk.GetSessionApi().ConfigurationTemplate.AdminDeleteConfigurationTemplateV1Op
     .Execute(cfgTemplateName, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Create a game session
@@ -1255,7 +1373,7 @@ ApimodelsCreateGameSessionRequest newGSRequest = new ApimodelsCreateGameSessionR
 
 ApimodelsGameSessionResponse newGSResponse = sdk.GetSessionApi().GameSession.CreateGameSessionOp
     .Execute(newGSRequest, sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Join a game session
@@ -1263,7 +1381,7 @@ ApimodelsGameSessionResponse newGSResponse = sdk.GetSessionApi().GameSession.Cre
 ```csharp
 ApimodelsGameSessionResponse p2GsJoin = sdk.GetSessionApi().GameSession.JoinGameSessionOp
     .Execute(sdk.Namespace, gameSessionId)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Leave a game session
@@ -1271,7 +1389,7 @@ ApimodelsGameSessionResponse p2GsJoin = sdk.GetSessionApi().GameSession.JoinGame
 ```csharp
 sdk.GetSessionApi().GameSession.LeaveGameSessionOp
     .Execute(sdk.Namespace, gameSessionId)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Delete a game session
@@ -1279,7 +1397,7 @@ sdk.GetSessionApi().GameSession.LeaveGameSessionOp
 ```csharp
 sdk.GetSessionApi().GameSession.DeleteGameSessionOp
     .Execute(sdk.Namespace, gameSessionId)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Admin delete bulk game session
@@ -1290,7 +1408,7 @@ var deleteResponse = _Sdk.GetSessionApi().GameSession.AdminDeleteBulkGameSession
     {
         Ids = [newGameSessionId]
     }, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Query game sessions
@@ -1298,7 +1416,7 @@ var deleteResponse = _Sdk.GetSessionApi().GameSession.AdminDeleteBulkGameSession
 ```csharp
 var response = _Sdk.GetSessionApi().GameSession.PublicQueryGameSessionsByAttributesOp
     .Execute(new Dictionary<string, object>() { }, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### User create a party
@@ -1318,7 +1436,7 @@ ApimodelsCreatePartyRequest partyRequest = new ApimodelsCreatePartyRequest()
 
 ApimodelsPartySessionResponse partyResponse = sdk.GetSessionApi().Party.PublicCreatePartyOp
     .Execute(partyRequest, sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### User join a party with code
@@ -1331,7 +1449,7 @@ ApimodelsJoinByCodeRequest joinRequest = new ApimodelsJoinByCodeRequest()
 
 ApimodelsPartySessionResponse joinResponse = sdk.GetSessionApi().Party.PublicPartyJoinCodeOp
     .Execute(joinRequest, sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get party detail
@@ -1339,7 +1457,7 @@ ApimodelsPartySessionResponse joinResponse = sdk.GetSessionApi().Party.PublicPar
 ```csharp
 ApimodelsPartySessionResponse partyData = _Sdk.GetSessionApi().Party.PublicGetPartyOp
     .Execute(_Sdk.Namespace, partyId)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Admin query parties
@@ -1349,7 +1467,7 @@ var adminPartyData = _Sdk.GetSessionApi().Party.AdminQueryPartiesOp
     .SetOffset(0)
     .SetLimit(10)
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### User leave a party
@@ -1357,7 +1475,7 @@ var adminPartyData = _Sdk.GetSessionApi().Party.AdminQueryPartiesOp
 ```csharp
 sdk.GetSessionApi().Party.PublicPartyLeaveOp
     .Execute(sdk.Namespace, partyId)
-    .Ok();
+    .EnsureSuccess();
 ```
 ## Social
 
@@ -1381,9 +1499,8 @@ StatCreate createStat = new StatCreate()
 };
 
 StatInfo cStat = _Sdk.GetSocialApi().StatConfiguration.CreateStatOp
-    .SetBody(createStat)
-    .Execute(_Sdk.Namespace)
-    .Ok();
+    .Execute(createStat, _Sdk.Namespace)
+    .EnsureSuccess();
 ```
 
 ### Get a stat
@@ -1391,7 +1508,7 @@ StatInfo cStat = _Sdk.GetSocialApi().StatConfiguration.CreateStatOp
 ```csharp
 StatInfo gStat = _Sdk.GetSocialApi().StatConfiguration.GetStatOp
     .Execute(_Sdk.Namespace, stat_code)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Update a stat
@@ -1403,9 +1520,8 @@ StatUpdate updateStat = new StatUpdate()
 };
 
 StatInfo uStat = _Sdk.GetSocialApi().StatConfiguration.UpdateStatOp
-    .SetBody(updateStat)
-    .Execute(_Sdk.Namespace, stat_code)
-    .Ok();
+    .Execute(updateStat, _Sdk.Namespace, stat_code)
+    .EnsureSuccess();
 ```
 
 ### Delete a stat
@@ -1413,14 +1529,14 @@ StatInfo uStat = _Sdk.GetSocialApi().StatConfiguration.UpdateStatOp
 ```csharp
 _Sdk.GetSocialApi().StatConfiguration.DeleteStatOp
     .Execute(_Sdk.Namespace, stat_code)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Create stat config
 
 ```csharp
 var newStat = _Sdk.GetSocialApi().StatConfiguration.CreateStatOp
-    .SetBody(new StatCreate()
+    .Execute(new StatCreate()
     {
         Name = "CSharp Extend SDK Test Stat",
         Description = "CSharp Extend Sdk integration test.",
@@ -1433,9 +1549,8 @@ var newStat = _Sdk.GetSocialApi().StatConfiguration.CreateStatOp
         SetAsGlobal = false,
         IsPublic = false,
         Tags = new List<string>() { "csharp", "extend_sdk", "test" }
-    })
-    .Execute(_Sdk.Namespace)
-    .Ok();
+    }, _Sdk.Namespace)
+    .EnsureSuccess();
 ```
 
 ### Get Stats
@@ -1447,7 +1562,7 @@ var statData = _Sdk.GetSocialApi().StatConfiguration.GetStatsOp
     .SetIsGlobal(false)
     .SetIsPublic(false)
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Export stat config
@@ -1455,7 +1570,7 @@ var statData = _Sdk.GetSocialApi().StatConfiguration.GetStatsOp
 ```csharp
 var exportStream = _Sdk.GetSocialApi().StatConfiguration.ExportStatsOp
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Delete a stat config
@@ -1470,7 +1585,7 @@ _Sdk.GetSocialApi().StatConfiguration.DeleteStatOp
 ```csharp
 statData = _Sdk.GetSocialApi().StatConfiguration.QueryStatsOp
     .Execute(_Sdk.Namespace, "csharp")
-    .Ok();
+    .EnsureSuccess();
 ```
 ## UGC
 
@@ -1485,7 +1600,7 @@ ModelsCreateTagRequest createTag = new ModelsCreateTagRequest()
 };
 ModelsCreateTagResponse cTag = _Sdk.GetUgcApi().AdminTag.AdminCreateTagOp
     .Execute(createTag, _Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Get tags
@@ -1495,7 +1610,7 @@ ModelsPaginatedGetTagResponse gTag = _Sdk.GetUgcApi().AdminTag.AdminGetTagOp
     .SetOffset(0)
     .SetLimit(10)
     .Execute(_Sdk.Namespace)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Update a tag
@@ -1507,7 +1622,7 @@ ModelsCreateTagRequest updateTag = new ModelsCreateTagRequest()
 };
 ModelsCreateTagResponse uTag = _Sdk.GetUgcApi().AdminTag.AdminUpdateTagOp
     .Execute(updateTag, _Sdk.Namespace, tag_id)
-    .Ok();
+    .EnsureSuccess();
 ```
 
 ### Delete a tag
@@ -1515,5 +1630,5 @@ ModelsCreateTagResponse uTag = _Sdk.GetUgcApi().AdminTag.AdminUpdateTagOp
 ```csharp
 _Sdk.GetUgcApi().AdminTag.AdminDeleteTagOp
     .Execute(_Sdk.Namespace, tag_id)
-    .Ok();
+    .EnsureSuccess();
 ```
