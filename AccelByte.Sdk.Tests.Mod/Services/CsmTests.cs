@@ -133,7 +133,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     #endregion
 
                     #region Delete env secret
-                    _Sdk.GetCsmApi().ConfigurationV2.DeleteVariableV2Op
+                    _Sdk.GetCsmApi().ConfigurationV2.DeleteSecretV2Op
                         .Execute(appName, secretId, _Sdk.Namespace)
                         .EnsureSuccess();
                     #endregion
