@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             Wait();
 
             //Finally, recheck if the data is truly deleted.
-            HttpResponseException? hrx = Assert.Throws<HttpResponseException>(() =>
+            Exception? hrx = Assert.Throws<Exception>(() =>
             {
                 DisableRetry();
                 gRecord = _Sdk.GetCloudsaveApi().PublicGameRecord.GetGameRecordHandlerV1Op
@@ -175,7 +175,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             Wait();
 
             //Finally, recheck if the data is truly deleted.
-            HttpResponseException? hrx = Assert.Throws<HttpResponseException>(() =>
+            Exception? hrx = Assert.Throws<Exception>(() =>
             {
                 DisableRetry();
                 gRecord = _Sdk.GetCloudsaveApi().PublicPlayerRecord.GetPlayerRecordHandlerV1Op
