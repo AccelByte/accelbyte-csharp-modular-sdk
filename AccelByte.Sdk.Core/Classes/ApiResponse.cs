@@ -28,9 +28,9 @@ namespace AccelByte.Sdk.Core
         public void ThrowExceptionIfError()
         {
             if (!IsSuccess && Error.IsAvailable)
-                throw new Exception($"{FullOperationId} returns error: {Error.Code}. {Error.Message}");
+                throw new ApiResponseException(this, true);
             else if (!IsSuccess)
-                throw new Exception($"{FullOperationId} returns unknown error with http status code {(int)StatusCode}");
+                throw new ApiResponseException(this, false);
         }
 
         public void EnsureSuccess()
@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Core
         {
             ThrowExceptionIfError();
             if (Data == null)
-                throw new Exception($"{FullOperationId} returns NULL");
+                throw new ApiResponseException(this, $"{FullOperationId} returns NULL");
 
             return Data;
         }
