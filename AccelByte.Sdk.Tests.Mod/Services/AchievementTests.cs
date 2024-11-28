@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #endregion
 
             //Finally, recheck if the data is truly deleted.
-            Exception? hrx = Assert.Throws<Exception>(() =>
+            ApiResponseException? hrx = Assert.Throws<ApiResponseException>(() =>
             {
                 DisableRetry();
                 _ = _Sdk.GetAchievementApi().Achievements.AdminGetAchievementOp
@@ -308,7 +308,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             await sdk.GetAchievementApi().Achievements.AdminDeleteAchievementOp
                 .ExecuteAsync(achievement_code, sdk.Namespace);
 
-            Exception? hrx = Assert.Throws<Exception>(() =>
+            ApiResponseException? hrx = Assert.Throws<ApiResponseException>(() =>
             {
                 retryPolicy.RetryOnException = false;
                 sdk.GetAchievementApi().Achievements.AdminGetAchievementOp

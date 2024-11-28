@@ -158,7 +158,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     Wait();
 
                     //Finally, recheck if the data is truly deleted.
-                    Exception? hrx = Assert.Throws<Exception>(() =>
+                    ApiResponseException? hrx = Assert.Throws<ApiResponseException>(() =>
                     {
                         DisableRetry();
                         _ = _Sdk.GetGroupApi().Group.GetSingleGroupPublicV1Op

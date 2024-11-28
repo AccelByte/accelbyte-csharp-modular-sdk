@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             Wait();
 
             //Finally, recheck if the data is truly deleted.
-            Exception? hrx = Assert.Throws<Exception>(() =>
+            ApiResponseException? hrx = Assert.Throws<ApiResponseException>(() =>
             {
                 DisableRetry();
                 gRecord = _Sdk.GetCloudsaveApi().PublicGameRecord.GetGameRecordHandlerV1Op
@@ -175,7 +175,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             Wait();
 
             //Finally, recheck if the data is truly deleted.
-            Exception? hrx = Assert.Throws<Exception>(() =>
+            ApiResponseException? hrx = Assert.Throws<ApiResponseException>(() =>
             {
                 DisableRetry();
                 gRecord = _Sdk.GetCloudsaveApi().PublicPlayerRecord.GetPlayerRecordHandlerV1Op
@@ -343,6 +343,31 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             _Sdk.GetCloudsaveApi().AdminGameBinaryRecord.AdminDeleteGameBinaryRecordV1Op
                 .Execute(dataKey, _Sdk.Namespace)
                 .EnsureSuccess();
+
+            ResetPolicy();
+        }
+
+        [Test]
+        public void ResponseExceptionTest()
+        {
+            Assert.IsNotNull(_Sdk);
+            if (_Sdk == null)
+                return;
+
+            DisableRetry();
+
+            try
+            {
+                //try to find record that shouldn't exists to trigger exception via EnsureSuccess method.
+
+                var gRecord = _Sdk.GetCloudsaveApi().PublicGameRecord.GetGameRecordHandlerV1Op
+                    .Execute("foo_bar_record_should_not_exists", _Sdk.Namespace)
+                    .EnsureSuccess();
+            }
+            catch (Exception x)
+            {
+                Assert.IsTrue(x is ApiResponseException);
+            }
 
             ResetPolicy();
         }

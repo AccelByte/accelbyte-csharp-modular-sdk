@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             #endregion
 
             //Finally, recheck if the data is truly deleted.
-            Exception? hrx = Assert.Throws<Exception>(() =>
+            ApiResponseException? hrx = Assert.Throws<ApiResponseException>(() =>
             {
                 DisableRetry();
                 _ = _Sdk.GetReportingApi().AdminReasons.AdminGetReasonOp
