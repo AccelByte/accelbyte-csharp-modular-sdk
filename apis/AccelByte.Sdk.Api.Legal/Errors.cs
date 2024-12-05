@@ -25,39 +25,39 @@ namespace AccelByte.Sdk.Api.Legal
 {
     public static class LegalErrors
     {
-        public static readonly ApiError Error40047 = new ApiError("40047", "Exported agreements for exportId [{exportId}] not found");
-        public static readonly ApiError Error40035 = new ApiError("40035", "errors.net.accelbyte.platform.legal.policy_version_not_found");
+        public static readonly ApiError Error2912 = new ApiError("2912", "errors.net.accelbyte.platform.legal.policy_version_not_found");
         public static readonly ApiError Error20002 = new ApiError("20002", "validation error");
+        public static readonly ApiError Error40017 = new ApiError("40017", "Policy with id : [{policyId}] is not marketing preference");
         public static readonly ApiError Error40026 = new ApiError("40026", "errors.net.accelbyte.platform.legal.not_allow_create_studio_policy");
+        public static readonly ApiError Error40027 = new ApiError("40027", "Too many export running currently");
         public static readonly ApiError Error40030 = new ApiError("40030", "errors.net.accelbyte.platform.legal.localized_policy_version_not_provided");
-        public static readonly ApiError Error40038 = new ApiError("40038", "errors.net.accelbyte.platform.legal.localized_policy_version_not_found");
         public static readonly ApiError Error40031 = new ApiError("40031", "errors.net.accelbyte.platform.legal.base_policy_not_found");
         public static readonly ApiError Error40032 = new ApiError("40032", "errors.net.accelbyte.platform.legal.invalid_base_policy");
-        public static readonly ApiError Error40041 = new ApiError("40041", "errors.net.accelbyte.platform.legal.policy_not_found");
         public static readonly ApiError Error40033 = new ApiError("40033", "errors.net.accelbyte.platform.legal.invalid_policy");
-        public static readonly ApiError Error40044 = new ApiError("40044", "errors.net.accelbyte.platform.legal.localized_policy_version_already_exist");
-        public static readonly ApiError Error2912 = new ApiError("2912", "errors.net.accelbyte.platform.legal.policy_version_not_found");
         public static readonly ApiError Error40034 = new ApiError("40034", "errors.net.accelbyte.platform.legal.invalid_file_type");
+        public static readonly ApiError Error40035 = new ApiError("40035", "errors.net.accelbyte.platform.legal.policy_version_not_found");
+        public static readonly ApiError Error40036 = new ApiError("40036", "errors.net.accelbyte.platform.legal.policy_version_id_not_found");
         public static readonly ApiError Error40037 = new ApiError("40037", "errors.net.accelbyte.platform.legal.invalid_localized_policy_version");
+        public static readonly ApiError Error40038 = new ApiError("40038", "errors.net.accelbyte.platform.legal.localized_policy_version_not_found");
+        public static readonly ApiError Error40039 = new ApiError("40039", "errors.net.accelbyte.platform.legal.localized_policy_version_already_latest");
+        public static readonly ApiError Error40040 = new ApiError("40040", "errors.net.accelbyte.platform.legal.user_has_no_country");
+        public static readonly ApiError Error40041 = new ApiError("40041", "errors.net.accelbyte.platform.legal.policy_not_found");
         public static readonly ApiError Error40042 = new ApiError("40042", "errors.net.accelbyte.platform.legal.policy_version_freezed");
-        public static readonly ApiError Error40027 = new ApiError("40027", "Too many export running currently");
+        public static readonly ApiError Error40043 = new ApiError("40043", "errors.net.accelbyte.platform.legal.localized_policy_version_already_publish");
+        public static readonly ApiError Error40044 = new ApiError("40044", "errors.net.accelbyte.platform.legal.localized_policy_version_already_exist");
         public static readonly ApiError Error40045 = new ApiError("40045", "errors.net.accelbyte.platform.legal.user_id_needed");
-        public static readonly ApiError Error40071 = new ApiError("40071", "errors.net.accelbyte.platform.legal.policy_version_is_active");
+        public static readonly ApiError Error40046 = new ApiError("40046", "errors.net.accelbyte.platform.legal.default_selection_not_provided");
+        public static readonly ApiError Error40047 = new ApiError("40047", "Exported agreements for exportId [{exportId}] not found");
         public static readonly ApiError Error40068 = new ApiError("40068", "errors.net.accelbyte.platform.legal.base_policy_have_published_policy_version_and_already_accepted_by_user");
         public static readonly ApiError Error40069 = new ApiError("40069", "errors.net.accelbyte.platform.legal.base_policy_already_have_published_policy_version");
-        public static readonly ApiError Error40075 = new ApiError("40075", "errors.net.accelbyte.platform.legal.localized_policy_version_is_published_and_already_accepted_by_user");
-        public static readonly ApiError Error40076 = new ApiError("40076", "errors.net.accelbyte.platform.legal.localized_policy_version_is_active");
         public static readonly ApiError Error40070 = new ApiError("40070", "errors.net.accelbyte.platform.legal.policy_version_is_published_and_already_accepted_by_user");
-        public static readonly ApiError Error40043 = new ApiError("40043", "errors.net.accelbyte.platform.legal.localized_policy_version_already_publish");
-        public static readonly ApiError Error40039 = new ApiError("40039", "errors.net.accelbyte.platform.legal.localized_policy_version_already_latest");
-        public static readonly ApiError Error40046 = new ApiError("40046", "errors.net.accelbyte.platform.legal.default_selection_not_provided");
+        public static readonly ApiError Error40071 = new ApiError("40071", "errors.net.accelbyte.platform.legal.policy_version_is_active");
         public static readonly ApiError Error40072 = new ApiError("40072", "errors.net.accelbyte.platform.legal.policy_have_published_policy_version");
         public static readonly ApiError Error40073 = new ApiError("40073", "errors.net.accelbyte.platform.legal.policy_have_published_policy_version_and_already_accepted_by_user");
         public static readonly ApiError Error40074 = new ApiError("40074", "errors.net.accelbyte.platform.legal.policy_is_default_policy");
-        public static readonly ApiError Error40036 = new ApiError("40036", "errors.net.accelbyte.platform.legal.policy_version_id_not_found");
-        public static readonly ApiError Error40017 = new ApiError("40017", "Policy with id : [{policyId}] is not marketing preference");
+        public static readonly ApiError Error40075 = new ApiError("40075", "errors.net.accelbyte.platform.legal.localized_policy_version_is_published_and_already_accepted_by_user");
+        public static readonly ApiError Error40076 = new ApiError("40076", "errors.net.accelbyte.platform.legal.localized_policy_version_is_active");
         public static readonly ApiError Error40081 = new ApiError("40081", "errors.net.accelbyte.platform.legal.policy_not_accessible");
-        public static readonly ApiError Error40040 = new ApiError("40040", "errors.net.accelbyte.platform.legal.user_has_no_country");
     }
 
     public class ErrorEntity : AccelByte.Sdk.Core.Model
@@ -83,10 +83,15 @@ namespace AccelByte.Sdk.Api.Legal
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                ErrorCode != null ? ErrorCode.Value.ToString() : "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                ErrorCode != null ? ErrorCode.Value.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 
@@ -105,10 +110,15 @@ namespace AccelByte.Sdk.Api.Legal
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                ErrorCode != null ? ErrorCode.Value.ToString() : "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                ErrorCode != null ? ErrorCode.Value.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 

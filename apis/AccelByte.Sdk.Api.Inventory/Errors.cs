@@ -47,10 +47,15 @@ namespace AccelByte.Sdk.Api.Inventory
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                "",
-                Message != null ? Message.ToString() : ""
-            );
+            string errorCode =
+                ErrorDetails != null ? ErrorDetails.ToString() :
+                "";
+
+            string errorMessage =
+                Message != null ? Message.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 
@@ -65,10 +70,15 @@ namespace AccelByte.Sdk.Api.Inventory
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                ErrorCode != null ? ErrorCode.Value.ToString() : "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                ErrorCode != null ? ErrorCode.Value.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 

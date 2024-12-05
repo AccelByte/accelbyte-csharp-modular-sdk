@@ -38,10 +38,15 @@ namespace AccelByte.Sdk.Api.Qosm
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                Code != null ? Code.Value.ToString() : "",
-                Message != null ? Message.ToString() : ""
-            );
+            string errorCode =
+                Code != null ? Code.Value.ToString() :
+                "";
+
+            string errorMessage =
+                Message != null ? Message.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 

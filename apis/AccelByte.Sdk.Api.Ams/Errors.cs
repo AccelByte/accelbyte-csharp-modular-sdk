@@ -41,10 +41,15 @@ namespace AccelByte.Sdk.Api.Ams
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                ErrorType != null ? ErrorType.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 

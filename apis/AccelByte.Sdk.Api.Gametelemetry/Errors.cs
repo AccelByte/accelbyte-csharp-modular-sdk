@@ -38,10 +38,15 @@ namespace AccelByte.Sdk.Api.Gametelemetry
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                ErrorCode != null ? ErrorCode.ToString() : "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                ErrorCode != null ? ErrorCode.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 
@@ -54,10 +59,13 @@ namespace AccelByte.Sdk.Api.Gametelemetry
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                "",
-                ""
-            );
+            string errorCode =
+                "";
+
+            string errorMessage =
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 

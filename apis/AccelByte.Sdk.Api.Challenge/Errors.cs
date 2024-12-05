@@ -29,9 +29,9 @@ namespace AccelByte.Sdk.Api.Challenge
         public static readonly ApiError Error20001 = new ApiError("20001", "unauthorized access");
         public static readonly ApiError Error20013 = new ApiError("20013", "insufficient permission");
         public static readonly ApiError Error20018 = new ApiError("20018", "bad request: {{message}}");
+        public static readonly ApiError Error20029 = new ApiError("20029", "not found");
         public static readonly ApiError Error99002 = new ApiError("99002", "duplicate key error: {{message}}");
         public static readonly ApiError Error99003 = new ApiError("99003", "challenge validation error: {{message}}");
-        public static readonly ApiError Error20029 = new ApiError("20029", "not found");
         public static readonly ApiError Error99004 = new ApiError("99004", "unprocessable entity: {{message}}");
     }
 
@@ -50,10 +50,15 @@ namespace AccelByte.Sdk.Api.Challenge
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                ErrorCode != null ? ErrorCode.Value.ToString() : "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                ErrorCode != null ? ErrorCode.Value.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 
@@ -77,10 +82,16 @@ namespace AccelByte.Sdk.Api.Challenge
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                ErrorCode != null ? ErrorCode.Value.ToString() : "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                ErrorCode != null ? ErrorCode.Value.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                Message != null ? Message.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 

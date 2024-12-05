@@ -25,42 +25,42 @@ namespace AccelByte.Sdk.Api.Seasonpass
 {
     public static class SeasonpassErrors
     {
-        public static readonly ApiError Error49143 = new ApiError("49143", "Season [{seasonId}] does not exist in namespace [{namespace}]");
-        public static readonly ApiError Error20026 = new ApiError("20026", "publisher namespace not allowed");
         public static readonly ApiError Error20002 = new ApiError("20002", "validation error");
+        public static readonly ApiError Error20026 = new ApiError("20026", "publisher namespace not allowed");
         public static readonly ApiError Error30141 = new ApiError("30141", "Store [{storeId}] does not exist in namespace [{namespace}]");
+        public static readonly ApiError Error30142 = new ApiError("30142", "Published store does not exist in namespace [{namespace}]");
+        public static readonly ApiError Error30341 = new ApiError("30341", "Item [{itemId}] does not exist in namespace [{namespace}]");
         public static readonly ApiError Error36141 = new ApiError("36141", "Currency [{currencyCode}] does not exist in namespace [{namespace}]");
         public static readonly ApiError Error49121 = new ApiError("49121", "Default language [{language}] required in localizations");
         public static readonly ApiError Error49122 = new ApiError("49122", "Invalid time range");
+        public static readonly ApiError Error49124 = new ApiError("49124", "Manual claim not supported");
         public static readonly ApiError Error49141 = new ApiError("49141", "Tier item does not exist in the store of namespace [{namespace}]");
-        public static readonly ApiError Error49147 = new ApiError("49147", "Published season does not exist");
-        public static readonly ApiError Error49171 = new ApiError("49171", "Invalid season status [{status}]");
         public static readonly ApiError Error49142 = new ApiError("49142", "Pass item does not exist in the store of namespace [{namespace}]");
-        public static readonly ApiError Error49174 = new ApiError("49174", "Pass [{code}] already exists in the season");
-        public static readonly ApiError Error49145 = new ApiError("49145", "Pass [{code}] does not exist");
-        public static readonly ApiError Error30142 = new ApiError("30142", "Published store does not exist in namespace [{namespace}]");
-        public static readonly ApiError Error30341 = new ApiError("30341", "Item [{itemId}] does not exist in namespace [{namespace}]");
+        public static readonly ApiError Error49143 = new ApiError("49143", "Season [{seasonId}] does not exist in namespace [{namespace}]");
         public static readonly ApiError Error49144 = new ApiError("49144", "Reward [{code}] does not exist");
+        public static readonly ApiError Error49145 = new ApiError("49145", "Pass [{code}] does not exist");
+        public static readonly ApiError Error49146 = new ApiError("49146", "Tier does not exist");
+        public static readonly ApiError Error49147 = new ApiError("49147", "Published season does not exist");
+        public static readonly ApiError Error49148 = new ApiError("49148", "User season does not exist");
+        public static readonly ApiError Error49171 = new ApiError("49171", "Invalid season status [{status}]");
         public static readonly ApiError Error49172 = new ApiError("49172", "Season is already ended");
+        public static readonly ApiError Error49173 = new ApiError("49173", "Reward [{code}] already exists in the season");
+        public static readonly ApiError Error49174 = new ApiError("49174", "Pass [{code}] already exists in the season");
         public static readonly ApiError Error49175 = new ApiError("49175", "Published season already exists in namespace [{namespace}]");
         public static readonly ApiError Error49176 = new ApiError("49176", "Rewards are not provided");
         public static readonly ApiError Error49177 = new ApiError("49177", "Passes are not provided");
         public static readonly ApiError Error49178 = new ApiError("49178", "Tiers are not provided");
-        public static readonly ApiError Error49189 = new ApiError("49189", "Duplicate season name [{name}] for publishing in namespace [{namespace}]");
-        public static readonly ApiError Error49181 = new ApiError("49181", "Season has not ended");
-        public static readonly ApiError Error49173 = new ApiError("49173", "Reward [{code}] already exists in the season");
         public static readonly ApiError Error49179 = new ApiError("49179", "Reward [{code}] is in use");
-        public static readonly ApiError Error49146 = new ApiError("49146", "Tier does not exist");
         public static readonly ApiError Error49180 = new ApiError("49180", "Season is already started");
-        public static readonly ApiError Error49148 = new ApiError("49148", "User season does not exist");
+        public static readonly ApiError Error49181 = new ApiError("49181", "Season has not ended");
+        public static readonly ApiError Error49182 = new ApiError("49182", "Reward is already claimed");
         public static readonly ApiError Error49183 = new ApiError("49183", "Pass item does not match published season pass");
         public static readonly ApiError Error49184 = new ApiError("49184", "Tier item does not match published season tier");
         public static readonly ApiError Error49185 = new ApiError("49185", "Season has not started");
         public static readonly ApiError Error49186 = new ApiError("49186", "Pass already owned");
         public static readonly ApiError Error49187 = new ApiError("49187", "Exceed max tier count");
-        public static readonly ApiError Error49124 = new ApiError("49124", "Manual claim not supported");
-        public static readonly ApiError Error49182 = new ApiError("49182", "Reward is already claimed");
         public static readonly ApiError Error49188 = new ApiError("49188", "Reward is claiming");
+        public static readonly ApiError Error49189 = new ApiError("49189", "Duplicate season name [{name}] for publishing in namespace [{namespace}]");
     }
 
     public class ErrorEntity : AccelByte.Sdk.Core.Model
@@ -86,10 +86,15 @@ namespace AccelByte.Sdk.Api.Seasonpass
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                ErrorCode != null ? ErrorCode.Value.ToString() : "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                ErrorCode != null ? ErrorCode.Value.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 
@@ -108,10 +113,15 @@ namespace AccelByte.Sdk.Api.Seasonpass
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                ErrorCode != null ? ErrorCode.Value.ToString() : "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                ErrorCode != null ? ErrorCode.Value.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 

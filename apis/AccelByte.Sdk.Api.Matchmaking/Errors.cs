@@ -32,9 +32,9 @@ namespace AccelByte.Sdk.Api.Matchmaking
         public static readonly ApiError Error20014 = new ApiError("20014", "invalid audience");
         public static readonly ApiError Error20015 = new ApiError("20015", "insufficient scope");
         public static readonly ApiError Error20019 = new ApiError("20019", "unable to parse request body");
-        public static readonly ApiError Error510301 = new ApiError("510301", "user playtime not found");
-        public static readonly ApiError Error510110 = new ApiError("510110", "channel not found");
         public static readonly ApiError Error510109 = new ApiError("510109", "failed to read file");
+        public static readonly ApiError Error510110 = new ApiError("510110", "channel not found");
+        public static readonly ApiError Error510301 = new ApiError("510301", "user playtime not found");
     }
 
     public class ResponseError : AccelByte.Sdk.Core.Model
@@ -48,10 +48,15 @@ namespace AccelByte.Sdk.Api.Matchmaking
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                ErrorCode != null ? ErrorCode.Value.ToString() : "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                ErrorCode != null ? ErrorCode.Value.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 
@@ -66,10 +71,15 @@ namespace AccelByte.Sdk.Api.Matchmaking
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                ErrorCode != null ? ErrorCode.Value.ToString() : "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                ErrorCode != null ? ErrorCode.Value.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 

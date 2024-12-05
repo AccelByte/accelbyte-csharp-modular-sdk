@@ -53,10 +53,16 @@ namespace AccelByte.Sdk.Api.Csm
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                Error != null ? Error.ToString() : "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                Error != null ? Error.ToString() :
+                ErrorCode != null ? ErrorCode.Value.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 

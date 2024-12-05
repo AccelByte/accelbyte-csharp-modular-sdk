@@ -47,10 +47,16 @@ namespace AccelByte.Sdk.Api.Sessionhistory
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                ErrorCode != null ? ErrorCode.Value.ToString() : "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                ErrorCode != null ? ErrorCode.Value.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                Message != null ? Message.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 

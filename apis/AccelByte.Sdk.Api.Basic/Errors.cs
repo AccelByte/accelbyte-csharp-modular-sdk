@@ -25,30 +25,30 @@ namespace AccelByte.Sdk.Api.Basic
 {
     public static class BasicErrors
     {
-        public static readonly ApiError Error20001 = new ApiError("20001", "unauthorized");
-        public static readonly ApiError Error20013 = new ApiError("20013", "insufficient permission");
-        public static readonly ApiError Error11336 = new ApiError("11336", "Unable to {action}: Namespace already exists");
-        public static readonly ApiError Error11338 = new ApiError("11338", "Unable to {action}: Namespace contains invalid character(s)");
-        public static readonly ApiError Error11339 = new ApiError("11339", "Unable to {action}: Display name contains invalid character(s)");
-        public static readonly ApiError Error11340 = new ApiError("11340", "Unable to {action}: The maximum number of games namespace for studio:{studio} has been exceeded");
-        public static readonly ApiError Error20002 = new ApiError("20002", "validation error");
-        public static readonly ApiError Error20019 = new ApiError("20019", "unable to parse request body");
-        public static readonly ApiError Error11337 = new ApiError("11337", "Unable to {action}: Namespace not found");
-        public static readonly ApiError Error20006 = new ApiError("20006", "optimistic lock");
-        public static readonly ApiError Error11771 = new ApiError("11771", "Unable to {action}: Config already exists");
-        public static readonly ApiError Error11741 = new ApiError("11741", "Unable to {action}: Config not found");
+        public static readonly ApiError Error11121 = new ApiError("11121", "Unable to {action}: category {category} is not valid");
         public static readonly ApiError Error11131 = new ApiError("11131", "Unable to {action}: File type is not supported");
-        public static readonly ApiError Error20000 = new ApiError("20000", "internal server error");
+        public static readonly ApiError Error11132 = new ApiError("11132", "Unable to {action}: file storage exceed limitation, user ID: {userId}, namespace: {namespace}");
         public static readonly ApiError Error11233 = new ApiError("11233", "Unable to {action}: Country group with code [{countryGroupCode}] is not found");
         public static readonly ApiError Error11234 = new ApiError("11234", "Unable to {action}: A country can't be assigned to more than one country group");
         public static readonly ApiError Error11235 = new ApiError("11235", "Unable to {action}: Country group with specified code is already exist");
-        public static readonly ApiError Error11469 = new ApiError("11469", "User profile with publicId [{publicId}] not found in namespace [{namespace}]");
-        public static readonly ApiError Error11121 = new ApiError("11121", "Unable to {action}: category {category} is not valid");
-        public static readonly ApiError Error11132 = new ApiError("11132", "Unable to {action}: file storage exceed limitation, user ID: {userId}, namespace: {namespace}");
+        public static readonly ApiError Error11336 = new ApiError("11336", "Unable to {action}: Namespace already exists");
+        public static readonly ApiError Error11337 = new ApiError("11337", "Unable to {action}: Namespace not found");
+        public static readonly ApiError Error11338 = new ApiError("11338", "Unable to {action}: Namespace contains invalid character(s)");
+        public static readonly ApiError Error11339 = new ApiError("11339", "Unable to {action}: Display name contains invalid character(s)");
+        public static readonly ApiError Error11340 = new ApiError("11340", "Unable to {action}: The maximum number of games namespace for studio:{studio} has been exceeded");
         public static readonly ApiError Error11440 = new ApiError("11440", "Unable to {action}: User profile not found in namespace [{namespace}]");
-        public static readonly ApiError Error20008 = new ApiError("20008", "user not found");
-        public static readonly ApiError Error20017 = new ApiError("20017", "user not linked");
         public static readonly ApiError Error11441 = new ApiError("11441", "Unable to {action}: User profile already exists");
+        public static readonly ApiError Error11469 = new ApiError("11469", "User profile with publicId [{publicId}] not found in namespace [{namespace}]");
+        public static readonly ApiError Error11741 = new ApiError("11741", "Unable to {action}: Config not found");
+        public static readonly ApiError Error11771 = new ApiError("11771", "Unable to {action}: Config already exists");
+        public static readonly ApiError Error20000 = new ApiError("20000", "internal server error");
+        public static readonly ApiError Error20001 = new ApiError("20001", "unauthorized");
+        public static readonly ApiError Error20002 = new ApiError("20002", "validation error");
+        public static readonly ApiError Error20006 = new ApiError("20006", "optimistic lock");
+        public static readonly ApiError Error20008 = new ApiError("20008", "user not found");
+        public static readonly ApiError Error20013 = new ApiError("20013", "insufficient permission");
+        public static readonly ApiError Error20017 = new ApiError("20017", "user not linked");
+        public static readonly ApiError Error20019 = new ApiError("20019", "unable to parse request body");
     }
 
     public class ErrorEntity : AccelByte.Sdk.Core.Model
@@ -74,10 +74,15 @@ namespace AccelByte.Sdk.Api.Basic
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                ErrorCode != null ? ErrorCode.Value.ToString() : "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                ErrorCode != null ? ErrorCode.Value.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 
@@ -96,10 +101,15 @@ namespace AccelByte.Sdk.Api.Basic
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                ErrorCode != null ? ErrorCode.Value.ToString() : "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                ErrorCode != null ? ErrorCode.Value.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 

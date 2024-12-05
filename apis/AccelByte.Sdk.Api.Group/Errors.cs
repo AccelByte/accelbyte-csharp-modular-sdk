@@ -28,22 +28,22 @@ namespace AccelByte.Sdk.Api.Group
         public static readonly ApiError Error20001 = new ApiError("20001", "unauthorized access");
         public static readonly ApiError Error20002 = new ApiError("20002", "validation error");
         public static readonly ApiError Error20013 = new ApiError("20013", "insufficient permissions");
-        public static readonly ApiError Error20022 = new ApiError("20022", "token is not user token");
-        public static readonly ApiError Error73131 = new ApiError("73131", "global configuration not found");
         public static readonly ApiError Error20019 = new ApiError("20019", "unable to parse request body");
-        public static readonly ApiError Error73130 = new ApiError("73130", "global configuration already exist");
-        public static readonly ApiError Error73333 = new ApiError("73333", "group not found");
-        public static readonly ApiError Error73433 = new ApiError("73433", "member group not found");
-        public static readonly ApiError Error73232 = new ApiError("73232", "member role not found");
-        public static readonly ApiError Error73342 = new ApiError("73342", "user already joined group");
-        public static readonly ApiError Error73036 = new ApiError("73036", "insufficient member role permission");
-        public static readonly ApiError Error73442 = new ApiError("73442", "user already joined in another group");
-        public static readonly ApiError Error73443 = new ApiError("73443", "member request not found");
+        public static readonly ApiError Error20022 = new ApiError("20022", "token is not user token");
         public static readonly ApiError Error73034 = new ApiError("73034", "user not belong to any group");
-        public static readonly ApiError Error73440 = new ApiError("73440", "group admin cannot leave group");
-        public static readonly ApiError Error73444 = new ApiError("73444", "member must have role");
+        public static readonly ApiError Error73036 = new ApiError("73036", "insufficient member role permission");
+        public static readonly ApiError Error73130 = new ApiError("73130", "global configuration already exist");
+        public static readonly ApiError Error73131 = new ApiError("73131", "global configuration not found");
+        public static readonly ApiError Error73232 = new ApiError("73232", "member role not found");
+        public static readonly ApiError Error73333 = new ApiError("73333", "group not found");
+        public static readonly ApiError Error73342 = new ApiError("73342", "user already joined group");
+        public static readonly ApiError Error73433 = new ApiError("73433", "member group not found");
         public static readonly ApiError Error73437 = new ApiError("73437", "user already invited");
         public static readonly ApiError Error73438 = new ApiError("73438", "user already requested to join");
+        public static readonly ApiError Error73440 = new ApiError("73440", "group admin cannot leave group");
+        public static readonly ApiError Error73442 = new ApiError("73442", "user already joined in another group");
+        public static readonly ApiError Error73443 = new ApiError("73443", "member request not found");
+        public static readonly ApiError Error73444 = new ApiError("73444", "member must have role");
     }
 
     public class ResponseErrorResponse : AccelByte.Sdk.Core.Model
@@ -57,10 +57,15 @@ namespace AccelByte.Sdk.Api.Group
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                ErrorCode != null ? ErrorCode.Value.ToString() : "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                ErrorCode != null ? ErrorCode.Value.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 

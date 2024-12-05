@@ -30,17 +30,17 @@ namespace AccelByte.Sdk.Api.Leaderboard
         public static readonly ApiError Error20002 = new ApiError("20002", "validation error");
         public static readonly ApiError Error20013 = new ApiError("20013", "insufficient permissions");
         public static readonly ApiError Error20019 = new ApiError("20019", "unable to parse request body");
-        public static readonly ApiError Error71132 = new ApiError("71132", "leaderboard configuration already exist");
-        public static readonly ApiError Error71242 = new ApiError("71242", "stat code not found in namespace");
-        public static readonly ApiError Error71230 = new ApiError("71230", "leaderboard configuration not found");
-        public static readonly ApiError Error71239 = new ApiError("71239", "leaderboard is not archived");
         public static readonly ApiError Error71130 = new ApiError("71130", "leaderboard config not found");
+        public static readonly ApiError Error71132 = new ApiError("71132", "leaderboard configuration already exist");
         public static readonly ApiError Error71133 = new ApiError("71133", "leaderboard configuration deleted");
+        public static readonly ApiError Error71230 = new ApiError("71230", "leaderboard configuration not found");
+        public static readonly ApiError Error71233 = new ApiError("71233", "user ranking data not found");
         public static readonly ApiError Error71235 = new ApiError("71235", "leaderboard ranking not found");
         public static readonly ApiError Error71236 = new ApiError("71236", "leaderboard ranking count failed");
-        public static readonly ApiError Error71241 = new ApiError("71241", "forbidden environment");
-        public static readonly ApiError Error71233 = new ApiError("71233", "user ranking data not found");
         public static readonly ApiError Error71237 = new ApiError("71237", "leaderboard ranking not created for inactive leaderboard");
+        public static readonly ApiError Error71239 = new ApiError("71239", "leaderboard is not archived");
+        public static readonly ApiError Error71241 = new ApiError("71241", "forbidden environment");
+        public static readonly ApiError Error71242 = new ApiError("71242", "stat code not found in namespace");
         public static readonly ApiError Error71243 = new ApiError("71243", "cycle doesn't belong to the stat code");
         public static readonly ApiError Error71244 = new ApiError("71244", "cycle is already stopped");
     }
@@ -56,10 +56,15 @@ namespace AccelByte.Sdk.Api.Leaderboard
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                ErrorCode != null ? ErrorCode.Value.ToString() : "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                ErrorCode != null ? ErrorCode.Value.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 

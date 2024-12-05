@@ -25,34 +25,34 @@ namespace AccelByte.Sdk.Api.Social
 {
     public static class SocialErrors
     {
-        public static readonly ApiError Error20000 = new ApiError("20000", "Internal server error");
-        public static readonly ApiError Error20001 = new ApiError("20001", "unauthorized access");
-        public static readonly ApiError Error20013 = new ApiError("20013", "insufficient permission");
-        public static readonly ApiError Error12041 = new ApiError("12041", "Game profile with id [{profileId}] is not found");
-        public static readonly ApiError Error12141 = new ApiError("12141", "Slot [{slotId}] not found in namespace [{namespace}]");
         public static readonly ApiError Error12021 = new ApiError("12021", "{totalUser} users is requested. Cannot retrieve more than {limitUser} users at once");
-        public static readonly ApiError Error20002 = new ApiError("20002", "validation error");
         public static readonly ApiError Error12022 = new ApiError("12022", "Game profile attribute name [{attrName1}] passed in request url mismatch the name [{attrName2}] in body");
+        public static readonly ApiError Error12041 = new ApiError("12041", "Game profile with id [{profileId}] is not found");
         public static readonly ApiError Error12121 = new ApiError("12121", "Checksum mismatch for [{filename}]");
         public static readonly ApiError Error12122 = new ApiError("12122", "[{filename}] exceeds the upload limit size of [{sizeLimit}] bytes");
+        public static readonly ApiError Error12141 = new ApiError("12141", "Slot [{slotId}] not found in namespace [{namespace}]");
         public static readonly ApiError Error12171 = new ApiError("12171", "User [{userId}] exceed max slot count [{maxCount}] in namespace [{namespace}]");
-        public static readonly ApiError Error12244 = new ApiError("12244", "Global stat item of [{statCode}] cannot be found in namespace [{namespace}]");
+        public static readonly ApiError Error12221 = new ApiError("12221", "Invalid stat operator, expect [{expected}] but actual [{actual}]");
+        public static readonly ApiError Error12222 = new ApiError("12222", "Stats data for namespace [{namespace}] is invalid");
+        public static readonly ApiError Error12223 = new ApiError("12223", "Invalid stat codes in namespace [{namespace}]: [{statCodes}]");
         public static readonly ApiError Error12225 = new ApiError("12225", "Invalid time range");
         public static readonly ApiError Error12226 = new ApiError("12226", "Invalid date [{date}] of month [{month}]");
-        public static readonly ApiError Error12274 = new ApiError("12274", "Stat item with code [{statCode}] of user [{profileId}] already exists in namespace [{namespace}]");
-        public static readonly ApiError Error12222 = new ApiError("12222", "Stats data for namespace [{namespace}] is invalid");
+        public static readonly ApiError Error12241 = new ApiError("12241", "Stat [{statCode}] cannot be found in namespace [{namespace}]");
+        public static readonly ApiError Error12242 = new ApiError("12242", "Stat item of [{statCode}] of user [{profileId}] cannot be found in namespace [{namespace}]");
+        public static readonly ApiError Error12243 = new ApiError("12243", "Stats cannot be found in namespace [{namespace}]");
+        public static readonly ApiError Error12244 = new ApiError("12244", "Global stat item of [{statCode}] cannot be found in namespace [{namespace}]");
         public static readonly ApiError Error12245 = new ApiError("12245", "Stat cycle [{id}] cannot be found in namespace [{namespace}]");
+        public static readonly ApiError Error12271 = new ApiError("12271", "Stat template with code [{statCode}] already exists in namespace [{namespace}]");
+        public static readonly ApiError Error12273 = new ApiError("12273", "Stat [{statCode}] is not decreasable");
+        public static readonly ApiError Error12274 = new ApiError("12274", "Stat item with code [{statCode}] of user [{profileId}] already exists in namespace [{namespace}]");
+        public static readonly ApiError Error12275 = new ApiError("12275", "[{action}] value: [{value}] of stat [{statCode}] is out of range while minimum [{minimum}] and maximum [{maximum}] in namespace [{namespace}]");
+        public static readonly ApiError Error12276 = new ApiError("12276", " Stat template with code [{statCode}] in namespace [{namespace}] not deletable due it is in an INIT status ");
         public static readonly ApiError Error12277 = new ApiError("12277", "Stat cycle [{id}] in namespace [{namespace}] with status [{status}] cannot be updated");
         public static readonly ApiError Error12279 = new ApiError("12279", "Invalid stat cycle status: Stat cycle [{id}], namespace [{namespace}], status [{status}]");
-        public static readonly ApiError Error12241 = new ApiError("12241", "Stat [{statCode}] cannot be found in namespace [{namespace}]");
-        public static readonly ApiError Error12271 = new ApiError("12271", "Stat template with code [{statCode}] already exists in namespace [{namespace}]");
-        public static readonly ApiError Error12276 = new ApiError("12276", " Stat template with code [{statCode}] in namespace [{namespace}] not deletable due it is in an INIT status ");
-        public static readonly ApiError Error12242 = new ApiError("12242", "Stat item of [{statCode}] of user [{profileId}] cannot be found in namespace [{namespace}]");
-        public static readonly ApiError Error12221 = new ApiError("12221", "Invalid stat operator, expect [{expected}] but actual [{actual}]");
-        public static readonly ApiError Error12273 = new ApiError("12273", "Stat [{statCode}] is not decreasable");
-        public static readonly ApiError Error12275 = new ApiError("12275", "[{action}] value: [{value}] of stat [{statCode}] is out of range while minimum [{minimum}] and maximum [{maximum}] in namespace [{namespace}]");
-        public static readonly ApiError Error12223 = new ApiError("12223", "Invalid stat codes in namespace [{namespace}]: [{statCodes}]");
-        public static readonly ApiError Error12243 = new ApiError("12243", "Stats cannot be found in namespace [{namespace}]");
+        public static readonly ApiError Error20000 = new ApiError("20000", "Internal server error");
+        public static readonly ApiError Error20001 = new ApiError("20001", "unauthorized access");
+        public static readonly ApiError Error20002 = new ApiError("20002", "validation error");
+        public static readonly ApiError Error20013 = new ApiError("20013", "insufficient permission");
     }
 
     public class ErrorEntity : AccelByte.Sdk.Core.Model
@@ -78,10 +78,15 @@ namespace AccelByte.Sdk.Api.Social
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                ErrorCode != null ? ErrorCode.Value.ToString() : "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                ErrorCode != null ? ErrorCode.Value.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 
@@ -100,10 +105,15 @@ namespace AccelByte.Sdk.Api.Social
 
         public ApiError TranslateToApiError()
         {
-            return new ApiError(
-                ErrorCode != null ? ErrorCode.Value.ToString() : "",
-                ErrorMessage != null ? ErrorMessage.ToString() : ""
-            );
+            string errorCode =
+                ErrorCode != null ? ErrorCode.Value.ToString() :
+                "";
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                "";
+
+            return new ApiError(errorCode, errorMessage);
         }
     }
 
