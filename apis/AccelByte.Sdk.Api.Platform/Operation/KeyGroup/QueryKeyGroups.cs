@@ -90,7 +90,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryKeyGroups op = new QueryKeyGroups(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<QueryKeyGroupsBuilder>(this);
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -127,7 +127,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -138,16 +138,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Name is not null) QueryParams["name"] = builder.Name;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Tag is not null) QueryParams["tag"] = builder.Tag;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -164,24 +164,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public QueryKeyGroups(
-            string namespace_,            
-            int? limit,            
-            string? name,            
-            int? offset,            
-            string? tag            
+            string namespace_,
+            int? limit,
+            string? name,
+            int? offset,
+            string? tag
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (name is not null) QueryParams["name"] = name;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (tag is not null) QueryParams["tag"] = tag;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -190,10 +190,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public QueryKeyGroups.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryKeyGroups.Response()

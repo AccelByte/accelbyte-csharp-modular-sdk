@@ -20,7 +20,7 @@ namespace AccelByte.Sdk.Core
 
         public bool IsAvailable { get; }
 
-        public ApiError(string code,string message)
+        public ApiError(string code, string message)
         {
             Code = code;
             Message = message;

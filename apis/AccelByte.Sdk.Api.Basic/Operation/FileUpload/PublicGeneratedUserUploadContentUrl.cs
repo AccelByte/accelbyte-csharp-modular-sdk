@@ -73,9 +73,9 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 PublicGeneratedUserUploadContentUrl op = new PublicGeneratedUserUploadContentUrl(this,
-                    namespace_,                    
-                    userId,                    
-                    fileType                    
+                    namespace_,
+                    userId,
+                    fileType
                 );
 
                 op.SetBaseFields<PublicGeneratedUserUploadContentUrlBuilder>(this);
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -134,14 +134,14 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (builder.Category is not null) QueryParams["category"] = builder.Category;
             if (fileType is not null) QueryParams["fileType"] = fileType;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -168,22 +168,22 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #endregion
 
         public PublicGeneratedUserUploadContentUrl(
-            string namespace_,            
-            string userId,            
-            string? category,            
-            string fileType            
+            string namespace_,
+            string userId,
+            string? category,
+            string fileType
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (category is not null) QueryParams["category"] = category;
             if (fileType is not null) QueryParams["fileType"] = fileType;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -192,10 +192,10 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicGeneratedUserUploadContentUrl.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGeneratedUserUploadContentUrl.Response()

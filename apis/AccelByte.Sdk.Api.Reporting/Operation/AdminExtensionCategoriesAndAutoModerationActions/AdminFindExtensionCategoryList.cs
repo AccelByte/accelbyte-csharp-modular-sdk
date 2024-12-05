@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -111,14 +111,14 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         private AdminFindExtensionCategoryList(AdminFindExtensionCategoryListBuilder builder
         )
         {
-            
+
             if (builder.Order is not null) QueryParams["order"] = builder.Order.Value;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy.Value;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -139,18 +139,18 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #endregion
 
         public AdminFindExtensionCategoryList(
-            AdminFindExtensionCategoryListOrder? order,            
-            AdminFindExtensionCategoryListSortBy? sortBy            
+            AdminFindExtensionCategoryListOrder? order,
+            AdminFindExtensionCategoryListSortBy? sortBy
         )
         {
-            
+
             if (order is not null) QueryParams["order"] = order.Value;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy.Value;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -162,7 +162,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminFindExtensionCategoryList.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminFindExtensionCategoryList.Response()

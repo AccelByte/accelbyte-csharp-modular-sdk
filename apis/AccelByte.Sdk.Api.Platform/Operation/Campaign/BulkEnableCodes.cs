@@ -75,8 +75,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 BulkEnableCodes op = new BulkEnableCodes(this,
-                    campaignId,                    
-                    namespace_                    
+                    campaignId,
+                    namespace_
                 );
 
                 op.SetBaseFields<BulkEnableCodesBuilder>(this);
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -130,15 +130,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["campaignId"] = campaignId;
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.BatchName is not null) QueryParams["batchName"] = builder.BatchName;
             if (builder.BatchNo is not null) QueryParams["batchNo"] = builder.BatchNo;
-            
 
-            
+
+
             CollectionFormatMap["batchNo"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -155,23 +155,23 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public BulkEnableCodes(
-            string campaignId,            
-            string namespace_,            
-            string? batchName,            
-            List<int>? batchNo            
+            string campaignId,
+            string namespace_,
+            string? batchName,
+            List<int>? batchNo
         )
         {
             PathParams["campaignId"] = campaignId;
             PathParams["namespace"] = namespace_;
-            
+
             if (batchName is not null) QueryParams["batchName"] = batchName;
             if (batchNo is not null) QueryParams["batchNo"] = batchNo;
-            
 
-            
+
+
             CollectionFormatMap["batchNo"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -183,7 +183,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public BulkEnableCodes.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new BulkEnableCodes.Response()

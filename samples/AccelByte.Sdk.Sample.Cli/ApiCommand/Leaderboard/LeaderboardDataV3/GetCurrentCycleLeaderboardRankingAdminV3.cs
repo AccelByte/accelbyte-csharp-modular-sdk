@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Leaderboard.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
 {
-    [SdkConsoleCommand("leaderboard","getcurrentcycleleaderboardrankingadminv3")]
-    public class GetCurrentCycleLeaderboardRankingAdminV3Command: ISdkConsoleCommand
+    [SdkConsoleCommand("leaderboard", "getcurrentcycleleaderboardrankingadminv3")]
+    public class GetCurrentCycleLeaderboardRankingAdminV3Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Leaderboard"; } }
+        public string ServiceName { get { return "Leaderboard"; } }
 
-        public string OperationName{ get { return "GetCurrentCycleLeaderboardRankingAdminV3"; } }
+        public string OperationName { get { return "GetCurrentCycleLeaderboardRankingAdminV3"; } }
 
         [SdkCommandArgument("cycleId")]
         public string CycleId { get; set; } = String.Empty;
@@ -74,8 +74,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-","response data is null.");
-            }   
+                    return CommandResult.Fail("-", "response data is null.");
+            }
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

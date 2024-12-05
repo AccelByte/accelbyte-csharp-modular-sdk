@@ -76,8 +76,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 GetSessionServerSecret op = new GetSessionServerSecret(this,
-                    namespace_,                    
-                    sessionId                    
+                    namespace_,
+                    sessionId
                 );
 
                 op.SetBaseFields<GetSessionServerSecretBuilder>(this);
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -131,12 +131,12 @@ namespace AccelByte.Sdk.Api.Session.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["sessionId"] = sessionId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -161,18 +161,18 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #endregion
 
         public GetSessionServerSecret(
-            string namespace_,            
-            string sessionId            
+            string namespace_,
+            string sessionId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["sessionId"] = sessionId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -184,7 +184,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetSessionServerSecret.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetSessionServerSecret.Response()

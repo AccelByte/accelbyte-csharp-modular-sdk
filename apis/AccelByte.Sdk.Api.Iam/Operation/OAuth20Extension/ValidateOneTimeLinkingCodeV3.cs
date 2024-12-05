@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 ValidateOneTimeLinkingCodeV3 op = new ValidateOneTimeLinkingCodeV3(this,
-                    oneTimeLinkCode                    
+                    oneTimeLinkCode
                 );
 
                 op.SetBaseFields<ValidateOneTimeLinkingCodeV3Builder>(this);
@@ -75,7 +75,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -102,13 +102,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string oneTimeLinkCode
         )
         {
-            
-            
+
+
             if (oneTimeLinkCode is not null) FormParams["oneTimeLinkCode"] = oneTimeLinkCode;
 
-            
-            
-            
+
+
+
 
         }
         #endregion
@@ -124,16 +124,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public ValidateOneTimeLinkingCodeV3(
-            string oneTimeLinkCode            
+            string oneTimeLinkCode
         )
         {
-            
-            
+
+
             if (oneTimeLinkCode is not null) FormParams["oneTimeLinkCode"] = oneTimeLinkCode;
 
-            
-            
-            
+
+
+
 
         }
 
@@ -144,7 +144,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ValidateOneTimeLinkingCodeV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ValidateOneTimeLinkingCodeV3.Response()

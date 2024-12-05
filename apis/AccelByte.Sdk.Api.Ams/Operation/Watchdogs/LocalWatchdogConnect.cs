@@ -58,8 +58,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             )
             {
                 LocalWatchdogConnect op = new LocalWatchdogConnect(this,
-                    namespace_,                    
-                    watchdogID                    
+                    namespace_,
+                    watchdogID
                 );
 
                 op.SetBaseFields<LocalWatchdogConnectBuilder>(this);
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -113,12 +113,12 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["watchdogID"] = watchdogID;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -135,18 +135,18 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #endregion
 
         public LocalWatchdogConnect(
-            string namespace_,            
-            string watchdogID            
+            string namespace_,
+            string watchdogID
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["watchdogID"] = watchdogID;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -155,10 +155,10 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public LocalWatchdogConnect.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new LocalWatchdogConnect.Response()

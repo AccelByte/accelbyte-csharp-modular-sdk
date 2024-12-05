@@ -58,8 +58,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
             )
             {
                 GetAllSessionsInChannel op = new GetAllSessionsInChannel(this,
-                    channelName,                    
-                    namespace_                    
+                    channelName,
+                    namespace_
                 );
 
                 op.SetBaseFields<GetAllSessionsInChannelBuilder>(this);
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -152,12 +152,12 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         {
             PathParams["channelName"] = channelName;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -199,18 +199,18 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         #endregion
 
         public GetAllSessionsInChannel(
-            string channelName,            
-            string namespace_            
+            string channelName,
+            string namespace_
         )
         {
             PathParams["channelName"] = channelName;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -222,7 +222,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetAllSessionsInChannel.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetAllSessionsInChannel.Response()
@@ -280,7 +280,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Data = JsonSerializer.Deserialize<List<Model.ModelsMatchmakingResult<T1>>>(payload, ResponseJsonOptions);
@@ -311,7 +311,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

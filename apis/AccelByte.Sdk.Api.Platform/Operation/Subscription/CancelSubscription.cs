@@ -71,10 +71,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 CancelSubscription op = new CancelSubscription(this,
-                    body,                    
-                    namespace_,                    
-                    subscriptionId,                    
-                    userId                    
+                    body,
+                    namespace_,
+                    subscriptionId,
+                    userId
                 );
 
                 op.SetBaseFields<CancelSubscriptionBuilder>(this);
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -139,14 +139,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["namespace"] = namespace_;
             PathParams["subscriptionId"] = subscriptionId;
             PathParams["userId"] = userId;
-            
-            if (builder.Force != null) QueryParams["force"] = Convert.ToString(builder.Force)!;
-            
 
-            
-            
+            if (builder.Force != null) QueryParams["force"] = Convert.ToString(builder.Force)!;
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -167,24 +167,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public CancelSubscription(
-            string namespace_,            
-            string subscriptionId,            
-            string userId,            
-            bool? force,            
-            Model.CancelRequest body            
+            string namespace_,
+            string subscriptionId,
+            string userId,
+            bool? force,
+            Model.CancelRequest body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["subscriptionId"] = subscriptionId;
             PathParams["userId"] = userId;
-            
-            if (force != null) QueryParams["force"] = Convert.ToString(force)!;
-            
 
-            
-            
+            if (force != null) QueryParams["force"] = Convert.ToString(force)!;
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -196,7 +196,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public CancelSubscription.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new CancelSubscription.Response()

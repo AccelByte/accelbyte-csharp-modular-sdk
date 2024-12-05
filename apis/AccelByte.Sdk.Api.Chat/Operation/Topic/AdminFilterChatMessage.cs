@@ -64,8 +64,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminFilterChatMessage op = new AdminFilterChatMessage(this,
-                    body,                    
-                    namespace_                    
+                    body,
+                    namespace_
                 );
 
                 op.SetBaseFields<AdminFilterChatMessageBuilder>(this);
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -145,7 +145,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -157,14 +157,14 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.Detail != null) QueryParams["detail"] = Convert.ToString(builder.Detail)!;
-            
 
-            
-            
+            if (builder.Detail != null) QueryParams["detail"] = Convert.ToString(builder.Detail)!;
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -202,20 +202,20 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #endregion
 
         public AdminFilterChatMessage(
-            string namespace_,            
-            bool? detail,            
-            Model.ModelsMessageRequest body            
+            string namespace_,
+            bool? detail,
+            Model.ModelsMessageRequest body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (detail != null) QueryParams["detail"] = Convert.ToString(detail)!;
-            
 
-            
-            
+            if (detail != null) QueryParams["detail"] = Convert.ToString(detail)!;
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -227,7 +227,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminFilterChatMessage.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminFilterChatMessage.Response()
@@ -280,7 +280,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Data = JsonSerializer.Deserialize<Model.ModelsMessageResultWithAttributes<T1>>(payload, ResponseJsonOptions);
@@ -306,7 +306,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                 response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

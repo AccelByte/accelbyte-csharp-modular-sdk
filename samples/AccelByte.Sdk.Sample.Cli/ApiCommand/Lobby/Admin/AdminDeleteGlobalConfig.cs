@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby","admindeleteglobalconfig")]
-    public class AdminDeleteGlobalConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("lobby", "admindeleteglobalconfig")]
+    public class AdminDeleteGlobalConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Lobby"; } }
+        public string ServiceName { get { return "Lobby"; } }
 
-        public string OperationName{ get { return "AdminDeleteGlobalConfig"; } }
+        public string OperationName { get { return "AdminDeleteGlobalConfig"; } }
 
         public AdminDeleteGlobalConfigCommand(IAccelByteSdk sdk)
         {
@@ -48,12 +48,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 
             var response = wrapper.AdminDeleteGlobalConfig(operation);
             if (response.IsSuccess)
-            {
-                if (response.Data != null)
-                    return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
-                else
-                    return CommandResult.Fail("-","response data is null.");
-            }   
+                return CommandResult.Success("");
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

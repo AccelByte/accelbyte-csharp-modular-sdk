@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 AdminDeleteConfigurationTemplateV1 op = new AdminDeleteConfigurationTemplateV1(this,
-                    name,                    
-                    namespace_                    
+                    name,
+                    namespace_
                 );
 
                 op.SetBaseFields<AdminDeleteConfigurationTemplateV1Builder>(this);
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -111,12 +111,12 @@ namespace AccelByte.Sdk.Api.Session.Operation
         {
             PathParams["name"] = name;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -141,18 +141,18 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #endregion
 
         public AdminDeleteConfigurationTemplateV1(
-            string name,            
-            string namespace_            
+            string name,
+            string namespace_
         )
         {
             PathParams["name"] = name;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -164,7 +164,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminDeleteConfigurationTemplateV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDeleteConfigurationTemplateV1.Response()
@@ -175,25 +175,25 @@ namespace AccelByte.Sdk.Api.Session.Operation
             };
 
             if (code == (HttpStatusCode)400)
-            
+
             {
                 response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
-            
+
             {
                 response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-            
+
             {
                 response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-            
+
             {
                 response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

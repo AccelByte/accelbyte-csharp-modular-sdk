@@ -156,8 +156,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryChanges op = new QueryChanges(this,
-                    namespace_,                    
-                    storeId                    
+                    namespace_,
+                    storeId
                 );
 
                 op.SetBaseFields<QueryChangesBuilder>(this);
@@ -179,7 +179,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -198,7 +198,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -211,7 +211,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["storeId"] = storeId;
-            
+
             if (builder.Action is not null) QueryParams["action"] = builder.Action.Value;
             if (builder.ItemSku is not null) QueryParams["itemSku"] = builder.ItemSku;
             if (builder.ItemType is not null) QueryParams["itemType"] = builder.ItemType.Value;
@@ -224,12 +224,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (builder.UpdatedAtEnd is not null) QueryParams["updatedAtEnd"] = builder.UpdatedAtEnd;
             if (builder.UpdatedAtStart is not null) QueryParams["updatedAtStart"] = builder.UpdatedAtStart;
             if (builder.WithTotal != null) QueryParams["withTotal"] = Convert.ToString(builder.WithTotal)!;
-            
 
-            
+
+
             CollectionFormatMap["sortBy"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -246,25 +246,25 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public QueryChanges(
-            string namespace_,            
-            string storeId,            
-            QueryChangesAction? action,            
-            string? itemSku,            
-            QueryChangesItemType? itemType,            
-            int? limit,            
-            int? offset,            
-            bool? selected,            
-            List<QueryChangesSortBy>? sortBy,            
-            QueryChangesStatus? status,            
-            QueryChangesType? type,            
-            string? updatedAtEnd,            
-            string? updatedAtStart,            
-            bool? withTotal            
+            string namespace_,
+            string storeId,
+            QueryChangesAction? action,
+            string? itemSku,
+            QueryChangesItemType? itemType,
+            int? limit,
+            int? offset,
+            bool? selected,
+            List<QueryChangesSortBy>? sortBy,
+            QueryChangesStatus? status,
+            QueryChangesType? type,
+            string? updatedAtEnd,
+            string? updatedAtStart,
+            bool? withTotal
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["storeId"] = storeId;
-            
+
             if (action is not null) QueryParams["action"] = action.Value;
             if (itemSku is not null) QueryParams["itemSku"] = itemSku;
             if (itemType is not null) QueryParams["itemType"] = itemType.Value;
@@ -277,12 +277,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (updatedAtEnd is not null) QueryParams["updatedAtEnd"] = updatedAtEnd;
             if (updatedAtStart is not null) QueryParams["updatedAtStart"] = updatedAtStart;
             if (withTotal != null) QueryParams["withTotal"] = Convert.ToString(withTotal)!;
-            
 
-            
+
+
             CollectionFormatMap["sortBy"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -291,10 +291,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public QueryChanges.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryChanges.Response()

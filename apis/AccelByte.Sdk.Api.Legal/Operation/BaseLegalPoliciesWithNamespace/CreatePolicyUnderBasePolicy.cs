@@ -72,8 +72,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 CreatePolicyUnderBasePolicy op = new CreatePolicyUnderBasePolicy(this,
-                    basePolicyId,                    
-                    namespace_                    
+                    basePolicyId,
+                    namespace_
                 );
 
                 op.SetBaseFields<CreatePolicyUnderBasePolicyBuilder>(this);
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -127,13 +127,13 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         {
             PathParams["basePolicyId"] = basePolicyId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = builder.Body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -152,20 +152,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #endregion
 
         public CreatePolicyUnderBasePolicy(
-            string basePolicyId,            
-            string namespace_,            
-            Model.CreatePolicyRequest body            
+            string basePolicyId,
+            string namespace_,
+            Model.CreatePolicyRequest body
         )
         {
             PathParams["basePolicyId"] = basePolicyId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -177,7 +177,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public CreatePolicyUnderBasePolicy.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new CreatePolicyUnderBasePolicy.Response()

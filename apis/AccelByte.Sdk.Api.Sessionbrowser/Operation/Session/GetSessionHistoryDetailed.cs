@@ -58,8 +58,8 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             )
             {
                 GetSessionHistoryDetailed op = new GetSessionHistoryDetailed(this,
-                    matchID,                    
-                    namespace_                    
+                    matchID,
+                    namespace_
                 );
 
                 op.SetBaseFields<GetSessionHistoryDetailedBuilder>(this);
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -113,12 +113,12 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         {
             PathParams["matchID"] = matchID;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -143,18 +143,18 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         #endregion
 
         public GetSessionHistoryDetailed(
-            string matchID,            
-            string namespace_            
+            string matchID,
+            string namespace_
         )
         {
             PathParams["matchID"] = matchID;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -166,7 +166,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetSessionHistoryDetailed.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetSessionHistoryDetailed.Response()

@@ -60,8 +60,8 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
             )
             {
                 CheckServerLogs op = new CheckServerLogs(this,
-                    namespace_,                    
-                    podName                    
+                    namespace_,
+                    podName
                 );
 
                 op.SetBaseFields<CheckServerLogsBuilder>(this);
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -115,12 +115,12 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["podName"] = podName;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -141,18 +141,18 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
         #endregion
 
         public CheckServerLogs(
-            string namespace_,            
-            string podName            
+            string namespace_,
+            string podName
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["podName"] = podName;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -163,8 +163,8 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json","text/x-log" };
-        
+        public override List<string> Produces => new() { "application/json", "text/x-log" };
+
         public CheckServerLogs.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new CheckServerLogs.Response()

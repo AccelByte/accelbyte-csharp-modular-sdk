@@ -81,8 +81,8 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             )
             {
                 AdminGetGoals op = new AdminGetGoals(this,
-                    challengeCode,                    
-                    namespace_                    
+                    challengeCode,
+                    namespace_
                 );
 
                 op.SetBaseFields<AdminGetGoalsBuilder>(this);
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -136,15 +136,15 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         {
             PathParams["challengeCode"] = challengeCode;
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -169,24 +169,24 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #endregion
 
         public AdminGetGoals(
-            string challengeCode,            
-            string namespace_,            
-            long? limit,            
-            long? offset,            
-            string? sortBy            
+            string challengeCode,
+            string namespace_,
+            long? limit,
+            long? offset,
+            string? sortBy
         )
         {
             PathParams["challengeCode"] = challengeCode;
             PathParams["namespace"] = namespace_;
-            
+
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -195,10 +195,10 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGetGoals.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetGoals.Response()

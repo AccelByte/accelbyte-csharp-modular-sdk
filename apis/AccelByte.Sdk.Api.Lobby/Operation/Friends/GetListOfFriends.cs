@@ -88,8 +88,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 GetListOfFriends op = new GetListOfFriends(this,
-                    namespace_,                    
-                    userId                    
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<GetListOfFriendsBuilder>(this);
@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -143,17 +143,17 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (builder.FriendId is not null) QueryParams["friendId"] = builder.FriendId;
             if (builder.FriendIds is not null) QueryParams["friendIds"] = builder.FriendIds;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
-            
 
-            
+
+
             CollectionFormatMap["friendIds"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -178,27 +178,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public GetListOfFriends(
-            string namespace_,            
-            string userId,            
-            string? friendId,            
-            List<string>? friendIds,            
-            long? limit,            
-            long? offset            
+            string namespace_,
+            string userId,
+            string? friendId,
+            List<string>? friendIds,
+            long? limit,
+            long? offset
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (friendId is not null) QueryParams["friendId"] = friendId;
             if (friendIds is not null) QueryParams["friendIds"] = friendIds;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
-            
 
-            
+
+
             CollectionFormatMap["friendIds"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -210,7 +210,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetListOfFriends.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetListOfFriends.Response()

@@ -57,8 +57,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 DownloadExportedAgreementsInCSV op = new DownloadExportedAgreementsInCSV(this,
-                    namespace_,                    
-                    exportId                    
+                    namespace_,
+                    exportId
                 );
 
                 op.SetBaseFields<DownloadExportedAgreementsInCSVBuilder>(this);
@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -111,13 +111,13 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (exportId is not null) QueryParams["exportId"] = exportId;
-            
 
-            
-            
-            
+            if (exportId is not null) QueryParams["exportId"] = exportId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -136,18 +136,18 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #endregion
 
         public DownloadExportedAgreementsInCSV(
-            string namespace_,            
-            string exportId            
+            string namespace_,
+            string exportId
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (exportId is not null) QueryParams["exportId"] = exportId;
-            
 
-            
-            
-            
+            if (exportId is not null) QueryParams["exportId"] = exportId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,10 +156,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public DownloadExportedAgreementsInCSV.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DownloadExportedAgreementsInCSV.Response()

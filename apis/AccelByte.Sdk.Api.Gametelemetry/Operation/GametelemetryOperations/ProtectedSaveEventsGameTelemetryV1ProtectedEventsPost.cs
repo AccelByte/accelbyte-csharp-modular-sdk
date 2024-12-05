@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             )
             {
                 ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost op = new ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost(this,
-                    body                    
+                    body
 
                 );
 
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             {
                 ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost op = Build(
                     body
-                    
+
                 );
 
                 if (_Sdk == null)
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -140,7 +140,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             {
                 ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost op = Build(
                     body
-                    
+
                 );
 
                 if (_Sdk == null)
@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -156,16 +156,16 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
         private ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost(ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder builder,
             List<TelemetryBody> body
-            
+
         )
         {
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
@@ -189,17 +189,17 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         #endregion
 
         public ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost(
-            List<Model.TelemetryBody> body,            
+            List<Model.TelemetryBody> body,
             string accessToken
         )
         {
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
@@ -212,7 +212,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost.Response()
@@ -223,19 +223,19 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             };
 
             if (code == (HttpStatusCode)422)
-            
+
             {
                 response.Error422 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-            
+
             {
                 response.Error500 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)507)
-            
+
             {
                 response.Error507 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error507!.TranslateToApiError();

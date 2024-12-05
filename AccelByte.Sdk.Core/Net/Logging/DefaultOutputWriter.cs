@@ -50,7 +50,7 @@ namespace AccelByte.Sdk.Core.Net.Logging
             lock (_FileLock)
             {
                 File.AppendAllText(_FilePath, sb.ToString());
-            }            
+            }
         }
     }
 }

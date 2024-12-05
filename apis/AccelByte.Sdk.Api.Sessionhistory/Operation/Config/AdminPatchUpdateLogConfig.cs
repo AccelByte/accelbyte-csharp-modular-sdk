@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             )
             {
                 AdminPatchUpdateLogConfig op = new AdminPatchUpdateLogConfig(this,
-                    body                    
+                    body
                 );
 
                 op.SetBaseFields<AdminPatchUpdateLogConfigBuilder>(this);
@@ -75,7 +75,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -102,13 +102,13 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             LogconfigConfiguration body
         )
         {
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -129,16 +129,16 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         #endregion
 
         public AdminPatchUpdateLogConfig(
-            Model.LogconfigConfiguration body            
+            Model.LogconfigConfiguration body
         )
         {
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -150,7 +150,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminPatchUpdateLogConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminPatchUpdateLogConfig.Response()

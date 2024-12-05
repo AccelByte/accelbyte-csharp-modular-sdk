@@ -68,7 +68,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 GetNamespace op = new GetNamespace(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<GetNamespaceBuilder>(this);
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,13 +116,13 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
-            
 
-            
-            
-            
+            if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,18 +147,18 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #endregion
 
         public GetNamespace(
-            string namespace_,            
-            bool? activeOnly            
+            string namespace_,
+            bool? activeOnly
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
-            
 
-            
-            
-            
+            if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -167,10 +167,10 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetNamespace.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetNamespace.Response()

@@ -109,9 +109,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 SearchItems op = new SearchItems(this,
-                    namespace_,                    
-                    keyword,                    
-                    language                    
+                    namespace_,
+                    keyword,
+                    language
                 );
 
                 op.SetBaseFields<SearchItemsBuilder>(this);
@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -156,7 +156,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -169,7 +169,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
             if (builder.ItemType is not null) QueryParams["itemType"] = builder.ItemType.Value;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
@@ -178,11 +178,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
             if (keyword is not null) QueryParams["keyword"] = keyword;
             if (language is not null) QueryParams["language"] = language;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -201,19 +201,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public SearchItems(
-            string namespace_,            
-            bool? activeOnly,            
-            SearchItemsItemType? itemType,            
-            int? limit,            
-            int? offset,            
-            string? sortBy,            
-            string? storeId,            
-            string keyword,            
-            string language            
+            string namespace_,
+            bool? activeOnly,
+            SearchItemsItemType? itemType,
+            int? limit,
+            int? offset,
+            string? sortBy,
+            string? storeId,
+            string keyword,
+            string language
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
             if (itemType is not null) QueryParams["itemType"] = itemType.Value;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
@@ -222,11 +222,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (storeId is not null) QueryParams["storeId"] = storeId;
             if (keyword is not null) QueryParams["keyword"] = keyword;
             if (language is not null) QueryParams["language"] = language;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -235,10 +235,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public SearchItems.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new SearchItems.Response()

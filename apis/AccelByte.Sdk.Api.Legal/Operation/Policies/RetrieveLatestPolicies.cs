@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 RetrieveLatestPolicies op = new RetrieveLatestPolicies(this,
-                    countryCode                    
+                    countryCode
                 );
 
                 op.SetBaseFields<RetrieveLatestPoliciesBuilder>(this);
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -140,16 +140,16 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         )
         {
             PathParams["countryCode"] = countryCode;
-            
+
             if (builder.DefaultOnEmpty != null) QueryParams["defaultOnEmpty"] = Convert.ToString(builder.DefaultOnEmpty)!;
             if (builder.PolicyType is not null) QueryParams["policyType"] = builder.PolicyType.Value;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
             if (builder.VisibleOnly != null) QueryParams["visibleOnly"] = Convert.ToString(builder.VisibleOnly)!;
-            
 
-            
-            
-            
+
+
+
+
 
         }
         #endregion
@@ -165,24 +165,24 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #endregion
 
         public RetrieveLatestPolicies(
-            string countryCode,            
-            bool? defaultOnEmpty,            
-            RetrieveLatestPoliciesPolicyType? policyType,            
-            string? tags,            
-            bool? visibleOnly            
+            string countryCode,
+            bool? defaultOnEmpty,
+            RetrieveLatestPoliciesPolicyType? policyType,
+            string? tags,
+            bool? visibleOnly
         )
         {
             PathParams["countryCode"] = countryCode;
-            
+
             if (defaultOnEmpty != null) QueryParams["defaultOnEmpty"] = Convert.ToString(defaultOnEmpty)!;
             if (policyType is not null) QueryParams["policyType"] = policyType.Value;
             if (tags is not null) QueryParams["tags"] = tags;
             if (visibleOnly != null) QueryParams["visibleOnly"] = Convert.ToString(visibleOnly)!;
-            
 
-            
-            
-            
+
+
+
+
 
         }
 
@@ -190,10 +190,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public RetrieveLatestPolicies.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RetrieveLatestPolicies.Response()

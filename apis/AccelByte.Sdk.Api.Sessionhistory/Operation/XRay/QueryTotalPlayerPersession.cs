@@ -65,9 +65,9 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             )
             {
                 QueryTotalPlayerPersession op = new QueryTotalPlayerPersession(this,
-                    namespace_,                    
-                    endDate,                    
-                    startDate                    
+                    namespace_,
+                    endDate,
+                    startDate
                 );
 
                 op.SetBaseFields<QueryTotalPlayerPersessionBuilder>(this);
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -125,16 +125,16 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.MatchPool is not null) QueryParams["matchPool"] = builder.MatchPool;
             if (endDate is not null) QueryParams["endDate"] = endDate;
             if (startDate is not null) QueryParams["startDate"] = startDate;
-            
 
-            
+
+
             CollectionFormatMap["matchPool"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -161,23 +161,23 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         #endregion
 
         public QueryTotalPlayerPersession(
-            string namespace_,            
-            List<string>? matchPool,            
-            string endDate,            
-            string startDate            
+            string namespace_,
+            List<string>? matchPool,
+            string endDate,
+            string startDate
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (matchPool is not null) QueryParams["matchPool"] = matchPool;
             if (endDate is not null) QueryParams["endDate"] = endDate;
             if (startDate is not null) QueryParams["startDate"] = startDate;
-            
 
-            
+
+
             CollectionFormatMap["matchPool"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -189,7 +189,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public QueryTotalPlayerPersession.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryTotalPlayerPersession.Response()

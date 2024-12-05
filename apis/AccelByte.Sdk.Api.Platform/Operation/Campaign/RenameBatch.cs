@@ -58,9 +58,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 RenameBatch op = new RenameBatch(this,
-                    body,                    
-                    campaignId,                    
-                    namespace_                    
+                    body,
+                    campaignId,
+                    namespace_
                 );
 
                 op.SetBaseFields<RenameBatchBuilder>(this);
@@ -84,7 +84,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -119,13 +119,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["campaignId"] = campaignId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -144,20 +144,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public RenameBatch(
-            string campaignId,            
-            string namespace_,            
-            Model.CampaignBatchNameChange body            
+            string campaignId,
+            string namespace_,
+            Model.CampaignBatchNameChange body
         )
         {
             PathParams["campaignId"] = campaignId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -168,8 +168,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() {  };
-        
+        public override List<string> Produces => new() { };
+
         public RenameBatch.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RenameBatch.Response()
@@ -180,7 +180,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             };
 
             if (code == (HttpStatusCode)404)
-            
+
             {
                 response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();

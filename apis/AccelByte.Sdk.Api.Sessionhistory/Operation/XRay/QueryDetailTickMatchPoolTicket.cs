@@ -58,10 +58,10 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             )
             {
                 QueryDetailTickMatchPoolTicket op = new QueryDetailTickMatchPoolTicket(this,
-                    namespace_,                    
-                    podName,                    
-                    poolName,                    
-                    tickId                    
+                    namespace_,
+                    podName,
+                    poolName,
+                    tickId
                 );
 
                 op.SetBaseFields<QueryDetailTickMatchPoolTicketBuilder>(this);
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -127,12 +127,12 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             PathParams["podName"] = podName;
             PathParams["poolName"] = poolName;
             PathParams["tickId"] = tickId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -159,22 +159,22 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         #endregion
 
         public QueryDetailTickMatchPoolTicket(
-            string namespace_,            
-            string podName,            
-            string poolName,            
-            string tickId            
+            string namespace_,
+            string podName,
+            string poolName,
+            string tickId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["podName"] = podName;
             PathParams["poolName"] = poolName;
             PathParams["tickId"] = tickId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -186,7 +186,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public QueryDetailTickMatchPoolTicket.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryDetailTickMatchPoolTicket.Response()

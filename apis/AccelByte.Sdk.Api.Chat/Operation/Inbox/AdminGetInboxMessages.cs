@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminGetInboxMessages op = new AdminGetInboxMessages(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<AdminGetInboxMessagesBuilder>(this);
@@ -155,7 +155,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -172,7 +172,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -183,7 +183,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
             if (builder.EndCreatedAt != null) QueryParams["endCreatedAt"] = Convert.ToString(builder.EndCreatedAt)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
@@ -194,12 +194,12 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             if (builder.StartCreatedAt != null) QueryParams["startCreatedAt"] = Convert.ToString(builder.StartCreatedAt)!;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
             if (builder.Transient != null) QueryParams["transient"] = Convert.ToString(builder.Transient)!;
-            
 
-            
+
+
             CollectionFormatMap["messageId"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -224,21 +224,21 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #endregion
 
         public AdminGetInboxMessages(
-            string namespace_,            
-            bool? activeOnly,            
-            long? endCreatedAt,            
-            long? limit,            
-            List<string>? messageId,            
-            long? offset,            
-            string? order,            
-            AdminGetInboxMessagesScope? scope,            
-            long? startCreatedAt,            
-            AdminGetInboxMessagesStatus? status,            
-            bool? transient            
+            string namespace_,
+            bool? activeOnly,
+            long? endCreatedAt,
+            long? limit,
+            List<string>? messageId,
+            long? offset,
+            string? order,
+            AdminGetInboxMessagesScope? scope,
+            long? startCreatedAt,
+            AdminGetInboxMessagesStatus? status,
+            bool? transient
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
             if (endCreatedAt != null) QueryParams["endCreatedAt"] = Convert.ToString(endCreatedAt)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
@@ -249,12 +249,12 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             if (startCreatedAt != null) QueryParams["startCreatedAt"] = Convert.ToString(startCreatedAt)!;
             if (status is not null) QueryParams["status"] = status.Value;
             if (transient != null) QueryParams["transient"] = Convert.ToString(transient)!;
-            
 
-            
+
+
             CollectionFormatMap["messageId"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -266,7 +266,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGetInboxMessages.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetInboxMessages.Response()

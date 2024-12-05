@@ -59,9 +59,9 @@ namespace AccelByte.Sdk.Api.Group.Operation
             )
             {
                 DeleteGroupConfigurationGlobalRuleAdminV1 op = new DeleteGroupConfigurationGlobalRuleAdminV1(this,
-                    allowedAction,                    
-                    configurationCode,                    
-                    namespace_                    
+                    allowedAction,
+                    configurationCode,
+                    namespace_
                 );
 
                 op.SetBaseFields<DeleteGroupConfigurationGlobalRuleAdminV1Builder>(this);
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -121,12 +121,12 @@ namespace AccelByte.Sdk.Api.Group.Operation
             PathParams["allowedAction"] = allowedAction;
             PathParams["configurationCode"] = configurationCode;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -153,20 +153,20 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #endregion
 
         public DeleteGroupConfigurationGlobalRuleAdminV1(
-            string allowedAction,            
-            string configurationCode,            
-            string namespace_            
+            string allowedAction,
+            string configurationCode,
+            string namespace_
         )
         {
             PathParams["allowedAction"] = allowedAction;
             PathParams["configurationCode"] = configurationCode;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -175,10 +175,10 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public DeleteGroupConfigurationGlobalRuleAdminV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteGroupConfigurationGlobalRuleAdminV1.Response()

@@ -56,7 +56,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicGenerateMyAuthenticatorKeyV4 op = new PublicGenerateMyAuthenticatorKeyV4(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<PublicGenerateMyAuthenticatorKeyV4Builder>(this);
@@ -76,7 +76,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -104,12 +104,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -136,16 +136,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicGenerateMyAuthenticatorKeyV4(
-            string namespace_            
+            string namespace_
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -154,10 +154,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicGenerateMyAuthenticatorKeyV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGenerateMyAuthenticatorKeyV4.Response()

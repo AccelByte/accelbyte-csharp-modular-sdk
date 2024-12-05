@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ### Endpoint migration guide
     /// - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users [GET]_**
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class GetUserByLoginID : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -66,14 +66,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 GetUserByLoginID op = new GetUserByLoginID(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<GetUserByLoginIDBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public GetUserByLoginID.Response Execute(
                 string namespace_
             )
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -115,13 +115,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.LoginId is not null) QueryParams["loginId"] = builder.LoginId;
-            
 
-            
-            
-            
+            if (builder.LoginId is not null) QueryParams["loginId"] = builder.LoginId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -144,18 +144,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public GetUserByLoginID(
-            string namespace_,            
-            string? loginId            
+            string namespace_,
+            string? loginId
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (loginId is not null) QueryParams["loginId"] = loginId;
-            
 
-            
-            
-            
+            if (loginId is not null) QueryParams["loginId"] = loginId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -167,7 +167,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetUserByLoginID.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetUserByLoginID.Response()

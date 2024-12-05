@@ -73,10 +73,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AuthenticationWithPlatformLinkV4 op = new AuthenticationWithPlatformLinkV4(this,
-                    clientId,                    
-                    linkingToken,                    
-                    password,                    
-                    username                    
+                    clientId,
+                    linkingToken,
+                    password,
+                    username
                 );
 
                 op.SetBaseFields<AuthenticationWithPlatformLinkV4Builder>(this);
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -138,17 +138,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string username
         )
         {
-            
-            
+
+
             if (builder.ExtendExp != null) FormParams["extend_exp"] = Convert.ToString(builder.ExtendExp)!;
             if (clientId is not null) FormParams["client_id"] = clientId;
             if (linkingToken is not null) FormParams["linkingToken"] = linkingToken;
             if (password is not null) FormParams["password"] = password;
             if (username is not null) FormParams["username"] = username;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -173,24 +173,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AuthenticationWithPlatformLinkV4(
-            bool? extendExp,            
-            string clientId,            
-            string linkingToken,            
-            string password,            
-            string username            
+            bool? extendExp,
+            string clientId,
+            string linkingToken,
+            string password,
+            string username
         )
         {
-            
-            
+
+
             if (extendExp != null) FormParams["extend_exp"] = Convert.ToString(extendExp)!;
             if (clientId is not null) FormParams["client_id"] = clientId;
             if (linkingToken is not null) FormParams["linkingToken"] = linkingToken;
             if (password is not null) FormParams["password"] = password;
             if (username is not null) FormParams["username"] = username;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -202,7 +202,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AuthenticationWithPlatformLinkV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AuthenticationWithPlatformLinkV4.Response()

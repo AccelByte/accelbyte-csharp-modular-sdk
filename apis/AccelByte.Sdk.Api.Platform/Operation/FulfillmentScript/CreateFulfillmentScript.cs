@@ -69,7 +69,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 CreateFulfillmentScript op = new CreateFulfillmentScript(this,
-                    id                    
+                    id
                 );
 
                 op.SetBaseFields<CreateFulfillmentScriptBuilder>(this);
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -117,13 +117,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["id"] = id;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = builder.Body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -142,18 +142,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public CreateFulfillmentScript(
-            string id,            
-            Model.FulfillmentScriptCreate body            
+            string id,
+            Model.FulfillmentScriptCreate body
         )
         {
             PathParams["id"] = id;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -164,8 +164,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() {  };
-        
+        public override List<string> Produces => new() { };
+
         public CreateFulfillmentScript.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new CreateFulfillmentScript.Response()

@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
     ///
     /// Upload certificates for XBox. Certificate must be in the valid form of PFX format.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AdminUploadXBoxCertificate : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -67,17 +67,17 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 AdminUploadXBoxCertificate op = new AdminUploadXBoxCertificate(this,
-                    certname,                    
-                    file,                    
-                    password,                    
-                    namespace_                    
+                    certname,
+                    file,
+                    password,
+                    namespace_
                 );
 
                 op.SetBaseFields<AdminUploadXBoxCertificateBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AdminUploadXBoxCertificate.Response Execute(
                 string certname,
                 Stream file,
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -134,16 +134,16 @@ namespace AccelByte.Sdk.Api.Session.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
+
+
             if (builder.Description is not null) FormParams["description"] = builder.Description;
             if (certname is not null) FormParams["certname"] = certname;
             if (file is not null) FormParams["file"] = file;
             if (password is not null) FormParams["password"] = password;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -170,24 +170,24 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #endregion
 
         public AdminUploadXBoxCertificate(
-            string namespace_,            
-            string? description,            
-            string certname,            
-            Stream file,            
-            string password            
+            string namespace_,
+            string? description,
+            string certname,
+            Stream file,
+            string password
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
+
+
             if (description is not null) FormParams["description"] = description;
             if (certname is not null) FormParams["certname"] = certname;
             if (file is not null) FormParams["file"] = file;
             if (password is not null) FormParams["password"] = password;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -199,7 +199,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "multipart/form-data" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminUploadXBoxCertificate.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminUploadXBoxCertificate.Response()

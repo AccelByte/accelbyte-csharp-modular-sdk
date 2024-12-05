@@ -143,7 +143,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 GetLikedContent op = new GetLikedContent(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<GetLikedContentBuilder>(this);
@@ -163,7 +163,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -180,7 +180,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -191,7 +191,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Isofficial != null) QueryParams["isofficial"] = Convert.ToString(builder.Isofficial)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Name is not null) QueryParams["name"] = builder.Name;
@@ -201,12 +201,12 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             if (builder.Subtype is not null) QueryParams["subtype"] = builder.Subtype;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
             if (builder.Type is not null) QueryParams["type"] = builder.Type;
-            
 
-            
+
+
             CollectionFormatMap["tags"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -229,20 +229,20 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #endregion
 
         public GetLikedContent(
-            string namespace_,            
-            bool? isofficial,            
-            long? limit,            
-            string? name,            
-            long? offset,            
-            string? orderby,            
-            string? sortby,            
-            string? subtype,            
-            List<string>? tags,            
-            string? type            
+            string namespace_,
+            bool? isofficial,
+            long? limit,
+            string? name,
+            long? offset,
+            string? orderby,
+            string? sortby,
+            string? subtype,
+            List<string>? tags,
+            string? type
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (isofficial != null) QueryParams["isofficial"] = Convert.ToString(isofficial)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (name is not null) QueryParams["name"] = name;
@@ -252,12 +252,12 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             if (subtype is not null) QueryParams["subtype"] = subtype;
             if (tags is not null) QueryParams["tags"] = tags;
             if (type is not null) QueryParams["type"] = type;
-            
 
-            
+
+
             CollectionFormatMap["tags"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -266,10 +266,10 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { "application/json","application/octet-stream" };
+        public override List<string> Consumes => new() { "application/json", "application/octet-stream" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetLikedContent.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetLikedContent.Response()

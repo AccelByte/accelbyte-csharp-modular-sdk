@@ -61,8 +61,8 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             )
             {
                 PublicSubmitMyAccountDeletionRequest op = new PublicSubmitMyAccountDeletionRequest(this,
-                    platformId,                    
-                    platformToken                    
+                    platformId,
+                    platformToken
                 );
 
                 op.SetBaseFields<PublicSubmitMyAccountDeletionRequestBuilder>(this);
@@ -84,7 +84,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -114,14 +114,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             string platformToken
         )
         {
-            
-            
+
+
             if (platformId is not null) FormParams["platformId"] = platformId;
             if (platformToken is not null) FormParams["platformToken"] = platformToken;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -150,18 +150,18 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #endregion
 
         public PublicSubmitMyAccountDeletionRequest(
-            string platformId,            
-            string platformToken            
+            string platformId,
+            string platformToken
         )
         {
-            
-            
+
+
             if (platformId is not null) FormParams["platformId"] = platformId;
             if (platformToken is not null) FormParams["platformToken"] = platformToken;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -173,7 +173,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicSubmitMyAccountDeletionRequest.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicSubmitMyAccountDeletionRequest.Response()

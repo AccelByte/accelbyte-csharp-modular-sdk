@@ -60,8 +60,8 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             )
             {
                 AdminDeleteInventoryConfiguration op = new AdminDeleteInventoryConfiguration(this,
-                    inventoryConfigurationId,                    
-                    namespace_                    
+                    inventoryConfigurationId,
+                    namespace_
                 );
 
                 op.SetBaseFields<AdminDeleteInventoryConfigurationBuilder>(this);
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -115,12 +115,12 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         {
             PathParams["inventoryConfigurationId"] = inventoryConfigurationId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -143,18 +143,18 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #endregion
 
         public AdminDeleteInventoryConfiguration(
-            string inventoryConfigurationId,            
-            string namespace_            
+            string inventoryConfigurationId,
+            string namespace_
         )
         {
             PathParams["inventoryConfigurationId"] = inventoryConfigurationId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -163,10 +163,10 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminDeleteInventoryConfiguration.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDeleteInventoryConfiguration.Response()
@@ -177,19 +177,19 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             };
 
             if (code == (HttpStatusCode)400)
-            
+
             {
                 response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-            
+
             {
                 response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-            
+
             {
                 response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

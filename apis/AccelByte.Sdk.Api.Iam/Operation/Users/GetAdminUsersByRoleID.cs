@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// Notes : this endpoint only accept admin role. Admin Role is role which have admin status and members.
     /// Use endpoint [GET] /roles/{roleId}/admin to check the role status
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class GetAdminUsersByRoleID : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -97,14 +97,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 GetAdminUsersByRoleID op = new GetAdminUsersByRoleID(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<GetAdminUsersByRoleIDBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public GetAdminUsersByRoleID.Response Execute(
                 string namespace_
             )
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -146,16 +146,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.After != null) QueryParams["after"] = Convert.ToString(builder.After)!;
             if (builder.Before != null) QueryParams["before"] = Convert.ToString(builder.Before)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.RoleId is not null) QueryParams["roleId"] = builder.RoleId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -182,24 +182,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public GetAdminUsersByRoleID(
-            string namespace_,            
-            long? after,            
-            long? before,            
-            long? limit,            
-            string? roleId            
+            string namespace_,
+            long? after,
+            long? before,
+            long? limit,
+            string? roleId
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (after != null) QueryParams["after"] = Convert.ToString(after)!;
             if (before != null) QueryParams["before"] = Convert.ToString(before)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (roleId is not null) QueryParams["roleId"] = roleId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -211,7 +211,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetAdminUsersByRoleID.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetAdminUsersByRoleID.Response()

@@ -70,10 +70,10 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 ResetUserStatItemValue op = new ResetUserStatItemValue(this,
-                    body,                    
-                    namespace_,                    
-                    statCode,                    
-                    userId                    
+                    body,
+                    namespace_,
+                    statCode,
+                    userId
                 );
 
                 op.SetBaseFields<ResetUserStatItemValueBuilder>(this);
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -122,7 +122,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -138,14 +138,14 @@ namespace AccelByte.Sdk.Api.Social.Operation
             PathParams["namespace"] = namespace_;
             PathParams["statCode"] = statCode;
             PathParams["userId"] = userId;
-            
-            if (builder.AdditionalKey is not null) QueryParams["additionalKey"] = builder.AdditionalKey;
-            
 
-            
-            
+            if (builder.AdditionalKey is not null) QueryParams["additionalKey"] = builder.AdditionalKey;
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -174,24 +174,24 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         public ResetUserStatItemValue(
-            string namespace_,            
-            string statCode,            
-            string userId,            
-            string? additionalKey,            
-            Model.StatResetInfo body            
+            string namespace_,
+            string statCode,
+            string userId,
+            string? additionalKey,
+            Model.StatResetInfo body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["statCode"] = statCode;
             PathParams["userId"] = userId;
-            
-            if (additionalKey is not null) QueryParams["additionalKey"] = additionalKey;
-            
 
-            
-            
+            if (additionalKey is not null) QueryParams["additionalKey"] = additionalKey;
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -203,7 +203,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ResetUserStatItemValue.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ResetUserStatItemValue.Response()

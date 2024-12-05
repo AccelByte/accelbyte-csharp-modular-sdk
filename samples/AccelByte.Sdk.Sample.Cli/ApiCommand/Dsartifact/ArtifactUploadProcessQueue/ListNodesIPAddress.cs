@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsartifact.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
 {
-    [SdkConsoleCommand("dsartifact","listnodesipaddress")]
-    public class ListNodesIPAddressCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("dsartifact", "listnodesipaddress")]
+    public class ListNodesIPAddressCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Dsartifact"; } }
+        public string ServiceName { get { return "Dsartifact"; } }
 
-        public string OperationName{ get { return "ListNodesIPAddress"; } }
+        public string OperationName { get { return "ListNodesIPAddress"; } }
 
         [SdkCommandArgument("limit")]
         public long? Limit { get; set; }
@@ -72,8 +72,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-","response data is null.");
-            }   
+                    return CommandResult.Fail("-", "response data is null.");
+            }
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

@@ -45,7 +45,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ListPlayerRecordHandlerV1.ListPlayerRecordHandlerV1Builder ListPlayerRecordHandlerV1Op
         {
             get
@@ -229,8 +229,8 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ListPlayerRecordHandlerV1.Response ListPlayerRecordHandlerV1(ListPlayerRecordHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -247,7 +247,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
         public AdminBulkPutPlayerRecordsByKeyHandlerV1.Response AdminBulkPutPlayerRecordsByKeyHandlerV1(AdminBulkPutPlayerRecordsByKeyHandlerV1 input)
         {
             var response = _sdk.RunRequest(input);

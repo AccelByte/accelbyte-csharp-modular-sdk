@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsartifact.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
 {
-    [SdkConsoleCommand("dsartifact","getactivequeue")]
-    public class GetActiveQueueCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("dsartifact", "getactivequeue")]
+    public class GetActiveQueueCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Dsartifact"; } }
+        public string ServiceName { get { return "Dsartifact"; } }
 
-        public string OperationName{ get { return "GetActiveQueue"; } }
+        public string OperationName { get { return "GetActiveQueue"; } }
 
         [SdkCommandArgument("nodeIP")]
         public string NodeIP { get; set; } = String.Empty;
@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-","response data is null.");
-            }   
+                    return CommandResult.Fail("-", "response data is null.");
+            }
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

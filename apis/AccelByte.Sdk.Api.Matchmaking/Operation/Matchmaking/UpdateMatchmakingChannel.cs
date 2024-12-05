@@ -59,9 +59,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
             )
             {
                 UpdateMatchmakingChannel op = new UpdateMatchmakingChannel(this,
-                    body,                    
-                    channelName,                    
-                    namespace_                    
+                    body,
+                    channelName,
+                    namespace_
                 );
 
                 op.SetBaseFields<UpdateMatchmakingChannelBuilder>(this);
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -120,13 +120,13 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         {
             PathParams["channelName"] = channelName;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -153,20 +153,20 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         #endregion
 
         public UpdateMatchmakingChannel(
-            string channelName,            
-            string namespace_,            
-            Model.ModelsUpdateChannelRequest body            
+            string channelName,
+            string namespace_,
+            Model.ModelsUpdateChannelRequest body
         )
         {
             PathParams["channelName"] = channelName;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -178,7 +178,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public UpdateMatchmakingChannel.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpdateMatchmakingChannel.Response()
@@ -189,31 +189,31 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
             };
 
             if (code == (HttpStatusCode)400)
-            
+
             {
                 response.Error400 = JsonSerializer.Deserialize<ResponseErrorV1>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
-            
+
             {
                 response.Error401 = JsonSerializer.Deserialize<ResponseErrorV1>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-            
+
             {
                 response.Error403 = JsonSerializer.Deserialize<ResponseErrorV1>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-            
+
             {
                 response.Error404 = JsonSerializer.Deserialize<ResponseErrorV1>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-            
+
             {
                 response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

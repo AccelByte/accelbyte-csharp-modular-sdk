@@ -61,7 +61,7 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
             )
             {
                 Heartbeat op = new Heartbeat(this,
-                    body                    
+                    body
                 );
 
                 op.SetBaseFields<HeartbeatBuilder>(this);
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -108,13 +108,13 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
             ModelsHeartbeatRequest body
         )
         {
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -135,16 +135,16 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
         #endregion
 
         public Heartbeat(
-            Model.ModelsHeartbeatRequest body            
+            Model.ModelsHeartbeatRequest body
         )
         {
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,7 +156,7 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public Heartbeat.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new Heartbeat.Response()
@@ -167,13 +167,13 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
             };
 
             if (code == (HttpStatusCode)400)
-            
+
             {
                 response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-            
+
             {
                 response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

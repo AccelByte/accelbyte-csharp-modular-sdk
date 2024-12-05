@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ### Endpoint migration guide
     /// - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/reset [POST]_**
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class ResetPassword : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -59,15 +59,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 ResetPassword op = new ResetPassword(this,
-                    body,                    
-                    namespace_                    
+                    body,
+                    namespace_
                 );
 
                 op.SetBaseFields<ResetPasswordBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public ResetPassword.Response Execute(
                 ModelResetPasswordRequest body,
                 string namespace_
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -114,13 +114,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
@@ -146,18 +146,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public ResetPassword(
-            string namespace_,            
-            Model.ModelResetPasswordRequest body            
+            string namespace_,
+            Model.ModelResetPasswordRequest body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
@@ -170,7 +170,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ResetPassword.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ResetPassword.Response()
@@ -181,25 +181,25 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             };
 
             if (code == (HttpStatusCode)400)
-            
+
             {
                 response.Error400 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error400!);
             }
             else if (code == (HttpStatusCode)403)
-            
+
             {
                 response.Error403 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error403!);
             }
             else if (code == (HttpStatusCode)404)
-            
+
             {
                 response.Error404 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)500)
-            
+
             {
                 response.Error500 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error500!);

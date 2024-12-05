@@ -65,9 +65,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetUserAppEntitlementByAppId op = new GetUserAppEntitlementByAppId(this,
-                    namespace_,                    
-                    userId,                    
-                    appId                    
+                    namespace_,
+                    userId,
+                    appId
                 );
 
                 op.SetBaseFields<GetUserAppEntitlementByAppIdBuilder>(this);
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -126,14 +126,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
             if (appId is not null) QueryParams["appId"] = appId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -152,22 +152,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public GetUserAppEntitlementByAppId(
-            string namespace_,            
-            string userId,            
-            bool? activeOnly,            
-            string appId            
+            string namespace_,
+            string userId,
+            bool? activeOnly,
+            string appId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
             if (appId is not null) QueryParams["appId"] = appId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -176,10 +176,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetUserAppEntitlementByAppId.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetUserAppEntitlementByAppId.Response()

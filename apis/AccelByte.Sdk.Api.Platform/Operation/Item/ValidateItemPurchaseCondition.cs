@@ -65,9 +65,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 ValidateItemPurchaseCondition op = new ValidateItemPurchaseCondition(this,
-                    body,                    
-                    namespace_,                    
-                    userId                    
+                    body,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<ValidateItemPurchaseConditionBuilder>(this);
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -125,15 +125,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Platform is not null) QueryParams["platform"] = builder.Platform;
             if (userId is not null) QueryParams["userId"] = userId;
-            
 
-            
-            
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -152,22 +152,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public ValidateItemPurchaseCondition(
-            string namespace_,            
-            string? platform,            
-            string userId,            
-            Model.ItemPurchaseConditionValidateRequest body            
+            string namespace_,
+            string? platform,
+            string userId,
+            Model.ItemPurchaseConditionValidateRequest body
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (platform is not null) QueryParams["platform"] = platform;
             if (userId is not null) QueryParams["userId"] = userId;
-            
 
-            
-            
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -179,7 +179,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ValidateItemPurchaseCondition.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ValidateItemPurchaseCondition.Response()

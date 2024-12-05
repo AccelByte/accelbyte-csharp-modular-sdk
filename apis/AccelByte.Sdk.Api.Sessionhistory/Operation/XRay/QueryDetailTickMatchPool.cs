@@ -83,11 +83,11 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             )
             {
                 QueryDetailTickMatchPool op = new QueryDetailTickMatchPool(this,
-                    namespace_,                    
-                    podName,                    
-                    poolName,                    
-                    endDate,                    
-                    startDate                    
+                    namespace_,
+                    podName,
+                    poolName,
+                    endDate,
+                    startDate
                 );
 
                 op.SetBaseFields<QueryDetailTickMatchPoolBuilder>(this);
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -140,7 +140,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -157,17 +157,17 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             PathParams["namespace"] = namespace_;
             PathParams["podName"] = podName;
             PathParams["poolName"] = poolName;
-            
+
             if (builder.All != null) QueryParams["all"] = Convert.ToString(builder.All)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (endDate is not null) QueryParams["endDate"] = endDate;
             if (startDate is not null) QueryParams["startDate"] = startDate;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -194,30 +194,30 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         #endregion
 
         public QueryDetailTickMatchPool(
-            string namespace_,            
-            string podName,            
-            string poolName,            
-            bool? all,            
-            long? limit,            
-            long? offset,            
-            string endDate,            
-            string startDate            
+            string namespace_,
+            string podName,
+            string poolName,
+            bool? all,
+            long? limit,
+            long? offset,
+            string endDate,
+            string startDate
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["podName"] = podName;
             PathParams["poolName"] = poolName;
-            
+
             if (all != null) QueryParams["all"] = Convert.ToString(all)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (endDate is not null) QueryParams["endDate"] = endDate;
             if (startDate is not null) QueryParams["startDate"] = startDate;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -229,7 +229,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public QueryDetailTickMatchPool.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryDetailTickMatchPool.Response()

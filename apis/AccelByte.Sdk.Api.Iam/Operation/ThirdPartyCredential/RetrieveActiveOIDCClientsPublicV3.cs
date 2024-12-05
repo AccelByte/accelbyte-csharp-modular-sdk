@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 RetrieveActiveOIDCClientsPublicV3 op = new RetrieveActiveOIDCClientsPublicV3(this,
-                    namespace_,                    
-                    clientId                    
+                    namespace_,
+                    clientId
                 );
 
                 op.SetBaseFields<RetrieveActiveOIDCClientsPublicV3Builder>(this);
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -110,13 +110,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (clientId is not null) QueryParams["clientId"] = clientId;
-            
 
-            
-            
-            
+            if (clientId is not null) QueryParams["clientId"] = clientId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -137,18 +137,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public RetrieveActiveOIDCClientsPublicV3(
-            string namespace_,            
-            string clientId            
+            string namespace_,
+            string clientId
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (clientId is not null) QueryParams["clientId"] = clientId;
-            
 
-            
-            
-            
+            if (clientId is not null) QueryParams["clientId"] = clientId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -157,10 +157,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public RetrieveActiveOIDCClientsPublicV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RetrieveActiveOIDCClientsPublicV3.Response()

@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 AnonymizeUserAgreement op = new AnonymizeUserAgreement(this,
-                    userId                    
+                    userId
                 );
 
                 op.SetBaseFields<AnonymizeUserAgreementBuilder>(this);
@@ -75,7 +75,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -103,12 +103,12 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         )
         {
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -127,16 +127,16 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #endregion
 
         public AnonymizeUserAgreement(
-            string userId            
+            string userId
         )
         {
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AnonymizeUserAgreement.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AnonymizeUserAgreement.Response()
@@ -159,7 +159,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             };
 
             if (code == (HttpStatusCode)404)
-            
+
             {
                 response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();

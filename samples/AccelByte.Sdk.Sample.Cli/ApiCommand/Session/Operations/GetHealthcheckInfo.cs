@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Session.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 {
-    [SdkConsoleCommand("session","gethealthcheckinfo")]
-    public class GetHealthcheckInfoCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("session", "gethealthcheckinfo")]
+    public class GetHealthcheckInfoCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Session"; } }
+        public string ServiceName { get { return "Session"; } }
 
-        public string OperationName{ get { return "GetHealthcheckInfo"; } }
+        public string OperationName { get { return "GetHealthcheckInfo"; } }
 
         public GetHealthcheckInfoCommand(IAccelByteSdk sdk)
         {

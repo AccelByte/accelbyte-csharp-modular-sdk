@@ -31,7 +31,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// Deletes a user slot configuration in given namespace, the namespace slot configuration will be returned after delete.
     /// Other detail info:
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class DeleteUserSlotConfig : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -63,15 +63,15 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 DeleteUserSlotConfig op = new DeleteUserSlotConfig(this,
-                    namespace_,                    
-                    userId                    
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<DeleteUserSlotConfigBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public DeleteUserSlotConfig.Response Execute(
                 string namespace_,
                 string userId
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -119,12 +119,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -141,18 +141,18 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         public DeleteUserSlotConfig(
-            string namespace_,            
-            string userId            
+            string namespace_,
+            string userId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -161,10 +161,10 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() {  };
-        
+        public override List<string> Produces => new() { };
+
         public DeleteUserSlotConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteUserSlotConfig.Response()

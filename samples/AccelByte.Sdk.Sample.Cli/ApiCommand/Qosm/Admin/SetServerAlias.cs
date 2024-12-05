@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Qosm.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Qosm
 {
-    [SdkConsoleCommand("qosm","setserveralias")]
-    public class SetServerAliasCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("qosm", "setserveralias")]
+    public class SetServerAliasCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Qosm"; } }
+        public string ServiceName { get { return "Qosm"; } }
 
-        public string OperationName{ get { return "SetServerAlias"; } }
+        public string OperationName { get { return "SetServerAlias"; } }
 
         [SdkCommandArgument("region")]
         public string Region { get; set; } = String.Empty;

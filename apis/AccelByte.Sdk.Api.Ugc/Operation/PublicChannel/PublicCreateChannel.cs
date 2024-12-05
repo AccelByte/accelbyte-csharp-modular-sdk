@@ -57,9 +57,9 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 PublicCreateChannel op = new PublicCreateChannel(this,
-                    body,                    
-                    namespace_,                    
-                    userId                    
+                    body,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<PublicCreateChannelBuilder>(this);
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -118,13 +118,13 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,20 +147,20 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #endregion
 
         public PublicCreateChannel(
-            string namespace_,            
-            string userId,            
-            Model.ModelsPublicChannelRequest body            
+            string namespace_,
+            string userId,
+            Model.ModelsPublicChannelRequest body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -169,10 +169,10 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { "application/json","application/octet-stream" };
+        public override List<string> Consumes => new() { "application/json", "application/octet-stream" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicCreateChannel.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicCreateChannel.Response()

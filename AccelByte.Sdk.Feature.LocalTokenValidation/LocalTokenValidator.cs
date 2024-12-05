@@ -63,7 +63,7 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
 
         private Func<IAccelByteSdk, string, LocalNamespaceContext> _NamespaceFetchFunction = ((sdk, aNamespace) =>
         {
-            var response = sdk.GetBasicApi().Namespace.GetNamespaceContextOp.Execute(aNamespace).EnsureSuccess();            
+            var response = sdk.GetBasicApi().Namespace.GetNamespaceContextOp.Execute(aNamespace).EnsureSuccess();
 
             var context = new LocalNamespaceContext();
             if (response.Namespace != null)

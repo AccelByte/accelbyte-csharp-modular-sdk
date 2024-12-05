@@ -29,7 +29,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
     /// 
     /// Default 'cached' parameter is 'true'
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class GetAppImageListV1 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -85,15 +85,15 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             )
             {
                 GetAppImageListV1 op = new GetAppImageListV1(this,
-                    app,                    
-                    namespace_                    
+                    app,
+                    namespace_
                 );
 
                 op.SetBaseFields<GetAppImageListV1Builder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public GetAppImageListV1.Response Execute(
                 string app,
                 string namespace_
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -141,15 +141,15 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Cached is not null) QueryParams["cached"] = builder.Cached;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -174,24 +174,24 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #endregion
 
         public GetAppImageListV1(
-            string app,            
-            string namespace_,            
-            string? cached,            
-            long? limit,            
-            long? offset            
+            string app,
+            string namespace_,
+            string? cached,
+            long? limit,
+            long? offset
         )
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
-            
+
             if (cached is not null) QueryParams["cached"] = cached;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -203,7 +203,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetAppImageListV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetAppImageListV1.Response()

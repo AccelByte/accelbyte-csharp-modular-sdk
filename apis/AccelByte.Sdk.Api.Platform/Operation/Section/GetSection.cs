@@ -68,8 +68,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetSection op = new GetSection(this,
-                    namespace_,                    
-                    sectionId                    
+                    namespace_,
+                    sectionId
                 );
 
                 op.SetBaseFields<GetSectionBuilder>(this);
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -149,7 +149,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -162,13 +162,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["sectionId"] = sectionId;
-            
-            if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
-            
 
-            
-            
-            
+            if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -194,20 +194,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public GetSection(
-            string namespace_,            
-            string sectionId,            
-            string? storeId            
+            string namespace_,
+            string sectionId,
+            string? storeId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["sectionId"] = sectionId;
-            
-            if (storeId is not null) QueryParams["storeId"] = storeId;
-            
 
-            
-            
-            
+            if (storeId is not null) QueryParams["storeId"] = storeId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -216,10 +216,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetSection.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetSection.Response()
@@ -257,7 +257,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Data = JsonSerializer.Deserialize<Model.FullSectionInfo<T1>>(payload, ResponseJsonOptions);
@@ -268,7 +268,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

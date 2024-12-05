@@ -57,9 +57,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             )
             {
                 RemovePlayerFromSession op = new RemovePlayerFromSession(this,
-                    namespace_,                    
-                    sessionID,                    
-                    userID                    
+                    namespace_,
+                    sessionID,
+                    userID
                 );
 
                 op.SetBaseFields<RemovePlayerFromSessionBuilder>(this);
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -119,12 +119,12 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             PathParams["namespace"] = namespace_;
             PathParams["sessionID"] = sessionID;
             PathParams["userID"] = userID;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,20 +147,20 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         #endregion
 
         public RemovePlayerFromSession(
-            string namespace_,            
-            string sessionID,            
-            string userID            
+            string namespace_,
+            string sessionID,
+            string userID
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["sessionID"] = sessionID;
             PathParams["userID"] = userID;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -172,7 +172,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public RemovePlayerFromSession.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RemovePlayerFromSession.Response()

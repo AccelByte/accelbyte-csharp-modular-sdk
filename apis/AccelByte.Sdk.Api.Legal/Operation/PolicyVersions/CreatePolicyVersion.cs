@@ -63,7 +63,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 CreatePolicyVersion op = new CreatePolicyVersion(this,
-                    policyId                    
+                    policyId
                 );
 
                 op.SetBaseFields<CreatePolicyVersionBuilder>(this);
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -111,13 +111,13 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         )
         {
             PathParams["policyId"] = policyId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = builder.Body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -136,18 +136,18 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #endregion
 
         public CreatePolicyVersion(
-            string policyId,            
-            Model.CreatePolicyVersionRequest body            
+            string policyId,
+            Model.CreatePolicyVersionRequest body
         )
         {
             PathParams["policyId"] = policyId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -159,7 +159,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public CreatePolicyVersion.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new CreatePolicyVersion.Response()

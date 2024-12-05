@@ -76,7 +76,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
             )
             {
                 ImportChannels op = new ImportChannels(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<ImportChannelsBuilder>(this);
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -124,14 +124,14 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
+
+
             if (builder.File is not null) FormParams["file"] = builder.File;
             if (builder.Strategy is not null) FormParams["strategy"] = builder.Strategy;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,20 +156,20 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         #endregion
 
         public ImportChannels(
-            string namespace_,            
-            Stream? file,            
-            string? strategy            
+            string namespace_,
+            Stream? file,
+            string? strategy
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
+
+
             if (file is not null) FormParams["file"] = file;
             if (strategy is not null) FormParams["strategy"] = strategy;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -181,7 +181,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         public override List<string> Consumes => new() { "multipart/form-data" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ImportChannels.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ImportChannels.Response()

@@ -170,7 +170,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminSearchUserV3 op = new AdminSearchUserV3(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<AdminSearchUserV3Builder>(this);
@@ -190,7 +190,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -207,7 +207,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -218,7 +218,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.By is not null) QueryParams["by"] = builder.By;
             if (builder.EndDate is not null) QueryParams["endDate"] = builder.EndDate;
             if (builder.IncludeTotal != null) QueryParams["includeTotal"] = Convert.ToString(builder.IncludeTotal)!;
@@ -231,11 +231,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (builder.SkipLoginQueue != null) QueryParams["skipLoginQueue"] = Convert.ToString(builder.SkipLoginQueue)!;
             if (builder.StartDate is not null) QueryParams["startDate"] = builder.StartDate;
             if (builder.TestAccount != null) QueryParams["testAccount"] = Convert.ToString(builder.TestAccount)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -260,23 +260,23 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminSearchUserV3(
-            string namespace_,            
-            string? by,            
-            string? endDate,            
-            bool? includeTotal,            
-            long? limit,            
-            long? offset,            
-            string? platformBy,            
-            string? platformId,            
-            string? query,            
-            string? roleIds,            
-            bool? skipLoginQueue,            
-            string? startDate,            
-            bool? testAccount            
+            string namespace_,
+            string? by,
+            string? endDate,
+            bool? includeTotal,
+            long? limit,
+            long? offset,
+            string? platformBy,
+            string? platformId,
+            string? query,
+            string? roleIds,
+            bool? skipLoginQueue,
+            string? startDate,
+            bool? testAccount
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (by is not null) QueryParams["by"] = by;
             if (endDate is not null) QueryParams["endDate"] = endDate;
             if (includeTotal != null) QueryParams["includeTotal"] = Convert.ToString(includeTotal)!;
@@ -289,11 +289,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (skipLoginQueue != null) QueryParams["skipLoginQueue"] = Convert.ToString(skipLoginQueue)!;
             if (startDate is not null) QueryParams["startDate"] = startDate;
             if (testAccount != null) QueryParams["testAccount"] = Convert.ToString(testAccount)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -305,7 +305,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminSearchUserV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminSearchUserV3.Response()

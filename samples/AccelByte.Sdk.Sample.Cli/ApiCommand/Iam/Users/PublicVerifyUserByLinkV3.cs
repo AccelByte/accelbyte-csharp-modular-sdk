@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","publicverifyuserbylinkv3")]
-    public class PublicVerifyUserByLinkV3Command: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "publicverifyuserbylinkv3")]
+    public class PublicVerifyUserByLinkV3Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "PublicVerifyUserByLinkV3"; } }
+        public string OperationName { get { return "PublicVerifyUserByLinkV3"; } }
 
         [SdkCommandArgument("code")]
         public string? Code { get; set; }
@@ -57,8 +57,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
                 if (response.Data != null)
                     return CommandResult.Success(response.Data);
                 else
-                    return CommandResult.Fail("-","response data is null.");
-            }   
+                    return CommandResult.Fail("-", "response data is null.");
+            }
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

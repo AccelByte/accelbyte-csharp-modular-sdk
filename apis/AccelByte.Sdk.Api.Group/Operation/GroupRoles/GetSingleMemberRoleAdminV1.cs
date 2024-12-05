@@ -58,8 +58,8 @@ namespace AccelByte.Sdk.Api.Group.Operation
             )
             {
                 GetSingleMemberRoleAdminV1 op = new GetSingleMemberRoleAdminV1(this,
-                    memberRoleId,                    
-                    namespace_                    
+                    memberRoleId,
+                    namespace_
                 );
 
                 op.SetBaseFields<GetSingleMemberRoleAdminV1Builder>(this);
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -113,12 +113,12 @@ namespace AccelByte.Sdk.Api.Group.Operation
         {
             PathParams["memberRoleId"] = memberRoleId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -145,18 +145,18 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #endregion
 
         public GetSingleMemberRoleAdminV1(
-            string memberRoleId,            
-            string namespace_            
+            string memberRoleId,
+            string namespace_
         )
         {
             PathParams["memberRoleId"] = memberRoleId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -165,10 +165,10 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetSingleMemberRoleAdminV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetSingleMemberRoleAdminV1.Response()

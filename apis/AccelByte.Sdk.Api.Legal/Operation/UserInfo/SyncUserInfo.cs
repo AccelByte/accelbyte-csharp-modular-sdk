@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
     ///
     /// Sync user info cache in agreement service with iam service.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class SyncUserInfo : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -56,14 +56,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 SyncUserInfo op = new SyncUserInfo(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<SyncUserInfoBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public SyncUserInfo.Response Execute(
                 string namespace_
             )
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -104,13 +104,13 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             string namespace_
         )
         {
-            
-            if (namespace_ is not null) QueryParams["namespace"] = namespace_;
-            
 
-            
-            
-            
+            if (namespace_ is not null) QueryParams["namespace"] = namespace_;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -127,16 +127,16 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #endregion
 
         public SyncUserInfo(
-            string namespace_            
+            string namespace_
         )
         {
-            
-            if (namespace_ is not null) QueryParams["namespace"] = namespace_;
-            
 
-            
-            
-            
+            if (namespace_ is not null) QueryParams["namespace"] = namespace_;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -145,10 +145,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Put;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public SyncUserInfo.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new SyncUserInfo.Response()

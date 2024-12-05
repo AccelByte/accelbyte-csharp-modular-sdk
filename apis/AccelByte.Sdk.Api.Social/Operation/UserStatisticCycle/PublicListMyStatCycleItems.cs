@@ -90,8 +90,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 PublicListMyStatCycleItems op = new PublicListMyStatCycleItems(this,
-                    cycleId,                    
-                    namespace_                    
+                    cycleId,
+                    namespace_
                 );
 
                 op.SetBaseFields<PublicListMyStatCycleItemsBuilder>(this);
@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -132,7 +132,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -145,17 +145,17 @@ namespace AccelByte.Sdk.Api.Social.Operation
         {
             PathParams["cycleId"] = cycleId;
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy;
             if (builder.StatCodes is not null) QueryParams["statCodes"] = builder.StatCodes;
-            
 
-            
+
+
             CollectionFormatMap["statCodes"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -182,27 +182,27 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         public PublicListMyStatCycleItems(
-            string cycleId,            
-            string namespace_,            
-            int? limit,            
-            int? offset,            
-            string? sortBy,            
-            List<string>? statCodes            
+            string cycleId,
+            string namespace_,
+            int? limit,
+            int? offset,
+            string? sortBy,
+            List<string>? statCodes
         )
         {
             PathParams["cycleId"] = cycleId;
             PathParams["namespace"] = namespace_;
-            
+
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy;
             if (statCodes is not null) QueryParams["statCodes"] = statCodes;
-            
 
-            
+
+
             CollectionFormatMap["statCodes"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -211,10 +211,10 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicListMyStatCycleItems.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicListMyStatCycleItems.Response()

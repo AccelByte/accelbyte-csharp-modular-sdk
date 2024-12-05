@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Matchmaking.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
 {
-    [SdkConsoleCommand("matchmaking","bulkcreatemocktickets")]
-    public class BulkCreateMockTicketsCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("matchmaking", "bulkcreatemocktickets")]
+    public class BulkCreateMockTicketsCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Matchmaking"; } }
+        public string ServiceName { get { return "Matchmaking"; } }
 
-        public string OperationName{ get { return "BulkCreateMockTickets"; } }
+        public string OperationName { get { return "BulkCreateMockTickets"; } }
 
         [SdkCommandArgument("channelName")]
         public string ChannelName { get; set; } = String.Empty;

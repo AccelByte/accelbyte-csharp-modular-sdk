@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
             )
             {
                 ListServerPerNamespace op = new ListServerPerNamespace(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<ListServerPerNamespaceBuilder>(this);
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -127,13 +127,13 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.Status is not null) QueryParams["status"] = builder.Status;
-            
 
-            
-            
-            
+            if (builder.Status is not null) QueryParams["status"] = builder.Status;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -152,18 +152,18 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
         #endregion
 
         public ListServerPerNamespace(
-            string namespace_,            
-            string? status            
+            string namespace_,
+            string? status
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (status is not null) QueryParams["status"] = status;
-            
 
-            
-            
-            
+            if (status is not null) QueryParams["status"] = status;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -175,7 +175,7 @@ namespace AccelByte.Sdk.Api.Qosm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ListServerPerNamespace.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ListServerPerNamespace.Response()

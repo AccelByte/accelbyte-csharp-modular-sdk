@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby","adminupdateglobalconfig")]
-    public class AdminUpdateGlobalConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("lobby", "adminupdateglobalconfig")]
+    public class AdminUpdateGlobalConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Lobby"; } }
+        public string ServiceName { get { return "Lobby"; } }
 
-        public string OperationName{ get { return "AdminUpdateGlobalConfig"; } }
+        public string OperationName { get { return "AdminUpdateGlobalConfig"; } }
 
         [SdkCommandData("body")]
         public ModelPutGlobalConfigurationRequest Body { get; set; } = new ModelPutGlobalConfigurationRequest();
@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-","response data is null.");
-            }   
+                    return CommandResult.Fail("-", "response data is null.");
+            }
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

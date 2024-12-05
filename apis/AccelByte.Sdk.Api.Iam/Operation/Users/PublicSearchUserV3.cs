@@ -151,7 +151,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicSearchUserV3 op = new PublicSearchUserV3(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<PublicSearchUserV3Builder>(this);
@@ -171,7 +171,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -188,7 +188,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -199,18 +199,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.By is not null) QueryParams["by"] = builder.By;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.PlatformBy is not null) QueryParams["platformBy"] = builder.PlatformBy;
             if (builder.PlatformId is not null) QueryParams["platformId"] = builder.PlatformId;
             if (builder.Query is not null) QueryParams["query"] = builder.Query;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -237,28 +237,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicSearchUserV3(
-            string namespace_,            
-            string? by,            
-            long? limit,            
-            long? offset,            
-            string? platformBy,            
-            string? platformId,            
-            string? query            
+            string namespace_,
+            string? by,
+            long? limit,
+            long? offset,
+            string? platformBy,
+            string? platformId,
+            string? query
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (by is not null) QueryParams["by"] = by;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (platformBy is not null) QueryParams["platformBy"] = platformBy;
             if (platformId is not null) QueryParams["platformId"] = platformId;
             if (query is not null) QueryParams["query"] = query;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -267,10 +267,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicSearchUserV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicSearchUserV3.Response()

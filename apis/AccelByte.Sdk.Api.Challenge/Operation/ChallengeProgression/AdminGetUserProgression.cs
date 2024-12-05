@@ -98,9 +98,9 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             )
             {
                 AdminGetUserProgression op = new AdminGetUserProgression(this,
-                    challengeCode,                    
-                    namespace_,                    
-                    userId                    
+                    challengeCode,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<AdminGetUserProgressionBuilder>(this);
@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -145,7 +145,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -160,19 +160,19 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             PathParams["challengeCode"] = challengeCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (builder.DateTime != null)
                 QueryParams["dateTime"] = builder.DateTime.Value.ToString("O", System.Globalization.CultureInfo.InvariantCulture);
             if (builder.GoalCode is not null) QueryParams["goalCode"] = builder.GoalCode;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
-            
 
-            
+
+
             CollectionFormatMap["tags"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -201,32 +201,32 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #endregion
 
         public AdminGetUserProgression(
-            string challengeCode,            
-            string namespace_,            
-            string userId,            
-            DateTime? dateTime,            
-            string? goalCode,            
-            long? limit,            
-            long? offset,            
-            List<string>? tags            
+            string challengeCode,
+            string namespace_,
+            string userId,
+            DateTime? dateTime,
+            string? goalCode,
+            long? limit,
+            long? offset,
+            List<string>? tags
         )
         {
             PathParams["challengeCode"] = challengeCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (dateTime != null)
                 QueryParams["dateTime"] = dateTime.Value.ToString("O", System.Globalization.CultureInfo.InvariantCulture);
             if (goalCode is not null) QueryParams["goalCode"] = goalCode;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (tags is not null) QueryParams["tags"] = tags;
-            
 
-            
+
+
             CollectionFormatMap["tags"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -235,10 +235,10 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGetUserProgression.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetUserProgression.Response()

@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             )
             {
                 MatchTicketDetails op = new MatchTicketDetails(this,
-                    namespace_,                    
-                    ticketid                    
+                    namespace_,
+                    ticketid
                 );
 
                 op.SetBaseFields<MatchTicketDetailsBuilder>(this);
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -111,12 +111,12 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["ticketid"] = ticketid;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -141,18 +141,18 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #endregion
 
         public MatchTicketDetails(
-            string namespace_,            
-            string ticketid            
+            string namespace_,
+            string ticketid
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["ticketid"] = ticketid;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -164,7 +164,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public MatchTicketDetails.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new MatchTicketDetails.Response()

@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             )
             {
                 AdminGetMatchmakingDetailByTicketID op = new AdminGetMatchmakingDetailByTicketID(this,
-                    namespace_,                    
-                    ticketId                    
+                    namespace_,
+                    ticketId
                 );
 
                 op.SetBaseFields<AdminGetMatchmakingDetailByTicketIDBuilder>(this);
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -111,12 +111,12 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["ticketId"] = ticketId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -141,18 +141,18 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         #endregion
 
         public AdminGetMatchmakingDetailByTicketID(
-            string namespace_,            
-            string ticketId            
+            string namespace_,
+            string ticketId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["ticketId"] = ticketId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -164,7 +164,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGetMatchmakingDetailByTicketID.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetMatchmakingDetailByTicketID.Response()

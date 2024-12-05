@@ -77,8 +77,8 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             )
             {
                 GetListOfSecretsV2 op = new GetListOfSecretsV2(this,
-                    app,                    
-                    namespace_                    
+                    app,
+                    namespace_
                 );
 
                 op.SetBaseFields<GetListOfSecretsV2Builder>(this);
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -132,14 +132,14 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -166,22 +166,22 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #endregion
 
         public GetListOfSecretsV2(
-            string app,            
-            string namespace_,            
-            long? limit,            
-            long? offset            
+            string app,
+            string namespace_,
+            long? limit,
+            long? offset
         )
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
-            
+
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -193,7 +193,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetListOfSecretsV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetListOfSecretsV2.Response()

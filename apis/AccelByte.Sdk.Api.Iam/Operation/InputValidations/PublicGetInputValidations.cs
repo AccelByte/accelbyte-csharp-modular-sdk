@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -113,14 +113,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         private PublicGetInputValidations(PublicGetInputValidationsBuilder builder
         )
         {
-            
+
             if (builder.DefaultOnEmpty != null) QueryParams["defaultOnEmpty"] = Convert.ToString(builder.DefaultOnEmpty)!;
             if (builder.LanguageCode is not null) QueryParams["languageCode"] = builder.LanguageCode;
-            
 
-            
-            
-            
+
+
+
+
 
         }
         #endregion
@@ -140,18 +140,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicGetInputValidations(
-            bool? defaultOnEmpty,            
-            string? languageCode            
+            bool? defaultOnEmpty,
+            string? languageCode
         )
         {
-            
+
             if (defaultOnEmpty != null) QueryParams["defaultOnEmpty"] = Convert.ToString(defaultOnEmpty)!;
             if (languageCode is not null) QueryParams["languageCode"] = languageCode;
-            
 
-            
-            
-            
+
+
+
+
 
         }
 
@@ -162,7 +162,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicGetInputValidations.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGetInputValidations.Response()

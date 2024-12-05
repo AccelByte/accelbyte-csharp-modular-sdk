@@ -60,9 +60,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 EnableItem op = new EnableItem(this,
-                    itemId,                    
-                    namespace_,                    
-                    storeId                    
+                    itemId,
+                    namespace_,
+                    storeId
                 );
 
                 op.SetBaseFields<EnableItemBuilder>(this);
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -150,7 +150,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -164,13 +164,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-            
-            if (storeId is not null) QueryParams["storeId"] = storeId;
-            
 
-            
-            
-            
+            if (storeId is not null) QueryParams["storeId"] = storeId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -200,20 +200,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public EnableItem(
-            string itemId,            
-            string namespace_,            
-            string storeId            
+            string itemId,
+            string namespace_,
+            string storeId
         )
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-            
-            if (storeId is not null) QueryParams["storeId"] = storeId;
-            
 
-            
-            
-            
+            if (storeId is not null) QueryParams["storeId"] = storeId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -225,7 +225,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public EnableItem.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new EnableItem.Response()
@@ -268,7 +268,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Data = JsonSerializer.Deserialize<Model.FullItemInfo<T1>>(payload, ResponseJsonOptions);
@@ -284,7 +284,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

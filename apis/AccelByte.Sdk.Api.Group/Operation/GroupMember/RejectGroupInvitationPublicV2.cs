@@ -62,8 +62,8 @@ namespace AccelByte.Sdk.Api.Group.Operation
             )
             {
                 RejectGroupInvitationPublicV2 op = new RejectGroupInvitationPublicV2(this,
-                    groupId,                    
-                    namespace_                    
+                    groupId,
+                    namespace_
                 );
 
                 op.SetBaseFields<RejectGroupInvitationPublicV2Builder>(this);
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -117,12 +117,12 @@ namespace AccelByte.Sdk.Api.Group.Operation
         {
             PathParams["groupId"] = groupId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -151,18 +151,18 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #endregion
 
         public RejectGroupInvitationPublicV2(
-            string groupId,            
-            string namespace_            
+            string groupId,
+            string namespace_
         )
         {
             PathParams["groupId"] = groupId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -171,10 +171,10 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public RejectGroupInvitationPublicV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RejectGroupInvitationPublicV2.Response()

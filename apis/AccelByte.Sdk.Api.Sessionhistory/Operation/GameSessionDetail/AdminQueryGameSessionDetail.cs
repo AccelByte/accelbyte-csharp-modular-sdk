@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             )
             {
                 AdminQueryGameSessionDetail op = new AdminQueryGameSessionDetail(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<AdminQueryGameSessionDetailBuilder>(this);
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -156,7 +156,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -167,7 +167,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.EndDate is not null) QueryParams["endDate"] = builder.EndDate;
             if (builder.GameSessionID is not null) QueryParams["gameSessionID"] = builder.GameSessionID;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
@@ -176,11 +176,11 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             if (builder.OrderBy is not null) QueryParams["orderBy"] = builder.OrderBy;
             if (builder.StartDate is not null) QueryParams["startDate"] = builder.StartDate;
             if (builder.UserID is not null) QueryParams["userID"] = builder.UserID;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -205,19 +205,19 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         #endregion
 
         public AdminQueryGameSessionDetail(
-            string namespace_,            
-            string? endDate,            
-            string? gameSessionID,            
-            long? limit,            
-            long? offset,            
-            string? order,            
-            string? orderBy,            
-            string? startDate,            
-            string? userID            
+            string namespace_,
+            string? endDate,
+            string? gameSessionID,
+            long? limit,
+            long? offset,
+            string? order,
+            string? orderBy,
+            string? startDate,
+            string? userID
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (endDate is not null) QueryParams["endDate"] = endDate;
             if (gameSessionID is not null) QueryParams["gameSessionID"] = gameSessionID;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
@@ -226,11 +226,11 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             if (orderBy is not null) QueryParams["orderBy"] = orderBy;
             if (startDate is not null) QueryParams["startDate"] = startDate;
             if (userID is not null) QueryParams["userID"] = userID;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -242,7 +242,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminQueryGameSessionDetail.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminQueryGameSessionDetail.Response()

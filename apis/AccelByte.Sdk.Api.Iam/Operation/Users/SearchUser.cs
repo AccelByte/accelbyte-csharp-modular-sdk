@@ -29,7 +29,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// Search all users that match the query on these fields: all login IDs (email address, phone number, and platform user id),
     /// userID, display name, and on the specified namespace. If the query is not defined, then it searches all users on the specified namespace.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class SearchUser : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -68,14 +68,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 SearchUser op = new SearchUser(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<SearchUserBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public SearchUser.Response Execute(
                 string namespace_
             )
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -117,13 +117,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.Query is not null) QueryParams["query"] = builder.Query;
-            
 
-            
-            
-            
+            if (builder.Query is not null) QueryParams["query"] = builder.Query;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -146,18 +146,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public SearchUser(
-            string namespace_,            
-            string? query            
+            string namespace_,
+            string? query
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (query is not null) QueryParams["query"] = query;
-            
 
-            
-            
-            
+            if (query is not null) QueryParams["query"] = query;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -169,7 +169,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public SearchUser.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new SearchUser.Response()

@@ -85,10 +85,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminGetThirdPartyPlatformTokenLinkStatusV3 op = new AdminGetThirdPartyPlatformTokenLinkStatusV3(this,
-                    platformToken,                    
-                    namespace_,                    
-                    platformId,                    
-                    userId                    
+                    platformToken,
+                    namespace_,
+                    platformId,
+                    userId
                 );
 
                 op.SetBaseFields<AdminGetThirdPartyPlatformTokenLinkStatusV3Builder>(this);
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -137,7 +137,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -153,13 +153,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
             PathParams["userId"] = userId;
-            
-            
+
+
             if (platformToken is not null) FormParams["platformToken"] = platformToken;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -186,22 +186,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminGetThirdPartyPlatformTokenLinkStatusV3(
-            string namespace_,            
-            string platformId,            
-            string userId,            
-            string platformToken            
+            string namespace_,
+            string platformId,
+            string userId,
+            string platformToken
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
             PathParams["userId"] = userId;
-            
-            
+
+
             if (platformToken is not null) FormParams["platformToken"] = platformToken;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -213,7 +213,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGetThirdPartyPlatformTokenLinkStatusV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetThirdPartyPlatformTokenLinkStatusV3.Response()

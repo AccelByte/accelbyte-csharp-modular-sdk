@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 GetNamespaceContext op = new GetNamespaceContext(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<GetNamespaceContextBuilder>(this);
@@ -78,7 +78,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -106,12 +106,12 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -132,16 +132,16 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #endregion
 
         public GetNamespaceContext(
-            string namespace_            
+            string namespace_
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -150,10 +150,10 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetNamespaceContext.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetNamespaceContext.Response()

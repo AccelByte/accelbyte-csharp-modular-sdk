@@ -50,7 +50,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .EnsureSuccess();
             #endregion
             Assert.AreEqual(appName, createdApp.AppName!);
-            
+
             try
             {
                 bool isAppReady = false;

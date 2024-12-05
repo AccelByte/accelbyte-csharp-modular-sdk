@@ -67,8 +67,8 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             )
             {
                 AdminPostGameBinaryRecordV1 op = new AdminPostGameBinaryRecordV1(this,
-                    body,                    
-                    namespace_                    
+                    body,
+                    namespace_
                 );
 
                 op.SetBaseFields<AdminPostGameBinaryRecordV1Builder>(this);
@@ -90,7 +90,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -121,13 +121,13 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -154,18 +154,18 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #endregion
 
         public AdminPostGameBinaryRecordV1(
-            string namespace_,            
-            Model.ModelsGameBinaryRecordCreate body            
+            string namespace_,
+            Model.ModelsGameBinaryRecordCreate body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -177,7 +177,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminPostGameBinaryRecordV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminPostGameBinaryRecordV1.Response()

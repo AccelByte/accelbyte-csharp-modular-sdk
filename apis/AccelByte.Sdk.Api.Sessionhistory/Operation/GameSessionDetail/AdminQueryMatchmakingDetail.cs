@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             )
             {
                 AdminQueryMatchmakingDetail op = new AdminQueryMatchmakingDetail(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<AdminQueryMatchmakingDetailBuilder>(this);
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -159,7 +159,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.GameSessionID is not null) QueryParams["gameSessionID"] = builder.GameSessionID;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
@@ -167,11 +167,11 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             if (builder.OrderBy is not null) QueryParams["orderBy"] = builder.OrderBy;
             if (builder.TicketID is not null) QueryParams["ticketID"] = builder.TicketID;
             if (builder.UserID is not null) QueryParams["userID"] = builder.UserID;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -196,18 +196,18 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         #endregion
 
         public AdminQueryMatchmakingDetail(
-            string namespace_,            
-            string? gameSessionID,            
-            long? limit,            
-            long? offset,            
-            string? order,            
-            string? orderBy,            
-            string? ticketID,            
-            string? userID            
+            string namespace_,
+            string? gameSessionID,
+            long? limit,
+            long? offset,
+            string? order,
+            string? orderBy,
+            string? ticketID,
+            string? userID
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (gameSessionID is not null) QueryParams["gameSessionID"] = gameSessionID;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
@@ -215,11 +215,11 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             if (orderBy is not null) QueryParams["orderBy"] = orderBy;
             if (ticketID is not null) QueryParams["ticketID"] = ticketID;
             if (userID is not null) QueryParams["userID"] = userID;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -231,7 +231,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminQueryMatchmakingDetail.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminQueryMatchmakingDetail.Response()

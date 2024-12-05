@@ -69,8 +69,8 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             )
             {
                 DeleteAppV2 op = new DeleteAppV2(this,
-                    app,                    
-                    namespace_                    
+                    app,
+                    namespace_
                 );
 
                 op.SetBaseFields<DeleteAppV2Builder>(this);
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -124,13 +124,13 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
-            
-            if (builder.Forced is not null) QueryParams["forced"] = builder.Forced;
-            
 
-            
-            
-            
+            if (builder.Forced is not null) QueryParams["forced"] = builder.Forced;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -157,20 +157,20 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #endregion
 
         public DeleteAppV2(
-            string app,            
-            string namespace_,            
-            string? forced            
+            string app,
+            string namespace_,
+            string? forced
         )
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
-            
-            if (forced is not null) QueryParams["forced"] = forced;
-            
 
-            
-            
-            
+            if (forced is not null) QueryParams["forced"] = forced;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -182,7 +182,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public DeleteAppV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteAppV2.Response()
@@ -193,31 +193,31 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             };
 
             if (code == (HttpStatusCode)400)
-            
+
             {
                 response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
-            
+
             {
                 response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-            
+
             {
                 response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-            
+
             {
                 response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-            
+
             {
                 response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

@@ -63,8 +63,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             )
             {
                 RunZombieCleanerRequestHandler op = new RunZombieCleanerRequestHandler(this,
-                    body,                    
-                    namespace_                    
+                    body,
+                    namespace_
                 );
 
                 op.SetBaseFields<RunZombieCleanerRequestHandlerBuilder>(this);
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -117,13 +117,13 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -142,18 +142,18 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         #endregion
 
         public RunZombieCleanerRequestHandler(
-            string namespace_,            
-            Model.ModelsDeleteZombieRequest body            
+            string namespace_,
+            Model.ModelsDeleteZombieRequest body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -165,7 +165,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public RunZombieCleanerRequestHandler.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RunZombieCleanerRequestHandler.Response()
@@ -176,7 +176,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             };
 
             if (code == (HttpStatusCode)401)
-            
+
             {
                 response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();

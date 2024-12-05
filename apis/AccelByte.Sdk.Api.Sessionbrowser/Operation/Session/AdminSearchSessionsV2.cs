@@ -114,9 +114,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             )
             {
                 AdminSearchSessionsV2 op = new AdminSearchSessionsV2(this,
-                    namespace_,                    
-                    limit,                    
-                    offset                    
+                    namespace_,
+                    limit,
+                    offset
                 );
 
                 op.SetBaseFields<AdminSearchSessionsV2Builder>(this);
@@ -140,7 +140,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -161,7 +161,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -174,7 +174,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Channel is not null) QueryParams["channel"] = builder.Channel;
             if (builder.Deleted != null) QueryParams["deleted"] = Convert.ToString(builder.Deleted)!;
             if (builder.MatchID is not null) QueryParams["matchID"] = builder.MatchID;
@@ -182,15 +182,15 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             if (builder.SessionType is not null) QueryParams["sessionType"] = builder.SessionType;
             if (builder.Status is not null) QueryParams["status"] = builder.Status;
             if (builder.UserID is not null) QueryParams["userID"] = builder.UserID;
-            
-            QueryParams["limit"] = Convert.ToString(limit)!;
-            
-            QueryParams["offset"] = Convert.ToString(offset)!;
-            
 
-            
-            
-            
+            QueryParams["limit"] = Convert.ToString(limit)!;
+
+            QueryParams["offset"] = Convert.ToString(offset)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -215,20 +215,20 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         #endregion
 
         public AdminSearchSessionsV2(
-            string namespace_,            
-            string? channel,            
-            bool? deleted,            
-            string? matchID,            
-            string? partyID,            
-            string? sessionType,            
-            string? status,            
-            string? userID,            
-            long limit,            
-            long offset            
+            string namespace_,
+            string? channel,
+            bool? deleted,
+            string? matchID,
+            string? partyID,
+            string? sessionType,
+            string? status,
+            string? userID,
+            long limit,
+            long offset
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (channel is not null) QueryParams["channel"] = channel;
             if (deleted != null) QueryParams["deleted"] = Convert.ToString(deleted)!;
             if (matchID is not null) QueryParams["matchID"] = matchID;
@@ -236,15 +236,15 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             if (sessionType is not null) QueryParams["sessionType"] = sessionType;
             if (status is not null) QueryParams["status"] = status;
             if (userID is not null) QueryParams["userID"] = userID;
-            
-            QueryParams["limit"] = Convert.ToString(limit)!;
-            
-            QueryParams["offset"] = Convert.ToString(offset)!;
-            
 
-            
-            
-            
+            QueryParams["limit"] = Convert.ToString(limit)!;
+
+            QueryParams["offset"] = Convert.ToString(offset)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -256,7 +256,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminSearchSessionsV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminSearchSessionsV2.Response()

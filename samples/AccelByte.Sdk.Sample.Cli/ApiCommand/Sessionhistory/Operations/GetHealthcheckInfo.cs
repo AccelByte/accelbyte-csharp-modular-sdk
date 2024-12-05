@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Sessionhistory.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionhistory
 {
-    [SdkConsoleCommand("sessionhistory","gethealthcheckinfo")]
-    public class GetHealthcheckInfoCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("sessionhistory", "gethealthcheckinfo")]
+    public class GetHealthcheckInfoCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Sessionhistory"; } }
+        public string ServiceName { get { return "Sessionhistory"; } }
 
-        public string OperationName{ get { return "GetHealthcheckInfo"; } }
+        public string OperationName { get { return "GetHealthcheckInfo"; } }
 
         public GetHealthcheckInfoCommand(IAccelByteSdk sdk)
         {

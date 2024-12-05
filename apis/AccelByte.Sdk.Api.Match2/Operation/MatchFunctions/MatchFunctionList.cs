@@ -71,7 +71,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             )
             {
                 MatchFunctionList op = new MatchFunctionList(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<MatchFunctionListBuilder>(this);
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -119,14 +119,14 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -149,20 +149,20 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #endregion
 
         public MatchFunctionList(
-            string namespace_,            
-            long? limit,            
-            long? offset            
+            string namespace_,
+            long? limit,
+            long? offset
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -174,7 +174,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public MatchFunctionList.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new MatchFunctionList.Response()

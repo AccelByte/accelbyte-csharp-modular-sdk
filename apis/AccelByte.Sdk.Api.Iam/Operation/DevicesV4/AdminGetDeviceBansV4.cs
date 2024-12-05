@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminGetDeviceBansV4 op = new AdminGetDeviceBansV4(this,
-                    deviceId,                    
-                    namespace_                    
+                    deviceId,
+                    namespace_
                 );
 
                 op.SetBaseFields<AdminGetDeviceBansV4Builder>(this);
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -111,12 +111,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["deviceId"] = deviceId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -141,18 +141,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminGetDeviceBansV4(
-            string deviceId,            
-            string namespace_            
+            string deviceId,
+            string namespace_
         )
         {
             PathParams["deviceId"] = deviceId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -164,7 +164,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGetDeviceBansV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetDeviceBansV4.Response()

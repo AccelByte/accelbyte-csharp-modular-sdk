@@ -84,8 +84,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetUserDLC op = new GetUserDLC(this,
-                    namespace_,                    
-                    userId                    
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<GetUserDLCBuilder>(this);
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -146,7 +146,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -165,7 +165,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -178,15 +178,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (builder.IncludeAllNamespaces != null) QueryParams["includeAllNamespaces"] = Convert.ToString(builder.IncludeAllNamespaces)!;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
             if (builder.Type is not null) QueryParams["type"] = builder.Type.Value;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -208,24 +208,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public GetUserDLC(
-            string namespace_,            
-            string userId,            
-            bool? includeAllNamespaces,            
-            GetUserDLCStatus? status,            
-            GetUserDLCType? type            
+            string namespace_,
+            string userId,
+            bool? includeAllNamespaces,
+            GetUserDLCStatus? status,
+            GetUserDLCType? type
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (includeAllNamespaces != null) QueryParams["includeAllNamespaces"] = Convert.ToString(includeAllNamespaces)!;
             if (status is not null) QueryParams["status"] = status.Value;
             if (type is not null) QueryParams["type"] = type.Value;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -234,10 +234,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetUserDLC.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetUserDLC.Response()
@@ -270,13 +270,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Data = JsonSerializer.Deserialize<List<Model.UserDLCRecord<T1>>>(payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
-            
+
             return response;
         }
     }

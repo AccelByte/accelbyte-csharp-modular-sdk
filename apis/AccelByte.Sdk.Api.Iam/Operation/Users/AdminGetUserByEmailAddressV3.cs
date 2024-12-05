@@ -64,7 +64,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminGetUserByEmailAddressV3 op = new AdminGetUserByEmailAddressV3(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<AdminGetUserByEmailAddressV3Builder>(this);
@@ -84,7 +84,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -112,13 +112,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.EmailAddress is not null) QueryParams["emailAddress"] = builder.EmailAddress;
-            
 
-            
-            
-            
+            if (builder.EmailAddress is not null) QueryParams["emailAddress"] = builder.EmailAddress;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -145,18 +145,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminGetUserByEmailAddressV3(
-            string namespace_,            
-            string? emailAddress            
+            string namespace_,
+            string? emailAddress
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (emailAddress is not null) QueryParams["emailAddress"] = emailAddress;
-            
 
-            
-            
-            
+            if (emailAddress is not null) QueryParams["emailAddress"] = emailAddress;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -165,10 +165,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGetUserByEmailAddressV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetUserByEmailAddressV3.Response()

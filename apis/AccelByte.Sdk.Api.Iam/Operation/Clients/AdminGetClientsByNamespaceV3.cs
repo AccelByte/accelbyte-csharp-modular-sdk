@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminGetClientsByNamespaceV3 op = new AdminGetClientsByNamespaceV3(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<AdminGetClientsByNamespaceV3Builder>(this);
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -140,7 +140,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -151,18 +151,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.ClientId is not null) QueryParams["clientId"] = builder.ClientId;
             if (builder.ClientName is not null) QueryParams["clientName"] = builder.ClientName;
             if (builder.ClientType is not null) QueryParams["clientType"] = builder.ClientType;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.SkipLoginQueue != null) QueryParams["skipLoginQueue"] = Convert.ToString(builder.SkipLoginQueue)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -185,28 +185,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminGetClientsByNamespaceV3(
-            string namespace_,            
-            string? clientId,            
-            string? clientName,            
-            string? clientType,            
-            long? limit,            
-            long? offset,            
-            bool? skipLoginQueue            
+            string namespace_,
+            string? clientId,
+            string? clientName,
+            string? clientType,
+            long? limit,
+            long? offset,
+            bool? skipLoginQueue
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (clientId is not null) QueryParams["clientId"] = clientId;
             if (clientName is not null) QueryParams["clientName"] = clientName;
             if (clientType is not null) QueryParams["clientType"] = clientType;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (skipLoginQueue != null) QueryParams["skipLoginQueue"] = Convert.ToString(skipLoginQueue)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -215,10 +215,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGetClientsByNamespaceV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetClientsByNamespaceV3.Response()

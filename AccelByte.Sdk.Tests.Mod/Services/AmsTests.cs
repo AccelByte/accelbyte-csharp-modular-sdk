@@ -30,7 +30,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             ApiAMSRegionsResponse regions = _Sdk.GetAmsApi().AMSInfo.InfoRegionsOp
                 .Execute(_Sdk.Namespace).EnsureSuccess();
-            Assert.GreaterOrEqual(regions!.Regions!.Count, 1);            
+            Assert.GreaterOrEqual(regions!.Regions!.Count, 1);
 
             ResetPolicy();
         }
@@ -52,7 +52,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             // get readily available instance type
             var instances = _Sdk.GetAmsApi().AMSInfo.InfoSupportedInstancesOp
                 .Execute(_Sdk.Namespace)
-                .EnsureSuccess();            
+                .EnsureSuccess();
             string instanceId = "";
             if (instances != null && instances.AvailableInstanceTypes != null && instances.AvailableInstanceTypes.Count > 0)
                 instanceId = instances.AvailableInstanceTypes[0].Id!;

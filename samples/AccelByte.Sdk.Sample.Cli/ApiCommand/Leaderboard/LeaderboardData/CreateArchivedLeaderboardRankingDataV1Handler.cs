@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Leaderboard.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
 {
-    [SdkConsoleCommand("leaderboard","createarchivedleaderboardrankingdatav1handler")]
-    public class CreateArchivedLeaderboardRankingDataV1HandlerCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("leaderboard", "createarchivedleaderboardrankingdatav1handler")]
+    public class CreateArchivedLeaderboardRankingDataV1HandlerCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Leaderboard"; } }
+        public string ServiceName { get { return "Leaderboard"; } }
 
-        public string OperationName{ get { return "CreateArchivedLeaderboardRankingDataV1Handler"; } }
+        public string OperationName { get { return "CreateArchivedLeaderboardRankingDataV1Handler"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

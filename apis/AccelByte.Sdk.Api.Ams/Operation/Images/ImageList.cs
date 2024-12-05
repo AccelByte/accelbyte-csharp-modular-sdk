@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             )
             {
                 ImageList op = new ImageList(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<ImageListBuilder>(this);
@@ -149,7 +149,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -166,7 +166,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -177,7 +177,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Count != null) QueryParams["count"] = Convert.ToString(builder.Count)!;
             if (builder.InUse is not null) QueryParams["inUse"] = builder.InUse;
             if (builder.IsProtected != null) QueryParams["isProtected"] = Convert.ToString(builder.IsProtected)!;
@@ -187,11 +187,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             if (builder.SortDirection is not null) QueryParams["sortDirection"] = builder.SortDirection;
             if (builder.Status is not null) QueryParams["status"] = builder.Status;
             if (builder.Tag is not null) QueryParams["tag"] = builder.Tag;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -216,20 +216,20 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #endregion
 
         public ImageList(
-            string namespace_,            
-            long? count,            
-            string? inUse,            
-            bool? isProtected,            
-            string? name,            
-            long? offset,            
-            string? sortBy,            
-            string? sortDirection,            
-            string? status,            
-            string? tag            
+            string namespace_,
+            long? count,
+            string? inUse,
+            bool? isProtected,
+            string? name,
+            long? offset,
+            string? sortBy,
+            string? sortDirection,
+            string? status,
+            string? tag
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (count != null) QueryParams["count"] = Convert.ToString(count)!;
             if (inUse is not null) QueryParams["inUse"] = inUse;
             if (isProtected != null) QueryParams["isProtected"] = Convert.ToString(isProtected)!;
@@ -239,11 +239,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             if (sortDirection is not null) QueryParams["sortDirection"] = sortDirection;
             if (status is not null) QueryParams["status"] = status;
             if (tag is not null) QueryParams["tag"] = tag;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -255,7 +255,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ImageList.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ImageList.Response()

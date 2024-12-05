@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             )
             {
                 FleetList op = new FleetList(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<FleetListBuilder>(this);
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -127,15 +127,15 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Active != null) QueryParams["active"] = Convert.ToString(builder.Active)!;
             if (builder.Name is not null) QueryParams["name"] = builder.Name;
             if (builder.Region is not null) QueryParams["region"] = builder.Region;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -154,22 +154,22 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #endregion
 
         public FleetList(
-            string namespace_,            
-            bool? active,            
-            string? name,            
-            string? region            
+            string namespace_,
+            bool? active,
+            string? name,
+            string? region
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (active != null) QueryParams["active"] = Convert.ToString(active)!;
             if (name is not null) QueryParams["name"] = name;
             if (region is not null) QueryParams["region"] = region;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -181,7 +181,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public FleetList.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new FleetList.Response()

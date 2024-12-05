@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","deleteplaystationiapconfig")]
-    public class DeletePlaystationIAPConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "deleteplaystationiapconfig")]
+    public class DeletePlaystationIAPConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "DeletePlaystationIAPConfig"; } }
+        public string OperationName { get { return "DeletePlaystationIAPConfig"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

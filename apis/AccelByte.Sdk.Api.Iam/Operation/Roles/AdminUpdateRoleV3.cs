@@ -61,8 +61,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminUpdateRoleV3 op = new AdminUpdateRoleV3(this,
-                    body,                    
-                    roleId                    
+                    body,
+                    roleId
                 );
 
                 op.SetBaseFields<AdminUpdateRoleV3Builder>(this);
@@ -84,7 +84,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -115,13 +115,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["roleId"] = roleId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -148,18 +148,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminUpdateRoleV3(
-            string roleId,            
-            Model.ModelRoleUpdateRequestV3 body            
+            string roleId,
+            Model.ModelRoleUpdateRequestV3 body
         )
         {
             PathParams["roleId"] = roleId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -171,7 +171,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminUpdateRoleV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminUpdateRoleV3.Response()

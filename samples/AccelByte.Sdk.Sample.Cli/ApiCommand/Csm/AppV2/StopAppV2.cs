@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Csm.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Csm
 {
-    [SdkConsoleCommand("csm","stopappv2")]
-    public class StopAppV2Command: ISdkConsoleCommand
+    [SdkConsoleCommand("csm", "stopappv2")]
+    public class StopAppV2Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Csm"; } }
+        public string ServiceName { get { return "Csm"; } }
 
-        public string OperationName{ get { return "StopAppV2"; } }
+        public string OperationName { get { return "StopAppV2"; } }
 
         [SdkCommandArgument("app")]
         public string App { get; set; } = String.Empty;

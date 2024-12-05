@@ -181,7 +181,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
             )
             {
                 ListTerminatedServers op = new ListTerminatedServers(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<ListTerminatedServersBuilder>(this);
@@ -201,7 +201,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -218,7 +218,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -229,7 +229,7 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Deployment is not null) QueryParams["deployment"] = builder.Deployment;
             if (builder.EndDate is not null) QueryParams["end_date"] = builder.EndDate;
             if (builder.GameMode is not null) QueryParams["game_mode"] = builder.GameMode;
@@ -245,11 +245,11 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
             if (builder.StartDate is not null) QueryParams["start_date"] = builder.StartDate;
             if (builder.Status is not null) QueryParams["status"] = builder.Status;
             if (builder.UserId is not null) QueryParams["user_id"] = builder.UserId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -272,26 +272,26 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
         #endregion
 
         public ListTerminatedServers(
-            string namespace_,            
-            string? deployment,            
-            string? endDate,            
-            string? gameMode,            
-            long? limit,            
-            string? next,            
-            string? partyId,            
-            string? podName,            
-            string? previous,            
-            string? provider,            
-            string? region,            
-            string? sessionId,            
-            string? source,            
-            string? startDate,            
-            string? status,            
-            string? userId            
+            string namespace_,
+            string? deployment,
+            string? endDate,
+            string? gameMode,
+            long? limit,
+            string? next,
+            string? partyId,
+            string? podName,
+            string? previous,
+            string? provider,
+            string? region,
+            string? sessionId,
+            string? source,
+            string? startDate,
+            string? status,
+            string? userId
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (deployment is not null) QueryParams["deployment"] = deployment;
             if (endDate is not null) QueryParams["end_date"] = endDate;
             if (gameMode is not null) QueryParams["game_mode"] = gameMode;
@@ -307,11 +307,11 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
             if (startDate is not null) QueryParams["start_date"] = startDate;
             if (status is not null) QueryParams["status"] = status;
             if (userId is not null) QueryParams["user_id"] = userId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -322,8 +322,8 @@ namespace AccelByte.Sdk.Api.Dslogmanager.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json","text/x-log" };
-        
+        public override List<string> Produces => new() { "application/json", "text/x-log" };
+
         public ListTerminatedServers.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ListTerminatedServers.Response()

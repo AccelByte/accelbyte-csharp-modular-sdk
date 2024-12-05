@@ -57,7 +57,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 TokenRevocationV3 op = new TokenRevocationV3(this,
-                    token                    
+                    token
                 );
 
                 op.SetBaseFields<TokenRevocationV3Builder>(this);
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -104,13 +104,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string token
         )
         {
-            
-            
+
+
             if (token is not null) FormParams["token"] = token;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -131,16 +131,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public TokenRevocationV3(
-            string token            
+            string token
         )
         {
-            
-            
+
+
             if (token is not null) FormParams["token"] = token;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -152,7 +152,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public TokenRevocationV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new TokenRevocationV3.Response()
@@ -163,13 +163,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             };
 
             if (code == (HttpStatusCode)400)
-            
+
             {
                 response.Error400 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
-            
+
             {
                 response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();

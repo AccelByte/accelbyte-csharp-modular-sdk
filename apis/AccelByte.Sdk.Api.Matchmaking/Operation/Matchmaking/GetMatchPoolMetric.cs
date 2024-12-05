@@ -58,8 +58,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
             )
             {
                 GetMatchPoolMetric op = new GetMatchPoolMetric(this,
-                    channelName,                    
-                    namespace_                    
+                    channelName,
+                    namespace_
                 );
 
                 op.SetBaseFields<GetMatchPoolMetricBuilder>(this);
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -113,12 +113,12 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         {
             PathParams["channelName"] = channelName;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -143,18 +143,18 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         #endregion
 
         public GetMatchPoolMetric(
-            string channelName,            
-            string namespace_            
+            string channelName,
+            string namespace_
         )
         {
             PathParams["channelName"] = channelName;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -166,7 +166,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetMatchPoolMetric.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetMatchPoolMetric.Response()

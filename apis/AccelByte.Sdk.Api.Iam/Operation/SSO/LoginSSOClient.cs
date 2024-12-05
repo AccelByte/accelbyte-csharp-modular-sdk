@@ -61,7 +61,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 LoginSSOClient op = new LoginSSOClient(this,
-                    platformId                    
+                    platformId
                 );
 
                 op.SetBaseFields<LoginSSOClientBuilder>(this);
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -109,13 +109,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["platformId"] = platformId;
-            
-            if (builder.Payload is not null) QueryParams["payload"] = builder.Payload;
-            
 
-            
-            
-            
+            if (builder.Payload is not null) QueryParams["payload"] = builder.Payload;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -132,18 +132,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public LoginSSOClient(
-            string platformId,            
-            string? payload            
+            string platformId,
+            string? payload
         )
         {
             PathParams["platformId"] = platformId;
-            
-            if (payload is not null) QueryParams["payload"] = payload;
-            
 
-            
-            
-            
+            if (payload is not null) QueryParams["payload"] = payload;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -152,10 +152,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public LoginSSOClient.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new LoginSSOClient.Response()

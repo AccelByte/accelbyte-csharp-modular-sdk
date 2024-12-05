@@ -57,8 +57,8 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             )
             {
                 AdminUpdatePlatformAccountClosureServicesConfiguration op = new AdminUpdatePlatformAccountClosureServicesConfiguration(this,
-                    body,                    
-                    namespace_                    
+                    body,
+                    namespace_
                 );
 
                 op.SetBaseFields<AdminUpdatePlatformAccountClosureServicesConfigurationBuilder>(this);
@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -111,13 +111,13 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -140,18 +140,18 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #endregion
 
         public AdminUpdatePlatformAccountClosureServicesConfiguration(
-            string namespace_,            
-            Model.DtoServiceConfigurationUpdateRequest body            
+            string namespace_,
+            Model.DtoServiceConfigurationUpdateRequest body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -163,7 +163,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminUpdatePlatformAccountClosureServicesConfiguration.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminUpdatePlatformAccountClosureServicesConfiguration.Response()

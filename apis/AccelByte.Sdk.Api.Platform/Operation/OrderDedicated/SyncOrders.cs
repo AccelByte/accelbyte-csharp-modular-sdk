@@ -67,8 +67,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 SyncOrders op = new SyncOrders(this,
-                    end,                    
-                    start                    
+                    end,
+                    start
                 );
 
                 op.SetBaseFields<SyncOrdersBuilder>(this);
@@ -90,7 +90,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -120,15 +120,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             string start
         )
         {
-            
+
             if (builder.NextEvaluatedKey is not null) QueryParams["nextEvaluatedKey"] = builder.NextEvaluatedKey;
             if (end is not null) QueryParams["end"] = end;
             if (start is not null) QueryParams["start"] = start;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -145,20 +145,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public SyncOrders(
-            string? nextEvaluatedKey,            
-            string end,            
-            string start            
+            string? nextEvaluatedKey,
+            string end,
+            string start
         )
         {
-            
+
             if (nextEvaluatedKey is not null) QueryParams["nextEvaluatedKey"] = nextEvaluatedKey;
             if (end is not null) QueryParams["end"] = end;
             if (start is not null) QueryParams["start"] = start;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -167,10 +167,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public SyncOrders.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new SyncOrders.Response()

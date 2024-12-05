@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Sessionhistory.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionhistory
 {
-    [SdkConsoleCommand("sessionhistory","adminpatchupdatelogconfig")]
-    public class AdminPatchUpdateLogConfigCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("sessionhistory", "adminpatchupdatelogconfig")]
+    public class AdminPatchUpdateLogConfigCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Sessionhistory"; } }
+        public string ServiceName { get { return "Sessionhistory"; } }
 
-        public string OperationName{ get { return "AdminPatchUpdateLogConfig"; } }
+        public string OperationName { get { return "AdminPatchUpdateLogConfig"; } }
 
         [SdkCommandData("body")]
         public LogconfigConfiguration Body { get; set; } = new LogconfigConfiguration();
@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionhistory
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-","response data is null.");
-            }   
+                    return CommandResult.Fail("-", "response data is null.");
+            }
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

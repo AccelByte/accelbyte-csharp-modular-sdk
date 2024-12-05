@@ -61,10 +61,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 AcquireUserTicket op = new AcquireUserTicket(this,
-                    body,                    
-                    boothName,                    
-                    namespace_,                    
-                    userId                    
+                    body,
+                    boothName,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<AcquireUserTicketBuilder>(this);
@@ -90,7 +90,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -129,13 +129,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["boothName"] = boothName;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -158,22 +158,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public AcquireUserTicket(
-            string boothName,            
-            string namespace_,            
-            string userId,            
-            Model.TicketAcquireRequest body            
+            string boothName,
+            string namespace_,
+            string userId,
+            Model.TicketAcquireRequest body
         )
         {
             PathParams["boothName"] = boothName;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -185,7 +185,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AcquireUserTicket.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AcquireUserTicket.Response()

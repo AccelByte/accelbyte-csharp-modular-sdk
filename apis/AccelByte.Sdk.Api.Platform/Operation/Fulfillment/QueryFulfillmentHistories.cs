@@ -90,7 +90,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryFulfillmentHistories op = new QueryFulfillmentHistories(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<QueryFulfillmentHistoriesBuilder>(this);
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -127,7 +127,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -138,16 +138,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
             if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -164,24 +164,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public QueryFulfillmentHistories(
-            string namespace_,            
-            int? limit,            
-            int? offset,            
-            QueryFulfillmentHistoriesStatus? status,            
-            string? userId            
+            string namespace_,
+            int? limit,
+            int? offset,
+            QueryFulfillmentHistoriesStatus? status,
+            string? userId
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (status is not null) QueryParams["status"] = status.Value;
             if (userId is not null) QueryParams["userId"] = userId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -190,10 +190,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public QueryFulfillmentHistories.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryFulfillmentHistories.Response()

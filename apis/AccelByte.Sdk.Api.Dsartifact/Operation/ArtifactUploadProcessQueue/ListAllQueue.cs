@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
             )
             {
                 ListAllQueue op = new ListAllQueue(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<ListAllQueueBuilder>(this);
@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -152,7 +152,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -163,7 +163,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.ExcludeUploading != null) QueryParams["exclude_uploading"] = Convert.ToString(builder.ExcludeUploading)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Next is not null) QueryParams["next"] = builder.Next;
@@ -171,11 +171,11 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
             if (builder.Order is not null) QueryParams["order"] = builder.Order;
             if (builder.PodName is not null) QueryParams["pod_name"] = builder.PodName;
             if (builder.Previous is not null) QueryParams["previous"] = builder.Previous;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -198,18 +198,18 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
         #endregion
 
         public ListAllQueue(
-            string namespace_,            
-            bool? excludeUploading,            
-            long? limit,            
-            string? next,            
-            string? nodeIP,            
-            string? order,            
-            string? podName,            
-            string? previous            
+            string namespace_,
+            bool? excludeUploading,
+            long? limit,
+            string? next,
+            string? nodeIP,
+            string? order,
+            string? podName,
+            string? previous
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (excludeUploading != null) QueryParams["exclude_uploading"] = Convert.ToString(excludeUploading)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (next is not null) QueryParams["next"] = next;
@@ -217,11 +217,11 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
             if (order is not null) QueryParams["order"] = order;
             if (podName is not null) QueryParams["pod_name"] = podName;
             if (previous is not null) QueryParams["previous"] = previous;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -232,8 +232,8 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json","text/x-log" };
-        
+        public override List<string> Produces => new() { "application/json", "text/x-log" };
+
         public ListAllQueue.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ListAllQueue.Response()

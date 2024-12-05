@@ -69,9 +69,9 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             )
             {
                 UpdatePass op = new UpdatePass(this,
-                    code,                    
-                    namespace_,                    
-                    seasonId                    
+                    code,
+                    namespace_,
+                    seasonId
                 );
 
                 op.SetBaseFields<UpdatePassBuilder>(this);
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -131,13 +131,13 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             PathParams["code"] = code;
             PathParams["namespace"] = namespace_;
             PathParams["seasonId"] = seasonId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = builder.Body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -162,22 +162,22 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #endregion
 
         public UpdatePass(
-            string code,            
-            string namespace_,            
-            string seasonId,            
-            Model.PassUpdate body            
+            string code,
+            string namespace_,
+            string seasonId,
+            Model.PassUpdate body
         )
         {
             PathParams["code"] = code;
             PathParams["namespace"] = namespace_;
             PathParams["seasonId"] = seasonId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -189,7 +189,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public UpdatePass.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpdatePass.Response()

@@ -72,9 +72,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 CreateCategory op = new CreateCategory(this,
-                    body,                    
-                    namespace_,                    
-                    storeId                    
+                    body,
+                    namespace_,
+                    storeId
                 );
 
                 op.SetBaseFields<CreateCategoryBuilder>(this);
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -132,14 +132,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (storeId is not null) QueryParams["storeId"] = storeId;
-            
 
-            
-            
+            if (storeId is not null) QueryParams["storeId"] = storeId;
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -164,20 +164,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public CreateCategory(
-            string namespace_,            
-            string storeId,            
-            Model.CategoryCreate body            
+            string namespace_,
+            string storeId,
+            Model.CategoryCreate body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (storeId is not null) QueryParams["storeId"] = storeId;
-            
 
-            
-            
+            if (storeId is not null) QueryParams["storeId"] = storeId;
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -189,7 +189,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public CreateCategory.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new CreateCategory.Response()

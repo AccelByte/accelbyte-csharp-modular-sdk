@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Session.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 {
-    [SdkConsoleCommand("session","admindeleteplatformcredentialsbyplatformid")]
-    public class AdminDeletePlatformCredentialsByPlatformIdCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("session", "admindeleteplatformcredentialsbyplatformid")]
+    public class AdminDeletePlatformCredentialsByPlatformIdCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Session"; } }
+        public string ServiceName { get { return "Session"; } }
 
-        public string OperationName{ get { return "AdminDeletePlatformCredentialsByPlatformId"; } }
+        public string OperationName { get { return "AdminDeletePlatformCredentialsByPlatformId"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

@@ -80,8 +80,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 PublicChatHistory op = new PublicChatHistory(this,
-                    namespace_,                    
-                    topic                    
+                    namespace_,
+                    topic
                 );
 
                 op.SetBaseFields<PublicChatHistoryBuilder>(this);
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -122,7 +122,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -135,15 +135,15 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
-            
+
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Order is not null) QueryParams["order"] = builder.Order;
             if (builder.StartCreatedAt != null) QueryParams["startCreatedAt"] = Convert.ToString(builder.StartCreatedAt)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -168,24 +168,24 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #endregion
 
         public PublicChatHistory(
-            string namespace_,            
-            string topic,            
-            long? limit,            
-            string? order,            
-            long? startCreatedAt            
+            string namespace_,
+            string topic,
+            long? limit,
+            string? order,
+            long? startCreatedAt
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
-            
+
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (order is not null) QueryParams["order"] = order;
             if (startCreatedAt != null) QueryParams["startCreatedAt"] = Convert.ToString(startCreatedAt)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -197,7 +197,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicChatHistory.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicChatHistory.Response()

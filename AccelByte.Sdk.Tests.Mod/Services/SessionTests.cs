@@ -359,7 +359,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .Execute(_Sdk.Namespace, partyId)
                 .EnsureSuccess();
             #endregion
-            
+
             Assert.AreEqual(2, partyData.Members!.Count);
             List<string> userIds = partyData.Members!.Select(item => item.Id!).ToList();
             Assert.Contains(_Player1.UserId, userIds);

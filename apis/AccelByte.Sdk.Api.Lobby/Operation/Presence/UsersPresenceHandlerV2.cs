@@ -64,8 +64,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 UsersPresenceHandlerV2 op = new UsersPresenceHandlerV2(this,
-                    body,                    
-                    namespace_                    
+                    body,
+                    namespace_
                 );
 
                 op.SetBaseFields<UsersPresenceHandlerV2Builder>(this);
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -118,14 +118,14 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.CountOnly != null) QueryParams["countOnly"] = Convert.ToString(builder.CountOnly)!;
-            
 
-            
-            
+            if (builder.CountOnly != null) QueryParams["countOnly"] = Convert.ToString(builder.CountOnly)!;
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -148,20 +148,20 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public UsersPresenceHandlerV2(
-            string namespace_,            
-            bool? countOnly,            
-            Model.ModelRequestUserPresence body            
+            string namespace_,
+            bool? countOnly,
+            Model.ModelRequestUserPresence body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (countOnly != null) QueryParams["countOnly"] = Convert.ToString(countOnly)!;
-            
 
-            
-            
+            if (countOnly != null) QueryParams["countOnly"] = Convert.ToString(countOnly)!;
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -173,7 +173,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public UsersPresenceHandlerV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UsersPresenceHandlerV2.Response()

@@ -85,9 +85,9 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             )
             {
                 UpdateLeaderboardConfigurationAdminV3 op = new UpdateLeaderboardConfigurationAdminV3(this,
-                    body,                    
-                    leaderboardCode,                    
-                    namespace_                    
+                    body,
+                    leaderboardCode,
+                    namespace_
                 );
 
                 op.SetBaseFields<UpdateLeaderboardConfigurationAdminV3Builder>(this);
@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -132,7 +132,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -146,13 +146,13 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         {
             PathParams["leaderboardCode"] = leaderboardCode;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -181,20 +181,20 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #endregion
 
         public UpdateLeaderboardConfigurationAdminV3(
-            string leaderboardCode,            
-            string namespace_,            
-            Model.ModelsUpdateLeaderboardConfigReqV3 body            
+            string leaderboardCode,
+            string namespace_,
+            Model.ModelsUpdateLeaderboardConfigReqV3 body
         )
         {
             PathParams["leaderboardCode"] = leaderboardCode;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -206,7 +206,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public UpdateLeaderboardConfigurationAdminV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpdateLeaderboardConfigurationAdminV3.Response()

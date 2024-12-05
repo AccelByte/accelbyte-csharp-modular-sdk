@@ -62,10 +62,10 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             )
             {
                 UpdateRootRegionOverride op = new UpdateRootRegionOverride(this,
-                    body,                    
-                    deployment,                    
-                    namespace_,                    
-                    region                    
+                    body,
+                    deployment,
+                    namespace_,
+                    region
                 );
 
                 op.SetBaseFields<UpdateRootRegionOverrideBuilder>(this);
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -130,13 +130,13 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             PathParams["deployment"] = deployment;
             PathParams["namespace"] = namespace_;
             PathParams["region"] = region;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -161,22 +161,22 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         #endregion
 
         public UpdateRootRegionOverride(
-            string deployment,            
-            string namespace_,            
-            string region,            
-            Model.ModelsUpdateRegionOverrideRequest body            
+            string deployment,
+            string namespace_,
+            string region,
+            Model.ModelsUpdateRegionOverrideRequest body
         )
         {
             PathParams["deployment"] = deployment;
             PathParams["namespace"] = namespace_;
             PathParams["region"] = region;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -188,7 +188,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public UpdateRootRegionOverride.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpdateRootRegionOverride.Response()

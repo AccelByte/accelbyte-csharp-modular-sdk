@@ -77,11 +77,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 AdminUpdateContentS3ByShareCode op = new AdminUpdateContentS3ByShareCode(this,
-                    body,                    
-                    channelId,                    
-                    namespace_,                    
-                    shareCode,                    
-                    userId                    
+                    body,
+                    channelId,
+                    namespace_,
+                    shareCode,
+                    userId
                 );
 
                 op.SetBaseFields<AdminUpdateContentS3ByShareCodeBuilder>(this);
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -160,7 +160,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -185,7 +185,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -203,13 +203,13 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["namespace"] = namespace_;
             PathParams["shareCode"] = shareCode;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -255,24 +255,24 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #endregion
 
         public AdminUpdateContentS3ByShareCode(
-            string channelId,            
-            string namespace_,            
-            string shareCode,            
-            string userId,            
-            Model.ModelsAdminUpdateContentRequest body            
+            string channelId,
+            string namespace_,
+            string shareCode,
+            string userId,
+            Model.ModelsAdminUpdateContentRequest body
         )
         {
             PathParams["channelId"] = channelId;
             PathParams["namespace"] = namespace_;
             PathParams["shareCode"] = shareCode;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -284,7 +284,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminUpdateContentS3ByShareCode.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminUpdateContentS3ByShareCode.Response()
@@ -347,7 +347,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Data = JsonSerializer.Deserialize<Model.ModelsCreateContentResponse<T1>>(payload, ResponseJsonOptions);
@@ -383,7 +383,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                 response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

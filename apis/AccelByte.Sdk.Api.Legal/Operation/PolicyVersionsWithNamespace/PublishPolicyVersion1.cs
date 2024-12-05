@@ -64,8 +64,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 PublishPolicyVersion1 op = new PublishPolicyVersion1(this,
-                    namespace_,                    
-                    policyVersionId                    
+                    namespace_,
+                    policyVersionId
                 );
 
                 op.SetBaseFields<PublishPolicyVersion1Builder>(this);
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -119,13 +119,13 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["policyVersionId"] = policyVersionId;
-            
-            if (builder.ShouldNotify != null) QueryParams["shouldNotify"] = Convert.ToString(builder.ShouldNotify)!;
-            
 
-            
-            
-            
+            if (builder.ShouldNotify != null) QueryParams["shouldNotify"] = Convert.ToString(builder.ShouldNotify)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -146,20 +146,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #endregion
 
         public PublishPolicyVersion1(
-            string namespace_,            
-            string policyVersionId,            
-            bool? shouldNotify            
+            string namespace_,
+            string policyVersionId,
+            bool? shouldNotify
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["policyVersionId"] = policyVersionId;
-            
-            if (shouldNotify != null) QueryParams["shouldNotify"] = Convert.ToString(shouldNotify)!;
-            
 
-            
-            
-            
+            if (shouldNotify != null) QueryParams["shouldNotify"] = Convert.ToString(shouldNotify)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -168,10 +168,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Patch;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublishPolicyVersion1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublishPolicyVersion1.Response()
@@ -182,13 +182,13 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             };
 
             if (code == (HttpStatusCode)400)
-            
+
             {
                 response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
-            
+
             {
                 response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();

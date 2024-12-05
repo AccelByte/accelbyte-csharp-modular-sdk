@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
     /// 
     /// Starts the Application
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class StartAppV1 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -60,16 +60,16 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             )
             {
                 StartAppV1 op = new StartAppV1(this,
-                    body,                    
-                    app,                    
-                    namespace_                    
+                    body,
+                    app,
+                    namespace_
                 );
 
                 op.SetBaseFields<StartAppV1Builder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public StartAppV1.Response Execute(
                 GeneratedStartAppV1Request body,
                 string app,
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -122,13 +122,13 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -155,20 +155,20 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #endregion
 
         public StartAppV1(
-            string app,            
-            string namespace_,            
-            Model.GeneratedStartAppV1Request body            
+            string app,
+            string namespace_,
+            Model.GeneratedStartAppV1Request body
         )
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -180,7 +180,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public StartAppV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new StartAppV1.Response()

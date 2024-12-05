@@ -60,8 +60,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 PublicGetUserProfilePublicInfoByIds op = new PublicGetUserProfilePublicInfoByIds(this,
-                    namespace_,                    
-                    userIds                    
+                    namespace_,
+                    userIds
                 );
 
                 op.SetBaseFields<PublicGetUserProfilePublicInfoByIdsBuilder>(this);
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -122,7 +122,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -141,7 +141,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -153,13 +153,13 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (userIds is not null) QueryParams["userIds"] = userIds;
-            
 
-            
-            
-            
+            if (userIds is not null) QueryParams["userIds"] = userIds;
+
+
+
+
+
 
         }
         #endregion
@@ -184,18 +184,18 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #endregion
 
         public PublicGetUserProfilePublicInfoByIds(
-            string namespace_,            
-            string userIds            
+            string namespace_,
+            string userIds
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (userIds is not null) QueryParams["userIds"] = userIds;
-            
 
-            
-            
-            
+            if (userIds is not null) QueryParams["userIds"] = userIds;
+
+
+
+
+
 
         }
 
@@ -203,10 +203,10 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicGetUserProfilePublicInfoByIds.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGetUserProfilePublicInfoByIds.Response()
@@ -244,7 +244,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Data = JsonSerializer.Deserialize<List<Model.UserProfilePublicInfo<T1>>>(payload, ResponseJsonOptions);
@@ -255,7 +255,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

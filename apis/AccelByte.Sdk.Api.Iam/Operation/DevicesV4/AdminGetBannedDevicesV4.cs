@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminGetBannedDevicesV4 op = new AdminGetBannedDevicesV4(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<AdminGetBannedDevicesV4Builder>(this);
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -132,7 +132,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -143,17 +143,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.DeviceType is not null) QueryParams["deviceType"] = builder.DeviceType;
             if (builder.EndDate is not null) QueryParams["endDate"] = builder.EndDate;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.StartDate is not null) QueryParams["startDate"] = builder.StartDate;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -176,26 +176,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminGetBannedDevicesV4(
-            string namespace_,            
-            string? deviceType,            
-            string? endDate,            
-            long? limit,            
-            long? offset,            
-            string? startDate            
+            string namespace_,
+            string? deviceType,
+            string? endDate,
+            long? limit,
+            long? offset,
+            string? startDate
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (deviceType is not null) QueryParams["deviceType"] = deviceType;
             if (endDate is not null) QueryParams["endDate"] = endDate;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (startDate is not null) QueryParams["startDate"] = startDate;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -207,7 +207,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGetBannedDevicesV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetBannedDevicesV4.Response()

@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 RequestOneTimeLinkingCodeV3 op = new RequestOneTimeLinkingCodeV3(this,
-                    platformId                    
+                    platformId
                 );
 
                 op.SetBaseFields<RequestOneTimeLinkingCodeV3Builder>(this);
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -127,13 +127,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string platformId
         )
         {
-            
-            
+
+
             if (platformId is not null) FormParams["platformId"] = platformId;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -150,16 +150,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public RequestOneTimeLinkingCodeV3(
-            string platformId            
+            string platformId
         )
         {
-            
-            
+
+
             if (platformId is not null) FormParams["platformId"] = platformId;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -171,7 +171,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public RequestOneTimeLinkingCodeV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RequestOneTimeLinkingCodeV3.Response()

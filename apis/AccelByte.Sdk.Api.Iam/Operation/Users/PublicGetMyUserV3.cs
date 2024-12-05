@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -122,13 +122,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         private PublicGetMyUserV3(PublicGetMyUserV3Builder builder
         )
         {
-            
-            if (builder.IncludeAllPlatforms != null) QueryParams["includeAllPlatforms"] = Convert.ToString(builder.IncludeAllPlatforms)!;
-            
 
-            
-            
-            
+            if (builder.IncludeAllPlatforms != null) QueryParams["includeAllPlatforms"] = Convert.ToString(builder.IncludeAllPlatforms)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -149,16 +149,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicGetMyUserV3(
-            bool? includeAllPlatforms            
+            bool? includeAllPlatforms
         )
         {
-            
-            if (includeAllPlatforms != null) QueryParams["includeAllPlatforms"] = Convert.ToString(includeAllPlatforms)!;
-            
 
-            
-            
-            
+            if (includeAllPlatforms != null) QueryParams["includeAllPlatforms"] = Convert.ToString(includeAllPlatforms)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -167,10 +167,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicGetMyUserV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGetMyUserV3.Response()

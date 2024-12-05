@@ -143,7 +143,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminChatHistory op = new AdminChatHistory(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<AdminChatHistoryBuilder>(this);
@@ -163,7 +163,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -180,7 +180,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -191,7 +191,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.ChatId is not null) QueryParams["chatId"] = builder.ChatId;
             if (builder.EndCreatedAt != null) QueryParams["endCreatedAt"] = Convert.ToString(builder.EndCreatedAt)!;
             if (builder.Keyword is not null) QueryParams["keyword"] = builder.Keyword;
@@ -203,13 +203,13 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             if (builder.StartCreatedAt != null) QueryParams["startCreatedAt"] = Convert.ToString(builder.StartCreatedAt)!;
             if (builder.Topic is not null) QueryParams["topic"] = builder.Topic;
             if (builder.Unfiltered != null) QueryParams["unfiltered"] = Convert.ToString(builder.Unfiltered)!;
-            
 
-            
+
+
             CollectionFormatMap["chatId"] = "multi";
             CollectionFormatMap["topic"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -234,22 +234,22 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #endregion
 
         public AdminChatHistory(
-            string namespace_,            
-            List<string>? chatId,            
-            long? endCreatedAt,            
-            string? keyword,            
-            long? limit,            
-            long? offset,            
-            string? order,            
-            string? senderUserId,            
-            string? shardId,            
-            long? startCreatedAt,            
-            List<string>? topic,            
-            bool? unfiltered            
+            string namespace_,
+            List<string>? chatId,
+            long? endCreatedAt,
+            string? keyword,
+            long? limit,
+            long? offset,
+            string? order,
+            string? senderUserId,
+            string? shardId,
+            long? startCreatedAt,
+            List<string>? topic,
+            bool? unfiltered
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (chatId is not null) QueryParams["chatId"] = chatId;
             if (endCreatedAt != null) QueryParams["endCreatedAt"] = Convert.ToString(endCreatedAt)!;
             if (keyword is not null) QueryParams["keyword"] = keyword;
@@ -261,13 +261,13 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             if (startCreatedAt != null) QueryParams["startCreatedAt"] = Convert.ToString(startCreatedAt)!;
             if (topic is not null) QueryParams["topic"] = topic;
             if (unfiltered != null) QueryParams["unfiltered"] = Convert.ToString(unfiltered)!;
-            
 
-            
+
+
             CollectionFormatMap["chatId"] = "multi";
             CollectionFormatMap["topic"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -279,7 +279,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminChatHistory.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminChatHistory.Response()

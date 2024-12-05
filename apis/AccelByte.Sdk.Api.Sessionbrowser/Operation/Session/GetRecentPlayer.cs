@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             )
             {
                 GetRecentPlayer op = new GetRecentPlayer(this,
-                    namespace_,                    
-                    userID                    
+                    namespace_,
+                    userID
                 );
 
                 op.SetBaseFields<GetRecentPlayerBuilder>(this);
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -111,12 +111,12 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userID"] = userID;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -137,18 +137,18 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         #endregion
 
         public GetRecentPlayer(
-            string namespace_,            
-            string userID            
+            string namespace_,
+            string userID
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userID"] = userID;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -160,7 +160,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetRecentPlayer.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetRecentPlayer.Response()

@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
     /// 
     /// Search sessions.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class SearchSessions : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -120,16 +120,16 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
             )
             {
                 SearchSessions op = new SearchSessions(this,
-                    namespace_,                    
-                    limit,                    
-                    offset                    
+                    namespace_,
+                    limit,
+                    offset
                 );
 
                 op.SetBaseFields<SearchSessionsBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public SearchSessions.Response Execute(
                 string namespace_,
                 long limit,
@@ -147,7 +147,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -168,7 +168,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -181,21 +181,21 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Channel is not null) QueryParams["channel"] = builder.Channel;
             if (builder.Deleted != null) QueryParams["deleted"] = Convert.ToString(builder.Deleted)!;
             if (builder.MatchID is not null) QueryParams["matchID"] = builder.MatchID;
             if (builder.PartyID is not null) QueryParams["partyID"] = builder.PartyID;
             if (builder.UserID is not null) QueryParams["userID"] = builder.UserID;
-            
-            QueryParams["limit"] = Convert.ToString(limit)!;
-            
-            QueryParams["offset"] = Convert.ToString(offset)!;
-            
 
-            
-            
-            
+            QueryParams["limit"] = Convert.ToString(limit)!;
+
+            QueryParams["offset"] = Convert.ToString(offset)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -222,32 +222,32 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         #endregion
 
         public SearchSessions(
-            string namespace_,            
-            string? channel,            
-            bool? deleted,            
-            string? matchID,            
-            string? partyID,            
-            string? userID,            
-            long limit,            
-            long offset            
+            string namespace_,
+            string? channel,
+            bool? deleted,
+            string? matchID,
+            string? partyID,
+            string? userID,
+            long limit,
+            long offset
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (channel is not null) QueryParams["channel"] = channel;
             if (deleted != null) QueryParams["deleted"] = Convert.ToString(deleted)!;
             if (matchID is not null) QueryParams["matchID"] = matchID;
             if (partyID is not null) QueryParams["partyID"] = partyID;
             if (userID is not null) QueryParams["userID"] = userID;
-            
-            QueryParams["limit"] = Convert.ToString(limit)!;
-            
-            QueryParams["offset"] = Convert.ToString(offset)!;
-            
 
-            
-            
-            
+            QueryParams["limit"] = Convert.ToString(limit)!;
+
+            QueryParams["offset"] = Convert.ToString(offset)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -259,7 +259,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public SearchSessions.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new SearchSessions.Response()

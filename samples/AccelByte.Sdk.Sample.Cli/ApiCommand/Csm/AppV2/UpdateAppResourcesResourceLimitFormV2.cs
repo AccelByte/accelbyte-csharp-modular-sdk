@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Csm.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Csm
 {
-    [SdkConsoleCommand("csm","updateappresourcesresourcelimitformv2")]
-    public class UpdateAppResourcesResourceLimitFormV2Command: ISdkConsoleCommand
+    [SdkConsoleCommand("csm", "updateappresourcesresourcelimitformv2")]
+    public class UpdateAppResourcesResourceLimitFormV2Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Csm"; } }
+        public string ServiceName { get { return "Csm"; } }
 
-        public string OperationName{ get { return "UpdateAppResourcesResourceLimitFormV2"; } }
+        public string OperationName { get { return "UpdateAppResourcesResourceLimitFormV2"; } }
 
         [SdkCommandArgument("app")]
         public string App { get; set; } = String.Empty;

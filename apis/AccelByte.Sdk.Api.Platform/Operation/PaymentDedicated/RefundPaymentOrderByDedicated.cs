@@ -200,9 +200,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 RefundPaymentOrderByDedicated op = new RefundPaymentOrderByDedicated(this,
-                    body,                    
-                    namespace_,                    
-                    paymentOrderNo                    
+                    body,
+                    namespace_,
+                    paymentOrderNo
                 );
 
                 op.SetBaseFields<RefundPaymentOrderByDedicatedBuilder>(this);
@@ -226,7 +226,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -247,7 +247,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -261,13 +261,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["paymentOrderNo"] = paymentOrderNo;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -290,20 +290,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public RefundPaymentOrderByDedicated(
-            string namespace_,            
-            string paymentOrderNo,            
-            Model.PaymentOrderRefund body            
+            string namespace_,
+            string paymentOrderNo,
+            Model.PaymentOrderRefund body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["paymentOrderNo"] = paymentOrderNo;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -315,7 +315,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public RefundPaymentOrderByDedicated.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RefundPaymentOrderByDedicated.Response()

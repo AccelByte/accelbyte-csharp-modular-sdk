@@ -71,7 +71,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -95,12 +95,12 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         private RetrieveCountryListWithPolicies(RetrieveCountryListWithPoliciesBuilder builder
         )
         {
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
         }
         #endregion
@@ -118,12 +118,12 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         public RetrieveCountryListWithPolicies(
         )
         {
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
         }
 
@@ -131,10 +131,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public RetrieveCountryListWithPolicies.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RetrieveCountryListWithPolicies.Response()

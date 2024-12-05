@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsmc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
 {
-    [SdkConsoleCommand("dsmc","runghostcleanerrequesthandler")]
-    public class RunGhostCleanerRequestHandlerCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("dsmc", "runghostcleanerrequesthandler")]
+    public class RunGhostCleanerRequestHandlerCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Dsmc"; } }
+        public string ServiceName { get { return "Dsmc"; } }
 
-        public string OperationName{ get { return "RunGhostCleanerRequestHandler"; } }
+        public string OperationName { get { return "RunGhostCleanerRequestHandler"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

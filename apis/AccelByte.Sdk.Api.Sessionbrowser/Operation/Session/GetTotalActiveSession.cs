@@ -63,7 +63,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
             )
             {
                 GetTotalActiveSession op = new GetTotalActiveSession(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<GetTotalActiveSessionBuilder>(this);
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -111,13 +111,13 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.SessionType is not null) QueryParams["session_type"] = builder.SessionType;
-            
 
-            
-            
-            
+            if (builder.SessionType is not null) QueryParams["session_type"] = builder.SessionType;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -138,18 +138,18 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
         #endregion
 
         public GetTotalActiveSession(
-            string namespace_,            
-            string? sessionType            
+            string namespace_,
+            string? sessionType
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (sessionType is not null) QueryParams["session_type"] = sessionType;
-            
 
-            
-            
-            
+            if (sessionType is not null) QueryParams["session_type"] = sessionType;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -158,10 +158,10 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetTotalActiveSession.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetTotalActiveSession.Response()

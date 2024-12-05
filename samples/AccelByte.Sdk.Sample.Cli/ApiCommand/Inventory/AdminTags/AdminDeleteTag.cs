@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Inventory.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
 {
-    [SdkConsoleCommand("inventory","admindeletetag")]
-    public class AdminDeleteTagCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("inventory", "admindeletetag")]
+    public class AdminDeleteTagCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Inventory"; } }
+        public string ServiceName { get { return "Inventory"; } }
 
-        public string OperationName{ get { return "AdminDeleteTag"; } }
+        public string OperationName { get { return "AdminDeleteTag"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

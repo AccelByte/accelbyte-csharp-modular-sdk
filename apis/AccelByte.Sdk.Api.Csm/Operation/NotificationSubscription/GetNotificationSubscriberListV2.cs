@@ -73,8 +73,8 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             )
             {
                 GetNotificationSubscriberListV2 op = new GetNotificationSubscriberListV2(this,
-                    app,                    
-                    namespace_                    
+                    app,
+                    namespace_
                 );
 
                 op.SetBaseFields<GetNotificationSubscriberListV2Builder>(this);
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -128,13 +128,13 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
-            
-            if (builder.NotificationType is not null) QueryParams["notificationType"] = builder.NotificationType;
-            
 
-            
-            
-            
+            if (builder.NotificationType is not null) QueryParams["notificationType"] = builder.NotificationType;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -159,20 +159,20 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #endregion
 
         public GetNotificationSubscriberListV2(
-            string app,            
-            string namespace_,            
-            string? notificationType            
+            string app,
+            string namespace_,
+            string? notificationType
         )
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
-            
-            if (notificationType is not null) QueryParams["notificationType"] = notificationType;
-            
 
-            
-            
-            
+            if (notificationType is not null) QueryParams["notificationType"] = notificationType;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -184,7 +184,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetNotificationSubscriberListV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetNotificationSubscriberListV2.Response()

@@ -115,9 +115,9 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             )
             {
                 AdminPutAdminGameRecordConcurrentHandlerV1 op = new AdminPutAdminGameRecordConcurrentHandlerV1(this,
-                    body,                    
-                    key,                    
-                    namespace_                    
+                    body,
+                    key,
+                    namespace_
                 );
 
                 op.SetBaseFields<AdminPutAdminGameRecordConcurrentHandlerV1Builder>(this);
@@ -141,7 +141,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -162,7 +162,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -176,13 +176,13 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         {
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -209,20 +209,20 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #endregion
 
         public AdminPutAdminGameRecordConcurrentHandlerV1(
-            string key,            
-            string namespace_,            
-            Model.ModelsAdminGameConcurrentRecordRequest body            
+            string key,
+            string namespace_,
+            Model.ModelsAdminGameConcurrentRecordRequest body
         )
         {
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -234,7 +234,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminPutAdminGameRecordConcurrentHandlerV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminPutAdminGameRecordConcurrentHandlerV1.Response()
@@ -245,31 +245,31 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             };
 
             if (code == (HttpStatusCode)400)
-            
+
             {
                 response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
-            
+
             {
                 response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-            
+
             {
                 response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)412)
-            
+
             {
                 response.Error412 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error412!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-            
+
             {
                 response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

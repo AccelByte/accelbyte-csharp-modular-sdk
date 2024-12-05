@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// Note:
     /// **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class PublicListUserIDByPlatformUserIDsV3 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -104,16 +104,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicListUserIDByPlatformUserIDsV3 op = new PublicListUserIDByPlatformUserIDsV3(this,
-                    body,                    
-                    namespace_,                    
-                    platformId                    
+                    body,
+                    namespace_,
+                    platformId
                 );
 
                 op.SetBaseFields<PublicListUserIDByPlatformUserIDsV3Builder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public PublicListUserIDByPlatformUserIDsV3.Response Execute(
                 ModelPlatformUserIDRequest body,
                 string namespace_,
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -152,7 +152,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -166,15 +166,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
-            
+
             if (builder.RawPID != null) QueryParams["rawPID"] = Convert.ToString(builder.RawPID)!;
             if (builder.RawPUID != null) QueryParams["rawPUID"] = Convert.ToString(builder.RawPUID)!;
-            
 
-            
-            
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -199,24 +199,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicListUserIDByPlatformUserIDsV3(
-            string namespace_,            
-            string platformId,            
-            bool? rawPID,            
-            bool? rawPUID,            
-            Model.ModelPlatformUserIDRequest body            
+            string namespace_,
+            string platformId,
+            bool? rawPID,
+            bool? rawPUID,
+            Model.ModelPlatformUserIDRequest body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
-            
+
             if (rawPID != null) QueryParams["rawPID"] = Convert.ToString(rawPID)!;
             if (rawPUID != null) QueryParams["rawPUID"] = Convert.ToString(rawPUID)!;
-            
 
-            
-            
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -228,7 +228,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicListUserIDByPlatformUserIDsV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicListUserIDByPlatformUserIDsV3.Response()

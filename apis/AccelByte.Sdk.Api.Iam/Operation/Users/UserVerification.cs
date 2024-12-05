@@ -30,7 +30,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// Redeems a verification code sent to a user to verify the user's contact address is correct
     /// Available ContactType : *email* or *phone*
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class UserVerification : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -63,16 +63,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 UserVerification op = new UserVerification(this,
-                    body,                    
-                    namespace_,                    
-                    userId                    
+                    body,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<UserVerificationBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public UserVerification.Response Execute(
                 ModelUserVerificationRequest body,
                 string namespace_,
@@ -90,7 +90,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -125,13 +125,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -158,20 +158,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public UserVerification(
-            string namespace_,            
-            string userId,            
-            Model.ModelUserVerificationRequest body            
+            string namespace_,
+            string userId,
+            Model.ModelUserVerificationRequest body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -183,7 +183,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public UserVerification.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UserVerification.Response()
@@ -194,31 +194,31 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             };
 
             if (code == (HttpStatusCode)400)
-            
+
             {
                 response.Error400 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error400!);
             }
             else if (code == (HttpStatusCode)401)
-            
+
             {
                 response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-            
+
             {
                 response.Error403 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error403!);
             }
             else if (code == (HttpStatusCode)404)
-            
+
             {
                 response.Error404 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)500)
-            
+
             {
                 response.Error500 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error500!);

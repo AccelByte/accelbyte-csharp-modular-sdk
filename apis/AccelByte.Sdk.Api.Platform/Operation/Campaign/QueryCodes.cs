@@ -116,8 +116,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryCodes op = new QueryCodes(this,
-                    campaignId,                    
-                    namespace_                    
+                    campaignId,
+                    namespace_
                 );
 
                 op.SetBaseFields<QueryCodesBuilder>(this);
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -158,7 +158,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -171,7 +171,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["campaignId"] = campaignId;
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
             if (builder.BatchName is not null) QueryParams["batchName"] = builder.BatchName;
             if (builder.BatchNo is not null) QueryParams["batchNo"] = builder.BatchNo;
@@ -179,12 +179,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.WithBatchName != null) QueryParams["withBatchName"] = Convert.ToString(builder.WithBatchName)!;
-            
 
-            
+
+
             CollectionFormatMap["batchNo"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -201,20 +201,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public QueryCodes(
-            string campaignId,            
-            string namespace_,            
-            bool? activeOnly,            
-            string? batchName,            
-            List<int>? batchNo,            
-            string? code,            
-            int? limit,            
-            int? offset,            
-            bool? withBatchName            
+            string campaignId,
+            string namespace_,
+            bool? activeOnly,
+            string? batchName,
+            List<int>? batchNo,
+            string? code,
+            int? limit,
+            int? offset,
+            bool? withBatchName
         )
         {
             PathParams["campaignId"] = campaignId;
             PathParams["namespace"] = namespace_;
-            
+
             if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
             if (batchName is not null) QueryParams["batchName"] = batchName;
             if (batchNo is not null) QueryParams["batchNo"] = batchNo;
@@ -222,12 +222,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (withBatchName != null) QueryParams["withBatchName"] = Convert.ToString(withBatchName)!;
-            
 
-            
+
+
             CollectionFormatMap["batchNo"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -236,10 +236,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public QueryCodes.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryCodes.Response()

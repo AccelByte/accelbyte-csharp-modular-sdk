@@ -58,10 +58,10 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 PublicCreateContentV2 op = new PublicCreateContentV2(this,
-                    body,                    
-                    channelId,                    
-                    namespace_,                    
-                    userId                    
+                    body,
+                    channelId,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<PublicCreateContentV2Builder>(this);
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -157,7 +157,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -173,13 +173,13 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["channelId"] = channelId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -217,22 +217,22 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #endregion
 
         public PublicCreateContentV2(
-            string channelId,            
-            string namespace_,            
-            string userId,            
-            Model.ModelsContentRequestV2 body            
+            string channelId,
+            string namespace_,
+            string userId,
+            Model.ModelsContentRequestV2 body
         )
         {
             PathParams["channelId"] = channelId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -241,10 +241,10 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { "application/json","application/octet-stream" };
+        public override List<string> Consumes => new() { "application/json", "application/octet-stream" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicCreateContentV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicCreateContentV2.Response()
@@ -297,7 +297,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Data = JsonSerializer.Deserialize<Model.ModelsCreateContentResponseV2<T1>>(payload, ResponseJsonOptions);
@@ -323,7 +323,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                 response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Tests.Mod.Scenario
                 _SdkClient.GetIamApi().Users.AdminDeleteUserInformationV3Op
                     .Execute(_SdkClient.Namespace, UserId)
                     .EnsureSuccess();
-            }   
+            }
         }
 
         public void Run(Action<IAccelByteSdk, ITestPlayer> action)

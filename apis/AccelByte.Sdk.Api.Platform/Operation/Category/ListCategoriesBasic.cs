@@ -67,7 +67,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 ListCategoriesBasic op = new ListCategoriesBasic(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<ListCategoriesBasicBuilder>(this);
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -115,13 +115,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
-            
 
-            
-            
-            
+            if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -138,18 +138,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public ListCategoriesBasic(
-            string namespace_,            
-            string? storeId            
+            string namespace_,
+            string? storeId
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (storeId is not null) QueryParams["storeId"] = storeId;
-            
 
-            
-            
-            
+            if (storeId is not null) QueryParams["storeId"] = storeId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -158,10 +158,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ListCategoriesBasic.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ListCategoriesBasic.Response()

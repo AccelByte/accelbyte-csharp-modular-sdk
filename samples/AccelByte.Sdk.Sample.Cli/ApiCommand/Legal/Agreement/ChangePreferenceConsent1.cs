@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal","changepreferenceconsent1")]
-    public class ChangePreferenceConsent1Command: ISdkConsoleCommand
+    [SdkConsoleCommand("legal", "changepreferenceconsent1")]
+    public class ChangePreferenceConsent1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Legal"; } }
+        public string ServiceName { get { return "Legal"; } }
 
-        public string OperationName{ get { return "ChangePreferenceConsent1"; } }
+        public string OperationName { get { return "ChangePreferenceConsent1"; } }
 
         [SdkCommandData("body")]
         public List<AcceptAgreementRequest> Body { get; set; } = new List<AcceptAgreementRequest>();

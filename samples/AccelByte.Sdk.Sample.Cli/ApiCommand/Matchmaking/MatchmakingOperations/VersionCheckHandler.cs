@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Matchmaking.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Matchmaking
 {
-    [SdkConsoleCommand("matchmaking","versioncheckhandler")]
-    public class VersionCheckHandlerCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("matchmaking", "versioncheckhandler")]
+    public class VersionCheckHandlerCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Matchmaking"; } }
+        public string ServiceName { get { return "Matchmaking"; } }
 
-        public string OperationName{ get { return "VersionCheckHandler"; } }
+        public string OperationName { get { return "VersionCheckHandler"; } }
 
         public VersionCheckHandlerCommand(IAccelByteSdk sdk)
         {

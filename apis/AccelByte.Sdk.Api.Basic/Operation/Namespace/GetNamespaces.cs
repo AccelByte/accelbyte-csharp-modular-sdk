@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -107,13 +107,13 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         private GetNamespaces(GetNamespacesBuilder builder
         )
         {
-            
-            if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
-            
 
-            
-            
-            
+            if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -134,16 +134,16 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #endregion
 
         public GetNamespaces(
-            bool? activeOnly            
+            bool? activeOnly
         )
         {
-            
-            if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
-            
 
-            
-            
-            
+            if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -152,10 +152,10 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetNamespaces.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetNamespaces.Response()

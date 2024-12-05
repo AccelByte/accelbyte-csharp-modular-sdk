@@ -64,7 +64,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicInviteUserV4 op = new PublicInviteUserV4(this,
-                    body                    
+                    body
                 );
 
                 op.SetBaseFields<PublicInviteUserV4Builder>(this);
@@ -84,7 +84,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -111,13 +111,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             ModelPublicInviteUserRequestV4 body
         )
         {
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -144,16 +144,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicInviteUserV4(
-            Model.ModelPublicInviteUserRequestV4 body            
+            Model.ModelPublicInviteUserRequestV4 body
         )
         {
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -165,7 +165,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicInviteUserV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicInviteUserV4.Response()

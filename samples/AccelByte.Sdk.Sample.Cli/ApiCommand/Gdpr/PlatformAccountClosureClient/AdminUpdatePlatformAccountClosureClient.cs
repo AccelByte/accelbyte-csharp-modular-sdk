@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Gdpr.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
 {
-    [SdkConsoleCommand("gdpr","adminupdateplatformaccountclosureclient")]
-    public class AdminUpdatePlatformAccountClosureClientCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("gdpr", "adminupdateplatformaccountclosureclient")]
+    public class AdminUpdatePlatformAccountClosureClientCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Gdpr"; } }
+        public string ServiceName { get { return "Gdpr"; } }
 
-        public string OperationName{ get { return "AdminUpdatePlatformAccountClosureClient"; } }
+        public string OperationName { get { return "AdminUpdatePlatformAccountClosureClient"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

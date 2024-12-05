@@ -63,8 +63,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             )
             {
                 AdminSubmitReport op = new AdminSubmitReport(this,
-                    body,                    
-                    namespace_                    
+                    body,
+                    namespace_
                 );
 
                 op.SetBaseFields<AdminSubmitReportBuilder>(this);
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -117,13 +117,13 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -146,18 +146,18 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #endregion
 
         public AdminSubmitReport(
-            string namespace_,            
-            Model.RestapiSubmitReportRequest body            
+            string namespace_,
+            Model.RestapiSubmitReportRequest body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -169,7 +169,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminSubmitReport.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminSubmitReport.Response()

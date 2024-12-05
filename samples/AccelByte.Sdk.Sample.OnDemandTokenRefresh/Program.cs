@@ -46,7 +46,7 @@ namespace AccelByte.Sdk.Sample.OnDemandTokenRefresh
 
                 try
                 {
-                    List<RetrieveAcceptedAgreementResponse>? response = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublicOp.Execute().EnsureSuccess();                    
+                    List<RetrieveAcceptedAgreementResponse>? response = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublicOp.Execute().EnsureSuccess();
 
                     foreach (var aggreement in response)
                         Console.WriteLine(aggreement.PolicyName);

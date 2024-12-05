@@ -56,7 +56,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicSendVerificationLinkV3 op = new PublicSendVerificationLinkV3(this,
-                    body                    
+                    body
                 );
 
                 op.SetBaseFields<PublicSendVerificationLinkV3Builder>(this);
@@ -76,7 +76,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -103,13 +103,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             ModelSendVerificationLinkRequest body
         )
         {
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -134,16 +134,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicSendVerificationLinkV3(
-            Model.ModelSendVerificationLinkRequest body            
+            Model.ModelSendVerificationLinkRequest body
         )
         {
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -155,7 +155,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicSendVerificationLinkV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicSendVerificationLinkV3.Response()
@@ -166,25 +166,25 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             };
 
             if (code == (HttpStatusCode)400)
-            
+
             {
                 response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
-            
+
             {
                 response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
-            
+
             {
                 response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)429)
-            
+
             {
                 response.Error429 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error429!.TranslateToApiError();

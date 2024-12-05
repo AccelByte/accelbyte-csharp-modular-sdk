@@ -35,7 +35,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ### Read Justice Platform Account UserID
     /// Without permission the UserID is going to be censored and replaced with âRedactedâ text.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class GetUserJusticePlatformAccount : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -68,16 +68,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 GetUserJusticePlatformAccount op = new GetUserJusticePlatformAccount(this,
-                    namespace_,                    
-                    targetNamespace,                    
-                    userId                    
+                    namespace_,
+                    targetNamespace,
+                    userId
                 );
 
                 op.SetBaseFields<GetUserJusticePlatformAccountBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public GetUserJusticePlatformAccount.Response Execute(
                 string namespace_,
                 string targetNamespace,
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -131,12 +131,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["namespace"] = namespace_;
             PathParams["targetNamespace"] = targetNamespace;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -159,20 +159,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public GetUserJusticePlatformAccount(
-            string namespace_,            
-            string targetNamespace,            
-            string userId            
+            string namespace_,
+            string targetNamespace,
+            string userId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["targetNamespace"] = targetNamespace;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -184,7 +184,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetUserJusticePlatformAccount.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetUserJusticePlatformAccount.Response()

@@ -61,7 +61,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminCheckThirdPartyLoginPlatformAvailabilityV3 op = new AdminCheckThirdPartyLoginPlatformAvailabilityV3(this,
-                    platformId                    
+                    platformId
                 );
 
                 op.SetBaseFields<AdminCheckThirdPartyLoginPlatformAvailabilityV3Builder>(this);
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -109,12 +109,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["platformId"] = platformId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -137,16 +137,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminCheckThirdPartyLoginPlatformAvailabilityV3(
-            string platformId            
+            string platformId
         )
         {
             PathParams["platformId"] = platformId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -155,10 +155,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminCheckThirdPartyLoginPlatformAvailabilityV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminCheckThirdPartyLoginPlatformAvailabilityV3.Response()

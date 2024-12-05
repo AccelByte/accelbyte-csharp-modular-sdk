@@ -61,13 +61,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 ImportStoreByCSV op = new ImportStoreByCSV(this,
-                    category,                    
-                    display,                    
-                    item,                    
-                    notes,                    
-                    section,                    
-                    namespace_,                    
-                    storeId                    
+                    category,
+                    display,
+                    item,
+                    notes,
+                    section,
+                    namespace_,
+                    storeId
                 );
 
                 op.SetBaseFields<ImportStoreByCSVBuilder>(this);
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -146,17 +146,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["storeId"] = storeId;
-            
-            
+
+
             if (category is not null) FormParams["category"] = category;
             if (display is not null) FormParams["display"] = display;
             if (item is not null) FormParams["item"] = item;
             if (notes is not null) FormParams["notes"] = notes;
             if (section is not null) FormParams["section"] = section;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -179,28 +179,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public ImportStoreByCSV(
-            string namespace_,            
-            string storeId,            
-            Stream category,            
-            Stream display,            
-            Stream item,            
-            string notes,            
-            Stream section            
+            string namespace_,
+            string storeId,
+            Stream category,
+            Stream display,
+            Stream item,
+            string notes,
+            Stream section
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["storeId"] = storeId;
-            
-            
+
+
             if (category is not null) FormParams["category"] = category;
             if (display is not null) FormParams["display"] = display;
             if (item is not null) FormParams["item"] = item;
             if (notes is not null) FormParams["notes"] = notes;
             if (section is not null) FormParams["section"] = section;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -212,7 +212,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "multipart/form-data" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ImportStoreByCSV.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ImportStoreByCSV.Response()

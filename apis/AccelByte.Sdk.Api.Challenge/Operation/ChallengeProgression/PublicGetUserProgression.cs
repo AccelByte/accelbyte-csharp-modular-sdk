@@ -97,8 +97,8 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             )
             {
                 PublicGetUserProgression op = new PublicGetUserProgression(this,
-                    challengeCode,                    
-                    namespace_                    
+                    challengeCode,
+                    namespace_
                 );
 
                 op.SetBaseFields<PublicGetUserProgressionBuilder>(this);
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -152,19 +152,19 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         {
             PathParams["challengeCode"] = challengeCode;
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.DateTime != null)
                 QueryParams["dateTime"] = builder.DateTime.Value.ToString("O", System.Globalization.CultureInfo.InvariantCulture);
             if (builder.GoalCode is not null) QueryParams["goalCode"] = builder.GoalCode;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
-            
 
-            
+
+
             CollectionFormatMap["tags"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -193,30 +193,30 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #endregion
 
         public PublicGetUserProgression(
-            string challengeCode,            
-            string namespace_,            
-            DateTime? dateTime,            
-            string? goalCode,            
-            long? limit,            
-            long? offset,            
-            List<string>? tags            
+            string challengeCode,
+            string namespace_,
+            DateTime? dateTime,
+            string? goalCode,
+            long? limit,
+            long? offset,
+            List<string>? tags
         )
         {
             PathParams["challengeCode"] = challengeCode;
             PathParams["namespace"] = namespace_;
-            
+
             if (dateTime != null)
                 QueryParams["dateTime"] = dateTime.Value.ToString("O", System.Globalization.CultureInfo.InvariantCulture);
             if (goalCode is not null) QueryParams["goalCode"] = goalCode;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (tags is not null) QueryParams["tags"] = tags;
-            
 
-            
+
+
             CollectionFormatMap["tags"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -225,10 +225,10 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicGetUserProgression.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGetUserProgression.Response()

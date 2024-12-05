@@ -63,7 +63,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 RetrieveAllPolicyTypes op = new RetrieveAllPolicyTypes(this,
-                    limit                    
+                    limit
                 );
 
                 op.SetBaseFields<RetrieveAllPolicyTypesBuilder>(this);
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -110,15 +110,15 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             int limit
         )
         {
-            
-            if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
-            
-            QueryParams["limit"] = Convert.ToString(limit)!;
-            
 
-            
-            
-            
+            if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
+
+            QueryParams["limit"] = Convert.ToString(limit)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -135,19 +135,19 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #endregion
 
         public RetrieveAllPolicyTypes(
-            int? offset,            
-            int limit            
+            int? offset,
+            int limit
         )
         {
-            
-            if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
-            
-            QueryParams["limit"] = Convert.ToString(limit)!;
-            
 
-            
-            
-            
+            if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
+
+            QueryParams["limit"] = Convert.ToString(limit)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,10 +156,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public RetrieveAllPolicyTypes.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RetrieveAllPolicyTypes.Response()

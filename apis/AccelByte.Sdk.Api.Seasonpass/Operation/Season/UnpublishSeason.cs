@@ -68,8 +68,8 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             )
             {
                 UnpublishSeason op = new UnpublishSeason(this,
-                    namespace_,                    
-                    seasonId                    
+                    namespace_,
+                    seasonId
                 );
 
                 op.SetBaseFields<UnpublishSeasonBuilder>(this);
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -123,13 +123,13 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["seasonId"] = seasonId;
-            
-            if (builder.Force != null) QueryParams["force"] = Convert.ToString(builder.Force)!;
-            
 
-            
-            
-            
+            if (builder.Force != null) QueryParams["force"] = Convert.ToString(builder.Force)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -152,20 +152,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #endregion
 
         public UnpublishSeason(
-            string namespace_,            
-            string seasonId,            
-            bool? force            
+            string namespace_,
+            string seasonId,
+            bool? force
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["seasonId"] = seasonId;
-            
-            if (force != null) QueryParams["force"] = Convert.ToString(force)!;
-            
 
-            
-            
-            
+            if (force != null) QueryParams["force"] = Convert.ToString(force)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -177,7 +177,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public UnpublishSeason.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UnpublishSeason.Response()

@@ -28,7 +28,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// 
     ///   * Returns : paginated wallets info
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class QueryWallets : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -99,14 +99,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryWallets op = new QueryWallets(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<QueryWalletsBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public QueryWallets.Response Execute(
                 string namespace_
             )
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -137,7 +137,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -148,17 +148,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.CurrencyCode is not null) QueryParams["currencyCode"] = builder.CurrencyCode;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Origin is not null) QueryParams["origin"] = builder.Origin.Value;
             if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -175,26 +175,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public QueryWallets(
-            string namespace_,            
-            string? currencyCode,            
-            int? limit,            
-            int? offset,            
-            QueryWalletsOrigin? origin,            
-            string? userId            
+            string namespace_,
+            string? currencyCode,
+            int? limit,
+            int? offset,
+            QueryWalletsOrigin? origin,
+            string? userId
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (currencyCode is not null) QueryParams["currencyCode"] = currencyCode;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (origin is not null) QueryParams["origin"] = origin.Value;
             if (userId is not null) QueryParams["userId"] = userId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -206,7 +206,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public QueryWallets.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryWallets.Response()

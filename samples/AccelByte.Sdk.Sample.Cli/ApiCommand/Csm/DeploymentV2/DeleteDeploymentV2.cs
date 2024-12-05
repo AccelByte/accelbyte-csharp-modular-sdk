@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Csm.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Csm
 {
-    [SdkConsoleCommand("csm","deletedeploymentv2")]
-    public class DeleteDeploymentV2Command: ISdkConsoleCommand
+    [SdkConsoleCommand("csm", "deletedeploymentv2")]
+    public class DeleteDeploymentV2Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Csm"; } }
+        public string ServiceName { get { return "Csm"; } }
 
-        public string OperationName{ get { return "DeleteDeploymentV2"; } }
+        public string OperationName { get { return "DeleteDeploymentV2"; } }
 
         [SdkCommandArgument("deploymentId")]
         public string DeploymentId { get; set; } = String.Empty;

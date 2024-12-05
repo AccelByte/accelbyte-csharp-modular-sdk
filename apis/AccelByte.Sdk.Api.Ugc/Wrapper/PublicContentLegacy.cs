@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CreateContentDirect.CreateContentDirectBuilder CreateContentDirectOp
         {
             get
@@ -167,7 +167,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateContentDirect.UpdateContentDirectBuilder UpdateContentDirectOp
         {
             get
@@ -427,8 +427,8 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CreateContentDirect.Response CreateContentDirect(CreateContentDirect input)
         {
             var response = _sdk.RunRequest(input);
@@ -462,7 +462,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
         public CreateContentS3.Response CreateContentS3(CreateContentS3 input)
         {
             var response = _sdk.RunRequest(input);
@@ -578,8 +578,8 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateContentDirect.Response UpdateContentDirect(UpdateContentDirect input)
         {
             var response = _sdk.RunRequest(input);
@@ -613,7 +613,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
         public DeleteContent.Response DeleteContent(DeleteContent input)
         {
             var response = _sdk.RunRequest(input);

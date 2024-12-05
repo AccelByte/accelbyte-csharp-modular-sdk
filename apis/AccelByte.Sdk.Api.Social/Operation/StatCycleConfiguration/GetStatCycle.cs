@@ -58,8 +58,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 GetStatCycle op = new GetStatCycle(this,
-                    cycleId,                    
-                    namespace_                    
+                    cycleId,
+                    namespace_
                 );
 
                 op.SetBaseFields<GetStatCycleBuilder>(this);
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -113,12 +113,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
         {
             PathParams["cycleId"] = cycleId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -143,18 +143,18 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         public GetStatCycle(
-            string cycleId,            
-            string namespace_            
+            string cycleId,
+            string namespace_
         )
         {
             PathParams["cycleId"] = cycleId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -163,10 +163,10 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetStatCycle.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetStatCycle.Response()

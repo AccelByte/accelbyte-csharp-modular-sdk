@@ -57,9 +57,9 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 SingleAdminUpdateChannel op = new SingleAdminUpdateChannel(this,
-                    body,                    
-                    channelId,                    
-                    namespace_                    
+                    body,
+                    channelId,
+                    namespace_
                 );
 
                 op.SetBaseFields<SingleAdminUpdateChannelBuilder>(this);
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -118,13 +118,13 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         {
             PathParams["channelId"] = channelId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -149,20 +149,20 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #endregion
 
         public SingleAdminUpdateChannel(
-            string channelId,            
-            string namespace_,            
-            Model.ModelsUpdateChannelRequest body            
+            string channelId,
+            string namespace_,
+            Model.ModelsUpdateChannelRequest body
         )
         {
             PathParams["channelId"] = channelId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -174,7 +174,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public SingleAdminUpdateChannel.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new SingleAdminUpdateChannel.Response()
