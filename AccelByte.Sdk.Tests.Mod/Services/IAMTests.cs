@@ -11,6 +11,8 @@ using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Core.Net.Http;
 using AccelByte.Sdk.Api.Iam.Model;
+using System.Diagnostics;
+using System.Threading;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -19,6 +21,27 @@ namespace AccelByte.Sdk.Tests.Mod.Services
     public class IAMTests : BaseServiceTests
     {
         public IAMTests() : base(true) { }
+
+        protected int FindAndCheckResourceActionFromRole(IAccelByteSdk sdk, string roleId, string resourceToCheck)
+        {
+            var permissions = sdk.GetIamApi().OverrideRoleConfigV3.AdminGetRoleNamespacePermissionV3Op
+                    .Execute(sdk.Namespace, roleId)
+                    .EnsureSuccess();
+            if (permissions == null)
+                throw new Exception("Role's permissions object is null");
+
+            int resultAction = -1;
+            foreach (var permission in permissions!.Permissions!)
+            {
+                if (permission.Resource! == resourceToCheck)
+                {
+                    resultAction = permission.Action!.Value;
+                    break;
+                }
+            }
+
+            return resultAction;
+        }
 
         [Test]
         public void CreateUserV3Tests()
@@ -127,6 +150,107 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                     .Execute(_Sdk.Namespace, user_id)
                     .EnsureSuccess();
             });
+        }
+
+        [Test]
+        public void RoleOverrideTest()
+        {
+            Assert.IsNotNull(_Sdk);
+            if (_Sdk == null)
+                return;
+
+            string roleIdentityToUpdate = "USER";
+            string resourceToCheck = "NAMESPACE:{namespace}:PROFILE";
+            int actionToCheck = 7;
+            int updatedActionToCheck = 2;
+            int checkCount = 20;
+            int checkInterval = 1000;
+
+            DisableRetry();
+
+            var roles = _Sdk.GetIamApi().Roles.AdminGetRolesV4Op
+                .SetAdminRole(false)
+                .Execute()
+                .EnsureSuccess();
+            Assert.IsNotNull(roles);
+
+            string userRoleId = "";
+            foreach (var role in roles!.Data!)
+            {
+                if (role.RoleName!.ToUpper() == roleIdentityToUpdate)
+                {
+                    userRoleId = role.RoleId!;
+                    break;
+                }
+            }
+
+            Assert.AreNotEqual("", userRoleId);
+            try
+            {
+                int oAction = FindAndCheckResourceActionFromRole(_Sdk, userRoleId, resourceToCheck);
+                Assert.AreEqual(actionToCheck, oAction);
+
+                //Do role override
+                var updateResponse = _Sdk.GetIamApi().OverrideRoleConfigV3.AdminUpdateRoleOverrideConfigV3Op
+                    .Execute(new ModelRoleOverrideUpdateRequest()
+                    {
+                        Exclusions = [
+                            new AccountcommonOverrideRolePermission()
+                            {
+                                Resource = resourceToCheck,
+                                Actions = [1, 4]
+                            }
+                        ]
+                    }, _Sdk.Namespace, roleIdentityToUpdate)
+                    .EnsureSuccess();
+                Assert.IsNotNull(updateResponse);
+
+                //Activate role override
+                var activateResponse = _Sdk.GetIamApi().OverrideRoleConfigV3.AdminChangeRoleOverrideConfigStatusV3Op
+                    .Execute(new ModelRoleOverrideStatsUpdateRequest()
+                    {
+                        Active = true
+                    }, _Sdk.Namespace, roleIdentityToUpdate)
+                    .EnsureSuccess();
+                Assert.IsNotNull(activateResponse);
+                if (activateResponse != null)
+                    Assert.IsTrue(activateResponse.Active!);
+
+                try
+                {
+                    bool uValid = false;
+                    int currentCount = 0;
+                    while (currentCount < checkCount)
+                    {
+                        Debug.WriteLine($"Checking updated permissions [{currentCount + 1}]");
+                        int uAction = FindAndCheckResourceActionFromRole(_Sdk, userRoleId, resourceToCheck);
+                        if (uAction == updatedActionToCheck)
+                        {
+                            uValid = true;
+                            break;
+                        }
+
+                        currentCount++;
+                        Thread.Sleep(checkInterval);
+                    }
+
+                    Assert.IsTrue(uValid);
+                }
+                finally
+                {
+                    //Deactivate role override
+                    _Sdk.GetIamApi().OverrideRoleConfigV3.AdminChangeRoleOverrideConfigStatusV3Op
+                        .Execute(new ModelRoleOverrideStatsUpdateRequest()
+                        {
+                            Active = false
+                        }, _Sdk.Namespace, roleIdentityToUpdate)
+                        .EnsureSuccess();
+                }
+            }
+            finally
+            {
+                ResetPolicy();
+            }
         }
     }
 }
