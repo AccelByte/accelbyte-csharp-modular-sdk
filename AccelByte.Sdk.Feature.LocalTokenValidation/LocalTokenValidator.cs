@@ -28,7 +28,9 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
     {
         private Func<IAccelByteSdk, string, List<LocalPermissionItem>> _FetchFunction = ((sdk, roleId) =>
         {
-            var response = sdk.GetIamApi().Roles.AdminGetRoleV4Op.Execute(roleId).EnsureSuccess();
+            var response = sdk.GetIamApi().OverrideRoleConfigV3.AdminGetRoleNamespacePermissionV3Op
+                .Execute(sdk.Namespace, roleId)
+                .EnsureSuccess();
 
             List<LocalPermissionItem> permissions = new List<LocalPermissionItem>();
             foreach (var item in response.Permissions!)
@@ -45,7 +47,8 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
 
         private Func<IAccelByteSdk, string, Task<List<LocalPermissionItem>>> _FetchFunctionAsync = (async (sdk, roleId) =>
         {
-            var response = await sdk.GetIamApi().Roles.AdminGetRoleV4Op.ExecuteAsync(roleId);
+            var response = await sdk.GetIamApi().OverrideRoleConfigV3.AdminGetRoleNamespacePermissionV3Op
+                .ExecuteAsync(sdk.Namespace, roleId);
             var responseData = response.EnsureSuccess();
 
             List<LocalPermissionItem> permissions = new List<LocalPermissionItem>();
