@@ -72,6 +72,7 @@ namespace AccelByte.Sdk.Tests.Mod.Scenario
                 Password = user_password,
                 DisplayName = $"SDK_{GenerateRandomAlphabet(8)}".ToLower(),
                 Username = _UserName,
+                UniqueDisplayName = _UserName,
                 Country = "ID",
                 DateOfBirth = "1995-01-10"
             };
@@ -88,7 +89,7 @@ namespace AccelByte.Sdk.Tests.Mod.Scenario
                 .SetTokenRepository(_TokenRepo)
                 .Build();
 
-            _Sdk.LoginUser(_UserName, user_password);
+            _Sdk.LoginUser(user_email, user_password);
         }
 
         public void Login() { }

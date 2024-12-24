@@ -67,7 +67,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 Password = user_password,
                 DisplayName = "CSharp Server SDK Test",
                 Country = "ID",
-                DateOfBirth = "1995-01-10"
+                DateOfBirth = "1995-01-10",
+                UniqueDisplayName = user_name
             };
 
             ModelUserCreateResponseV3 cuResp = _Sdk.GetIamApi().Users.PublicCreateUserV3Op
@@ -107,7 +108,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 DisplayName = "CSharp Server SDK Test",
                 Username = user_name,
                 Country = "ID",
-                DateOfBirth = "1995-01-10"
+                DateOfBirth = "1995-01-10",
+                UniqueDisplayName = user_name
             };
 
             AccountCreateUserResponseV4 cuResp = _Sdk.GetIamApi().UsersV4.PublicCreateUserV4Op
