@@ -6,10 +6,10 @@
         <CoreVersion>0.10.0</CoreVersion>
         <AssemblyCoreVersion>0.0.0</AssemblyCoreVersion>
 
-        <CoreAuthenticationVersion>0.6.0</CoreAuthenticationVersion>
+        <CoreAuthenticationVersion>0.7.0</CoreAuthenticationVersion>
         <CompatVersion>0.4.0</CompatVersion>
         <FeatureAutoRefreshTokenVersion>0.3.0</FeatureAutoRefreshTokenVersion>
-        <FeatureLocalTokenValidationVersion>0.7.0</FeatureLocalTokenValidationVersion>
+        <FeatureLocalTokenValidationVersion>0.8.0</FeatureLocalTokenValidationVersion>
 
         <ApiAchievementVersion>0.6.0</ApiAchievementVersion>
         <ApiAmsVersion>0.14.0</ApiAmsVersion>
@@ -17,7 +17,7 @@
         <ApiChallengeVersion>0.10.0</ApiChallengeVersion>
 		<ApiChatVersion>0.9.0</ApiChatVersion>
         <ApiCloudsaveVersion>0.12.0</ApiCloudsaveVersion>
-        <ApiCsmVersion>0.2.0</ApiCsmVersion>
+        <ApiCsmVersion>0.1.0</ApiCsmVersion>
         <ApiDsartifactVersion>0.2.0</ApiDsartifactVersion>
         <ApiDslogmanagerVersion>0.5.0</ApiDslogmanagerVersion>
         <ApiDsmcVersion>0.5.0</ApiDsmcVersion>
