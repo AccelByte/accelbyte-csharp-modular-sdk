@@ -298,6 +298,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AppendTeamGameSession.AppendTeamGameSessionBuilder AppendTeamGameSessionOp
         {
             get
@@ -887,6 +888,8 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AppendTeamGameSession.Response AppendTeamGameSession(AppendTeamGameSession input)
         {
             var response = _sdk.RunRequest(input);
@@ -920,6 +923,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
         public PublicGameSessionCancel.Response PublicGameSessionCancel(PublicGameSessionCancel input)
         {
             var response = _sdk.RunRequest(input);

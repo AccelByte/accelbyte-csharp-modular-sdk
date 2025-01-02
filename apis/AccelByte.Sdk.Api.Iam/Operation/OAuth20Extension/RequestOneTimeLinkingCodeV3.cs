@@ -61,6 +61,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
+            public string? RedirectUri { get; set; }
+
+            public string? State { get; set; }
+
 
 
             internal RequestOneTimeLinkingCodeV3Builder() { }
@@ -72,6 +76,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
+
+            public RequestOneTimeLinkingCodeV3Builder SetRedirectUri(string _redirectUri)
+            {
+                RedirectUri = _redirectUri;
+                return this;
+            }
+
+            public RequestOneTimeLinkingCodeV3Builder SetState(string _state)
+            {
+                State = _state;
+                return this;
+            }
 
 
 
@@ -129,6 +145,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
 
 
+            if (builder.RedirectUri is not null) FormParams["redirectUri"] = builder.RedirectUri;
+            if (builder.State is not null) FormParams["state"] = builder.State;
             if (platformId is not null) FormParams["platformId"] = platformId;
 
 
@@ -150,11 +168,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public RequestOneTimeLinkingCodeV3(
+            string? redirectUri,
+            string? state,
             string platformId
         )
         {
 
 
+            if (redirectUri is not null) FormParams["redirectUri"] = redirectUri;
+            if (state is not null) FormParams["state"] = state;
             if (platformId is not null) FormParams["platformId"] = platformId;
 
 

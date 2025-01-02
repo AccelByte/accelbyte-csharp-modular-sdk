@@ -207,6 +207,7 @@
 | `api.Time` | [ApiTime](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiTime.cs) |
 | `api.Timeout` | [ApiTimeout](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiTimeout.cs) |
 | `api.UpdateServerRequest` | [ApiUpdateServerRequest](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiUpdateServerRequest.cs) |
+| `pagination.PaginationInfo` | [PaginationPaginationInfo](../../apis/AccelByte.Sdk.Api.Ams/Model/PaginationPaginationInfo.cs) |
 | `response.ErrorResponse` | [ResponseErrorResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ResponseErrorResponse.cs) |
 | `time.Location` | [TimeLocation](../../apis/AccelByte.Sdk.Api.Ams/Model/TimeLocation.cs) |
 | `time.zone` | [TimeZone](../../apis/AccelByte.Sdk.Api.Ams/Model/TimeZone.cs) |

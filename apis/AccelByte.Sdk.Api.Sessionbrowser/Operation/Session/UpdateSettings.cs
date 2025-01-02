@@ -25,6 +25,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
     ///
     /// Update game session, used to update OtherSettings
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class UpdateSettings : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -66,6 +67,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public UpdateSettings.Response Execute(
                 ModelsUpdateSettingsRequest body,
                 string namespace_,

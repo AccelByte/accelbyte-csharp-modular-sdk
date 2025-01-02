@@ -25,6 +25,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     ///
     /// Create a new list
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AdminCreateProfanityList : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -64,6 +65,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AdminCreateProfanityList.Response Execute(
                 ModelsAdminCreateProfanityListRequest body,
                 string namespace_

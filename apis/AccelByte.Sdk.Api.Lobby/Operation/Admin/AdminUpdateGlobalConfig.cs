@@ -25,6 +25,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     ///
     /// Upsert global configuration data.
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AdminUpdateGlobalConfig : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -62,6 +63,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AdminUpdateGlobalConfig.Response Execute(
                 ModelPutGlobalConfigurationRequest body
             )

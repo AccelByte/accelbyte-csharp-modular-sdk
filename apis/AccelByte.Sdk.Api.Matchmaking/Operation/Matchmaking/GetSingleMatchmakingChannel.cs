@@ -27,6 +27,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
     /// 
     /// Action Code: 510112
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class GetSingleMatchmakingChannel : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -66,6 +67,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public GetSingleMatchmakingChannel.Response Execute(
                 string channelName,
                 string namespace_

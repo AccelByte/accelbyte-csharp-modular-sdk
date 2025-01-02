@@ -25,6 +25,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     ///
     /// Delete a list include all filters inside of it
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AdminDeleteProfanityList : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -64,6 +65,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AdminDeleteProfanityList.Response Execute(
                 string list,
                 string namespace_

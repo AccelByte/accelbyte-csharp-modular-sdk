@@ -27,6 +27,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
     /// 
     /// if party_id value empty/null, field will not show in response body.
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class GetSessionHistoryDetailed : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -66,6 +67,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public GetSessionHistoryDetailed.Response Execute(
                 string matchID,
                 string namespace_

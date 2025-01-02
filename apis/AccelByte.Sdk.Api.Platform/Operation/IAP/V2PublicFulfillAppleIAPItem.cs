@@ -24,7 +24,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// V2PublicFulfillAppleIAPItem
     ///
     /// Verify apple iap transaction and fulfill item, support subscriptionOther detail info:
-    ///   * Returns :
+    ///               * Returns :
     /// </summary>
     public class V2PublicFulfillAppleIAPItem : AccelByte.Sdk.Core.Operation
     {

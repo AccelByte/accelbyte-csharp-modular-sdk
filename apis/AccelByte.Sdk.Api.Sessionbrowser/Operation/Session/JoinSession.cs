@@ -25,6 +25,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
     ///
     /// Join the specified session by session ID. Possible the game required a password to join
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class JoinSession : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -66,6 +67,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public JoinSession.Response Execute(
                 ModelsJoinGameSessionRequest body,
                 string namespace_,

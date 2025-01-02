@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
             if (Offset != null)
                 opBuilder.SetOffset((long)Offset);
             if (SortBy != null)
-                opBuilder.SetSortBy((string)SortBy);
+                opBuilder.SetSortBy(AdminGetChallengesSortBy.NewValue(SortBy));
             if (Status != null)
                 opBuilder.SetStatus(AdminGetChallengesStatus.NewValue(Status));
 

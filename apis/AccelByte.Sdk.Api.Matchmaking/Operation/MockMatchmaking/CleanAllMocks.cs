@@ -26,6 +26,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
     /// Delete all mock tickets and matches in a channel.
     /// '
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class CleanAllMocks : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -65,6 +66,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public CleanAllMocks.Response Execute(
                 string channelName,
                 string namespace_

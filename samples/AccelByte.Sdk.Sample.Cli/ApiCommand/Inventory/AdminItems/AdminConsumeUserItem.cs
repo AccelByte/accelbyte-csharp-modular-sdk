@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,6 +36,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
         [SdkCommandArgument("userId")]
         public string UserId { get; set; } = String.Empty;
 
+        [SdkCommandArgument("dateRangeValidation")]
+        public string? DateRangeValidation { get; set; }
+
         [SdkCommandData("body")]
         public ApimodelsConsumeItemReq Body { get; set; } = new ApimodelsConsumeItemReq();
 
@@ -50,6 +53,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
 
             var opBuilder = AccelByte.Sdk.Api.Inventory.Operation.AdminConsumeUserItem.Builder;
 
+            if (DateRangeValidation != null)
+                opBuilder.SetDateRangeValidation((string)DateRangeValidation);
 
 
 

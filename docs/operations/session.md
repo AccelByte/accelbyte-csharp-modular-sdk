@@ -88,7 +88,7 @@
 | `/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/members/{memberId}/kick` | DELETE | PublicKickGameSessionMember | [PublicKickGameSessionMember](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/PublicKickGameSessionMember.cs) | [PublicKickGameSessionMember](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/PublicKickGameSessionMember.cs) |
 | `/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/reject` | DELETE | PublicGameSessionReject | [PublicGameSessionReject](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/PublicGameSessionReject.cs) | [PublicGameSessionReject](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/PublicGameSessionReject.cs) |
 | `/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/secret` | GET | GetSessionServerSecret | [GetSessionServerSecret](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/GetSessionServerSecret.cs) | [GetSessionServerSecret](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/GetSessionServerSecret.cs) |
-| `/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/teams` | POST | AppendTeamGameSession | [AppendTeamGameSession](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/AppendTeamGameSession.cs) | [AppendTeamGameSession](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/AppendTeamGameSession.cs) |
+| [DEPRECATED] `/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/teams` | POST | AppendTeamGameSession | [AppendTeamGameSession](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/AppendTeamGameSession.cs) | [AppendTeamGameSession](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/AppendTeamGameSession.cs) |
 | `/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/users/{userId}/cancel` | DELETE | PublicGameSessionCancel | [PublicGameSessionCancel](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/PublicGameSessionCancel.cs) | [PublicGameSessionCancel](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/PublicGameSessionCancel.cs) |
 | `/session/v1/public/namespaces/{namespace}/users/me/gamesessions` | GET | PublicQueryMyGameSessions | [PublicQueryMyGameSessions](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/PublicQueryMyGameSessions.cs) | [PublicQueryMyGameSessions](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/PublicQueryMyGameSessions.cs) |
 
@@ -119,6 +119,18 @@
 | `/session/v1/public/namespaces/{namespace}/party` | POST | PublicCreateParty | [PublicCreateParty](../../apis/AccelByte.Sdk.Api.Session/Operation/Party/PublicCreateParty.cs) | [PublicCreateParty](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Party/PublicCreateParty.cs) |
 | `/session/v1/public/namespaces/{namespace}/users/me/parties` | GET | PublicQueryMyParties | [PublicQueryMyParties](../../apis/AccelByte.Sdk.Api.Session/Operation/Party/PublicQueryMyParties.cs) | [PublicQueryMyParties](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Party/PublicQueryMyParties.cs) |
 
+### Session Storage Wrapper:  [SessionStorage](../../apis/AccelByte.Sdk.Api.Session/Wrapper/SessionStorage.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/session/v1/admin/namespaces/{namespace}/parties/{partyId}/storage` | GET | AdminReadPartySessionStorage | [AdminReadPartySessionStorage](../../apis/AccelByte.Sdk.Api.Session/Operation/SessionStorage/AdminReadPartySessionStorage.cs) | [AdminReadPartySessionStorage](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/SessionStorage/AdminReadPartySessionStorage.cs) |
+| `/session/v1/admin/namespaces/{namespace}/sessions/{sessionId}/storage` | GET | AdminReadSessionStorage | [AdminReadSessionStorage](../../apis/AccelByte.Sdk.Api.Session/Operation/SessionStorage/AdminReadSessionStorage.cs) | [AdminReadSessionStorage](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/SessionStorage/AdminReadSessionStorage.cs) |
+| `/session/v1/admin/namespaces/{namespace}/sessions/{sessionId}/storage` | DELETE | AdminDeleteUserSessionStorage | [AdminDeleteUserSessionStorage](../../apis/AccelByte.Sdk.Api.Session/Operation/SessionStorage/AdminDeleteUserSessionStorage.cs) | [AdminDeleteUserSessionStorage](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/SessionStorage/AdminDeleteUserSessionStorage.cs) |
+| `/session/v1/admin/namespaces/{namespace}/sessions/{sessionId}/storage/users/{userId}` | GET | AdminReadUserSessionStorage | [AdminReadUserSessionStorage](../../apis/AccelByte.Sdk.Api.Session/Operation/SessionStorage/AdminReadUserSessionStorage.cs) | [AdminReadUserSessionStorage](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/SessionStorage/AdminReadUserSessionStorage.cs) |
+| `/session/v1/public/namespaces/{namespace}/parties/{partyId}/storage` | GET | PublicReadPartySessionStorage | [PublicReadPartySessionStorage](../../apis/AccelByte.Sdk.Api.Session/Operation/SessionStorage/PublicReadPartySessionStorage.cs) | [PublicReadPartySessionStorage](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/SessionStorage/PublicReadPartySessionStorage.cs) |
+| `/session/v1/public/namespaces/{namespace}/parties/{partyId}/storage/users/{userId}/reserved` | PATCH | PublicUpdateInsertPartySessionStorageReserved | [PublicUpdateInsertPartySessionStorageReserved](../../apis/AccelByte.Sdk.Api.Session/Operation/SessionStorage/PublicUpdateInsertPartySessionStorageReserved.cs) | [PublicUpdateInsertPartySessionStorageReserved](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/SessionStorage/PublicUpdateInsertPartySessionStorageReserved.cs) |
+| `/session/v1/public/namespaces/{namespace}/sessions/{sessionId}/storage/leader` | PATCH | PublicUpdateInsertSessionStorageLeader | [PublicUpdateInsertSessionStorageLeader](../../apis/AccelByte.Sdk.Api.Session/Operation/SessionStorage/PublicUpdateInsertSessionStorageLeader.cs) | [PublicUpdateInsertSessionStorageLeader](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/SessionStorage/PublicUpdateInsertSessionStorageLeader.cs) |
+| `/session/v1/public/namespaces/{namespace}/sessions/{sessionId}/storage/users/{userId}` | PATCH | PublicUpdateInsertSessionStorage | [PublicUpdateInsertSessionStorage](../../apis/AccelByte.Sdk.Api.Session/Operation/SessionStorage/PublicUpdateInsertSessionStorage.cs) | [PublicUpdateInsertSessionStorage](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/SessionStorage/PublicUpdateInsertSessionStorage.cs) |
+
 ### Platform Credential Wrapper:  [PlatformCredential](../../apis/AccelByte.Sdk.Api.Session/Wrapper/PlatformCredential.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -135,15 +147,6 @@
 | `/session/v1/admin/namespaces/{namespace}/recent-team-player` | GET | AdminGetRecentTeamPlayer | [AdminGetRecentTeamPlayer](../../apis/AccelByte.Sdk.Api.Session/Operation/RecentPlayer/AdminGetRecentTeamPlayer.cs) | [AdminGetRecentTeamPlayer](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/RecentPlayer/AdminGetRecentTeamPlayer.cs) |
 | `/session/v1/public/namespaces/{namespace}/recent-player` | GET | PublicGetRecentPlayer | [PublicGetRecentPlayer](../../apis/AccelByte.Sdk.Api.Session/Operation/RecentPlayer/PublicGetRecentPlayer.cs) | [PublicGetRecentPlayer](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/RecentPlayer/PublicGetRecentPlayer.cs) |
 | `/session/v1/public/namespaces/{namespace}/recent-team-player` | GET | PublicGetRecentTeamPlayer | [PublicGetRecentTeamPlayer](../../apis/AccelByte.Sdk.Api.Session/Operation/RecentPlayer/PublicGetRecentTeamPlayer.cs) | [PublicGetRecentTeamPlayer](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/RecentPlayer/PublicGetRecentTeamPlayer.cs) |
-
-### Session Storage Wrapper:  [SessionStorage](../../apis/AccelByte.Sdk.Api.Session/Wrapper/SessionStorage.cs)
-| Endpoint | Method | ID | Class | Example |
-|---|---|---|---|---|
-| `/session/v1/admin/namespaces/{namespace}/sessions/{sessionId}/storage` | GET | AdminReadSessionStorage | [AdminReadSessionStorage](../../apis/AccelByte.Sdk.Api.Session/Operation/SessionStorage/AdminReadSessionStorage.cs) | [AdminReadSessionStorage](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/SessionStorage/AdminReadSessionStorage.cs) |
-| `/session/v1/admin/namespaces/{namespace}/sessions/{sessionId}/storage` | DELETE | AdminDeleteUserSessionStorage | [AdminDeleteUserSessionStorage](../../apis/AccelByte.Sdk.Api.Session/Operation/SessionStorage/AdminDeleteUserSessionStorage.cs) | [AdminDeleteUserSessionStorage](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/SessionStorage/AdminDeleteUserSessionStorage.cs) |
-| `/session/v1/admin/namespaces/{namespace}/sessions/{sessionId}/storage/users/{userId}` | GET | AdminReadUserSessionStorage | [AdminReadUserSessionStorage](../../apis/AccelByte.Sdk.Api.Session/Operation/SessionStorage/AdminReadUserSessionStorage.cs) | [AdminReadUserSessionStorage](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/SessionStorage/AdminReadUserSessionStorage.cs) |
-| `/session/v1/public/namespaces/{namespace}/sessions/{sessionId}/storage/leader` | PATCH | PublicUpdateInsertSessionStorageLeader | [PublicUpdateInsertSessionStorageLeader](../../apis/AccelByte.Sdk.Api.Session/Operation/SessionStorage/PublicUpdateInsertSessionStorageLeader.cs) | [PublicUpdateInsertSessionStorageLeader](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/SessionStorage/PublicUpdateInsertSessionStorageLeader.cs) |
-| `/session/v1/public/namespaces/{namespace}/sessions/{sessionId}/storage/users/{userId}` | PATCH | PublicUpdateInsertSessionStorage | [PublicUpdateInsertSessionStorage](../../apis/AccelByte.Sdk.Api.Session/Operation/SessionStorage/PublicUpdateInsertSessionStorage.cs) | [PublicUpdateInsertSessionStorage](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/SessionStorage/PublicUpdateInsertSessionStorage.cs) |
 
 ### Player Wrapper:  [Player](../../apis/AccelByte.Sdk.Api.Session/Wrapper/Player.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -208,7 +211,7 @@
 | `/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/code` | POST | GameSessionGenerateCode | [GameSessionGenerateCode](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/GameSessionGenerateCode.cs) | [GameSessionGenerateCode](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/GameSessionGenerateCode.cs) |
 | `/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/join` | POST | JoinGameSession | [JoinGameSession](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/JoinGameSession.cs) | [JoinGameSession](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/JoinGameSession.cs) |
 | `/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/leader` | POST | PublicPromoteGameSessionLeader | [PublicPromoteGameSessionLeader](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/PublicPromoteGameSessionLeader.cs) | [PublicPromoteGameSessionLeader](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/PublicPromoteGameSessionLeader.cs) |
-| `/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/teams` | POST | AppendTeamGameSession | [AppendTeamGameSession](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/AppendTeamGameSession.cs) | [AppendTeamGameSession](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/AppendTeamGameSession.cs) |
+| [DEPRECATED] `/session/v1/public/namespaces/{namespace}/gamesessions/{sessionId}/teams` | POST | AppendTeamGameSession | [AppendTeamGameSession](../../apis/AccelByte.Sdk.Api.Session/Operation/GameSession/AppendTeamGameSession.cs) | [AppendTeamGameSession](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/GameSession/AppendTeamGameSession.cs) |
 
 ### Native Session Wrapper:  [NativeSession](../../apis/AccelByte.Sdk.Api.Session/Wrapper/NativeSession.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -226,15 +229,15 @@
 | `/session/v1/public/namespaces/{namespace}/parties/{partyId}/users/me/join` | POST | PublicPartyJoin | [PublicPartyJoin](../../apis/AccelByte.Sdk.Api.Session/Operation/Party/PublicPartyJoin.cs) | [PublicPartyJoin](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Party/PublicPartyJoin.cs) |
 | `/session/v1/public/namespaces/{namespace}/party` | POST | PublicCreateParty | [PublicCreateParty](../../apis/AccelByte.Sdk.Api.Session/Operation/Party/PublicCreateParty.cs) | [PublicCreateParty](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/Party/PublicCreateParty.cs) |
 
+### Session Storage Wrapper:  [SessionStorage](../../apis/AccelByte.Sdk.Api.Session/Wrapper/SessionStorage.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
 ### Platform Credential Wrapper:  [PlatformCredential](../../apis/AccelByte.Sdk.Api.Session/Wrapper/PlatformCredential.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
 ### Recent Player Wrapper:  [RecentPlayer](../../apis/AccelByte.Sdk.Api.Session/Wrapper/RecentPlayer.cs)
-| Endpoint | Method | ID | Class | Example |
-|---|---|---|---|---|
-
-### Session Storage Wrapper:  [SessionStorage](../../apis/AccelByte.Sdk.Api.Session/Wrapper/SessionStorage.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 

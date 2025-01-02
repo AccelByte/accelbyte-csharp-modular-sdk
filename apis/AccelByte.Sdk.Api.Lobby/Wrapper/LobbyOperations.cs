@@ -34,6 +34,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         }
 
         #region Operation Builders
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUpdatePartyAttributesV1.AdminUpdatePartyAttributesV1Builder AdminUpdatePartyAttributesV1Op
         {
             get
@@ -45,6 +46,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminJoinPartyV1.AdminJoinPartyV1Builder AdminJoinPartyV1Op
         {
             get
@@ -69,6 +71,8 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         }
         #endregion
 
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUpdatePartyAttributesV1.Response AdminUpdatePartyAttributesV1(AdminUpdatePartyAttributesV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -102,6 +106,9 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminJoinPartyV1.Response AdminJoinPartyV1(AdminJoinPartyV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -118,6 +125,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
         public PublicGetMessages.Response PublicGetMessages(PublicGetMessages input)
         {
             var response = _sdk.RunRequest(input);

@@ -25,6 +25,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
     ///
     /// Query game sessions by comma separated user ids
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class GetSessionByUserIDs : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -64,6 +65,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public GetSessionByUserIDs.Response Execute(
                 string namespace_,
                 string userIds

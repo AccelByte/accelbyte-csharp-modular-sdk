@@ -1940,6 +1940,17 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        public PublicSendCodeForwardV3.PublicSendCodeForwardV3Builder PublicSendCodeForwardV3Op
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicSendCodeForwardV3.PublicSendCodeForwardV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public PublicGetLinkHeadlessAccountToMyAccountConflictV3.PublicGetLinkHeadlessAccountToMyAccountConflictV3Builder PublicGetLinkHeadlessAccountToMyAccountConflictV3Op
         {
             get
@@ -1962,6 +1973,17 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        public PublicGetMyRedirectionAfterLinkV3.PublicGetMyRedirectionAfterLinkV3Builder PublicGetMyRedirectionAfterLinkV3Op
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicGetMyRedirectionAfterLinkV3.PublicGetMyRedirectionAfterLinkV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public PublicGetMyProfileAllowUpdateStatusV3.PublicGetMyProfileAllowUpdateStatusV3Builder PublicGetMyProfileAllowUpdateStatusV3Op
         {
             get
@@ -1978,6 +2000,17 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             get
             {
                 var opBuilder = new Operation.PublicSendVerificationLinkV3.PublicSendVerificationLinkV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public PublicGetOpenidUserInfoV3.PublicGetOpenidUserInfoV3Builder PublicGetOpenidUserInfoV3Op
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicGetOpenidUserInfoV3.PublicGetOpenidUserInfoV3Builder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -4927,6 +4960,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public PublicSendCodeForwardV3.Response PublicSendCodeForwardV3(PublicSendCodeForwardV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicSendCodeForwardV3.Response> PublicSendCodeForwardV3Async(PublicSendCodeForwardV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public PublicGetLinkHeadlessAccountToMyAccountConflictV3.Response PublicGetLinkHeadlessAccountToMyAccountConflictV3(PublicGetLinkHeadlessAccountToMyAccountConflictV3 input)
         {
             var response = _sdk.RunRequest(input);
@@ -4959,6 +5008,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public PublicGetMyRedirectionAfterLinkV3.Response PublicGetMyRedirectionAfterLinkV3(PublicGetMyRedirectionAfterLinkV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetMyRedirectionAfterLinkV3.Response> PublicGetMyRedirectionAfterLinkV3Async(PublicGetMyRedirectionAfterLinkV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public PublicGetMyProfileAllowUpdateStatusV3.Response PublicGetMyProfileAllowUpdateStatusV3(PublicGetMyProfileAllowUpdateStatusV3 input)
         {
             var response = _sdk.RunRequest(input);
@@ -4984,6 +5049,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
         public async Task<PublicSendVerificationLinkV3.Response> PublicSendVerificationLinkV3Async(PublicSendVerificationLinkV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetOpenidUserInfoV3.Response PublicGetOpenidUserInfoV3(PublicGetOpenidUserInfoV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetOpenidUserInfoV3.Response> PublicGetOpenidUserInfoV3Async(PublicGetOpenidUserInfoV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

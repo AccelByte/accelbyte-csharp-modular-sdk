@@ -25,9 +25,17 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonPropertyName("id")]
         public string? Id { get; set; }
 
+        [JsonPropertyName("isReplayed")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? IsReplayed { get; set; }
+
         [JsonPropertyName("itemRevocations")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<ItemRevocation>? ItemRevocations { get; set; }
+
+        [JsonPropertyName("requestId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? RequestId { get; set; }
 
         [JsonPropertyName("status")]
         [JsonStringEnum]

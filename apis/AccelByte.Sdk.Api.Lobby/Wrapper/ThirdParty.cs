@@ -34,6 +34,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         }
 
         #region Operation Builders
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetThirdPartyConfig.AdminGetThirdPartyConfigBuilder AdminGetThirdPartyConfigOp
         {
             get
@@ -45,6 +46,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUpdateThirdPartyConfig.AdminUpdateThirdPartyConfigBuilder AdminUpdateThirdPartyConfigOp
         {
             get
@@ -56,6 +58,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminCreateThirdPartyConfig.AdminCreateThirdPartyConfigBuilder AdminCreateThirdPartyConfigOp
         {
             get
@@ -67,6 +70,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminDeleteThirdPartyConfig.AdminDeleteThirdPartyConfigBuilder AdminDeleteThirdPartyConfigOp
         {
             get
@@ -80,6 +84,8 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         }
         #endregion
 
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetThirdPartyConfig.Response AdminGetThirdPartyConfig(AdminGetThirdPartyConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -96,6 +102,9 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUpdateThirdPartyConfig.Response AdminUpdateThirdPartyConfig(AdminUpdateThirdPartyConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -112,6 +121,9 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminCreateThirdPartyConfig.Response AdminCreateThirdPartyConfig(AdminCreateThirdPartyConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -128,6 +140,9 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminDeleteThirdPartyConfig.Response AdminDeleteThirdPartyConfig(AdminDeleteThirdPartyConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -144,5 +159,6 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
     }
 }

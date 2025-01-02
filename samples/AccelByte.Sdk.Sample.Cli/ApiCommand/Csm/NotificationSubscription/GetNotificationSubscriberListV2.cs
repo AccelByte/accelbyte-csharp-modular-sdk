@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Csm
         public string Namespace { get; set; } = String.Empty;
 
         [SdkCommandArgument("notificationType")]
-        public string? NotificationType { get; set; }
+        public string NotificationType { get; set; } = String.Empty;
 
         public GetNotificationSubscriberListV2Command(IAccelByteSdk sdk)
         {
@@ -47,15 +47,14 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Csm
 
             var opBuilder = AccelByte.Sdk.Api.Csm.Operation.GetNotificationSubscriberListV2.Builder;
 
-            if (NotificationType != null)
-                opBuilder.SetNotificationType((string)NotificationType);
 
 
 
 
             GetNotificationSubscriberListV2 operation = opBuilder.Build(
                 App,
-                Namespace
+                Namespace,
+                NotificationType
             );
 
 

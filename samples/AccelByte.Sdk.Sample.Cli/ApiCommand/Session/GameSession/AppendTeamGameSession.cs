@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -45,6 +45,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
         {
             AccelByte.Sdk.Api.Session.Wrapper.GameSession wrapper = new AccelByte.Sdk.Api.Session.Wrapper.GameSession(_SDK);
 
+#pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Session.Operation.AppendTeamGameSession.Builder;
 
 
@@ -57,7 +58,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
                 SessionId
             );
 
+#pragma warning restore ab_deprecated_operation
 
+#pragma warning disable ab_deprecated_operation_wrapper
             var response = wrapper.AppendTeamGameSession(operation);
             if (response.IsSuccess)
             {
@@ -70,6 +73,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
                 return CommandResult.Fail("-", "Valid error message unavailable");
+#pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

@@ -26,6 +26,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
     /// Read mock tickets after the specified timestamp in a channel.
     /// '
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class GetMockTicketsByTimestamp : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -67,6 +68,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public GetMockTicketsByTimestamp.Response Execute(
                 ModelsQueryMockBy body,
                 string channelName,

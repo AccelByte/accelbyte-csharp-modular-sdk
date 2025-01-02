@@ -23,11 +23,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// getPaymentCallbackConfig
     ///
-    ///  [Not supported yet in AGS Shared Cloud] Get payment callback configuration.
+    /// 
+    /// 
+    /// ### The endpoint is going to be deprecated
+    /// 
+    /// [Not supported yet in AGS Shared Cloud] Get payment callback configuration.
     /// Other detail info:
     /// 
     ///   * Returns : Payment callback config
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class GetPaymentCallbackConfig : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -65,6 +70,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public GetPaymentCallbackConfig.Response Execute(
                 string namespace_
             )

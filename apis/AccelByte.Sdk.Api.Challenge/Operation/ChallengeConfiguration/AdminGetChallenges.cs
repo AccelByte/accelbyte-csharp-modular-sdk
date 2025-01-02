@@ -23,7 +23,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
     /// <summary>
     /// adminGetChallenges
     ///
-    ///   * Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]
+    /// - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]
     /// </summary>
     public class AdminGetChallenges : AccelByte.Sdk.Core.Operation
     {
@@ -38,7 +38,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
             public long? Offset { get; set; }
 
-            public string? SortBy { get; set; }
+            public AdminGetChallengesSortBy? SortBy { get; set; }
 
             public AdminGetChallengesStatus? Status { get; set; }
 
@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                 return this;
             }
 
-            public AdminGetChallengesBuilder SetSortBy(string _sortBy)
+            public AdminGetChallengesBuilder SetSortBy(AdminGetChallengesSortBy _sortBy)
             {
                 SortBy = _sortBy;
                 return this;
@@ -138,7 +138,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
-            if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy;
+            if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy.Value;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
 
 
@@ -170,7 +170,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             string namespace_,
             long? limit,
             long? offset,
-            string? sortBy,
+            AdminGetChallengesSortBy? sortBy,
             AdminGetChallengesStatus? status
         )
         {
@@ -178,7 +178,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
-            if (sortBy is not null) QueryParams["sortBy"] = sortBy;
+            if (sortBy is not null) QueryParams["sortBy"] = sortBy.Value;
             if (status is not null) QueryParams["status"] = status.Value;
 
 
@@ -231,6 +231,39 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
 
             return response;
+        }
+    }
+
+    public class AdminGetChallengesSortBy : StringEnum<AdminGetChallengesSortBy>
+    {
+        public static readonly AdminGetChallengesSortBy CreatedAt
+            = new AdminGetChallengesSortBy("createdAt");
+
+        public static readonly AdminGetChallengesSortBy CreatedAtasc
+            = new AdminGetChallengesSortBy("createdAt:asc");
+
+        public static readonly AdminGetChallengesSortBy CreatedAtdesc
+            = new AdminGetChallengesSortBy("createdAt:desc");
+
+        public static readonly AdminGetChallengesSortBy UpdatedAt
+            = new AdminGetChallengesSortBy("updatedAt");
+
+        public static readonly AdminGetChallengesSortBy UpdatedAtasc
+            = new AdminGetChallengesSortBy("updatedAt:asc");
+
+        public static readonly AdminGetChallengesSortBy UpdatedAtdesc
+            = new AdminGetChallengesSortBy("updatedAt:desc");
+
+
+        public static implicit operator AdminGetChallengesSortBy(string value)
+        {
+            return NewValue(value);
+        }
+
+        public AdminGetChallengesSortBy(string enumValue)
+            : base(enumValue)
+        {
+
         }
     }
 

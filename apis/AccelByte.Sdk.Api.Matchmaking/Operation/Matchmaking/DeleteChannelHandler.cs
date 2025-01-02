@@ -28,6 +28,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
     /// 
     /// Trying to delete non-existent channel will result deletion success
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class DeleteChannelHandler : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -67,6 +68,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public DeleteChannelHandler.Response Execute(
                 string channel,
                 string namespace_

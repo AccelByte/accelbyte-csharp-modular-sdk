@@ -25,6 +25,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
     ///
     /// Reads single channel based on namespace and channel name
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class PublicGetSingleMatchmakingChannel : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -64,6 +65,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public PublicGetSingleMatchmakingChannel.Response Execute(
                 string channelName,
                 string namespace_

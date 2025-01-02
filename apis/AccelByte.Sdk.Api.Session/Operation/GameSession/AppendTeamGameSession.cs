@@ -23,8 +23,9 @@ namespace AccelByte.Sdk.Api.Session.Operation
     /// <summary>
     /// appendTeamGameSession
     ///
-    /// Append new member or team to session
+    /// Append new member or team to session. Please use patchUpdateGameSession instead
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AppendTeamGameSession : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -66,6 +67,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AppendTeamGameSession.Response Execute(
                 ApimodelsAppendTeamGameSessionRequest body,
                 string namespace_,

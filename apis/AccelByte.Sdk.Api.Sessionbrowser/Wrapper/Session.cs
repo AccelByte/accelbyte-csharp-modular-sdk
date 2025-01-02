@@ -34,6 +34,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
         }
 
         #region Operation Builders
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminQuerySession.AdminQuerySessionBuilder AdminQuerySessionOp
         {
             get
@@ -45,6 +46,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetTotalActiveSession.GetTotalActiveSessionBuilder GetTotalActiveSessionOp
         {
             get
@@ -56,6 +58,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetActiveCustomGameSessions.GetActiveCustomGameSessionsBuilder GetActiveCustomGameSessionsOp
         {
             get
@@ -67,6 +70,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetActiveMatchmakingGameSessions.GetActiveMatchmakingGameSessionsBuilder GetActiveMatchmakingGameSessionsOp
         {
             get
@@ -78,6 +82,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetSession.AdminGetSessionBuilder AdminGetSessionOp
         {
             get
@@ -89,6 +94,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminDeleteSession.AdminDeleteSessionBuilder AdminDeleteSessionOp
         {
             get
@@ -100,6 +106,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminSearchSessionsV2.AdminSearchSessionsV2Builder AdminSearchSessionsV2Op
         {
             get
@@ -111,6 +118,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetSessionHistoryDetailed.GetSessionHistoryDetailedBuilder GetSessionHistoryDetailedOp
         {
             get
@@ -122,6 +130,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UserQuerySession.UserQuerySessionBuilder UserQuerySessionOp
         {
             get
@@ -133,6 +142,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CreateSession.CreateSessionBuilder CreateSessionOp
         {
             get
@@ -144,6 +154,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetSessionByUserIDs.GetSessionByUserIDsBuilder GetSessionByUserIDsOp
         {
             get
@@ -155,6 +166,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetSession.GetSessionBuilder GetSessionOp
         {
             get
@@ -166,6 +178,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateSession.UpdateSessionBuilder UpdateSessionOp
         {
             get
@@ -177,6 +190,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteSession.DeleteSessionBuilder DeleteSessionOp
         {
             get
@@ -188,6 +202,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public JoinSession.JoinSessionBuilder JoinSessionOp
         {
             get
@@ -199,6 +214,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteSessionLocalDS.DeleteSessionLocalDSBuilder DeleteSessionLocalDSOp
         {
             get
@@ -210,6 +226,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AddPlayerToSession.AddPlayerToSessionBuilder AddPlayerToSessionOp
         {
             get
@@ -221,6 +238,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RemovePlayerFromSession.RemovePlayerFromSessionBuilder RemovePlayerFromSessionOp
         {
             get
@@ -232,6 +250,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateSettings.UpdateSettingsBuilder UpdateSettingsOp
         {
             get
@@ -243,6 +262,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetRecentPlayer.GetRecentPlayerBuilder GetRecentPlayerOp
         {
             get
@@ -256,6 +276,8 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
         }
         #endregion
 
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminQuerySession.Response AdminQuerySession(AdminQuerySession input)
         {
             var response = _sdk.RunRequest(input);
@@ -272,6 +294,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetTotalActiveSession.Response GetTotalActiveSession(GetTotalActiveSession input)
         {
             var response = _sdk.RunRequest(input);
@@ -288,6 +313,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetActiveCustomGameSessions.Response GetActiveCustomGameSessions(GetActiveCustomGameSessions input)
         {
             var response = _sdk.RunRequest(input);
@@ -304,6 +332,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetActiveMatchmakingGameSessions.Response GetActiveMatchmakingGameSessions(GetActiveMatchmakingGameSessions input)
         {
             var response = _sdk.RunRequest(input);
@@ -320,6 +351,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetSession.Response AdminGetSession(AdminGetSession input)
         {
             var response = _sdk.RunRequest(input);
@@ -336,6 +370,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminDeleteSession.Response AdminDeleteSession(AdminDeleteSession input)
         {
             var response = _sdk.RunRequest(input);
@@ -352,6 +389,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminSearchSessionsV2.Response AdminSearchSessionsV2(AdminSearchSessionsV2 input)
         {
             var response = _sdk.RunRequest(input);
@@ -368,6 +408,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetSessionHistoryDetailed.Response GetSessionHistoryDetailed(GetSessionHistoryDetailed input)
         {
             var response = _sdk.RunRequest(input);
@@ -384,6 +427,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UserQuerySession.Response UserQuerySession(UserQuerySession input)
         {
             var response = _sdk.RunRequest(input);
@@ -400,6 +446,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CreateSession.Response CreateSession(CreateSession input)
         {
             var response = _sdk.RunRequest(input);
@@ -416,6 +465,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetSessionByUserIDs.Response GetSessionByUserIDs(GetSessionByUserIDs input)
         {
             var response = _sdk.RunRequest(input);
@@ -432,6 +484,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetSession.Response GetSession(GetSession input)
         {
             var response = _sdk.RunRequest(input);
@@ -448,6 +503,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateSession.Response UpdateSession(UpdateSession input)
         {
             var response = _sdk.RunRequest(input);
@@ -464,6 +522,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteSession.Response DeleteSession(DeleteSession input)
         {
             var response = _sdk.RunRequest(input);
@@ -480,6 +541,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public JoinSession.Response JoinSession(JoinSession input)
         {
             var response = _sdk.RunRequest(input);
@@ -496,6 +560,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteSessionLocalDS.Response DeleteSessionLocalDS(DeleteSessionLocalDS input)
         {
             var response = _sdk.RunRequest(input);
@@ -512,6 +579,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AddPlayerToSession.Response AddPlayerToSession(AddPlayerToSession input)
         {
             var response = _sdk.RunRequest(input);
@@ -528,6 +598,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RemovePlayerFromSession.Response RemovePlayerFromSession(RemovePlayerFromSession input)
         {
             var response = _sdk.RunRequest(input);
@@ -544,6 +617,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateSettings.Response UpdateSettings(UpdateSettings input)
         {
             var response = _sdk.RunRequest(input);
@@ -560,6 +636,9 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetRecentPlayer.Response GetRecentPlayer(GetRecentPlayer input)
         {
             var response = _sdk.RunRequest(input);
@@ -576,5 +655,6 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
     }
 }

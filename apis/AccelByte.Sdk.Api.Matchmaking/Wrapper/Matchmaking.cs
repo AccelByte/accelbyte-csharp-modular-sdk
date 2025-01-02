@@ -34,6 +34,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
         }
 
         #region Operation Builders
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetAllChannelsHandler.GetAllChannelsHandlerBuilder GetAllChannelsHandlerOp
         {
             get
@@ -45,6 +46,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CreateChannelHandler.CreateChannelHandlerBuilder CreateChannelHandlerOp
         {
             get
@@ -56,6 +58,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetMatchPoolMetric.GetMatchPoolMetricBuilder GetMatchPoolMetricOp
         {
             get
@@ -67,6 +70,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteChannelHandler.DeleteChannelHandlerBuilder DeleteChannelHandlerOp
         {
             get
@@ -78,6 +82,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public StoreMatchResults.StoreMatchResultsBuilder StoreMatchResultsOp
         {
             get
@@ -89,6 +94,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Rebalance.RebalanceBuilder RebalanceOp
         {
             get
@@ -100,6 +106,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public QueueSessionHandler.QueueSessionHandlerBuilder QueueSessionHandlerOp
         {
             get
@@ -111,6 +118,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DequeueSessionHandler.DequeueSessionHandlerBuilder DequeueSessionHandlerOp
         {
             get
@@ -122,6 +130,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public QuerySessionHandler.QuerySessionHandlerBuilder QuerySessionHandlerOp
         {
             get
@@ -133,6 +142,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetAllPartyInAllChannel.GetAllPartyInAllChannelBuilder GetAllPartyInAllChannelOp
         {
             get
@@ -144,6 +154,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public BulkGetSessions.BulkGetSessionsBuilder BulkGetSessionsOp
         {
             get
@@ -155,6 +166,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ExportChannels.ExportChannelsBuilder ExportChannelsOp
         {
             get
@@ -166,6 +178,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ImportChannels.ImportChannelsBuilder ImportChannelsOp
         {
             get
@@ -177,6 +190,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetSingleMatchmakingChannel.GetSingleMatchmakingChannelBuilder GetSingleMatchmakingChannelOp
         {
             get
@@ -188,6 +202,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateMatchmakingChannel.UpdateMatchmakingChannelBuilder UpdateMatchmakingChannelOp
         {
             get
@@ -199,6 +214,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetAllPartyInChannel.GetAllPartyInChannelBuilder GetAllPartyInChannelOp
         {
             get
@@ -210,6 +226,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetAllSessionsInChannel.GetAllSessionsInChannelBuilder GetAllSessionsInChannelOp
         {
             get
@@ -221,6 +238,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AddUserIntoSessionInChannel.AddUserIntoSessionInChannelBuilder AddUserIntoSessionInChannelOp
         {
             get
@@ -232,6 +250,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteSessionInChannel.DeleteSessionInChannelBuilder DeleteSessionInChannelOp
         {
             get
@@ -243,6 +262,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteUserFromSessionInChannel.DeleteUserFromSessionInChannelBuilder DeleteUserFromSessionInChannelOp
         {
             get
@@ -254,6 +274,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetStatData.GetStatDataBuilder GetStatDataOp
         {
             get
@@ -289,6 +310,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetAllMatchmakingChannel.PublicGetAllMatchmakingChannelBuilder PublicGetAllMatchmakingChannelOp
         {
             get
@@ -300,6 +322,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetSingleMatchmakingChannel.PublicGetSingleMatchmakingChannelBuilder PublicGetSingleMatchmakingChannelOp
         {
             get
@@ -325,6 +348,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
         }
         #endregion
 
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetAllChannelsHandler.Response GetAllChannelsHandler(GetAllChannelsHandler input)
         {
             var response = _sdk.RunRequest(input);
@@ -341,6 +366,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CreateChannelHandler.Response CreateChannelHandler(CreateChannelHandler input)
         {
             var response = _sdk.RunRequest(input);
@@ -357,6 +385,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetMatchPoolMetric.Response GetMatchPoolMetric(GetMatchPoolMetric input)
         {
             var response = _sdk.RunRequest(input);
@@ -373,6 +404,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteChannelHandler.Response DeleteChannelHandler(DeleteChannelHandler input)
         {
             var response = _sdk.RunRequest(input);
@@ -389,6 +423,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public StoreMatchResults.Response StoreMatchResults(StoreMatchResults input)
         {
             var response = _sdk.RunRequest(input);
@@ -405,6 +442,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public Rebalance.Response Rebalance(Rebalance input)
         {
             var response = _sdk.RunRequest(input);
@@ -421,6 +461,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public QueueSessionHandler.Response QueueSessionHandler(QueueSessionHandler input)
         {
             var response = _sdk.RunRequest(input);
@@ -437,6 +480,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DequeueSessionHandler.Response DequeueSessionHandler(DequeueSessionHandler input)
         {
             var response = _sdk.RunRequest(input);
@@ -453,6 +499,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public QuerySessionHandler.Response QuerySessionHandler(QuerySessionHandler input)
         {
             var response = _sdk.RunRequest(input);
@@ -486,6 +535,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetAllPartyInAllChannel.Response GetAllPartyInAllChannel(GetAllPartyInAllChannel input)
         {
             var response = _sdk.RunRequest(input);
@@ -519,6 +571,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public BulkGetSessions.Response BulkGetSessions(BulkGetSessions input)
         {
             var response = _sdk.RunRequest(input);
@@ -552,6 +607,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ExportChannels.Response ExportChannels(ExportChannels input)
         {
             var response = _sdk.RunRequest(input);
@@ -568,6 +626,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ImportChannels.Response ImportChannels(ImportChannels input)
         {
             var response = _sdk.RunRequest(input);
@@ -584,6 +645,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetSingleMatchmakingChannel.Response GetSingleMatchmakingChannel(GetSingleMatchmakingChannel input)
         {
             var response = _sdk.RunRequest(input);
@@ -600,6 +664,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateMatchmakingChannel.Response UpdateMatchmakingChannel(UpdateMatchmakingChannel input)
         {
             var response = _sdk.RunRequest(input);
@@ -616,6 +683,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetAllPartyInChannel.Response GetAllPartyInChannel(GetAllPartyInChannel input)
         {
             var response = _sdk.RunRequest(input);
@@ -649,6 +719,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetAllSessionsInChannel.Response GetAllSessionsInChannel(GetAllSessionsInChannel input)
         {
             var response = _sdk.RunRequest(input);
@@ -682,6 +755,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AddUserIntoSessionInChannel.Response AddUserIntoSessionInChannel(AddUserIntoSessionInChannel input)
         {
             var response = _sdk.RunRequest(input);
@@ -698,6 +774,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteSessionInChannel.Response DeleteSessionInChannel(DeleteSessionInChannel input)
         {
             var response = _sdk.RunRequest(input);
@@ -714,6 +793,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteUserFromSessionInChannel.Response DeleteUserFromSessionInChannel(DeleteUserFromSessionInChannel input)
         {
             var response = _sdk.RunRequest(input);
@@ -730,6 +812,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetStatData.Response GetStatData(GetStatData input)
         {
             var response = _sdk.RunRequest(input);
@@ -746,6 +831,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
 #pragma warning disable ab_deprecated_operation
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SearchSessions.Response SearchSessions(SearchSessions input)
@@ -784,6 +870,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.Payload);
         }
 #pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetAllMatchmakingChannel.Response PublicGetAllMatchmakingChannel(PublicGetAllMatchmakingChannel input)
         {
             var response = _sdk.RunRequest(input);
@@ -800,6 +888,9 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetSingleMatchmakingChannel.Response PublicGetSingleMatchmakingChannel(PublicGetSingleMatchmakingChannel input)
         {
             var response = _sdk.RunRequest(input);
@@ -816,6 +907,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
 #pragma warning disable ab_deprecated_operation
         [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SearchSessionsV2.Response SearchSessionsV2(SearchSessionsV2 input)

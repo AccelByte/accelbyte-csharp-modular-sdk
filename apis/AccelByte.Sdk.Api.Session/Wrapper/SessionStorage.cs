@@ -34,6 +34,17 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         }
 
         #region Operation Builders
+        public AdminReadPartySessionStorage.AdminReadPartySessionStorageBuilder AdminReadPartySessionStorageOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminReadPartySessionStorage.AdminReadPartySessionStorageBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public AdminReadSessionStorage.AdminReadSessionStorageBuilder AdminReadSessionStorageOp
         {
             get
@@ -67,6 +78,28 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     return opBuilder;
             }
         }
+        public PublicReadPartySessionStorage.PublicReadPartySessionStorageBuilder PublicReadPartySessionStorageOp
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicReadPartySessionStorage.PublicReadPartySessionStorageBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public PublicUpdateInsertPartySessionStorageReserved.PublicUpdateInsertPartySessionStorageReservedBuilder PublicUpdateInsertPartySessionStorageReservedOp
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicUpdateInsertPartySessionStorageReserved.PublicUpdateInsertPartySessionStorageReservedBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public PublicUpdateInsertSessionStorageLeader.PublicUpdateInsertSessionStorageLeaderBuilder PublicUpdateInsertSessionStorageLeaderOp
         {
             get
@@ -91,6 +124,22 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         }
         #endregion
 
+        public AdminReadPartySessionStorage.Response AdminReadPartySessionStorage(AdminReadPartySessionStorage input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminReadPartySessionStorage.Response> AdminReadPartySessionStorageAsync(AdminReadPartySessionStorage input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public AdminReadSessionStorage.Response AdminReadSessionStorage(AdminReadSessionStorage input)
         {
             var response = _sdk.RunRequest(input);
@@ -132,6 +181,38 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.Payload);
         }
         public async Task<AdminReadUserSessionStorage.Response> AdminReadUserSessionStorageAsync(AdminReadUserSessionStorage input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicReadPartySessionStorage.Response PublicReadPartySessionStorage(PublicReadPartySessionStorage input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicReadPartySessionStorage.Response> PublicReadPartySessionStorageAsync(PublicReadPartySessionStorage input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicUpdateInsertPartySessionStorageReserved.Response PublicUpdateInsertPartySessionStorageReserved(PublicUpdateInsertPartySessionStorageReserved input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicUpdateInsertPartySessionStorageReserved.Response> PublicUpdateInsertPartySessionStorageReservedAsync(PublicUpdateInsertPartySessionStorageReserved input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

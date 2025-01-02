@@ -25,6 +25,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     ///
     /// Get third party config for specified namespace.
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AdminGetThirdPartyConfig : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -62,6 +63,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AdminGetThirdPartyConfig.Response Execute(
                 string namespace_
             )

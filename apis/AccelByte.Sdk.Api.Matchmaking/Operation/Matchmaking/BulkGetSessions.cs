@@ -25,6 +25,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
     ///
     /// Bulk get sessions.
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class BulkGetSessions : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -70,6 +71,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public BulkGetSessions.Response Execute(
                 string namespace_
             )

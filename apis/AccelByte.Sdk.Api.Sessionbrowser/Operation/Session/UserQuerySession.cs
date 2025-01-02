@@ -25,6 +25,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
     ///
     /// Query available game session
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class UserQuerySession : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -136,6 +137,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public UserQuerySession.Response Execute(
                 string namespace_,
                 string sessionType

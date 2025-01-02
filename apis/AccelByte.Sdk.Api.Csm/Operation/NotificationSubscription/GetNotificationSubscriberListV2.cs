@@ -43,8 +43,6 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             : OperationBuilder<GetNotificationSubscriberListV2Builder>
         {
 
-            public string? NotificationType { get; set; }
-
 
 
 
@@ -57,24 +55,20 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
 
 
-            public GetNotificationSubscriberListV2Builder SetNotificationType(string _notificationType)
-            {
-                NotificationType = _notificationType;
-                return this;
-            }
-
 
 
 
 
             public GetNotificationSubscriberListV2 Build(
                 string app,
-                string namespace_
+                string namespace_,
+                string notificationType
             )
             {
                 GetNotificationSubscriberListV2 op = new GetNotificationSubscriberListV2(this,
                     app,
-                    namespace_
+                    namespace_,
+                    notificationType
                 );
 
                 op.SetBaseFields<GetNotificationSubscriberListV2Builder>(this);
@@ -83,12 +77,14 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
             public GetNotificationSubscriberListV2.Response Execute(
                 string app,
-                string namespace_
+                string namespace_,
+                string notificationType
             )
             {
                 GetNotificationSubscriberListV2 op = Build(
                     app,
-                    namespace_
+                    namespace_,
+                    notificationType
                 );
 
                 if (_Sdk == null)
@@ -102,12 +98,14 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             public async Task<GetNotificationSubscriberListV2.Response> ExecuteAsync(
                 string app,
-                string namespace_
+                string namespace_,
+                string notificationType
             )
             {
                 GetNotificationSubscriberListV2 op = Build(
                     app,
-                    namespace_
+                    namespace_,
+                    notificationType
                 );
 
                 if (_Sdk == null)
@@ -123,13 +121,14 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
         private GetNotificationSubscriberListV2(GetNotificationSubscriberListV2Builder builder,
             string app,
-            string namespace_
+            string namespace_,
+            string notificationType
         )
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
 
-            if (builder.NotificationType is not null) QueryParams["notificationType"] = builder.NotificationType;
+            if (notificationType is not null) QueryParams["notificationType"] = notificationType;
 
 
 
@@ -161,7 +160,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         public GetNotificationSubscriberListV2(
             string app,
             string namespace_,
-            string? notificationType
+            string notificationType
         )
         {
             PathParams["app"] = app;

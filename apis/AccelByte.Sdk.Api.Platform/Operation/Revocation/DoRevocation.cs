@@ -137,6 +137,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public class Response : ApiResponse<Model.RevocationResult>
         {
 
+            public ErrorEntity? Error409 { get; set; } = null;
+
 
             protected override string GetFullOperationId() => "Platform::Revocation::DoRevocation";
         }
@@ -186,6 +188,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 response.Data = JsonSerializer.Deserialize<Model.RevocationResult>(payload, ResponseJsonOptions);
                 response.IsSuccess = true;
+            }
+            else if (code == (HttpStatusCode)409)
+            {
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
             }
 
             return response;

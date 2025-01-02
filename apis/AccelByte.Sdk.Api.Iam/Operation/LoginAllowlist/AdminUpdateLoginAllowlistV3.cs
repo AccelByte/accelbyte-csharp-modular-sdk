@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         #region Response Part        
-        public class Response : ApiResponse<Model.ModelLoginAllowlistResponse>
+        public class Response : ApiResponse
         {
 
             public RestErrorResponse? Error400 { get; set; } = null;
@@ -172,34 +172,30 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             var response = new AdminUpdateLoginAllowlistV3.Response()
             {
                 StatusCode = code,
-                ContentType = contentType
+                ContentType = contentType,
+                IsSuccess = true
             };
 
-            if (code == (HttpStatusCode)204)
-            {
-                response.IsSuccess = true;
-            }
-            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
-            {
-                response.Data = JsonSerializer.Deserialize<Model.ModelLoginAllowlistResponse>(payload, ResponseJsonOptions);
-                response.IsSuccess = true;
-            }
-            else if (code == (HttpStatusCode)400)
+            if (code == (HttpStatusCode)400)
+
             {
                 response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
+
             {
                 response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
+
             {
                 response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
+
             {
                 response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

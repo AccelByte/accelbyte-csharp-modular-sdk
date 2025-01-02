@@ -26,6 +26,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
     /// Get a channel's stat data (mean, stddev, min, max) according to the stats collected from statistics service.
     /// '
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class GetStatData : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -65,6 +66,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public GetStatData.Response Execute(
                 string channelName,
                 string namespace_

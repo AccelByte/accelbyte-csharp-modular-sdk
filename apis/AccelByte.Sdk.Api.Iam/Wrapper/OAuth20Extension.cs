@@ -56,6 +56,17 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        public AuthenticateAndLinkForwardV3.AuthenticateAndLinkForwardV3Builder AuthenticateAndLinkForwardV3Op
+        {
+            get
+            {
+                var opBuilder = new Operation.AuthenticateAndLinkForwardV3.AuthenticateAndLinkForwardV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public GenerateTokenByNewHeadlessAccountV3.GenerateTokenByNewHeadlessAccountV3Builder GenerateTokenByNewHeadlessAccountV3Op
         {
             get
@@ -166,6 +177,17 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        public UpgradeAndAuthenticateForwardV3.UpgradeAndAuthenticateForwardV3Builder UpgradeAndAuthenticateForwardV3Op
+        {
+            get
+            {
+                var opBuilder = new Operation.UpgradeAndAuthenticateForwardV3.UpgradeAndAuthenticateForwardV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         #endregion
 
         public UserAuthenticationV3.Response UserAuthenticationV3(UserAuthenticationV3 input)
@@ -193,6 +215,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
         public async Task<AuthenticationWithPlatformLinkV3.Response> AuthenticationWithPlatformLinkV3Async(AuthenticationWithPlatformLinkV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AuthenticateAndLinkForwardV3.Response AuthenticateAndLinkForwardV3(AuthenticateAndLinkForwardV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AuthenticateAndLinkForwardV3.Response> AuthenticateAndLinkForwardV3Async(AuthenticateAndLinkForwardV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -353,6 +391,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
         public async Task<RequestTargetTokenResponseV3.Response> RequestTargetTokenResponseV3Async(RequestTargetTokenResponseV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public UpgradeAndAuthenticateForwardV3.Response UpgradeAndAuthenticateForwardV3(UpgradeAndAuthenticateForwardV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpgradeAndAuthenticateForwardV3.Response> UpgradeAndAuthenticateForwardV3Async(UpgradeAndAuthenticateForwardV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

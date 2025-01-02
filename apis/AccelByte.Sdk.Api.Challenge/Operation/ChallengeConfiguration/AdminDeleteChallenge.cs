@@ -23,9 +23,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
     /// <summary>
     /// adminDeleteChallenge
     ///
-    /// 
-    /// 
-    ///   * Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [DELETE]
+    /// - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [DELETE]
     /// </summary>
     public class AdminDeleteChallenge : AccelByte.Sdk.Core.Operation
     {

@@ -23,12 +23,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// fulfillItems
     ///
-    ///  [Not supported yet in AGS Shared Cloud] Fulfill items by transactionId.
-    /// Other detail info:
     /// 
-    ///   * Request body : storeId, region, language, and entitlementCollectionId can be ignored.
+    /// 
+    /// ### The endpoint is going to be deprecated
+    /// 
+    /// Description: this endpoint is Not supported yet in AGS Shared Cloud and it's used to fulfill items by transaction id.
+    /// 
+    ///   *  Request body : storeId, region, language, and entitlementCollectionId can be ignored.
     ///   *  Returns : fulfillment v2 result, storeId field can be ignored.
+    /// 
+    /// 
+    /// 
+    /// ### Endpoint migration guide
+    /// 
+    ///   *  Substitute endpoint: /v3/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId} [PUT]
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class FulfillItems : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -72,6 +82,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public FulfillItems.Response Execute(
                 FulfillmentV2Request body,
                 string namespace_,

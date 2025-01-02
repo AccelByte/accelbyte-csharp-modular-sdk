@@ -26,6 +26,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
     /// Search sessions. Optimize the query by differentiating query with filter namespace only and filter with namespace & other filter (partyID, userID, matchID).
     /// Query with filter namespace only will not group whole session data while query with filter namespace & other filter will include session data.
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AdminSearchSessionsV2 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -123,6 +124,7 @@ namespace AccelByte.Sdk.Api.Sessionbrowser.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AdminSearchSessionsV2.Response Execute(
                 string namespace_,
                 long limit,

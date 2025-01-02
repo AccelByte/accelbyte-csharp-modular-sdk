@@ -782,6 +782,17 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        public PublicUpgradeHeadlessWithCodeV4Forward.PublicUpgradeHeadlessWithCodeV4ForwardBuilder PublicUpgradeHeadlessWithCodeV4ForwardOp
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicUpgradeHeadlessWithCodeV4Forward.PublicUpgradeHeadlessWithCodeV4ForwardBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         #endregion
 
         public AdminListInvitationHistoriesV4.Response AdminListInvitationHistoriesV4(AdminListInvitationHistoriesV4 input)
@@ -1882,6 +1893,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
         public async Task<PublicInviteUserV4.Response> PublicInviteUserV4Async(PublicInviteUserV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicUpgradeHeadlessWithCodeV4Forward.Response PublicUpgradeHeadlessWithCodeV4Forward(PublicUpgradeHeadlessWithCodeV4Forward input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicUpgradeHeadlessWithCodeV4Forward.Response> PublicUpgradeHeadlessWithCodeV4ForwardAsync(PublicUpgradeHeadlessWithCodeV4Forward input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

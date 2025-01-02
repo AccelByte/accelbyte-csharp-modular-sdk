@@ -28,7 +28,9 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
     /// 
     /// ------
     /// Supported platforms:
-    /// * psn
+    /// - psn
+    /// - steamnetwork
+    /// - xbox
     /// </summary>
     public class AdminGetUserPlatformAccountClosureHistories : AccelByte.Sdk.Core.Operation
     {

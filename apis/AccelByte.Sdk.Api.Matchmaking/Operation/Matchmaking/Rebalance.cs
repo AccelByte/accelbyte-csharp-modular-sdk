@@ -29,6 +29,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
     /// 
     /// Will return rebalanced mm result
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class Rebalance : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -68,6 +69,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public Rebalance.Response Execute(
                 ModelsRebalanceRequest body,
                 string namespace_

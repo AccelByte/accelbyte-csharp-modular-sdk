@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -27,6 +27,12 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 
         public string OperationName { get { return "RequestOneTimeLinkingCodeV3"; } }
 
+        [SdkCommandArgument("redirectUri")]
+        public string RedirectUri { get; set; } = String.Empty;
+
+        [SdkCommandArgument("state")]
+        public string State { get; set; } = String.Empty;
+
         [SdkCommandArgument("platformId")]
         public string PlatformId { get; set; } = String.Empty;
 
@@ -43,6 +49,10 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 
 
 
+            if (RedirectUri != null)
+                opBuilder.SetRedirectUri((string)RedirectUri);
+            if (State != null)
+                opBuilder.SetState((string)State);
 
 
             RequestOneTimeLinkingCodeV3 operation = opBuilder.Build(

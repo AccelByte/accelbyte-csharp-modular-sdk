@@ -138,6 +138,17 @@ namespace AccelByte.Sdk.Api.Session
         }
         private Wrapper.Party? _Party = null;
 
+        public Wrapper.SessionStorage SessionStorage
+        {
+            get
+            {
+                if (_SessionStorage == null)
+                    _SessionStorage = new Wrapper.SessionStorage(_Sdk, _CustomBasePath);
+                return _SessionStorage;
+            }
+        }
+        private Wrapper.SessionStorage? _SessionStorage = null;
+
         public Wrapper.PlatformCredential PlatformCredential
         {
             get
@@ -159,17 +170,6 @@ namespace AccelByte.Sdk.Api.Session
             }
         }
         private Wrapper.RecentPlayer? _RecentPlayer = null;
-
-        public Wrapper.SessionStorage SessionStorage
-        {
-            get
-            {
-                if (_SessionStorage == null)
-                    _SessionStorage = new Wrapper.SessionStorage(_Sdk, _CustomBasePath);
-                return _SessionStorage;
-            }
-        }
-        private Wrapper.SessionStorage? _SessionStorage = null;
 
         public Wrapper.Player Player
         {

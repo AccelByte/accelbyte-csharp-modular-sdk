@@ -31,6 +31,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
     /// 
     /// if party_id value empty/null, field will not show in response body.
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class QuerySessionHandler : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -70,6 +71,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public QuerySessionHandler.Response Execute(
                 string matchID,
                 string namespace_

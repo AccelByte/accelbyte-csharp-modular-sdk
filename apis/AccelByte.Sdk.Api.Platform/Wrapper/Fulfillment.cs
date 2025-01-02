@@ -122,6 +122,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public FulfillItems.FulfillItemsBuilder FulfillItemsOp
         {
             get
@@ -133,6 +134,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RetryFulfillItems.RetryFulfillItemsBuilder RetryFulfillItemsOp
         {
             get
@@ -144,11 +146,45 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RevokeItems.RevokeItemsBuilder RevokeItemsOp
         {
             get
             {
                 var opBuilder = new Operation.RevokeItems.RevokeItemsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public FulfillItemsV3.FulfillItemsV3Builder FulfillItemsV3Op
+        {
+            get
+            {
+                var opBuilder = new Operation.FulfillItemsV3.FulfillItemsV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public RetryFulfillItemsV3.RetryFulfillItemsV3Builder RetryFulfillItemsV3Op
+        {
+            get
+            {
+                var opBuilder = new Operation.RetryFulfillItemsV3.RetryFulfillItemsV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public RevokeItemsV3.RevokeItemsV3Builder RevokeItemsV3Op
+        {
+            get
+            {
+                var opBuilder = new Operation.RevokeItemsV3.RevokeItemsV3Builder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -285,6 +321,8 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public FulfillItems.Response FulfillItems(FulfillItems input)
         {
             var response = _sdk.RunRequest(input);
@@ -301,6 +339,9 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RetryFulfillItems.Response RetryFulfillItems(RetryFulfillItems input)
         {
             var response = _sdk.RunRequest(input);
@@ -317,6 +358,9 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RevokeItems.Response RevokeItems(RevokeItems input)
         {
             var response = _sdk.RunRequest(input);
@@ -326,6 +370,55 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
         public async Task<RevokeItems.Response> RevokeItemsAsync(RevokeItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+#pragma warning restore ab_deprecated_operation
+        public FulfillItemsV3.Response FulfillItemsV3(FulfillItemsV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<FulfillItemsV3.Response> FulfillItemsV3Async(FulfillItemsV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public RetryFulfillItemsV3.Response RetryFulfillItemsV3(RetryFulfillItemsV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<RetryFulfillItemsV3.Response> RetryFulfillItemsV3Async(RetryFulfillItemsV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public RevokeItemsV3.Response RevokeItemsV3(RevokeItemsV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<RevokeItemsV3.Response> RevokeItemsV3Async(RevokeItemsV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

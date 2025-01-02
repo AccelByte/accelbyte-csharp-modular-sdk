@@ -122,6 +122,17 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        public Verify2faCodeForward.Verify2faCodeForwardBuilder Verify2faCodeForwardOp
+        {
+            get
+            {
+                var opBuilder = new Operation.Verify2faCodeForward.Verify2faCodeForwardBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public RetrieveUserThirdPartyPlatformTokenV3.RetrieveUserThirdPartyPlatformTokenV3Builder RetrieveUserThirdPartyPlatformTokenV3Op
         {
             get
@@ -333,6 +344,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
         public async Task<Verify2faCode.Response> Verify2faCodeAsync(Verify2faCode input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public Verify2faCodeForward.Response Verify2faCodeForward(Verify2faCodeForward input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<Verify2faCodeForward.Response> Verify2faCodeForwardAsync(Verify2faCodeForward input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

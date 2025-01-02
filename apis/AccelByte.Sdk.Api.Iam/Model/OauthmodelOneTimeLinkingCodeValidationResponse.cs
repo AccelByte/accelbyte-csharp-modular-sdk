@@ -15,6 +15,10 @@ namespace AccelByte.Sdk.Api.Iam.Model
         [JsonPropertyName("expired")]
         public bool? Expired { get; set; }
 
+        [JsonPropertyName("platformId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? PlatformId { get; set; }
+
         [JsonPropertyName("valid")]
         public bool? Valid { get; set; }
 

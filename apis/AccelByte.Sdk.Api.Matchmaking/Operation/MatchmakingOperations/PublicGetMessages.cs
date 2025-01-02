@@ -25,6 +25,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
     ///
     /// get the list of messages.
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class PublicGetMessages : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -60,6 +61,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public PublicGetMessages.Response Execute(
             )
             {

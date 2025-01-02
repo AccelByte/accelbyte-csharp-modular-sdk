@@ -28,6 +28,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
     /// All mock tickets and matches will be cleaned up automatically after 1 day.
     /// '
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class CreateMockTickets : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -69,6 +70,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public CreateMockTickets.Response Execute(
                 ModelsCreateMockTicket body,
                 string channelName,

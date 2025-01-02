@@ -25,6 +25,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     ///
     /// Sends notification to a party.
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class SendPartyFreeformNotificationV1Admin : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -66,6 +67,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public SendPartyFreeformNotificationV1Admin.Response Execute(
                 ModelFreeFormNotificationRequestV1 body,
                 string namespace_,

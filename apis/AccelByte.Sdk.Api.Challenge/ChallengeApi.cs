@@ -39,6 +39,17 @@ namespace AccelByte.Sdk.Api.Challenge
         }
         private Wrapper.GoalConfiguration? _GoalConfiguration = null;
 
+        public Wrapper.Schedules Schedules
+        {
+            get
+            {
+                if (_Schedules == null)
+                    _Schedules = new Wrapper.Schedules(_Sdk, _CustomBasePath);
+                return _Schedules;
+            }
+        }
+        private Wrapper.Schedules? _Schedules = null;
+
         public Wrapper.Plugins Plugins
         {
             get

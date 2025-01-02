@@ -37,6 +37,8 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             : OperationBuilder<AdminConsumeUserItemBuilder>
         {
 
+            public string? DateRangeValidation { get; set; }
+
 
 
 
@@ -48,6 +50,12 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                 _Sdk = sdk;
             }
 
+
+            public AdminConsumeUserItemBuilder SetDateRangeValidation(string _dateRangeValidation)
+            {
+                DateRangeValidation = _dateRangeValidation;
+                return this;
+            }
 
 
 
@@ -177,6 +185,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
 
+            if (builder.DateRangeValidation is not null) QueryParams["dateRangeValidation"] = builder.DateRangeValidation;
 
 
 
@@ -219,6 +228,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             string inventoryId,
             string namespace_,
             string userId,
+            string? dateRangeValidation,
             Model.ApimodelsConsumeItemReq body
         )
         {
@@ -226,6 +236,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
 
+            if (dateRangeValidation is not null) QueryParams["dateRangeValidation"] = dateRangeValidation;
 
 
 

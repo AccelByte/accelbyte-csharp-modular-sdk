@@ -30,6 +30,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     /// 
     /// Action Code: 50101
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class PublicGetPartyDataV1 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -69,6 +70,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public PublicGetPartyDataV1.Response Execute(
                 string namespace_,
                 string partyId

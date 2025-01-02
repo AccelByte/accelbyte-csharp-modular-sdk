@@ -250,6 +250,8 @@ namespace AccelByte.Sdk.Api.Platform
         public static readonly ApiError Error40171 = new ApiError("40171", "Subscription [{subscriptionId}] is not active");
         public static readonly ApiError Error40172 = new ApiError("40172", "Subscription [{subscriptionId}] is charging, waiting for payment notification");
         public static readonly ApiError Error40173 = new ApiError("40173", "Subscription [{subscriptionId}] current currency [{currentCurrency}] not match request currency [{requestCurrency}]");
+        public static readonly ApiError Error41171 = new ApiError("41171", "Request has different payload on previous call");
+        public static readonly ApiError Error41172 = new ApiError("41172", "Request has different user id on previous call");
         public static readonly ApiError Error49147 = new ApiError("49147", "Published season does not exist");
         public static readonly ApiError Error49183 = new ApiError("49183", "Pass item does not match published season pass");
         public static readonly ApiError Error49184 = new ApiError("49184", "Tier item does not match published season tier");

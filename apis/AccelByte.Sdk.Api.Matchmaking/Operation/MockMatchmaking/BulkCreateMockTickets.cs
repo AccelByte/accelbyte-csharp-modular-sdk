@@ -27,6 +27,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
     /// The tickets input will be used as is.
     /// '
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class BulkCreateMockTickets : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -68,6 +69,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public BulkCreateMockTickets.Response Execute(
                 List<ModelsMatchingParty> body,
                 string channelName,

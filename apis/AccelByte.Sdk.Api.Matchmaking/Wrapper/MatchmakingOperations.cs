@@ -56,6 +56,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetMessages.PublicGetMessagesBuilder PublicGetMessagesOp
         {
             get
@@ -112,6 +113,8 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetMessages.Response PublicGetMessages(PublicGetMessages input)
         {
             var response = _sdk.RunRequest(input);
@@ -128,6 +131,7 @@ namespace AccelByte.Sdk.Api.Matchmaking.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
         public VersionCheckHandler.Response VersionCheckHandler(VersionCheckHandler input)
         {
             var response = _sdk.RunRequest(input);
