@@ -28,6 +28,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// - If namespace is game, will search by game user Id, other wise will search by publisher namespace
     /// - **Result will include displayName(if it exists)**
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class PublicBulkGetUsers : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -67,6 +68,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public PublicBulkGetUsers.Response Execute(
                 ModelUserIDsRequest body,
                 string namespace_

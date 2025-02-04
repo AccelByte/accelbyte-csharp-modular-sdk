@@ -42,7 +42,6 @@ namespace AccelByte.Sdk.Api.Session.Operation
     /// - textChat
     /// - autoJoin
     /// - requestedRegions
-    /// - dsSource
     /// - preferredClaimKeys
     /// - fallbackClaimKeys
     /// - customURLGRPC

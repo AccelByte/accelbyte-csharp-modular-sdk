@@ -122,6 +122,17 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        public PartialUpdateThirdPartyLoginPlatformDomainV3.PartialUpdateThirdPartyLoginPlatformDomainV3Builder PartialUpdateThirdPartyLoginPlatformDomainV3Op
+        {
+            get
+            {
+                var opBuilder = new Operation.PartialUpdateThirdPartyLoginPlatformDomainV3.PartialUpdateThirdPartyLoginPlatformDomainV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public AdminCheckThirdPartyLoginPlatformAvailabilityV3.AdminCheckThirdPartyLoginPlatformAvailabilityV3Builder AdminCheckThirdPartyLoginPlatformAvailabilityV3Op
         {
             get
@@ -278,6 +289,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
         public async Task<DeleteThirdPartyLoginPlatformDomainV3.Response> DeleteThirdPartyLoginPlatformDomainV3Async(DeleteThirdPartyLoginPlatformDomainV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PartialUpdateThirdPartyLoginPlatformDomainV3.Response PartialUpdateThirdPartyLoginPlatformDomainV3(PartialUpdateThirdPartyLoginPlatformDomainV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PartialUpdateThirdPartyLoginPlatformDomainV3.Response> PartialUpdateThirdPartyLoginPlatformDomainV3Async(PartialUpdateThirdPartyLoginPlatformDomainV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
             public PublicUpgradeHeadlessWithCodeV4Forward Build(
-                AccountUpgradeHeadlessAccountWithVerificationCodeRequestV4 body
+                AccountUpgradeHeadlessAccountWithVerificationCodeForwardRequestV4 body
             )
             {
                 PublicUpgradeHeadlessWithCodeV4Forward op = new PublicUpgradeHeadlessWithCodeV4Forward(this,
@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
 
             public PublicUpgradeHeadlessWithCodeV4Forward.Response Execute(
-                AccountUpgradeHeadlessAccountWithVerificationCodeRequestV4 body
+                AccountUpgradeHeadlessAccountWithVerificationCodeForwardRequestV4 body
             )
             {
                 PublicUpgradeHeadlessWithCodeV4Forward op = Build(
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.Payload);
             }
             public async Task<PublicUpgradeHeadlessWithCodeV4Forward.Response> ExecuteAsync(
-                AccountUpgradeHeadlessAccountWithVerificationCodeRequestV4 body
+                AccountUpgradeHeadlessAccountWithVerificationCodeForwardRequestV4 body
             )
             {
                 PublicUpgradeHeadlessWithCodeV4Forward op = Build(
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         }
 
         private PublicUpgradeHeadlessWithCodeV4Forward(PublicUpgradeHeadlessWithCodeV4ForwardBuilder builder,
-            AccountUpgradeHeadlessAccountWithVerificationCodeRequestV4 body
+            AccountUpgradeHeadlessAccountWithVerificationCodeForwardRequestV4 body
         )
         {
 
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicUpgradeHeadlessWithCodeV4Forward(
-            Model.AccountUpgradeHeadlessAccountWithVerificationCodeRequestV4 body
+            Model.AccountUpgradeHeadlessAccountWithVerificationCodeForwardRequestV4 body
         )
         {
 

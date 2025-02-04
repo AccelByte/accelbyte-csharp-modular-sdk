@@ -34,6 +34,8 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             : OperationBuilder<GetChallengesBuilder>
         {
 
+            public string? Keyword { get; set; }
+
             public long? Limit { get; set; }
 
             public long? Offset { get; set; }
@@ -41,6 +43,8 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             public GetChallengesSortBy? SortBy { get; set; }
 
             public GetChallengesStatus? Status { get; set; }
+
+            public List<string>? Tags { get; set; }
 
 
 
@@ -53,6 +57,12 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                 _Sdk = sdk;
             }
 
+
+            public GetChallengesBuilder SetKeyword(string _keyword)
+            {
+                Keyword = _keyword;
+                return this;
+            }
 
             public GetChallengesBuilder SetLimit(long _limit)
             {
@@ -75,6 +85,12 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             public GetChallengesBuilder SetStatus(GetChallengesStatus _status)
             {
                 Status = _status;
+                return this;
+            }
+
+            public GetChallengesBuilder SetTags(List<string> _tags)
+            {
+                Tags = _tags;
                 return this;
             }
 
@@ -136,13 +152,16 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         {
             PathParams["namespace"] = namespace_;
 
+            if (builder.Keyword is not null) QueryParams["keyword"] = builder.Keyword;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy.Value;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
+            if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
 
 
 
+            CollectionFormatMap["tags"] = "csv";
 
 
 
@@ -153,6 +172,8 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #region Response Part        
         public class Response : ApiResponse<Model.ModelListChallengeResponse>
         {
+
+            public ResponseError? Error400 { get; set; } = null;
 
             public IamErrorResponse? Error401 { get; set; } = null;
 
@@ -168,21 +189,26 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
         public GetChallenges(
             string namespace_,
+            string? keyword,
             long? limit,
             long? offset,
             GetChallengesSortBy? sortBy,
-            GetChallengesStatus? status
+            GetChallengesStatus? status,
+            List<string>? tags
         )
         {
             PathParams["namespace"] = namespace_;
 
+            if (keyword is not null) QueryParams["keyword"] = keyword;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy.Value;
             if (status is not null) QueryParams["status"] = status.Value;
+            if (tags is not null) QueryParams["tags"] = tags;
 
 
 
+            CollectionFormatMap["tags"] = "csv";
 
 
 
@@ -213,6 +239,11 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             {
                 response.Data = JsonSerializer.Deserialize<Model.ModelListChallengeResponse>(payload, ResponseJsonOptions);
                 response.IsSuccess = true;
+            }
+            else if (code == (HttpStatusCode)400)
+            {
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {

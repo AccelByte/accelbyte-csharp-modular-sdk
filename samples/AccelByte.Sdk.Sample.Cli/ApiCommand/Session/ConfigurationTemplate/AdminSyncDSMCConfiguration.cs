@@ -39,6 +39,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
         {
             AccelByte.Sdk.Api.Session.Wrapper.ConfigurationTemplate wrapper = new AccelByte.Sdk.Api.Session.Wrapper.ConfigurationTemplate(_SDK);
 
+#pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Session.Operation.AdminSyncDSMCConfiguration.Builder;
 
 
@@ -49,7 +50,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
                 Namespace
             );
 
+#pragma warning restore ab_deprecated_operation
 
+#pragma warning disable ab_deprecated_operation_wrapper
             var response = wrapper.AdminSyncDSMCConfiguration(operation);
             if (response.IsSuccess)
             {
@@ -62,6 +65,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
                 return CommandResult.Fail("-", "Valid error message unavailable");
+#pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

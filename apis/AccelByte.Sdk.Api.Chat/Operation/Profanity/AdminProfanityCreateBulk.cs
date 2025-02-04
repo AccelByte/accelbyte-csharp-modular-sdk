@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #endregion
 
         #region Response Part        
-        public class Response : ApiResponse<Model.ModelsDictionary>
+        public class Response : ApiResponse
         {
 
             public RestapiErrorResponseBody? Error400 { get; set; } = null;
@@ -172,39 +172,36 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             var response = new AdminProfanityCreateBulk.Response()
             {
                 StatusCode = code,
-                ContentType = contentType
+                ContentType = contentType,
+                IsSuccess = true
             };
 
-            if (code == (HttpStatusCode)204)
-            {
-                response.IsSuccess = true;
-            }
-            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
-            {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsDictionary>(payload, ResponseJsonOptions);
-                response.IsSuccess = true;
-            }
-            else if (code == (HttpStatusCode)400)
+            if (code == (HttpStatusCode)400)
+
             {
                 response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
+
             {
                 response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
+
             {
                 response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
+
             {
                 response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
+
             {
                 response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

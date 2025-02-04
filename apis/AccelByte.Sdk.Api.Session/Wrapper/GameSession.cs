@@ -78,6 +78,17 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     return opBuilder;
             }
         }
+        public AdminUpdateDSInformation.AdminUpdateDSInformationBuilder AdminUpdateDSInformationOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminUpdateDSInformation.AdminUpdateDSInformationBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public AdminKickGameSessionMember.AdminKickGameSessionMemberBuilder AdminKickGameSessionMemberOp
         {
             get
@@ -391,6 +402,22 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.Payload);
         }
         public async Task<AdminSetDSReady.Response> AdminSetDSReadyAsync(AdminSetDSReady input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminUpdateDSInformation.Response AdminUpdateDSInformation(AdminUpdateDSInformation input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminUpdateDSInformation.Response> AdminUpdateDSInformationAsync(AdminUpdateDSInformation input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -25,6 +25,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
     ///
     /// Get dsmc default configuration.
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AdminGetDSMCConfigurationDefault : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -60,6 +61,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AdminGetDSMCConfigurationDefault.Response Execute(
             )
             {

@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Session.Model
 {
@@ -84,6 +86,11 @@ namespace AccelByte.Sdk.Api.Session.Model
 
         [JsonPropertyName("textChat")]
         public bool? TextChat { get; set; }
+
+        [JsonPropertyName("textChatMode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public ApimodelsCreateGameSessionRequestTextChatMode? TextChatMode { get; set; }
 
         [JsonPropertyName("ticketIDs")]
         public List<string>? TicketIDs { get; set; }
@@ -172,6 +179,11 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonPropertyName("textChat")]
         public bool? TextChat { get; set; }
 
+        [JsonPropertyName("textChatMode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public ApimodelsCreateGameSessionRequestTextChatMode? TextChatMode { get; set; }
+
         [JsonPropertyName("ticketIDs")]
         public List<string>? TicketIDs { get; set; }
 
@@ -184,4 +196,28 @@ namespace AccelByte.Sdk.Api.Session.Model
 
     }
 
+
+    public class ApimodelsCreateGameSessionRequestTextChatMode : StringEnum<ApimodelsCreateGameSessionRequestTextChatMode>
+    {
+        public static readonly ApimodelsCreateGameSessionRequestTextChatMode GAME
+            = new ApimodelsCreateGameSessionRequestTextChatMode("GAME");
+
+        public static readonly ApimodelsCreateGameSessionRequestTextChatMode NONE
+            = new ApimodelsCreateGameSessionRequestTextChatMode("NONE");
+
+        public static readonly ApimodelsCreateGameSessionRequestTextChatMode TEAM
+            = new ApimodelsCreateGameSessionRequestTextChatMode("TEAM");
+
+
+        public static implicit operator ApimodelsCreateGameSessionRequestTextChatMode(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ApimodelsCreateGameSessionRequestTextChatMode(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

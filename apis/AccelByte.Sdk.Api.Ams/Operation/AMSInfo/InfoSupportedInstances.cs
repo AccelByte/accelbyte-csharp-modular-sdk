@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #endregion
 
         #region Response Part        
-        public class Response : ApiResponse<Model.ApiInstanceTypesForNamespaceResponse>
+        public class Response : ApiResponse<Model.ApiInstanceTypesResponse>
         {
 
             public ResponseErrorResponse? Error401 { get; set; } = null;
@@ -167,7 +167,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiInstanceTypesForNamespaceResponse>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ApiInstanceTypesResponse>(payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)

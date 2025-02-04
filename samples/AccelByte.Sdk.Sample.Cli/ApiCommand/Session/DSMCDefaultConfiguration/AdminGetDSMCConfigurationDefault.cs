@@ -36,6 +36,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
         {
             AccelByte.Sdk.Api.Session.Wrapper.DSMCDefaultConfiguration wrapper = new AccelByte.Sdk.Api.Session.Wrapper.DSMCDefaultConfiguration(_SDK);
 
+#pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Session.Operation.AdminGetDSMCConfigurationDefault.Builder;
 
 
@@ -45,7 +46,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
             AdminGetDSMCConfigurationDefault operation = opBuilder.Build(
             );
 
+#pragma warning restore ab_deprecated_operation
 
+#pragma warning disable ab_deprecated_operation_wrapper
             var response = wrapper.AdminGetDSMCConfigurationDefault(operation);
             if (response.IsSuccess)
             {
@@ -58,6 +61,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
                 return CommandResult.Fail("-", "Valid error message unavailable");
+#pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

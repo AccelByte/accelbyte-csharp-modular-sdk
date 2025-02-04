@@ -193,6 +193,17 @@ namespace AccelByte.Sdk.Api.Legal
         }
         private Wrapper.Utility? _Utility = null;
 
+        public Wrapper.PoliciesWithNamespaceV2 PoliciesWithNamespaceV2
+        {
+            get
+            {
+                if (_PoliciesWithNamespaceV2 == null)
+                    _PoliciesWithNamespaceV2 = new Wrapper.PoliciesWithNamespaceV2(_Sdk, _CustomBasePath);
+                return _PoliciesWithNamespaceV2;
+            }
+        }
+        private Wrapper.PoliciesWithNamespaceV2? _PoliciesWithNamespaceV2 = null;
+
         internal LegalApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;

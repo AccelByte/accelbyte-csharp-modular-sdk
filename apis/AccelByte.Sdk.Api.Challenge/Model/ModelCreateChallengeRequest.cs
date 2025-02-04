@@ -63,6 +63,10 @@ namespace AccelByte.Sdk.Api.Challenge.Model
         [JsonPropertyName("startDate")]
         public DateTime? StartDate { get; set; }
 
+        [JsonPropertyName("tags")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<string>? Tags { get; set; }
+
     }
 
 

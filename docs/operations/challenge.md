@@ -129,6 +129,7 @@
 | `model.GoalProgressionResponse` | [ModelGoalProgressionResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelGoalProgressionResponse.cs) |
 | `model.GoalResponse` | [ModelGoalResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelGoalResponse.cs) |
 | `model.GoalSchedule` | [ModelGoalSchedule](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelGoalSchedule.cs) |
+| `model.GoalScheduleRequest` | [ModelGoalScheduleRequest](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelGoalScheduleRequest.cs) |
 | `model.ListChallengeResponse` | [ModelListChallengeResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelListChallengeResponse.cs) |
 | `model.ListPeriodsResponse` | [ModelListPeriodsResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelListPeriodsResponse.cs) |
 | `model.ListScheduleByGoalResponse` | [ModelListScheduleByGoalResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelListScheduleByGoalResponse.cs) |

@@ -30,6 +30,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
+        [SdkCommandArgument("keyword")]
+        public string? Keyword { get; set; }
+
         [SdkCommandArgument("limit")]
         public long? Limit { get; set; }
 
@@ -42,6 +45,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
         [SdkCommandArgument("status")]
         public string? Status { get; set; }
 
+        [SdkCommandArgument("tags")]
+        public List<string>? Tags { get; set; }
+
         public GetChallengesCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -53,6 +59,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
 
             var opBuilder = AccelByte.Sdk.Api.Challenge.Operation.GetChallenges.Builder;
 
+            if (Keyword != null)
+                opBuilder.SetKeyword((string)Keyword);
             if (Limit != null)
                 opBuilder.SetLimit((long)Limit);
             if (Offset != null)
@@ -61,6 +69,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
                 opBuilder.SetSortBy(GetChallengesSortBy.NewValue(SortBy));
             if (Status != null)
                 opBuilder.SetStatus(GetChallengesStatus.NewValue(Status));
+            if (Tags != null)
+                opBuilder.SetTags((List<string>)Tags);
 
 
 

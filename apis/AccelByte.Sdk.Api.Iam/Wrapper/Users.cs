@@ -1420,6 +1420,17 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        public AdminGetUserStateByUserIdV3.AdminGetUserStateByUserIdV3Builder AdminGetUserStateByUserIdV3Op
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminGetUserStateByUserIdV3.AdminGetUserStateByUserIdV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public AdminUpdateUserStatusV3.AdminUpdateUserStatusV3Builder AdminUpdateUserStatusV3Op
         {
             get
@@ -1487,6 +1498,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetUserByPlatformUserIDV3.PublicGetUserByPlatformUserIDV3Builder PublicGetUserByPlatformUserIDV3Op
         {
             get
@@ -1542,6 +1554,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicBulkGetUsers.PublicBulkGetUsersBuilder PublicBulkGetUsersOp
         {
             get
@@ -4165,6 +4178,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public AdminGetUserStateByUserIdV3.Response AdminGetUserStateByUserIdV3(AdminGetUserStateByUserIdV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetUserStateByUserIdV3.Response> AdminGetUserStateByUserIdV3Async(AdminGetUserStateByUserIdV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public AdminUpdateUserStatusV3.Response AdminUpdateUserStatusV3(AdminUpdateUserStatusV3 input)
         {
             var response = _sdk.RunRequest(input);
@@ -4264,6 +4293,8 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
 #pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetUserByPlatformUserIDV3.Response PublicGetUserByPlatformUserIDV3(PublicGetUserByPlatformUserIDV3 input)
         {
             var response = _sdk.RunRequest(input);
@@ -4280,6 +4311,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
         public PublicGetAsyncStatus.Response PublicGetAsyncStatus(PublicGetAsyncStatus input)
         {
             var response = _sdk.RunRequest(input);
@@ -4361,6 +4393,8 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicBulkGetUsers.Response PublicBulkGetUsers(PublicBulkGetUsers input)
         {
             var response = _sdk.RunRequest(input);
@@ -4377,6 +4411,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+#pragma warning restore ab_deprecated_operation
         public PublicSendRegistrationCode.Response PublicSendRegistrationCode(PublicSendRegistrationCode input)
         {
             var response = _sdk.RunRequest(input);

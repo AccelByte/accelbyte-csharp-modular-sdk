@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Session.Model
 {
@@ -19,6 +21,10 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonPropertyName("appName")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? AppName { get; set; }
+
+        [JsonPropertyName("asyncProcessDSRequest")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ModelsAsyncProcessDSRequest? AsyncProcessDSRequest { get; set; }
 
         [JsonPropertyName("attributes")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -117,6 +123,11 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonPropertyName("textChat")]
         public bool? TextChat { get; set; }
 
+        [JsonPropertyName("textChatMode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public ApimodelsPublicConfigurationTextChatMode? TextChatMode { get; set; }
+
         [JsonPropertyName("tieTeamsSessionLifetime")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? TieTeamsSessionLifetime { get; set; }
@@ -135,6 +146,10 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonPropertyName("appName")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? AppName { get; set; }
+
+        [JsonPropertyName("asyncProcessDSRequest")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ModelsAsyncProcessDSRequest? AsyncProcessDSRequest { get; set; }
 
         [JsonPropertyName("attributes")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -233,6 +248,11 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonPropertyName("textChat")]
         public bool? TextChat { get; set; }
 
+        [JsonPropertyName("textChatMode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public ApimodelsPublicConfigurationTextChatMode? TextChatMode { get; set; }
+
         [JsonPropertyName("tieTeamsSessionLifetime")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? TieTeamsSessionLifetime { get; set; }
@@ -242,4 +262,28 @@ namespace AccelByte.Sdk.Api.Session.Model
 
     }
 
+
+    public class ApimodelsPublicConfigurationTextChatMode : StringEnum<ApimodelsPublicConfigurationTextChatMode>
+    {
+        public static readonly ApimodelsPublicConfigurationTextChatMode GAME
+            = new ApimodelsPublicConfigurationTextChatMode("GAME");
+
+        public static readonly ApimodelsPublicConfigurationTextChatMode NONE
+            = new ApimodelsPublicConfigurationTextChatMode("NONE");
+
+        public static readonly ApimodelsPublicConfigurationTextChatMode TEAM
+            = new ApimodelsPublicConfigurationTextChatMode("TEAM");
+
+
+        public static implicit operator ApimodelsPublicConfigurationTextChatMode(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ApimodelsPublicConfigurationTextChatMode(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

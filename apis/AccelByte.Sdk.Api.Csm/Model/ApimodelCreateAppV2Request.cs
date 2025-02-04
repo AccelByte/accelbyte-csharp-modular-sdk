@@ -35,6 +35,10 @@ namespace AccelByte.Sdk.Api.Csm.Model
         [JsonPropertyName("scenario")]
         public string? Scenario { get; set; }
 
+        [JsonPropertyName("vmSharingConfiguration")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? VmSharingConfiguration { get; set; }
+
     }
 
 

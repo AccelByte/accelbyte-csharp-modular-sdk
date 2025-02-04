@@ -458,6 +458,17 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        public PublicGetUserByPlatformUserIDV4.PublicGetUserByPlatformUserIDV4Builder PublicGetUserByPlatformUserIDV4Op
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicGetUserByPlatformUserIDV4.PublicGetUserByPlatformUserIDV4Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public PublicCreateTestUserV4.PublicCreateTestUserV4Builder PublicCreateTestUserV4Op
         {
             get
@@ -1414,6 +1425,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
         public async Task<PublicListUserIDByPlatformUserIDsV4.Response> PublicListUserIDByPlatformUserIDsV4Async(PublicListUserIDByPlatformUserIDsV4 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetUserByPlatformUserIDV4.Response PublicGetUserByPlatformUserIDV4(PublicGetUserByPlatformUserIDV4 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetUserByPlatformUserIDV4.Response> PublicGetUserByPlatformUserIDV4Async(PublicGetUserByPlatformUserIDV4 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

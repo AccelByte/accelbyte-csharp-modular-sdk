@@ -108,6 +108,10 @@ namespace AccelByte.Sdk.Api.Iam.Model
         [JsonPropertyName("UserInfoHTTPMethod")]
         public string? UserInfoHTTPMethod { get; set; }
 
+        [JsonPropertyName("googleAdminConsoleKey")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? GoogleAdminConsoleKey { get; set; }
+
         [JsonPropertyName("scopes")]
         public List<string>? Scopes { get; set; }
 

@@ -8,12 +8,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace AccelByte.Sdk.Api.Ams.Model
+namespace AccelByte.Sdk.Api.Loginqueue.Model
 {
-    public class ApiInstanceTypesForNamespaceResponse : AccelByte.Sdk.Core.Model
+    public class ApimodelsLink : AccelByte.Sdk.Core.Model
     {
-        [JsonPropertyName("availableInstanceTypes")]
-        public List<ApiInstanceTypeForNamespaceResponse>? AvailableInstanceTypes { get; set; }
+        [JsonPropertyName("action")]
+        public string? Action { get; set; }
+
+        [JsonPropertyName("href")]
+        public string? Href { get; set; }
 
     }
 
