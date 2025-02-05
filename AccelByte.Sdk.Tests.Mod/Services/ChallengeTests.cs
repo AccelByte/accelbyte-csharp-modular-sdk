@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2024 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2024-2025 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                         Code = goalCode,
                         Name = goalName,
                         Description = "",
-                        Schedule = new ModelGoalSchedule()
+                        Schedule = new ModelGoalScheduleRequest()
                         {
                             StartTime = DateTime.Now.AddDays(1),
                             Order = 1
