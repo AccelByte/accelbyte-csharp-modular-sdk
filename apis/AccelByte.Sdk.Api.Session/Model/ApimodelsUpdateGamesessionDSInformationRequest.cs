@@ -12,9 +12,6 @@ namespace AccelByte.Sdk.Api.Session.Model
 {
     public class ApimodelsUpdateGamesessionDSInformationRequest : AccelByte.Sdk.Core.Model
     {
-        [JsonPropertyName("clientVersion")]
-        public string? ClientVersion { get; set; }
-
         [JsonPropertyName("createdRegion")]
         public string? CreatedRegion { get; set; }
 
@@ -23,9 +20,6 @@ namespace AccelByte.Sdk.Api.Session.Model
 
         [JsonPropertyName("description")]
         public string? Description { get; set; }
-
-        [JsonPropertyName("gameMode")]
-        public string? GameMode { get; set; }
 
         [JsonPropertyName("ip")]
         public string? Ip { get; set; }

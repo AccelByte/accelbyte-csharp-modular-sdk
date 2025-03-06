@@ -75,7 +75,7 @@ eval_tap $? 4 'AdminAccountGet' test.out
 
 #- 5 AdminAccountCreate
 # body param: body
-echo '{"name": "n0lhO7ci"}' > $TEMP_JSON_INPUT
+echo '{"name": "5HdIkAHO"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ams \
     --op AdminAccountCreate \
@@ -94,7 +94,7 @@ eval_tap $? 6 'AdminAccountLinkTokenGet' test.out
 
 #- 7 AdminAccountLink
 # body param: body
-echo '{"token": "wLAQiUp6"}' > $TEMP_JSON_INPUT
+echo '{"token": "rEtd4sMY"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ams \
     --op AdminAccountLink \
@@ -108,20 +108,20 @@ $CLI_EXE \
     --sn ams \
     --op ArtifactGet \
     --namespace $AB_NAMESPACE \
-    --artifactType 'q2UqFEsv' \
-    --count '418' \
-    --endDate 'GSS63g8f' \
-    --fleetID 'aQKNQNDG' \
-    --imageID 'GlIZvJla' \
-    --maxSize '1' \
-    --minSize '37' \
-    --offset '70' \
-    --region 'dJY59d3y' \
-    --serverId 'JnCnxjJF' \
-    --sortBy 'IScMf6MM' \
-    --sortDirection 'asc' \
-    --startDate 'rISYNK2l' \
-    --status 'GKeHKpq9' \
+    --artifactType '9U7FBQpL' \
+    --count '149' \
+    --endDate '32Q3DgMm' \
+    --fleetID 'hmkF8Efa' \
+    --imageID 'J1oe9wGR' \
+    --maxSize '77' \
+    --minSize '48' \
+    --offset '45' \
+    --region 'WPjQkhQO' \
+    --serverId 'bc0VKE39' \
+    --sortBy 'KIElySyh' \
+    --sortDirection 'desc' \
+    --startDate 'Z8BN85Na' \
+    --status 'UIKToPaC' \
     > test.out 2>&1
 eval_tap $? 8 'ArtifactGet' test.out
 
@@ -130,9 +130,9 @@ $CLI_EXE \
     --sn ams \
     --op ArtifactBulkDelete \
     --namespace $AB_NAMESPACE \
-    --artifactType 'IlttcPLW' \
-    --fleetId 'P9CC1uB8' \
-    --uploadedBefore '1978-12-19' \
+    --artifactType 'BfpWW9Iu' \
+    --fleetId '9C4OLUPm' \
+    --uploadedBefore '1976-07-31' \
     > test.out 2>&1
 eval_tap $? 9 'ArtifactBulkDelete' test.out
 
@@ -148,7 +148,7 @@ eval_tap $? 10 'ArtifactUsageGet' test.out
 $CLI_EXE \
     --sn ams \
     --op ArtifactDelete \
-    --artifactID 'lF3EaUBV' \
+    --artifactID 'sjcy10tl' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 11 'ArtifactDelete' test.out
@@ -157,7 +157,7 @@ eval_tap $? 11 'ArtifactDelete' test.out
 $CLI_EXE \
     --sn ams \
     --op ArtifactGetURL \
-    --artifactID '0XPHGJWJ' \
+    --artifactID 'mtgmILsV' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 12 'ArtifactGetURL' test.out
@@ -167,14 +167,14 @@ $CLI_EXE \
     --sn ams \
     --op DevelopmentServerConfigurationList \
     --namespace $AB_NAMESPACE \
-    --count '334' \
-    --offset '71' \
+    --count '245' \
+    --offset '2' \
     > test.out 2>&1
 eval_tap $? 13 'DevelopmentServerConfigurationList' test.out
 
 #- 14 DevelopmentServerConfigurationCreate
 # body param: body
-echo '{"commandLineArguments": "Q1QK207V", "expiresAt": "1979-08-07T00:00:00Z", "imageId": "iMdiGuBl", "name": "xLlUFvvU"}' > $TEMP_JSON_INPUT
+echo '{"commandLineArguments": "xxe06TqY", "expiresAt": "1991-08-09T00:00:00Z", "imageId": "yJMcGeni", "name": "0nhwNl3p"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ams \
     --op DevelopmentServerConfigurationCreate \
@@ -187,7 +187,7 @@ eval_tap $? 14 'DevelopmentServerConfigurationCreate' test.out
 $CLI_EXE \
     --sn ams \
     --op DevelopmentServerConfigurationGet \
-    --developmentServerConfigID 'Vcrwnv8w' \
+    --developmentServerConfigID 'q7AHtbc8' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 15 'DevelopmentServerConfigurationGet' test.out
@@ -196,7 +196,7 @@ eval_tap $? 15 'DevelopmentServerConfigurationGet' test.out
 $CLI_EXE \
     --sn ams \
     --op DevelopmentServerConfigurationDelete \
-    --developmentServerConfigID 'fP3dqvgX' \
+    --developmentServerConfigID 'V7JTqaI1' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 16 'DevelopmentServerConfigurationDelete' test.out
@@ -207,18 +207,18 @@ $CLI_EXE \
     --op FleetList \
     --namespace $AB_NAMESPACE \
     --active 'true' \
-    --count '67' \
-    --desc 'asc' \
-    --name 'KOcHFAgK' \
+    --count '15' \
+    --name 'mCBMfcEG' \
     --offset '65' \
-    --region 'tn8kAxbl' \
+    --region 'NVCQibVh' \
     --sortBy 'active' \
+    --sortDirection 'desc' \
     > test.out 2>&1
 eval_tap $? 17 'FleetList' test.out
 
 #- 18 FleetCreate
 # body param: body
-echo '{"active": false, "claimKeys": ["4QKgixV4", "PSsggagi", "LfnHF8oP"], "dsHostConfiguration": {"instanceId": "Qh6YXCW7", "serversPerVm": 4}, "imageDeploymentProfile": {"commandLine": "MFOehWm0", "imageId": "vcrNFJD4", "portConfigurations": [{"name": "eCDQiIDJ", "protocol": "2G1wVk4w"}, {"name": "lDGUupG1", "protocol": "HnL9922p"}, {"name": "pH5l4JYw", "protocol": "qgJUZ5Ui"}], "timeout": {"claim": 7, "creation": 89, "drain": 89, "session": 31, "unresponsive": 49}}, "name": "MyJGpJxb", "onDemand": false, "regions": [{"bufferSize": 73, "dynamicBuffer": false, "maxServerCount": 69, "minServerCount": 68, "region": "QfILMas5"}, {"bufferSize": 96, "dynamicBuffer": true, "maxServerCount": 33, "minServerCount": 90, "region": "0tNdQTO0"}, {"bufferSize": 61, "dynamicBuffer": false, "maxServerCount": 81, "minServerCount": 90, "region": "8OSMMThE"}], "samplingRules": {"coredumps": {"crashed": {"collect": true, "percentage": 75}}, "logs": {"crashed": {"collect": true, "percentage": 55}, "success": {"collect": false, "percentage": 44}, "unclaimed": {"collect": true, "percentage": 56}}}}' > $TEMP_JSON_INPUT
+echo '{"active": true, "claimKeys": ["d4Kwomxr", "aq1f3x7H", "3nTITfKi"], "dsHostConfiguration": {"instanceId": "gmHUhwVO", "serversPerVm": 61}, "fallbackFleet": "87thyf9K", "imageDeploymentProfile": {"commandLine": "ktj2bkNj", "imageId": "EGcSdOYa", "portConfigurations": [{"name": "rMfMpAYl", "protocol": "Hgfu5szS"}, {"name": "a7Q8u2zt", "protocol": "dca2xtOh"}, {"name": "xYXQQiIu", "protocol": "KPzWsFDn"}], "timeout": {"claim": 46, "creation": 30, "drain": 79, "session": 81, "unresponsive": 9}}, "name": "J2Vu8MoK", "onDemand": true, "regions": [{"bufferSize": 58, "dynamicBuffer": false, "maxServerCount": 92, "minServerCount": 43, "region": "gDHmcFiV"}, {"bufferSize": 87, "dynamicBuffer": false, "maxServerCount": 0, "minServerCount": 63, "region": "MlSlkyLk"}, {"bufferSize": 28, "dynamicBuffer": true, "maxServerCount": 26, "minServerCount": 36, "region": "BrA313qH"}], "samplingRules": {"coredumps": {"crashed": {"collect": true, "percentage": 52}}, "logs": {"crashed": {"collect": true, "percentage": 55}, "success": {"collect": false, "percentage": 98}, "unclaimed": {"collect": true, "percentage": 30}}}}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ams \
     --op FleetCreate \
@@ -231,18 +231,18 @@ eval_tap $? 18 'FleetCreate' test.out
 $CLI_EXE \
     --sn ams \
     --op FleetGet \
-    --fleetID 'zMGIoFKh' \
+    --fleetID 'IrRFxfWC' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 19 'FleetGet' test.out
 
 #- 20 FleetUpdate
 # body param: body
-echo '{"active": false, "claimKeys": ["OLEtDZMy", "aUdnE89D", "goekcVOR"], "dsHostConfiguration": {"instanceId": "VEVdRWnV", "serversPerVm": 38}, "imageDeploymentProfile": {"commandLine": "C0zN3Nef", "imageId": "ClV7qqrq", "portConfigurations": [{"name": "rDoF1BFp", "protocol": "ugWSrccB"}, {"name": "xIrd1TD4", "protocol": "QgeKx2MA"}, {"name": "CThWkR68", "protocol": "nR1TPPSo"}], "timeout": {"claim": 95, "creation": 87, "drain": 28, "session": 31, "unresponsive": 93}}, "name": "ihHnvNcl", "onDemand": false, "regions": [{"bufferSize": 27, "dynamicBuffer": true, "maxServerCount": 74, "minServerCount": 62, "region": "8gHZQudN"}, {"bufferSize": 71, "dynamicBuffer": true, "maxServerCount": 57, "minServerCount": 35, "region": "jJuEqyfW"}, {"bufferSize": 11, "dynamicBuffer": true, "maxServerCount": 7, "minServerCount": 97, "region": "eUbo0TPm"}], "samplingRules": {"coredumps": {"crashed": {"collect": true, "percentage": 76}}, "logs": {"crashed": {"collect": false, "percentage": 49}, "success": {"collect": true, "percentage": 17}, "unclaimed": {"collect": false, "percentage": 36}}}}' > $TEMP_JSON_INPUT
+echo '{"active": true, "claimKeys": ["O4FWgBgu", "MgblzVxt", "c5NajcNh"], "dsHostConfiguration": {"instanceId": "ku8fiDy6", "serversPerVm": 45}, "fallbackFleet": "byN7GD3C", "imageDeploymentProfile": {"commandLine": "AswctpSh", "imageId": "Qfs630Sz", "portConfigurations": [{"name": "3fAMbA6z", "protocol": "Qor6JB4M"}, {"name": "26eSD5tv", "protocol": "ESLK8xMp"}, {"name": "SUgC56lI", "protocol": "1J1bcHTT"}], "timeout": {"claim": 84, "creation": 95, "drain": 77, "session": 93, "unresponsive": 69}}, "name": "SMDusYLx", "onDemand": true, "regions": [{"bufferSize": 68, "dynamicBuffer": false, "maxServerCount": 62, "minServerCount": 47, "region": "d2b9ocbo"}, {"bufferSize": 60, "dynamicBuffer": false, "maxServerCount": 48, "minServerCount": 5, "region": "L7O4VVyQ"}, {"bufferSize": 58, "dynamicBuffer": true, "maxServerCount": 13, "minServerCount": 4, "region": "rMMifSHB"}], "samplingRules": {"coredumps": {"crashed": {"collect": true, "percentage": 32}}, "logs": {"crashed": {"collect": false, "percentage": 9}, "success": {"collect": false, "percentage": 87}, "unclaimed": {"collect": true, "percentage": 16}}}}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ams \
     --op FleetUpdate \
-    --fleetID 'gKrXSVNi' \
+    --fleetID 'nhALK4f0' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -252,7 +252,7 @@ eval_tap $? 20 'FleetUpdate' test.out
 $CLI_EXE \
     --sn ams \
     --op FleetDelete \
-    --fleetID 'o9hrDUXP' \
+    --fleetID 'HJnmDgEb' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 21 'FleetDelete' test.out
@@ -261,18 +261,18 @@ eval_tap $? 21 'FleetDelete' test.out
 $CLI_EXE \
     --sn ams \
     --op FleetArtifactSamplingRulesGet \
-    --fleetID 'kbiUKb1q' \
+    --fleetID 'k6EAqMgI' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 22 'FleetArtifactSamplingRulesGet' test.out
 
 #- 23 FleetArtifactSamplingRulesSet
 # body param: body
-echo '{"coredumps": {"crashed": {"collect": true, "percentage": 90}}, "logs": {"crashed": {"collect": false, "percentage": 58}, "success": {"collect": true, "percentage": 76}, "unclaimed": {"collect": true, "percentage": 44}}}' > $TEMP_JSON_INPUT
+echo '{"coredumps": {"crashed": {"collect": true, "percentage": 100}}, "logs": {"crashed": {"collect": false, "percentage": 81}, "success": {"collect": false, "percentage": 29}, "unclaimed": {"collect": false, "percentage": 14}}}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ams \
     --op FleetArtifactSamplingRulesSet \
-    --fleetID 'UIxoc40d' \
+    --fleetID 'KUdyIUji' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -282,15 +282,15 @@ eval_tap $? 23 'FleetArtifactSamplingRulesSet' test.out
 $CLI_EXE \
     --sn ams \
     --op FleetServers \
-    --fleetID '1ucJNWVJ' \
+    --fleetID 'gz32yfyc' \
     --namespace $AB_NAMESPACE \
-    --count '43' \
-    --offset '10' \
-    --region 'JQ0wQfKn' \
-    --serverId 'w9u3Gr4P' \
-    --sortBy 'dBNcWSW5' \
-    --sortDirection 'desc' \
-    --status 'claimed' \
+    --count '65' \
+    --offset '27' \
+    --region '7OtIE55F' \
+    --serverId 'Gcpql3C6' \
+    --sortBy 'a4scydLF' \
+    --sortDirection 'asc' \
+    --status 'draining' \
     > test.out 2>&1
 eval_tap $? 24 'FleetServers' test.out
 
@@ -298,15 +298,15 @@ eval_tap $? 24 'FleetServers' test.out
 $CLI_EXE \
     --sn ams \
     --op FleetServerHistory \
-    --fleetID 'BFZ3gpYx' \
+    --fleetID 'HTiSV89M' \
     --namespace $AB_NAMESPACE \
-    --count '49' \
-    --offset '99' \
-    --reason 'BvWaafsO' \
-    --region 'WWJcUj9j' \
-    --serverId 'VlzrZwEe' \
-    --sortDirection 'WCbre24w' \
-    --status 'QnjA99gl' \
+    --count '26' \
+    --offset '6' \
+    --reason 'vKCKSRpp' \
+    --region 'MC7BkTu0' \
+    --serverId 'qghlpECD' \
+    --sortDirection 'yu3kSOVp' \
+    --status '09BgRy25' \
     > test.out 2>&1
 eval_tap $? 25 'FleetServerHistory' test.out
 
@@ -315,15 +315,15 @@ $CLI_EXE \
     --sn ams \
     --op ImageList \
     --namespace $AB_NAMESPACE \
-    --count '29' \
-    --inUse 'e33U14aN' \
-    --isProtected 'false' \
-    --name 'ea1h9kYa' \
-    --offset '0' \
-    --sortBy 'gicR3r4P' \
-    --sortDirection 'oOzvVf7H' \
-    --status 'HV3iowdt' \
-    --tag 'RskA9uXq' \
+    --count '86' \
+    --inUse 'rPkqWwfW' \
+    --isProtected 'true' \
+    --name 'fbOd9cFt' \
+    --offset '53' \
+    --sortBy 'pGsxjdYB' \
+    --sortDirection 'rvI0F9sM' \
+    --status 'fDA2TZbv' \
+    --tag 'p2KEOJr1' \
     > test.out 2>&1
 eval_tap $? 26 'ImageList' test.out
 
@@ -339,7 +339,7 @@ eval_tap $? 27 'ImagesStorage' test.out
 $CLI_EXE \
     --sn ams \
     --op ImageGet \
-    --imageID 'KfXJVMyh' \
+    --imageID 'pRiPaWic' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 28 'ImageGet' test.out
@@ -348,18 +348,18 @@ eval_tap $? 28 'ImageGet' test.out
 $CLI_EXE \
     --sn ams \
     --op ImageMarkForDeletion \
-    --imageID 'oQiJNnS3' \
+    --imageID 'uNpFCrtL' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 29 'ImageMarkForDeletion' test.out
 
 #- 30 ImagePatch
 # body param: body
-echo '{"addedTags": ["kE1DfEpY", "Dxs709Dj", "NSX1HtBi"], "isProtected": false, "name": "mNiaxizN", "removedTags": ["3h0wDyUO", "bXQUkDVw", "Jy6sLLdG"]}' > $TEMP_JSON_INPUT
+echo '{"addedTags": ["thsV4Wgd", "13BlW5Pz", "pflY6DR0"], "isProtected": false, "name": "VWdRmrOb", "removedTags": ["9w07odfH", "garQ2gHf", "0psgCtPS"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ams \
     --op ImagePatch \
-    --imageID 'in5fUQul' \
+    --imageID 'QjWhHbGa' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -369,7 +369,7 @@ eval_tap $? 30 'ImagePatch' test.out
 $CLI_EXE \
     --sn ams \
     --op ImageUnmarkForDeletion \
-    --imageID 'VqwXEaT2' \
+    --imageID 'RGLm9UbN' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 31 'ImageUnmarkForDeletion' test.out
@@ -379,18 +379,18 @@ $CLI_EXE \
     --sn ams \
     --op QoSRegionsGet \
     --namespace $AB_NAMESPACE \
-    --status '1Wu55u0L' \
+    --status 'D8D3E2sw' \
     > test.out 2>&1
 eval_tap $? 32 'QoSRegionsGet' test.out
 
 #- 33 QoSRegionsUpdate
 # body param: body
-echo '{"status": "KApKdAv3"}' > $TEMP_JSON_INPUT
+echo '{"status": "HMzMR8cp"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ams \
     --op QoSRegionsUpdate \
     --namespace $AB_NAMESPACE \
-    --region 'xhvJIqNk' \
+    --region 'ggAWR5w2' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 33 'QoSRegionsUpdate' test.out
@@ -408,7 +408,7 @@ $CLI_EXE \
     --sn ams \
     --op FleetServerInfo \
     --namespace $AB_NAMESPACE \
-    --serverID '2yN1ZrCI' \
+    --serverID 'zZq2MQXX' \
     > test.out 2>&1
 eval_tap $? 35 'FleetServerInfo' test.out
 
@@ -417,7 +417,7 @@ $CLI_EXE \
     --sn ams \
     --op FleetServerConnectionInfo \
     --namespace $AB_NAMESPACE \
-    --serverID '1OkmOLIm' \
+    --serverID 'mrSDSe07' \
     > test.out 2>&1
 eval_tap $? 36 'FleetServerConnectionInfo' test.out
 
@@ -426,7 +426,7 @@ $CLI_EXE \
     --sn ams \
     --op ServerHistory \
     --namespace $AB_NAMESPACE \
-    --serverID 'ugyzhHr2' \
+    --serverID 'TZNU0kGH' \
     > test.out 2>&1
 eval_tap $? 37 'ServerHistory' test.out
 
@@ -448,11 +448,11 @@ eval_tap $? 39 'AccountGet' test.out
 
 #- 40 FleetClaimByID
 # body param: body
-echo '{"region": "r502Cpyc", "sessionId": "Mvvw8U0q"}' > $TEMP_JSON_INPUT
+echo '{"region": "KAlgbYUL", "sessionId": "Ms0km8WP"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ams \
     --op FleetClaimByID \
-    --fleetID 'iGjdsRPv' \
+    --fleetID 'LyjeP9ri' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -463,13 +463,13 @@ $CLI_EXE \
     --sn ams \
     --op LocalWatchdogConnect \
     --namespace $AB_NAMESPACE \
-    --watchdogID 'VBMaeg2D' \
+    --watchdogID 'Udmr8PWk' \
     > test.out 2>&1
 eval_tap $? 41 'LocalWatchdogConnect' test.out
 
 #- 42 FleetClaimByKeys
 # body param: body
-echo '{"claimKeys": ["crjefIKC", "dA4fYogW", "uut5VLzc"], "regions": ["7p5wbWUs", "RU7hRHtF", "ZdueWUPm"], "sessionId": "MtRSHB3g"}' > $TEMP_JSON_INPUT
+echo '{"claimKeys": ["FWebKTFS", "Ek8CRMoo", "u5rDONrB"], "regions": ["iDF2mjKG", "ykxvvFal", "KIYDk5wC"], "sessionId": "r3YJgBVp"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn ams \
     --op FleetClaimByKeys \
@@ -483,7 +483,7 @@ $CLI_EXE \
     --sn ams \
     --op WatchdogConnect \
     --namespace $AB_NAMESPACE \
-    --watchdogID 'vDaB5yxC' \
+    --watchdogID 'zPWcXGSz' \
     > test.out 2>&1
 eval_tap $? 43 'WatchdogConnect' test.out
 

@@ -16,6 +16,7 @@ namespace AccelByte.Sdk.Api.Ams.Model
         public DateTime? CreatedAt { get; set; }
 
         [JsonPropertyName("deleteAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? DeleteAt { get; set; }
 
         [JsonPropertyName("executable")]

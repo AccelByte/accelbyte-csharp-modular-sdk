@@ -15,6 +15,8 @@
 ### Config Wrapper:  [Config](../../apis/AccelByte.Sdk.Api.Sessionhistory/Wrapper/Config.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
+| `/sessionhistory/v1/admin/config/env` | GET | AdminGetEnvConfig | [AdminGetEnvConfig](../../apis/AccelByte.Sdk.Api.Sessionhistory/Operation/Config/AdminGetEnvConfig.cs) | [AdminGetEnvConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Sessionhistory/Config/AdminGetEnvConfig.cs) |
+| `/sessionhistory/v1/admin/config/env` | PATCH | AdminPatchUpdateEnvConfig | [AdminPatchUpdateEnvConfig](../../apis/AccelByte.Sdk.Api.Sessionhistory/Operation/Config/AdminPatchUpdateEnvConfig.cs) | [AdminPatchUpdateEnvConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Sessionhistory/Config/AdminPatchUpdateEnvConfig.cs) |
 | `/sessionhistory/v1/admin/config/log` | GET | AdminGetLogConfig | [AdminGetLogConfig](../../apis/AccelByte.Sdk.Api.Sessionhistory/Operation/Config/AdminGetLogConfig.cs) | [AdminGetLogConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Sessionhistory/Config/AdminGetLogConfig.cs) |
 | `/sessionhistory/v1/admin/config/log` | PATCH | AdminPatchUpdateLogConfig | [AdminPatchUpdateLogConfig](../../apis/AccelByte.Sdk.Api.Sessionhistory/Operation/Config/AdminPatchUpdateLogConfig.cs) | [AdminPatchUpdateLogConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Sessionhistory/Config/AdminPatchUpdateLogConfig.cs) |
 
@@ -137,6 +139,7 @@
 | `apimodels.XRayTicketResult` | [ApimodelsXRayTicketResult](../../apis/AccelByte.Sdk.Api.Sessionhistory/Model/ApimodelsXRayTicketResult.cs) |
 | `apimodels.XRayTotalActiveSessionQueryResponse` | [ApimodelsXRayTotalActiveSessionQueryResponse](../../apis/AccelByte.Sdk.Api.Sessionhistory/Model/ApimodelsXRayTotalActiveSessionQueryResponse.cs) |
 | `apimodels.XRayTotalPlayerPersessionAVGQueryResponse` | [ApimodelsXRayTotalPlayerPersessionAVGQueryResponse](../../apis/AccelByte.Sdk.Api.Sessionhistory/Model/ApimodelsXRayTotalPlayerPersessionAVGQueryResponse.cs) |
+| `envconfig.Configuration` | [EnvconfigConfiguration](../../apis/AccelByte.Sdk.Api.Sessionhistory/Model/EnvconfigConfiguration.cs) |
 | `logconfig.Configuration` | [LogconfigConfiguration](../../apis/AccelByte.Sdk.Api.Sessionhistory/Model/LogconfigConfiguration.cs) |
 | `models.AllianceRule` | [ModelsAllianceRule](../../apis/AccelByte.Sdk.Api.Sessionhistory/Model/ModelsAllianceRule.cs) |
 | `models.BackfillProposal` | [ModelsBackfillProposal](../../apis/AccelByte.Sdk.Api.Sessionhistory/Model/ModelsBackfillProposal.cs) |

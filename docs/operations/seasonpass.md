@@ -38,6 +38,11 @@
 | `/seasonpass/public/namespaces/{namespace}/users/{userId}/seasons/current/data` | GET | PublicGetCurrentUserSeason | [PublicGetCurrentUserSeason](../../apis/AccelByte.Sdk.Api.Seasonpass/Operation/Season/PublicGetCurrentUserSeason.cs) | [PublicGetCurrentUserSeason](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Seasonpass/Season/PublicGetCurrentUserSeason.cs) |
 | `/seasonpass/public/namespaces/{namespace}/users/{userId}/seasons/{seasonId}/data` | GET | PublicGetUserSeason | [PublicGetUserSeason](../../apis/AccelByte.Sdk.Api.Seasonpass/Operation/Season/PublicGetUserSeason.cs) | [PublicGetUserSeason](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Seasonpass/Season/PublicGetUserSeason.cs) |
 
+### Utilities Wrapper:  [Utilities](../../apis/AccelByte.Sdk.Api.Seasonpass/Wrapper/Utilities.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/seasonpass/admin/namespaces/{namespace}/seasons/item/references` | GET | GetItemReferences | [GetItemReferences](../../apis/AccelByte.Sdk.Api.Seasonpass/Operation/Utilities/GetItemReferences.cs) | [GetItemReferences](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Seasonpass/Utilities/GetItemReferences.cs) |
+
 ### Pass Wrapper:  [Pass](../../apis/AccelByte.Sdk.Api.Seasonpass/Wrapper/Pass.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -86,6 +91,10 @@
 | `/seasonpass/public/namespaces/{namespace}/users/{userId}/seasons/current/data` | GET | PublicGetCurrentUserSeason | [PublicGetCurrentUserSeason](../../apis/AccelByte.Sdk.Api.Seasonpass/Operation/Season/PublicGetCurrentUserSeason.cs) | [PublicGetCurrentUserSeason](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Seasonpass/Season/PublicGetCurrentUserSeason.cs) |
 | `/seasonpass/public/namespaces/{namespace}/users/{userId}/seasons/{seasonId}/data` | GET | PublicGetUserSeason | [PublicGetUserSeason](../../apis/AccelByte.Sdk.Api.Seasonpass/Operation/Season/PublicGetUserSeason.cs) | [PublicGetUserSeason](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Seasonpass/Season/PublicGetUserSeason.cs) |
 
+### Utilities Wrapper:  [Utilities](../../apis/AccelByte.Sdk.Api.Seasonpass/Wrapper/Utilities.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
 ### Pass Wrapper:  [Pass](../../apis/AccelByte.Sdk.Api.Seasonpass/Wrapper/Pass.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -117,6 +126,8 @@
 | `FieldValidationError` | [FieldValidationError](../../apis/AccelByte.Sdk.Api.Seasonpass/Model/FieldValidationError.cs) |
 | `FullSeasonInfo` | [FullSeasonInfo](../../apis/AccelByte.Sdk.Api.Seasonpass/Model/FullSeasonInfo.cs) |
 | `Image` | [Image](../../apis/AccelByte.Sdk.Api.Seasonpass/Model/Image.cs) |
+| `ItemReference` | [ItemReference](../../apis/AccelByte.Sdk.Api.Seasonpass/Model/ItemReference.cs) |
+| `ItemReferenceInfo` | [ItemReferenceInfo](../../apis/AccelByte.Sdk.Api.Seasonpass/Model/ItemReferenceInfo.cs) |
 | `ListSeasonInfo` | [ListSeasonInfo](../../apis/AccelByte.Sdk.Api.Seasonpass/Model/ListSeasonInfo.cs) |
 | `ListSeasonInfoPagingSlicedResult` | [ListSeasonInfoPagingSlicedResult](../../apis/AccelByte.Sdk.Api.Seasonpass/Model/ListSeasonInfoPagingSlicedResult.cs) |
 | `ListUserSeasonInfo` | [ListUserSeasonInfo](../../apis/AccelByte.Sdk.Api.Seasonpass/Model/ListUserSeasonInfo.cs) |

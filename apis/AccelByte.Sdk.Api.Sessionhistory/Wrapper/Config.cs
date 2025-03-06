@@ -34,6 +34,28 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
         }
 
         #region Operation Builders
+        public AdminGetEnvConfig.AdminGetEnvConfigBuilder AdminGetEnvConfigOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminGetEnvConfig.AdminGetEnvConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public AdminPatchUpdateEnvConfig.AdminPatchUpdateEnvConfigBuilder AdminPatchUpdateEnvConfigOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminPatchUpdateEnvConfig.AdminPatchUpdateEnvConfigBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public AdminGetLogConfig.AdminGetLogConfigBuilder AdminGetLogConfigOp
         {
             get
@@ -58,6 +80,38 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
         }
         #endregion
 
+        public AdminGetEnvConfig.Response AdminGetEnvConfig(AdminGetEnvConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetEnvConfig.Response> AdminGetEnvConfigAsync(AdminGetEnvConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminPatchUpdateEnvConfig.Response AdminPatchUpdateEnvConfig(AdminPatchUpdateEnvConfig input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminPatchUpdateEnvConfig.Response> AdminPatchUpdateEnvConfigAsync(AdminPatchUpdateEnvConfig input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public AdminGetLogConfig.Response AdminGetLogConfig(AdminGetLogConfig input)
         {
             var response = _sdk.RunRequest(input);

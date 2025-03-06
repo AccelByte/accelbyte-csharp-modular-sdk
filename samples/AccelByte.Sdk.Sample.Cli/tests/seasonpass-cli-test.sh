@@ -38,7 +38,7 @@ TEMP_JSON_INPUT="input_json.json"
 TEMP_FILE_UPLOAD="file_upload.bin"
 
 echo "TAP version 13"
-echo "1..45"
+echo "1..46"
 
 #- 1 Login
 $CLI_EXE --op login --lt user --user user --pass user > test.out 2>&1
@@ -64,15 +64,15 @@ $CLI_EXE \
     --sn seasonpass \
     --op QuerySeasons \
     --namespace $AB_NAMESPACE \
-    --limit '85' \
-    --offset '77' \
-    --status '["PUBLISHED", "DRAFT", "RETIRED"]' \
+    --limit '58' \
+    --offset '44' \
+    --status '["RETIRED", "DRAFT", "PUBLISHED"]' \
     > test.out 2>&1
 eval_tap $? 3 'QuerySeasons' test.out
 
 #- 4 CreateSeason
 # body param: body
-echo '{"autoClaim": true, "defaultLanguage": "z7IStTq0", "defaultRequiredExp": 73, "draftStoreId": "vyHMQpqh", "end": "1993-01-31T00:00:00Z", "excessStrategy": {"currency": "adJmjaUI", "method": "CURRENCY", "percentPerExp": 92}, "images": [{"as": "DOinilKR", "caption": "04MpQLp1", "height": 80, "imageUrl": "EWK2T74Z", "smallImageUrl": "otKXO70U", "width": 89}, {"as": "2m8PjbU5", "caption": "IHIZPx1S", "height": 46, "imageUrl": "kRAiuhSn", "smallImageUrl": "HMMm4P5n", "width": 53}, {"as": "W7852KiQ", "caption": "Mu9Lq1lk", "height": 10, "imageUrl": "hCvftUJ2", "smallImageUrl": "JjpBrqQs", "width": 42}], "localizations": {"oVLw3Sb2": {"description": "s3II7CYr", "title": "0wVgmRbx"}, "TEfrOv72": {"description": "sUlqMlFb", "title": "stmJKXrF"}, "EjKBblGz": {"description": "y99UJ3eK", "title": "AcjvIvYO"}}, "name": "KS3jkBjo", "start": "1981-01-14T00:00:00Z", "tierItemId": "SpkDXldy"}' > $TEMP_JSON_INPUT
+echo '{"autoClaim": false, "defaultLanguage": "bCZdUCYK", "defaultRequiredExp": 96, "draftStoreId": "a6jlvsFo", "end": "1990-03-24T00:00:00Z", "excessStrategy": {"currency": "FsndyMdb", "method": "NONE", "percentPerExp": 9}, "images": [{"as": "zexbZUQf", "caption": "YqDFuj8q", "height": 69, "imageUrl": "ZrJY10Vz", "smallImageUrl": "PsYHv5Bn", "width": 82}, {"as": "DoJn5qYC", "caption": "Gtbzb7Cu", "height": 82, "imageUrl": "G2MonKXU", "smallImageUrl": "sMLRn1LF", "width": 44}, {"as": "oD5JEgFH", "caption": "oEAUNJIU", "height": 45, "imageUrl": "IdkQ8z6A", "smallImageUrl": "nyNnrj24", "width": 2}], "localizations": {"LrMkXbyc": {"description": "DbknEN12", "title": "RZoSmPqM"}, "be5PtUOj": {"description": "VkStS9Mt", "title": "9lGvJ1wY"}, "Bjg5HJEP": {"description": "oKthSnDg", "title": "Np62JrzJ"}}, "name": "jB2447mn", "start": "1976-08-24T00:00:00Z", "tierItemId": "lfAlxr8D"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn seasonpass \
     --op CreateSeason \
@@ -91,7 +91,7 @@ eval_tap $? 5 'GetCurrentSeason' test.out
 
 #- 6 BulkGetUserSeasonProgression
 # body param: body
-echo '{"userIds": ["XApuryxh", "85CaCq1W", "Gsh22z21"]}' > $TEMP_JSON_INPUT
+echo '{"userIds": ["phGJnN3B", "alz3EhCQ", "DGsq7OqW"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn seasonpass \
     --op BulkGetUserSeasonProgression \
@@ -100,425 +100,434 @@ $CLI_EXE \
     > test.out 2>&1
 eval_tap $? 6 'BulkGetUserSeasonProgression' test.out
 
-#- 7 GetSeason
+#- 7 GetItemReferences
+$CLI_EXE \
+    --sn seasonpass \
+    --op GetItemReferences \
+    --namespace $AB_NAMESPACE \
+    --itemId 'bkrbT0Fd' \
+    > test.out 2>&1
+eval_tap $? 7 'GetItemReferences' test.out
+
+#- 8 GetSeason
 $CLI_EXE \
     --sn seasonpass \
     --op GetSeason \
     --namespace $AB_NAMESPACE \
-    --seasonId 'etZlkfAE' \
+    --seasonId '07mxc8wI' \
     > test.out 2>&1
-eval_tap $? 7 'GetSeason' test.out
+eval_tap $? 8 'GetSeason' test.out
 
-#- 8 DeleteSeason
+#- 9 DeleteSeason
 $CLI_EXE \
     --sn seasonpass \
     --op DeleteSeason \
     --namespace $AB_NAMESPACE \
-    --seasonId 'eGJDks9k' \
+    --seasonId '3PF8oggZ' \
     > test.out 2>&1
-eval_tap $? 8 'DeleteSeason' test.out
+eval_tap $? 9 'DeleteSeason' test.out
 
-#- 9 UpdateSeason
+#- 10 UpdateSeason
 # body param: body
-echo '{"autoClaim": true, "defaultLanguage": "kFrBq1Pa", "defaultRequiredExp": 13, "draftStoreId": "GeTiuWa1", "end": "1992-08-20T00:00:00Z", "excessStrategy": {"currency": "UqfYO6JJ", "method": "CURRENCY", "percentPerExp": 32}, "images": [{"as": "WbAVg8OS", "caption": "m0V7hGql", "height": 60, "imageUrl": "6dq7WMs2", "smallImageUrl": "D8cEqRq3", "width": 62}, {"as": "2SbbbB2L", "caption": "OBsUQCEH", "height": 97, "imageUrl": "zbtWbTkV", "smallImageUrl": "sgxNw50l", "width": 12}, {"as": "swUmxf57", "caption": "DcyPm9Bi", "height": 68, "imageUrl": "umTTdat6", "smallImageUrl": "xsocxIzD", "width": 16}], "localizations": {"IdRDGQTA": {"description": "CyjuOO3i", "title": "1Pb7m6Pi"}, "q0EK7dNA": {"description": "dbIa1tFu", "title": "TbNLGnSK"}, "K2ld3GIn": {"description": "fmXrQbpX", "title": "wOFCvHQE"}}, "name": "z00AViLe", "start": "1985-06-11T00:00:00Z", "tierItemId": "JPVIy15X"}' > $TEMP_JSON_INPUT
+echo '{"autoClaim": false, "defaultLanguage": "0NxXTHX2", "defaultRequiredExp": 94, "draftStoreId": "0sqhM93M", "end": "1979-04-15T00:00:00Z", "excessStrategy": {"currency": "X7eNCRiS", "method": "NONE", "percentPerExp": 56}, "images": [{"as": "X83B8RCC", "caption": "hINR7T95", "height": 21, "imageUrl": "9EsbYOr2", "smallImageUrl": "BmBzwbkC", "width": 18}, {"as": "AlulSXwh", "caption": "k3zwelEm", "height": 73, "imageUrl": "xG4AaC7r", "smallImageUrl": "4cdCpQMB", "width": 61}, {"as": "hYD5VRYA", "caption": "hBzxohXW", "height": 91, "imageUrl": "BwQuBDCx", "smallImageUrl": "lhGd4up9", "width": 69}], "localizations": {"zwyb2RST": {"description": "pBqffpzi", "title": "u1tkIdnQ"}, "HN0uAwEE": {"description": "CyLWsoOG", "title": "7v97tt2e"}, "fIksqk8F": {"description": "72nDRLjl", "title": "B0X5y9p5"}}, "name": "Um2RmHEz", "start": "1991-07-14T00:00:00Z", "tierItemId": "DNS11WY0"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn seasonpass \
     --op UpdateSeason \
     --namespace $AB_NAMESPACE \
-    --seasonId 'rwsf2Eow' \
+    --seasonId '1NxWEvtK' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 9 'UpdateSeason' test.out
+eval_tap $? 10 'UpdateSeason' test.out
 
-#- 10 CloneSeason
+#- 11 CloneSeason
 # body param: body
-echo '{"end": "1976-10-10T00:00:00Z", "name": "e8728lm5", "start": "1972-04-02T00:00:00Z"}' > $TEMP_JSON_INPUT
+echo '{"end": "1985-01-24T00:00:00Z", "name": "s652izD4", "start": "1985-02-27T00:00:00Z"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn seasonpass \
     --op CloneSeason \
     --namespace $AB_NAMESPACE \
-    --seasonId '0S0LWyZU' \
+    --seasonId 'VhP6uCmm' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 10 'CloneSeason' test.out
+eval_tap $? 11 'CloneSeason' test.out
 
-#- 11 GetFullSeason
+#- 12 GetFullSeason
 $CLI_EXE \
     --sn seasonpass \
     --op GetFullSeason \
     --namespace $AB_NAMESPACE \
-    --seasonId 'ruugMVr8' \
+    --seasonId 'jXhixgok' \
     > test.out 2>&1
-eval_tap $? 11 'GetFullSeason' test.out
+eval_tap $? 12 'GetFullSeason' test.out
 
-#- 12 QueryPasses
+#- 13 QueryPasses
 $CLI_EXE \
     --sn seasonpass \
     --op QueryPasses \
     --namespace $AB_NAMESPACE \
-    --seasonId '9TAiQmuM' \
+    --seasonId 'iukp7PGt' \
     > test.out 2>&1
-eval_tap $? 12 'QueryPasses' test.out
+eval_tap $? 13 'QueryPasses' test.out
 
-#- 13 CreatePass
+#- 14 CreatePass
 # body param: body
-echo '{"autoEnroll": true, "code": "UfRIQsrC", "displayOrder": 48, "images": [{"as": "jYsUhZU1", "caption": "AozadJc3", "height": 50, "imageUrl": "TclpKQb4", "smallImageUrl": "JHl9eEys", "width": 38}, {"as": "hXD7Bbai", "caption": "JEGQbYIH", "height": 67, "imageUrl": "nQeiw3KZ", "smallImageUrl": "lF4pJoQq", "width": 33}, {"as": "XfWLrM3p", "caption": "KptHt1r2", "height": 84, "imageUrl": "iSIoUcII", "smallImageUrl": "KOxgHeIR", "width": 90}], "localizations": {"gxUoPpSf": {"description": "HQowItEu", "title": "Slw0qp15"}, "RZQ0DFPv": {"description": "MYReGAG8", "title": "VXop8iP6"}, "XFQOKOlv": {"description": "PDxoKMMA", "title": "QRUVzc1S"}}, "passItemId": "4B3OmtQR"}' > $TEMP_JSON_INPUT
+echo '{"autoEnroll": false, "code": "sq5QiBwK", "displayOrder": 29, "images": [{"as": "enlSg6oS", "caption": "s6Rx0ykX", "height": 53, "imageUrl": "ridw2yUc", "smallImageUrl": "CombFG0D", "width": 55}, {"as": "lB770M86", "caption": "hvXmUr1J", "height": 94, "imageUrl": "WCUycY3b", "smallImageUrl": "4kJSNCdO", "width": 55}, {"as": "UYP9Ma5U", "caption": "n1XVMOsR", "height": 19, "imageUrl": "1ngax9Ai", "smallImageUrl": "IYf5tcBq", "width": 67}], "localizations": {"W9vyzObr": {"description": "UpiATDMr", "title": "5ly0hpUq"}, "EYaRFlLz": {"description": "InIMhse1", "title": "kdX36JrB"}, "wy7Bx1DV": {"description": "jiENblnT", "title": "xIori65v"}}, "passItemId": "CbgyDbt5"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn seasonpass \
     --op CreatePass \
     --namespace $AB_NAMESPACE \
-    --seasonId 'PcQ9gIDB' \
+    --seasonId 'Ei8IfWoU' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 13 'CreatePass' test.out
+eval_tap $? 14 'CreatePass' test.out
 
-#- 14 GetPass
+#- 15 GetPass
 $CLI_EXE \
     --sn seasonpass \
     --op GetPass \
-    --code 'ZJPMQTYt' \
+    --code 'p8CMKRFm' \
     --namespace $AB_NAMESPACE \
-    --seasonId 'qiYBKnVX' \
+    --seasonId 's53Sj0nv' \
     > test.out 2>&1
-eval_tap $? 14 'GetPass' test.out
+eval_tap $? 15 'GetPass' test.out
 
-#- 15 DeletePass
+#- 16 DeletePass
 $CLI_EXE \
     --sn seasonpass \
     --op DeletePass \
-    --code 'HsBgfVBf' \
+    --code 'MUD8C0BF' \
     --namespace $AB_NAMESPACE \
-    --seasonId 'X8vyVK6a' \
+    --seasonId 'vypg46Rs' \
     > test.out 2>&1
-eval_tap $? 15 'DeletePass' test.out
+eval_tap $? 16 'DeletePass' test.out
 
-#- 16 UpdatePass
+#- 17 UpdatePass
 # body param: body
-echo '{"autoEnroll": true, "displayOrder": 97, "images": [{"as": "G7nta9ti", "caption": "5gxbZaAo", "height": 71, "imageUrl": "p2OVh0VL", "smallImageUrl": "gLjbcM3D", "width": 53}, {"as": "n3OA0mie", "caption": "yYvuttMb", "height": 100, "imageUrl": "hnBFCIZe", "smallImageUrl": "4S3Sy9ke", "width": 21}, {"as": "KSQCd0d1", "caption": "llQjw2bC", "height": 33, "imageUrl": "UhsnDc4E", "smallImageUrl": "oSW5uE4L", "width": 78}], "localizations": {"vcHnEJSg": {"description": "Rdj5nXJS", "title": "dGtp86Bc"}, "AMuLDprg": {"description": "0OQ9S0zd", "title": "0g88oef5"}, "rmeZsUCC": {"description": "r2OaB4SV", "title": "aBOwfLbZ"}}, "passItemId": "jC9B7Kg9"}' > $TEMP_JSON_INPUT
+echo '{"autoEnroll": true, "displayOrder": 17, "images": [{"as": "fo8mzjw7", "caption": "V6VVQvqQ", "height": 85, "imageUrl": "E1vzfP8H", "smallImageUrl": "fPvIAlrS", "width": 79}, {"as": "cK5yZkBC", "caption": "U1rOPjM5", "height": 57, "imageUrl": "P61ggQEH", "smallImageUrl": "YJaNsMcI", "width": 28}, {"as": "aNAQXLMA", "caption": "NaCcR6VJ", "height": 31, "imageUrl": "ZcUOxGKe", "smallImageUrl": "tokfWFUf", "width": 71}], "localizations": {"GXPW3hap": {"description": "o9RoVEqS", "title": "L6cOzkcG"}, "nNLqbkvH": {"description": "1C5iGTya", "title": "odzhVSgr"}, "tWkZwa0E": {"description": "QFJftTFW", "title": "PE4yh0Wy"}}, "passItemId": "wpKxZbBu"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn seasonpass \
     --op UpdatePass \
-    --code '9jOF2bKv' \
+    --code '1JoCrCwD' \
     --namespace $AB_NAMESPACE \
-    --seasonId '0TiJwh88' \
+    --seasonId '5ewsZIDs' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 16 'UpdatePass' test.out
+eval_tap $? 17 'UpdatePass' test.out
 
-#- 17 PublishSeason
+#- 18 PublishSeason
 $CLI_EXE \
     --sn seasonpass \
     --op PublishSeason \
     --namespace $AB_NAMESPACE \
-    --seasonId 'drHaM2kT' \
+    --seasonId 'vzTBC26I' \
     > test.out 2>&1
-eval_tap $? 17 'PublishSeason' test.out
+eval_tap $? 18 'PublishSeason' test.out
 
-#- 18 RetireSeason
+#- 19 RetireSeason
 $CLI_EXE \
     --sn seasonpass \
     --op RetireSeason \
     --namespace $AB_NAMESPACE \
-    --seasonId '8uBwdSd1' \
+    --seasonId 'vBXPLVND' \
     --force 'true' \
     > test.out 2>&1
-eval_tap $? 18 'RetireSeason' test.out
+eval_tap $? 19 'RetireSeason' test.out
 
-#- 19 QueryRewards
+#- 20 QueryRewards
 $CLI_EXE \
     --sn seasonpass \
     --op QueryRewards \
     --namespace $AB_NAMESPACE \
-    --seasonId 'fIb2MWoc' \
-    --q 'DtyekWk9' \
+    --seasonId 'HAgGjZDK' \
+    --q 'pJMbksih' \
     > test.out 2>&1
-eval_tap $? 19 'QueryRewards' test.out
+eval_tap $? 20 'QueryRewards' test.out
 
-#- 20 CreateReward
+#- 21 CreateReward
 # body param: body
-echo '{"code": "aMPSZCxA", "currency": {"currencyCode": "EVCwzEK6", "namespace": "SBz8ZVLo"}, "image": {"as": "k4VKoHIn", "caption": "AY1mgupF", "height": 41, "imageUrl": "i6naJMFT", "smallImageUrl": "3a21cVMf", "width": 30}, "itemId": "Ey3SfD89", "quantity": 46, "type": "CURRENCY"}' > $TEMP_JSON_INPUT
+echo '{"code": "Q5ukESLN", "currency": {"currencyCode": "tm2lumjv", "namespace": "fK4WFqpz"}, "image": {"as": "JemVdUXk", "caption": "rf1Qbw28", "height": 36, "imageUrl": "sX85n7YT", "smallImageUrl": "JDLqY7xj", "width": 55}, "itemId": "QbxGWCYW", "quantity": 49, "type": "CURRENCY"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn seasonpass \
     --op CreateReward \
     --namespace $AB_NAMESPACE \
-    --seasonId 'C2tyPzN9' \
+    --seasonId 'fEs4uJXe' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 20 'CreateReward' test.out
+eval_tap $? 21 'CreateReward' test.out
 
-#- 21 GetReward
+#- 22 GetReward
 $CLI_EXE \
     --sn seasonpass \
     --op GetReward \
-    --code 'V9fcEdI3' \
+    --code 'l9WL7Ez8' \
     --namespace $AB_NAMESPACE \
-    --seasonId 'msAqpDZM' \
+    --seasonId 'RsEHS7Y3' \
     > test.out 2>&1
-eval_tap $? 21 'GetReward' test.out
+eval_tap $? 22 'GetReward' test.out
 
-#- 22 DeleteReward
+#- 23 DeleteReward
 $CLI_EXE \
     --sn seasonpass \
     --op DeleteReward \
-    --code 'zsdY7pVZ' \
+    --code 'c14SxLRJ' \
     --namespace $AB_NAMESPACE \
-    --seasonId 'dIdLoysD' \
+    --seasonId 'R56n1lq0' \
     > test.out 2>&1
-eval_tap $? 22 'DeleteReward' test.out
+eval_tap $? 23 'DeleteReward' test.out
 
-#- 23 UpdateReward
+#- 24 UpdateReward
 # body param: body
-echo '{"currency": {"currencyCode": "TGQj5ePb", "namespace": "8RZLZl1g"}, "image": {"as": "lDsl1pc2", "caption": "Pwd44Yfg", "height": 29, "imageUrl": "PiaIdKxt", "smallImageUrl": "gQNxp9wf", "width": 40}, "itemId": "DxvLRehX", "nullFields": ["Avv3Qqah", "Vfbdm7Kg", "52j4KO1C"], "quantity": 97, "type": "ITEM"}' > $TEMP_JSON_INPUT
+echo '{"currency": {"currencyCode": "zZIGwnKE", "namespace": "4xSiDDTK"}, "image": {"as": "XwsIRndp", "caption": "p930UAYl", "height": 29, "imageUrl": "LhFMgTER", "smallImageUrl": "KcD1x508", "width": 91}, "itemId": "ivZHfNzv", "nullFields": ["6dVoYBEj", "mBbe7cGr", "VIxOcyci"], "quantity": 83, "type": "CURRENCY"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn seasonpass \
     --op UpdateReward \
-    --code 'vUGo5czx' \
+    --code 'YnNiFi2b' \
     --namespace $AB_NAMESPACE \
-    --seasonId 'ZfLqd6vn' \
+    --seasonId 'JyVwN3CX' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 23 'UpdateReward' test.out
+eval_tap $? 24 'UpdateReward' test.out
 
-#- 24 QueryTiers
+#- 25 QueryTiers
 $CLI_EXE \
     --sn seasonpass \
     --op QueryTiers \
     --namespace $AB_NAMESPACE \
-    --seasonId 'dXaz8Lyo' \
-    --limit '42' \
-    --offset '30' \
+    --seasonId 'j9wi5jZ3' \
+    --limit '79' \
+    --offset '59' \
     > test.out 2>&1
-eval_tap $? 24 'QueryTiers' test.out
+eval_tap $? 25 'QueryTiers' test.out
 
-#- 25 CreateTier
+#- 26 CreateTier
 # body param: body
-echo '{"index": 33, "quantity": 87, "tier": {"requiredExp": 45, "rewards": {"AOzgMKXL": ["kXivOeJV", "Ev4ZrTwx", "scH4jYXB"], "KfgS80Ro": ["ic2TYnmi", "ignGLBml", "KW6Ih5nJ"], "E831LhOw": ["QLZsCTIK", "qlXLlc2z", "JyfDOez5"]}}}' > $TEMP_JSON_INPUT
+echo '{"index": 100, "quantity": 58, "tier": {"requiredExp": 89, "rewards": {"HjKl60hO": ["TVM1Vbw7", "3GcABxn9", "ksf0BpV5"], "uCNp6U5n": ["QgQRvhOf", "K7KZD9MY", "wuvKalKn"], "MbeImVMc": ["6oq2Yj8o", "r31uEx3n", "3PDMi4Mu"]}}}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn seasonpass \
     --op CreateTier \
     --namespace $AB_NAMESPACE \
-    --seasonId 'KtJ1LCBn' \
+    --seasonId 'iaahAPlG' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 25 'CreateTier' test.out
+eval_tap $? 26 'CreateTier' test.out
 
-#- 26 UpdateTier
+#- 27 UpdateTier
 # body param: body
-echo '{"requiredExp": 26, "rewards": {"yaBvcapo": ["dUJ8LG0c", "Rvr7wik5", "Yvnsh6q4"], "A5IA7WpM": ["tDqqQOOt", "N68eyyxC", "4esFOLno"], "qjk4JhNN": ["zRP0cwRU", "xCNs0SJS", "ndYkKoWW"]}}' > $TEMP_JSON_INPUT
+echo '{"requiredExp": 74, "rewards": {"FQcEYe2P": ["QYs9EzbX", "ytfuwPyI", "sxseFoUr"], "Xr6dVu1w": ["A105pXyb", "n8Wd1uml", "nDaAFOcV"], "Kxt4ZU4T": ["bSqPTj7D", "88MJCTpz", "9F2YECU1"]}}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn seasonpass \
     --op UpdateTier \
-    --id 'geo2aIkr' \
+    --id 'DydwC80a' \
     --namespace $AB_NAMESPACE \
-    --seasonId 'bQPyhi89' \
+    --seasonId 'zvvJNc7t' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 26 'UpdateTier' test.out
+eval_tap $? 27 'UpdateTier' test.out
 
-#- 27 DeleteTier
+#- 28 DeleteTier
 $CLI_EXE \
     --sn seasonpass \
     --op DeleteTier \
-    --id '6v8pcpnE' \
+    --id 'QwAVuSiS' \
     --namespace $AB_NAMESPACE \
-    --seasonId 'HjCXn7ta' \
+    --seasonId 'sJra0Jao' \
     > test.out 2>&1
-eval_tap $? 27 'DeleteTier' test.out
+eval_tap $? 28 'DeleteTier' test.out
 
-#- 28 ReorderTier
+#- 29 ReorderTier
 # body param: body
-echo '{"newIndex": 6}' > $TEMP_JSON_INPUT
+echo '{"newIndex": 45}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn seasonpass \
     --op ReorderTier \
-    --id '3bcAD4Ml' \
+    --id 'xFMuLMhA' \
     --namespace $AB_NAMESPACE \
-    --seasonId 'Q5VLz93X' \
+    --seasonId 'lEXCe3Ah' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 28 'ReorderTier' test.out
+eval_tap $? 29 'ReorderTier' test.out
 
-#- 29 UnpublishSeason
+#- 30 UnpublishSeason
 $CLI_EXE \
     --sn seasonpass \
     --op UnpublishSeason \
     --namespace $AB_NAMESPACE \
-    --seasonId '2Wa4wLjY' \
-    --force 'true' \
+    --seasonId '7JT6Towy' \
+    --force 'false' \
     > test.out 2>&1
-eval_tap $? 29 'UnpublishSeason' test.out
+eval_tap $? 30 'UnpublishSeason' test.out
 
-#- 30 GetUserParticipatedSeasons
+#- 31 GetUserParticipatedSeasons
 $CLI_EXE \
     --sn seasonpass \
     --op GetUserParticipatedSeasons \
     --namespace $AB_NAMESPACE \
-    --userId '30Lv3dLr' \
-    --limit '6' \
-    --offset '75' \
+    --userId 'A5QPXYGZ' \
+    --limit '13' \
+    --offset '30' \
     > test.out 2>&1
-eval_tap $? 30 'GetUserParticipatedSeasons' test.out
+eval_tap $? 31 'GetUserParticipatedSeasons' test.out
 
-#- 31 GrantUserExp
+#- 32 GrantUserExp
 # body param: body
-echo '{"exp": 34, "source": "PAID_FOR", "tags": ["IGeeOLuT", "rxsHFqHo", "f14Q0bmw"]}' > $TEMP_JSON_INPUT
+echo '{"exp": 1, "source": "PAID_FOR", "tags": ["CiCvxkkZ", "4N8mAqId", "lT8YqFYz"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn seasonpass \
     --op GrantUserExp \
     --namespace $AB_NAMESPACE \
-    --userId 'OA8XScBn' \
+    --userId 'x8KmYvCv' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 31 'GrantUserExp' test.out
+eval_tap $? 32 'GrantUserExp' test.out
 
-#- 32 GrantUserPass
+#- 33 GrantUserPass
 # body param: body
-echo '{"passCode": "Znre8ZC4", "passItemId": "N1dYnn6U"}' > $TEMP_JSON_INPUT
+echo '{"passCode": "BRkujNJj", "passItemId": "fJefkGIk"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn seasonpass \
     --op GrantUserPass \
     --namespace $AB_NAMESPACE \
-    --userId 'j0jnwPAN' \
+    --userId 'KpFKpVfv' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 32 'GrantUserPass' test.out
+eval_tap $? 33 'GrantUserPass' test.out
 
-#- 33 ExistsAnyPassByPassCodes
+#- 34 ExistsAnyPassByPassCodes
 $CLI_EXE \
     --sn seasonpass \
     --op ExistsAnyPassByPassCodes \
     --namespace $AB_NAMESPACE \
-    --userId 'XtE74Kc2' \
-    --passCodes '["o1kDzsBz", "pk93i0Od", "hyrgB45N"]' \
+    --userId 'E7rSHKbv' \
+    --passCodes '["3tVcIFtU", "1gcSZnhh", "291DAMuN"]' \
     > test.out 2>&1
-eval_tap $? 33 'ExistsAnyPassByPassCodes' test.out
+eval_tap $? 34 'ExistsAnyPassByPassCodes' test.out
 
-#- 34 GetCurrentUserSeasonProgression
+#- 35 GetCurrentUserSeasonProgression
 $CLI_EXE \
     --sn seasonpass \
     --op GetCurrentUserSeasonProgression \
     --namespace $AB_NAMESPACE \
-    --userId 'aFprfvtv' \
+    --userId '5W1gW2Ob' \
     > test.out 2>&1
-eval_tap $? 34 'GetCurrentUserSeasonProgression' test.out
+eval_tap $? 35 'GetCurrentUserSeasonProgression' test.out
 
-#- 35 CheckSeasonPurchasable
+#- 36 CheckSeasonPurchasable
 # body param: body
-echo '{"passItemId": "NdewJdHq", "tierItemCount": 33, "tierItemId": "jnWZabll"}' > $TEMP_JSON_INPUT
+echo '{"passItemId": "N1Fh7MHt", "tierItemCount": 41, "tierItemId": "BxJTgzTs"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn seasonpass \
     --op CheckSeasonPurchasable \
     --namespace $AB_NAMESPACE \
-    --userId 'i8mcQtIN' \
+    --userId 'eBP9SDOf' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 35 'CheckSeasonPurchasable' test.out
+eval_tap $? 36 'CheckSeasonPurchasable' test.out
 
-#- 36 ResetUserSeason
+#- 37 ResetUserSeason
 $CLI_EXE \
     --sn seasonpass \
     --op ResetUserSeason \
     --namespace $AB_NAMESPACE \
-    --userId 'g0766R11' \
+    --userId 'tmgvzkTz' \
     > test.out 2>&1
-eval_tap $? 36 'ResetUserSeason' test.out
+eval_tap $? 37 'ResetUserSeason' test.out
 
-#- 37 GrantUserTier
+#- 38 GrantUserTier
 # body param: body
-echo '{"count": 54, "source": "PAID_FOR", "tags": ["Pvtdk7Gx", "XIPacwrT", "xcVSj91A"]}' > $TEMP_JSON_INPUT
+echo '{"count": 29, "source": "SWEAT", "tags": ["TpEBCuoD", "ttDpVLBb", "dikEcmsZ"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn seasonpass \
     --op GrantUserTier \
     --namespace $AB_NAMESPACE \
-    --userId '3nRrR6A6' \
+    --userId 'jJrh9JpE' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 37 'GrantUserTier' test.out
+eval_tap $? 38 'GrantUserTier' test.out
 
-#- 38 QueryUserExpGrantHistory
+#- 39 QueryUserExpGrantHistory
 $CLI_EXE \
     --sn seasonpass \
     --op QueryUserExpGrantHistory \
     --namespace $AB_NAMESPACE \
-    --userId 'oGaOZJc6' \
-    --from 'EMhgn2n6' \
-    --limit '22' \
-    --offset '63' \
-    --seasonId 'Cy8gyxMc' \
-    --source 'SWEAT' \
-    --tags '["cjROUOiO", "zFenFaVw", "CWpnkc2z"]' \
-    --to 'gZDvwYZi' \
+    --userId 'vmYJJ6HY' \
+    --from 'GeteeOx4' \
+    --limit '39' \
+    --offset '60' \
+    --seasonId '5BFN1cYz' \
+    --source 'PAID_FOR' \
+    --tags '["3PvPvt9x", "IUhWNRXq", "sThpAWSa"]' \
+    --to 'mjW9V63g' \
     > test.out 2>&1
-eval_tap $? 38 'QueryUserExpGrantHistory' test.out
+eval_tap $? 39 'QueryUserExpGrantHistory' test.out
 
-#- 39 QueryUserExpGrantHistoryTag
+#- 40 QueryUserExpGrantHistoryTag
 $CLI_EXE \
     --sn seasonpass \
     --op QueryUserExpGrantHistoryTag \
     --namespace $AB_NAMESPACE \
-    --userId 'X0axJn1S' \
-    --seasonId 'CyRoETQ7' \
+    --userId 'pAagyaQU' \
+    --seasonId 'oy6i9rVF' \
     > test.out 2>&1
-eval_tap $? 39 'QueryUserExpGrantHistoryTag' test.out
+eval_tap $? 40 'QueryUserExpGrantHistoryTag' test.out
 
-#- 40 GetUserSeason
+#- 41 GetUserSeason
 $CLI_EXE \
     --sn seasonpass \
     --op GetUserSeason \
     --namespace $AB_NAMESPACE \
-    --seasonId 'T9pL0NcU' \
-    --userId 'N9nSxKBJ' \
+    --seasonId 'pqf4Frat' \
+    --userId 'gEuEh9Mk' \
     > test.out 2>&1
-eval_tap $? 40 'GetUserSeason' test.out
+eval_tap $? 41 'GetUserSeason' test.out
 
-#- 41 PublicGetCurrentSeason
+#- 42 PublicGetCurrentSeason
 $CLI_EXE \
     --sn seasonpass \
     --op PublicGetCurrentSeason \
     --namespace $AB_NAMESPACE \
-    --language 'MhXhEpur' \
+    --language 'iNEGQOFh' \
     > test.out 2>&1
-eval_tap $? 41 'PublicGetCurrentSeason' test.out
+eval_tap $? 42 'PublicGetCurrentSeason' test.out
 
-#- 42 PublicGetCurrentUserSeason
+#- 43 PublicGetCurrentUserSeason
 $CLI_EXE \
     --sn seasonpass \
     --op PublicGetCurrentUserSeason \
     --namespace $AB_NAMESPACE \
-    --userId 'UFaP43jY' \
+    --userId 'ELIzXTNf' \
     > test.out 2>&1
-eval_tap $? 42 'PublicGetCurrentUserSeason' test.out
+eval_tap $? 43 'PublicGetCurrentUserSeason' test.out
 
-#- 43 PublicClaimUserReward
+#- 44 PublicClaimUserReward
 # body param: body
-echo '{"passCode": "DUPnWhlG", "rewardCode": "4yZ5mg84", "tierIndex": 62}' > $TEMP_JSON_INPUT
+echo '{"passCode": "V5h1tJb5", "rewardCode": "qA98lqCx", "tierIndex": 64}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn seasonpass \
     --op PublicClaimUserReward \
     --namespace $AB_NAMESPACE \
-    --userId 'F0xbMPg2' \
+    --userId 'kNI8aGvq' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
-eval_tap $? 43 'PublicClaimUserReward' test.out
+eval_tap $? 44 'PublicClaimUserReward' test.out
 
-#- 44 PublicBulkClaimUserRewards
+#- 45 PublicBulkClaimUserRewards
 $CLI_EXE \
     --sn seasonpass \
     --op PublicBulkClaimUserRewards \
     --namespace $AB_NAMESPACE \
-    --userId 'JO81JFHs' \
+    --userId 'Y1eQMHGX' \
     > test.out 2>&1
-eval_tap $? 44 'PublicBulkClaimUserRewards' test.out
+eval_tap $? 45 'PublicBulkClaimUserRewards' test.out
 
-#- 45 PublicGetUserSeason
+#- 46 PublicGetUserSeason
 $CLI_EXE \
     --sn seasonpass \
     --op PublicGetUserSeason \
     --namespace $AB_NAMESPACE \
-    --seasonId 'W2bBIJwZ' \
-    --userId 'GG810l3e' \
+    --seasonId 'n0k3bnYi' \
+    --userId 'SfNJVBEW' \
     > test.out 2>&1
-eval_tap $? 45 'PublicGetUserSeason' test.out
+eval_tap $? 46 'PublicGetUserSeason' test.out
 
 
 # remove artifacts

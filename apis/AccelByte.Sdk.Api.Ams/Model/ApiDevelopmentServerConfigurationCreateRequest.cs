@@ -16,6 +16,7 @@ namespace AccelByte.Sdk.Api.Ams.Model
         public string? CommandLineArguments { get; set; }
 
         [JsonPropertyName("expiresAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? ExpiresAt { get; set; }
 
         [JsonPropertyName("imageId")]

@@ -430,6 +430,17 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
+        public QueryItemReferences.QueryItemReferencesBuilder QueryItemReferencesOp
+        {
+            get
+            {
+                var opBuilder = new Operation.QueryItemReferences.QueryItemReferencesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public ReturnItem.ReturnItemBuilder ReturnItemOp
         {
             get
@@ -1391,6 +1402,22 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public QueryItemReferences.Response QueryItemReferences(QueryItemReferences input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<QueryItemReferences.Response> QueryItemReferencesAsync(QueryItemReferences input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

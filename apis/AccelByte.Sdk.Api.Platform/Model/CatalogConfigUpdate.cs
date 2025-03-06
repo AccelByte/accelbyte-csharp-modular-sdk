@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Platform.Model
 {
@@ -15,7 +17,45 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonPropertyName("enableInventoryCheck")]
         public bool? EnableInventoryCheck { get; set; }
 
+        [JsonPropertyName("itemDeletionCheckConfig")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public List<CatalogConfigUpdateItemDeletionCheckConfig>? ItemDeletionCheckConfig { get; set; }
+
     }
 
 
+
+    public class CatalogConfigUpdateItemDeletionCheckConfig : StringEnum<CatalogConfigUpdateItemDeletionCheckConfig>
+    {
+        public static readonly CatalogConfigUpdateItemDeletionCheckConfig CAMPAIGN
+            = new CatalogConfigUpdateItemDeletionCheckConfig("CAMPAIGN");
+
+        public static readonly CatalogConfigUpdateItemDeletionCheckConfig CATALOG
+            = new CatalogConfigUpdateItemDeletionCheckConfig("CATALOG");
+
+        public static readonly CatalogConfigUpdateItemDeletionCheckConfig DLC
+            = new CatalogConfigUpdateItemDeletionCheckConfig("DLC");
+
+        public static readonly CatalogConfigUpdateItemDeletionCheckConfig ENTITLEMENT
+            = new CatalogConfigUpdateItemDeletionCheckConfig("ENTITLEMENT");
+
+        public static readonly CatalogConfigUpdateItemDeletionCheckConfig IAP
+            = new CatalogConfigUpdateItemDeletionCheckConfig("IAP");
+
+        public static readonly CatalogConfigUpdateItemDeletionCheckConfig REWARD
+            = new CatalogConfigUpdateItemDeletionCheckConfig("REWARD");
+
+
+        public static implicit operator CatalogConfigUpdateItemDeletionCheckConfig(string value)
+        {
+            return NewValue(value);
+        }
+
+        public CatalogConfigUpdateItemDeletionCheckConfig(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

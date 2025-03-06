@@ -136,6 +136,10 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? TieTeamsSessionLifetime { get; set; }
 
+        [JsonPropertyName("ttlHours")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? TtlHours { get; set; }
+
         [JsonPropertyName("type")]
         public string? Type { get; set; }
 
@@ -264,6 +268,10 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonPropertyName("tieTeamsSessionLifetime")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? TieTeamsSessionLifetime { get; set; }
+
+        [JsonPropertyName("ttlHours")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? TtlHours { get; set; }
 
         [JsonPropertyName("type")]
         public string? Type { get; set; }

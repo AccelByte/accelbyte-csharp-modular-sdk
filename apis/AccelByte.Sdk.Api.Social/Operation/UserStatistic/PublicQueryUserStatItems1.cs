@@ -23,12 +23,9 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// <summary>
     /// publicQueryUserStatItems_1
     ///
-    /// Public list all statItems of user.
-    /// NOTE:
-    ///         * If stat code does not exist, will ignore this stat code.
-    ///         * If stat item does not exist, will return default value
+    /// Public list all statItems by pagination.
     /// Other detail info:
-    ///         *  Returns : stat items
+    ///           *  Returns : stat items
     /// </summary>
     public class PublicQueryUserStatItems1 : AccelByte.Sdk.Core.Operation
     {
@@ -39,11 +36,15 @@ namespace AccelByte.Sdk.Api.Social.Operation
             : OperationBuilder<PublicQueryUserStatItems1Builder>
         {
 
-            public string? AdditionalKey { get; set; }
+            public int? Limit { get; set; }
 
-            public List<string>? StatCodes { get; set; }
+            public int? Offset { get; set; }
 
-            public List<string>? Tags { get; set; }
+            public string? SortBy { get; set; }
+
+            public string? StatCodes { get; set; }
+
+            public string? Tags { get; set; }
 
 
 
@@ -57,19 +58,31 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
 
 
-            public PublicQueryUserStatItems1Builder SetAdditionalKey(string _additionalKey)
+            public PublicQueryUserStatItems1Builder SetLimit(int _limit)
             {
-                AdditionalKey = _additionalKey;
+                Limit = _limit;
                 return this;
             }
 
-            public PublicQueryUserStatItems1Builder SetStatCodes(List<string> _statCodes)
+            public PublicQueryUserStatItems1Builder SetOffset(int _offset)
+            {
+                Offset = _offset;
+                return this;
+            }
+
+            public PublicQueryUserStatItems1Builder SetSortBy(string _sortBy)
+            {
+                SortBy = _sortBy;
+                return this;
+            }
+
+            public PublicQueryUserStatItems1Builder SetStatCodes(string _statCodes)
             {
                 StatCodes = _statCodes;
                 return this;
             }
 
-            public PublicQueryUserStatItems1Builder SetTags(List<string> _tags)
+            public PublicQueryUserStatItems1Builder SetTags(string _tags)
             {
                 Tags = _tags;
                 return this;
@@ -141,14 +154,14 @@ namespace AccelByte.Sdk.Api.Social.Operation
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
 
-            if (builder.AdditionalKey is not null) QueryParams["additionalKey"] = builder.AdditionalKey;
+            if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
+            if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
+            if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy;
             if (builder.StatCodes is not null) QueryParams["statCodes"] = builder.StatCodes;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
 
 
 
-            CollectionFormatMap["statCodes"] = "multi";
-            CollectionFormatMap["tags"] = "multi";
 
 
 
@@ -157,16 +170,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         #region Response Part        
-        public class Response : ApiResponse<List<Model.ADTOObjectForUserStatItemValue>>
+        public class Response : ApiResponse<Model.UserStatItemPagingSlicedResult>
         {
-
-            public ErrorEntity? Error400 { get; set; } = null;
 
             public ErrorEntity? Error401 { get; set; } = null;
 
             public ErrorEntity? Error403 { get; set; } = null;
-
-            public ErrorEntity? Error404 { get; set; } = null;
 
             public ValidationErrorEntity? Error422 { get; set; } = null;
 
@@ -181,29 +190,31 @@ namespace AccelByte.Sdk.Api.Social.Operation
         public PublicQueryUserStatItems1(
             string namespace_,
             string userId,
-            string? additionalKey,
-            List<string>? statCodes,
-            List<string>? tags
+            int? limit,
+            int? offset,
+            string? sortBy,
+            string? statCodes,
+            string? tags
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
 
-            if (additionalKey is not null) QueryParams["additionalKey"] = additionalKey;
+            if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
+            if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
+            if (sortBy is not null) QueryParams["sortBy"] = sortBy;
             if (statCodes is not null) QueryParams["statCodes"] = statCodes;
             if (tags is not null) QueryParams["tags"] = tags;
 
 
 
-            CollectionFormatMap["statCodes"] = "multi";
-            CollectionFormatMap["tags"] = "multi";
 
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/social/v1/public/namespaces/{namespace}/users/{userId}/statitems/value/bulk";
+        public override string Path => "/social/v1/public/namespaces/{namespace}/users/{userId}/statitems";
 
         public override HttpMethod Method => HttpMethod.Get;
 
@@ -225,13 +236,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ADTOObjectForUserStatItemValue>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.UserStatItemPagingSlicedResult>(payload, ResponseJsonOptions);
                 response.IsSuccess = true;
-            }
-            else if (code == (HttpStatusCode)400)
-            {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
-                response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
@@ -242,11 +248,6 @@ namespace AccelByte.Sdk.Api.Social.Operation
             {
                 response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
-            }
-            else if (code == (HttpStatusCode)404)
-            {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
-                response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {

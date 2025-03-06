@@ -265,11 +265,11 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        public PublicQueryUserStatItems.PublicQueryUserStatItemsBuilder PublicQueryUserStatItemsOp
+        public PublicQueryUserStatItems1.PublicQueryUserStatItems1Builder PublicQueryUserStatItems1Op
         {
             get
             {
-                var opBuilder = new Operation.PublicQueryUserStatItems.PublicQueryUserStatItemsBuilder(_sdk);
+                var opBuilder = new Operation.PublicQueryUserStatItems1.PublicQueryUserStatItems1Builder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -287,11 +287,11 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        public PublicQueryUserStatItems1.PublicQueryUserStatItems1Builder PublicQueryUserStatItems1Op
+        public PublicQueryUserStatItems.PublicQueryUserStatItemsBuilder PublicQueryUserStatItemsOp
         {
             get
             {
-                var opBuilder = new Operation.PublicQueryUserStatItems1.PublicQueryUserStatItems1Builder(_sdk);
+                var opBuilder = new Operation.PublicQueryUserStatItems.PublicQueryUserStatItemsBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -1060,7 +1060,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public PublicQueryUserStatItems.Response PublicQueryUserStatItems(PublicQueryUserStatItems input)
+        public PublicQueryUserStatItems1.Response PublicQueryUserStatItems1(PublicQueryUserStatItems1 input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1068,7 +1068,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<PublicQueryUserStatItems.Response> PublicQueryUserStatItemsAsync(PublicQueryUserStatItems input)
+        public async Task<PublicQueryUserStatItems1.Response> PublicQueryUserStatItems1Async(PublicQueryUserStatItems1 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1109,7 +1109,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public PublicQueryUserStatItems1.Response PublicQueryUserStatItems1(PublicQueryUserStatItems1 input)
+        public PublicQueryUserStatItems.Response PublicQueryUserStatItems(PublicQueryUserStatItems input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -1117,7 +1117,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<PublicQueryUserStatItems1.Response> PublicQueryUserStatItems1Async(PublicQueryUserStatItems1 input)
+        public async Task<PublicQueryUserStatItems.Response> PublicQueryUserStatItemsAsync(PublicQueryUserStatItems input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -171,6 +171,17 @@ namespace AccelByte.Sdk.Api.Iam
         }
         private Wrapper.OverrideRoleConfigV3? _OverrideRoleConfigV3 = null;
 
+        public Wrapper.AccountIdenfifierTag AccountIdenfifierTag
+        {
+            get
+            {
+                if (_AccountIdenfifierTag == null)
+                    _AccountIdenfifierTag = new Wrapper.AccountIdenfifierTag(_Sdk, _CustomBasePath);
+                return _AccountIdenfifierTag;
+            }
+        }
+        private Wrapper.AccountIdenfifierTag? _AccountIdenfifierTag = null;
+
         public Wrapper.OAuth20Extension OAuth20Extension
         {
             get

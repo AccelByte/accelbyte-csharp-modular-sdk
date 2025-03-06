@@ -53,6 +53,9 @@ namespace AccelByte.Sdk.Api.Platform.Model
         public static readonly EpicGamesReconcileResultStatus REVOKED
             = new EpicGamesReconcileResultStatus("REVOKED");
 
+        public static readonly EpicGamesReconcileResultStatus REVOKEFAILED
+            = new EpicGamesReconcileResultStatus("REVOKE_FAILED");
+
         public static readonly EpicGamesReconcileResultStatus VERIFIED
             = new EpicGamesReconcileResultStatus("VERIFIED");
 

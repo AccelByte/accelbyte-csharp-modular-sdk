@@ -34,6 +34,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
             : OperationBuilder<AdminQueryPartiesBuilder>
         {
 
+            public string? FromTime { get; set; }
+
             public string? IsSoftDeleted { get; set; }
 
             public string? Joinability { get; set; }
@@ -56,6 +58,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
             public string? PartyID { get; set; }
 
+            public string? ToTime { get; set; }
+
             public string? Value { get; set; }
 
 
@@ -69,6 +73,12 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 _Sdk = sdk;
             }
 
+
+            public AdminQueryPartiesBuilder SetFromTime(string _fromTime)
+            {
+                FromTime = _fromTime;
+                return this;
+            }
 
             public AdminQueryPartiesBuilder SetIsSoftDeleted(string _isSoftDeleted)
             {
@@ -136,6 +146,12 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 return this;
             }
 
+            public AdminQueryPartiesBuilder SetToTime(string _toTime)
+            {
+                ToTime = _toTime;
+                return this;
+            }
+
             public AdminQueryPartiesBuilder SetValue(string _value)
             {
                 Value = _value;
@@ -200,6 +216,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         {
             PathParams["namespace"] = namespace_;
 
+            if (builder.FromTime is not null) QueryParams["fromTime"] = builder.FromTime;
             if (builder.IsSoftDeleted is not null) QueryParams["isSoftDeleted"] = builder.IsSoftDeleted;
             if (builder.Joinability is not null) QueryParams["joinability"] = builder.Joinability;
             if (builder.Key is not null) QueryParams["key"] = builder.Key;
@@ -211,6 +228,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
             if (builder.Order is not null) QueryParams["order"] = builder.Order;
             if (builder.OrderBy is not null) QueryParams["orderBy"] = builder.OrderBy;
             if (builder.PartyID is not null) QueryParams["partyID"] = builder.PartyID;
+            if (builder.ToTime is not null) QueryParams["toTime"] = builder.ToTime;
             if (builder.Value is not null) QueryParams["value"] = builder.Value;
 
 
@@ -240,6 +258,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
         public AdminQueryParties(
             string namespace_,
+            string? fromTime,
             string? isSoftDeleted,
             string? joinability,
             string? key,
@@ -251,11 +270,13 @@ namespace AccelByte.Sdk.Api.Session.Operation
             string? order,
             string? orderBy,
             string? partyID,
+            string? toTime,
             string? value
         )
         {
             PathParams["namespace"] = namespace_;
 
+            if (fromTime is not null) QueryParams["fromTime"] = fromTime;
             if (isSoftDeleted is not null) QueryParams["isSoftDeleted"] = isSoftDeleted;
             if (joinability is not null) QueryParams["joinability"] = joinability;
             if (key is not null) QueryParams["key"] = key;
@@ -267,6 +288,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
             if (order is not null) QueryParams["order"] = order;
             if (orderBy is not null) QueryParams["orderBy"] = orderBy;
             if (partyID is not null) QueryParams["partyID"] = partyID;
+            if (toTime is not null) QueryParams["toTime"] = toTime;
             if (value is not null) QueryParams["value"] = value;
 
 

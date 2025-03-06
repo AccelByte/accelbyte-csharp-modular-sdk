@@ -8,18 +8,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace AccelByte.Sdk.Api.Ams.Model
+namespace AccelByte.Sdk.Api.Iam.Model
 {
-    public class TimeZone : AccelByte.Sdk.Core.Model
+    public class ModelTagCreateRequestV3 : AccelByte.Sdk.Core.Model
     {
-        [JsonPropertyName("isDST")]
-        public bool? IsDST { get; set; }
-
-        [JsonPropertyName("name")]
-        public string? Name { get; set; }
-
-        [JsonPropertyName("offset")]
-        public int? Offset { get; set; }
+        [JsonPropertyName("tagName")]
+        public string? TagName { get; set; }
 
     }
 

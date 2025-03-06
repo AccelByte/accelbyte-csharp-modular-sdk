@@ -92,6 +92,8 @@ namespace AccelByte.Sdk.Api.Platform
         public static readonly ApiError Error30381 = new ApiError("30381", "Currency [{currency}] is not set for bundle Item [{itemId}] in region [{region}]");
         public static readonly ApiError Error30382 = new ApiError("30382", "Duplicated Item sku [{sku}]");
         public static readonly ApiError Error30383 = new ApiError("30383", "Item app id [{appId}] already exists in namespace [{namespace}] item [{itemId}]");
+        public static readonly ApiError Error30386 = new ApiError("30386", "The item [{itemId}] is currently associated and cannot be deleted in namespace [{namespace}], Feature {featureName}, Module {moduleName}, and Reference ID {referenceId} are using this item ID");
+        public static readonly ApiError Error30387 = new ApiError("30387", "The item [{itemId}] is currently associated and cannot be disabled in namespace [{namespace}], Feature {featureName}, Module {moduleName}, and Reference ID {referenceId} are using this item ID");
         public static readonly ApiError Error30541 = new ApiError("30541", "Item type config [{id}] doesn't exist");
         public static readonly ApiError Error30641 = new ApiError("30641", "View [{viewId}] does not exist in namespace [{namespace}]");
         public static readonly ApiError Error30741 = new ApiError("30741", "Section [{sectionId}] does not exist in namespace [{namespace}]");
@@ -229,11 +231,15 @@ namespace AccelByte.Sdk.Api.Platform
         public static readonly ApiError Error39148 = new ApiError("39148", "Google IAP config not found in namespace [{namespace}].");
         public static readonly ApiError Error39149 = new ApiError("39149", "Third Party Subscription Transaction [{id}] not found for user [{userId}] in the namespace [{namespace}].");
         public static readonly ApiError Error39150 = new ApiError("39150", "Third Party User Subscription [{id}] not found for user [{userId}] in the namespace [{namespace}]..");
+        public static readonly ApiError Error39151 = new ApiError("39151", "IAP order no [{iapOrderNo}] not found in namespace [{namespace}].");
         public static readonly ApiError Error39171 = new ApiError("39171", "The bundle id in namespace [{namespace}] expect [{expected}] but was [{actual}]");
         public static readonly ApiError Error39172 = new ApiError("39172", "The order id in namespace [{namespace}] expect [{expected}] but was [{actual}]");
         public static readonly ApiError Error39173 = new ApiError("39173", "The purchase status of google play order [{orderId}] in namespace [{namespace}] expect [{expected}] but was [{actual}]");
         public static readonly ApiError Error39174 = new ApiError("39174", "The google iap purchase time of order [{orderId}] in namespace [{namespace}] expect [{expected}] but was [{actual}]");
         public static readonly ApiError Error39175 = new ApiError("39175", "Duplicate IAP item mapping, IAPType: [{iapType}] and id: [{iapId}]");
+        public static readonly ApiError Error39183 = new ApiError("39183", "Steam transaction [{orderId}] is still pending or failed, status [{status}], please try it later");
+        public static readonly ApiError Error39184 = new ApiError("39184", "Steam api exception with error code [{errorCode}] and error message [{message}]");
+        public static readonly ApiError Error39185 = new ApiError("39185", "This endpoint only works on sync mode [{workSyncMode}], but current steam iap config sync mode is [{currentSyncMode}] under namespace [{namespace}]");
         public static readonly ApiError Error39221 = new ApiError("39221", "Invalid Xbox Business Partner Certificate or password: [{message}]");
         public static readonly ApiError Error39244 = new ApiError("39244", "Steam config does not exist");
         public static readonly ApiError Error39245 = new ApiError("39245", "Steam app id does not exist");
@@ -242,6 +248,7 @@ namespace AccelByte.Sdk.Api.Platform
         public static readonly ApiError Error39441 = new ApiError("39441", "Platform dlc config cannot be found in namespace [{namespace}]");
         public static readonly ApiError Error39442 = new ApiError("39442", "DLC item config cannot be found in namespace [{namespace}]");
         public static readonly ApiError Error39471 = new ApiError("39471", "Duplicated dlc reward id [{dlcRewardId}] in namespace [{namespace}] ");
+        public static readonly ApiError Error39621 = new ApiError("39621", "Steam api common exception with status code [statusCode] details: [details]");
         public static readonly ApiError Error40121 = new ApiError("40121", "Item type [{itemType}] does not support");
         public static readonly ApiError Error40122 = new ApiError("40122", "Subscription already been subscribed by user");
         public static readonly ApiError Error40123 = new ApiError("40123", "Currency [{currencyCode}] does not support");

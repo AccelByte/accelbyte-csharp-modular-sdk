@@ -34,6 +34,17 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
         }
 
         #region Operation Builders
+        public AdminQueryBackfill.AdminQueryBackfillBuilder AdminQueryBackfillOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminQueryBackfill.AdminQueryBackfillBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public CreateBackfill.CreateBackfillBuilder CreateBackfillOp
         {
             get
@@ -102,6 +113,22 @@ namespace AccelByte.Sdk.Api.Match2.Wrapper
         }
         #endregion
 
+        public AdminQueryBackfill.Response AdminQueryBackfill(AdminQueryBackfill input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminQueryBackfill.Response> AdminQueryBackfillAsync(AdminQueryBackfill input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public CreateBackfill.Response CreateBackfill(CreateBackfill input)
         {
             var response = _sdk.RunRequest(input);

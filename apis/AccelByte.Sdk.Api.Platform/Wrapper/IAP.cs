@@ -386,6 +386,61 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
+        public QueryAbnormalTransactions.QueryAbnormalTransactionsBuilder QueryAbnormalTransactionsOp
+        {
+            get
+            {
+                var opBuilder = new Operation.QueryAbnormalTransactions.QueryAbnormalTransactionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public AdminGetSteamJobInfo.AdminGetSteamJobInfoBuilder AdminGetSteamJobInfoOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminGetSteamJobInfo.AdminGetSteamJobInfoBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public AdminResetSteamJobTime.AdminResetSteamJobTimeBuilder AdminResetSteamJobTimeOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminResetSteamJobTime.AdminResetSteamJobTimeBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public AdminRefundIAPOrder.AdminRefundIAPOrderBuilder AdminRefundIAPOrderOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminRefundIAPOrder.AdminRefundIAPOrderBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public QuerySteamReportHistories.QuerySteamReportHistoriesBuilder QuerySteamReportHistoriesOp
+        {
+            get
+            {
+                var opBuilder = new Operation.QuerySteamReportHistories.QuerySteamReportHistoriesBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public GetIAPOrderConsumeDetails.GetIAPOrderConsumeDetailsBuilder GetIAPOrderConsumeDetailsOp
         {
             get
@@ -435,6 +490,39 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             get
             {
                 var opBuilder = new Operation.MockFulfillIAPItem.MockFulfillIAPItemBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public AdminGetIAPOrderLineItems.AdminGetIAPOrderLineItemsBuilder AdminGetIAPOrderLineItemsOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminGetIAPOrderLineItems.AdminGetIAPOrderLineItemsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public AdminSyncSteamAbnormalTransaction.AdminSyncSteamAbnormalTransactionBuilder AdminSyncSteamAbnormalTransactionOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminSyncSteamAbnormalTransaction.AdminSyncSteamAbnormalTransactionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public AdminSyncSteamIAPByTransaction.AdminSyncSteamIAPByTransactionBuilder AdminSyncSteamIAPByTransactionOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminSyncSteamIAPByTransaction.AdminSyncSteamIAPByTransactionBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -545,6 +633,28 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             get
             {
                 var opBuilder = new Operation.SyncSteamInventory.SyncSteamInventoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public SyncSteamAbnormalTransaction.SyncSteamAbnormalTransactionBuilder SyncSteamAbnormalTransactionOp
+        {
+            get
+            {
+                var opBuilder = new Operation.SyncSteamAbnormalTransaction.SyncSteamAbnormalTransactionBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public SyncSteamIAPByTransaction.SyncSteamIAPByTransactionBuilder SyncSteamIAPByTransactionOp
+        {
+            get
+            {
+                var opBuilder = new Operation.SyncSteamIAPByTransaction.SyncSteamIAPByTransactionBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -1098,6 +1208,86 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public QueryAbnormalTransactions.Response QueryAbnormalTransactions(QueryAbnormalTransactions input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<QueryAbnormalTransactions.Response> QueryAbnormalTransactionsAsync(QueryAbnormalTransactions input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetSteamJobInfo.Response AdminGetSteamJobInfo(AdminGetSteamJobInfo input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetSteamJobInfo.Response> AdminGetSteamJobInfoAsync(AdminGetSteamJobInfo input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminResetSteamJobTime.Response AdminResetSteamJobTime(AdminResetSteamJobTime input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminResetSteamJobTime.Response> AdminResetSteamJobTimeAsync(AdminResetSteamJobTime input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminRefundIAPOrder.Response AdminRefundIAPOrder(AdminRefundIAPOrder input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminRefundIAPOrder.Response> AdminRefundIAPOrderAsync(AdminRefundIAPOrder input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public QuerySteamReportHistories.Response QuerySteamReportHistories(QuerySteamReportHistories input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<QuerySteamReportHistories.Response> QuerySteamReportHistoriesAsync(QuerySteamReportHistories input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public GetIAPOrderConsumeDetails.Response GetIAPOrderConsumeDetails(GetIAPOrderConsumeDetails input)
         {
             var response = _sdk.RunRequest(input);
@@ -1171,6 +1361,54 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
         public async Task<MockFulfillIAPItem.Response> MockFulfillIAPItemAsync(MockFulfillIAPItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminGetIAPOrderLineItems.Response AdminGetIAPOrderLineItems(AdminGetIAPOrderLineItems input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminGetIAPOrderLineItems.Response> AdminGetIAPOrderLineItemsAsync(AdminGetIAPOrderLineItems input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminSyncSteamAbnormalTransaction.Response AdminSyncSteamAbnormalTransaction(AdminSyncSteamAbnormalTransaction input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminSyncSteamAbnormalTransaction.Response> AdminSyncSteamAbnormalTransactionAsync(AdminSyncSteamAbnormalTransaction input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminSyncSteamIAPByTransaction.Response AdminSyncSteamIAPByTransaction(AdminSyncSteamIAPByTransaction input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminSyncSteamIAPByTransaction.Response> AdminSyncSteamIAPByTransactionAsync(AdminSyncSteamIAPByTransaction input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -1331,6 +1569,38 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
         public async Task<SyncSteamInventory.Response> SyncSteamInventoryAsync(SyncSteamInventory input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public SyncSteamAbnormalTransaction.Response SyncSteamAbnormalTransaction(SyncSteamAbnormalTransaction input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<SyncSteamAbnormalTransaction.Response> SyncSteamAbnormalTransactionAsync(SyncSteamAbnormalTransaction input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public SyncSteamIAPByTransaction.Response SyncSteamIAPByTransaction(SyncSteamIAPByTransaction input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<SyncSteamIAPByTransaction.Response> SyncSteamIAPByTransactionAsync(SyncSteamIAPByTransaction input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

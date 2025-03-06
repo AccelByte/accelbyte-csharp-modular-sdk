@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Platform.Model
 {
@@ -16,13 +18,65 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? AppId { get; set; }
 
+        [JsonPropertyName("env")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public SteamIAPConfigInfoEnv? Env { get; set; }
+
         [JsonPropertyName("namespace")]
         public string? Namespace { get; set; }
 
         [JsonPropertyName("publisherAuthenticationKey")]
         public string? PublisherAuthenticationKey { get; set; }
 
+        [JsonPropertyName("syncMode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public SteamIAPConfigInfoSyncMode? SyncMode { get; set; }
+
     }
 
 
+
+    public class SteamIAPConfigInfoEnv : StringEnum<SteamIAPConfigInfoEnv>
+    {
+        public static readonly SteamIAPConfigInfoEnv LIVE
+            = new SteamIAPConfigInfoEnv("LIVE");
+
+        public static readonly SteamIAPConfigInfoEnv SANDBOX
+            = new SteamIAPConfigInfoEnv("SANDBOX");
+
+
+        public static implicit operator SteamIAPConfigInfoEnv(string value)
+        {
+            return NewValue(value);
+        }
+
+        public SteamIAPConfigInfoEnv(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
+
+    public class SteamIAPConfigInfoSyncMode : StringEnum<SteamIAPConfigInfoSyncMode>
+    {
+        public static readonly SteamIAPConfigInfoSyncMode INVENTORY
+            = new SteamIAPConfigInfoSyncMode("INVENTORY");
+
+        public static readonly SteamIAPConfigInfoSyncMode TRANSACTION
+            = new SteamIAPConfigInfoSyncMode("TRANSACTION");
+
+
+        public static implicit operator SteamIAPConfigInfoSyncMode(string value)
+        {
+            return NewValue(value);
+        }
+
+        public SteamIAPConfigInfoSyncMode(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

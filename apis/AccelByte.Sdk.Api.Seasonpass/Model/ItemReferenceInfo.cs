@@ -8,18 +8,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace AccelByte.Sdk.Api.Ams.Model
+namespace AccelByte.Sdk.Api.Seasonpass.Model
 {
-    public class ApiTime : AccelByte.Sdk.Core.Model
+    public class ItemReferenceInfo : AccelByte.Sdk.Core.Model
     {
-        [JsonPropertyName("ext")]
-        public long? Ext { get; set; }
-
-        [JsonPropertyName("loc")]
-        public TimeLocation? Loc { get; set; }
-
-        [JsonPropertyName("wall")]
-        public long? Wall { get; set; }
+        [JsonPropertyName("references")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<ItemReference>? References { get; set; }
 
     }
 

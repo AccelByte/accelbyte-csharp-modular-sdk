@@ -39,6 +39,17 @@ namespace AccelByte.Sdk.Api.Seasonpass
         }
         private Wrapper.Season? _Season = null;
 
+        public Wrapper.Utilities Utilities
+        {
+            get
+            {
+                if (_Utilities == null)
+                    _Utilities = new Wrapper.Utilities(_Sdk, _CustomBasePath);
+                return _Utilities;
+            }
+        }
+        private Wrapper.Utilities? _Utilities = null;
+
         public Wrapper.Pass Pass
         {
             get

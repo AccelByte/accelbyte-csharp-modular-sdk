@@ -20,6 +20,11 @@
 | `/challenge/v1/admin/namespaces/{namespace}/challenges/{challengeCode}/tied` | DELETE | AdminDeleteTiedChallenge | [AdminDeleteTiedChallenge](../../apis/AccelByte.Sdk.Api.Challenge/Operation/ChallengeConfiguration/AdminDeleteTiedChallenge.cs) | [AdminDeleteTiedChallenge](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Challenge/ChallengeConfiguration/AdminDeleteTiedChallenge.cs) |
 | `/challenge/v1/admin/namespaces/{namespace}/challenges/{challengeCode}/tied/schedule` | PUT | AdminUpdateTiedChallengeSchedule | [AdminUpdateTiedChallengeSchedule](../../apis/AccelByte.Sdk.Api.Challenge/Operation/ChallengeConfiguration/AdminUpdateTiedChallengeSchedule.cs) | [AdminUpdateTiedChallengeSchedule](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Challenge/ChallengeConfiguration/AdminUpdateTiedChallengeSchedule.cs) |
 
+### Utilities Wrapper:  [Utilities](../../apis/AccelByte.Sdk.Api.Challenge/Wrapper/Utilities.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/challenge/v1/admin/namespaces/{namespace}/challenges/item/references` | GET | AdminGetItemReferences | [AdminGetItemReferences](../../apis/AccelByte.Sdk.Api.Challenge/Operation/Utilities/AdminGetItemReferences.cs) | [AdminGetItemReferences](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Challenge/Utilities/AdminGetItemReferences.cs) |
+
 ### Goal Configuration Wrapper:  [GoalConfiguration](../../apis/AccelByte.Sdk.Api.Challenge/Wrapper/GoalConfiguration.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -80,6 +85,10 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
+### Utilities Wrapper:  [Utilities](../../apis/AccelByte.Sdk.Api.Challenge/Wrapper/Utilities.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
 ### Goal Configuration Wrapper:  [GoalConfiguration](../../apis/AccelByte.Sdk.Api.Challenge/Wrapper/GoalConfiguration.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -113,6 +122,7 @@
 |---|---|
 | `iam.ErrorResponse` | [IamErrorResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/IamErrorResponse.cs) |
 | `iam.Permission` | [IamPermission](../../apis/AccelByte.Sdk.Api.Challenge/Model/IamPermission.cs) |
+| `model.ChallengeReference` | [ModelChallengeReference](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelChallengeReference.cs) |
 | `model.ChallengeResponse` | [ModelChallengeResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelChallengeResponse.cs) |
 | `model.ClaimUserRewardsByGoalCodeRequest` | [ModelClaimUserRewardsByGoalCodeRequest](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelClaimUserRewardsByGoalCodeRequest.cs) |
 | `model.ClaimUserRewardsReq` | [ModelClaimUserRewardsReq](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelClaimUserRewardsReq.cs) |
@@ -130,6 +140,8 @@
 | `model.GoalResponse` | [ModelGoalResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelGoalResponse.cs) |
 | `model.GoalSchedule` | [ModelGoalSchedule](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelGoalSchedule.cs) |
 | `model.GoalScheduleRequest` | [ModelGoalScheduleRequest](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelGoalScheduleRequest.cs) |
+| `model.ItemReference` | [ModelItemReference](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelItemReference.cs) |
+| `model.ItemReferenceResponse` | [ModelItemReferenceResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelItemReferenceResponse.cs) |
 | `model.ListChallengeResponse` | [ModelListChallengeResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelListChallengeResponse.cs) |
 | `model.ListPeriodsResponse` | [ModelListPeriodsResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelListPeriodsResponse.cs) |
 | `model.ListScheduleByGoalResponse` | [ModelListScheduleByGoalResponse](../../apis/AccelByte.Sdk.Api.Challenge/Model/ModelListScheduleByGoalResponse.cs) |

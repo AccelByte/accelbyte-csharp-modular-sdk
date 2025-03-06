@@ -34,6 +34,12 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             : OperationBuilder<AdminQueryPartyDetailBuilder>
         {
 
+            public string? EndDate { get; set; }
+
+            public string? Joinability { get; set; }
+
+            public string? LeaderID { get; set; }
+
             public long? Limit { get; set; }
 
             public long? Offset { get; set; }
@@ -43,6 +49,8 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             public string? OrderBy { get; set; }
 
             public string? PartyID { get; set; }
+
+            public string? StartDate { get; set; }
 
             public string? UserID { get; set; }
 
@@ -57,6 +65,24 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
                 _Sdk = sdk;
             }
 
+
+            public AdminQueryPartyDetailBuilder SetEndDate(string _endDate)
+            {
+                EndDate = _endDate;
+                return this;
+            }
+
+            public AdminQueryPartyDetailBuilder SetJoinability(string _joinability)
+            {
+                Joinability = _joinability;
+                return this;
+            }
+
+            public AdminQueryPartyDetailBuilder SetLeaderID(string _leaderID)
+            {
+                LeaderID = _leaderID;
+                return this;
+            }
 
             public AdminQueryPartyDetailBuilder SetLimit(long _limit)
             {
@@ -85,6 +111,12 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             public AdminQueryPartyDetailBuilder SetPartyID(string _partyID)
             {
                 PartyID = _partyID;
+                return this;
+            }
+
+            public AdminQueryPartyDetailBuilder SetStartDate(string _startDate)
+            {
+                StartDate = _startDate;
                 return this;
             }
 
@@ -152,11 +184,15 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         {
             PathParams["namespace"] = namespace_;
 
+            if (builder.EndDate is not null) QueryParams["endDate"] = builder.EndDate;
+            if (builder.Joinability is not null) QueryParams["joinability"] = builder.Joinability;
+            if (builder.LeaderID is not null) QueryParams["leaderID"] = builder.LeaderID;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Order is not null) QueryParams["order"] = builder.Order;
             if (builder.OrderBy is not null) QueryParams["orderBy"] = builder.OrderBy;
             if (builder.PartyID is not null) QueryParams["partyID"] = builder.PartyID;
+            if (builder.StartDate is not null) QueryParams["startDate"] = builder.StartDate;
             if (builder.UserID is not null) QueryParams["userID"] = builder.UserID;
 
 
@@ -188,21 +224,29 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
 
         public AdminQueryPartyDetail(
             string namespace_,
+            string? endDate,
+            string? joinability,
+            string? leaderID,
             long? limit,
             long? offset,
             string? order,
             string? orderBy,
             string? partyID,
+            string? startDate,
             string? userID
         )
         {
             PathParams["namespace"] = namespace_;
 
+            if (endDate is not null) QueryParams["endDate"] = endDate;
+            if (joinability is not null) QueryParams["joinability"] = joinability;
+            if (leaderID is not null) QueryParams["leaderID"] = leaderID;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (order is not null) QueryParams["order"] = order;
             if (orderBy is not null) QueryParams["orderBy"] = orderBy;
             if (partyID is not null) QueryParams["partyID"] = partyID;
+            if (startDate is not null) QueryParams["startDate"] = startDate;
             if (userID is not null) QueryParams["userID"] = userID;
 
 

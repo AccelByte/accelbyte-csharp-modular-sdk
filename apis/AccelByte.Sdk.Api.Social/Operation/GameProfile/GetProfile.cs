@@ -23,10 +23,16 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// <summary>
     /// getProfile
     ///
+    /// 
+    /// 
+    /// ## The endpoint is going to be deprecated
+    /// 
+    /// 
     /// Returns profile for a user.
     /// Other detail info:
     ///         *  Returns : game profile info
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class GetProfile : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -68,6 +74,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public GetProfile.Response Execute(
                 string namespace_,
                 string profileId,

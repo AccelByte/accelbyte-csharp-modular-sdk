@@ -204,11 +204,7 @@
 | `api.QoSServer` | [ApiQoSServer](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiQoSServer.cs) |
 | `api.ReferencingFleet` | [ApiReferencingFleet](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiReferencingFleet.cs) |
 | `api.RegionConfig` | [ApiRegionConfig](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiRegionConfig.cs) |
-| `api.Time` | [ApiTime](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiTime.cs) |
 | `api.Timeout` | [ApiTimeout](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiTimeout.cs) |
 | `api.UpdateServerRequest` | [ApiUpdateServerRequest](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiUpdateServerRequest.cs) |
 | `pagination.PaginationInfo` | [PaginationPaginationInfo](../../apis/AccelByte.Sdk.Api.Ams/Model/PaginationPaginationInfo.cs) |
 | `response.ErrorResponse` | [ResponseErrorResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ResponseErrorResponse.cs) |
-| `time.Location` | [TimeLocation](../../apis/AccelByte.Sdk.Api.Ams/Model/TimeLocation.cs) |
-| `time.zone` | [TimeZone](../../apis/AccelByte.Sdk.Api.Ams/Model/TimeZone.cs) |
-| `time.zoneTrans` | [TimeZoneTrans](../../apis/AccelByte.Sdk.Api.Ams/Model/TimeZoneTrans.cs) |

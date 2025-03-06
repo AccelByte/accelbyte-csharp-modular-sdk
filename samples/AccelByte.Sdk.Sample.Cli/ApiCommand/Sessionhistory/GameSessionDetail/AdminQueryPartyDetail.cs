@@ -30,6 +30,15 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionhistory
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
+        [SdkCommandArgument("endDate")]
+        public string? EndDate { get; set; }
+
+        [SdkCommandArgument("joinability")]
+        public string? Joinability { get; set; }
+
+        [SdkCommandArgument("leaderID")]
+        public string? LeaderID { get; set; }
+
         [SdkCommandArgument("limit")]
         public long? Limit { get; set; }
 
@@ -45,6 +54,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionhistory
         [SdkCommandArgument("partyID")]
         public string? PartyID { get; set; }
 
+        [SdkCommandArgument("startDate")]
+        public string? StartDate { get; set; }
+
         [SdkCommandArgument("userID")]
         public string? UserID { get; set; }
 
@@ -59,6 +71,12 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionhistory
 
             var opBuilder = AccelByte.Sdk.Api.Sessionhistory.Operation.AdminQueryPartyDetail.Builder;
 
+            if (EndDate != null)
+                opBuilder.SetEndDate((string)EndDate);
+            if (Joinability != null)
+                opBuilder.SetJoinability((string)Joinability);
+            if (LeaderID != null)
+                opBuilder.SetLeaderID((string)LeaderID);
             if (Limit != null)
                 opBuilder.SetLimit((long)Limit);
             if (Offset != null)
@@ -69,6 +87,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Sessionhistory
                 opBuilder.SetOrderBy((string)OrderBy);
             if (PartyID != null)
                 opBuilder.SetPartyID((string)PartyID);
+            if (StartDate != null)
+                opBuilder.SetStartDate((string)StartDate);
             if (UserID != null)
                 opBuilder.SetUserID((string)UserID);
 

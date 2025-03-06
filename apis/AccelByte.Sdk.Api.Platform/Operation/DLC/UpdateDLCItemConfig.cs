@@ -129,6 +129,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             public ErrorEntity? Error400 { get; set; } = null;
 
+            public ErrorEntity? Error404 { get; set; } = null;
+
             public ErrorEntity? Error409 { get; set; } = null;
 
             public ValidationErrorEntity? Error422 { get; set; } = null;
@@ -185,6 +187,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             {
                 response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {

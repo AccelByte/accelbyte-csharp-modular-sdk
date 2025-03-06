@@ -33,6 +33,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
+        [SdkCommandArgument("featuresToCheck")]
+        public List<string>? FeaturesToCheck { get; set; }
+
         [SdkCommandArgument("force")]
         public bool? Force { get; set; }
 
@@ -50,6 +53,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 
             var opBuilder = AccelByte.Sdk.Api.Platform.Operation.DeleteItem.Builder;
 
+            if (FeaturesToCheck != null)
+                opBuilder.SetFeaturesToCheck(DeleteItemFeaturesToCheck.NewValue(FeaturesToCheck));
             if (Force != null)
                 opBuilder.SetForce((bool)Force);
             if (StoreId != null)

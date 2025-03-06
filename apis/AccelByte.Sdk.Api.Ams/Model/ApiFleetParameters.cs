@@ -22,6 +22,10 @@ namespace AccelByte.Sdk.Api.Ams.Model
         [JsonPropertyName("dsHostConfiguration")]
         public ApiDSHostConfigurationParameters? DsHostConfiguration { get; set; }
 
+        [JsonPropertyName("fallbackFleet")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? FallbackFleet { get; set; }
+
         [JsonPropertyName("imageDeploymentProfile")]
         public ApiImageDeploymentProfile? ImageDeploymentProfile { get; set; }
 

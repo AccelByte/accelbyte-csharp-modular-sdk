@@ -23,10 +23,16 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// <summary>
     /// publicUpdateProfile
     ///
+    /// 
+    /// 
+    /// ## The endpoint is going to be deprecated
+    /// 
+    /// 
     /// Updates user game profile, returns updated profile.
     /// Other detail info:
     ///         *  Returns : updated game profile
     /// </summary>
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class PublicUpdateProfile : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -76,6 +82,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 return op;
             }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public PublicUpdateProfile.Response Execute(
                 string namespace_,
                 string profileId,

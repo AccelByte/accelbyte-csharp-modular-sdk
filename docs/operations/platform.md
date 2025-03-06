@@ -54,6 +54,7 @@
 | `/platform/admin/namespaces/{namespace}/items/{itemId}/features/{feature}` | DELETE | DefeatureItem | [DefeatureItem](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/DefeatureItem.cs) | [DefeatureItem](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/DefeatureItem.cs) |
 | `/platform/admin/namespaces/{namespace}/items/{itemId}/locale` | GET | GetLocaleItem | [GetLocaleItem](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/GetLocaleItem.cs) | [GetLocaleItem](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/GetLocaleItem.cs) |
 | `/platform/admin/namespaces/{namespace}/items/{itemId}/purchase/condition` | PUT | UpdateItemPurchaseCondition | [UpdateItemPurchaseCondition](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/UpdateItemPurchaseCondition.cs) | [UpdateItemPurchaseCondition](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/UpdateItemPurchaseCondition.cs) |
+| `/platform/admin/namespaces/{namespace}/items/{itemId}/references` | GET | QueryItemReferences | [QueryItemReferences](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/QueryItemReferences.cs) | [QueryItemReferences](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/QueryItemReferences.cs) |
 | `/platform/admin/namespaces/{namespace}/items/{itemId}/return` | PUT | ReturnItem | [ReturnItem](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/ReturnItem.cs) | [ReturnItem](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/ReturnItem.cs) |
 | `/platform/public/namespaces/{namespace}/items/byAppId` | GET | PublicGetItemByAppId | [PublicGetItemByAppId](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/PublicGetItemByAppId.cs) | [PublicGetItemByAppId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/PublicGetItemByAppId.cs) |
 | `/platform/public/namespaces/{namespace}/items/byCriteria` | GET | PublicQueryItems | [PublicQueryItems](../../apis/AccelByte.Sdk.Api.Platform/Operation/Item/PublicQueryItems.cs) | [PublicQueryItems](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/Item/PublicQueryItems.cs) |
@@ -304,11 +305,19 @@
 | `/platform/admin/namespaces/{namespace}/iap/config/xbl` | PUT | UpdateXblIAPConfig | [UpdateXblIAPConfig](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/UpdateXblIAPConfig.cs) | [UpdateXblIAPConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/UpdateXblIAPConfig.cs) |
 | `/platform/admin/namespaces/{namespace}/iap/config/xbl` | DELETE | DeleteXblAPConfig | [DeleteXblAPConfig](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/DeleteXblAPConfig.cs) | [DeleteXblAPConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/DeleteXblAPConfig.cs) |
 | `/platform/admin/namespaces/{namespace}/iap/config/xbl/cert` | PUT | UpdateXblBPCertFile | [UpdateXblBPCertFile](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/UpdateXblBPCertFile.cs) | [UpdateXblBPCertFile](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/UpdateXblBPCertFile.cs) |
+| `/platform/admin/namespaces/{namespace}/iap/steam/abnormal_transactions` | GET | QueryAbnormalTransactions | [QueryAbnormalTransactions](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/QueryAbnormalTransactions.cs) | [QueryAbnormalTransactions](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/QueryAbnormalTransactions.cs) |
+| `/platform/admin/namespaces/{namespace}/iap/steam/job` | GET | AdminGetSteamJobInfo | [AdminGetSteamJobInfo](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/AdminGetSteamJobInfo.cs) | [AdminGetSteamJobInfo](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/AdminGetSteamJobInfo.cs) |
+| `/platform/admin/namespaces/{namespace}/iap/steam/job/reset` | PUT | AdminResetSteamJobTime | [AdminResetSteamJobTime](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/AdminResetSteamJobTime.cs) | [AdminResetSteamJobTime](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/AdminResetSteamJobTime.cs) |
+| `/platform/admin/namespaces/{namespace}/iap/steam/orders/{iapOrderNo}/refund` | PUT | AdminRefundIAPOrder | [AdminRefundIAPOrder](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/AdminRefundIAPOrder.cs) | [AdminRefundIAPOrder](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/AdminRefundIAPOrder.cs) |
+| `/platform/admin/namespaces/{namespace}/iap/steam/report/histories` | GET | QuerySteamReportHistories | [QuerySteamReportHistories](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/QuerySteamReportHistories.cs) | [QuerySteamReportHistories](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/QuerySteamReportHistories.cs) |
 | `/platform/admin/namespaces/{namespace}/iap/{iapOrderNo}/consumedetails` | GET | GetIAPOrderConsumeDetails | [GetIAPOrderConsumeDetails](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/GetIAPOrderConsumeDetails.cs) | [GetIAPOrderConsumeDetails](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/GetIAPOrderConsumeDetails.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/iap` | GET | QueryUserIAPOrders | [QueryUserIAPOrders](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/QueryUserIAPOrders.cs) | [QueryUserIAPOrders](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/QueryUserIAPOrders.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/iap/all` | GET | QueryAllUserIAPOrders | [QueryAllUserIAPOrders](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/QueryAllUserIAPOrders.cs) | [QueryAllUserIAPOrders](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/QueryAllUserIAPOrders.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/iap/consume/history` | GET | QueryUserIAPConsumeHistory | [QueryUserIAPConsumeHistory](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/QueryUserIAPConsumeHistory.cs) | [QueryUserIAPConsumeHistory](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/QueryUserIAPConsumeHistory.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/iap/mock/receipt` | PUT | MockFulfillIAPItem | [MockFulfillIAPItem](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/MockFulfillIAPItem.cs) | [MockFulfillIAPItem](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/MockFulfillIAPItem.cs) |
+| `/platform/admin/namespaces/{namespace}/users/{userId}/iap/orders/{iapOrderNo}/line_items` | GET | AdminGetIAPOrderLineItems | [AdminGetIAPOrderLineItems](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/AdminGetIAPOrderLineItems.cs) | [AdminGetIAPOrderLineItems](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/AdminGetIAPOrderLineItems.cs) |
+| `/platform/admin/namespaces/{namespace}/users/{userId}/iap/steam/syncAbnormalTransaction` | PUT | AdminSyncSteamAbnormalTransaction | [AdminSyncSteamAbnormalTransaction](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/AdminSyncSteamAbnormalTransaction.cs) | [AdminSyncSteamAbnormalTransaction](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/AdminSyncSteamAbnormalTransaction.cs) |
+| `/platform/admin/namespaces/{namespace}/users/{userId}/iap/steam/syncByTransaction` | PUT | AdminSyncSteamIAPByTransaction | [AdminSyncSteamIAPByTransaction](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/AdminSyncSteamIAPByTransaction.cs) | [AdminSyncSteamIAPByTransaction](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/AdminSyncSteamIAPByTransaction.cs) |
 | `/platform/public/namespaces/{namespace}/iap/apple/config/version` | GET | GetAppleConfigVersion | [GetAppleConfigVersion](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/GetAppleConfigVersion.cs) | [GetAppleConfigVersion](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/GetAppleConfigVersion.cs) |
 | `/platform/public/namespaces/{namespace}/iap/item/mapping` | GET | GetIAPItemMapping | [GetIAPItemMapping](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/GetIAPItemMapping.cs) | [GetIAPItemMapping](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/GetIAPItemMapping.cs) |
 | `/platform/public/namespaces/{namespace}/users/me/iap/twitch/sync` | PUT | SyncTwitchDropsEntitlement | [SyncTwitchDropsEntitlement](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/SyncTwitchDropsEntitlement.cs) | [SyncTwitchDropsEntitlement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/SyncTwitchDropsEntitlement.cs) |
@@ -319,6 +328,8 @@
 | `/platform/public/namespaces/{namespace}/users/{userId}/iap/psn/sync` | PUT | PublicReconcilePlayStationStore | [PublicReconcilePlayStationStore](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/PublicReconcilePlayStationStore.cs) | [PublicReconcilePlayStationStore](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/PublicReconcilePlayStationStore.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/iap/psn/sync/multiServiceLabels` | PUT | PublicReconcilePlayStationStoreWithMultipleServiceLabels | [PublicReconcilePlayStationStoreWithMultipleServiceLabels](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/PublicReconcilePlayStationStoreWithMultipleServiceLabels.cs) | [PublicReconcilePlayStationStoreWithMultipleServiceLabels](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/PublicReconcilePlayStationStoreWithMultipleServiceLabels.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/iap/steam/sync` | PUT | SyncSteamInventory | [SyncSteamInventory](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/SyncSteamInventory.cs) | [SyncSteamInventory](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/SyncSteamInventory.cs) |
+| `/platform/public/namespaces/{namespace}/users/{userId}/iap/steam/syncAbnormalTransaction` | PUT | SyncSteamAbnormalTransaction | [SyncSteamAbnormalTransaction](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/SyncSteamAbnormalTransaction.cs) | [SyncSteamAbnormalTransaction](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/SyncSteamAbnormalTransaction.cs) |
+| `/platform/public/namespaces/{namespace}/users/{userId}/iap/steam/syncByTransaction` | PUT | SyncSteamIAPByTransaction | [SyncSteamIAPByTransaction](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/SyncSteamIAPByTransaction.cs) | [SyncSteamIAPByTransaction](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/SyncSteamIAPByTransaction.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/iap/twitch/sync` | PUT | SyncTwitchDropsEntitlement1 | [SyncTwitchDropsEntitlement1](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/SyncTwitchDropsEntitlement1.cs) | [SyncTwitchDropsEntitlement1](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/SyncTwitchDropsEntitlement1.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/iap/xbl/sync` | PUT | SyncXboxInventory | [SyncXboxInventory](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/SyncXboxInventory.cs) | [SyncXboxInventory](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/SyncXboxInventory.cs) |
 | `/platform/v2/public/namespaces/{namespace}/users/{userId}/iap/apple/receipt` | PUT | V2PublicFulfillAppleIAPItem | [V2PublicFulfillAppleIAPItem](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/V2PublicFulfillAppleIAPItem.cs) | [V2PublicFulfillAppleIAPItem](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/V2PublicFulfillAppleIAPItem.cs) |
@@ -874,6 +885,7 @@
 | `CategoryCreate` | [CategoryCreate](../../apis/AccelByte.Sdk.Api.Platform/Model/CategoryCreate.cs) |
 | `CategoryInfo` | [CategoryInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/CategoryInfo.cs) |
 | `CategoryUpdate` | [CategoryUpdate](../../apis/AccelByte.Sdk.Api.Platform/Model/CategoryUpdate.cs) |
+| `ChangeStatusItemRequest` | [ChangeStatusItemRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/ChangeStatusItemRequest.cs) |
 | `CheckoutConfig` | [CheckoutConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/CheckoutConfig.cs) |
 | `ClawbackInfo` | [ClawbackInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ClawbackInfo.cs) |
 | `ClientRequestParameter` | [ClientRequestParameter](../../apis/AccelByte.Sdk.Api.Platform/Model/ClientRequestParameter.cs) |
@@ -958,6 +970,7 @@
 | `ExportStoreToCSVRequest` | [ExportStoreToCSVRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/ExportStoreToCSVRequest.cs) |
 | `ExtensionFulfillmentSummary` | [ExtensionFulfillmentSummary](../../apis/AccelByte.Sdk.Api.Platform/Model/ExtensionFulfillmentSummary.cs) |
 | `ExternalPaymentOrderCreate` | [ExternalPaymentOrderCreate](../../apis/AccelByte.Sdk.Api.Platform/Model/ExternalPaymentOrderCreate.cs) |
+| `FeatureReference` | [FeatureReference](../../apis/AccelByte.Sdk.Api.Platform/Model/FeatureReference.cs) |
 | `FieldValidationError` | [FieldValidationError](../../apis/AccelByte.Sdk.Api.Platform/Model/FieldValidationError.cs) |
 | `FixedPeriodRotationConfig` | [FixedPeriodRotationConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/FixedPeriodRotationConfig.cs) |
 | `FulFillItemPayload` | [FulFillItemPayload](../../apis/AccelByte.Sdk.Api.Platform/Model/FulFillItemPayload.cs) |
@@ -1004,7 +1017,9 @@
 | `IAPItemMappingInfo` | [IAPItemMappingInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/IAPItemMappingInfo.cs) |
 | `IAPOrderConsumeDetailInfo` | [IAPOrderConsumeDetailInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/IAPOrderConsumeDetailInfo.cs) |
 | `IAPOrderInfo` | [IAPOrderInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/IAPOrderInfo.cs) |
+| `IAPOrderLineItemInfo` | [IAPOrderLineItemInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/IAPOrderLineItemInfo.cs) |
 | `IAPOrderPagingSlicedResult` | [IAPOrderPagingSlicedResult](../../apis/AccelByte.Sdk.Api.Platform/Model/IAPOrderPagingSlicedResult.cs) |
+| `IAPOrderShortInfo` | [IAPOrderShortInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/IAPOrderShortInfo.cs) |
 | `Image` | [Image](../../apis/AccelByte.Sdk.Api.Platform/Model/Image.cs) |
 | `ImportErrorDetails` | [ImportErrorDetails](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportErrorDetails.cs) |
 | `ImportStoreAppInfo` | [ImportStoreAppInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ImportStoreAppInfo.cs) |
@@ -1023,6 +1038,7 @@
 | `ItemAcquireRequest` | [ItemAcquireRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/ItemAcquireRequest.cs) |
 | `ItemAcquireResult` | [ItemAcquireResult](../../apis/AccelByte.Sdk.Api.Platform/Model/ItemAcquireResult.cs) |
 | `ItemCreate` | [ItemCreate](../../apis/AccelByte.Sdk.Api.Platform/Model/ItemCreate.cs) |
+| `ItemDependency` | [ItemDependency](../../apis/AccelByte.Sdk.Api.Platform/Model/ItemDependency.cs) |
 | `ItemDynamicDataInfo` | [ItemDynamicDataInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ItemDynamicDataInfo.cs) |
 | `ItemId` | [ItemId](../../apis/AccelByte.Sdk.Api.Platform/Model/ItemId.cs) |
 | `ItemInfo` | [ItemInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ItemInfo.cs) |
@@ -1030,6 +1046,7 @@
 | `ItemPagingSlicedResult` | [ItemPagingSlicedResult](../../apis/AccelByte.Sdk.Api.Platform/Model/ItemPagingSlicedResult.cs) |
 | `ItemPurchaseConditionValidateRequest` | [ItemPurchaseConditionValidateRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/ItemPurchaseConditionValidateRequest.cs) |
 | `ItemPurchaseConditionValidateResult` | [ItemPurchaseConditionValidateResult](../../apis/AccelByte.Sdk.Api.Platform/Model/ItemPurchaseConditionValidateResult.cs) |
+| `ItemReference` | [ItemReference](../../apis/AccelByte.Sdk.Api.Platform/Model/ItemReference.cs) |
 | `ItemReturnRequest` | [ItemReturnRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/ItemReturnRequest.cs) |
 | `ItemRevocation` | [ItemRevocation](../../apis/AccelByte.Sdk.Api.Platform/Model/ItemRevocation.cs) |
 | `ItemSnapshot` | [ItemSnapshot](../../apis/AccelByte.Sdk.Api.Platform/Model/ItemSnapshot.cs) |
@@ -1051,6 +1068,7 @@
 | `LootBoxPluginConfigUpdate` | [LootBoxPluginConfigUpdate](../../apis/AccelByte.Sdk.Api.Platform/Model/LootBoxPluginConfigUpdate.cs) |
 | `LootBoxReward` | [LootBoxReward](../../apis/AccelByte.Sdk.Api.Platform/Model/LootBoxReward.cs) |
 | `MockIAPReceipt` | [MockIAPReceipt](../../apis/AccelByte.Sdk.Api.Platform/Model/MockIAPReceipt.cs) |
+| `ModuleReference` | [ModuleReference](../../apis/AccelByte.Sdk.Api.Platform/Model/ModuleReference.cs) |
 | `NeonPayConfig` | [NeonPayConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/NeonPayConfig.cs) |
 | `NotificationPagingSlicedResult` | [NotificationPagingSlicedResult](../../apis/AccelByte.Sdk.Api.Platform/Model/NotificationPagingSlicedResult.cs) |
 | `NotificationProcessResult` | [NotificationProcessResult](../../apis/AccelByte.Sdk.Api.Platform/Model/NotificationProcessResult.cs) |
@@ -1158,6 +1176,7 @@
 | `RegionDataItemDTO` | [RegionDataItemDTO](../../apis/AccelByte.Sdk.Api.Platform/Model/RegionDataItemDTO.cs) |
 | `RequestHistory` | [RequestHistory](../../apis/AccelByte.Sdk.Api.Platform/Model/RequestHistory.cs) |
 | `Requirement` | [Requirement](../../apis/AccelByte.Sdk.Api.Platform/Model/Requirement.cs) |
+| `ResetJobRequest` | [ResetJobRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/ResetJobRequest.cs) |
 | `RevocationConfigInfo` | [RevocationConfigInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/RevocationConfigInfo.cs) |
 | `RevocationConfigUpdate` | [RevocationConfigUpdate](../../apis/AccelByte.Sdk.Api.Platform/Model/RevocationConfigUpdate.cs) |
 | `RevocationError` | [RevocationError](../../apis/AccelByte.Sdk.Api.Platform/Model/RevocationError.cs) |
@@ -1202,12 +1221,16 @@
 | `SimpleWallet` | [SimpleWallet](../../apis/AccelByte.Sdk.Api.Platform/Model/SimpleWallet.cs) |
 | `Slide` | [Slide](../../apis/AccelByte.Sdk.Api.Platform/Model/Slide.cs) |
 | `StackableEntitlementInfo` | [StackableEntitlementInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/StackableEntitlementInfo.cs) |
+| `SteamAbnormalTransactionPagingSlicedResult` | [SteamAbnormalTransactionPagingSlicedResult](../../apis/AccelByte.Sdk.Api.Platform/Model/SteamAbnormalTransactionPagingSlicedResult.cs) |
 | `SteamAchievement` | [SteamAchievement](../../apis/AccelByte.Sdk.Api.Platform/Model/SteamAchievement.cs) |
 | `SteamAchievementUpdateRequest` | [SteamAchievementUpdateRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/SteamAchievementUpdateRequest.cs) |
 | `SteamDLCSyncRequest` | [SteamDLCSyncRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/SteamDLCSyncRequest.cs) |
 | `SteamIAPConfig` | [SteamIAPConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/SteamIAPConfig.cs) |
 | `SteamIAPConfigInfo` | [SteamIAPConfigInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/SteamIAPConfigInfo.cs) |
 | `SteamIAPConfigRequest` | [SteamIAPConfigRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/SteamIAPConfigRequest.cs) |
+| `SteamReportInfoPagingSlicedResult` | [SteamReportInfoPagingSlicedResult](../../apis/AccelByte.Sdk.Api.Platform/Model/SteamReportInfoPagingSlicedResult.cs) |
+| `SteamReportJobInfo` | [SteamReportJobInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/SteamReportJobInfo.cs) |
+| `SteamSyncByTransactionRequest` | [SteamSyncByTransactionRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/SteamSyncByTransactionRequest.cs) |
 | `SteamSyncRequest` | [SteamSyncRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/SteamSyncRequest.cs) |
 | `StoreBackupInfo` | [StoreBackupInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/StoreBackupInfo.cs) |
 | `StoreCreate` | [StoreCreate](../../apis/AccelByte.Sdk.Api.Platform/Model/StoreCreate.cs) |

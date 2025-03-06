@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Platform.Model
 {
@@ -15,7 +17,45 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonPropertyName("enableInventoryCheck")]
         public bool? EnableInventoryCheck { get; set; }
 
+        [JsonPropertyName("itemDeletionCheckConfig")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public List<CatalogConfigInfoItemDeletionCheckConfig>? ItemDeletionCheckConfig { get; set; }
+
     }
 
 
+
+    public class CatalogConfigInfoItemDeletionCheckConfig : StringEnum<CatalogConfigInfoItemDeletionCheckConfig>
+    {
+        public static readonly CatalogConfigInfoItemDeletionCheckConfig CAMPAIGN
+            = new CatalogConfigInfoItemDeletionCheckConfig("CAMPAIGN");
+
+        public static readonly CatalogConfigInfoItemDeletionCheckConfig CATALOG
+            = new CatalogConfigInfoItemDeletionCheckConfig("CATALOG");
+
+        public static readonly CatalogConfigInfoItemDeletionCheckConfig DLC
+            = new CatalogConfigInfoItemDeletionCheckConfig("DLC");
+
+        public static readonly CatalogConfigInfoItemDeletionCheckConfig ENTITLEMENT
+            = new CatalogConfigInfoItemDeletionCheckConfig("ENTITLEMENT");
+
+        public static readonly CatalogConfigInfoItemDeletionCheckConfig IAP
+            = new CatalogConfigInfoItemDeletionCheckConfig("IAP");
+
+        public static readonly CatalogConfigInfoItemDeletionCheckConfig REWARD
+            = new CatalogConfigInfoItemDeletionCheckConfig("REWARD");
+
+
+        public static implicit operator CatalogConfigInfoItemDeletionCheckConfig(string value)
+        {
+            return NewValue(value);
+        }
+
+        public CatalogConfigInfoItemDeletionCheckConfig(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }
