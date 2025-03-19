@@ -448,7 +448,7 @@ var updateSecret = _Sdk.GetCsmApi().ConfigurationV2.UpdateSecretV2Op
 ### Delete env secret
 
 ```csharp
-_Sdk.GetCsmApi().ConfigurationV2.DeleteVariableV2Op
+_Sdk.GetCsmApi().ConfigurationV2.DeleteSecretV2Op
     .Execute(appName, secretId, _Sdk.Namespace)
     .EnsureSuccess();
 ```
@@ -523,33 +523,6 @@ _Sdk.GetGametelemetryApi().GametelemetryOperations.ProtectedSaveEventsGameTeleme
             }
         }
     })
-    .EnsureSuccess();
-```
-
-### Update steam's playtime
-
-```csharp
-try
-{
-    _Sdk.GetGametelemetryApi().GametelemetryOperations.ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePutOp
-        .Execute(playTime, steamId)
-        .EnsureSuccess();
-}
-catch (Exception e)
-{
-    if (e.Message.ToLower().Contains("user not found"))
-    {
-        Assert.Ignore("User not found.");
-    }
-}
-```
-
-### Get steam's playtime
-
-```csharp
-PlayTimeResponse resGet = _Sdk.GetGametelemetryApi().GametelemetryOperations
-    .ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGetOp
-    .Execute(steamId)
     .EnsureSuccess();
 ```
 ## GDPR
@@ -689,7 +662,8 @@ ModelUserCreateRequestV3 newUser = new ModelUserCreateRequestV3()
     Password = user_password,
     DisplayName = "CSharp Server SDK Test",
     Country = "ID",
-    DateOfBirth = "1995-01-10"
+    DateOfBirth = "1995-01-10",
+    UniqueDisplayName = user_name
 };
 
 ModelUserCreateResponseV3 cuResp = _Sdk.GetIamApi().Users.PublicCreateUserV3Op
@@ -708,7 +682,8 @@ AccountCreateUserRequestV4 newUser = new AccountCreateUserRequestV4()
     DisplayName = "CSharp Server SDK Test",
     Username = user_name,
     Country = "ID",
-    DateOfBirth = "1995-01-10"
+    DateOfBirth = "1995-01-10",
+    UniqueDisplayName = user_name
 };
 
 AccountCreateUserResponseV4 cuResp = _Sdk.GetIamApi().UsersV4.PublicCreateUserV4Op
