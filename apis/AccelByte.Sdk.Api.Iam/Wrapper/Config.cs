@@ -45,6 +45,17 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        public PublicGetSystemConfigV3.PublicGetSystemConfigV3Builder PublicGetSystemConfigV3Op
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicGetSystemConfigV3.PublicGetSystemConfigV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public PublicGetConfigValueV3.PublicGetConfigValueV3Builder PublicGetConfigValueV3Op
         {
             get
@@ -87,6 +98,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse<T1>(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicGetSystemConfigV3.Response PublicGetSystemConfigV3(PublicGetSystemConfigV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicGetSystemConfigV3.Response> PublicGetSystemConfigV3Async(PublicGetSystemConfigV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
                     response.Code,
                     response.ContentType,
                     response.Payload);

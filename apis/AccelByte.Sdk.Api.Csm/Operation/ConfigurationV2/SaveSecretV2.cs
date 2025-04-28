@@ -26,12 +26,12 @@ namespace AccelByte.Sdk.Api.Csm.Operation
     /// Required permission : `ADMIN:NAMESPACE:{namespace}:EXTEND:SECRET [CREATE]`
     /// 
     /// Save an environment secret.
+    /// Secret will always be masked.
     /// Request body:
     /// - configName : environment secret name - Required.
     /// - source : source of the configuration value (plaintext or ssm) - Required.
     /// - value : configuration value - Required.
     /// - description : description of the configuration - Optional.
-    /// - applyMask : mask the value in the Helm manifest for sensitive information (true or false) - Optional.
     /// </summary>
     public class SaveSecretV2 : AccelByte.Sdk.Core.Operation
     {
@@ -59,7 +59,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
 
             public SaveSecretV2 Build(
-                ApimodelSaveConfigurationV2Request body,
+                ApimodelSaveSecretConfigurationV2Request body,
                 string app,
                 string namespace_
             )
@@ -75,7 +75,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
 
             public SaveSecretV2.Response Execute(
-                ApimodelSaveConfigurationV2Request body,
+                ApimodelSaveSecretConfigurationV2Request body,
                 string app,
                 string namespace_
             )
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.Payload);
             }
             public async Task<SaveSecretV2.Response> ExecuteAsync(
-                ApimodelSaveConfigurationV2Request body,
+                ApimodelSaveSecretConfigurationV2Request body,
                 string app,
                 string namespace_
             )
@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         }
 
         private SaveSecretV2(SaveSecretV2Builder builder,
-            ApimodelSaveConfigurationV2Request body,
+            ApimodelSaveSecretConfigurationV2Request body,
             string app,
             string namespace_
         )
@@ -159,7 +159,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         public SaveSecretV2(
             string app,
             string namespace_,
-            Model.ApimodelSaveConfigurationV2Request body
+            Model.ApimodelSaveSecretConfigurationV2Request body
         )
         {
             PathParams["app"] = app;

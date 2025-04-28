@@ -36,6 +36,8 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             : OperationBuilder<GetUserRankingPublicV3Builder>
         {
 
+            public long? PreviousVersion { get; set; }
+
 
 
 
@@ -47,6 +49,12 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                 _Sdk = sdk;
             }
 
+
+            public GetUserRankingPublicV3Builder SetPreviousVersion(long _previousVersion)
+            {
+                PreviousVersion = _previousVersion;
+                return this;
+            }
 
 
 
@@ -122,6 +130,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
 
+            if (builder.PreviousVersion != null) QueryParams["previousVersion"] = Convert.ToString(builder.PreviousVersion)!;
 
 
 
@@ -135,6 +144,8 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #region Response Part        
         public class Response : ApiResponse<Model.ModelsUserRankingResponseV3>
         {
+
+            public ResponseErrorResponse? Error400 { get; set; } = null;
 
             public ResponseErrorResponse? Error401 { get; set; } = null;
 
@@ -153,13 +164,15 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         public GetUserRankingPublicV3(
             string leaderboardCode,
             string namespace_,
-            string userId
+            string userId,
+            long? previousVersion
         )
         {
             PathParams["leaderboardCode"] = leaderboardCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
 
+            if (previousVersion != null) QueryParams["previousVersion"] = Convert.ToString(previousVersion)!;
 
 
 
@@ -193,6 +206,11 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             {
                 response.Data = JsonSerializer.Deserialize<Model.ModelsUserRankingResponseV3>(payload, ResponseJsonOptions);
                 response.IsSuccess = true;
+            }
+            else if (code == (HttpStatusCode)400)
+            {
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {

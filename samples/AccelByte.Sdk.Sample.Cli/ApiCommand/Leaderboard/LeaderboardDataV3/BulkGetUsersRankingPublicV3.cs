@@ -33,6 +33,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
+        [SdkCommandArgument("previousVersion")]
+        public long? PreviousVersion { get; set; }
+
         [SdkCommandData("body")]
         public ModelsBulkUserIDsRequest Body { get; set; } = new ModelsBulkUserIDsRequest();
 
@@ -47,6 +50,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
 
             var opBuilder = AccelByte.Sdk.Api.Leaderboard.Operation.BulkGetUsersRankingPublicV3.Builder;
 
+            if (PreviousVersion != null)
+                opBuilder.SetPreviousVersion((long)PreviousVersion);
 
 
 

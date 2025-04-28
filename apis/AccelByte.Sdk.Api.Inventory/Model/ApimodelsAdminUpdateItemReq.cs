@@ -28,6 +28,7 @@ namespace AccelByte.Sdk.Api.Inventory.Model
         public List<string>? Tags { get; set; }
 
         [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Type { get; set; }
 
     }
@@ -50,6 +51,7 @@ namespace AccelByte.Sdk.Api.Inventory.Model
         public List<string>? Tags { get; set; }
 
         [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Type { get; set; }
 
     }

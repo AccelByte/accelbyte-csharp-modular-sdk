@@ -36,6 +36,8 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             : OperationBuilder<BulkGetUsersRankingPublicV3Builder>
         {
 
+            public long? PreviousVersion { get; set; }
+
 
 
 
@@ -47,6 +49,12 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                 _Sdk = sdk;
             }
 
+
+            public BulkGetUsersRankingPublicV3Builder SetPreviousVersion(long _previousVersion)
+            {
+                PreviousVersion = _previousVersion;
+                return this;
+            }
 
 
 
@@ -121,6 +129,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             PathParams["leaderboardCode"] = leaderboardCode;
             PathParams["namespace"] = namespace_;
 
+            if (builder.PreviousVersion != null) QueryParams["previousVersion"] = Convert.ToString(builder.PreviousVersion)!;
 
 
 
@@ -155,12 +164,14 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         public BulkGetUsersRankingPublicV3(
             string leaderboardCode,
             string namespace_,
+            long? previousVersion,
             Model.ModelsBulkUserIDsRequest body
         )
         {
             PathParams["leaderboardCode"] = leaderboardCode;
             PathParams["namespace"] = namespace_;
 
+            if (previousVersion != null) QueryParams["previousVersion"] = Convert.ToString(previousVersion)!;
 
 
 

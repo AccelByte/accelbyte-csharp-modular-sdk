@@ -45,6 +45,17 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     return opBuilder;
             }
         }
+        public AdminBulkUnlockAchievement.AdminBulkUnlockAchievementBuilder AdminBulkUnlockAchievementOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminBulkUnlockAchievement.AdminBulkUnlockAchievementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public AdminResetAchievement.AdminResetAchievementBuilder AdminResetAchievementOp
         {
             get
@@ -78,6 +89,17 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     return opBuilder;
             }
         }
+        public PublicBulkUnlockAchievement.PublicBulkUnlockAchievementBuilder PublicBulkUnlockAchievementOp
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicBulkUnlockAchievement.PublicBulkUnlockAchievementBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public PublicUnlockAchievement.PublicUnlockAchievementBuilder PublicUnlockAchievementOp
         {
             get
@@ -100,6 +122,22 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.Payload);
         }
         public async Task<AdminListUserAchievements.Response> AdminListUserAchievementsAsync(AdminListUserAchievements input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminBulkUnlockAchievement.Response AdminBulkUnlockAchievement(AdminBulkUnlockAchievement input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminBulkUnlockAchievement.Response> AdminBulkUnlockAchievementAsync(AdminBulkUnlockAchievement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -148,6 +186,22 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
                     response.Payload);
         }
         public async Task<PublicListUserAchievements.Response> PublicListUserAchievementsAsync(PublicListUserAchievements input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicBulkUnlockAchievement.Response PublicBulkUnlockAchievement(PublicBulkUnlockAchievement input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicBulkUnlockAchievement.Response> PublicBulkUnlockAchievementAsync(PublicBulkUnlockAchievement input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

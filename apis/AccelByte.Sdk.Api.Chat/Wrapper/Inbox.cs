@@ -89,6 +89,17 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     return opBuilder;
             }
         }
+        public AdminListKafkaTopic.AdminListKafkaTopicBuilder AdminListKafkaTopicOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminListKafkaTopic.AdminListKafkaTopicBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public AdminDeleteInboxMessage.AdminDeleteInboxMessageBuilder AdminDeleteInboxMessageOp
         {
             get
@@ -286,6 +297,22 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.Payload);
         }
         public async Task<AdminGetCategorySchema.Response> AdminGetCategorySchemaAsync(AdminGetCategorySchema input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminListKafkaTopic.Response AdminListKafkaTopic(AdminListKafkaTopic input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminListKafkaTopic.Response> AdminListKafkaTopicAsync(AdminListKafkaTopic input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

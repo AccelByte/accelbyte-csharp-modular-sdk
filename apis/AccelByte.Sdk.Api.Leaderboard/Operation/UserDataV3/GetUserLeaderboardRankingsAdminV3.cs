@@ -40,6 +40,8 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
             public long? Offset { get; set; }
 
+            public long? PreviousVersion { get; set; }
+
 
 
 
@@ -61,6 +63,12 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             public GetUserLeaderboardRankingsAdminV3Builder SetOffset(long _offset)
             {
                 Offset = _offset;
+                return this;
+            }
+
+            public GetUserLeaderboardRankingsAdminV3Builder SetPreviousVersion(long _previousVersion)
+            {
+                PreviousVersion = _previousVersion;
                 return this;
             }
 
@@ -132,6 +140,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
+            if (builder.PreviousVersion != null) QueryParams["previousVersion"] = Convert.ToString(builder.PreviousVersion)!;
 
 
 
@@ -145,6 +154,8 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #region Response Part        
         public class Response : ApiResponse<Model.ModelsGetAllUserLeaderboardsRespV3>
         {
+
+            public ResponseErrorResponse? Error400 { get; set; } = null;
 
             public ResponseErrorResponse? Error401 { get; set; } = null;
 
@@ -162,7 +173,8 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             string namespace_,
             string userId,
             long? limit,
-            long? offset
+            long? offset,
+            long? previousVersion
         )
         {
             PathParams["namespace"] = namespace_;
@@ -170,6 +182,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
+            if (previousVersion != null) QueryParams["previousVersion"] = Convert.ToString(previousVersion)!;
 
 
 
@@ -203,6 +216,11 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             {
                 response.Data = JsonSerializer.Deserialize<Model.ModelsGetAllUserLeaderboardsRespV3>(payload, ResponseJsonOptions);
                 response.IsSuccess = true;
+            }
+            else if (code == (HttpStatusCode)400)
+            {
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {

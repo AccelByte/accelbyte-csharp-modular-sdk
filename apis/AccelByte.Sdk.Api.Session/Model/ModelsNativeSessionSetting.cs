@@ -7,11 +7,18 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Session.Model
 {
     public class ModelsNativeSessionSetting : AccelByte.Sdk.Core.Model
     {
+        [JsonPropertyName("PSNDisableSystemUIMenu")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public List<ModelsNativeSessionSettingPSNDisableSystemUIMenu>? PSNDisableSystemUIMenu { get; set; }
+
         [JsonPropertyName("PSNServiceLabel")]
         public int? PSNServiceLabel { get; set; }
 
@@ -49,6 +56,11 @@ namespace AccelByte.Sdk.Api.Session.Model
 
     public class ModelsNativeSessionSetting<T1> : AccelByte.Sdk.Core.Model
     {
+        [JsonPropertyName("PSNDisableSystemUIMenu")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonStringEnum]
+        public List<ModelsNativeSessionSettingPSNDisableSystemUIMenu>? PSNDisableSystemUIMenu { get; set; }
+
         [JsonPropertyName("PSNServiceLabel")]
         public int? PSNServiceLabel { get; set; }
 
@@ -84,4 +96,31 @@ namespace AccelByte.Sdk.Api.Session.Model
 
     }
 
+
+    public class ModelsNativeSessionSettingPSNDisableSystemUIMenu : StringEnum<ModelsNativeSessionSettingPSNDisableSystemUIMenu>
+    {
+        public static readonly ModelsNativeSessionSettingPSNDisableSystemUIMenu KICK
+            = new ModelsNativeSessionSettingPSNDisableSystemUIMenu("KICK");
+
+        public static readonly ModelsNativeSessionSettingPSNDisableSystemUIMenu PROMOTETOLEADER
+            = new ModelsNativeSessionSettingPSNDisableSystemUIMenu("PROMOTE_TO_LEADER");
+
+        public static readonly ModelsNativeSessionSettingPSNDisableSystemUIMenu UPDATEINVITABLEUSERTYPE
+            = new ModelsNativeSessionSettingPSNDisableSystemUIMenu("UPDATE_INVITABLE_USER_TYPE");
+
+        public static readonly ModelsNativeSessionSettingPSNDisableSystemUIMenu UPDATEJOINABLEUSERTYPE
+            = new ModelsNativeSessionSettingPSNDisableSystemUIMenu("UPDATE_JOINABLE_USER_TYPE");
+
+
+        public static implicit operator ModelsNativeSessionSettingPSNDisableSystemUIMenu(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ModelsNativeSessionSettingPSNDisableSystemUIMenu(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

@@ -945,6 +945,17 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
+        public AdminCursorGetUserV3.AdminCursorGetUserV3Builder AdminCursorGetUserV3Op
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminCursorGetUserV3.AdminCursorGetUserV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public AdminInviteUserV3.AdminInviteUserV3Builder AdminInviteUserV3Op
         {
             get
@@ -1936,6 +1947,17 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             get
             {
                 var opBuilder = new Operation.PublicValidateUserByUserIDAndPasswordV3.PublicValidateUserByUserIDAndPasswordV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public PublicForgotPasswordWithoutNamespaceV3.PublicForgotPasswordWithoutNamespaceV3Builder PublicForgotPasswordWithoutNamespaceV3Op
+        {
+            get
+            {
+                var opBuilder = new Operation.PublicForgotPasswordWithoutNamespaceV3.PublicForgotPasswordWithoutNamespaceV3Builder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -3467,6 +3489,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public AdminCursorGetUserV3.Response AdminCursorGetUserV3(AdminCursorGetUserV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminCursorGetUserV3.Response> AdminCursorGetUserV3Async(AdminCursorGetUserV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public AdminInviteUserV3.Response AdminInviteUserV3(AdminInviteUserV3 input)
         {
             var response = _sdk.RunRequest(input);
@@ -4972,6 +5010,22 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.Payload);
         }
         public async Task<PublicValidateUserByUserIDAndPasswordV3.Response> PublicValidateUserByUserIDAndPasswordV3Async(PublicValidateUserByUserIDAndPasswordV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public PublicForgotPasswordWithoutNamespaceV3.Response PublicForgotPasswordWithoutNamespaceV3(PublicForgotPasswordWithoutNamespaceV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<PublicForgotPasswordWithoutNamespaceV3.Response> PublicForgotPasswordWithoutNamespaceV3Async(PublicForgotPasswordWithoutNamespaceV3 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -25,6 +25,7 @@ namespace AccelByte.Sdk.Api.Seasonpass
 {
     public static class SeasonpassErrors
     {
+        public static readonly ApiError Error20001 = new ApiError("20001", "Unauthorized");
         public static readonly ApiError Error20002 = new ApiError("20002", "validation error");
         public static readonly ApiError Error20026 = new ApiError("20026", "publisher namespace not allowed");
         public static readonly ApiError Error30141 = new ApiError("30141", "Store [{storeId}] does not exist in namespace [{namespace}]");

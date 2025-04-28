@@ -18,6 +18,10 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? PSNBaseURL { get; set; }
 
+        [JsonPropertyName("amsClaimTimeoutMinutes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? AmsClaimTimeoutMinutes { get; set; }
+
         [JsonPropertyName("appName")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? AppName { get; set; }
@@ -146,6 +150,10 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonPropertyName("PSNBaseURL")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? PSNBaseURL { get; set; }
+
+        [JsonPropertyName("amsClaimTimeoutMinutes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? AmsClaimTimeoutMinutes { get; set; }
 
         [JsonPropertyName("appName")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

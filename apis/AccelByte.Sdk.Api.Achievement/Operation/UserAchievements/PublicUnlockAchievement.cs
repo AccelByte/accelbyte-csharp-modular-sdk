@@ -141,6 +141,8 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
             public ResponseError? Error401 { get; set; } = null;
 
+            public ResponseError? Error404 { get; set; } = null;
+
             public ResponseError? Error422 { get; set; } = null;
 
             public ResponseError? Error500 { get; set; } = null;
@@ -198,6 +200,12 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             {
                 response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
 

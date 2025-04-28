@@ -130,6 +130,8 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
             public ResponseError? Error403 { get; set; } = null;
 
+            public ResponseError? Error404 { get; set; } = null;
+
             public ResponseError? Error500 { get; set; } = null;
 
 
@@ -189,6 +191,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             {
                 response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {

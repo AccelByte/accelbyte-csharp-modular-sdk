@@ -47,9 +47,11 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 | `/achievement/v1/admin/namespaces/{namespace}/users/{userId}/achievements` | GET | AdminListUserAchievements | [AdminListUserAchievements](../../apis/AccelByte.Sdk.Api.Achievement/Operation/UserAchievements/AdminListUserAchievements.cs) | [AdminListUserAchievements](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Achievement/UserAchievements/AdminListUserAchievements.cs) |
+| `/achievement/v1/admin/namespaces/{namespace}/users/{userId}/achievements/bulkUnlock` | PUT | AdminBulkUnlockAchievement | [AdminBulkUnlockAchievement](../../apis/AccelByte.Sdk.Api.Achievement/Operation/UserAchievements/AdminBulkUnlockAchievement.cs) | [AdminBulkUnlockAchievement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Achievement/UserAchievements/AdminBulkUnlockAchievement.cs) |
 | `/achievement/v1/admin/namespaces/{namespace}/users/{userId}/achievements/{achievementCode}/reset` | DELETE | AdminResetAchievement | [AdminResetAchievement](../../apis/AccelByte.Sdk.Api.Achievement/Operation/UserAchievements/AdminResetAchievement.cs) | [AdminResetAchievement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Achievement/UserAchievements/AdminResetAchievement.cs) |
 | `/achievement/v1/admin/namespaces/{namespace}/users/{userId}/achievements/{achievementCode}/unlock` | PUT | AdminUnlockAchievement | [AdminUnlockAchievement](../../apis/AccelByte.Sdk.Api.Achievement/Operation/UserAchievements/AdminUnlockAchievement.cs) | [AdminUnlockAchievement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Achievement/UserAchievements/AdminUnlockAchievement.cs) |
 | `/achievement/v1/public/namespaces/{namespace}/users/{userId}/achievements` | GET | PublicListUserAchievements | [PublicListUserAchievements](../../apis/AccelByte.Sdk.Api.Achievement/Operation/UserAchievements/PublicListUserAchievements.cs) | [PublicListUserAchievements](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Achievement/UserAchievements/PublicListUserAchievements.cs) |
+| `/achievement/v1/public/namespaces/{namespace}/users/{userId}/achievements/bulkUnlock` | PUT | PublicBulkUnlockAchievement | [PublicBulkUnlockAchievement](../../apis/AccelByte.Sdk.Api.Achievement/Operation/UserAchievements/PublicBulkUnlockAchievement.cs) | [PublicBulkUnlockAchievement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Achievement/UserAchievements/PublicBulkUnlockAchievement.cs) |
 | `/achievement/v1/public/namespaces/{namespace}/users/{userId}/achievements/{achievementCode}/unlock` | PUT | PublicUnlockAchievement | [PublicUnlockAchievement](../../apis/AccelByte.Sdk.Api.Achievement/Operation/UserAchievements/PublicUnlockAchievement.cs) | [PublicUnlockAchievement](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Achievement/UserAchievements/PublicUnlockAchievement.cs) |
 
 ### Anonymization Wrapper:  [Anonymization](../../apis/AccelByte.Sdk.Api.Achievement/Wrapper/Anonymization.cs)
@@ -104,6 +106,8 @@
 | `models.AdditionalInfo` | [ModelsAdditionalInfo](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsAdditionalInfo.cs) |
 | `models.BulkCreatePSNEventResponse` | [ModelsBulkCreatePSNEventResponse](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsBulkCreatePSNEventResponse.cs) |
 | `models.BulkCreatePSNEvents` | [ModelsBulkCreatePSNEvents](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsBulkCreatePSNEvents.cs) |
+| `models.BulkUnlockAchievementRequest` | [ModelsBulkUnlockAchievementRequest](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsBulkUnlockAchievementRequest.cs) |
+| `models.BulkUnlockAchievementResponse` | [ModelsBulkUnlockAchievementResponse](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsBulkUnlockAchievementResponse.cs) |
 | `models.ContributorResponse` | [ModelsContributorResponse](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsContributorResponse.cs) |
 | `models.CreatePSNEvent` | [ModelsCreatePSNEvent](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsCreatePSNEvent.cs) |
 | `models.ErrorDetails` | [ModelsErrorDetails](../../apis/AccelByte.Sdk.Api.Achievement/Model/ModelsErrorDetails.cs) |

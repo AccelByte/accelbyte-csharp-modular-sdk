@@ -123,6 +123,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
 
 
+            Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
@@ -131,6 +132,8 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         {
 
             public ErrorEntity? Error400 { get; set; } = null;
+
+            public ErrorEntity? Error401 { get; set; } = null;
 
             public ErrorEntity? Error404 { get; set; } = null;
 
@@ -154,6 +157,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
 
 
+            Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
         public override string Path => "/seasonpass/public/namespaces/{namespace}/seasons/current";
@@ -185,6 +189,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             {
                 response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)401)
+            {
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
