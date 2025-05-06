@@ -100,19 +100,20 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             string user_id = "";
 
             #region Create a user
-            AccountCreateUserRequestV4 newUser = new AccountCreateUserRequestV4()
+            AccountCreateTestUserRequestV4 newUser = new()
             {
+                Verified = true,
                 AuthType = "EMAILPASSWD",
                 EmailAddress = user_email,
                 Password = user_password,
-                DisplayName = "CSharp Server SDK Test",
+                DisplayName = "CSharp Extend SDK Test",
                 Username = user_name,
                 Country = "ID",
                 DateOfBirth = "1995-01-10",
                 UniqueDisplayName = user_name
             };
 
-            AccountCreateUserResponseV4 cuResp = _Sdk.GetIamApi().UsersV4.PublicCreateUserV4Op
+            AccountCreateUserResponseV4 cuResp = _Sdk.GetIamApi().UsersV4.PublicCreateTestUserV4Op
                 .Execute(newUser, _Sdk.Namespace)
                 .EnsureSuccess();
             #endregion
