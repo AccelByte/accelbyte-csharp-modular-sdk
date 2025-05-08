@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .Execute(_Sdk.Namespace, user_id)
                 .EnsureSuccess();
             #endregion
-            Assert.AreEqual("CSharp Server SDK Test", gUser.DisplayName);
+            Assert.AreEqual("CSharp Extend SDK Test", gUser.DisplayName);
 
             #region Update a user
             ModelUserUpdateRequestV3 updateUser = new ModelUserUpdateRequestV3()
