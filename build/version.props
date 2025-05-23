@@ -30,6 +30,7 @@
         <ApiLeaderboardVersion>0.10.0</ApiLeaderboardVersion>
         <ApiLegalVersion>0.11.0</ApiLegalVersion>
         <ApiLobbyVersion>0.14.0</ApiLobbyVersion>
+        <ApiLoginqueueVersion>0.1.0</ApiLoginqueueVersion>
         <ApiMatch2Version>0.14.0</ApiMatch2Version>
         <ApiMatchmakingVersion>0.12.0</ApiMatchmakingVersion>
         <ApiPlatformVersion>0.17.0</ApiPlatformVersion>
