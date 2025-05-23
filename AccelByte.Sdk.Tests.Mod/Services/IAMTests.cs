@@ -44,7 +44,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
         }
 
         [Test]
-        public void CreateUserV3Tests()
+        public void CreateUserV4Test()
         {
             Assert.IsNotNull(_Sdk);
             if (_Sdk == null)
@@ -60,23 +60,24 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             DisableRetry();
 
             #region Create a user (V3)
-            ModelUserCreateRequestV3 newUser = new ModelUserCreateRequestV3()
+            AccountCreateUserRequestV4 newUser = new AccountCreateUserRequestV4()
             {
                 AuthType = "EMAILPASSWD",
                 EmailAddress = user_email,
                 Password = user_password,
-                DisplayName = "CSharp Server SDK Test",
+                DisplayName = "CSharp Extend SDK Test",
+                Username = user_name,
                 Country = "ID",
                 DateOfBirth = "1995-01-10",
                 UniqueDisplayName = user_name
             };
 
-            ModelUserCreateResponseV3 cuResp = _Sdk.GetIamApi().Users.PublicCreateUserV3Op
+            var response = _Sdk.GetIamApi().UsersV4.AdminCreateUserV4Op
                 .Execute(newUser, _Sdk.Namespace)
                 .EnsureSuccess();
             #endregion
-            Assert.AreEqual(user_email, cuResp.EmailAddress);
-            user_id = cuResp.UserId!;
+            Assert.AreEqual(user_email, response.EmailAddress);
+            user_id = response.UserId!;
 
             _Sdk.GetIamApi().Users.AdminDeleteUserInformationV3Op
                 .Execute(_Sdk.Namespace, user_id)
