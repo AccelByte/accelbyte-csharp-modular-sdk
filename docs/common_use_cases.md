@@ -1241,47 +1241,7 @@ SeasonInfo uSeason = _Sdk.GetSeasonpassApi().Season.UpdateSeasonOp
     .Execute(_Sdk.Namespace, cSeasonId)
     .EnsureSuccess();
 ```
-## SessionHistory
 
-Source: [SessionHistoryTests.cs](../AccelByte.Sdk.Tests.Mod/Services/SessionHistoryTests.cs)
-
-### Get all game sessions history
-
-```csharp
-var response = _Sdk.GetSessionhistoryApi().GameSessionDetail.AdminQueryGameSessionDetailOp
-    .SetOffset(0)
-    .SetLimit(20)
-    .Execute(_Sdk.Namespace)
-    .EnsureSuccess();
-```
-
-### Get all matchmaking history
-
-```csharp
-var mResponse = _Sdk.GetSessionhistoryApi().GameSessionDetail.AdminQueryMatchmakingDetailOp
-    .SetOffset(0)
-    .SetLimit(20)
-    .Execute(_Sdk.Namespace)
-    .EnsureSuccess();
-```
-
-### Query party details
-
-```csharp
-var partyDetails = _Sdk.GetSessionhistoryApi().GameSessionDetail.AdminQueryPartyDetailOp
-    .SetOffset(0)
-    .SetLimit(50)
-    .Execute(_Sdk.Namespace)
-    .EnsureSuccess();
-```
-
-### Query total matchmaking match
-
-```csharp
-var mmData = _Sdk.GetSessionhistoryApi().XRay.QueryTotalMatchmakingMatchOp
-    .Execute(_Sdk.Namespace, endDate, startDate)
-    .EnsureSuccess();
-```
 ## Session
 
 Source: [SessionTests.cs](../AccelByte.Sdk.Tests.Mod/Services/SessionTests.cs)

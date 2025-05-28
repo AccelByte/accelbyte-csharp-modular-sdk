@@ -23,14 +23,11 @@ using AccelByte.Sdk.Api.Leaderboard;
 using AccelByte.Sdk.Api.Legal;
 using AccelByte.Sdk.Api.Lobby;
 using AccelByte.Sdk.Api.Match2;
-using AccelByte.Sdk.Api.Matchmaking;
 using AccelByte.Sdk.Api.Platform;
 using AccelByte.Sdk.Api.Qosm;
 using AccelByte.Sdk.Api.Reporting;
 using AccelByte.Sdk.Api.Seasonpass;
 using AccelByte.Sdk.Api.Session;
-using AccelByte.Sdk.Api.Sessionbrowser;
-using AccelByte.Sdk.Api.Sessionhistory;
 using AccelByte.Sdk.Api.Social;
 using AccelByte.Sdk.Api.Ugc;
 using AccelByte.Sdk.Authentication;
@@ -60,14 +57,11 @@ namespace AccelByte.Sdk.Core
         public LegalApi Legal { get => ((IAccelByteSdk)this).GetLegalApi(); }
         public LobbyApi Lobby { get => ((IAccelByteSdk)this).GetLobbyApi(); }
         public Match2Api Match2 { get => ((IAccelByteSdk)this).GetMatch2Api(); }
-        public MatchmakingApi Matchmaking { get => ((IAccelByteSdk)this).GetMatchmakingApi(); }
         public PlatformApi Platform { get => ((IAccelByteSdk)this).GetPlatformApi(); }
         public QosmApi Qosm { get => ((IAccelByteSdk)this).GetQosmApi(); }
         public ReportingApi Reporting { get => ((IAccelByteSdk)this).GetReportingApi(); }
         public SeasonpassApi Seasonpass { get => ((IAccelByteSdk)this).GetSeasonpassApi(); }
         public SessionApi Session { get => ((IAccelByteSdk)this).GetSessionApi(); }
-        public SessionbrowserApi Sessionbrowser { get => ((IAccelByteSdk)this).GetSessionbrowserApi(); }
-        public SessionhistoryApi Sessionhistory { get => ((IAccelByteSdk)this).GetSessionhistoryApi(); }
         public SocialApi Social { get => ((IAccelByteSdk)this).GetSocialApi(); }
         public UgcApi Ugc { get => ((IAccelByteSdk)this).GetUgcApi(); }
         #endregion

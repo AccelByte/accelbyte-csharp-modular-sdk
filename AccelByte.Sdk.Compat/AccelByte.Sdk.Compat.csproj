@@ -75,13 +75,10 @@ and restrictions contact your company contract manager.
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Legal\AccelByte.Sdk.Api.Legal.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Lobby\AccelByte.Sdk.Api.Lobby.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Match2\AccelByte.Sdk.Api.Match2.csproj" />
-    <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Matchmaking\AccelByte.Sdk.Api.Matchmaking.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Platform\AccelByte.Sdk.Api.Platform.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Qosm\AccelByte.Sdk.Api.Qosm.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Reporting\AccelByte.Sdk.Api.Reporting.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Seasonpass\AccelByte.Sdk.Api.Seasonpass.csproj" />
-    <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Sessionbrowser\AccelByte.Sdk.Api.Sessionbrowser.csproj" />
-    <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Sessionhistory\AccelByte.Sdk.Api.Sessionhistory.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Session\AccelByte.Sdk.Api.Session.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Social\AccelByte.Sdk.Api.Social.csproj" />
     <ProjectReference Include="..\apis\AccelByte.Sdk.Api.Ugc\AccelByte.Sdk.Api.Ugc.csproj" />

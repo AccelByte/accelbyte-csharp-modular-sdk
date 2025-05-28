@@ -32,14 +32,11 @@
         <ApiLobbyVersion>0.14.0</ApiLobbyVersion>
         <ApiLoginqueueVersion>0.1.0</ApiLoginqueueVersion>
         <ApiMatch2Version>0.14.0</ApiMatch2Version>
-        <ApiMatchmakingVersion>0.12.0</ApiMatchmakingVersion>
         <ApiPlatformVersion>0.17.0</ApiPlatformVersion>
         <ApiQosmVersion>0.4.0</ApiQosmVersion>
         <ApiReportingVersion>0.5.0</ApiReportingVersion>
         <ApiSeasonpassVersion>0.8.0</ApiSeasonpassVersion>
-        <ApiSessionVersion>0.19.0</ApiSessionVersion>
-        <ApiSessionbrowserVersion>0.8.0</ApiSessionbrowserVersion>
-        <ApiSessionhistoryVersion>0.9.0</ApiSessionhistoryVersion>
+        <ApiSessionVersion>0.19.0</ApiSessionVersion>        
         <ApiSocialVersion>0.13.0</ApiSocialVersion>
         <ApiUgcVersion>0.10.0</ApiUgcVersion>
     </PropertyGroup>
